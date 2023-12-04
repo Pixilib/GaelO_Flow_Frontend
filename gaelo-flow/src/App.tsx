@@ -1,17 +1,16 @@
+import { SignInForm } from './RenderComponents/SignInForm'
 import './index.css'
-import { SignInForm } from './RenderComponents/SignInForm';
 
 function App() {
 
-
   return (
-    <div className='h-screen w-full mx-auto grid grid-cols-2'>
-      <section className="bg-custom-gradient h-full" >
+    <div className='h-screen w-screen columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-yellow-500'>
+      <div className="h-full w-full " >
 
-      </section>
-      <section className="flex flex-col justify-center items-center h-full  rounded-tl-xl bg-white">
+      </div>
+      <div className="h-full w-full flex items-center bg-white rounded-tl-3xl rounded-bl-3xl">
         <SignInForm />
-      </section>
+      </div>
     </div>
   )
 }
