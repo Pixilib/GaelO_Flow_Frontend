@@ -1,29 +1,31 @@
 
+import React from 'react';
+
 type InputProps = {
-    bordered?: boolean
-    placeholder?: string;
-    label?: string;
-    
-}
+  placeholder?: string;
+  label?: string;
+};
 
-const Input = ({ bordered = false, placeholder = "", label = "" }: InputProps) => {
+const Input = ({ placeholder = "", label = "" }: InputProps) => {
 
-    const inputClasses = {
-        'username': 'bg-white-500 hover:border-violet-500',
-    }
+  const inputStyle = {
+    base: 'bg-gray-100 rounded-lg p-2 shadow-md',
+    hover: 'hover:border-blue-500 hover:bg-white',
+    placeholder: 'placeholder-gray-400',
 
+  };
 
-    return (
-        <fieldset className="border">
-
-            <legend>test</legend>
-            <input
-                className={bordered ? inputClasses.username : inputClasses.mailAddress + ` border w-full rounded border-purple-300 text-gray-900`}
-                type="text"
-                placeholder={placeholder}
-                onChange={(e) => { }} />
-        </fieldset>
-    );
-}
+  return (
+    <fieldset>
+      <legend>{label}</legend>
+      <input
+        className={`${inputStyle.base} ${inputStyle.hover} ${inputStyle.placeholder} w-full text-gray-600`}
+        type="text"
+        placeholder={placeholder}
+        onChange={(e) => {}}
+      />
+    </fieldset>
+  );
+};
 
 export default Input;
