@@ -1,12 +1,14 @@
 
-import React from 'react';
 
 type InputProps = {
   placeholder?: string;
   label?: string;
+  type?: string;
+  children?: React.ReactNode;
+  [key:string]: any;
 };
 
-const Input = ({ placeholder = "", label = "" }: InputProps) => {
+const Input = ({ placeholder = "", label = "" ,type="text",...props}: InputProps) => {
 
   const inputStyle = {
     base: 'bg-gray-100 rounded-lg p-2 shadow-md',
@@ -20,10 +22,11 @@ const Input = ({ placeholder = "", label = "" }: InputProps) => {
       <legend>{label}</legend>
       <input
         className={`${inputStyle.base} ${inputStyle.hover} ${inputStyle.placeholder} w-full text-gray-600`}
-        type="text"
+        type={type}
         placeholder={placeholder}
-        onChange={(e) => {}}
+        {...props}
       />
+
     </fieldset>
   );
 };
