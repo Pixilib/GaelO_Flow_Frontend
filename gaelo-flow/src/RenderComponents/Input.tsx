@@ -1,12 +1,10 @@
-
-import React from 'react';
-
 type InputProps = {
   placeholder?: string;
   label?: string;
+  [key :string] :any;
 };
 
-const Input = ({ placeholder = "", label = "" }: InputProps) => {
+const Input = ({ placeholder = "", label = "", ...props }: InputProps) => {
 
   const inputStyle = {
     base: 'bg-gray-100 rounded-lg p-2 shadow-md',
@@ -22,7 +20,7 @@ const Input = ({ placeholder = "", label = "" }: InputProps) => {
         className={`${inputStyle.base} ${inputStyle.hover} ${inputStyle.placeholder} w-full text-gray-600`}
         type="text"
         placeholder={placeholder}
-        onChange={(e) => {}}
+        {...props}
       />
     </fieldset>
   );

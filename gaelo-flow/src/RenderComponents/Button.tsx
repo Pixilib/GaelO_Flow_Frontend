@@ -15,7 +15,7 @@ const Button = ({ color, bordered = false, children, ...props }: ButtonProps) =>
   }
 
   return (
-    <button className={colorClasses[color] + " text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline " + (bordered ? "border border-white-900" : "")} {...props} >
+    <button className={colorClasses[color] + " text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline disabled:bg-gray-500 " + (bordered ? "border border-white-900" : "")} {...props} >
       {children}
     </button>
   );
