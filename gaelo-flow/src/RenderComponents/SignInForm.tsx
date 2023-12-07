@@ -26,7 +26,7 @@ export const SignInForm = () => {
                 <label className="block text-gray-900 text-sm font-bold mb-3" htmlFor="mailAddress">Email Address:</label>
                 <Input bordered placeholder="Enter your mail"></Input>
                 <div className="w-full flex justify-center">
-                    <Button color="purple" bordered>Connect</Button>
+                    <Button color="purple" bordered onClick={handleConnect}>Connect</Button>
                 </div><hr className="my-10 border-orange-300" />
             </div>
 
