@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Button from './Button';
+import Input from './Input';
 
 
 export const SignInForm = () => {
@@ -11,21 +13,27 @@ export const SignInForm = () => {
     };
 
     return (
-        <form onSubmit={handleConnect} className="bg-white p-4 md:p-8 rounded-lg shadow-md w-3/4 mx-auto">
+        <div>
+            <h1 className="text-4xl font-bold text-center mb-8">Welcome back !</h1>
+            <p className="text-lg text-gray-700 text-center mb-8">Please Log in to your Account.</p>
+
+            <div className="mb-4 w-full">
+                <label className="block text-gray-00 font-bold mb-3" htmlFor="username">Username:</label>
+                <Input bordered placeholder="Enter your username"></Input>
+            </div>
+
             <div className="mb-4">
-                <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                <label className="block text-gray-900 text-sm font-bold mb-3" htmlFor="mailAddress">Email Address:</label>
+                <Input bordered placeholder="Enter your mail"></Input>
+                <div className="w-full flex justify-center">
+                    <Button color="purple" bordered>Connect</Button>
+                </div><hr className="my-10 border-orange-300" /><div className="flex justify-between">
+                <p className="text-gray-600 inline-block mr-16">Already have an account?</p>
+                <p className="text-gray-600 inline-block">Login to your account</p>
+                </div>
             </div>
-            <div className="mb-4">
-                <label htmlFor="mobileNumber" className="block text-gray-700 text-sm font-bold mb-2">Mobile Number</label>
-                <input type="tel" id="mobileNumber" onChange={(e) => setMobileNumber(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-            </div>
-            <div className="flex items-center justify-end">
-                <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    Connect
-                </button>
-            </div>
-        </form>
+
+        </div>
     );
 };
 // TODO : Use lib @pixilib/gaeloUI instead
