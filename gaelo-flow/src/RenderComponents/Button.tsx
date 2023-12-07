@@ -4,9 +4,10 @@ type ButtonProps = {
   color: 'purple' | 'green'
   bordered?: boolean
   children: React.ReactNode
+  [key :string] :any 
 }
 
-const Button = ({ color, bordered = false, children }: ButtonProps) => {
+const Button = ({ color, bordered = false, children, ...props }: ButtonProps) => {
 
   const colorClasses = {
     'green': 'bg-green-500 hover:bg-green-700',
@@ -14,7 +15,7 @@ const Button = ({ color, bordered = false, children }: ButtonProps) => {
   }
 
   return (
-    <button className={colorClasses[color] + " text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline " + (bordered ? "border border-white-900" : "")}>
+    <button className={colorClasses[color] + " text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline " + (bordered ? "border border-white-900" : "")} {...props} >
       {children}
     </button>
   );

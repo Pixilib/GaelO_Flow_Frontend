@@ -27,10 +27,7 @@ export const SignInForm = () => {
                 <Input bordered placeholder="Enter your mail"></Input>
                 <div className="w-full flex justify-center">
                     <Button color="purple" bordered>Connect</Button>
-                </div><hr className="my-10 border-orange-300" /><div className="flex justify-between">
-                <p className="text-gray-600 inline-block mr-16">Already have an account?</p>
-                <p className="text-gray-600 inline-block">Login to your account</p>
-                </div>
+                </div><hr className="my-10 border-orange-300" />
             </div>
 
         </div>
