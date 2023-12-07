@@ -11,7 +11,7 @@ const Button = ({ color, bordered = false, children, ...props }: ButtonProps) =>
 
   const colorClasses = {
     'green': 'bg-green-500 hover:bg-green-700',
-    'purple': 'bg-violet-700 hover:bg-indigo-900'
+    'purple': 'bg-violet-700 hover:bg-indigo-900',
   }
 
   return (
