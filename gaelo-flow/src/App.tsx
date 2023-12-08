@@ -5,6 +5,19 @@ import Welcome from "./Welcome";
 import "./index.css";
 import Button from "./RenderComponents/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+
+
+const store = configureStore({
+  reducer: {
+    // Define a top-level state field named `todos`, handled by `todosReducer`
+    //todos: todosReducer,
+    // Define a top-level state field named `filters`, handled by `filtersReducer`
+    //filters: filtersReducer
+  }
+})
+
 
 const queryClient = new QueryClient();
 
@@ -27,6 +40,7 @@ function App() {
     useState<boolean>(false);
 
   return (
+    <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
         <BrowserRouter>
@@ -56,6 +70,8 @@ function App() {
         </BrowserRouter>
       </ErrorBoundary>
     </QueryClientProvider>
+
+    </Provider>
   );
 }
 
