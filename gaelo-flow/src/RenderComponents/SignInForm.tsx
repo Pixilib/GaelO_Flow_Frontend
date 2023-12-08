@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import Input from './Input';
-import { useGenericMutation } from '../utils/useFetch';
+import { useCustomMutation } from '../utils/useFetch';
 
 
 type SignInRequest = { username: string; password: string; };
 type SignInResponse = { token: string; };
 export const SignInForm = () => {
 
-      const { mutate: signIn, isError, error } = useGenericMutation<SignInResponse, SignInRequest>(
+      const { mutate: signIn, isSuccess, isError, error } = useCustomMutation<SignInResponse, SignInRequest>(
         'signIn', 
         'api/auth/login',
     );
@@ -16,15 +16,22 @@ export const SignInForm = () => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [isLogged, setIsLogged] = useState(false)
+
     //const [isError, setIsError] = useState(false)
     
       const onLogin = (event: React.FormEvent) => {
         console.log("j'ai cliqué sur Connect")
         event.preventDefault();
         signIn({ username, password });
-        console.log("j'apelle l'api " + username + password)
-        ;
+        console.log("j'apelle l'api " + username + password);
     };
+
+    if (isSuccess) {
+        setIsLogged(true)
+        console.log(`${username} is logged in !`)
+    }
+
 
 
 
@@ -37,6 +44,7 @@ export const SignInForm = () => {
             <div className="mb-4 w-full">
                 <label className="block text-gray-00 font-bold mb-3" htmlFor="username">Username:</label>
                 <Input bordered placeholder="Enter your username" value={username} onChange={(event)=>{setUsername(event.target.value)}}></Input>
+                {isLogged && <p className="text-green-500 text-center">{username} are logged in !</p>}
             </div>
 
             <div className="mb-4">
