@@ -21,7 +21,7 @@ const Input = ({ placeholder = "", label = "", svg =null, ...props }: InputProps
 
   const svgContainerStyle = {
     position: 'absolute',
-    top: '50%'
+    top: '50%',
     left: '10px'
   };
 
