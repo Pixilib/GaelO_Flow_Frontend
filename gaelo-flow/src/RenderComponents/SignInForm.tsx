@@ -1,21 +1,54 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import Input from './Input';
+import { useCustomMutation } from '../utils/useFetch';
+import axios from 'axios'; 
 import LockLogo from './../assets/lock.svg';
 
-
+type SignInRequest = { username: string; password: string; };
+type SignInResponse = { token: string; };
 export const SignInForm = () => {
-
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    console.log(LockLogo)
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [isLogged, setIsLogged] = useState(false)
 
-    const handleConnect = (event: React.FormEvent) => {
+    //const [isError, setIsError] = useState(false)
+
+    const signInFetch = async (data: SignInRequest): Promise<SignInResponse> => {
+      const response = await axios.post('api/auth/login', data);
+      return response.data;
+  };
+
+  const { mutate: signIn, isError, error } = useCustomMutation<SignInResponse, Error, SignInRequest>(
+    signInFetch,
+    'Connexion réussie', // Message de succès
+    [], // Clés de requête à invalider après la mutation
+    {
+        onSuccess: () => {
+            setIsLogged(true);
+            console.log(`${username} is logged in !`);
+        },
+        onError: (err) => {
+            // Gestion de l'erreur
+            console.error('Erreur de connexion', err);
+        }
+    }
+);
+
+    
+    const onLogin = (event: React.FormEvent) => {
+        console.log("j'ai cliqué sur Connect")
         event.preventDefault();
-        // Logique de connexion ici
-    };
+        signIn({ username, password });
+        console.log("j'apelle l'api " + username + password);
+     };
 
+     //TODO : redirect route after login
+     //TODO: disabled button connect if clicked
+ 
     const onLogin = () => {
         console.log("j'apelle l'api" + username + password)
     }
@@ -24,6 +57,7 @@ export const SignInForm = () => {
         <div>
             <h1 className="text-5xl font-bold text-center mb-8">Welcome !</h1>
             <p className="text-lg text-gray-700 text-center mb-8">Please Log in to your Account.</p>
+            {isError && <p className="text-red-500 text-center">Error: {error?.message}</p>}
 
             <div className="mb-4 w-full relative">
                 <label className="block text-gray-800 font-bold mb-2" htmlFor="username">Username:</label>
@@ -58,4 +92,3 @@ export const SignInForm = () => {
         </div>
     );
 };
-// TODO : Use lib @pixilib/gaeloUI instead
