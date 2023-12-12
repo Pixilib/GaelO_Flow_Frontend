@@ -1,40 +1,24 @@
 
 type InputProps = {
+  className?: string;
   placeholder?: string;
   label?: string;
   svg?: React.ReactNode;
   [key: string]: any;
 };
 
-const Input = ({ placeholder = "", label = "", svg =null, ...props }: InputProps) => {
-
-  const inputStyle = {
-    base: 'bg-gray-100 rounded-lg p-2 shadow-md',
-    hover: 'hover:border-blue-500 hover:bg-white',
-    placeholder: 'placeholder-gray-400',
-
-  };
-
-  const containerStyle = {
-    position: 'relative',
-  };
-
-  const svgContainerStyle = {
-    position: 'absolute',
-    top: '50%'
-    left: '10px'
-  };
+const Input = ({ className = "", placeholder = "", label = "", svg = null, ...props }: InputProps) => {
 
   return (
-    <fieldset>
-      <legend>{label}</legend>
+    <fieldset className="relative space-y-1">
+      <legend className="font-bold ">{label}</legend>
       <input
-        className={`${inputStyle.base} ${inputStyle.hover} ${inputStyle.placeholder} w-full text-gray-600 peer`}
+        className={"peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600" + " " + className}
         type="text"
         placeholder={placeholder}
         {...props}
       />
-      <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-2 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
+      <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
         {svg}
       </div>
     </fieldset>
