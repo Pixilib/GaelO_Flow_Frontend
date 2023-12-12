@@ -7,10 +7,13 @@ import Button from "./RenderComponents/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+import UserSlice from "./reducers/UserSlice";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 
 const store = configureStore({
   reducer: {
+    user: UserSlice,
     // Define a top-level state field named `todos`, handled by `todosReducer`
     //todos: todosReducer,
     // Define a top-level state field named `filters`, handled by `filtersReducer`
@@ -69,6 +72,8 @@ function App() {
           {displayLegalMention && <Button onClick={() => setDisplayLegalMention(false)} color="purple">Return to Main</Button>}
         </BrowserRouter>
       </ErrorBoundary>
+      <ReactQueryDevtools initialIsOpen={true} />
+
     </QueryClientProvider>
 
     </Provider>
