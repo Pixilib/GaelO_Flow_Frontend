@@ -1,8 +1,7 @@
 
 import { toast } from 'react-toastify'
 
-type ToastType = string;
-export const toastSuccess= (message:ToastType)=> {
+export const toastSuccess= (message :string)=> {
     const toastify = toast.success
     toastify(message, {
         position: 'bottom-right',
@@ -14,7 +13,7 @@ export const toastSuccess= (message:ToastType)=> {
     })
 }
 
-export const toastwarning = (message:ToastType)=> {
+export const toastwarning = (message :string)=> {
     const toastify = toast.warning
     toastify(message, {
         position: 'bottom-right',
@@ -26,7 +25,7 @@ export const toastwarning = (message:ToastType)=> {
     })
 }
 
-export const toastError = (message:ToastType)=> {
+export const toastError = (message :string)=> {
     const toastify = toast.error
     toastify(message, {
         position: 'bottom-right',

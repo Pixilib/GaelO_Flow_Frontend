@@ -1,7 +1,4 @@
-//create a homepage with the name of user connected and a button to go to the dashboard
-// with a button lo logout and the name of the user connected
-
-import Button from "./Button";
+import Button from "./RenderComponents/Button";
 
 const Home = () => {    
     return (

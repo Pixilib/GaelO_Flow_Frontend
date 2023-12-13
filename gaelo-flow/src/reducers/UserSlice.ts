@@ -1,7 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-
-//create a type for the initial state of the slice
 interface UserState {
     token: string | null;
     isLogged: boolean;
@@ -25,14 +23,14 @@ const initialState: UserState = {
 const userSLice = createSlice({
     name: 'user',
     initialState,
-    reducers:{
-        login(state,action: PayloadAction<LoginPayload>){
+    reducers: {
+        login(state, action: PayloadAction<LoginPayload>) {
             state.token = action.payload.token;
             state.isLogged = true;
             state.tokenCreationDate = new Date().toISOString();
             state.currentUserId = action.payload.userId;
         },
-        logout(state){
+        logout(state) {
             state.token = null;
             state.isLogged = false;
             state.tokenCreationDate = null;
@@ -41,6 +39,6 @@ const userSLice = createSlice({
     }
 })
 
-export const {login,logout} = userSLice.actions;
+export const { login, logout } = userSLice.actions;
 export default userSLice.reducer;
-        
+

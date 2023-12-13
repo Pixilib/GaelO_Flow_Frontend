@@ -1,4 +1,3 @@
-
 type InputProps = {
   className?: string;
   placeholder?: string;
