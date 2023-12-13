@@ -44,11 +44,14 @@ function App() {
 
   return (
     <Provider store={store}>
-    <QueryClientProvider client={queryClient}>
+      <QueryClientProvider 
+      client={queryClient}
+      >
       <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
         <BrowserRouter>
           <Routes>
             <Route
+
               path="/legal-mention"
               element={
                 <>
@@ -73,9 +76,7 @@ function App() {
         </BrowserRouter>
       </ErrorBoundary>
       <ReactQueryDevtools initialIsOpen={true} />
-
     </QueryClientProvider>
-
     </Provider>
   );
 }

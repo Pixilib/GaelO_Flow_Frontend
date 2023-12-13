@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SignInForm } from './RenderComponents/SignInForm'
+import { SignInForm } from './auth/SignInForm'
 
 interface WelcomeProps{
     onLegalMention : ()=> void
