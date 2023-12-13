@@ -1,58 +1,45 @@
-import React, { useState } from 'react';
-import Button from './Button';
-import Input from './Input';
-import { useCustomMutation } from '../utils/useFetch';
-import axios from 'axios';
+import { ChangeEvent, useState } from 'react';
+import Button from '../RenderComponents/Button';
+import Input from '../RenderComponents/Input';
+import { useCustomMutation } from '../utils/reactQuery';
+import { signIn } from '../services/auth';
+import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { login } from '../reducers/UserSlice';
+import { toastError } from '../utils/toastify';
 import ChevronRight from './../assets/chevron-right.svg?react'
 import User from './../assets/user.svg?react'
 import Lock from './../assets/lock.svg?react'
 
-type SignInRequest = { username: string; password: string; };
-type SignInResponse = { token: string; };
 
 export const SignInForm = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [isLogged, setIsLogged] = useState(false)
+    const dispatch = useDispatch()
 
-    //const [isError, setIsError] = useState(false)
-
-    const signInFetch = async (data: SignInRequest): Promise<SignInResponse> => {
-        const response = await axios.post('api/auth/login', data);
-        return response.data;
-    };
-
-    const { mutate: signIn, isError, error } = useCustomMutation<SignInResponse, Error, SignInRequest>(
-        signInFetch,
-        'Connexion réussie', // Message de succès
-        [], // Clés de requête à invalider après la mutation
+    const loginMutation = useCustomMutation(
+        ({ username, password }) => signIn(username, password),
+        null,
+        [],
         {
-            onSuccess: () => {
-                setIsLogged(true);
-                console.log(`${username} is logged in !`);
+            onSuccess: (data: Record<string, any>) => {
+                const decodedToken  : Record<string, any>= jwtDecode(data.token);
+                dispatch(login({ token: data.token, userId: decodedToken.userId }));
             },
-            onError: (err) => {
-                // Gestion de l'erreur
-                console.error('Erreur de connexion', err);
+            onError: () => {
+                toastError('Error in creadentials')
             }
-        }
-    );
+        })
 
-
-    const onLogin = () => {
-        console.log("j'ai cliqué sur Connect")
+    const onLogin = async () => {
+        loginMutation.mutate({ username, password });
     };
-
-    //TODO : redirect route after login
-    //TODO: disabled button connect if clicked
 
     return (
         <div className="flex flex-col w-full">
             <h1 className="text-5xl font-bold text-center mb-6">Welcome !</h1>
             <p className="text-lg text-gray-700 text-center mb-12">Please Log in to your Account.</p>
-            {isError && <p className="text-red-500 text-center">Error: {error?.message}</p>}
-
             <div className="w-full space-y-3">
                 <Input
                     label='Username :'
