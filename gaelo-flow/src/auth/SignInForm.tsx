@@ -1,18 +1,37 @@
 import React, { useState } from 'react';
-import { useSignIn } from './useSignIn'; // Assure-toi que le chemin d'importation est correct
 import Button from '../RenderComponents/Button';
 import Input from '../RenderComponents/Input';
+import { useCustomMutation } from '../utils/reactQuery';
+import { signIn } from '../services/auth';
+import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { login } from '../reducers/UserSlice';
+import { toastError } from '../utils/toastify';
 
 
 export const SignInForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { mutate: signIn,isError, error } = useSignIn();
 
-    const onLogin = async (event: React.FormEvent) => {
-        event.preventDefault();
-        console.log("Attempting to connect with credentials:", { username, password });
-        signIn({ username, password });
+    const dispatch = useDispatch()
+
+    const loginMutation = useCustomMutation(
+        ({ username, password }) => signIn(username, password),
+        null,
+        [],
+        {
+            onSuccess: (data: Record<string, any>) => {
+                const decodedToken = jwtDecode(data.token);
+                console.log(decodedToken)
+                dispatch(login({ token: data.token, userId: decodedToken.userId }));
+            },
+            onError: () => {
+                toastError('Error in creadentials')
+            }
+        })
+
+    const onLogin = async () => {
+        loginMutation.mutate({ username, password });
     };
 
     return (
@@ -22,7 +41,6 @@ export const SignInForm = () => {
             <div className="mb-4 w-full">
                 <label className="block text-gray-00 font-bold mb-3" htmlFor="username">Username:</label>
                 <Input bordered placeholder="Enter your username" value={username} onChange={(event) => setUsername(event.target.value)} />
-                {isError && <p className="text-red-500 text-center">{error?.message}</p>}
             </div>
 
             <div className="mb-4">

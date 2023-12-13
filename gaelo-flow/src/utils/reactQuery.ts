@@ -1,57 +1,34 @@
-import { MutationFunction, QueryFunction, QueryKey, UseMutationOptions, UseMutationResult, UseQueryOptions, UseQueryResult, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toastError, toastSuccess } from './toastify'
 
-/**
- * Custom hook for request data with react-query.
- * @param queryKeys - Clé(s) de requête.
- * @param queryFn - Fonction qui retourne les données de la requête.
- * @param options - Options supplémentaires pour la requête.
- * @returns Résultat de useQuery.
- */
-const useCustomQuery = <TData, TError>(
-  queryKeys: QueryKey,
-  queryFn: QueryFunction<TData, QueryKey>,
-  options?: Omit<UseQueryOptions<TData, TError, TData, QueryKey>, 'queryKey' | 'queryFn'>
-): UseQueryResult<TData, TError> => {
-  return useQuery<TData, TError, TData, QueryKey>({
+const useCustomQuery = (
+  queryKeys: string[],
+  queryFn: () => Promise<unknown>,
+  options?: { [key :string] : any}
+) => {
+  return useQuery({
     queryKey: queryKeys,
     queryFn: queryFn,
-    //qcTime: 0, 
+    gcTime: 0, 
     retry: false,
     ...options
   });
 };
 
-// Type étendu pour les options de useMutation
-interface CustomMutationOptions<TData, TError, TVariables, TContext> extends Omit<UseMutationOptions<TData, TError, TVariables, TContext>, 'mutationFn'> {
-  delayInvalidation?: boolean;
-}
-
-/**
- * Custom hook for performing mutations with react-query.
- *
- * @param mutationFn - La fonction de mutation.
- * @param successMessage - Message de succès personnalisé.
- * @param invalidatedQueryKeys - Clés de requête à invalider après la mutation.
- * @param options - Options supplémentaires pour la mutation.
- * @returns Résultat de useMutation.
- */
-const useCustomMutation = <TData, TError, TVariables, TContext = unknown>(
-  mutationFn: MutationFunction<TData, TVariables>,
-  successMessage: string,
-  invalidatedQueryKeys: QueryKey[] = [],
-  options?: CustomMutationOptions<TData, TError, TVariables, TContext>
-): UseMutationResult<TData, TError, TVariables, TContext> => {
+const useCustomMutation = (
+  mutationFn :(...args : any[])=> Promise<unknown>,
+  successMessage: string|null,
+  invalidatedQueryKeys: string[][] = [],
+  options?: { [key :string] : any}
+) => {
     const queryClient = useQueryClient();
 
-    return useMutation<TData, TError, TVariables, TContext>({
+    return useMutation({
         mutationFn: mutationFn,
-        // qcTime: 0, //
         retry: false,
         onSuccess: (data, variables, context) => {
             // Fonction pour invalider toutes les requêtes
-            const invalidateAllQueries = (keys: QueryKey[]) => {
+            const invalidateAllQueries = (keys: string[][]) => {
                 keys.forEach(key => queryClient.invalidateQueries({ queryKey: key }));
             };
 
@@ -60,14 +37,8 @@ const useCustomMutation = <TData, TError, TVariables, TContext = unknown>(
 
             if (options?.onSuccess) {
                 options.onSuccess(data, variables, context);
-                if (options.delayInvalidation) {
-                    setTimeout(() => invalidateAllQueries(invalidatedQueryKeys), 50);
-                } else {
-                    invalidateAllQueries(invalidatedQueryKeys);
-                }
-            } else {
-                invalidateAllQueries(invalidatedQueryKeys);
             }
+            invalidateAllQueries(invalidatedQueryKeys);
         },
         onError: (error, variables, context) => {
             if (options?.onError) {
