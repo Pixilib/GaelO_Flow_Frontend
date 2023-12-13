@@ -7,6 +7,9 @@ import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/UserSlice';
 import { toastError } from '../utils/toastify';
+import ChevronRight from './../assets/chevron-right.svg?react'
+import User from './../assets/user.svg?react'
+import Lock from './../assets/lock.svg?react'
 
 
 export const SignInForm = () => {
@@ -34,21 +37,39 @@ export const SignInForm = () => {
     };
 
     return (
-        <div>
-            <h1 className="text-4xl font-bold text-center mb-8">Welcome back !</h1>
-            <p className="text-lg text-gray-700 text-center mb-8">Please Log in to your Account.</p>
-            <div className="mb-4 w-full">
-                <label className="block text-gray-00 font-bold mb-3" htmlFor="username">Username:</label>
-                <Input bordered placeholder="Enter your username" value={username} onChange={(event :ChangeEvent<HTMLInputElement>) => setUsername(event.target.value)} />
+        <div className="flex flex-col w-full">
+            <h1 className="text-5xl font-bold text-center mb-6">Welcome !</h1>
+            <p className="text-lg text-gray-700 text-center mb-12">Please Log in to your Account.</p>
+            <div className="w-full space-y-3">
+                <Input
+                    label='Username :'
+                    className='w-full'
+                    svg={<User/>}
+                    bordered
+                    placeholder="Enter your username"
+                    value={username}
+                    onChange={(event) => { setUsername(event.target.value) }}
+                />
+                <Input
+                    label='Password :'
+                    svg={<Lock/>}
+                    bordered
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(event) => { setPassword(event.target.value) }}
+                />
+                <Button
+                    className="w-full"
+                    color="purple"
+                    onClick={() => onLogin()} bordered disabled={(username.length == 0 || password.length == 0)}>
+                    <div className='w-1/2 flex justify-around'>
+                        Connect
+                        <ChevronRight />
+                    </div>
+                </Button>
             </div>
 
-            <div className="mb-4">
-                <label className="block text-gray-900 text-sm font-bold mb-3" htmlFor="password">Password:</label>
-                <Input bordered placeholder="Enter your password" value={password} onChange={(event :ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)} type="password" />
-                <div className="w-full flex justify-center">
-                    <Button color="purple" onClick={onLogin} bordered disabled={username.length === 0 || password.length === 0}>Connect</Button>
-                </div>
-            </div>
+
         </div>
     );
 };
