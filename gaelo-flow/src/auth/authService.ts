@@ -12,7 +12,8 @@ interface SignInResponse {
 export const signIn = async (credentials: SignInCredentials): Promise<SignInResponse> => {
     try {
       const response = await axios.post('/api/auth/login', credentials);
-      return response.data;
+      console.log({response})
+      return response.data.access_token;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // Gérer les erreurs spécifiques à Axios

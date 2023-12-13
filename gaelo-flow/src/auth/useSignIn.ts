@@ -29,7 +29,9 @@ export const useSignIn = (): UseMutationResult<SignInResponse, Error, SignInCred
     [], // Clés de requête à invalider après la mutation
     {
       onSuccess: (data) => {
+        console.table({data})
         const decodedToken = jwtDecode<DecodedToken>(data.token);
+        console.log({decodedToken})
         dispatch(login({ token: data.token, userId: decodedToken.userId }));
       },
       onError: (error) => {
