@@ -10,6 +10,7 @@ import { toastError } from '../utils/toastify';
 import ChevronRight from './../assets/chevron-right.svg?react'
 import User from './../assets/user.svg?react'
 import Lock from './../assets/lock.svg?react'
+import { useNavigate } from 'react-router-dom';
 
 
 export const SignInForm = () => {
@@ -17,15 +18,22 @@ export const SignInForm = () => {
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate();
     const loginMutation = useCustomMutation(
         ({ username, password }) => signIn(username, password),
         null,
         [],
         {
             onSuccess: (data: Record<string, any>) => {
-                const decodedToken  : Record<string, any>= jwtDecode(data.token);
-                dispatch(login({ token: data.token, userId: decodedToken.userId }));
+                console.log('login success')
+                try{
+                    const decodedToken  : Record<string, any>= jwtDecode(data.data.access_token);
+                    console.warn(decodedToken)
+                    dispatch(login({ token: data.data.access_token, userId: decodedToken.userId }));
+                    navigate('/home');
+                }catch(e){
+                    console.error(e)
+                }
             },
             onError: () => {
                 toastError('Error in creadentials')
@@ -33,6 +41,7 @@ export const SignInForm = () => {
         })
 
     const onLogin = async () => {
+        console.log('login')
         loginMutation.mutate({ username, password });
     };
 
@@ -48,7 +57,7 @@ export const SignInForm = () => {
                     bordered
                     placeholder="Enter your username"
                     value={username}
-                    onChange={(event) => { setUsername(event.target.value) }}
+                    onChange={(event:ChangeEvent<HTMLInputElement>) => { setUsername(event.target.value) }}
                 />
                 <Input
                     label='Password :'
@@ -56,7 +65,8 @@ export const SignInForm = () => {
                     bordered
                     placeholder="Enter your password"
                     value={password}
-                    onChange={(event) => { setPassword(event.target.value) }}
+                    type='password'
+                    onChange={(event:ChangeEvent<HTMLInputElement>) => { setPassword(event.target.value) }}
                 />
                 <Button
                     className="w-full"

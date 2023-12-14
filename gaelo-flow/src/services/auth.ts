@@ -1,10 +1,15 @@
 import axios from 'axios';
 
 export const signIn = async (username: string, password: string): Promise<unknown> => {
-    const payload = {
-        username: username,
-        password: password
+    try{
+        const response = await axios.post('/api/auth/login', {
+            username,
+            password
+        });
+        console.log({ response })
+        return response;
+    }catch(error){
+        console.log(error);
+        return error;
     }
-
-    return axios.post('/api/auth/login', payload);
 };
