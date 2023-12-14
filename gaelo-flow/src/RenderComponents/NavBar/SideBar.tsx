@@ -1,6 +1,6 @@
 
 
-type SideBarProps = {
+export type SideBarProps = {
     className?: string,
     children?: React.ReactNode
     [key :string] :any 
