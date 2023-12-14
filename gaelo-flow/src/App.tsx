@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "./store";
 import ErrorBoundary from "./ErrorBoundary";
+import Home from "./Home";
 
 
 const queryClient = new QueryClient();
@@ -16,6 +17,10 @@ function App() {
 
   const [displayLegalMention, setDisplayLegalMention] =
     useState<boolean>(false);
+
+    return(
+      <Home/>
+    )
 
   return (
     <Provider store={store}>
