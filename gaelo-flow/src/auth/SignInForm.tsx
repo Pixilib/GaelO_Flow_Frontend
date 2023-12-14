@@ -28,7 +28,6 @@ export const SignInForm = () => {
                 console.log('login success')
                 try{
                     const decodedToken  : Record<string, any>= jwtDecode(data.data.access_token);
-                    console.warn(decodedToken)
                     dispatch(login({ token: data.data.access_token, userId: decodedToken.userId }));
                     navigate('/home');
                 }catch(e){
