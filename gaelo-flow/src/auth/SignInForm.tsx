@@ -6,7 +6,7 @@ import { signIn } from '../services/auth';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/UserSlice';
-import { toastError } from '../utils/toastify';
+import { toastError, toastSuccess } from '../utils/toastify';
 import ChevronRight from './../assets/chevron-right.svg?react'
 import User from './../assets/user.svg?react'
 import Lock from './../assets/lock.svg?react'
@@ -28,7 +28,8 @@ export const SignInForm = () => {
                 console.log('login success')
                 try{
                     const decodedToken  : Record<string, any>= jwtDecode(data.data.access_token);
-                    dispatch(login({ token: data.data.access_token, userId: decodedToken.userId }));
+                    dispatch(login({ token: data.data.access_token, userId: decodedToken.userId , role: decodedToken.role}));
+                    toastSuccess('Login success')
                     navigate('/home');
                 }catch(e){
                     console.error(e)
@@ -40,7 +41,6 @@ export const SignInForm = () => {
         })
 
     const onLogin = async () => {
-        console.log('login')
         loginMutation.mutate({ username, password });
     };
 
