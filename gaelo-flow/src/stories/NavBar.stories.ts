@@ -1,11 +1,12 @@
 //Exemple de story:
 import type { Meta, StoryObj } from '@storybook/react';
-import SideBar from '../../RenderComponents/NavBar/SideBar';
+import SideBar from '../RenderComponents/NavBar/SideBar';
 
 
 const meta: Meta<typeof SideBar> = {
     title: 'Example/SideBar',
     component: SideBar,
+    tags: ['autodocs'],
     }
 export default meta;
 type Story = StoryObj<typeof SideBar>;
