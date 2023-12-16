@@ -6,10 +6,11 @@ import { signIn } from '../services/auth';
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/UserSlice';
-import { toastError } from '../utils/toastify';
+import { toastError, toastSuccess } from '../utils/toastify';
 import ChevronRight from './../assets/chevron-right.svg?react'
 import User from './../assets/user.svg?react'
 import Lock from './../assets/lock.svg?react'
+import { useNavigate } from 'react-router-dom';
 
 
 export const SignInForm = () => {
@@ -17,15 +18,22 @@ export const SignInForm = () => {
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate();
     const loginMutation = useCustomMutation(
         ({ username, password }) => signIn(username, password),
         null,
         [],
         {
             onSuccess: (data: Record<string, any>) => {
-                const decodedToken  : Record<string, any>= jwtDecode(data.token);
-                dispatch(login({ token: data.token, userId: decodedToken.userId }));
+                console.log('login success')
+                try{
+                    const decodedToken  : Record<string, any>= jwtDecode(data.data.access_token);
+                    dispatch(login({ token: data.data.access_token, userId: decodedToken.userId , role: decodedToken.role}));
+                    toastSuccess('Login success')
+                    navigate('/home');
+                }catch(e){
+                    console.error(e)
+                }
             },
             onError: () => {
                 toastError('Error in creadentials')
@@ -48,7 +56,7 @@ export const SignInForm = () => {
                     bordered
                     placeholder="Enter your username"
                     value={username}
-                    onChange={(event) => { setUsername(event.target.value) }}
+                    onChange={(event:ChangeEvent<HTMLInputElement>) => { setUsername(event.target.value) }}
                 />
                 <Input
                     label='Password :'
@@ -56,7 +64,8 @@ export const SignInForm = () => {
                     bordered
                     placeholder="Enter your password"
                     value={password}
-                    onChange={(event) => { setPassword(event.target.value) }}
+                    type='password'
+                    onChange={(event:ChangeEvent<HTMLInputElement>) => { setPassword(event.target.value) }}
                 />
                 <Button
                     className="w-full"

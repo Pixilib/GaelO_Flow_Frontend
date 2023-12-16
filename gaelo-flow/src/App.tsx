@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Welcome from "./Welcome";
+import Home from "./Home";
 import "./index.css";
 import Button from "./RenderComponents/Button";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -46,6 +47,7 @@ function App() {
                   <Welcome onLegalMention={() => setDisplayLegalMention(true)} />
                 }
               />
+              <Route path="/home" element={<Home />} />
             </Routes>
             {displayLegalMention && <Button onClick={() => setDisplayLegalMention(false)} color="purple">Return to Main</Button>}
           </BrowserRouter>

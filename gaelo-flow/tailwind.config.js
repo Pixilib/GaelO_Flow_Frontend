@@ -8,4 +8,3 @@ export default {
   plugins: ["prettier-plugin-tailwindcss"],
 };
 
-//TODO : [] adapt gradient to looks like the figma
