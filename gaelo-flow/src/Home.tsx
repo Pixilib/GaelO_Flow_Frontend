@@ -2,41 +2,42 @@ import Button from "./RenderComponents/Button";
 
 const Home = () => {
     return (
-        <div className="h-screen w-screen bg-[#ebdfd7]">
-            <h1 className="text-4xl font-bold text-center mb-8">Welcome username !</h1>
-            <p className="text-lg text-gray-700 text-center mb-8">You are connected.</p>
-
-            <Button color="purple">Logout</Button>
-
-            <div className="flex flex-wrap">
-
-
-                <div className="w-1/3 p-4 bg-[#4746B8]rounded-lg">
-
+        <div className=" mx-4 h-screen bg-background flex flex-col">
+    
+                <div className="m-8 bg-gradient-to-r from-indigo-700 to-amber-500 text-white rounded-lg shadow-xl p-10">
                     Welcome username
 
                 </div>
+                <div className="mx-8 columns-3 flex gap-6 b ">
 
-                <div className="w-1/3 p-4 bg-[#ffffff]">
+                    <div className=" w-1/3 p-4 bg-[#ffffff] rounded-lg border border-gray-300">
 
-                    02
+                        02
 
+                    </div>
+
+                    <div className="w-1/3 p-4 bg-[#ffffff] rounded-lg">
+
+                        03
+
+                    </div>
+                    <div className="w-1/3 p-20 bg-[#ffffff] rounded-lg">
+
+                        03ccc 
+
+                    </div>
                 </div>
 
-                <div className="w-1/3 p-4 bg-[#ffffff]">
 
-                    03
-
-                </div>
-
-                <div className="w-1/3  bg-[#ffffff]">
+                <div className=" m-8 p-20 bg-[#ffffff] rounded-lg p-4">
 
                     Active Task
-                    </div>
-            </div>
-
-
+                </div>
         </div>
+
+
+
+
     )
 }
 
