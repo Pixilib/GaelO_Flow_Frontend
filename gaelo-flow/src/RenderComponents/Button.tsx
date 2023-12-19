@@ -1,7 +1,7 @@
 import React from "react";
 
 type ButtonProps = {
-  color: 'purple' | 'green'
+  color: 'purple' | 'orange'
   className?: string,
   bordered?: boolean
   children: React.ReactNode
@@ -11,7 +11,7 @@ type ButtonProps = {
 const Button = ({ color, bordered = false, className = '', children, ...props }: ButtonProps) => {
 
   const colorClasses = {
-    'green': 'bg-green-500 hover:enabled:bg-green-700',
+    'orange': 'bg-amber-500 hover:enabled:bg-indigo-700',
     'purple': 'bg-indigo-700 ed:bg-indigo-900',
   }
 

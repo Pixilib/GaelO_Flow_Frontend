@@ -18,9 +18,6 @@ function App() {
   const [displayLegalMention, setDisplayLegalMention] =
     useState<boolean>(false);
 
-    return(
-      <Home/>
-    )
 
   return (
     <Provider store={store}>

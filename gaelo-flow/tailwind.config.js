@@ -9,7 +9,7 @@ export default {
         'purple': '#4746B8',
         'background': '#F4EDE8',
         'red': '#f8d7da',
-        'gray': '#F5F5F7',
+        'borderGray': '#EFE7DA',
       },
     },
   },
