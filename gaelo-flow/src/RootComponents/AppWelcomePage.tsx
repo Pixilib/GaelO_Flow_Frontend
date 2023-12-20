@@ -6,7 +6,7 @@ import {SideBar} from "../RenderComponents/NavBar/SideBar";
 
 
 
-const Root = () => {    
+const AppWelcomePage = () => {    
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -25,4 +25,4 @@ const Root = () => {
     )
 }
 
-export default Root;
+export default AppWelcomePage;
