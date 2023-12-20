@@ -3,18 +3,18 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface Role {
     name: string;
-    'import': boolean;
+    import: boolean;
     anonymize: boolean;
-    'export': boolean;
+    export: boolean;
     query: boolean;
     autoQuery: boolean;
-    'delete': boolean;
+    delete: boolean;
     admin: boolean;
     modify: boolean;
     cdBurner: boolean;
     autoRouting: boolean;
   }
-interface UserState {
+export interface UserState {
     token: string | null;
     isLogged: boolean;
     tokenCreationDate: string | null;
@@ -54,10 +54,11 @@ const userSLice = createSlice({
             state.tokenCreationDate = null;
             state.currentUserId = null;
             state.role = null;
-        }
+        },
+
     }
 })
 
-export const { login, logout } = userSLice.actions;
+export const { login, logout} = userSLice.actions;
 export default userSLice.reducer;
 
