@@ -16,7 +16,7 @@ export const SideBar = ({children,className="",...props}:SideBarProps):JSX.Eleme
 
   
     return(
-  <div data-gaelo-flow='sidebar' className={"flex flex-col "+className}{...props}>
+  <nav data-gaelo-flow='sidebar' className={"flex flex-col "+className}{...props}>
 
     <div
       id="docs-sidebar"
@@ -360,7 +360,7 @@ export const SideBar = ({children,className="",...props}:SideBarProps):JSX.Eleme
       </nav>
       {children}
     </div>
-  </div>
+  </nav>
 
     )
 };

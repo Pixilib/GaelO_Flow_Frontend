@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "./store";
 import ErrorBoundary from "./ErrorBoundary";
+import Root from "./RootComponents/Root";
 
 
 const queryClient = new QueryClient();
@@ -47,7 +48,7 @@ function App() {
                   <Welcome onLegalMention={() => setDisplayLegalMention(true)} />
                 }
               />
-              <Route path="/home" element={<Home />} />
+              <Route path="/home" element={<Root />} />
             </Routes>
             {displayLegalMention && <Button onClick={() => setDisplayLegalMention(false)} color="purple">Return to Main</Button>}
           </BrowserRouter>

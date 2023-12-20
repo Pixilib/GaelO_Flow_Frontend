@@ -1,14 +1,13 @@
-// import Button from "./RenderComponents/Button";
 import { useDispatch } from "react-redux";
-import { logout } from "./reducers/UserSlice";
+import { logout } from "../reducers/UserSlice";
 import { useNavigate } from "react-router-dom";
-import Button from "./RenderComponents/Button";
-import SideBar from "@/RenderComponents/NavBar/SideBar";
+import Button from "../RenderComponents/Button";
+import SideBar from "../RenderComponents/NavBar/SideBar";
 
 
 
 
-const Home = () => {    
+const Root = () => {    
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -29,4 +28,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Root;

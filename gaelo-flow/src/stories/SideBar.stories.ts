@@ -16,4 +16,5 @@ export const Simple: Story = {
     decorators: [],
     name: 'So simple!',
     parameters: {},
+    
   };
