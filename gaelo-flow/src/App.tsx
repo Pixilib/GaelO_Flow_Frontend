@@ -48,8 +48,7 @@ function App() {
                   <Welcome onLegalMention={() => setDisplayLegalMention(true)} />
                 }
               />
-              <Route path="/home" element={<Root />} />
-            </Routes>
+   
             {displayLegalMention && <Button onClick={() => setDisplayLegalMention(false)} color="purple">Return to Main</Button>}
           </BrowserRouter>
         </ErrorBoundary>

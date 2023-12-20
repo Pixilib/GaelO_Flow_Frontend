@@ -6,14 +6,14 @@ import SideBar from "../RenderComponents/NavBar/SideBar";
 
 
 
-
 const Root = () => {    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     const handleLogout = () => {
-        //TODO : handle logout
-        dispatch(logout());
-        navigate('/');
+       //TODO : handle logout
+       dispatch(logout());
+       navigate('/');
     }
     return (
         <div>

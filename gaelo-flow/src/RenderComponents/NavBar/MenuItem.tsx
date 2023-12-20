@@ -13,7 +13,7 @@ export const MenuItem: React.FC<MenuItemProps> = ({ icon, text, to, className, c
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div>
+        <li>
             <Link to={to} className={`flex items-center p-2 bg-inherit text-white ${className}`}>
                 {icon}
                 <span className="ml-3">{text}</span>
@@ -24,6 +24,6 @@ export const MenuItem: React.FC<MenuItemProps> = ({ icon, text, to, className, c
                 </button>
             )}
             {isOpen && children}
-        </div>
+        </li>
     );
 };
