@@ -43,7 +43,7 @@ function Welcome({ onLegalMention }: WelcomeProps) {
           <hr className="my-10 border-orange-300" />
           <div className="flex justify-between">
             <span className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer" onClick={() => { setDisplayComponent('lostPassword') }} >Lost password ?</span>
-            <span className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer" onClick={() => { onLegalMention('') }} >Legal Mention</span>
+            <span className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer" onClick={() => { onLegalMention() }} >Legal Mention</span>
           </div>
         </div>
       </div>

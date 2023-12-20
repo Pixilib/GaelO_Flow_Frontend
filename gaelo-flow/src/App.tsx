@@ -25,7 +25,6 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<AuthenticatorRoot />}>
-                {/* Place ici tes autres routes */}
                 <Route index element={<Welcome onLegalMention={() => setDisplayLegalMention(true)} />} />
                 <Route path="/legal-mention" element={
                   <>
@@ -35,14 +34,13 @@ function App() {
                     "Legal Mention"
                   </>
                 }/>
-                {/* Ajoute d'autres routes si nécessaire */}
-              </Route>
-            </Routes>
             {displayLegalMention && 
               <Button onClick={() => setDisplayLegalMention(false)} color="purple">
                 Return to Main
               </Button>
             }
+              </Route>
+            </Routes>
           </BrowserRouter>
         </ErrorBoundary>
         <ReactQueryDevtools initialIsOpen={true} />

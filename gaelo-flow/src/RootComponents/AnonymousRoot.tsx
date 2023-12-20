@@ -1,10 +1,9 @@
-import {SignInForm} from '../auth/SignInForm'
-
+import Welcome from "../Welcome"
 
 const AnonymousRoot = () => {
     return (
         <>
-            <SignInForm />
+            <Welcome/>
             // TODO: add a sign up form here when is created
         </>
     )
