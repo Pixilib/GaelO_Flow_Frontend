@@ -37,7 +37,7 @@ const Home = () => {
 
                     <p className=
 
-                        "text-lg font-semibold text-dark">Retrieve</p>
+                        "text-lg font-semibold text-dark">Delete</p>
                     <h3 className="text-xl">Progress</h3>
 
                     <Button

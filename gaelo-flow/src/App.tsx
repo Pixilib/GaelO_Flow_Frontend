@@ -9,6 +9,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "./store";
 import ErrorBoundary from "./ErrorBoundary";
 import Home from "./Home";
+import General from "./General"
+
 
 
 const queryClient = new QueryClient();
@@ -17,6 +19,7 @@ function App() {
 
   const [displayLegalMention, setDisplayLegalMention] =
     useState<boolean>(false);
+
 
 
   return (
