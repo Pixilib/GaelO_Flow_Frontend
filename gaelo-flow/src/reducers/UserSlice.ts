@@ -3,12 +3,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface Role {
     name: string;
-    'import': boolean;
+    import: boolean;
     anonymize: boolean;
-    'export': boolean;
+    export: boolean;
     query: boolean;
     autoQuery: boolean;
-    'delete': boolean;
+    delete: boolean;
     admin: boolean;
     modify: boolean;
     cdBurner: boolean;
