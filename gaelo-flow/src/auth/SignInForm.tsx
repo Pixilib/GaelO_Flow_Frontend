@@ -28,6 +28,7 @@ export const SignInForm = () => {
                 console.log('login success')
                 try{
                     const decodedToken  : Record<string, any>= jwtDecode(data.data.access_token);
+                    console.log({decodedToken: {decodedToken}, data: {data}})
                     dispatch(login({ token: data.data.access_token, userId: decodedToken.userId , role: decodedToken.role}));
                     toastSuccess('Login success')
                     navigate('/home');
