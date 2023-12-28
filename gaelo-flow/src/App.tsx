@@ -8,6 +8,9 @@ import { Provider } from "react-redux";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { store } from "./store";
 import ErrorBoundary from "./ErrorBoundary";
+import Home from "./Home";
+import General from "./General"
+
 import AuthenticatorRoot from "./RootComponents/AuthenticatorRoot";
 
 
@@ -17,6 +20,8 @@ function App() {
 
   const [displayLegalMention, setDisplayLegalMention] =
     useState<boolean>(false);
+
+
 
   return (
     <Provider store={store}>
