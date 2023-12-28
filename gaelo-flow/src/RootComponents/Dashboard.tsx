@@ -1,5 +1,4 @@
-import React from "react";
-import taskSvg from "./../assets/task.svg?react";
+import taskSvg from "./../assets/task.svg";
 import Button from "./../RenderComponents/Button";
 
 const Dashboard = () => {
@@ -48,7 +47,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="m-8 flex p-20 bg-[#ffffff] rounded-[10px] p-4 shadow-xl items-center">
+      <div className="m-8 flex bg-[#ffffff] rounded-[10px] p-4 shadow-xl items-center">
         <img src={taskSvg} alt="Task Icon" className="w-10 h-10 mr-2" />
         <p className="text-lg font-semibold text-dark">Active Task</p>
       </div>
