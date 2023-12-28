@@ -1,22 +1,14 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import Welcome from "./Welcome";
 import "./index.css";
-import { Routes, Route } from "react-router-dom";
-
-
-import LegalMention from "./RootComponents/LegalMentions";
+import { RootState } from "./store";
+import AppWelcomePage from "./RootComponents/AppWelcomePage";
 
 function App() {
+  const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
-  const [displayLegalMention, setDisplayLegalMention] =
-    useState<boolean>(false);
-
-  return (
-    <Routes>
-      <Route path="/" element={<Welcome />} />
-      <Route path="/legal-mention" element={<LegalMention />} />
-    </Routes>
-  );
+  if (isLogged) return <AppWelcomePage />;
+  else return <Welcome />;
 }
 
 export default App;

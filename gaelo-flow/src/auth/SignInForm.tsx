@@ -1,12 +1,4 @@
 import { ChangeEvent, useState } from "react";
-import { useDispatch } from "react-redux";
-
-import { jwtDecode } from "jwt-decode";
-
-import { useCustomMutation } from "../utils/reactQuery";
-import { signIn } from "../services/auth";
-import { login } from "../reducers/UserSlice";
-import { toastError } from "../utils/toastify";
 
 import Button from "../RenderComponents/Button";
 import Input from "../RenderComponents/Input";
@@ -14,38 +6,13 @@ import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 import Lock from "./../assets/lock.svg?react";
 
-export const SignInForm = () => {
+interface SignInFormProps {
+  onLogin: (username: string, password: string) => void;
+}
+
+export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const dispatch = useDispatch();
-
-  const loginMutation = useCustomMutation(
-    ({ username, password }) => signIn(username, password),
-    null,
-    [],
-    {
-      onSuccess: (data: Record<string, any>) => {
-          const decodedToken: Record<string, any> = jwtDecode(
-            data.data.access_token
-          );
-          dispatch(
-            login({
-              token: data.data.access_token,
-              userId: decodedToken.userId,
-              role: decodedToken.role,
-            })
-          );
-      },
-      onError: () => {
-        toastError("Error in creadentials");
-      },
-    }
-  );
-
-  const onLogin = async () => {
-    loginMutation.mutate({ username, password });
-  };
 
   return (
     <div className="flex flex-col w-full">
@@ -79,7 +46,7 @@ export const SignInForm = () => {
         <Button
           className="w-full"
           color="purple"
-          onClick={() => onLogin()}
+          onClick={() => onLogin(username, password)}
           bordered
           disabled={username.length == 0 || password.length == 0}
         >

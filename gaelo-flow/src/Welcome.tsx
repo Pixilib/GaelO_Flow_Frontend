@@ -1,20 +1,45 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { SignInForm } from "./auth/SignInForm";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import AppWelcomePage from "./RootComponents/AppWelcomePage";
-import { RootState } from "./store";
+import { useCustomMutation } from "./utils/reactQuery";
+import { signIn } from "./services/auth";
+import { jwtDecode } from "jwt-decode";
+import { login } from "./reducers/UserSlice";
+import { toastError } from "./utils/toastify";
 
 function Welcome() {
   const navigate = useNavigate();
-  const isLogged = useSelector((state : RootState) => state.user.isLogged);
+  const dispatch = useDispatch();
 
-  const [displayComponent, setDisplayComponent] = useState<
-    "login" | "lostPassword"
-  >("login");
+  const loginMutation = useCustomMutation(
+    ({ username, password }) => signIn(username, password),
+    null,
+    [],
+    {
+      onSuccess: (data: Record<string, any>) => {
+        const decodedToken: Record<string, any> = jwtDecode(
+          data.data.access_token
+        );
+        dispatch(
+          login({
+            token: data.data.access_token,
+            userId: decodedToken.userId,
+            role: decodedToken.role,
+          })
+        );
+      },
+      onError: () => {
+        toastError("Error in creadentials");
+      },
+    }
+  );
 
-  const getComponent = () => {
-    return (
+  const loginHandle = (username: string, password: string) => {
+    loginMutation.mutate({ username, password });
+  };
+
+  return (
+    <>
       <div className="h-screen w-screen columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
         <div className="h-full w-full">
           <img
@@ -46,16 +71,17 @@ function Welcome() {
           style={{ filter: "drop-shadow(-20px 0 20px rgba(50, 50, 50, 0.5))" }}
         >
           <div className="w-1/2">
-            {displayComponent === "login" ? <SignInForm /> : null}
-            {displayComponent === "lostPassword"
-              ? "Lost Password Component"
-              : null}
+            <Routes>
+              <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
+              <Route path="lost-password" element={<div>Lost Password</div>} />
+              <Route path="legal-mention" element={<div>Legal Mention</div>} />
+            </Routes>
             <hr className="my-10 border-orange-300" />
             <div className="flex justify-between">
               <span
                 className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
                 onClick={() => {
-                  setDisplayComponent("lostPassword");
+                  navigate("/lost-password");
                 }}
               >
                 Lost password ?
@@ -72,10 +98,8 @@ function Welcome() {
           </div>
         </div>
       </div>
-    );
-  };
-
-  return <>{isLogged ? <AppWelcomePage/> : getComponent()}</>;
+    </>
+  );
 }
 
 export default Welcome;
