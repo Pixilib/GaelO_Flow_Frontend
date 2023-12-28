@@ -1,4 +1,5 @@
-import Button from "@/RenderComponents/Button";
+
+import Button from "./../RenderComponents/Button";
 import { useNavigate } from "react-router-dom";
 
 const LegalMention = () => {

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "./reducers/UserSlice";
 import { useNavigate } from "react-router-dom";
 import Button from "./RenderComponents/Button";
-import SideBar from "@/RenderComponents/NavBar/SideBar";
+import SideBar from "./RenderComponents/NavBar/SideBar";
 
 
 
