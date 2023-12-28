@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const signIn = async (username: string, password: string): Promise<unknown> => {
     try{
-        const response = await axios.post('/api/auth/login', {
+        const response = await axios.post('/api/login', {
             username,
             password
         });
