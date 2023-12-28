@@ -14,8 +14,10 @@ const RootApp = () => {
   };
   return (
     <div className="flex w-full h-screen">
-      <SideBar />
-      <div className="h-full w-full">
+      <div className="grow-0">
+        <SideBar />
+      </div>
+      <div className="grow">
         <Dashboard />
       </div>
     </div>

@@ -5,7 +5,7 @@ const Dashboard = () => {
   const username = "M.Ohma";
 
   return (
-    <div className="bg-background flex flex-col p-8 h-full w-full">
+    <div className="bg-background p-8 h-full w-full">
       <h1 className="text-3xl font-bold mx-8">Overview</h1>
 
       <div className="m-8 bg-gradient-to-r from-indigo-700 to-amber-500 text-white p-10 rounded-[10px] shadow-xl flex items-center h-10">
