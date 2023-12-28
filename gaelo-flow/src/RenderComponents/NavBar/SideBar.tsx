@@ -13,7 +13,6 @@ export type SideBarProps = {
 
 export const SideBar = ({children,className="",...props}:SideBarProps):JSX.Element => {
     
-
     return(
   <nav data-gaelo-flow='sidebar' className={"flex flex-col "+className}{...props}>
     <div

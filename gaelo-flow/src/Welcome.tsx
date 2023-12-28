@@ -4,14 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AppWelcomePage from "./RootComponents/AppWelcomePage";
 import { RootState } from "./store";
+import { SignUpForm } from "./auth/SignUpForm";
 
 function Welcome() {
   const navigate = useNavigate();
   const isLogged = useSelector((state : RootState) => state.user.isLogged);
 
   const [displayComponent, setDisplayComponent] = useState<
-    "login" | "lostPassword"
+    "login" | "lostPassword"| "signUp"
   >("login");
+
 
   const getComponent = () => {
     return (
@@ -50,6 +52,7 @@ function Welcome() {
             {displayComponent === "lostPassword"
               ? "Lost Password Component"
               : null}
+              {displayComponent === "signUp" ? <SignUpForm /> : null}
             <hr className="my-10 border-orange-300" />
             <div className="flex justify-between">
               <span
@@ -59,6 +62,14 @@ function Welcome() {
                 }}
               >
                 Lost password ?
+              </span>
+              <span
+                className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+                onClick={() => {
+                  setDisplayComponent("signUp");
+                }}
+              >
+                Create an account
               </span>
               <span
                 className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
