@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../reducers/UserSlice";
-import { useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { SideBar } from "../RenderComponents/NavBar/SideBar";
 import Dashboard from "./Dashboard";
+import AdminRoot from "./../admin/AdminRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,11 @@ const RootApp = () => {
         <SideBar />
       </div>
       <div className="grow">
-        <Dashboard />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/admin" element={<AdminRoot />} />
+        </Routes>
+        
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ function Welcome() {
         >
           <div className="w-1/2">
             <Routes>
-              <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
+              <Route path="/*" element={<SignInForm onLogin={loginHandle} />} />
               <Route path="lost-password" element={<div>Lost Password</div>} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
             </Routes>
