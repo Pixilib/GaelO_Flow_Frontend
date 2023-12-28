@@ -1,4 +1,4 @@
-// import Button from "./RenderComponents/Button";
+
 import { useDispatch } from "react-redux";
 import { logout } from "./reducers/UserSlice";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,10 @@ const Home = () => {
             //TODO : redirect route for logout aftre clicked on button logout
             <Button color="purple" onClick={handleLogout}>Logout</Button>
         </div>
+
+
+
+
     )
 }
 
