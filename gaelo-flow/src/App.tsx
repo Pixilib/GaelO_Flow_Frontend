@@ -11,6 +11,7 @@ import ErrorBoundary from "./ErrorBoundary";
 import Home from "./Home";
 import General from "./General"
 
+import AuthenticatorRoot from "./RootComponents/AuthenticatorRoot";
 
 
 const queryClient = new QueryClient();
@@ -24,35 +25,27 @@ function App() {
 
   return (
     <Provider store={store}>
-      <QueryClientProvider
-        client={queryClient}
-      >
+      <QueryClientProvider client={queryClient}>
         <ErrorBoundary FallbackComponent={<>Error</>}>
           <BrowserRouter>
             <Routes>
-              <Route
-
-                path="/legal-mention"
-                element={
+              <Route path="/" element={<AuthenticatorRoot />}>
+                <Route index element={<Welcome onLegalMention={() => setDisplayLegalMention(true)} />} />
+                <Route path="/legal-mention" element={
                   <>
-                    <Button
-                      onClick={() => setDisplayLegalMention(false)}
-                      color="purple"
-                    >
+                    <Button onClick={() => setDisplayLegalMention(false)} color="purple">
                       Return to Main
                     </Button>{" "}
                     "Legal Mention"
                   </>
-                }
-              />
-              <Route
-                path="/"
-                element={
-                  <Welcome onLegalMention={() => setDisplayLegalMention(true)} />
-                }
-              />
+                }/>
+            {displayLegalMention && 
+              <Button onClick={() => setDisplayLegalMention(false)} color="purple">
+                Return to Main
+              </Button>
+            }
+              </Route>
             </Routes>
-            {displayLegalMention && <Button onClick={() => setDisplayLegalMention(false)} color="purple">Return to Main</Button>}
           </BrowserRouter>
         </ErrorBoundary>
         <ReactQueryDevtools initialIsOpen={true} />

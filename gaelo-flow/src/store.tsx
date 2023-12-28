@@ -8,7 +8,8 @@ const store = configureStore({
       //todos: todosReducer,
       // Define a top-level state field named `filters`, handled by `filtersReducer`
       //filters: filtersReducer
-    }
+    },
+    devTools:true
   })
 
   export {store}
