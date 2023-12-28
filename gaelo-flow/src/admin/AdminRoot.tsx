@@ -1,8 +1,15 @@
-const AdminRoot= ()=>{
+
+import { Route, Routes, useNavigate } from "react-router-dom";
+import General from "./General";
+
+const AdminRoot = () => {
     return (
         <div className="h-full w-full">
-            My Admin Component
-        </div>  
+            <Routes>
+                <Route path="/general" element={<General />} />
+            </Routes>
+            My Admin Component 2
+        </div>
     )
 }
 

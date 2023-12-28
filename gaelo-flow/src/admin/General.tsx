@@ -1,6 +1,6 @@
-import Button from './RenderComponents/Button';
+import Button from '../RenderComponents/Button';
 
-const Home = () => {
+const General = () => {
   return (
     <div className="bg-background flex flex-col p-8 h-screen">
       <h1 className="text-3xl font-bold mx-8"> </h1>
@@ -39,4 +39,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default General;
