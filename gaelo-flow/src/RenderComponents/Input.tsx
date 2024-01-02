@@ -3,10 +3,11 @@ type InputProps = {
   placeholder?: string;
   label?: string;
   svg?: React.ReactNode;
+  rightIcon?: React.ReactNode;
   [key: string]: any;
 };
 
-const Input = ({ className = "", placeholder = "", label = "", svg = null, ...props }: InputProps) => {
+const Input = ({ className = "", placeholder = "", label = "", svg = null,rightIcon = null, ...props }: InputProps) => {
 
   return (
     <fieldset className="relative space-y-1">
@@ -20,6 +21,7 @@ const Input = ({ className = "", placeholder = "", label = "", svg = null, ...pr
       <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
         {svg}
       </div>
+      {rightIcon && <div className="absolute inset-y-0 end-0 flex items-center pr-4 cursor-pointer">{rightIcon}</div>} {/* Ajoutez cette ligne */}
     </fieldset>
   );
 };

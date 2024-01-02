@@ -22,7 +22,6 @@ export const signIn = async (username: string, password: string): Promise<unknow
 };
 
 export const signUp = async (UserCredentials: UserSignUp): Promise<unknown> => {
-
     try{
         const response = await axios.post('/api/register', {
             ...UserCredentials
@@ -36,3 +35,20 @@ export const signUp = async (UserCredentials: UserSignUp): Promise<unknown> => {
         }
     }
 }
+
+
+    export const changePassword = async (newPassword: string, token: string): Promise<unknown> => {
+        try{
+            const response = await axios.post('/api/change-password', {
+                newPassword,
+                token
+            });
+            return response;
+        }catch(error){
+            if (axios.isAxiosError(error)) {
+                return Promise.reject(error);
+            } else {
+                return Promise.reject(new Error('Unknown error'));
+            }
+        }
+    }
