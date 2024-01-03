@@ -17,13 +17,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const ButtonStory: Story = {};
-// type ButtonProps = {
-//   color: 'purple' | 'green'
-//   className?: string,
-//   bordered?: boolean
-//   children: React.ReactNode
-//   [key :string] :any 
-// }
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const Default: Story = {
@@ -33,6 +26,8 @@ export const Default: Story = {
   args: {
     color: 'purple',
     bordered: true,
+    className: '',
+    children: 'Button',
   },
 };
 
@@ -43,6 +38,7 @@ export const Green: Story = {
   args: {
     color: 'green',
     bordered: true,
+    children: 'Button',
   },
 };
 
@@ -53,5 +49,6 @@ export const notBordered: Story = {
   args: {
     color: 'purple',
     bordered: false,
+    children: 'Button',
   },
 };
