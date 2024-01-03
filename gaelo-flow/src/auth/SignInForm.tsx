@@ -43,19 +43,19 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
             setPassword(event.target.value);
           }}
         />
+         <div className="justify-center flex">
         <Button
-          className="w-full"
           color="purple"
           onClick={() => onLogin(username, password)}
           bordered
           disabled={username.length == 0 || password.length == 0}
-        >
-          <div className="w-1/2 flex justify-around">
+          >
             Connect
             <ChevronRight />
-          </div>
         </Button>
-      </div>
+        </div>
     </div>
+    </div>
+
   );
 };

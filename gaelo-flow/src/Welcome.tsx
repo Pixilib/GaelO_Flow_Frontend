@@ -40,31 +40,17 @@ function Welcome() {
 
   return (
     <>
-      <div className="h-screen w-screen columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
-        <div className="h-full w-full">
+      <div className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
+        <div className="h-full flex relative w-full">
           <img
-            src="/gaelo-flow-white.png"
-            className="absolute top-7 left-7 w-1/12"
-          ></img>
+              src="/gaelo-flow-white.svg"
+              className="absolute top-7 left-7 w-1/12 "
+                        ></img>
 
-          <div className="flex h-screen justify-center items-center w-12/12">
-            <img
-              src="/cloud.svg"
-              style={{
-                left: "400px",
-                top: "300px",
-                transform: "rotate(5deg)",
-                width: "8%",
-              }}
-              className="absolute w-1/8 bottom-10"
-            />
-            <img src="/VisualHome.svg" alt="VisualHome Image" />
-            <img
-              src="/cloud.svg"
-              style={{ left: "600px", transform: "rotate(5deg)" }}
-              className="absolute w-1/8 bottom-80"
-            />
-          </div>
+          <div className="flex h-screen justify-center items-center w-full">
+            
+          <img src="/VisualHome3.svg" alt="VisualHome Image" className="mx-auto mt-4 " />
+                    </div>
         </div>
         <div
           className="h-full w-full flex justify-center items-center bg-white rounded-tl-3xl"

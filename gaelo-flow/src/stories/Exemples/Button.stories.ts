@@ -36,16 +36,6 @@ export const Default: Story = {
   },
 };
 
-export const Green: Story = {
-  decorators: [],
-  name: 'Green',
-  parameters: {},
-  args: {
-    color: 'green',
-    bordered: true,
-  },
-};
-
 export const notBordered: Story = {
   decorators: [],
   name: 'notBordered',

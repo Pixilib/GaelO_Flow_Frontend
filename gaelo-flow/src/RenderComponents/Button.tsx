@@ -12,11 +12,11 @@ const Button = ({ color, bordered = false, className = '', children, ...props }:
 
   const colorClasses = {
     'orange': 'bg-amber-500 hover:enabled:bg-indigo-700',
-    'purple': 'bg-indigo-700 ed:bg-indigo-900',
+    'purple': 'bg-indigo-900 ed:bg-indigo-900',
   }
 
   return (
-    <button className={colorClasses[color] + " text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline disabled:bg-opacity-70 " + (bordered ? "border border-white-900" : "") + " " + className} {...props} >
+    <button className={colorClasses[color] + " text-white font-bold py-4 px-8 inline-flex rounded-3xl focus:outline-none focus:shadow-outline disabled:bg-opacity-70 " + (bordered ? "border border-white-900" : "") + " " + className} {...props} >
       {children}
     </button>
   );
