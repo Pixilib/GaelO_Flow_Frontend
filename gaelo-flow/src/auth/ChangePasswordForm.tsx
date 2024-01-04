@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { useCustomMutation } from "../utils/reactQuery";
 
 import { AxiosError } from "axios";
-import Input from "@/RenderComponents/Input";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Lock from "./../assets/lock.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
-import Button from "@/RenderComponents/Button";
-import { toastError, toastSuccess } from "@/utils/toastify";
-import { changePassword } from "@/services/auth";
-import { svgWithOnClick } from "@/RenderComponents/svgOnClick";
+import Button from "../RenderComponents/Button";
+import { toastError, toastSuccess } from "../utils/toastify";
+import { changePassword } from "../services/auth";
+import { svgWithOnClick } from "../RenderComponents/svgOnClick";
+import Input2 from "../RenderComponents/Input2";
 
 export const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -31,6 +31,8 @@ export const ChangePasswordForm = () => {
       navigate("/"); // Redirection si le token n'est pas trouvé
     }
   }, [navigate]);
+
+  
 
   const changePasswordMutation = useCustomMutation(
     ({ newPassword, token }) => changePassword(newPassword, token),
@@ -66,10 +68,10 @@ export const ChangePasswordForm = () => {
         Please create/change your password.
       </p>
       <div className="w-full space-y-3">
-        <Input
+        <Input2
           label="New Password :"
-          svg={<Lock />}
-          rightIcon={
+          svgLeft={<Lock />}
+          svgRight={
             showPassword ? (
               <VisibilityWithClick onClick={() => setShowPassword(false)} />
             ) : (
@@ -84,12 +86,12 @@ export const ChangePasswordForm = () => {
             setNewPassword(event.target.value);
           }}
         />
-        <Input
+        <Input2
           label="Confirm New Password :"
-          svg={<Lock />}
+          svgLeft={<Lock />}
           bordered
           placeholder="Confirm your new password"
-          rightIcon={
+          svgRight={
             showPassword ? (
               <VisibilityWithClick onClick={() => setShowPassword(false)} />
             ) : (

@@ -4,11 +4,11 @@ import { useCustomMutation } from "../utils/reactQuery";
 import { signUp } from "../services/auth";
 
 import Button from "../RenderComponents/Button";
-import Input from "../RenderComponents/Input";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 import { toastSuccess, toastError } from "@/utils/toastify";
 import { AxiosError } from "axios";
+import Input2 from "@/RenderComponents/Input2";
 
 
 export const SignUpForm = () => {
@@ -49,7 +49,7 @@ export const SignUpForm = () => {
             Please create your Account.
           </p>
           <div className="w-full space-y-3">
-            <Input
+            <Input2
               label="Username :"
               className="w-full"
               svg={<User />}
@@ -61,7 +61,7 @@ export const SignUpForm = () => {
                 setUsername(event.target.value);
               }}
             />
-            <Input
+            <Input2
               label="firstname :"
               svg={<User />}
               bordered
@@ -72,7 +72,7 @@ export const SignUpForm = () => {
                 setFirstname(event.target.value);
               }}
             />
-            <Input
+            <Input2
               label="lastname :"
               svg={<User />}
               bordered
@@ -83,7 +83,7 @@ export const SignUpForm = () => {
                 setLastname(event.target.value);
               }}
             />
-            <Input
+            <Input2
               label="email :"
               svg={<User />}
               bordered

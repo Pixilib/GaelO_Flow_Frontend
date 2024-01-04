@@ -9,14 +9,19 @@ import { login } from "../reducers/UserSlice";
 import { toastError } from "../utils/toastify";
 
 import Button from "../RenderComponents/Button";
-import Input from "../RenderComponents/Input";
+import Input2 from "@/RenderComponents/Input2";
 import ChevronRight from "./../assets/chevron-right.svg?react";
+import Visibility from "./../assets/visibility.svg?react";
+import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
 import Lock from "./../assets/lock.svg?react";
+import { svgWithOnClick } from "@/RenderComponents/svgOnClick";
 
 export const SignInForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const dispatch = useDispatch();
 
@@ -43,6 +48,10 @@ export const SignInForm = () => {
     }
   );
 
+  const VisibilityWithClick = svgWithOnClick(() => <Visibility />);
+  const VisibilityOffWithClick = svgWithOnClick(() => <VisibilityOff />);
+
+
   const onLogin = async () => {
     loginMutation.mutate({ username, password });
   };
@@ -54,10 +63,10 @@ export const SignInForm = () => {
         Please Log in to your Account.
       </p>
       <div className="w-full space-y-3">
-        <Input
+        <Input2
           label="Username :"
           className="w-full"
-          svg={<User />}
+          svgLeft={<User />}
           bordered
           placeholder="Enter your username"
           value={username}
@@ -65,9 +74,9 @@ export const SignInForm = () => {
             setUsername(event.target.value);
           }}
         />
-        <Input
+        <Input2
           label="Password :"
-          svg={<Lock />}
+          svgLeft={<Lock />}
           bordered
           placeholder="Enter your password"
           value={password}
@@ -75,6 +84,13 @@ export const SignInForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setPassword(event.target.value);
           }}
+          rightIcon={
+            showPassword ? (
+              <VisibilityWithClick onClick={() => setShowPassword(false)} />
+            ) : (
+              <VisibilityOffWithClick onClick={() => setShowPassword(true)} />
+            )
+          }
         />
         <Button
           className="w-full"
