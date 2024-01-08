@@ -31,7 +31,7 @@ export const Default: Story = {
   name: 'Default',
   parameters: {},
   args: {
-    color: 'purple',
+    color: 'primary',
     bordered: true,
   },
 };
@@ -41,7 +41,7 @@ export const notBordered: Story = {
   name: 'notBordered',
   parameters: {},
   args: {
-    color: 'purple',
+    color: 'primary',
     bordered: false,
   },
 };

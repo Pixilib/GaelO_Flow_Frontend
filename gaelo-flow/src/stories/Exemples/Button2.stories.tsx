@@ -1,39 +1,34 @@
-import { Meta, StoryFn } from "@storybook/react";
-import React from "react";
-import Button from "../../RenderComponents/Button";
-import Ytb from "../assets/youtube.svg";
-
-
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
+import Button, { ButtonProps } from "../../RenderComponents/Button";
+import ChevronRight from "./../../assets/chevron-right.svg?react"
 export default {
-    title: "UI/Button",
-    component: Button,
-    argTypes: {
-        disabled: {
-            options: [true, false],
-            control: { type: "radio" },
-            description: "Choose disabled state",
-        },
-        
+  title: "Gaelo FLow UI/Button",
+  component: Button,
+  args: {
+    color: "primary",
+    bordered: false,
+    //children: "Text"
+  },
+  argTypes: {
+    children: {
+      options : ["text", "icons"],
+      control: { type: 'radio' },
+      mapping: {
+        text: "My Text3",
+        icons: <ChevronRight />
+      },
     },
+  },
+  tags: ['autodocs']
 } as Meta<typeof Button>;
+type Story = StoryObj<typeof Button>;
 
-const template_button: StoryFn<typeof Button> = (args) => {
-    console.debug(args);
-    return (
 
-        <div className={"flex flex-row gap-3"}>
-          <Button color="orange">Orange</Button>
-          <Button color="purple">Purple</Button>
-
-          <Button color="purple"> 
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
-            </svg>Avec img 
-          </Button>
-        </div>
-            
-
-);
-};
-export const template_buttons = template_button.bind({});
+export const ButtonTextStory: Story = {
+  render: (args) => (
+    <>
+      <Button {...args}></Button>
+      
+      <Button color="secondary">{args.children}</Button>
+    </>)
+}

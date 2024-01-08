@@ -20,7 +20,7 @@ const Dashboard = () => {
       </div>
 
       <div className="mx-8 columns-3 flex gap-6 b ">
-        <div className=" w-1/3 p-4 text-dark bg-[#ffffff] rounded-[10px] shadow-xl">
+        <div className=" w-1/3 p-4 text-dark bg-white rounded-[10px] shadow-xl">
           <p className="text-lg font-semibold">Anonymisation</p>
           <h3 className="text-xl">Progress</h3>
 
@@ -28,7 +28,7 @@ const Dashboard = () => {
             Empty List
           </Button>
         </div>
-        <div className=" w-1/3 p-4 bg-[#ffffff] rounded-[10px] shadow-xl ">
+        <div className=" w-1/3 p-4 bg-white rounded-[10px] shadow-xl ">
           <p className="text-lg font-semibold text-dark">Delete</p>
           <h3 className="text-xl">Progress</h3>
 

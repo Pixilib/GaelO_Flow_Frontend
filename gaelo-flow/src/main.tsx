@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ErrorBoundary FallbackComponent={<>Error</>}>
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
-          <ToastContainer ></ToastContainer>
+            <ToastContainer />
             <App />
           </BrowserRouter>
           <ReactQueryDevtools initialIsOpen={true} />

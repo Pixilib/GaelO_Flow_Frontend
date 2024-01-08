@@ -1,7 +1,7 @@
-import React, { useState, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-export type MenuItemProps = {
+type MenuItemProps = {
     icon?: ReactNode;
     text: string;
     to: string;
@@ -9,7 +9,7 @@ export type MenuItemProps = {
     children?: ReactNode;
 };
 
-export const MenuItem: React.FC<MenuItemProps> = ({ icon, text, to, className, children }) => {
+export const MenuItem = ({ icon, text, to, className, children }: MenuItemProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (

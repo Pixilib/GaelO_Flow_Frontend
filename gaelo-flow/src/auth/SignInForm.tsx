@@ -6,7 +6,7 @@ import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 import Lock from "./../assets/lock.svg?react";
 
-interface SignInFormProps {
+type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
 }
 
@@ -43,18 +43,18 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
             setPassword(event.target.value);
           }}
         />
-         <div className="justify-center flex">
-        <Button
-          color="purple"
-          onClick={() => onLogin(username, password)}
-          bordered
-          disabled={username.length == 0 || password.length == 0}
+        <div className="justify-center flex">
+          <Button
+            color="purple"
+            onClick={() => onLogin(username, password)}
+            bordered
+            disabled={username.length == 0 || password.length == 0}
           >
             Connect
             <ChevronRight />
-        </Button>
+          </Button>
         </div>
-    </div>
+      </div>
     </div>
 
   );

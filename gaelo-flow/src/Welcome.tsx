@@ -6,6 +6,7 @@ import { signIn } from "./services/auth";
 import { jwtDecode } from "jwt-decode";
 import { login } from "./reducers/UserSlice";
 import { toastError } from "./utils/toastify";
+import { getUsers } from "./services/users";
 
 function Welcome() {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ function Welcome() {
             role: decodedToken.role,
           })
         );
+        getUsers().then(response=> console.log(response.data))
       },
       onError: () => {
         toastError("Error in creadentials");
@@ -36,6 +38,7 @@ function Welcome() {
 
   const loginHandle = (username: string, password: string) => {
     loginMutation.mutate({ username, password });
+   
   };
 
   return (
@@ -43,7 +46,7 @@ function Welcome() {
       <div className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
         <div className="h-full flex relative w-full">
           <img
-              src="/gaelo-flow-white.svg"
+              src="/gaelo-flow-white2.svg"
               className="absolute top-7 left-7 w-1/12 "
                         ></img>
 

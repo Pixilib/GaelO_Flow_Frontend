@@ -25,3 +25,4 @@ const Input = ({ className = "", placeholder = "", label = "", svg = null, ...pr
 };
 
 export default Input;
+export const maVariable = 5

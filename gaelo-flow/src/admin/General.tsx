@@ -10,9 +10,6 @@ const General = () => {
         <div className="w-96 p-4 text-dark bg-[#ffffff] rounded-[10px] shadow-xl text-center flex flex-col">
           <h3 className="text-xl font-bold mx-8">Orthanc Setting </h3>
           <div className="flex flex-1 justify-center items-end">
-
-       
-
             <Button
               className="w-2/8 flex"
               variant="contained"
@@ -35,9 +32,7 @@ const General = () => {
             </Button>
           </div>
         </div>
-
       </div>
-
     </div>
   );
 };

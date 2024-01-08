@@ -7,7 +7,7 @@ const meta: Meta<typeof SideBar> = {
     title: 'Example/SideBar',
     component: SideBar,
     tags: ['autodocs'],
-    }
+}
 export default meta;
 type Story = StoryObj<typeof SideBar>;
 
@@ -16,5 +16,5 @@ export const Simple: Story = {
     decorators: [],
     name: 'So simple!',
     parameters: {},
-    
-  };
+
+};
