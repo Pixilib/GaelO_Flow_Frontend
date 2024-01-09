@@ -45,7 +45,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         />
         <div className="justify-center flex">
           <Button
-            color="purple"
+            color="primary"
             onClick={() => onLogin(username, password)}
             bordered
             disabled={username.length == 0 || password.length == 0}
