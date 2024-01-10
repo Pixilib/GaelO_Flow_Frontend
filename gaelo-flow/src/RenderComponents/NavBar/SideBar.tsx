@@ -5,7 +5,6 @@ export type SideBarProps = {
 
 //TODO: Add a state for open and close
 //TODO: make components items for menu and sub menu, take a prop for the icon and text
-
 export const SideBar = ({
   children,
   ...props

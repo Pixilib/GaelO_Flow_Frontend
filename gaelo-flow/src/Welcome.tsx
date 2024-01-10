@@ -89,6 +89,14 @@ function Welcome() {
               <span
                 className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
                 onClick={() => {
+                  navigate("sign-up");
+                }}
+              >
+                Create an account
+              </span>
+              <span
+                className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+                onClick={() => {
                   navigate("/legal-mention");
                 }}
               >

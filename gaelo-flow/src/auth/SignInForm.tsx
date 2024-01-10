@@ -3,6 +3,8 @@ import { ChangeEvent, useState } from "react";
 import Button from "../RenderComponents/Button";
 import Input from "../RenderComponents/Input";
 import ChevronRight from "./../assets/chevron-right.svg?react";
+import Visibility from "./../assets/visibility.svg?react";
+import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
 import Lock from "./../assets/lock.svg?react";
 
@@ -13,6 +15,7 @@ interface SignInFormProps {
 export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="flex flex-col w-full">
@@ -24,7 +27,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         <Input
           label="Username :"
           className="w-full"
-          svg={<User />}
+          svgLeft={<User />}
           bordered
           placeholder="Enter your username"
           value={username}
@@ -34,7 +37,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         />
         <Input
           label="Password :"
-          svg={<Lock />}
+          svgLeft={<Lock />}
           bordered
           placeholder="Enter your password"
           value={password}
@@ -42,6 +45,11 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setPassword(event.target.value);
           }}
+          rightIcon={
+            <span onClick={() => setShowPassword(true)}>
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </span>
+          }
         />
         <Button
           className="w-full"

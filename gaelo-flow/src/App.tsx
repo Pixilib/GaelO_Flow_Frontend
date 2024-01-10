@@ -9,6 +9,7 @@ function App() {
 
   if (isLogged) return <RootApp />;
   else return <Welcome />;
+
 }
 
 export default App;
