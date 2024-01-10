@@ -65,3 +65,4 @@ const Input = ({
 };
 
 export default Input;
+export const maVariable = 5

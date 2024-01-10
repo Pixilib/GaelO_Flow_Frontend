@@ -5,9 +5,6 @@ export default {
 
     extend: {
       colors: {
-        'dark' : '#393838',
-        'purple': '#4746B8',
-        'background': '#F4EDE8',
         'primary': '#4746B8',
         'primary-hover': '#0C0B76',
         'secondary': '#EB9124',

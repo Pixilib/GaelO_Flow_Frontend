@@ -8,7 +8,7 @@ import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
 import Lock from "./../assets/lock.svg?react";
 
-interface SignInFormProps {
+type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
 }
 
@@ -51,19 +51,19 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
             </span>
           }
         />
-        <Button
-          className="w-full"
-          color="purple"
-          onClick={() => onLogin(username, password)}
-          bordered
-          disabled={username.length == 0 || password.length == 0}
-        >
-          <div className="w-1/2 flex justify-around">
+        <div className="justify-center flex">
+          <Button
+            color="primary"
+            onClick={() => onLogin(username, password)}
+            bordered
+            disabled={username.length == 0 || password.length == 0}
+          >
             Connect
             <ChevronRight />
-          </div>
-        </Button>
+          </Button>
+        </div>
       </div>
     </div>
+
   );
 };

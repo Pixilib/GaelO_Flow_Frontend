@@ -21,7 +21,7 @@ const RootApp = () => {
       <div className="grow">
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/admin" element={<AdminRoot />} />
+          <Route path="/admin/*" element={<AdminRoot />} />
         </Routes>
         
       </div>

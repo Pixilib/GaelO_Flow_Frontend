@@ -1,12 +1,12 @@
 import { StoryObj, Meta } from '@storybook/react';
-import {MenuItem} from './../RenderComponents/NavBar/MenuItem';
+import { MenuItem } from './../RenderComponents/NavBar/MenuItem';
 
 
 const meta: Meta<typeof MenuItem> = {
     title: 'Components/MenuItem',
     component: MenuItem,
     tags: ['autodocs'],
-    }
+}
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -20,6 +20,6 @@ export const Simple: Story = {
     args: {
         text: 'Hello',
         className: 'bg-red-500',
-},
+    },
 
 };
