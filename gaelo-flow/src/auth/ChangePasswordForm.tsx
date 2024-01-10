@@ -11,7 +11,6 @@ import VisibilityOff from "./../assets/visibility-off.svg?react";
 import Button from "../RenderComponents/Button";
 import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
-import { svgWithOnClick } from "../RenderComponents/svgOnClick";
 import Input from "../RenderComponents/Input";
 
 export const ChangePasswordForm = () => {
@@ -54,8 +53,7 @@ export const ChangePasswordForm = () => {
       },
     }
   );
-  const VisibilityWithClick = svgWithOnClick(() => <Visibility />);
-  const VisibilityOffWithClick = svgWithOnClick(() => <VisibilityOff />);
+
 
   const onChangePassword = async () => {
     changePasswordMutation.mutate({ newPassword, token });
@@ -72,11 +70,9 @@ export const ChangePasswordForm = () => {
           label="New Password :"
           svgLeft={<Lock />}
           svgRight={
-            showPassword ? (
-              <VisibilityWithClick onClick={() => setShowPassword(false)} />
-            ) : (
-              <VisibilityOffWithClick onClick={() => setShowPassword(true)} />
-            )
+            <span onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </span>
           }
           bordered
           placeholder="Enter your new password"
@@ -92,11 +88,9 @@ export const ChangePasswordForm = () => {
           bordered
           placeholder="Confirm your new password"
           svgRight={
-            showPassword ? (
-              <VisibilityWithClick onClick={() => setShowPassword(false)} />
-            ) : (
-              <VisibilityOffWithClick onClick={() => setShowPassword(true)} />
-            )
+            <span onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </span>
           }
           value={confirmNewPassword}
           type={showPassword ? "text" : "password"}
@@ -106,7 +100,7 @@ export const ChangePasswordForm = () => {
         />
         <Button
           className="w-full"
-          color="purple"
+          color="primary"
           onClick={() => onChangePassword()}
           disabled={newPassword !== confirmNewPassword}
         >
