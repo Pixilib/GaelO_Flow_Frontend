@@ -1,53 +1,28 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Input from '@/RenderComponents/Input';
+import type { Meta, StoryObj } from "@storybook/react";
+import Input from "../RenderComponents/Input";
 
-const meta = {
-    title: 'Example/Input',
-    component: Input,
-    tags: ['autodocs'],
-    // what options are available for the component
-    argTypes: {
-        type: {
-            control: {
-                type: 'select',
-                options: ['text', 'password'],
-            },
-        },
-        svgRight: {
-            control: {
-                type: 'select',
-                options: ['eye', 'eye-off'],
-            },
-        },
+const meta: Meta<typeof Input> = {
+  title: "Example/Input",
+  component: Input,
+  args: {
+    type: "text",
+    placeholder: "Enter your username",
+    className: "",
+    label: "username",
+    //svgLeft: <Input/>,
+  },
+  argTypes: {
+    children: {
+      options: ["user"],
+      control: { type: "radio" },
+      //mapping: { svgLeft: <User />},
     },
-    } satisfies Meta<typeof Input>;
+  },
+  tags: ["autodocs"],
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Input>;
 
-export const InputStory: Story = {};
-
-export const Default: Story = {
-    decorators: [],
-    name: 'Default',
-    parameters: {},
-    args: {
-        type: 'text',
-        placeholder: 'Enter your username',
-        className: 'w-1/2',
-        label: 'username',
-    },
-};
-
-export const Password: Story = {
-    decorators: [],
-    name: 'Password',
-    parameters: {},
-    args: {
-        type: 'password',
-        placeholder: 'Enter your password',
-        className: '',
-        label: 'password',
-        svgRight: 'eye',
-    },
-};
+export const InputStory: Story = {
+  };

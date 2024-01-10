@@ -12,7 +12,7 @@ import Button from "../RenderComponents/Button";
 import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
 import { svgWithOnClick } from "../RenderComponents/svgOnClick";
-import Input2 from "../RenderComponents/Input2";
+import Input from "../RenderComponents/Input";
 
 export const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ export const ChangePasswordForm = () => {
         Please create/change your password.
       </p>
       <div className="w-full space-y-3">
-        <Input2
+        <Input
           label="New Password :"
           svgLeft={<Lock />}
           svgRight={
@@ -86,7 +86,7 @@ export const ChangePasswordForm = () => {
             setNewPassword(event.target.value);
           }}
         />
-        <Input2
+        <Input
           label="Confirm New Password :"
           svgLeft={<Lock />}
           bordered

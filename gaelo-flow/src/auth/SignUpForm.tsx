@@ -8,7 +8,7 @@ import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 import { toastSuccess, toastError } from "@/utils/toastify";
 import { AxiosError } from "axios";
-import Input2 from "@/RenderComponents/Input2";
+import Input from "../RenderComponents/Input";
 
 
 export const SignUpForm = () => {
@@ -49,7 +49,7 @@ export const SignUpForm = () => {
             Please create your Account.
           </p>
           <div className="w-full space-y-3">
-            <Input2
+            <Input
               label="Username :"
               className="w-full"
               svg={<User />}
@@ -61,7 +61,7 @@ export const SignUpForm = () => {
                 setUsername(event.target.value);
               }}
             />
-            <Input2
+            <Input
               label="firstname :"
               svg={<User />}
               bordered
@@ -72,7 +72,7 @@ export const SignUpForm = () => {
                 setFirstname(event.target.value);
               }}
             />
-            <Input2
+            <Input
               label="lastname :"
               svg={<User />}
               bordered
@@ -83,7 +83,7 @@ export const SignUpForm = () => {
                 setLastname(event.target.value);
               }}
             />
-            <Input2
+            <Input
               label="email :"
               svg={<User />}
               bordered

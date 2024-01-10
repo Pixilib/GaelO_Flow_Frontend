@@ -9,7 +9,7 @@ import { login } from "../reducers/UserSlice";
 import { toastError } from "../utils/toastify";
 
 import Button from "../RenderComponents/Button";
-import Input2 from "@/RenderComponents/Input2";
+import Input from "../RenderComponents/Input";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
@@ -63,7 +63,7 @@ export const SignInForm = () => {
         Please Log in to your Account.
       </p>
       <div className="w-full space-y-3">
-        <Input2
+        <Input
           label="Username :"
           className="w-full"
           svgLeft={<User />}
@@ -74,7 +74,7 @@ export const SignInForm = () => {
             setUsername(event.target.value);
           }}
         />
-        <Input2
+        <Input
           label="Password :"
           svgLeft={<Lock />}
           bordered
