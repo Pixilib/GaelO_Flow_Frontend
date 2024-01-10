@@ -5,11 +5,9 @@ export default {
 
     extend: {
       colors: {
-<<<<<<< HEAD
         'dark' : '#393838',
         'purple': '#4746B8',
         'background': '#F4EDE8',
-=======
         'primary': '#4746B8',
         'primary-hover': '#0C0B76',
         'secondary': '#EB9124',
@@ -21,15 +19,10 @@ export default {
         'success-hover': '#276A4A',
         'background': '#F4EDE8',
         'dark' : '#393838',
->>>>>>> register
         'red': '#f8d7da',
         'borderGray': '#EFE7DA',
       },
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> register
