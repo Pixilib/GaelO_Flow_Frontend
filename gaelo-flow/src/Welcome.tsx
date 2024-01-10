@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { login } from "./reducers/UserSlice";
 import { toastError } from "./utils/toastify";
 import { getUsers } from "./services/users";
+import { SignUpForm } from "./auth/SignUpForm";
 
 function Welcome() {
   const navigate = useNavigate();
@@ -64,6 +65,7 @@ function Welcome() {
               <Route path="/*" element={<SignInForm onLogin={loginHandle} />} />
               <Route path="lost-password" element={<div>Lost Password</div>} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
+              <Route path="sign-up" element={<SignUpForm/>} />
             </Routes>
             <hr className="my-10 border-orange-300" />
             <div className="flex justify-between">

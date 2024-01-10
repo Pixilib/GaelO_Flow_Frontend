@@ -6,8 +6,7 @@ import { signUp } from "../services/auth";
 import Button from "../RenderComponents/Button";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
-import { toastSuccess, toastError } from "@/utils/toastify";
-import { AxiosError } from "axios";
+import { toastSuccess, toastError } from "../utils/toastify";
 import Input from "../RenderComponents/Input";
 
 
@@ -26,7 +25,7 @@ export const SignUpForm = () => {
             onSuccess: (data: Record<string, any>) => {
                     toastSuccess(data.data.message);
                 },
-                onError: (error: AxiosError<{ message: string }>) => {
+                onError: (error: any) => {
                     //display an error message if an error occurs
                     if (error.response?.data?.message) {
                         toastError(error.response.data.message);
@@ -96,7 +95,7 @@ export const SignUpForm = () => {
             />
             <Button
               className="w-full"
-              color="purple"
+              color="primary"
               onClick={() => onRegister()}
               bordered
             >
