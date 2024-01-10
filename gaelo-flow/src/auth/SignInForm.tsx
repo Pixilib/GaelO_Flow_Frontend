@@ -23,7 +23,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
       <p className="text-lg text-gray-700 text-center mb-12">
         Please Log in to your Account.
       </p>
-      <div className="w-full space-y-3">
+      <div className="w-full space-y-12">
         <Input
           label="Username :"
           className="w-full"
