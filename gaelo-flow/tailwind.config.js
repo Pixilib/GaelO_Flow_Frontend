@@ -18,6 +18,8 @@ export default {
         'dark' : '#393838',
         'red': '#f8d7da',
         'borderGray': '#EFE7DA',
+        'CardGray': '#F1F1F1',
+
       },
     },
   },

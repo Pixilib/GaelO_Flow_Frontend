@@ -19,33 +19,54 @@ const Dashboard = () => {
         ></img>
       </div>
 
-      <div className="mx-8 columns-3 flex gap-6 b ">
-        <div className=" w-1/3 p-4 text-dark bg-white rounded-[10px] shadow-xl">
-          <p className="text-lg font-semibold">Anonymisation</p>
-          <h3 className="text-xl">Progress</h3>
+      <div className="mx-8 columns-3 flex gap-6">
+  <div className="relative flex-1 p-4 bg-white rounded-[10px] shadow-xl flex flex-col justify-between">
+    <div>
+      <p className="text-lg font-semibold">Anonymisation</p>
+      <h3 className="text-xl">Progress</h3>
+    </div>
+    <Button
+      className="self-center"
+      variant="contained"
+      color="secondary"
+    >
+      Empty List
+    </Button>
+  </div>
 
-          <Button className="w-full" variant="contained" color="orange">
-            Empty List
-          </Button>
-        </div>
-        <div className=" w-1/3 p-4 bg-white rounded-[10px] shadow-xl ">
-          <p className="text-lg font-semibold text-dark">Delete</p>
-          <h3 className="text-xl">Progress</h3>
+  <div className="relative flex-1 p-4 bg-white rounded-[10px] shadow-xl flex flex-col justify-between">
+    <div>
+      <p className="text-lg font-semibold text-dark">Delete</p>
+      <h3 className="text-xl">Progress</h3>
+    </div>
+    <Button
+      className="self-center"
+      variant="contained"
+      color="secondary"
+    >
+      Empty List
+    </Button>
+  </div>
 
-          <Button className="w-full" variant="contained" color="orange">
-            Empty List
-          </Button>
-        </div>
+  <div className="relative flex-1 p-4 bg-white rounded-[10px] shadow-xl flex flex-col justify-between">
+    <div>
+      <p className="text-lg font-semibold text-dark">Delete</p>
+      <h3 className="text-xl">Progress</h3>
+    </div>
+    <Button
+      className="self-center"
+      variant="contained"
+      color="secondary"
+    >
+      Empty List
+    </Button>
+  
+</div>
 
-        <div className=" w-1/3 p-4 bg-[#ffffff] rounded-[10px] shadow-xl">
-          <p className="text-lg font-semibold text-dark">Retrieve</p>
-          <h3 className="text-xl">Status</h3>
+  
 
-          <Button className="w-full" variant="contained" color="orange">
-            lorem ipsum
-          </Button>
-        </div>
-      </div>
+
+</div>
 
       <div className="m-8 flex bg-[#ffffff] rounded-[10px] p-4 shadow-xl items-center">
         <img src={taskSvg} alt="Task Icon" className="w-10 h-10 mr-2" />
