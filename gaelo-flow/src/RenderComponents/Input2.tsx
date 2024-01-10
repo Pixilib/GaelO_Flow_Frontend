@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { Variant } from "./enum";
+
 
 type InputProps = {
   className?: string;
+  variant?: Variant.Light | Variant.Dark;
   type?: string;
   placeholder?: string;
   label?: string;
@@ -10,8 +13,12 @@ type InputProps = {
   [key: string]: any;
 };
 
+
+
+
 const Input2 = ({
   className = "",
+  variant = Variant.Light,
   placeholder = "",
   label = "",
   type = "text",
@@ -20,6 +27,8 @@ const Input2 = ({
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const bgColor = variant === Variant.Light ? "bg-white " : "bg-gray-100 ";
+  const bgColorFocus = variant === Variant.Light ? "focus:bg-white " : "focus:bg-gray-100 ";
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
   return (
@@ -29,8 +38,8 @@ const Input2 = ({
           className={`transition-all duration-100 ease-in-out
                       ${
                         isFocused
-                          ? "text-xs text-gray-800 absolute -top-2 left-5 bg-white px-1"
-                          : "font-bold -top-4 left-0"
+                          ? `text-xs text-gray-800 absolute -top-2 left-5 ${bgColor} px-1`
+                          : "mb-2"
                       }`}
         >
           {label}
@@ -40,8 +49,7 @@ const Input2 = ({
         type={type}
         placeholder={isFocused ? "" : placeholder}
         className={
-          `pl-12 pr-12 py-5 bg-gray-100 focus:bg-white text-gray-800 w-full text-sm border-2 border-gray-300 rounded-lg outline-none focus:border-purpleCustom focus:ring-purpleCustom disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600" +
-          " " + ${className}`
+          `pl-12 pr-12 py-3 bg-gray-10 ${bgColorFocus} text-gray-800 w-full text-sm border-2 border-gray-300 rounded-xl outline-none focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600 ${className}`
         }
         onFocus={handleFocus}
         onBlur={handleBlur}
