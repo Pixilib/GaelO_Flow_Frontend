@@ -17,13 +17,14 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+
   return (
     <div className="flex flex-col w-full">
       <h1 className="text-5xl font-bold text-center mb-6">Welcome !</h1>
       <p className="text-lg text-gray-700 text-center mb-12">
         Please Log in to your Account.
       </p>
-      <div className="w-full space-y-3">
+      <div className="w-full space-y-12">
         <Input
           label="Username :"
           className="w-full"
@@ -41,12 +42,12 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
           bordered
           placeholder="Enter your password"
           value={password}
-          type="password"
+          type={showPassword ? "text" : "password"}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setPassword(event.target.value);
           }}
-          rightIcon={
-            <span onClick={() => setShowPassword(true)}>
+          svgRight={
+            <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <Visibility /> : <VisibilityOff />}
             </span>
           }
