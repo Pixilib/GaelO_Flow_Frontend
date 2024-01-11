@@ -51,8 +51,8 @@ function Welcome() {
 
   return (
     <>
-      <div className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
-        <div className="h-full flex relative w-full">
+      <main className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
+        <section className="h-full flex relative w-full">
           <img
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7 w-1/12 "
@@ -64,8 +64,8 @@ function Welcome() {
               className="mx-auto mt-4 "
             />
           </div>
-        </div>
-        <div
+        </section>
+        <section
           className="w-full flex justify-center items-center bg-white rounded-tl-3xl"
           style={{ filter: "drop-shadow(-20px 0 20px rgba(50, 50, 50, 0.5))" }}
         >
@@ -111,8 +111,8 @@ function Welcome() {
               </span>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

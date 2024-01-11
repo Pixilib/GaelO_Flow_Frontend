@@ -12,7 +12,6 @@ export const LostPasswordForm = () => {
         Enter the email you used to create your account so we can send you
         instructions on how to reset your password.
       </p>
-      <div className="w-full space-y-12">
         <Input
           label="Email :"
           svgLeft={<Letter />}
@@ -25,7 +24,6 @@ export const LostPasswordForm = () => {
             setEmail(event.target.value);
           }}
         />
-      </div>
     </div>
   );
 };
