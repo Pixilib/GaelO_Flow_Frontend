@@ -18,6 +18,7 @@ import { SignUpForm } from "./auth/SignUpForm";
 function Welcome() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const loginMutation = useCustomMutation(
     ({ username, password }) => signIn(username, password),
@@ -77,37 +78,37 @@ function Welcome() {
             </Routes>
             <hr className="my-10 border-orange-300" />
             <div className="flex justify-between">
-              <Link
-                className="text-gray-600 inline-block hover:underline hover:text-indigo-800"
-                to="/lost-password"
+              <span
+                className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+                onClick={() => navigate("/lost-password")}
               >
                 Lost password ?
-              </Link>
+              </span>
 
               {location.pathname !== "/sign-up" && (
-                <Link
-                  to="/sign-up"
-                  className="text-gray-600 hover:underline hover:text-indigo-800"
+                <span
+                  onClick={() => navigate("/sign-up")}
+                  className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
                 >
                   Create your account
-                </Link>
+                </span>
               )}
 
               {location.pathname !== "/" && (
-                <Link
-                  to="/"
-                  className="text-gray-600 hover:underline hover:text-indigo-800"
+                <span
+                onClick={() => navigate("/")}
+                  className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
                 > 
                   Login to your account
-                </Link>
+                </span>
                 )}
 
-              <Link
-                className="text-gray-600 inline-block hover:underline hover:text-indigo-800"
-                to="/legal-mention"
+              <span
+                className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+                onClick={() => navigate("/legal-mention")}
               >
                 Legal Mention
-              </Link>
+              </span>
             </div>
           </div>
         </div>
