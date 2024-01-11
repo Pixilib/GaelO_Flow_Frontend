@@ -14,6 +14,7 @@ import { login } from "./reducers/UserSlice";
 import { toastError } from "./utils/toastify";
 import { getUsers } from "./services/users";
 import { SignUpForm } from "./auth/SignUpForm";
+import { LostPasswordForm } from "./auth/LostPasswordForm";
 
 function Welcome() {
   const dispatch = useDispatch();
@@ -56,8 +57,7 @@ function Welcome() {
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7 w-1/12 "
           ></img>
-
-          <div className="flex h-screen justify-center items-center w-full">
+          <div className="flex h-screen justify-center content-between w-full">
             <img
               src="/VisualHome3.svg"
               alt="VisualHome Image"
@@ -66,13 +66,13 @@ function Welcome() {
           </div>
         </div>
         <div
-          className="h-full w-full flex justify-center items-center bg-white rounded-tl-3xl"
+          className="w-full flex justify-center items-center bg-white rounded-tl-3xl"
           style={{ filter: "drop-shadow(-20px 0 20px rgba(50, 50, 50, 0.5))" }}
         >
-          <div className="w-1/2">
+          <div className="w-2/3">
             <Routes>
               <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
-              <Route path="lost-password" element={<div>Lost Password</div>} />
+              <Route path="lost-password" element={ <LostPasswordForm/> } />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
