@@ -6,6 +6,7 @@ import { signUp } from "../services/auth";
 import Button from "../RenderComponents/Button";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
+import Letter from "./../assets/letter.svg?react";
 import { toastSuccess, toastError } from "../utils/toastify";
 import Input from "../RenderComponents/Input";
 
@@ -42,16 +43,16 @@ export const SignUpForm = () => {
     }
 
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full ">
           <h1 className="text-5xl font-bold text-center mb-6">Register </h1>
           <p className="text-lg text-gray-700 text-center mb-12">
             Please create your Account.
           </p>
-          <div className="w-full space-y-3">
+          <div className="w-full space-y-12">
             <Input
               label="Username :"
               className="w-full"
-              svg={<User />}
+              svgLeft={<User />}
               bordered
               placeholder="Enter your username"
               value={username}
@@ -61,8 +62,8 @@ export const SignUpForm = () => {
               }}
             />
             <Input
-              label="firstname :"
-              svg={<User />}
+              label="Firstname :"
+              svgLeft={<User />}
               bordered
               placeholder="Enter your firstanme"
               value={firstname}
@@ -72,8 +73,8 @@ export const SignUpForm = () => {
               }}
             />
             <Input
-              label="lastname :"
-              svg={<User />}
+              label="Lastname :"
+              svgLeft={<User />}
               bordered
               placeholder="Enter your lastname"
               value={lastname}
@@ -83,8 +84,8 @@ export const SignUpForm = () => {
               }}
             />
             <Input
-              label="email :"
-              svg={<User />}
+              label="Email :"
+              svgLeft={<Letter />}
               bordered
               placeholder="Enter your @email"
               value={email}
