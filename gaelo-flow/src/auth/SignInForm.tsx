@@ -3,6 +3,8 @@ import { ChangeEvent, useState } from "react";
 import Button from "../RenderComponents/Button";
 import Input from "../RenderComponents/Input";
 import ChevronRight from "./../assets/chevron-right.svg?react";
+import Visibility from "./../assets/visibility.svg?react";
+import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
 import Lock from "./../assets/lock.svg?react";
 
@@ -13,6 +15,8 @@ type SignInFormProps = {
 export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
 
   return (
     <div className="flex flex-col w-full">
@@ -20,11 +24,11 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
       <p className="text-lg text-gray-700 text-center mb-12">
         Please Log in to your Account.
       </p>
-      <div className="w-full space-y-3">
+      <div className="w-full space-y-12">
         <Input
           label="Username :"
           className="w-full"
-          svg={<User />}
+          svgLeft={<User />}
           bordered
           placeholder="Enter your username"
           value={username}
@@ -34,14 +38,19 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         />
         <Input
           label="Password :"
-          svg={<Lock />}
+          svgLeft={<Lock />}
           bordered
           placeholder="Enter your password"
           value={password}
-          type="password"
+          type={showPassword ? "text" : "password"}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setPassword(event.target.value);
           }}
+          svgRight={
+            <span onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </span>
+          }
         />
         <div className="justify-center flex">
           <Button

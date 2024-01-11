@@ -1,28 +1,74 @@
+import React, { useState } from "react";
+import { Variant } from "./enum";
+
+
 type InputProps = {
   className?: string;
+  variant?: Variant.Light | Variant.Dark;
+  type?: string;
   placeholder?: string;
   label?: string;
-  svg?: React.ReactNode;
+  svgLeft?: React.ReactNode;
+  svgRight?: React.ReactNode;
   [key: string]: any;
 };
 
-const Input = ({ className = "", placeholder = "", label = "", svg = null, ...props }: InputProps) => {
 
+
+
+const Input = ({
+  className = "",
+  variant = Variant.Light,
+  placeholder = "",
+  label = "",
+  type = "text",
+  svgLeft = null,
+  svgRight = null,
+  ...props
+}: InputProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const bgColor = variant === Variant.Light ? "bg-white " : "bg-gray-100 ";
+  const bgColorFocus = variant === Variant.Light ? "focus:bg-white " : "focus:bg-gray-100 ";
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
   return (
-    <fieldset className="relative space-y-1">
-      <legend className="font-bold ">{label}</legend>
+    <div className={`relative flex flex-col ${className}`}>
+      {label && (
+        <legend
+          className={`transition-all duration-100 ease-in-out
+                      ${
+                        isFocused
+                          ? `text-xs absolute -top-2 left-5 ${bgColor} px-1 mb-2 text-primary`
+                          : "text-sm mb-2 absolute -top-7 left-2 text-slate-500"
+                      }`}
+        >
+          {label}
+        </legend>
+      )} 
       <input
-        className={"peer py-3 px-4 ps-11 block w-full bg-gray-100 border-transparent rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600" + " " + className}
-        type="text"
-        placeholder={placeholder}
+        type={type}
+        placeholder={isFocused ? "" : placeholder}
+        className={
+          ` py-3 bg-gray-10 text-gray-800 w-full text-sm border-2
+           border-gray-300 rounded-xl outline-none focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none
+            dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600 ${bgColorFocus} ${className} ${isFocused ? "pl-3 pr-0" : "pl-12 pr-12"} `
+        }
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...props}
       />
-      <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
-        {svg}
-      </div>
-    </fieldset>
+      {!isFocused && svgLeft && (
+        <div className="absolute inset-y-0 left-0 flex items-center pl-4">
+          {svgLeft}
+        </div>
+      )}
+      {svgRight && (
+        <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+          {svgRight}
+        </div>
+      )}
+    </div>
   );
 };
 
 export default Input;
-export const maVariable = 5
