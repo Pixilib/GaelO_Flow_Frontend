@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import {
-  Link,
   Route,
   Routes,
   useLocation,
@@ -15,6 +14,7 @@ import { toastError } from "./utils/toastify";
 import { getUsers } from "./services/users";
 import { SignUpForm } from "./auth/SignUpForm";
 import { LostPasswordForm } from "./auth/LostPasswordForm";
+import { ImgChangeWelcome } from "./RenderComponents/ImgChangeWelcome";
 
 function Welcome() {
   const dispatch = useDispatch();
@@ -57,12 +57,8 @@ function Welcome() {
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7 w-1/12 "
           ></img>
-          <div className="flex h-screen justify-center content-between w-full">
-            <img
-              src="/VisualHome3.svg"
-              alt="VisualHome Image"
-              className="mx-auto mt-4 "
-            />
+          <div className="flex h-screen justify-center w-full">
+            <ImgChangeWelcome/>
           </div>
         </section>
         <section
@@ -77,7 +73,7 @@ function Welcome() {
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
             <hr className="my-10 border-orange-300" />
-            <div className="flex justify-between">
+            <div className="flex justify-between text-center mx-auto text-balance">
               <span
                 className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
                 onClick={() => navigate("/lost-password")}
