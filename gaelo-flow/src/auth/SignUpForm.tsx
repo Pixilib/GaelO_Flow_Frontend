@@ -6,7 +6,7 @@ import { signUp } from "../services/auth";
 import Button from "../RenderComponents/Button";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
-import Letter from "./../assets/letter.svg?react";
+import Mail from "./../assets/mail.svg?react";
 import { toastSuccess, toastError } from "../utils/toastify";
 import Input from "../RenderComponents/Input";
 
@@ -85,7 +85,7 @@ export const SignUpForm = () => {
             />
             <Input
               label="Email :"
-              svgLeft={<Letter />}
+              svgLeft={<Mail />}
               bordered
               placeholder="Enter your @email"
               value={email}

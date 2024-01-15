@@ -12,6 +12,7 @@ type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
 }
 
+
 export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -20,14 +21,13 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
 
   return (
     <div className="flex flex-col w-full">
-      <h1 className="text-5xl font-bold text-center mb-6">Welcome !</h1>
-      <p className="text-lg text-gray-700 text-center mb-12">
-        Please Log in to your Account.
+      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">Welcome to <span className="text-primary">Gaelo Flow</span></h1>
+      <p className="text-lg text-dark text-center mb-12">
+        Please Log in to your Account
       </p>
-      <div className="w-full space-y-12">
+      <div className="w-full space-y-12 text-dark">
         <Input
           label="Username :"
-          className="w-full"
           svgLeft={<User />}
           bordered
           placeholder="Enter your username"
