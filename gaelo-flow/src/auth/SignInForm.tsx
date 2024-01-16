@@ -6,7 +6,7 @@ import ChevronRight from "./../assets/chevron-right.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
-import Lock from "./../assets/lock.svg?react";
+import Key from "./../assets/key.svg?react";
 
 type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
@@ -38,7 +38,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         />
         <Input
           label="Password :"
-          svgLeft={<Lock />}
+          svgLeft={<Key />}
           bordered
           placeholder="Enter your password"
           value={password}
