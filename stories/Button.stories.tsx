@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Button from "./../../src/RenderComponents/Button";
-import ChevronRight from "./../../src/assets/chevron-right.svg"
+import Button from "../src/RenderComponents/Button";
+import ChevronRight from "../src/assets/chevron-right.svg"
 
 export default {
   title: "Gaelo FLow UI/Button",

@@ -52,7 +52,7 @@ const Body = ({ children, className = '' }: BodyProps) => {
 
 const Footer = ({ children, className = '' }: FooterProps) => {
   return (
-    <div className={`bg-CardFooterColor text-black w-full box-border flex-grow leading-relaxed py-3 px-3 ${className}`}>
+    <div className={`bg-primary text-black w-full box-border flex-grow leading-relaxed py-3 px-3 ${className}`}>
       {children}
     </div>
   );

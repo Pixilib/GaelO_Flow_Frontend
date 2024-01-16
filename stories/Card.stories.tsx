@@ -1,13 +1,13 @@
-import { Meta, Story } from "@storybook/react";
-import Card from "./../../src/RenderComponents/Card";
-import ChevronRight from '../../src/assets/chevron-right.svg?react'
-import { Colors } from "./../../src/utils/enums";
+import { Meta, StoryObj } from "@storybook/react";
+import Card from "../src/RenderComponents/Card";
+import ChevronRight from '../src/assets/chevron-right.svg?react'
+import { Colors } from "../src/utils/enums";
 
 export default {
   title: "Gaelo FLow UI/Card",
   component: Card,
   args: {
-    color: Colors,
+    color: Colors.primaryHover,
     bordered: false,
   },
   argTypes: {
@@ -20,10 +20,12 @@ export default {
       control: { type: "radio" },
     },
   },
-} as Meta;
+} as Meta<typeof Card>;
+type Story = StoryObj<typeof Card>;
 
-const Template: Story = (args) => (
-  <Card color={args.color}>
+
+export const CardStory: Story = {
+  render: ({ children, ...args }) => (<Card color={args.color}>
     <Card.BasicHeader title="Card Title" />
     <Card.Body>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, facilis non a dolore soluta consectetur modi minima corrupti id ab at ipsa, vel fugit magnam, numquam aperiam dicta doloribus! Harum? Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, facilis non a dolore soluta consectetur modi minima corrupti id ab at ipsa, vel fugit magnam, numquam aperiam dicta doloribus! Harum
@@ -32,7 +34,5 @@ const Template: Story = (args) => (
       {/* Your Footer content goes here */}
       Footer content
     </Card.Footer>
-  </Card>
-);
-
-export const template_buttons = Template.bind({});
+  </Card>)
+}
