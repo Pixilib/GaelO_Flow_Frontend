@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import {
-  Link,
   Route,
   Routes,
   useLocation,
@@ -14,6 +13,8 @@ import { login } from "./reducers/UserSlice";
 import { toastError } from "./utils/toastify";
 import { getUsers } from "./services/users";
 import { SignUpForm } from "./auth/SignUpForm";
+import { LostPasswordForm } from "./auth/LostPasswordForm";
+import { ImgChangeWelcome } from "./RenderComponents/ImgChangeWelcome";
 
 function Welcome() {
   const dispatch = useDispatch();
@@ -50,34 +51,29 @@ function Welcome() {
 
   return (
     <>
-      <div className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
-        <div className="h-full flex relative w-full">
+      <main className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
+        <section className="h-full flex relative w-full">
           <img
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7 w-1/12 "
           ></img>
-
-          <div className="flex h-screen justify-center items-center w-full">
-            <img
-              src="/VisualHome3.svg"
-              alt="VisualHome Image"
-              className="mx-auto mt-4 "
-            />
+          <div className="flex h-screen justify-center w-full">
+            <ImgChangeWelcome/>
           </div>
-        </div>
-        <div
-          className="h-full w-full flex justify-center items-center bg-white rounded-tl-3xl"
+        </section>
+        <section
+          className="w-full flex justify-center items-center bg-white rounded-tl-3xl"
           style={{ filter: "drop-shadow(-20px 0 20px rgba(50, 50, 50, 0.5))" }}
         >
-          <div className="w-1/2">
+          <div className="w-2/3">
             <Routes>
               <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
-              <Route path="lost-password" element={<div>Lost Password</div>} />
+              <Route path="lost-password" element={ <LostPasswordForm/> } />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
             <hr className="my-10 border-orange-300" />
-            <div className="flex justify-between">
+            <div className="flex justify-between text-center mx-auto text-balance">
               <span
                 className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
                 onClick={() => navigate("/lost-password")}
@@ -111,8 +107,8 @@ function Welcome() {
               </span>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

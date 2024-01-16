@@ -8,6 +8,7 @@ import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
 import PasswordKeyOn from "./../assets/password-key-on.svg?react";
 
+
 type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
 }
@@ -39,7 +40,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         <Input
           label="Password :"
           svgLeft={<PasswordKeyOn />}
-          
+
           bordered
           placeholder="Enter your password"
           value={password}

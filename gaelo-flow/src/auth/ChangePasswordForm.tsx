@@ -5,7 +5,7 @@ import { useCustomMutation } from "../utils/reactQuery";
 
 import { AxiosError } from "axios";
 import ChevronRight from "./../assets/chevron-right.svg?react";
-import Lock from "./../assets/lock.svg?react";
+import Key from "./../assets/lock.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import Button from "../RenderComponents/Button";
@@ -68,7 +68,7 @@ export const ChangePasswordForm = () => {
       <div className="w-full space-y-3">
         <Input
           label="New Password :"
-          svgLeft={<Lock />}
+          svgLeft={<Key />}
           svgRight={
             <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <Visibility /> : <VisibilityOff />}
@@ -84,7 +84,7 @@ export const ChangePasswordForm = () => {
         />
         <Input
           label="Confirm New Password :"
-          svgLeft={<Lock />}
+          svgLeft={<Key />}
           bordered
           placeholder="Confirm your new password"
           svgRight={
