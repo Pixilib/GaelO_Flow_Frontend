@@ -1,0 +1,15 @@
+export enum Colors {
+    color = 'primary',
+    primaryHover = 'primary-hover',
+    secondary = 'secondary',
+    secondaryHover = 'secondary-hover',
+    danger = 'danger',
+    dangerHover = "danger-hover",
+    success = 'success',
+    successHover = 'success-hover',
+    orange = 'orange',
+    dark = 'dark',
+    red = 'red',
+    gray = 'gray',
+    light = 'light',
+}
