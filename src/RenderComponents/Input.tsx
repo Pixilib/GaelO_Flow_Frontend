@@ -52,7 +52,7 @@ const Input = ({
         placeholder={isFocused ? "" : placeholder}
         className={
           ` py-3 bg-gray-10 text-gray-600 w-full text-sm border
-           border-gray-300 rounded-xl outline-none focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none
+           border-gray rounded-xl outline-none focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none
            dark:text-gray-400 dark:focus:ring-gray-600 ${bgColorFocus} ${className} ${isFocused ? "pl-3 pr-0" : "pl-12 pr-12"} `}
            onFocus={handleFocus}
         onBlur={handleBlur}

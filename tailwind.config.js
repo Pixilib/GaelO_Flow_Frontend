@@ -8,7 +8,6 @@ export default {
         'primary-hover': '#0C0B76',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
-        'disabled': '#DADADA',
         'danger': '#DB1F22',
         'danger-hover': '#9F181A',
         'success': '#36A56F',
@@ -16,7 +15,7 @@ export default {
         'orange': '#F4EDE8',
         'dark' : '#393838',
         'red': '#f8d7da',
-        'gray': '#EFE7DA',
+        'gray': '#AFB2C3',
         'light': '#F1F1F1'
       },
     },

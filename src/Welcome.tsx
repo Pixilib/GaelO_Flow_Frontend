@@ -88,22 +88,16 @@ function Welcome() {
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
-            <hr className="my-10 border-orange-300" />
+            <hr className="my-10 border-primary" />
             <div className="flex justify-between text-center mx-auto text-balance">
-              <span
-                className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
-                onClick={() => navigate("/lost-password")}
-              >
-                Lost password ?
-              </span>
+
 
               {location.pathname !== "/sign-up" && (
                 <span
                   onClick={() => navigate("/sign-up")}
                   className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
                 >
-                  Create your account
-                </span>
+                  Don’t have an account? Sign Up                </span>
               )}
 
               {location.pathname !== "/" && (

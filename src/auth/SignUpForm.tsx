@@ -9,7 +9,7 @@ import User from "./../assets/user.svg?react";
 import Mail from "./../assets/mail.svg?react";
 import { toastSuccess, toastError } from "../utils/toastify";
 import Input from "../RenderComponents/Input";
-
+import { Colors } from "../utils/enums";
 
 export const SignUpForm = () => {
     const [username, setUsername] = useState("");
@@ -65,7 +65,7 @@ export const SignUpForm = () => {
               label="Firstname :"
               svgLeft={<User />}
               bordered
-              placeholder="Enter your firstanme"
+              placeholder="Enter your firstname"
               value={firstname}
               required
               onChange={(event: ChangeEvent<HTMLInputElement>) => {
@@ -94,18 +94,17 @@ export const SignUpForm = () => {
                 setEmail(event.target.value);
               }}
             />
-            <Button
-              className="w-full"
-              color="primary"
+             <div className="justify-center flex">
+          <Button
+              color={Colors.primary}
               onClick={() => onRegister()}
-              bordered
-            >
-              <div className="w-1/2 flex justify-around">
-                Connect
-                <ChevronRight />
-              </div>
+              className="w-60"
+              >
+              Create your account
+              <ChevronRight />
             </Button>
           </div>
         </div>
-      )
-}
+      </div>
+    );
+  };
