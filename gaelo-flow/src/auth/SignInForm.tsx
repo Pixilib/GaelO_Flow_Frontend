@@ -6,7 +6,7 @@ import ChevronRight from "./../assets/chevron-right.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
-import Lock from "./../assets/lock.svg?react";
+import PasswordKeyOn from "./../assets/password-key-on.svg?react";
 
 type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
@@ -21,7 +21,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
 
   return (
     <div className="flex flex-col w-full">
-      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">Welcome to <span className="text-primary">Gaelo Flow</span></h1>
+      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">Welcome back !</h1>
       <p className="text-lg text-dark text-center mb-12">
         Please Log in to your Account
       </p>
@@ -38,7 +38,8 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         />
         <Input
           label="Password :"
-          svgLeft={<Lock />}
+          svgLeft={<PasswordKeyOn />}
+          
           bordered
           placeholder="Enter your password"
           value={password}
@@ -50,8 +51,9 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
             <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <Visibility /> : <VisibilityOff />}
             </span>
-          }
-        />
+         }
+       />
+
         <div className="justify-center flex">
           <Button
             color="primary"

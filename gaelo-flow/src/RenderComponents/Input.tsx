@@ -31,29 +31,30 @@ const Input = ({
   const bgColorFocus = variant === Variant.Light ? "focus:bg-white " : "focus:bg-gray-100 ";
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
+
+
+
   return (
     <div className={`relative flex flex-col ${className}`}>
       {label && (
         <legend
           className={`transition-all duration-100 ease-in-out
-                      ${
-                        isFocused
-                          ? `text-xs absolute -top-2 left-5 ${bgColor} px-1 mb-2 text-primary`
-                          : "text-sm mb-2 absolute -top-7 left-2 text-slate-500"
-                      }`}
+                      ${isFocused
+              ? `text-xs absolute -top-2 left-5 ${bgColor} px-1 mb-2 text-primary`
+              : "text-sm mb-2 absolute -top-7 left-2 text-dark"
+            }`}
         >
           {label}
         </legend>
-      )} 
+      )}
       <input
         type={type}
         placeholder={isFocused ? "" : placeholder}
         className={
-          ` py-3 bg-gray-10 text-gray-800 w-full text-sm border-2
+          ` py-3 bg-gray-10 text-gray-600 w-full text-sm border
            border-gray-300 rounded-xl outline-none focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none
-            dark:bg-gray-700 dark:border-transparent dark:text-gray-400 dark:focus:ring-gray-600 ${bgColorFocus} ${className} ${isFocused ? "pl-3 pr-0" : "pl-12 pr-12"} `
-        }
-        onFocus={handleFocus}
+           dark:text-gray-400 dark:focus:ring-gray-600 ${bgColorFocus} ${className} ${isFocused ? "pl-3 pr-0" : "pl-12 pr-12"} `}
+           onFocus={handleFocus}
         onBlur={handleBlur}
         {...props}
       />

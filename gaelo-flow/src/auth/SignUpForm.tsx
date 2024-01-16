@@ -44,7 +44,7 @@ export const SignUpForm = () => {
 
     return (
         <div className="flex flex-col w-full ">
-          <h1 className="text-5xl font-bold text-center mb-6">Register </h1>
+      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">Welcome to <span className="text-primary">Gaelo Flow</span></h1>
           <p className="text-lg text-gray-700 text-center mb-12">
             Please create your Account.
           </p>

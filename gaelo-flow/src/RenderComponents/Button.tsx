@@ -20,7 +20,7 @@ const Button = ({ color, bordered, className, children, ...props }: ButtonProps)
     
   return (
     <button
-    className={`flex justify-center ${colorClasses[color]} text-white p-3 font-bold inline-flex focus:outline-none focus:shadow-outline disabled:bg-opacity-70 ${bordered ? "border border-white-900" : ""} rounded-full shadow-lg ${className}`}    {...props}
+    className={`flex justify-center ${colorClasses[color]} text-white p-3 font-semibold inline-flex focus:outline-none focus:shadow-outline disabled:bg-opacity-70 ${bordered ? "border border-white-900" : ""} rounded-full shadow-lg ${className} w-40`}    {...props}
   >
     {children}
   </button>
