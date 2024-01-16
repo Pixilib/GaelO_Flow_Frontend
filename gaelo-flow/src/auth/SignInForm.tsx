@@ -6,11 +6,13 @@ import ChevronRight from "./../assets/chevron-right.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
-import Key from "./../assets/key.svg?react";
+import PasswordKeyOn from "./../assets/password-key-on.svg?react";
+
 
 type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
 }
+
 
 export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [username, setUsername] = useState("");
@@ -20,14 +22,13 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
 
   return (
     <div className="flex flex-col w-full">
-      <h1 className="text-5xl font-bold text-center mb-6">Welcome !</h1>
-      <p className="text-lg text-gray-700 text-center mb-12">
-        Please Log in to your Account.
+      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">Welcome back !</h1>
+      <p className="text-lg text-dark text-center mb-12">
+        Please Log in to your Account
       </p>
-      <div className="w-full space-y-12">
+      <div className="w-full space-y-12 text-dark">
         <Input
           label="Username :"
-          className="w-full"
           svgLeft={<User />}
           bordered
           placeholder="Enter your username"
@@ -38,7 +39,8 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
         />
         <Input
           label="Password :"
-          svgLeft={<Key />}
+          svgLeft={<PasswordKeyOn />}
+
           bordered
           placeholder="Enter your password"
           value={password}
@@ -50,8 +52,9 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
             <span onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? <Visibility /> : <VisibilityOff />}
             </span>
-          }
-        />
+         }
+       />
+
         <div className="justify-center flex">
           <Button
             color="primary"

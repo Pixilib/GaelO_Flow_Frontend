@@ -6,7 +6,7 @@ import { signUp } from "../services/auth";
 import Button from "../RenderComponents/Button";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
-import Letter from "./../assets/letter.svg?react";
+import Mail from "./../assets/mail.svg?react";
 import { toastSuccess, toastError } from "../utils/toastify";
 import Input from "../RenderComponents/Input";
 
@@ -44,7 +44,7 @@ export const SignUpForm = () => {
 
     return (
         <div className="flex flex-col w-full ">
-          <h1 className="text-5xl font-bold text-center mb-6">Register </h1>
+      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">Welcome to <span className="text-primary">Gaelo Flow</span></h1>
           <p className="text-lg text-gray-700 text-center mb-12">
             Please create your Account.
           </p>
@@ -85,7 +85,7 @@ export const SignUpForm = () => {
             />
             <Input
               label="Email :"
-              svgLeft={<Letter />}
+              svgLeft={<Mail />}
               bordered
               placeholder="Enter your @email"
               value={email}
