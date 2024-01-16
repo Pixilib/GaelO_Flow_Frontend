@@ -1,7 +1,8 @@
 import React from "react";
+import { Colors } from "../utils/enums";
 
 export type ButtonProps = {
-  color: 'primary' | 'secondary'| 'disabled'| 'danger' | 'success';
+  color: Colors;
   className?: string;
   bordered?: boolean;
   children: React.ReactNode;
@@ -10,12 +11,20 @@ export type ButtonProps = {
 
 const Button = ({ color, bordered, className, children, ...props }: ButtonProps) => {
 
-  const colorClasses = {
+  const colorClasses :Record<Colors, string> = {
     'primary': 'bg-primary hover:bg-primary-hover',
     'secondary': 'bg-secondary hover:bg-secondary-hover',
-    'disabled': 'bg-disabled ',
     'danger': 'bg-danger hover:bg-danger-hover',
     'success': 'bg-success hover:bg-success-hover',
+    [Colors.primaryHover]: "",
+    [Colors.secondaryHover]: "",
+    [Colors.dangerHover]: "",
+    [Colors.successHover]: "",
+    [Colors.orange]: "",
+    [Colors.dark]: "",
+    [Colors.red]: "",
+    [Colors.gray]: "",
+    [Colors.light]: ""
   };
     
   return (

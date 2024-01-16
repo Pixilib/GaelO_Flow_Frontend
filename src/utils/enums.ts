@@ -1,5 +1,5 @@
 export enum Colors {
-    color = 'primary',
+    primary = 'primary',
     primaryHover = 'primary-hover',
     secondary = 'secondary',
     secondaryHover = 'secondary-hover',

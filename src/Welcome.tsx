@@ -14,7 +14,9 @@ import { toastError } from "./utils/toastify";
 import { getUsers } from "./services/users";
 import { SignUpForm } from "./auth/SignUpForm";
 import { LostPasswordForm } from "./auth/LostPasswordForm";
-import { ImgChangeWelcome } from "./RenderComponents/ImgChangeWelcome";
+
+import SignInImage from './assets/sign-in.svg?react'
+import SignUpImage from './assets/sign-up.svg?react'
 
 function Welcome() {
   const dispatch = useDispatch();
@@ -45,6 +47,20 @@ function Welcome() {
     }
   );
 
+  const getImage = () => {
+    switch (location.pathname) {
+      case "/sign-in":
+        return <SignInImage />
+
+      case "/sign-up":
+        return <SignUpImage />
+
+      default:
+        return <SignInImage />
+    }
+  }
+
+
   const loginHandle = (username: string, password: string) => {
     loginMutation.mutate({ username, password });
   };
@@ -57,8 +73,8 @@ function Welcome() {
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7 w-1/12 "
           ></img>
-          <div className="flex h-screen justify-center w-full">
-            <ImgChangeWelcome/>
+          <div className="flex h-screen justify-center items-center w-full">
+            {getImage()}
           </div>
         </section>
         <section
@@ -68,7 +84,7 @@ function Welcome() {
           <div className="w-2/3">
             <Routes>
               <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
-              <Route path="lost-password" element={ <LostPasswordForm/> } />
+              <Route path="lost-password" element={<LostPasswordForm />} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
@@ -92,12 +108,12 @@ function Welcome() {
 
               {location.pathname !== "/" && (
                 <span
-                onClick={() => navigate("/")}
+                  onClick={() => navigate("/")}
                   className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
-                > 
+                >
                   Login to your account
                 </span>
-                )}
+              )}
 
               <span
                 className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"

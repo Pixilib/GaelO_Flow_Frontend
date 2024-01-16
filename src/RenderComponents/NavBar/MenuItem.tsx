@@ -1,5 +1,4 @@
 import { useState, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 
 type MenuItemProps = {
     icon?: ReactNode;
@@ -8,22 +7,20 @@ type MenuItemProps = {
     className?: string;
     children?: ReactNode;
 };
-
-export const MenuItem = ({ icon, text, to, className, children }: MenuItemProps) => {
+ //TODO composant à revoir
+const MenuItem = ({ icon, text, to, className, children, onClick }: MenuItemProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <li>
-            <Link to={to} className={`flex items-center p-2 bg-inherit text-white ${className}`}>
-                {icon}
-                <span className="ml-3">{text}</span>
-            </Link>
+        <li className={`flex items-center p-2 bg-inherit text-white ${className}`}>
             {children && (
                 <button onClick={() => setIsOpen(!isOpen)} className="ml-4">
                     {isOpen ? 'Less' : 'More'} {/* mettre des icones SVG*/}
                 </button>
             )}
-            {isOpen && children}
+            {isOpen  ? children : null}
         </li>
     );
 };
+
+export default MenuItem

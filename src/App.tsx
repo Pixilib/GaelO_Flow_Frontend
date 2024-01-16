@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Welcome from "./Welcome";
 import "./index.css";
 import { RootState } from "./store";
-import RootApp from "./RootComponents/RootApp";
+import RootApp from "./root/RootApp";
 
 
 

@@ -24,8 +24,24 @@ type FooterProps = {
 
 const Card = ({ color, className = '', children }: CardsProps) => {
 
+  const colorsClass  : Record<Colors, string> = {
+    [Colors.danger]: 'bg-danger',
+    [Colors.primary]: "bg-primary",
+    [Colors.primaryHover]: "",
+    [Colors.secondary]: "",
+    [Colors.secondaryHover]: "",
+    [Colors.dangerHover]: "",
+    [Colors.success]: "",
+    [Colors.successHover]: "",
+    [Colors.orange]: "",
+    [Colors.dark]: "",
+    [Colors.red]: "",
+    [Colors.gray]: "",
+    [Colors.light]: ""
+  }
+
   return (
-    <div className={`p-4 ${color} ${className}`}>
+    <div className={`p-4 ${colorsClass[color]} ${className}`}>
       {children}
     </div>
   );
