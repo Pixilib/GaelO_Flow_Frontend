@@ -67,8 +67,11 @@ function Welcome() {
 
   return (
     <>
-      <main className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r from-indigo-700 to-amber-500">
-        <section className="h-full flex relative w-full">
+<main className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r 
+  from-primary 
+  to-secondary ">
+
+    <section className="h-full flex relative w-full">
           <img
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7 w-1/12 "
@@ -78,9 +81,9 @@ function Welcome() {
           </div>
         </section>
         <section
-          className="w-full flex justify-center items-center bg-white rounded-tl-3xl"
-          style={{ filter: "drop-shadow(-20px 0 20px rgba(50, 50, 50, 0.5))" }}
-        >
+          className="w-full flex justify-center items-center bg-white rounded-tl-70"
+         style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}>
+  {/* Contenu de la section */}
           <div className="w-2/3">
             <Routes>
               <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
@@ -94,11 +97,12 @@ function Welcome() {
 
               {location.pathname !== "/sign-up" && (
                 <span
-                  onClick={() => navigate("/sign-up")}
-                  className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
-                >
-                  Don’t have an account? Sign Up                </span>
-              )}
+                onClick={() => navigate("/sign-up")}
+                className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
+              >
+                Don’t have an account? <span className="text-primary">Sign Up</span>
+              </span>
+            )}
 
               {location.pathname !== "/" && (
                 <span
