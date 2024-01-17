@@ -21,9 +21,9 @@ export const signUp = async (UserCredentials: UserSignUp): Promise<unknown> => {
   return axios.post("/api/register", UserCredentials);
 };
 
-export const forgotPassword =
+export const lostPassword =
  async (email: string): Promise<unknown> => {
-  return axios.post("/api/forgot-password", {
+  return axios.post("/api/lost-password", {
     email,
   });
 };

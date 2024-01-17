@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./auth/SignInForm";
 import { useCustomMutation } from "./utils/reactQuery";
-import { forgotPassword, signIn } from "./services/auth";
+import { lostPassword, signIn } from "./services/auth";
 import { jwtDecode } from "jwt-decode";
 import { login } from "./reducers/UserSlice";
 import { toastError } from "./utils/toastify";
@@ -47,7 +47,7 @@ function Welcome() {
   };
 
   const changePasswordMutation = useCustomMutation(
-    ({ email}) => forgotPassword(email),
+    ({ email}) => lostPassword(email),
     null,
     [],
     {
