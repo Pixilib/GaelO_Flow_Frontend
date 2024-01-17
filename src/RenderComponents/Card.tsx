@@ -47,7 +47,7 @@ const Card = ({ color, className = '', children }: CardsProps) => {
   );
 };
 
-const BasicHeader = ({ title, className = '' }: BasicHeaderProps) => {
+const CardHeader = ({ title, className = '' }: BasicHeaderProps) => {
   return (
     <div className={`bg-white border shadow-sm rounded-t-xl ${className}`}>
         <h2 className="text-lg font-bold text-dark text-center">{title}</h2>
@@ -58,7 +58,7 @@ const BasicHeader = ({ title, className = '' }: BasicHeaderProps) => {
   );
 }
 
-const Body = ({ children, className = '' }: BodyProps) => {
+const CardBody = ({ children, className = '' }: BodyProps) => {
   return (
     <div className={`bg-CardBodyColor text-black w-full box-border flex-grow leading-relaxed py-3 px-12 ${className}`}>
       {children}
@@ -66,7 +66,7 @@ const Body = ({ children, className = '' }: BodyProps) => {
   );
 };
 
-const Footer = ({ children, className = '' }: FooterProps) => {
+const CardFooter = ({ children, className = '' }: FooterProps) => {
   return (
     <div className={`bg-primary text-black w-full box-border flex-grow leading-relaxed py-3 px-3 ${className}`}>
       {children}
@@ -74,8 +74,9 @@ const Footer = ({ children, className = '' }: FooterProps) => {
   );
 };
 
-export default Object.assign(Card, {
-  BasicHeader,
-  Body,
-  Footer,
-});
+export default Card
+export {
+  CardHeader,
+  CardBody,
+  CardFooter,
+};

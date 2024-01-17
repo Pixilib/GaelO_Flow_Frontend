@@ -24,5 +24,4 @@ const meta: Meta<typeof Input> = {
 export default meta;
 type Story = StoryObj<typeof Input>;
 
-export const InputStory: Story = {
-  };
+export const InputStory: Story = {};

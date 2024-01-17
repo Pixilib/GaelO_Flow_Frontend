@@ -1,3 +1,4 @@
+import { Colors } from '../utils/enums';
 import Button from '../RenderComponents/Button';
 
 const General = () => {
@@ -13,7 +14,7 @@ const General = () => {
             <Button
               className="w-2/8 flex"
               variant="contained"
-              color="orange"
+              color={Colors.primary}
             >
               Vider la liste
             </Button>
@@ -26,7 +27,7 @@ const General = () => {
             <Button
               className="w-2/8 flex"
               variant="contained"
-              color="orange"
+              color={Colors.primary}
             >
               Vider la liste
             </Button>

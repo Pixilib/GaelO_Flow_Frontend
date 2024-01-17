@@ -7,6 +7,7 @@ type MenuItemProps = {
     className?: string;
     children?: ReactNode;
 };
+
  //TODO composant à revoir
 const MenuItem = ({ icon, text, to, className, children, onClick }: MenuItemProps) => {
     const [isOpen, setIsOpen] = useState(false);

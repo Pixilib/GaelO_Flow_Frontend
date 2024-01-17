@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Card from "../src/RenderComponents/Card";
+import Card, {CardHeader, CardBody, CardFooter} from "../src/RenderComponents/Card";
 import ChevronRight from '../src/assets/chevron-right.svg?react'
 import { Colors } from "../src/utils/enums";
 
@@ -25,14 +25,15 @@ type Story = StoryObj<typeof Card>;
 
 
 export const CardStory: Story = {
-  render: ({ children, ...args }) => (<Card color={args.color}>
-    <Card.BasicHeader title="Card Title" />
-    <Card.Body>
+  render: ({ children, ...args }) => (
+  <Card color={args.color}>
+    <CardHeader title="Card Title" />
+    <CardBody>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, facilis non a dolore soluta consectetur modi minima corrupti id ab at ipsa, vel fugit magnam, numquam aperiam dicta doloribus! Harum? Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, facilis non a dolore soluta consectetur modi minima corrupti id ab at ipsa, vel fugit magnam, numquam aperiam dicta doloribus! Harum
-    </Card.Body>
-    <Card.Footer>
+    </CardBody>
+    <CardFooter>
       {/* Your Footer content goes here */}
       Footer content
-    </Card.Footer>
+    </CardFooter>
   </Card>)
 }

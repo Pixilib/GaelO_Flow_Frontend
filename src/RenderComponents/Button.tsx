@@ -16,6 +16,15 @@ const Button = ({ color, bordered, className, children, ...props }: ButtonProps)
     [Colors.secondary]: "bg-secondary hover:bg-secondary-hover",
     [Colors.danger]: "bg-danger hover:bg-danger-hover",
     [Colors.success]: "bg-success hover:bg-success-hover",
+    [Colors.primaryHover]: "",
+    [Colors.secondaryHover]: "",
+    [Colors.dangerHover]: "",
+    [Colors.successHover]: "",
+    [Colors.orange]: "",
+    [Colors.dark]: "",
+    [Colors.red]: "",
+    [Colors.gray]: "",
+    [Colors.light]: ""
   };
 
   return (
