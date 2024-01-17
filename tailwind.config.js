@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      borderRadius: {
+        '70': '70px',
+      },
       colors: {
         'primary': '#4746B8',
         'primary-hover': '#0C0B76',
