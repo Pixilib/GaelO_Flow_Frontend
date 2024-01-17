@@ -1,12 +1,13 @@
-import { useState, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import Items from './Items';
 
 type MenuItemProps = {
-    icon?: ReactNode;
-    text: string;
+    icon: ReactNode;
+    title: string;
+    items?: string[];
     className?: string;
-    children?: ReactNode;
-    isOpen= false;
-    onClick?: () => void;
+    isOpen: boolean;
+    onToogle?: () => void;
 };
 
 //TODO composant à revoir
@@ -14,17 +15,14 @@ type MenuItemProps = {
 //TODO ajouter un onClick pour le MenuItem
 //TODO ajouter en props un composant child pour le MenuItem (pour les sous menus)
 
-const MenuItem = ({ icon, text, to, className, isOpen ,children }: MenuItemProps) => {
+const MenuItem = ({ icon, title,items, className, isOpen, onToogle }: MenuItemProps) => {
 
     return (
-        <li className={`flex items-center p-2 bg-inherit text-white ${className}`}>
-            {children && (
-                <button onClick={() => setIsOpen(!isOpen)} className="ml-4">
-                    {isOpen ? 'Less' : 'More'} {/* mettre des icones SVG*/}
-                </button>
-            )}
-            {isOpen  ? children : null}
-        </li>
+        <div className={`flex items-center p-2 bg-inherit text-white ${className}`}>
+            <span className="mr-2">{icon}</span>
+            <span onClick={onToogle}>{title}</span>
+            {isOpen && <Items items={items || []} />}
+        </div>
     );
 };
 
