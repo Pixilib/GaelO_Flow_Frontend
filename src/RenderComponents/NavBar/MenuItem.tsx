@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import Items from './Items';
 
 type MenuItemProps = {
-    icon: ReactNode;
+    icon?: ReactNode;
     title: string;
     items?: string[];
     className?: string;
@@ -18,10 +18,11 @@ type MenuItemProps = {
 const MenuItem = ({ icon, title,items, className, isOpen, onToogle }: MenuItemProps) => {
 
     return (
-        <div className={`flex items-center p-2 bg-inherit text-white ${className}`}>
-            <span className="mr-2">{icon}</span>
-            <span onClick={onToogle}>{title}</span>
+        <div className={`flex p-2 bg-inherit text-white ${className}`}>
+            <span className="flex justify-start">{icon}</span>
+            <span className="flex justify-center" onClick={onToogle}>{title}</span>
             {isOpen && <Items items={items || []} />}
+
         </div>
     );
 };
