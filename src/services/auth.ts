@@ -21,7 +21,15 @@ export const signUp = async (UserCredentials: UserSignUp): Promise<unknown> => {
   return axios.post("/api/register", UserCredentials);
 };
 
-export const changePassword = async (
+export const lostPassword =
+ async (email: string): Promise<unknown> => {
+  return axios.post("/api/lost-password", {
+    email,
+  });
+};
+
+export const changePassword =
+ async (
   newPassword: string,
   token: string
 ): Promise<unknown> => {

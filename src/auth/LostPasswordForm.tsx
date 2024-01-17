@@ -1,8 +1,17 @@
 import Input from "../RenderComponents/Input";
 import { ChangeEvent, useState } from "react";
 import Letter from "../assets/mail.svg?react";
+import ChevronRight from "../assets/chevron-right.svg?react";
+import Button from "../RenderComponents/Button";
+import { Colors } from "../utils/enums";
 
-export const LostPasswordForm = () => {
+
+type LostPasswordFormProps = {
+  onSubmit: (email: string) => void;
+};
+
+
+export const LostPasswordForm = ({onSubmit}:LostPasswordFormProps ) => {
   const [email, setEmail] = useState("");
 
   return (
@@ -24,6 +33,16 @@ export const LostPasswordForm = () => {
             setEmail(event.target.value);
           }}
         />
+       <div className="justify-center flex mt-16">
+          <Button
+            color={Colors.primary}
+            onClick={() => onSubmit(email)}
+            disabled={email.length === 0}
+          >
+            Connect
+            <ChevronRight />
+          </Button>
+        </div>
     </div>
   );
 };
