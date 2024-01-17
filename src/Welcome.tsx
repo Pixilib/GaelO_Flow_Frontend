@@ -1,10 +1,5 @@
 import { useDispatch } from "react-redux";
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./auth/SignInForm";
 import { useCustomMutation } from "./utils/reactQuery";
 import { signIn } from "./services/auth";
@@ -15,8 +10,8 @@ import { getUsers } from "./services/users";
 import { SignUpForm } from "./auth/SignUpForm";
 import { LostPasswordForm } from "./auth/LostPasswordForm";
 
-import SignInImage from './assets/sign-in.svg?react'
-import SignUpImage from './assets/sign-up.svg?react'
+import SignInImage from "./assets/sign-in.svg?react";
+import SignUpImage from "./assets/sign-up.svg?react";
 
 function Welcome() {
   const dispatch = useDispatch();
@@ -50,16 +45,13 @@ function Welcome() {
   const getImage = () => {
     switch (location.pathname) {
       case "/sign-in":
-        return <SignInImage />
-
+        return <SignInImage />;
       case "/sign-up":
-        return <SignUpImage />
-
+        return <SignUpImage />;
       default:
-        return <SignInImage />
+        return <SignInImage />;
     }
-  }
-
+  };
 
   const loginHandle = (username: string, password: string) => {
     loginMutation.mutate({ username, password });
@@ -90,14 +82,13 @@ function Welcome() {
             </Routes>
             <hr className="my-10 border-primary" />
             <div className="flex justify-between text-center mx-auto text-balance">
-
-
               {location.pathname !== "/sign-up" && (
                 <span
                   onClick={() => navigate("/sign-up")}
                   className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
                 >
-                  Don’t have an account? Sign Up                </span>
+                  Don’t have an account? Sign Up{" "}
+                </span>
               )}
 
               {location.pathname !== "/" && (

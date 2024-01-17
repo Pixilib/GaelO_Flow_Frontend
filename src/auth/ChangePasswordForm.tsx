@@ -12,6 +12,7 @@ import Button from "../RenderComponents/Button";
 import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
 import Input from "../RenderComponents/Input";
+import { Colors } from "../utils/enums";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ const ChangePasswordForm = () => {
         />
         <Button
           className="w-full"
-          color="primary"
+          color={Colors.primary}
           onClick={() => onChangePassword()}
           disabled={newPassword !== confirmNewPassword}
         >
