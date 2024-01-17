@@ -59,7 +59,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
 <div className="text-right ">
     <span
     className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
-    onClick={() => console.log("Forgot Password?")}
+    onClick={() => navigate("/lost-password")}
   >
     Forgot Password ?
   </span>
