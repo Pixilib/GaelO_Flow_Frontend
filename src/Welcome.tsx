@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./auth/SignInForm";
 import { useCustomMutation } from "./utils/reactQuery";
-import { signIn } from "./services/auth";
+import { forgotPassword, signIn } from "./services/auth";
 import { jwtDecode } from "jwt-decode";
 import { login } from "./reducers/UserSlice";
 import { toastError } from "./utils/toastify";
@@ -41,6 +41,28 @@ function Welcome() {
       },
     }
   );
+  
+  const loginHandle = (username: string, password: string) => {
+    loginMutation.mutate({ username, password });
+  };
+
+  const changePasswordMutation = useCustomMutation(
+    ({ email}) => forgotPassword(email),
+    null,
+    [],
+    {
+      onSuccess: (data: Record<string, any>) => {
+        console.log(data);
+      },
+      onError: () => {
+        toastError("Error in creadentials");
+      },
+    }
+  );
+
+  const changePasswordHandle = (email: string) => {
+    changePasswordMutation.mutate({ email });
+  };
 
   const getImage = () => {
     switch (location.pathname) {
@@ -53,9 +75,6 @@ function Welcome() {
     }
   };
 
-  const loginHandle = (username: string, password: string) => {
-    loginMutation.mutate({ username, password });
-  };
 
   return (
     <>
@@ -76,7 +95,7 @@ function Welcome() {
           <div className="w-2/3">
             <Routes>
               <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
-              <Route path="lost-password" element={<LostPasswordForm />} />
+              <Route path="lost-password" element={<LostPasswordForm onSubmit={changePasswordHandle}/>} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
