@@ -7,6 +7,7 @@ import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
 import PasswordKeyOn from "./../assets/password-key-on.svg?react";
 import { Colors } from "../utils/enums";
+import { useNavigate } from "react-router-dom";
 
 type SignInFormProps = {
   onLogin: (username: string, password: string) => void;
@@ -16,6 +17,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col w-full">

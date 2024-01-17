@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Variant } from "./enum";
-
+import { Colors } from "./../utils/enums";
 
 type InputProps = {
   className?: string;
-  variant?: Variant.Light | Variant.Dark;
+  variant?: Colors.light | Colors.dark;
   type?: string;
   placeholder?: string;
   label?: string;
@@ -13,12 +12,9 @@ type InputProps = {
   [key: string]: any;
 };
 
-
-
-
 const Input = ({
   className = "",
-  variant = Variant.Light,
+  variant = Colors.light,
   placeholder = "",
   label = "",
   type = "text",
@@ -27,12 +23,11 @@ const Input = ({
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const bgColor = variant === Variant.Light ? "bg-white " : "bg-gray-100 ";
-  const bgColorFocus = variant === Variant.Light ? "focus:bg-white " : "focus:bg-gray-100 ";
+  const bgColor = variant === Colors.light ? "bg-white " : "bg-gray-100 ";
+  const bgColorFocus = variant === Colors.light ? "focus:bg-white " : "focus:bg-gray-100 ";
+  
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
-
-
 
   return (
     <div className={`relative flex flex-col ${className}`}>
