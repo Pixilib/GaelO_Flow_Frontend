@@ -23,18 +23,16 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
     event.preventDefault();
     onLogin(username, password);
   };
-  
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
         Welcome back !
       </h1>
-      <p className="text-lg text-dark text-center mb-12">
+      <p className="mb-12 text-lg text-center text-dark">
         Please Log in to your Account
       </p>
-      <div className="w-full space-y-10 text-dark my-12">
-        {" "}
-        {/* Adjusted space-y value */}
+      <div className="w-full mt-20 text-dark">
         <Input
           label="Username:"
           svgLeft={<User />}
@@ -44,8 +42,9 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
+          className="custom-input"
         />
-        <div className="w-full space-y-10 text-dark">
+        <div className="w-full mt-12 text-dark">
           <Input
             label="Password:"
             svgLeft={<PasswordKeyOn />}
@@ -61,17 +60,19 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </span>
             }
+            className="custom-input"
           />
         </div>
-        <div className="text-right ">
+        <div className="mt-3 text-xs text-right">
           <span
-            className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+            className="inline-block text-gray-600 cursor-pointer hover:underline hover:text-indigo-800"
             onClick={() => navigate("/lost-password")}
           >
             Forgot Password ?
           </span>
         </div>
-        <div className="justify-center flex">
+
+        <div className="flex justify-center mt-12">
           <Button
             color={Colors.primary}
             type="submit"

@@ -88,9 +88,11 @@ const Welcome = () => {
         <section className="h-full flex relative w-full">
           <img
             src="/gaelo-flow-white2.svg"
-            className="absolute top-7 left-7 w-1/12 "
-          ></img>
-          <div className="flex h-screen justify-center items-center w-full">
+            className="absolute top-7 left-7"
+            alt="Logo"
+            style={{ width: '8.33%', maxWidth: '100%', height: 'auto' }}
+          />
+          <div className="flex items-center justify-center w-full h-screen">
             {getImage()}
           </div>
         </section>
@@ -109,8 +111,8 @@ const Welcome = () => {
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
-            <hr className="my-10 border-primary" />
-            <div className="flex justify-between text-center mx-auto text-balance">
+            <hr className="my-8 mt-20 border-primary" />
+            <div className="flex justify-between mx-auto text-center text-balance">
               {location.pathname !== "/sign-up" && (
                 <span
                   onClick={() => navigate("/sign-up")}
@@ -122,13 +124,15 @@ const Welcome = () => {
               )}
 
               {location.pathname !== "/" && (
-                <span onClick={() => navigate("/")} className={classLink}>
-                  Login to your account
-                </span>
+                <span
+                  onClick={() => navigate("/")}
+                  className={classLink}
+                >
+                  Already have an account ? <span className="text-primary">Login</span>                </span>
               )}
 
               <span
-                className={classLink}
+                className={`${classLink} inline-block`}
                 onClick={() => navigate("/legal-mention")}
               >
                 Legal Mention
