@@ -1,13 +1,16 @@
 import { ReactNode } from 'react';
 import Items from './Items';
+import ChevronDown from '../../assets/chevron-down.svg?react';
+import ChevronUp from '../../assets/chevron-up.svg?react';
+
 
 type MenuItemProps = {
     icon?: ReactNode;
     title: string;
     items?: string[];
     className?: string;
-    isOpen: boolean;
-    onToogle?: () => void;
+    isOpen?: boolean;
+    onClick?: () => void;
 };
 
 //TODO composant à revoir
@@ -15,16 +18,23 @@ type MenuItemProps = {
 //TODO ajouter un onClick pour le MenuItem
 //TODO ajouter en props un composant child pour le MenuItem (pour les sous menus)
 
-const MenuItem = ({ icon, title,items, className, isOpen, onToogle }: MenuItemProps) => {
+const MenuItemCollapse = ({ icon, title,items, className, isOpen, onClick }: MenuItemProps) => {
 
     return (
-        <div className={`flex p-2 bg-inherit text-white ${className}`}>
-            <span className="flex justify-start">{icon}</span>
-            <span className="flex justify-center" onClick={onToogle}>{title}</span>
-            {isOpen && <Items items={items || []} />}
-
+        <>
+        <div className={`flex justify-center p-2 bg-inherit hover:bg-[#0C0B76] text-white ${className}`} onClick={onClick}>
+            <span>{icon}</span>
+            <span >{title}</span>
+            <span className=''>
+            {items && items.length > 0 && (isOpen === false ? <ChevronDown/> : <ChevronUp/> ) }
+            </span>
         </div>
+        <div className='flex justify-center'>
+            {isOpen && <Items items={items || []} />}
+        </div>
+        </>
     );
 };
-
-export default MenuItem
+// background: #0C0B76;
+// box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+export default MenuItemCollapse
