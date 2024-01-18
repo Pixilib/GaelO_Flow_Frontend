@@ -49,8 +49,8 @@ const Card = ({ color, className = '', children }: CardsProps) => {
 
 const CardHeader = ({ title, className = '' }: BasicHeaderProps) => {
   return (
-    <div className={`bg-white border shadow-sm rounded-t-xl ${className}`}>
-        <h2 className="text-lg font-bold text-dark text-center">{title}</h2>
+<div className={`bg-white shadow-sm rounded-t-xl ${className}`}>
+          <h2 className="text-lg font-bold text-center text-dark">{title}</h2>
         <div className="flex items-center gap-x-1"> 
     
       </div>
