@@ -28,7 +28,7 @@ type Story = StoryObj<typeof Button>;
 
 export const ButtonTextStory: Story = {
   render: ({ children, ...args }) => (
-    <div style={{ display: 'flex', flexDirection: 'column', margin: '0px', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ display: 'flex ', flexDirection: 'column', margin: '0px', justifyContent: 'center', alignItems: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'row',}}>
         <Button {...args} style={{ width: '150px', marginRight: '50px' }}>{children}</Button>
         <Button color={Colors.primary} style={{ marginRight: '50px' }}>{children}</Button>
