@@ -41,13 +41,13 @@ function Welcome() {
       },
     }
   );
-  
+
   const loginHandle = (username: string, password: string) => {
     loginMutation.mutate({ username, password });
   };
 
   const changePasswordMutation = useCustomMutation(
-    ({ email}) => lostPassword(email),
+    ({ email }) => lostPassword(email),
     null,
     [],
     {
@@ -78,52 +78,50 @@ function Welcome() {
 
   return (
     <>
-<main className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r 
-  from-primary 
-  to-secondary ">
-
-    <section className="h-full flex relative w-full">
+      <main className="w-screen h-screen gap-0 sm:flex columns-2 bg-gradient-to-r from-primary to-secondary">
+        <section className="relative flex w-full h-full">
           <img
             src="/gaelo-flow-white2.svg"
-            className="absolute top-7 left-7 w-1/12 "
-          ></img>
-          <div className="flex h-screen justify-center items-center w-full">
+            className="absolute top-7 left-7"
+            alt="Logo"
+            style={{ width: '8.33%', maxWidth: '100%', height: 'auto' }}
+          />
+          <div className="flex items-center justify-center w-full h-screen">
             {getImage()}
           </div>
         </section>
         <section
-          className="w-full flex justify-center items-center bg-white rounded-tl-70"
-         style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}>
-  {/* Contenu de la section */}
+          className="flex items-center justify-center w-full bg-white rounded-tl-70"
+          style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}>
+          {/* Contenu de la section */}
           <div className="w-2/3">
             <Routes>
               <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
-              <Route path="lost-password" element={<LostPasswordForm onSubmit={changePasswordHandle}/>} />
+              <Route path="lost-password" element={<LostPasswordForm onSubmit={changePasswordHandle} />} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
-            <hr className="my-10 border-primary" />
-            <div className="flex justify-between text-center mx-auto text-balance">
+            <hr className="my-8 mt-20 border-primary" />
+            <div className="flex justify-between mx-auto text-center text-balance">
               {location.pathname !== "/sign-up" && (
                 <span
-                onClick={() => navigate("/sign-up")}
-                className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
-              >
-                Don’t have an account? <span className="text-primary">Sign Up</span>
-              </span>
-            )}
+                  onClick={() => navigate("/sign-up")}
+                  className="text-gray-600 cursor-pointer hover:underline hover:text-indigo-800"
+                >
+                  Don’t have an account? <span className="text-primary">Sign Up</span>
+                </span>
+              )}
 
               {location.pathname !== "/" && (
                 <span
                   onClick={() => navigate("/")}
-                  className="text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer"
+                  className="text-gray-600 cursor-pointer hover:underline hover:text-indigo-800"
                 >
-                  Login to your account
-                </span>
+                  Already have an account ? <span className="text-primary">Login</span>                </span>
               )}
 
               <span
-                className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+                className="inline-block text-gray-600 cursor-pointer hover:underline hover:text-indigo-800"
                 onClick={() => navigate("/legal-mention")}
               >
                 Legal Mention

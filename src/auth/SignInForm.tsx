@@ -21,51 +21,53 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
 
   return (
     <div className="flex flex-col w-full">
-      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
+      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
         Welcome back !
       </h1>
-      <p className="text-lg text-dark text-center mb-12">
+      <p className="mb-12 text-lg text-center text-dark">
         Please Log in to your Account
       </p>
-      <div className="w-full space-y-10 text-dark my-12"> {/* Adjusted space-y value */}
-        <Input
-          label="Username:"
-          svgLeft={<User />}
-          bordered
-          placeholder="Enter your username"
-          value={username}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setUsername(event.target.value);
-          }}
-        />
-        <div className="w-full space-y-10 text-dark">
+      <div className="w-full mt-20 text-dark">
   <Input
-    label="Password:"
-    svgLeft={<PasswordKeyOn />}
+    label="Username:"
+    svgLeft={<User />}
     bordered
-    placeholder="Enter your password"
-    value={password}
-    type={showPassword ? "text" : "password"}
+    placeholder="Enter your username"
+    value={username}
     onChange={(event: ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value);
+      setUsername(event.target.value);
     }}
-    svgRight={
-      <span onClick={() => setShowPassword(!showPassword)}>
-        {showPassword ? <Visibility /> : <VisibilityOff />}
-      </span>
-    }
+    className="custom-input"
   />
-</div>
-<div className="text-right ">
-    <span
-    className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+  <div className="w-full mt-12 text-dark"> 
+    <Input
+      label="Password:"
+      svgLeft={<PasswordKeyOn />}
+      bordered
+      placeholder="Enter your password"
+      value={password}
+      type={showPassword ? "text" : "password"}
+      onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        setPassword(event.target.value);
+      }}
+      svgRight={
+        <span onClick={() => setShowPassword(!showPassword)}>
+          {showPassword ? <Visibility /> : <VisibilityOff />}
+        </span>
+      }
+      className="custom-input"
+    />
+  </div>
+  <div className="mt-3 text-xs text-right"> 
+      <span
+    className="inline-block text-gray-600 cursor-pointer hover:underline hover:text-indigo-800"
     onClick={() => navigate("/lost-password")}
   >
     Forgot Password ?
   </span>
 </div>
 
-        <div className="justify-center flex">
+        <div className="flex justify-center mt-12">
           <Button
             color={Colors.primary}
             onClick={() => onLogin(username, password)}
