@@ -36,7 +36,7 @@ const Input = ({
           className={`transition-all duration-100 ease-in-out
                       ${isFocused
               ? `text-xs absolute -top-2 left-5 ${bgColor} px-1 mb-2 text-primary`
-              : "text-sm mb-2 absolute -top-7 left-2 text-dark"
+              : "text-sm mb-2 absolute -top-7 left-1 text-dark"
             }`}
         >
           {label}
