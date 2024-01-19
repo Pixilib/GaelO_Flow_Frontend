@@ -1,18 +1,35 @@
 
+export type Item = {
+  title: string;
+  path: string;
+  isActive: boolean;
+};
+
 type ItemsProps = {
-    items: string[];
-    isOpen?: boolean;
-}
+  items: Item[];
+  onNavigate: (path: string) => void;
+};
 
-//Create type Object for Items with key for title and value for redirect with useNavigate from react-router-dom
+const Items = ({ items, onNavigate }: ItemsProps) => {
+  return (
+    <ul className="bg-white">
+      {items.map((item, index) => {
+        const activeClasses = item.isActive
+          ? "bg-secondary text-dark"
+          : "bg-inherit hover:bg-[#0C0B76] text-dark hover:text-white";
 
-const Items = ({ items, isOpen }:ItemsProps) => {
-    return ( 
-            <ul>
-                {items.map((item, index) => <li key={index} >{item}</li>)}
-            </ul>
-    )
-
+        return (
+          <li
+            key={index}
+            className={`flex flex-col justify-center p-2 text-dark  ${activeClasses} ${index === items.length - 1 ? 'rounded-b-xl' : ''}`}
+            onClick={() => onNavigate(item.path)}
+          >
+            {item.title}
+          </li>
+        );
+      })}
+    </ul>
+  );
 };
 
 export default Items;

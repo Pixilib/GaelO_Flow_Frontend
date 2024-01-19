@@ -19,15 +19,22 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onLogin(username, password);
+  };
+  
   return (
-    <div className="flex flex-col w-full">
+    <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
         Welcome back !
       </h1>
       <p className="text-lg text-dark text-center mb-12">
         Please Log in to your Account
       </p>
-      <div className="w-full space-y-10 text-dark my-12"> {/* Adjusted space-y value */}
+      <div className="w-full space-y-10 text-dark my-12">
+        {" "}
+        {/* Adjusted space-y value */}
         <Input
           label="Username:"
           svgLeft={<User />}
@@ -39,36 +46,35 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
           }}
         />
         <div className="w-full space-y-10 text-dark">
-  <Input
-    label="Password:"
-    svgLeft={<PasswordKeyOn />}
-    bordered
-    placeholder="Enter your password"
-    value={password}
-    type={showPassword ? "text" : "password"}
-    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value);
-    }}
-    svgRight={
-      <span onClick={() => setShowPassword(!showPassword)}>
-        {showPassword ? <Visibility /> : <VisibilityOff />}
-      </span>
-    }
-  />
-</div>
-<div className="text-right ">
-    <span
-    className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
-    onClick={() => navigate("/lost-password")}
-  >
-    Forgot Password ?
-  </span>
-</div>
-
+          <Input
+            label="Password:"
+            svgLeft={<PasswordKeyOn />}
+            bordered
+            placeholder="Enter your password"
+            value={password}
+            type={showPassword ? "text" : "password"}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setPassword(event.target.value);
+            }}
+            svgRight={
+              <span onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </span>
+            }
+          />
+        </div>
+        <div className="text-right ">
+          <span
+            className="text-gray-600 inline-block hover:underline hover:text-indigo-800 cursor-pointer"
+            onClick={() => navigate("/lost-password")}
+          >
+            Forgot Password ?
+          </span>
+        </div>
         <div className="justify-center flex">
           <Button
             color={Colors.primary}
-            onClick={() => onLogin(username, password)}
+            type="submit"
             disabled={username.length === 0 || password.length === 0}
           >
             Connect
@@ -76,6 +82,6 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
