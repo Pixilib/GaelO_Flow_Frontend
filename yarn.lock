@@ -5547,25 +5547,8 @@ __metadata:
   languageName: node
   linkType: hard
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
-"compare-versions@npm:^6.0.0":
-  version: 6.1.0
-  resolution: "compare-versions@npm:6.1.0"
-  checksum: 5378edc8a53ac98ed907da463e1d6c26f1ed2664006d6a0d54bbdf7f046a36c43e244740854fc0edfc1e09253b9a0b7c98d1282dfee9f6f1a87199599f611218
-  languageName: node
-  linkType: hard
 
-<<<<<<< HEAD
-=======
->>>>>>> 05ff9fa ( update 2 files)
-=======
->>>>>>> 1020c0e (welcome style)
-=======
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
+
 "compressible@npm:~2.0.16":
   version: 2.0.18
   resolution: "compressible@npm:2.0.18"
@@ -7042,17 +7025,7 @@ __metadata:
     react-router-dom: "npm:^6.21.2"
     react-toastify: "npm:^9.1.3"
     storybook: "npm:^7.6.8"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     storybook-addon-react-router-v6: "npm:^2.0.10"
-=======
->>>>>>> 05ff9fa ( update 2 files)
-=======
->>>>>>> 1020c0e (welcome style)
-=======
-    storybook-addon-react-router-v6: "npm:^2.0.10"
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.0.11"
@@ -9824,12 +9797,6 @@ __metadata:
   checksum: 0d60a0ea758529c32a706d0c69d70b69fb94de3c46442fffdee34f08f51ffceddbb5395b41dfd1565895653e9f60f98ca525835be9d5db1f16d6b22be12f4cd4
   languageName: node
   linkType: hard
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
 "react-inspector@npm:6.0.2":
   version: 6.0.2
   resolution: "react-inspector@npm:6.0.2"
@@ -9838,14 +9805,6 @@ __metadata:
   checksum: 8f9b23c21b4d95722e28c9455c2bf00fd9437347714382594461f98e5b9954d60864d0f4e74e881639b065e752a97ba52a65e39930c234072e5bff291bb02b5e
   languageName: node
   linkType: hard
-
-<<<<<<< HEAD
-=======
->>>>>>> 05ff9fa ( update 2 files)
-=======
->>>>>>> 1020c0e (welcome style)
-=======
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
 "react-is@npm:18.1.0":
   version: 18.1.0
   resolution: "react-is@npm:18.1.0"
@@ -10757,12 +10716,6 @@ __metadata:
   checksum: 2f27c3eaa7207b81410e170e7c41379816d22c1566308a9d97fbf853c4facff531fcb2a85f085c7503c578736570972f747c26018ebeaba7d1341fb82a7b6d52
   languageName: node
   linkType: hard
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
 "storybook-addon-react-router-v6@npm:^2.0.10":
   version: 2.0.10
   resolution: "storybook-addon-react-router-v6@npm:2.0.10"
@@ -10788,14 +10741,6 @@ __metadata:
   checksum: c7a9684956122563aad0443bf09a264de026c953b492c572d571d7eb9cd2ba692a638d7aa899fb944c158710fe9295668480dcabe6cd11ff5679f9c698b928e1
   languageName: node
   linkType: hard
-
-<<<<<<< HEAD
-=======
->>>>>>> 05ff9fa ( update 2 files)
-=======
->>>>>>> 1020c0e (welcome style)
-=======
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
 "storybook@npm:^7.6.8":
   version: 7.6.8
   resolution: "storybook@npm:7.6.8"
