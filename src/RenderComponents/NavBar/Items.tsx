@@ -1,4 +1,3 @@
-
 export type Item = {
   title: string;
   path: string;
@@ -21,7 +20,7 @@ const Items = ({ items, onNavigate }: ItemsProps) => {
         return (
           <li
             key={index}
-            className={`flex flex-col justify-center p-2 text-dark  ${activeClasses} ${index === items.length - 1 ? 'rounded-b-xl' : ''}`}
+            className={`flex flex-col justify-center p-2 text-dark  ${activeClasses} ${index === items.length - 1 ? "rounded-b-xl" : ""}`}
             onClick={() => onNavigate(item.path)}
           >
             {item.title}

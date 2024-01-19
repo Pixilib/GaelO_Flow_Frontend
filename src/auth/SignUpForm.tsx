@@ -41,8 +41,12 @@ export const SignUpForm = () => {
     signUpMutation.mutate({ username, lastname, firstname, email });
   };
 
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onRegister();
+  };
   return (
-    <div className="flex flex-col w-full ">
+    <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
         Welcome to <span className="text-primary">Gaelo Flow</span>
       </h1>
@@ -61,6 +65,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
+          autocomplete="username"
         />
         <Input
           label="Firstname :"
@@ -72,6 +77,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setFirstname(event.target.value);
           }}
+          autocomplete="firstname"
         />
         <Input
           label="Lastname :"
@@ -83,6 +89,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setLastname(event.target.value);
           }}
+          autocomplete="lastname"
         />
         <Input
           label="Email :"
@@ -94,18 +101,20 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setEmail(event.target.value);
           }}
+          autocomplete="email"
         />
         <div className="justify-center flex">
           <Button
             color={Colors.primary}
             onClick={() => onRegister()}
             className="w-60"
+            type="submit"
           >
             Create your account
             <ChevronRight />
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };

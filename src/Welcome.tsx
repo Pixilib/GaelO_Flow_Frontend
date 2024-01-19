@@ -2,51 +2,27 @@ import { useDispatch } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./auth/SignInForm";
 import { useCustomMutation } from "./utils/reactQuery";
-import { lostPassword, signIn } from "./services/auth";
-import { jwtDecode } from "jwt-decode";
-import { login } from "./reducers/UserSlice";
+import { lostPassword } from "./services/auth";
+import { useAuth } from "./utils/useAuth";
 import { toastError } from "./utils/toastify";
-import { getUsers } from "./services/users";
 import { SignUpForm } from "./auth/SignUpForm";
 import { LostPasswordForm } from "./auth/LostPasswordForm";
+import ChangePasswordForm from "./auth/ChangePasswordForm";
 
 import SignInImage from "./assets/sign-in.svg?react";
 import SignUpImage from "./assets/sign-up.svg?react";
 
 const Welcome = () => {
-  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const { loginMutate } = useAuth();
 
-  const loginMutation = useCustomMutation(
-    ({ username, password }) => signIn(username, password),
-    null,
-    [],
-    {
-      onSuccess: (data: Record<string, any>) => {
-        const decodedToken: Record<string, any> = jwtDecode(
-          data.data.access_token
-        );
-        dispatch(
-          login({
-            token: data.data.access_token,
-            userId: decodedToken.userId,
-            role: decodedToken.role,
-          })
-        );
-        getUsers().then((response) => console.log(response.data));
-      },
-      onError: () => {
-        toastError("Error in creadentials");
-      },
-    }
-  );
 
   const loginHandle = (username: string, password: string) => {
-    loginMutation.mutate({ username, password });
+    loginMutate({ username, password });
   };
 
-  const changePasswordMutation = useCustomMutation(
+  const lostPasswordMutation = useCustomMutation(
     ({ email }) => lostPassword(email),
     null,
     [],
@@ -60,8 +36,8 @@ const Welcome = () => {
     }
   );
 
-  const changePasswordHandle = (email: string) => {
-    changePasswordMutation.mutate({ email });
+  const lostPasswordHandle = (email: string) => {
+    lostPasswordMutation.mutate({ email });
   };
 
   const getImage = () => {
@@ -90,7 +66,7 @@ const Welcome = () => {
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7"
             alt="Logo"
-            style={{ width: '8.33%', maxWidth: '100%', height: 'auto' }}
+            style={{ width: "8.33%", maxWidth: "100%", height: "auto" }}
           />
           <div className="flex items-center justify-center w-full h-screen">
             {getImage()}
@@ -104,9 +80,10 @@ const Welcome = () => {
           <div className="w-2/3">
             <Routes>
               <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
+              <Route path="/change-password" element={<ChangePasswordForm />} />
               <Route
                 path="lost-password"
-                element={<LostPasswordForm onSubmit={changePasswordHandle} />}
+                element={<LostPasswordForm onSubmit={lostPasswordHandle} />}
               />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
@@ -124,11 +101,10 @@ const Welcome = () => {
               )}
 
               {location.pathname !== "/" && (
-                <span
-                  onClick={() => navigate("/")}
-                  className={classLink}
-                >
-                  Already have an account ? <span className="text-primary">Login</span>                </span>
+                <span onClick={() => navigate("/")} className={classLink}>
+                  Already have an account ?{" "}
+                  <span className="text-primary">Login</span>{" "}
+                </span>
               )}
 
               <span
