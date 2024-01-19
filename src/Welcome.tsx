@@ -11,11 +11,9 @@ import SignUpImage from "./assets/sign-up.svg?react";
 const Welcome = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { loginMutate, lostPasswordMutate, signUpMutate } = useAuth();
+  const { lostPasswordMutate, signUpMutate } = useAuth();
 
-  const loginHandle = (username: string, password: string) => {
-    loginMutate({ username, password });
-  };
+
 
   const lostPasswordHandle = (email: string) => {
     lostPasswordMutate({ email });
@@ -69,7 +67,7 @@ const Welcome = () => {
           {/* Contenu de la section */}
           <div className="w-2/3">
             <Routes>
-              <Route path="/" element={<SignInForm onLogin={loginHandle} />} />
+              <Route path="/" element={<SignInForm />} />
               <Route path="/change-password" element={<ChangePasswordForm />} />
               <Route
                 path="lost-password"
