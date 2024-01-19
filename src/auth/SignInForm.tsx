@@ -56,7 +56,7 @@ export const SignInForm = () => {
     event.preventDefault();
     loginMutation.mutate({ username, password });
   };
-  
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
@@ -75,7 +75,8 @@ export const SignInForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          className="custom-input"
+          autocomplete="username"
+          required
         />
         <div className="w-full mt-12 text-dark">
           <Input
@@ -93,7 +94,7 @@ export const SignInForm = () => {
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </span>
             }
-            className="custom-input"
+            required
           />
         </div>
         <div className="mt-3 text-xs text-right">
