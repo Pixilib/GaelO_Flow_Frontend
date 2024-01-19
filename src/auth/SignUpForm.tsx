@@ -1,50 +1,28 @@
 import { ChangeEvent, useState } from "react";
 
-import { useCustomMutation } from "../utils/reactQuery";
-import { signUp } from "../services/auth";
-
 import Button from "../RenderComponents/Button";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 import Mail from "./../assets/mail.svg?react";
-import { toastSuccess, toastError } from "../utils/toastify";
 import Input from "../RenderComponents/Input";
 import { Colors } from "../utils/enums";
 
-export const SignUpForm = () => {
+export type SignUpFormProps = {
+  onRegister: (username: string, lastname: string, firstname: string, email: string ) => void;
+};
+
+export const SignUpForm = ({ onRegister }: SignUpFormProps) => {
   const [username, setUsername] = useState("");
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [email, setEmail] = useState("");
 
-  const signUpMutation = useCustomMutation(
-    () => signUp({ username, lastname, firstname, email }),
-    null,
-    [],
-    {
-      onSuccess: (data: Record<string, any>) => {
-        toastSuccess(data.data.message);
-      },
-      onError: (error: any) => {
-        //display an error message if an error occurs
-        if (error.response?.data?.message) {
-          toastError(error.response.data.message);
-        } else {
-          // display a generic error message
-          toastError("An error occurred during registration.");
-        }
-      },
-    }
-  );
-
-  const onRegister = async () => {
-    signUpMutation.mutate({ username, lastname, firstname, email });
-  };
-
+ 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onRegister();
+    onRegister(username, lastname, firstname, email);
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
@@ -106,9 +84,8 @@ export const SignUpForm = () => {
         <div className="justify-center flex">
           <Button
             color={Colors.primary}
-            onClick={() => onRegister()}
-            className="w-60"
             type="submit"
+            className="w-60"
           >
             Create your account
             <ChevronRight />

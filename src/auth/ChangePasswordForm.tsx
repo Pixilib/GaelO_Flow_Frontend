@@ -5,7 +5,7 @@ import { useCustomMutation } from "../utils/reactQuery";
 
 import { AxiosError } from "axios";
 import ChevronRight from "./../assets/chevron-right.svg?react";
-import Key from "./../assets/password-key-on.svg";
+import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import Button from "../RenderComponents/Button";
@@ -64,7 +64,7 @@ const ChangePasswordForm = () => {
       <p className="text-lg text-gray-700 text-center mb-12">
         Please create/change your password.
       </p>
-      <div className="w-full space-y-3">
+      <div className="w-full space-y-12">
         <Input
           label="New Password :"
           svgLeft={<Key />}

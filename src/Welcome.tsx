@@ -1,10 +1,6 @@
-import { useDispatch } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./auth/SignInForm";
-import { useCustomMutation } from "./utils/reactQuery";
-import { lostPassword } from "./services/auth";
 import { useAuth } from "./utils/useAuth";
-import { toastError } from "./utils/toastify";
 import { SignUpForm } from "./auth/SignUpForm";
 import { LostPasswordForm } from "./auth/LostPasswordForm";
 import ChangePasswordForm from "./auth/ChangePasswordForm";
@@ -15,29 +11,23 @@ import SignUpImage from "./assets/sign-up.svg?react";
 const Welcome = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { loginMutate } = useAuth();
-
+  const { loginMutate, lostPasswordMutate, signUpMutate } = useAuth();
 
   const loginHandle = (username: string, password: string) => {
     loginMutate({ username, password });
   };
 
-  const lostPasswordMutation = useCustomMutation(
-    ({ email }) => lostPassword(email),
-    null,
-    [],
-    {
-      onSuccess: (data: Record<string, any>) => {
-        console.log(data);
-      },
-      onError: () => {
-        toastError("Error in creadentials");
-      },
-    }
-  );
-
   const lostPasswordHandle = (email: string) => {
-    lostPasswordMutation.mutate({ email });
+    lostPasswordMutate({ email });
+  };
+
+  const signUpHandle = (
+    username: string,
+    lastname: string,
+    firstname: string,
+    email: string
+  ) => {
+    signUpMutate({ username, lastname, firstname, email });
   };
 
   const getImage = () => {
@@ -86,7 +76,10 @@ const Welcome = () => {
                 element={<LostPasswordForm onSubmit={lostPasswordHandle} />}
               />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
-              <Route path="sign-up" element={<SignUpForm />} />
+              <Route
+                path="sign-up"
+                element={<SignUpForm onRegister={signUpHandle} />}
+              />
             </Routes>
             <hr className="my-8 mt-20 border-primary" />
             <div className="flex justify-between mx-auto text-center text-balance">
