@@ -35,10 +35,12 @@ export const lostPassword =
 export const changePassword =
  async (
   newPassword: string,
+  connfirmPassword: string,
   token: string
 ): Promise<unknown> => {
     return axios.post("/api/change-password", {
       newPassword,
+      connfirmPassword,
       token,
     });
 };

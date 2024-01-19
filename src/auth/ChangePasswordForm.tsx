@@ -17,7 +17,7 @@ import { Colors } from "../utils/enums";
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [token, setToken] = useState("");
 
@@ -34,7 +34,7 @@ const ChangePasswordForm = () => {
   }, [navigate]);
 
   const changePasswordMutation = useCustomMutation(
-    ({ newPassword, token }) => changePassword(newPassword, token),
+    ({ newPassword,confirmPassword, token }) => changePassword(newPassword,confirmPassword, token),
     null,
     [],
     {
@@ -45,6 +45,7 @@ const ChangePasswordForm = () => {
       onError: (error: AxiosError<{ message: string }>) => {
         //display an error message if an error occurs
         if (error.response?.data?.message) {
+          console.table(error);
           toastError(error.response.data.message);
         } else {
           // display a generic error message
@@ -91,17 +92,17 @@ const ChangePasswordForm = () => {
               {showPassword ? <Visibility /> : <VisibilityOff />}
             </span>
           }
-          value={confirmNewPassword}
+          value={confirmPassword}
           type={showPassword ? "text" : "password"}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setConfirmNewPassword(event.target.value);
+            setconfirmPassword(event.target.value);
           }}
         />
         <Button
           className="w-full"
           color={Colors.primary}
           onClick={() => onChangePassword()}
-          disabled={newPassword !== confirmNewPassword}
+          disabled={newPassword !== confirmPassword}
         >
           <div className="w-1/2 flex justify-around">
             Connect

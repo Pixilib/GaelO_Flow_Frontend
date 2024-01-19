@@ -28,7 +28,7 @@ export const SideBar = () => {
     {
       title: "sign-up",
       path: "/signup",
-      isActive: location.pathname === "/signup",
+      isActive: location.pathname === "/sign-up",
     },
     {
       title: "sign-in",

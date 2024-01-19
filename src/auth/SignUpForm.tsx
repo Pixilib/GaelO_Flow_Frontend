@@ -1,26 +1,46 @@
 import { ChangeEvent, useState } from "react";
 
+import { signUp } from "../services/auth";
+import { useCustomMutation } from "../utils/reactQuery";
+import { toastError, toastSuccess } from "../utils/toastify";
+
 import Button from "../RenderComponents/Button";
+import Input from "../RenderComponents/Input";
+import { Colors } from "../utils/enums";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 import Mail from "./../assets/mail.svg?react";
-import Input from "../RenderComponents/Input";
-import { Colors } from "../utils/enums";
 
-export type SignUpFormProps = {
-  onRegister: (username: string, lastname: string, firstname: string, email: string ) => void;
-};
-
-export const SignUpForm = ({ onRegister }: SignUpFormProps) => {
+export const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [email, setEmail] = useState("");
 
- 
+  const signUpMutation = useCustomMutation(
+    ({username,lastname,firstname,email}) => signUp(username, lastname, firstname, email),
+    null,
+    [],
+    {
+      onSuccess: (data: Record<string, any>) => {
+        toastSuccess(data.data.message);
+      },
+      onError: (error: any) => {
+        //display an error message if an error occurs
+        if (error.response?.data?.message) {
+          toastError(error.response.data.message);
+        } else {
+          // display a generic error message
+          toastError("An error occurred during registration.");
+        }
+      },
+    }
+  );
+
+
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onRegister(username, lastname, firstname, email);
+    signUpMutation.mutate({ username, lastname, firstname, email });
   };
 
   return (
@@ -43,7 +63,7 @@ export const SignUpForm = ({ onRegister }: SignUpFormProps) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          autocomplete="username"
+          autocomplete="on"
         />
         <Input
           label="Firstname :"
@@ -55,7 +75,7 @@ export const SignUpForm = ({ onRegister }: SignUpFormProps) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setFirstname(event.target.value);
           }}
-          autocomplete="firstname"
+          autocomplete="on"
         />
         <Input
           label="Lastname :"
@@ -67,7 +87,7 @@ export const SignUpForm = ({ onRegister }: SignUpFormProps) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setLastname(event.target.value);
           }}
-          autocomplete="lastname"
+          autocomplete="on"
         />
         <Input
           label="Email :"
@@ -79,7 +99,7 @@ export const SignUpForm = ({ onRegister }: SignUpFormProps) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setEmail(event.target.value);
           }}
-          autocomplete="email"
+          autocomplete="on"
         />
         <div className="justify-center flex">
           <Button

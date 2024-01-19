@@ -11,7 +11,7 @@ import SignUpImage from "./assets/sign-up.svg?react";
 const Welcome = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { lostPasswordMutate, signUpMutate } = useAuth();
+  const { lostPasswordMutate } = useAuth();
 
 
 
@@ -19,14 +19,7 @@ const Welcome = () => {
     lostPasswordMutate({ email });
   };
 
-  const signUpHandle = (
-    username: string,
-    lastname: string,
-    firstname: string,
-    email: string
-  ) => {
-    signUpMutate({ username, lastname, firstname, email });
-  };
+
 
   const getImage = () => {
     switch (location.pathname) {
@@ -76,7 +69,7 @@ const Welcome = () => {
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route
                 path="sign-up"
-                element={<SignUpForm onRegister={signUpHandle} />}
+                element={<SignUpForm />}
               />
             </Routes>
             <hr className="my-8 mt-20 border-primary" />
