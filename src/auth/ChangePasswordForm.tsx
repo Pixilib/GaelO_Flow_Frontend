@@ -54,7 +54,6 @@ const ChangePasswordForm = () => {
     }
   );
 
-
   const onChangePassword = async () => {
     changePasswordMutation.mutate({ newPassword, token });
   };
@@ -114,4 +113,4 @@ const ChangePasswordForm = () => {
   );
 };
 
-export default ChangePasswordForm
+export default ChangePasswordForm;
