@@ -1,12 +1,10 @@
 import { lostPassword, signUp } from "../services/auth";
 import { useCustomMutation } from "./reactQuery";
-import { useDispatch } from "react-redux";
 import { toastError,toastSuccess } from "../utils/toastify";
 
 
 
 export const useAuth = () => {
-    const dispatch = useDispatch();
 
 //connexion
 
@@ -49,7 +47,6 @@ export const useAuth = () => {
 
 
   return {
-    loginMutate: loginMutation.mutate,
     lostPasswordMutate: lostPasswordMutation.mutate,
     signUpMutate: signUpMutation.mutate,
   }
