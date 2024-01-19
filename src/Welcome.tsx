@@ -124,7 +124,6 @@ const Welcome = () => {
               )}
 
               {location.pathname !== "/" && (
-<<<<<<< HEAD
                 <span
                   onClick={() => navigate("/")}
                   className={classLink}
@@ -134,15 +133,6 @@ const Welcome = () => {
 
               <span
                 className={`${classLink} inline-block`}
-=======
-                <span onClick={() => navigate("/")} className={classLink}>
-                  Login to your account
-                </span>
-              )}
-
-              <span
-                className={classLink}
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
                 onClick={() => navigate("/legal-mention")}
               >
                 Legal Mention

@@ -23,11 +23,6 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
     event.preventDefault();
     onLogin(username, password);
   };
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> e628865 (refactor: :recycle: WIP SideBar and refacto SignInForm)
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-4xl font-semibold text-center mb-6 text-dark">

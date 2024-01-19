@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Administrator from '../src/assets/administrator_line_icon_236151 1 (1).svg?react';
-import {MenuItemCollapse} from '../src/RenderComponents/NavBar/MenuItem';
+import {MenuItemsCollapse} from '../src/RenderComponents/NavBar/MenuItem';
 
 
-const meta: Meta<typeof MenuItemCollapse> = {
+const meta: Meta<typeof MenuItemsCollapse> = {
     title: 'GAELO FLOW UI/MenuItem',
-    component: MenuItemCollapse,
+    component: MenuItemsCollapse,
     tags: ["autodocs"],
     args: {
         title: 'Menu',
@@ -40,7 +40,7 @@ const meta: Meta<typeof MenuItemCollapse> = {
     },
 };
 export default meta;
-type Story = StoryObj<typeof MenuItemCollapse>;
+type Story = StoryObj<typeof MenuItemsCollapse>;
 
 export const MenuItems: Story = {};
 
