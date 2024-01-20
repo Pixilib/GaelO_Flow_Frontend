@@ -1,18 +1,19 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 
 import { useCustomMutation } from "../utils/reactQuery";
+import { toastError, toastSuccess } from "../utils/toastify";
+import { changePassword } from "../services/auth";
 
-import { AxiosError } from "axios";
+import Button from "../RenderComponents/Button";
+import { Colors } from "../utils/enums";
+
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
-import Button from "../RenderComponents/Button";
-import { toastError, toastSuccess } from "../utils/toastify";
-import { changePassword } from "../services/auth";
 import Input from "../RenderComponents/Input";
-import { Colors } from "../utils/enums";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -55,12 +56,13 @@ const ChangePasswordForm = () => {
     }
   );
 
-  const onChangePassword = async () => {
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
     changePasswordMutation.mutate({ newPassword, token });
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-5xl font-bold text-center mb-6"> Password </h1>
       <p className="text-lg text-gray-700 text-center mb-12">
         Please create/change your password.
@@ -81,6 +83,7 @@ const ChangePasswordForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setNewPassword(event.target.value);
           }}
+          required
         />
         <Input
           label="Confirm New Password :"
@@ -97,20 +100,20 @@ const ChangePasswordForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setconfirmPassword(event.target.value);
           }}
+          required
         />
+          <div className="flex justify-center mt-12">
         <Button
-          className="w-full"
           color={Colors.primary}
-          onClick={() => onChangePassword()}
+          type="submit"
           disabled={newPassword !== confirmPassword}
         >
-          <div className="w-1/2 flex justify-around">
             Connect
             <ChevronRight />
-          </div>
         </Button>
+          </div>
       </div>
-    </div>
+    </form>
   );
 };
 

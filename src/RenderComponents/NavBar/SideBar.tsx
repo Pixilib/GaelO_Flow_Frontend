@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import LogoSideBar from "../../../public/LogoGaeloFlow-white 3.svg?react";
-import Administrator from "../../assets/administrator_line_icon_236151 1 (1).svg?react";
+
 import { MenuItem, MenuItemsCollapse } from "./MenuItem";
+import LogoSideBar from "../../assets/LogoGaeloFlow-white3.svg?react";
+import Administrator from "../../assets/administrator_line_icon_236151 1 (1).svg?react";
 
 //TODO: Add a state for open and close
 //TODO: make components items for menu and sub menu, take a prop for the icon and text
@@ -27,7 +28,7 @@ export const SideBar = () => {
     },
     {
       title: "sign-up",
-      path: "/signup",
+      path: "/sign-up",
       isActive: location.pathname === "/sign-up",
     },
     {
