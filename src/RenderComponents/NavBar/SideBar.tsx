@@ -23,17 +23,17 @@ export const SideBar = () => {
     {
       title: "Lost Password",
       path: "/lost-password",
-      isActive: location.pathname === '/lost-password' 
+      isActive: location.pathname === "/lost-password",
     },
     {
       title: "sign-up",
       path: "/signup",
-      isActive: location.pathname === '/signup'
+      isActive: location.pathname === "/sign-up",
     },
     {
       title: "sign-in",
       path: "/",
-      isActive: location.pathname === '/'
+      isActive: location.pathname === "/",
     },
   ];
 

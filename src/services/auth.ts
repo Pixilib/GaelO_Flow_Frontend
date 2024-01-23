@@ -1,11 +1,5 @@
 import axios from "./axios";
 
-export type UserSignUp = {
-  username: string;
-  lastname: string;
-  firstname: string;
-  email: string;
-};
 
 export const signIn = (
   username: string,
@@ -17,8 +11,18 @@ export const signIn = (
   });
 };
 
-export const signUp = async (UserCredentials: UserSignUp): Promise<unknown> => {
-  return axios.post("/api/register", UserCredentials);
+export const signUp = async (
+  username: string,
+  lastname: string,
+  firstname: string,
+  email: string,
+): Promise<unknown> => {
+  return axios.post("/api/register", {
+    username,
+    lastname,
+    firstname,
+    email,
+  });
 };
 
 export const lostPassword =
@@ -31,10 +35,12 @@ export const lostPassword =
 export const changePassword =
  async (
   newPassword: string,
+  connfirmPassword: string,
   token: string
 ): Promise<unknown> => {
     return axios.post("/api/change-password", {
       newPassword,
+      connfirmPassword,
       token,
     });
 };

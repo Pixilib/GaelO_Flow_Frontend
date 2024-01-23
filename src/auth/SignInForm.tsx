@@ -1,28 +1,62 @@
 import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
+import { login } from "../reducers/UserSlice";
+import { useCustomMutation } from "../utils/reactQuery";
+import { signIn } from "../services/auth";
+import { getUsers } from "../services/users";
+import { toastError } from "../utils/toastify";
+
 import Button from "../RenderComponents/Button";
 import Input from "../RenderComponents/Input";
+
+import { Colors } from "../utils/enums";
+import PasswordKeyOn from "./../assets/password-key-on.svg?react";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
-import PasswordKeyOn from "./../assets/password-key-on.svg?react";
-import { Colors } from "../utils/enums";
-import { useNavigate } from "react-router-dom";
 
-type SignInFormProps = {
-  onLogin: (username: string, password: string) => void;
-};
-
-export const SignInForm = ({ onLogin }: SignInFormProps) => {
+export const SignInForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+
+  const loginMutation = useCustomMutation(
+    ({ username, password }) => signIn(username, password),
+    null,
+    [],
+    {
+      onSuccess: (data: Record<string, any>) => {
+        const decodedToken: Record<string, any> = jwtDecode(
+          data.data.access_token
+        );
+        dispatch(
+          login({
+            token: data.data.access_token,
+            userId: decodedToken.userId,
+            role: decodedToken.role,
+          })
+        );
+        getUsers().then((response) => console.log(response.data));
+      },
+      onError: () => {
+        toastError("Error in creadentials");
+      },
+    }
+  );
+
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onLogin(username, password);
+    loginMutation.mutate({ username, password });
   };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
@@ -41,7 +75,8 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          className="custom-input"
+          autocomplete="on"
+          required
         />
         <div className="w-full mt-12 text-dark">
           <Input
@@ -59,7 +94,7 @@ export const SignInForm = ({ onLogin }: SignInFormProps) => {
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </span>
             }
-            className="custom-input"
+            required
           />
         </div>
         <div className="mt-3 text-xs text-right">
