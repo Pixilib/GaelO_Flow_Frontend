@@ -1,8 +1,10 @@
-import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
 import Card, { CardHeader, CardBody, CardFooter } from "../src/RenderComponents/Card";
 import ChevronRight from '../src/assets/chevron-right.svg?react';
 import { Colors } from "../src/utils/enums";
+import Button from "../src/RenderComponents/Button";
+
+import DotMenuRightMore from "../src/assets/dot-menu-more.svg?react";
 
 export default {
   title: "Gaelo Flow UI/Card",
@@ -10,6 +12,8 @@ export default {
   args: {
     color: Colors.primary,
     bordered: false,
+    children: "Text",
+
   },
   argTypes: {
     children: {
@@ -24,33 +28,41 @@ export default {
 } as Meta<typeof Card>;
 
 type Story = StoryObj<typeof Card>;
+
 export const CardStory: Story = {
   render: ({ children, ...args }) => (
-    <div className="flex justify-center space-x-4">
-      {/* Card task */}
-      <Card>
-        <CardHeader title="Title Task" />
+    <div className="space-y-5">
+      {/* Card   */}
+      <Card color={Colors.primary} bordered={false}>
+        <CardHeader title="Card  Title" />
         <CardBody>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </CardBody>
         <CardFooter>
-          {/* footer */}
         </CardFooter>
       </Card>
 
-      {/* Ajoutez de la marge horizontale entre les cartes */}
-      <div style={{ margin: '0 16px' }}></div>
 
       {/* Card Settings */}
-      <Card>
-        <CardHeader title="Centered Card Title" centerTitle={true} />
+      <Card color={Colors.primary} bordered={false}>
+        <CardHeader title="Card Setting Title" centerTitle={true} rightIcon={<ChevronRight />} >
+          <>
+            <button className={`icon-button mr-4`} onClick={() => console.log('click')}>
+              <span className="icon-right">{<DotMenuRightMore />}</span>
+            </button>
+          </>
+        </CardHeader>
         <CardBody>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum
         </CardBody>
-        <CardFooter>
-          {/* footer */}
+        <CardFooter className="flex-shrink-0">
+          <div className="flex items-center space-x-2">
+            <Button color={Colors.success}><ChevronRight /></Button>
+            <Button color={Colors.orange}><ChevronRight /></Button>
+            <Button color={Colors.danger}><ChevronRight /></Button>
+          </div>
         </CardFooter>
       </Card>
     </div>
   ),
 };
+
