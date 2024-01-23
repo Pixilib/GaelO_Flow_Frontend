@@ -1,20 +1,25 @@
-import React from "react"
+import React from "react";
+
 import { Colors } from "../utils/enums";
 
 type CardsProps = {
   color: Colors;
+  bordered?: boolean;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 type BasicHeaderProps = {
   title: string;
-  className?: string;
+  centerTitle?: boolean;
+  color?: Colors | undefined;
+  className?: string; 
+  children : React.ReactNode;
+  [key :string] : any;
 };
 
 type BodyProps = {
   children: React.ReactNode;
-  className?: string;
 };
 
 type FooterProps = {
@@ -22,60 +27,56 @@ type FooterProps = {
   className?: string;
 };
 
-const Card = ({ color, className = '', children }: CardsProps) => {
+const colorClasses: Record<Colors, string> = {
+  [Colors.primary]: "bg-primary ",
+  [Colors.secondary]: "bg-secondary",
+  [Colors.danger]: "bg-danger",
+  [Colors.success]: "bg-success",
+  [Colors.primaryHover]: "",
+  [Colors.secondaryHover]: "",
+  [Colors.dangerHover]: "",
+  [Colors.successHover]: "",
+  [Colors.orange]: "",
+  [Colors.dark]: "",
+  [Colors.red]: "",
+  [Colors.gray]: "bg-gray hover:bg-gray-hover",
+  [Colors.light]: ""
+};
 
-  const colorsClass  : Record<Colors, string> = {
-    [Colors.danger]: 'bg-danger',
-    [Colors.primary]: "bg-primary",
-    [Colors.primaryHover]: "",
-    [Colors.secondary]: "",
-    [Colors.secondaryHover]: "",
-    [Colors.dangerHover]: "",
-    [Colors.success]: "",
-    [Colors.successHover]: "",
-    [Colors.orange]: "",
-    [Colors.dark]: "",
-    [Colors.red]: "",
-    [Colors.gray]: "",
-    [Colors.light]: ""
-  }
+const Card = ({ bordered, className = "", children }: CardsProps) => {
+  const borderClass = bordered ? "border" : "";
 
   return (
-    <div className={`p-4 ${colorsClass[color]} ${className}`}>
+    <div className={`shadow-md ${className} ${borderClass} rounded-xl`}>
+      {children}
+    </div>
+  );
+};
+const CardHeader = ({ title, className = "", children, ...props }: BasicHeaderProps) => {
+  return (
+    <div className={`bg-white text-white shadow-sm rounded-t-xl ${className} flex items-center text-center`} {...props}>
+      {title && <h2 className="flex-1 p-4 mx-auto text-lg font-bold text-dark">{title}</h2>}
       {children}
     </div>
   );
 };
 
-const BasicHeader = ({ title, className = '' }: BasicHeaderProps) => {
-  return (
-    <div className={`bg-white border shadow-sm rounded-t-xl ${className}`}>
-        <h2 className="text-lg font-bold text-dark text-center">{title}</h2>
-        <div className="flex items-center gap-x-1"> 
-    
-      </div>
-    </div>
-  );
-}
 
-const Body = ({ children, className = '' }: BodyProps) => {
+const CardBody = ({ children }: BodyProps) => {
   return (
-    <div className={`bg-CardBodyColor text-black w-full box-border flex-grow leading-relaxed py-3 px-12 ${className}`}>
+    <div className="box-border flex-grow px-12 py-3 leading-relaxed text-black bg-gray hover:bg-gray-hover">
       {children}
     </div>
   );
 };
 
-const Footer = ({ children, className = '' }: FooterProps) => {
+const CardFooter = ({ children, className = "" }: FooterProps) => {
   return (
-    <div className={`bg-primary text-black w-full box-border flex-grow leading-relaxed py-3 px-3 ${className}`}>
-      {children}
+    <div className={`bg-gray hover:bg-gray-hover text-black box-border flex-grow leading-relaxed py-3 px-3 ${className} rounded-b-xl`}>
+      {children || <div className="flex-grow"></div>}
     </div>
   );
 };
 
-export default Object.assign(Card, {
-  BasicHeader,
-  Body,
-  Footer,
-});
+export default Card;
+export { CardHeader, CardBody, CardFooter };

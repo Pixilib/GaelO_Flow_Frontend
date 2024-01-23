@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Variant } from "./enum";
-
+import { Colors } from "./../utils/enums";
 
 type InputProps = {
   className?: string;
-  variant?: Variant.Light | Variant.Dark;
+  variant?: Colors.light | Colors.dark;
   type?: string;
   placeholder?: string;
   label?: string;
@@ -13,12 +12,9 @@ type InputProps = {
   [key: string]: any;
 };
 
-
-
-
 const Input = ({
   className = "",
-  variant = Variant.Light,
+  variant = Colors.light,
   placeholder = "",
   label = "",
   type = "text",
@@ -27,12 +23,11 @@ const Input = ({
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
-  const bgColor = variant === Variant.Light ? "bg-white " : "bg-gray-100 ";
-  const bgColorFocus = variant === Variant.Light ? "focus:bg-white " : "focus:bg-gray-100 ";
+  const bgColor = variant === Colors.light ? "bg-white " : "bg-gray-100 ";
+  const bgColorFocus = variant === Colors.light ? "focus:bg-white " : "focus:bg-gray-100 ";
+  
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
-
-
 
   return (
     <div className={`relative flex flex-col ${className}`}>
@@ -41,7 +36,7 @@ const Input = ({
           className={`transition-all duration-100 ease-in-out
                       ${isFocused
               ? `text-xs absolute -top-2 left-5 ${bgColor} px-1 mb-2 text-primary`
-              : "text-sm mb-2 absolute -top-7 left-2 text-dark"
+              : "text-sm mb-2 absolute -top-7 left-1 text-dark"
             }`}
         >
           {label}

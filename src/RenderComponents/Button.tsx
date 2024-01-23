@@ -16,11 +16,20 @@ const Button = ({ color, bordered, className, children, ...props }: ButtonProps)
     [Colors.secondary]: "bg-secondary hover:bg-secondary-hover",
     [Colors.danger]: "bg-danger hover:bg-danger-hover",
     [Colors.success]: "bg-success hover:bg-success-hover",
+    [Colors.primaryHover]: "",
+    [Colors.secondaryHover]: "",
+    [Colors.dangerHover]: "",
+    [Colors.successHover]: "",
+    [Colors.orange]: "bg-orange hover:bg-orange-hover",
+    [Colors.dark]: "",
+    [Colors.red]: "",
+    [Colors.gray]: "",
+    [Colors.light]: ""
   };
 
   return (
     <button
-      className={`flex justify-center items-center ${colorClasses[color]} text-white p-3 font-semibold focus:outline-none focus:shadow-outline disabled:bg-opacity-70 ${bordered ? "border border-white-900" : ""} rounded-full shadow-lg ${className} w-40`}
+      className={`flex justify-center items-center ${colorClasses[color]} text-white p-3 font-semibold focus:outline-none focus:shadow-outline disabled:bg-opacity-70 ${bordered ? "border border-white-900" : ""} rounded-full shadow-lg ${className} min-w-0`}
       {...props}
     >
       {children}

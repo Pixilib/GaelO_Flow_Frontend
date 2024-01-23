@@ -5,18 +5,19 @@ import { useCustomMutation } from "../utils/reactQuery";
 
 import { AxiosError } from "axios";
 import ChevronRight from "./../assets/chevron-right.svg?react";
-import Key from "./../assets/password-key-on.svg";
+import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import Button from "../RenderComponents/Button";
 import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
 import Input from "../RenderComponents/Input";
+import { Colors } from "../utils/enums";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [confirmPassword, setconfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [token, setToken] = useState("");
 
@@ -33,7 +34,7 @@ const ChangePasswordForm = () => {
   }, [navigate]);
 
   const changePasswordMutation = useCustomMutation(
-    ({ newPassword, token }) => changePassword(newPassword, token),
+    ({ newPassword,confirmPassword, token }) => changePassword(newPassword,confirmPassword, token),
     null,
     [],
     {
@@ -44,6 +45,7 @@ const ChangePasswordForm = () => {
       onError: (error: AxiosError<{ message: string }>) => {
         //display an error message if an error occurs
         if (error.response?.data?.message) {
+          console.table(error);
           toastError(error.response.data.message);
         } else {
           // display a generic error message
@@ -52,7 +54,6 @@ const ChangePasswordForm = () => {
       },
     }
   );
-
 
   const onChangePassword = async () => {
     changePasswordMutation.mutate({ newPassword, token });
@@ -64,7 +65,7 @@ const ChangePasswordForm = () => {
       <p className="text-lg text-gray-700 text-center mb-12">
         Please create/change your password.
       </p>
-      <div className="w-full space-y-3">
+      <div className="w-full space-y-12">
         <Input
           label="New Password :"
           svgLeft={<Key />}
@@ -91,17 +92,17 @@ const ChangePasswordForm = () => {
               {showPassword ? <Visibility /> : <VisibilityOff />}
             </span>
           }
-          value={confirmNewPassword}
+          value={confirmPassword}
           type={showPassword ? "text" : "password"}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setConfirmNewPassword(event.target.value);
+            setconfirmPassword(event.target.value);
           }}
         />
         <Button
           className="w-full"
-          color="primary"
+          color={Colors.primary}
           onClick={() => onChangePassword()}
-          disabled={newPassword !== confirmNewPassword}
+          disabled={newPassword !== confirmPassword}
         >
           <div className="w-1/2 flex justify-around">
             Connect
@@ -113,4 +114,4 @@ const ChangePasswordForm = () => {
   );
 };
 
-export default ChangePasswordForm
+export default ChangePasswordForm;
