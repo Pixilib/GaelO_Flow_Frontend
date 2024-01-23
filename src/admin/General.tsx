@@ -4,29 +4,29 @@ import Button from '../RenderComponents/Button';
 
 const General = () => {
   return (
-    <div className="bg-background flex flex-col p-8 h-screen">
-      <h1 className="text-3xl font-bold mx-8"> </h1>
+    <div className="flex flex-col h-screen p-8 bg-background">
+      <h1 className="mx-8 text-3xl font-bold"> </h1>
 
       <div className="flex flex-1 gap-20">
 
         <div className="w-96 p-4 text-dark bg-[#ffffff] rounded-[10px] shadow-xl text-center flex flex-col">
-          <h3 className="text-xl font-bold mx-8">Orthanc Setting </h3>
-          <div className="flex flex-1 justify-center items-end">
+          <h3 className="mx-8 text-xl font-bold">Orthanc Setting </h3>
+          <div className="flex items-end justify-center flex-1">
             <Button
-              className="w-2/8 flex"
+              className="flex w-2/8"
               variant="contained"
               color={Colors.primary}
             >
-              Vider la liste
+              Vider la list
             </Button>
           </div>
         </div>
 
         <div className="w-96 p-4 text-dark bg-[#ffffff] rounded-[10px] shadow-xl text-center flex flex-col">
-          <h3 className="text-xl font-bold mx-12">Redis  Setting</h3>
-          <div className="flex flex-1 justify-center items-end">
+          <h3 className="mx-12 text-xl font-bold">Redis  Setting</h3>
+          <div className="flex items-end justify-center flex-1">
             <Button
-              className="w-2/8 flex"
+              className="flex w-2/8"
               variant="contained"
               color={Colors.primary}
             >
