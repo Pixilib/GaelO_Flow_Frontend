@@ -59,7 +59,9 @@ const Dashboard = () => {
               Empty List
             </Button>
           </CardFooter>
-        </Card>      </div>
+        </Card>     
+        
+         </div>
     </div>
   );
 };

@@ -1,40 +1,40 @@
 import { Colors } from '../utils/enums';
 import Button from '../RenderComponents/Button';
+import Card, { CardHeader, CardBody, CardFooter } from "../RenderComponents/Card";
+import Check from "./../assets/check.svg?react";
 
+import Restart from "./../assets/restart.svg?react";
+import Shutdown from "./../assets/shutdown.svg?react";
 
 const General = () => {
   return (
-    <div className="flex flex-col h-screen p-8 bg-background">
-      <h1 className="mx-8 text-3xl font-bold"> </h1>
+    <div className="flex-col h-screen p-8 bg-background">
+      {/* Card Anonymization */}
+      <Card className="flex-1 mb-6">
+        <CardHeader title="Redis Setting" />
+        <CardBody>
+          <h3 className="text-xl">Progress</h3>
+        </CardBody>
+        <CardFooter>
+          
+        </CardFooter>
+      </Card>
 
-      <div className="flex flex-1 gap-20">
-
-        <div className="w-96 p-4 text-dark bg-[#ffffff] rounded-[10px] shadow-xl text-center flex flex-col">
-          <h3 className="mx-8 text-xl font-bold">Orthanc Setting </h3>
-          <div className="flex items-end justify-center flex-1">
-            <Button
-              className="flex w-2/8"
-              variant="contained"
-              color={Colors.primary}
-            >
-              Vider la list
-            </Button>
-          </div>
+      <Card className="flex-1 mb-6">
+        <CardHeader title="Orthanc Setting" />
+        <CardBody>
+          <h3 className="text-xl">Progress</h3>
+        </CardBody>
+        <CardFooter>
+        <div className="flex items-center justify-center space-x-2">
+                  <Button color={Colors.success}><Check /></Button>
+          <Button color={Colors.orange}><Restart /></Button>
+          <Button color={Colors.danger}><Shutdown /></Button>
         </div>
 
-        <div className="w-96 p-4 text-dark bg-[#ffffff] rounded-[10px] shadow-xl text-center flex flex-col">
-          <h3 className="mx-12 text-xl font-bold">Redis  Setting</h3>
-          <div className="flex items-end justify-center flex-1">
-            <Button
-              className="flex w-2/8"
-              variant="contained"
-              color={Colors.primary}
-            >
-              Vider la liste
-            </Button>
-          </div>
-        </div>
-      </div>
+        </CardFooter>
+
+      </Card>
     </div>
   );
 };
