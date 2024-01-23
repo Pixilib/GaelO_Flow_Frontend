@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Button from "../src/RenderComponents/Button";
-import ChevronRight from "../src/assets/chevron-right.svg";
+import ChevronRight from "../src/assets/chevron-right.svg?react";
 import { Colors } from "../src/utils/enums"; 
 
 export default {

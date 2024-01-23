@@ -1,6 +1,7 @@
 import { Colors } from '../utils/enums';
 import Button from '../RenderComponents/Button';
 
+
 const General = () => {
   return (
     <div className="bg-background flex flex-col p-8 h-screen">

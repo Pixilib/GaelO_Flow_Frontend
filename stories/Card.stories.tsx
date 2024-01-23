@@ -1,14 +1,19 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Card, {CardHeader, CardBody, CardFooter} from "../src/RenderComponents/Card";
-import ChevronRight from '../src/assets/chevron-right.svg?react'
+import Card, { CardHeader, CardBody, CardFooter } from "../src/RenderComponents/Card";
+import ChevronRight from '../src/assets/chevron-right.svg?react';
 import { Colors } from "../src/utils/enums";
+import Button from "../src/RenderComponents/Button";
+
+import DotMenuRightMore from "../src/assets/dot-menu-more.svg?react";
 
 export default {
-  title: "Gaelo FLow UI/Card",
+  title: "Gaelo Flow UI/Card",
   component: Card,
   args: {
-    color: Colors.primaryHover,
+    color: Colors.primary,
     bordered: false,
+    children: "Text",
+
   },
   argTypes: {
     children: {
@@ -21,19 +26,43 @@ export default {
     },
   },
 } as Meta<typeof Card>;
-type Story = StoryObj<typeof Card>;
 
+type Story = StoryObj<typeof Card>;
 
 export const CardStory: Story = {
   render: ({ children, ...args }) => (
-  <Card color={args.color}>
-    <CardHeader title="Card Title" />
-    <CardBody>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, facilis non a dolore soluta consectetur modi minima corrupti id ab at ipsa, vel fugit magnam, numquam aperiam dicta doloribus! Harum? Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, facilis non a dolore soluta consectetur modi minima corrupti id ab at ipsa, vel fugit magnam, numquam aperiam dicta doloribus! Harum
-    </CardBody>
-    <CardFooter>
-      {/* Your Footer content goes here */}
-      Footer content
-    </CardFooter>
-  </Card>)
-}
+    <div className="space-y-5">
+      {/* Card   */}
+      <Card color={Colors.primary} bordered={false}>
+        <CardHeader title="Card  Title" />
+        <CardBody>
+        </CardBody>
+        <CardFooter>
+        </CardFooter>
+      </Card>
+
+
+      {/* Card Settings */}
+      <Card color={Colors.primary} bordered={false}>
+        <CardHeader title="Card Setting Title" centerTitle={true} rightIcon={<ChevronRight />} >
+          <>
+            <button className={`icon-button mr-4`} onClick={() => console.log('click')}>
+              <span className="icon-right">{<DotMenuRightMore />}</span>
+            </button>
+          </>
+        </CardHeader>
+        <CardBody>
+          Lorem ipsum
+        </CardBody>
+        <CardFooter className="flex-shrink-0">
+          <div className="flex items-center space-x-2">
+            <Button color={Colors.success}><ChevronRight /></Button>
+            <Button color={Colors.orange}><ChevronRight /></Button>
+            <Button color={Colors.danger}><ChevronRight /></Button>
+          </div>
+        </CardFooter>
+      </Card>
+    </div>
+  ),
+};
+
