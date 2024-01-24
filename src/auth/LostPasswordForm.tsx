@@ -1,19 +1,44 @@
-import Input from "../RenderComponents/Input";
 import { ChangeEvent, useState } from "react";
-import Letter from "../assets/mail.svg?react";
-import ChevronRight from "../assets/chevron-right.svg?react";
+
+import { useCustomMutation } from "../utils/reactQuery";
+import { lostPassword } from "../services/auth";
+import { toastError, toastSuccess } from "../utils/toastify";
+
+import Input from "../RenderComponents/Input";
 import Button from "../RenderComponents/Button";
 import { Colors } from "../utils/enums";
+import Letter from "../assets/mail.svg?react";
+import ChevronRight from "../assets/chevron-right.svg?react";
 
-type LostPasswordFormProps = {
-  onSubmit: (email: string) => void;
-};
 
-export const LostPasswordForm = ({ onSubmit }: LostPasswordFormProps) => {
+
+
+export const LostPasswordForm = () => {
   const [email, setEmail] = useState("");
 
+  const lostPasswordMutation = useCustomMutation(
+    ({ email }) => lostPassword(email),
+    null,
+    [],
+    {
+      onSuccess: (data: Record<string, any>) => {
+        toastSuccess("Email sent");
+        console.log(data);
+      },
+      onError: () => {
+        toastError("Error in creadentials");
+      },
+    }
+  );
+  
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    lostPasswordMutation.mutate({ email });
+  };
+
+
   return (
-    <div className="flex flex-col w-full">
+    <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-5xl font-bold text-center mb-12 ">Forgot Password</h1>
       <p
         className="text-lg text-gray-700 text-center mb-16 
@@ -33,17 +58,18 @@ export const LostPasswordForm = ({ onSubmit }: LostPasswordFormProps) => {
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setEmail(event.target.value);
         }}
+        autocomplete="on"
       />
       <div className="justify-center flex mt-16">
         <Button
           color={Colors.primary}
-          onClick={() => onSubmit(email)}
+          type="submit"
           disabled={email.length === 0}
         >
           Connect
           <ChevronRight />
         </Button>
       </div>
-    </div>
+    </form>
   );
 };

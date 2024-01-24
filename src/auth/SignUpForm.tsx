@@ -8,8 +8,8 @@ import Button from "../RenderComponents/Button";
 import Input from "../RenderComponents/Input";
 import { Colors } from "../utils/enums";
 import ChevronRight from "./../assets/chevron-right.svg?react";
-import User from "./../assets/user.svg?react";
 import Mail from "./../assets/mail.svg?react";
+import User from "./../assets/user.svg?react";
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState("");

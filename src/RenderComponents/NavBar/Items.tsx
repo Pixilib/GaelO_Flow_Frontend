@@ -11,7 +11,7 @@ type ItemsProps = {
 
 const Items = ({ items, onNavigate }: ItemsProps) => {
   return (
-    <ul className="bg-white">
+    <ul className="bg-white rounded-b-xl">
       {items.map((item, index) => {
         const activeClasses = item.isActive
           ? "bg-secondary text-dark"
