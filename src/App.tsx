@@ -7,9 +7,15 @@ import General from "./admin/General";
 
 
 
+
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
   
+return (
+
+  <General/>
+  
+  )
   if (isLogged) return <RootApp />;
   else return <Welcome />;
 

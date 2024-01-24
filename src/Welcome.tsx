@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./auth/SignInForm";
-import { useAuth } from "./utils/useAuth";
 import { SignUpForm } from "./auth/SignUpForm";
 import { LostPasswordForm } from "./auth/LostPasswordForm";
 import ChangePasswordForm from "./auth/ChangePasswordForm";
@@ -11,15 +10,9 @@ import SignUpImage from "./assets/sign-up.svg?react";
 const Welcome = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { lostPasswordMutate } = useAuth();
 
 
-
-  const lostPasswordHandle = (email: string) => {
-    lostPasswordMutate({ email });
-  };
-
-
+ 
 
   const getImage = () => {
     switch (location.pathname) {
@@ -64,7 +57,7 @@ const Welcome = () => {
               <Route path="/change-password" element={<ChangePasswordForm />} />
               <Route
                 path="lost-password"
-                element={<LostPasswordForm onSubmit={lostPasswordHandle} />}
+                element={<LostPasswordForm />}
               />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route

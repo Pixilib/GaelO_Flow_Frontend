@@ -54,8 +54,8 @@ export const MenuItemsCollapse = ({
 }: MenuItemCollapseProps) => {
   return (
         <div className={`flex flex-col w-full justify-between ${className}`} onClick={toggleOpen}>
-          <div className="flex justify-between p-3 text-dark">
-            <span>{icon}</span>
+          <div className="flex justify-between p-3 text-white">
+            <span className="">{icon}</span>
             <span>{title}</span>
           <span>
             {isOpen ? <ChevronUp /> : <ChevronDown />}
