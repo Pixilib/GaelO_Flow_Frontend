@@ -13,17 +13,17 @@ const RootApp = () => {
     dispatch(logout());
     navigate("/");
   };
+
   return (
     <div className="flex w-full h-screen">
       <div className="grow-0">
-        <SideBar />
+        <SideBar onLogout={handleLogout} />
       </div>
       <div className="grow">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/admin/*" element={<AdminRoot />} />
         </Routes>
-        
       </div>
     </div>
   );

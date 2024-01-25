@@ -18,7 +18,8 @@ export const SignUpForm = () => {
   const [email, setEmail] = useState("");
 
   const signUpMutation = useCustomMutation(
-    ({username,lastname,firstname,email}) => signUp(username, lastname, firstname, email),
+    ({ username, lastname, firstname, email }) =>
+      signUp(username, lastname, firstname, email),
     null,
     [],
     {
@@ -36,7 +37,6 @@ export const SignUpForm = () => {
       },
     }
   );
-
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -102,11 +102,7 @@ export const SignUpForm = () => {
           autoComplete="on"
         />
         <div className="justify-center flex">
-          <Button
-            color={Colors.primary}
-            type="submit"
-            className="w-60"
-          >
+          <Button color={Colors.primary} type="submit" className="w-60">
             Create your account
             <ChevronRight />
           </Button>

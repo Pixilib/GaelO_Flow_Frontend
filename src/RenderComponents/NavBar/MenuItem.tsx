@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 
-
 type MenuItemProps = {
   icon?: ReactNode;
   title: string;
@@ -18,6 +17,7 @@ const MenuItem = ({
 }: MenuItemProps) => {
   const activeClasses = isActive
     ? "text-white underline decoration-white decoration-2"
+    //TODO : pas de couleur hardcodé
     : "bg-inherit hover:bg-[#0C0B76] text-white";
 
   return (

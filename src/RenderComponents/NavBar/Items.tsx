@@ -20,7 +20,8 @@ const Items = ({ items, onNavigate }: ItemsProps) => {
         return (
           <li
             key={index}
-            className={`p-2 flex justify-start pl-12 pe-4 items-center text-dark ${activeClasses} ${index === items.length - 1 ? "rounded-b-xl" : ""}`}
+            //TODO : verifier le selecteur last
+            className={`p-2 flex justify-start pl-12 pe-4 items-center text-dark ${activeClasses} last:rounded-b-xl`}
             onClick={() => onNavigate(item.path)}
           >
             {item.title}
