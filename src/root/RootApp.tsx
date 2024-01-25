@@ -13,10 +13,11 @@ const RootApp = () => {
     dispatch(logout());
     navigate("/");
   };
+
   return (
-    <div className="flex h-full">
-      <div className="flex-none h-full">
-        <SideBar />
+    <div className="flex w-full h-screen">
+      <div className="grow-0">
+        <SideBar onLogout={handleLogout} />
       </div>
       <div className="h-full grow">
         <Routes>

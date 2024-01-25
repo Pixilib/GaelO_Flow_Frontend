@@ -1,5 +1,5 @@
 import axios from './axios';
 
-export const getUsers = () =>{
+export const getUsers = () : Promise<unknown> =>{
     return axios.get('/api/users');
 }

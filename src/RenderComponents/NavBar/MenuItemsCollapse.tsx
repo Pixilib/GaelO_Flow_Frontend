@@ -40,8 +40,12 @@ type MenuItemCollapseProps = {
           <span className="flex-shrink-0 mr-4">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
           
         </div>
-        {isOpen && <Items items={items} onNavigate={onNavigate} />}
+        <span className="flex-shrink-0">
+          {isOpen ? <ChevronUp /> : <ChevronDown />}
+        </span>
       </div>
-    );
-  };
-  export default MenuItemsCollapse;
+      {isOpen && <Items items={items} onNavigate={onNavigate} />}
+    </div>
+  );
+};
+export default MenuItemsCollapse;

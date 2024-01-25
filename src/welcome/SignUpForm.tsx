@@ -18,7 +18,8 @@ export const SignUpForm = () => {
   const [email, setEmail] = useState("");
 
   const signUpMutation = useCustomMutation(
-    ({username,lastname,firstname,email}) => signUp(username, lastname, firstname, email),
+    ({ username, lastname, firstname, email }) =>
+      signUp(username, lastname, firstname, email),
     null,
     [],
     {
@@ -36,7 +37,6 @@ export const SignUpForm = () => {
       },
     }
   );
-
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();

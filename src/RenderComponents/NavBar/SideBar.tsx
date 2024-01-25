@@ -14,8 +14,11 @@ import Help from "../../assets/help.svg?react";
 import Logout from "../../assets/logout.svg?react";
 import MenuItemsCollapse from "./MenuItemsCollapse";
 
-//TODO: Add route for the menu , when route exist !
-export const SideBar = () => {
+type SideBarProps = {
+  onLogout: () => void;
+};
+
+export const SideBar = ({ onLogout }: SideBarProps) => {
   const [openItem, setOpenItem] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
