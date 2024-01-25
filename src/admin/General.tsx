@@ -122,7 +122,7 @@ const General = () => {
           </div>
         </CardBody>
         <CardFooter>
-          {/* You can add buttons or other elements here if needed */}
+          {/**/}
         </CardFooter>
       </Card>
 
