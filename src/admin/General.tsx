@@ -7,7 +7,6 @@ const General = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  //TODO: Fix problems with cards #73 
   return (
     <div className="flex-col h-screen p-8 bg-background">
       {/* Card Redis Setting */}
