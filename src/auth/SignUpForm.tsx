@@ -63,7 +63,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Firstname :"
@@ -75,7 +75,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setFirstname(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Lastname :"
@@ -87,7 +87,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setLastname(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Email :"
@@ -99,7 +99,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setEmail(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <div className="justify-center flex">
           <Button

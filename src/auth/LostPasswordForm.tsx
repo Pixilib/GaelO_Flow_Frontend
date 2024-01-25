@@ -58,7 +58,7 @@ export const LostPasswordForm = () => {
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           setEmail(event.target.value);
         }}
-        autocomplete="on"
+        autoComplete="on"
       />
       <div className="justify-center flex mt-16">
         <Button

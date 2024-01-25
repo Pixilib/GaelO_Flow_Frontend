@@ -75,7 +75,7 @@ export const SignInForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
           required
         />
         <div className="w-full mt-12 text-dark">
