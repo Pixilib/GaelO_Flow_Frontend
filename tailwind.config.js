@@ -22,6 +22,9 @@ export default {
         'gray': '#EFEFEF', 
         'light': '#F1F1F1'
       },
+      boxShadow: {
+        'custom': '11px 17px 15px rgba(58, 51, 51, 0.37)',
+      },
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],

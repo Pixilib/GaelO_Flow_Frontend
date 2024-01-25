@@ -19,16 +19,17 @@ export const MenuItem = ({
   className,
 }: MenuItemProps) => {
   const activeClasses = isActive
-    ? "bg-secondary text-dark"
+    ? "text-white underline decoration-white decoration-2"
     : "bg-inherit hover:bg-[#0C0B76] text-white";
 
   return (
     <div
-      className={`flex justify-center p-2 bg-inherit ${activeClasses} ${className}`}
+      className={`flex items-start justify-start w-full p-3 bg-inherit ${activeClasses} ${className}`}
       onClick={onClick}
+      data-gaelo-flow="sidebar-item"
     >
-      <span>{icon}</span>
-      <span>{title}</span>
+      <span className="ml-4 mr-2">{icon}</span>
+      <span className="">{title}</span>
     </div>
   );
 };
@@ -43,6 +44,7 @@ type MenuItemCollapseProps = {
   className?: string;
 };
 
+
 export const MenuItemsCollapse = ({
   icon,
   title,
@@ -52,16 +54,23 @@ export const MenuItemsCollapse = ({
   toggleOpen,
   onNavigate,
 }: MenuItemCollapseProps) => {
+  const bgIsOpen = isOpen ? "bg-inherit hover:bg-[#0C0B76] bg-inherit" : "";
   return (
-        <div className={`flex flex-col w-full justify-between ${className}`} onClick={toggleOpen}>
-          <div className="flex justify-between p-3 text-white">
-            <span className="">{icon}</span>
-            <span>{title}</span>
-          <span>
-            {isOpen ? <ChevronUp /> : <ChevronDown />}
-          </span>
-          </div>
-          {isOpen && <Items items={items} onNavigate={onNavigate} />}
+    <div
+      className={`flex flex-col w-full ${className}`}
+      onClick={toggleOpen}
+      data-gaelo-flow="sidebar-item-collapse"
+    >
+      <div className={`flex justify-between p-3 text-white ${bgIsOpen}`}>
+        
+        <div className={`flex items-center flex-grow ml-4`}>
+          <span className="mr-2">{icon}</span>
+          <span className="flex-grow">{title}</span>
         </div>
-      );
+        <span className="flex-shrink-0">{isOpen ? <ChevronUp /> : <ChevronDown />}</span>
+        
+      </div>
+      {isOpen && <Items items={items} onNavigate={onNavigate} />}
+    </div>
+  );
 };

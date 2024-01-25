@@ -14,13 +14,13 @@ const Items = ({ items, onNavigate }: ItemsProps) => {
     <ul className="bg-white rounded-b-xl">
       {items.map((item, index) => {
         const activeClasses = item.isActive
-          ? "bg-secondary text-dark"
-          : "bg-inherit hover:bg-[#0C0B76] text-dark hover:text-white";
+          ? "text-dark bg-inherit hover:bg-primary hover:text-white underline decoration-primary hover:decoration-white decoration-2"
+          : "bg-inherit hover:bg-primary text-dark hover:text-white";
 
         return (
           <li
             key={index}
-            className={`flex flex-col justify-center p-2 text-dark  ${activeClasses} ${index === items.length - 1 ? "rounded-b-xl" : ""}`}
+            className={`p-2 flex justify-start pl-12 pe-4 items-center text-dark ${activeClasses} ${index === items.length - 1 ? "rounded-b-xl" : ""}`}
             onClick={() => onNavigate(item.path)}
           >
             {item.title}
