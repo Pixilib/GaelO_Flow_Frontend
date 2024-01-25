@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../RenderComponents/Card';
+import Button from "../RenderComponents/Button";
+import { Colors } from "../utils/enums";
+import Check from '../assets/check.svg?react';
+import Restart from '../assets/restart.svg?react';
+import Shutdown from '../assets/shutdown.svg?react';
 
 const General = () => {
   const [address, setAddress] = useState('');
@@ -66,7 +71,7 @@ const General = () => {
       </Card>
 
       <Card className="flex-1 mb-6">
-  <CardHeader title="Another Card" />
+  <CardHeader title="Orthanc Setting" />
   <CardBody>
     <div className="flex justify-center">
       <div className="w-1/2">
@@ -131,9 +136,13 @@ const General = () => {
       </div>
     </div>
   </CardBody>
-  <CardFooter>
-    {/**/}
-  </CardFooter>
+  <CardFooter className="flex justify-center">
+  <div className="flex items-center space-x-2">
+    <Button color={Colors.success}><Check /></Button>
+    <Button color={Colors.orange}><Restart/></Button>
+    <Button color={Colors.danger}><Shutdown /></Button>
+  </div>
+</CardFooter>
 </Card>
 
 
