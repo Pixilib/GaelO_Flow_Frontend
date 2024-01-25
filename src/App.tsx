@@ -3,6 +3,7 @@ import Welcome from "./Welcome";
 import "./index.css";
 import { RootState } from "./store";
 import RootApp from "./root/RootApp";
+import General from "./admin/General";
 
 
 
