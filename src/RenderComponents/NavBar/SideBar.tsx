@@ -5,8 +5,6 @@ import { MenuItem, MenuItemsCollapse } from "./MenuItem";
 import LogoSideBar from "../../assets/LogoGaeloFlow-white3.svg?react";
 import Administrator from "../../assets/administrator_line_icon_236151 1 (1).svg?react";
 
-//TODO: Add a state for open and close
-//TODO: make components items for menu and sub menu, take a prop for the icon and text
 export const SideBar = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
   const location = useLocation();
@@ -39,9 +37,26 @@ export const SideBar = () => {
   ];
 
   return (
-    <nav data-gaelo-flow="sidebar" className="w-full h-full bg-background">
-      <div className="h-full rounded-tr-3xl top-0 start-0 bottom-0 z-[60] w-64 bg-primary pt-7 pb-10 overflow-y-hidden">
+    <nav
+      data-gaelo-flow="sidebar"
+      className="flex flex-col w-full h-full shadow-custom"
+    >
+      <div className="h-full justify-center rounded-tr-3xl top-0 start-0 bottom-0 z-[60] w-64 bg-primary pt-7 pb-10 overflow-y-hidden">
         <LogoSideBar className="mx-auto mb-10" />
+        <MenuItem
+          title="Administration"
+          icon={<Administrator />}
+          isActive={location.pathname === "/sign-in"}
+          onClick={() => handleItemClick("/sign-in")}
+        />
+        <MenuItemsCollapse
+          icon={<Administrator />}
+          title="Authentification"
+          items={authItems}
+          isOpen={openItem === "Authentification"}
+          toggleOpen={() => toggleOpen("Authentification")}
+          onNavigate={handleItemClick}
+        />
         <MenuItem
           title="Administration"
           icon={<Administrator />}
@@ -50,10 +65,10 @@ export const SideBar = () => {
         />
         <MenuItemsCollapse
           icon={<Administrator />}
-          title="Authentification"
+          title="admin"
           items={authItems}
-          isOpen={openItem === "Authentification"}
-          toggleOpen={() => toggleOpen("Authentification")}
+          isOpen={openItem === "admin"}
+          toggleOpen={() => toggleOpen("admin")}
           onNavigate={handleItemClick}
         />
       </div>

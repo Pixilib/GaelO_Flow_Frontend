@@ -1,10 +1,5 @@
-import React, { useState } from 'react';
-import { Colors } from '../utils/enums';
-import Button from '../RenderComponents/Button';
+import { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../RenderComponents/Card';
-import Check from '../assets/check.svg?react';
-import Restart from '../assets/restart.svg?react';
-import Shutdown from '../assets/shutdown.svg?react';
 
 const General = () => {
   const [address, setAddress] = useState('');
@@ -12,6 +7,7 @@ const General = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  //TODO: Fix problems with cards #73 
   return (
     <div className="flex-col h-screen p-8 bg-background">
       {/* Card Redis Setting */}
