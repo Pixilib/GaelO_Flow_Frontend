@@ -12,7 +12,7 @@ export type ButtonProps = {
 const Button = ({ color, bordered, className, children, ...props }: ButtonProps) => {
 
   const colorClasses: Record<Colors, string> = {
-    [Colors.primary]: "bg-primary :bhoverg-primary-hover",
+    [Colors.primary]: "bg-primary hover:bg-primary-hover",
     [Colors.secondary]: "bg-secondary hover:bg-secondary-hover",
     [Colors.danger]: "bg-danger hover:bg-danger-hover",
     [Colors.success]: "bg-success hover:bg-success-hover",
