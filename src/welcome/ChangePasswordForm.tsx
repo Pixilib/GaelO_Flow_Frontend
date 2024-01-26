@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
@@ -20,22 +20,12 @@ const ChangePasswordForm = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const tokenFromUrl = new URLSearchParams(window.location.search).get(
-      "token"
-    );
-    if (tokenFromUrl) {
-      setToken(tokenFromUrl);
-    } else {
-      toastError("Token not found.");
-      navigate("/"); // Redirection si le token n'est pas trouvé
-    }
-  }, [navigate]);
+  const token = new URLSearchParams(window.location.search).get("token");
 
   const changePasswordMutation = useCustomMutation(
-    ({ newPassword,confirmPassword, token }) => changePassword(newPassword,confirmPassword, token),
+    ({ newPassword, confirmPassword, token }) =>
+      changePassword(newPassword, confirmPassword, token),
     null,
     [],
     {
@@ -46,7 +36,6 @@ const ChangePasswordForm = () => {
       onError: (error: AxiosError<{ message: string }>) => {
         //display an error message if an error occurs
         if (error.response?.data?.message) {
-          console.table(error);
           toastError(error.response.data.message);
         } else {
           // display a generic error message
@@ -60,6 +49,8 @@ const ChangePasswordForm = () => {
     event.preventDefault();
     changePasswordMutation.mutate({ newPassword, token });
   };
+
+  if (!token) return <>Missing Token</>;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
@@ -102,16 +93,16 @@ const ChangePasswordForm = () => {
           }}
           required
         />
-          <div className="flex justify-center mt-12">
-        <Button
-          color={Colors.primary}
-          type="submit"
-          disabled={newPassword !== confirmPassword}
-        >
+        <div className="flex justify-center mt-12">
+          <Button
+            color={Colors.primary}
+            type="submit"
+            disabled={newPassword !== confirmPassword}
+          >
             Connect
             <ChevronRight />
-        </Button>
-          </div>
+          </Button>
+        </div>
       </div>
     </form>
   );

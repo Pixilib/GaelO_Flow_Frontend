@@ -10,9 +10,6 @@ import { Colors } from "../utils/enums";
 import Letter from "../assets/mail.svg?react";
 import ChevronRight from "../assets/chevron-right.svg?react";
 
-
-
-
 export const LostPasswordForm = () => {
   const [email, setEmail] = useState("");
 
@@ -21,21 +18,19 @@ export const LostPasswordForm = () => {
     null,
     [],
     {
-      onSuccess: (data: Record<string, any>) => {
-        toastSuccess("Email sent");
-        console.log(data);
+      onSuccess: () => {
+        toastSuccess("Reset password link sent by email");
       },
       onError: () => {
-        toastError("Error in creadentials");
+        toastError("Error in credentials");
       },
     }
   );
-  
+
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     lostPasswordMutation.mutate({ email });
   };
-
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">

@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 
-
 type MenuItemProps = {
   icon?: ReactNode;
   title: string;
