@@ -27,7 +27,7 @@ type MenuItemCollapseProps = {
     const bgIsOpen = isOpen ? "bg-primary-hover" : "hover:bg-primary-hover";
     return (
       <div
-        className={`flex flex-col w-full cursor-context-menu ${className}`}
+        className={`flex flex-col w-full cursor-context-menu text-sm ${className}`}
         onClick={toggleOpen}
         data-gaelo-flow="sidebar-item-collapse"
       >

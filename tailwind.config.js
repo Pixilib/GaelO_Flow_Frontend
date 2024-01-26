@@ -5,6 +5,7 @@ export default {
     extend: {
       borderRadius: {
         '70': '70px',
+        '40': '40px',
       },
       colors: {
         'primary': '#4746B8',
