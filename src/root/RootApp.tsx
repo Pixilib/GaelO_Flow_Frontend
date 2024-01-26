@@ -15,7 +15,7 @@ const RootApp = () => {
   };
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex w-full h-screen">
       <div className="flex-none h-full">
         <SideBar onLogout={handleLogout} />
       </div>
