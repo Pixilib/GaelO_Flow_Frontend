@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Administrator from '../src/assets/administrator_line_icon_236151 1 (1).svg?react';
+import Administrator from '../src/assets/administrator.svg?react';
 import MenuItemsCollapse from '../src/RenderComponents/NavBar/MenuItemsCollapse';
 
 

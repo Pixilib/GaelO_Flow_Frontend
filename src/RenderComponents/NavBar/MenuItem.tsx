@@ -15,18 +15,18 @@ const MenuItem = ({
   onClick,
   className,
 }: MenuItemProps) => {
+  //? Personnalize css if item is Active or not
   const activeClasses = isActive
-    ? "text-white underline decoration-white decoration-2"
-    //TODO : pas de couleur hardcodé
-    : "bg-inherit hover:bg-[#0C0B76] text-white";
+    ? "bg-primary-hover disabled cursor-not-allowed"
+    : "bg-inherit cursor-pointer";
 
   return (
     <div
-      className={`flex items-start justify-start w-full p-3 bg-inherit ${activeClasses} ${className}`}
+      className={`flex items-start text-sm justify-start text-white hover:bg-primary-hover w-full p-3 ${activeClasses} ${className}`}
       onClick={onClick}
       data-gaelo-flow="sidebar-item"
     >
-      <span className="ml-4 mr-2">{icon}</span>
+      <span className="ml-4 mr-3">{icon}</span>
       <span className="">{title}</span>
     </div>
   );
