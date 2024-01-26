@@ -7,6 +7,9 @@ import Administrator from "../../assets/administrator.svg?react";
 import Search from "../../assets/search.svg?react";
 import MenuItemsCollapse from "./MenuItemsCollapse";
 
+
+
+//TODO: Add route for the menu , when route exist !
 export const SideBar = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
   const location = useLocation();
@@ -20,19 +23,25 @@ export const SideBar = () => {
     setOpenItem(openItem === title ? null : title);
   };
 
-  const authItems = [
+  //TODO: Add route for the adminItems , when route exist !
+  const adminItems = [
     {
-      title: "Lost Password",
-      path: "/lost-password",
-      isActive: location.pathname === "/lost-password",
+      title: "Aets",
+      path: "/",
+      isActive: location.pathname === "/",
     },
     {
-      title: "sign-up",
-      path: "/sign-up",
-      isActive: location.pathname === "/sign-up",
+      title: "Peers",
+      path: "/",
+      isActive: location.pathname === "/",
     },
     {
-      title: "sign-in",
+      title: "External endpoints",
+      path: "/",
+      isActive: location.pathname === "/",
+    },
+    {
+      title: "Robot & tasks",
       path: "/",
       isActive: location.pathname === "/",
     },
@@ -49,7 +58,7 @@ export const SideBar = () => {
           <MenuItemsCollapse
             icon={<Administrator />}
             title="Administration"
-            items={authItems}
+            items={adminItems}
             isOpen={openItem === "Administration"}
             toggleOpen={() => toggleOpen("Administration")}
             onNavigate={handleItemClick}
