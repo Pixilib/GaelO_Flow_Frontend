@@ -70,11 +70,15 @@ export const SideBar = () => {
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="flex flex-col w-full h-full shadow-custom rounded-tr-40 bg-primary"
+      className="w-full h-screen shadow-custom rounded-tr-40 bg-primary"
     >
-      <main className="justify-between h-full content-between rounded-tr-40 top-0 start-0 bottom-0 border-radius-inherit z-[60] w-64 bg-primary pt-7 overflow-y-hidden">
-        <LogoSideBar className="mx-auto mb-12 md:mb-28 lg:mb-32 xl:mb-32 2xl:mb-36 " />
-        <div className="space-y-1 2xl:space-y-4">
+      <main className="h-full overflow-y-auto rounded-tr-40 top-0 start-0 bottom-0 border-radius-inherit z-[60] w-64 bg-primary pt-7">
+        <div className="flex justify-center h-15%">
+          <LogoSideBar/>
+          
+        {/* <LogoSideBar className="mx-auto mb-12 md:mb-28 lg:mb-32 xl:mb-32 2xl:mb-36 " /> */}
+        </div>
+        <div className="flex flex-col h-60%">
           <MenuItemsCollapse
             icon={<Administrator />}
             title="Administration"
@@ -114,7 +118,7 @@ export const SideBar = () => {
             onClick={() => handleItemClick("/mydicom")}
           />
         </div>
-        <div className="space-y-1 mt-28 md:mt-32 lg:mt-40 xl:mt-44 2xl:space-y-4">
+        <div className="flex flex-col justify-end h-auto pb-4">
           <MenuItem
             title="Home"
             icon={<Home />}

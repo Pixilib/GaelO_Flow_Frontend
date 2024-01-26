@@ -14,16 +14,15 @@ const RootApp = () => {
     navigate("/");
   };
   return (
-    <div className="flex w-full h-screen">
-      <div className="grow-0">
+    <div className="flex h-full">
+      <div className="flex-none h-full">
         <SideBar />
       </div>
-      <div className="grow">
+      <div className="h-full grow">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/admin/*" element={<AdminRoot />} />
         </Routes>
-        
       </div>
     </div>
   );
