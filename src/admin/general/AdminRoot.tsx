@@ -4,9 +4,9 @@ import General from "./General";
 
 const AdminRoot = () => {
     return (
-        <div className="h-full w-full">
+        <div className="w-full h-full">
             <Routes>
-                <Route path="/general" element={<General />} />
+                <Route path="general" element={<General />} />
             </Routes>
             My Admin Component 2
         </div>

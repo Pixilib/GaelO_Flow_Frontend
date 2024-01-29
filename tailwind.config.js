@@ -27,6 +27,9 @@ export default {
         '90%': '90%',
 
       },
+      borderWidth: {
+        '1,5': '1.5px',
+      },
       colors: {
         'primary': '#4746B8',
         'primary-hover': '#0C0B76',
@@ -38,9 +41,9 @@ export default {
         'success-hover': '#276A4A',
         'orange': '#DFB520',
         'orange-hover': '#9C7F15',
-        'dark' : '#393838',
+        'dark': '#393838',
         'red': '#f8d7da',
-        'gray': '#EFEFEF', 
+        'gray': '#EFEFEF',
         'light': '#F1F1F1'
       },
       boxShadow: {
