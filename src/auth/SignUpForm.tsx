@@ -45,10 +45,10 @@ export const SignUpForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
+      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
         Welcome to <span className="text-primary">Gaelo Flow</span>
       </h1>
-      <p className="text-lg text-gray-700 text-center mb-12">
+      <p className="mb-12 text-lg text-center text-gray-700">
         Please create your Account.
       </p>
       <div className="w-full space-y-12">
@@ -56,7 +56,6 @@ export const SignUpForm = () => {
           label="Username :"
           className="w-full"
           svgLeft={<User />}
-          bordered
           placeholder="Enter your username"
           value={username}
           required
@@ -68,7 +67,6 @@ export const SignUpForm = () => {
         <Input
           label="Firstname :"
           svgLeft={<User />}
-          bordered
           placeholder="Enter your firstname"
           value={firstname}
           required
@@ -80,7 +78,6 @@ export const SignUpForm = () => {
         <Input
           label="Lastname :"
           svgLeft={<User />}
-          bordered
           placeholder="Enter your lastname"
           value={lastname}
           required
@@ -92,7 +89,6 @@ export const SignUpForm = () => {
         <Input
           label="Email :"
           svgLeft={<Mail />}
-          bordered
           placeholder="Enter your @email"
           value={email}
           required
@@ -101,7 +97,7 @@ export const SignUpForm = () => {
           }}
           autocomplete="on"
         />
-        <div className="justify-center flex">
+        <div className="flex justify-center">
           <Button
             color={Colors.primary}
             type="submit"

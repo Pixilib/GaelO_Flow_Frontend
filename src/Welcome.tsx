@@ -31,11 +31,9 @@ const Welcome = () => {
   return (
     <>
       <main
-        className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r 
-        from-primary 
-        to-secondary "
+        className="w-screen h-screen gap-0 sm:flex columns-2 bg-gradient-to-r from-primary to-secondary "
       >
-        <section className="h-full flex relative w-full">
+        <section className="relative flex w-full h-full">
           <img
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7"
@@ -47,13 +45,13 @@ const Welcome = () => {
           </div>
         </section>
         <section
-          className="w-full flex justify-center items-center bg-white rounded-tl-70"
+          className="flex items-center justify-center w-full bg-white rounded-tl-70"
           style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}
         >
           {/* Contenu de la section */}
           <div className="w-2/3">
             <Routes>
-              <Route path="/" element={<SignInForm />} />
+              <Route path="/*" element={<SignInForm />} />
               <Route path="/change-password" element={<ChangePasswordForm />} />
               <Route
                 path="lost-password"

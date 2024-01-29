@@ -3,7 +3,6 @@ import Welcome from "./Welcome";
 import "./index.css";
 import { RootState } from "./store";
 import RootApp from "./root/RootApp";
-import General from "./admin/General";
 
 
 
@@ -13,10 +12,9 @@ function App() {
   
 return (
 
-  <General/>
+  (isLogged) ?  <RootApp /> : <Welcome />
+
 )
-  if (isLogged) return <RootApp />;
-  else return <Welcome />;
 
 }
 
