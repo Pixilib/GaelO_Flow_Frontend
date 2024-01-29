@@ -47,7 +47,7 @@ const Welcome = () => {
         >
           <div className="w-9/12">
             <Routes>
-              <Route path="/" element={<SignInForm />} />
+              <Route path="/*" element={<SignInForm />} />
               <Route path="/change-password" element={<ChangePasswordForm />} />
               <Route path="lost-password" element={<LostPasswordForm />} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
