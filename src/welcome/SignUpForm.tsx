@@ -18,7 +18,8 @@ export const SignUpForm = () => {
   const [email, setEmail] = useState("");
 
   const signUpMutation = useCustomMutation(
-    ({username,lastname,firstname,email}) => signUp(username, lastname, firstname, email),
+    ({ username, lastname, firstname, email }) =>
+      signUp(username, lastname, firstname, email),
     null,
     [],
     {
@@ -36,7 +37,6 @@ export const SignUpForm = () => {
       },
     }
   );
-
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,7 +62,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Firstname :"
@@ -73,7 +73,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setFirstname(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Lastname :"
@@ -84,7 +84,7 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setLastname(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Email :"
@@ -95,14 +95,19 @@ export const SignUpForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setEmail(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
+<<<<<<< HEAD:src/auth/SignUpForm.tsx
         <div className="flex justify-center">
           <Button
             color={Colors.primary}
             type="submit"
             className="w-60"
           >
+=======
+        <div className="justify-center flex">
+          <Button color={Colors.primary} type="submit" className="w-60">
+>>>>>>> c1f74a5324be81f63853e6c9403991ae6c661c2b:src/welcome/SignUpForm.tsx
             Create your account
             <ChevronRight />
           </Button>

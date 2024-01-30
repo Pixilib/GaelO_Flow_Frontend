@@ -1,20 +1,18 @@
 import { useSelector } from "react-redux";
-import Welcome from "./Welcome";
-import "./index.css";
+import WelcomeRoot from "./welcome/WelcomeRoot";
 import { RootState } from "./store";
 import RootApp from "./root/RootApp";
-
-
-
+import "./index.css";
 
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
+
   
-return (
-
-  (isLogged) ?  <RootApp /> : <Welcome />
-
-)
+ return (
+  <div className="w-screen h-screen">
+    {isLogged ? <RootApp /> : <Welcome />}
+  </div>
+ )
 
 }
 

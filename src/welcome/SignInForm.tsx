@@ -6,7 +6,6 @@ import { jwtDecode } from "jwt-decode";
 import { login } from "../reducers/UserSlice";
 import { useCustomMutation } from "../utils/reactQuery";
 import { signIn } from "../services/auth";
-import { getUsers } from "../services/users";
 import { toastError } from "../utils/toastify";
 
 import Button from "../RenderComponents/Button";
@@ -20,12 +19,12 @@ import VisibilityOff from "./../assets/visibility-off.svg?react";
 import User from "./../assets/user.svg?react";
 
 export const SignInForm = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const loginMutation = useCustomMutation(
     ({ username, password }) => signIn(username, password),
@@ -43,14 +42,12 @@ export const SignInForm = () => {
             role: decodedToken.role,
           })
         );
-        getUsers().then((response) => console.log(response.data));
       },
       onError: () => {
         toastError("Error in creadentials");
       },
     }
   );
-
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -75,7 +72,7 @@ export const SignInForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
           required
         />
         <div className="w-full mt-12 text-dark">
