@@ -3,7 +3,7 @@ import { logout } from "../reducers/UserSlice";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { SideBar } from "../RenderComponents/NavBar/SideBar";
 import Dashboard from "./Dashboard";
-import AdminRoot from "../admin/AdminRoot";
+import AdminRoot from "../admin/general/AdminRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();

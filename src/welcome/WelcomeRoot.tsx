@@ -28,11 +28,9 @@ const Welcome = () => {
   return (
     <>
       <main
-        className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r 
-        from-primary 
-        to-secondary "
+        className="w-screen h-screen gap-0 sm:flex columns-2 bg-gradient-to-r from-primary to-secondary "
       >
-        <div className="h-full flex relative w-1/2">
+        <div className="relative flex w-1/2 h-full">
           <img
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7"
@@ -44,7 +42,7 @@ const Welcome = () => {
           </div>
         </div>
         <div
-          className="w-1/2 bg-white rounded-tl-70 flex items-center justify-center"
+          className="flex items-center justify-center w-1/2 bg-white rounded-tl-70"
           style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}
         >
           <div className="w-9/12">
