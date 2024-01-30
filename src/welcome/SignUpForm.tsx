@@ -97,17 +97,12 @@ export const SignUpForm = () => {
           }}
           autoComplete="on"
         />
-<<<<<<< HEAD:src/auth/SignUpForm.tsx
         <div className="flex justify-center">
           <Button
             color={Colors.primary}
             type="submit"
             className="w-60"
           >
-=======
-        <div className="justify-center flex">
-          <Button color={Colors.primary} type="submit" className="w-60">
->>>>>>> c1f74a5324be81f63853e6c9403991ae6c661c2b:src/welcome/SignUpForm.tsx
             Create your account
             <ChevronRight />
           </Button>
