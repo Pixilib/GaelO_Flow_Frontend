@@ -43,9 +43,10 @@ type MenuItemCollapseProps = {
         <span className="flex-shrink-0">
           {isOpen ? <ChevronUp /> : <ChevronDown />}
         </span>
+        {isOpen && <Items items={items} onNavigate={onNavigate} />}
       </div>
-      {isOpen && <Items items={items} onNavigate={onNavigate} />}
-    </div>
+
+
   );
 };
 export default MenuItemsCollapse;

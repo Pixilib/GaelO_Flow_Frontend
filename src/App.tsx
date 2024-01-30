@@ -9,7 +9,7 @@ function App() {
   
  return (
   <div className="w-screen h-screen">
-    {isLogged ? <RootApp /> : <Welcome />}
+    {isLogged ? <RootApp /> : <WelcomeRoot />}
   </div>
  )
 
