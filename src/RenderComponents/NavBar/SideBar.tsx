@@ -38,7 +38,7 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
   const adminItems = [
     {
       title: "Aets",
-      path: "/",
+      path: "/aets",
       isActive: location.pathname === "/",
     },
     {
@@ -139,7 +139,7 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
             title="Log out"
             icon={<Logout />}
             isActive={location.pathname === "/logout"}
-            onClick={() => handleItemClick("/logout")}
+            onClick={onLogout}
           />
           
         </div>
