@@ -53,22 +53,22 @@ const Welcome = () => {
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
+            
             <hr className="my-8 mt-20 border-primary" />
             <div className="flex justify-between mx-auto text-center text-balance">
+              
               {location.pathname !== "/sign-up" && (
                 <span
                   onClick={() => navigate("/sign-up")}
                   className={classLink}
                 >
                   Don’t have an account?{" "}
-                  <span className="text-primary">Sign Up</span>
                 </span>
               )}
 
               {location.pathname !== "/" && (
                 <span onClick={() => navigate("/")} className={classLink}>
                   Already have an account ?{" "}
-                  <span className="text-primary">Login</span>{" "}
                 </span>
               )}
 
