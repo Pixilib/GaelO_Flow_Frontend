@@ -31,11 +31,9 @@ const Welcome = () => {
   return (
     <>
       <main
-        className="h-screen w-screen sm:flex columns-2 gap-0 bg-gradient-to-r 
-        from-primary 
-        to-secondary "
+        className="w-screen h-screen gap-0 sm:flex columns-2 bg-gradient-to-r from-primary to-secondary "
       >
-        <section className="h-full flex relative w-full">
+        <section className="relative flex w-full h-full">
           <img
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7"
@@ -47,7 +45,7 @@ const Welcome = () => {
           </div>
         </section>
         <section
-          className="w-full flex justify-center items-center bg-white rounded-tl-70"
+          className="flex items-center justify-center w-full bg-white rounded-tl-70"
           style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}
         >
           {/* Contenu de la section */}
@@ -65,22 +63,22 @@ const Welcome = () => {
                 element={<SignUpForm />}
               />
             </Routes>
+            
             <hr className="my-8 mt-20 border-primary" />
             <div className="flex justify-between mx-auto text-center text-balance">
+              
               {location.pathname !== "/sign-up" && (
                 <span
                   onClick={() => navigate("/sign-up")}
                   className={classLink}
                 >
                   Don’t have an account?{" "}
-                  <span className="text-primary">Sign Up</span>
                 </span>
               )}
 
               {location.pathname !== "/" && (
                 <span onClick={() => navigate("/")} className={classLink}>
                   Already have an account ?{" "}
-                  <span className="text-primary">Login</span>{" "}
                 </span>
               )}
 
