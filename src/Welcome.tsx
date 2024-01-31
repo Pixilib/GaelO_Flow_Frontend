@@ -11,9 +11,6 @@ const Welcome = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-
- 
-
   const getImage = () => {
     switch (location.pathname) {
       case "/sign-in":
@@ -67,7 +64,7 @@ const Welcome = () => {
             <hr className="my-8 mt-20 border-primary" />
             <div className="flex justify-between mx-auto text-center text-balance">
               
-              {location.pathname !== "/sign-up" && (
+              {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
                 <span
                   onClick={() => navigate("/sign-up")}
                   className={classLink}
@@ -81,13 +78,14 @@ const Welcome = () => {
                   Already have an account ?{" "}
                 </span>
               )}
-
-              <span
-                className={`${classLink} inline-block`}
-                onClick={() => navigate("/legal-mention")}
-              >
-                Legal Mention
-              </span>
+              {location.pathname !== "/legal-mention" && (
+                <span
+                  className={`${classLink} inline-block`}
+                  onClick={() => navigate("/legal-mention")}
+                >
+                  Legal Mention
+                </span>
+              )}
             </div>
           </div>
         </section>
