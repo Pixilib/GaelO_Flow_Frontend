@@ -1,11 +1,11 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { SignInForm } from "./auth/SignInForm";
-import { SignUpForm } from "./auth/SignUpForm";
-import { LostPasswordForm } from "./auth/LostPasswordForm";
-import ChangePasswordForm from "./auth/ChangePasswordForm";
+import { SignInForm } from "./SignInForm";
+import { SignUpForm } from "./SignUpForm";
+import { LostPasswordForm } from "./LostPasswordForm";
+import ChangePasswordForm from "./ChangePasswordForm";
 
-import SignInImage from "./assets/sign-in.svg?react";
-import SignUpImage from "./assets/sign-up.svg?react";
+import SignInImage from "../assets/sign-in.svg?react";
+import SignUpImage from "../assets/sign-up.svg?react";
 
 const Welcome = () => {
   const location = useLocation();
