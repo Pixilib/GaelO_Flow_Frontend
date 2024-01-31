@@ -11,9 +11,6 @@ const Welcome = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-
- 
-
   const getImage = () => {
     switch (location.pathname) {
       case "/sign-in":
