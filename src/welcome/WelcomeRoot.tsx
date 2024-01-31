@@ -30,7 +30,7 @@ const Welcome = () => {
       <main
         className="w-screen h-screen gap-0 sm:flex columns-2 bg-gradient-to-r from-primary to-secondary "
       >
-        <section className="relative flex w-full h-full">
+        <div className="relative flex w-full h-full">
           <img
             src="/gaelo-flow-white2.svg"
             className="absolute top-7 left-7"
@@ -40,8 +40,8 @@ const Welcome = () => {
           <div className="flex items-center justify-center w-full h-screen">
             {getImage()}
           </div>
-        </section>
-        <section
+        </div>
+        <div
           className="flex items-center justify-center w-full bg-white rounded-tl-70"
           style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}
         >
@@ -88,7 +88,7 @@ const Welcome = () => {
               )}
             </div>
           </div>
-        </section>
+        </div>
       </main>
     </>
   );
