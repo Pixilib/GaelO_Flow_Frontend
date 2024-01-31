@@ -20,6 +20,7 @@ type SideBarProps = {
 };
 
 export const SideBar = ({ onLogout }: SideBarProps) => {
+
 //TODO: Add route for the menu , when route exist !
   const [openItem, setOpenItem] = useState<string | null>(null);
   const location = useLocation();

@@ -6,7 +6,6 @@ import "./index.css";
 
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
-
   
  return (
   <div className="w-screen h-screen">
