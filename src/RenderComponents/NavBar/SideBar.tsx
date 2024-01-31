@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import MenuItem from "./MenuItem";
+import MenuItemsCollapse from "./MenuItemsCollapse";
+
 import LogoSideBar from "../../assets/logoGaeloFlow-white3.svg?react";
 import Administrator from "../../assets/administrator.svg?react";
 import Import from "../../assets/import-content.svg?react";
@@ -12,13 +14,14 @@ import MyDicom from "../../assets/my-dicom.svg?react";
 import Home from "../../assets/home.svg?react";
 import Help from "../../assets/help.svg?react";
 import Logout from "../../assets/logout.svg?react";
-import MenuItemsCollapse from "./MenuItemsCollapse";
 
 type SideBarProps = {
   onLogout: () => void;
 };
 
 export const SideBar = ({ onLogout }: SideBarProps) => {
+
+//TODO: Add route for the menu , when route exist !
   const [openItem, setOpenItem] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -77,9 +80,7 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
     >
       <main className="h-full overflow-y-auto rounded-tr-40 top-0 start-0 bottom-0 border-radius-inherit z-[60] w-64 bg-primary pt-7">
         <div className="flex justify-center h-15%">
-          <LogoSideBar/>
-          
-        {/* <LogoSideBar className="mx-auto mb-12 md:mb-28 lg:mb-32 xl:mb-32 2xl:mb-36 " /> */}
+          <LogoSideBar/>          
         </div>
         <div className="flex flex-col h-60%">
           <MenuItemsCollapse
