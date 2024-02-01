@@ -4,10 +4,11 @@ import {Banner} from "../src/RenderComponents/Banner/Banner";
 
 
 const meta: Meta<BannerProps> = {
-    title: "Gaelo Flow UI/Banner",
+    title: "GAELO FLOW UI/Banner",
     component: Banner,
     args: {
-        children: "Text",
+        children: <div className="w-full text-white bg-primary">Hello</div>,
+        className: "bg-red", 
     },
     argTypes: {
         children: {
@@ -22,4 +23,7 @@ const meta: Meta<BannerProps> = {
 export default meta;
 type Story = StoryObj<BannerProps>;
 
-export const BannerStory: Story = {};
+export const BannerStory: Story = {
+
+
+};
