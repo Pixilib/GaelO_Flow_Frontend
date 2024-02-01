@@ -27,9 +27,7 @@ const Welcome = () => {
 
   return (
     <>
-      <main
-        className="w-screen h-screen gap-0 sm:flex columns-2 bg-gradient-to-r from-primary to-secondary "
-      >
+      <main className="flex w-screen h-screen gap-0 columns-2 bg-gradient-to-r from-primary to-secondary ">
         <div className="relative flex w-full h-full">
           <img
             src="/gaelo-flow-white2.svg"
@@ -50,34 +48,36 @@ const Welcome = () => {
             <Routes>
               <Route path="/*" element={<SignInForm />} />
               <Route path="/change-password" element={<ChangePasswordForm />} />
-              <Route
-                path="lost-password"
-                element={<LostPasswordForm />}
-              />
+              <Route path="lost-password" element={<LostPasswordForm />} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
-              <Route
-                path="sign-up"
-                element={<SignUpForm />}
-              />
+              <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
-            
+
             <hr className="my-8 mt-20 border-primary" />
             <div className="flex justify-between mx-auto text-center text-balance">
-              
-              {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
-                <span
-                  onClick={() => navigate("/sign-up")}
-                  className={classLink}
-                >
-                  Don’t have an account?{" "}
-                </span>
-              )}
+              {location.pathname !== "/sign-up" &&
+                location.pathname !== "/legal-mention" && (
+                  <span
+                    onClick={() => navigate("/sign-up")}
+                    className={classLink}
+                  >
+                    Don’t have an account?
+                  </span>
+                )}
 
-              {location.pathname !== "/" && (
-                <span onClick={() => navigate("/")} className={classLink}>
-                  Already have an account ?{" "}
-                </span>
-              )}
+              {location.pathname !== "/" &&
+                (location.pathname === "/legal-mention" ? (
+                  <span
+                    onClick={() => navigate("/sign-up")}
+                    className={classLink}
+                  >
+                    Back
+                  </span>
+                ) : (
+                  <span onClick={() => navigate("/")} className={classLink}>
+                    Already have an account ?{" "}
+                  </span>
+                ))}
               {location.pathname !== "/legal-mention" && (
                 <span
                   className={`${classLink} inline-block`}
