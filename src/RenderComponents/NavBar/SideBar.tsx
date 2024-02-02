@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Location} from "react-router-dom";
 
+import type { LocationState } from "../../root/RootApp";
 import MenuItem from "./MenuItem";
 import MenuItemsCollapse from "./MenuItemsCollapse";
 
@@ -23,8 +24,8 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
 
 //TODO: Add route for the menu , when route exist !
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleItemClick = (path: string) => {
     navigate(path);
@@ -76,9 +77,9 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="w-full h-screen shadow-custom rounded-tr-40 bg-primary"
+      className="w-64 h-full border-transparent bg-primary shadow-custom rounded-tr-40"
     >
-      <main className="h-full overflow-y-auto rounded-tr-40 top-0 start-0 bottom-0 border-radius-inherit z-[60] w-64 bg-primary pt-7">
+      <main className="h-full overflow-hidden rounded-tr-40 pt-7">
         <div className="flex justify-center h-15%">
           <LogoSideBar/>          
         </div>
