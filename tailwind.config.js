@@ -4,8 +4,9 @@ export default {
   theme: {
     extend: {
       borderRadius: {
-        '70': '70px',
+        '20': '20px',
         '40': '40px',
+        '70': '70px',
       },
       height: {
         '10%': '10%',

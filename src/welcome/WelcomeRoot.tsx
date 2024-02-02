@@ -6,6 +6,7 @@ import ChangePasswordForm from "./ChangePasswordForm";
 
 import SignInImage from "../assets/sign-in.svg?react";
 import SignUpImage from "../assets/sign-up.svg?react";
+import ArrowBack from "../assets/arrow-back.svg?react";
 
 const Welcome = () => {
   const location = useLocation();
@@ -67,12 +68,15 @@ const Welcome = () => {
 
               {location.pathname !== "/" &&
                 (location.pathname === "/legal-mention" ? (
-                  <span
-                    onClick={() => navigate("/sign-up")}
+                  <div
+                    className="flex mx-3 my-3"
+                    onClick={() => navigate("/")}
                     className={classLink}
-                  >
-                    Back
-                  </span>
+                  ><div>
+                      <ArrowBack />
+                  </div>
+                    <span>Back</span>
+                  </div>
                 ) : (
                   <span onClick={() => navigate("/")} className={classLink}>
                     Already have an account ?{" "}

@@ -7,7 +7,7 @@ const meta: Meta<BannerProps> = {
     title: "GAELO FLOW UI/Banner",
     component: Banner,
     args: {
-        children: <div className="w-full text-white bg-primary">Hello</div>,
+        children: <div className="w-full text-primary">Hello</div>,
         className: "bg-red", 
     },
     argTypes: {
