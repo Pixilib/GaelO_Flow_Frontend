@@ -1,21 +1,17 @@
-import React from "react";
-
-import { Colors } from "../utils/enums";
+// Card.tsx
+import React from 'react';
 
 type CardsProps = {
-  color: Colors;
-  bordered?: boolean;
+  children: React.ReactNode;
   className?: string;
-  children?: React.ReactNode;
+  bordered?: boolean;
 };
 
 type BasicHeaderProps = {
   title: string;
   centerTitle?: boolean;
-  color?: Colors | undefined;
   className?: string; 
-  children : React.ReactNode;
-  [key :string] : any;
+  children?: React.ReactNode;
 };
 
 type BodyProps = {
@@ -23,24 +19,8 @@ type BodyProps = {
 };
 
 type FooterProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
-};
-
-const colorClasses: Record<Colors, string> = {
-  [Colors.primary]: "bg-primary ",
-  [Colors.secondary]: "bg-secondary",
-  [Colors.danger]: "bg-danger",
-  [Colors.success]: "bg-success",
-  [Colors.primaryHover]: "",
-  [Colors.secondaryHover]: "",
-  [Colors.dangerHover]: "",
-  [Colors.successHover]: "",
-  [Colors.orange]: "",
-  [Colors.dark]: "",
-  [Colors.red]: "",
-  [Colors.gray]: "bg-gray hover:bg-gray-hover",
-  [Colors.light]: ""
 };
 
 const Card = ({ bordered, className = "", children }: CardsProps) => {
@@ -52,15 +32,15 @@ const Card = ({ bordered, className = "", children }: CardsProps) => {
     </div>
   );
 };
-const CardHeader = ({ title, className = "", children, ...props }: BasicHeaderProps) => {
+
+const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
   return (
-    <div className={`bg-white text-white shadow-sm rounded-t-xl ${className} flex items-center text-center`} {...props}>
+    <div className={`bg-white text-white shadow-sm rounded-t-xl ${className} flex items-center text-center`}>
       {title && <h2 className="flex-1 p-4 mx-auto text-lg font-bold text-dark">{title}</h2>}
       {children}
     </div>
   );
 };
-
 
 const CardBody = ({ children }: BodyProps) => {
   return (

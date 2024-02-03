@@ -1,40 +1,31 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 
 import { useCustomMutation } from "../utils/reactQuery";
+import { toastError, toastSuccess } from "../utils/toastify";
+import { changePassword } from "../services/auth";
 
-import { AxiosError } from "axios";
+import Button from "../RenderComponents/Button";
+import { Colors } from "../utils/enums";
+
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
-import Button from "../RenderComponents/Button";
-import { toastError, toastSuccess } from "../utils/toastify";
-import { changePassword } from "../services/auth";
 import Input from "../RenderComponents/Input";
-import { Colors } from "../utils/enums";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const tokenFromUrl = new URLSearchParams(window.location.search).get(
-      "token"
-    );
-    if (tokenFromUrl) {
-      setToken(tokenFromUrl);
-    } else {
-      toastError("Token not found.");
-      navigate("/"); // Redirection si le token n'est pas trouvé
-    }
-  }, [navigate]);
+  const token = new URLSearchParams(window.location.search).get("token");
 
   const changePasswordMutation = useCustomMutation(
-    ({ newPassword,confirmPassword, token }) => changePassword(newPassword,confirmPassword, token),
+    ({ newPassword, confirmPassword, token }) =>
+      changePassword(newPassword, confirmPassword, token),
     null,
     [],
     {
@@ -45,7 +36,6 @@ const ChangePasswordForm = () => {
       onError: (error: AxiosError<{ message: string }>) => {
         //display an error message if an error occurs
         if (error.response?.data?.message) {
-          console.table(error);
           toastError(error.response.data.message);
         } else {
           // display a generic error message
@@ -55,12 +45,15 @@ const ChangePasswordForm = () => {
     }
   );
 
-  const onChangePassword = async () => {
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault();
     changePasswordMutation.mutate({ newPassword, token });
   };
 
+  if (!token) return <>Missing Token</>;
+
   return (
-    <div className="flex flex-col w-full">
+    <form onSubmit={handleSubmit} className="flex flex-col w-full">
       <h1 className="text-5xl font-bold text-center mb-6"> Password </h1>
       <p className="text-lg text-gray-700 text-center mb-12">
         Please create/change your password.
@@ -81,6 +74,7 @@ const ChangePasswordForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setNewPassword(event.target.value);
           }}
+          required
         />
         <Input
           label="Confirm New Password :"
@@ -97,20 +91,20 @@ const ChangePasswordForm = () => {
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setconfirmPassword(event.target.value);
           }}
+          required
         />
-        <Button
-          className="w-full"
-          color={Colors.primary}
-          onClick={() => onChangePassword()}
-          disabled={newPassword !== confirmPassword}
-        >
-          <div className="w-1/2 flex justify-around">
+        <div className="flex justify-center mt-12">
+          <Button
+            color={Colors.primary}
+            type="submit"
+            disabled={newPassword !== confirmPassword}
+          >
             Connect
             <ChevronRight />
-          </div>
-        </Button>
+          </Button>
+        </div>
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -8,6 +8,7 @@ export enum Colors {
     success = 'success',
     successHover = 'success-hover',
     orange = 'orange',
+    orangeHover='orange-hover',
     dark = 'dark',
     red = 'red',
     gray = 'gray',

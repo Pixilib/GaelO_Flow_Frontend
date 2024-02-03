@@ -1,7 +1,4 @@
 import { ReactNode } from "react";
-import Items, { Item } from "./Items";
-import ChevronDown from "../../assets/chevron-down.svg?react";
-import ChevronUp from "../../assets/chevron-up.svg?react";
 
 type MenuItemProps = {
   icon?: ReactNode;
@@ -11,57 +8,28 @@ type MenuItemProps = {
   className?: string;
 };
 
-export const MenuItem = ({
+const MenuItem = ({
   icon,
   title,
   isActive,
   onClick,
   className,
 }: MenuItemProps) => {
+  //? Personnalize css if item is Active or not
   const activeClasses = isActive
-    ? "bg-secondary text-dark"
-    : "bg-inherit hover:bg-[#0C0B76] text-white";
+    ? "bg-primary-hover disabled cursor-not-allowed"
+    : "bg-inherit cursor-pointer";
 
   return (
     <div
-      className={`flex justify-center p-2 bg-inherit ${activeClasses} ${className}`}
+      className={`flex items-start text-sm justify-start text-white hover:bg-primary-hover w-full p-3 ${activeClasses} ${className}`}
       onClick={onClick}
+      data-gaelo-flow="sidebar-item"
     >
-      <span>{icon}</span>
-      <span>{title}</span>
+      <span className="ml-4 mr-3">{icon}</span>
+      <span className="">{title}</span>
     </div>
   );
 };
 
-type MenuItemCollapseProps = {
-  icon?: ReactNode;
-  title: string;
-  items: Item[];
-  isOpen: boolean;
-  toggleOpen: () => void;
-  onNavigate: (path: string) => void;
-  className?: string;
-};
-
-export const MenuItemsCollapse = ({
-  icon,
-  title,
-  items,
-  isOpen,
-  className,
-  toggleOpen,
-  onNavigate,
-}: MenuItemCollapseProps) => {
-  return (
-        <div className={`flex flex-col w-full justify-between ${className}`} onClick={toggleOpen}>
-          <div className="flex justify-between p-3 text-dark">
-            <span>{icon}</span>
-            <span>{title}</span>
-          <span>
-            {isOpen ? <ChevronUp /> : <ChevronDown />}
-          </span>
-          </div>
-          {isOpen && <Items items={items} onNavigate={onNavigate} />}
-        </div>
-      );
-};
+export default MenuItem;

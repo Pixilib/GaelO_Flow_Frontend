@@ -1,15 +1,31 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import LogoSideBar from "../../../public/LogoGaeloFlow-white 3.svg?react";
-import Administrator from "../../assets/administrator_line_icon_236151 1 (1).svg?react";
-import { MenuItem, MenuItemsCollapse } from "./MenuItem";
+import { useNavigate, useLocation, Location} from "react-router-dom";
 
-//TODO: Add a state for open and close
-//TODO: make components items for menu and sub menu, take a prop for the icon and text
-export const SideBar = () => {
+import type { LocationState } from "../../root/RootApp";
+import MenuItem from "./MenuItem";
+import MenuItemsCollapse from "./MenuItemsCollapse";
+
+import LogoSideBar from "../../assets/logoGaeloFlow-white3.svg?react";
+import Administrator from "../../assets/administrator.svg?react";
+import Import from "../../assets/import-content.svg?react";
+import Search from "../../assets/search.svg?react";
+import SearchDocument from "../../assets/search-document.svg?react";
+import Auto from "../../assets/auto-retrieve.svg?react";
+import MyDicom from "../../assets/my-dicom.svg?react";
+import Home from "../../assets/home.svg?react";
+import Help from "../../assets/help.svg?react";
+import Logout from "../../assets/logout.svg?react";
+
+type SideBarProps = {
+  onLogout: () => void;
+};
+
+export const SideBar = ({ onLogout }: SideBarProps) => {
+
+//TODO: Add route for the menu , when route exist !
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleItemClick = (path: string) => {
     navigate(path);
@@ -19,44 +35,116 @@ export const SideBar = () => {
     setOpenItem(openItem === title ? null : title);
   };
 
-  const authItems = [
+  //TODO: Add route for the adminItems , when route exist !
+  const adminItems = [
     {
-      title: "Lost Password",
-      path: "/lost-password",
-      isActive: location.pathname === "/lost-password",
+      title: "Aets",
+      path: "/aets",
+      isActive: location.pathname === "/",
     },
     {
-      title: "sign-up",
-      path: "/signup",
-      isActive: location.pathname === "/sign-up",
+      title: "Peers",
+      path: "/peers",
+      isActive: location.pathname === "/peers",
     },
     {
-      title: "sign-in",
-      path: "/",
+      title: "External endpoints",
+      path: "/external-endpoints",
+      isActive: location.pathname === "/external-endpoints",
+    },
+    {
+      title: "Robot & Tasks",
+      path: "/robot-tasks",
+      isActive: location.pathname === "/robot-tasks",
+    },
+    {
+      title: "Jobs",
+      path: "/jobs",
+      isActive: location.pathname === "/jobs",
+    },
+    {
+      title: "Users",
+      path: "/users",
+      isActive: location.pathname === "/users",
+    },
+    {
+      title: "Labels",
+      path: "/labels",
       isActive: location.pathname === "/",
     },
   ];
 
   return (
-    <nav data-gaelo-flow="sidebar" className="w-full h-full bg-background">
-      <div className="h-full rounded-tr-3xl top-0 start-0 bottom-0 z-[60] w-64 bg-primary border-e  pt-7 pb-10 overflow-y-hidden lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 dark:bg-gray-800 px-6">
-        <LogoSideBar className="mx-auto mb-10" />
-        <MenuItem
-          title="Administration"
-          icon={<Administrator />}
-          isActive={location.pathname === "/lost-password"}
-          onClick={() => handleItemClick("/lost-password")}
-        />
-        <MenuItemsCollapse
-          icon={<Administrator />}
-          title="Authentification"
-          className="bg-secondary"
-          items={authItems}
-          isOpen={openItem === "Authentification"}
-          toggleOpen={() => toggleOpen("Authentification")}
-          onNavigate={handleItemClick}
-        />
-      </div>
+    <nav
+      data-gaelo-flow="sidebar"
+      className="w-64 h-full border-transparent bg-primary shadow-custom rounded-tr-40"
+    >
+      <main className="h-full overflow-hidden rounded-tr-40 pt-7">
+        <div className="flex justify-center h-15%">
+          <LogoSideBar/>          
+        </div>
+        <div className="flex flex-col h-60%">
+          <MenuItemsCollapse
+            icon={<Administrator />}
+            title="Administration"
+            items={adminItems}
+            isOpen={openItem === "Administration"}
+            toggleOpen={() => toggleOpen("Administration")}
+            onNavigate={handleItemClick}
+          />
+          <MenuItem
+            title="Orthanc Content"
+            icon={<Search />}
+            isActive={location.pathname === "/"}
+            onClick={() => handleItemClick("/")}
+          />
+          <MenuItem
+            title="Import"
+            icon={<Import />}
+            isActive={location.pathname === "/import"}
+            onClick={() => handleItemClick("/")}
+          />
+          <MenuItem
+            title="Query"
+            icon={<SearchDocument />}
+            isActive={location.pathname === "/query"}
+            onClick={() => handleItemClick("/query")}
+          />
+          <MenuItem
+            title="Auto retrieve"
+            icon={<Auto />}
+            isActive={location.pathname === "/query"}
+            onClick={() => handleItemClick("/query")}
+          />
+          <MenuItem
+            title="My Dicom"
+            icon={<MyDicom />}
+            isActive={location.pathname === "/mydicom"}
+            onClick={() => handleItemClick("/mydicom")}
+          />
+        </div>
+        <div className="flex flex-col justify-end h-auto pb-4">
+          <MenuItem
+            title="Home"
+            icon={<Home />}
+            isActive={location.pathname === "/home"}
+            onClick={() => handleItemClick("/home")}
+          />
+          <MenuItem
+            title="Help"
+            icon={<Help />}
+            isActive={location.pathname === "/help"}
+            onClick={() => handleItemClick("/help")}
+          />
+          <MenuItem
+            title="Log out"
+            icon={<Logout />}
+            isActive={location.pathname === "/logout"}
+            onClick={onLogout}
+          />
+          
+        </div>
+      </main>
     </nav>
   );
 };

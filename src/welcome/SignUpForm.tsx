@@ -8,8 +8,8 @@ import Button from "../RenderComponents/Button";
 import Input from "../RenderComponents/Input";
 import { Colors } from "../utils/enums";
 import ChevronRight from "./../assets/chevron-right.svg?react";
-import User from "./../assets/user.svg?react";
 import Mail from "./../assets/mail.svg?react";
+import User from "./../assets/user.svg?react";
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState("");
@@ -18,7 +18,8 @@ export const SignUpForm = () => {
   const [email, setEmail] = useState("");
 
   const signUpMutation = useCustomMutation(
-    ({username,lastname,firstname,email}) => signUp(username, lastname, firstname, email),
+    ({ username, lastname, firstname, email }) =>
+      signUp(username, lastname, firstname, email),
     null,
     [],
     {
@@ -37,7 +38,6 @@ export const SignUpForm = () => {
     }
   );
 
-
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     signUpMutation.mutate({ username, lastname, firstname, email });
@@ -45,10 +45,10 @@ export const SignUpForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
+      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
         Welcome to <span className="text-primary">Gaelo Flow</span>
       </h1>
-      <p className="text-lg text-gray-700 text-center mb-12">
+      <p className="mb-12 text-lg text-center text-gray-700">
         Please create your Account.
       </p>
       <div className="w-full space-y-12">
@@ -56,52 +56,48 @@ export const SignUpForm = () => {
           label="Username :"
           className="w-full"
           svgLeft={<User />}
-          bordered
           placeholder="Enter your username"
           value={username}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Firstname :"
           svgLeft={<User />}
-          bordered
           placeholder="Enter your firstname"
           value={firstname}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setFirstname(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Lastname :"
           svgLeft={<User />}
-          bordered
           placeholder="Enter your lastname"
           value={lastname}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setLastname(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
         <Input
           label="Email :"
           svgLeft={<Mail />}
-          bordered
           placeholder="Enter your @email"
           value={email}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setEmail(event.target.value);
           }}
-          autocomplete="on"
+          autoComplete="on"
         />
-        <div className="justify-center flex">
+        <div className="flex justify-center">
           <Button
             color={Colors.primary}
             type="submit"
