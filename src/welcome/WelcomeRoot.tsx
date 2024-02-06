@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./SignInForm";
 import { SignUpForm } from "./SignUpForm";
-import { LostPasswordForm } from "./LostPasswordForm";
+import ForgotPasswordForm  from "./ForgotPasswordForm";
 import ChangePasswordForm from "./ChangePasswordForm";
 
 import SignInImage from "../assets/sign-in.svg?react";
@@ -49,7 +49,7 @@ const Welcome = () => {
             <Routes>
               <Route path="/*" element={<SignInForm />} />
               <Route path="/change-password" element={<ChangePasswordForm />} />
-              <Route path="lost-password" element={<LostPasswordForm />} />
+              <Route path="lost-password" element={<ForgotPasswordForm />} />
               <Route path="legal-mention" element={<div>Legal Mention</div>} />
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
@@ -69,7 +69,6 @@ const Welcome = () => {
               {location.pathname !== "/" &&
                 (location.pathname === "/legal-mention" ? (
                   <div
-                    className="flex mx-3 my-3"
                     onClick={() => navigate("/")}
                   ><div className="cursor-pointer">
                       <ArrowBack />

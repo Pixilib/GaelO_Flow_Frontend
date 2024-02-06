@@ -44,21 +44,21 @@ export const SignUpForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
-        Welcome to <span className="text-primary">Gaelo Flow</span>
-      </h1>
-      <p className="mb-12 text-lg text-center text-gray-700">
-        Please create your Account.
-      </p>
-      <div className="w-full space-y-12">
-        <Input
-          label="Username :"
-          className="w-full"
-          svgLeft={<User />}
-          placeholder="Enter your username"
-          value={username}
-          required
+    <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
+  <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
+    Welcome to <span className="text-primary">Gaelo Flow</span>
+  </h1>
+  <p className="mb-12 text-lg text-center text-gray-700">
+    Please create your Account
+  </p>
+  <div className="flex flex-col items-center w-full max-w-md space-y-12"> 
+    <Input
+      label="Username :"
+      className="w-full" 
+      svgLeft={<User />} 
+      placeholder="Enter your username"
+      value={username}
+      required
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value);
           }}

@@ -55,14 +55,14 @@ export const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="text-4xl font-semibold text-center mb-6 text-dark">
+    <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
+      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
         Welcome back !
       </h1>
       <p className="mb-12 text-lg text-center text-dark">
         Please Log in to your Account
       </p>
-      <div className="w-full mt-20 text-dark">
+      <div className="w-2/3 mt-20 text-dark">
         <Input
           label="Username:"
           svgLeft={<User />}
