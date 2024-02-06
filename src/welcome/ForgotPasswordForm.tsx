@@ -10,7 +10,7 @@ import { Colors } from "../utils/enums";
 import Letter from "../assets/mail.svg?react";
 import ChevronRight from "../assets/chevron-right.svg?react";
 
-export const LostPasswordForm = () => {
+const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
 
   const lostPasswordMutation = useCustomMutation(
@@ -67,3 +67,5 @@ export const LostPasswordForm = () => {
     </form>
   );
 };
+
+export default ForgotPasswordForm

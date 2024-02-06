@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../reducers/UserSlice";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { SideBar } from "../RenderComponents/NavBar/SideBar";
 import { Banner } from "../RenderComponents/Banner/Banner";
 import Dashboard from "./Dashboard";
@@ -19,16 +19,16 @@ const RootApp = () => {
 
   return (
     <div className="flex w-full h-full">
-      <SideBar onLogout={handleLogout} className="fixed"/>
+      <SideBar onLogout={handleLogout} />
       <div className="flex flex-col flex-1">
-        <Banner title={"Home"}/>
-        
-      <div className="flex h-full">
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/admin/*" element={<AdminRoot />} />
-        </Routes>
-      </div>
+        <Banner title={"Home"} />
+
+        <div className="flex h-full">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/admin/*" element={<AdminRoot />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

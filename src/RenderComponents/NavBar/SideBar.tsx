@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useNavigate, useLocation, Location} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import type { LocationState } from "../../root/RootApp";
 import MenuItem from "./MenuItem";
 import MenuItemsCollapse from "./MenuItemsCollapse";
 
@@ -22,7 +21,7 @@ type SideBarProps = {
 
 export const SideBar = ({ onLogout }: SideBarProps) => {
 
-//TODO: Add route for the menu , when route exist !
+  //TODO: Add route for the menu , when route exist !
   const [openItem, setOpenItem] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -81,7 +80,7 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
     >
       <main className="h-full overflow-hidden rounded-tr-40 pt-7">
         <div className="flex justify-center h-15%">
-          <LogoSideBar/>          
+          <LogoSideBar />
         </div>
         <div className="flex flex-col h-60%">
           <MenuItemsCollapse
@@ -142,7 +141,7 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
             isActive={location.pathname === "/logout"}
             onClick={onLogout}
           />
-          
+
         </div>
       </main>
     </nav>
