@@ -7,6 +7,7 @@ export enum Colors {
     dangerHover = "danger-hover",
     success = 'success',
     successHover = 'success-hover',
+    disabled='disabled',
     orange = 'orange',
     orangeHover='orange-hover',
     dark = 'dark',
