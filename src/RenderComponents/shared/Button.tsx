@@ -12,15 +12,21 @@ export type ButtonProps = {
 const Button = ({ color, bordered, className, children, ...props }: ButtonProps) => {
 
   const colorClasses: Record<Colors, string> = {
-    [Colors.primary]: "bg-primary hover:bg-primary-hover",
-    [Colors.secondary]: "bg-secondary hover:bg-secondary-hover",
-    [Colors.danger]: "bg-danger hover:bg-danger-hover",
-    [Colors.success]: "bg-success hover:bg-success-hover",
-    [Colors.orange]: "bg-orange hover:bg-orange-hover",
-    [Colors.dark]: "",
-    [Colors.red]: "",
-    [Colors.gray]: "",
-    [Colors.light]: ""
+    [Colors.primary]: "bg-primary",
+    [Colors.primaryHover]: "hover:bg-primary-hover",
+    [Colors.secondary]: "bg-secondary",
+    [Colors.secondaryHover]: "hover:bg-secondary-hover",
+    [Colors.danger]: "bg-danger",
+    [Colors.dangerHover]: "hover:bg-danger-hover",
+    [Colors.success]: "bg-success",
+    [Colors.successHover]: "hover:bg-success-hover",
+    [Colors.disabled]: "bg-disabled",
+    [Colors.orange]: "bg-orange",
+    [Colors.orangeHover]: "hover:bg-orange-hover",
+    [Colors.dark]: "bg-dark", 
+    [Colors.red]: "bg-red", 
+    [Colors.gray]: "bg-gray",
+    [Colors.light]: "bg-light", 
   };
 
   return (
