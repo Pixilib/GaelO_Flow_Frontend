@@ -1,17 +1,25 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useState } from "react";
 import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
 import Input from "../../RenderComponents/Input";
 import Table from '../../RenderComponents/Table';
 import { createColumnHelper } from "@tanstack/react-table";
 import Button from "../../RenderComponents/Button";
+import { Colors } from "../src/utils/enums";
 
-const redisCard = () => {
+
+interface RedisData {
+    address: string;
+    port: number;
+    password: string;
+}
+
+const RedisCard = () => {
     const [address, setAddress] = useState('');
     const [port, setPort] = useState('');
     const [password, setPassword] = useState('');
 
-    const columnHelper = createColumnHelper()
-    const data: any = [
+    const columnHelper = createColumnHelper<RedisData>();
+    const data = [
         {
             address: 'https://orthanc.fr',
             port: 8042,
@@ -22,27 +30,21 @@ const redisCard = () => {
             port: 8043,
             password: 'password',
         },
-
-    ]
+    ];
 
     const columns = [
         columnHelper.accessor('address', {
-            header: 'Address2',
-            cell: ({ row, getValue }) => {
-                console.log(row)
-                return <Button onClick={()=>{console.log(row.original.address)}} className="bg-primary" target="_blank" rel="noopener noreferrer">Edit</Button>
-            },
-        }),
+            header: 'Address',
+            cell: info => <Button color={Colors.primary} onClick={() => { console.log(info.row.original.address); }}>Edit</Button>,        }),
         columnHelper.accessor('port', {
             header: 'Port',
             cell: info => info.getValue(),
         }),
         columnHelper.accessor('password', {
             header: 'Password',
-            cell: info => '••••••',
+            cell: () => '••••••',
         }),
     ];
-
 
     return (
         <Card>
@@ -55,13 +57,11 @@ const redisCard = () => {
                         <Input className="w-full" label="Password" type="text" onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} value={password} />
                         <Table columns={columns} data={data} />
                     </div>
-
                 </div>
             </CardBody>
-            <CardFooter>
-            </CardFooter>
+            <CardFooter />
         </Card>
-    )
-}
+    );
+};
 
-export default redisCard
+export default RedisCard;
