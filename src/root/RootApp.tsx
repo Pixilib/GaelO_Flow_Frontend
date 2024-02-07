@@ -7,7 +7,7 @@ import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/general/AdminRoot";
 import { SideBar } from "../RenderComponents/NavBar/SideBar";
 import { Banner } from "../RenderComponents/Banner/Banner";
-import { BannerDropDown } from "../RenderComponents/Banner/BannerDropDown";
+import { BannerDropDown } from '../RenderComponents/Banner/BannerDropDown';
 import Items from "../RenderComponents/NavBar/Items";
 import ItemsProps from "../RenderComponents/NavBar/Items"
 import { VariantItem } from '../RenderComponents/NavBar/ItemsVariant';
@@ -16,9 +16,11 @@ import ToogleChevron from "../RenderComponents/shared/ToogleChevron";
 
 import Language from "../assets/language.svg?react";
 import ChevronDown from "../assets/chevron-up.svg?react";
+import Notification from "../assets/notification.svg?react";
+import Settings from "../assets/settings.svg?react";
 
 const RootApp = () => {
-  const [openItem, setOpenItem] = useState<string | null>(null);
+  const [openItem, setOpenItem] = useState<string|null>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
 
   const dispatch = useDispatch();
@@ -32,6 +34,8 @@ const RootApp = () => {
   };
 
   const toggleOpen = (name: string) => {
+    console.log("toggleOpen")
+    console.log({name,openItem,isOpen : openItem === name})
     setOpenItem(openItem === name ? null : name);
   };
 
@@ -40,11 +44,18 @@ const RootApp = () => {
     navigate("/");
   };
   const isOpen = (item: string): boolean => openItem === item;
-  const dropdownItems = [
+  const ItemsLanguage:Items[] = [
     { title: "English", path: "/english", isActive: location.pathname === "/english"},
     { title: "Français", path: "/francais", isActive: location.pathname === "/francais"},
   ];
-  console.log({location,selectedLanguage,openItem})
+
+  const ItemsSettingsUser:Items[] = [
+    { title: "Profile", path: "/profile", isActive: location.pathname === "/profile"},
+    { title: "Settings", path: "/settings", isActive: location.pathname === "/settings"},
+  ];
+  console.log({name,openItem,isOPen : openItem === name})
+
+  // console.log({location,selectedLanguage,openItem, isOpen: isOpen("Language"),name})
   return (
     <div className="flex w-full h-full">
       <SideBar onLogout={handleLogout} className="fixed" />
@@ -56,7 +67,7 @@ const RootApp = () => {
               <span className="mx-4">{selectedLanguage}</span>
               <ToogleChevron
                 name={"Language"}
-                isOpen={openItem === "Language"}
+                isOpen={isOpen("Language")}
                 toggleOpen={() => toggleOpen("Language")}
               />
             </div>
@@ -64,10 +75,29 @@ const RootApp = () => {
                 <Items
                   // className={`w-full rounded-b-xl bg-primary text-white shadow-lg`}
                   variant={VariantItem["BannerItems"]}
-                  items={dropdownItems}
+                  items={ItemsLanguage}
                   onNavigate={onNavigate}
                 />
               )}
+          </BannerDropDown>
+          <BannerDropDown>
+          <div className="inline-flex items-center w-full">
+          <ToogleChevron
+                name={"SettingsUser"}
+                isOpen={isOpen("SettingsUser")}
+                toggleOpen={() => toggleOpen("SettingsUser")}
+              />
+              {openItem}
+            <Notification />
+            <Settings />
+          </div>
+          {isOpen("SettingsUser") && (
+            <Items
+              variant={VariantItem["BannerItems"]}
+              items={ItemsSettingsUser}
+              onNavigate={onNavigate}
+            />
+          )}
           </BannerDropDown>
         </Banner>
 

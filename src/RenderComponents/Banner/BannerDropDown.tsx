@@ -9,6 +9,7 @@ export type BannerDropDownProps = {
 };
 
 export const BannerDropDown = ({
+  name,
   children,
   className,
 }: BannerDropDownProps) => {

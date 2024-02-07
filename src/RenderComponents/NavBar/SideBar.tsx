@@ -73,7 +73,6 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
       isActive: location.pathname === "/",
     },
   ];
-
   return (
     <nav
       data-gaelo-flow="sidebar"
