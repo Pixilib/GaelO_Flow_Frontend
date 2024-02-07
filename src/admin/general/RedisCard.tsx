@@ -1,10 +1,10 @@
 import { ChangeEvent, useState } from "react";
-import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
-import Input from "../../RenderComponents/Input";
+import Input from "../../RenderComponents/shared/Input";
+import Card, {CardHeader,CardBody,CardFooter} from "../../RenderComponents/shared/Card";
 import Table from '../../RenderComponents/Table';
 import { createColumnHelper } from "@tanstack/react-table";
-import Button from "../../RenderComponents/Button";
-import { Colors } from "../src/utils/enums";
+import Button from "../../RenderComponents/shared/Button";
+import { Colors } from "../../utils/enums";
 
 
 interface RedisData {
