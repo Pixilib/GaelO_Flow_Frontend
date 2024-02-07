@@ -14,7 +14,7 @@ export type ItemsProps = {
 
 const Items = ({ items,variant, onNavigate}: ItemsProps) => {
   return (
-    <ul data-gaelo-flow="Items" className={`rounded-b-xl bg-white`}>
+    <ul data-gaelo-flow="Items" className={`${variant["classUlElem"]}`}>
       {items.map((item, index) => {
         const activeClasses = (item.isActive?? false)
           ? variant.active
@@ -23,7 +23,7 @@ const Items = ({ items,variant, onNavigate}: ItemsProps) => {
         return (
           <li
             key={index}
-            className={`${variant["base"]} ${activeClasses}`}
+            className={`${variant["classLiElem"]} ${activeClasses}`}
             onClick={() => onNavigate(item.path)}
           >
             {item.title}

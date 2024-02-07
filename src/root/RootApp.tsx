@@ -19,11 +19,16 @@ import ChevronDown from "../assets/chevron-up.svg?react";
 
 const RootApp = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const onNavigate = (path: string) => {
+  const onNavigate = (path: string, language: string) => {
     navigate(path);
+    setSelectedLanguage(language);
+    setOpenItem(null); 
   };
 
   const toggleOpen = (name: string) => {
@@ -35,10 +40,11 @@ const RootApp = () => {
     navigate("/");
   };
   const isOpen = (item: string): boolean => openItem === item;
-  const dropdownItems:ItemsProps = [
-    { title: "English", path: "/english", isActive: true},
-    { title: "Français", path: "/français", isActive: false},
+  const dropdownItems = [
+    { title: "English", path: "/english", isActive: location.pathname === "/english"},
+    { title: "Français", path: "/francais", isActive: location.pathname === "/francais"},
   ];
+  console.log({location,selectedLanguage,openItem})
   return (
     <div className="flex w-full h-full">
       <SideBar onLogout={handleLogout} className="fixed" />
@@ -47,14 +53,13 @@ const RootApp = () => {
           <BannerDropDown>
             <div className="inline-flex items-center w-full">
               <Language />
-              <span className="mx-4">English</span>
+              <span className="mx-4">{selectedLanguage}</span>
               <ToogleChevron
                 name={"Language"}
                 isOpen={openItem === "Language"}
                 toggleOpen={() => toggleOpen("Language")}
               />
             </div>
-            <div className="flex justify-center w-inherit">
               {isOpen("Language") && (
                 <Items
                   // className={`w-full rounded-b-xl bg-primary text-white shadow-lg`}
@@ -63,7 +68,6 @@ const RootApp = () => {
                   onNavigate={onNavigate}
                 />
               )}
-            </div>
           </BannerDropDown>
         </Banner>
 
