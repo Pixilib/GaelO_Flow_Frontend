@@ -4,7 +4,6 @@ import Input from "../../RenderComponents/Input";
 import Table from '../../RenderComponents/Table';
 import { createColumnHelper } from "@tanstack/react-table";
 import Button from "../../RenderComponents/Button";
-import { Colors } from "../src/utils/enums";
 
 
 interface RedisData {
