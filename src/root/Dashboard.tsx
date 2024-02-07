@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../RenderComponents/Button";
-import Card, { CardHeader, CardBody, CardFooter } from "../RenderComponents/Card";
+import Button from "../RenderComponents/shared/Button";
+import Card, { CardHeader, CardBody, CardFooter } from "../RenderComponents/shared/Card";
 import { Colors } from "../utils/enums";
 
 const Dashboard = () => {

@@ -1,12 +1,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import Card, { CardBody, CardFooter, CardHeader } from "../../RenderComponents/Card";
-import Button from "../../RenderComponents/Button";
+import Card, { CardBody, CardFooter, CardHeader } from "../../RenderComponents/shared/Card";
+import Button from "../../RenderComponents/shared/Button";
 import { Colors } from "../../utils/enums";
 
 import Check from '../../assets/check.svg?react';
 import Restart from '../../assets/restart.svg?react';
 import Shutdown from '../../assets/shutdown.svg?react';
-import Input from "../../RenderComponents/Input";
+import Input from "../../RenderComponents/shared/Input";
 import { useCustomQuery } from "../../utils/reactQuery";
 import { getOptions } from "../../services/options";
 

@@ -1,26 +1,29 @@
+import {VariantKey, VariantItem} from './ItemsVariant';
+
 export type Item = {
   title: string;
   path: string;
   isActive: boolean;
 };
 
-type ItemsProps = {
+export type ItemsProps = {
   items: Item[];
+  variant: VariantKey;
   onNavigate: (path: string) => void;
 };
 
-const Items = ({ items, onNavigate }: ItemsProps) => {
+const Items = ({ items,variant, onNavigate}: ItemsProps) => {
   return (
-    <ul className="bg-white rounded-b-xl">
+    <ul data-gaelo-flow="Items" className={`rounded-b-xl bg-white`}>
       {items.map((item, index) => {
-        const activeClasses = item.isActive
-          ? "text-dark bg-primary text-white cursor-not-allowed"
-          : "bg-inherit hover:bg-primary text-dark hover:text-white cursor-pointer";
-
+        const activeClasses = (item.isActive?? false)
+          ? variant.active
+          : variant.inactive;
+        // console.log({activeClasses,variant})
         return (
           <li
             key={index}
-            className={`flex my-0.5 first:mt-0 justify-start last:rounded-b-xl last:mb-0.5 p-2 pl-12 pe-4 items-center text-dark ${activeClasses} `}
+            className={`${variant["base"]} ${activeClasses}`}
             onClick={() => onNavigate(item.path)}
           >
             {item.title}

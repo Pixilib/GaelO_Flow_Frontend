@@ -1,6 +1,6 @@
 import { useState } from "react"
-import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
-import Input from "../../RenderComponents/Input";
+import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/shared/Card';
+import Input from "../../RenderComponents/shared/Input";
 
 const redisCard = () => {
     const [address, setAddress] = useState('');

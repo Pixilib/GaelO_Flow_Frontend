@@ -1,5 +1,5 @@
 import React from "react";
-import { Colors } from "../utils/enums";
+import { Colors } from "../../utils/enums";
 
 export type ButtonProps = {
   color: Colors;

@@ -6,14 +6,14 @@ import { useCustomMutation } from "../utils/reactQuery";
 import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
 
-import Button from "../RenderComponents/Button";
+import Button from "../RenderComponents/shared/Button";
 import { Colors } from "../utils/enums";
 
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
-import Input from "../RenderComponents/Input";
+import Input from "../RenderComponents/shared/Input";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();

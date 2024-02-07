@@ -71,8 +71,7 @@ const Welcome = () => {
                   <div
                     className="flex mx-3 my-3"
                     onClick={() => navigate("/")}
-                    className={classLink}
-                  ><div>
+                  ><div className="cursor-pointer">
                       <ArrowBack />
                   </div>
                     <span>Back</span>

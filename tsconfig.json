@@ -9,7 +9,7 @@
       "DOM.Iterable"
     ],
     "module": "ESNext",
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -30,7 +30,7 @@
     "src",
     "types.d.ts",
     "stories", 
-    "vite-env.d.ts",
+    "vite-env.d.ts"
   ],
   "references": [
     {
