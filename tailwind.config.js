@@ -40,11 +40,12 @@ export default {
         'danger-hover': '#9F181A',
         'success': '#36A56F',
         'success-hover': '#276A4A',
+        'disabled': '#b2b2b2',
         'orange': '#DFB520',
         'orange-hover': '#9C7F15',
         'dark': '#393838',
         'red': '#f8d7da',
-        'gray': '#EFEFEF',
+        'gray': '#EDEDED',
         'light': '#F1F1F1'
       },
       boxShadow: {
