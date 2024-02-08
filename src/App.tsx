@@ -9,11 +9,6 @@ import RedisCard from "./admin/general/RedisCard"
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
-return ( 
-
-<RedisCard/>
-
-)
     
     return (
   <div className="w-screen h-screen">
