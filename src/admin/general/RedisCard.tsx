@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import Input from "../../RenderComponents/shared/Input";
-import Card, {CardHeader,CardBody,CardFooter} from "../../RenderComponents/shared/Card";
-import Table from '../../RenderComponents/Table';
+import Card, { CardHeader, CardBody, CardFooter } from "../../RenderComponents/shared/Card";
+import Table from '../../RenderComponents/shared/Table';
 import { createColumnHelper } from "@tanstack/react-table";
 import Button from "../../RenderComponents/shared/Button";
 import { Colors } from "../../utils/enums";
@@ -35,7 +35,8 @@ const RedisCard = () => {
     const columns = [
         columnHelper.accessor('address', {
             header: 'Address',
-            cell: info => <Button color={Colors.primary} onClick={() => { console.log(info.row.original.address); }}>Edit</Button>,        }),
+            cell: info => <Button color={Colors.primary} onClick={() => { console.log(info.row.original.address); }}>Edit</Button>,
+        }),
         columnHelper.accessor('port', {
             header: 'Port',
             cell: info => info.getValue(),

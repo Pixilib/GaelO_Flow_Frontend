@@ -1,9 +1,6 @@
 import { ReactNode } from "react";
-import Items, { Item } from "./Items";
-import { VariantItem } from "./ItemsVariant";
+import Items, { Item } from "../Items/Items";
 import ToogleChevron from "../shared/ToogleChevron";
-import ChevronDown from "../../assets/chevron-down.svg?react";
-import ChevronUp from "../../assets/chevron-up.svg?react";
 
 type MenuItemCollapseProps = {
   icon?: ReactNode;
@@ -36,9 +33,9 @@ const MenuItemsCollapse = ({
           <span className="mr-3">{icon}</span>
           <span className="flex-grow">{title}</span>
         </div>
-        <ToogleChevron className={"flex-shrink-0 mr-4"} isOpen={isOpen} toggleOpen={toggleOpen}/>
+        <ToogleChevron className={"flex-shrink-0 mr-4"} isOpen={isOpen} toggleOpen={toggleOpen} />
       </div>
-      {isOpen && <Items variant={VariantItem.SideBarItems} items={items} onNavigate={onNavigate} />}
+      {isOpen && <Items variant={"SideBarItems"} items={items} onNavigate={onNavigate} />}
     </div>
   );
 }
