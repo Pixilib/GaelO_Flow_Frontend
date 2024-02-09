@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import BannerHome from "../../assets/banner-home.svg?react";
-import ArrowBack from "../../assets/arrow-back.svg?react";
+import BannerHome from "./assets/banner-home.svg?react";
+import ArrowBack from "./assets/arrow-back.svg?react";
 //WIP - Banner component
 export type BannerProps = {
   title: string;
@@ -13,6 +13,7 @@ export const Banner = ({ title, children, className }: BannerProps) => {
   const navigate = useNavigate();
   return (
     <div
+      data-gaelo-flow="banner"
       className={`h-24 shadow-lg border-transparent rounded-br-20 flex items-center justify-between w-full ${className}`}
     >
       <div className="flex items-center ml-12">
@@ -20,7 +21,7 @@ export const Banner = ({ title, children, className }: BannerProps) => {
           {location.pathname === "/" ? (
             <BannerHome />
           ) : (
-            <span className="cursor-pointer"onClick={()=> navigate("/")}>
+            <span className="cursor-pointer" onClick={() => navigate("/")}>
               <ArrowBack />
             </span>
           )}
@@ -34,3 +35,4 @@ export const Banner = ({ title, children, className }: BannerProps) => {
     </div>
   );
 };
+

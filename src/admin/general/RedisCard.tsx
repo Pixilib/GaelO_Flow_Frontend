@@ -4,7 +4,7 @@ import Input from "../../RenderComponents/Input";
 import Table from '../../RenderComponents/Table';
 import { createColumnHelper } from "@tanstack/react-table";
 import Button from "../../RenderComponents/Button";
-import { Colors } from "../src/utils/enums";
+import { Colors } from "../../utils/enums";
 
 
 interface RedisData {
@@ -35,7 +35,8 @@ const RedisCard = () => {
     const columns = [
         columnHelper.accessor('address', {
             header: 'Address',
-            cell: info => <Button color={Colors.primary} onClick={() => { console.log(info.row.original.address); }}>Edit</Button>,        }),
+            cell: info => <Button color={Colors.primary} onClick={() => { console.log(info.row.original.address); }}>Edit</Button>,
+        }),
         columnHelper.accessor('port', {
             header: 'Port',
             cell: info => info.getValue(),
