@@ -14,8 +14,8 @@ export const BannerDropDown = ({
   return (
     <>
       <div
-        data-gaelo-flow="BannerDropDown"
-        className={`h-12 bg-primary py-3 px-4 mr-9 border-transparent rounded-18 items-center font-semibold text-sm text-white ${className}`}
+        data-gaelo-flow="banner-dropdown"
+        className={`mr-9 h-12 items-center rounded-18 border-transparent bg-primary px-4 py-3 text-sm font-semibold text-white ${className}`}
       >
         {children}
       </div>

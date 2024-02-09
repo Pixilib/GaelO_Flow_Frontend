@@ -3,28 +3,28 @@ import { useDispatch } from "react-redux";
 import { logout } from "../reducers/UserSlice";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
+import { SideBar } from "../RenderComponents/NavBar/SideBar";
 import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/general/AdminRoot";
-import { SideBar } from "../RenderComponents/NavBar/SideBar";
-import { Banner } from "../RenderComponents/Banner/Banner";
+import { Banner } from "../Banner";
 import { BannerDropDown } from '../RenderComponents/Banner/BannerDropDown';
-import Items, { Item } from "../RenderComponents/Items/Items";
+import { Item } from "../RenderComponents/Items/Items";
 
-import ToogleChevron from "../RenderComponents/shared/ToogleChevron";
+import ToogleChevron from "../RenderComponents/ToogleChevron";
 
 import Language from "../assets/language.svg?react";
 import Notification from "../assets/notification.svg?react";
 import Settings from "../assets/settings.svg?react";
+import BannerItems from "../RenderComponents/Items/BannerItems";
+import Profile from "../assets/user-banner.svg?react";
 
 const RootApp = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
-  // const [settingsUser, setSettingsUser] = useState<string | null>(null);
+  // const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
 
 
 
@@ -51,44 +51,42 @@ const RootApp = () => {
     { title: "Profile", path: "/profile", isActive: location.pathname === "/profile" },
     { title: "Settings", path: "/settings", isActive: location.pathname === "/settings" },
   ];
-  console.log({ name, openItem, isOpen, location })
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex size-full">
       <SideBar onLogout={handleLogout} />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-1 flex-col">
         <Banner title={"Home"}>
           <div className="flex justify-end ">
             <BannerDropDown>
-              <div className="inline-flex items-center w-full">
+              <div className="inline-flex w-full items-center">
                 <Language />
-                <span className="mx-4">{selectedLanguage}</span>
+                <span className="mx-4">{"English"}</span>
                 <ToogleChevron
                   isOpen={isOpen("Language")}
                   toggleOpen={() => toggleOpen("Language")}
                 />
               </div>
               {isOpen("Language") && (
-                <Items
-                  variant={"BannerItems"}
-                  items={ItemsLanguage}
+                <BannerItems
+                  elements={ItemsLanguage}
                   onNavigate={handleItemClick}
                 />
               )}
             </BannerDropDown>
             <BannerDropDown >
-              <div className="inline-flex items-center w-full gap-4 ">
+              <div className="inline-flex w-full items-center gap-4 ">
                 <ToogleChevron
                   isOpen={isOpen("SettingsUser")}
                   toggleOpen={() => toggleOpen("SettingsUser")}
                 />
-                <Notification />
-                <Settings />
+                <Notification className="transition-transform duration-100 hover:scale-110" />
+                <Settings className="transition-transform duration-100 hover:scale-110" />
+                <Profile height={23}  fill="white" width={23} stroke="white" className="transition-transform duration-100 hover:scale-110"  />
               </div>
               {isOpen("SettingsUser") && (
-                <Items
-                  variant={"BannerItems"}
-                  items={ItemsSettingsUser}
+                <BannerItems
+                  elements={ItemsSettingsUser}
                   onNavigate={handleItemClick}
                 />
               )}

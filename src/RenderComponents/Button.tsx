@@ -1,5 +1,5 @@
 import React from "react";
-import { Colors } from "../../utils/enums";
+import { Colors } from "../utils/enums";
 
 export type ButtonProps = {
   color: Colors;
@@ -31,7 +31,7 @@ const Button = ({ color, bordered, className, children, ...props }: ButtonProps)
 
   return (
     <button
-      className={`flex justify-center items-center ${colorClasses[color]} text-white p-3 font-semibold focus:outline-none focus:shadow-outline disabled:bg-opacity-70 ${bordered ? "border border-white-900" : ""} rounded-full shadow-lg ${className} min-w-0`}
+      className={`flex items-center justify-center ${colorClasses[color]} focus:shadow-outline p-3 font-semibold text-white focus:outline-none disabled:bg-opacity-70 ${bordered ? "border-white-900 border" : ""} rounded-full shadow-lg ${className} min-w-0`}
       {...props}
     >
       {children}

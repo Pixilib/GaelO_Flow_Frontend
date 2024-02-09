@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Input from "../src/RenderComponents/shared/Input";
+import Input from "../src/RenderComponents/Input";
 
 const meta: Meta<typeof Input> = {
   title: "GAELO FLOW UI/Input",

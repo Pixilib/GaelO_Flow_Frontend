@@ -1,4 +1,10 @@
-import { VariantItem, VariantKey } from './ItemsVariant';
+
+export type ItemStyle = {
+  classLiElem: string;
+  classUlElem: string;
+  active: string;
+  inactive: string;
+};
 
 export type Item = {
   title: string;
@@ -7,24 +13,24 @@ export type Item = {
 };
 
 export type ItemsProps = {
-  items: Item[];
-  variant: VariantKey;
+  elements: Item[];
+  style: ItemStyle;
   onNavigate: (path: string) => void;
 };
 
-const Items = ({ items, variant, onNavigate }: ItemsProps) => {
+export const Items = ({ elements, style, onNavigate }: ItemsProps) => {
 
-  const { classLiElem, classUlElem, active, inactive } = VariantItem[variant];
   return (
-    <ul data-gaelo-flow="Items" className={`${classUlElem}`}>
-      {items.map((item, index) => {
+    <ul data-gaelo-flow="items" className={style.classUlElem}>
+      {elements.map((item, index) => {
         const activeClasses = item.isActive
-          ? active
-          : inactive;
+          ? style.active
+          : style.inactive;
+        console.log({ activeClasses });
         return (
           <li
             key={index}
-            className={`${classLiElem} ${activeClasses}`}
+            className={`${style.classLiElem} ${activeClasses}`}
             onClick={() => onNavigate(item.path)}
           >
             {item.title}
@@ -35,4 +41,3 @@ const Items = ({ items, variant, onNavigate }: ItemsProps) => {
   );
 };
 
-export default Items;

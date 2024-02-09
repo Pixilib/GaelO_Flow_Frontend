@@ -8,8 +8,8 @@ import { useCustomMutation } from "../utils/reactQuery";
 import { signIn } from "../services/auth";
 import { toastError } from "../utils/toastify";
 
-import Button from "../RenderComponents/shared/Button";
-import Input from "../RenderComponents/shared/Input";
+import Button from "../RenderComponents/Button";
+import Input from "../RenderComponents/Input";
 
 import { Colors } from "../utils/enums";
 import PasswordKeyOn from "./../assets/password-key-on.svg?react";

@@ -1,5 +1,5 @@
-import ChevronUp from "../../assets/chevron-up.svg?react";
-import ChevronDown from "../../assets/chevron-down.svg?react";
+import ChevronUp from "../assets/chevron-up.svg?react";
+import ChevronDown from "../assets/chevron-down.svg?react";
 
 type ToggleChevronProps = {
     isOpen: boolean;

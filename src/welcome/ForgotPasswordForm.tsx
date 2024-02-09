@@ -4,8 +4,8 @@ import { useCustomMutation } from "../utils/reactQuery";
 import { lostPassword } from "../services/auth";
 import { toastError, toastSuccess } from "../utils/toastify";
 
-import Input from "../RenderComponents/shared/Input";
-import Button from "../RenderComponents/shared/Button";
+import Input from "../RenderComponents/Input";
+import Button from "../RenderComponents/Button";
 import { Colors } from "../utils/enums";
 import Letter from "../assets/mail.svg?react";
 import ChevronRight from "../assets/chevron-right.svg?react";

@@ -1,9 +1,9 @@
 import { ChangeEvent, useState } from "react";
-import Input from "../../RenderComponents/shared/Input";
-import Card, { CardHeader, CardBody, CardFooter } from "../../RenderComponents/shared/Card";
-import Table from '../../RenderComponents/shared/Table';
+import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
+import Input from "../../RenderComponents/Input";
+import Table from '../../RenderComponents/Table';
 import { createColumnHelper } from "@tanstack/react-table";
-import Button from "../../RenderComponents/shared/Button";
+import Button from "../../RenderComponents/Button";
 import { Colors } from "../../utils/enums";
 
 
