@@ -26,7 +26,7 @@ export const Items = ({ elements, style, onNavigate }: ItemsProps) => {
         const activeClasses = item.isActive
           ? style.active
           : style.inactive;
-        console.log({ activeClasses });
+          console.log({style})
         return (
           <li
             key={index}

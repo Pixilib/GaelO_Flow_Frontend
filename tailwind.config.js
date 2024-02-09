@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontSize:{
+        '10px': '10px',
+      },
       borderRadius: {
         '18': '18px',
         '20': '20px',
@@ -35,6 +38,7 @@ export default {
       colors: {
         'primary': '#4746B8',
         'primary-hover': '#0C0B76',
+        'primary-active':'#8C8BD3',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
         'danger': '#DB1F22',
