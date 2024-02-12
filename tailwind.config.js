@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       borderRadius: {
+        '18': '18px',
         '20': '20px',
         '40': '40px',
         '70': '70px',
@@ -51,6 +52,7 @@ export default {
       boxShadow: {
         'custom': '11px 17px 15px rgba(58, 51, 51, 0.37)',
       },
+      animation:['hover'],
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],

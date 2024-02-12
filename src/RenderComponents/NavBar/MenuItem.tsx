@@ -22,7 +22,7 @@ const MenuItem = ({
 
   return (
     <div
-      className={`flex items-start text-sm justify-start text-white hover:bg-primary-hover w-full p-3 ${activeClasses} ${className}`}
+      className={`flex w-full items-start justify-start p-3 text-sm text-white hover:bg-primary-hover ${activeClasses} ${className}`}
       onClick={onClick}
       data-gaelo-flow="sidebar-item"
     >

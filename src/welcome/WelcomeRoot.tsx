@@ -70,8 +70,7 @@ const Welcome = () => {
                 (location.pathname === "/legal-mention" ? (
                   <div
                     onClick={() => navigate("/")}
-                    className={classLink}
-                  ><div>
+                  ><div className="cursor-pointer">
                       <ArrowBack />
                   </div>
                     <span>Back</span>

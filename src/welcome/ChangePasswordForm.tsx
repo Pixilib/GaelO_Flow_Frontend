@@ -54,8 +54,8 @@ const ChangePasswordForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="text-5xl font-bold text-center mb-6"> Password </h1>
-      <p className="text-lg text-gray-700 text-center mb-12">
+      <h1 className="mb-6 text-5xl font-bold text-center"> Password </h1>
+      <p className="mb-12 text-lg text-center text-gray-700">
         Please create/change your password.
       </p>
       <div className="w-full space-y-12">
