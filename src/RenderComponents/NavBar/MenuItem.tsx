@@ -17,17 +17,17 @@ const MenuItem = ({
 }: MenuItemProps) => {
   //? Personnalize css if item is Active or not
   const activeClasses = isActive
-    ? "bg-primary-hover disabled cursor-not-allowed"
-    : "bg-inherit cursor-pointer";
+    ? "bg-primary-active disabled cursor-not-allowed"
+    : "cursor-pointer";
 
   return (
     <div
-      className={`flex w-full items-start justify-start p-3 text-sm text-white hover:bg-primary-hover ${activeClasses} ${className}`}
+      className={`flex w-full items-start justify-start p-3 text-xs text-white transition-all duration-200 hover:text-sm ${activeClasses} ${className}`}
       onClick={onClick}
       data-gaelo-flow="sidebar-item"
     >
-      <span className="ml-4 mr-3">{icon}</span>
-      <span className="">{title}</span>
+      <span className="ml-4 mr-3 hover:mx-2">{icon}</span>
+      <span >{title}</span>
     </div>
   );
 };
