@@ -1,10 +1,11 @@
 import { Items, Item, ItemStyle } from "./Items.tsx";
-
+import Line from "../../assets/line.svg?react";
 
 type SideBarItemsProps = {
   elements: Item[];
   onNavigate: (path: string) => void;
 };
+
 
 const SideBarItems = ({ elements, onNavigate }: SideBarItemsProps) => {
   const sideBarItemsStyle: ItemStyle = {
@@ -14,7 +15,7 @@ const SideBarItems = ({ elements, onNavigate }: SideBarItemsProps) => {
     inactive: "bg-inherit text-10 hover:text-dark cursor-pointer "
   };
   return (
-    <Items elements={elements} onNavigate={onNavigate} style={sideBarItemsStyle} />
+    <Items icon={<Line/>} elements={elements} onNavigate={onNavigate} style={sideBarItemsStyle} />
   )
 };
 

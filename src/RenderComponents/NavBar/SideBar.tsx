@@ -75,13 +75,13 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="h-full min-h-[545px] w-64 overflow-auto rounded-tr-40 border-transparent bg-primary shadow-custom"
+      className="h-full w-64 rounded-tr-40 border-transparent bg-primary shadow-custom"
     >
-      <main className="h-full overflow-hidden rounded-tr-40 pt-7">
+      <main className="h-full rounded-tr-40 pt-7">
         <div className="flex h-15% justify-center">
           <LogoSideBar />
         </div>
-        <div className="flex h-65% flex-col overflow-auto">
+        <div className="flex h-60% flex-col">
           <MenuItemsCollapse
             icon={<Administrator />}
             title="Administration"
@@ -121,7 +121,7 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
             onClick={() => handleItemClick("/mydicom")}
           />
         </div>
-        <div className="flex h-10% flex-col justify-end">
+        <div className="flex h-25% flex-col">
           <MenuItem
             title="Home"
             icon={<Home />}
