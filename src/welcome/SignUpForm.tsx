@@ -56,6 +56,8 @@ export const SignUpForm = () => {
       label="Username :"
       className="w-full" 
       svgLeft={<User />} 
+      bordered
+
       placeholder="Enter your username"
       value={username}
       required
@@ -67,6 +69,7 @@ export const SignUpForm = () => {
         <Input
           label="Firstname :"
           svgLeft={<User />}
+          bordered
           placeholder="Enter your firstname"
           value={firstname}
           required
@@ -78,6 +81,7 @@ export const SignUpForm = () => {
         <Input
           label="Lastname :"
           svgLeft={<User />}
+          bordered
           placeholder="Enter your lastname"
           value={lastname}
           required
@@ -89,6 +93,7 @@ export const SignUpForm = () => {
         <Input
           label="Email :"
           svgLeft={<Mail />}
+          bordered
           placeholder="Enter your @email"
           value={email}
           required
