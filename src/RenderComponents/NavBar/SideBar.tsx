@@ -79,9 +79,6 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
     },
   ];
 
-
-
-
   return (
     <nav
       data-gaelo-flow="sidebar"
