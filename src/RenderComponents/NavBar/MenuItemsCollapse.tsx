@@ -23,16 +23,16 @@ const MenuItemsCollapse = ({
   onNavigate,
 }: MenuItemCollapseProps) => {
   //? Personnalize css if Menu is Open or not
-  const bgIsOpen = isOpen ? "bg-primary-hover" : "hover:bg-primary-hover";
+  const bgIsOpen = isOpen ? "bg-primary-hover" : "transition-transform duration-100 hover:scale-110 ";
   return (
     <div
-      className={`flex w-full cursor-context-menu flex-col text-sm ${className}`}
+      className={`flex w-full cursor-context-menu flex-col ${className}`}
       data-gaelo-flow="sidebar-item-collapse"
     >
-      <div className={`flex justify-between p-3 text-white ${bgIsOpen}`}>
+      <div className={`flex justify-between p-3 ${bgIsOpen}`}>
         <div className={`ml-4 flex grow items-center`}>
           <span className="mr-3">{icon}</span>
-          <span className="grow">{title}</span>
+          <span className="grow text-xs text-white">{title}</span>
         </div>
         <ToogleChevron className={"mr-4 shrink-0"} isOpen={isOpen} toggleOpen={toggleOpen} />
       </div>
