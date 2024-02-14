@@ -1,5 +1,4 @@
 import { Items, Item, ItemStyle } from "./Items.tsx";
-import Line from "../../assets/line.svg?react";
 
 type SideBarItemsProps = {
   elements: Item[];
@@ -12,10 +11,10 @@ const SideBarItems = ({ elements, onNavigate }: SideBarItemsProps) => {
     classLiElem: "flex my-0.5 first:mt-0 text-sm justify-start py-1 pl-12 pe-4 items-center ",
     classUlElem: "rounded-b-xl bg-primary text-[10px] text-white ",
     active: "bg-primary-active text-10 cursor-not-allowed ",
-    inactive: "bg-inherit text-10 hover:text-dark cursor-pointer "
+    inactive: "bg-inherit text-10 hover:bg-primary-hover cursor-pointer "
   };
   return (
-    <Items icon={<Line/>} elements={elements} onNavigate={onNavigate} style={sideBarItemsStyle} />
+    <Items elements={elements} onNavigate={onNavigate} style={sideBarItemsStyle} />
   )
 };
 

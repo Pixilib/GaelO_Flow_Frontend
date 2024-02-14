@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout } from "../reducers/UserSlice";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
@@ -17,36 +17,34 @@ import Notification from "../assets/notification.svg?react";
 import Settings from "../assets/settings.svg?react";
 import BannerItems from "../RenderComponents/Items/BannerItems";
 import Profile from "../assets/user-banner.svg?react";
+import useOutsideClick from "../utils/useOutsideClick";
 
 const RootApp = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
-  // const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
-
+  const languageDropdownRef = useRef<HTMLElement>(null);
+  const settingsDropdownRef = useRef<HTMLElement>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
-
-
-  const handleItemClick = (path: string) => {
-    navigate(path);
-  };
-
-
-  const toggleOpen = (name: string) => {
-    setOpenItem(openItem === name ? null : name);
-  };
-
+  
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
   };
+  const handleItemClick = (path: string) => {
+    navigate(path);
+  };
+  const toggleOpen = (name: string) => {
+    setOpenItem(openItem === name ? null : name);
+  };
+  useOutsideClick(languageDropdownRef, () => isOpen('Language') && toggleOpen('Language'));
+  useOutsideClick(settingsDropdownRef, () => isOpen('SettingsUser') && toggleOpen('SettingsUser'));
+
   const isOpen = (item: string): boolean => openItem === item;
   const ItemsLanguage: Item[] = [
     { title: "English", path: "/english", isActive: location.pathname === "/english" },
     { title: "Français", path: "/francais", isActive: location.pathname === "/francais" },
   ];
-
   const ItemsSettingsUser: Item[] = [
     { title: "Profile", path: "/profile", isActive: location.pathname === "/profile" },
     { title: "Settings", path: "/settings", isActive: location.pathname === "/settings" },
@@ -54,7 +52,7 @@ const RootApp = () => {
 
   return (
     <div className="flex size-full">
-      <SideBar onLogout={handleLogout} />
+      <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
       <div className="flex flex-1 flex-col">
         <Banner title={"Home"}>
           <div className="flex justify-end ">
@@ -65,6 +63,7 @@ const RootApp = () => {
                 <ToogleChevron
                   isOpen={isOpen("Language")}
                   toggleOpen={() => toggleOpen("Language")}
+                  myRef={languageDropdownRef}
                 />
               </div>
               {isOpen("Language") && (
@@ -79,6 +78,7 @@ const RootApp = () => {
                 <ToogleChevron
                   isOpen={isOpen("SettingsUser")}
                   toggleOpen={() => toggleOpen("SettingsUser")}
+                  myRef={settingsDropdownRef}
                 />
                 <Notification className="transition-transform duration-100 hover:scale-110" />
                 <Settings className="transition-transform duration-100 hover:scale-110" />
@@ -91,7 +91,6 @@ const RootApp = () => {
                 />
               )}
             </BannerDropDown>
-
           </div>
         </Banner>
 
@@ -105,5 +104,4 @@ const RootApp = () => {
     </div>
   );
 };
-
 export default RootApp;

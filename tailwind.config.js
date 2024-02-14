@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontSize:{
-        '10px': '10px',
+        '10': '10px',
       },
       borderRadius: {
         '18': '18px',
@@ -38,8 +38,8 @@ export default {
       },
       colors: {
         'primary': '#4746B8',
-        'primary-hover': '#0C0B76',
-        'primary-active':'#8C8BD3',
+        'primary-active': '#0C0B76',
+        'primary-hover':'#8C8BD3',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
         'danger': '#DB1F22',

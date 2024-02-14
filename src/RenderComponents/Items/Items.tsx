@@ -15,7 +15,7 @@ export type ItemsProps = {
   elements: Item[];
   style: ItemStyle;
   onNavigate: (path: string) => void;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 };
 
 export const Items = ({ elements, style, onNavigate,icon}: ItemsProps) => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import MenuItem from "./MenuItem";
@@ -14,18 +14,24 @@ import MyDicom from "../../assets/my-dicom.svg?react";
 import Home from "../../assets/home.svg?react";
 import Help from "../../assets/help.svg?react";
 import Logout from "../../assets/logout.svg?react";
+import useOutsideClick from "../../utils/useOutsideClick";
 
 type SideBarProps = {
   onLogout: () => void;
+  openItem: string | null;
+  setOpenItem: (value: string | null) => void;
 };
 
-export const SideBar = ({ onLogout }: SideBarProps) => {
-
-  //TODO: Add route for the menu , when route exist !
-  const [openItem, setOpenItem] = useState<string | null>(null);
+export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
+  const adminMenuRef = useRef<HTMLElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
+  useOutsideClick(adminMenuRef, () => {
+    if (openItem === "Administration") {
+      setOpenItem(null);
+    }
+  });
   const handleItemClick = (path: string) => {
     navigate(path);
   };
@@ -72,6 +78,10 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
       isActive: location.pathname === "/",
     },
   ];
+
+
+
+
   return (
     <nav
       data-gaelo-flow="sidebar"
@@ -83,6 +93,7 @@ export const SideBar = ({ onLogout }: SideBarProps) => {
         </div>
         <div className="flex h-60% flex-col">
           <MenuItemsCollapse
+            myRef={adminMenuRef}
             icon={<Administrator />}
             title="Administration"
             elements={adminItems}

@@ -11,30 +11,32 @@ type MenuItemCollapseProps = {
   toggleOpen: () => void;
   onNavigate: (path: string) => void;
   className?: string;
+  myRef: React.Ref<HTMLElement>;
 };
 
 const MenuItemsCollapse = ({
   icon,
   title,
   elements,
+  myRef,
   isOpen,
   className,
   toggleOpen,
   onNavigate,
 }: MenuItemCollapseProps) => {
   //? Personnalize css if Menu is Open or not
-  const bgIsOpen = isOpen ? "bg-primary-hover" : "";
+  const bgIsOpen = isOpen ? "bg-primary-active" : "";
   return (
     <div
-      className={`flex w-full cursor-context-menu flex-col ${className}`}
+      className={`flex w-full cursor-context-menu flex-col hover:bg-primary-hover ${className}`}
       data-gaelo-flow="sidebar-item-collapse"
     >
       <div className={`flex justify-between p-3 ${bgIsOpen}`}>
         <div className="ml-4 flex grow items-center">
           <span className="mr-3">{icon}</span>
-          <span className="grow text-xs text-white transition-all duration-100 hover:text-sm ">{title}</span>
+          <span className="grow text-xs text-white">{title}</span>
         </div>
-        <ToogleChevron className={"mr-4 shrink-0"} isOpen={isOpen} toggleOpen={toggleOpen} />
+        <ToogleChevron myRef={myRef} className={"mr-4 shrink-0"} isOpen={isOpen} toggleOpen={toggleOpen} />
       </div>
       {isOpen && <SideBarItems elements={elements} onNavigate={onNavigate} />}
     </div>
