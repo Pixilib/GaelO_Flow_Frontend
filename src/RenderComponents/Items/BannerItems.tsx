@@ -8,8 +8,8 @@ type BannerItemsProps = {
 
 const SideBarItems = ({ elements, onNavigate }: BannerItemsProps) => {
   const sideBarItemsStyle: ItemStyle = {
-    classUlElem:"text-center mt-4 rounded-xl bg-primary shadow-lg px-4 relative z-10",
-    classLiElem: "cursor-pointer rounded-xl py-3 text-sm hover:text-lg transition-all duration-200",
+    classUlElem:"text-center mt-4 rounded-xl bg-primary shadow-lg relative z-10",
+    classLiElem: "cursor-pointer rounded-xl py-3 text-sm hover:bg-primary-hover",
     active: "",
     inactive: "",
   };

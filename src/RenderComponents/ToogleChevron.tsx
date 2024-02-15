@@ -5,10 +5,11 @@ type ToggleChevronProps = {
     isOpen: boolean;
     toggleOpen: () => void;
     className?: string;
+    myRef: React.Ref<HTMLElement>;
 }
 
-const ToggleChevron= ({ isOpen, toggleOpen, className }:ToggleChevronProps) => (
-    <span data-gaelo-flow="ToogleChevron"  className={`${className}`} onClick={toggleOpen}>
+const ToggleChevron= ({ isOpen, toggleOpen, className, myRef}:ToggleChevronProps) => (
+    <span ref={myRef} data-gaelo-flow="ToogleChevron"  className={`${className}`} onClick={toggleOpen}>
         {isOpen ? <ChevronUp /> : <ChevronDown />}
     </span>
 );
