@@ -35,11 +35,9 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
   const handleItemClick = (path: string) => {
     navigate(path);
   };
-
   const toggleOpen = (title: string) => {
     setOpenItem(openItem === title ? null : title);
   };
-
   //TODO: Add route for the adminItems , when route exist !
   const adminItems = [
     {
@@ -148,7 +146,6 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
             isActive={location.pathname === "/logout"}
             onClick={onLogout}
           />
-
         </div>
       </main>
     </nav>
