@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SideBarItems from '../src/RenderComponents/Items/SideBarItems';
+import SideBarItems from '../src/SideBarItems';
 
 const meta: Meta<typeof SideBarItems> = {
     title: 'GAELO FLOW UI/SideBarItems',

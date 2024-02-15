@@ -43,7 +43,9 @@ const Input = ({
           placeholder={placeholder}
           // eslint-disable-next-line tailwindcss/no-custom-classname
           className={`peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""}  ${bordered ? "border focus:border-primary" : ""} text-gray-600 w-full rounded-xl text-sm focus:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${className}`}
+          
           {...props}
+          
         />
 
       </div>

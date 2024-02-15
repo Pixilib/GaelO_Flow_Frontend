@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
-import { Item } from "../Items/Items";
-import ToogleChevron from "../ToogleChevron";
-import SideBarItems from "../Items/SideBarItems";
+import { Item } from "./RenderComponents/Items/Items";
+import SideBarItems from "./SideBarItems";
+
+import ToogleChevron from "./RenderComponents/ToogleChevron";
 
 type MenuItemCollapseProps = {
   icon?: ReactNode;
@@ -28,10 +29,10 @@ const MenuItemsCollapse = ({
   const bgIsOpen = isOpen ? "bg-primary-active" : "";
   return (
     <div
-      className={`flex w-full cursor-context-menu flex-col hover:bg-primary-hover ${className}`}
+      className={`flex w-full cursor-context-menu flex-col ${className}`}
       data-gaelo-flow="sidebar-item-collapse"
     >
-      <div className={`flex justify-between p-3 ${bgIsOpen}`}>
+      <div className={`flex justify-between p-2.5 ${bgIsOpen}`}>
         <div className="ml-4 flex grow items-center">
           <span className="mr-3">{icon}</span>
           <span className="grow text-xs text-white">{title}</span>

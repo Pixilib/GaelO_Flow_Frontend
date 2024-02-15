@@ -22,11 +22,11 @@ const MenuItem = ({
 
   return (
     <div
-      className={`flex w-full items-start justify-start p-3 text-xs text-white hover:bg-primary-hover ${activeClasses} ${className}`}
+      className={`flex w-full items-start justify-start p-2.5 text-xs text-white hover:bg-primary-hover ${activeClasses} ${className}`}
       onClick={onClick}
       data-gaelo-flow="sidebar-item"
     >
-      <span className="ml-4 mr-3 hover:mx-2">{icon}</span>
+      <span className="ml-4 mr-3">{icon}</span>
       <span >{title}</span>
     </div>
   );
