@@ -11,24 +11,23 @@ interface RedisData {
 
 const RedisCard: React.FC = () => {
     const columnHelper = createColumnHelper<RedisData>();
-    const [data, setData] = useState<RedisData[]>([]); 
+    const [data, setData] = useState<RedisData[]>([]);
+    
     useEffect(() => {
-       
         const fetchData = async () => {
-          
             const loadedData = [
                 {
                     address: 'https://orthanc',
                     port: 1234,
                     password: 'password',
                 },
-                
             ];
-            setData(loadedData); 
+            setData(loadedData);
         };
 
         fetchData();
-    }, []); 
+    }, []);
+    
     const columns = [
         columnHelper.accessor('address', {
             header: 'Address',
@@ -55,7 +54,9 @@ const RedisCard: React.FC = () => {
                         </div>
                     </div>
                 </CardBody>
-                <CardFooter />
+                <CardFooter className="flex justify-center">
+                
+            </CardFooter>
             </Card>
         </div>
     );

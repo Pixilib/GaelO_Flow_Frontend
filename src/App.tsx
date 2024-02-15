@@ -3,11 +3,11 @@ import WelcomeRoot from "./welcome/WelcomeRoot";
 import { RootState } from "./store";
 import RootApp from "./root/RootApp";
 import "./index.css";
-import RedisCard from "./admin/general/RedisCard";
+import OrthancCard from "./admin/general/OrthancCard";
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
 return(
-  <RedisCard/>
+  <OrthancCard/>
 )
     return (
   <div className="w-screen h-screen">

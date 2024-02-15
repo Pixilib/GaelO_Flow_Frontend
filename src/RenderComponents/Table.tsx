@@ -20,7 +20,6 @@ const Table = ({ data, columns }: TableProps) => {
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map(header => {
-                                // Applique un centrage pour les colonnes spécifiées
                                 const textAlignClass = ['address', 'port', 'password'].includes(header.id) ? 'text-center' : 'text-left';
                                 return (
                                     <th key={header.id} className={`px-2 py-3 ${textAlignClass} text-xs font-bold text-dark uppercase tracking-wider md:px-4 lg:px-6 min-w-[120px] text-lg border-b-2 border-gray`}>
