@@ -52,7 +52,7 @@ export default {
         'dark': '#393838',
         'red': '#f8d7da',
         'gray': '#EDEDED',
-        'light': '#F1F1F1'
+        'light': '#F1F1F1',
       },
       boxShadow: {
         'custom': '11px 17px 15px rgba(58, 51, 51, 0.37)',
