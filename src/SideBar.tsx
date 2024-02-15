@@ -1,20 +1,20 @@
 import { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import MenuItem from "./MenuItem";
+import MenuItem from "./RenderComponents/NavBar/MenuItem";
 import MenuItemsCollapse from "./MenuItemsCollapse";
 
-import LogoSideBar from "../../assets/logoGaeloFlow-white3.svg?react";
-import Administrator from "../../assets/administrator.svg?react";
-import Import from "../../assets/import-content.svg?react";
-import Search from "../../assets/search.svg?react";
-import SearchDocument from "../../assets/search-document.svg?react";
-import Auto from "../../assets/auto-retrieve.svg?react";
-import MyDicom from "../../assets/my-dicom.svg?react";
-import Home from "../../assets/home.svg?react";
-import Help from "../../assets/help.svg?react";
-import Logout from "../../assets/logout.svg?react";
-import useOutsideClick from "../../utils/useOutsideClick";
+import LogoSideBar from  "./assets/logoGaeloFlow-white3.svg?react";
+import Administrator from "./assets/administrator.svg?react";
+import Import from "./assets/import-content.svg?react";
+import Search from "./assets/search.svg?react";
+import SearchDocument from "./assets/search-document.svg?react";
+import Auto from "./assets/auto-retrieve.svg?react";
+import MyDicom from "./assets/my-dicom.svg?react";
+import Home from "./assets/home.svg?react";
+import Help from "./assets/help.svg?react";
+import Logout from "./assets/logout.svg?react";
+import useOutsideClick from "./utils/useOutsideClick";
 
 type SideBarProps = {
   onLogout: () => void;
@@ -35,11 +35,9 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
   const handleItemClick = (path: string) => {
     navigate(path);
   };
-
   const toggleOpen = (title: string) => {
     setOpenItem(openItem === title ? null : title);
   };
-
   //TODO: Add route for the adminItems , when route exist !
   const adminItems = [
     {
@@ -75,7 +73,7 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
     {
       title: "Labels",
       path: "/labels",
-      isActive: location.pathname === "/",
+      isActive: location.pathname === "/labels",
     },
   ];
 
@@ -85,10 +83,10 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
       className="h-full w-64 rounded-tr-40 border-transparent bg-primary shadow-custom"
     >
       <main className="h-full rounded-tr-40 pt-7">
-        <div className="flex h-15% justify-center">
+        <div className="flex h-11% justify-center">
           <LogoSideBar />
         </div>
-        <div className="flex h-60% flex-col">
+        <div className="flex h-69% flex-col overflow-y-auto">
           <MenuItemsCollapse
             myRef={adminMenuRef}
             icon={<Administrator />}
@@ -129,12 +127,13 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
             onClick={() => handleItemClick("/mydicom")}
           />
         </div>
-        <div className="flex h-25% flex-col">
+        <div className="flex h-20% flex-col">
           <MenuItem
             title="Home"
             icon={<Home />}
             isActive={location.pathname === "/home"}
             onClick={() => handleItemClick("/home")}
+            className="mt-1"
           />
           <MenuItem
             title="Help"
@@ -148,7 +147,6 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
             isActive={location.pathname === "/logout"}
             onClick={onLogout}
           />
-
         </div>
       </main>
     </nav>

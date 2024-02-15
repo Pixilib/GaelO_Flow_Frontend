@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../reducers/UserSlice";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 
-import { SideBar } from "../RenderComponents/NavBar/SideBar";
+import { SideBar } from "../SideBar";
 import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/general/AdminRoot";
 import { Banner } from "../Banner";
@@ -15,7 +15,7 @@ import ToogleChevron from "../RenderComponents/ToogleChevron";
 import Language from "../assets/language.svg?react";
 import Notification from "../assets/notification.svg?react";
 import Settings from "../assets/settings.svg?react";
-import BannerItems from "../RenderComponents/Items/BannerItems";
+import BannerItems from "../BannerItems";
 import Profile from "../assets/user-banner.svg?react";
 import useOutsideClick from "../utils/useOutsideClick";
 
