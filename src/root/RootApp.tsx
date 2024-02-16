@@ -20,31 +20,32 @@ import Profile from "../assets/user-banner.svg?react";
 import useOutsideClick from "../utils/useOutsideClick";
 
 const RootApp = () => {
-  const [openItem, setOpenItem] = useState<string | null>(null);
-  const [isToggled, setIsToggled] = useState<boolean>(false);
-  const languageDropdownRef = useRef<HTMLUListElement>(null);
-  const settingsDropdownRef = useRef<HTMLUListElement>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [openItem, setOpenItem] = useState<string | null>(null);
+  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const languageDropdownRef = useRef<HTMLUListElement>(null);
+  const settingsDropdownRef = useRef<HTMLUListElement>(null);
+  useOutsideClick(languageDropdownRef, () => isOpen('Language') && handleDropDown('Language'));
+  useOutsideClick(settingsDropdownRef, () => isOpen('SettingsUser') && handleDropDown('SettingsUser'));
+
   const handleSwitchMode = () => {
     setIsToggled(!isToggled);
   }
+  const handleItemClick = (path: string) => {
+    navigate(path);
+  };
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
   };
-  const handleItemClick = (path: string) => {
-    navigate(path);
-  };
   const handleDropDown = (name: string) => {
     setOpenItem(openItem === name ? null : name);
   };
-  useOutsideClick(languageDropdownRef, () => isOpen('Language') && handleDropDown('Language'));
-  useOutsideClick(settingsDropdownRef, () => isOpen('SettingsUser') && handleDropDown('SettingsUser'));
-
   const isOpen = (item: string): boolean => openItem === item;
+  
   const ItemsLanguage: Item[] = [
     { title: "English", path: "/english", isActive: location.pathname === "/english" },
     { title: "Français", path: "/francais", isActive: location.pathname === "/francais" },
