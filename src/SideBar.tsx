@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import MenuItem from "./RenderComponents/NavBar/MenuItem";
-import MenuItemsCollapse from "./MenuItemsCollapse";
+import MenuItem from "./RenderComponents/Menu/MenuItem";
+import MenuItemsCollapse from "./RenderComponents/Menu/MenuItemsCollapse";
 
 import LogoSideBar from  "./assets/logoGaeloFlow-white3.svg?react";
 import Administrator from "./assets/administrator.svg?react";
@@ -22,8 +22,8 @@ type SideBarProps = {
   setOpenItem: (value: string | null) => void;
 };
 
-export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
-  const adminMenuRef = useRef<HTMLElement>(null);
+export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
+  const adminMenuRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,7 +35,7 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
   const handleItemClick = (path: string) => {
     navigate(path);
   };
-  const toggleOpen = (title: string) => {
+  const handleDropDown = (title: string) => {
     setOpenItem(openItem === title ? null : title);
   };
   //TODO: Add route for the adminItems , when route exist !
@@ -93,7 +93,7 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
             title="Administration"
             elements={adminItems}
             isOpen={openItem === "Administration"}
-            toggleOpen={() => toggleOpen("Administration")}
+            dropDownOpen={() => handleDropDown("Administration")}
             onNavigate={handleItemClick}
           />
           <MenuItem
@@ -127,7 +127,8 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
             onClick={() => handleItemClick("/mydicom")}
           />
         </div>
-        <div className="flex h-20% flex-col">
+        <div className="flex h-20% flex-col border-t border-white">
+
           <MenuItem
             title="Home"
             icon={<Home />}

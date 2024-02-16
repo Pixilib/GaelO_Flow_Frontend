@@ -8,7 +8,7 @@ function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
 
     return (
-  <div className="w-screen h-screen">
+  <div className="h-screen w-screen">
     {isLogged ? <RootApp /> : <WelcomeRoot />}
   </div>
  )
