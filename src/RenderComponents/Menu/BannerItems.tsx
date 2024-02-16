@@ -1,4 +1,4 @@
-import { Items, Item, ItemStyle } from "./RenderComponents/Items/Items.tsx";
+import { Items, Item, ItemStyle } from "./Items.tsx";
 
 
 type BannerItemsProps = {

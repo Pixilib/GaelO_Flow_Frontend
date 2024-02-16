@@ -10,7 +10,7 @@ type ToggleSwitchProps = {
 const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
   return (
     <label className="flex cursor-pointer items-center">
-      {/* Le vrai input checkbox caché */}
+      {/* The real hidden checkbox input */}
       <input
         data-gaelo-flow="toggle-switch"
         type="checkbox"
@@ -19,21 +19,22 @@ const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
         onChange={onToggle}
         aria-labelledby="Light and Dark mode switch"
       />
-      {/* Le design du switch */}
+      {/* switch design */}
       <div
-        className={`duration-500 relative flex h-7 w-16 items-center rounded-full pe-3
-       transition-colors ease-in-out 
+        className={`relative flex h-7 w-16 items-center rounded-full pe-3 transition-colors
+       duration-500 ease-in-out 
         ${isToggled ? 'justify-end bg-primary-active' : 'justify-start rounded-full bg-primary-hover'
           }`}
       >
-        {/* Le cercle du toggle avec l'icône du soleil ou de la lune */}
+        {/* Circle toogle with moon or sun */}
         <div
-          className={`duration-200 flex size-6
-           items-center justify-center rounded-full transition-opacity- shadow transition-all ease-in-out
+          // eslint-disable-next-line tailwindcss/no-custom-classname
+          className={`transition-opacity- flex size-6
+           items-center justify-center rounded-full shadow transition-all duration-200 ease-in-out
             ${isToggled ? 'translate-x-2 ' : 'translate-x-0 bg-slate-100'
             }`}
         >
-          {/* Affiche l'icône correspondante selon l'état du switch */}
+          {/*Display icon according to toogle switch  */}
           {isToggled ? (
             <Moon className="size-4" />
           ) : (

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Administrator from '../src/assets/administrator.svg?react';
-import MenuItemsCollapse from '../src/MenuItemsCollapse';
+import MenuItemsCollapse from '../src/RenderComponents/Menu/MenuItemsCollapse';
 
 
 const meta: Meta<typeof MenuItemsCollapse> = {

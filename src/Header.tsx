@@ -3,26 +3,26 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import useOutsideClick from "./utils/useOutsideClick";
 import { Banner } from "./Banner";
-import BannerItems from "./BannerItems";
-import { BannerDropDown } from "./RenderComponents/Banner/BannerDropDown";
-import { Item } from "./RenderComponents/Items/Items";
-import ToggleSwitch from "./RenderComponents/ToggleSwitch";
-import ToogleChevron from "./RenderComponents/ToogleChevron";
+import BannerItems from "./RenderComponents/Menu/BannerItems";
+import { BannerDropDown } from "./RenderComponents/Menu/BannerDropDown";
+import { Item } from "./RenderComponents/Menu/Items";
+import ToggleSwitch from "./RenderComponents/Menu/ToggleSwitch";
+import ToogleChevron from "./RenderComponents/Menu/ToogleChevron";
 
-import Language from "../assets/language.svg?react";
-import Notification from "../assets/notification.svg?react";
-import Settings from "../assets/settings.svg?react";
-import Profile from "../assets/user-banner.svg?react";
+import Language from "./assets/language.svg?react";
+import Notification from "./assets/notification.svg?react";
+import Settings from "./assets/settings.svg?react";
+import Profile from "./assets/user-banner.svg?react";
 
 type HeaderProps = {
     openItem: string | null;
     setOpenItem: (value: string | null) => void;
     isToggled: boolean;
-    setIsToggled: (value: boolean) => void;
+    onSwicthMode: () => void;
 };
 
 
-const Header = ({ openItem, setOpenItem, isToggled, setIsToggled}: HeaderProps) => {
+const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode}: HeaderProps) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -74,7 +74,7 @@ const Header = ({ openItem, setOpenItem, isToggled, setIsToggled}: HeaderProps) 
                             isOpen={isOpen("SettingsUser")}
                             dropDownOpen={() => handleDropDown("SettingsUser")}
                         />
-                        <ToggleSwitch isToggled={isToggled} onToggle={handleSwitchMode} />
+                        <ToggleSwitch isToggled={isToggled} onToggle={onSwicthMode} />
                         <Notification className="size-4 transition-transform duration-100 hover:scale-110" />
                         <Settings className="size-4 transition-transform duration-100 hover:scale-110" />
                         <Profile height={23} fill="white" width={23} stroke="white" className="transition-transform duration-100 hover:scale-110" />
@@ -90,9 +90,7 @@ const Header = ({ openItem, setOpenItem, isToggled, setIsToggled}: HeaderProps) 
                 </BannerDropDown>
             </div>
         </Banner>
-
     )
-
 }
 
 export default Header;

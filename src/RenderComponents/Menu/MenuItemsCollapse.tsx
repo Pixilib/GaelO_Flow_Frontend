@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import { Item } from "./RenderComponents/Items/Items";
+import { Item } from "./Items";
 import SideBarItems from "./SideBarItems";
 
-import ToogleChevron from "./RenderComponents/ToogleChevron";
+import ToogleChevron from "./ToogleChevron";
 
 type MenuItemCollapseProps = {
   icon?: ReactNode;

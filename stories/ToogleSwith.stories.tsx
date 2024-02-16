@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import ToggleSwicth from '../src/RenderComponents/ToggleSwitch';
+import ToggleSwicth from '../src/RenderComponents/Menu/ToggleSwitch';
 
 
 const meta: Meta<typeof ToggleSwicth> = {

@@ -14,9 +14,9 @@ export const Banner = ({ title, children, className }: BannerProps) => {
   return (
     <div
       data-gaelo-flow="banner"
-      className={`h-24 shadow-lg border-transparent rounded-br-20 flex items-center justify-between w-full ${className}`}
+      className={`flex h-24 w-full items-center justify-between rounded-br-20 border-transparent shadow-lg ${className}`}
     >
-      <div className="flex items-center ml-12">
+      <div className="ml-12 flex items-center">
         <span className="mr-8">
           {location.pathname === "/" ? (
             <BannerHome />

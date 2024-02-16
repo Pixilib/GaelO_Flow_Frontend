@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-import MenuItem from "./RenderComponents/NavBar/MenuItem";
-import MenuItemsCollapse from "./MenuItemsCollapse";
+import MenuItem from "./RenderComponents/Menu/MenuItem";
+import MenuItemsCollapse from "./RenderComponents/Menu/MenuItemsCollapse";
 
 import LogoSideBar from  "./assets/logoGaeloFlow-white3.svg?react";
 import Administrator from "./assets/administrator.svg?react";

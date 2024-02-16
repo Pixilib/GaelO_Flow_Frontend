@@ -1,7 +1,3 @@
-//WIP BannerDropDown component
-
-//TODO: Define the type of Object
-
 export type BannerDropDownProps = {
   children: React.ReactNode;
   className?: string;
