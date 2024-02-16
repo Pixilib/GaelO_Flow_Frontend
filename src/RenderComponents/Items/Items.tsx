@@ -1,3 +1,5 @@
+import { forwardRef } from "react";
+
 export type ItemStyle = {
   classLiElem: string;
   classUlElem: string;
@@ -18,28 +20,26 @@ export type ItemsProps = {
   icon?: React.ReactNode;
 };
 
-export const Items = ({ elements, style, onNavigate,icon}: ItemsProps) => {
+export const Items = forwardRef<HTMLUListElement, ItemsProps>(({ elements, style, onNavigate, icon},ref) => {
 
   return (
-    <>
-    <ul data-gaelo-flow="items" className={style.classUlElem}>
-      {elements.map((item, index) => {
-        const activeClasses = item.isActive
-        ? style.active
-        : style.inactive;
-        return (
-          <li
-          key={index}
-          className={`${style.classLiElem} ${activeClasses}`}
-          onClick={() => onNavigate(item.path)}
-          >
-            {icon}
-            {item.title}
-          </li>
-        );
-      })}
-    </ul>
-    </>
-  );
-};
-
+      <ul ref={ref} data-gaelo-flow="items" className={style.classUlElem}>
+        {elements.map((item, index) => {
+          const activeClasses = item.isActive
+          ? style.active
+          : style.inactive;
+          return (
+            <li
+            key={index}
+            className={`${style.classLiElem} ${activeClasses}`}
+            onClick={() => onNavigate(item.path)}
+            >
+              {icon}
+              {item.title}
+            </li>
+          );
+        })}
+      </ul>
+    )
+  }
+);

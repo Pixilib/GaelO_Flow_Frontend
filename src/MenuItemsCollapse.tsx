@@ -9,10 +9,10 @@ type MenuItemCollapseProps = {
   title: string;
   elements: Item[];
   isOpen: boolean;
-  toggleOpen: () => void;
+  dropDownOpen: () => void;
   onNavigate: (path: string) => void;
   className?: string;
-  myRef: React.Ref<HTMLElement>;
+  myRef: React.Ref<HTMLUListElement>;
 };
 
 const MenuItemsCollapse = ({
@@ -22,7 +22,7 @@ const MenuItemsCollapse = ({
   myRef,
   isOpen,
   className,
-  toggleOpen,
+  dropDownOpen,
   onNavigate,
 }: MenuItemCollapseProps) => {
   //? Personnalize css if Menu is Open or not
@@ -37,9 +37,9 @@ const MenuItemsCollapse = ({
           <span className="mr-3">{icon}</span>
           <span className="grow text-xs text-white">{title}</span>
         </div>
-        <ToogleChevron myRef={myRef} className={"mr-4 shrink-0"} isOpen={isOpen} toggleOpen={toggleOpen} />
+        <ToogleChevron  className={"mr-4 shrink-0"} isOpen={isOpen} dropDownOpen={dropDownOpen} />
       </div>
-      {isOpen && <SideBarItems elements={elements} onNavigate={onNavigate} />}
+      {isOpen && <SideBarItems myRef={myRef} elements={elements} onNavigate={onNavigate} />}
     </div>
   );
 }

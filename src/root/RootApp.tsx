@@ -9,9 +9,9 @@ import AdminRoot from "../admin/general/AdminRoot";
 import { Banner } from "../Banner";
 import { BannerDropDown } from '../RenderComponents/Banner/BannerDropDown';
 import { Item } from "../RenderComponents/Items/Items";
+import ToggleSwitch from "../RenderComponents/ToggleSwitch";
 
 import ToogleChevron from "../RenderComponents/ToogleChevron";
-
 import Language from "../assets/language.svg?react";
 import Notification from "../assets/notification.svg?react";
 import Settings from "../assets/settings.svg?react";
@@ -21,12 +21,16 @@ import useOutsideClick from "../utils/useOutsideClick";
 
 const RootApp = () => {
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const languageDropdownRef = useRef<HTMLElement>(null);
-  const settingsDropdownRef = useRef<HTMLElement>(null);
+  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const languageDropdownRef = useRef<HTMLUListElement>(null);
+  const settingsDropdownRef = useRef<HTMLUListElement>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  
+
+  const handleSwitchMode = () => {
+    setIsToggled(!isToggled);
+  }
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
@@ -34,11 +38,11 @@ const RootApp = () => {
   const handleItemClick = (path: string) => {
     navigate(path);
   };
-  const toggleOpen = (name: string) => {
+  const handleDropDown = (name: string) => {
     setOpenItem(openItem === name ? null : name);
   };
-  useOutsideClick(languageDropdownRef, () => isOpen('Language') && toggleOpen('Language'));
-  useOutsideClick(settingsDropdownRef, () => isOpen('SettingsUser') && toggleOpen('SettingsUser'));
+  useOutsideClick(languageDropdownRef, () => isOpen('Language') && handleDropDown('Language'));
+  useOutsideClick(settingsDropdownRef, () => isOpen('SettingsUser') && handleDropDown('SettingsUser'));
 
   const isOpen = (item: string): boolean => openItem === item;
   const ItemsLanguage: Item[] = [
@@ -56,38 +60,41 @@ const RootApp = () => {
       <div className="flex flex-1 flex-col">
         <Banner title={"Home"}>
           <div className="flex justify-end ">
-            <BannerDropDown>
+            <BannerDropDown className="flex w-40 flex-col">
               <div className="inline-flex w-full items-center">
                 <Language />
                 <span className="mx-4">{"English"}</span>
                 <ToogleChevron
                   isOpen={isOpen("Language")}
-                  toggleOpen={() => toggleOpen("Language")}
-                  myRef={languageDropdownRef}
+                  dropDownOpen={() => handleDropDown("Language")}
                 />
               </div>
               {isOpen("Language") && (
                 <BannerItems
                   elements={ItemsLanguage}
                   onNavigate={handleItemClick}
+                  className="w-36"
+                  myRef={languageDropdownRef}
                 />
               )}
             </BannerDropDown>
-            <BannerDropDown >
-              <div className="inline-flex w-full items-center gap-4 ">
+            <BannerDropDown className="flex w-60 flex-col" >
+              <div className="inline-flex w-full items-center gap-4">
                 <ToogleChevron
                   isOpen={isOpen("SettingsUser")}
-                  toggleOpen={() => toggleOpen("SettingsUser")}
-                  myRef={settingsDropdownRef}
+                  dropDownOpen={() => handleDropDown("SettingsUser")}
                 />
-                <Notification className="transition-transform duration-100 hover:scale-110" />
-                <Settings className="transition-transform duration-100 hover:scale-110" />
-                <Profile height={23}  fill="white" width={23} stroke="white" className="transition-transform duration-100 hover:scale-110"  />
+                <ToggleSwitch isToggled={isToggled} onToggle={handleSwitchMode} />
+                <Notification className="size-4 transition-transform duration-100 hover:scale-110" />
+                <Settings className="size-4 transition-transform duration-100 hover:scale-110" />
+                <Profile height={23} fill="white" width={23} stroke="white" className="transition-transform duration-100 hover:scale-110" />
               </div>
               {isOpen("SettingsUser") && (
                 <BannerItems
                   elements={ItemsSettingsUser}
                   onNavigate={handleItemClick}
+                  myRef={settingsDropdownRef}
+                  className="w-56"
                 />
               )}
             </BannerDropDown>

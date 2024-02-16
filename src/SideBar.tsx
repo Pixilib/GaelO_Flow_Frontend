@@ -22,8 +22,8 @@ type SideBarProps = {
   setOpenItem: (value: string | null) => void;
 };
 
-export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
-  const adminMenuRef = useRef<HTMLElement>(null);
+export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
+  const adminMenuRef = useRef<HTMLUListElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,7 +35,7 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
   const handleItemClick = (path: string) => {
     navigate(path);
   };
-  const toggleOpen = (title: string) => {
+  const handleDropDown = (title: string) => {
     setOpenItem(openItem === title ? null : title);
   };
   //TODO: Add route for the adminItems , when route exist !
@@ -93,7 +93,7 @@ export const SideBar = ({ onLogout,openItem,setOpenItem }: SideBarProps) => {
             title="Administration"
             elements={adminItems}
             isOpen={openItem === "Administration"}
-            toggleOpen={() => toggleOpen("Administration")}
+            dropDownOpen={() => handleDropDown("Administration")}
             onNavigate={handleItemClick}
           />
           <MenuItem

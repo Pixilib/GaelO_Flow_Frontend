@@ -61,7 +61,6 @@ export default {
       boxShadow: {
         'custom': '11px 17px 15px rgba(58, 51, 51, 0.37)',
       },
-      animation:['hover'],
     },
   },
   plugins: ["prettier-plugin-tailwindcss"],
