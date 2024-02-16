@@ -127,7 +127,8 @@ export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             onClick={() => handleItemClick("/mydicom")}
           />
         </div>
-        <div className="flex h-20% flex-col">
+        <div className="flex h-20% flex-col border-t border-white">
+
           <MenuItem
             title="Home"
             icon={<Home />}

@@ -1,6 +1,6 @@
 
-import Sun from '../assets/sun.svg?react';
-import Moon from '../assets/moon.svg?react';
+import Sun from '../../assets/sun.svg?react';
+import Moon from '../../assets/moon.svg?react';
 
 type ToggleSwitchProps = {
   isToggled: boolean;

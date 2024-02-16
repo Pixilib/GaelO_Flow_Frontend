@@ -1,14 +1,17 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import useOutsideClick from "./utils/useOutsideClick";
-import { Banner } from "./Banner";
+
+import { Banner } from "./RenderComponents/Menu/Banner";
 import BannerItems from "./RenderComponents/Menu/BannerItems";
 import { BannerDropDown } from "./RenderComponents/Menu/BannerDropDown";
 import { Item } from "./RenderComponents/Menu/Items";
 import ToggleSwitch from "./RenderComponents/Menu/ToggleSwitch";
 import ToogleChevron from "./RenderComponents/Menu/ToogleChevron";
 
+import ArrowBack from "./assets/arrow-back.svg?react";
+import BannerHome from "./assets/banner-home.svg?react";
 import Language from "./assets/language.svg?react";
 import Notification from "./assets/notification.svg?react";
 import Settings from "./assets/settings.svg?react";
@@ -21,23 +24,33 @@ type HeaderProps = {
     onSwicthMode: () => void;
 };
 
-
-const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode}: HeaderProps) => {
+const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps) => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
     const languageDropdownRef = useRef<HTMLUListElement>(null);
     const settingsDropdownRef = useRef<HTMLUListElement>(null);
     useOutsideClick(languageDropdownRef, () => isOpen('Language') && handleDropDown('Language'));
     useOutsideClick(settingsDropdownRef, () => isOpen('SettingsUser') && handleDropDown('SettingsUser'));
-    
+
     const handleDropDown = (name: string) => {
         setOpenItem(openItem === name ? null : name);
     };
-    const handleItemClick = (path: string) => {
+    const handleItemClick = (language: string) => {
+        setSelectedLanguage(language);
+        handleDropDown('Language');
+    };
+    const handleSettingsItemClick = (path: string) => {
         navigate(path);
     };
+    const handleLeftIconClick = () => {
+        if (location.pathname !== "/") {
+            navigate("/");
+        }
+    };
     const isOpen = (item: string): boolean => openItem === item;
+    const leftIcon = location.pathname === "/" ? <BannerHome /> : <span><ArrowBack /></span>;
 
     const ItemsLanguage: Item[] = [
         { title: "English", path: "/english", isActive: location.pathname === "/english" },
@@ -48,12 +61,12 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode}: HeaderProps) 
         { title: "Settings", path: "/settings", isActive: location.pathname === "/settings" },
     ];
     return (
-        <Banner title={"Home"}>
+        <Banner title={"Home"} leftIcon={leftIcon} onLeftIconClick={handleLeftIconClick} >
             <div className="flex justify-end ">
-                <BannerDropDown className="flex w-40 flex-col">
+                <BannerDropDown className="flex w-44 flex-col">
                     <div className="inline-flex w-full items-center">
                         <Language />
-                        <span className="mx-4">{"English"}</span>
+                        <span className="mx-4">{selectedLanguage}</span>
                         <ToogleChevron
                             isOpen={isOpen("Language")}
                             dropDownOpen={() => handleDropDown("Language")}
@@ -62,8 +75,11 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode}: HeaderProps) 
                     {isOpen("Language") && (
                         <BannerItems
                             elements={ItemsLanguage}
-                            onNavigate={handleItemClick}
-                            className="w-36"
+                            onNavigate={(path) => {
+                                const language = path === "/english" ? "English" : "Français";
+                                handleItemClick(language);
+                            }}
+                            className="w-40"
                             myRef={languageDropdownRef}
                         />
                     )}
@@ -82,7 +98,7 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode}: HeaderProps) 
                     {isOpen("SettingsUser") && (
                         <BannerItems
                             elements={ItemsSettingsUser}
-                            onNavigate={handleItemClick}
+                            onNavigate={handleSettingsItemClick}
                             myRef={settingsDropdownRef}
                             className="w-56"
                         />
