@@ -66,7 +66,7 @@ const OrthancSettingsCard: React.FC = () => {
                     </div>
                 </CardBody>
                 <CardFooter className="flex justify-center space-x-4">
-                    <Button color={Colors.secondary} onClick={() => console.log('Restart action')}>
+                    <Button color={Colors.orange} onClick={() => console.log('Restart action')}>
                         <Restart />
                     </Button>
                     <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>

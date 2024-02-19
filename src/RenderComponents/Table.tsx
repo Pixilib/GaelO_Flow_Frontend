@@ -22,8 +22,14 @@ const Table: React.FC<TableProps> = ({ data, columns }) => {
         getCoreRowModel: getCoreRowModel(),
     });
 
+    const containerStyles: React.CSSProperties = {
+        overflowX: 'auto',
+        overflowY: 'auto', 
+        maxHeight: '500px', 
+    };
+
     return (
-        <div className="overflow-x-auto">
+        <div style={containerStyles} className="overflow-x-auto">
             <table className="min-w-full bg-white rounded-lg">
                 <thead className="border-b-2 border-gray-200">
                     {table.getHeaderGroups().map(headerGroup => (
