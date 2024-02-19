@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { createColumnHelper } from "@tanstack/react-table";
 import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
 import Table from '../../RenderComponents/Table';
-
 interface RedisData {
     address: string;
     port: number;
@@ -12,7 +11,7 @@ interface RedisData {
 const RedisCard: React.FC = () => {
     const columnHelper = createColumnHelper<RedisData>();
     const [data, setData] = useState<RedisData[]>([]);
-    
+
     useEffect(() => {
         const fetchData = async () => {
             const loadedData = [
@@ -27,8 +26,8 @@ const RedisCard: React.FC = () => {
 
         fetchData();
     }, []);
-    
-    const columns = [
+
+    const columns: ColumnDef<RedisData>[] = [
         columnHelper.accessor('address', {
             header: 'Address',
             cell: info => info.getValue(),
@@ -46,7 +45,7 @@ const RedisCard: React.FC = () => {
     return (
         <div className='mt-4'>
             <Card>
-                <CardHeader title="Redis Settings" />
+                <CardHeader title="Redis Setting" />
                 <CardBody>
                     <div className="flex justify-center">
                         <div className="w-full mb-4">
@@ -55,8 +54,8 @@ const RedisCard: React.FC = () => {
                     </div>
                 </CardBody>
                 <CardFooter className="flex justify-center">
-                
-            </CardFooter>
+
+                </CardFooter>
             </Card>
         </div>
     );

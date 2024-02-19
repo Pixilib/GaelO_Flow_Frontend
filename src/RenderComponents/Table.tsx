@@ -1,12 +1,21 @@
 import React from 'react';
-import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
+import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
 
-type TableProps = {
-    data: Object[],
-    columns: Array<any>
+type DataType = {
+    username?: string;
+    address?: string;
+    port?: number;
+    password?: string;
 };
 
-const Table = ({ data, columns }: TableProps) => {
+type ColumnType = ColumnDef<DataType>;
+
+type TableProps = {
+    data: DataType[];
+    columns: ColumnType[];
+};
+
+const Table: React.FC<TableProps> = ({ data, columns }) => {
     const table = useReactTable({
         data,
         columns,
@@ -20,9 +29,9 @@ const Table = ({ data, columns }: TableProps) => {
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map(header => {
-                                const textAlignClass = ['address', 'port', 'password'].includes(header.id) ? 'text-center' : 'text-left';
+                                const textAlignClass = ['address', 'port', 'password', 'username'].includes(header.id) ? 'text-center' : 'text-left';
                                 return (
-                                    <th key={header.id} className={`px-2 py-3 ${textAlignClass} text-xs font-bold text-dark uppercase tracking-wider md:px-4 lg:px-6 min-w-[120px] text-lg border-b-2 border-gray`}>
+                                    <th key={header.id} className={`px-2 py-3 ${textAlignClass} text-xs font-bold text-dark uppercase tracking-wider md:px-4 lg:px-6 min-w-[120px] border-b-2 border-gray`}>
                                         {flexRender(header.column.columnDef.header, header.getContext())}
                                     </th>
                                 );
@@ -34,16 +43,16 @@ const Table = ({ data, columns }: TableProps) => {
                     {table.getRowModel().rows.map(row => (
                         <tr key={row.id}>
                             {row.getVisibleCells().map(cell => {
-                                const isCenteredColumn = ['address', 'port', 'password'].includes(cell.column.id);
+                                const isCenteredColumn = ['address', 'port', 'password', 'username'].includes(cell.column.id);
                                 const textAlignClass = isCenteredColumn ? 'text-center' : 'text-left';
-                                const cellContent = flexRender(cell.column.columnDef.cell, cell.getContext());
                                 return (
-                                    <td key={cell.id} className={`px-2 py-4 whitespace-nowrap md:px-4 lg:px-6 min-w-[120px] ${textAlignClass}`}>
+                                    <td key={cell.id} className={`px-2 py-4 whitespace-nowrap md:px-4 lg:px-6 ${textAlignClass}`}>
                                         {cell.column.id === 'port' ? (
-                                            <span className="inline-flex items-center w-12 h-[27px] px-3 py-2.5 bg-green-200 text-dark rounded-lg  justify-center items-center gap-2">                                                {cellContent}
+                                            <span className="inline-flex items-center justify-center px-3 py-1.5 bg-green-200 text-green-800 rounded-full">
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                             </span>
                                         ) : (
-                                            cellContent
+                                            flexRender(cell.column.columnDef.cell, cell.getContext())
                                         )}
                                     </td>
                                 );
