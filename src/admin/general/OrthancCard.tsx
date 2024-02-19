@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { createColumnHelper } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
-import Table from '../../RenderComponents/Table';
+import Table from '../../RenderComponents/Table'; 
 import Button from '../../RenderComponents/Button';
 import { Colors } from '../../utils/enums';
 
@@ -13,11 +13,10 @@ interface OrthancData {
     address: string;
     port: number;
     password: string;
-    username: string; 
+    username: string;
 }
 
 const OrthancSettingsCard: React.FC = () => {
-    const columnHelper = createColumnHelper<OrthancData>();
     const [data, setData] = useState<OrthancData[]>([]);
 
     useEffect(() => {
@@ -37,23 +36,28 @@ const OrthancSettingsCard: React.FC = () => {
     }, []);
 
     const columns: ColumnDef<OrthancData>[] = [
-        columnHelper.accessor('username', {
-            header: () => 'Username',
-            cell: info => info.renderValue(),
-        }),
-        columnHelper.accessor('address', {
-            header: () => 'Address',
-            cell: info => info.renderValue(),
-        }),
-        columnHelper.accessor('port', {
-            header: () => 'Port',
-            cell: info => info.renderValue(),
-        }),
-        columnHelper.accessor('password', {
-            header: () => 'Password',
+        {
+            accessorKey: 'username',
+            header: 'Username',
+            cell: info => info.getValue(),
+        },
+        {
+            accessorKey: 'address',
+            header: 'Address',
+            cell: info => info.getValue(),
+        },
+        {
+            accessorKey: 'port',
+            header: 'Port',
+            cell: info => info.getValue(),
+        },
+        {
+            accessorKey: 'password',
+            header: 'Password',
             cell: () => '••••••',
-        }),
+        },
     ];
+
     return (
         <div className='mt-4'>
             <Card>
@@ -66,15 +70,9 @@ const OrthancSettingsCard: React.FC = () => {
                     </div>
                 </CardBody>
                 <CardFooter className="flex justify-center space-x-4">
-                    <Button color={Colors.orange} onClick={() => console.log('Restart action')}>
-                        <Restart />
-                    </Button>
-                    <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
-                        <Shutdown />
-                    </Button>
-                    <Button color={Colors.primary} onClick={() => console.log('Info action')}>
-                        <Info />
-                    </Button>
+                    <Button color={Colors.orange} onClick={() => console.log('Restart action')}><Restart /></Button>
+                    <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}><Shutdown /></Button>
+                    <Button color={Colors.primary} onClick={() => console.log('Info action')}><Info /></Button>
                 </CardFooter>
             </Card>
         </div>

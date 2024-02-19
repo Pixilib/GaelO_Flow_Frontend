@@ -3,17 +3,18 @@ import WelcomeRoot from "./welcome/WelcomeRoot";
 import { RootState } from "./store";
 import RootApp from "./root/RootApp";
 import "./index.css";
-import General from "./admin/general/General";
+import OrthancSettingsCard from "./admin/general/OrthancCard";
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
 return(
-  <General/>
-)
-    return (
-  <div className="w-screen h-screen">
-    {isLogged ? <RootApp /> : <WelcomeRoot />}
-  </div>
- )
+  
+<OrthancSettingsCard/> )
+
+return (
+    <div className="w-screen h-screen">
+      {isLogged ? <RootApp /> : <WelcomeRoot />}
+    </div>
+  )
 
 }
 
