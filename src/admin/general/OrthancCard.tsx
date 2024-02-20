@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
-import Table from '../../RenderComponents/Table'; 
+import Table from '../../RenderComponents/Table';
 import Button from '../../RenderComponents/Button';
 import { Colors } from '../../utils/enums';
 
@@ -16,6 +16,11 @@ interface OrthancData {
     username: string;
 }
 
+const Badge: React.FC<{ value: number }> = ({ value }) => {
+    const badgeClasses = `bg-green-200 text-dark py-1 px-2 rounded`;
+    return <span className={badgeClasses}>{value}</span>;
+};
+
 const OrthancSettingsCard: React.FC = () => {
     const [data, setData] = useState<OrthancData[]>([]);
 
@@ -25,8 +30,8 @@ const OrthancSettingsCard: React.FC = () => {
                 {
                     address: 'https://orthanc',
                     port: 1234,
-                    password: 'password',
-                    username: 'admin',
+                    password: '',
+                    username: '',
                 },
             ];
             setData(loadedData);
@@ -49,7 +54,7 @@ const OrthancSettingsCard: React.FC = () => {
         {
             accessorKey: 'port',
             header: 'Port',
-            cell: info => info.getValue(),
+            cell: info => <Badge value={info.getValue() as number} />,
         },
         {
             accessorKey: 'password',
