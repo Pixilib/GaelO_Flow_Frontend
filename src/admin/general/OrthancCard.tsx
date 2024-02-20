@@ -17,7 +17,7 @@ interface OrthancData {
 }
 
 const Badge: React.FC<{ value: number }> = ({ value }) => {
-    const badgeClasses = `bg-green-200 text-dark py-1 px-2 rounded`;
+    const badgeClasses = `rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
 };
 

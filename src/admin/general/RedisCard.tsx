@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef } from '@tanstack/react-table';
 import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
 import Table from '../../RenderComponents/Table';
+
+const Badge: React.FC<{ value: number }> = ({ value }) => {
+    const badgeClasses = `rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20`;
+    return <span className={badgeClasses}>{value}</span>;
+};
 
 interface RedisData {
     address: string;
@@ -17,19 +22,12 @@ const RedisCard: React.FC = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                setLoading(true);
                 const loadedData = [
-                    {
-                        address: 'https://orthanc',
-                        port: 8042,
-                        password: 'secret',
-                    },
+                    { address: 'redis', port: 6379, password: 'secret' },
                 ];
                 setData(loadedData);
-                setError(null); 
             } catch (error) {
                 setError('Failed to fetch data');
-                console.error(error);
             } finally {
                 setLoading(false);
             }
@@ -47,7 +45,7 @@ const RedisCard: React.FC = () => {
         {
             accessorKey: 'port',
             header: 'Port',
-            cell: info => info.getValue(),
+            cell: info => <Badge value={info.getValue() as number} />,
         },
         {
             accessorKey: 'password',
