@@ -1,7 +1,7 @@
 //Exemple de story:
 import { withRouter } from 'storybook-addon-react-router-v6';
 import type { Meta, StoryObj } from "@storybook/react";
-import SideBar from "../src/RenderComponents/NavBar/SideBar";
+import SideBar from "../src/SideBar";
 
 const meta: Meta<typeof SideBar> = {
   title: "Example/SideBar",

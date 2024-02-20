@@ -55,14 +55,14 @@ export const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
-      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
+    <form onSubmit={handleSubmit} className="flex w-full flex-col items-center">
+      <h1 className="mb-6 text-center text-4xl font-semibold text-dark">
         Welcome back !
       </h1>
-      <p className="mb-12 text-lg text-center text-dark">
+      <p className="mb-12 text-center text-lg text-dark">
         Please Log in to your Account
       </p>
-      <div className="w-2/3 mt-20 text-dark">
+      <div className="mt-20 w-2/3 text-dark">
         <Input
           label="Username:"
           svgLeft={<User />}
@@ -75,7 +75,7 @@ export const SignInForm = () => {
           autoComplete="on"
           required
         />
-        <div className="w-full mt-12 text-dark">
+        <div className="mt-12 w-full text-dark">
           <Input
             label="Password:"
             svgLeft={<PasswordKeyOn />}
@@ -94,16 +94,16 @@ export const SignInForm = () => {
             required
           />
         </div>
-        <div className="mt-3 text-xs text-right">
+        <div className="mt-3 text-right text-xs">
           <span
-            className="inline-block text-gray-600 cursor-pointer hover:underline hover:text-indigo-800"
+            className="inline-block cursor-pointer hover:text-indigo-800 hover:underline"
             onClick={() => navigate("/lost-password")}
           >
             Forgot Password ?
           </span>
         </div>
 
-        <div className="flex justify-center mt-12">
+        <div className="mt-12 flex justify-center">
           <Button
             color={Colors.primary}
             type="submit"

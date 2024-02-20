@@ -44,14 +44,14 @@ export const SignUpForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
-  <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
+    <form onSubmit={handleSubmit} className="flex w-full flex-col items-center">
+  <h1 className="mb-6 text-center text-4xl font-semibold text-dark">
     Welcome to <span className="text-primary">Gaelo Flow</span>
   </h1>
-  <p className="mb-12 text-lg text-center text-gray-700">
+  <p className="mb-12 text-center text-lg">
     Please create your Account
   </p>
-  <div className="flex flex-col items-center w-full max-w-md space-y-12"> 
+  <div className="flex w-full max-w-md flex-col items-center space-y-12"> 
     <Input
       label="Username :"
       className="w-full" 

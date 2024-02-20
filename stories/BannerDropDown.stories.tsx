@@ -1,6 +1,6 @@
 import type { Meta, Story } from "@storybook/react";
-import type {BannerDropDownProps} from "../src/RenderComponents/Banner/BannerDropDown";
-import {BannerDropDown} from "../src/RenderComponents/Banner/BannerDropDown";
+import type {BannerDropDownProps} from "../src/RenderComponents/Menu/BannerDropDown";
+import {BannerDropDown} from "../src/RenderComponents/Menu/BannerDropDown";
 
 const meta: Meta<BannerDropDownProps> = {
     title: "GAELO FLOW UI/BannerDropDown",
