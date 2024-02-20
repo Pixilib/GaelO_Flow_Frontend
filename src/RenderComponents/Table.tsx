@@ -4,7 +4,6 @@ type TableProps<T> = {
     data: T[];
     columns: ColumnDef<T, unknown>[];
 };
-
 const Table = <T,>({ data, columns }: TableProps<T>) => {
     const table = useReactTable({
         data,
