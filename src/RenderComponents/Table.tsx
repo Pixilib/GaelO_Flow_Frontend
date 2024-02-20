@@ -1,4 +1,3 @@
-import React from 'react';
 import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from '@tanstack/react-table';
 
 type TableProps<T> = {
