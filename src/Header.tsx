@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import useOutsideClick from "./utils/useOutsideClick";
 
@@ -27,18 +28,21 @@ type HeaderProps = {
 const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps) => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const { t, i18n} = useTranslation();
+    
     const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
     const languageDropdownRef = useRef<HTMLUListElement>(null);
     const settingsDropdownRef = useRef<HTMLUListElement>(null);
     useOutsideClick(languageDropdownRef, () => isOpen('Language') && handleDropDown('Language'));
     useOutsideClick(settingsDropdownRef, () => isOpen('SettingsUser') && handleDropDown('SettingsUser'));
-
+    
     const handleDropDown = (name: string) => {
         setOpenItem(openItem === name ? null : name);
     };
     const handleItemClick = (language: string) => {
         setSelectedLanguage(language);
+        const lg = language === "English" ? "en" : "fr";
+        i18n.changeLanguage(lg);
         handleDropDown('Language');
     };
     const handleSettingsItemClick = (path: string) => {
@@ -51,7 +55,8 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps)
     };
     const isOpen = (item: string): boolean => openItem === item;
     const leftIcon = location.pathname === "/" ? <BannerHome /> : <span><ArrowBack /></span>;
-
+    
+    //Items for elements in props of BannerItems
     const ItemsLanguage: Item[] = [
         { title: "English", path: "/english", isActive: location.pathname === "/english" },
         { title: "Français", path: "/francais", isActive: location.pathname === "/francais" },
@@ -60,8 +65,9 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps)
         { title: "Profile", path: "/profile", isActive: location.pathname === "/profile" },
         { title: "Settings", path: "/settings", isActive: location.pathname === "/settings" },
     ];
+    const title = t('titleBanner');
     return (
-        <Banner title={"Home"} leftIcon={leftIcon} onLeftIconClick={handleLeftIconClick} >
+        <Banner title={title} leftIcon={leftIcon} onLeftIconClick={handleLeftIconClick} >
             <div className="flex justify-end ">
                 <BannerDropDown className="flex w-44 flex-col">
                     <div className="inline-flex w-full items-center">
