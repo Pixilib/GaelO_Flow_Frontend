@@ -21,6 +21,7 @@ const Input = ({
   svgLeft = null,
   svgRight = null,
   bordered = false,
+  
   ...props
 }: InputProps) => {
 
@@ -29,20 +30,19 @@ const Input = ({
       {label && <label className="mb-2 text-sm font-medium text-dark">{label}</label>}
       <div className="relative">
         {svgLeft && (
-          <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {svgLeft}
           </div>
         )}
         {svgRight && (
-          <div className="absolute inset-y-0 end-0 flex items-center pe-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="absolute inset-y-0 flex items-center end-0 pe-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {svgRight}
           </div>
         )}
         <input
           type={type}
           placeholder={placeholder}
-          // eslint-disable-next-line tailwindcss/no-custom-classname
-          className={`peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""}  ${bordered ? "border focus:border-primary" : ""} text-gray-600 w-full rounded-xl text-sm focus:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${className}`}
+          className={`peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""} ${bordered ? "border border-gray focus:border-primary" : "border-none"} text-gray-600 w-full rounded-xl text-sm focus:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${className}`}
           
           {...props}
           

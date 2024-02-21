@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignInForm } from "./SignInForm";
 import { SignUpForm } from "./SignUpForm";
-import ForgotPasswordForm  from "./ForgotPasswordForm";
+import ForgotPasswordForm from "./ForgotPasswordForm";
 import ChangePasswordForm from "./ChangePasswordForm";
 
 import SignInImage from "../assets/sign-in.svg?react";
@@ -13,38 +13,34 @@ const Welcome = () => {
   const navigate = useNavigate();
 
   const getImage = () => {
+    let imageComponent;
     switch (location.pathname) {
       case "/sign-in":
-        return <SignInImage />;
+        imageComponent = <SignInImage />;
+        break;
       case "/sign-up":
-        return <SignUpImage />;
+        imageComponent = <SignUpImage />;
+        break;
       default:
-        return <SignInImage />;
+        imageComponent = <SignInImage />;
     }
+    return <div className="w-1/2 mx-auto">{imageComponent}</div>;
   };
 
-  const classLink =
-    "text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer";
+  const classLink = "text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer";
 
   return (
     <>
-      <main className="flex w-screen h-screen gap-0 columns-2 bg-gradient-to-r from-primary to-secondary ">
-        <div className="relative flex w-full h-full">
+      <main className="flex w-screen h-screen grid-cols-2 gap-0 bg-gradient-to-r from-primary to-secondary">
+        <div className="relative flex items-center justify-center w-full h-full">
           <img
             src="/gaelo-flow-white2.svg"
-            className="absolute top-7 left-7"
+            className="absolute w-20 h-auto top-7 left-7"
             alt="Logo"
-            style={{ width: "8.33%", maxWidth: "100%", height: "auto" }}
           />
-          <div className="flex items-center justify-center w-full h-screen">
-            {getImage()}
-          </div>
+          {getImage()}
         </div>
-        <div
-          className="flex items-center justify-center w-full bg-white rounded-tl-70"
-          style={{ filter: "drop-shadow(-17px 0 10px rgba(91, 84, 84, 0.4))" }}
-        >
-          {/* Contenu de la section */}
+        <div className="flex items-center justify-center w-full bg-white shadow-xl rounded-tl-3xl rounded-bl-3xl">
           <div className="w-2/3">
             <Routes>
               <Route path="/*" element={<SignInForm />} />
@@ -56,35 +52,26 @@ const Welcome = () => {
 
             <hr className="my-8 mt-20 border-primary" />
             <div className="flex justify-between mx-auto text-center text-balance">
-              {location.pathname !== "/sign-up" &&
-                location.pathname !== "/legal-mention" && (
-                  <span
-                    onClick={() => navigate("/sign-up")}
-                    className={classLink}
-                  >
-                    Don’t have an account?
-                  </span>
-                )}
+              {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
+                <span onClick={() => navigate("/sign-up")} className={classLink}>
+                  Don’t have an account?
+                </span>
+              )}
 
-              {location.pathname !== "/" &&
-                (location.pathname === "/legal-mention" ? (
-                  <div
-                    onClick={() => navigate("/")}
-                  ><div className="cursor-pointer">
-                      <ArrowBack />
-                  </div>
+              {location.pathname !== "/" && (
+                location.pathname === "/legal-mention" ? (
+                  <div onClick={() => navigate("/")} className="flex items-center gap-2 cursor-pointer">
+                    <ArrowBack />
                     <span>Back</span>
                   </div>
                 ) : (
                   <span onClick={() => navigate("/")} className={classLink}>
-                    Already have an account ?{" "}
+                    Already have an account?
                   </span>
-                ))}
+                )
+              )}
               {location.pathname !== "/legal-mention" && (
-                <span
-                  className={`${classLink} inline-block`}
-                  onClick={() => navigate("/legal-mention")}
-                >
+                <span className={`${classLink} inline-block`} onClick={() => navigate("/legal-mention")}>
                   Legal Mention
                 </span>
               )}
