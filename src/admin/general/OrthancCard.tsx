@@ -33,20 +33,21 @@ const OrthancSettingsCard: React.FC = () => {
                         'Content-Type': 'application/json',
                     },
                 });
-
+    
                 if (!response.ok) {
-                    throw new Error('');
+                    throw new Error('Network response was not ok');
                 }
-
+    
                 const loadedData = await response.json();
-                setData(loadedData); /
+                setData(loadedData); 
             } catch (error) {
                 console.error('Failed to fetch data:', error);
             }
         };
-
+    
         fetchData();
     }, []);
+    
 
     const columns: ColumnDef<OrthancData>[] = [
         {
