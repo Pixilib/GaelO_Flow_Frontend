@@ -26,15 +26,23 @@ const OrthancSettingsCard: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const loadedData = [
-                {
-                    address: 'https://orthanc',
-                    port: 1234,
-                    password: '',
-                    username: '',
-                },
-            ];
-            setData(loadedData);
+            try {
+                const response = await fetch('https://otjs.ddns.net/api/system', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('');
+                }
+
+                const loadedData = await response.json();
+                setData(loadedData); /
+            } catch (error) {
+                console.error('Failed to fetch data:', error);
+            }
         };
 
         fetchData();
