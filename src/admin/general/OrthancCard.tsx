@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ColumnDef } from '@tanstack/react-table';
+import { useCustomQuery } from "../../utils/reactQuery";
+import { apiSystem } from '../../services/orthanc';
+
 import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
 import Table from '../../RenderComponents/Table';
 import Button from '../../RenderComponents/Button';
@@ -24,30 +27,36 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
 const OrthancSettingsCard: React.FC = () => {
     const [data, setData] = useState<OrthancData[]>([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('https://otjs.ddns.net/api/system', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await fetch('https://otjs.ddns.net/api/system', {
+    //                 method: 'GET',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //             });
     
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
     
-                const loadedData = await response.json();
-                setData(loadedData); 
-            } catch (error) {
-                console.error('Failed to fetch data:', error);
-            }
-        };
+    //             const loadedData = await response.json();
+    //             setData(loadedData); 
+    //         } catch (error) {
+    //             console.error('Failed to fetch data:', error);
+    //         }
+    //     };
     
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
     
+    const getOrthancData = useCustomQuery( ["OrthancData"],
+    ()=> apiSystem(),
+    {
+
+    }
+    )
 
     const columns: ColumnDef<OrthancData>[] = [
         {
