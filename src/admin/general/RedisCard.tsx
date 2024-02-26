@@ -33,7 +33,7 @@ const RedisCard: React.FC = () => {
             }
         };
 
-        fetchData();docker pull j'ai fais
+        fetchData();
     }, []);
 
     const columns: ColumnDef<RedisData>[] = [
