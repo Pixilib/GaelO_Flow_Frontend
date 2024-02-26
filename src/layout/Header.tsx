@@ -3,19 +3,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 
-import { Banner } from "./RenderComponents/Menu/Banner";
-import BannerItems from "./RenderComponents/Menu/BannerItems";
-import { BannerDropDown } from "./RenderComponents/Menu/BannerDropDown";
-import { Item } from "./RenderComponents/Menu/Items";
-import ToggleSwitch from "./RenderComponents/Menu/ToggleSwitch";
-import ToogleChevron from "./RenderComponents/Menu/ToogleChevron";
+import { Banner } from "../RenderComponents/Menu/Banner";
+import BannerItems from "../RenderComponents/Menu/BannerItems";
+import { BannerDropDown } from "../RenderComponents/Menu/BannerDropDown";
+import { Item } from "../RenderComponents/Menu/Items";
+import ToggleSwitch from "../RenderComponents/Menu/ToggleSwitch";
+import ToogleChevron from "../RenderComponents/Menu/ToogleChevron";
 
-import ArrowBack from "./assets/arrow-back.svg?react";
-import BannerHome from "./assets/banner-home.svg?react";
-import Language from "./assets/language.svg?react";
-import Notification from "./assets/notification.svg?react";
-import Settings from "./assets/settings.svg?react";
-import Profile from "./assets/user-banner.svg?react";
+import ArrowBack from "../assets/arrow-back.svg?react";
+import BannerHome from "../assets/banner-home.svg?react";
+import Language from "../assets/language.svg?react";
+import Notification from "../assets/notification.svg?react";
+import Settings from "../assets/settings.svg?react";
+import Profile from "../assets/user-banner.svg?react";
 
 type HeaderProps = {
     openItem: string | null;
@@ -27,9 +27,9 @@ type HeaderProps = {
 const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps) => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { t, i18n} = useTranslation();
+    const { t, i18n } = useTranslation();
     const [selectedLanguage, setSelectedLanguage] = useState<string>("English");
-    
+
     const handleDropDown = (name: string) => {
         setOpenItem(openItem === name ? null : name);
     };
@@ -63,7 +63,7 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps)
     return (
         <Banner title={title} leftIcon={leftIcon} onLeftIconClick={handleLeftIconClick} >
             <div className="flex justify-end ">
-                <BannerDropDown className="flex w-44 flex-col">
+                <BannerDropDown className="flex w-44 flex-col" isOpen={isOpen("Language")} dropDownOpen={()=>handleDropDown("Language")}>
                     <div className="inline-flex w-full items-center">
                         <Language />
                         <span className="mx-4">{selectedLanguage}</span>
@@ -72,28 +72,28 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps)
                             onClick={() => handleDropDown("Language")}
                         />
                     </div>
-                        <BannerItems
-                            elements={ItemsLanguage}
-                            onNavigate={(path) => {
-                                const language = path === "/english" ? "English" : "Français";
-                                handleItemClick(language);
-                            }}
-                            isOpen={isOpen("Language")}
-                            setOpenItem={() => setOpenItem(null)}
-                            className="w-40"
-                        />
+                    <BannerItems
+                        elements={ItemsLanguage}
+                        onNavigate={(path) => {
+                            const language = path === "/english" ? "English" : "Français";
+                            handleItemClick(language);
+                        }}
+                        isOpen={isOpen("Language")}
+                        setOpenItem={() => setOpenItem(null)}
+                        className="w-40"
+                    />
                 </BannerDropDown>
-                <BannerDropDown className="flex w-60 flex-col">
-                    <div className="inline-flex w-full items-center gap-4">
-                        <ToogleChevron
-                            isOpen={isOpen("SettingsUser")}
-                            onClick={() => handleDropDown("SettingsUser")}
-                        />
-                        <ToggleSwitch isToggled={isToggled} onToggle={onSwicthMode} />
-                        <Notification className="size-4 transition-transform duration-100 hover:scale-110" />
-                        <Settings className="size-4 transition-transform duration-100 hover:scale-110" />
-                        <Profile height={23} fill="white" width={23} stroke="white" className="transition-transform duration-100 hover:scale-110" />
-                    </div>
+                <BannerDropDown className="flex w-60 flex-col" isOpen={isOpen("SettingsUser")} dropDownOpen={()=>handleDropDown("SettingsUser")}>
+                        <div className="inline-flex w-full items-center gap-4">
+                            <ToogleChevron
+                                isOpen={isOpen("SettingsUser")}
+                                onClick={() => handleDropDown("SettingsUser")}
+                            />
+                            <ToggleSwitch isToggled={isToggled} onToggle={onSwicthMode} />
+                            <Notification className="size-4 transition-transform duration-100 hover:scale-110" />
+                            <Settings className="size-4 transition-transform duration-100 hover:scale-110" />
+                            <Profile height={23} fill="white" width={23} stroke="white" className="transition-transform duration-100 hover:scale-110" />
+                        </div>
                         <BannerItems
                             elements={ItemsSettingsUser}
                             onNavigate={handleSettingsItemClick}

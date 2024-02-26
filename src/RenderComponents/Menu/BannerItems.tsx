@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { Items, Item, ItemStyle } from "./Items.tsx";
 
 
@@ -10,15 +9,10 @@ type BannerItemsProps = {
   setOpenItem: (value: string | null) => void;
 };
 
-const BannerItems = ({ elements, onNavigate, className, isOpen, setOpenItem }: BannerItemsProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const BannerItems = ({ elements, onNavigate, className, isOpen }: BannerItemsProps) => {
 
   // Focus on the container when it is open
-  useEffect(() => {
-    if (isOpen && containerRef.current) {
-      containerRef.current.focus();
-    }
-  }, [isOpen]);
+
 
   const bannerItemsStyle: ItemStyle = {
     active: "",
@@ -27,7 +21,7 @@ const BannerItems = ({ elements, onNavigate, className, isOpen, setOpenItem }: B
     inactive: "",
   };
   return isOpen ? (
-    <div ref={containerRef} tabIndex={-1} onBlur={() => setOpenItem(null)}  >
+    <div>
       <Items elements={elements} onNavigate={onNavigate} style={bannerItemsStyle} />
     </div>
   ) : null;

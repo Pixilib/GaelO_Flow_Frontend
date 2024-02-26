@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 
 export type ItemStyle = {
   classLiElem: string;
@@ -20,10 +19,10 @@ export type ItemsProps = {
   icon?: React.ReactNode;
 };
 
-export const Items = forwardRef<HTMLUListElement, ItemsProps>(({ elements, style, onNavigate, icon},ref) => {
+export const Items = (({ elements, style, onNavigate, icon}:ItemsProps) => {
 
   return (
-      <ul ref={ref} data-gaelo-flow="items" className={style.classUlElem}>
+      <ul data-gaelo-flow="items" className={style.classUlElem}>
         {elements.map((item, index) => {
           const activeClasses = item.isActive
           ? style.active

@@ -19,7 +19,7 @@ i18n
     interpolation: {
       escapeValue: false, 
     },
-    debug: true, // Active le mode débogage en développement
+    debug: true,
   });
 
   i18n.on('languageChanged', (lng) => {

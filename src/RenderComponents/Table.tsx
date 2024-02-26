@@ -13,7 +13,7 @@ const Table = <T,>({ data, columns }: TableProps<T>) => {
     });
     return (
         <div style={{ overflowX: 'auto', maxHeight: '500px' }}>
-            <table className="min-w-full bg-white rounded-lg">
+            <table className="min-w-full rounded-lg bg-white">
                 <thead className="border-b-2 border-gray">
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>

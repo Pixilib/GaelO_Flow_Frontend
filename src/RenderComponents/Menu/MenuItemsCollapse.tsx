@@ -29,12 +29,12 @@ const handleClick = () => {
   dropDownOpen(); 
 }
 const handleFocus = () => {
+  if(isOpen)
   dropDownOpen();
 };
 const handleBlur = () => {
   setTimeout(() => {
     if (isOpen) {
-      console.log("Blur");
       dropDownOpen();
     }
   }, 100);
