@@ -12,35 +12,53 @@ type MenuItemCollapseProps = {
   dropDownOpen: () => void;
   onNavigate: (path: string) => void;
   className?: string;
-  myRef: React.Ref<HTMLUListElement>;
 };
-
 const MenuItemsCollapse = ({
   icon,
   title,
   elements,
-  myRef,
   isOpen,
   className,
   dropDownOpen,
-  onNavigate,
+  onNavigate
 }: MenuItemCollapseProps) => {
   //? Personnalize css if Menu is Open or not
-  const bgIsOpen = isOpen ? "bg-primary-active" : "";
+  const bgIsOpen = isOpen ? "bg-primary-active rounded-lg p-2.5" : "p-2.5 hover:bg-primary-hover rounded-lg";
+
+const handleClick = () => {
+  dropDownOpen(); 
+}
+const handleFocus = () => {
+  if(isOpen)
+  dropDownOpen();
+};
+const handleBlur = () => {
+  setTimeout(() => {
+    if (isOpen) {
+      dropDownOpen();
+    }
+  }, 100);
+};
   return (
     <div
-      className={`flex w-full cursor-context-menu flex-col ${className}`}
+      className={`flex w-full cursor-context-menu flex-col text-xs text-white ${className}`}
       data-gaelo-flow="sidebar-item-collapse"
+      onBlur={handleFocus}
+      onFocus={handleBlur}
+      onClick={handleClick}
+      tabIndex={-1}
     >
-      <div className={`flex justify-between p-2.5 ${bgIsOpen}`}>
-        <div className="ml-4 flex grow items-center">
-          <span className="mr-3">{icon}</span>
-          <span className="grow text-xs text-white">{title}</span>
+      <div className="mx-auto flex justify-start gap-3"  >
+        <div className={`${bgIsOpen} mx-auto flex`}>
+        <div className="mx-3 flex grow items-center">
+          <span className="-ml-0.5 mr-5">{icon}</span>
+          <span>{title}</span>
         </div>
-        <ToogleChevron  className={"mr-4 shrink-0"} isOpen={isOpen} dropDownOpen={dropDownOpen} />
+        <ToogleChevron  className={"ml-7 flex shrink-0 items-center"} isOpen={isOpen} />
       </div>
-      {isOpen && <SideBarItems myRef={myRef} elements={elements} onNavigate={onNavigate} />}
-    </div>
+        </div>
+      {isOpen && <SideBarItems elements={elements} onNavigate={onNavigate} />}
+    </div>      
   );
 }
 export default MenuItemsCollapse;

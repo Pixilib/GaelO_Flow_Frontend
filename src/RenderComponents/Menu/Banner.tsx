@@ -8,7 +8,6 @@ export type BannerProps = {
 };
 
 export const Banner = ({ title, leftIcon, onLeftIconClick, children, className }: BannerProps) => {
-
   return (
     <div
       data-gaelo-flow="banner"

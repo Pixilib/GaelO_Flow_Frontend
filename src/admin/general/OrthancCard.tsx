@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
 import { useCustomQuery } from "../../utils/reactQuery";
 import { apiSystem } from '../../services/orthanc';
@@ -11,7 +11,13 @@ import { Colors } from '../../utils/enums';
 import Restart from '../../assets/restart.svg?react';
 import Shutdown from '../../assets/shutdown.svg?react';
 import Info from '../../assets/info.svg?react';
+import { useCustomQuery } from '../../utils/reactQuery';
+import { getOrthancSystem } from '../../services/orthanc';
 
+//!Maybe needs to change interface see src/types/Orthanc/OrthancSystemType.ts
+//WIP
+//You can see an example respons in JSON format, see src/types/Orthanc/exempleApiSystem.json
+//TODO: Change interface to match the response of the request
 interface OrthancData {
     address: string;
     port: number;
@@ -25,68 +31,24 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
 };
 
 const OrthancSettingsCard: React.FC = () => {
-    const { data: orthancData, isLoading, isError, error } = useCustomQuery<OrthancData[]>(["OrthancData"], apiSystem);
 
-    onst columns: ColumnDef<OrthancData>[] = [
+    const { isPending, data: orthancData, error } = useCustomQuery(
+        ["orthancData"],
+        async () => getOrthancSystem(),
         {
-            accessorKey: 'username',
-            header: 'Username',
-            cell: info => info.getValue(),
-        },
-        {
-            accessorKey: 'address',
-            header: 'Address',
-            cell: info => info.getValue(),
-        },
-        {
-            accessorKey: 'port',
-            header: 'Port',
-            cell: info => <Badge value={info.getValue() as number} />,
-        },
-        {
-            accessorKey: 'password',
-            header: 'Password',
-            cell: () => '••••••',
-        },
-    ];
-
-    // Gestion des états de chargement et d'erreur
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (isError) {
-        return <div>Error: {error instanceof Error ? error.message : "An error occurred"}</div>;
-    }
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await fetch('https://otjs.ddns.net/api/system', {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                 },
-    //             });
-    
-    //             if (!response.ok) {
-    //                 throw new Error('Network response was not ok');
-    //             }
-    //             const loadedData = await response.json();
-    //             setData(loadedData); 
-    //         } catch (error) {
-    //             console.error('Failed to fetch data:', error);
-    //         }
-    //     };
-    
-    //     fetchData();
-    // }, []);
-    
-    const getOrthancData = useCustomQuery( ["OrthancData"],
-    ()=> apiSystem(),
-    {
-
-    }
+            refetchOnMount: true,
+            onSuccess: (orthancData: any) => console.log("La requête a réussi !", orthancData),
+            onError: (error: any) => console.log("La requête a échoué !", error),
+        }
     )
+    
+    //!It's for exemple, you can change the return of the request
+    if (isPending) return <span>Loading ... </span>
+    if (error) return <span>Error: {error.message}</span>
+    if (!orthancData) return null
+    //! Just for visualize example of response
+    if (orthancData)
+    console.log({ orthancData })
 
     const columns: ColumnDef<OrthancData>[] = [
         {
@@ -113,12 +75,16 @@ const OrthancSettingsCard: React.FC = () => {
 
     return (
         <div className='mt-4'>
+            <div>
+                <h1>Orthanc Data</h1>
+                <pre>{JSON.stringify(orthancData, null, 2)}</pre>
+            </div>
             <Card>
                 <CardHeader title="Orthanc Settings" />
                 <CardBody>
                     <div className="flex justify-center">
                         <div className="w-full mb-4">
-                            <Table columns={columns} data={data} />
+                            <Table columns={columns} data={orthancData} />
                         </div>
                     </div>
                 </CardBody>

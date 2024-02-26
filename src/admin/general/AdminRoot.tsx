@@ -4,7 +4,7 @@ import General from "./General";
 
 const AdminRoot = () => {
     return (
-        <div className="w-full h-full">
+        <div className="size-full">
             <Routes>
                 <Route path="general" element={<General />} />
             </Routes>

@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
 
 import { login } from "../reducers/UserSlice";
@@ -21,6 +22,8 @@ import User from "./../assets/user.svg?react";
 export const SignInForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -57,7 +60,7 @@ export const SignInForm = () => {
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col items-center">
       <h1 className="mb-6 text-center text-4xl font-semibold text-dark">
-        Welcome back !
+       {t('titleSignInForm')}
       </h1>
       <p className="mb-12 text-center text-lg text-dark">
         Please Log in to your Account
