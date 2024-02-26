@@ -31,16 +31,8 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
 };
 
 const OrthancSettingsCard: React.FC = () => {
-
-    const { isPending, data: orthancData, error } = useCustomQuery(
-        ["orthancData"],
-        async () => getOrthancSystem(),
-        {
-            refetchOnMount: true,
-            onSuccess: (orthancData: any) => console.log("La requête a réussi !", orthancData),
-            onError: (error: any) => console.log("La requête a échoué !", error),
-        }
-    )
+    const { data: orthancData, error, isPending } = useCustomQuery<OrthancData[]>('orthancSystem', getOrthancSystem);
+  
     
     //!It's for exemple, you can change the return of the request
     if (isPending) return <span>Loading ... </span>
