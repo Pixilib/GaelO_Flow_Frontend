@@ -25,8 +25,39 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
 };
 
 const OrthancSettingsCard: React.FC = () => {
-    const [data, setData] = useState<OrthancData[]>([]);
+    const { data: orthancData, isLoading, isError, error } = useCustomQuery<OrthancData[]>(["OrthancData"], apiSystem);
 
+    onst columns: ColumnDef<OrthancData>[] = [
+        {
+            accessorKey: 'username',
+            header: 'Username',
+            cell: info => info.getValue(),
+        },
+        {
+            accessorKey: 'address',
+            header: 'Address',
+            cell: info => info.getValue(),
+        },
+        {
+            accessorKey: 'port',
+            header: 'Port',
+            cell: info => <Badge value={info.getValue() as number} />,
+        },
+        {
+            accessorKey: 'password',
+            header: 'Password',
+            cell: () => '••••••',
+        },
+    ];
+
+    // Gestion des états de chargement et d'erreur
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (isError) {
+        return <div>Error: {error instanceof Error ? error.message : "An error occurred"}</div>;
+    }
     // useEffect(() => {
     //     const fetchData = async () => {
     //         try {
@@ -40,7 +71,6 @@ const OrthancSettingsCard: React.FC = () => {
     //             if (!response.ok) {
     //                 throw new Error('Network response was not ok');
     //             }
-    
     //             const loadedData = await response.json();
     //             setData(loadedData); 
     //         } catch (error) {
