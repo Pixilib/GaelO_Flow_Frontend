@@ -11,9 +11,6 @@ type BannerItemsProps = {
 
 const BannerItems = ({ elements, onNavigate, className, isOpen }: BannerItemsProps) => {
 
-  // Focus on the container when it is open
-
-
   const bannerItemsStyle: ItemStyle = {
     active: "",
     classUlElem: `text-center mt-4 rounded-xl bg-primary shadow-lg relative z-10 ${className}`,

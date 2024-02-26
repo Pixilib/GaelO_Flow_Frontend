@@ -44,6 +44,7 @@ const OrthancSettingsCard: React.FC = () => {
     if (error) return <span>Error: {error.message}</span>
     if (!orthancData) return null
     //! Just for visualize example of response
+    if (orthancData)
     console.log({ orthancData })
 
     const columns: ColumnDef<OrthancData>[] = [
@@ -80,7 +81,6 @@ const OrthancSettingsCard: React.FC = () => {
                 <CardBody>
                     <div className="flex justify-center">
                         <div className="mb-4 w-full">
-                        if (orthancData)
                             <Table columns={columns} data={orthancData} />
                         </div>
                     </div>

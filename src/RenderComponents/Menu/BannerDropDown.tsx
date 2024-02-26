@@ -12,19 +12,14 @@ export const BannerDropDown = ({
   dropDownOpen,
 }: BannerDropDownProps) => {
 
-  console.log("isOpen", isOpen);
-  
 const handleClick = () => {
-  console.log("click");
   dropDownOpen(); 
 }
 const handleFocus = () => {
-  console.log("focus");
   if(isOpen)
   dropDownOpen();
 };
 const handleBlur = () => {
-  console.log("blur");
   setTimeout(() => {
     if (isOpen) {
       dropDownOpen();
