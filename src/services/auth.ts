@@ -11,7 +11,7 @@ export const signIn = (
   });
 };
 
-export const signUp = async (
+export const signUp = (
   username: string,
   lastname: string,
   firstname: string,
@@ -26,21 +26,21 @@ export const signUp = async (
 };
 
 export const lostPassword =
- async (email: string): Promise<unknown> => {
-  return axios.post("/api/lost-password", {
-    email,
-  });
-};
+  (email: string): Promise<unknown> => {
+    return axios.post("/api/lost-password", {
+      email,
+    });
+  };
 
 export const changePassword =
- async (
-  newPassword: string,
-  connfirmPassword: string,
-  token: string
-): Promise<unknown> => {
+  (
+    newPassword: string,
+    connfirmPassword: string,
+    token: string
+  ): Promise<unknown> => {
     return axios.post("/api/change-password", {
       newPassword,
       connfirmPassword,
       token,
     });
-};
+  };

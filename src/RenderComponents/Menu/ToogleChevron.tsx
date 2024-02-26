@@ -3,14 +3,17 @@ import ChevronDown from "../../assets/chevron-down.svg?react";
 
 type ToggleChevronProps = {
     isOpen: boolean;
-    dropDownOpen: () => void;
     className?: string;
+    onClick?: () => void;
 }
 
-const ToggleChevron= ({ isOpen, dropDownOpen, className}:ToggleChevronProps) => (
-    <span  data-gaelo-flow="ToogleChevron"  className={`${className}`} onClick={dropDownOpen}>
+const ToggleChevron= ({ isOpen, className, onClick}:ToggleChevronProps) => {
+    return(
+    <span  data-gaelo-flow="ToogleChevron"  className={`${className}`} onClick={onClick} >
         {isOpen ? <ChevronUp /> : <ChevronDown />}
     </span>
-);
+    )
+}
 
+// onClick={onClick} onFocus={handleFocus} onBlur={handleBlur}
 export default ToggleChevron;
