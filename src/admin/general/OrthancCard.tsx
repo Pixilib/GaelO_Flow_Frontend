@@ -31,8 +31,7 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
 };
 
 const OrthancSettingsCard: React.FC = () => {
-    const { data: orthancData, error, isPending } = useCustomQuery<OrthancData[]>('orthancSystem', getOrthancSystem);
-  
+    const { data: orthancData, error, isPending } = useCustomQuery<OrthancData[]>('orthancSystem', getOrthancSystem);  
     
     //!It's for exemple, you can change the return of the request
     if (isPending) return <span>Loading ... </span>
@@ -89,5 +88,6 @@ const OrthancSettingsCard: React.FC = () => {
         </div>
     );
 };
+
 
 export default OrthancSettingsCard;
