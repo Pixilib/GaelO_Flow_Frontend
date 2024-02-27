@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     useReactTable,
     getCoreRowModel,
@@ -32,7 +32,7 @@ const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
 
     return (
         <div style={{ overflowX: 'auto', maxHeight: '500px' }}>
-            <table className="min-w-full rounded-lg bg-white">
+            <table className="min-w-full bg-white rounded-lg">
                 <thead className="border-b-2 border-gray">
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>

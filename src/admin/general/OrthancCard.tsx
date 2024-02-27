@@ -28,17 +28,15 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
     return <span className={badgeClasses}>{value}</span>;
 };
 
-
 const OrthancSettingsCard: React.FC = () => {
     const { data: orthancData, error, isPending } = useCustomQuery<OrthancData[]>('orthancSystem', getOrthancSystem, {
-        select: (data: OrthancData[]) => data.map((item: OrthancData) => ({
+        select: (data: OrthancData[]) => data.map(item => ({
             ...item,
-            port: Number(item.port), 
+            port: Number(item.port),
         })),
     });
 
-    console.log("Orthanc Data:", orthancData);
-    if (isPending) return <span>Loading ...</span>;
+    if (isPending) return <span>Loading...</span>;
     if (error) return <span>Error: {error.message}</span>;
     if (!orthancData) return null;
 
@@ -77,9 +75,15 @@ const OrthancSettingsCard: React.FC = () => {
                     </div>
                 </CardBody>
                 <CardFooter className="flex justify-center space-x-4">
-                    <Button color={Colors.orange} onClick={() => console.log('Restart action')}><img src={Restart} alt="Restart" /></Button>
-                    <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}><img src={Shutdown} alt="Shutdown" /></Button>
-                    <Button color={Colors.primary} onClick={() => console.log('Info action')}><img src={Info} alt="Info" /></Button>
+                    <Button color={Colors.orange} onClick={() => console.log('Restart action')}>
+                        <Restart title="Restart" />
+                    </Button>
+                    <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
+                        <Shutdown title="Shutdown" />
+                    </Button>
+                    <Button color={Colors.primary} onClick={() => console.log('Info action')}>
+                        <Info title="Info" />
+                    </Button>
                 </CardFooter>
             </Card>
         </div>
