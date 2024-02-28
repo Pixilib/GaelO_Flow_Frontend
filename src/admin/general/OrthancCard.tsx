@@ -1,5 +1,8 @@
 import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
+import { useCustomQuery } from '../../utils/reactQuery';
+import { getOrthancSystem } from '../../services/orthanc';
+
 import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
 import Table from '../../RenderComponents/Table';
 import Button from '../../RenderComponents/Button';
@@ -8,8 +11,6 @@ import { Colors } from '../../utils/enums';
 import Restart from '../../assets/restart.svg?react';
 import Shutdown from '../../assets/shutdown.svg?react';
 import Info from '../../assets/info.svg?react';
-import { useCustomQuery } from '../../utils/reactQuery';
-import { getOrthancSystem } from '../../services/orthanc';
 
 //!Maybe needs to change interface see src/types/Orthanc/OrthancSystemType.ts
 //WIP
@@ -28,24 +29,16 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
 };
 
 const OrthancSettingsCard: React.FC = () => {
+    const { data: orthancData, error, isPending } = useCustomQuery<OrthancData[]>('orthancSystem', getOrthancSystem, {
+        select: (data: OrthancData[]) => data.map(item => ({
+            ...item,
+            port: Number(item.port),
+        })),
+    });
 
-    const { isPending, data: orthancData, error } = useCustomQuery(
-        ["orthancData"],
-        async () => getOrthancSystem(),
-        {
-            refetchOnMount: true,
-            onSuccess: (orthancData: any) => console.log("La requête a réussi !", orthancData),
-            onError: (error: any) => console.log("La requête a échoué !", error),
-        }
-    )
-    
-    //!It's for exemple, you can change the return of the request
-    if (isPending) return <span>Loading ... </span>
-    if (error) return <span>Error: {error.message}</span>
-    if (!orthancData) return null
-    //! Just for visualize example of response
-    if (orthancData)
-    console.log({ orthancData })
+    if (isPending) return <span>Loading...</span>;
+    if (error) return <span>Error: {error.message}</span>;
+    if (!orthancData) return null;
 
     const columns: ColumnDef<OrthancData>[] = [
         {
@@ -72,23 +65,25 @@ const OrthancSettingsCard: React.FC = () => {
 
     return (
         <div className='mt-4'>
-            <div>
-                <h1>Orthanc Data</h1>
-                <pre>{JSON.stringify(orthancData, null, 2)}</pre>
-            </div>
             <Card>
                 <CardHeader title="Orthanc Settings" />
                 <CardBody>
                     <div className="flex justify-center">
-                        <div className="mb-4 w-full">
+                        <div className="w-full mb-4">
                             <Table columns={columns} data={orthancData} />
                         </div>
                     </div>
                 </CardBody>
                 <CardFooter className="flex justify-center space-x-4">
-                    <Button color={Colors.orange} onClick={() => console.log('Restart action')}><Restart /></Button>
-                    <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}><Shutdown /></Button>
-                    <Button color={Colors.primary} onClick={() => console.log('Info action')}><Info /></Button>
+                    <Button color={Colors.orange} onClick={() => console.log('Restart action')}>
+                        <Restart title="Restart" />
+                    </Button>
+                    <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
+                        <Shutdown title="Shutdown" />
+                    </Button>
+                    <Button color={Colors.primary} onClick={() => console.log('Info action')}>
+                        <Info title="Info" />
+                    </Button>
                 </CardFooter>
             </Card>
         </div>
