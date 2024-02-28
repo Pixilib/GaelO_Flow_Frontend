@@ -42,20 +42,23 @@ const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
                                 return (
                                     <th
                                         key={header.id}
-                                        className="px-2 py-3 text-xs font-bold tracking-wider text-center text-gray-600 uppercase md:px-4 lg:px-6"
-                                        style={{ cursor: header.column.getCanSort() ? 'pointer' : 'default' }}
+                                        className={`px-2 py-3 text-xs font-bold tracking-wider text-center uppercase md:px-4 lg:px-6 ${header.column.getCanSort() ? 'cursor-pointer' : 'cursor-default'
+                                            } text-gray-600`}
                                     >
-                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <div className="flex items-center justify-center">
                                             {flexRender(header.column.columnDef.header, header.getContext())}
-                                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '4px' }}>
+                                            <div className="flex flex-col ml-1">
                                                 <span
                                                     onClick={(e) => {
                                                         e.stopPropagation();
                                                         const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
                                                         setSorting([{ id: header.id, desc: isDesc }]);
                                                     }}
-                                                    style={{ cursor: 'pointer', color: isSortedAsc || isSortedDesc ? Colors.dark : Colors.light }}
-                                                >{isSortedDesc ? '▼' : '▲'}</span>
+                                                    className={`cursor-pointer ${isSortedAsc || isSortedDesc ? Colors.dark : Colors.light}}
+                                                }`}
+                                                >
+                                                    {isSortedDesc ? '▼' : '▲'}
+                                                </span>
                                             </div>
                                         </div>
                                     </th>

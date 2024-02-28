@@ -9,11 +9,9 @@ function App() {
   return(
     <OrthancSettingsCard/>
   )
- return (
-  <div className="w-screen h-screen">
-
+ 
   return (
-  <div className="h-screen w-screen">
+  <div className="w-screen h-screen">
     {isLogged ? <RootApp /> : <WelcomeRoot />}
   </div>
  )
