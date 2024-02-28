@@ -59,9 +59,8 @@ const Header = ({ openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps)
         { title: "Profile", path: "/profile", isActive: location.pathname === "/profile" },
         { title: "Settings", path: "/settings", isActive: location.pathname === "/settings" },
     ];
-    const title = t('titleBanner');
     return (
-        <Banner title={title} leftIcon={leftIcon} onLeftIconClick={handleLeftIconClick} >
+        <Banner title={t('titleBanner')} leftIcon={leftIcon} onLeftIconClick={handleLeftIconClick} >
             <div className="flex justify-end ">
                 <BannerDropDown className="flex w-44 flex-col" isOpen={isOpen("Language")} dropDownOpen={()=>handleDropDown("Language")}>
                     <div className="inline-flex w-full items-center">
