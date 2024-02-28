@@ -12,9 +12,7 @@ export const BannerDropDown = ({
   dropDownOpen,
 }: BannerDropDownProps) => {
 
-const handleClick = () => {
-  dropDownOpen(); 
-}
+
 const handleFocus = () => {
   if(isOpen)
   dropDownOpen();
@@ -35,7 +33,6 @@ const handleBlur = () => {
         tabIndex={0}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onClick={handleClick}
       >
         {children}
       </div>

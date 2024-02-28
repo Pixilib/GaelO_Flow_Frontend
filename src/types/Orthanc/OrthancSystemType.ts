@@ -1,6 +1,6 @@
 
 
-export interface TopLevel {
+export type TopLevel = {
     ApiVersion:               number;
     CheckRevisions:           boolean;
     DatabaseBackendPlugin:    null;
@@ -24,7 +24,7 @@ export interface TopLevel {
     Version:                  string;
 }
 
-export interface MainDicomTags {
+export type MainDicomTags = {
     Instance: string;
     Patient:  string;
     Series:   string;
