@@ -8,14 +8,13 @@ import {
     SortingState,
 } from '@tanstack/react-table';
 import { Colors } from '../utils/enums';
-
-type TableProps<T> = {
+interface TableProps<T> {
     data: T[];
     columns: ColumnDef<T, unknown>[];
     enableSorting?: boolean;
-};
+}
 
-const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
+function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
     const [sorting, setSorting] = useState<SortingState>([]);
 
     const table = useReactTable({
@@ -31,7 +30,7 @@ const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
     });
 
     return (
-        <div style={{ overflowX: 'auto', maxHeight: '500px' }}>
+        <div className="overflow-x-auto max-h-[500px]">
             <table className="min-w-full bg-white rounded-lg">
                 <thead className="border-b-2 border-gray">
                     {table.getHeaderGroups().map(headerGroup => (
@@ -42,12 +41,16 @@ const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
                                 return (
                                     <th
                                         key={header.id}
-                                        className={`px-2 py-3 text-xs font-bold tracking-wider text-center uppercase md:px-4 lg:px-6 ${header.column.getCanSort() ? 'cursor-pointer' : 'cursor-default'
-                                            } text-gray-600`}
+                                        className={`px-2 py-3 text-xs font-bold tracking-wider text-center uppercase md:px-4 lg:px-6 cursor-pointer text-gray-600 ${!header.column.getCanSort() ? 'cursor-default' : ''
+                                            }`}
+                                        onClick={() => {
+                                            const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
+                                            setSorting([{ id: header.id, desc: isDesc }]);
+                                        }}
                                     >
                                         <div className="flex items-center justify-center">
                                             {flexRender(header.column.columnDef.header, header.getContext())}
-                                            <div className="flex flex-col ml-1">
+                                            {header.column.getCanSort() && (
                                                 <span
                                                     onClick={(e) => {
                                                         e.stopPropagation();
@@ -55,11 +58,11 @@ const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
                                                         setSorting([{ id: header.id, desc: isDesc }]);
                                                     }}
                                                     className={`cursor-pointer ${isSortedAsc || isSortedDesc ? Colors.dark : Colors.light}}
-                                                }`}
+                                           }`}
                                                 >
                                                     {isSortedDesc ? '▼' : '▲'}
                                                 </span>
-                                            </div>
+                                            )}
                                         </div>
                                     </th>
                                 );
@@ -68,8 +71,12 @@ const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
                     ))}
                 </thead>
                 <tbody>
-                    {table.getRowModel().rows.map(row => (
-                        <tr key={row.id}>
+                    {table.getRowModel().rows.map((row, rowIndex) => (
+                        <tr
+                            key={row.id}
+                            className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'
+                                }`}
+                        >
                             {row.getVisibleCells().map(cell => (
                                 <td key={cell.id} className="px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6">
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -81,6 +88,6 @@ const Table = <T,>({ data, columns, enableSorting = true }: TableProps<T>) => {
             </table>
         </div>
     );
-};
+}
 
 export default Table;
