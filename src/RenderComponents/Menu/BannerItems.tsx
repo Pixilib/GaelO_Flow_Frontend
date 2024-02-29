@@ -3,13 +3,13 @@ import { Items, Item, ItemStyle } from "./Items.tsx";
 
 type BannerItemsProps = {
   elements: Item[];
-  onNavigate: (path: string) => void;
+  onSelect: (item:Item) => void;
   className?: string;
   isOpen: boolean;
   setOpenItem: (value: string | null) => void;
 };
 
-const BannerItems = ({ elements, onNavigate, className, isOpen }: BannerItemsProps) => {
+const BannerItems = ({ elements, onSelect, className, isOpen }: BannerItemsProps) => {
 
   const bannerItemsStyle: ItemStyle = {
     active: "",
@@ -19,7 +19,7 @@ const BannerItems = ({ elements, onNavigate, className, isOpen }: BannerItemsPro
   };
   return isOpen ? (
     <div>
-      <Items elements={elements} onNavigate={onNavigate} style={bannerItemsStyle} />
+      <Items elements={elements} onSelect={onSelect} style={bannerItemsStyle} />
     </div>
   ) : null;
 };

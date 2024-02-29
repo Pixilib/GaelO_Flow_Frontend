@@ -12,7 +12,7 @@ const Dashboard = () => {
 
       <div className="m-8 flex h-10 items-center rounded-[10px] bg-white p-10 shadow-xl">
         <h2 className="text-xl">
-          Welcome <span className="font-bold">{username}</span>
+          <span className="font-bold">{username}</span>
         </h2>
         <img
           src="hello.svg"

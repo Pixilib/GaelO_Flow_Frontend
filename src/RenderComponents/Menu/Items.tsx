@@ -15,11 +15,11 @@ export type Item = {
 export type ItemsProps = {
   elements: Item[];
   style: ItemStyle;
-  onNavigate: (path: string) => void;
+  onSelect: (item: Item) => void;
   icon?: React.ReactNode;
 };
 
-export const Items = (({ elements, style, onNavigate, icon}:ItemsProps) => {
+export const Items = (({ elements, style, onSelect, icon}:ItemsProps) => {
 
   return (
       <ul data-gaelo-flow="items" className={style.classUlElem}>
@@ -31,7 +31,7 @@ export const Items = (({ elements, style, onNavigate, icon}:ItemsProps) => {
             <li
             key={index}
             className={`${style.classLiElem} ${activeClasses}`}
-            onClick={() => onNavigate(item.path)}
+            onClick={() => onSelect(item)}
             >
               {icon}
               {item.title}
