@@ -10,7 +10,7 @@ import {
 import { Colors } from '../utils/enums';
 
 type TableProps<T> = {
-    data: T[];
+    data: any;
     columns: ColumnDef<T, unknown>[];
     enableSorting?: boolean;
 };
