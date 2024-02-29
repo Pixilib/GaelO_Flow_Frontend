@@ -10,7 +10,7 @@ type MenuItemCollapseProps = {
   elements: Item[];
   isOpen: boolean;
   dropDownOpen: () => void;
-  onNavigate: (path: string) => void;
+  onNavigate: (item: Item) => void;
   className?: string;
 };
 const MenuItemsCollapse = ({

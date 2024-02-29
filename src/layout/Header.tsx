@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
-
 import { Banner } from "../RenderComponents/Menu/Banner";
 import BannerItems from "../RenderComponents/Menu/BannerItems";
 import { BannerDropDown } from "../RenderComponents/Menu/BannerDropDown";
@@ -14,45 +13,39 @@ import Language from "../assets/language.svg?react";
 import Notification from "../assets/notification.svg?react";
 import Settings from "../assets/settings.svg?react";
 import Profile from "../assets/user-banner.svg?react";
+import i18n from "../i18n";
 
 type HeaderProps = {
     title: string;
-    setBannerTitle: (title: string) => void;
     openItem: string | null;
     setOpenItem: (value: string | null) => void;
     isToggled: boolean;
     onSwicthMode: () => void;
-    language: string;
-    setLanguageSelect: (lang: string) => void;
 };
 
-const Header = ({ title, setBannerTitle, openItem, setOpenItem, isToggled, onSwicthMode, language, setLanguageSelect }: HeaderProps) => {
+const Header = ({ title, openItem, setOpenItem, isToggled, onSwicthMode }: HeaderProps) => {
     const navigate = useNavigate();
     const location = useLocation();
+
     const handleDropDown = (name: string) => {
         setOpenItem(openItem === name ? null : name);
     };
-    const handleLanguageSelect = (item: Item) => {
-        // handleDropDown('Language');
-        setLanguageSelect(item.title);
-        console.log("Language: ", language);
-    };
+
     const handleSettingsItemClick = (item: Item) => {
         navigate(item.path);
     };
     const handleLeftIconClick = () => {
         if (location.pathname !== "/") {
             navigate("/");
-            setBannerTitle("Home")
         }
     };
 
     const isOpen = (item: string): boolean => openItem === item;
     const leftIcon = location.pathname === "/" ? <BannerHome /> : <span><ArrowBack /></span>;
     //Items for elements in props of BannerItems
-    const ItemsLanguage: Item[] = [
-        { title: "English", path: "/english", isActive: location.pathname === "/english" },
-        { title: "Français", path: "/francais", isActive: location.pathname === "/francais" },
+    const ItemsLanguage = [
+        { title: "English", code: 'fr', path: "/english", isActive: location.pathname === "/english" },
+        { title: "Français", code: 'en', path: "/francais", isActive: location.pathname === "/francais" },
     ];
     const ItemsSettingsUser: Item[] = [
         { title: "Profile", path: "/profile", isActive: location.pathname === "/profile" },
@@ -65,7 +58,7 @@ const Header = ({ title, setBannerTitle, openItem, setOpenItem, isToggled, onSwi
                 <BannerDropDown className="flex w-44 flex-col" isOpen={isOpen("Language")} dropDownOpen={() => handleDropDown("Language")}>
                     <div className="inline-flex w-full items-center">
                         <Language />
-                        <span className="mx-4">{language}</span>
+                        <span className="mx-4">{ItemsLanguage.find(item => item.code === i18n.language)?.title}</span>
                         <ToogleChevron
                             isOpen={isOpen("Language")}
                             onClick={() => handleDropDown("Language")}
@@ -73,7 +66,7 @@ const Header = ({ title, setBannerTitle, openItem, setOpenItem, isToggled, onSwi
                     </div>
                     <BannerItems
                         elements={ItemsLanguage}
-                        onSelect={handleLanguageSelect}
+                        onSelect={(item: any) => i18n.changeLanguage(item.code)}
                         isOpen={isOpen("Language")}
                         setOpenItem={() => setOpenItem(null)}
                         className="w-40"
