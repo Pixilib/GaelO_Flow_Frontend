@@ -3,6 +3,7 @@ export type BannerProps = {
   title: string;
   leftIcon?: React.ReactNode;
   onLeftIconClick?: () => void;
+  language?: string;
   children?: React.ReactNode;
   className?: string;
 };

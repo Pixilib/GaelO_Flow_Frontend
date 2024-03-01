@@ -2,7 +2,7 @@ import { Items, Item, ItemStyle } from "./Items.tsx";
 
 type SideBarItemsProps = {
   elements: Item[];
-  onNavigate: (path: string) => void;
+  onNavigate: (item: Item) => void;
 };
 
 const SideBarItems = ({ elements, onNavigate }: SideBarItemsProps) => {
@@ -13,7 +13,7 @@ const SideBarItems = ({ elements, onNavigate }: SideBarItemsProps) => {
     inactive: "text-10 cursor-pointer "
   };
   return (
-    <Items elements={elements} onNavigate={onNavigate} style={sideBarItemsStyle} />
+    <Items elements={elements} onSelect={onNavigate} style={sideBarItemsStyle} />
   )
 };
 

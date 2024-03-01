@@ -4,10 +4,13 @@ import Moon from '../../assets/moon.svg?react';
 
 type ToggleSwitchProps = {
   isToggled: boolean;
-  onToggle: () => void; // tu peux détailler davantage le type si nécessaire
+  onToggle: () => void;
 }
 
 const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
+  const handleClick = (event:any) => {
+    event.stopPropagation();
+  }
   return (
     <label className="flex cursor-pointer items-center">
       {/* The real hidden checkbox input */}
@@ -17,6 +20,7 @@ const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
         className="sr-only"
         checked={isToggled}
         onChange={onToggle}
+        onClick={handleClick}
         aria-labelledby="Light and Dark mode switch"
       />
       {/* switch design */}

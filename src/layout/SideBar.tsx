@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import MenuItem from "../RenderComponents/Menu/MenuItem";
 import MenuItemsCollapse from "../RenderComponents/Menu/MenuItemsCollapse";
 
-import LogoSideBar from  "../assets/logoGaeloFlow-white3.svg?react";
+import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import Administrator from "../assets/administrator.svg?react";
 import Import from "../assets/import-content.svg?react";
 import Search from "../assets/search.svg?react";
@@ -13,6 +13,7 @@ import MyDicom from "../assets/my-dicom.svg?react";
 import Home from "../assets/home.svg?react";
 import Help from "../assets/help.svg?react";
 import Logout from "../assets/logout.svg?react";
+import { Item } from "../RenderComponents/Menu/Items";
 
 type SideBarProps = {
   onLogout: () => void;
@@ -24,12 +25,14 @@ export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleItemClick = (path: string) => {
-    navigate(path);
+  const handleItemClick = (item: Item|string) => {
+    const itemPath = typeof item === "string" ? item : item.path;
+    navigate(itemPath);
   };
   const handleDropDown = (title: string) => {
     setOpenItem(openItem === title ? null : title);
   };
+
   //TODO: Add route for the adminItems , when route exist !
   const adminItems = [
     {
@@ -68,7 +71,7 @@ export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       isActive: location.pathname === "/labels",
     },
   ];
-
+  
   return (
     <nav
       data-gaelo-flow="sidebar"
@@ -86,7 +89,6 @@ export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             isOpen={openItem === "Administration"}
             dropDownOpen={() => handleDropDown("Administration")}
             onNavigate={handleItemClick}
-            // setOpenItem={setOpenItem}
           />
           <MenuItem
             title="Orthanc Content"
@@ -98,7 +100,7 @@ export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             title="Import"
             icon={<Import />}
             isActive={location.pathname === "/import"}
-            onClick={() => handleItemClick("/")}
+            onClick={()=>handleItemClick("/import")}
           />
           <MenuItem
             title="Query"
@@ -109,8 +111,8 @@ export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           <MenuItem
             title="Auto retrieve"
             icon={<Auto />}
-            isActive={location.pathname === "/query"}
-            onClick={() => handleItemClick("/query")}
+            isActive={location.pathname === "/auto-retrieve"}
+            onClick={() => handleItemClick("/auto-retrieve")}
           />
           <MenuItem
             title="My Dicom"

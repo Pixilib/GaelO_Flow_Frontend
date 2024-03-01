@@ -1,6 +1,6 @@
 
 
-export type TopLevel = {
+export type OrthancSystem = {
     ApiVersion:               number;
     CheckRevisions:           boolean;
     DatabaseBackendPlugin:    null;
