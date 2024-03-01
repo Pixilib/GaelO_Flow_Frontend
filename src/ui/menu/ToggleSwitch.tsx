@@ -3,11 +3,11 @@ import Sun from '../../assets/sun.svg?react';
 import Moon from '../../assets/moon.svg?react';
 
 type ToggleSwitchProps = {
-  isToggled: boolean;
-  onToggle: () => void;
-}
+  isToggled?: boolean;
+  onToggle?: () => void;
+} & React.InputHTMLAttributes<HTMLInputElement>
 
-const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
+const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
   const handleClick = (event:any) => {
     event.stopPropagation();
   }
@@ -17,11 +17,12 @@ const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
       <input
         data-gaelo-flow="toggle-switch"
         type="checkbox"
-        className="sr-only"
+        className=" sr-only"
         checked={isToggled}
         onChange={onToggle}
         onClick={handleClick}
         aria-labelledby="Light and Dark mode switch"
+        {...props}
       />
       {/* switch design */}
       <div

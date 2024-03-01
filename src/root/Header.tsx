@@ -121,7 +121,7 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
           }
         >
           <span className="inline-flex items-center gap-4">
-            <ToggleSwitch disabled />
+            <ToggleSwitch  disabled={true} />
             <Notification className="size-4 transition-transform duration-100 hover:scale-110" />
             <Settings className="size-4 transition-transform duration-100 hover:scale-110" />
             <Profile

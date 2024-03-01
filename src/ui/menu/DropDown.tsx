@@ -10,13 +10,15 @@ type DropDownProps = {
 };
 
 const DropDown = ({ children, className, dropDown }: DropDownProps) => {
-  const [isOpen, setIsOpen] = useState();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleClick = () => {
+    console.log('handleClick')
     setIsOpen(true);
   };
 
   const handleBlur = () => {
+    console.log('handleBlur')
     setIsOpen(false);
   };
 
@@ -27,8 +29,8 @@ const DropDown = ({ children, className, dropDown }: DropDownProps) => {
       tabIndex={0}
       onClick={handleClick}
       onBlur={handleBlur}
-    >
-      {<ToogleChevron isOpen={isOpen} />}
+      >
+      {<ToogleChevron isOpen={isOpen} className="inline-flex" />}
       {children}
       {dropDown}
     </div>
