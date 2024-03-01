@@ -4,8 +4,8 @@ import { signUp } from "../services/auth";
 import { useCustomMutation } from "../utils/reactQuery";
 import { toastError, toastSuccess } from "../utils/toastify";
 
-import Button from "../RenderComponents/Button";
-import Input from "../RenderComponents/Input";
+import Button from "../ui/Button";
+import Input from "../ui/Input";
 import { Colors } from "../utils/enums";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Mail from "./../assets/mail.svg?react";
@@ -23,12 +23,12 @@ export const SignUpForm = () => {
     [],
     {
       onSuccess: (data: Record<string, any>) => {
-        toastSuccess(data.data.message);
+        toastSuccess(data.message);
       },
       onError: (error: any) => {
         //display an error message if an error occurs
-        if (error.response?.data?.message) {
-          toastError(error.response.data.message);
+        if (error.response?.message) {
+          toastError(error.response.message);
         } else {
           // display a generic error message
           toastError("An error occurred during registration.");

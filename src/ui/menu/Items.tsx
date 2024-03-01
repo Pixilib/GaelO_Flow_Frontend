@@ -19,7 +19,7 @@ export type ItemsProps = {
   icon?: React.ReactNode;
 };
 
-export const Items = (({ elements, style, onSelect, icon}:ItemsProps) => {
+const Items = (({ elements, style, onSelect, icon}:ItemsProps) => {
 
   return (
       <ul data-gaelo-flow="items" className={style.classUlElem}>
@@ -42,3 +42,5 @@ export const Items = (({ elements, style, onSelect, icon}:ItemsProps) => {
     )
   }
 );
+
+export default Items

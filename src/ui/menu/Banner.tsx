@@ -1,5 +1,4 @@
-
-export type BannerProps = {
+type BannerProps = {
   title: string;
   leftIcon?: React.ReactNode;
   onLeftIconClick?: () => void;
@@ -8,14 +7,20 @@ export type BannerProps = {
   className?: string;
 };
 
-export const Banner = ({ title, leftIcon, onLeftIconClick, children, className }: BannerProps) => {
+const Banner = ({
+  title,
+  leftIcon,
+  onLeftIconClick,
+  children,
+  className,
+}: BannerProps) => {
   return (
     <div
       data-gaelo-flow="banner"
       className={`flex h-24 w-full items-center justify-between rounded-br-20 border-transparent shadow-lg ${className}`}
     >
       <div className="ml-12 flex items-center">
-      {leftIcon && (
+        {leftIcon && (
           <span className="mr-8 cursor-pointer" onClick={onLeftIconClick}>
             {leftIcon}
           </span>
@@ -30,3 +35,4 @@ export const Banner = ({ title, leftIcon, onLeftIconClick, children, className }
   );
 };
 
+export default Banner;

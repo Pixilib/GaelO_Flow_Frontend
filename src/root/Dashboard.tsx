@@ -1,5 +1,5 @@
-import Button from "../RenderComponents/Button";
-import Card, { CardHeader, CardBody, CardFooter } from "../RenderComponents/Card";
+import Button from "../ui/Button";
+import Card, { CardHeader, CardBody, CardFooter } from "../ui/Card";
 import { Colors } from "../utils/enums";
 
 const Dashboard = () => {
@@ -9,7 +9,6 @@ const Dashboard = () => {
     // eslint-disable-next-line tailwindcss/no-custom-classname
     <div className="bg-background size-full p-8">
       <h1 className="mx-8 text-3xl font-bold">Overview</h1>
-
       <div className="m-8 flex h-10 items-center rounded-[10px] bg-white p-10 shadow-xl">
         <h2 className="text-xl">
           <span className="font-bold">{username}</span>

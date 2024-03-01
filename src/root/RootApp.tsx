@@ -1,23 +1,26 @@
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../reducers/UserSlice";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
-import { SideBar } from "../layout/SideBar";
+import { logout } from "../reducers/UserSlice";
+
+import SideBar from "./SideBar";
 import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/general/AdminRoot";
-import Header from "../layout/Header";
+import Header from "./Header";
 
 const RootApp = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const [isToggled, setIsToggled] = useState<boolean>(false);
 
   const handleSwitchMode = () => {
     setIsToggled(!isToggled);
   };
+
   const handleLogout = () => {
     dispatch(logout());
     navigate("/");
@@ -51,7 +54,6 @@ const RootApp = () => {
           title={title}
           openItem={openItem}
           setOpenItem={setOpenItem}
-          isToggled={isToggled}
           onSwicthMode={handleSwitchMode}
         />
         <div className="flex">

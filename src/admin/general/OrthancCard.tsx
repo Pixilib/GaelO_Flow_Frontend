@@ -1,13 +1,13 @@
 import React from 'react';
-import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
-import Table from '../../RenderComponents/Table';
-import Button from '../../RenderComponents/Button';
+import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
+import Table from '../../ui/Table';
+import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
 
 import Restart from '../../assets/restart.svg?react';
 import Shutdown from '../../assets/shutdown.svg?react';
 import Info from '../../assets/info.svg?react';
-import Input from '../../RenderComponents/Input';
+import Input from '../../ui/Input';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, orthancReset } from '../../services/orthanc';
 
@@ -33,8 +33,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     })
 
     const { mutate: resetOrthanc } = useCustomMutation(() => orthancReset(), [])
-
-    console.log(orthancSystem)
 
     const columns = [
         {

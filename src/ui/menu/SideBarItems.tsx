@@ -1,4 +1,4 @@
-import { Items, Item, ItemStyle } from "./Items.tsx";
+import Items, { Item, ItemStyle } from "./Items.tsx";
 
 type SideBarItemsProps = {
   elements: Item[];

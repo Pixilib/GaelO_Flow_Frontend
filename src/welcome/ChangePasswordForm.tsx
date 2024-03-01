@@ -6,14 +6,14 @@ import { useCustomMutation } from "../utils/reactQuery";
 import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
 
-import Button from "../RenderComponents/Button";
+import Button from "../ui/Button";
 import { Colors } from "../utils/enums";
 
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
-import Input from "../RenderComponents/Input";
+import Input from "../ui/Input";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -29,10 +29,10 @@ const ChangePasswordForm = () => {
     [],
     {
       onSuccess: (data: Record<string, any>) => {
-        toastSuccess(data.data.message);
+        toastSuccess(data.message);
         navigate("/");
       },
-      onError: (error: AxiosError<{ message: string }>) => {
+      onError: (error: any) => {
         //display an error message if an error occurs
         if (error.response?.data?.message) {
           toastError(error.response.data.message);
