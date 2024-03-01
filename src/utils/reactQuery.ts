@@ -1,5 +1,4 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { toastError, toastSuccess } from './toastify'
 
 const useCustomQuery = (
   queryKeys: string[],
@@ -17,7 +16,6 @@ const useCustomQuery = (
 
 const useCustomMutation = (
   mutationFn :(...args : any[])=> Promise<unknown>,
-  successMessage: string|null,
   invalidatedQueryKeys: string[][] = [],
   options?: { [key :string] : any}
 ) => {
@@ -32,9 +30,6 @@ const useCustomMutation = (
                 keys.forEach(key => queryClient.invalidateQueries({ queryKey: key }));
             };
 
-            // Personnaliser le message de succès
-            if (successMessage) toastSuccess(successMessage);
-
             if (options?.onSuccess) {
                 options.onSuccess(data, variables, context);
             }
@@ -43,8 +38,6 @@ const useCustomMutation = (
         onError: (error, variables, context) => {
             if (options?.onError) {
                 options.onError(error, variables, context);
-            } else {
-                toastError(error instanceof Error ? error.message : 'Error');
             }
         },
         onSettled: (data, error, variables, context) => {

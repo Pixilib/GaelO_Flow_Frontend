@@ -26,7 +26,6 @@ const ChangePasswordForm = () => {
   const changePasswordMutation = useCustomMutation(
     ({ newPassword, confirmPassword, token }) =>
       changePassword(newPassword, confirmPassword, token),
-    null,
     [],
     {
       onSuccess: (data: Record<string, any>) => {

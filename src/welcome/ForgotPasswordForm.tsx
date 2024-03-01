@@ -15,7 +15,6 @@ const ForgotPasswordForm = () => {
 
   const lostPasswordMutation = useCustomMutation(
     ({ email }) => lostPassword(email),
-    null,
     [],
     {
       onSuccess: () => {
