@@ -31,7 +31,6 @@ export const SignInForm = () => {
 
   const loginMutation = useCustomMutation(
     ({ username, password }) => signIn(username, password),
-    null,
     [],
     {
       onSuccess: (data: Record<string, any>) => {

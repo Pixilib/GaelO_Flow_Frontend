@@ -8,8 +8,9 @@ import {
     SortingState,
 } from '@tanstack/react-table';
 import { Colors } from '../utils/enums';
-interface TableProps<T> {
-    data: T[];
+
+type TableProps<T> = {
+    data: any;
     columns: ColumnDef<T, unknown>[];
     enableSorting?: boolean;
 }

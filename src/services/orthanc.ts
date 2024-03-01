@@ -1,14 +1,13 @@
 import axios from "axios";
 
 export const getOrthancSystem = (): Promise<unknown> => {
-  console.log("getOrthancSystem");
-  return axios.get("/api/system");
+  return axios.get("/api/system").then(response => response.data);
 };
 
-export const OrthancReset = (): Promise<unknown> => {
-  return axios.post("/api/tools/shutdown");
+export const orthancReset = (): Promise<unknown> => {
+  return axios.post("/api/tools/reset");
 }
 
-export const OrthancShutdown = (): Promise<unknown> => {
+export const orthancShutdown = (): Promise<unknown> => {
   return axios.post("/api/tools/shutdown");
 }
