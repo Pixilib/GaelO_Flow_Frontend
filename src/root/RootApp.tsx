@@ -10,16 +10,11 @@ import AdminRoot from "../admin/general/AdminRoot";
 import Header from "./Header";
 
 const RootApp = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const [openItem, setOpenItem] = useState<string | null>(null);
-
-  const handleSwitchMode = () => {
-    setIsToggled(!isToggled);
-  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -27,7 +22,6 @@ const RootApp = () => {
   };
 
   const title = useMemo(()=> {
-
     const titlePath: { [key: string]: string } = {
       "/aets": "Aets",
       "/auto-retrieve": "Auto retrieve",
@@ -54,7 +48,6 @@ const RootApp = () => {
           title={title}
           openItem={openItem}
           setOpenItem={setOpenItem}
-          onSwicthMode={handleSwitchMode}
         />
         <div className="flex">
           <Routes>

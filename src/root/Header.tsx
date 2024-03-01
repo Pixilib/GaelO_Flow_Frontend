@@ -40,7 +40,7 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
   };
 
   const isOpen = (item: string): boolean => openItem === item;
-
+  console.log({location, openItem, isOpen})
   const leftIcon =
     location.pathname === "/" ? (
       <BannerHome />
@@ -86,17 +86,19 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
     >
       <div className="flex justify-end">
         <DropDown
-          className="flex w-44 flex-col"
+          className="relative flex w-44 flex-col"
           isOpen={isOpen("Language")}
           dropDownOpen={() => handleDropDown("Language")}
           dropDown={
-            <BannerItems
-              elements={ItemsLanguage}
-              onSelect={(item: any) => i18n.changeLanguage(item.code)}
-              isOpen={isOpen("Language")}
-              setOpenItem={() => setOpenItem(null)}
-              className="w-40"
-            />
+            <div className="absolute top-full -mt-2">
+              <BannerItems
+                elements={ItemsLanguage}
+                onSelect={(item: any) => i18n.changeLanguage(item.code)}
+                isOpen={isOpen("Language")}
+                setOpenItem={() => setOpenItem(null)}
+                className="w-40"
+              />
+            </div>
           }
         >
           <span className="inline-flex items-center">
@@ -107,17 +109,19 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
           </span>
         </DropDown>
         <DropDown
-          className="flex w-60 flex-col"
+          className="relative flex w-60 flex-col"
           isOpen={isOpen("SettingsUser")}
           dropDownOpen={() => handleDropDown("SettingsUser")}
           dropDown={
-            <BannerItems
-              elements={ItemsSettingsUser}
-              onSelect={handleSettingsItemClick}
-              className="w-56"
-              isOpen={isOpen("SettingsUser")}
-              setOpenItem={() => setOpenItem(null)}
-            />
+            <div className="absolute top-full -mt-16">
+              <BannerItems
+                elements={ItemsSettingsUser}
+                onSelect={handleSettingsItemClick}
+                className="absolute right-0 top-14 w-56"
+                isOpen={isOpen("SettingsUser")}
+                setOpenItem={() => setOpenItem(null)}
+              />
+            </div>
           }
         >
           <span className="inline-flex items-center gap-4">
@@ -126,10 +130,10 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
             <Settings className="size-4 transition-transform duration-100 hover:scale-110" />
             <Profile
               height={23}
-              fill="white"
               width={23}
-              stroke="white"
               className="transition-transform duration-100 hover:scale-110"
+              fill="white"
+              stroke="white"
             />
           </span>
         </DropDown>
