@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 
-import MenuItem from "../RenderComponents/Menu/MenuItem";
-import MenuItemsCollapse from "../RenderComponents/Menu/MenuItemsCollapse";
+import MenuItem from "../ui/menu/MenuItem";
+import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
 import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import Administrator from "../assets/administrator.svg?react";
@@ -13,7 +13,7 @@ import MyDicom from "../assets/my-dicom.svg?react";
 import Home from "../assets/home.svg?react";
 import Help from "../assets/help.svg?react";
 import Logout from "../assets/logout.svg?react";
-import { Item } from "../RenderComponents/Menu/Items";
+import { Item } from "../ui/menu/Items";
 
 type SideBarProps = {
   onLogout: () => void;
@@ -21,7 +21,7 @@ type SideBarProps = {
   setOpenItem: (value: string | null) => void;
 };
 
-export const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
+const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 

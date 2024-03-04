@@ -7,7 +7,7 @@ type ToggleChevronProps = {
     onClick?: () => void;
 }
 
-const ToggleChevron= ({ isOpen, className, onClick}:ToggleChevronProps) => {
+const ToggleChevron= ({ isOpen, className, onClick = () => {}}:ToggleChevronProps) => {
     return(
     <span  data-gaelo-flow="ToogleChevron"  className={`${className}`} onClick={onClick} >
         {isOpen ? <ChevronUp /> : <ChevronDown />}
@@ -15,5 +15,4 @@ const ToggleChevron= ({ isOpen, className, onClick}:ToggleChevronProps) => {
     )
 }
 
-// onClick={onClick} onFocus={handleFocus} onBlur={handleBlur}
 export default ToggleChevron;

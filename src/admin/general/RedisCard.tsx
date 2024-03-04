@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Card, { CardHeader, CardBody, CardFooter } from '../../RenderComponents/Card';
-import Table from '../../RenderComponents/Table';
-import Input from '../../RenderComponents/Input';
+import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
+import Table from '../../ui/Table';
+import Input from '../../ui/Input';
 
 const Badge: React.FC<{ value: number }> = ({ value }) => {
     const badgeClasses = `rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20`;

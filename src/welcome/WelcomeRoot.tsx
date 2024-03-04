@@ -24,23 +24,23 @@ const Welcome = () => {
       default:
         imageComponent = <SignInImage />;
     }
-    return <div className="w-1/2 mx-auto">{imageComponent}</div>;
+    return <div className="mx-auto w-1/2">{imageComponent}</div>;
   };
 
   const classLink = "text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer";
 
   return (
     <>
-      <main className="flex w-screen h-screen grid-cols-2 gap-0 bg-gradient-to-r from-primary to-secondary">
-        <div className="relative flex items-center justify-center w-full h-full">
+      <main className="flex h-screen w-screen grid-cols-2 gap-0 bg-gradient-to-r from-primary to-secondary">
+        <div className="relative flex size-full items-center justify-center">
           <img
             src="/gaelo-flow-white2.svg"
-            className="absolute w-20 h-auto top-7 left-7"
+            className="absolute left-7 top-7 h-auto w-20"
             alt="Logo"
           />
           {getImage()}
         </div>
-        <div className="flex items-center justify-center w-full bg-white shadow-xl rounded-tl-3xl rounded-bl-3xl">
+        <div className="flex w-full items-center justify-center rounded-l-3xl bg-white shadow-xl">
           <div className="w-2/3">
             <Routes>
               <Route path="/*" element={<SignInForm />} />
@@ -51,7 +51,7 @@ const Welcome = () => {
             </Routes>
 
             <hr className="my-8 mt-20 border-primary" />
-            <div className="flex justify-between mx-auto text-center text-balance">
+            <div className="mx-auto flex justify-between text-balance text-center">
               {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
                 <span onClick={() => navigate("/sign-up")} className={classLink}>
                   Don’t have an account?
@@ -60,7 +60,7 @@ const Welcome = () => {
 
               {location.pathname !== "/" && (
                 location.pathname === "/legal-mention" ? (
-                  <div onClick={() => navigate("/")} className="flex items-center gap-2 cursor-pointer">
+                  <div onClick={() => navigate("/")} className="flex cursor-pointer items-center gap-2">
                     <ArrowBack />
                     <span>Back</span>
                   </div>

@@ -21,10 +21,6 @@ i18n
     },
     debug: true,
   });
-
-  i18n.on('languageChanged', (lng) => {
-    console.log('La langue a changé pour :', lng);
-  });
   
 
 export default i18n;

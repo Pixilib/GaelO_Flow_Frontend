@@ -1,7 +1,7 @@
 import type { Meta, Story } from "@storybook/react";
 import { BrowserRouter as Router } from 'react-router-dom';
-import type { BannerProps } from "../src/RenderComponents/Menu/Banner";
-import { Banner } from "../src/RenderComponents/Menu/Banner";
+import type { BannerProps } from "../src/ui/menu/Banner";
+import { Banner } from "../src/ui/menu/Banner";
 
 const meta: Meta<BannerProps> = {
   title: "GAELO FLOW UI/Banner",
