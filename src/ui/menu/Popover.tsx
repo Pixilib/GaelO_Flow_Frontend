@@ -1,33 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, ReactNode } from 'react';
 
 type PopoverProps = {
-  trigger: React.ReactNode;
-  content: React.ReactNode;
+  trigger: ReactNode;
+  content: ReactNode;
   className?: string;
-  placement?: 'top' | 'right' | 'bottom' | 'left';
+  placement?: 'top' | 'right' | 'bottom' | 'left' | 'bottom-end';
 };
 
-const Popover = ({ trigger, content, className, placement = 'bottom' }: PopoverProps) => {
+const Popover: React.FC<PopoverProps> = ({ trigger, content, className, placement = 'bottom' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
 
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [popoverRef]);
-
-  const handleClick = () => {
-    console.log('handleClick');
-    setIsOpen(!isOpen);
+  const handleMouseLeave = () => {
+    setIsOpen(false);
   };
 
   const placementClasses = {
@@ -35,16 +24,17 @@ const Popover = ({ trigger, content, className, placement = 'bottom' }: PopoverP
     right: "left-full ml-2",
     bottom: "top-full mt-2",
     left: "right-full mr-2",
+    'bottom-end': "left-full ml-2",
   };
 
   return (
-    <div className={`relative ${className}`} ref={popoverRef}>
-      <div onClick={handleClick} className="cursor-pointer">
+    <div className={`relative ${className}`} ref={popoverRef} onMouseLeave={handleMouseLeave}>
+      <div onMouseEnter={handleMouseEnter} className="flex items-center text-sm text-gray-500 cursor-pointer dark:text-gray-400">
         {trigger}
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 ${placementClasses[placement]} bg-white border border-gray-200 rounded-lg shadow-md p-4 text-sm text-gray-600 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400`}
+          className={`absolute z-10 ${placementClasses[placement]} bg-white border border-gray-200 rounded-lg shadow-md p-4 text-sm text-gray-600 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 w-72 transition-opacity duration-300 opacity-100`}
           role="tooltip"
         >
           {content}

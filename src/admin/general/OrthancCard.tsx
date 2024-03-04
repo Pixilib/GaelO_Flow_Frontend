@@ -3,6 +3,7 @@ import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Table from '../../ui/Table';
 import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
+import Popover from '../../ui/menu/Popover';
 
 import Restart from '../../assets/restart.svg?react';
 import Shutdown from '../../assets/shutdown.svg?react';
@@ -63,7 +64,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <CardHeader title="Orthanc Settings" />
                 <CardBody>
                     <div className="flex justify-center">
-                        <div className="mb-4 w-full">
+                        <div className="w-full mb-4">
                             <Table columns={columns} data={[orthancData]} />
                         </div>
                     </div>
@@ -75,11 +76,18 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
                         <Shutdown title="Shutdown" />
                     </Button>
-                    <Button color={Colors.primary} onClick={() => console.log('Info action')}>
-                        <Info title="Info" onClick={() => refetch()} />
-                        {
-                            orthancSystem ? <div>{orthancSystem.Version}</div> : null
-                        }
+                    <Button color={Colors.primary} onMouseEnter={() => refetch()}>
+                        <Popover
+                            trigger={<Info title="Info" />}
+                            content={
+                                orthancSystem ? (
+                                    <div>Version: {orthancSystem.Version}</div>
+                                ) : (
+                                    <div>Chargement des informations...</div>
+                                )
+                            }
+                            placement="bottom"
+                        />
                     </Button>
                 </CardFooter>
             </Card>

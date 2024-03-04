@@ -3,8 +3,9 @@ import Popover from "../src/ui/menu/Popover";
 
 const meta: Meta<typeof Popover> = {
     title: "GAELO FLOW UI/Popover",
+    component: Popover,
     args: {
-        trigger: "Click me",
+        trigger: "Button",
         content: "Content here",
     },
     argTypes: {
