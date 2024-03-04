@@ -7,7 +7,7 @@ import { useCustomQuery } from "../../utils/reactQuery";
 const General = () => {
 
   const { data, error, isPending } = useCustomQuery(
-    ['options'],
+    ["options"],
     () => getOptions()
   )
 
@@ -16,7 +16,7 @@ const General = () => {
 
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
-    <div className="bg-background h-screen flex-col space-y-12 p-1">
+    <div className="flex-col h-screen p-1 space-y-12 bg-background">
       <RedisCard redisData={{ address: data.redis_address, port: data.redis_port }} />
       <OrthancCard orthancData={{ address: data.orthanc_address, port: data.orthanc_port, password: data.orthanc_password, username: data.orthanc_username }} />
     </div>
