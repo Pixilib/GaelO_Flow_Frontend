@@ -24,6 +24,7 @@ const Popover: React.FC<PopoverProps> = ({ trigger, content, className, placemen
     right: "left-full ml-2",
     bottom: "top-full mt-4",
     left: "right-full mr-2",
+    'bottom-end': "left-full ml-2",
   };
 
   return (
@@ -33,7 +34,7 @@ const Popover: React.FC<PopoverProps> = ({ trigger, content, className, placemen
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 ${placementClasses[placement]} bg-white rounded-lg shadow-md p-4 text-sm text-gray-600 dark:bg-gray-900 dark:text-gray-400 w-72 transition-opacity duration-300 opacity-100 `}
+          className={`absolute z-10 ${placementClasses[placement]} bg-white border border-gray-200 rounded-lg shadow-md p-4 text-sm text-gray-600 dark:bg-gray-900 dark:text-gray-400 w-72 transition-opacity duration-300 opacity-100`}
           role="tooltip"
         >
           {content}
