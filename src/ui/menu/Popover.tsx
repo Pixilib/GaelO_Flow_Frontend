@@ -1,8 +1,13 @@
 import React, { useState, useRef, ReactNode } from 'react';
 
+type PopoverContent = {
+  header?: React.ReactNode; 
+  body: React.ReactNode;
+};
+
 type PopoverProps = {
   trigger: ReactNode;
-  content: ReactNode;
+  content: PopoverContent;
   className?: string;
   placement?: 'top' | 'right' | 'bottom' | 'left' | 'bottom-end';
 };
@@ -34,14 +39,21 @@ const Popover: React.FC<PopoverProps> = ({ trigger, content, className, placemen
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 ${placementClasses[placement]} bg-white border border-gray-200 rounded-lg shadow-md p-4 text-sm text-gray-600 dark:bg-gray-900 dark:text-gray-400 w-72 transition-opacity duration-300 opacity-100`}
+          className={`absolute z-10 ${placementClasses[placement]} bg-white rounded-lg shadow-md p-4 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-400 w-72 transition-opacity duration-300 opacity-100`}
           role="tooltip"
         >
-          {content}
+          {content.header && (
+            
+            <div className="p-3 bg-red-700 rounded-t-lg text-dark dark:text-gray-200 dark:bg-gray-700">
+              {content.header}
+            </div>
+          )}
+          <div className="p-2">
+            {content.body}
+          </div>
         </div>
       )}
     </div>
   );
 };
-
 export default Popover;

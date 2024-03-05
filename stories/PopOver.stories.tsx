@@ -5,8 +5,9 @@ const meta: Meta<typeof Popover> = {
     title: "GAELO FLOW UI/Popover",
     component: Popover,
     args: {
-        trigger: "Button",
-        content: "Content here",
+        trigger: "Click me", 
+        className: '', 
+        placement: 'bottom', 
     },
     argTypes: {
         trigger: {
@@ -23,7 +24,8 @@ const meta: Meta<typeof Popover> = {
             control: { type: 'select' },
         },
     },
-    tags: ["autodocs"]
+    tags: ["autodocs"],
+
 }
 export default meta;
 
@@ -32,6 +34,7 @@ type Story = StoryObj<typeof Popover>;
 export const PopOvertory: Story = {
 
     render: (args) => (
+    
         <div className="space-y-5">
             <Popover
                 trigger={args.trigger}

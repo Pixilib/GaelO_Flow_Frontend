@@ -52,7 +52,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         {
             accessorKey: 'password',
             header: 'Password',
-            cell: row => <Input disabled type='password' value={row.getValue()} />,
+            cell: row => <Input disabled className="text-center" type='password' value={row.getValue()} />,
         },
     ];
 
