@@ -3,13 +3,15 @@ import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Table from '../../ui/Table';
 import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
-import Input from '../../ui/Input';
-import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
-import { getOrthancSystem, orthancReset } from '../../services/orthanc';
+import Popover from '../../ui/menu/Popover';
+import ToggleEye from '../../ui/ToggleEye';
 
 import Restart from '../../assets/restart.svg?react';
 import Shutdown from '../../assets/shutdown.svg?react';
 import Info from '../../assets/info.svg?react';
+import Input from '../../ui/Input';
+import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
+import { getOrthancSystem, orthancReset } from '../../services/orthanc';
 
 interface OrthancData {
     address: string;
@@ -24,15 +26,15 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
 };
 
 type OrthancCardProps = {
-    orthancData: OrthancData
-}
+    orthancData: OrthancData;
+};
 
 const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     const { data: orthancSystem, refetch } = useCustomQuery(['system'], () => getOrthancSystem(), {
-        enabled: false
-    })
+        enabled: false,
+    });
 
-    const { mutate: resetOrthanc } = useCustomMutation(() => orthancReset(), [])
+    const { mutate: resetOrthanc } = useCustomMutation(() => orthancReset(), []);
 
     const columns = [
         {
@@ -51,7 +53,12 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         {
             accessorKey: 'password',
             header: 'Password',
-            cell: row => <Input disabled className="text-center" type='password' value={row.getValue()} />,
+            cell: row => (
+                <div className="flex items-center">
+                    <Input disabled className="text-center" type="password" value={row.getValue()} />
+                    <ToggleEye />
+                </div>
+            ),
         },
     ];
 
@@ -73,8 +80,18 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
                         <Shutdown title="Shutdown" />
                     </Button>
-                    <Button color={Colors.primary} onClick={() => refetch()}>
-                        <Info title="Info" />
+                    <Button color={Colors.primary} onMouseEnter={() => refetch()}>
+                        <Popover
+                            trigger={<Info title="Info" />}
+                            content={
+                                orthancSystem ? (
+                                    <div>Version: {orthancSystem.Version}</div>
+                                ) : (
+                                    <div>Loading information...</div>
+                                )
+                            }
+                            placement="bottom"
+                        />
                     </Button>
                 </CardFooter>
             </Card>

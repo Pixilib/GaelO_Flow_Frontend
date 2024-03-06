@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Colors } from '../utils/enums';
 
 const ToggleEye = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -8,16 +9,13 @@ const ToggleEye = () => {
         setIsVisible(!isVisible);
     };
 
+    const iconStyle = { color: Colors.gray };
+
     return (
         <div className="flex items-center">
             <button onClick={toggleVisibility} className="text-xl">
-                {isVisible ? <FaEye /> : <FaEyeSlash />}
+                {isVisible ? <FaEye style={iconStyle} /> : <FaEyeSlash style={iconStyle} />}
             </button>
-            <input
-                type={isVisible ? "text" : "password"}
-                className="p-2 ml-2 border border-gray-300 rounded"
-                placeholder="Votre mot de passe"
-            />
         </div>
     );
 };
