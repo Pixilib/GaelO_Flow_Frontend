@@ -1,59 +1,49 @@
-import React, { useState, useRef, ReactNode } from 'react';
+import React, { useState } from 'react';
 
-type PopoverContent = {
-  header?: React.ReactNode; 
-  body: React.ReactNode;
+type SimplePopoverProps = {
+  trigger: React.ReactNode;
+  content: React.ReactNode;
+  placement?: 'top' | 'right' | 'bottom' | 'left';
 };
 
-type PopoverProps = {
-  trigger: ReactNode;
-  content: PopoverContent;
-  className?: string;
-  placement?: 'top' | 'right' | 'bottom' | 'left' | 'bottom-end';
-};
-
-const Popover: React.FC<PopoverProps> = ({ trigger, content, className, placement = 'bottom' }) => {
+const SimplePopover: React.FC<SimplePopoverProps> = ({
+  trigger,
+  content,
+  placement = 'bottom',
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const popoverRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseEnter = () => {
-    setIsOpen(true);
+  const getPlacementClasses = (placement: string) => {
+    switch (placement) {
+      case 'top':
+        return 'bottom-full mb-1'; 
+      case 'right':
+        return 'left-full ml-1'; 
+      case 'bottom':
+        return 'top-full mt-1'; 
+      case 'left':
+        return 'right-full mr-1'; 
+      default:
+        return 'top-full mt-1'; 
+    }
   };
-
-  const handleMouseLeave = () => {
-    setIsOpen(false);
-  };
-
-  const placementClasses = {
-    top: "bottom-full mb-2",
-    right: "left-full ml-2",
-    bottom: "top-full mt-4",
-    left: "right-full mr-2",
-    'bottom-end': "left-full ml-2",
-  };
+  
 
   return (
-    <div className={`relative ${className}`} ref={popoverRef} onMouseLeave={handleMouseLeave}>
-      <div onMouseEnter={handleMouseEnter} className="flex items-center text-sm text-gray-500 cursor-pointer dark:text-gray-400">
+    <div className="relative" onMouseLeave={() => setIsOpen(false)}>
+      <div onMouseEnter={() => setIsOpen(true)} className="cursor-pointer">
         {trigger}
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 ${placementClasses[placement]} bg-white rounded-lg shadow-md p-4 text-sm text-gray-600 dark:bg-gray-800 dark:text-gray-400 w-72 transition-opacity duration-300 opacity-100`}
+          className={`absolute z-10 ${getPlacementClasses(placement)} bg-white rounded-lg shadow-md p-4 text-gray-600 dark:bg-gray-800 dark:text-gray-400`}
           role="tooltip"
         >
-          {content.header && (
-            
-            <div className="p-3 bg-red-700 rounded-t-lg text-dark dark:text-gray-200 dark:bg-gray-700">
-              {content.header}
-            </div>
-          )}
-          <div className="p-2">
-            {content.body}
-          </div>
+          {content}
         </div>
       )}
     </div>
   );
 };
-export default Popover;
+
+export default SimplePopover;
