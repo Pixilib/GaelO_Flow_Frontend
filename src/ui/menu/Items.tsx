@@ -20,7 +20,10 @@ export type ItemsProps = {
 };
 
 const Items = (({ elements, style, onSelect, icon}:ItemsProps) => {
-
+  const handleClick = (event: React.MouseEvent, item: Item) => {
+    event.stopPropagation();
+    onSelect(item);
+  };
   return (
       <ul data-gaelo-flow="items" className={style.classUlElem}>
         {elements.map((item, index) => {
@@ -31,7 +34,7 @@ const Items = (({ elements, style, onSelect, icon}:ItemsProps) => {
             <li
             key={index}
             className={`${style.classLiElem} ${activeClasses}`}
-            onClick={() => onSelect(item)}
+            onClick={(event) => handleClick(event, item)}
             >
               {icon}
               {item.title}

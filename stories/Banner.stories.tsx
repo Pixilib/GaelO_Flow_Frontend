@@ -1,9 +1,9 @@
-import type { Meta, Story } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { BrowserRouter as Router } from 'react-router-dom';
-import type { BannerProps } from "../src/ui/menu/Banner";
-import { Banner } from "../src/ui/menu/Banner";
+import type BannerProps from "../src/ui/menu/Banner";
+import Banner  from "../src/ui/menu/Banner";
 
-const meta: Meta<BannerProps> = {
+const meta: Meta<typeof BannerProps> = {
   title: "GAELO FLOW UI/Banner",
   component: Banner,
   args: {
@@ -18,7 +18,7 @@ const meta: Meta<BannerProps> = {
 
 export default meta;
 
-export const BannerStory: Story<BannerProps> = (args) => (
+export const BannerStory: StoryObj<typeof BannerProps> = (args) => (
   <Router>
     <Banner {...args} />
   </Router>

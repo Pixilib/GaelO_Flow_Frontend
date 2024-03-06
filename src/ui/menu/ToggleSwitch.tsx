@@ -8,7 +8,7 @@ type ToggleSwitchProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
-  const handleClick = (event:any) => {
+  const handleClick = (event:React.MouseEvent) => {
     event.stopPropagation();
   }
   return (
@@ -17,7 +17,7 @@ const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
       <input
         data-gaelo-flow="toggle-switch"
         type="checkbox"
-        className=" sr-only"
+        className="sr-only"
         checked={isToggled}
         onChange={onToggle}
         onClick={handleClick}
