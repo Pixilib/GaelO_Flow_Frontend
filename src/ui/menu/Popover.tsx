@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-type SimplePopoverProps = {
+type PopoverProps = {
   trigger: React.ReactNode;
   content: React.ReactNode;
   placement?: 'top' | 'right' | 'bottom' | 'left';
 };
 
-const SimplePopover: React.FC<SimplePopoverProps> = ({
+const SimplePopover: React.FC<PopoverProps> = ({
   trigger,
   content,
   placement = 'bottom',
