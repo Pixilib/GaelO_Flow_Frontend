@@ -4,15 +4,26 @@ import DropDown from "../src/ui/menu/DropDown";
 const meta: Meta<typeof DropDown> = {
     title: "GAELO FLOW UI/DropDown",
     component: DropDown,
-    args: {
-        children: "Text",
-    },
+    tags: ["autodocs"],
     argTypes: {
+        
+        chevronPosition: { control: { type: 'radio', options: ['left', 'right'] } },
         children: {
-        options: ["Text"],
+            control: 'text'
+        },
+        className: {
+            control: 'text'
+        },
+        isOpen: {
+            control: 'boolean'
+        },
+        dropDownOpen: {
+            action: "clicked",
+        },
+        dropDown: {
+            control:"object"
         },
     },
-    tags:["autodocs"]
 }
 
 export default meta;
@@ -20,13 +31,24 @@ export default meta;
 type Story = StoryObj<typeof DropDown>;
 
 export const DropDownStory: Story = {
+    args: {
+        chevronPosition: "right",
+        children: "DropDown",
+        className: "w-44 blue-gray-500 flex justify-center relative",
+        isOpen: false,
+        dropDownOpen: () => { },
+        dropDown: <div className="absolute top-full text-dark">BannerItems</div>,
 
+}
+}
 
-    render: ({ children }) => (
-        <div className="space-y-5">
-            <DropDown isOpen={false} dropDownOpen={() => console.log('click')} dropDown={<div>Drop Down</div>}>
-                {children}
-            </DropDown>
-        </div>
-    )
-};
+export const DropDownStoryLeft: Story = {
+    args: {
+        chevronPosition: "left",
+        children: "DropDown",
+        className: "w-44 blue-gray-300 flex justify-center relative",
+        isOpen: false,
+        dropDownOpen: () => { },
+        dropDown: <div className="absolute top-full text-dark">BannerItems</div>,
+}
+}
