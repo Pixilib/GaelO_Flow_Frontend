@@ -57,7 +57,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Jobs",
-      path: "/jobs",
+      path: "admin/jobs",
       isActive: location.pathname === "/jobs",
     },
     {

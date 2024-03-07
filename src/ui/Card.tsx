@@ -37,7 +37,7 @@ const CardHeader = ({ title, centerTitle = false, className = "", children }: Ba
 
   return (
     <div className={`bg-white text-black ${shadowClass} rounded-t-xl ${className} flex items-center text-center`}>
-      {title && <h2 className="flex-1 p-4 mx-auto text-lg font-bold">{title}</h2>}
+      {title && <h2 className="mx-auto flex-1 p-4 text-lg font-bold">{title}</h2>}
       {children}
     </div>
   );
@@ -45,7 +45,7 @@ const CardHeader = ({ title, centerTitle = false, className = "", children }: Ba
 
 const CardBody = ({ children }: BodyProps) => {
   return (
-    <div className="box-border flex-grow px-12 py-3 leading-relaxed text-black bg-gray hover:bg-gray-hover">
+    <div className="hover:bg-gray-hover box-border grow bg-gray px-12 py-3 leading-relaxed text-black">
       {children}
     </div>
   );
@@ -53,8 +53,8 @@ const CardBody = ({ children }: BodyProps) => {
 
 const CardFooter = ({ children, className = "" }: FooterProps) => {
   return (
-    <div className={`bg-gray hover:bg-gray-hover text-black box-border flex-grow leading-relaxed py-3 px-3 ${className} rounded-b-xl`}>
-      {children || <div className="flex-grow"></div>}
+    <div className={`hover:bg-gray-hover box-border grow bg-gray px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+      {children || <div className="grow"></div>}
     </div>
   );
 };
