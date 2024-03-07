@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Table from '../../ui/Table';
 import Button from '../../ui/Button';
@@ -53,12 +53,15 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         {
             accessorKey: 'password',
             header: 'Password',
-            cell: row => (
+            cell: row => {
+                const [show, setShow] = useState(false)
+                return (
                 <div className="flex items-center">
-                    <Input disabled className="text-center" type="password" value={row.getValue()} />
-                    <ToggleEye />
-                </div>
-            ),
+                    <Input disabled className="text-center" type={show ? "text" : "password"} value={row.getValue()} />
+                    <ToggleEye onToggle={(visible)=>setShow(visible)} />
+                </div>)
+
+            }
         },
     ];
 
