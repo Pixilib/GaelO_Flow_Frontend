@@ -43,7 +43,7 @@ const RootApp = () => {
   return (
     <div className="flex size-full">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-col flex-1">
         <Header
           title={title}
           openItem={openItem}
@@ -52,7 +52,7 @@ const RootApp = () => {
         <div className="flex">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/admin/*" element={<AdminRoot />} />
+            <Route path="/administration/*" element={<AdminRoot />} />
           </Routes>
         </div>
       </div>

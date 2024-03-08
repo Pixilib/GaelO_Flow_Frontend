@@ -61,7 +61,7 @@ export default {
         'badge-blue-text': '#4A4AFF',
       },
       boxShadow: {
-        'custom': '11px 17px 15px rgba(58, 51, 51, 0.37)',
+        'custom': '5px 17px 15px rgba(58, 51, 51, 0.20)',
       },
     },
   },

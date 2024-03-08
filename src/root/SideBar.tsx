@@ -27,6 +27,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
 
   const handleItemClick = (item: Item|string) => {
     const itemPath = typeof item === "string" ? item : item.path;
+    console.log(itemPath)
     navigate(itemPath);
   };
   const handleDropDown = (title: string) => {
@@ -36,46 +37,46 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   //TODO: Add route for the adminItems , when route exist !
   const adminItems = [
     {
+      title: "General",
+      path: "/administration/general",
+      isActive: location.pathname === "/administration/general",
+    },
+    {
       title: "Aets",
-      path: "/aets",
-      isActive: location.pathname === "/",
+      path: "/administration/aets",
+      isActive: location.pathname === "/administration/aets",
     },
     {
       title: "Peers",
-      path: "/peers",
-      isActive: location.pathname === "/peers",
-    },
-    {
-      title: "External endpoints",
-      path: "/external-endpoints",
-      isActive: location.pathname === "/external-endpoints",
+      path: "/administration/peers",
+      isActive: location.pathname === "/administration/peers",
     },
     {
       title: "Robot & Tasks",
-      path: "/robot-tasks",
+      path: "/administration/robot-tasks",
       isActive: location.pathname === "/robot-tasks",
     },
     {
       title: "Jobs",
-      path: "admin/jobs",
-      isActive: location.pathname === "/jobs",
+      path: "/administration/jobs",
+      isActive: location.pathname === "/administration/jobs",
     },
     {
       title: "Users",
-      path: "/users",
-      isActive: location.pathname === "/users",
+      path: "/administration/users",
+      isActive: location.pathname === "/administration/users",
     },
     {
       title: "Labels",
-      path: "/labels",
-      isActive: location.pathname === "/labels",
+      path: "/administration/labels",
+      isActive: location.pathname === "/administration/labels",
     },
   ];
   
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="h-full w-64 rounded-tr-40 border-transparent bg-primary shadow-custom"
+      className="w-64 h-full border-transparent rounded-tr-40 bg-primary shadow-custom"
     >
       <main className="h-full rounded-tr-40 pt-7">
         <div className="flex h-11% justify-center">

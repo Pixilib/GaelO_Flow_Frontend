@@ -8,7 +8,7 @@ type CardsProps = {
 
 type BasicHeaderProps = {
   title: string;
-  centerTitle?: boolean;
+  centerTitle?: boolean; 
   className?: string; 
   children?: React.ReactNode;
 };
@@ -24,16 +24,17 @@ type FooterProps = {
 
 const Card = ({ bordered, className = "", children }: CardsProps) => {
   const borderClass = bordered ? "border" : "";
+  const spacingClass = "mx-4 md:mx-4";
 
   return (
-    <div className={`shadow-md ${className} ${borderClass} rounded-xl`}>
+    <div className={`${spacingClass} shadow-md ${className} ${borderClass} rounded-xl`}>
       {children}
     </div>
   );
 };
 
-const CardHeader = ({ title, centerTitle = false, className = "", children }: BasicHeaderProps) => {
-  const shadowClass = "shadow-[0_-2px_4px_rgba(0,0,0,0.1)]"; 
+const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
+  const shadowClass = "shadow-[0_-2px_4px_rgba(0,0,0,0.1)]";
 
   return (
     <div className={`bg-white text-black ${shadowClass} rounded-t-xl ${className} flex items-center text-center`}>

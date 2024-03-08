@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Table from '../../ui/Table';
 import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
+import Popover from '../../ui/menu/Popover';
+import ToggleEye from '../../ui/ToggleEye';
 
 import Restart from '../../assets/restart.svg?react';
 import Shutdown from '../../assets/shutdown.svg?react';
@@ -22,17 +24,17 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
     const badgeClasses = `rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
 };
+
 type OrthancCardProps = {
-    orthancData: OrthancData
-}
+    orthancData: OrthancData;
+};
 
 const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
-
     const { data: orthancSystem, refetch } = useCustomQuery(['system'], () => getOrthancSystem(), {
-        enabled: false
-    })
+        enabled: false,
+    });
 
-    const { mutate: resetOrthanc } = useCustomMutation(() => orthancReset(), [])
+    const { mutate: resetOrthanc } = useCustomMutation(() => orthancReset(), []);
 
     const columns = [
         {
@@ -51,11 +53,17 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         {
             accessorKey: 'password',
             header: 'Password',
-            cell: row => <Input disabled type='password' value={row.getValue()} />,
+            cell: row => {
+                const [show, setShow] = useState(false)
+                return (
+                <div className="flex items-center">
+                    <Input disabled className="text-center" type={show ? "text" : "password"} value={row.getValue()} />
+                    <ToggleEye onToggle={(visible)=>setShow(visible)} />
+                </div>)
+
+            }
         },
     ];
-
-
 
     return (
         <div className='mt-4'>
@@ -63,7 +71,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <CardHeader title="Orthanc Settings" />
                 <CardBody>
                     <div className="flex justify-center">
-                        <div className="mb-4 w-full">
+                        <div className="w-full mb-4">
                             <Table columns={columns} data={[orthancData]} />
                         </div>
                     </div>
@@ -75,11 +83,18 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
                         <Shutdown title="Shutdown" />
                     </Button>
-                    <Button color={Colors.primary} onClick={() => console.log('Info action')}>
-                        <Info title="Info" onClick={() => refetch()} />
-                        {
-                            orthancSystem ? <div>{orthancSystem.Version}</div> : null
-                        }
+                    <Button color={Colors.primary} onMouseEnter={() => refetch()}>
+                        <Popover
+                            trigger={<Info title="Info" />}
+                            content={
+                                orthancSystem ? (
+                                    <div>Version: {orthancSystem.Version}</div>
+                                ) : (
+                                    <div>Loading information...</div>
+                                )
+                            }
+                            placement="bottom"
+                        />
                     </Button>
                 </CardFooter>
             </Card>

@@ -10,15 +10,15 @@ import {
 import { Colors } from '../utils/enums';
 
 type TableProps<T> = {
-    data: any;
+    data: T[];
     columns: ColumnDef<T, unknown>[];
     enableSorting?: boolean;
-}
+};
 
 function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
     const [sorting, setSorting] = useState<SortingState>([]);
 
-    const table = useReactTable({
+    const table = useReactTable<T>({
         data,
         columns,
         state: {
@@ -58,7 +58,7 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                                                         const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
                                                         setSorting([{ id: header.id, desc: isDesc }]);
                                                     }}
-                                                    className={`cursor-pointer ${isSortedAsc || isSortedDesc ? Colors.dark : Colors.light}}`}
+                                                    className={`cursor-pointer ${isSortedAsc || isSortedDesc ? Colors.dark : Colors.light}`}
                                                 >
                                                     {isSortedDesc ? '▼' : '▲'}
                                                 </span>
@@ -74,8 +74,7 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                     {table.getRowModel().rows.map((row, rowIndex) => (
                         <tr
                             key={row.id}
-                            className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'
-                                }`}
+                            className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'}`}
                         >
                             {row.getVisibleCells().map(cell => (
                                 <td key={cell.id} className="whitespace-nowrap px-2 py-4 text-center md:px-4 lg:px-6">
