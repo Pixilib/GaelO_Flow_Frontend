@@ -4,9 +4,8 @@ import Badge from '../ui/Badge';
 import Restart from '../assets/restart.svg?react';
 
 
-const JobTable = (data: any[]) => {
+const JobTable = (data:any) => {
 
-    console.log({data})
     const columns = [
         {
             accessorKey: 'ID',

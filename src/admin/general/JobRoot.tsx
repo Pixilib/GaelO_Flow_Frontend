@@ -13,10 +13,9 @@ import Spinner from '../../ui/Spinner';
 const JobRoot = () => {
   const { data: jobsInstances, isLoading: isLoadingJobs, refetch } = useCustomQuery(['jobs'], () => getJobs(), {
     enabled: true,
-    refetchInterval: 10000,
+    // refetchInterval: 10000,
   })
 
-  console.log({ jobsInstances })
 
 
   const jobsInstancesSampleIdDetails = [
@@ -160,7 +159,7 @@ const JobRoot = () => {
       <Card >
         <CardHeader title='Jobs Instances' />        
         <CardBody>
-          {isLoadingJobs ? <Spinner/> :<JobTable data={jobsInstancesSampleIdDetails} />}
+          {isLoadingJobs ? <Spinner/> :<JobTable data={jobsInstances} />}
         </CardBody>
         <CardFooter>
           <Button onClick={() => refetch()} color={Colors.secondary}>Refresh</Button>
