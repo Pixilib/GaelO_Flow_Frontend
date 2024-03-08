@@ -1,7 +1,7 @@
 
 import { Route, Routes } from "react-router-dom";
-import General from "./General";
-import JobRoot from "./JobRoot";
+import General from "./general/General";
+import JobRoot from "./jobs/JobRoot";
 
 const AdminRoot = () => {
     return (

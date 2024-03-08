@@ -15,7 +15,7 @@ import ToggleEye from "../ui/ToggleEye";
 
 import { Colors } from "../utils/enums";
 import PasswordKeyOn from "./../assets/password-key-on.svg?react";
-import ChevronRight from "./../assets/chevron-right.svg?react";;
+import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 
 export const SignInForm = () => {
@@ -34,13 +34,13 @@ export const SignInForm = () => {
     {
       onSuccess: (data: Record<string, any>) => {
         const decodedToken: Record<string, any> = jwtDecode(
-          data.access_token
+          data.Access_token
         );
         dispatch(
           login({
-            token: data.access_token,
-            userId: decodedToken.userId,
-            role: decodedToken.role,
+            token: data.AccessToken,
+            userId: decodedToken.UserId,
+            role: decodedToken.Role,
           })
         );
       },
@@ -56,14 +56,14 @@ export const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
-      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
+    <form onSubmit={handleSubmit} className="flex w-full flex-col items-center">
+      <h1 className="mb-6 text-center text-4xl font-semibold text-dark">
         {t('titleSignInForm')}
       </h1>
-      <p className="mb-12 text-lg text-center text-dark">
+      <p className="mb-12 text-center text-lg text-dark">
         Please Log in to your Account
       </p>
-      <div className="w-2/3 mt-20 text-dark">
+      <div className="mt-20 w-2/3 text-dark">
         <Input
           label="Username:"
           svgLeft={<User />}
@@ -77,7 +77,7 @@ export const SignInForm = () => {
           required
         />
         
-        <div className="w-full mt-12 text-dark">
+        <div className="mt-12 w-full text-dark">
           <Input
             label="Password:"
             svgLeft={<PasswordKeyOn />}
@@ -96,7 +96,7 @@ export const SignInForm = () => {
         </div>
 
       </div>
-      <div className="mt-3 text-xs text-right">
+      <div className="mt-3 text-right text-xs">
         <span
           className="inline-block cursor-pointer hover:text-indigo-800 hover:underline"
           onClick={() => navigate("/lost-password")}
@@ -105,7 +105,7 @@ export const SignInForm = () => {
         </span>
       </div>
 
-      <div className="flex justify-center mt-12">
+      <div className="mt-12 flex justify-center">
         <Button
           color={Colors.primary}
           type="submit"

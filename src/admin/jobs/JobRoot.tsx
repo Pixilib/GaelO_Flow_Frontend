@@ -3,14 +3,17 @@ import { getJobs } from '../../services/jobs';
 
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Button from '../../ui/Button';
-import JobTable from '../../root/JobTable';
+import JobTable from './JobTable';
 import Spinner from '../../ui/Spinner';
 import { Colors } from '../../utils/enums';
 
 
 // !Refacto In progress add mutation for restart job ect...
 const JobRoot = () => {
-  const { data: jobsInstances, isLoading: isLoadingJobs, refetch } = useCustomQuery(['jobs'], () => getJobs(), {
+  const { data: jobData, isLoading: isLoadingJobs, refetch } = useCustomQuery(
+    ['jobs'], 
+    () => getJobs(), 
+    {
     enabled: true,
     refetchInterval: 10000,
   })
@@ -20,7 +23,7 @@ const JobRoot = () => {
       <Card >
         <CardHeader title='Jobs Instances' />        
         <CardBody>
-          {isLoadingJobs ? <Spinner/> :<JobTable data={jobsInstances} />}
+          {isLoadingJobs ? <Spinner/> :<JobTable data={jobData} />}
         </CardBody>
         <CardFooter>
           <Button onClick={() => refetch()} color={Colors.secondary}>Refresh</Button>

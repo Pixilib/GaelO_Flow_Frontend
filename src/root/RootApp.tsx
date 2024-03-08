@@ -6,7 +6,7 @@ import { logout } from "../reducers/UserSlice";
 
 import SideBar from "./SideBar";
 import Dashboard from "./Dashboard";
-import AdminRoot from "../admin/general/AdminRoot";
+import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 
 const RootApp = () => {
