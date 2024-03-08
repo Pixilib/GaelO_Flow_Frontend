@@ -12,7 +12,7 @@ import { Colors } from '../../utils/enums';
 const JobRoot = () => {
   const { data: jobsInstances, isLoading: isLoadingJobs, refetch } = useCustomQuery(['jobs'], () => getJobs(), {
     enabled: true,
-    // refetchInterval: 10000,
+    refetchInterval: 10000,
   })
 
   return (
