@@ -46,7 +46,7 @@ services:
         image: osimis/orthanc:23.9.0
         container_name: orthanc-flow
         restart: unless-stopped
-        #ports: ["8042:8042"]
+        ports: ["8042:8042"]
         volumes: ["orthanc-flow:/var/lib/orthanc/db:Z"]
         environment:
             NEURO_PLUGIN_ENABLED: "true"

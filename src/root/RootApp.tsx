@@ -27,7 +27,7 @@ const RootApp = () => {
       "/auto-retrieve": "Auto retrieve",
       "/import": "Import",
       "/external-endpoints": "External endpoints",
-      "/jobs": "Jobs",
+      "admin/jobs": "Jobs",
       "/labels": "Labels",
       "/mydicom": "My Dicom",
       "/Orthanc Content": "Orthanc Content",

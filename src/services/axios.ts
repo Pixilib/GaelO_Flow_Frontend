@@ -1,7 +1,3 @@
-/**
-Copyright (c) 2021 - 2023 Pixilib
- */
-
 import axios from 'axios'
 import { store } from '../store'
 import { logout } from '../reducers/UserSlice'
