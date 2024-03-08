@@ -42,7 +42,7 @@ const JobTable = (data:any) => {
     ]
 
     return (
-        <Table data={data} columns={columns} />
+        <Table data={data.data} columns={columns} />
     )
 
 }
