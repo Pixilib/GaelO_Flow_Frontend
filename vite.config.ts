@@ -13,7 +13,7 @@ export default defineConfig({
         target: 'http://localhost:3000', // URL de votre serveur backend
         changeOrigin: true, // Nécessaire pour les hôtes virtuels
         secure: false, // Si votre backend est en HTTPS, mettez ceci à true
-      },
+      }
     }
   }
 })

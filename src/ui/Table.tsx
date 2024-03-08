@@ -31,8 +31,8 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
     });
 
     return (
-        <div className="overflow-x-auto max-h-[500px]">
-            <table className="min-w-full bg-white rounded-lg">
+        <div className="max-h-[500px] overflow-x-auto">
+            <table className="min-w-full rounded-lg bg-white">
                 <thead className="border-b-2 border-gray">
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
@@ -42,7 +42,7 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                                 return (
                                     <th
                                         key={header.id}
-                                        className={`px-2 py-3 text-xs font-bold tracking-wider text-center uppercase md:px-4 lg:px-6 cursor-pointer text-gray-600 ${!header.column.getCanSort() ? 'cursor-default' : ''
+                                        className={`text-gray-600 cursor-pointer px-2 py-3 text-center text-xs font-bold uppercase tracking-wider md:px-4 lg:px-6 ${!header.column.getCanSort() ? 'cursor-default' : ''
                                             }`}
                                         onClick={() => {
                                             const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
@@ -58,8 +58,7 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                                                         const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
                                                         setSorting([{ id: header.id, desc: isDesc }]);
                                                     }}
-                                                    className={`cursor-pointer ${isSortedAsc || isSortedDesc ? Colors.dark : Colors.light}}
-                                           }`}
+                                                    className={`cursor-pointer ${isSortedAsc || isSortedDesc ? Colors.dark : Colors.light}}`}
                                                 >
                                                     {isSortedDesc ? '▼' : '▲'}
                                                 </span>
@@ -79,7 +78,7 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                                 }`}
                         >
                             {row.getVisibleCells().map(cell => (
-                                <td key={cell.id} className="px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6">
+                                <td key={cell.id} className="whitespace-nowrap px-2 py-4 text-center md:px-4 lg:px-6">
                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                 </td>
                             ))}

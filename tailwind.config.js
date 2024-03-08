@@ -57,6 +57,8 @@ export default {
         'red': '#f8d7da',
         'gray': '#EDEDED',
         'light': '#F1F1F1',
+        'badge-gray': '#E6E6F2',
+        'badge-blue-text': '#4A4AFF',
       },
       boxShadow: {
         'custom': '11px 17px 15px rgba(58, 51, 51, 0.37)',
