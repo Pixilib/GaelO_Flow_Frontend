@@ -19,17 +19,6 @@ const JobRoot = () => {
   console.log({ jobsInstances })
 
 
-
-  const jobInstancesSampleId =
-    [
-      "0475d062-0054-4b49-b6a7-326f0b8216ef",
-      "3888c8b3-271c-4c69-abd7-2b21fb373958",
-      "71a1e475-d77c-449e-9092-f2ee4300088f",
-      "90ed5d23-8a25-457a-a7a2-15e9f5056655",
-      "9d3d5067-d297-4b88-977e-22d310ed785a",
-      "9fa3a088-0eed-4f0e-b296-7684dc8a8844"
-    ]
-
   const jobsInstancesSampleIdDetails = [
     {
       "CompletionTime": "20240308T093643.950203",
@@ -171,7 +160,7 @@ const JobRoot = () => {
       <Card >
         <CardHeader title='Jobs Instances' />        
         <CardBody>
-          {isLoadingJobs ? <Spinner/> :<JobTable data={jobsInstances} />}
+          {isLoadingJobs ? <Spinner/> :<JobTable data={jobsInstancesSampleIdDetails} />}
         </CardBody>
         <CardFooter>
           <Button onClick={() => refetch()} color={Colors.secondary}>Refresh</Button>
