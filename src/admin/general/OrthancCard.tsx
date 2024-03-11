@@ -6,12 +6,11 @@ import { Colors } from '../../utils/enums';
 import Popover from '../../ui/menu/Popover';
 import ToggleEye from '../../ui/ToggleEye';
 
-import Restart from '../../assets/restart.svg?react';
-import Info from '../../assets/info.svg?react';
+import { VscDebugRestart } from "react-icons/vsc";
+import { IoClose } from "react-icons/io5";import { BsQuestionLg } from "react-icons/bs";
 import Input from '../../ui/Input';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, orthancReset } from '../../services/orthanc';
-import { RxCross2 } from "react-icons/rx";
 interface OrthancData {
     address: string;
     port: number;
@@ -77,27 +76,32 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 </CardBody>
                 <CardFooter className="flex justify-center space-x-4">
                     <Button color={Colors.orange} onClick={() => resetOrthanc({})}>
-                        <Restart title="Reset" />
+                        <VscDebugRestart size="20px" title="Restart" />
                     </Button>
                     <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
-                        <RxCross2 size="20px" title="Shutdown" />  </Button>
-                    <Button color={Colors.primary} onMouseEnter={() => refetch()}>
-                        <Popover
-                            trigger={<Info title="Info" />}
-                            content={
-                                orthancSystem ? (
-                                    <div>Version: {orthancSystem.Version}</div>
-                                ) : (
-                                    <div>Loading information...</div>
-                                )
-                            }
-                            placement="bottom"
-                        />
+                    <IoClose size="20px" title="Shutdown" />
                     </Button>
+                    {/* Le Popover est utilisé ici comme un wrapper autour du bouton qui déclenche le Popover */}
+                    <Popover
+                        trigger={
+                            <Button color={Colors.primary}>
+                                <BsQuestionLg size="20px" title="Info" />
+                            </Button>
+                        }
+                        content={
+                            orthancSystem ? (
+                                <div>Version: {orthancSystem.Version}</div>
+                            ) : (
+                                <div>Loading information...</div>
+                            )
+                        }
+                        placement="bottom"
+                    />
                 </CardFooter>
             </Card>
         </div>
     );
 };
+
 
 export default OrthancSettingsCard;
