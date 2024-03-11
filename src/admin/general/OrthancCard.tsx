@@ -7,12 +7,11 @@ import Popover from '../../ui/menu/Popover';
 import ToggleEye from '../../ui/ToggleEye';
 
 import Restart from '../../assets/restart.svg?react';
-import Shutdown from '../../assets/shutdown.svg?react';
 import Info from '../../assets/info.svg?react';
 import Input from '../../ui/Input';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, orthancReset } from '../../services/orthanc';
-
+import { RxCross2 } from "react-icons/rx";
 interface OrthancData {
     address: string;
     port: number;
@@ -21,7 +20,7 @@ interface OrthancData {
 }
 
 const Badge: React.FC<{ value: number }> = ({ value }) => {
-    const badgeClasses = `rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20`;
+    const badgeClasses = `rounded-xl bg-indigo-100 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
 };
 
@@ -56,10 +55,10 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
             cell: row => {
                 const [show, setShow] = useState(false)
                 return (
-                <div className="flex items-center">
-                    <Input disabled className="text-center" type={show ? "text" : "password"} value={row.getValue()} />
-                    <ToggleEye onToggle={(visible)=>setShow(visible)} />
-                </div>)
+                    <div className="flex items-center">
+                        <Input disabled className="text-center" type={show ? "text" : "password"} value={row.getValue()} />
+                        <ToggleEye onToggle={(visible) => setShow(visible)} />
+                    </div>)
 
             }
         },
@@ -81,8 +80,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         <Restart title="Reset" />
                     </Button>
                     <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
-                        <Shutdown title="Shutdown" />
-                    </Button>
+                        <RxCross2 size="20px" title="Shutdown" />  </Button>
                     <Button color={Colors.primary} onMouseEnter={() => refetch()}>
                         <Popover
                             trigger={<Info title="Info" />}

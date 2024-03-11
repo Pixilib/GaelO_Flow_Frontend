@@ -5,7 +5,7 @@ import Table from '../../ui/Table';
 import Input from '../../ui/Input';
 
 const Badge: React.FC<{ value: number }> = ({ value }) => {
-    const badgeClasses = `rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20`;
+    const badgeClasses = `rounded-xl bg-indigo-100 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
 };
 
