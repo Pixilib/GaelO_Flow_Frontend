@@ -81,7 +81,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <Button color={Colors.danger} onClick={() => console.log('Shutdown action')}>
                     <IoClose size="20px" title="Shutdown" />
                     </Button>
-                    {/* Le Popover est utilisé ici comme un wrapper autour du bouton qui déclenche le Popover */}
                     <Popover
                         trigger={
                             <Button color={Colors.primary}>
