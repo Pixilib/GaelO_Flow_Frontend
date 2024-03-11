@@ -82,20 +82,27 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <IoClose size="20px" title="Shutdown" />
                     </Button>
                     <Popover
-                        trigger={
-                            <Button color={Colors.primary}>
-                                <BsQuestionLg size="20px" title="Info" />
-                            </Button>
-                        }
-                        content={
-                            orthancSystem ? (
-                                <div>Version: {orthancSystem.Version}</div>
-                            ) : (
-                                <div>Loading information...</div>
-                            )
-                        }
-                        placement="bottom"
-                    />
+    trigger={
+        <Button color={Colors.primary}>
+            <BsQuestionLg size="20px" title="Info" />
+        </Button>
+    }
+    content={
+        <div className="p-4">
+            <div className="mb-4">
+                <h3 className="mb-2 text-lg font-bold">System </h3>
+                <p className="mb-1"><span className="font-semibold">Version:</span> 1.2.3</p>
+                <p><span className="font-semibold">Uptime:</span> 48 hours</p>
+            </div>
+            <div>
+                <h3 className="mb-2 text-lg font-bold">Plugins</h3>
+                <p className="mb-1"><span className="font-semibold">Plugin 1:</span> Enabled</p>
+                <p><span className="font-semibold">Plugin 2:</span> Disabled</p>
+            </div>
+        </div>
+    }
+    placement="bottom"
+/>
                 </CardFooter>
             </Card>
         </div>
