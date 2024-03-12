@@ -38,16 +38,14 @@ const RedisCard = ({ redisData }: redisCardProps) => {
     ];
 
     return (
-        <div className='mt-4'>
-            <Card>
-                <CardHeader title="Redis Settings" />
-                <CardBody>
-                    <Table columns={columns} data={[redisData]} />
-                </CardBody>
-                <CardFooter>
-                </CardFooter>
-            </Card>
-        </div>
+        <Card>
+            <CardHeader title="Redis Settings" />
+            <CardBody>
+                <Table columns={columns} data={[redisData]} />
+            </CardBody>
+            <CardFooter>
+            </CardFooter>
+        </Card>
     );
 };
 

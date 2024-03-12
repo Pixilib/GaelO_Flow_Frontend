@@ -1,0 +1,17 @@
+import React from 'react';
+import Select from 'react-select';
+
+const options = [
+    { value: 'Default', label: 'Default' },
+    { value: 'Verbose', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
+    const handleChange = (selectedOption) => {
+        setSelectedOption(selectedOption);
+        console.log('Selected option:', selectedOption);
+    };
+
+
+  
+ 
+export default SelectInput; 
