@@ -36,8 +36,7 @@ const SimplePopover: React.FC<PopoverProps> = ({
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 ${getPlacementClasses(placement)} bg-white rounded-lg shadow-md p-4 text-gray-600 dark:bg-gray-800 dark:text-gray-400`}
-          role="tooltip"
+        className={`absolute z-10 ${getPlacementClasses(placement)} bg-white rounded-lg shadow-md p-4 text-gray-600 dark:bg-gray-800 dark:text-gray-400 w-80`} 
         >
           {content}
         </div>

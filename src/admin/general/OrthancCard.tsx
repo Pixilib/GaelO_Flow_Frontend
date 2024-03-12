@@ -91,13 +91,13 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         <div className="p-4">
             <div className="mb-4">
                 <h3 className="mb-2 text-lg font-bold">System </h3>
-                <p className="mb-1"><span className="font-semibold">Version:</span> 1.2.3</p>
-                <p><span className="font-semibold">Uptime:</span> 48 hours</p>
+                <p className="mb-1"><span className="font-semibold">0:</span> explorer.js</p>
+                <p><span className="font-semibold">1:</span> dicom-web</p>
             </div>
             <div>
                 <h3 className="mb-2 text-lg font-bold">Plugins</h3>
-                <p className="mb-1"><span className="font-semibold">Plugin 1:</span> Enabled</p>
-                <p><span className="font-semibold">Plugin 2:</span> Disabled</p>
+                <p className="mb-1"><span>explorer.js</span> </p>
+                <p><span>dicom-web</span> </p>
             </div>
         </div>
     }
