@@ -5,7 +5,6 @@ import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
 import Popover from '../../ui/Popover';
 import ToggleEye from '../../ui/ToggleEye';
-import SelecInput from '../../ui/SelectInput';
 
 import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
@@ -90,7 +89,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     ];
 
     return (
-        <div className='mt-4'>
             <Card>
                 <CardHeader title="Orthanc Settings" />
                 <CardBody>
@@ -112,10 +110,8 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                             <BsQuestionLg size="20px" title="Info" />
                         </Button>
                     </Popover>
-                    <SelecInput></SelecInput>
                 </CardFooter>
             </Card>
-        </div>
     );
 };
 
