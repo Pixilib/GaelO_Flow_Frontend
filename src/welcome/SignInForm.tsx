@@ -34,7 +34,7 @@ export const SignInForm = () => {
     {
       onSuccess: (data: Record<string, any>) => {
         const decodedToken: Record<string, any> = jwtDecode(
-          data.Access_token
+          data.AccessToken
         );
         dispatch(
           login({
