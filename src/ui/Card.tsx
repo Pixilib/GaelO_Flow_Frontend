@@ -37,8 +37,8 @@ const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
   const shadowClass = "shadow-[0_-2px_4px_rgba(0,0,0,0.1)]";
 
   return (
-    <div className={`bg-white text-black ${shadowClass} rounded-t-xl ${className} flex items-center text-center`}>
-      {title && <h2 className="mx-auto flex-1 p-4 text-lg font-bold">{title}</h2>}
+    <div className={`bg-primary text-white ${shadowClass} rounded-t-xl ${className} flex items-center justify-center text-center`}>
+      {title && <h2 className="flex-1 p-4 mx-auto text-lg font-bold">{title}</h2>}
       {children}
     </div>
   );

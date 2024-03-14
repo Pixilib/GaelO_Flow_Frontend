@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 type PopoverProps = {
-  trigger: React.ReactNode;
-  content: React.ReactNode;
+  children: React.ReactNode;
+  popover: React.ReactNode;
   placement?: 'top' | 'right' | 'bottom' | 'left';
 };
 
-const SimplePopover: React.FC<PopoverProps> = ({
-  trigger,
-  content,
+const Popover: React.FC<PopoverProps> = ({
+  children,
+  popover,
   placement = 'bottom',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,18 +32,17 @@ const SimplePopover: React.FC<PopoverProps> = ({
   return (
     <div className="relative" onMouseLeave={() => setIsOpen(false)}>
       <div onMouseEnter={() => setIsOpen(true)} className="cursor-pointer">
-        {trigger}
+        {children}
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 ${getPlacementClasses(placement)} bg-white rounded-lg shadow-md p-4 text-gray-600 dark:bg-gray-800 dark:text-gray-400`}
-          role="tooltip"
+        className={`absolute z-10 ${getPlacementClasses(placement)} bg-white rounded-lg shadow-md p-4 text-gray-600 dark:bg-gray-800 dark:text-gray-400 w-80`} 
         >
-          {content}
+          {popover}
         </div>
       )}
     </div>
   );
 };
 
-export default SimplePopover;
+export default Popover;

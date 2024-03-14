@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Popover from "../src/ui/menu/Popover";
+import Popover from "../src/ui/Popover";
 
 const meta: Meta<typeof Popover> = {
     title: "GAELO FLOW UI/Popover",

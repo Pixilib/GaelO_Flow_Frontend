@@ -1,4 +1,3 @@
-import React from "react";
 import { Colors } from "../utils/enums";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -14,18 +13,24 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const colorClasses: Record<Colors, string> = {
-    [Colors.primary]: "bg-primary hover:bg-primary-active",
-    [Colors.secondary]: "bg-secondary hover:bg-secondary-hover",
-    [Colors.danger]: "bg-danger hover:bg-danger-hover",
-    [Colors.success]: "bg-success hover:bg-success-hover",
-    [Colors.disabled]: "bg-disabled",
-    [Colors.orange]: "bg-orange hover:bg-orange-hover",
-    [Colors.dark]: "bg-dark",
-    [Colors.red]: "bg-red",
-    [Colors.gray]: "bg-gray",
-    [Colors.light]: "bg-light",
+  const colorClasses: Record<keyof typeof Colors, string> = {
+    primary: "bg-primary",
+    primaryHover: "hover:bg-primary-hover",
+    secondary: "bg-secondary",
+    secondaryHover: "hover:bg-secondary-hover",
+    danger: "bg-danger",
+    dangerHover: "hover:bg-danger-hover",
+    success: "bg-success",
+    successHover: "hover:bg-success-hover",
+    disabled: "bg-disabled",
+    orange: "bg-orange",
+    orangeHover: "hover:bg-orange-hover",
+    dark: "bg-dark",
+    red: "bg-red",
+    gray: "bg-gray",
+    light: "bg-light",
   };
+
 
   const borderClasses = bordered ? "border border-white" : "";
 
