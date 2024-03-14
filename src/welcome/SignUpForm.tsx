@@ -4,8 +4,8 @@ import { signUp } from "../services/auth";
 import { useCustomMutation } from "../utils/reactQuery";
 import { toastError, toastSuccess } from "../utils/toastify";
 
-import Button from "../RenderComponents/Button";
-import Input from "../RenderComponents/Input";
+import Button from "../ui/Button";
+import Input from "../ui/Input";
 import { Colors } from "../utils/enums";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Mail from "./../assets/mail.svg?react";
@@ -20,16 +20,15 @@ export const SignUpForm = () => {
   const signUpMutation = useCustomMutation(
     ({ username, lastname, firstname, email }) =>
       signUp(username, lastname, firstname, email),
-    null,
     [],
     {
       onSuccess: (data: Record<string, any>) => {
-        toastSuccess(data.data.message);
+        toastSuccess(data.message);
       },
       onError: (error: any) => {
         //display an error message if an error occurs
-        if (error.response?.data?.message) {
-          toastError(error.response.data.message);
+        if (error.response?.message) {
+          toastError(error.response.message);
         } else {
           // display a generic error message
           toastError("An error occurred during registration.");
@@ -44,18 +43,19 @@ export const SignUpForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
+    <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
       <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
         Welcome to <span className="text-primary">Gaelo Flow</span>
       </h1>
-      <p className="mb-12 text-lg text-center text-gray-700">
-        Please create your Account.
+      <p className="mb-12 text-lg text-center">
+        Please create your Account
       </p>
-      <div className="w-full space-y-12">
+      <div className="flex flex-col items-center w-full max-w-md space-y-12">
         <Input
           label="Username :"
           className="w-full"
           svgLeft={<User />}
+          bordered
           placeholder="Enter your username"
           value={username}
           required
@@ -67,6 +67,7 @@ export const SignUpForm = () => {
         <Input
           label="Firstname :"
           svgLeft={<User />}
+          bordered
           placeholder="Enter your firstname"
           value={firstname}
           required
@@ -78,6 +79,7 @@ export const SignUpForm = () => {
         <Input
           label="Lastname :"
           svgLeft={<User />}
+          bordered
           placeholder="Enter your lastname"
           value={lastname}
           required
@@ -89,6 +91,7 @@ export const SignUpForm = () => {
         <Input
           label="Email :"
           svgLeft={<Mail />}
+          bordered
           placeholder="Enter your @email"
           value={email}
           required

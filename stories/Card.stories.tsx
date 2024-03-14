@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Card, { CardHeader, CardBody, CardFooter } from "../src/RenderComponents/Card";
+import Card, { CardHeader, CardBody, CardFooter } from "../src/ui/Card";
 import ChevronRight from '../src/assets/chevron-right.svg?react';
 import { Colors } from "../src/utils/enums";
-import Button from "../src/RenderComponents/Button";
+import Button from "../src/ui/Button";
 
 import DotMenuRightMore from "../src/assets/dot-menu-more.svg?react";
 
@@ -55,7 +55,7 @@ export const CardStory: Story = {
           Lorem ipsum
         </CardBody>
         <CardFooter className="flex-shrink-0">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-10">
             <Button color={Colors.success}><ChevronRight /></Button>
             <Button color={Colors.orange}><ChevronRight /></Button>
             <Button color={Colors.danger}><ChevronRight /></Button>

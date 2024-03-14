@@ -1,18 +1,17 @@
-import React from "react";
-import Button from "../RenderComponents/Button";
-import Card, { CardHeader, CardBody, CardFooter } from "../RenderComponents/Card";
+import Button from "../ui/Button";
+import Card, { CardHeader, CardBody, CardFooter } from "../ui/Card";
 import { Colors } from "../utils/enums";
 
 const Dashboard = () => {
   const username = "M.Ohma";
 
   return (
-    <div className="w-full h-full p-8 bg-background">
+    // eslint-disable-next-line tailwindcss/no-custom-classname
+    <div className="bg-background size-full p-8">
       <h1 className="mx-8 text-3xl font-bold">Overview</h1>
-
-      <div className="m-8 bg-white p-10 rounded-[10px] shadow-xl flex items-center h-10">
+      <div className="m-8 flex h-10 items-center rounded-[10px] bg-white p-10 shadow-xl">
         <h2 className="text-xl">
-          Welcome <span className="font-bold">{username}</span>
+          <span className="font-bold">{username}</span>
         </h2>
         <img
           src="hello.svg"
@@ -21,7 +20,7 @@ const Dashboard = () => {
         ></img>
       </div>
 
-      <div className="flex gap-6 mx-8 columns-3">
+      <div className="mx-8 flex columns-3 gap-6">
         {/* Card Anonymisation */}
         <Card className="flex-1 ">
           <CardHeader title="Anonymisation" />

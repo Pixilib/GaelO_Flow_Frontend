@@ -1,29 +1,30 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import type {BannerProps} from "../src/RenderComponents/Banner/Banner";
-import {Banner} from "../src/RenderComponents/Banner/Banner";
+import { BrowserRouter as Router } from 'react-router-dom';
+import type BannerProps from "../src/ui/menu/Banner";
+import Banner  from "../src/ui/menu/Banner";
 
-
-const meta: Meta<BannerProps> = {
-    title: "GAELO FLOW UI/Banner",
-    component: Banner,
-    args: {
-        children: <div className="w-full text-primary">Hello</div>,
-        className: "bg-red", 
+const meta: Meta<typeof BannerProps> = {
+  title: "GAELO FLOW UI/Banner",
+  component: Banner,
+  args: {
+  },
+  argTypes: {
+    children: {
+      options: ["Text"],
     },
-    argTypes: {
-        children: {
-        options: ["Text"],
-        control: { type: "radio" },
-        },
-    },
-    tags:["autodocs"]
-    };
-
+  },
+  tags: ["autodocs"]
+};
 
 export default meta;
-type Story = StoryObj<BannerProps>;
 
-export const BannerStory: Story = {
+export const BannerStory: StoryObj<typeof BannerProps> = (args) => (
+  <Router>
+    <Banner {...args} />
+  </Router>
+);
 
-
+BannerStory.args = {
+  title: 'Home',
+  className: "bg-red",
 };

@@ -1,19 +1,18 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
 
 import { useCustomMutation } from "../utils/reactQuery";
 import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
 
-import Button from "../RenderComponents/Button";
+import Button from "../ui/Button";
 import { Colors } from "../utils/enums";
 
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
-import Input from "../RenderComponents/Input";
+import Input from "../ui/Input";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -26,14 +25,13 @@ const ChangePasswordForm = () => {
   const changePasswordMutation = useCustomMutation(
     ({ newPassword, confirmPassword, token }) =>
       changePassword(newPassword, confirmPassword, token),
-    null,
     [],
     {
       onSuccess: (data: Record<string, any>) => {
-        toastSuccess(data.data.message);
+        toastSuccess(data.message);
         navigate("/");
       },
-      onError: (error: AxiosError<{ message: string }>) => {
+      onError: (error: any) => {
         //display an error message if an error occurs
         if (error.response?.data?.message) {
           toastError(error.response.data.message);
@@ -53,9 +51,9 @@ const ChangePasswordForm = () => {
   if (!token) return <>Missing Token</>;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="text-5xl font-bold text-center mb-6"> Password </h1>
-      <p className="text-lg text-gray-700 text-center mb-12">
+    <form onSubmit={handleSubmit} className="flex w-full flex-col">
+      <h1 className="mb-6 text-center text-5xl font-bold"> Password </h1>
+      <p className="text-gray-700 mb-12 text-center text-lg">
         Please create/change your password.
       </p>
       <div className="w-full space-y-12">
@@ -93,7 +91,7 @@ const ChangePasswordForm = () => {
           }}
           required
         />
-        <div className="flex justify-center mt-12">
+        <div className="mt-12 flex justify-center">
           <Button
             color={Colors.primary}
             type="submit"

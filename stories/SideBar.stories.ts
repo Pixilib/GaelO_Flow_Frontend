@@ -1,10 +1,10 @@
 //Exemple de story:
 import { withRouter } from 'storybook-addon-react-router-v6';
 import type { Meta, StoryObj } from "@storybook/react";
-import SideBar from "../src/RenderComponents/NavBar/SideBar";
+import SideBar from "../src/root/SideBar";
 
 const meta: Meta<typeof SideBar> = {
-  title: "Example/SideBar",
+  title: "GAELO FLOW UI/Root/SideBar",
   component: SideBar,
   tags: ["autodocs"],
   decorators: [withRouter],

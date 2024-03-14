@@ -1,46 +1,84 @@
 import axios from "./axios";
 
-
 export const signIn = (
   username: string,
   password: string
 ): Promise<unknown> => {
-  return axios.post("/api/login", {
-    username,
-    password,
-  });
+  return axios
+    .post("/api/login", {
+      Username : username,
+      Password : password,
+    })
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response);
+        throw error.response;
+      }
+      throw error;
+    });
 };
 
-export const signUp = async (
+export const signUp = (
   username: string,
   lastname: string,
   firstname: string,
-  email: string,
+  email: string
 ): Promise<unknown> => {
-  return axios.post("/api/register", {
-    username,
-    lastname,
-    firstname,
-    email,
-  });
+  return axios
+    .post("/api/register", {
+      Username : username,
+      Lastname : lastname,
+      Firstname : firstname,
+      Email : email,
+    })
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
 };
 
-export const lostPassword =
- async (email: string): Promise<unknown> => {
-  return axios.post("/api/lost-password", {
-    email,
-  });
+export const lostPassword = (email: string): Promise<unknown> => {
+  return axios
+    .post("/api/lost-password", {
+      Email : email,
+    })
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
 };
 
-export const changePassword =
- async (
+export const changePassword = (
   newPassword: string,
-  connfirmPassword: string,
+  confirmPassword: string,
   token: string
 ): Promise<unknown> => {
-    return axios.post("/api/change-password", {
-      newPassword,
-      connfirmPassword,
-      token,
+  return axios
+    .post("/api/change-password", {
+      NewPassword : newPassword,
+      ConfirmPassword : confirmPassword,
+      Token : token,
+    })
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
     });
 };

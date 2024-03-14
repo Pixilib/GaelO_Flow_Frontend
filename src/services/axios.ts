@@ -1,9 +1,4 @@
-/**
-Copyright (c) 2021 - 2023 Pixilib
- */
-
 import axios from 'axios'
-import { toast } from 'react-toastify'
 import { store } from '../store'
 import { logout } from '../reducers/UserSlice'
 
@@ -28,11 +23,6 @@ axios.interceptors.response.use(
             urlString &&
             !urlString.startsWith('api/auth/login')
         ) {
-            // Singleton toast using fixed id to avoid multiple toast if multiple api call are 401
-            toast.error('Session expired. Please reauthenticate.', {
-                toastId: 'reauthenticate'
-            })
-
             store.dispatch(logout())
         }
         return Promise.reject(error)

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Administrator from '../src/assets/administrator.svg?react';
-import MenuItemsCollapse from '../src/RenderComponents/NavBar/MenuItemsCollapse';
+import MenuItemsCollapse from '../src/ui/menu/MenuItemsCollapse';
 
 
 const meta: Meta<typeof MenuItemsCollapse> = {
@@ -9,9 +9,9 @@ const meta: Meta<typeof MenuItemsCollapse> = {
     tags: ["autodocs"],
     args: {
         title: 'Menu',
-        isOpen: false,
+        isOpen: true,
         className: 'bg-primary text-white',
-        items: [
+        elements: [
                 {
                   title: "Lost Password",
                   path: "/lost-password",

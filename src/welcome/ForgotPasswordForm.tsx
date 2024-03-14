@@ -4,18 +4,17 @@ import { useCustomMutation } from "../utils/reactQuery";
 import { lostPassword } from "../services/auth";
 import { toastError, toastSuccess } from "../utils/toastify";
 
-import Input from "../RenderComponents/Input";
-import Button from "../RenderComponents/Button";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
 import { Colors } from "../utils/enums";
 import Letter from "../assets/mail.svg?react";
 import ChevronRight from "../assets/chevron-right.svg?react";
 
-export const LostPasswordForm = () => {
+const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
 
   const lostPasswordMutation = useCustomMutation(
     ({ email }) => lostPassword(email),
-    null,
     [],
     {
       onSuccess: () => {
@@ -33,12 +32,9 @@ export const LostPasswordForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="text-5xl font-bold text-center mb-12 ">Forgot Password</h1>
-      <p
-        className="text-lg text-gray-700 text-center mb-16 
-      "
-      >
+    <form onSubmit={handleSubmit} className="flex w-full flex-col">
+      <h1 className="mb-12 text-center text-5xl font-bold ">Forgot Password</h1>
+      <p className="mb-16 text-center text-lg">
         Enter your email address account below and we'll send you a link to
         reset your password
       </p>
@@ -55,9 +51,9 @@ export const LostPasswordForm = () => {
         }}
         autoComplete="on"
       />
-      <div className="justify-center flex mt-16">
+      <div className="mt-16 flex justify-center">
         <Button
-          color={Colors.primary}
+          color={email.length === 0 ? Colors.disabled : Colors.primary}
           type="submit"
           disabled={email.length === 0}
         >
@@ -68,3 +64,5 @@ export const LostPasswordForm = () => {
     </form>
   );
 };
+
+export default ForgotPasswordForm
