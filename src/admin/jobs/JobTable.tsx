@@ -1,4 +1,4 @@
-import Table from "../../ui/Table";
+import Table from "../../ui/table/Table";
 import Badge from "../../ui/Badge";
 
 import Restart from "../../assets/restart.svg?react";
@@ -10,9 +10,9 @@ const JobTable = ({ data = [] }) => {
       accessorKey: "ID",
       header: "Id",
       cell: (row: any) => (
-        <span className="text-xs text-slate-500 ">
+        <div className="text-xs text-slate-500 ">
           {row.getValue() as string}
-        </span>
+        </div>
       ),
     },
     {
@@ -36,7 +36,7 @@ const JobTable = ({ data = [] }) => {
     },
     {
       header: "Actions",
-      cell: ({ row }: any) => {
+      cell: (row: any) => {
         return (
           <div className="flex justify-center">
             <Restart />
@@ -46,6 +46,6 @@ const JobTable = ({ data = [] }) => {
     },
   ];
 
-  return <Table data={data} columns={columns} />;
+  return <Table data={data.data} columns={columns} classForThead={"bg-almond border-almond rounded-t-xl"} />;
 };
 export default JobTable;
