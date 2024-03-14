@@ -2,33 +2,31 @@ import { useCustomQuery } from '../../utils/reactQuery';
 import { getJobs } from '../../services/jobs';
 
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Button from '../../ui/Button';
 import JobTable from './JobTable';
 import Spinner from '../../ui/Spinner';
-import { Colors } from '../../utils/enums';
 
 
-// !Refacto In progress add mutation for restart job ect...
 const JobRoot = () => {
-  const { data: jobData, isLoading: isLoadingJobs, refetch } = useCustomQuery(
-    ['jobs'], 
-    () => getJobs(), 
+  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery(
+    ['jobs'],
+    () => getJobs(),
     {
-    enabled: true,
-    refetchInterval: 10000,
-  })
+      enabled: true,
+      refetchInterval: 10000,
+    })
 
   return (
-    <div className="mt-10 flex justify-center">
-      <Card >
-        <CardHeader title='Jobs Instances' />        
-        <CardBody>
-          {isLoadingJobs ? <Spinner/> :<JobTable data={jobData} />}
-        </CardBody>
-        <CardFooter>
-          <Button onClick={() => refetch()} color={Colors.secondary}>Refresh</Button>
-        </CardFooter>
-      </Card>
+    <div className="flex justify-center mt-10">
+      {isLoadingJobs ? <Spinner /> :
+        <Card >
+          <CardHeader title='Jobs' />
+          <CardBody>
+            <JobTable data={jobData as any} />
+          </CardBody>
+          <CardFooter>
+          </CardFooter>
+        </Card>
+      }
     </div>
   )
 }
