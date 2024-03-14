@@ -15,7 +15,7 @@ import ToggleEye from "../ui/ToggleEye";
 
 import { Colors } from "../utils/enums";
 import PasswordKeyOn from "./../assets/password-key-on.svg?react";
-import ChevronRight from "./../assets/chevron-right.svg?react";;
+import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
 
 export const SignInForm = () => {
@@ -34,13 +34,13 @@ export const SignInForm = () => {
     {
       onSuccess: (data: Record<string, any>) => {
         const decodedToken: Record<string, any> = jwtDecode(
-          data.access_token
+          data.AccessToken
         );
         dispatch(
           login({
-            token: data.access_token,
-            userId: decodedToken.userId,
-            role: decodedToken.role,
+            token: data.AccessToken,
+            userId: decodedToken.UserId,
+            role: decodedToken.Role,
           })
         );
       },

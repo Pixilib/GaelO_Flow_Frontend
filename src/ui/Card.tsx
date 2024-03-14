@@ -46,7 +46,7 @@ const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
 
 const CardBody = ({ children }: BodyProps) => {
   return (
-    <div className="box-border flex-grow px-12 py-3 leading-relaxed text-black bg-gray hover:bg-gray-hover">
+    <div className="hover:bg-gray-hover box-border grow bg-gray px-12 py-3 leading-relaxed text-black">
       {children}
     </div>
   );
@@ -54,8 +54,8 @@ const CardBody = ({ children }: BodyProps) => {
 
 const CardFooter = ({ children, className = "" }: FooterProps) => {
   return (
-    <div className={`bg-gray hover:bg-gray-hover text-black box-border flex-grow leading-relaxed py-3 px-3 ${className} rounded-b-xl`}>
-      {children || <div className="flex-grow"></div>}
+    <div className={`hover:bg-gray-hover box-border grow bg-gray px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+      {children || <div className="grow"></div>}
     </div>
   );
 };

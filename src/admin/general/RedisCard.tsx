@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Table from '../../ui/Table';
+import Table from '../../ui/table/Table';
 import Input from '../../ui/Input';
 
 const Badge: React.FC<{ value: number }> = ({ value }) => {

@@ -6,7 +6,7 @@ import { logout } from "../reducers/UserSlice";
 
 import SideBar from "./SideBar";
 import Dashboard from "./Dashboard";
-import AdminRoot from "../admin/general/AdminRoot";
+import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 
 const RootApp = () => {
@@ -27,7 +27,7 @@ const RootApp = () => {
       "/auto-retrieve": "Auto retrieve",
       "/import": "Import",
       "/external-endpoints": "External endpoints",
-      "/jobs": "Jobs",
+      "admin/jobs": "Jobs",
       "/labels": "Labels",
       "/mydicom": "My Dicom",
       "/Orthanc Content": "Orthanc Content",

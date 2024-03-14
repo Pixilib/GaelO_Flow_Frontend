@@ -16,13 +16,10 @@ const General = () => {
 
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
-    <div className="pt-8"> {/* Ajout d'un padding-top pour l'espace au-dessus */}
-  <div className="flex-col h-screen p-1 space-y-12 bg-background">
-    <RedisCard redisData={{ address: data.redis_address, port: data.redis_port }} />
-    <OrthancCard orthancData={{ address: data.orthanc_address, port: data.orthanc_port, password: data.orthanc_password, username: data.orthanc_username }} />
-  </div>
-</div>
-
+    <div className="bg-background h-screen flex-col space-y-12 p-1">
+      <RedisCard redisData={{ address: data.RedisAddress, port: data.RedisPort }} />
+      <OrthancCard orthancData={{ address: data.OrthancAddress, port: data.OrthancPort, password: data.OrthancPassword, username: data.OrthancUsername }} />
+    </div>
   );
 };
 

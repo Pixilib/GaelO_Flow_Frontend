@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Table from '../../ui/Table';
+import Table from '../../ui/table/Table';
 import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
 import Popover from '../../ui/Popover';
@@ -80,6 +80,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         <ToggleEye onToggle={(visible) => setShow(visible)} />
                     </div>
                 );
+
             }
         },
     ];

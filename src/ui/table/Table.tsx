@@ -6,43 +6,65 @@ import {
     flexRender,
     ColumnDef,
     SortingState,
+    ColumnFiltersState,
+    getFilteredRowModel,
+    getPaginationRowModel,
 } from '@tanstack/react-table';
-import { Colors } from '../utils/enums';
+import FilterTable from './FilterTable'; // Assurez-vous que le chemin d'importation est correct
+import Footer from '../table/Footer';
 
-type TableProps<T> = {
-    data: T[];
-    columns: ColumnDef<T, unknown>[];
+
+type TableProps<TData> = {
+    data: TData[];
+    columns: ColumnDef<TData>[];
     enableSorting?: boolean;
+    classForThead?: string;
 };
-
-function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
+//WIP : Pagination
+function Table<T>({ data, columns, enableSorting = true, classForThead }: TableProps<T>) {
     const [sorting, setSorting] = useState<SortingState>([]);
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const [pagination, setPagination] = useState({
+        pageIndex: 0, //initial page index
+        pageSize: 10, //default page size
+      });
+
 
     const table = useReactTable<T>({
         data,
         columns,
         state: {
             sorting,
+            columnFilters,
+            pagination,
         },
+        onPaginationChange: setPagination, //update the pagination state when internal APIs mutate the pagination state
         onSortingChange: setSorting,
+        onColumnFiltersChange: setColumnFilters,
+        getPaginationRowModel: getPaginationRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        enableColumnFilters: true,
         enableSorting,
     });
 
     return (
-        <div className="overflow-x-auto max-h-[500px]">
-            <table className="min-w-full bg-white rounded-lg">
-                <thead className="border-b-2 border-gray">
+        <div className="max-h-[500px] overflow-x-auto rounded-xl">
+            <table className="min-w-full bg-white border-grayCustom">
+                <thead className={`border-grayCustom  ${classForThead}`}>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map(header => {
                                 const isSortedDesc = header.column.getIsSorted() === 'desc';
                                 const isSortedAsc = header.column.getIsSorted() === 'asc';
+                                // Condition pour afficher le composant de filtre
+                                const canFilter = header.column.columnDef.enableColumnFilter ?? true;
+
                                 return (
                                     <th
                                         key={header.id}
-                                        className={`px-2 py-3 text-xs font-bold tracking-wider text-center uppercase md:px-4 lg:px-6 cursor-pointer text-gray-600 ${!header.column.getCanSort() ? 'cursor-default' : ''
+                                        className={`cursor-pointer px-2 py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-600 md:px-4 lg:px-6 ${!header.column.getCanSort() ? 'cursor-default' : ''
                                             }`}
                                         onClick={() => {
                                             const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
@@ -51,6 +73,8 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                                     >
                                         <div className="flex items-center justify-center">
                                             {flexRender(header.column.columnDef.header, header.getContext())}
+                                            {/* Rendre conditionnellement le composant FilterTable */}
+                                            {canFilter !== false && <FilterTable column={header.column} table={table} />}
                                             {header.column.getCanSort() && (
                                                 <span
                                                     onClick={(e) => {
@@ -58,7 +82,7 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                                                         const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
                                                         setSorting([{ id: header.id, desc: isDesc }]);
                                                     }}
-                                                    className={`cursor-pointer ${isSortedAsc || isSortedDesc ? 'text-' + Colors.dark : 'text-' + Colors.light}`}
+                                                    className={`cursor-pointer`}
                                                 >
                                                     {isSortedDesc ? '▼' : '▲'}
                                                 </span>
@@ -84,9 +108,20 @@ function Table<T>({ data, columns, enableSorting = true }: TableProps<T>) {
                         </tr>
                     ))}
                 </tbody>
+                <div className="flex ">
+                    <Footer
+                        pagination={{
+                            pageIndex: table.getPaginationRowModel(),
+                            pageCount: table.getPageCount(),
+                            canPreviousPage: table.getCanPreviousPage(),
+                            canNextPage: table.getCanNextPage(),
+                        }}
+                        setPageIndex={setPageIndex}
+                        className="justify-end"
+                    />
+                </div>
             </table>
         </div>
     );
 }
-
 export default Table;

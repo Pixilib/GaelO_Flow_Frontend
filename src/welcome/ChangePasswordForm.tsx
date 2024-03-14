@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
 
 import { useCustomMutation } from "../utils/reactQuery";
 import { toastError, toastSuccess } from "../utils/toastify";
@@ -52,9 +51,9 @@ const ChangePasswordForm = () => {
   if (!token) return <>Missing Token</>;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="mb-6 text-5xl font-bold text-center"> Password </h1>
-      <p className="mb-12 text-lg text-center text-gray-700">
+    <form onSubmit={handleSubmit} className="flex w-full flex-col">
+      <h1 className="mb-6 text-center text-5xl font-bold"> Password </h1>
+      <p className="text-gray-700 mb-12 text-center text-lg">
         Please create/change your password.
       </p>
       <div className="w-full space-y-12">
@@ -92,7 +91,7 @@ const ChangePasswordForm = () => {
           }}
           required
         />
-        <div className="flex justify-center mt-12">
+        <div className="mt-12 flex justify-center">
           <Button
             color={Colors.primary}
             type="submit"

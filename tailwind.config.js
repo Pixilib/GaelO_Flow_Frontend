@@ -41,6 +41,7 @@ export default {
         '1,5': '1.5px',
       },
       colors: {
+        'almond':'#EFD7BA',
         'primary': '#4746B8',
         'primary-active': '#333182',
         'primary-hover':'#8C8BD3',
@@ -55,13 +56,15 @@ export default {
         'orange-hover': '#A88400',
         'dark': '#393838',
         'red': '#f8d7da',
-        'gray': '#EDEDED',
+        'grayCustom': '#EDEDED',
         'light': '#F1F1F1',
+        'badge-gray': '#E6E6F2',
+        'badge-blue-text': '#4A4AFF',
       },
       boxShadow: {
         'custom': '5px 17px 15px rgba(58, 51, 51, 0.20)',
       },
     },
   },
-  plugins: ["prettier-plugin-tailwindcss"],
+  // plugins: ["prettier-plugin-tailwindcss"],
 };

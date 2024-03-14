@@ -6,14 +6,15 @@ export const signIn = (
 ): Promise<unknown> => {
   return axios
     .post("/api/login", {
-      username,
-      password,
+      Username : username,
+      Password : password,
     })
     .then(function (response) {
       return response.data;
     })
     .catch(function (error) {
       if (error.response) {
+        console.log(error.response);
         throw error.response;
       }
       throw error;
@@ -28,10 +29,10 @@ export const signUp = (
 ): Promise<unknown> => {
   return axios
     .post("/api/register", {
-      username,
-      lastname,
-      firstname,
-      email,
+      Username : username,
+      Lastname : lastname,
+      Firstname : firstname,
+      Email : email,
     })
     .then(function (response) {
       return response.data;
@@ -47,7 +48,7 @@ export const signUp = (
 export const lostPassword = (email: string): Promise<unknown> => {
   return axios
     .post("/api/lost-password", {
-      email,
+      Email : email,
     })
     .then(function (response) {
       return response.data;
@@ -62,14 +63,14 @@ export const lostPassword = (email: string): Promise<unknown> => {
 
 export const changePassword = (
   newPassword: string,
-  connfirmPassword: string,
+  confirmPassword: string,
   token: string
 ): Promise<unknown> => {
   return axios
     .post("/api/change-password", {
-      newPassword,
-      connfirmPassword,
-      token,
+      NewPassword : newPassword,
+      ConfirmPassword : confirmPassword,
+      Token : token,
     })
     .then(function (response) {
       return response.data;
