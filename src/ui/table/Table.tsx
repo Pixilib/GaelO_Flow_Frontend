@@ -13,7 +13,6 @@ import {
 import FilterTable from './FilterTable'; // Assurez-vous que le chemin d'importation est correct
 import Footer from '../table/Footer';
 
-
 type TableProps<TData> = {
     data: TData[];
     columns: ColumnDef<TData>[];
@@ -60,7 +59,6 @@ function Table<T>({ data, columns, enableSorting = true, classForThead }: TableP
                                 const isSortedAsc = header.column.getIsSorted() === 'asc';
                                 // Condition pour afficher le composant de filtre
                                 const canFilter = header.column.columnDef.enableColumnFilter ?? true;
-
                                 return (
                                     <th
                                         key={header.id}
@@ -111,12 +109,12 @@ function Table<T>({ data, columns, enableSorting = true, classForThead }: TableP
                 <div className="flex ">
                     <Footer
                         pagination={{
-                            pageIndex: table.getPaginationRowModel(),
+                            pageIndex: table.getState().pagination.pageIndex,
                             pageCount: table.getPageCount(),
                             canPreviousPage: table.getCanPreviousPage(),
                             canNextPage: table.getCanNextPage(),
                         }}
-                        setPageIndex={setPageIndex}
+                        setPageIndex={table.setPageIndex}
                         className="justify-end"
                     />
                 </div>
