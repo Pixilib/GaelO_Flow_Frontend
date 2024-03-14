@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Colors } from "../../utils/enums";
+<table />
 import {
     useReactTable,
     getCoreRowModel,
@@ -13,15 +15,14 @@ import {
 import FilterTable from './FilterTable'; // Assurez-vous que le chemin d'importation est correct
 import Footer from '../table/Footer';
 
-
 type TableProps<TData> = {
     data: TData[];
     columns: ColumnDef<TData>[];
     enableSorting?: boolean;
-    classForThead?: string;
+    color?: Colors;
 };
 //WIP : Pagination
-function Table<T>({ data, columns, enableSorting = true, classForThead }: TableProps<T>) {
+function Table<T>({ data, columns, enableSorting = true, color }: TableProps<T>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [pagination, setPagination] = useState({
@@ -48,11 +49,28 @@ function Table<T>({ data, columns, enableSorting = true, classForThead }: TableP
         enableColumnFilters: true,
         enableSorting,
     });
-
+    const colorClasses: Record<keyof typeof Colors, string> = {
+        almond: "bg-almond",
+        primary: "bg-primary",
+        primaryHover: "hover:bg-primary-hover",
+        secondary: "bg-secondary",
+        secondaryHover: "hover:bg-secondary-hover",
+        danger: "bg-danger",
+        dangerHover: "hover:bg-danger-hover",
+        success: "bg-success",
+        successHover: "hover:bg-success-hover",
+        disabled: "bg-disabled",
+        orange: "bg-orange",
+        orangeHover: "hover:bg-orange-hover",
+        dark: "bg-dark",
+        red: "bg-red",
+        gray: "bg-gray",
+        light: "bg-light",
+      };
     return (
         <div className="max-h-[500px] overflow-x-auto rounded-xl">
-            <table className="min-w-full bg-white border-grayCustom">
-                <thead className={`border-grayCustom  ${classForThead}`}>
+            <table className={`min-w-full bg-white border-grayCustom ${colorClasses}`}>
+                <thead className={`border-grayCustom  ${color}`}>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map(header => {
@@ -60,7 +78,6 @@ function Table<T>({ data, columns, enableSorting = true, classForThead }: TableP
                                 const isSortedAsc = header.column.getIsSorted() === 'asc';
                                 // Condition pour afficher le composant de filtre
                                 const canFilter = header.column.columnDef.enableColumnFilter ?? true;
-
                                 return (
                                     <th
                                         key={header.id}
@@ -108,19 +125,19 @@ function Table<T>({ data, columns, enableSorting = true, classForThead }: TableP
                         </tr>
                     ))}
                 </tbody>
-                <div className="flex ">
+            </table>
+                <div className="flex my-2">
                     <Footer
                         pagination={{
-                            pageIndex: table.getPaginationRowModel(),
+                            pageIndex: table.getState().pagination.pageIndex,
                             pageCount: table.getPageCount(),
                             canPreviousPage: table.getCanPreviousPage(),
                             canNextPage: table.getCanNextPage(),
                         }}
-                        setPageIndex={setPageIndex}
-                        className="justify-end"
+                        setPageIndex={table.setPageIndex}
+                        className="flex justify-end"
                     />
                 </div>
-            </table>
         </div>
     );
 }
