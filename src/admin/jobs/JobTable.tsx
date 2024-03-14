@@ -1,4 +1,4 @@
-import Table from "../../ui/Table";
+import Table from "../../ui/table/Table";
 import Badge from "../../ui/Badge";
 
 import Restart from "../../assets/restart.svg?react";
@@ -10,10 +10,10 @@ const JobTable = (data: any) => {
     {
       accessorKey: "ID",
       header: "Id",
-      cell: (row :any) => (
-        <span className="text-xs text-slate-500 ">
+      cell: (row: any) => (
+        <div className="text-xs text-slate-500 ">
           {row.getValue() as string}
-        </span>
+        </div>
       ),
     },
     {
@@ -23,7 +23,7 @@ const JobTable = (data: any) => {
     {
       accessorKey: "Progress",
       header: "Progress",
-      cell: (row :any) => (
+      cell: (row: any) => (
         <Badge
           value={row.getValue()}
           className="bg-badge-gray text-badge-blue-text"
@@ -33,11 +33,11 @@ const JobTable = (data: any) => {
     {
       accessorKey: "State",
       header: "State",
-      cell: (row :any) => <Badge value={row.getValue()} />,
+      cell: (row: any) => <Badge value={row.getValue()} />,
     },
     {
       header: "Actions",
-      cell: ({ row }: any) => {
+      cell: (row: any) => {
         return (
           <div className="flex justify-center">
             <Restart />
@@ -47,6 +47,6 @@ const JobTable = (data: any) => {
     },
   ];
 
-  return <Table data={data.data} columns={columns} />;
+  return <Table data={data.data} columns={columns} classForThead={"bg-almond border-almond rounded-t-xl"} />;
 };
 export default JobTable;

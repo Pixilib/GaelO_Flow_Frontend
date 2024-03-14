@@ -14,6 +14,7 @@ export const signIn = (
     })
     .catch(function (error) {
       if (error.response) {
+        console.log(error.response);
         throw error.response;
       }
       throw error;

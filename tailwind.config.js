@@ -41,6 +41,7 @@ export default {
         '1,5': '1.5px',
       },
       colors: {
+        'almond':'#EFD7BA',
         'primary': '#4746B8',
         'primary-active': '#333182',
         'primary-hover':'#8C8BD3',
@@ -65,5 +66,5 @@ export default {
       },
     },
   },
-  plugins: ["prettier-plugin-tailwindcss"],
+  // plugins: ["prettier-plugin-tailwindcss"],
 };

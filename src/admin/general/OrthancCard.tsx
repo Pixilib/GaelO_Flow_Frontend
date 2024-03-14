@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Table from '../../ui/Table';
+import Table from '../../ui/table/Table';
 import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
 import Popover from '../../ui/menu/Popover';
@@ -56,10 +56,10 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
             cell: row => {
                 const [show, setShow] = useState(false)
                 return (
-                <div className="flex items-center">
-                    <Input disabled className="text-center" type={show ? "text" : "password"} value={row.getValue()} />
-                    <ToggleEye onToggle={(visible)=>setShow(visible)} />
-                </div>)
+                    <div className="flex items-center">
+                        <Input disabled className="text-center" type={show ? "text" : "password"} value={row.getValue()} />
+                        <ToggleEye onToggle={(visible) => setShow(visible)} />
+                    </div>)
 
             }
         },
