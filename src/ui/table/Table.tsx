@@ -69,7 +69,7 @@ function Table<T>({ data, columns, enableSorting = true, color }: TableProps<T>)
       };
     return (
         <div className="max-h-[500px] overflow-x-auto rounded-xl">
-            <table className={`min-w-full bg-white border-grayCustom ${colorClasses}`}>
+            <table className={`min-w-full border-grayCustom ${colorClasses}`}>
                 <thead className={`border-grayCustom  ${color}`}>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
@@ -126,7 +126,7 @@ function Table<T>({ data, columns, enableSorting = true, color }: TableProps<T>)
                     ))}
                 </tbody>
             </table>
-                <div className="flex my-2">
+                <div className="flex justify-end my-2 me-2">
                     <Footer
                         pagination={{
                             pageIndex: table.getState().pagination.pageIndex,
@@ -135,7 +135,6 @@ function Table<T>({ data, columns, enableSorting = true, color }: TableProps<T>)
                             canNextPage: table.getCanNextPage(),
                         }}
                         setPageIndex={table.setPageIndex}
-                        className="flex justify-end"
                     />
                 </div>
         </div>
