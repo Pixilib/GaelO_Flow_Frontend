@@ -2,12 +2,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store";
 import WelcomeRoot from "./welcome/WelcomeRoot";
 import RootApp from "./root/RootApp";
+import RedisCard from "./admin/general/RedisCard";
 
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
-  
   return (
-    <div className="h-screen w-screen">
+    <RedisCard/>
+  )
+  return (
+    <div className="w-screen h-screen">
       {isLogged ? <RootApp  /> : <WelcomeRoot />}
     </div>
   )
