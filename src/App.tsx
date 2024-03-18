@@ -2,12 +2,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store";
 import WelcomeRoot from "./welcome/WelcomeRoot";
 import RootApp from "./root/RootApp";
-import RedisCard from "./admin/general/RedisCard";
+import Aet from "./admin/general/Aet";
 
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
   return (
-    <RedisCard/>
+    <Aet/>
   )
   return (
     <div className="w-screen h-screen">
