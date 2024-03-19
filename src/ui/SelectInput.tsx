@@ -20,7 +20,7 @@ const customStyles: StylesConfig<OptionType, boolean> = {
   control: (provided, state) => ({
     ...provided,
     borderRadius: '0.375rem', 
-    borderColor: state.isFocused ? 'indigo-600' : 'gray-200', 
+    borderColor: state.isFocused ? 'primary' : 'primaryHover', 
     boxShadow: state.isFocused ? '0 0 0 1px #4F46E5' : 'none',
     '&:hover': {
       borderColor: state.isFocused ? 'indigo-600' : 'primary', 
