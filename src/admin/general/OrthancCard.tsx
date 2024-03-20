@@ -5,7 +5,7 @@ import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
 import Popover from '../../ui/Popover';
 import ToggleEye from '../../ui/ToggleEye';
-import SelectInput from '../../ui/SelectInput'; 
+import SelectInput from '../../ui/SelectInput';
 
 import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
@@ -107,13 +107,13 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <IoClose size="20px" title="Shutdown" />
                 </Button>
                 <Popover popover={orthancDetails} placement="bottom"  >
-                        <Button color={Colors.primary}>
-                            <BsQuestionLg size="20px" title="Info" />
-                        </Button>
-                    </Popover>
+                    <Button color={Colors.primary}>
+                        <BsQuestionLg size="20px" title="Info" />
+                    </Button>
+                </Popover>
                 <SelectInput
                     onChange={handleSelectChange}
-                    placeholder="Select option" options={[]}                />
+                    placeholder="Select option" options={[]} />
             </CardFooter>
         </Card>
     );
