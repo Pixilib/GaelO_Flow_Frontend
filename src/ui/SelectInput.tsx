@@ -8,13 +8,32 @@ interface OptionType {
 
 interface SelectionInputProps {
   options: OptionType[] | GroupBase<OptionType>[];
-  onChange: (value: any) => void; 
+  onChange: (value: any) => void;
   placeholder?: string;
   formatOptionLabel?: (option: OptionType) => React.ReactNode;
   isMulti?: boolean;
   formatGroupLabel?: (group: GroupBase<OptionType>) => React.ReactNode;
   styles?: StylesConfig<OptionType, boolean>;
 }
+
+const customStyles: StylesConfig<OptionType, boolean> = {
+  control: (provided, state) => ({
+    ...provided,
+    borderRadius: '0.375rem', 
+    borderColor: state.isFocused ? 'primary' : 'primaryHover', 
+    boxShadow: state.isFocused ? '0 0 0 1px #4F46E5' : 'none',
+    '&:hover': {
+      borderColor: state.isFocused ? 'indigo-600' : 'primary', 
+    },
+    backgroundColor: state.isFocused ? '#EFF6FF' : '#EFF6FF',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    borderRadius: '0.375rem',
+    borderColor: 'gray-200', 
+  }),
+  
+};
 
 const SelectionInput: React.FC<SelectionInputProps> = ({
   options,
@@ -33,7 +52,7 @@ const SelectionInput: React.FC<SelectionInputProps> = ({
     placeholder={placeholder}
     formatOptionLabel={formatOptionLabel}
     formatGroupLabel={formatGroupLabel}
-    styles={styles}
+    styles={{ ...customStyles, ...styles }}
     {...props}
   />
 );
