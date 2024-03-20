@@ -1,19 +1,32 @@
 import { FaRedo, FaPlay, FaPause, FaTimes } from 'react-icons/fa';
 
-function JobIcons() {
+
+const on = () => {
+  console.log("Clicked");
+}
+const JobIcons= () => {
+  const classIcons = "inline-flex items-center justify-center p-2 rounded-full transition-transform transform hover:scale-110";
   return (
-    <div>
+    <div className="flex space-x-3">
       {/* Icone de rechargement */}
-      <FaRedo color="blue" size="1em" />
+      <div className={`${classIcons} bg-primary`} onClick={on}>
+        <FaRedo color="white" size="1em" />
+      </div>
       
       {/* Icone de lecture */}
-      <FaPlay color="green" size="1em" />
+      <div className={`${classIcons} bg-success`} onClick={on}>
+      <FaPlay color="white" size="1em" />
+      </div>
       
       {/* Icone de pause */}
-      <FaPause color="yellow" size="1em" />
+      <div className={`${classIcons} bg-[#DFB520]`} onClick={on}  >
+      <FaPause color="white" size="1em" />
+      </div>
       
       {/* Icone de fermeture */}
-      <FaTimes color="red" size="1em" />
+      <div className={`${classIcons} bg-danger`} onClick={on}>
+      <FaTimes color="white" size="1em" />
+      </div>
     </div>
   );
 }

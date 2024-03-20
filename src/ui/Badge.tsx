@@ -1,12 +1,13 @@
 
 type BadgeProps = {
-    value: number;
+    value: number|string;
     className?: string;
+    [key: string]: any;
 };
 
 
 const Badge = ({ value, className }:BadgeProps) => {
-    const badgeClasses = `rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 ${className}`;
+    const badgeClasses = `px-6 py-1 text-m font-medium text-center ring-0 ring-inset outline-0 min-w-4 ${className}`;
     return <span className={badgeClasses}>{value}</span>;
 };
 
