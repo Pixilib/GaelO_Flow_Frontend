@@ -9,6 +9,7 @@ interface AetData {
     name: string;
     Aet: number;
     Host: string;
+    Port: number;
     Manufacturer: string;
 }
 
@@ -30,6 +31,10 @@ const Aet: React.FC<AetProps> = ({ aetData }) => {
         {
             accessorKey: 'Host',
             header: 'HOST',
+        },
+        {
+            accessorKey: 'Port',
+            header: 'PORT',
         },
         {
             accessorKey: 'Manufacturer',
