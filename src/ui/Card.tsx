@@ -1,4 +1,5 @@
 import React from 'react';
+import { Colors } from "../utils/enums";
 
 type CardsProps = {
   children: React.ReactNode;
@@ -8,19 +9,43 @@ type CardsProps = {
 
 type BasicHeaderProps = {
   title: string;
-  centerTitle?: boolean; 
-  className?: string; 
+  centerTitle?: boolean;
+  className?: string;
   children?: React.ReactNode;
+  color?: Colors;
 };
 
 type BodyProps = {
   children: React.ReactNode;
+  color?: Colors;
 };
 
 type FooterProps = {
   children?: React.ReactNode;
   className?: string;
+  color?: Colors;
 };
+
+const colorClasses: Record<keyof typeof Colors, string> = {
+  almond: "bg-almond",
+  primary: "bg-primary",
+  primaryHover: "hover:bg-primary-hover",
+  secondary: "bg-secondary",
+  secondaryHover: "hover:bg-secondary-hover",
+  danger: "bg-danger",
+  dangerHover: "hover:bg-danger-hover",
+  success: "bg-success",
+  successHover: "hover:bg-success-hover",
+  disabled: "bg-disabled",
+  orange: "bg-orange",
+  orangeHover: "hover:bg-orange-hover",
+  dark: "bg-dark",
+  red: "bg-red",
+  gray: "bg-gray",
+  light: "bg-light",
+};
+
+const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";
 
 const Card = ({ bordered, className = "", children }: CardsProps) => {
   const borderClass = bordered ? "border" : "";
@@ -33,28 +58,33 @@ const Card = ({ bordered, className = "", children }: CardsProps) => {
   );
 };
 
-const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
+const CardHeader = ({ title, centerTitle, className = "", children, color }: BasicHeaderProps) => {
   const shadowClass = "shadow-[0_-2px_4px_rgba(0,0,0,0.1)]";
+  const headerClass = getColorClass(color);
 
   return (
-    <div className={`bg-primary text-white ${shadowClass} rounded-t-xl ${className} flex items-center justify-center text-center`}>
+    <div className={`${headerClass} text-white ${shadowClass} rounded-t-xl ${className} flex items-center ${centerTitle ? 'justify-center' : ''} text-center`}>
       {title && <h2 className="flex-1 p-4 mx-auto text-lg font-bold">{title}</h2>}
       {children}
     </div>
   );
 };
 
-const CardBody = ({ children }: BodyProps) => {
+const CardBody = ({ children, color }: BodyProps) => {
+  const bodyClass = getColorClass(color);
+
   return (
-    <div className="box-border px-12 py-3 leading-relaxed text-black hover:bg-gray-hover grow bg-gray">
+    <div className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black`}>
       {children}
     </div>
   );
 };
 
-const CardFooter = ({ children, className = "" }: FooterProps) => {
+const CardFooter = ({ children, className = "", color }: FooterProps) => {
+  const footerClass = getColorClass(color);
+
   return (
-    <div className={`hover:bg-gray-hover box-border grow bg-gray px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+    <div className={`${footerClass} box-border grow px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
       {children || <div className="grow"></div>}
     </div>
   );

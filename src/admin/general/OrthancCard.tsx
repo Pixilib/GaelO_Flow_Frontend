@@ -18,7 +18,7 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
     const badgeClasses = `rounded-xl bg-indigo-100 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
 };
-type OrthancData= {
+type OrthancData = {
     username: string;
     address: string;
     port: number;
