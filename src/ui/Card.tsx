@@ -46,7 +46,7 @@ const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
 
 const CardBody = ({ children }: BodyProps) => {
   return (
-    <div className="hover:bg-gray-hover box-border grow bg-gray px-12 py-3 leading-relaxed text-black">
+    <div className="box-border px-12 py-3 leading-relaxed text-black hover:bg-gray-hover grow bg-gray">
       {children}
     </div>
   );

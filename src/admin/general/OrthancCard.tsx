@@ -5,7 +5,7 @@ import Button from '../../ui/Button';
 import { Colors } from '../../utils/enums';
 import Popover from '../../ui/Popover';
 import ToggleEye from '../../ui/ToggleEye';
-import SelectInput from '../../ui/SelectInput'; 
+import SelectInput from '../../ui/SelectInput';
 
 import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
@@ -18,9 +18,12 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
     const badgeClasses = `rounded-xl bg-indigo-100 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
 };
-
-
-
+type OrthancData= {
+    username: string;
+    address: string;
+    port: number;
+    password: string;
+};
 
 type OrthancCardProps = {
     orthancData: OrthancData;
@@ -80,7 +83,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         <ToggleEye onToggle={(visible) => setShow(visible)} />
                     </div>
                 );
-
             }
         },
     ];
@@ -88,6 +90,9 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     const handleSelectChange = (selectedOption: any) => {
         console.log("Selected option:", selectedOption);
     };
+
+
+
 
     return (
         <Card>
@@ -107,13 +112,13 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <IoClose size="20px" title="Shutdown" />
                 </Button>
                 <Popover popover={orthancDetails} placement="bottom"  >
-                        <Button color={Colors.primary}>
-                            <BsQuestionLg size="20px" title="Info" />
-                        </Button>
-                    </Popover>
+                    <Button color={Colors.primary}>
+                        <BsQuestionLg size="20px" title="Info" />
+                    </Button>
+                </Popover>
                 <SelectInput
                     onChange={handleSelectChange}
-                    placeholder="Select option" options={[]}                />
+                    placeholder="Select option" options={[]} />
             </CardFooter>
         </Card>
     );
