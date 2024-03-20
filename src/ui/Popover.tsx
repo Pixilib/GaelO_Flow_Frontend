@@ -4,12 +4,14 @@ type PopoverProps = {
   children: React.ReactNode;
   popover: React.ReactNode;
   placement?: 'top' | 'right' | 'bottom' | 'left';
+  className?: string;
 };
 
 const Popover: React.FC<PopoverProps> = ({
   children,
   popover,
   placement = 'bottom',
+  className,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +38,7 @@ const Popover: React.FC<PopoverProps> = ({
       </div>
       {isOpen && (
         <div
-        className={`absolute z-10 ${getPlacementClasses(placement)} bg-white rounded-lg shadow-md p-4 text-gray-600 dark:bg-gray-800 dark:text-gray-400 w-80`} 
+        className={`absolute z-10 ${getPlacementClasses(placement)} bg-white rounded-lg shadow-md p-4 text-gray-600 dark:bg-gray-800 dark:text-gray-400 w-80 ${className}`} 
         >
           {popover}
         </div>

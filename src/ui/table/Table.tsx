@@ -20,15 +20,16 @@ type TableProps<TData> = {
     columns: ColumnDef<TData>[];
     enableSorting?: boolean;
     color?: Colors;
+    className?: string;
 };
 //WIP : Pagination
-function Table<T>({ data, columns, enableSorting = true, color }: TableProps<T>) {
+function Table<T>({ data, columns, enableSorting = true, color, className }: TableProps<T>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [pagination, setPagination] = useState({
         pageIndex: 0, //initial page index
         pageSize: 10, //default page size
-      });
+    });
 
 
     const table = useReactTable<T>({
@@ -49,28 +50,11 @@ function Table<T>({ data, columns, enableSorting = true, color }: TableProps<T>)
         enableColumnFilters: true,
         enableSorting,
     });
-    const colorClasses: Record<keyof typeof Colors, string> = {
-        almond: "bg-almond",
-        primary: "bg-primary",
-        primaryHover: "hover:bg-primary-hover",
-        secondary: "bg-secondary",
-        secondaryHover: "hover:bg-secondary-hover",
-        danger: "bg-danger",
-        dangerHover: "hover:bg-danger-hover",
-        success: "bg-success",
-        successHover: "hover:bg-success-hover",
-        disabled: "bg-disabled",
-        orange: "bg-orange",
-        orangeHover: "hover:bg-orange-hover",
-        dark: "bg-dark",
-        red: "bg-red",
-        gray: "bg-gray",
-        light: "bg-light",
-      };
+
     return (
         <div className="max-h-[500px] overflow-x-auto rounded-xl">
-            <table className={`min-w-full border-grayCustom ${colorClasses}`}>
-                <thead className={`border-grayCustom  ${color}`}>
+            <table className={`min-w-full border-grayCustom ${className}`}>
+                <thead className={`border-grayCustom  bg-${color}`}>
                     {table.getHeaderGroups().map(headerGroup => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map(header => {
@@ -126,17 +110,11 @@ function Table<T>({ data, columns, enableSorting = true, color }: TableProps<T>)
                     ))}
                 </tbody>
             </table>
-                <div className="flex justify-end my-2 me-2">
-                    <Footer
-                        pagination={{
-                            pageIndex: table.getState().pagination.pageIndex,
-                            pageCount: table.getPageCount(),
-                            canPreviousPage: table.getCanPreviousPage(),
-                            canNextPage: table.getCanNextPage(),
-                        }}
-                        setPageIndex={table.setPageIndex}
-                    />
-                </div>
+            <div className="flex justify-end my-2 me-2">
+                <Footer
+                    table={table}
+                />
+            </div>
         </div>
     );
 }
