@@ -51,7 +51,7 @@ const Aet: React.FC<AetProps> = ({ aetData }) => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-4">
-                        <Table columns={columns} data={aetData} />
+                        <Table columns={columns} data={aetData} color={Colors.almond} />
                     </div>
                     <div className="flex justify-center w-full mt-2 mb-4">
                         <Button color="success" onClick={handleNewAetClick}>

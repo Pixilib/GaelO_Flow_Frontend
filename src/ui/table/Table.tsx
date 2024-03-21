@@ -56,44 +56,46 @@ function Table<T>({ data, columns, enableSorting = true, color, className }: Tab
             <table className={`min-w-full border-grayCustom ${className}`}>
                 <thead className={`border-grayCustom  bg-${color}`}>
                     {table.getHeaderGroups().map(headerGroup => (
-                        <tr key={headerGroup.id}>
-                            {headerGroup.headers.map(header => {
-                                const isSortedDesc = header.column.getIsSorted() === 'desc';
-                                const isSortedAsc = header.column.getIsSorted() === 'asc';
-                                // Condition pour afficher le composant de filtre
-                                const canFilter = header.column.columnDef.enableColumnFilter ?? true;
-                                return (
-                                    <th
-                                        key={header.id}
-                                        className={`cursor-pointer px-2 py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-600 md:px-4 lg:px-6 ${!header.column.getCanSort() ? 'cursor-default' : ''
-                                            }`}
-                                        onClick={() => {
-                                            const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
-                                            setSorting([{ id: header.id, desc: isDesc }]);
-                                        }}
-                                    >
-                                        <div className="flex items-center justify-center">
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
-                                            {/* Rendre conditionnellement le composant FilterTable */}
-                                            {canFilter !== false && <FilterTable column={header.column} table={table} />}
-                                            {header.column.getCanSort() && (
-                                                <span
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        const isDesc = isSortedAsc || (!isSortedAsc && !isSortedDesc);
-                                                        setSorting([{ id: header.id, desc: isDesc }]);
-                                                    }}
-                                                    className={`cursor-pointer`}
-                                                >
-                                                    {isSortedDesc ? '▼' : '▲'}
-                                                </span>
-                                            )}
-                                        </div>
-                                    </th>
-                                );
-                            })}
+                      <>
+                      {/* Ligne pour les titres et les flèches de tri */}
+                      <tr key={headerGroup.id} className={`bg-${color}`}>
+                        {headerGroup.headers.map(header => (
+                          <th
+                            key={header.id}
+                            colSpan={header.column.getCanFilter() ? 1 : undefined}
+                            className="h-2 px-2 py-3 text-xs font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6"
+                            onClick={header.column.getToggleSortingHandler()}
+                          >
+                            <div className="flex items-center justify-center space-x-1">
+                              {flexRender(header.column.columnDef.header, header.getContext())}
+                              {header.column.getCanSort() && (
+                                <span className="cursor-pointer">
+                                  {header.column.getIsSorted() === 'desc' ? '▼' : '▲'}
+                                </span>
+                              )}
+                            </div>
+                          </th>
+                        ))}
+                      </tr>
+                      {/* Ligne distincte pour les filtres si au moins un filtre est présent */}
+                      {headerGroup.headers.some(header => header.column.getCanFilter()) && (
+                        <tr key={`${headerGroup.id}-filters`} className="bg-${color}-filter">
+                          {headerGroup.headers.map(header => (
+                            <th
+                              key={`${header.id}-filter`}
+                              className="p-2 text-center md:px-4 lg:px-6"
+                            >
+                              {header.column.getCanFilter() ? (
+                                <div onClick={e => e.stopPropagation()}>
+                                  <FilterTable column={header.column} table={table} />
+                                </div>
+                              ) : null}
+                            </th>
+                          ))}
                         </tr>
-                    ))}
+                      )}
+                    </>
+                  ))}
                 </thead>
                 <tbody>
                     {table.getRowModel().rows.map((row, rowIndex) => (
