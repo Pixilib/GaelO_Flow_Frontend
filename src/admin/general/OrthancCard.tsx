@@ -18,7 +18,7 @@ const Badge: React.FC<{ value: number }> = ({ value }) => {
     const badgeClasses = `rounded-xl bg-indigo-100 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
 };
-type OrthancData = {
+type OrthancData= {
     username: string;
     address: string;
     port: number;
@@ -97,15 +97,14 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     return (
         <Card>
             <CardHeader title="Orthanc Settings" color={Colors.primary} />
-            <CardBody color={Colors.light}>
-                                <div className="flex justify-center">
-                    <div className="w-full mb-">
-                        <Table columns={columns} data={[orthancData]} color={Colors.almond}/>
-
+            <CardBody>
+                <div className="flex justify-center">
+                    <div className="w-full mb-4">
+                    <Table columns={columns} data={[orthancData]} color={Colors.almond}/>
                     </div>
                 </div>
             </CardBody>
-            <CardFooter className="flex justify-center space-x-4" color={Colors.light}>
+            <CardFooter className="flex justify-center space-x-4">
                 <Button color={Colors.orange} onClick={reset}>
                     <RestartIcon size="20px" title="Restart" />
                 </Button>
