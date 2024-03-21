@@ -13,13 +13,11 @@ type BasicHeaderProps = {
   className?: string;
   children?: React.ReactNode;
   color?: Colors;
-  
 };
 
 type BodyProps = {
   children: React.ReactNode;
   color?: Colors;
-  className?: string; // Ajout de cette ligne
 };
 
 type FooterProps = {
@@ -36,6 +34,7 @@ const colorClasses: Record<keyof typeof Colors, string> = {
   secondaryHover: "hover:bg-secondary-hover",
   danger: "bg-danger",
   dangerHover: "hover:bg-danger-hover",
+  grayCustom: "bg-gray-custom",
   success: "bg-success",
   successHover: "hover:bg-success-hover",
   disabled: "bg-disabled",

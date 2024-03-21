@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { AiOutlineCheck } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
@@ -7,15 +7,26 @@ import SelectInput from '../../ui/SelectInput';
 import Input from '../../ui/Input';
 import { Colors } from "../../utils/enums";
 
+// Placeholder SVG components
+const User = () => <svg />;
+const Mail = () => <svg />;
+
 interface NewAetCardProps {
     onClose: () => void;
 }
 
 const NewAetCard: React.FC<NewAetCardProps> = ({ onClose }) => {
+    const [name, setName] = useState('');
+    const [aet, setAet] = useState('');
+    const [ipAddress, setIpAddress] = useState('');
+    const [port, setPort] = useState('');
+
     const options = [
-        { value: 'option1', label: 'Option 1' },
-        { value: 'option2', label: 'Option 2' },
-        { value: 'option3', label: 'Option 3' },
+        { value: 'Generic', label: 'Generic' },
+        { value: 'GenericNoWildcardInDates', label: 'GenericNoWildcardInDates' },
+        { value: 'GenericNoUniversalWildcard', label: 'GenericNoUniversalWildcard' },
+        { value: 'Vitrea', label: 'Vitrea' },
+        { value: 'GE', label: 'GE' },
     ];
 
     const handleSelectChange = (selectedOption: any) => {
@@ -27,21 +38,57 @@ const NewAetCard: React.FC<NewAetCardProps> = ({ onClose }) => {
             <Card className="flex flex-col h-full">
                 <CardHeader title="New Aet" color={Colors.success}>
                     <div className="flex items-center justify-between">
-                        <CgClose size="24px" title="Close" onClick={onClose} className="cursor-pointer" />
+                        <CgClose size="24px" title="Close" onClick={onClose} className="mr-2 cursor-pointer" />
                     </div>
                 </CardHeader>
                 <CardBody color={Colors.grayCustom}>
-                    <div className="flex flex-col space-y-4">
-                        <Input placeholder="Input 1" />
-                        <Input placeholder="Input 2" />
-                        <Input placeholder="Input 3" />
-                        <Input placeholder="Input 4" />
-                        <SelectInput
-                            onChange={handleSelectChange}
-                            placeholder="Select option"
-                            options={options}
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                        <Input
+                            label="Name"
+                            className="w-full"
+                            svgLeft={<User />}
+                            bordered
+                            placeholder="Enter your name"
+                            value={name}
+                            required
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
+                        />
+                        <Input
+                            label="Aet"
+                            className="w-full"
+                            svgLeft={<User />}
+                            bordered
+                            placeholder="Enter Aet"
+                            value={aet}
+                            required
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setAet(event.target.value)}
+                        />
+                        <Input
+                            label="IP Address"
+                            className="w-full"
+                            svgLeft={<User />}
+                            bordered
+                            placeholder="Enter your IP address"
+                            value={ipAddress}
+                            required
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setIpAddress(event.target.value)}
+                        />
+                        <Input
+                            label="Port"
+                            className="w-full"
+                            svgLeft={<Mail />}
+                            bordered
+                            placeholder="Enter your port"
+                            value={port}
+                            required
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setPort(event.target.value)}
                         />
                     </div>
+                    <SelectInput
+                        onChange={handleSelectChange}
+                        placeholder="Select option"
+                        options={options}
+                    />
                 </CardBody>
                 <CardFooter className="flex justify-center">
                     <Button color="success">
