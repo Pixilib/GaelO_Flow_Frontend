@@ -82,15 +82,16 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
       title={title}
       leftIcon={leftIcon}
       onLeftIconClick={handleLeftIconClick}
+      className="bg-white"
     >
       <div className="flex justify-end gap-4">
         <DropDown
           chevronPosition="right"
-          className="relative flex w-44 flex-col"
+          className="relative flex flex-col w-44"
           isOpen={isOpen("Language")}
           dropDownOpen={() => handleDropDown("Language")}
           dropDown={
-            <div className="absolute top-full -mt-2">
+            <div className="absolute -mt-2 top-full">
               <BannerItems
                 elements={ItemsLanguage}
                 onSelect={(item: any) => i18n.changeLanguage(item.code)}
@@ -110,11 +111,11 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
         </DropDown>
         <DropDown
           chevronPosition="left"
-          className="relative flex w-60 flex-col"
+          className="relative flex flex-col w-60"
           isOpen={isOpen("SettingsUser")}
           dropDownOpen={() => handleDropDown("SettingsUser")}
           dropDown={
-            <div className="absolute top-full -mt-2 ">
+            <div className="absolute -mt-2 top-full ">
               <BannerItems
                 elements={ItemsSettingsUser}
                 onSelect={handleSettingsItemClick}
@@ -126,8 +127,8 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
           }
         >
           <ToggleSwitch disabled={true} />
-          <Notification className="size-4 transition-transform duration-100 hover:scale-110" />
-          <Settings className="size-4 transition-transform duration-100 hover:scale-110" />
+          <Notification className="transition-transform duration-100 size-4 hover:scale-110" />
+          <Settings className="transition-transform duration-100 size-4 hover:scale-110" />
           <Profile
             height={23}
             width={23}

@@ -42,7 +42,9 @@ const RootApp = () => {
 
   return (
     <div className="flex size-full bg-[#E9E5E4]">
+      <div className="bg-white">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
+      </div>
       <div className="flex flex-col flex-1">
         <Header
           title={title}
