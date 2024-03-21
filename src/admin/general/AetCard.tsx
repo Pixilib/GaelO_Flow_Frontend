@@ -5,6 +5,7 @@ import Badge from '../../ui/Badge';
 import { ColumnDef } from '@tanstack/react-table';
 import Button from '../../ui/Button';
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
+import { Colors } from '../../utils/enums';
 interface AetData {
     name: string;
     Aet: number;
@@ -51,7 +52,7 @@ const Aet: React.FC<AetProps> = ({ aetData }) => {
             <CardBody>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-4">
-                        <Table columns={columns} data={aetData} />
+                        <Table columns={columns} data={aetData} color={Colors.almond} />
                     </div>
                     <div className="flex justify-center w-full mt-2">
                         <Button color="success">

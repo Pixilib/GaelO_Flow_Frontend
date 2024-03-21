@@ -6,8 +6,12 @@ import { Colors } from "../../utils/enums";
 import JobIcons from "./JobIcons";
 import Popover from "../../ui/Popover";
 
+type JobTableProps = {
+  data: any[];
+  onJobAction: (id: string, action: string) => void;
+};
 //WIP for actions
-const JobTable = ({ data = [] }) => {
+const JobTable = ({ data = [], onJobAction }:JobTableProps) => {
   const columns = [
     {
       accessorKey: "Type",
@@ -30,10 +34,10 @@ const JobTable = ({ data = [] }) => {
       },
       {
         header: "Action",
-        cell: () => {
+        cell: (info: any) => {
           return (
             <div className="flex justify-center">
-            <JobIcons/>   
+            <JobIcons jobId={info.row.original.ID} onAction={onJobAction}/>   
           </div>
         );
       },
@@ -42,11 +46,10 @@ const JobTable = ({ data = [] }) => {
     {
       header: "Info",
       cell: (info:any) => {
-        const row = info.row.original;
         return (
-          <Popover popover={infoDetails(row)} placement="left" className="w-auto ">
+          <Popover popover={infoDetails(info.row.original)} placement="left" className="w-auto ">
           <div className="flex justify-center transition-transform hover:scale-110">
-            <BsInfoCircle size="1.5em" color="gray" onClick={() => handleInfoClick(row)}/>
+            <BsInfoCircle size="1.5em" color="gray" onClick={() => handleInfoClick(info.row.original)}/>
           </div>
           </Popover>
         );
@@ -54,7 +57,7 @@ const JobTable = ({ data = [] }) => {
       enableColumnFilter: false,
     }
   ];
-  const infoDetails = (rowData:any) => <pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre>;
+  const infoDetails = (rowData:any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
   const handleInfoClick = (rowData:any) => {
     console.log('Row data:', JSON.stringify(rowData, null, 2));
     return <pre>{JSON.stringify(rowData, null, 4)}</pre>;
