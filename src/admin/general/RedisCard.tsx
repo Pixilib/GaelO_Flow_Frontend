@@ -3,6 +3,7 @@ import React from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Table from '../../ui/table/Table';
 import Input from '../../ui/Input';
+import { Colors } from '../../utils/enums';
 
 const Badge: React.FC<{ value: number }> = ({ value }) => {
     const badgeClasses = `rounded-xl bg-indigo-100 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-green-600/20`;
@@ -39,11 +40,11 @@ const RedisCard = ({ redisData }: redisCardProps) => {
 
     return (
         <Card>
-            <CardHeader title="Redis Settings" />
-            <CardBody>
+            <CardHeader title="Redis Settings" color={Colors.primary} />
+            <CardBody color={Colors.light}>
                 <Table columns={columns} data={[redisData]} />
             </CardBody>
-            <CardFooter>
+            <CardFooter color={Colors.light}>
             </CardFooter>
         </Card>
     );

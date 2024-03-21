@@ -47,13 +47,13 @@ const Aet: React.FC<AetProps> = ({ aetData }) => {
     return (
         <Card>
             <CardHeader title="AETS" color={Colors.primary} />
-            <CardBody>
+            <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-4">
                         <Table columns={columns} data={aetData} />
                     </div>
                     <div className="flex justify-center w-full mt-2 mb-4">
-                        <Button color="success" onClick={handleNewAetClick}>
+                        <Button color="sucess" onClick={handleNewAetClick}>
                             <span className="flex items-center mr-2">
                                 <MoreIcon className="mr-2" size={24} />
                                 New AET

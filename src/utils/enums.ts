@@ -5,6 +5,7 @@ export enum Colors {
     dark = 'dark',
     disabled='disabled',
     gray = 'gray',
+    grayCustom = 'gray-custom',
     light = 'light',
     orange = 'orange',
     orangeHover='orange-hover',

@@ -30,7 +30,7 @@ const NewAetCard: React.FC<NewAetCardProps> = ({ onClose }) => {
                         <CgClose size="24px" title="Close" onClick={onClose} className="cursor-pointer" />
                     </div>
                 </CardHeader>
-                <CardBody color={Colors.gray}>
+                <CardBody color={Colors.grayCustom}>
                     <div className="flex flex-col space-y-4">
                         <Input placeholder="Input 1" />
                         <Input placeholder="Input 2" />

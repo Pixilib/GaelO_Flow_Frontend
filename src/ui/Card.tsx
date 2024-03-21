@@ -13,11 +13,13 @@ type BasicHeaderProps = {
   className?: string;
   children?: React.ReactNode;
   color?: Colors;
+  
 };
 
 type BodyProps = {
   children: React.ReactNode;
   color?: Colors;
+  className?: string; // Ajout de cette ligne
 };
 
 type FooterProps = {
