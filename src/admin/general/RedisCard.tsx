@@ -29,12 +29,12 @@ const RedisCard = ({ redisData }: redisCardProps) => {
         {
             accessorKey: 'port',
             header: 'Port',
-            cell: info => <Badge value={info.getValue() as number} />,
+            cell: (info: { getValue: () => number; }) => <Badge value={info.getValue() as number} />,
         },
         {
             accessorKey: 'password',
             header: 'Password',
-            cell: row => <Input disabled type='password' value={row.getValue()} />,
+            cell: (row: { getValue: () => any; }) => <Input disabled type='password' value={row.getValue()} />,
         },
     ];
 
@@ -42,7 +42,7 @@ const RedisCard = ({ redisData }: redisCardProps) => {
         <Card>
             <CardHeader title="Redis Settings" color={Colors.primary} />
             <CardBody color={Colors.light}>
-                <Table columns={columns} data={[redisData]} />
+                <Table columns={columns} data={[redisData]} color={Colors.almond} />
             </CardBody>
             <CardFooter color={Colors.light}>
             </CardFooter>

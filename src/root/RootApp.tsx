@@ -21,7 +21,7 @@ const RootApp = () => {
     navigate("/");
   };
 
-  const title = useMemo(()=> {
+  const title = useMemo(() => {
     const titlePath: { [key: string]: string } = {
       "/aets": "Aets",
       "/auto-retrieve": "Auto retrieve",
@@ -43,7 +43,8 @@ const RootApp = () => {
   return (
     <div className="flex size-full bg-[#E9E5E4]">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-col flex-1" style={{ backgroundColor: '#F3ECE8' }}> {/* Style ajouté ici */}        <Header
+      <div className="flex flex-col flex-1" style={{ backgroundColor: '#F3ECE8' }}>
+        <Header
           title={title}
           openItem={openItem}
           setOpenItem={setOpenItem}

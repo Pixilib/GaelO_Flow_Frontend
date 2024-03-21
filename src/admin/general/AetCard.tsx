@@ -26,7 +26,7 @@ const Aet: React.FC<AetProps> = ({ aetData }) => {
         {
             accessorKey: 'name',
             header: 'NAME',
-            
+
         },
         {
             accessorKey: 'Aet',

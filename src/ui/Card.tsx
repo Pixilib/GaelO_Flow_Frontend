@@ -18,6 +18,8 @@ type BasicHeaderProps = {
 type BodyProps = {
   children: React.ReactNode;
   color?: Colors;
+  className?: string;
+
 };
 
 type FooterProps = {

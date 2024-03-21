@@ -7,10 +7,6 @@ import SelectInput from '../../ui/SelectInput';
 import Input from '../../ui/Input';
 import { Colors } from "../../utils/enums";
 
-// Placeholder SVG components
-const User = () => <svg />;
-const Mail = () => <svg />;
-
 interface NewAetCardProps {
     onClose: () => void;
 }
@@ -41,12 +37,11 @@ const NewAetCard: React.FC<NewAetCardProps> = ({ onClose }) => {
                         <CgClose size="24px" title="Close" onClick={onClose} className="mr-2 cursor-pointer" />
                     </div>
                 </CardHeader>
-                <CardBody color={Colors.grayCustom}>
+                <CardBody className="bg-stone-400">
                     <div className="grid grid-cols-2 gap-4 mb-4">
                         <Input
                             label="Name"
                             className="w-full"
-                            svgLeft={<User />}
                             bordered
                             placeholder="Enter your name"
                             value={name}
@@ -56,7 +51,6 @@ const NewAetCard: React.FC<NewAetCardProps> = ({ onClose }) => {
                         <Input
                             label="Aet"
                             className="w-full"
-                            svgLeft={<User />}
                             bordered
                             placeholder="Enter Aet"
                             value={aet}
@@ -66,7 +60,6 @@ const NewAetCard: React.FC<NewAetCardProps> = ({ onClose }) => {
                         <Input
                             label="IP Address"
                             className="w-full"
-                            svgLeft={<User />}
                             bordered
                             placeholder="Enter your IP address"
                             value={ipAddress}
@@ -76,7 +69,6 @@ const NewAetCard: React.FC<NewAetCardProps> = ({ onClose }) => {
                         <Input
                             label="Port"
                             className="w-full"
-                            svgLeft={<Mail />}
                             bordered
                             placeholder="Enter your port"
                             value={port}
