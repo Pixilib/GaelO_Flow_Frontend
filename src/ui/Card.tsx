@@ -22,7 +22,7 @@ type FooterProps = {
   className?: string;
 };
 
-const Card = ({ bordered, className = "", children }: CardsProps) => {
+const Card = ({ bordered, className, children }: CardsProps) => {
   const borderClass = bordered ? "border" : "";
   const spacingClass = "mx-4 md:mx-4";
 
@@ -33,7 +33,7 @@ const Card = ({ bordered, className = "", children }: CardsProps) => {
   );
 };
 
-const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
+const CardHeader = ({ title, className, children }: BasicHeaderProps) => {
   const shadowClass = "shadow-[0_-2px_4px_rgba(0,0,0,0.1)]";
 
   return (
@@ -46,15 +46,15 @@ const CardHeader = ({ title, className = "", children }: BasicHeaderProps) => {
 
 const CardBody = ({ children }: BodyProps) => {
   return (
-    <div className="box-border px-12 py-3 leading-relaxed text-black hover:bg-gray-hover grow bg-gray">
+    <div className="box-border px-12 py-3 leading-relaxed text-black hover:bg-gray-hover bg-gray grow">
       {children}
     </div>
   );
 };
 
-const CardFooter = ({ children, className = "" }: FooterProps) => {
+const CardFooter = ({ children, className }: FooterProps) => {
   return (
-    <div className={`hover:bg-gray-hover box-border grow bg-gray px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+    <div className={`hover:bg-gray-hover bg-gray box-border grow p-3 leading-relaxed text-black ${className} rounded-b-xl`}>
       {children || <div className="grow"></div>}
     </div>
   );

@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from "react";
 
 import { signUp } from "../services/auth";
 import { useCustomMutation } from "../utils/reactQuery";
-import { toastError, toastSuccess } from "../utils/toastify";
 
 import Button from "../ui/Button";
 import Input from "../ui/Input";
@@ -10,12 +9,14 @@ import { Colors } from "../utils/enums";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import Mail from "./../assets/mail.svg?react";
 import User from "./../assets/user.svg?react";
+import { useCustomToast } from "../utils/toastify";
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState("");
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [email, setEmail] = useState("");
+  const { toastSuccess, toastError } = useCustomToast();
 
   const signUpMutation = useCustomMutation(
     ({ username, lastname, firstname, email }) =>
