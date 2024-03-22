@@ -5,10 +5,11 @@ import Badge from "../../ui/Badge";
 import { Colors } from "../../utils/enums";
 import JobIcons from "./JobIcons";
 import Popover from "../../ui/Popover";
+import { postJobsAction } from "../../services/jobs";
 
 type JobTableProps = {
   data: any[];
-  onJobAction: (id: string, action: string) => void;
+  onJobAction: (id: string, action: postJobsAction) => void;
 };
 //WIP for actions
 const JobTable = ({ data = [], onJobAction }:JobTableProps) => {
