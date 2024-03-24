@@ -38,9 +38,9 @@ const JobRoot = () => {
 
   return (
     <div className="flex justify-center h-full mt-10">
-      <Card >
+      <Card className="bg-white">
         <CardHeader title='Jobs' />
-        <CardBody>
+        <CardBody className="">
           {isLoadingJobs ? <Spinner /> : <JobTable data={jobData as any} onJobAction={handleJobAction} />}
         </CardBody>
         <CardFooter>

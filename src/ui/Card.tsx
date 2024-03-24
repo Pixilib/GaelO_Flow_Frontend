@@ -15,6 +15,7 @@ type BasicHeaderProps = {
 
 type BodyProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
 type FooterProps = {
@@ -44,9 +45,9 @@ const CardHeader = ({ title, className, children }: BasicHeaderProps) => {
   );
 };
 
-const CardBody = ({ children }: BodyProps) => {
+const CardBody = ({ children, className }: BodyProps) => {
   return (
-    <div className="box-border px-12 py-3 leading-relaxed text-black hover:bg-gray-hover bg-gray grow">
+    <div className={`box-border px-12 py-3 leading-relaxed text-black hover:bg-gray-hover bg-gray grow ${className}`}>
       {children}
     </div>
   );
