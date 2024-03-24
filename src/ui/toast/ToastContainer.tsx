@@ -12,7 +12,7 @@ type ToastContainerProps = {
   className?: string
 }
 
-function ToastContainer({ className = '' }) {
+function ToastContainer({ className }:ToastContainerProps) {
 
   const [toasts, setToasts] = useState([] as ToastItem[]);
 
@@ -60,7 +60,7 @@ function ToastContainer({ className = '' }) {
 
   return (
     <ToastContext.Provider value={{ pushToastRef, updateToastRef }}>
-      <div data-gaelo-ui='toast-container' className={`z-[1300] ${className}`}>
+      <div data-gaelo-flow='toast-container' className={`z-[1300] ${className}`}>
         <div className="fixed bottom-2 right-2" >
           {toasts.filter(toast => toast.position === 'bottom-right').map((toast) => (
             <ToastComponent key={toast.id} {...toast} />
