@@ -1,6 +1,7 @@
 import React from 'react';
 import { Colors } from "../utils/enums";
 
+// Définition des types pour les props de chaque composant
 type CardsProps = {
   children: React.ReactNode;
   className?: string;
@@ -19,7 +20,6 @@ type BodyProps = {
   children: React.ReactNode;
   color?: Colors;
   className?: string;
-
 };
 
 type FooterProps = {
@@ -28,6 +28,7 @@ type FooterProps = {
   color?: Colors;
 };
 
+// Mapping entre les couleurs et les classes CSS correspondantes
 const colorClasses: Record<keyof typeof Colors, string> = {
   almond: "bg-almond",
   primary: "bg-primary",
@@ -36,7 +37,7 @@ const colorClasses: Record<keyof typeof Colors, string> = {
   secondaryHover: "hover:bg-secondary-hover",
   danger: "bg-danger",
   dangerHover: "hover:bg-danger-hover",
-  grayCustom: "bg-gray-custom",
+  grayCustom: "bg-grayCustom",
   success: "bg-success",
   successHover: "hover:bg-success-hover",
   disabled: "bg-disabled",
@@ -50,6 +51,7 @@ const colorClasses: Record<keyof typeof Colors, string> = {
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";
 
+// Composants
 const Card = ({ bordered, className = "", children }: CardsProps) => {
   const borderClass = bordered ? "border" : "";
   const spacingClass = "mx-4 md:mx-4";
@@ -73,18 +75,18 @@ const CardHeader = ({ title, centerTitle, className = "", children, color }: Bas
   );
 };
 
-const CardBody = ({ children, color }: BodyProps) => {
+const CardBody = ({ children, color, className = "" }: BodyProps) => {
   const bodyClass = getColorClass(color);
 
   return (
-    <div className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black`}>
+    <div className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black ${className}`}>
       {children}
     </div>
   );
 };
 
-
-const footerClass = getColorClass(color);
+const CardFooter = ({ children, className = "", color }: FooterProps) => {
+  const footerClass = getColorClass(color);
 
   return (
     <div className={`${footerClass} box-border grow px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
