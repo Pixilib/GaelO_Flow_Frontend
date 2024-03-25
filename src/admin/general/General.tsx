@@ -13,11 +13,12 @@ const General = () => {
   if (error) return <span>Error: {error.message}</span>;
 
   return (
-    <div className="flex flex-col h-screen p-1 py-12 space-y-12 bg-background">
+    <div className="flex flex-col h-screen p-1 py-8 space-y">
       <RedisCard redisData={{ address: data.RedisAddress, port: data.RedisPort }} />
-      <OrthancCard orthancData={{ address: data.OrthancAddress, port: data.OrthancPort, password: data.OrthancPassword, username: data.OrthancUsername }} />
+      <div className="py-8">
+        <OrthancCard orthancData={{ address: data.OrthancAddress, port: data.OrthancPort, password: data.OrthancPassword, username: data.OrthancUsername }} />
+      </div>
     </div>
   );
-}; // Cette accolade fermante était manquante.
-
+};
 export default General;

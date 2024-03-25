@@ -42,6 +42,7 @@ const RedisCard = ({ redisData }: redisCardProps) => {
         <Card>
             <CardHeader title="Redis Settings" color={Colors.primary} />
             <CardBody color={Colors.light}>
+            <div className="mt-5"></div> 
                 <Table columns={columns} data={[redisData]} color={Colors.almond} />
             </CardBody>
             <CardFooter color={Colors.light}>
