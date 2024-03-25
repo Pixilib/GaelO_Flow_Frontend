@@ -83,8 +83,8 @@ const CardBody = ({ children, color }: BodyProps) => {
   );
 };
 
-const CardFooter = ({ children, className = "", color }: FooterProps) => {
-  const footerClass = getColorClass(color);
+
+const footerClass = getColorClass(color);
 
   return (
     <div className={`${footerClass} box-border grow px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>

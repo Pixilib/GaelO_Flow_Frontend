@@ -41,9 +41,9 @@ const RootApp = () => {
   }, [location.pathname])
 
   return (
-    <div className="flex size-full bg-[#E9E5E4]">
+    <div className="flex bg-white size-full">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-col flex-1" style={{ backgroundColor: '#F3ECE8' }}>
+      <div className="flex flex-col flex-1 bg-secondaryLight">
         <Header
           title={title}
           openItem={openItem}

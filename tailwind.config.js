@@ -47,6 +47,7 @@ export default {
         'primary-hover':'#8C8BD3',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
+        'secondaryLight': '#F3ECE8',
         'danger': '#DB1F22',
         'danger-hover': '#8A1315',
         'success': '#36A56F',
