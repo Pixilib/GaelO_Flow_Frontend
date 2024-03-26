@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Button from '../../ui/Button';
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
-import NewModalitiyCard from './NewModalitiyCard';
+import NewModalityCard from './NewModalityCard';
 import { Colors } from '../../utils/enums';
 import { useCustomQuery, useCustomMutation } from '../../utils/reactQuery';
 import ModalitiesTable from './ModalitiesTable'
+import Toast from '../../ui/toast/Toast';
+import { updateModality, deleteModality } from '../../services/modalities';
 
 interface AetData {
     name: string;
@@ -37,9 +39,9 @@ const ModalitiesRoot: React.FC = () => {
     */
 
     const updateModalityMutation = useCustomMutation(
-        ({name, aet, host, port, manufacturer}) => updateModality(name, ....),
-        [['modalities']]
-    )
+        ({ name, aet, host, port, manufacturer }) => updateModality(name, aet, host, port, manufacturer),
+        [['modalities']] 
+    );
 
     const deleteModalityMutation = useCustomMutation(
         ({name}) => deleteModality(name),
@@ -48,18 +50,31 @@ const ModalitiesRoot: React.FC = () => {
 
     const handleNewAetClick = () => {
         setShowNewAetCard(true);
-    }
+    };
 
-    const createAetHandler = (aet :AetData) => {
-        updateModalityMutation.mutate(aet)
-        //Appeler l'AET
-    }
+    const createAetHandler = (aet: AetData) => {
+        updateModalityMutation.mutate(aet, {
+            onSuccess: () => {
+                toastSuccess("successfully created.");
+            },
+            onError: (error) => {
+                console.error("Error creating", error);
+                toastError("An error occurred while creating the AET.");
+            }
+        });
+    };
 
     const deleteAetHandler = (aetName: string) => {
-        deleteModalityMutation.mutate({name : aetName})
-        //Appeler le delete API
+        if (window.confirm(`Are you sure you want to delete the modality named "${aetName}"?`)) {
+            deleteModalityMutation.mutate({ name: aetName }, {
+                onSuccess: () => {
+                },
+                onError: (error) => {
+                    console.error("Error deleting modality: ", error);
+                }
+            });
+        }
     }
-
     return (
         <Card>
             <CardHeader title="Modalities" color={Colors.primary} />
@@ -80,7 +95,7 @@ const ModalitiesRoot: React.FC = () => {
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
                     <div className="w-full">
-                        <NewModalitiyCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
+                        <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
                     </div>
                 )}
             </CardFooter>
