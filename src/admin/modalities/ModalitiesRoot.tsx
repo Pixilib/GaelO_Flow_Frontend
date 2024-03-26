@@ -55,10 +55,10 @@ const ModalitiesRoot: React.FC = () => {
     const createAetHandler = (aet: AetData) => {
         updateModalityMutation.mutate(aet, {
             onSuccess: () => {
-                toastSuccess("successfully created.");
+                toastSuccess("successfully");
             },
             onError: (error) => {
-                console.error("Error creating", error);
+                console.error("Error", error);
                 toastError("An error occurred while creating the AET.");
             }
         });
