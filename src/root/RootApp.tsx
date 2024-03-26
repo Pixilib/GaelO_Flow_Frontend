@@ -21,7 +21,7 @@ const RootApp = () => {
     navigate("/");
   };
 
-  const title = useMemo(()=> {
+  const title = useMemo(() => {
     const titlePath: { [key: string]: string } = {
       "/aets": "Aets",
       "/auto-retrieve": "Auto retrieve",
@@ -41,11 +41,9 @@ const RootApp = () => {
   }, [location.pathname])
 
   return (
-    <div className="flex size-full bg-[#E9E5E4]">
-      <div className="bg-white">
+    <div className="flex bg-white size-full">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      </div>
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 bg-secondaryLight">
         <Header
           title={title}
           openItem={openItem}

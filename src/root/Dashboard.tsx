@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   return (
     // eslint-disable-next-line tailwindcss/no-custom-classname
-    <div className="bg-background size-full p-8">
+    <div className="p-8 bg-background size-full">
       <h1 className="mx-8 text-3xl font-bold">Overview</h1>
       <div className="m-8 flex h-10 items-center rounded-[10px] bg-white p-10 shadow-xl">
         <h2 className="text-xl">
@@ -20,14 +20,14 @@ const Dashboard = () => {
         ></img>
       </div>
 
-      <div className="mx-8 flex columns-3 gap-6">
+      <div className="flex gap-6 mx-8 columns-3">
         {/* Card Anonymisation */}
         <Card className="flex-1 ">
-          <CardHeader title="Anonymisation" />
-          <CardBody>
+        <CardHeader title="Anonymisation" color={Colors.primary} />
+        <CardBody color={Colors.light}>
             <h3 className="text-xl">Progress</h3>
           </CardBody>
-          <CardFooter>
+          <CardFooter  color={Colors.light}>
             <Button className="self-center" variant="contained" color="primary">
               Empty List
             </Button>
@@ -36,11 +36,11 @@ const Dashboard = () => {
 
         {/* Card Delete */}
         <Card className="flex-1 ">
-          <CardHeader title="Delete" color={Colors.dark} />
-          <CardBody>
+        <CardHeader title="Delete" color={Colors.primary} />
+        <CardBody color={Colors.light}>
             <h3 className="text-xl">Progress</h3>
           </CardBody>
-          <CardFooter>
+          <CardFooter  color={Colors.light}>
             <Button className="self-center" variant="contained" color="primary">
               Empty List
             </Button>
@@ -49,11 +49,11 @@ const Dashboard = () => {
 
         {/* Card Retrieve */}
         <Card className="flex-1 ">
-          <CardHeader title="Delete" color={Colors.dark} />
-          <CardBody>
-            <h3 className="text-xl">Retrieve</h3>
+          <CardHeader title="Delete" color={Colors.primary} />
+          <CardBody color={Colors.light}>
+                        <h3 className="text-xl">Retrieve</h3>
           </CardBody>
-          <CardFooter>
+          <CardFooter  color={Colors.light}>
             <Button className="self-center" variant="contained" color="primary">
               Empty List
             </Button>
