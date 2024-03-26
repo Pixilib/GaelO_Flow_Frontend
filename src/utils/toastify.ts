@@ -1,38 +1,27 @@
 
-import { toast } from 'react-toastify'
+import useToasts from '../services/useToasts'
+export const useCustomToast = () => {
+    const { pushToast } = useToasts()
 
-export const toastSuccess= (message :string)=> {
-    const toastify = toast.success
-    toastify(message, {
-        position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false
-    })
-}
+    const toastSuccess = (message: string) => {
+        pushToast({ content: message, type: 'success', duration: 5, position: 'bottom-right', animation: 'slide-left' })
+        console.log('toast success')
+    }
 
-export const toastwarning = (message :string)=> {
-    const toastify = toast.warning
-    toastify(message, {
-        position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false
-    })
-}
+    const toastWarning = (message: string) => {
+        pushToast({ content: message, type: 'warning', duration: 5, position: 'bottom-right', animation: 'slide-left' })
+        console.log('toast warning')
+    }
 
-export const toastError = (message :string)=> {
-    const toastify = toast.error
-    toastify(message, {
-        position: 'bottom-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: false
-    })
+    const toastError = (message: string) => {
+        pushToast({ content: message, type: 'danger', duration: 5, position: 'bottom-right', animation: 'slide-left' })
+        console.log('toast danger')
+    }
+
+    const toastInfo = (message: string) => {
+        pushToast({ content: message, type: 'info', duration: 5, position: 'bottom-right', animation: 'slide-left' })
+        console.log('toast info')
+    }
+
+    return { toastSuccess, toastWarning, toastError, toastInfo }
 }

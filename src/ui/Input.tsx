@@ -14,9 +14,9 @@ type InputProps = {
 };
 
 const Input = ({
-  className = "",
-  placeholder = "",
-  label = "",
+  className,
+  placeholder,
+  label,
   type = "text",
   svgLeft = null,
   svgRight = null,
