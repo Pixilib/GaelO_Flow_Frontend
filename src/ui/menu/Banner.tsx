@@ -17,9 +17,9 @@ const Banner = ({
   return (
     <div
       data-gaelo-flow="banner"
-      className={`flex h-24 w-full items-center justify-between rounded-br-20 border-transparent shadow-lg ${className}`}
+      className={`flex h-24 w-full items-center justify-between rounded-br-20 border-transparent shadow-lg bg-white ${className}`}
     >
-      <div className="ml-12 flex items-center">
+      <div className="flex items-center ml-12">
         {leftIcon && (
           <span className="mr-8 cursor-pointer" onClick={onLeftIconClick}>
             {leftIcon}

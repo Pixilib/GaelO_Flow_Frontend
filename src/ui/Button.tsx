@@ -30,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
     red: "bg-red",
     gray: "bg-gray",
     light: "bg-light",
+    grayCustom: ""
   };
 
 

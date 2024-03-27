@@ -1,11 +1,13 @@
-import React from 'react';
-import Card, { CardHeader, CardBody } from '../../ui/Card';
+import React, { useState } from 'react';
+import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Table from '../../ui/table/Table';
 import Badge from '../../ui/Badge';
-import { ColumnDef } from '@tanstack/react-table';
 import Button from '../../ui/Button';
+import { ColumnDef } from '@tanstack/react-table';
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
+import NewAetCard from './NewAetCard';
 import { Colors } from '../../utils/enums';
+
 interface AetData {
     name: string;
     Aet: number;
@@ -18,6 +20,8 @@ interface AetProps {
 }
 
 const Aet: React.FC<AetProps> = ({ aetData }) => {
+    const [showNewAetCard, setShowNewAetCard] = useState(false);
+
     const columns: ColumnDef<AetData>[] = [
         {
             accessorKey: 'name',
@@ -36,35 +40,37 @@ const Aet: React.FC<AetProps> = ({ aetData }) => {
             accessorKey: 'Manufacturer',
             header: 'MANUFACTURER',
         },
-        {
-            accessorKey: 'EchoAet',
-            header: 'ECHO AET',
-        },
-        {
-            accessorKey: 'RemoveAet',
-            header: 'REMOVE AET',
-        },
     ];
 
+    const handleNewAetClick = () => setShowNewAetCard(true);
+
     return (
-        <Card>
-            <CardHeader title="AETS" />
-            <CardBody>
-                <div className="flex flex-col items-center">
-                    <div className="w-full mb-4">
-                        <Table columns={columns} data={aetData} color={Colors.almond} />
+        <div className="py-8">
+            <Card>
+                <CardHeader title="AETS" color={Colors.primary} />
+                <CardBody color={Colors.light}>
+                    <div className="flex flex-col items-center">
+                        <div className="w-full mb-8">
+                            <Table columns={columns} data={aetData} color={Colors.almond} />
+                        </div>
+                        <div className="flex justify-center w-full mt-2 mb-4">
+                            <Button color="success" onClick={handleNewAetClick}>
+                                <span className="flex items-center mr-2">
+                                    <MoreIcon className="mr-2" size={24} />New AET
+                                </span>
+                            </Button>
+                        </div>
                     </div>
-                    <div className="flex justify-center w-full mt-2">
-                        <Button color="success">
-                            <span className="flex items-center mr-2">
-                                <MoreIcon className="mr-2" size={24} />
-                                New AET
-                            </span>
-                        </Button>
-                    </div>
-                </div>
-            </CardBody>
-        </Card>
+                </CardBody>
+                <CardFooter color={Colors.light}>
+                    {showNewAetCard && (
+                        <div className="w-full">
+                            <NewAetCard onClose={() => setShowNewAetCard(false)} />
+                        </div>
+                    )}
+                </CardFooter>
+            </Card>
+        </div>
     );
 };
 
