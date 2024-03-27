@@ -1,11 +1,11 @@
-import { BsInfoCircle } from "react-icons/bs";
+import { BsInfoCircle as Info } from "react-icons/bs";
 import Table from "../../ui/table/Table";
 import Badge from "../../ui/Badge";
 
 import { Colors } from "../../utils/enums";
 import JobIcons from "./JobIcons";
 import Popover from "../../ui/Popover";
-import { postJobsAction } from "../../services/jobs";
+import { postJobsAction } from "../../utils/types2";
 
 type JobTableProps = {
   data: any[];
@@ -13,6 +13,7 @@ type JobTableProps = {
 };
 //WIP for actions
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
+
   const columns = [
     {
       accessorKey: "Type",
@@ -52,7 +53,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
             <div className="absolute">
               <Popover popover={infoDetails(info.row.original)} placement="left" className="w-auto" withOnClick={true}>
                 <div className="transition-transform hover:scale-110">
-                  <BsInfoCircle size="1.5em" color="gray" />
+                  <Info size="1.5em" color="gray" />
                 </div>
               </Popover>
             </div>
@@ -62,6 +63,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       enableColumnFilter: false,
     }
   ];
+  
   const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
 
   return <Table data={data} columns={columns} color={Colors.almond} />;
