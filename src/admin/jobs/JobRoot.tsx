@@ -38,8 +38,8 @@ const JobRoot = () => {
 
 
   return (
-    <div className="flex justify-center h-full mt-10">
-      <Card className="bg-white">
+    <div className="flex justify-center w-full h-full">
+      <Card className="w-full bg-white">
         <CardHeader title='Jobs' color={Colors.primary} />
         <CardBody className="">
           {isLoadingJobs ? <Spinner /> : <JobTable data={jobData as any} onJobAction={handleJobAction} />}
