@@ -35,13 +35,13 @@ const Popover: React.FC<PopoverProps> = ({
   const handleEvent = withOnClick ? { onClick: () => setIsOpen(!isOpen) } : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
   return (
-    <div className="relative" onMouseLeave={() => setIsOpen(false)}>
+    <div className="fixed" onMouseLeave={() => setIsOpen(false)}>
       <div {...handleEvent} className="cursor-pointer">
         {children}
       </div>
       {isOpen && (
         <div
-          className={`absolute z-10 ${getPlacementClasses(placement)} w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+          className={`z-10 ${getPlacementClasses(placement)} w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
         >
           {popover}
         </div>
