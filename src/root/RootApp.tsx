@@ -23,18 +23,18 @@ const RootApp = () => {
 
   const title = useMemo(()=> {
     const titlePath: { [key: string]: string } = {
-      "/aets": "Aets",
-      "/auto-retrieve": "Auto retrieve",
-      "/import": "Import",
-      "/external-endpoints": "External endpoints",
-      "admin/jobs": "Jobs",
-      "/labels": "Labels",
-      "/mydicom": "My Dicom",
+      "/administration/general": "General",
+      "/administration/aets": "Aets",
+      "/administration/jobs": "Jobs",
+      "/administration/labels": "Labels",
+      "/administration/queues":"Queues",
+      "/administration/peers": "Peers",
+      "/administration/users": "Users",
       "/Orthanc Content": "Orthanc Content",
-      "/peers": "Peers",
+      "/import": "Import",
       "/query": "Query",
-      "/robot-tasks": "Robot & Tasks",
-      "/users": "Users",
+      "/mydicom": "My Dicom",
+      "/auto-retrieve": "Auto retrieve",
       "/": "Home"
     };
     return titlePath[location.pathname];
