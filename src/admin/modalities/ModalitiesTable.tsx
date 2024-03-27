@@ -3,6 +3,7 @@ import Table from '../../ui/table/Table';
 import Badge from '../../ui/Badge';
 import { ColumnDef } from '@tanstack/react-table';
 import { Colors } from '../../utils/enums';
+import Button from '../../ui/Button';
 
 interface AetData {
     name: string;

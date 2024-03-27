@@ -23,7 +23,7 @@ const RootApp = () => {
 
   const title = useMemo(() => {
     const titlePath: { [key: string]: string } = {
-      "/aets": "Aets",
+      "/modalities": "Modalities",
       "/auto-retrieve": "Auto retrieve",
       "/import": "Import",
       "/external-endpoints": "External endpoints",

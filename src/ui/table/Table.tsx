@@ -12,7 +12,7 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from '@tanstack/react-table';
-import FilterTable from './FilterTable'; // Assurez-vous que le chemin d'importation est correct
+import FilterTable from './FilterTable'; 
 import Footer from '../table/Footer';
 
 type TableProps<TData> = {

@@ -104,3 +104,4 @@ const ModalitiesRoot: React.FC = () => {
 };
 
 export default ModalitiesRoot;
+
