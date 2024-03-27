@@ -6,6 +6,7 @@ import JobTable from './JobTable';
 import Spinner from '../../ui/Spinner';
 // import { toastError, toastSuccess } from '../../utils/toastify';
 import { useCustomToast } from '../../utils/toastify';
+import { Colors } from '../../utils/enums';
 const JobRoot = () => {
 
   const { toastSuccess, toastError } = useCustomToast();
@@ -39,7 +40,7 @@ const JobRoot = () => {
   return (
     <div className="flex justify-center h-full mt-10">
       <Card className="bg-white">
-        <CardHeader title='Jobs' />
+        <CardHeader title='Jobs' color={Colors.primary} />
         <CardBody className="">
           {isLoadingJobs ? <Spinner /> : <JobTable data={jobData as any} onJobAction={handleJobAction} />}
         </CardBody>

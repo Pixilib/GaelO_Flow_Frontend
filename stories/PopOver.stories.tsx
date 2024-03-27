@@ -11,6 +11,9 @@ const meta = {
       className: {
         control: 'text',
       },
+      withOnClick: {
+        control: 'boolean',
+      },
     },
     tags: ["autodocs"],
   } satisfies Meta<typeof Popover>;
