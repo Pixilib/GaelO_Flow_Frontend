@@ -14,7 +14,7 @@ interface AetData {
 
 interface AetProps {
     aetData: AetData[];
-    onDeleteAet : (aetname :string) => void;
+    onDeleteAet: (aetname: string) => void;
 }
 
 const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
@@ -38,10 +38,9 @@ const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
             header: 'MANUFACTURER',
         },
         {
-            id : "delete",
-            cell : ({row}) => <>
-                <Button onClick = {() => onDeleteAet(row.original.name)} >Delete</Button>
-            </>
+            id: "delete",
+            cell: ({ row }) => <>
+                <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>Delete</Button>            </>
         }
     ];
 

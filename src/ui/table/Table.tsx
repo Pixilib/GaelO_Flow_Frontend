@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Colors } from "../../utils/enums";
-<table />
 import {
   useReactTable,
   getCoreRowModel,

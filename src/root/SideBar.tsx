@@ -43,7 +43,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       isActive: location.pathname === "/administration/general",
     },
     {
-      title: "Aets",
+      title: "Modalities",
       path: "/administration/aets",
       isActive: location.pathname === "/administration/aets",
     },
