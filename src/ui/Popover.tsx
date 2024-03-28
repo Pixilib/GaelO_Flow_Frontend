@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 type PopoverProps = {
   children: React.ReactNode;
   popover: React.ReactNode;
+  withOnClick?: boolean;
   placement?: 'top' | 'right' | 'bottom' | 'left';
   className?: string;
 };
@@ -10,6 +11,7 @@ type PopoverProps = {
 const Popover: React.FC<PopoverProps> = ({
   children,
   popover,
+  withOnClick = "false",
   placement = 'bottom',
   className,
 }) => {
@@ -18,31 +20,33 @@ const Popover: React.FC<PopoverProps> = ({
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
       case 'top':
-        return 'bottom-full mb-1'; 
+        return 'absolute bottom-full';
       case 'right':
-        return 'left-full ml-1'; 
+        return 'absolute left-full';
       case 'bottom':
-        return 'top-full mt-1'; 
+        return 'absolute top-full';
       case 'left':
-        return 'right-full mr-1'; 
+        return 'absolute right-full';
       default:
-        return 'top-full mt-1'; 
+        return 'absolute top-full';
     }
   };
-  
 
+  const handleEvent = withOnClick ? { onClick: () => setIsOpen(!isOpen) } : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
+
+  console.log({ isOpen })
   return (
-    <div className="relative" onMouseLeave={() => setIsOpen(false)}>
-      <div onMouseEnter={() => setIsOpen(true)} className="cursor-pointer">
-        {children}
+    <div {...handleEvent} >
+      {children}
+      <div className="cursor-pointer  z-100" >
+        {isOpen && (
+          <div
+            className={` ${getPlacementClasses(placement)} absolute z-100 w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+          >
+            {popover}
+          </div>
+        )}
       </div>
-      {isOpen && (
-        <div
-        className={`absolute z-10 ${getPlacementClasses(placement)} w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`} 
-        >
-          {popover}
-        </div>
-      )}
     </div>
   );
 };
