@@ -21,29 +21,29 @@ const RootApp = () => {
     navigate("/");
   };
 
-  const title = useMemo(()=> {
+  const title = useMemo(() => {
     const titlePath: { [key: string]: string } = {
-      "/aets": "Aets",
-      "/auto-retrieve": "Auto retrieve",
-      "/import": "Import",
-      "/external-endpoints": "External endpoints",
-      "admin/jobs": "Jobs",
-      "/labels": "Labels",
-      "/mydicom": "My Dicom",
+      "/administration/general": "General",
+      "/administration/modalities": "Modalities",
+      "/administration/jobs": "Jobs",
+      "/administration/labels": "Labels",
+      "/administration/queues":"Queues",
+      "/administration/peers": "Peers",
+      "/administration/users": "Users",
       "/Orthanc Content": "Orthanc Content",
-      "/peers": "Peers",
+      "/import": "Import",
       "/query": "Query",
-      "/robot-tasks": "Robot & Tasks",
-      "/users": "Users",
+      "/mydicom": "My Dicom",
+      "/auto-retrieve": "Auto retrieve",
       "/": "Home"
     };
     return titlePath[location.pathname];
   }, [location.pathname])
 
   return (
-    <div className="flex size-full">
+    <div className="flex bg-white size-full">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1 bg-secondaryLight">
         <Header
           title={title}
           openItem={openItem}

@@ -1,36 +1,58 @@
-import { useCustomQuery } from '../../utils/reactQuery';
-import { getJobs } from '../../services/jobs';
+import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
+import { getJobs, postJobs } from "../../services/jobs";
 
-import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Button from '../../ui/Button';
-import JobTable from './JobTable';
-import Spinner from '../../ui/Spinner';
-import { Colors } from '../../utils/enums';
+import Card, { CardHeader, CardBody, CardFooter } from "../../ui/Card";
+import Spinner from "../../ui/Spinner";
 
+import { useCustomToast } from "../../utils/toastify";
+import { Colors } from "../../utils/enums";
+import { postJobsAction } from "../../utils/types2";
 
-// !Refacto In progress add mutation for restart job ect...
+import JobTable from "./JobTable";
+
 const JobRoot = () => {
-  const { data: jobData, isLoading: isLoadingJobs, refetch } = useCustomQuery(
-    ['jobs'], 
-    () => getJobs(), 
+  const { toastSuccess, toastError } = useCustomToast();
+
+  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery(
+    ["jobs"],
+    () => getJobs(),
     {
-    enabled: true,
-    refetchInterval: 10000,
-  })
+      enabled: true,
+      refetchInterval: 10000,
+    }
+  );
+
+  const { mutate } = useCustomMutation(
+    ({ id, action }: { id: string; action: postJobsAction }) =>
+      postJobs(id, action),
+    [["jobs"]],
+    {
+      onSuccess: (_: any, { action }: { action: postJobsAction }) => {
+        toastSuccess(`${action} Job with success`);
+      },
+      onError: (e: any, { action }: { action: postJobsAction }) => {
+        toastError(`${action} Job is failed. ${e.statusText}`);
+      },
+    }
+  );
+
+  const handleJobAction = (id: string, action: postJobsAction) => {
+    mutate({ id, action });
+  };
+
+  if (isLoadingJobs) return <Spinner />
 
   return (
-    <div className="mt-10 flex justify-center">
-      <Card >
-        <CardHeader title='Jobs Instances' />        
+    <div className="flex justify-center w-full h-full">
+      <Card className="w-full bg-white">
+        <CardHeader title="Jobs" color={Colors.primary} />
         <CardBody>
-          {isLoadingJobs ? <Spinner/> :<JobTable data={jobData} />}
+            <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </CardBody>
-        <CardFooter>
-          <Button onClick={() => refetch()} color={Colors.secondary}>Refresh</Button>
-        </CardFooter>
+        <CardFooter></CardFooter>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 export default JobRoot;

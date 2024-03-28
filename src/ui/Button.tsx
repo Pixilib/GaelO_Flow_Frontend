@@ -14,6 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const colorClasses: Record<keyof typeof Colors, string> = {
+    almond: "bg-almond",
     primary: "bg-primary",
     primaryHover: "hover:bg-primary-hover",
     secondary: "bg-secondary",
@@ -29,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
     red: "bg-red",
     gray: "bg-gray",
     light: "bg-light",
+    grayCustom: ""
   };
 
 
@@ -37,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       {...props} 
-      className={`flex items-center justify-center ${colorClasses[color]} ${borderClasses} focus:shadow-outline p-3 font-semibold text-white focus:outline-none disabled:bg-opacity-70 rounded-full shadow-lg ${className}`}
+      className={`flex items-center justify-center ${colorClasses[color]} ${borderClasses} focus:shadow-outline rounded-full p-3 font-semibold text-white shadow-lg focus:outline-none disabled:bg-opacity-70 ${className}`}
     >
       {children}
     </button>

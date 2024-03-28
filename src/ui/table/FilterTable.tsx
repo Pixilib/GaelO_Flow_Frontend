@@ -25,7 +25,7 @@ const FilterTable = ({
 
 
     return typeof firstValue === "number" ? (
-        <div>
+        <div className="flex flex-col items-center">
             <input
                 type="number"
                 value={(columnFilterValue as [number, number])?.[0] ?? ""}
@@ -36,8 +36,7 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Min`}
-                className="border rounded shadow"
-                style={{ width: "100%" }}
+                className="w-3/4 h-6 border rounded-lg"
             />
             <input
                 type="number"
@@ -49,20 +48,18 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Max`}
-                className="border rounded shadow"
-                style={{ width: "100%" }}
+                className="w-3/4 h-6 border rounded-lg "
             />
         </div>
     ) : (
         <input
-            type="text"
-            value={(columnFilterValue ?? "") as string}
-            onClick={stopPropagation}
-            onChange={(e) => column.setFilterValue(e.target.value)}
-            placeholder={`Search...`}
-            className="border rounded shadow"
-            style={{ width: "100%" }}
-        />
-    );
+        type="text"
+        value={(columnFilterValue ?? "") as string}
+        onClick={stopPropagation}
+        onChange={(e) => column.setFilterValue(e.target.value)}
+        placeholder="Search..."
+        className="w-full pl-2 -mt-2 text-sm font-medium border rounded-lg"
+    />
+);
 };
 export default FilterTable;

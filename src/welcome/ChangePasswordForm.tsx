@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useCustomMutation } from "../utils/reactQuery";
-import { toastError, toastSuccess } from "../utils/toastify";
 import { changePassword } from "../services/auth";
 
 import Button from "../ui/Button";
@@ -13,12 +12,14 @@ import Key from "./../assets/password-key-on.svg?react";
 import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import Input from "../ui/Input";
+import { useCustomToast } from "../utils/toastify";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { toastSuccess, toastError } = useCustomToast();
 
   const token = new URLSearchParams(window.location.search).get("token");
 
@@ -51,9 +52,9 @@ const ChangePasswordForm = () => {
   if (!token) return <>Missing Token</>;
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full flex-col">
-      <h1 className="mb-6 text-center text-5xl font-bold"> Password </h1>
-      <p className="text-gray-700 mb-12 text-center text-lg">
+    <form onSubmit={handleSubmit} className="flex flex-col w-full">
+      <h1 className="mb-6 text-5xl font-bold text-center"> Password </h1>
+      <p className="mb-12 text-lg text-center text-gray-700">
         Please create/change your password.
       </p>
       <div className="w-full space-y-12">
@@ -91,7 +92,7 @@ const ChangePasswordForm = () => {
           }}
           required
         />
-        <div className="mt-12 flex justify-center">
+        <div className="flex justify-center mt-12">
           <Button
             color={Colors.primary}
             type="submit"

@@ -5,10 +5,10 @@ import RootApp from "./root/RootApp";
 
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
-  
+
   return (
-    <div className="h-screen w-screen">
-      {isLogged ? <RootApp  /> : <WelcomeRoot />}
+    <div className="w-screen h-screen">
+      {isLogged ? <RootApp /> : <WelcomeRoot />}
     </div>
   )
 }

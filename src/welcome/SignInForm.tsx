@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { login } from "../reducers/UserSlice";
 import { useCustomMutation } from "../utils/reactQuery";
 import { signIn } from "../services/auth";
-import { toastError } from "../utils/toastify";
+import { useCustomToast } from "../utils/toastify";
 
 import Button from "../ui/Button";
 import Input from "../ui/Input";
@@ -27,6 +27,7 @@ export const SignInForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { toastError } = useCustomToast();
 
   const loginMutation = useCustomMutation(
     ({ username, password }) => signIn(username, password),
@@ -76,7 +77,7 @@ export const SignInForm = () => {
           autoComplete="on"
           required
         />
-        
+
         <div className="w-full mt-12 text-dark">
           <Input
             label="Password:"
