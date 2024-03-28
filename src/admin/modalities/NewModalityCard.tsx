@@ -36,10 +36,28 @@ const NewModalityCard: React.FC<NewAetCardProps> = ({ onClose, onCreateAet }) =>
     };
 
     const onSubmitAet = () => {
-        //TODO verifier name, AET, host et port sont définis
         if (name.length === 0) {
-
-            //Afficher un toast pour dire qu'il manque le name
+            if (!name || name.trim().length === 0) {
+                console.error("error");
+                return;
+            }
+            if (!host || host.trim().length === 0) {
+                console.error("error: Missing host.");
+                toastWarning("Missing host");
+                return; 
+            }
+        
+            if (!host || host.trim().length === 0) {
+                console.error("error");
+                return;
+            }
+        
+            if (typeof port !== "number" || isNaN(port)) {
+                console.error("error");
+                return;
+            }
+        
+        };
             toastWarning("Missing name")
             return;
         }
