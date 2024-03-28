@@ -9,7 +9,10 @@ type InputProps = {
   label?: string;
   svgLeft?: React.ReactNode;
   svgRight?: React.ReactNode;
-  bordered? :boolean;
+  bordered?: boolean;
+  min?: number;
+  max?: number;
+  step?: number;
   [key: string]: any;
 };
 
@@ -18,10 +21,13 @@ const Input = ({
   placeholder,
   label,
   type = "text",
+  min = undefined,
+  max = undefined,
+  step = undefined,
   svgLeft = null,
   svgRight = null,
   bordered = false,
-  
+
   ...props
 }: InputProps) => {
 
@@ -41,11 +47,14 @@ const Input = ({
         )}
         <input
           type={type}
+          min={min}
+          max={max}
+          step={step}
           placeholder={placeholder}
           className={`peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""} ${bordered ? "border border-gray focus:border-primary" : "border-none"} text-gray-600 w-full rounded-xl text-sm focus:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${className}`}
-          
+
           {...props}
-          
+
         />
 
       </div>

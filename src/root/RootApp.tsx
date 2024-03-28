@@ -24,7 +24,7 @@ const RootApp = () => {
   const title = useMemo(() => {
     const titlePath: { [key: string]: string } = {
       "/administration/general": "General",
-      "/administration/aets": "Aets",
+      "/administration/modalities": "Modalities",
       "/administration/jobs": "Jobs",
       "/administration/labels": "Labels",
       "/administration/queues":"Queues",

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Colors } from "../utils/enums";
 
-// Définition des types pour les props de chaque composant
 type CardsProps = {
   children: React.ReactNode;
   className?: string;
@@ -28,7 +27,6 @@ type FooterProps = {
   color?: Colors;
 };
 
-// Mapping entre les couleurs et les classes CSS correspondantes
 const colorClasses: Record<keyof typeof Colors, string> = {
   almond: "bg-almond",
   primary: "bg-primary",
@@ -51,7 +49,6 @@ const colorClasses: Record<keyof typeof Colors, string> = {
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";
 
-// Composants
 const Card = ({ bordered, className = "", children }: CardsProps) => {
   const borderClass = bordered ? "border" : "";
   const spacingClass = "mx-4 md:mx-4";
