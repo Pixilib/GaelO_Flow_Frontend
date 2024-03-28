@@ -7,3 +7,4 @@ export type OrthancJob = {
     State : string
     [key :string] : any
 }
+
