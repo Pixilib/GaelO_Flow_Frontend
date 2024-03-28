@@ -6,14 +6,14 @@ import Spinner from "../../ui/Spinner";
 
 import { useCustomToast } from "../../utils/toastify";
 import { Colors } from "../../utils/enums";
-import { postJobsAction } from "../../utils/types2";
+import { JobMutationVariables, OrthancJob, postJobsAction } from '../../utils/types2';
 
 import JobTable from "./JobTable";
 
 const JobRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
-  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery(
+  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<OrthancJob>(
     ["jobs"],
     () => getJobs(),
     {
@@ -22,16 +22,16 @@ const JobRoot = () => {
     }
   );
 
-  const { mutate } = useCustomMutation(
-    ({ id, action }: { id: string; action: postJobsAction }) =>
+  const { mutate } = useCustomMutation<unknown,JobMutationVariables>(
+    ({ id, action }: JobMutationVariables) =>
       postJobs(id, action),
     [["jobs"]],
     {
-      onSuccess: (_: any, { action }: { action: postJobsAction }) => {
-        toastSuccess(`${action} Job with success`);
+      onSuccess: (_: any, variables) => {
+        toastSuccess(`${variables.action} Job with success`);
       },
-      onError: (e: any, { action }: { action: postJobsAction }) => {
-        toastError(`${action} Job is failed. ${e.statusText}`);
+      onError: (e: any, variables) => {
+        toastError(`${variables.action} Job is failed. ${e.statusText}`);
       },
     }
   );

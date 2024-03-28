@@ -1,4 +1,4 @@
-import { UseQueryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 const useCustomQuery = <T>(
     queryKeys: string[],
@@ -14,15 +14,15 @@ const useCustomQuery = <T>(
     });
   };
 
-  const useCustomMutation = (
-    mutationFn :(...args : any[])=> Promise<unknown>,
+  const useCustomMutation = <T, V = undefined>(
+    mutationFn :(variables: V)=> Promise<T>,
     invalidatedQueryKeys: string[][] = [],
-    options?: { [key :string] : any}
+    options?: Omit<UseMutationOptions<T, unknown, V>, 'mutationFn'>
   ) => {
       const queryClient = useQueryClient();
   
       return useMutation({
-          mutationFn: mutationFn,
+          mutationFn,
           retry: false,
           onSuccess: (data, variables, context) => {
               // Fonction pour invalider toutes les requêtes
