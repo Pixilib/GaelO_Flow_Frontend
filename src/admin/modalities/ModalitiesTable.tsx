@@ -22,11 +22,11 @@ const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
     const columns: ColumnDef<AetData>[] = [
         {
             accessorKey: 'name',
-            header: 'NAME',
+            header: 'Name',
         },
         {
             accessorKey: 'Aet',
-            header: 'AET',
+            header: 'Aet',
             cell: (info) => <Badge value={info.getValue() as number} />,
         },
         {
@@ -35,15 +35,14 @@ const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
         },
         {
             accessorKey: 'Manufacturer',
-            header: 'MANUFACTURER',
+            header: 'Manufacturer',
         },
         {
             id: "delete",
             cell: ({ row }) => <>
                 <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>Delete</Button>            </>
         }
-    ];
-
+    ]
     return (
         <Table columns={columns} data={aetData} headerColor={Colors.almond} />
     );

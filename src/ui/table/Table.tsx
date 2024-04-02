@@ -15,14 +15,15 @@ import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 
 type TableProps<TData> = {
-  data: TData[];
+  data?: TData[];
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
+  enableColumnFilters? :boolean;
   headerColor: Colors;
   className?: string;
 };
 //WIP : Pagination
-function Table<T>({ data, columns, enableSorting = true, headerColor, className }: TableProps<T>) {
+function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false,  headerColor, className }: TableProps<T>) {
 
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -47,7 +48,7 @@ function Table<T>({ data, columns, enableSorting = true, headerColor, className 
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    enableColumnFilters: true,
+    enableColumnFilters: enableColumnFilters,
     enableSorting,
   });
   const headerBgClass = `bg-${headerColor}`;

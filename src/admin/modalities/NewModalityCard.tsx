@@ -1,6 +1,6 @@
-import React, { useState, ChangeEvent } from 'react';
-import { AiOutlineCheck } from "react-icons/ai";
-import { CgClose } from "react-icons/cg";
+import { ChangeEvent, useState } from 'react';
+import { AiOutlineCheck as ChecIcon} from "react-icons/ai";
+import { CgClose as CloseIcon} from "react-icons/cg";
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Button from '../../ui/Button';
 import SelectInput from '../../ui/SelectInput';
@@ -9,16 +9,16 @@ import { Colors } from "../../utils/enums";
 import { Option } from "../../utils/types";
 import { useCustomToast } from "../../utils/toastify";
 
-interface NewAetCardProps {
+interface NewModalityCardProps {
     onClose: () => void;
-    onCreateAet: (aet: { name: string, aet: string, host: string, port: number, manufacturer: string }) => void,
+    onCreateAet: () => void;
 }
 
-const NewModalityCard: React.FC<NewAetCardProps> = ({ onClose, onCreateAet }) => {
+function NewModalityCard({ onClose, onCreateAet }: NewModalityCardProps) {
 
     const { toastWarning } = useCustomToast();
     const [name, setName] = useState('');
-    const [aet, setAet] = useState('');
+    const [aet, setAet] = useState(''); 
     const [host, setHost] = useState('');
     const [port, setPort] = useState('');
     const [manufacturer, setManufacturer] = useState<Option | null>(null);
@@ -31,108 +31,74 @@ const NewModalityCard: React.FC<NewAetCardProps> = ({ onClose, onCreateAet }) =>
         { value: 'GE', label: 'GE' },
     ];
 
-    const handleSelectChange = (option: any) => {
-        setManufacturer(option)
+    const handleSelectChange = (option: Option) => {
+        setManufacturer(option);
     };
 
     const onSubmitAet = () => {
-        if (name.length === 0) {
-            if (!name || name.trim().length === 0) {
-                console.error("error");
-                return;
-            }
-            if (!host || host.trim().length === 0) {
-                console.error("error: Missing host.");
-                toastWarning("Missing host");
-                return; 
-            }
-        
-            if (!host || host.trim().length === 0) {
-                console.error("error");
-                return;
-            }
-        
-            if (typeof port !== "number" || isNaN(port)) {
-                console.error("error");
-                return;
-            }
-        
-        };
-            toastWarning("Missing name")
+        if (!name.trim()) {
+            toastWarning("Missing name");
+            return;
+        }
+        if (!host.trim()) {
+            toastWarning("Missing host");
+            return;
+        }
+        if (isNaN(Number(port)) || Number(port) <= 0) {
+            toastWarning("Invalid port");
             return;
         }
 
-        onCreateAet({
-            name,
-            aet,
-            host,
-            port: Number(port),
-            manufacturer: manufacturer?.value ?? 'Generic'
-        })
-    }
+        onCreateAet()
+    };
 
     return (
-        <Card className="flex flex-col h-full">
+        <Card className="flex flex-col h-full ">
             <CardHeader title="New Aet" color={Colors.success}>
-                <div className="flex items-center justify-between">
-                    <CgClose size="24px" title="Close" onClick={onClose} className="mr-2 cursor-pointer" />
+                <div className="flex items-center justify-between mr-2 ">
+                    <CloseIcon size="24px" title="Close" onClick={onClose} className="cursor-pointer " />
                 </div>
             </CardHeader>
-            <CardBody className="bg-stone-400">
+            <CardBody className="p-4 bg-stone-100">
                 <div className="grid grid-cols-2 gap-4 mb-4">
                     <Input
                         label="Name"
-                        className="w-full"
                         bordered
-                        placeholder="Enter your name"
                         value={name}
-                        required
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            setName(event.target.value);
+                        }}
                     />
                     <Input
-                        label="Aet"
-                        className="w-full"
+                        label="Host"
                         bordered
-                        placeholder="Enter Aet"
-                        value={aet}
-                        required
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => setAet(event.target.value)}
-                    />
-                    <Input
-                        label="IP Address"
-                        className="w-full"
-                        bordered
-                        placeholder="Enter your IP address"
                         value={host}
-                        required
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => setHost(event.target.value)}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                            setHost(event.target.value);
+                        }}
                     />
                     <Input
                         label="Port"
-                        type="number"
-                        className="w-full"
                         bordered
-                        placeholder="Enter your port"
                         value={port}
-                        min={0}
-                        step={1}
-                        required
                         onChange={(event: ChangeEvent<HTMLInputElement>) => setPort(event.target.value)}
+                        type="number"
+                    />
+                    <SelectInput
+                        onChange={handleSelectChange}
+                        placeholder="Select Manufacturer"
+                        options={options}
+                        value={manufacturer}
                     />
                 </div>
-                <SelectInput
-                    onChange={handleSelectChange}
-                    placeholder="Select option"
-                    options={options}
-                />
             </CardBody>
-            <CardFooter className="flex justify-center">
-                <Button color={Colors.success} onClick={() => onSubmitAet()}>
-                    <AiOutlineCheck size="20px" title="Check" />
+            <CardFooter className="flex justify-center bg-stone-100">
+                <Button color={Colors.success} onClick={onSubmitAet}>
+                    <ChecIcon size="20px" title="Check" />
                 </Button>
             </CardFooter>
         </Card>
     );
-};
+}
 
 export default NewModalityCard;

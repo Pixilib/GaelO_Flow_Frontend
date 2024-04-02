@@ -30,7 +30,8 @@ const Input = ({
 
   ...props
 }: InputProps) => {
-
+ 
+  const InputClassName="w-full bg-gray-50 peer border border-gray-300 text-gray-500 focus:outline-none focus:ring-blue-500 pl-10 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:dark:bg-opacity-50"
   return (
     <div className="w-full ">
       {label && <label className="mb-2 text-sm font-medium text-dark">{label}</label>}
@@ -51,7 +52,7 @@ const Input = ({
           max={max}
           step={step}
           placeholder={placeholder}
-          className={`peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""} ${bordered ? "border border-gray focus:border-primary" : "border-none"} text-gray-600 w-full rounded-xl text-sm focus:shadow-lg disabled:pointer-events-none disabled:opacity-50 ${className}`}
+          className={`peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""} ${bordered ? " border-2 border-gray " : "border-none"} text-gray-600 w-full rounded-xl text-sm disabled:pointer-events-none disabled:opacity-50 ${className}${InputClassName}`}
 
           {...props}
 
