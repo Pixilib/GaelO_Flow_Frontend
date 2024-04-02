@@ -10,7 +10,7 @@ import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { Colors } from '../../utils/enums';
 import Spinner from '../../ui/Spinner';
 
-interface AetData {
+interface PeerData {
     name: string;
     aet: string;
     host: string;
@@ -24,9 +24,9 @@ const ModalitiesRoot: React.FC = () => {
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState<'success' | 'danger'>('success');
 
-    const { data: aets, isLoading } = useCustomQuery<AetData[]>(
-        'modalities',
-        () => getModalities(),
+    const { data: Peers, isLoading } = useCustomQuery<PeersData[]>(
+        'Peers',
+        () => getPeers(),
         {
             select: (data: object) => Object.entries(data).map(([key, item]) => ({
                 name: key,
@@ -38,16 +38,16 @@ const ModalitiesRoot: React.FC = () => {
         }
     );
 
-    console.log(aets)
+    console.log(peers)
 
-    const updateModalityMutation = useCustomMutation(
-        ({ name, aet, host, port, manufacturer }) => updateModality(name, aet, host, port, manufacturer),
-        [['modalities']]
+    const updatePeerMutation = useCustomMutation(
+        ({ name, aet, host, port, manufacturer }) => updatePeer(name, aet, host, port, manufacturer),
+        [['Peers']]
     );
 
     const deleteModalityMutation = useCustomMutation(
         ({ name }) => deleteModality(name),
-        [['modalities']]
+        [['peers']]
     );
 
     // Functions for toast notifications
@@ -66,8 +66,8 @@ const ModalitiesRoot: React.FC = () => {
     // Handlers for modalities management
     const handleNewAetClick = () => setShowNewAetCard(true);
 
-    const createAetHandler = (aet: AetData) => {
-        updateModalityMutation.mutate(aet, {
+    const createPeerHandler = (aet: PeerData) => {
+        updateMPeerMutation.mutate(Peer, {
             onSuccess: () => showSuccessToast("Modality created successfully."),
             onError: (error) => {
                 console.error("Error", error);
@@ -76,9 +76,9 @@ const ModalitiesRoot: React.FC = () => {
         });
     };
 
-    const deleteAetHandler = (aetName: string) => {
-        if (window.confirm(`Are you sure you want to delete the modality named "${aetName}"?`)) {
-            deleteModalityMutation.mutate({ name: aetName }, {
+    const deletePeerHandler = (aetName: string) => {
+        if (window.confirm(`Are you sure you want to delete the modality named "${peerName}"?`)) {
+            deleteModalityMutation.mutate({ name: peerName }, {
                 onSuccess: () => showSuccessToast("Modality deleted successfully."),
                 onError: (error) => {
                     console.error("Error deleting modality: ", error);
@@ -98,16 +98,16 @@ const ModalitiesRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets} onDeleteAet={deleteAetHandler} />
+                        <ModalitiesTable peerData={peers} onDeletePeer={deletePeerHandler} />
                     </div>
-                    <Button color={Colors.success} onClick={handleNewAetClick}>
+                    <Button color={Colors.success} onClick={handleNewPeerClick}>
                         <MoreIcon className="mr-3" size={24} /> New modality
                     </Button>
                 </div>
             </CardBody>
             <CardFooter color={Colors.light}>
-                {showNewAetCard && (
-                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
+                {showNewPeerCard && (
+                    <NewPeerCard onClose={() => setShowNewAetCard(false)} onCreateAet={createPeerHandler} />
                 )}
             </CardFooter>
             {showToast && (
@@ -124,4 +124,4 @@ const ModalitiesRoot: React.FC = () => {
     );
 };
 
-export default ModalitiesRoot;
+export default PeersRoot;

@@ -5,21 +5,21 @@ import { ColumnDef } from '@tanstack/react-table';
 import { Colors } from '../../utils/enums';
 import Button from '../../ui/Button';
 
-interface AetData {
+interface PeerData {
     name: string;
     Aet: number;
     Host: string;
     Manufacturer: string;
 }
 
-interface AetProps {
-    aetData: AetData[];
-    onDeleteAet: (aetname: string) => void;
+interface Peerprops {
+    aetData: PeerData[];
+    onDeletePeers: (Peersname: string) => void;
 }
 
-const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
+const PeersTable: React.FC<PeerProps> = ({ PeerData, onDeletePeer }) => {
 
-    const columns: ColumnDef<AetData>[] = [
+    const columns: ColumnDef<PeerData>[] = [
         {
             accessorKey: 'name',
             header: 'Name',
@@ -40,12 +40,12 @@ const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
         {
             id: "delete",
             cell: ({ row }) => <>
-                <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>Delete</Button>            </>
+                <Button onClick={() => onDeletePeer(row.original.name)} color={Colors.danger}>Delete</Button>            </>
         }
     ]
     return (
-        <Table columns={columns} data={Data} headerColor={Colors.almond} />
+        <Table columns={columns} data={PeerData} headerColor={Colors.almond} />
     );
 };
 
-export default ModalitiesTable;
+export default PeersTable;
