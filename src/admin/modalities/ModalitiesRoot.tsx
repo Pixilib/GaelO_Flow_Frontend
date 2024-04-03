@@ -37,9 +37,6 @@ const ModalitiesRoot: React.FC = () => {
             })),
         }
     );
-
-    console.log(aets)
-
     const updateModalityMutation = useCustomMutation(
         ({ name, aet, host, port, manufacturer }) => updateModality(name, aet, host, port, manufacturer),
         [['modalities']]
@@ -107,7 +104,7 @@ const ModalitiesRoot: React.FC = () => {
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
+                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={(aet: AetData) => createAetHandler(aet)} />
                 )}
             </CardFooter>
             {showToast && (
