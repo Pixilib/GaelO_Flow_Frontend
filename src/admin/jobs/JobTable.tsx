@@ -1,18 +1,38 @@
 import { BsInfoCircle as Info } from "react-icons/bs";
-import Table from "../../ui/table/Table";
-import Badge from "../../ui/Badge";
 
 import { Colors } from "../../utils/enums";
-import JobIcons from "./JobIcons";
+import { Table } from "../../ui";
+import Badge from "../../ui/Badge";
 import Popover from "../../ui/Popover";
-import { postJobsAction } from "../../utils/types2";
+import { useCustomMutation } from "../../utils/reactQuery";
+import { useCustomToast } from "../../utils/toastify";
+import { JobMutationPayload, JobsAction, OrthancJob } from "../../utils/types2";
+import { postJobs } from "../../services/jobs";
+import JobActions from "./JobActions";
 
 type JobTableProps = {
-  data: any[];
-  onJobAction: (id: string, action: postJobsAction) => void;
+  data: OrthancJob[];
 };
-//WIP for actions
-const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
+
+const JobTable = ({ data = [] }: JobTableProps) => {
+  const { toastSuccess, toastError } = useCustomToast();
+
+  const handleJobAction = (jobId: string, action: JobsAction) => {
+    mutate({ Id: jobId, Action: action });
+  };
+
+  const { mutate } = useCustomMutation<void, JobMutationPayload>(
+    ({ Id, Action }: JobMutationPayload) => postJobs({ Id, Action }),
+    [["jobs"]],
+    {
+      onSuccess: (_: any, variables) => {
+        toastSuccess(`${variables.Action} Job with success`);
+      },
+      onError: (e: any, variables) => {
+        toastError(`${variables.Action} Job is failed. ${e.statusText}`);
+      },
+    }
+  );
 
   const columns = [
     {
@@ -32,14 +52,22 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
     {
       accessorKey: "State",
       header: "State",
-      cell: (row: any) => <Badge value={row.getValue()} className="rounded-full bg-[#CDFFCD] text-success" />,
+      cell: (row: any) => (
+        <Badge
+          value={row.getValue()}
+          className="rounded-full bg-[#CDFFCD] text-success"
+        />
+      ),
     },
     {
       header: "Action",
       cell: (info: any) => {
         return (
           <div className="flex justify-center">
-            <JobIcons jobId={info.row.original.ID} onAction={onJobAction} />
+            <JobActions
+              jobId={info.row.original.ID}
+              onJobAction={handleJobAction}
+            />
           </div>
         );
       },
@@ -49,23 +77,31 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       header: "Info",
       cell: (info: any) => {
         return (
-          <>
-            <div className="absolute">
-              <Popover popover={infoDetails(info.row.original)} placement="left" className="w-auto" withOnClick={true}>
-                <div className="transition-transform hover:scale-110">
-                  <Info size="1.5em" color="gray" />
-                </div>
-              </Popover>
-            </div>
-          </>
+          <div className="relative">
+            <Popover
+              popover={infoDetails(info.row.original)}
+              placement="left"
+              className="relative w-auto "
+              withOnClick={true}
+            >
+              <div className="relative transition-transform hover:scale-110">
+                <Info size="1.5em" color="gray" className="relative" />
+              </div>
+            </Popover>
+          </div>
         );
       },
       enableColumnFilter: false,
-    }
+    },
   ];
-  
-  const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
+
+  const infoDetails = (rowData: any) => (
+    <code>
+      <pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre>
+    </code>
+  );
 
   return <Table data={data} columns={columns} color={Colors.almond} />;
 };
+
 export default JobTable;

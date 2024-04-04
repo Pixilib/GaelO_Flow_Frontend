@@ -1,9 +1,10 @@
+import { SignInResponse } from "../utils/types2";
 import axios from "./axios";
 
 export const signIn = (
   username: string,
   password: string
-): Promise<unknown> => {
+): Promise<SignInResponse> => {
   return axios
     .post("/api/login", {
       Username : username,
@@ -14,7 +15,6 @@ export const signIn = (
     })
     .catch(function (error) {
       if (error.response) {
-        console.log(error.response);
         throw error.response;
       }
       throw error;
@@ -26,7 +26,7 @@ export const signUp = (
   lastname: string,
   firstname: string,
   email: string
-): Promise<unknown> => {
+): Promise<void> => {
   return axios
     .post("/api/register", {
       Username : username,
@@ -34,8 +34,8 @@ export const signUp = (
       Firstname : firstname,
       Email : email,
     })
-    .then(function (response) {
-      return response.data;
+    .then(function () {
+      return undefined;
     })
     .catch(function (error) {
       if (error.response) {
@@ -45,13 +45,13 @@ export const signUp = (
     });
 };
 
-export const lostPassword = (email: string): Promise<unknown> => {
+export const lostPassword = (email: string): Promise<void> => {
   return axios
     .post("/api/lost-password", {
       Email : email,
     })
-    .then(function (response) {
-      return response.data;
+    .then(function () {
+      return undefined;
     })
     .catch(function (error) {
       if (error.response) {
@@ -64,21 +64,18 @@ export const lostPassword = (email: string): Promise<unknown> => {
 export const changePassword = (
   newPassword: string,
   confirmPassword: string,
-  token: string
-): Promise<unknown> => {
+  token: string,
+  userId: number
+): Promise<void> => {
   return axios
     .post("/api/change-password", {
       NewPassword : newPassword,
-      ConfirmPassword : confirmPassword,
+      ConfirmationPassword : confirmPassword,
       Token : token,
+      UserId : Number(userId),
     })
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      if (error.response) {
-        throw error.response;
-      }
-      throw error;
+    .then(() => undefined)
+    .catch(error => {
+      throw error.response || error;
     });
 };
