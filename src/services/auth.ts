@@ -15,7 +15,6 @@ export const signIn = (
     })
     .catch(function (error) {
       if (error.response) {
-        console.log(error.response);
         throw error.response;
       }
       throw error;
@@ -35,8 +34,8 @@ export const signUp = (
       Firstname : firstname,
       Email : email,
     })
-    .then(function (response) {
-      return response.data;
+    .then(function () {
+      return undefined;
     })
     .catch(function (error) {
       if (error.response) {
@@ -51,9 +50,8 @@ export const lostPassword = (email: string): Promise<void> => {
     .post("/api/lost-password", {
       Email : email,
     })
-    .then(function (response) {
-      console.log({response})
-      return response.data;
+    .then(function () {
+      return undefined;
     })
     .catch(function (error) {
       if (error.response) {
@@ -68,7 +66,7 @@ export const changePassword = (
   confirmPassword: string,
   token: string,
   userId: number
-): Promise<number> => {
+): Promise<void> => {
   return axios
     .post("/api/change-password", {
       NewPassword : newPassword,
@@ -76,9 +74,8 @@ export const changePassword = (
       Token : token,
       UserId : Number(userId),
     })
-    .then(response => response.data.status)
+    .then(() => undefined)
     .catch(error => {
-      console.log({error});
       throw error.response || error;
     });
 };

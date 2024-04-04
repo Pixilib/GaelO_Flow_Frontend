@@ -1,10 +1,10 @@
 
 //Job
-export type PostJobsAction = "resume" | "pause" | "cancel" | "resubmit";
+export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
 
-export type JobMutationVariables = {
+export type JobMutationPayload = {
     Id: string;
-    Action: PostJobsAction;
+    Action: JobsAction;
   };
   
 export type OrthancJob = {

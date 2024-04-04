@@ -14,7 +14,7 @@ const useCustomQuery = <T>(
     });
   };
 
-  const useCustomMutation = <T, V = undefined>(
+  const useCustomMutation = <T, V = undefined|object>(
     mutationFn :(variables: V)=> Promise<T>,
     invalidatedQueryKeys: string[][] = [],
     options?: Omit<UseMutationOptions<T, unknown, V>, 'mutationFn'>

@@ -1,9 +1,10 @@
 import axios from "axios";
-import { JobMutationVariables, OrthancJob } from "../utils/types2";
+import { JobMutationPayload, OrthancJob } from "../utils/types2";
 
-export const getJobs = (): Promise<OrthancJob> => {
-  return axios.get('/api/jobs?expand')
-    .then(response => response.data as OrthancJob)
+export const getJobs = (): Promise<OrthancJob[]> => {
+  return axios
+    .get("/api/jobs?expand")
+    .then((response) => response.data as OrthancJob[])
     .catch(function (error) {
       if (error.response) {
         throw error.response;
@@ -12,9 +13,10 @@ export const getJobs = (): Promise<OrthancJob> => {
     });
 };
 
-export const postJobs = ({Id, Action}:JobMutationVariables): Promise<unknown> => {
-  return axios.post(`/api/jobs/${Id}/${Action}`)
-    .then(response => response.data)
+export const postJobs = ({ Id, Action }: JobMutationPayload): Promise<void> => {
+  return axios
+    .post(`/api/jobs/${Id}/${Action}`)
+    .then(() => undefined)
     .catch(function (error) {
       if (error.response) {
         throw error.response;
