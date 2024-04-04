@@ -10,7 +10,6 @@ import { store } from "./store.tsx";
 import App from "./App.tsx";
 import ErrorBoundary from "./ErrorBoundary.tsx";
 
-import 'react-toastify/dist/ReactToastify.css';
 import "./index.css";
 
 const queryClient = new QueryClient();

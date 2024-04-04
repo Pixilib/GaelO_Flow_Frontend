@@ -31,6 +31,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     navigate(itemPath);
   };
   const handleDropDown = (title: string) => {
+    console.log()
     setOpenItem(openItem === title ? null : title);
   };
 
@@ -42,9 +43,9 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       isActive: location.pathname === "/administration/general",
     },
     {
-      title: "Aets",
-      path: "/administration/aets",
-      isActive: location.pathname === "/administration/aets",
+      title: "Modalities",
+      path: "/administration/modalities",
+      isActive: location.pathname === "/administration/modalities",
     },
     {
       title: "Peers",
@@ -78,7 +79,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       data-gaelo-flow="sidebar"
       className="w-64 h-full border-transparent rounded-tr-40 shadow-custom"
     >
-      <main className="h-full rounded-tr-40 pt-7 bg-primary">
+      <main className="h-full rounded-tr-40 bg-primary pt-7">
         <div className="flex h-11% justify-center">
           <LogoSideBar />
         </div>

@@ -99,8 +99,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
             <CardHeader title="Orthanc Settings" color={Colors.primary} />
             <CardBody color={Colors.light}>
                 <div className="mt-5"></div>
-                <Table columns={columns} data={[orthancData]} color={Colors.almond} />
-            </CardBody>
+                <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />            </CardBody>
 
             <CardFooter className="flex justify-center space-x-4" color={Colors.light}>
                 <Button color={Colors.orange} onClick={reset}>
