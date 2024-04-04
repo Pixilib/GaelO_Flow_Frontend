@@ -1,9 +1,10 @@
 
-export type postJobsAction = "resume" | "pause" | "cancel" | "resubmit";
+//Job
+export type PostJobsAction = "resume" | "pause" | "cancel" | "resubmit";
 
 export type JobMutationVariables = {
-    id: string;
-    action: postJobsAction;
+    Id: string;
+    Action: PostJobsAction;
   };
   
 export type OrthancJob = {
@@ -12,4 +13,29 @@ export type OrthancJob = {
     State : string
     [key :string] : any
 }
+
+
+//auth
+export type SignInResponse = {
+    AccessToken : string;
+    UserId:number;
+}
+
+// export type SignUpResponse = {
+//?
+// }
+
+// export type lostPasswordResponse = {
+//     ?
+// }
+
+export type ChangePasswordVariables = {
+    NewPassword : string;
+    ConfirmationPassword : string;
+    Token : string;
+    UserId : number;
+}
+// export type changePasswordResponse = {
+//     ?
+// }
 

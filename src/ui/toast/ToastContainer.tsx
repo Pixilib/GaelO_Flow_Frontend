@@ -2,7 +2,7 @@ import { ComponentProps, useContext, useState } from "react";
 import ToastContext, { Toast } from "./ToastContext";
 import ToastComponent from "./Toast";
 
-type ToastItem = ComponentProps<typeof ToastComponent> & {
+export type ToastItem = ComponentProps<typeof ToastComponent> & {
   id: number,
   duration: number,
   timer: ReturnType<typeof setTimeout>;

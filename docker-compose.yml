@@ -15,7 +15,6 @@ services:
         ORTHANC_PORT : 8042
         ORTHANC_USERNAME: "orthanc"
         ORTHANC_PASSWORD: "orthanc"
-        POSTGRES_HOST_AUTH_METHOD: "trust"
         TYPEORM_TYPE : "postgres"
         TYPEORM_HOST : "flow-db"
         TYPEORM_PORT : 5432
@@ -26,6 +25,12 @@ services:
         REDIS_PORT : 6379
         API_PORT : 3000
         JWT_SECRET : "verySecretKey"
+        MAIL_HOST: "${MAIL_HOST}"
+        MAIL_USER: "${MAIL_USER}"
+        MAIL_PASSWORD: "${MAIL_PASSWORD}"
+        MAIL_FROM: "${MAIL_FROM}"
+        MAIL_ENCRYPTION: "${MAIL_ENCRYPTION}"
+
 
     redis:
         image: redis:alpine

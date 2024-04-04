@@ -14,14 +14,17 @@ const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
   const { toastSuccess, toastError } = useCustomToast();
 
-  const lostPasswordMutation = useCustomMutation(
+  const lostPasswordMutation = useCustomMutation<void,{email:string}>(
     ({ email }) => lostPassword(email),
     [],
     {
       onSuccess: () => {
         toastSuccess("Reset password link sent by email");
       },
-      onError: () => {
+      onError: (error:any) => {
+        if(error.data.message){
+          toastError(error.data.message);
+        }
         toastError("Error in credentials");
       },
     }

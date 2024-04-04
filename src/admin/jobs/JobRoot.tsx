@@ -6,7 +6,7 @@ import Spinner from "../../ui/Spinner";
 
 import { useCustomToast } from "../../utils/toastify";
 import { Colors } from "../../utils/enums";
-import { JobMutationVariables, OrthancJob, postJobsAction } from '../../utils/types2';
+import { JobMutationVariables, OrthancJob } from '../../utils/types2';
 
 import JobTable from "./JobTable";
 
@@ -23,21 +23,21 @@ const JobRoot = () => {
   );
 
   const { mutate } = useCustomMutation<unknown,JobMutationVariables>(
-    ({ id, action }: JobMutationVariables) =>
-      postJobs(id, action),
+    ({ Id, Action }: JobMutationVariables) =>
+      postJobs({ Id, Action }),
     [["jobs"]],
     {
       onSuccess: (_: any, variables) => {
-        toastSuccess(`${variables.action} Job with success`);
+        toastSuccess(`${variables.Action} Job with success`);
       },
       onError: (e: any, variables) => {
-        toastError(`${variables.action} Job is failed. ${e.statusText}`);
+        toastError(`${variables.Action} Job is failed. ${e.statusText}`);
       },
     }
   );
 
-  const handleJobAction = (id: string, action: postJobsAction) => {
-    mutate({ id, action });
+  const handleJobAction = ({Id,Action}:JobMutationVariables) => {
+    mutate({ Id, Action });
   };
 
   if (isLoadingJobs) return <Spinner />

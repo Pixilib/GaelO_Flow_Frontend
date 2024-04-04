@@ -5,11 +5,12 @@ import Badge from "../../ui/Badge";
 import { Colors } from "../../utils/enums";
 import JobIcons from "./JobIcons";
 import Popover from "../../ui/Popover";
-import { postJobsAction } from "../../utils/types2";
+import { JobMutationVariables } from "../../utils/types2";
 
+//!WIP 
 type JobTableProps = {
   data: any[];
-  onJobAction: (id: string, action: postJobsAction) => void;
+  onJobAction: ({Id, Action}:JobMutationVariables) => void;
 };
 //WIP for actions
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
@@ -39,7 +40,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       cell: (info: any) => {
         return (
           <div className="flex justify-center">
-            <JobIcons jobId={info.row.original.ID} onAction={onJobAction} />
+            <JobIcons jobId={info.row.original.ID} onJobAction={onJobAction} />
           </div>
         );
       },
@@ -49,15 +50,13 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       header: "Info",
       cell: (info: any) => {
         return (
-          <>
-            <div className="absolute">
-              <Popover popover={infoDetails(info.row.original)} placement="left" className="w-auto" withOnClick={true}>
-                <div className="transition-transform hover:scale-110">
-                  <Info size="1.5em" color="gray" />
+          <div className="relative">
+              <Popover popover={infoDetails(info.row.original)} placement="left" className="relative w-auto " withOnClick={true}>
+                <div className="relative transition-transform hover:scale-110">
+                  <Info size="1.5em" color="gray" className="relative" />
                 </div>
               </Popover>
-            </div>
-          </>
+          </div>
         );
       },
       enableColumnFilter: false,

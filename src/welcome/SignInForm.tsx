@@ -17,6 +17,7 @@ import { Colors } from "../utils/enums";
 import PasswordKeyOn from "./../assets/password-key-on.svg?react";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
+import { SignInResponse } from "../utils/types2";
 
 export const SignInForm = () => {
   const navigate = useNavigate();
@@ -29,11 +30,11 @@ export const SignInForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { toastError } = useCustomToast();
 
-  const loginMutation = useCustomMutation(
+  const loginMutation = useCustomMutation<SignInResponse,{username:string,password:string}>(
     ({ username, password }) => signIn(username, password),
     [],
     {
-      onSuccess: (data: Record<string, any>) => {
+      onSuccess: (data: SignInResponse) => {
         const decodedToken: Record<string, any> = jwtDecode(
           data.AccessToken
         );

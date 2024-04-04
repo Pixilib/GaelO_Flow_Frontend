@@ -13,6 +13,8 @@ import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import Input from "../ui/Input";
 import { useCustomToast } from "../utils/toastify";
+import { ChangePasswordVariables } from '../utils/types2';
+import { getQueryParams } from "../utils/queryParams";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
@@ -21,35 +23,41 @@ const ChangePasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { toastSuccess, toastError } = useCustomToast();
 
-  const token = new URLSearchParams(window.location.search).get("token");
 
-  const changePasswordMutation = useCustomMutation(
-    ({ newPassword, confirmPassword, token }) =>
-      changePassword(newPassword, confirmPassword, token),
+  const { token, userId } = getQueryParams();
+  console.log({token, userId})
+  const changePasswordMutation = useCustomMutation<any, ChangePasswordVariables>(
+    () => changePassword(newPassword, confirmPassword, token, Number(userId)),
     [],
     {
-      onSuccess: (data: Record<string, any>) => {
-        toastSuccess(data.message);
+      onSuccess: (responseData) => {
+        const successMessage = responseData || "Password changed successfully.";
+        toastSuccess(successMessage);
         navigate("/");
       },
       onError: (error: any) => {
-        //display an error message if an error occurs
-        if (error.response?.data?.message) {
-          toastError(error.response.data.message);
-        } else {
-          // display a generic error message
-          toastError("An error occurred during change password.");
-        }
+        console.log({error})
+          if (error?.data?.message?.[0]?.constraints) {
+            const constraints = error.data.message[0].constraints;
+            const errorMessage = Object.values(constraints).join(' ');
+            toastError(errorMessage);
+          } else {
+            toastError("An error occurred during password change.");
+          }
       },
     }
   );
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    changePasswordMutation.mutate({ newPassword, token });
+    if (newPassword === confirmPassword && token && userId) {
+      console.log({newPassword, confirmPassword, token, userId})
+      changePasswordMutation.mutate({ NewPassword: newPassword, ConfirmationPassword: confirmPassword, Token: token, UserId: Number(userId)});
+    } else {
+      toastError("Passwords do not match, token is missing or User not found.");
+    }
   };
 
-  if (!token) return <>Missing Token</>;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
