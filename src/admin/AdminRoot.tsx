@@ -12,7 +12,6 @@ const AdminRoot = () => {
                 <Route path="general" element={<General />} />
                 <Route path="/jobs" element={<JobRoot />} />
                 <Route path="/modalities" element={<ModalitiesRoot/>} />
-                <Route path="/modalities" element={<ModalitiesRoot />} />
                 <Route path="/queues" element={<QueuesRoot />} />
             </Routes>
         </div>

@@ -44,8 +44,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Modalities",
-      path: "/administration/aets",
-      isActive: location.pathname === "/administration/aets",
+      path: "/administration/modalities",
+      isActive: location.pathname === "/administration/modalities",
     },
     {
       title: "Peers",

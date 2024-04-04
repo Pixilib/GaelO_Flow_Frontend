@@ -8,6 +8,7 @@ import Toast from '../../ui/toast/Toast';
 import { updateModality, deleteModality, getModalities } from '../../services/modalities';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { Colors } from '../../utils/enums';
+import Spinner from '../../ui/Spinner';
 
 interface AetData {
     name: string;
@@ -23,20 +24,19 @@ const ModalitiesRoot: React.FC = () => {
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState<'success' | 'danger'>('success');
 
-    const { data: aets, isLoading, error } = useCustomQuery<AetData[]>(
+    const { data: aets, isLoading } = useCustomQuery<AetData[]>(
         'modalities',
-        getModalities,
+        () => getModalities(),
         {
-            select: (response: { data: any[]; }) => response.data.map((item) => ({
-                name: item.name,
-                aet: item.aet,
-                host: item.host,
-                port: item.port,
-                manufacturer: item.manufacturer,
+            select: (data: object) => Object.entries(data).map(([key, item]) => ({
+                name: key,
+                aet: item.Aet,
+                host: item.Host,
+                port: item.Port,
+                manufacturer: item.Manufacturer,
             })),
         }
     );
-
     const updateModalityMutation = useCustomMutation(
         ({ name, aet, host, port, manufacturer }) => updateModality(name, aet, host, port, manufacturer),
         [['modalities']]
@@ -85,28 +85,26 @@ const ModalitiesRoot: React.FC = () => {
         }
     };
 
+    if(isLoading) {
+        return <Spinner/>
+    } 
+
     return (
         <Card>
             <CardHeader title="Modalities" color={Colors.primary} />
             <CardBody color={Colors.light}>
-                {isLoading ? (
-                    <div>Loading modalities...</div>
-                ) : error ? (
-                    <div>Error fetching modalities: {error.toString()}</div>
-                ) : (
-                    <div className="flex flex-col items-center">
-                        <div className="w-full mb-8">
-                            <ModalitiesTable data={aets} onDeleteAet={deleteAetHandler} />
-                        </div>
-                        <Button color={Colors.success} onClick={handleNewAetClick}>
-                            <MoreIcon className="mr-2" size={24} /> New modality
-                        </Button>
+                <div className="flex flex-col items-center">
+                    <div className="w-full mb-8">
+                        <ModalitiesTable aetData={aets} onDeleteAet={deleteAetHandler} />
                     </div>
-                )}
+                    <Button color={Colors.success} onClick={handleNewAetClick}>
+                        <MoreIcon className="mr-3" size={24} /> New modality
+                    </Button>
+                </div>
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
+                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={(aet: AetData) => createAetHandler(aet)} />
                 )}
             </CardFooter>
             {showToast && (
@@ -118,6 +116,7 @@ const ModalitiesRoot: React.FC = () => {
                     position="bottom-left"
                 />
             )}
+
         </Card>
     );
 };
