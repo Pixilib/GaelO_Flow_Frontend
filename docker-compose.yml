@@ -25,11 +25,11 @@ services:
         REDIS_PORT : 6379
         API_PORT : 3000
         JWT_SECRET : "verySecretKey"
-        MAIL_HOST: "${MAIL_HOST}"
-        MAIL_USER: "${MAIL_USER}"
-        MAIL_PASSWORD: "${MAIL_PASSWORD}"
-        MAIL_FROM: "${MAIL_FROM}"
-        MAIL_ENCRYPTION: "${MAIL_ENCRYPTION}"
+        MAIL_HOST: ""
+        MAIL_USER: ""
+        MAIL_PASSWORD: ""
+        MAIL_FROM: ""
+        MAIL_ENCRYPTION: ""
 
 
     redis:
