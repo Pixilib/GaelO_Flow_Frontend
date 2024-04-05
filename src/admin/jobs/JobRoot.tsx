@@ -1,19 +1,17 @@
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getJobs, postJobs } from "../../services/jobs";
 
-import Card, { CardHeader, CardBody, CardFooter } from "../../ui/Card";
-import Spinner from "../../ui/Spinner";
-
+import { Spinner, Card, CardHeader, CardBody, CardFooter } from "../../ui";
 import { useCustomToast } from "../../utils/toastify";
 import { Colors } from "../../utils/enums";
-import { postJobsAction } from "../../utils/types2";
+import { JobMutationVariables, OrthancJob } from '../../utils/types';
 
 import JobTable from "./JobTable";
 
 const JobRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
-  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery(
+  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<OrthancJob>(
     ["jobs"],
     () => getJobs(),
     {
@@ -22,26 +20,25 @@ const JobRoot = () => {
     }
   );
 
-  const { mutate } = useCustomMutation(
-    ({ id, action }: { id: string; action: postJobsAction }) =>
-      postJobs(id, action),
+  const { mutate } = useCustomMutation<unknown,JobMutationVariables>(
+    ({ Id, Action }: JobMutationVariables) =>
+      postJobs({ Id, Action }),
     [["jobs"]],
     {
-      onSuccess: (_: any, { action }: { action: postJobsAction }) => {
-        toastSuccess(`${action} Job with success`);
+      onSuccess: (_: any, variables) => {
+        toastSuccess(`${variables.Action} Job with success`);
       },
-      onError: (e: any, { action }: { action: postJobsAction }) => {
-        toastError(`${action} Job is failed. ${e.statusText}`);
+      onError: (e: any, variables) => {
+        toastError(`${variables.Action} Job is failed. ${e.statusText}`);
       },
     }
   );
 
-  const handleJobAction = (id: string, action: postJobsAction) => {
-    mutate({ id, action });
+  const handleJobAction = ({Id,Action}:JobMutationVariables) => {
+    mutate({ Id, Action });
   };
 
   if (isLoadingJobs) return <Spinner />
-
   return (
     <div className="flex justify-center w-full h-full">
       <Card className="w-full bg-white">

@@ -20,28 +20,27 @@ const Popover: React.FC<PopoverProps> = ({
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
       case 'top':
-        return 'absolute bottom-full';
+        return 'z-100 absolute bottom-full';
       case 'right':
-        return 'absolute left-full';
+        return 'z-100 absolute left-full';
       case 'bottom':
-        return 'absolute top-full';
+        return 'z-100 absolute top-full';
       case 'left':
-        return 'absolute right-full';
+        return 'z-100 absolute right-full';
       default:
-        return 'absolute top-full';
+        return 'z-100 absolute top-full';
     }
   };
 
   const handleEvent = withOnClick ? { onClick: () => setIsOpen(!isOpen) } : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
-  console.log({ isOpen })
   return (
-    <div {...handleEvent} >
+    <div {...handleEvent} className="relative" >
       {children}
-      <div className="cursor-pointer  z-100" >
+      <div className="z-50 cursor-pointer " >
         {isOpen && (
           <div
-            className={` ${getPlacementClasses(placement)} absolute z-100 w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+            className={` ${getPlacementClasses(placement)} z-100 w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
           >
             {popover}
           </div>

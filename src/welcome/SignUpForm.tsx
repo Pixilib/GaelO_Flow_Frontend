@@ -3,13 +3,11 @@ import { ChangeEvent, useState } from "react";
 import { signUp } from "../services/auth";
 import { useCustomMutation } from "../utils/reactQuery";
 
-import Button from "../ui/Button";
-import Input from "../ui/Input";
+import {Button, Input} from "../ui";
+
 import { Colors } from "../utils/enums";
-import ChevronRight from "./../assets/chevron-right.svg?react";
-import Mail from "./../assets/mail.svg?react";
-import User from "./../assets/user.svg?react";
 import { useCustomToast } from "../utils/toastify";
+import { ChevronRight, Letter as Mail, User } from "./../assets";
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState("");
@@ -18,20 +16,19 @@ export const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const { toastSuccess, toastError } = useCustomToast();
 
-  const signUpMutation = useCustomMutation(
+  const signUpMutation = useCustomMutation<void,Record<string,string>>(
     ({ username, lastname, firstname, email }) =>
       signUp(username, lastname, firstname, email),
     [],
     {
-      onSuccess: (data: Record<string, any>) => {
-        toastSuccess(data.message);
+      onSuccess: () => {
+        toastSuccess("An email has been sent to you to confirm your registration.");
       },
       onError: (error: any) => {
-        //display an error message if an error occurs
-        if (error.response?.message) {
-          toastError(error.response.message);
+        console.log({error})
+        if (error.data.message) {
+          toastError(error.data.message);
         } else {
-          // display a generic error message
           toastError("An error occurred during registration.");
         }
       },

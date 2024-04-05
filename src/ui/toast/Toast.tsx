@@ -46,7 +46,7 @@ function Toast({ content, type, animation = 'slide-right', position = "bottom-ri
     }
 
     return (
-        <div data-gaelo-ui='toast' onClick={onClose} className={`${getType()}  ${getAnimation()} rounded-xl text-sm text-white shadow-lg dark:bg-gray-900 `} role="alert">
+        <div data-gaelo-ui='toast' onClick={onClose} className={`${getType()}  ${getAnimation()} ${getPosition()} rounded-xl text-sm text-white shadow-lg dark:bg-gray-900 max-w-56 leading-6	text-wrap text-justify`} role="alert">
             <div className="flex p-4">
                 {content}
                 <div className="ms-auto">

@@ -12,7 +12,7 @@ const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
     event.stopPropagation();
   }
   return (
-    <label className="flex cursor-pointer items-center">
+    <label className="flex items-center cursor-pointer">
       {/* The real hidden checkbox input */}
       <input
         data-gaelo-flow="toggle-switch"
@@ -33,7 +33,6 @@ const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
       >
         {/* Circle toogle with moon or sun */}
         <div
-          // eslint-disable-next-line tailwindcss/no-custom-classname
           className={`transition-opacity- flex size-6
            items-center justify-center rounded-full shadow transition-all duration-200 ease-in-out
             ${isToggled ? 'translate-x-2 ' : 'translate-x-0 bg-slate-100'

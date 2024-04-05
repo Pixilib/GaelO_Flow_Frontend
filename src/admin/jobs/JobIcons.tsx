@@ -4,17 +4,17 @@ import {
   FaPause as Pause,
   FaTimes as Cancel,
 } from "react-icons/fa";
-import { postJobsAction } from "../../utils/types2";
+import { JobMutationVariables, PostJobsAction } from "../../utils/types";
 
 type JobIconsProps = {
   jobId: string;
-  onAction: (jobId: string, action: postJobsAction) => void;
+  onJobAction: ({Id, Action}:JobMutationVariables) => void;
 };
 
-const JobIcons = ({ jobId, onAction }: JobIconsProps) => {
-  const handleClick = (action: postJobsAction) => (e: React.MouseEvent) => {
+const JobIcons = ({ jobId, onJobAction }: JobIconsProps) => {
+  const handleClick = (Action: PostJobsAction) => (e: React.MouseEvent) => {
     e.stopPropagation();
-    onAction(jobId, action);
+    onJobAction({ Id: jobId, Action });
   };
 
   const classIcons =
