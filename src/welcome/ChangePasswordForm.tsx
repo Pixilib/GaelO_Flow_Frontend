@@ -1,20 +1,17 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useCustomMutation } from "../utils/reactQuery";
 import { changePassword } from "../services/auth";
+import { useCustomMutation } from "../utils/reactQuery";
 
-import Button from "../ui/Button";
-import { Colors } from "../utils/enums";
-
-import ChevronRight from "./../assets/chevron-right.svg?react";
-import Key from "./../assets/password-key-on.svg?react";
-import Visibility from "./../assets/visibility.svg?react";
-import VisibilityOff from "./../assets/visibility-off.svg?react";
-import Input from "../ui/Input";
-import { useCustomToast } from "../utils/toastify";
-import { ChangePasswordVariables } from '../utils/types';
 import { getQueryParams } from "../utils/queryParams";
+import { useCustomToast } from "../utils/toastify";
+import { Colors } from "../utils/enums";
+import { ChangePasswordVariables } from '../utils/types';
+
+import { Button, Input } from "../ui";
+import { ChevronRight, Key, Visibility, VisibilityOff } from './../assets';
+
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();

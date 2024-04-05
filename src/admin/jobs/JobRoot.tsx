@@ -1,9 +1,7 @@
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getJobs, postJobs } from "../../services/jobs";
 
-import Card, { CardHeader, CardBody, CardFooter } from "../../ui/Card";
-import Spinner from "../../ui/Spinner";
-
+import { Spinner, Card, CardHeader, CardBody, CardFooter } from "../../ui";
 import { useCustomToast } from "../../utils/toastify";
 import { Colors } from "../../utils/enums";
 import { JobMutationVariables, OrthancJob } from '../../utils/types';
@@ -41,7 +39,6 @@ const JobRoot = () => {
   };
 
   if (isLoadingJobs) return <Spinner />
-  console.log(jobData)
   return (
     <div className="flex justify-center w-full h-full">
       <Card className="w-full bg-white">

@@ -34,7 +34,6 @@ const Popover: React.FC<PopoverProps> = ({
 
   const handleEvent = withOnClick ? { onClick: () => setIsOpen(!isOpen) } : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
-  console.log({ isOpen })
   return (
     <div {...handleEvent} className="relative" >
       {children}

@@ -3,13 +3,11 @@ import { ChangeEvent, useState } from "react";
 import { signUp } from "../services/auth";
 import { useCustomMutation } from "../utils/reactQuery";
 
-import Button from "../ui/Button";
-import Input from "../ui/Input";
+import {Button, Input} from "../ui";
+
 import { Colors } from "../utils/enums";
-import ChevronRight from "./../assets/chevron-right.svg?react";
-import Mail from "./../assets/mail.svg?react";
-import User from "./../assets/user.svg?react";
 import { useCustomToast } from "../utils/toastify";
+import { ChevronRight, Letter as Mail, User } from "./../assets";
 
 export const SignUpForm = () => {
   const [username, setUsername] = useState("");
