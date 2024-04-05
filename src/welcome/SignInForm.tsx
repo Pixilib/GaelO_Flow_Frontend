@@ -17,7 +17,7 @@ import { Colors } from "../utils/enums";
 import PasswordKeyOn from "./../assets/password-key-on.svg?react";
 import ChevronRight from "./../assets/chevron-right.svg?react";
 import User from "./../assets/user.svg?react";
-import { SignInResponse } from "../utils/types2";
+import { SignInResponse } from "../utils/types";
 
 export const SignInForm = () => {
   const navigate = useNavigate();

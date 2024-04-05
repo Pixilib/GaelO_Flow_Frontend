@@ -13,7 +13,7 @@ import Visibility from "./../assets/visibility.svg?react";
 import VisibilityOff from "./../assets/visibility-off.svg?react";
 import Input from "../ui/Input";
 import { useCustomToast } from "../utils/toastify";
-import { ChangePasswordVariables } from '../utils/types2';
+import { ChangePasswordVariables } from '../utils/types';
 import { getQueryParams } from "../utils/queryParams";
 
 const ChangePasswordForm = () => {

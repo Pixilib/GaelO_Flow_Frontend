@@ -5,7 +5,7 @@ import Badge from "../../ui/Badge";
 import { Colors } from "../../utils/enums";
 import JobIcons from "./JobIcons";
 import Popover from "../../ui/Popover";
-import { JobMutationVariables } from "../../utils/types2";
+import { JobMutationVariables } from "../../utils/types";
 
 //!WIP 
 type JobTableProps = {

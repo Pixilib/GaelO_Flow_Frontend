@@ -6,7 +6,7 @@ import Spinner from "../../ui/Spinner";
 
 import { useCustomToast } from "../../utils/toastify";
 import { Colors } from "../../utils/enums";
-import { JobMutationVariables, OrthancJob } from '../../utils/types2';
+import { JobMutationVariables, OrthancJob } from '../../utils/types';
 
 import JobTable from "./JobTable";
 
@@ -41,7 +41,7 @@ const JobRoot = () => {
   };
 
   if (isLoadingJobs) return <Spinner />
-
+  console.log(jobData)
   return (
     <div className="flex justify-center w-full h-full">
       <Card className="w-full bg-white">

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { JobMutationVariables, OrthancJob } from "../utils/types2";
+import { JobMutationVariables, OrthancJob } from "../utils/types";
 
 export const getJobs = (): Promise<OrthancJob> => {
   return axios.get('/api/jobs?expand')

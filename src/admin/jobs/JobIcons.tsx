@@ -4,7 +4,7 @@ import {
   FaPause as Pause,
   FaTimes as Cancel,
 } from "react-icons/fa";
-import { JobMutationVariables, PostJobsAction } from "../../utils/types2";
+import { JobMutationVariables, PostJobsAction } from "../../utils/types";
 
 type JobIconsProps = {
   jobId: string;
