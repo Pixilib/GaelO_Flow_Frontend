@@ -7,12 +7,11 @@ services:
     gaelo-flow:
       container_name: gaelo-flow
       image: ghcr.io/pixilib/gaelo-flow-backend
-      depends_on: [redis, flow-db]
+      depends_on: [redis, flow-db, orthanc-flow]
       ports: ["3000:3000"]
       environment:
         APP_URL : "http://localhost"
-        ORTHANC_ADDRESS : "http://orthanc-flow"
-        ORTHANC_PORT : 8042
+        ORTHANC_ADDRESS : "http://orthanc-flow:8042"
         ORTHANC_USERNAME: "orthanc"
         ORTHANC_PASSWORD: "orthanc"
         TYPEORM_TYPE : "postgres"

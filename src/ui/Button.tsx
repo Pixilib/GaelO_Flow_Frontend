@@ -1,3 +1,4 @@
+import React from 'react';
 import { Colors } from "../utils/enums";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,19 +14,14 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const colorClasses: Record<keyof typeof Colors, string> = {
-    almond: "bg-almond",
-    primary: "bg-primary",
-    primaryHover: "hover:bg-primary-hover",
-    secondary: "bg-secondary",
-    secondaryHover: "hover:bg-secondary-hover",
-    danger: "bg-danger",
-    dangerHover: "hover:bg-danger-hover",
-    success: "bg-success",
-    successHover: "hover:bg-success-hover",
+  const baseColorClasses: Record<keyof typeof Colors, string> = {
+    almond: "bg-almond hover:bg-almond-hover",
+    primary: "bg-primary hover:bg-primary-hover",
+    secondary: "bg-secondary hover:bg-secondary-hover",
+    danger: "bg-danger hover:bg-danger-hover",
+    success: "bg-success hover:bg-success-hover",
     disabled: "bg-disabled",
-    orange: "bg-orange",
-    orangeHover: "hover:bg-orange-hover",
+    orange: "bg-orange hover:bg-orange-hover",
     dark: "bg-dark",
     red: "bg-red",
     gray: "bg-gray",
@@ -33,13 +29,15 @@ const Button: React.FC<ButtonProps> = ({
     grayCustom: ""
   };
 
+  const isDisabled = props.disabled;
+  const colorClass = baseColorClasses[color] + (isDisabled ? "" : " transition-colors duration-150 ease-in-out");
 
   const borderClasses = bordered ? "border border-white" : "";
 
   return (
     <button
       {...props} 
-      className={`flex items-center justify-center ${colorClasses[color]} ${borderClasses} focus:shadow-outline rounded-full p-3 font-semibold text-white shadow-lg focus:outline-none disabled:bg-opacity-70 ${className}`}
+      className={`flex items-center justify-center ${colorClass} ${borderClasses} focus:shadow-outline rounded-full p-3 font-semibold text-white shadow-lg focus:outline-none disabled:bg-opacity-70 ${className}`}
     >
       {children}
     </button>

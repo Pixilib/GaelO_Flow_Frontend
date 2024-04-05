@@ -2,8 +2,8 @@
 import { Route, Routes } from "react-router-dom";
 import General from "./general/General";
 import JobRoot from "./jobs/JobRoot";
-import AetCard from "./general/AetCard";
 import QueuesRoot from "./queues/QueuesRoot";
+import ModalitiesRoot from "./modalities/ModalitiesRoot";
 
 const AdminRoot = () => {
     return (
@@ -11,7 +11,7 @@ const AdminRoot = () => {
             <Routes>
                 <Route path="general" element={<General />} />
                 <Route path="/jobs" element={<JobRoot />} />
-                <Route path="/aets" element={<AetCard aetData={[]} />} />
+                <Route path="/modalities" element={<ModalitiesRoot/>} />
                 <Route path="/queues" element={<QueuesRoot />} />
             </Routes>
         </div>

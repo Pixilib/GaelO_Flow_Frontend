@@ -11,17 +11,20 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from '@tanstack/react-table';
-import FilterTable from './FilterTable'; // Assurez-vous que le chemin d'importation est correct
+import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 
 type TableProps<TData> = {
-  data: TData[];
+  data?: TData[];
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
-  color?: Colors;
+  enableColumnFilters? :boolean;
+  headerColor: Colors;
   className?: string;
 };
-function Table<T>({ data, columns, enableSorting = true, color, className }: TableProps<T>) {
+//WIP : Pagination
+function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false,  headerColor, className }: TableProps<T>) {
+
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
@@ -45,18 +48,19 @@ function Table<T>({ data, columns, enableSorting = true, color, className }: Tab
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    enableColumnFilters: true,
+    enableColumnFilters: enableColumnFilters,
     enableSorting,
   });
+  const headerBgClass = `bg-${headerColor}`;
 
   return (
-    <div className="max-h-[500px] overflow-x-auto rounded-xl">
+    <div className={`max-h-[500px] overflow-x-auto rounded-xl ${className}`}>
       <table className={`min-w-full border-grayCustom ${className}`}>
-        <thead className={`border-grayCustom  bg-${color}`}>
+        <thead className={headerBgClass}>
           {table.getHeaderGroups().map(headerGroup => (
             <>
               {/* Ligne pour les titres et les flèches de tri */}
-              <tr key={headerGroup.id} className={`bg-${color}`}>
+              <tr key={headerGroup.id} className={headerBgClass}>
                 {headerGroup.headers.map(header => (
                   <th
                     key={header.id}

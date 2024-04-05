@@ -65,6 +65,6 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
   
   const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
 
-  return <Table data={data} columns={columns} color={Colors.almond} />;
+  return <Table data={data} columns={columns} headerColor={Colors.almond} />;
 };
 export default JobTable;
