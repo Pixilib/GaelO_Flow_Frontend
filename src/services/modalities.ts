@@ -1,44 +1,55 @@
 import axios from "axios";
 
-export const updateModality = (name: string, aet: string, host: string, port: number, manufacturer: string): Promise<unknown> => {
+interface Modality {
+    name: string;
+    aet: string; 
+    host: string;
+    port: number;
+    manufacturer: string;
+}
+
+export const updateModality = (
+  name: string, 
+  aet: string, 
+  host: string, 
+  port: number, 
+  manufacturer: string
+): Promise<Modality> => {
     const payload = {
         AET: aet,
         Host: host,
         Port: port,
         Manufacturer: manufacturer
-    }
+    };
 
-    return axios.post("/api/modalities/" + name, payload).then(response => response.data)
-        .catch(function (error) {
+    return axios.post(`/api/modalities/${name}`, payload)
+        .then(response => response.data as Modality)
+        .catch(error => {
             if (error.response) {
-                throw error.response;
+                throw error.response.data;
             }
-            throw error;
+            throw error.message;
         });
 };
 
-export const deleteModality = (name: string): Promise<unknown> => {
-    return axios.delete("/api/modalities/" + name)
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
+export const deleteModality = (name: string): Promise<string> => {
+    return axios.delete(`/api/modalities/${name}`)
+        .then(response => response.data as string)
+        .catch(error => {
             if (error.response) {
-                throw error.response;
+                throw error.response.data;
             }
-            throw error;
+            throw error.message;
         });
-}
+};
 
-export const getModalities = (): Promise<unknown> => {
+export const getModalities = (): Promise<Modality[]> => {
     return axios.get("/api/modalities?expand")
-        .then(function (response) {
-            return response.data;
-        })
-        .catch(function (error) {
+        .then(response => response.data as Modality[])
+        .catch(error => {
             if (error.response) {
-                throw error.response;
+                throw error.response.data;
             }
-            throw error;
+            throw error.message;
         });
-}
+};

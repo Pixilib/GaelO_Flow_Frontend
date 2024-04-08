@@ -23,8 +23,8 @@ const ModalitiesRoot: React.FC = () => {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState<'success' | 'danger'>('success');
-
-    const { data: aets, isLoading } = useCustomQuery<AetData[]>('modalities', getModalities, {
+    
+    const { data: aets, isLoading } = useCustomQuery<AetData[]>(['modalities'], () => getModalities(), {
         select: (data) => Object.values(data).map((item: any) => ({
             name: item.name,
             aet: item.aet,
