@@ -8,7 +8,6 @@ import Input from '../../ui/Input';
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 
-// Assurez-vous que cette définition correspond à ce que vous attendez pour votre AET
 interface AetData {
     name: string;
     aet: string;
@@ -37,7 +36,6 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
 
     const options = [
         { value: 'Generic', label: 'Generic' },
-        // Ajoutez d'autres options ici si nécessaire
     ];
 
     const handleSelectChange = (option: Option) => {
