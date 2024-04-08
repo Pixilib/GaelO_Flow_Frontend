@@ -7,45 +7,31 @@ import Button from '../../ui/Button';
 
 interface AetData {
     name: string;
-    Aet: number;
-    Host: string;
-    Manufacturer: string;
+    aet: string;
+    host: string;
+    manufacturer: string;
 }
 
-interface AetProps {
+interface ModalitiesTableProps {
     aetData: AetData[];
-    onDeleteAet: (aetname: string) => void;
+    onDeleteAet: (aetName: string) => void;
 }
 
-const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
-
+const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData, onDeleteAet }) => {
     const columns: ColumnDef<AetData>[] = [
+        { accessorKey: 'name', header: 'Name' },
+        { accessorKey: 'aet', header: 'AET', cell: info => <Badge value={info.getValue() as string} /> },
+        { accessorKey: 'host', header: 'Host' },
+        { accessorKey: 'manufacturer', header: 'Manufacturer' },
         {
-            accessorKey: 'name',
-            header: 'Name',
-        },
-        {
-            accessorKey: 'Aet',
-            header: 'Aet',
-            cell: (info) => <Badge value={info.getValue() as number} />,
-        },
-        {
-            accessorKey: 'Host',
-            header: 'HOST',
-        },
-        {
-            accessorKey: 'Manufacturer',
-            header: 'Manufacturer',
-        },
-        {
-            id: "delete",
-            cell: ({ row }) => <>
-                <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>Delete</Button>            </>
+            id: 'delete',
+            cell: ({ row }) => (
+                <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>Delete</Button>
+            )
         }
-    ]
-    return (
-        <Table columns={columns} data={Data} headerColor={Colors.almond} />
-    );
+    ];
+
+    return <Table columns={columns} data={aetData} headerColor={Colors.almond} />;
 };
 
 export default ModalitiesTable;
