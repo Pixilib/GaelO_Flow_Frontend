@@ -11,7 +11,7 @@ interface AetData {
     aet: string;
     host: string;
     manufacturer: string;
-    isUserCreated?: boolean; // Attribut pour distinguer les entrées créées par l'utilisateur
+    isUserCreated?: boolean;
 }
 
 interface ModalitiesTableProps {
@@ -40,13 +40,13 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData, onDeleteAet,
             header: '',
             id: 'edit',
             cell: ({ row }) => row.original.isUserCreated ? (
-                <EditIcon onClick={() => onEditAet(row.original)} style={{ cursor: 'pointer', color: '#4B5563', marginRight: '10px' }} />
+                <EditIcon onClick={() => onEditAet(row.original)} className="mr-2 text-gray-600 cursor-pointer" />
             ) : null,
         },
         {
             id: 'delete',
             cell: ({ row }) => row.original.isUserCreated ? (
-                <DeleteIcon onClick={() => onDeleteAet(row.original.name)} style={{ cursor: 'pointer', color: '#EF4444' }} />
+                <DeleteIcon onClick={() => onDeletePeer(row.original.name)} className="text-red-500 cursor-pointer" />
             ) : null,
         }
     ];

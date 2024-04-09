@@ -62,7 +62,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
 
     return (
         <Card className="flex flex-col h-full">
-            <CardHeader title="New AET" color={Colors.success}>
+            <CardHeader title="Create New Modality" color={Colors.success}>
                 <CloseIcon size="24px" title="Close" onClick={onClose} className="cursor-pointer" />
             </CardHeader>
             <CardBody className="p-4 bg-stone-100">

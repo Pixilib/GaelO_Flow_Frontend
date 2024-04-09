@@ -78,7 +78,7 @@ const ModalitiesRoot: React.FC = () => {
 
     return (
         <Card>
-            <CardHeader title="Modalities" color={Colors.primary} />
+            <CardHeader title="New Modalities" color={Colors.primary} />
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
@@ -87,7 +87,7 @@ const ModalitiesRoot: React.FC = () => {
                         } } />
                     </div>
                     <Button color={Colors.success} onClick={handleNewAetClick}>
-                        <MoreIcon className="mr-3" size={24} /> New modality
+                        <MoreIcon className="mr-3" size={24} /> Create New modality
                     </Button>
                 </div>
             </CardBody>
