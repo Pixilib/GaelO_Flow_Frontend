@@ -82,7 +82,9 @@ const ModalitiesRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets ?? []} onDeleteAet={deleteAetHandler} />
+                        <ModalitiesTable aetData={aets ?? []} onDeleteAet={deleteAetHandler} onEditAet={function (_aet: AetData): void {
+                            throw new Error('Function not implemented.');
+                        } } />
                     </div>
                     <Button color={Colors.success} onClick={handleNewAetClick}>
                         <MoreIcon className="mr-3" size={24} /> New modality
