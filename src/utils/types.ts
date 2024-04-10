@@ -18,6 +18,35 @@ export type OrthancJob = {
     [key :string] : any
 }
 
+//Options
+export type OptionsResponse = {
+    AutoQueryHourStart: number;
+    AutoQueryMinuteStart: number;
+    AutoQueryHourStop: number;
+    AutoQueryMinuteStop: number;
+    OrthancMonitoringRate: number;
+    BurnerStarted: boolean;
+    BurnerLabelPath: string;
+    BurnerMonitoringLevel: string;
+    BurnerManifacturer: string;
+    BurnerMonitoredPath: string;
+    BurnerDeleteStudyAfterSent: boolean;
+    BurnerSupportType: string;
+    BurnerViewerPath: string;
+    BurnerTransferSyntax: string;
+    BurnerDateFormat: string;
+    BurnerTranscoding: string;
+    AutorouterStarted: boolean;
+    OrthancAddress: string;
+    OrthancPort: string;
+    OrthancUsername: string;
+    OrthancPassword: string;
+    RedisAddress: string;
+    RedisPort: string;
+};
+
+
+
 
 //auth
 export type SignInResponse = {

@@ -49,7 +49,7 @@ export const InteractiveToastContainer: Story = {
     };
 
     return (
-      <ToastContext.Provider value={contextValue}>
+      <ToastContext.Provider value={contextValue as any}>
         <div className="container">
           <Button color={Colors.success} className='' onClick={() => pushToastRef.current({ content: 'Success Toast', type: 'success', animation: 'slide-right', position: 'bottom-right', duration: 5 })}>Add Success Toast</Button>
           <Button color={Colors.danger} onClick={() => pushToastRef.current({ content: 'Danger Toast', type: 'danger', animation: 'slide-right', position: 'bottom-right', duration: 5 })}>Add Danger Toast</Button>

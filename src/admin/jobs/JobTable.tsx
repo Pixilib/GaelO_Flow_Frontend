@@ -8,6 +8,7 @@ import Popover from "../../ui/Popover";
 import { JobMutationVariables } from "../../utils/types";
 
 //!WIP 
+//! Needs to fix implemntation of PopOver
 type JobTableProps = {
   data: any[];
   onJobAction: ({Id, Action}:JobMutationVariables) => void;

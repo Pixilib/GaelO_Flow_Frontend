@@ -1,6 +1,7 @@
 import axios from "./axios";
+import { OptionsResponse } from "src/utils/types";
 
-export const getOptions = (): Promise<unknown> => {
+export const getOptions = (): Promise<OptionsResponse> => {
   return axios
     .get("/api/options")
     .then(function (response) {
