@@ -46,7 +46,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData, onDeleteAet,
         {
             id: 'delete',
             cell: ({ row }) => row.original.isUserCreated ? (
-                <DeleteIcon onClick={() => onDeletePeer(row.original.name)} className="text-red-500 cursor-pointer" />
+                <DeleteIcon onClick={() => onDeleteAet(row.original.name)} className="text-red-500 cursor-pointer" />
             ) : null,
         }
     ];
