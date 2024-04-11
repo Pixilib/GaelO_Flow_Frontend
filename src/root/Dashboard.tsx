@@ -23,11 +23,11 @@ const Dashboard = () => {
       <div className="flex gap-6 mx-8 columns-3">
         {/* Card Anonymisation */}
         <Card className="flex-1 ">
-        <CardHeader title="Anonymisation" color={Colors.primary} />
-        <CardBody color={Colors.light}>
+          <CardHeader title="Anonymisation" color={Colors.primary} />
+          <CardBody color={Colors.light}>
             <h3 className="text-xl">Progress</h3>
           </CardBody>
-          <CardFooter  color={Colors.light}>
+          <CardFooter color={Colors.light}>
             <Button className="self-center" variant="contained" color="primary">
               Empty List
             </Button>
@@ -36,11 +36,11 @@ const Dashboard = () => {
 
         {/* Card Delete */}
         <Card className="flex-1 ">
-        <CardHeader title="Delete" color={Colors.primary} />
-        <CardBody color={Colors.light}>
+          <CardHeader title="Delete" color={Colors.primary} />
+          <CardBody color={Colors.light}>
             <h3 className="text-xl">Progress</h3>
           </CardBody>
-          <CardFooter  color={Colors.light}>
+          <CardFooter color={Colors.light}>
             <Button className="self-center" variant="contained" color="primary">
               Empty List
             </Button>
@@ -51,16 +51,16 @@ const Dashboard = () => {
         <Card className="flex-1 ">
           <CardHeader title="Delete" color={Colors.primary} />
           <CardBody color={Colors.light}>
-                        <h3 className="text-xl">Retrieve</h3>
+            <h3 className="text-xl">Retrieve</h3>
           </CardBody>
-          <CardFooter  color={Colors.light}>
+          <CardFooter color={Colors.light}>
             <Button className="self-center" variant="contained" color="primary">
               Empty List
             </Button>
           </CardFooter>
-        </Card>     
-        
-         </div>
+        </Card>
+
+      </div>
     </div>
   );
 };

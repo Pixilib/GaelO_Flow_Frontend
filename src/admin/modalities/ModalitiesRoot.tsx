@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Button from '../../ui/Button';
+import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 import NewModalityCard from './NewModalityCard';
 import ModalitiesTable from './ModalitiesTable';
 import Toast from '../../ui/toast/Toast';
 import { updateModality, deleteModality, getModalities } from '../../services/modalities';
-import { useCustomQuery, useCustomMutation } from '../../utils/reactQuery';
+import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { Colors } from '../../utils/enums';
 import Spinner from '../../ui/Spinner';
 
 interface AetData {
     name: string;
-    aet: string; 
+    aet: string;
     host: string;
     port: number;
     manufacturer: string;
@@ -23,33 +23,35 @@ const ModalitiesRoot: React.FC = () => {
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState<'success' | 'danger'>('success');
+
+    const { data: aets = [], isLoading } = useCustomQuery<AetData[]>(
+        'modalities',
+        getModalities,
+        {
+            select: (data: { [key: string]: any } | undefined) => {
+                if (!data) return [];
+                return Object.entries(data).map(([key, item]) => ({
+                    name: key,
+                    aet: item?.Aet ?? '',
+                    host: item?.Host ?? '',
+                    port: item?.Port ?? 0,
+                    manufacturer: item?.Manufacturer ?? '',
+                }));
+            },
+        }
+    );
     
-    const { data: aets, isLoading } = useCustomQuery<AetData[]>(['modalities'], () => getModalities(), {
-        select: (data) => Object.values(data).map((item: any) => ({
-            name: item.name,
-            aet: item.aet,
-            host: item.host,
-            port: item.port,
-            manufacturer: item.manufacturer,
-        })),
-    });
-
-    const { mutate: updateModalityMutate } = useCustomMutation(
-        (aet: AetData) => updateModality(aet),
-        {
-            onSuccess: () => showSuccessToast("Modality updated successfully."),
-            onError: () => showErrorToast("An error occurred while updating the modality."),
-        }
+    const updateModalityMutation = useCustomMutation(
+        ({ name, aet, host, port, manufacturer }) => updateModality(name, aet, host, port, manufacturer),
+        [['modalities']]
     );
 
-    const { mutate: deleteModalityMutate } = useCustomMutation(
-        (name: string) => deleteModality(name),
-        {
-            onSuccess: () => showSuccessToast("Modality deleted successfully."),
-            onError: () => showErrorToast("An error occurred while deleting the modality."),
-        }
+    const deleteModalityMutation = useCustomMutation(
+        ({ name }) => deleteModality(name),
+        [['modalities']]
     );
 
+    // Functions for toast notifications
     const showSuccessToast = (message: string) => {
         setToastMessage(message);
         setToastType('success');
@@ -62,38 +64,51 @@ const ModalitiesRoot: React.FC = () => {
         setShowToast(true);
     };
 
+    // Handlers for modalities management
     const handleNewAetClick = () => setShowNewAetCard(true);
 
     const createAetHandler = (aet: AetData) => {
-        updateModalityMutate(aet);
+        updateModalityMutation.mutate(aet, {
+            onSuccess: () => showSuccessToast("Modality created successfully."),
+            onError: (error) => {
+                console.error("Error", error);
+                showErrorToast("An error occurred while creating the modality.");
+            }
+        });
     };
 
     const deleteAetHandler = (aetName: string) => {
         if (window.confirm(`Are you sure you want to delete the modality named "${aetName}"?`)) {
-            deleteModalityMutate(aetName);
+            deleteModalityMutation.mutate({ name: aetName }, {
+                onSuccess: () => showSuccessToast("Modality deleted successfully."),
+                onError: (error) => {
+                    console.error("Error deleting modality: ", error);
+                    showErrorToast("An error occurred while deleting the modality.");
+                }
+            });
         }
     };
 
-    if (isLoading) return <Spinner />;
+    if(isLoading) {
+        return <Spinner/>
+    } 
 
     return (
         <Card>
-            <CardHeader title="New Modalities" color={Colors.primary} />
+            <CardHeader title="Modalities" color={Colors.primary} />
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets ?? []} onDeleteAet={deleteAetHandler} onEditAet={function (_aet: AetData): void {
-                            throw new Error('Function not implemented.');
-                        } } />
+                        <ModalitiesTable aetData={aets} onDeleteAet={deleteAetHandler} />
                     </div>
                     <Button color={Colors.success} onClick={handleNewAetClick}>
-                        <MoreIcon className="mr-3" size={24} /> Create New modality
+                        <MoreIcon className="mr-3" size={24} /> New modality
                     </Button>
                 </div>
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
+                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={(aet: AetData) => createAetHandler(aet)} />
                 )}
             </CardFooter>
             {showToast && (
@@ -105,6 +120,7 @@ const ModalitiesRoot: React.FC = () => {
                     position="bottom-left"
                 />
             )}
+
         </Card>
     );
 };

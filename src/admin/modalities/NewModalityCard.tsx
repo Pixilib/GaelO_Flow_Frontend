@@ -42,10 +42,11 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
         setManufacturer(option);
     };
 
+    const isValidPort = (port: number) => port > 0 && port <= 65535;
+
     const onSubmitAet = () => {
-        // Validation simple des champs
-        if (!name.trim() || !aet.trim() || !host.trim() || port === '' || isNaN(Number(port)) || Number(port) <= 0 || !manufacturer) {
-            toastWarning("Please fill in all fields correctly.");
+        if (!name.trim() || !aet.trim() || !host.trim() || port === '' || isNaN(Number(port)) || !isValidPort(Number(port)) || !manufacturer) {
+            toastWarning("Please fill in all fields correctly with a valid port number (1-65535).");
             return;
         }
 
@@ -67,17 +68,17 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
             </CardHeader>
             <CardBody className="p-4 bg-stone-100">
                 <div className="grid grid-cols-2 gap-4 mb-4">
-                    <Input label="Name" bordered value={name} onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
-                    <Input label="AET" bordered value={aet} onChange={(e: ChangeEvent<HTMLInputElement>) => setAet(e.target.value)} />
-                    <Input label="Host" bordered value={host} onChange={(e: ChangeEvent<HTMLInputElement>) => setHost(e.target.value)} />
-                    <Input label="Port" bordered type="number" value={port.toString()} onChange={(e: ChangeEvent<HTMLInputElement>) => setPort(e.target.value === '' ? '' : Number(e.target.value))} />
+                    <Input label="Name" bordered value={name} onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)} aria-label="Modality Name" />
+                    <Input label="AET" bordered value={aet} onChange={(e: ChangeEvent<HTMLInputElement>) => setAet(e.target.value)} aria-label="AET" />
+                    <Input label="Host" bordered value={host} onChange={(e: ChangeEvent<HTMLInputElement>) => setHost(e.target.value)} aria-label="Host" />
+                    <Input label="Port" bordered type="number" value={port.toString()} onChange={(e: ChangeEvent<HTMLInputElement>) => setPort(e.target.value === '' ? '' : Number(e.target.value))} aria-label="Port" />
                     <div className="col-span-2">
-                        <SelectInput options={options} value={manufacturer} onChange={handleSelectChange} placeholder="Select Manufacturer" />
+                        <SelectInput options={options} value={manufacturer} onChange={handleSelectChange} placeholder="Select Manufacturer" aria-label="Manufacturer" />
                     </div>
                 </div>
             </CardBody>
             <CardFooter className="flex justify-center bg-stone-100">
-                <Button color={Colors.success} onClick={onSubmitAet}><CheckIcon size="20px" /></Button>
+                <Button color={Colors.success} onClick={onSubmitAet} aria-label="Submit New Modality"><CheckIcon size="20px" /></Button>
             </CardFooter>
         </Card>
     );
