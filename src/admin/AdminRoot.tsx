@@ -4,6 +4,7 @@ import General from "./general/General";
 import JobRoot from "./jobs/JobRoot";
 import QueuesRoot from "./queues/QueuesRoot";
 import ModalitiesRoot from "./modalities/ModalitiesRoot";
+import PeersRoot from "./peers/PeersRoot";
 
 const AdminRoot = () => {
     return (
@@ -12,6 +13,7 @@ const AdminRoot = () => {
                 <Route path="general" element={<General />} />
                 <Route path="/jobs" element={<JobRoot />} />
                 <Route path="/modalities" element={<ModalitiesRoot/>} />
+                <Route path="/peers" element={<PeersRoot/>} />
                 <Route path="/queues" element={<QueuesRoot />} />
             </Routes>
         </div>

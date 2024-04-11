@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { AiOutlinePlus as MoreIcon } from 'react-icons/ai';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Button from '../../ui/Button';
-import NewPeerCard from './NewPeerCard';
+import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
+import NewPeerCard from './NewPeerCard'; // Ensure this import matches your file and component name
 import PeersTable from './PeersTable';
-import { Toast } from '../../ui';
-import { createPeer, updatePeer, deletePeer, getPeers } from '../../services/peers';
-import { useQueryClient, useQuery, useMutation } from 'react-query';
+import Toast from '../../ui/toast/Toast';
+import { updatePeer, deletePeer, getPeers } from '../../services/peers';
+import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { Colors } from '../../utils/enums';
 import Spinner from '../../ui/Spinner';
 
@@ -14,36 +14,40 @@ interface PeerData {
     username: string;
     peername: string;
     url: string;
-    isUserCreated?: boolean;
+    isUserCreated?: boolean; // Correct place for optional property
 }
 
-const PeersRoot = () => {
+const PeersRoot: React.FC = () => {
     const [showNewPeerCard, setShowNewPeerCard] = useState(false);
     const [showToast, setShowToast] = useState(false);
     const [toastMessage, setToastMessage] = useState('');
-    const [toastType, setToastType] = useState('success');
-    const queryClient = useQueryClient();
+    const [toastType, setToastType] = useState<'success' | 'danger'>('success');
 
-    const { data: peers, isLoading } = useQuery<PeerData[]>('peers', getPeers);
+    const { data: peers, isLoading } = useCustomQuery<PeerData[]>('peers', getPeers, {
+        select: (data) => Object.entries(data || {}).map(([key, value]) => ({
+            username: key,
+            peername: value?.peer ?? '',
+            url: value?.url ?? '',
+            isUserCreated: value?.isUserCreated // Corrected syntax for object property
+        })),
+    });
 
-    const updatePeerMutation = useMutation(updatePeer, {
+    const { mutate: updatePeerMutate } = useCustomMutation((peer: PeerData) => updatePeer(peer), {
         onSuccess: () => {
             showSuccessToast("Peer updated successfully.");
-            queryClient.invalidateQueries('peers');
         },
         onError: () => {
             showErrorToast("An error occurred while updating the peer.");
-        }
+        },
     });
 
-    const deletePeerMutation = useMutation(deletePeer, {
+    const { mutate: deletePeerMutate } = useCustomMutation((peerName: string) => deletePeer(peerName), {
         onSuccess: () => {
             showSuccessToast("Peer deleted successfully.");
-            queryClient.invalidateQueries('peers');
         },
         onError: () => {
             showErrorToast("An error occurred while deleting the peer.");
-        }
+        },
     });
 
     const showSuccessToast = (message: string) => {
@@ -58,16 +62,21 @@ const PeersRoot = () => {
         setShowToast(true);
     };
 
-    const handleCreateNewPeer = (peer: PeerData) => {
-        createPeer(peer).then(() => {
-            showSuccessToast("Peer created successfully.");
-            queryClient.invalidateQueries('peers');
-        }).catch(() => {
-            showErrorToast("An error occurred while creating the peer.");
-        });
+    const handleNewPeerClick = () => setShowNewPeerCard(true);
+
+    const createPeerHandler = (peer: PeerData) => {
+        updatePeerMutate(peer);
     };
 
-    if (isLoading) return <Spinner />;
+    const deletePeerHandler = (peerName: string) => {
+        if (window.confirm(`Are you sure you want to delete the peer named "${peerName}"?`)) {
+            deletePeerMutate(peerName);
+        }
+    };
+
+    if (isLoading) {
+        return <Spinner />;
+    }
 
     return (
         <Card>
@@ -75,21 +84,16 @@ const PeersRoot = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <PeersTable
-                            peerData={peers ?? []}
-                            onDeletePeer={(peerName) => deletePeerMutation.mutate(peerName)}
-                            onEditPeer={(peer) => updatePeerMutation.mutate(peer)}
-                       
-                       />
+                        <PeersTable peerData={peers || []} onDeletePeer={deletePeerHandler} />
                     </div>
-                    <Button color={Colors.success} onClick={() => setShowNewPeerCard(true)}>
-                        <MoreIcon className="mr-3" size={24} /> Create New Peer
+                    <Button color={Colors.success} onClick={handleNewPeerClick}>
+                        <MoreIcon className="mr-3" size={24} /> New Peer
                     </Button>
                 </div>
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewPeerCard && (
-                    <NewPeerCard onClose={() => setShowNewPeerCard(false)} onCreatePeer={handleCreateNewPeer} />
+                    <NewPeerCard onClose={() => setShowNewPeerCard(false)} onCreatePeer={createPeerHandler} />
                 )}
             </CardFooter>
             {showToast && (

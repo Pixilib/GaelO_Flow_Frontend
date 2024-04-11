@@ -24,34 +24,40 @@ const ModalitiesRoot: React.FC = () => {
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState<'success' | 'danger'>('success');
 
-    const { data: aets = [], isLoading } = useCustomQuery<AetData[]>(
-        'modalities',
-        getModalities,
+    const { data: aets, isLoading } = useCustomQuery<AetData[]>('modalities', getModalities, {
+        select: (data) => Object.entries(data || {}).map(([key, value]) => ({
+            name: key,
+            aet: value?.aet ?? '',
+            host: value?.host ?? '',
+            port: value?.port ?? 0,
+            manufacturer: value?.manufacturer ?? '',
+        })),
+    });
+
+    const { mutate: updateModalityMutate } = useCustomMutation(
+        (aet: AetData) => updateModality(aet),
         {
-            select: (data: { [key: string]: any } | undefined) => {
-                if (!data) return [];
-                return Object.entries(data).map(([key, item]) => ({
-                    name: key,
-                    aet: item?.Aet ?? '',
-                    host: item?.Host ?? '',
-                    port: item?.Port ?? 0,
-                    manufacturer: item?.Manufacturer ?? '',
-                }));
+            onSuccess: () => {
+                showSuccessToast("Modality updated successfully.");
+            },
+            onError: () => {
+                showErrorToast("An error occurred while updating the modality.");
             },
         }
     );
-    
-    const updateModalityMutation = useCustomMutation(
-        ({ name, aet, host, port, manufacturer }) => updateModality(name, aet, host, port, manufacturer),
-        [['modalities']]
+
+    const { mutate: deleteModalityMutate } = useCustomMutation(
+        (name: string) => deleteModality(name),
+        {
+            onSuccess: () => {
+                showSuccessToast("Modality deleted successfully.");
+            },
+            onError: () => {
+                showErrorToast("An error occurred while deleting the modality.");
+            },
+        }
     );
 
-    const deleteModalityMutation = useCustomMutation(
-        ({ name }) => deleteModality(name),
-        [['modalities']]
-    );
-
-    // Functions for toast notifications
     const showSuccessToast = (message: string) => {
         setToastMessage(message);
         setToastType('success');
@@ -64,34 +70,21 @@ const ModalitiesRoot: React.FC = () => {
         setShowToast(true);
     };
 
-    // Handlers for modalities management
     const handleNewAetClick = () => setShowNewAetCard(true);
 
     const createAetHandler = (aet: AetData) => {
-        updateModalityMutation.mutate(aet, {
-            onSuccess: () => showSuccessToast("Modality created successfully."),
-            onError: (error) => {
-                console.error("Error", error);
-                showErrorToast("An error occurred while creating the modality.");
-            }
-        });
+        updateModalityMutate(aet);
     };
 
     const deleteAetHandler = (aetName: string) => {
         if (window.confirm(`Are you sure you want to delete the modality named "${aetName}"?`)) {
-            deleteModalityMutation.mutate({ name: aetName }, {
-                onSuccess: () => showSuccessToast("Modality deleted successfully."),
-                onError: (error) => {
-                    console.error("Error deleting modality: ", error);
-                    showErrorToast("An error occurred while deleting the modality.");
-                }
-            });
+            deleteModalityMutate(aetName);
         }
     };
 
-    if(isLoading) {
-        return <Spinner/>
-    } 
+    if (isLoading) {
+        return <Spinner />;
+    }
 
     return (
         <Card>
@@ -99,7 +92,7 @@ const ModalitiesRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets} onDeleteAet={deleteAetHandler} />
+                        <ModalitiesTable aetData={aets || []} onDeleteAet={deleteAetHandler} />
                     </div>
                     <Button color={Colors.success} onClick={handleNewAetClick}>
                         <MoreIcon className="mr-3" size={24} /> New modality
@@ -108,7 +101,7 @@ const ModalitiesRoot: React.FC = () => {
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={(aet: AetData) => createAetHandler(aet)} />
+                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
                 )}
             </CardFooter>
             {showToast && (
@@ -120,7 +113,6 @@ const ModalitiesRoot: React.FC = () => {
                     position="bottom-left"
                 />
             )}
-
         </Card>
     );
 };
