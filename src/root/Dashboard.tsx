@@ -6,7 +6,6 @@ const Dashboard = () => {
   const username = "M.Ohma";
 
   return (
-    // eslint-disable-next-line tailwindcss/no-custom-classname
     <div className="p-8 bg-background size-full">
       <h1 className="mx-8 text-3xl font-bold">Overview</h1>
       <div className="m-8 flex h-10 items-center rounded-[10px] bg-white p-10 shadow-xl">

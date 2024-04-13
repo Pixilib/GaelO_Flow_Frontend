@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { OptionsResponse } from "src/utils/types";
+import { OptionsPayload, OptionsResponse } from "src/utils/types";
 
 export const getOptions = (): Promise<OptionsResponse> => {
   return axios
@@ -14,3 +14,14 @@ export const getOptions = (): Promise<OptionsResponse> => {
       throw error;
     });
 };
+
+export const updateOptions =  (payload:OptionsPayload):Promise<unknown> =>{
+return axios.patch("/api/options", payload)
+    .then(response => response.data)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}

@@ -10,6 +10,10 @@ const meta: Meta<typeof Badge> = {
       control: 'text',
       defaultValue: 'Badge',
     },
+    className: {
+      control: 'text',
+      defaultValue: 'text-m font-medium text-center ring-0 ring-inset outline-0 min-w-4',
+    },
   },
   tags: ['autodocs'],
 };
@@ -20,43 +24,50 @@ type Story = StoryObj<typeof Badge>;
 export const Small: Story = {
   args: {
     value: 'Small',
-    className: 'text-xs py-1 px-2', // Petite taille
+    className: 'text-xs py-1 px-2',
   },
 };
 
 export const Medium: Story = {
   args: {
     value: 'Medium',
-    className: 'text-sm py-1.5 px-3', // Taille moyenne
+    className: 'text-sm py-1.5 px-3',
+  },
+};
+
+export const RoundedSuccess: Story = {
+  args: {
+    value: 'rounded Success',
+    className: 'text-sm py-1.5 px-3 rounded-full bg-[#CDFFCD] text-success ring-1',
   },
 };
 
 export const Large: Story = {
   args: {
     value: 'Large',
-    className: 'text-lg py-2 px-4', // Grande taille
+    className: 'text-lg py-2 px-4',
   },
 };
 
 export const XLarge: Story = {
   args: {
     value: 'XLarge',
-    className: 'text-xl py-2.5 px-4.5', // Très grande taille
+    className: 'text-xl py-2.5 px-4.5',
   },
 };
 export const RoundedXL: Story = {
-    args: {
-        value: 'rounded XL',
-        className: 'text-xl py-2.5 px-4.5 rounded-full', // Très grande taille
-    },
-    };
+  args: {
+    value: 'rounded XL',
+    className: 'text-xl py-2.5 px-4.5 rounded-full',
+  },
+};
 export const BadgesInline: Story = {
   render: () => (
     <div className="flex space-x-4">
-      <Badge value="Small" className="px-2 py-1 text-xs bg-black ring-1" />
-      <Badge value="Medium" className=" ring-1 text-sm py-1.5 px-3 bg-gray text-white" />
-      <Badge value="Large" className="px-4 py-2 text-lg text-black bg-yellow-500 ring-1" />
-      <Badge value="XLarge" className=" ring-1 text-xl py-2.5 px-4.5 bg-red-500 text-white" />
+      <Badge value="Small" className="px-2 py-1 text-xs bg-black rounded-lg text-dark ring-1" />
+      <Badge value="Medium" className=" ring-1 text-sm py-1.5 px-3 bg-success text-white rounded-lg" />
+      <Badge value="Large" className="px-4 py-2 text-lg text-black bg-yellow-500 rounded-lg ring-1" />
+      <Badge value="XLarge" className=" ring-1 text-xl py-2.5 px-4.5 bg-danger text-white rounded-lg" />
     </div>
   ),
 };

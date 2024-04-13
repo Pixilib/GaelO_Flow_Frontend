@@ -1,6 +1,6 @@
-import Card from "../../ui/Card";
+// import Card from "../../ui/Card";
 import Spinner from "../../ui/Spinner";
-import Tabs2 from '../../ui/menu/Tabs';
+import Tabs from '../../ui/menu/Tabs';
 import { useCustomQuery } from "../../utils/reactQuery";
 import { getOptions } from "../../services/options";
 import { OptionsResponse } from "../../utils/types";
@@ -24,7 +24,7 @@ const QueuesRoot = () => {
   )
   //create a component who will display QueuesForm or Spinner if the data is loading
   const RenderQueuesForm = () => {
-    return isLoadingOptions ? <Spinner /> : <Retrieve data={options} />
+    return isLoadingOptions ? <Spinner /> : <Retrieve data={options as OptionsResponse} />
   }
 
   const handleTabClick = (path: string) => {
@@ -38,10 +38,11 @@ const QueuesRoot = () => {
   ]
 
   return (
-    <Card className="flex justify-center w-full h-full bg-white">
-      <Tabs2 tabs={tabs} variant='basic' onTabClick={handleTabClick} />
-
-    </Card>
+    // <Card className="flex justify-center h-full bg-white ">
+      <div className="mx-12 rounded-xl">
+        <Tabs tabs={tabs} variant='basic' onTabClick={handleTabClick} className={`bg-white`} />
+      </div>
+    // </Card>
   )
 }
 

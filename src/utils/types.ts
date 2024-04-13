@@ -1,24 +1,14 @@
+type  AtLeastOne<T> = {
+    [K in keyof T]: Pick<T, K>
+}[keyof T];
 //option
 export type Option = {
-    value : any
-    label : string
+    value: any
+    label: string
 }
-//Job
-export type PostJobsAction = "resume" | "pause" | "cancel" | "resubmit";
+export type OptionsPayload = AtLeastOne<OptionsResponse>;
 
-export type JobMutationVariables = {
-    Id: string;
-    Action: PostJobsAction;
-  };
-  
-export type OrthancJob = {
-    Type :string,
-    Progress : number,
-    State : string
-    [key :string] : any
-}
 
-//Options
 export type OptionsResponse = {
     AutoQueryHourStart: number;
     AutoQueryMinuteStart: number;
@@ -45,17 +35,34 @@ export type OptionsResponse = {
     RedisPort: string;
 };
 
+//Job
+export type PostJobsAction = "resume" | "pause" | "cancel" | "resubmit";
+
+export type JobPayload = {
+    Id: string;
+    Action: PostJobsAction;
+};
+
+export type OrthancJob = {
+    Type: string,
+    Progress: number,
+    State: string
+    [key: string]: any
+}
+
+//Options
+
 
 
 
 //auth
 export type SignInResponse = {
-    AccessToken : string;
-    UserId:number;
+    AccessToken: string;
+    UserId: number;
 }
 
 // export type SignUpResponse = {
-//?
+//      ?
 // }
 
 // export type lostPasswordResponse = {
@@ -63,10 +70,10 @@ export type SignInResponse = {
 // }
 
 export type ChangePasswordVariables = {
-    NewPassword : string;
-    ConfirmationPassword : string;
-    Token : string;
-    UserId : number;
+    NewPassword: string;
+    ConfirmationPassword: string;
+    Token: string;
+    UserId: number;
 }
 // export type changePasswordResponse = {
 //     ?

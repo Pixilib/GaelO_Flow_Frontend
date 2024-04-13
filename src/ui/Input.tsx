@@ -27,7 +27,6 @@ const Input = ({
   svgLeft = null,
   svgRight = null,
   bordered = false,
-
   ...props
 }: InputProps) => {
  
@@ -53,9 +52,7 @@ const Input = ({
           step={step}
           placeholder={placeholder}
           className={`peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""} ${bordered ? " border-2 border-gray " : "border-none"} text-gray-600 w-full rounded-xl text-sm disabled:pointer-events-none disabled:opacity-50 ${className}${InputClassName}`}
-
           {...props}
-
         />
 
       </div>

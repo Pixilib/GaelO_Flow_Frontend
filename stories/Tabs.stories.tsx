@@ -54,7 +54,7 @@ const meta: Meta<typeof TabsWrapper> = { // Remarquez le changement ici pour uti
     },
     variant: {
       control: 'radio',
-      options: ['basic', 'underline', 'pill', 'boxed'],
+      options: ['basic', 'underline', 'pill'],
       description: 'Visual style variant of the tabs',
     },
     onTabClick: {
