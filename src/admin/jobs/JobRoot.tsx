@@ -4,7 +4,7 @@ import { getJobs, postJobs } from "../../services/jobs";
 import { Spinner, Card, CardHeader, CardBody, CardFooter } from "../../ui";
 import { useCustomToast } from "../../utils/toastify";
 import { Colors } from "../../utils/enums";
-import { JobMutationVariables, OrthancJob } from '../../utils/types';
+import { JobPayload, OrthancJob } from '../../utils/types';
 
 import JobTable from "./JobTable";
 
@@ -20,8 +20,8 @@ const JobRoot = () => {
     }
   );
 
-  const { mutate } = useCustomMutation<unknown,JobMutationVariables>(
-    ({ Id, Action }: JobMutationVariables) =>
+  const { mutate } = useCustomMutation<unknown, JobPayload>(
+    ({ Id, Action }: JobPayload) =>
       postJobs({ Id, Action }),
     [["jobs"]],
     {
@@ -34,7 +34,7 @@ const JobRoot = () => {
     }
   );
 
-  const handleJobAction = ({Id,Action}:JobMutationVariables) => {
+  const handleJobAction = ({ Id, Action }: JobPayload) => {
     mutate({ Id, Action });
   };
 
@@ -44,7 +44,7 @@ const JobRoot = () => {
       <Card className="w-full bg-white">
         <CardHeader title="Jobs" color={Colors.primary} />
         <CardBody>
-            <JobTable data={jobData as any} onJobAction={handleJobAction} />
+          <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </CardBody>
         <CardFooter></CardFooter>
       </Card>

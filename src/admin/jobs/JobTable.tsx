@@ -5,12 +5,13 @@ import Badge from "../../ui/Badge";
 import { Colors } from "../../utils/enums";
 import JobIcons from "./JobIcons";
 import Popover from "../../ui/Popover";
-import { JobMutationVariables } from "../../utils/types";
+import { JobPayload } from "../../utils/types";
 
 //!WIP 
+//! Needs to fix implemntation of PopOver
 type JobTableProps = {
   data: any[];
-  onJobAction: ({Id, Action}:JobMutationVariables) => void;
+  onJobAction: ({ Id, Action }: JobPayload) => void;
 };
 //WIP for actions
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
@@ -51,18 +52,18 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       cell: (info: any) => {
         return (
           <div className="relative">
-              <Popover popover={infoDetails(info.row.original)} placement="left" className="relative w-auto " withOnClick={true}>
-                <div className="relative transition-transform hover:scale-110">
-                  <Info size="1.5em" color="gray" className="relative" />
-                </div>
-              </Popover>
+            <Popover popover={infoDetails(info.row.original)} placement="left" className="relative w-auto " withOnClick={true}>
+              <div className="relative transition-transform hover:scale-110">
+                <Info size="1.5em" color="gray" className="relative" />
+              </div>
+            </Popover>
           </div>
         );
       },
       enableColumnFilter: false,
     }
   ];
-  
+
   const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
 
   return <Table data={data} columns={columns} headerColor={Colors.almond} />;

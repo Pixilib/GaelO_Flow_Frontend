@@ -4,11 +4,11 @@ import {
   FaPause as Pause,
   FaTimes as Cancel,
 } from "react-icons/fa";
-import { JobMutationVariables, PostJobsAction } from "../../utils/types";
+import { JobPayload, PostJobsAction } from "../../utils/types";
 
 type JobIconsProps = {
   jobId: string;
-  onJobAction: ({Id, Action}:JobMutationVariables) => void;
+  onJobAction: ({ Id, Action }: JobPayload) => void;
 };
 
 const JobIcons = ({ jobId, onJobAction }: JobIconsProps) => {
@@ -19,7 +19,7 @@ const JobIcons = ({ jobId, onJobAction }: JobIconsProps) => {
 
   const classIcons =
     "inline-flex items-center justify-center p-2 rounded-full transition-transform transform hover:scale-110";
-    
+
   return (
     <div className="flex space-x-3">
       <div
