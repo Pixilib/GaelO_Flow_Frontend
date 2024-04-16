@@ -54,7 +54,7 @@ const Card = ({ bordered, className = "", children }: CardsProps) => {
   const spacingClass = "mx-4 md:mx-4";
 
   return (
-    <div className={`${spacingClass} shadow-md ${className} ${borderClass} rounded-xl`}>
+    <div data-gaelo-flow="Card" className={`${spacingClass} shadow-md ${className} ${borderClass} rounded-xl`}>
       {children}
     </div>
   );
@@ -65,7 +65,7 @@ const CardHeader = ({ title, centerTitle, className = "", children, color }: Bas
   const headerClass = getColorClass(color);
 
   return (
-    <div className={`${headerClass} text-white ${shadowClass} rounded-t-xl ${className} flex items-center ${centerTitle ? 'justify-center' : ''} text-center`}>
+    <div data-gaelo-flow="Card-header" className={`${headerClass} text-white ${shadowClass} rounded-t-xl ${className} flex items-center ${centerTitle ? 'justify-center' : ''} text-center`}>
       {title && <h2 className="flex-1 p-4 mx-auto text-lg font-bold">{title}</h2>}
       {children}
     </div>
@@ -76,7 +76,7 @@ const CardBody = ({ children, color, className = "" }: BodyProps) => {
   const bodyClass = getColorClass(color);
 
   return (
-    <div className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black ${className}`}>
+    <div data-gaelo-flow="Card-Body" className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black ${className}`}>
       {children}
     </div>
   );
@@ -86,7 +86,7 @@ const CardFooter = ({ children, className = "", color }: FooterProps) => {
   const footerClass = getColorClass(color);
 
   return (
-    <div className={`${footerClass} box-border grow px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+    <div data-gaelo-flow="Card-footer" className={`${footerClass} box-border grow px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
       {children || <div className="grow"></div>}
     </div>
   );
