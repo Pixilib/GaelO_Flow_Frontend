@@ -11,6 +11,9 @@ interface PeerData {
     peername: string;
     url: string;
     isUserCreated?: boolean;
+    port: number;
+    ipAddress: string;
+    password: string;
 }
 
 interface PeersTableProps {

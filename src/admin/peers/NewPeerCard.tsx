@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
 import { CgClose as CloseIcon } from "react-icons/cg";
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
@@ -12,6 +12,9 @@ interface PeerData {
     peername: string;
     url: string;
     isUserCreated?: boolean;
+    port: number;
+    ipAddress: string;
+    password: string;
 }
 
 interface NewPeerCardProps {
@@ -21,20 +24,25 @@ interface NewPeerCardProps {
 
 const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
     const { toastWarning } = useCustomToast();
-    const [username, setUsername] = useState('');
     const [peername, setPeerName] = useState('');
     const [url, setUrl] = useState('');
+    const [port, setPort] = useState('');
+    const [ipAddress, setIpAddress] = useState('');
+    const [password, setPassword] = useState('');
 
     const onSubmitPeer = () => {
-        if (!username.trim() || !peername.trim() || !url.trim()) {
+        if (!peername.trim() || !url.trim() || !port.trim() || !ipAddress.trim() || !password.trim()) {
             toastWarning("Please fill in all fields correctly.");
             return;
         }
 
         const newPeerData: PeerData = {
-            username,
             peername,
             url,
+            port: parseInt(port, 10),
+            ipAddress,
+            password,
+            isUserCreated: true,
         };
 
         onCreatePeer(newPeerData);
@@ -43,13 +51,17 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
     return (
         <Card className="flex flex-col h-full">
             <CardHeader title="Create New Peer" color={Colors.success}>
-                <CloseIcon size="24px" title="Close" onClick={onClose} className="cursor-pointer" />
+            <CloseIcon size="24px" title="Close" onClick={onClose} className="mr-4 cursor-pointer" />
             </CardHeader>
             <CardBody className="p-4 bg-stone-100">
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                    <Input label="Username" bordered value={username} onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} />
-                    <Input label="Peer Name" bordered value={peername} onChange={(e: ChangeEvent<HTMLInputElement>) => setPeerName(e.target.value)} />
+                <div className="mb-4">
+                    <Input label="Peer Name" bordered fullWidth value={peername} onChange={(e: ChangeEvent<HTMLInputElement>) => setPeerName(e.target.value)} />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
                     <Input label="URL" bordered value={url} onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)} />
+                    <Input label="Port" bordered value={port} onChange={(e: ChangeEvent<HTMLInputElement>) => setPort(e.target.value)} />
+                    <Input label="IP Address" bordered value={ipAddress} onChange={(e: ChangeEvent<HTMLInputElement>) => setIpAddress(e.target.value)} />
+                    <Input label="Password" bordered value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
                 </div>
             </CardBody>
             <CardFooter className="flex justify-center bg-stone-100">

@@ -20,67 +20,26 @@ interface AetData {
 
 const ModalitiesRoot: React.FC = () => {
     const [showNewAetCard, setShowNewAetCard] = useState(false);
-    const [showToast, setShowToast] = useState(false);
-    const [toastMessage, setToastMessage] = useState('');
-    const [toastType, setToastType] = useState<'success' | 'danger'>('success');
-
-    const { data: aets, isLoading } = useCustomQuery<AetData[]>('modalities', getModalities, {
-        select: (data) => Object.entries(data || {}).map(([key, value]) => ({
-            name: key,
-            aet: value?.aet ?? '',
-            host: value?.host ?? '',
-            port: value?.port ?? 0,
-            manufacturer: value?.manufacturer ?? '',
-        })),
-    });
+    const { data: aets, isLoading } = useCustomQuery<AetData[]>('modalities', getModalities);
 
     const { mutate: updateModalityMutate } = useCustomMutation(
         (aet: AetData) => updateModality(aet),
         {
-            onSuccess: () => {
-                showSuccessToast("Modality updated successfully.");
-            },
-            onError: () => {
-                showErrorToast("An error occurred while updating the modality.");
-            },
+            onSuccess: () => console.log("Modality updated successfully."),
+            onError: () => console.log("Error updating modality.")
         }
     );
 
     const { mutate: deleteModalityMutate } = useCustomMutation(
         (name: string) => deleteModality(name),
         {
-            onSuccess: () => {
-                showSuccessToast("Modality deleted successfully.");
-            },
-            onError: () => {
-                showErrorToast("An error occurred while deleting the modality.");
-            },
+            onSuccess: () => console.log("Modality deleted successfully."),
+            onError: () => console.log("Error deleting modality.")
         }
     );
 
-    const showSuccessToast = (message: string) => {
-        setToastMessage(message);
-        setToastType('success');
-        setShowToast(true);
-    };
-
-    const showErrorToast = (message: string) => {
-        setToastMessage(message);
-        setToastType('danger');
-        setShowToast(true);
-    };
-
     const handleNewAetClick = () => setShowNewAetCard(true);
-
-    const createAetHandler = (aet: AetData) => {
-        updateModalityMutate(aet);
-    };
-
-    const deleteAetHandler = (aetName: string) => {
-        if (window.confirm(`Are you sure you want to delete the modality named "${aetName}"?`)) {
-            deleteModalityMutate(aetName);
-        }
-    };
+    const handleCloseNewAetCard = () => setShowNewAetCard(false);
 
     if (isLoading) {
         return <Spinner />;
@@ -92,27 +51,20 @@ const ModalitiesRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets || []} onDeleteAet={deleteAetHandler} />
+                        <ModalitiesTable aetData={aets || []} onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} />
                     </div>
-                    <Button color={Colors.success} onClick={handleNewAetClick}>
-                        <MoreIcon className="mr-3" size={24} /> New modality
-                    </Button>
+                    {!showNewAetCard && (
+                        <Button color={Colors.success} onClick={handleNewAetClick}>
+                            <MoreIcon className="mr-3" size={24} /> New modality
+                        </Button>
+                    )}
                 </div>
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard onClose={() => setShowNewAetCard(false)} onCreateAet={createAetHandler} />
+                    <NewModalityCard onClose={handleCloseNewAetCard} onCreateAet={(aet: AetData) => updateModalityMutate(aet)} />
                 )}
             </CardFooter>
-            {showToast && (
-                <Toast
-                    content={toastMessage}
-                    type={toastType}
-                    onClose={() => setShowToast(false)}
-                    animation="slide-left"
-                    position="bottom-left"
-                />
-            )}
         </Card>
     );
 };

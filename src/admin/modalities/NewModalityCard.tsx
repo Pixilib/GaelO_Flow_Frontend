@@ -1,11 +1,11 @@
-import { ChangeEvent, useState } from 'react';
-import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
+import React, { ChangeEvent, useState } from 'react';
 import { CgClose as CloseIcon } from "react-icons/cg";
+import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Button from '../../ui/Button';
-import SelectInput from '../../ui/SelectInput';
 import Input from '../../ui/Input';
-import { Colors } from "../../utils/enums";
+import SelectInput from '../../ui/SelectInput';
+import { Colors } from '../../utils/enums';
 import { useCustomToast } from "../../utils/toastify";
 
 interface AetData {
@@ -64,9 +64,9 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
 
     return (
         <Card className="flex flex-col h-full">
-            <CardHeader title="Create New Modality" color={Colors.success}>
-                <CloseIcon size="24px" title="Close" onClick={onClose} className="cursor-pointer" />
-            </CardHeader>
+            <CardHeader title="Create New Modality" color={Colors.success} className="flex items-center justify-between">
+                <div className="text-lg font-semibold"></div>
+                <CloseIcon size="24px" title="Close" onClick={onClose} className="mr-4 cursor-pointer" />            </CardHeader>
             <CardBody className="p-4 bg-stone-100">
                 <div className="grid grid-cols-2 gap-4 mb-4">
                     <Input label="Name" bordered value={name} onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)} aria-label="Modality Name" />
@@ -74,12 +74,18 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
                     <Input label="Host" bordered value={host} onChange={(e: ChangeEvent<HTMLInputElement>) => setHost(e.target.value)} aria-label="Host" />
                     <Input label="Port" bordered type="number" value={port.toString()} onChange={(e: ChangeEvent<HTMLInputElement>) => setPort(e.target.value === '' ? '' : Number(e.target.value))} aria-label="Port" />
                     <div className="col-span-2">
-                        <SelectInput options={options} value={manufacturer} onChange={handleSelectChange} placeholder="Select Manufacturer" aria-label="Manufacturer" />
+                        <SelectInput options={options.map(op => ({ value: op.value, label: op.label }))}
+                                     value={manufacturer?.value}
+                                     onChange={e => handleSelectChange(options.find(op => op.value === e.target.value)!)}
+                                     placeholder="Select Manufacturer"
+                                     aria-label="Manufacturer" />
                     </div>
                 </div>
             </CardBody>
             <CardFooter className="flex justify-center bg-stone-100">
-                <Button color={Colors.success} onClick={onSubmitAet} aria-label="Submit New Modality"><CheckIcon size="20px" /></Button>
+                <Button color={Colors.success} onClick={onSubmitAet} aria-label="Submit New Modality">
+                    <CheckIcon size="20px" />
+                </Button>
             </CardFooter>
         </Card>
     );
