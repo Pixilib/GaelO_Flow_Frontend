@@ -42,8 +42,14 @@ const PeersRoot: React.FC = () => {
     });
 
     const { mutate: deletePeerMutate } = useCustomMutation((peerName: string) => deletePeer(peerName), {
-        onSuccess: () => {
+        _onSuccess: () => {
             showSuccessToast("Peer deleted successfully.");
+        },
+        get onSuccess() {
+            return this._onSuccess;
+        },
+        set onSuccess(value) {
+            this._onSuccess = value;
         },
         onError: () => {
             showErrorToast("An error occurred while deleting the peer.");
@@ -84,7 +90,9 @@ const PeersRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <PeersTable peerData={peers || []} onDeletePeer={deletePeerHandler} />
+                        <PeersTable peerData={peers || []} onDeletePeer={deletePeerHandler} onEditPeer={function (_peer: PeerData): void {
+                            throw new Error('Function not implemented.');
+                        } } />
                     </div>
                     <Button color={Colors.success} onClick={handleNewPeerClick}>
                         <MoreIcon className="mr-3" size={24} /> New Peer

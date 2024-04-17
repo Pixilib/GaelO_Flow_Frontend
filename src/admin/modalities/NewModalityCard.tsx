@@ -36,6 +36,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
 
     const options = [
         { value: 'Generic', label: 'Generic' },
+        { value: 'GenericNoWildcardInDates', label: 'GenericNoWildcardInDates' },
     ];
 
     const handleSelectChange = (option: Option) => {
