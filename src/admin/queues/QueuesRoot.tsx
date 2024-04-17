@@ -40,7 +40,7 @@ const QueuesRoot = () => {
   return (
     // <Card className="flex justify-center h-full bg-white ">
       <div className="mx-12 rounded-xl">
-        <Tabs tabs={tabs} variant='basic' onTabClick={handleTabClick} className={`bg-white`} />
+        <Tabs tabs={tabs} variant='basic' onTabClick={handleTabClick} className={`bg-[#EFEFEF]`} />
       </div>
     // </Card>
   )

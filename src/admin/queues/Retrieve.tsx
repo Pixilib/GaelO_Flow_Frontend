@@ -1,27 +1,51 @@
-import { IoMdSend as SendIcon } from "react-icons/io";
-import { Card, CardHeader, CardBody, Badge, Button } from '../../ui';
-import { Colors } from '../../utils/enums';
-import { OptionsResponse } from '../../utils/types';
-import Input2 from '../../ui/Input2';
-import { hoursMinsToString, stringToHoursMinutes, timeDiff } from '../../utils/date';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-// !WIP
+import { useCustomToast } from "../../utils/toastify";
+import { useCustomMutation } from "../../utils/reactQuery";
+import { updateOptions } from "../../services/options";
+import { AutoQueryPayload, OptionsResponse } from '../../utils/types';
+import { formatTime, parseTimeString, formatTimeReadable, timeDiff } from '../../utils/date';
+
+import { IoMdSend as SendIcon } from "react-icons/io";
+import { Card, CardHeader, CardBody, Badge, Button, Table } from '../../ui';
+import { Colors } from '../../utils/enums';
+import Input2 from '../../ui/Input2';
+
+// 
 type RetrieveProps = {
     data: OptionsResponse;
 }
-
+//* This component works get the data, update the data with form
+//TODO - Need to refactor the code in differents components
 const Retrieve = ({ data }: RetrieveProps) => {
     const [startTime, setStartTime] = useState("");
     const [stopTime, setStopTime] = useState("");
     const [timeDelta, setTimeDelta] = useState(timeDiff(startTime, stopTime));
+    const { toastSuccess, toastError } = useCustomToast();
+
+    const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
+        ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) => updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
+        {
+            onSuccess: () => {
+                toastSuccess("Options updated successfully");
+            },
+            onError: (error: any) => {
+                console.log({ error })
+                if (error.data.message) {
+                    toastError(error.data.message);
+                } else {
+                    toastError("An error occurred during updating options.");
+                }
+            },
+        }
+    );
 
     useEffect(() => {
-        const optionClockStart = hoursMinsToString(data.AutoQueryHourStart, data.AutoQueryMinuteStart);
-        const optionClockStop = hoursMinsToString(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
+        const optionClockStart = formatTime(data.AutoQueryHourStart, data.AutoQueryMinuteStart);
+        const optionClockStop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
         setStartTime(optionClockStart);
         setStopTime(optionClockStop);
-        setTimeDelta(stringToHoursMinutes(timeDiff(optionClockStart, optionClockStop)));
+        setTimeDelta(formatTimeReadable(timeDiff(optionClockStart, optionClockStop)));
     }, [data]);
 
     const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>, type: 'start' | 'stop') => {
@@ -30,16 +54,23 @@ const Retrieve = ({ data }: RetrieveProps) => {
         if (type === 'start') {
             setStartTime(value);
             console.log({ value, startTime, stopTime })
-            setTimeDelta(stringToHoursMinutes(timeDiff(value, stopTime)));
+            setTimeDelta(formatTimeReadable(timeDiff(value, stopTime)));
         } else {
             setStopTime(value);
-            setTimeDelta(stringToHoursMinutes(timeDiff(startTime, value)));
+            setTimeDelta(formatTimeReadable(timeDiff(startTime, value)));
         }
     };
 
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const { hours: startHours, minutes: startMinutes } = parseTimeString(startTime);
+        const { hours: stopHours, minutes: stopMinutes } = parseTimeString(stopTime);
+        optionsMutation.mutate({ AutoQueryHourStart: startHours, AutoQueryMinuteStart: startMinutes, AutoQueryHourStop: stopHours, AutoQueryMinuteStop: stopMinutes });
+    }
+
     return (
-        <div data-gaelo-flow="Retrieve-Container-Queues" className="flex flex-col items-center justify-center">
-            <Card className="w-3/4 mt-8 bg-white ">
+        <form onSubmit={handleSubmit} data-gaelo-flow="Retrieve-Container-Queues" className="flex flex-col items-center justify-center">
+            <Card className="w-3/4 mt-8 border">
                 <CardHeader title="Retrieve Schedule Time: " color={Colors.success} />
                 <CardBody color={Colors.light}>
                     <div className='relative flex items-center justify-between mt-6'>
@@ -65,17 +96,18 @@ const Retrieve = ({ data }: RetrieveProps) => {
                             `}
                         />
                     </div>
-            
-
                 </CardBody>
             </Card>
-                    <div className="flex justify-center mt-6">
-                        <Button color={Colors.success} className="w-32 gap-2 px-8 text-center">
-                            <span> <SendIcon /> </span>
-                            <span> Send </span>
-                        </Button>
-                    </div>
-        </div>
+            <div className="flex justify-center mt-6">
+                <Button color={Colors.success} className="w-32 gap-2 px-8 text-center" type="submit">
+                    <span><SendIcon /></span>
+                    <span>Send</span>
+                </Button>
+            </div>
+            <div className="flex mt-6">
+                <Table data={[]} columns={[]} headerColor={Colors.almond} />
+            </div>
+        </form>
     )
 }
 
