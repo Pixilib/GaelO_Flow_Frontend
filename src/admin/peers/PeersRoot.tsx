@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
 import Button from '../../ui/Button';
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
-import NewPeerCard from './NewPeerCard'; // Assurez-vous que cet import correspond à votre nom de fichier et de composant
+import NewPeerCard from './NewPeerCard';
 import PeersTable from './PeersTable';
 import Toast from '../../ui/toast/Toast';
 import { updatePeer, deletePeer, getPeers } from '../../services/peers';
@@ -47,7 +47,9 @@ const PeersRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <PeersTable peerData={peers || []} onDeletePeer={(peerName: string) => deletePeerMutate(peerName)} />
+                        <PeersTable peerData={peers || []} onDeletePeer={(peerName: string) => deletePeerMutate(peerName)} onEditPeer={function (_peer: PeerData): void {
+                            throw new Error('Function not implemented.');
+                        } } />
                     </div>
                     {!showNewPeerCard && (
                         <Button color={Colors.success} onClick={handleNewPeerClick}>

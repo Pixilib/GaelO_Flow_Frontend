@@ -43,6 +43,7 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
             ipAddress,
             password,
             isUserCreated: true,
+            username: ''
         };
 
         onCreatePeer(newPeerData);

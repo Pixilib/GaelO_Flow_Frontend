@@ -75,10 +75,10 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
                     <Input label="Port" bordered type="number" value={port.toString()} onChange={(e: ChangeEvent<HTMLInputElement>) => setPort(e.target.value === '' ? '' : Number(e.target.value))} aria-label="Port" />
                     <div className="col-span-2">
                         <SelectInput options={options.map(op => ({ value: op.value, label: op.label }))}
-                                     value={manufacturer?.value}
-                                     onChange={e => handleSelectChange(options.find(op => op.value === e.target.value)!)}
-                                     placeholder="Select Manufacturer"
-                                     aria-label="Manufacturer" />
+                            value={manufacturer?.value}
+                            onChange={e => handleSelectChange(options.find(op => op.value === e.target.value)!)}
+                            placeholder="Select Manufacturer"
+                            aria-label="Manufacturer" />
                     </div>
                 </div>
             </CardBody>

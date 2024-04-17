@@ -48,7 +48,7 @@ const customStyles: StylesConfig<OptionType, boolean> = {
     backgroundColor: '#E2E8F0',
     borderRadius: '6px',
     padding: '2px 6px',
-    margin: '2px',  // Ajoute un peu d'espace autour de chaque tag
+    margin: '2px',
   }),
   multiValueLabel: (provided) => ({
     ...provided,
