@@ -1,14 +1,25 @@
+//option
+export type AutoQueryPayload = {
+    AutoQueryHourStart: number;
+    AutoQueryMinuteStart: number;
+    AutoQueryHourStop: number;
+    AutoQueryMinuteStop: number;
+};
+
+// ? we can use this type to validate the payload who check if object contains properties of OptionsResponse
+//! For now we don't need to use this type
 type  AtLeastOne<T> = {
     [K in keyof T]: Pick<T, K>
 }[keyof T];
-//option
+
+export type OptionsPayload = AtLeastOne<OptionsResponse>;
+
 export type Option = {
     value: any
     label: string
 }
-export type OptionsPayload = AtLeastOne<OptionsResponse>;
 
-
+// * This is the response from the API getOptions
 export type OptionsResponse = {
     AutoQueryHourStart: number;
     AutoQueryMinuteStart: number;

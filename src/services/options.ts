@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { OptionsPayload, OptionsResponse } from "src/utils/types";
+import { AutoQueryPayload, OptionsResponse } from "src/utils/types";
 
 export const getOptions = (): Promise<OptionsResponse> => {
   return axios
@@ -15,7 +15,7 @@ export const getOptions = (): Promise<OptionsResponse> => {
     });
 };
 
-export const updateOptions =  (payload:OptionsPayload):Promise<unknown> =>{
+export const updateOptions =  (payload:AutoQueryPayload):Promise<void> =>{
 return axios.patch("/api/options", payload)
     .then(response => response.data)
     .catch(function (error) {
