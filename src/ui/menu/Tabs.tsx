@@ -42,8 +42,8 @@ const Tabs = ({ tabs, variant = 'basic', onTabClick, className }: TabsProps) => 
   };
   
   return (
-    <div data-gaelo-flow="Tabs" className={`flex flex-col justify-center w-full h-full ${className}`}>
-      <div className="flex items-center justify-center text-center cursor-pointer rounded-t-xl min-w-30 min-h-20">
+    <div data-gaelo-flow="Tabs" className={`flex flex-col shadow-lg justify-center w-full h-full rounded-lg ${className}`}>
+      <div className="flex items-center justify-center text-center shadow-md cursor-pointer rounded-t-xl min-w-30 min-h-20">
         {tabs.map((tab,index) => (
           <div
             data-galeo-flow={`Tab-${tab.title}`}
