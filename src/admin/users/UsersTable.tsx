@@ -1,4 +1,4 @@
-import { BsPencilFill as Edit } from "react-icons/bs"; 
+import { BsPencilFill as Edit } from "react-icons/bs";
 import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { UserResponse } from "../../utils/types";
@@ -40,24 +40,32 @@ const UsersTable = ({ data = [] }: UsersProps) => {
             header: 'Super Admin',
             accessorKey: 'SuperAdmin',
             enableColumnFilters: true,
-        },
-        {
-            header: 'Action',
-            cell:( info:any ) => {
-                return(
+            cell({ row }: { row: any }) {
+                console.log(row)
+                return (
                     <div className="flex justify-center">
-                        <Edit size={'1.3rem'} color="gray" />
+                        <input id="SuperAdmin" type="checkbox" checked={row.original.SuperAdmin} disabled />
+                        <label htmlFor="SuperAdmin" className="ml-2">SuperAdmin</label>
                     </div>
                 )
             }
         },
-        
+        {
+            header: 'Action',
+            cell: (info: any) => {
+                return (
+                    <div className="flex justify-center">
+                        <Edit size={'1.3rem'} color="gray" onClick={() => console.log('click on Edit')} />
+                    </div>
+                )
+            }
+        },
     ]
 
     return (
         <div className="mx-12 mt-4">
             <Table data={data} columns={columns} headerColor={Colors.almond} />
         </div>
-    );
+    )
 }
 export default UsersTable;

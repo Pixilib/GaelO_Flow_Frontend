@@ -62,7 +62,10 @@ export type OrthancJob = {
 }
 
 //User
-
+/**
+ * @typedef RoleUser
+ * Represent all the roles that a user can have
+ */
 type RoleUser = {
     Name: string;
     Import: boolean;
@@ -76,7 +79,10 @@ type RoleUser = {
     CdBurner: boolean;
     AutoRouting: boolean;
 }
-
+/**
+ * @typedef User
+ * Represent a user with all fields who need
+ */
 type User = {
     Id: number;
     Firstname: string;
@@ -87,6 +93,11 @@ type User = {
     RoleName: string;
     Role: RoleUser;
 }
+/**
+ * @typedef UserResponse
+ * Represent a list of Users
+ * Response from the API get users
+ */
 export type UserResponse = User[];
 
 
