@@ -30,7 +30,7 @@ const Input = ({
   ...props
 }: InputProps) => {
  
-  const InputClassName="w-full bg-gray-50 peer border border-gray-300 text-gray-500 focus:outline-none focus:ring-blue-500 pl-10 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:dark:bg-opacity-50"
+  const InputClassName="w-full bg-gray-50 peer border border-gray-300 text-gray-500 focus:outline-none focus:ring-blue-500 pl-10 focus:border-primary block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:dark:bg-opacity-50"
   return (
     <div className="w-full ">
       {label && <label className="mb-2 text-sm font-medium text-dark">{label}</label>}

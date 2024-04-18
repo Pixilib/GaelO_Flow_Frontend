@@ -4,48 +4,54 @@ import Badge from '../../ui/Badge';
 import { ColumnDef } from '@tanstack/react-table';
 import { Colors } from '../../utils/enums';
 import Button from '../../ui/Button';
+import { AiOutlineEdit as EditIcon, AiOutlineDelete as DeleteIcon, AiOutlineRedo as ReplayIcon, AiOutlineAudio as EchoIcon } from 'react-icons/ai';
 
 interface AetData {
     name: string;
-    Aet: number;
-    Host: string;
-    Manufacturer: string;
+    aet: string;
+    host: string;
+    manufacturer: string;
+    isUserCreated?: boolean;
 }
 
-interface AetProps {
+interface ModalitiesTableProps {
     aetData: AetData[];
-    onDeleteAet: (aetname: string) => void;
+    onDeleteAet: (aetName: string) => void;
+    onEditAet: (aet: AetData) => void;
 }
 
-const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
-
+const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData, onDeleteAet, onEditAet }) => {
     const columns: ColumnDef<AetData>[] = [
+        { accessorKey: 'name', header: 'Name' },
+        { accessorKey: 'aet', header: 'AET', cell: info => <Badge value={info.getValue() as string} /> },
+        { accessorKey: 'host', header: 'Host' },
+        { accessorKey: 'manufacturer', header: 'Manufacturer' },
         {
-            accessorKey: 'name',
-            header: 'Name',
+            header: 'Actions',
+            id: 'actions',
+            cell: ({ row }) => (
+                <>
+                    <Button onClick={() => ReplayIcon(row.original)} color={Colors.primary}><ReplayIcon /></Button>
+                    <Button onClick={() => EchoIcon(row.original)} color={Colors.secondary}><EchoIcon /></Button>
+                </>
+            )
         },
         {
-            accessorKey: 'Aet',
-            header: 'Aet',
-            cell: (info) => <Badge value={info.getValue() as number} />,
+            header: '',
+            id: 'edit',
+            cell: ({ row }) => row.original.isUserCreated ? (
+                <EditIcon onClick={() => onEditAet(row.original)} className="mr-2 text-gray-600 cursor-pointer" />
+            ) : null,
         },
         {
-            accessorKey: 'Host',
-            header: 'HOST',
-        },
-        {
-            accessorKey: 'Manufacturer',
-            header: 'Manufacturer',
-        },
-        {
-            id: "delete",
-            cell: ({ row }) => <>
-                <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>Delete</Button>            </>
+            id: 'delete',
+            cell: ({ row }) => row.original.isUserCreated ? (
+                <DeleteIcon onClick={() => onDeleteAet(row.original.name)} className="text-red-500 cursor-pointer" />
+            ) : null,
         }
-    ]
-    return (
-        <Table columns={columns} data={Data} headerColor={Colors.almond} />
-    );
+    ];
+
+    return <Table columns={columns} data={aetData} headerColor={Colors.almond} />;
 };
 
 export default ModalitiesTable;

@@ -19,20 +19,49 @@ interface SelectionInputProps {
 const customStyles: StylesConfig<OptionType, boolean> = {
   control: (provided, state) => ({
     ...provided,
-    borderRadius: '0.375rem', 
-    borderColor: state.isFocused ? 'primary' : 'primaryHover', 
-    boxShadow: state.isFocused ? '0 0 0 1px #4F46E5' : 'none',
+    borderRadius: '10px',
+    borderColor: state.isFocused ? '#333182' : '#D1D5DB',
+    borderWidth: '2px',
+    boxShadow: 'none',
     '&:hover': {
-      borderColor: state.isFocused ? 'indigo-600' : 'primary', 
+      borderColor: state.isFocused ? '#333182' : '#D1D5DB',
     },
-    backgroundColor: state.isFocused ? '#EFF6FF' : '#EFF6FF',
   }),
   menu: (provided) => ({
     ...provided,
-    borderRadius: '0.375rem',
-    borderColor: 'gray-200', 
+    borderRadius: '10px',
+    padding: '12px',
   }),
-  
+  option: (provided, state) => ({
+    ...provided,
+    borderRadius: '8px',
+    padding: '8px 16px',
+    backgroundColor: state.isSelected ? '#333182' : 'white',
+    color: state.isSelected ? 'white' : 'grey',
+    '&:hover': {
+      backgroundColor: '#333182',
+      color: 'white',
+    },
+  }),
+  multiValue: (provided) => ({
+    ...provided,
+    backgroundColor: '#E2E8F0',
+    borderRadius: '6px',
+    padding: '2px 6px',
+    margin: '2px',
+  }),
+  multiValueLabel: (provided) => ({
+    ...provided,
+    color: '#1F2937',
+  }),
+  multiValueRemove: (provided) => ({
+    ...provided,
+    color: '#EF4444',
+    '&:hover': {
+      backgroundColor: '#FEE2E2',
+      color: '#DC2626',
+    },
+  }),
 };
 
 const SelectionInput: React.FC<SelectionInputProps> = ({
