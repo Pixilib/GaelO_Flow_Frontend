@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import React, { useState, ReactNode } from 'react';
 
 // Définition du type pour chaque onglet
-export type Tab = {
+export type TabProps = {
   title: string;
   path?: string;
-  Component: () => React.ReactNode|string;
+  component: React.ComponentType<any> | ReactNode;
+};
+
+// Composant Tab, il ne s'occupe que de l'affichage
+const Tab: React.FC<TabProps> = ({ component }) => {
+    return <>{typeof component === 'function' ? React.createElement(component) : component}</>;
 };
 
 // Props du composant Tabs
 export type TabsProps = {
-  tabs: Tab[];
-  variant?: 'basic' | 'underline' | 'pill' ;
+  children: React.ReactElement<TabProps>[];
+  variant?: 'basic' | 'underline' | 'pill';
   className?: string;
-  onTabClick?: (path: string) => void; 
+  onTabClick?: (path: string) => void;
 };
 
 // Styles pour chaque variant
@@ -31,33 +36,34 @@ const variantStyles = {
   },
 };
 
-const Tabs = ({ tabs, variant = 'basic', onTabClick, className }: TabsProps) => {
+const Tabs: React.FC<TabsProps> = ({ children, variant = 'basic', onTabClick, className }) => {
   const [activeTab, setActiveTab] = useState(0);
   const styles = variantStyles[variant];
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: number, path?: string) => {
     setActiveTab(index);
-    const path = tabs[index].path;
-    if( path && onTabClick) onTabClick(path);
+    if (path && onTabClick) {
+      onTabClick(path);
+    }
   };
-  
+
   return (
-    <div data-gaelo-flow="Tabs" className={`flex flex-col shadow-lg justify-center w-full h-full rounded-lg ${className}`}>
+    <div className={`flex flex-col shadow-lg justify-center w-full h-full rounded-lg ${className}`}>
       <div className="flex items-center justify-center text-center shadow-md cursor-pointer rounded-t-xl min-w-30 min-h-20">
-        {tabs.map((tab,index) => (
+        {React.Children.map(children, (child, index) => (
           <div
-            data-galeo-flow={`Tab-${tab.title}`}
             key={index}
-            className={`flex-grow min-h-20 rounded-t-xl text-lg flex items-center justify-center ${activeTab === index ? styles.active : styles.inactive}`}
-            onClick={() => handleClick(index)}
+            className={`flex-grow min-h-20 rounded-t-xl text-lg flex items-center justify-center ${index === activeTab ? styles.active : styles.inactive}`}
+            onClick={() => handleClick(index, child.props.path)}
           >
-            {tab.title}
+            {child.props.title}
           </div>
         ))}
       </div>
-      {tabs[activeTab]?.Component()}
+      {React.isValidElement(children[activeTab]) ? <Tab {...children[activeTab].props} /> : null}
     </div>
   );
 };
 
 export default Tabs;
+export { Tab };
