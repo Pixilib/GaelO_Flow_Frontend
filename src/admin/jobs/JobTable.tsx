@@ -13,7 +13,6 @@ type JobTableProps = {
   data: any[];
   onJobAction: ({ Id, Action }: JobPayload) => void;
 };
-//WIP for actions
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
 
   const columns = [

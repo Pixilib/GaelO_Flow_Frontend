@@ -8,7 +8,7 @@ export type AutoQueryPayload = {
 
 // ? we can use this type to validate the payload who check if object contains properties of OptionsResponse
 //! For now we don't need to use this type
-type  AtLeastOne<T> = {
+type AtLeastOne<T> = {
     [K in keyof T]: Pick<T, K>
 }[keyof T];
 
@@ -61,9 +61,33 @@ export type OrthancJob = {
     [key: string]: any
 }
 
-//Options
+//User
 
+type RoleUser = {
+    Name: string;
+    Import: boolean;
+    Anonymize: boolean;
+    Export: boolean;
+    Query: boolean;
+    AutoQuery: boolean;
+    Delete: boolean;
+    Admin: boolean;
+    Modify: boolean;
+    CdBurner: boolean;
+    AutoRouting: boolean;
+}
 
+type User = {
+    Id: number;
+    Firstname: string;
+    Lastname: string;
+    Username: string;
+    Email: string;
+    SuperAdmin: boolean;
+    RoleName: string;
+    Role: RoleUser;
+}
+export type UserResponse = User[];
 
 
 //auth

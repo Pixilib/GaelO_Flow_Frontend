@@ -13,7 +13,6 @@ import Delete from "./Delete";
 //! WIP - This is the root component for the Queues
 const QueuesRoot = () => {
   const navigate = useNavigate();
-  // implement the logic to fetch the data from the API queues
   const { data: options, isPending: isLoadingOptions } = useCustomQuery<OptionsResponse>(
     ["options"],
     () => getOptions(),
@@ -22,8 +21,7 @@ const QueuesRoot = () => {
       refetchInterval: 10000,
     }
   )
-  //create a component who will display QueuesForm or Spinner if the data is loading
-  const RenderQueuesForm = () => {
+  const RetrieveDisplay = () => {
     return isLoadingOptions ? <Spinner /> : <Retrieve data={options as OptionsResponse} />
   }
 
@@ -32,7 +30,7 @@ const QueuesRoot = () => {
   }
 
   const tabs = [
-    { title: 'retrieve', path: 'retieve', Component: () => <RenderQueuesForm /> },
+    { title: 'retrieve', path: 'retrieve', Component: () => <RetrieveDisplay /> },
     { title: 'anonymize', path: 'anonymize', Component: () => <Anonymize /> },
     { title: 'delete', path: 'delete', Component: () => <Delete /> },
   ]

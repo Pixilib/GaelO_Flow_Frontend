@@ -54,7 +54,7 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
   const headerBgClass = `bg-${headerColor}`;
 
   return (
-    <div className={`max-h-[500px] overflow-x-auto rounded-xl ${className}`}>
+    <div className={`max-h-[500px] overflow-x-auto rounded-xl shadow-md ${className}`}>
       <table className={`min-w-full border-grayCustom ${className}`}>
         <thead className={headerBgClass}>
           {table.getHeaderGroups().map(headerGroup => (
@@ -114,7 +114,7 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
           ))}
         </tbody>
       </table>
-      <div className="flex justify-end my-2 me-2">
+      <div className="flex justify-end">
         <Footer
           table={table}
         />

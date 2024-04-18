@@ -48,7 +48,7 @@ const Tabs = ({ tabs, variant = 'basic', onTabClick, className }: TabsProps) => 
           <div
             data-galeo-flow={`Tab-${tab.title}`}
             key={index}
-            className={`flex-grow min-h-20 rounded-t-xl flex items-center justify-center ${activeTab === index ? styles.active : styles.inactive}`}
+            className={`flex-grow min-h-20 rounded-t-xl text-lg flex items-center justify-center ${activeTab === index ? styles.active : styles.inactive}`}
             onClick={() => handleClick(index)}
           >
             {tab.title}

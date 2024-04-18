@@ -1,6 +1,7 @@
+import { UserResponse } from "../utils/types";
 import axios from "./axios";
 
-export const getUsers = (): Promise<unknown> => {
+export const getUsers = (): Promise<UserResponse> => {
   return axios
     .get("/api/users")
     .then(function (response) {
@@ -13,3 +14,4 @@ export const getUsers = (): Promise<unknown> => {
       throw error;
     });
 };
+

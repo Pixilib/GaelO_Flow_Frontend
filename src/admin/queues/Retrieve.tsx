@@ -22,9 +22,18 @@ const Retrieve = ({ data }: RetrieveProps) => {
     const [stopTime, setStopTime] = useState("");
     const [timeDelta, setTimeDelta] = useState(timeDiff(startTime, stopTime));
     const { toastSuccess, toastError } = useCustomToast();
-
+    
+    useEffect(() => {
+        const optionClockStart = formatTime(data.AutoQueryHourStart, data.AutoQueryMinuteStart);
+        const optionClockStop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
+        setStartTime(optionClockStart);
+        setStopTime(optionClockStop);
+        setTimeDelta(formatTimeReadable(timeDiff(optionClockStart, optionClockStop)));
+    }, [data]);
+    
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
         ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) => updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
+        [["options"]],
         {
             onSuccess: () => {
                 toastSuccess("Options updated successfully");
@@ -40,20 +49,11 @@ const Retrieve = ({ data }: RetrieveProps) => {
         }
     );
 
-    useEffect(() => {
-        const optionClockStart = formatTime(data.AutoQueryHourStart, data.AutoQueryMinuteStart);
-        const optionClockStop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
-        setStartTime(optionClockStart);
-        setStopTime(optionClockStop);
-        setTimeDelta(formatTimeReadable(timeDiff(optionClockStart, optionClockStop)));
-    }, [data]);
 
     const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>, type: 'start' | 'stop') => {
         const value = event.target.value;
-        console.log({ value, type, startTime, stopTime, timeDelta })
         if (type === 'start') {
             setStartTime(value);
-            console.log({ value, startTime, stopTime })
             setTimeDelta(formatTimeReadable(timeDiff(value, stopTime)));
         } else {
             setStopTime(value);
