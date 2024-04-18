@@ -12,7 +12,6 @@ import { BsQuestionLg } from "react-icons/bs";
 import Input from '../../ui/Input';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, orthancReset } from '../../services/orthanc';
-
 const Badge: React.FC<{ value: number }> = ({ value }) => {
     const badgeClasses = `rounded-xl bg-indigo-100 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-green-600/20`;
     return <span className={badgeClasses}>{value}</span>;
@@ -99,11 +98,11 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     return (
         <Card>
             <CardHeader title="Orthanc Settings" color={Colors.primary} />
-            <CardBody color={Colors.light}>
-                <div className="mt-5"></div>
-                <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
-            </CardBody>
+            <CardBody color={Colors.light} className="pb-0 mb-0">
+    <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
+</CardBody>
             <CardFooter className="flex justify-center space-x-4" color={Colors.light}>
+            
                 <Button color={Colors.orange} onClick={reset}>
                     <RestartIcon size="20px" title="Restart" />
                 </Button>
