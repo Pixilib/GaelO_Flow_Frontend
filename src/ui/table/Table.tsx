@@ -114,7 +114,7 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
           ))}
         </tbody>
       </table>
-      <div className="flex justify-end my-2 me-2">
+      <div className="w-full">
         <Footer
           table={table}
         />

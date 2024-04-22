@@ -7,6 +7,7 @@ interface OptionType {
 }
 
 interface SelectionInputProps {
+  value: OptionType|undefined,
   options: OptionType[] | GroupBase<OptionType>[];
   onChange: (value: any) => void;
   placeholder?: string;
@@ -72,6 +73,7 @@ const SelectionInput: React.FC<SelectionInputProps> = ({
   isMulti = false,
   formatGroupLabel,
   styles,
+  value,
   ...props
 }) => (
   <Select
@@ -82,6 +84,7 @@ const SelectionInput: React.FC<SelectionInputProps> = ({
     formatOptionLabel={formatOptionLabel}
     formatGroupLabel={formatGroupLabel}
     styles={{ ...customStyles, ...styles }}
+    value={value}
     {...props}
   />
 );
