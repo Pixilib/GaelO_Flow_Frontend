@@ -46,7 +46,9 @@ const JobRoot = () => {
         <CardBody>
           <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </CardBody>
-        <CardFooter></CardFooter>
+        <CardFooter>
+          
+        </CardFooter>
       </Card>
     </div>
   );

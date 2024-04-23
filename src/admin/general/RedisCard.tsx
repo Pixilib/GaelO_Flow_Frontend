@@ -1,10 +1,9 @@
 import React from 'react';
 
-import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Table from '../../ui/table/Table';
-import Input from '../../ui/Input';
+import type { ColumnDef } from '@tanstack/react-table';
+
+import {Table, Card, CardHeader, CardBody, CardFooter } from '../../ui/';
 import { Colors } from '../../utils/enums';
-import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '../../ui';
 
 interface RedisData {

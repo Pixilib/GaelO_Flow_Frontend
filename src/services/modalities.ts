@@ -1,11 +1,11 @@
 import axios from "axios";
 
 interface Modality {
-    name: string;
-    aet: string;
-    host: string;
-    port: number;
-    manufacturer: string;
+    Name: string;
+    AET: string;
+    Host: string;
+    Port: number;
+    Manufacturer: string;
 }
 
 function handleAxiosError(error: any) {
@@ -18,9 +18,7 @@ function handleAxiosError(error: any) {
 export const updateModality = (
     modality: Modality
 ): Promise<Modality> => {
-    const { name, aet, host, port, manufacturer } = modality;
-    const payload = { aet, host, port, manufacturer };
-    return axios.post(`/api/modalities/${name}`, payload)
+    return axios.put(`/api/modalities/${modality.Name}`, modality)
         .then(response => response.data)
         .catch(handleAxiosError);
 };
@@ -31,8 +29,14 @@ export const deleteModality = (name: string): Promise<string> => {
         .catch(handleAxiosError);
 };
 
-export const getModalities = (): Promise<Modality[]> => {
+export const getModalities = (): Promise<Record<string, Modality>> => {
     return axios.get("/api/modalities?expand")
         .then(response => response.data)
+        .catch(handleAxiosError);
+};
+
+export const echoModality = (name :string): Promise<void> => {
+    return axios.post("/api/modalities/" + name + "/echo")
+        .then(() => undefined)
         .catch(handleAxiosError);
 };

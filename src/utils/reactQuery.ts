@@ -24,6 +24,7 @@ const useCustomMutation = <T, V = undefined|any> (
     return useMutation({
         mutationFn,
         retry: false,
+        ...options,
         onSuccess: (data, variables, context) => {
             // Fonction pour invalider toutes les requêtes
             const invalidateAllQueries = (keys: string[][]) => {
@@ -35,17 +36,7 @@ const useCustomMutation = <T, V = undefined|any> (
             }
             invalidateAllQueries(invalidatedQueryKeys);
         },
-        onError: (error, variables, context) => {
-            if (options?.onError) {
-                options.onError(error, variables, context);
-            }
-        },
-        onSettled: (data, error, variables, context) => {
-            if (options?.onSettled) {
-                options.onSettled(data, error, variables, context);
-            }
-        },
-        ...options
+        
     });
 };
 

@@ -14,9 +14,9 @@ const General = () => {
 
   return (
     <div className="flex flex-col">
-      <RedisCard redisData={{ address: data.RedisAddress, port: data.RedisPort }} />
+      <RedisCard redisData={{ address: data.RedisAddress, port: Number(data.RedisPort), password: data.RedisPort }} />
       <div className="py-8">
-        <OrthancCard orthancData={{ address: data.OrthancAddress, port: data.OrthancPort, password: data.OrthancPassword, username: data.OrthancUsername }} />
+        <OrthancCard orthancData={{ address: data.OrthancAddress, port: Number(data.OrthancPort), password: data.OrthancPassword, username: data.OrthancUsername }} />
       </div>
     </div>
   );

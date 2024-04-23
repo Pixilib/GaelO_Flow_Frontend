@@ -37,6 +37,9 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
     const options = [
         { value: 'Generic', label: 'Generic' },
         { value: 'GenericNoWildcardInDates', label: 'GenericNoWildcardInDates' },
+        { value: 'GenericNoUniversalWildcard', label: 'GenericNoUniversalWildcard' },
+        { value: 'Vitrea', label: 'Vitrea' },
+        { value: 'GE', label: 'GE' },
     ];
 
     const handleSelectChange = (option: Option) => {
@@ -74,9 +77,9 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
                     <Input label="Host" bordered value={host} onChange={(e: ChangeEvent<HTMLInputElement>) => setHost(e.target.value)} aria-label="Host" />
                     <Input label="Port" bordered type="number" value={port.toString()} onChange={(e: ChangeEvent<HTMLInputElement>) => setPort(e.target.value === '' ? '' : Number(e.target.value))} aria-label="Port" />
                     <div className="col-span-2">
-                        <SelectInput options={options.map(op => ({ value: op.value, label: op.label }))}
-                            value={manufacturer?.value}
-                            onChange={e => handleSelectChange(options.find(op => op.value === e.target.value)!)}
+                        <SelectInput options={options}
+                            value={manufacturer ?? undefined}
+                            onChange={e => handleSelectChange(e)}
                             placeholder="Select Manufacturer"
                             aria-label="Manufacturer" />
                     </div>

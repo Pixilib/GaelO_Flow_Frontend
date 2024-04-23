@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Button from '../../ui/Button';
+
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
+
+import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
+import { Colors } from '../../utils/enums';
+import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
+
 import NewModalityCard from './NewModalityCard';
 import ModalitiesTable from './ModalitiesTable';
-import Toast from '../../ui/toast/Toast';
-import { updateModality, deleteModality, getModalities } from '../../services/modalities';
-import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
-import { Colors } from '../../utils/enums';
-import Spinner from '../../ui/Spinner';
+import { updateModality, deleteModality, getModalities, echoModality } from '../../services/modalities';
+import { useCustomToast } from '../../utils/toastify';
 
 interface AetData {
     name: string;
@@ -19,31 +20,60 @@ interface AetData {
 }
 
 const ModalitiesRoot: React.FC = () => {
+
+    const { toastSuccess, toastError } = useCustomToast()
+
     const [showNewAetCard, setShowNewAetCard] = useState(false);
-    const { data: aets, isLoading } = useCustomQuery<AetData[]>('modalities', getModalities);
+
+    const { data: aets, isLoading } = useCustomQuery<AetData[]>(
+        ['modalities'],
+        () => getModalities(),
+        {
+            select: (data): AetData[] => {
+                return Object.entries(data).map(([name, aet]) => {
+                    return {
+                        name: name,
+                        aet: aet.AET,
+                        host: aet.Host,
+                        port: aet.Port,
+                        manufacturer: aet.Manufacturer
+                    }
+                });
+            }
+        });
 
     const { mutate: updateModalityMutate } = useCustomMutation(
-        (aet: AetData) => updateModality(aet),
+        (aet: AetData) => updateModality({ AET: aet.aet, Host: aet.host, Port: aet.port, Manufacturer: aet.manufacturer, Name: aet.name }),
+        [['modalities']],
         {
-            onSuccess: () => console.log("Modality updated successfully."),
-            onError: () => console.log("Error updating modality.")
+            onSuccess: () => toastSuccess("Modality created successfully"),
+            onError: () => toastError("Error while creating modality"),
+        }
+    );
+
+    const { mutate: echoModalityMutate } = useCustomMutation(
+        (aetName :string) => echoModality(aetName),
+        [['modalities']],
+        {
+            onSuccess: () => toastSuccess("Echo successful"),
+            onError: () => toastError("Error while echo"),
         }
     );
 
     const { mutate: deleteModalityMutate } = useCustomMutation(
         (name: string) => deleteModality(name),
+        [['modalities']],
         {
-            onSuccess: () => console.log("Modality deleted successfully."),
-            onError: () => console.log("Error deleting modality.")
+            onSuccess: () => toastSuccess("Modality deleted successfully"),
+            onError: () => toastError("Error while deleting modality"),
         }
     );
 
     const handleNewAetClick = () => setShowNewAetCard(true);
     const handleCloseNewAetCard = () => setShowNewAetCard(false);
+    const handleEchoAet = (aetName :string) => echoModalityMutate(aetName);
 
-    if (isLoading) {
-        return <Spinner />;
-    }
+    if (isLoading) return <Spinner />;
 
     return (
         <Card>
@@ -51,9 +81,7 @@ const ModalitiesRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets || []} onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} onEditAet={function (_aet: AetData): void {
-                            throw new Error('Function not implemented.');
-                        } } />
+                        <ModalitiesTable aetData={aets} onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} onEchoAet={handleEchoAet} />
                     </div>
                     {!showNewAetCard && (
                         <Button color={Colors.success} onClick={handleNewAetClick}>
