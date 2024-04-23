@@ -1,3 +1,4 @@
+import { TbWifi} from "react-icons/tb"; 
 import React from 'react';
 
 import type { ColumnDef } from '@tanstack/react-table';
@@ -44,7 +45,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDelet
             header: 'Actions',
             id: 'actions',
             cell: ({ row }) => (
-                    <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}><EchoIcon /></Button>
+                    <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}> <TbWifi/> </Button>
             )
         },
         {
