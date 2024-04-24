@@ -1,45 +1,60 @@
-// import Card from "../../ui/Card";
-import Spinner from "../../ui/Spinner";
-import Tabs, { Tab } from '../../ui/menu/Tabs';
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+
+import { Spinner, Tabs, Tab } from "../../ui";
 import { useCustomQuery } from "../../utils/reactQuery";
-import { getOptions } from "../../services/options";
 import { OptionsResponse } from "../../utils/types";
-import { useNavigate } from "react-router-dom";
+import { getOptions } from "../../services/options";
+
 import Retrieve from "./Retrieve";
 import Anonymize from "./Anonymize";
 import Delete from "./Delete";
 
-
-//! WIP - This is the root component for the Queues
 const QueuesRoot = () => {
   const navigate = useNavigate();
-  const { data: options, isPending: isLoadingOptions } = useCustomQuery<OptionsResponse>(
-    ["options"],
-    () => getOptions(),
-    {
-      enabled: true,
-      refetchInterval: 10000,
-    }
-  )
-  const RetrieveDisplay = () => {
-    return isLoadingOptions ? <Spinner /> : <Retrieve data={options as OptionsResponse} />
-  }
+  const location = useLocation();
+
+  const path = location.pathname;
+
+  console.log(path);
+
+  const { data: options, isPending: isLoadingOptions } =
+    useCustomQuery<OptionsResponse>(["options"], () => getOptions());
 
   const handleTabClick = (path: string) => {
-    navigate(path)
-  }
+    navigate(path);
+  };
+
+  if (isLoadingOptions) return <Spinner />;
 
   return (
-    // <Card className="flex justify-center h-full bg-white ">
-      <div className="mx-7">
-        <Tabs  variant='basic' onTabClick={handleTabClick} className={`bg-light-gray`}>
-          <Tab title="Retrieve"  path="retrieve" component={<RetrieveDisplay />}/>
-          <Tab title="Anonymize"  path="anonymize" component={<Anonymize /> }/>
-          <Tab title="Delete"  path="delete" component={<Delete />}/>
-        </Tabs>
-      </div>
-    // </Card>
-  )
-}
+    <div className="mx-7">
+      <Tabs className={`bg-light-gray`}>
+        <Tab
+          title="Retrieve"
+          active={path.endsWith("retrieve")}
+          onClick={() => handleTabClick("retrieve")}
+        />
+        <Tab
+          title="Anonymize"
+          active={path.endsWith("anonymize")}
+          onClick={() => handleTabClick("anonymize")}
+        />
+        <Tab
+          title="Delete"
+          active={path.endsWith("delete")}
+          onClick={() => handleTabClick("delete")}
+        />
+      </Tabs>
+      <Routes>
+        <Route
+          path="retrieve"
+          element={<Retrieve data={options as OptionsResponse} />}
+        />
+        <Route path="anonymize" element={<Anonymize />} />
+        <Route path="delete" element={<Delete />} />
+      </Routes>
+    </div>
+  );
+};
 
 export default QueuesRoot;

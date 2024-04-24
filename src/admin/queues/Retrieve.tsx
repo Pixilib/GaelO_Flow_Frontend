@@ -11,10 +11,10 @@ import { Card, CardHeader, CardBody, Badge, Button, Table } from '../../ui';
 import { Colors } from '../../utils/enums';
 import Input2 from '../../ui/Input2';
 
-// 
 type RetrieveProps = {
     data: OptionsResponse;
 }
+
 //* This component works get the data, update the data with form
 //TODO - Need to refactor the code in differents components
 const Retrieve = ({ data }: RetrieveProps) => {
@@ -39,7 +39,6 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 toastSuccess("Options updated successfully");
             },
             onError: (error: any) => {
-                console.log({ error })
                 if (error.data.message) {
                     toastError(error.data.message);
                 } else {
@@ -69,7 +68,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} data-gaelo-flow="Retrieve-Container-Queues" className="flex flex-col items-center w-full">
+        <form onSubmit={handleSubmit} data-gaelo-flow="retrieve-container-queues" className="flex flex-col items-center w-full">
             <Card className="w-11/12 mt-8 border">
                 <CardHeader title="Retrieve Schedule Time: " color={Colors.success} />
                 <CardBody color={Colors.light}>
