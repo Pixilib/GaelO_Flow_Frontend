@@ -40,7 +40,6 @@ const UsersTable = ({ data = [] }: UsersProps) => {
             accessorKey: 'SuperAdmin',
             enableColumnFilters: true,
             cell({ row }: { row: any }) {
-                console.log(row)
                 return (
                     <div className="flex justify-center">
                         <input id="SuperAdmin" type="checkbox" checked={row.original.SuperAdmin} disabled />

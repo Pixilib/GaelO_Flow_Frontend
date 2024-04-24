@@ -1,6 +1,7 @@
 import Badge from "./Badge";
 import Button from "./Button";
 import Input from "./Input";
+import Label from "./Label";
 import ToggleEye from "./ToggleEye";
 import Card, { CardHeader, CardBody, CardFooter } from "./Card";
 import Popover from "./Popover";
@@ -19,17 +20,32 @@ import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, Side
 
 export { 
     Badge,
-    Button, 
-    Input, 
-    ToggleEye, 
-    Card, CardHeader, CardBody, CardFooter, 
-    Popover,
+    Banner,
+    BannerItems,
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    DropDown,
     FilterTable,
-    Table,
     Footer,
-    Spinner,
+    Input,
+    Items,
+    Label,
+    MenuItemsCollapse,
+    MenuItem,
+    Popover,
     SelectionInput,
-    Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, ToggleSwitch, ToogleChevron,
-    Toast, ToastContainer, ToastContext,
-    Tabs, Tab
+    SideBarItems,
+    Spinner,
+    Tab,
+    Table,
+    Tabs,
+    Toast,
+    ToastContainer,
+    ToastContext,
+    ToggleEye,
+    ToggleSwitch,
+    ToogleChevron
 };

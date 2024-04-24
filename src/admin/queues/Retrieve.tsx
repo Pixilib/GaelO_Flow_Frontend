@@ -7,9 +7,8 @@ import { AutoQueryPayload, OptionsResponse } from '../../utils/types';
 import { formatTime, parseTimeString, formatTimeReadable, timeDiff } from '../../utils/date';
 
 import { IoMdSend as SendIcon } from "react-icons/io";
-import { Card, CardHeader, CardBody, Badge, Button, Table } from '../../ui';
+import { Card, CardHeader, CardBody, Badge, Button, Table, Input, Label } from '../../ui';
 import { Colors } from '../../utils/enums';
-import Input2 from '../../ui/Input2';
 
 type RetrieveProps = {
     data: OptionsResponse;
@@ -32,7 +31,8 @@ const Retrieve = ({ data }: RetrieveProps) => {
     }, [data]);
 
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
-        ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) => updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
+        ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) =>
+             updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
         [["options"]],
         {
             onSuccess: () => {
@@ -48,17 +48,17 @@ const Retrieve = ({ data }: RetrieveProps) => {
         }
     );
 
-
-    const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>, type: 'start' | 'stop') => {
+    const handleTimeStart = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
-        if (type === 'start') {
-            setStartTime(value);
-            setTimeDelta(formatTimeReadable(timeDiff(value, stopTime)));
-        } else {
-            setStopTime(value);
-            setTimeDelta(formatTimeReadable(timeDiff(startTime, value)));
-        }
-    };
+        setStartTime(value);
+        setTimeDelta(formatTimeReadable(timeDiff(value, stopTime)));
+    }
+
+    const handleTimeStop = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setStopTime(value);
+        setTimeDelta(formatTimeReadable(timeDiff(startTime, value)));
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -72,23 +72,24 @@ const Retrieve = ({ data }: RetrieveProps) => {
             <Card className="w-11/12 mt-8 border">
                 <CardHeader title="Retrieve Schedule Time: " color={Colors.success} />
                 <CardBody color={Colors.light}>
-                    <div className='flex items-center justify-around mt-1'>
-                        <Input2
+                    <div className='flex items-center justify-around gap-4 mt-1'>
+                        <Input
                             type="time"
-                            label={{ value: 'Start Time', className: '', align: 'center' }}
-                            size={'lg'} variant={Colors.primary} value={startTime}
-                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeChange(event, 'start')}
-                            className={"bg-gray-100 text-gray-400 focus:text-dark focus:shadow-2xl shadow-lg"}
+                            label={<Label value={"Start Time"} className="text-sm text-center text-bold" align="center" />}
+                            size={'lg'}
+                            value={startTime}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeStart(event)}
+                            className={"focus:shadow-2xl shadow-lg"}
                         />
-                        <Input2
+                        <Input
                             type="time"
-                            label={{ value: 'Stop Time', className: 'text-center', align: 'center' }}
-                            size={'lg'} variant={Colors.primary} value={stopTime}
-                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeChange(event, 'stop')}
+                            label={<Label value={"Stop Time"} className="text-sm text-center text-bold" align="center" />}
+                            size={'lg'} variant={Colors.light} value={stopTime}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeStop(event)}
                             className={"bg-gray-100 text-gray-400 focus:text-dark focus:shadow-2xl shadow-lg"}
                         />
                         <div className="flex-col text-center">
-                            <label htmlFor="time-delta"> Total Time</label>
+                            <label htmlFor="time-delta" className="text-sm text-bold"> Total Time</label>
                             <Badge
                                 value={timeDelta}
                                 id="time-delta"

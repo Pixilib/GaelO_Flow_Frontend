@@ -12,17 +12,11 @@ import Delete from "./Delete";
 const QueuesRoot = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const path = location.pathname;
 
-  console.log(path);
 
   const { data: options, isPending: isLoadingOptions } =
     useCustomQuery<OptionsResponse>(["options"], () => getOptions());
-
-  const handleTabClick = (path: string) => {
-    navigate(path);
-  };
 
   if (isLoadingOptions) return <Spinner />;
 
@@ -32,26 +26,33 @@ const QueuesRoot = () => {
         <Tab
           title="Retrieve"
           active={path.endsWith("retrieve")}
-          onClick={() => handleTabClick("retrieve")}
+          onClick={() => navigate("retrieve")}
         />
         <Tab
           title="Anonymize"
           active={path.endsWith("anonymize")}
-          onClick={() => handleTabClick("anonymize")}
+          onClick={() => navigate("anonymize")}
         />
         <Tab
           title="Delete"
           active={path.endsWith("delete")}
-          onClick={() => handleTabClick("delete")}
+          onClick={() => navigate("delete")}
         />
       </Tabs>
+      
       <Routes>
         <Route
           path="retrieve"
           element={<Retrieve data={options as OptionsResponse} />}
         />
-        <Route path="anonymize" element={<Anonymize />} />
-        <Route path="delete" element={<Delete />} />
+        <Route 
+        path="anonymize" 
+        element={<Anonymize />} 
+        />
+        <Route 
+        path="delete" 
+        element={<Delete />} 
+        />
       </Routes>
     </div>
   );
