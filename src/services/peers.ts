@@ -5,10 +5,24 @@ interface PeerData {
     peername: string;
     url: string;
     isUserCreated?: boolean;
+    port: number;
+    ipAddress: string;
+    password: string;
 }
+function handleAxiosError(error: any) {
+    if (error.response) {
+        throw error.response;
+    }
+    throw error;
+}
+export const updatePeer = (
+    peer: PeerData
+): Promise<Peer> => axios.get(`/api/peers/${peer.Name}`, peer)
+    .then(response => response.data)
+    .catch(handleAxiosError);
 
-export const createPeer = (peerData: PeerData): Promise<PeerData> => {
-    return axios.post("/api/peers", peerData)
+export const deletePeer = (peername: string): Promise<void> => {
+    return axios.delete(`/api/peers/${peername}`)
         .then(response => response.data)
         .catch(error => {
             throw error.response ? error.response.data : error;
@@ -22,19 +36,8 @@ export const getPeers = (): Promise<PeerData[]> => {
             throw error.response ? error.response.data : error;
         });
 };
-
-export const updatePeer = (peername: string, peerData: PeerData): Promise<PeerData> => {
-    return axios.put(`/api/peers/${peername}`, peerData)
-        .then(response => response.data)
-        .catch(error => {
-            throw error.response ? error.response.data : error;
-        });
-};
-
-export const deletePeer = (peername: string): Promise<void> => {
-    return axios.delete(`/api/peers/${peername}`)
-        .then(response => response.data)
-        .catch(error => {
-            throw error.response ? error.response.data : error;
-        });
+export const echoPeer = (name :string): Promise<void> => {
+    return axios.post("/api/peers/" + name + "/echo")
+        .then(() => undefined)
+        .catch(handleAxiosError);
 };

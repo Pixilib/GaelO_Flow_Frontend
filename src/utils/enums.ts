@@ -10,6 +10,7 @@ export enum Colors {
     orange = 'orange',
     orangeHover='orange-hover',
     primary = 'primary',
+    primaryActive='primary-active',
     primaryHover = 'primary-hover',
     red = 'red',
     secondary = 'secondary',

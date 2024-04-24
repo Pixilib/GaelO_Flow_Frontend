@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
-import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Table from '../../ui/table/Table';
-import Button from '../../ui/Button';
-import { Colors } from '../../utils/enums';
-import Popover from '../../ui/Popover';
-import ToggleEye from '../../ui/ToggleEye';
-import SelectInput from '../../ui/SelectInput';
+import { useState } from 'react';
+
 import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
 import { BsQuestionLg } from "react-icons/bs";
-import Input from '../../ui/Input';
+
+import { Table, Button, Popover, ToggleEye, SelectInput, Input, Card, CardHeader, CardBody, CardFooter, Badge } from '../../ui/';
+import { Colors } from '../../utils/enums';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, updateVerbosity } from '../../services/orthanc';
-import { Badge } from '../../ui';
 
 type OrthancData = {
     username: string;
@@ -35,7 +30,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         }
     );
 
-    const { data: orthancVerbosity} = useCustomQuery(
+    const { data: orthancVerbosity } = useCustomQuery(
         ['log-level'],
         () => getVerbosity()
     );
@@ -116,7 +111,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     </Button>
                 </Popover>
                 <SelectInput
-                    value = {selectOptions.find(option => option.value === orthancVerbosity)}
+                    value={selectOptions.find(option => option.value === orthancVerbosity)}
                     onChange={handleSelectChange}
                     placeholder="Select option"
                     options={selectOptions}
