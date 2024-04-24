@@ -34,7 +34,6 @@ const variantStyles = {
 
 const Tabs: React.FC<TabsProps> = ({ children, variant = 'basic', onTabClick, className }) => {
   const [activeTab, setActiveTab] = useState(0);
-
   const handleClick = (index: number, path?: string) => {
     setActiveTab(index);
     if (path && onTabClick) {
