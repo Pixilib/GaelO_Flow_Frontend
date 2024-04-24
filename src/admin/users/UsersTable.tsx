@@ -9,7 +9,6 @@ type UsersProps = {
 }
 
 const UsersTable = ({ data = [] }: UsersProps) => {
-    console.log({ data })
     const columns = [
         {
             header: 'Username',
@@ -63,7 +62,7 @@ const UsersTable = ({ data = [] }: UsersProps) => {
     ]
 
     return (
-        <div className="mx-12 mt-4">
+        <div className="mx-5 mt-4 ">
             <Table data={data} columns={columns} headerColor={Colors.almond} />
         </div>
     )

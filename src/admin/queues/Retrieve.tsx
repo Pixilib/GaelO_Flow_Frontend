@@ -22,7 +22,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
     const [stopTime, setStopTime] = useState("");
     const [timeDelta, setTimeDelta] = useState(timeDiff(startTime, stopTime));
     const { toastSuccess, toastError } = useCustomToast();
-    
+
     useEffect(() => {
         const optionClockStart = formatTime(data.AutoQueryHourStart, data.AutoQueryMinuteStart);
         const optionClockStop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
@@ -30,7 +30,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
         setStopTime(optionClockStop);
         setTimeDelta(formatTimeReadable(timeDiff(optionClockStart, optionClockStop)));
     }, [data]);
-    
+
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
         ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) => updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
         [["options"]],
@@ -69,14 +69,14 @@ const Retrieve = ({ data }: RetrieveProps) => {
     }
 
     return (
-        <form onSubmit={handleSubmit} data-gaelo-flow="Retrieve-Container-Queues" className="flex flex-col items-center justify-center">
-            <Card className="w-3/4 mt-8 border">
+        <form onSubmit={handleSubmit} data-gaelo-flow="Retrieve-Container-Queues" className="flex flex-col items-center w-full">
+            <Card className="w-11/12 mt-8 border">
                 <CardHeader title="Retrieve Schedule Time: " color={Colors.success} />
                 <CardBody color={Colors.light}>
-                    <div className='relative flex items-center justify-between mt-6'>
+                    <div className='flex items-center justify-around mt-1'>
                         <Input2
                             type="time"
-                            label={{ value: 'Start Time', className: 'text-center', align: 'center' }}
+                            label={{ value: 'Start Time', className: '', align: 'center' }}
                             size={'lg'} variant={Colors.primary} value={startTime}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeChange(event, 'start')}
                             className={"bg-gray-100 text-gray-400 focus:text-dark focus:shadow-2xl shadow-lg"}
@@ -88,13 +88,17 @@ const Retrieve = ({ data }: RetrieveProps) => {
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeChange(event, 'stop')}
                             className={"bg-gray-100 text-gray-400 focus:text-dark focus:shadow-2xl shadow-lg"}
                         />
-                        <Badge
-                            value={timeDelta}
-                            className={`
-                            rounded-full bg-[#CDFFCD] shadow-lg
-                            text-black h-14 w-32 text-nowrap flex items-center text-sm
+                        <div className="flex-col text-center">
+                            <label htmlFor="time-delta"> Total Time</label>
+                            <Badge
+                                value={timeDelta}
+                                id="time-delta"
+                                className={`
+                                rounded-full bg-[#CDFFCD] shadow-lg mt-2
+                              text-black h-10 w-auto text-nowrap flex items-center text-sm
                             `}
-                        />
+                            />
+                        </div>
                     </div>
                 </CardBody>
             </Card>

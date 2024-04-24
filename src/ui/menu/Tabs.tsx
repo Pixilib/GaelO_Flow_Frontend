@@ -1,18 +1,15 @@
-import React, { useState, ReactNode } from 'react';
+import React, { useState } from 'react';
 
-// Définition du type pour chaque onglet
 export type TabProps = {
   title: string;
   path?: string;
-  component: React.ComponentType<any> | ReactNode;
+  component: React.ComponentType<any> | React.ReactNode;
 };
 
-// Composant Tab, il ne s'occupe que de l'affichage
 const Tab: React.FC<TabProps> = ({ component }) => {
-    return <>{typeof component === 'function' ? React.createElement(component) : component}</>;
+  return <>{typeof component === 'function' ? React.createElement(component) : component}</>;
 };
 
-// Props du composant Tabs
 export type TabsProps = {
   children: React.ReactElement<TabProps>[];
   variant?: 'basic' | 'underline' | 'pill';
@@ -20,25 +17,23 @@ export type TabsProps = {
   onTabClick?: (path: string) => void;
 };
 
-// Styles pour chaque variant
 const variantStyles = {
   basic: {
-    active: 'bg-white text-dark rounded-t-xl hover:bg-white hover:text-dark',
-    inactive: 'bg-primary text-white hover:bg-white hover:text-dark',
+    active: 'z-50 first:rounded-tl-xl bg-light-gray text-[#929393] rounded-t-xl',
+    inactive: 'text-gray-400 hover:text-[#929393] bg-primary text-white z-50 first:rounded-tl-xl',
   },
   underline: {
-    active: 'border-b-2 border-primary text-primary hover:border-b-2 hover:border-primary hover:text-dark',
-    inactive: 'text-gray-500 hover:text-primary hover:text-dark',
+    active: 'border-b-2 border-primary text-primary',
+    inactive: 'text-gray-500 hover:text-primary',
   },
   pill: {
-    active: 'bg-primary text-white rounded-full hover:bg-primary hover:text-dark',
-    inactive: 'text-primary hover:bg-primary hover:text-dark rounded-full',
+    active: 'bg-primary text-white rounded-full',
+    inactive: 'text-primary hover:bg-lightGray rounded-full',
   },
 };
 
 const Tabs: React.FC<TabsProps> = ({ children, variant = 'basic', onTabClick, className }) => {
   const [activeTab, setActiveTab] = useState(0);
-  const styles = variantStyles[variant];
 
   const handleClick = (index: number, path?: string) => {
     setActiveTab(index);
@@ -47,20 +42,27 @@ const Tabs: React.FC<TabsProps> = ({ children, variant = 'basic', onTabClick, cl
     }
   };
 
+  const tabClass = (index: number):string => {
+    const isActive = index === activeTab;
+    return `${isActive ? variantStyles[variant].active : variantStyles[variant].inactive} px-6 py-3 font-medium cursor-pointer text-lg leading-normal`;
+  };
+
   return (
-    <div className={`flex flex-col shadow-lg justify-center w-full h-full rounded-lg ${className}`}>
-      <div className="flex items-center justify-center text-center shadow-md cursor-pointer rounded-t-xl min-w-30 min-h-20">
+    <div className={`flex flex-col ${className} shadow-md first:rounded-tl-xl last:rounded-tr-xl bg-primary h-auto`}>
+      <div className="flex">
         {React.Children.map(children, (child, index) => (
           <div
             key={index}
-            className={`flex-grow min-h-20 rounded-t-xl text-lg flex items-center justify-center ${index === activeTab ? styles.active : styles.inactive}`}
+            className={tabClass(index)}
             onClick={() => handleClick(index, child.props.path)}
           >
             {child.props.title}
           </div>
         ))}
       </div>
-      {React.isValidElement(children[activeTab]) ? <Tab {...children[activeTab].props} /> : null}
+      <div className="flex-grow bg-light-gray">
+        {React.isValidElement(children[activeTab]) ? <Tab {...children[activeTab].props} /> : null}
+      </div>
     </div>
   );
 };

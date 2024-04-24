@@ -59,6 +59,7 @@ export default {
         'red': '#f8d7da',
         'grayCustom': '#D4CFCF',
         'light': '#FFFFFF',
+        'light-gray':'#EFEFEF',
         'badge-grayCustom': '#E6E6F2',
         'badge-blue-text': '#4A4AFF',
       },

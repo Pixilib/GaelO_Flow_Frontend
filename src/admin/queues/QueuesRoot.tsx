@@ -1,6 +1,6 @@
 // import Card from "../../ui/Card";
 import Spinner from "../../ui/Spinner";
-import Tabs from '../../ui/menu/Tabs';
+import Tabs, { Tab } from '../../ui/menu/Tabs';
 import { useCustomQuery } from "../../utils/reactQuery";
 import { getOptions } from "../../services/options";
 import { OptionsResponse } from "../../utils/types";
@@ -29,16 +29,14 @@ const QueuesRoot = () => {
     navigate(path)
   }
 
-  const tabs = [
-    { title: 'retrieve', path: 'retrieve', Component: () => <RetrieveDisplay /> },
-    { title: 'anonymize', path: 'anonymize', Component: () => <Anonymize /> },
-    { title: 'delete', path: 'delete', Component: () => <Delete /> },
-  ]
-
   return (
     // <Card className="flex justify-center h-full bg-white ">
-      <div className="mx-12 rounded-xl">
-        <Tabs tabs={tabs} variant='basic' onTabClick={handleTabClick} className={`bg-[#EFEFEF]`} />
+      <div className="mx-7">
+        <Tabs  variant='basic' onTabClick={handleTabClick} className={`bg-light-gray`}>
+          <Tab title="Retrieve"  path="retrieve" component={<RetrieveDisplay />}/>
+          <Tab title="Anonymize"  path="anonymize" component={<Anonymize /> }/>
+          <Tab title="Delete"  path="delete" component={<Delete />}/>
+        </Tabs>
       </div>
     // </Card>
   )

@@ -30,7 +30,7 @@ export const Default: Story = {
     ],
     variant: 'basic',
     onTabClick: action('Navigate to'),
-    className: 'bg-[#EFEFEF]'
+    className: 'bg-light-gray'
   }
 };
 
