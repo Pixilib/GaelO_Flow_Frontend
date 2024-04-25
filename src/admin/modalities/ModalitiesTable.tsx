@@ -1,51 +1,62 @@
+import { TbWifi} from "react-icons/tb"; 
 import React from 'react';
-import Table from '../../ui/table/Table';
-import Badge from '../../ui/Badge';
-import { ColumnDef } from '@tanstack/react-table';
+
+import type { ColumnDef } from '@tanstack/react-table';
+import { AiOutlineDelete as DeleteIcon, AiOutlineAudio as EchoIcon } from 'react-icons/ai';
+
+import {Table, Badge, Button} from '../../ui';
 import { Colors } from '../../utils/enums';
-import Button from '../../ui/Button';
 
 interface AetData {
     name: string;
-    Aet: number;
-    Host: string;
-    Manufacturer: string;
+    aet: string;
+    host: string;
+    manufacturer: string;
+    isUserCreated?: boolean;
 }
 
-interface AetProps {
-    aetData: AetData[];
-    onDeleteAet: (aetname: string) => void;
+interface ModalitiesTableProps {
+    aetData?: AetData[];
+    onDeleteAet: (aetName: string) => void;
+    onEchoAet: (aet: AetData) => void;
 }
 
-const ModalitiesTable: React.FC<AetProps> = ({ aetData, onDeleteAet }) => {
+const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDeleteAet, onEchoAet }) => {
 
     const columns: ColumnDef<AetData>[] = [
         {
             accessorKey: 'name',
-            header: 'Name',
+            header: 'Name'
         },
         {
-            accessorKey: 'Aet',
-            header: 'Aet',
-            cell: (info) => <Badge value={info.getValue() as number} />,
+            accessorKey: 'aet',
+            header: 'AET',
+            cell: info => <Badge value={info.getValue() as string} />
         },
         {
-            accessorKey: 'Host',
-            header: 'HOST',
+            accessorKey: 'host',
+            header: 'Host'
         },
         {
-            accessorKey: 'Manufacturer',
-            header: 'Manufacturer',
+            accessorKey: 'manufacturer',
+            header: 'Manufacturer'
         },
         {
-            id: "delete",
-            cell: ({ row }) => <>
-                <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>Delete</Button>            </>
+            header: 'Actions',
+            id: 'actions',
+            cell: ({ row }) => (
+                    <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}> <TbWifi/> </Button>
+            )
+        },
+        {
+            id: 'delete',
+            cell: ({ row }) => (
+                <DeleteIcon onClick={() => onDeleteAet(row.original.name)} className="text-red-500 cursor-pointer" />
+            ),
         }
-    ]
-    return (
-        <Table columns={columns} data={Data} headerColor={Colors.almond} />
-    );
+    ];
+
+    return <Table columns={columns} data={aetData} headerColor={Colors.almond} />;
 };
 
 export default ModalitiesTable;

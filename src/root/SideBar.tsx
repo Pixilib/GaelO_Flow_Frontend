@@ -34,7 +34,6 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     console.log()
     setOpenItem(openItem === title ? null : title);
   };
-
   //TODO: Add route for the adminItems , when route exist !
   const adminItems = [
     {

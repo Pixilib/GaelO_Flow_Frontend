@@ -44,7 +44,7 @@ export default {
         'almond':'#EFD7BA',
         'primary': '#4746B8',
         'primary-active': '#333182',
-        'primary-hover':'#8C8BD3',
+        'primary-light':'#8C8BD3',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
         'secondaryLight': '#F3ECE8',

@@ -1,57 +1,45 @@
+import React from 'react';
+import Table from '../../ui/table/Table';
+import Badge from '../../ui/Badge';
+import { ColumnDef } from '@tanstack/react-table';
+import { Colors } from '../../utils/enums';
+import Button from '../../ui/Button';
+import { AiOutlineEdit as EditIcon, AiOutlineDelete as DeleteIcon } from 'react-icons/ai';
 
-// import Table from '../../ui/table/Table';
-// import Badge from '../../ui/Badge';
-// import { ColumnDef } from '@tanstack/react-table';
-// import { Colors } from '../../utils/enums';
-// import Button from '../../ui/Button';
+interface PeerData {
+    username: string;
+    peername: string;
+    url: string;
+    isUserCreated?: boolean;
+    port: number;
+    ipAddress: string;
+    password: string;
+}
 
-// interface PeerData {
-//     name: string;
-//     Aet: number;
-//     Host: string;
-//     Manufacturer: string;
-// }
+interface PeersTableProps {
+    peerData: PeerData[];
+    onDeletePeer: (peerName: string) => void;
+    onEditPeer: (peer: PeerData) => void;
+}
 
-// interface Peerprops {
-//     aetData: PeerData[];
-//     onDeletePeers: (Peersname: string) => void;
-// }
+const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEditPeer }) => {
+    const columns: ColumnDef<PeerData>[] = [
+        { accessorKey: 'username', header: 'Username' },
+        { accessorKey: 'peername', header: 'Peer Name', cell: info => <Badge value={info.getValue() as string} /> },
+        { accessorKey: 'url', header: 'URL' },
+        {
+            header: 'Actions',
+            id: 'actions',
+            cell: ({ row }) => (
+                <>
+                    <Button onClick={() => onEditPeer(row.original)} color={Colors.primary}><EditIcon /></Button>
+                    <Button onClick={() => onDeletePeer(row.original.peername)} color={Colors.secondary}><DeleteIcon /></Button>
+                </>
+            )
+        }
+    ];
 
-// const PeersTable: React.FC<PeerProps> = ({ PeerData, onDeletePeer }) => {
+    return <Table columns={columns} data={peerData} headerColor={Colors.almond} />;
+};
 
-//     /**
-//      * columns to be displayed in the table
-//      */
-//     // const columns: ColumnDef<PeerData>[] = [
-//     //     {
-//     //         accessorKey: 'name',
-//     //         header: 'Name',
-//     //     },
-//     //     {
-//     //         accessorKey: 'Aet',
-//     //         header: 'Aet',
-//     //         cell: (info) => <Badge value={info.getValue() as number} />,
-//     //     },
-//     //     {
-//     //         accessorKey: 'Host',
-//     //         header: 'HOST',
-//     //     },
-//     //     {
-//     //         accessorKey: 'Manufacturer',
-//     //         header: 'Manufacturer',
-//     //     },
-//     //     {
-//     //         id: "delete",
-//     //         cell: ({ row }) => <>
-//     //             <Button onClick={() => onDeletePeer(row.original.name)} color={Colors.danger}>Delete</Button>            </>
-//     //     }
-//     // ]
-
-//     return (
-//         // <Table columns={columns} data={PeerData} headerColor={Colors.almond} />
-//         null
-//     );
-// };
-
-// export default PeersTable;
-
+export default PeersTable;
