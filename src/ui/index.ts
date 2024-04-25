@@ -1,4 +1,4 @@
-import Badge from "./Badge";
+import {Badge} from "./Badge";
 import Button from "./Button";
 import Input from "./Input";
 import ToggleEye from "./ToggleEye";
