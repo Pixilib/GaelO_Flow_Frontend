@@ -15,14 +15,15 @@ import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 
 type TableProps<TData> = {
-  data: TData[];
+  data?: TData[];
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
+  enableColumnFilters? :boolean;
   headerColor: Colors;
   className?: string;
 };
 
-function Table<T>({ data, columns, enableSorting = true, headerColor, className }: TableProps<T>) {
+function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false,  headerColor, className }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
@@ -39,20 +40,20 @@ function Table<T>({ data, columns, enableSorting = true, headerColor, className 
       columnFilters,
       pagination,
     },
-    onPaginationChange: setPagination, //update the pagination state when internal APIs mutate the pagination state
+    onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    enableColumnFilters: true,
+    enableColumnFilters: enableColumnFilters,
     enableSorting,
   });
   const headerBgClass = `bg-${headerColor}`;
 
   return (
-    <div className={`max-h-[500px] overflow-x-auto rounded-xl ${className}`}>
+    <div className={`max-h-[500px] overflow-x-auto rounded-xl shadow-md ${className}`}>
       <table className={`min-w-full border-grayCustom ${className}`}>
         <thead className={headerBgClass}>
           {table.getHeaderGroups().map(headerGroup => (
@@ -112,7 +113,7 @@ function Table<T>({ data, columns, enableSorting = true, headerColor, className 
           ))}
         </tbody>
       </table>
-      <div className="flex justify-end my-2 me-2">
+      <div className="w-full">
         <Footer
           table={table}
         />

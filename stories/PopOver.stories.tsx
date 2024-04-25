@@ -23,15 +23,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
-    <div className="flex items-center justify-center p-5 mt-20 ml-20"> {/* Adjust Tailwind classes as needed */}
+    <div className="flex items-center justify-center p-5 mt-20 mb-10 ml-20"> {/* Adjust Tailwind classes as needed */}
       <Popover {...args}>
         {args.children}
       </Popover>
     </div>
   ),
   args: {
-    children: <div className="p-2 border border-black cursor-pointer bg-red">Hover me</div>, // Défini ici mais peut être redéfini dans render
-    popover: <div className="max-w-xs p-2 text-center">This is a popover content</div>, // Adjust Tailwind classes as needed
+    children: <div className="p-2 border border-black cursor-pointer bg-red">Hover me</div>,
+    popover: <div className="max-w-xs p-2 text-center">This is a popover content</div>, 
   },
 };
 

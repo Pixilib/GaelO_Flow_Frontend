@@ -8,11 +8,11 @@ type ToggleSwitchProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
-  const handleClick = (event:React.MouseEvent) => {
+  const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
   }
   return (
-    <label className="flex cursor-pointer items-center">
+    <label className="flex items-center cursor-pointer">
       {/* The real hidden checkbox input */}
       <input
         data-gaelo-flow="toggle-switch"
@@ -28,12 +28,11 @@ const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
       <div
         className={`relative flex h-7 w-16 items-center rounded-full pe-3 transition-colors
        duration-500 ease-in-out 
-        ${isToggled ? 'justify-end bg-primary-active' : 'justify-start rounded-full bg-primary-hover'
+        ${isToggled ? 'justify-end bg-primary-active' : 'justify-start rounded-full bg-primary-light'
           }`}
       >
         {/* Circle toogle with moon or sun */}
         <div
-          // eslint-disable-next-line tailwindcss/no-custom-classname
           className={`transition-opacity- flex size-6
            items-center justify-center rounded-full shadow transition-all duration-200 ease-in-out
             ${isToggled ? 'translate-x-2 ' : 'translate-x-0 bg-slate-100'

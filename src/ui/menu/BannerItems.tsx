@@ -14,7 +14,7 @@ const BannerItems = ({ elements, onSelect, className, isOpen }: BannerItemsProps
   const bannerItemsStyle: ItemStyle = {
     active: "",
     classUlElem: `text-center mt-4 rounded-xl bg-primary shadow-lg relative z-10 ${className}`,
-    classLiElem: "cursor-pointer last:rounded-b-xl first:rounded-t-xl py-3 text-sm hover:bg-primary-hover",
+    classLiElem: "cursor-pointer last:rounded-b-xl first:rounded-t-xl py-3 text-sm hover:bg-primary-light",
     inactive: "",
   };
   return isOpen ? (

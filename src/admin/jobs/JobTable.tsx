@@ -1,38 +1,18 @@
 import { BsInfoCircle as Info } from "react-icons/bs";
 
+import { Table, Badge, Popover} from "../../ui";
+
 import { Colors } from "../../utils/enums";
-import { Table } from "../../ui";
-import Badge from "../../ui/Badge";
-import Popover from "../../ui/Popover";
-import { useCustomMutation } from "../../utils/reactQuery";
-import { useCustomToast } from "../../utils/toastify";
-import { JobMutationPayload, JobsAction, OrthancJob } from "../../utils/types2";
-import { postJobs } from "../../services/jobs";
+import { JobsAction } from "../../utils/types";
 import JobActions from "./JobActions";
 
+//!WIP 
+//! Needs to fix implemntation of PopOver
 type JobTableProps = {
-  data: OrthancJob[];
+  data: any[];
+  onJobAction: (jobId :string, action :JobsAction) => void;
 };
-
-const JobTable = ({ data = [] }: JobTableProps) => {
-  const { toastSuccess, toastError } = useCustomToast();
-
-  const handleJobAction = (jobId: string, action: JobsAction) => {
-    mutate({ Id: jobId, Action: action });
-  };
-
-  const { mutate } = useCustomMutation<void, JobMutationPayload>(
-    ({ Id, Action }: JobMutationPayload) => postJobs({ Id, Action }),
-    [["jobs"]],
-    {
-      onSuccess: (_: any, variables) => {
-        toastSuccess(`${variables.Action} Job with success`);
-      },
-      onError: (e: any, variables) => {
-        toastError(`${variables.Action} Job is failed. ${e.statusText}`);
-      },
-    }
-  );
+const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
 
   const columns = [
     {
@@ -48,6 +28,7 @@ const JobTable = ({ data = [] }: JobTableProps) => {
           className="rounded-full bg-badge-grayCustom text-badge-blue-text"
         />
       ),
+      enableColumnFilter: true,
     },
     {
       accessorKey: "State",
@@ -66,7 +47,7 @@ const JobTable = ({ data = [] }: JobTableProps) => {
           <div className="flex justify-center">
             <JobActions
               jobId={info.row.original.ID}
-              onJobAction={handleJobAction}
+              onJobAction={onJobAction}
             />
           </div>
         );
@@ -78,12 +59,7 @@ const JobTable = ({ data = [] }: JobTableProps) => {
       cell: (info: any) => {
         return (
           <div className="relative">
-            <Popover
-              popover={infoDetails(info.row.original)}
-              placement="left"
-              className="relative w-auto "
-              withOnClick={true}
-            >
+            <Popover popover={infoDetails(info.row.original)} placement="left" className="relative w-auto " withOnClick={true}>
               <div className="relative transition-transform hover:scale-110">
                 <Info size="1.5em" color="gray" className="relative" />
               </div>
@@ -95,13 +71,8 @@ const JobTable = ({ data = [] }: JobTableProps) => {
     },
   ];
 
-  const infoDetails = (rowData: any) => (
-    <code>
-      <pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre>
-    </code>
-  );
-
-  return <Table data={data} columns={columns} color={Colors.almond} />;
+  const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
+  return <Table data={data} columns={columns} headerColor={Colors.almond} enableColumnFilters enableSorting/>;
 };
 
 export default JobTable;

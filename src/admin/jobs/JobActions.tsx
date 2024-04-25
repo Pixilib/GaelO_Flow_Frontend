@@ -4,7 +4,7 @@ import {
   FaPause as Pause,
   FaTimes as Cancel,
 } from "react-icons/fa";
-import { JobsAction } from "../../utils/types2";
+import { JobsAction } from "src/utils/types";
 
 type JobActionsProps = {
   jobId: string;
@@ -20,7 +20,7 @@ const JobActions = ({ jobId, onJobAction }: JobActionsProps) => {
 
   const classIcons =
     "inline-flex items-center justify-center p-2 rounded-full transition-transform transform hover:scale-110";
-    
+
   return (
     <div className="flex space-x-3">
       <div

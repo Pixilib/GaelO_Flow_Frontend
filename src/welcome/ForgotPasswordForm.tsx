@@ -2,13 +2,11 @@ import { ChangeEvent, useState } from "react";
 
 import { useCustomMutation } from "../utils/reactQuery";
 import { lostPassword } from "../services/auth";
-
-import Input from "../ui/Input";
-import Button from "../ui/Button";
 import { Colors } from "../utils/enums";
-import Letter from "../assets/mail.svg?react";
-import ChevronRight from "../assets/chevron-right.svg?react";
 import { useCustomToast } from "../utils/toastify";
+
+import { Button, Input } from "../ui";
+import { Letter, ChevronRight } from "../assets";
 
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");

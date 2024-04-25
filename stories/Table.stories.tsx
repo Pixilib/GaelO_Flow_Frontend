@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Table from '../src/ui/table/Table';
+import { Colors } from '../src/utils/enums';
 
 type DataType = {
   id: number;
@@ -57,6 +58,8 @@ const data: DataType[] = [
   { id: 25, name: 'John Smith', age: 32, city: 'New York' },
 ];
 
+
+
 const meta: Meta<typeof Table<DataType>> = {
   title: 'GAELO FLOW UI/Table',
   component: Table,
@@ -64,6 +67,11 @@ const meta: Meta<typeof Table<DataType>> = {
     data: { control: 'object' },
     columns: { control: 'object' },
     enableSorting: { control: 'boolean' },
+    enableColumnFilters: { control: 'boolean' },
+    headerColor: {
+      control: { type: 'select', options: Object.values(Colors) },
+      defaultValue: Colors.almond,
+    }
   },
   tags: ["autodocs"]
 } satisfies Meta<typeof Table<DataType>>;
@@ -76,14 +84,17 @@ export const DefaultTable: Story = {
     data,
     columns,
     enableSorting: true,
+    enableColumnFilters: true,
+    headerColor: Colors.almond,
   },
 } satisfies Story;
 
 export const WithoutSorting: Story = {
   args: {
     data,
-    columns: columns.map(col => ({ ...col, enableSorting: false })),
-    enableSorting: false,
+    columns: columns.map(col => ({ ...col })),
+    enableColumnFilters: true,
+    headerColor: Colors.almond,
   },
 } satisfies Story;
 
@@ -99,10 +110,10 @@ export const CustomStyling: Story = {
       ),
     })),
     enableSorting: true,
+    enableColumnFilters: true,
+    headerColor: Colors.almond,
   },
 } satisfies Story;
-
-// Additional Stories
 
 export const HighlightYoungAge: Story = {
   args: {
@@ -116,6 +127,8 @@ export const HighlightYoungAge: Story = {
       ) : col.accessorKey,
     })),
     enableSorting: true,
+    enableColumnFilters: true,
+    headerColor: Colors.almond,
   },
 } satisfies Story;
 
@@ -127,5 +140,7 @@ export const FilterableCities: Story = {
       canFilter: col.accessorKey === 'city',
     })),
     enableSorting: true,
+    enableColumnFilters: true,
+    headerColor: Colors.almond,
   },
 } satisfies Story;

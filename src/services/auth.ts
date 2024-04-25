@@ -1,4 +1,4 @@
-import { SignInResponse } from "../utils/types2";
+import { SignInResponse } from "../utils/types";
 import axios from "./axios";
 
 export const signIn = (

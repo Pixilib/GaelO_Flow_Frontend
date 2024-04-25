@@ -1,31 +1,61 @@
-import Card, { CardBody, CardFooter, CardHeader } from "../../ui/Card";
-import Spinner from "../../ui/Spinner";
-import { Colors } from "../../utils/enums";
-import QueuesForm from "./QueuesForm";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
+import { Spinner, Tabs, Tab } from "../../ui";
+import { useCustomQuery } from "../../utils/reactQuery";
+import { OptionsResponse } from "../../utils/types";
+import { getOptions } from "../../services/options";
 
-//! WIP - This is the root component for the Queues
+import Retrieve from "./Retrieve";
+import Anonymize from "./Anonymize";
+import Delete from "./Delete";
 
 const QueuesRoot = () => {
-    // implement the logic to fetch the data from the API queues
-    
+  const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname;
 
-    const isLoadingQueues = false;
+
+  const { data: options, isPending: isLoadingOptions } =
+    useCustomQuery<OptionsResponse>(["options"], () => getOptions());
+
+  if (isLoadingOptions) return <Spinner />;
+
   return (
-    <div className="flex justify-center h-full mt-10">
-      <Card className="bg-white">
-        <CardHeader title='Queues' color={Colors.primary} />
-        <CardBody className="bg-white">
-            <div>
-                Formulaire
-            </div>
-          {isLoadingQueues ? <Spinner /> : <QueuesForm />}
-        </CardBody>
-        <CardFooter>
-        </CardFooter>
-      </Card>
+    <div className="shadow-md mx-7">
+      <Tabs className={`bg-light-gray`}>
+        <Tab
+          title="Retrieve"
+          active={path.endsWith("retrieve")}
+          onClick={() => navigate("retrieve")}
+        />
+        <Tab
+          title="Anonymize"
+          active={path.endsWith("anonymize")}
+          onClick={() => navigate("anonymize")}
+        />
+        <Tab
+          title="Delete"
+          active={path.endsWith("delete")}
+          onClick={() => navigate("delete")}
+        />
+      </Tabs>
+      
+      <Routes>
+        <Route
+          path="retrieve"
+          element={<Retrieve data={options as OptionsResponse} />}
+        />
+        <Route 
+        path="anonymize" 
+        element={<Anonymize />} 
+        />
+        <Route 
+        path="delete" 
+        element={<Delete />} 
+        />
+      </Routes>
     </div>
-  )
-}
+  );
+};
 
 export default QueuesRoot;

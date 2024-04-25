@@ -8,16 +8,11 @@ import { login } from "../reducers/UserSlice";
 import { useCustomMutation } from "../utils/reactQuery";
 import { signIn } from "../services/auth";
 import { useCustomToast } from "../utils/toastify";
-
-import Button from "../ui/Button";
-import Input from "../ui/Input";
-import ToggleEye from "../ui/ToggleEye";
-
 import { Colors } from "../utils/enums";
-import PasswordKeyOn from "./../assets/password-key-on.svg?react";
-import ChevronRight from "./../assets/chevron-right.svg?react";
-import User from "./../assets/user.svg?react";
-import { SignInResponse } from "../utils/types2";
+import { SignInResponse } from "../utils/types";
+
+import { Button, Input, ToggleEye } from "../ui";
+import { PasswordKeyOn, ChevronRight, User } from "./../assets";
 
 export const SignInForm = () => {
   const navigate = useNavigate();
@@ -95,6 +90,7 @@ export const SignInForm = () => {
             }
             required
           />
+          
         </div>
 
       </div>

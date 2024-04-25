@@ -34,7 +34,6 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     console.log()
     setOpenItem(openItem === title ? null : title);
   };
-
   //TODO: Add route for the adminItems , when route exist !
   const adminItems = [
     {
@@ -44,8 +43,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Modalities",
-      path: "/administration/aets",
-      isActive: location.pathname === "/administration/aets",
+      path: "/administration/modalities",
+      isActive: location.pathname === "/administration/modalities",
     },
     {
       title: "Peers",
@@ -54,7 +53,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Queues",
-      path: "/administration/queues",
+      path: "/administration/queues/retrieve",
       isActive: location.pathname === "/administration/queues",
     },
     {
@@ -64,7 +63,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Users",
-      path: "/administration/users",
+      path: "/administration/users/local",
       isActive: location.pathname === "/administration/users",
     },
     {
