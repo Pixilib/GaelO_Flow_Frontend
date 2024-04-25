@@ -25,6 +25,7 @@ export default {
       control: { type: "radio" },
     },
   },
+  tags:['autodocs']
 } as Meta<typeof Card>;
 
 type Story = StoryObj<typeof Card>;

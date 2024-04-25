@@ -1,63 +1,66 @@
-import { useState } from 'react';
+import React from 'react';
 
-// Définition du type pour chaque onglet
-export type Tab = {
+export type TabProps = {
   title: string;
-  path?: string;
-  Component: () => React.ReactNode|string;
-};
+  active: boolean;
+  onClick : () => void
+  variant?: 'basic' | 'underline' | 'pill';
+ };
 
-// Props du composant Tabs
-export type TabsProps = {
-  tabs: Tab[];
-  variant?: 'basic' | 'underline' | 'pill' ;
-  className?: string;
-  onTabClick?: (path: string) => void; 
-};
-
-// Styles pour chaque variant
-const variantStyles = {
-  basic: {
-    active: 'bg-white text-dark rounded-t-xl hover:bg-white hover:text-dark',
-    inactive: 'bg-primary text-white hover:bg-white hover:text-dark',
-  },
-  underline: {
-    active: 'border-b-2 border-primary text-primary hover:border-b-2 hover:border-primary hover:text-dark',
-    inactive: 'text-gray-500 hover:text-primary hover:text-dark',
-  },
-  pill: {
-    active: 'bg-primary text-white rounded-full hover:bg-primary hover:text-dark',
-    inactive: 'text-primary hover:bg-primary hover:text-dark rounded-full',
-  },
-};
-
-const Tabs = ({ tabs, variant = 'basic', onTabClick, className }: TabsProps) => {
-  const [activeTab, setActiveTab] = useState(0);
-  const styles = variantStyles[variant];
-
-  const handleClick = (index: number) => {
-    setActiveTab(index);
-    const path = tabs[index].path;
-    if( path && onTabClick) onTabClick(path);
+const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick}) => {
+  const variantStyles = {
+    basic: {
+      active: 'z-50 first:rounded-tl-xl bg-light-gray text-[#929393] rounded-t-xl',
+      inactive: 'text-gray-400 hover:text-[#929393] bg-primary text-white z-50 first:rounded-tl-xl',
+    },
+    underline: {
+      active: 'border-b-2 border-primary text-primary',
+      inactive: 'text-gray-500 hover:text-primary',
+    },
+    pill: {
+      active: 'bg-primary text-white rounded-full',
+      inactive: 'text-primary hover:bg-lightGray rounded-full',
+    },
   };
+
+  return (
+  <>
+    <div 
+       data-gaelo-flow="Tab" 
+       className={`${active ?
+       variantStyles[variant].active : variantStyles[variant].inactive}
+       px-6 py-3 font-medium
+       cursor-pointer text-lg 
+       leading-normal`} 
+       onClick={() => onClick()}
+       >
+      {title}
+    </div>
+</>
+);
+};
+
+export type TabsProps = {
+  children: React.ReactElement<TabProps>[];
+  className?: string;
+  onClick?: () => void;
+};
+
+const Tabs: React.FC<TabsProps> = ({ children, onClick, className }) => {
   
   return (
-    <div data-gaelo-flow="Tabs" className={`flex flex-col shadow-lg justify-center w-full h-full rounded-lg ${className}`}>
-      <div className="flex items-center justify-center text-center shadow-md cursor-pointer rounded-t-xl min-w-30 min-h-20">
-        {tabs.map((tab,index) => (
-          <div
-            data-galeo-flow={`Tab-${tab.title}`}
-            key={index}
-            className={`flex-grow min-h-20 rounded-t-xl flex items-center justify-center ${activeTab === index ? styles.active : styles.inactive}`}
-            onClick={() => handleClick(index)}
-          >
-            {tab.title}
-          </div>
-        ))}
+    <div
+      data-gaelo-flow="Tabs"
+      className={`flex flex-col ${className} 
+      shadow-md first:rounded-tl-xl
+      last:rounded-tr-xl bg-primary h-auto rounded-t-xl`} 
+      onClick={onClick}>
+      <div className="flex">
+        {children}
       </div>
-      {tabs[activeTab]?.Component()}
     </div>
   );
 };
 
 export default Tabs;
+export { Tab };

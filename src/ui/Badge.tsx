@@ -1,4 +1,6 @@
 
+
+//! Refacto by @SophieLab 
 type BadgeProps = {
     value: number|string;
     className?: string;

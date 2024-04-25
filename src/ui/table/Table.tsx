@@ -41,7 +41,7 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
       columnFilters,
       pagination,
     },
-    onPaginationChange: setPagination, //update the pagination state when internal APIs mutate the pagination state
+    onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getPaginationRowModel: getPaginationRowModel(),
@@ -54,7 +54,7 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
   const headerBgClass = `bg-${headerColor}`;
 
   return (
-    <div className={`max-h-[500px] overflow-x-auto rounded-xl ${className}`}>
+    <div className={`max-h-[500px] overflow-x-auto rounded-xl shadow-md ${className}`}>
       <table className={`min-w-full border-grayCustom ${className}`}>
         <thead className={headerBgClass}>
           {table.getHeaderGroups().map(headerGroup => (

@@ -13,7 +13,6 @@ type JobTableProps = {
   data: any[];
   onJobAction: ({ Id, Action }: JobPayload) => void;
 };
-//WIP for actions
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
 
   const columns = [
@@ -30,6 +29,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
           className="rounded-full bg-badge-grayCustom text-badge-blue-text"
         />
       ),
+      enableColumnFilter: true,
     },
     {
       accessorKey: "State",
@@ -65,7 +65,6 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
   ];
 
   const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
-
-  return <Table data={data} columns={columns} headerColor={Colors.almond} />;
+  return <Table data={data} columns={columns} headerColor={Colors.almond} enableColumnFilters enableSorting/>;
 };
 export default JobTable;
