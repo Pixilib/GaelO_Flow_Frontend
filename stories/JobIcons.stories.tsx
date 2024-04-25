@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import JobIcons from '../src/admin/jobs/JobIcons';
+import JobIcons from '../src/admin/jobs/JobActions';
 
 const meta: Meta<typeof JobIcons> = {
   title: 'GAELO FLOW UI/JOB/JobIcons',
