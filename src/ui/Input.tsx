@@ -39,7 +39,7 @@ const Input = ({
   border 
   border-gray
   text-gray-500 
-  focus:outline-none 
+  focus:outline
   focus:shadow-outline
   focus:primary focus:ring-primary focus:ring-2
   p-2.5 
@@ -55,6 +55,7 @@ const Input = ({
   disabled:bg-gray-100 
   disabled:dark:bg-opacity-50
 `;
+//`bg-gray-50 peer text-dark focus:primary focus:ring-primary focus:ring-2 focus:shadow-outline`
   
   return (
     <div className="w-full">

@@ -41,7 +41,7 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
       columnFilters,
       pagination,
     },
-    onPaginationChange: setPagination, //update the pagination state when internal APIs mutate the pagination state
+    onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getPaginationRowModel: getPaginationRowModel(),

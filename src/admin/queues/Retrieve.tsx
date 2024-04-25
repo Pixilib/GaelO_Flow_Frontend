@@ -72,19 +72,18 @@ const Retrieve = ({ data }: RetrieveProps) => {
             <Card className="w-11/12 mt-8 border">
                 <CardHeader title="Retrieve Schedule Time: " color={Colors.success} />
                 <CardBody color={Colors.light}>
-                    <div className='flex items-center justify-around gap-4 mt-1'>
+                    <div className='flex items-center justify-around gap-12 mt-1'>
                         <Input
                             type="time"
-                            label={<Label value={"Start Time"} className="text-sm text-center text-bold" align="center" />}
-                            size={'lg'}
+                            label={<Label value={"Start Time"} className="text-sm font-medium text-center" align="center" spaceY={2}  />}
                             value={startTime}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeStart(event)}
                             className={"focus:shadow-2xl shadow-lg"}
                         />
                         <Input
                             type="time"
-                            label={<Label value={"Stop Time"} className="text-sm text-center text-bold" align="center" />}
-                            size={'lg'} variant={Colors.light} value={stopTime}
+                            label={<Label value={"Stop Time"} className="text-sm font-medium text-center " align="center" spaceY={2} />}
+                            value={stopTime}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeStop(event)}
                             className={"bg-gray-100 text-gray-400 focus:text-dark focus:shadow-2xl shadow-lg"}
                         />
@@ -94,9 +93,10 @@ const Retrieve = ({ data }: RetrieveProps) => {
                                 value={timeDelta}
                                 id="time-delta"
                                 className={`
-                                rounded-full bg-[#CDFFCD] shadow-lg mt-2
-                              text-black h-10 w-auto text-nowrap flex items-center text-sm
-                            `}
+                                rounded-full bg-[#CDFFCD] shadow-lg 
+                              text-black h-10 w-auto text-nowrap
+                                flex items-center text-sm mt-2
+                               `}
                             />
                         </div>
                     </div>

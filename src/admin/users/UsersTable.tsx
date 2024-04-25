@@ -62,7 +62,7 @@ const UsersTable = ({ data = [] }: UsersProps) => {
 
     return (
         <div className="mx-5 mt-4 ">
-            <Table data={data} columns={columns} headerColor={Colors.almond} />
+            <Table data={data} columns={columns} headerColor={Colors.almond} enableColumnFilters enableSorting/>
         </div>
     )
 }

@@ -25,7 +25,15 @@ const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick}) =
 
   return (
   <>
-    <div className={`${active ? variantStyles[variant].active : variantStyles[variant].inactive} px-6 py-3 font-medium cursor-pointer text-lg leading-normal`} onClick={() => onClick()}>
+    <div 
+       data-gaelo-flow="Tab" 
+       className={`${active ?
+       variantStyles[variant].active : variantStyles[variant].inactive}
+       px-6 py-3 font-medium
+       cursor-pointer text-lg 
+       leading-normal`} 
+       onClick={() => onClick()}
+       >
       {title}
     </div>
 </>
@@ -41,7 +49,12 @@ export type TabsProps = {
 const Tabs: React.FC<TabsProps> = ({ children, onClick, className }) => {
   
   return (
-    <div className={`flex flex-col ${className} shadow-md first:rounded-tl-xl last:rounded-tr-xl bg-primary h-auto`} onClick={onClick}>
+    <div
+      data-gaelo-flow="Tabs"
+      className={`flex flex-col ${className} 
+      shadow-md first:rounded-tl-xl
+      last:rounded-tr-xl bg-primary h-auto rounded-t-xl`} 
+      onClick={onClick}>
       <div className="flex">
         {children}
       </div>

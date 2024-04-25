@@ -7,13 +7,17 @@ const UsersRoot = () => {
     const location = useLocation();
     const path = location.pathname;
 
+    const handleTabClick = (tab: string) => {
+        navigate(tab);
+    }
+    
     return (
-        <div className="mx-12 rounded-xl">
+        <div className="mx-12 shadow-md rounded-xl">
             <Tabs className="bg-light-gray">
                 <Tab 
                 title="local Users" 
-                active={path.endsWith("localusers")} 
-                onClick={()=> navigate("local")}
+                active={path.endsWith("local")} 
+                onClick={()=> handleTabClick("local")}
                 />
                 <Tab 
                 title="Rôles"
