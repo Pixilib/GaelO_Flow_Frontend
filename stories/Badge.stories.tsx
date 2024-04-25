@@ -64,10 +64,7 @@ export const RoundedXL: Story = {
 export const BadgesInline: Story = {
   render: () => (
     <div className="flex space-x-4">
-      <Badge value="Small" className="px-2 py-1 text-xs bg-black rounded-lg text-dark ring-1" />
-      <Badge value="Medium" className=" ring-1 text-sm py-1.5 px-3 bg-success text-white rounded-lg" />
-      <Badge value="Large" className="px-4 py-2 text-lg text-black bg-yellow-500 rounded-lg ring-1" />
-      <Badge value="XLarge" className=" ring-1 text-xl py-2.5 px-4.5 bg-danger text-white rounded-lg" />
+ 
     </div>
   ),
 };
