@@ -95,13 +95,13 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     return (
         <Card>
             <CardHeader title="Orthanc Settings" color={Colors.primary} />
-            <CardBody color={Colors.light} className="pb-0 mb-0">
+            <CardBody color={Colors.light} className="pb-0">
                 <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
+                <div className="h-2"></div>
             </CardBody>
-            <CardFooter className="flex justify-center space-x-4" color={Colors.light}>
-                <Button color={Colors.orange} onClick={reset}>
-                    <RestartIcon size="20px" title="Restart" />
-                </Button>
+            <CardFooter className="flex justify-center mt-0 space-x-4" color={Colors.light}>                <Button color={Colors.orange} onClick={reset}>
+                <RestartIcon size="20px" title="Restart" />
+            </Button>
                 <Button color={Colors.danger} >
                     <IoClose size="20px" title="Shutdown" />
                 </Button>
