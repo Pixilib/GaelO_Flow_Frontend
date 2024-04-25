@@ -1,10 +1,10 @@
-import Badge from "./Badge";
+import {Badge} from "./Badge";
 import Button from "./Button";
 import Input from "./Input";
+import Label from "./Label";
 import ToggleEye from "./ToggleEye";
 import Card, { CardHeader, CardBody, CardFooter } from "./Card";
 import Popover from "./Popover";
-import SelectInput from "./SelectInput";
 
 import FilterTable from "./table/FilterTable";
 import Table from "./table/Table";
@@ -14,21 +14,38 @@ import Toast from "./toast/Toast";
 import ToastContainer from "./toast/ToastContainer";
 import ToastContext from "./toast/ToastContext";
 
+import SelectionInput from "./SelectInput";
 import Spinner from "./Spinner";
-import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems,Tabs , ToggleSwitch, ToogleChevron } from "./menu";
+import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems , ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
 
 export { 
     Badge,
-    Button, 
-    Input, 
-    ToggleEye, 
-    Card, CardHeader, CardBody, CardFooter, 
-    Popover,
+    Banner,
+    BannerItems,
+    Button,
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    DropDown,
     FilterTable,
-    Table,
     Footer,
+    Input,
+    Items,
+    Label,
+    MenuItemsCollapse,
+    MenuItem,
+    Popover,
+    SelectionInput,
+    SideBarItems,
     Spinner,
-    SelectInput,
-    Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, ToggleSwitch, ToogleChevron,Tabs,
-    Toast, ToastContainer, ToastContext, 
+    Tab,
+    Table,
+    Tabs,
+    Toast,
+    ToastContainer,
+    ToastContext,
+    ToggleEye,
+    ToggleSwitch,
+    ToogleChevron
 };

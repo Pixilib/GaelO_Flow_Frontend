@@ -1,6 +1,5 @@
 import React from 'react';
-import Table from '../../ui/table/Table';
-import Badge from '../../ui/Badge';
+import {Table, Badge} from '../../ui';
 import { ColumnDef } from '@tanstack/react-table';
 import { Colors } from '../../utils/enums';
 import Button from '../../ui/Button';

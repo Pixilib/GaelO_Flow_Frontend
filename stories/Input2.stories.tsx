@@ -5,6 +5,8 @@ import { FaSearch } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import { Colors } from '../src/utils/enums';
 
+
+//!WIP Needs to fix it !
 const meta: Meta<typeof Input2> = {
   title: 'GAELO FLOW UI/Input2',
   component: Input2,
@@ -19,7 +21,7 @@ const meta: Meta<typeof Input2> = {
     }, 
     'label.className': { control: 'text' },
     size: {
-      control: { type: 'select', options: ['sm', 'md', 'lg', 'xl'] },
+      control: { type: 'select', options: ['sm', 'md', 'lg', 'xl', 'xxl', 'auto'] },
     },
     variant: {
       control: { type: 'select', options: ['light', 'primary', 'success'] },
@@ -68,12 +70,12 @@ export const LargeBorderedPrimary: Story = {
 
 export const MultipleInputs: Story = {
   render: (args) => (
-    <div className="relative gap-y-7">
-      <Input2 {...args} size="sm" placeholder="Small" svgLeft={<FaSearch />} svgRight={<AiOutlineClose />} label={{ value: 'First Input', align: 'left' }} />
+    <div className="gap-y-7">
+      <Input2 {...args} size="sm" placeholder="Small"  label={{ value: 'First Input', align: 'left' }} />
       <Input2 {...args} size="md" placeholder="Medium" variant={Colors.success} svgLeft={<FaSearch />} label={{ value: 'Second Input', align: 'center' }} />
       <Input2 {...args} size="lg" placeholder="Large" variant={Colors.primary} svgRight={<AiOutlineClose />} label={{ value: 'Third Input', align: 'right' }} />
-      <Input2 {...args} size="lg" placeholder="Large" variant={Colors.primary} svgRight={<AiOutlineClose />} label={{ value: 'Third Input', align: 'right' }} />
       <Input2 {...args} size="xl" placeholder="Large" variant={Colors.light}svgRight={<AiOutlineClose />} label={{ value: 'Fourth Input', align: 'right' }} />
+      <Input2 {...args} size="auto" placeholder="Auto" variant={Colors.primary} svgRight={<AiOutlineClose />} label={{ value: 'Third Input', align: 'right' }} />
     </div>
   ),
   args: {

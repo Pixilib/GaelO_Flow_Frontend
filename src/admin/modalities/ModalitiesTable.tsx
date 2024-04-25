@@ -56,7 +56,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDelet
         }
     ];
 
-    return <Table columns={columns} data={aetData} headerColor={Colors.almond} />;
+    return <Table columns={columns} data={aetData} headerColor={Colors.almond} enableColumnFilters enableSorting />;
 };
 
 export default ModalitiesTable;

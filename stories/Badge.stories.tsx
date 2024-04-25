@@ -1,6 +1,5 @@
-// Badge.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
-import Badge from '../src/ui/Badge';
+import { Badge } from '../src/ui/Badge';
 
 const meta: Meta<typeof Badge> = {
   title: 'GAELO FLOW UI/Badge',
@@ -10,61 +9,69 @@ const meta: Meta<typeof Badge> = {
       control: 'text',
       defaultValue: 'Badge',
     },
+    backgroundColor: {
+      control: 'color',
+      defaultValue: '#E0E7FF',
+    },
+    textColor: {
+      control: 'color',
+      defaultValue: '#3730A3',
+    },
+    borderColor: {
+      control: 'color',
+      defaultValue: '#C7D2FE',
+    },
     className: {
       control: 'text',
-      defaultValue: 'text-m font-medium text-center ring-0 ring-inset outline-0 min-w-4',
+      defaultValue: 'text-sm py-1.5 px-3',
     },
   },
-  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Displays a label badge typically used for indicating status or categorizing items.',
+      },
+    },
+    tags: ['autodocs'],
+  },
 };
 export default meta;
 
 type Story = StoryObj<typeof Badge>;
 
-export const Small: Story = {
+export const Default: Story = {
   args: {
-    value: 'Small',
-    className: 'text-xs py-1 px-2',
+    value: 'Default',
   },
 };
 
-export const Medium: Story = {
+export const BadgeSuccess: Story = {
   args: {
-    value: 'Medium',
-    className: 'text-sm py-1.5 px-3',
+    value: 'Rounded Success',
+    backgroundColor: '#CDFFCD',
+    textColor: '#276749',
+    borderColor: '#A3E635',
+    className: 'rounded-full',
   },
 };
 
-export const RoundedSuccess: Story = {
+export const BadgeDanger: Story = {
   args: {
-    value: 'rounded Success',
-    className: 'text-sm py-1.5 px-3 rounded-full bg-[#CDFFCD] text-success ring-1',
+    value: 'Rounded Danger',
+    backgroundColor: '#FEE2E2',
+    textColor: '#B91C1C',
+    borderColor: '#FECACA',
+    className: 'rounded-full',
   },
 };
 
-export const Large: Story = {
-  args: {
-    value: 'Large',
-    className: 'text-lg py-2 px-4',
-  },
-};
-
-export const XLarge: Story = {
-  args: {
-    value: 'XLarge',
-    className: 'text-xl py-2.5 px-4.5',
-  },
-};
-export const RoundedXL: Story = {
-  args: {
-    value: 'rounded XL',
-    className: 'text-xl py-2.5 px-4.5 rounded-full',
-  },
-};
 export const BadgesInline: Story = {
-  render: () => (
+  render: ({ args }) => (
     <div className="flex space-x-4">
  
     </div>
   ),
+  args: {
+    className: 'text-sm py-1.5 px-3 rounded-lg',
+  },
 };

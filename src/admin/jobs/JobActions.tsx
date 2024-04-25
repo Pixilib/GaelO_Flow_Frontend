@@ -4,17 +4,18 @@ import {
   FaPause as Pause,
   FaTimes as Cancel,
 } from "react-icons/fa";
-import { JobPayload, PostJobsAction } from "../../utils/types";
+import { JobsAction } from "src/utils/types";
 
-type JobIconsProps = {
+type JobActionsProps = {
   jobId: string;
-  onJobAction: ({ Id, Action }: JobPayload) => void;
+  onJobAction: (jobId :string, action :JobsAction) => void;
 };
 
-const JobIcons = ({ jobId, onJobAction }: JobIconsProps) => {
-  const handleClick = (Action: PostJobsAction) => (e: React.MouseEvent) => {
+const JobActions = ({ jobId, onJobAction }: JobActionsProps) => {
+
+  const handleClick = (action :JobsAction) => (e: React.MouseEvent) => {
     e.stopPropagation();
-    onJobAction({ Id: jobId, Action });
+    onJobAction(jobId, action);
   };
 
   const classIcons =
@@ -53,4 +54,4 @@ const JobIcons = ({ jobId, onJobAction }: JobIconsProps) => {
   );
 };
 
-export default JobIcons;
+export default JobActions;

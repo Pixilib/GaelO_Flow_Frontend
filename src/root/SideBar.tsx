@@ -53,7 +53,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Queues",
-      path: "/administration/queues",
+      path: "/administration/queues/retrieve",
       isActive: location.pathname === "/administration/queues",
     },
     {
@@ -63,7 +63,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Users",
-      path: "/administration/users",
+      path: "/administration/users/local",
       isActive: location.pathname === "/administration/users",
     },
     {
