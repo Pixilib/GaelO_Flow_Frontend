@@ -4,7 +4,7 @@ import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
 import { BsQuestionLg } from "react-icons/bs";
 
-import { Table, Button, Popover, ToggleEye, SelectInput, Input, Card, CardHeader, CardBody, CardFooter, Badge } from '../../ui/';
+import { Table, Button, Popover, ToggleEye, Input, Card, CardHeader, CardBody, CardFooter, Badge, SelectionInput } from '../../ui/';
 import { Colors } from '../../utils/enums';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, updateVerbosity } from '../../services/orthanc';
@@ -110,7 +110,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         <BsQuestionLg size="20px" title="Info" />
                     </Button>
                 </Popover>
-                <SelectInput
+                <SelectionInput
                     value={selectOptions.find(option => option.value === orthancVerbosity)}
                     onChange={handleSelectChange}
                     placeholder="Select option"
