@@ -1,4 +1,4 @@
-import { UserResponse } from "../utils/types";
+import {RolesUserResponse, UserResponse } from "../utils/types";
 import axios from "./axios";
 
 export const getUsers = (): Promise<UserResponse> => {
@@ -15,3 +15,17 @@ export const getUsers = (): Promise<UserResponse> => {
     });
 };
 
+
+export const getRoles = (): Promise<RolesUserResponse> => {
+  return axios
+    .get("/api/roles")
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}

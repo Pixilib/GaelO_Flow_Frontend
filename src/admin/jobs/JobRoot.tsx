@@ -3,22 +3,21 @@ import { getJobs, postJobs } from "../../services/jobs";
 
 import { Spinner, Card, CardHeader, CardBody, CardFooter } from "../../ui";
 import { Colors } from "../../utils/enums";
-import { JobPayload, OrthancJob } from '../../utils/types';
-import { useCustomToast } from "../../utils/toastify";
+import { JobPayload, JobsAction, OrthancJob } from '../../utils/types';
 
 import JobTable from "./JobTable";
+import { useCustomToast } from "../../utils/toastify";
 
 const JobRoot = () => {
-  const { toastSuccess, toastError } = useCustomToast();
 
-  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<OrthancJob>(
-    ["jobs"],
-    () => getJobs(),
-    {
-      enabled: true,
-      refetchInterval: 10000,
-    }
-  );
+  const { toastSuccess, toastError } = useCustomToast()
+
+  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<
+    OrthancJob[]
+  >(["jobs"], () => getJobs(), {
+    enabled: true,
+    refetchInterval: 10000,
+  });
 
   const { mutate } = useCustomMutation<unknown, JobPayload>(
     ({ Id, Action }: JobPayload) =>
@@ -34,8 +33,8 @@ const JobRoot = () => {
     }
   );
 
-  const handleJobAction = ({ Id, Action }: JobPayload) => {
-    mutate({ Id, Action });
+  const handleJobAction = (id :string, action : JobsAction) => {
+    mutate({ Id : id, Action : action });
   };
 
   if (isLoadingJobs) return <Spinner />

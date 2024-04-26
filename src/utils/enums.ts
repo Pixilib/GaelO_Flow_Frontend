@@ -18,4 +18,5 @@ export enum Colors {
     secondaryHover = 'secondary-hover',
     success = 'success',
     successHover = 'success-hover',
+    white='white',
 }

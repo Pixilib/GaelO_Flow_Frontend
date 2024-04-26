@@ -1,9 +1,10 @@
 import axios from "axios";
 import { JobPayload, OrthancJob } from "../utils/types";
 
-export const getJobs = (): Promise<OrthancJob> => {
-  return axios.get('/api/jobs?expand')
-    .then(response => response.data as OrthancJob)
+export const getJobs = (): Promise<OrthancJob[]> => {
+  return axios
+    .get("/api/jobs?expand")
+    .then((response) => response.data as OrthancJob[])
     .catch(function (error) {
       if (error.response) {
         throw error.response;
