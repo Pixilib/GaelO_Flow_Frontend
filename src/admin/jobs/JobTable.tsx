@@ -1,17 +1,15 @@
 import { BsInfoCircle as Info } from "react-icons/bs";
-import Table from "../../ui/table/Table";
-import Badge from "../../ui/Badge";
+import {Table, Badge} from "../../ui";
 
 import { Colors } from "../../utils/enums";
-import JobIcons from "./JobIcons";
-import Popover from "../../ui/Popover";
-import { JobPayload } from "../../utils/types";
+import { JobsAction } from "../../utils/types";
+import JobActions from "./JobActions";
 
 //!WIP 
 //! Needs to fix implemntation of PopOver
 type JobTableProps = {
   data: any[];
-  onJobAction: ({ Id, Action }: JobPayload) => void;
+  onJobAction: (jobId :string, action :JobsAction) => void;
 };
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
 
@@ -34,14 +32,22 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
     {
       accessorKey: "State",
       header: "State",
-      cell: (row: any) => <Badge value={row.getValue()} className="rounded-full bg-[#CDFFCD] text-success" />,
+      cell: (row: any) => (
+        <Badge
+          value={row.getValue()}
+          className="rounded-full bg-[#CDFFCD] text-success"
+        />
+      ),
     },
     {
       header: "Action",
       cell: (info: any) => {
         return (
           <div className="flex justify-center">
-            <JobIcons jobId={info.row.original.ID} onJobAction={onJobAction} />
+            <JobActions
+              jobId={info.row.original.ID}
+              onJobAction={onJobAction}
+            />
           </div>
         );
       },
@@ -61,10 +67,11 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
         );
       },
       enableColumnFilter: false,
-    }
+    },
   ];
 
   const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
   return <Table data={data} columns={columns} headerColor={Colors.almond} enableColumnFilters enableSorting/>;
 };
+
 export default JobTable;

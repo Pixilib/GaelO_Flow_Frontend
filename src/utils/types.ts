@@ -125,3 +125,9 @@ export type ChangePasswordVariables = {
 //     ?
 // }
 
+export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
+export type JobMutationPayload = {
+    Id: string;
+    Action: JobsAction;
+}
+

@@ -22,9 +22,8 @@ type TableProps<TData> = {
   headerColor: Colors;
   className?: string;
 };
-//WIP : Pagination
-function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false,  headerColor, className }: TableProps<T>) {
 
+function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false,  headerColor, className }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
