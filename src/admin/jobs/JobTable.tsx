@@ -1,6 +1,5 @@
 import { BsInfoCircle as Info } from "react-icons/bs";
-
-import { Table, Badge, Popover} from "../../ui";
+import {Table, Badge} from "../../ui";
 
 import { Colors } from "../../utils/enums";
 import { JobsAction } from "../../utils/types";
