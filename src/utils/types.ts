@@ -100,7 +100,7 @@ type User = {
  * Response from the API get users
  */
 export type UserResponse = User[];
-
+export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
 
 //auth
 export type SignInResponse = {

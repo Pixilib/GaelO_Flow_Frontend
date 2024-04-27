@@ -53,7 +53,7 @@ const Tabs: React.FC<TabsProps> = ({ children, onClick, className }) => {
       data-gaelo-flow="Tabs"
       className={`flex flex-col ${className} 
       shadow-md first:rounded-tl-xl
-      last:rounded-tr-xl bg-primary h-auto rounded-t-xl`} 
+      last:rounded-tr-xl bg-primary h-auto rounded-t-xl overflow-y-auto`} 
       onClick={onClick}>
       <div className="flex">
         {children}

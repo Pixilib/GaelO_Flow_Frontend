@@ -53,7 +53,7 @@ const UsersTable = ({ data = [] }: UsersProps) => {
             cell: (info: any) => {
                 return (
                     <div className="flex justify-center">
-                        <Edit size={'1.3rem'} color="gray" onClick={() => console.log('click on Edit')} />
+                        <Edit size={'1.3rem'} color="#DFB520" onClick={() => console.log('click on Edit')} />
                     </div>
                 )
             }
