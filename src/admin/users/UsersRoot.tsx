@@ -27,7 +27,8 @@ const UsersRoot = () => {
             </Tabs>
             <Routes>
                 <Route path="local" element={<LocalUsers />} />
-                {/* <Route path="roles" element={} /> */}
+                <Route path="create" element={<div>Create User</div>} />
+                <Route path=":id/edit" element={<div>Edit User</div>} />
             </Routes>
         </div>
     );

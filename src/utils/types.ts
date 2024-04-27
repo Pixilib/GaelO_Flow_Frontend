@@ -101,7 +101,7 @@ type User = {
  */
 export type UserResponse = User[];
 export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
-
+export type UserUpdatePayload = AtLeastOne<UserPayload>;
 //auth
 export type SignInResponse = {
     AccessToken: string;
