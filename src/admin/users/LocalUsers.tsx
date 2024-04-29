@@ -18,25 +18,9 @@ const LocalUsers = () => {
         () => getUsers(),
         {
             enabled: true,
-            refetchInterval: 10000,
         }
     );
-    const handleCreateUser = () => {
-        navigate("users/create");
-    }
-
-    const handleEditUser = (userId: number) => {
-        navigate(`users/${userId}/edit`);
-    }
-    
-    const confirmDelete = (userId:number) => {
-        const confirmation = window.confirm("Are you sure you want to delete this user?");
-        if (confirmation) {
-            handleDeleteUser.mutate(userId);
-        }
-    };
-
-    const handleDeleteUser = useCustomMutation<void,number>(
+    const handleDeleteUser = useCustomMutation<void, number>(
         (userId: number) => deleteUser(userId),
         [["users"]],
         {
@@ -47,18 +31,34 @@ const LocalUsers = () => {
                 toastError("User deletion failed");
             },
         }
-        
     );
+
+
+    const handleCreateUser = () => {
+        navigate("create");
+    }
+
+    const handleEditUser = (userId: number) => {
+        const user = users?.find((user) => user.Id === userId);
+        navigate(`edit`, { state: { user } });
+    }
+
+    const confirmDelete = (userId: number) => {
+        const confirmation = window.confirm("Are you sure you want to delete this user?");
+        if (confirmation) {
+            handleDeleteUser.mutate(userId);
+        }
+    };
     return (
-      <div>
+        <div>
             {isLoadingUsers ? (
                 <Spinner />
             ) : (
                 <>
-                    <UsersTable 
-                        data={users || []} 
-                        onEdit={handleEditUser} // Déclencheur pour l'édition
-                        onDelete={() => {}} // Déclencheur pour la suppression
+                    <UsersTable
+                        data={users || []}
+                        onEdit={handleEditUser}
+                        onDelete={confirmDelete} 
                     />
                     <div className="flex justify-center mx-10 mb-10 mt-9">
                         <Button

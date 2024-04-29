@@ -76,7 +76,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="w-64 h-full border-transparent rounded-tr-40 shadow-custom"
+      className="w-64 h-full border-transparent rounded-tr-40"
     >
       <main className="h-full rounded-tr-40 bg-primary pt-7">
         <div className="flex h-11% justify-center">

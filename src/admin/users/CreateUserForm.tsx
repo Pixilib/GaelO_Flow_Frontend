@@ -2,20 +2,17 @@ import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 import { IoIosCloseCircle } from "react-icons/io";
 import { ChangeEvent, useState } from "react";
 import { Button, Card, CardBody, CardHeader, Input, Label, SelectionInput, ToggleEye } from "../../ui";
-import { Colors } from "../../utils/enums";
-import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getRoles, postUsers } from "../../services/users";
-import { RolesUserResponse, UserPayload } from '../../utils/types';
-import { useCustomToast } from "../../utils/toastify";
+import { Colors, useCustomMutation, useCustomQuery, RolesUserResponse, UserPayload, useCustomToast } from '../../utils';
+
 
 type UserFormProps = {
     title: string;
-    className: string
-    onClose: () => void
+    className?: string;
+    onClose: () => void;
 }
-
 //!WIP 
-const UserForm = ({ title, className, onClose }: UserFormProps) => {
+const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
     const [show, setShow] = useState(false);
     const [userName, setUserName] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -24,7 +21,7 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
     const [email, setEmail] = useState("");
     const [selectedRole, setSelectedRole] = useState(null);
     const [isSuperAdmin, setIsSuperAdmin] = useState(false);
-
+    
     const { data: roles } = useCustomQuery<RolesUserResponse>(
         ["roles"], () => getRoles(),
         {
@@ -45,6 +42,13 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
         [["users"]],
         {
             onSuccess: () => {
+                setUserName("");
+                setFirstName("");
+                setLastName("");
+                setPassword("");
+                setEmail("");
+                setSelectedRole(null);
+                setIsSuperAdmin(false);
                 toastSuccess("User created with success");
             },
             onError: (error: any) => {
@@ -67,18 +71,20 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
             toastError("Please select a role");
             return;
         }
-        userMutation.mutate({
-            Username: userName,
+        const payload: UserPayload = {
             Firstname: firstName,
             Lastname: lastName,
-            Password: password,
             Email: email,
             RoleName: selectedRole,
-            SuperAdmin: isSuperAdmin
-        });
-    }
+            SuperAdmin: isSuperAdmin,
+            Username: userName,
+            Password: password,
+        };
+
+            userMutation.mutate(payload);
+        }
     return (
-        <Card className={`mt-10 ${className} overflow-y-auto`}>
+        <Card className={`my-10 ${className}`}>
             <CardHeader title={title} color={Colors.success} >
                 <IoIosCloseCircle size={"1.7rem"}
                     onClick={() => onClose()}
@@ -87,8 +93,8 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
             </CardHeader>
 
             <CardBody color={Colors.lightGray}>
-                <form onSubmit={handleSubmit} className="grid gap-y-4">
-                    <div className="grid grid-cols-1 col-span-3 md:grid-cols-3 gap-11">
+                <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
+                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-3 lg:gap-11">
                         <Input
                             label={
                                 <Label value="Username *"
@@ -96,7 +102,7 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
                                     align="left" />
                             }
                             placeholder="Enter your username"
-                            className="mt-3"
+                            className="mt-1 lg:mt-3"
                             value={userName}
                             required
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setUserName(event.target.value)}
@@ -109,7 +115,7 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
                                 />
                             }
                             placeholder="Enter your firstname"
-                            className="mt-3"
+                            className="mt-1 lg:mt-3"
                             value={firstName}
                             required
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}
@@ -122,13 +128,13 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
                                 />
                             }
                             placeholder="Enter your lastname"
-                            className="mt-3"
+                            className="mt-1 lg:mt-3"
                             value={lastName}
                             required
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
                         />
                     </div>
-                    <div className="grid grid-cols-1 col-span-3 md:grid-cols-2 gap-11">
+                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
                         <Input
                             label={
                                 <Label value="Password *"
@@ -138,7 +144,7 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
                             size="auto"
                             type={show ? "text" : "password"}
                             placeholder="Enter your password"
-                            className="mt-3 rounded-xl"
+                            className="mt-1 lg:mt-3 rounded-xl"
                             svgRight={
                                 <ToggleEye onToggle={(visible) => setShow(visible)} />
                             }
@@ -155,16 +161,16 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
                             size="auto"
                             type="email"
                             placeholder="example@example.com"
-                            className="mt-3 rounded-xl"
+                            className="mt-1 lg:mt-3 rounded-xl"
                             value={email}
                             required
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 col-span-3 md:grid-cols-2 gap-11">
+                    <div className="grid grid-cols-1 col-span-3 lg:grid-cols-2 gap-11">
                         <label className="flex flex-col">
-                            <span className="mb-2 text-sm font-bold"> Rôles *</span>
+                            <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
                             <SelectionInput
                                 options={rolesOptions}
                                 placeholder="Select a Rôle"
@@ -186,7 +192,7 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
                     <div className="grid grid-cols-1 col-span-3 mt-3 ">
                         <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
                             <SubmitUser size={'1.3rem'} />
-                            <div className="">Create</div>
+                            <div className="">Submit</div>
                         </Button>
                     </div>
 
@@ -195,4 +201,4 @@ const UserForm = ({ title, className, onClose }: UserFormProps) => {
         </Card>
     );
 };
-export default UserForm;
+export default CreateUserForm;
