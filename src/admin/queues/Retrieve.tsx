@@ -5,8 +5,10 @@ import { useCustomMutation } from "../../utils/reactQuery";
 import { updateOptions } from "../../services/options";
 import { AutoQueryPayload, OptionsResponse } from '../../utils/types';
 import { formatTime, parseTimeString, formatTimeReadable, timeDiff } from '../../utils/date';
-import { Card, CardHeader, CardBody, Badge, Button, Input, Label, Table } from '../../ui';
+
+import { Table } from '../../ui';
 import { Colors } from '../../utils/enums';
+import RetrieveForm from "./RetrieveForm";
 
 type RetrieveProps = {
     data: OptionsResponse;
@@ -19,7 +21,8 @@ const Retrieve = ({ data }: RetrieveProps) => {
 
     const { toastSuccess, toastError } = useCustomToast();
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
-        payload => updateOptions(payload),
+        ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) =>
+            updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
         [["options"]],
         {
             onSuccess: () => toastSuccess("Options updated successfully"),
@@ -51,56 +54,32 @@ const Retrieve = ({ data }: RetrieveProps) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const start = parseTimeString(startTime);
-        const stop = parseTimeString(stopTime);
+        const { hours: startHours, minutes: startMinutes } = parseTimeString(startTime);
+        const { hours: stopHours, minutes: stopMinutes } = parseTimeString(stopTime);
         optionsMutation.mutate({
-            AutoQueryHourStart: start.hours,
-            AutoQueryMinuteStart: start.minutes,
-            AutoQueryHourStop: stop.hours,
-            AutoQueryMinuteStop: stop.minutes
+            AutoQueryHourStart: startHours,
+            AutoQueryMinuteStart: startMinutes,
+            AutoQueryHourStop: stopHours,
+            AutoQueryMinuteStop: stopMinutes
         });
-    };
+    }
 
+    //TODO - Need to refactor than another component 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
-            <Card className="w-11/12 mt-8 border">
-                <CardHeader title="Retrieve Schedule Time" color={Colors.success} />
-                <CardBody color={Colors.light}>
-                    <div className='flex items-center justify-around gap-12 mt-1'>
-                        <Input
-                            type="time"
-                            label={<Label value="Start Time" className="text-sm font-medium text-center" align="center" spaceY={2} />}
-                            value={startTime}
-                            onChange={handleTimeChange(true)}
-                            className="shadow-lg focus:shadow-2xl"
-                        />
-                        <Input
-                            type="time"
-                            label={<Label value="Stop Time" className="text-sm font-medium text-center" align="center" spaceY={2} />}
-                            value={stopTime}
-                            onChange={handleTimeChange(false)}
-                            className="text-gray-400 bg-gray-100 shadow-lg focus:text-dark focus:shadow-2xl"
-                        />
-                        <div className="flex-col text-center">
-                            <label className="text-sm font-bold">Total Time</label>
-                            <Badge
-                                value={timeDelta}
-                                className="rounded-full bg-[#CDFFCD] shadow-lg text-black h-10 w-auto flex items-center text-sm mt-2"
-                            />
-                        </div>
-                    </div>
-                </CardBody>
-            </Card>
-            <div className="flex justify-center mt-6">
-                <Button color={Colors.success} className="w-32 gap-2 px-8 text-center" type="submit">
-                    <SendIcon /><span>Send</span>
-                </Button>
-            </div>
-            <div className="flex mt-6">
-                <Table data={[]} columns={[]} headerColor={Colors.almond} />
-            </div>
-        </form>
-    );
-};
+        <>
+                <RetrieveForm
+                    startTime={startTime}
+                    stopTime={stopTime}
+                    timeDelta={timeDelta}
+                    handleTimeStart={(e) => handleTimeStart(e)}
+                    handleTimeStop={(e) => handleTimeStop(e)}
+                    onSubmit={handleSubmit}
+                />
+                <div className="flex mt-6">
+                    <Table data={[]} columns={[]} headerColor={Colors.almond} />
+                </div>
+        </>
+    )
+}
 
 export default Retrieve;
