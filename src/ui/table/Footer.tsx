@@ -22,7 +22,7 @@ const Footer = ({ table }: FooterProps) => {
   const totalRows = getPrePaginationRowModel().rows.length;
   const btnClassFooter = "border-none bg-transparent p-2 focus:outline-none text-dark"
   return (
-    <div className="flex justify-end w-full">
+    <div className="flex justify-end w-full bg-white">
       <div className="flex items-center justify-end flex-grow me-4">
         <strong className="me-4">{totalRows}</strong><em> {totalRows > 1 ? "results" : "result"} </em>
       </div>

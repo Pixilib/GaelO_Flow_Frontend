@@ -34,6 +34,8 @@ const RootApp = () => {
       "/administration/peers": "Peers",
       "/administration/users": "Users",
       "/administration/users/local": "Users",
+      "/administration/users/local/create": "Users",
+      "/administration/users/local/edit": "Users",
       "/administration/users/roles": "Users",
       "/Orthanc Content": "Orthanc Content",
       "/import": "Import",

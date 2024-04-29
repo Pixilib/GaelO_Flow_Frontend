@@ -47,11 +47,11 @@ export type OptionsResponse = {
 };
 
 //Job
-export type PostJobsAction = "resume" | "pause" | "cancel" | "resubmit";
+export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
 
 export type JobPayload = {
     Id: string;
-    Action: PostJobsAction;
+    Action: JobsAction;
 };
 
 export type OrthancJob = {
@@ -79,6 +79,7 @@ type RoleUser = {
     CdBurner: boolean;
     AutoRouting: boolean;
 }
+export type RolesUserResponse = RoleUser[];
 /**
  * @typedef User
  * Represent a user with all fields who need
@@ -99,8 +100,8 @@ type User = {
  * Response from the API get users
  */
 export type UserResponse = User[];
-
-
+export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
+export type UserUpdatePayload = Partial<UserPayload>;
 //auth
 export type SignInResponse = {
     AccessToken: string;
@@ -125,9 +126,4 @@ export type ChangePasswordVariables = {
 //     ?
 // }
 
-export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
-export type JobMutationPayload = {
-    Id: string;
-    Action: JobsAction;
-}
 

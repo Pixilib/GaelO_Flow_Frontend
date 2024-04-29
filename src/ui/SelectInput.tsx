@@ -7,9 +7,9 @@ interface OptionType {
 }
 
 interface SelectionInputProps {
-  value: OptionType|undefined,
+  value?: OptionType|undefined,
   options: OptionType[] | GroupBase<OptionType>[];
-  onChange: (value: any) => void;
+  onChange?: (value: any) => void;
   placeholder?: string;
   formatOptionLabel?: (option: OptionType) => React.ReactNode;
   isMulti?: boolean;
