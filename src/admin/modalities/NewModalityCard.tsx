@@ -48,11 +48,35 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
 
     const isValidPort = (port: number) => port > 0 && port <= 65535;
 
-    const onSubmitAet = () => {
-        if (!name.trim() || !aet.trim() || !host.trim() || port === '' || isNaN(Number(port)) || !isValidPort(Number(port)) || !manufacturer) {
-            toastWarning("Please fill in all fields correctly with a valid port number (1-65535).");
-            return;
-        }
+        const onSubmitAet = () => {
+            if (!name.trim()) {
+                toastWarning("Name is required.");
+                return;
+            }
+            if (!aet.trim()) {
+                toastWarning("AET is required.");
+                return;
+            }
+            if (!host.trim()) {
+                toastWarning("Host is required.");
+                return;
+            }
+            if (port === '') {
+                toastWarning("Port is required.");
+                return;
+            }
+            if (isNaN(Number(port))) {
+                toastWarning("Port must be a number.");
+                return;
+            }
+            if (!isValidPort(Number(port))) {
+                toastWarning("Port must be between 1 and 65535.");
+                return;
+            }
+            if (!manufacturer) {
+                toastWarning("Manufacturer is required.");
+                return;
+            }
 
         const newAetData: AetData = {
             name,

@@ -9,7 +9,7 @@ import PeersRoot from "./peers/PeersRoot";
 
 const AdminRoot = () => {
     return (
-        <div className="mt-10 size-full">
+        <div className="mt-10 size-full bg-light-gray">
             <Routes>
                 <Route path="/general" element={<General />} />
                 <Route path="/jobs" element={<JobRoot />} />

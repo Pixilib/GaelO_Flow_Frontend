@@ -131,3 +131,9 @@ export type JobMutationPayload = {
     Action: JobsAction;
 }
 
+export interface Peer {
+    name: string;
+    password: string;
+    url: string;
+    username: string;
+}

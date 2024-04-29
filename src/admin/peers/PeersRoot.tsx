@@ -10,39 +10,20 @@ import NewPeerCard from './NewPeerCard';
 import PeersTable from './PeersTable';
 import { updatePeer, deletePeer, getPeers } from '../../services/peers';
 import { useCustomToast } from '../../utils/toastify';
-
-interface PeerData {
-    username: string;
-    peername: string;
-    url: string;
-    isUserCreated?: boolean;
-    port: number;
-    ipAddress: string;
-    password: string;
-}
+import { Peer } from '../../utils/types';
 
 const PeersRoot: React.FC = () => {
     const { toastSuccess, toastError } = useCustomToast();
     const [showNewPeerCard, setShowNewPeerCard] = useState(false);
 
-    const { data: peers, isLoading } = useCustomQuery<PeerData[]>(
+    const { data: peers, isLoading } = useCustomQuery<Peer[]>(
         ['peers'],
-        getPeers, 
-        {
-            select: (data): PeerData[] => data.map((peer) => ({
-                username: peer.username,
-                peername: peer.peername,
-                url: peer.url,
-                port: peer.port,
-                ipAddress: peer.ipAddress,
-                password: peer.password,
-                isUserCreated: peer.isUserCreated,
-            })),
-        }
+        () => getPeers()
     );
 
     const updatePeerMutate = useCustomMutation(
-        (peer: PeerData) => updatePeer(peer),
+        (peer: Peer) => updatePeer(peer.name, peer.url, peer.username, peer.password),
+        [['peers']],
         {
             onSuccess: () => toastSuccess("Peer updated successfully"),
             onError: () => toastError("Error while updating peer"),
@@ -51,6 +32,7 @@ const PeersRoot: React.FC = () => {
 
     const deletePeerMutate = useCustomMutation(
         deletePeer,
+        [['peers']],
         {
             onSuccess: () => toastSuccess("Peer deleted successfully"),
             onError: (error: Error) => toastError(`Error while deleting peer: ${error.message}`),
