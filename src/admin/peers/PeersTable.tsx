@@ -2,7 +2,6 @@ import React from 'react';
 import {Table, Badge} from '../../ui';
 import { ColumnDef } from '@tanstack/react-table';
 import { Colors } from '../../utils/enums';
-import Button from '../../ui/Button';
 import { AiOutlineEdit as EditIcon, AiOutlineDelete as DeleteIcon } from 'react-icons/ai';
 import { Peer } from '../../utils/types';
 
@@ -22,8 +21,10 @@ const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEditP
             id: 'actions',
             cell: ({ row }) => (
                 <>
-                    <Button onClick={() => onEditPeer(row.original)} color={Colors.primary}><EditIcon /></Button>
-                    <Button onClick={() => onDeletePeer(row.original.name)} color={Colors.secondary}><DeleteIcon /></Button>
+                    <div className="action-icons">
+                    <EditIcon onClick={() => onEditPeer(row.original)} className="icon edit-icon" />
+                    <DeleteIcon onClick={() => onDeletePeer(row.original.name)} className="icon delete-icon" />
+                </div>
                 </>
             )
         }

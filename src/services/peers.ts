@@ -11,7 +11,7 @@ function handleAxiosError(error: any) {
 export const updatePeer = (name: string, url :string, username :string, password :string
 ): Promise<void> => {
     const payload = {
-        URL : url,
+        Url : url,
         Username : username,
         Password : password
     };
@@ -34,7 +34,7 @@ export const getPeers = (): Promise<Peer[]> => {
             return Object.entries(response.data).map(([name, peer]) => {
                 return {
                     name : name,
-                    url : peer.URL,
+                    url : peer.Url,
                     username: peer.Username,
                     password: peer.Password
                 }

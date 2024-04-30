@@ -35,7 +35,7 @@ const PeersRoot: React.FC = () => {
         [['peers']],
         {
             onSuccess: () => toastSuccess("Peer deleted successfully"),
-            onError: (error: Error) => toastError(`Error while deleting peer: ${error.message}`),
+            onError: (error :any) => toastError(`Error while deleting peer: ${error?.message}`),
         }
     );
 

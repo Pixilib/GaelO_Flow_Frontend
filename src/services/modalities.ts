@@ -1,12 +1,7 @@
 import axios from "axios";
+import { Modality } from "../utils/types";
 
-interface Modality {
-    Name: string;
-    AET: string;
-    Host: string;
-    Port: number;
-    Manufacturer: string;
-}
+
 
 function handleAxiosError(error: any) {
     if (error.response) {
@@ -18,7 +13,13 @@ function handleAxiosError(error: any) {
 export const updateModality = (
     modality: Modality
 ): Promise<Modality> => {
-    return axios.put(`/api/modalities/${modality.Name}`, modality)
+    const payload = {
+        AET: modality.aet,
+        Host: modality.host,
+        Port: modality.port,
+        Manufacturer: modality.manufacturer
+    }
+    return axios.put(`/api/modalities/${modality.name}`, payload)
         .then(response => response.data)
         .catch(handleAxiosError);
 };
@@ -29,10 +30,19 @@ export const deleteModality = (name: string): Promise<string> => {
         .catch(handleAxiosError);
 };
 
-export const getModalities = (): Promise<Record<string, Modality>> => {
+export const getModalities = (): Promise<Modality[]> => {
     return axios.get("/api/modalities?expand")
-        .then(response => response.data)
-        .catch(handleAxiosError);
+        .then(response => {
+            return Object.entries(response.data).map(([name, aet] :any) => {
+                return {
+                    name: name,
+                    aet: aet.AET,
+                    host: aet.Host,
+                    port: aet.Port,
+                    manufacturer: aet.Manufacturer
+                }
+            });
+        }).catch(handleAxiosError);
 };
 
 export const echoModality = (name :string): Promise<void> => {

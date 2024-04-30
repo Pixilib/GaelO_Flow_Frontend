@@ -1,29 +1,21 @@
-import { TbWifi} from "react-icons/tb"; 
 import React from 'react';
 
-import type { ColumnDef } from '@tanstack/react-table';
-import { AiOutlineDelete as DeleteIcon, AiOutlineAudio as EchoIcon } from 'react-icons/ai';
+import { ColumnDef } from '@tanstack/react-table';
+import { VscTrash as DeleteIcon } from "react-icons/vsc";
+import { AiOutlineAudio as EchoIcon } from "react-icons/ai"; 
 
-import {Table, Badge, Button} from '../../ui';
+import { Table, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
-
-interface AetData {
-    name: string;
-    aet: string;
-    host: string;
-    manufacturer: string;
-    isUserCreated?: boolean;
-}
+import { Modality } from '../../utils/types';
 
 interface ModalitiesTableProps {
-    aetData?: AetData[];
+    aetData?: Modality[];
     onDeleteAet: (aetName: string) => void;
-    onEchoAet: (aet: AetData) => void;
+    onEchoAet: (aetName :string) => void;
 }
 
 const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDeleteAet, onEchoAet }) => {
-
-    const columns: ColumnDef<AetData>[] = [
+    const columns: ColumnDef<Modality>[] = [
         {
             accessorKey: 'name',
             header: 'Name'
@@ -45,14 +37,18 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDelet
             header: 'Actions',
             id: 'actions',
             cell: ({ row }) => (
-                    <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}> <TbWifi/> </Button>
+                <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}>
+                    <EchoIcon />
+                </Button>
             )
         },
         {
             id: 'delete',
             cell: ({ row }) => (
-                <DeleteIcon onClick={() => onDeleteAet(row.original.name)} className="text-red-500 cursor-pointer" />
-            ),
+                <DeleteIcon
+                    onClick={() => onDeleteAet(row.original.name)}
+                    className="text-black cursor-pointer"
+                />),
         }
     ];
 

@@ -137,3 +137,11 @@ export interface Peer {
     url: string;
     username: string;
 }
+
+export interface Modality {
+    name: string;
+    aet: string;
+    host: string;
+    port: number;
+    manufacturer: string;
+}

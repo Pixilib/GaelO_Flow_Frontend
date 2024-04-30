@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SelectionInput from '../src/ui/SelectInput';
+import SelectInput from '../src/ui/SelectInput';
 import { action } from '@storybook/addon-actions';
 
 
 
-const meta: Meta<typeof SelectionInput> = {
+const meta: Meta<typeof SelectInput> = {
   title: 'GAELO FLOW UI/SelectionInput',
-  component: SelectionInput,
+  component: SelectInput,
   argTypes: {
     onChange: { action: 'changed' },
     options: { control: 'object' },
@@ -14,7 +14,7 @@ const meta: Meta<typeof SelectionInput> = {
     isMulti: { control: 'boolean' },
   },
   tags:['autodocs']
-} satisfies Meta<typeof SelectionInput>;
+} satisfies Meta<typeof SelectInput>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;

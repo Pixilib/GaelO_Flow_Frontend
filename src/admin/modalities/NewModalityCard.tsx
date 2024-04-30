@@ -1,29 +1,16 @@
 import React, { ChangeEvent, useState } from 'react';
+
 import { CgClose as CloseIcon } from "react-icons/cg";
 import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
-import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Button from '../../ui/Button';
-import Input from '../../ui/Input';
-import SelectInput from '../../ui/SelectInput';
+
+import{ Card, Button, Input, SelectInput, CardHeader, CardBody, CardFooter } from '../../ui';
 import { Colors } from '../../utils/enums';
 import { useCustomToast } from "../../utils/toastify";
-
-interface AetData {
-    name: string;
-    aet: string;
-    host: string;
-    port: number;
-    manufacturer: string;
-}
-
-interface Option {
-    value: string;
-    label: string;
-}
+import { Modality, Option } from '../../utils/types';
 
 interface NewModalityCardProps {
     onClose: () => void;
-    onCreateAet: (aet: AetData) => void;
+    onCreateAet: (aet: Modality) => void;
 }
 
 const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet }) => {
@@ -78,7 +65,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({ onClose, onCreateAet 
                 return;
             }
 
-        const newAetData: AetData = {
+        const newAetData: Modality = {
             name,
             aet,
             host,

@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, Input, Label, SelectionInput } from "../../ui";
+import { Card, CardBody, CardHeader, Input, Label, SelectInput } from "../../ui";
 import { Colors } from "../../utils/enums";
 
 type UserFormProps = {
@@ -69,7 +69,7 @@ const UserForm = ({ title }: UserFormProps) => {
                     <div className="grid grid-cols-2 col-span-3 gap-11">
                         <label className="flex flex-col">
                            <span className="mb-2 text-sm font-bold"> Rôles *</span> 
-                        <SelectionInput value={[]}options={[]} onChange={()=>console.log("on Change")}/>
+                        <SelectInput value={[]} options={[]} onChange={()=>console.log("on Change")}/>
                         </label>
                         <label htmlFor="superAdmin" className="flex items-center">
                             <input type="checkbox" id="superAdmin" defaultChecked={false} />

@@ -18,7 +18,7 @@ const MenuItem = ({
   //? Personnalize css if item is Active or not
   const activeClasses = isActive
     ? "bg-primary-active p-2.5 ml-3 disabled cursor-not-allowed rounded-lg"
-    : "cursor-pointer hover:bg-primary-hover p-2.5 ml-3 ";
+    : "cursor-pointer hover:bg-primary-light p-2.5 ml-3 ";
 
   return (
     <div
