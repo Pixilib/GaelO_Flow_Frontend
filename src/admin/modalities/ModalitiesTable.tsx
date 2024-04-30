@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { VscTrash as DeleteIcon } from "react-icons/vsc";
-import { AiOutlineAudio as EchoIcon } from "react-icons/ai"; 
+import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi"; 
 
 import { Table, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
@@ -11,7 +10,7 @@ import { Modality } from '../../utils/types';
 interface ModalitiesTableProps {
     aetData?: Modality[];
     onDeleteAet: (aetName: string) => void;
-    onEchoAet: (aetName :string) => void;
+    onEchoAet: (aetName: string) => void;
 }
 
 const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDeleteAet, onEchoAet }) => {
@@ -37,18 +36,14 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDelet
             header: 'Actions',
             id: 'actions',
             cell: ({ row }) => (
-                <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}>
-                    <EchoIcon />
-                </Button>
+                <div className="flex justify-center items-center gap-2.5">                     <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}>
+                        <EchoIcon />  
+                    </Button>
+                    <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>
+                        <DeleteIcon size={18} />
+                    </Button>
+                </div>
             )
-        },
-        {
-            id: 'delete',
-            cell: ({ row }) => (
-                <DeleteIcon
-                    onClick={() => onDeleteAet(row.original.name)}
-                    className="text-black cursor-pointer"
-                />),
         }
     ];
 

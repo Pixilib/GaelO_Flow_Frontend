@@ -1,9 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
+
 import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
 import { CgClose as CloseIcon } from "react-icons/cg";
-import Card, { CardHeader, CardBody, CardFooter } from '../../ui/Card';
-import Button from '../../ui/Button';
-import Input from '../../ui/Input';
+
+import { Card, Button, Input, CardHeader, CardBody, CardFooter } from '../../ui';
 import { Colors } from "../../utils/enums";
 import { Peer } from '../../utils/types';
 
@@ -18,28 +18,41 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const onSubmitPeer = () => {
+    const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+        event.preventDefault();
         onCreatePeer({ name, username, url, password });
     };
 
     return (
         <Card className="flex flex-col h-full">
             <CardHeader title="Create New Peer" color={Colors.success}>
-                <CloseIcon size="24px" title="Close" onClick={onClose} className="mr-4 cursor-pointer" />
+                <CloseIcon size="24px" title="Close" onClick={onClose} className="ml-auto mr-[8px] cursor-pointer" />
             </CardHeader>
+
             <CardBody className="p-4 bg-stone-100">
-                <div className="mb-4">
-                    <Input required label="Name" bordered value={name} onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
-                    <Input required label="Url" bordered value={url} onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)} />
-                    <Input label="Username" bordered value={username} onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} />
-                    <Input label="Password" type="password" bordered value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="flex flex-wrap -mx-2">
+                        <div className="w-1/2 px-2">
+                            <Input required label="Name" bordered value={name} onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
+                        </div>
+                        <div className="w-1/2 px-2">
+                            <Input required label="Url" bordered value={url} onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)} />
+                        </div>
+                        <div className="w-1/2 px-2">
+                            <Input label="Username" bordered value={username} onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} />
+                        </div>
+                        <div className="w-1/2 px-2">
+                            <Input label="Password" type="password" bordered value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
+                        </div>
+                    </div>
+                    <CardFooter className="flex justify-center bg-stone-100">
+                        <Button type="submit" color={Colors.success}><CheckIcon size="20px" /></Button>
+                    </CardFooter>
+                </form>
             </CardBody>
-            <CardFooter className="flex justify-center bg-stone-100">
-                <Button color={Colors.success} onClick={onSubmitPeer}><CheckIcon size="20px" /></Button>
-            </CardFooter>
         </Card>
     );
 }
 
 export default NewPeerCard;
+

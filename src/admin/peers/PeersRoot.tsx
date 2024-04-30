@@ -50,7 +50,9 @@ const PeersRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <PeersTable peerData={peers || []} onDeletePeer={deletePeerMutate.mutate} onEditPeer={updatePeerMutate.mutate} />
+                        <PeersTable peerData={peers || []} onDeletePeer={deletePeerMutate.mutate} onEchoPeer={function (): void {
+                            throw new Error('Function not implemented.');
+                        } } />
                     </div>
                     {!showNewPeerCard && (
                         <Button color={Colors.success} onClick={handleNewPeerClick}>
