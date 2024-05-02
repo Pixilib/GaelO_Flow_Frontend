@@ -55,7 +55,6 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
             header: 'Action',
             cell({ row }:{row:any}) {
                 const userId = row.original.Id;
-                console.log(userId);
                 return (
                     <div className="flex justify-center gap-7">
                             <Edit size={'1.3rem'}

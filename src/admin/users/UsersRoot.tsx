@@ -3,7 +3,7 @@ import { Tabs, Tab } from "../../ui"; // En supposant que Tab est également exp
 import LocalUsers from "./LocalUsers";
 import EditUserForm from "./EditUserForm";
 import CreateUserForm from "./CreateUserForm";
-
+import Roles from "./Roles";
 const UsersRoot = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -14,7 +14,7 @@ const UsersRoot = () => {
     const handleTabClick = (tab: string) => {
         navigate(tab);
     }
-
+    // console.log(path.startsWith("/administration/users/local"),path)
     return (
         <div className="h-full mx-12 shadow-md rounded-xl">
             <Tabs className="bg-light-gray">
@@ -26,7 +26,7 @@ const UsersRoot = () => {
                 <Tab
                     title="Rôles"
                     active={path.endsWith("roles")}
-                    onClick={() => navigate("roles")}
+                    onClick={() => handleTabClick("roles")}
                 />
             </Tabs>
             <Routes>
@@ -49,6 +49,7 @@ const UsersRoot = () => {
                     }
                 />
                 <Route path="/local" element={<LocalUsers />} />
+                <Route path="/roles" element={<Roles />} />
             </Routes>
         </div>
     );

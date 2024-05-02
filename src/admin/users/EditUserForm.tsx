@@ -1,4 +1,4 @@
-import { RiDeleteBin2Fill as DeleteUser } from "react-icons/ri"; 
+import { BsFillPersonXFill as DeleteUser  } from "react-icons/bs"; 
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 import { IoIosCloseCircle } from "react-icons/io";
 import { ChangeEvent, useEffect, useState } from "react";

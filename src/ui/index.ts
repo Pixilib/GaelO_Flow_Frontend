@@ -1,5 +1,6 @@
 import {Badge} from "./Badge";
 import Button from "./Button";
+import BooleanIcon from "./BooleanIcon";
 import Input from "./Input";
 import Label from "./Label";
 import ToggleEye from "./ToggleEye";
@@ -22,6 +23,7 @@ export {
     Badge,
     Banner,
     BannerItems,
+    BooleanIcon,
     Button,
     Card,
     CardBody,
