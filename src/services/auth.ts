@@ -22,14 +22,12 @@ export const signIn = (
 };
 
 export const signUp = (
-  username: string,
   lastname: string,
   firstname: string,
   email: string
 ): Promise<void> => {
   return axios
     .post("/api/register", {
-      Username : username,
       Lastname : lastname,
       Firstname : firstname,
       Email : email,

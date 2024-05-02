@@ -10,15 +10,14 @@ import { useCustomToast } from "../utils/toastify";
 import { ChevronRight, Letter as Mail, User } from "./../assets";
 
 export const SignUpForm = () => {
-  const [username, setUsername] = useState("");
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [email, setEmail] = useState("");
   const { toastSuccess, toastError } = useCustomToast();
 
   const signUpMutation = useCustomMutation<void,Record<string,string>>(
-    ({ username, lastname, firstname, email }) =>
-      signUp(username, lastname, firstname, email),
+    ({ lastname, firstname, email }) =>
+      signUp(lastname, firstname, email),
     [],
     {
       onSuccess: () => {
@@ -37,7 +36,7 @@ export const SignUpForm = () => {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signUpMutation.mutate({ username, lastname, firstname, email });
+    signUpMutation.mutate({ lastname, firstname, email });
   };
 
   return (
@@ -49,19 +48,6 @@ export const SignUpForm = () => {
         Please create your Account
       </p>
       <div className="flex flex-col items-center w-full max-w-md space-y-12">
-        <Input
-          label="Username :"
-          className="w-full"
-          svgLeft={<User />}
-          bordered
-          placeholder="Enter your username"
-          value={username}
-          required
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setUsername(event.target.value);
-          }}
-          autoComplete="on"
-        />
         <Input
           label="Firstname :"
           svgLeft={<User />}
