@@ -102,8 +102,6 @@ const EditUserForm = ({ title, className, onClose}: UserFormProps) => {
             Lastname: lastName,
             Email: email,
             RoleName: selectedRole?.value,
-            SuperAdmin: isSuperAdmin,
-            Username: userName,
         };
         if (user) {
             try {
@@ -139,19 +137,7 @@ const EditUserForm = ({ title, className, onClose}: UserFormProps) => {
 
             <CardBody color={Colors.lightGray}>
                 <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
-                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-3 lg:gap-11">
-                        <Input
-                            label={
-                                <Label value="Username *"
-                                    className="text-sm font-medium text-center"
-                                    align="left" />
-                            }
-                            placeholder="Enter your username"
-                            className="mt-1 lg:mt-3"
-                            value={userName}
-                            required
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setUserName(event.target.value)}
-                        />
+                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
                         <Input
                             label={
                                 <Label value="Firstname *"
@@ -205,19 +191,6 @@ const EditUserForm = ({ title, className, onClose}: UserFormProps) => {
               
                                 value={selectedRole}
                             />
-                        </label>
-                    </div>
-
-                    <div className="grid grid-cols-1 col-span-3 lg:grid-cols-2 gap-11">
-
-                        <label htmlFor="superAdmin" className="flex items-center">
-                            <input type="checkbox"
-                                id="superAdmin"
-                                defaultChecked={false}
-                                checked={isSuperAdmin}
-                                onChange={(event) => setIsSuperAdmin(event.target.checked)}
-                            />
-                            <span className="ml-2">Super Admin</span>
                         </label>
                     </div>
 
