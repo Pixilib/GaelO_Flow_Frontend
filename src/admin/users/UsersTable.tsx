@@ -14,8 +14,8 @@ type UsersProps = {
 const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
     const columns = [
         {
-            header: 'Username',
-            accessorKey: 'Username',
+            header: 'Email',
+            accessorKey: 'Email',
             enableColumnFilters: true,
         },
         {
@@ -37,19 +37,6 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
             header: 'Rôle',
             accessorKey: 'Role.Name',
             enableColumnFilters: true,
-        },
-        {
-            header: 'Super Admin',
-            accessorKey: 'SuperAdmin',
-            enableColumnFilters: true,
-            cell({ row }: { row: any }) {
-                return (
-                    <div className="flex justify-center">
-                        <input id="SuperAdmin" type="checkbox" checked={row.original.SuperAdmin} disabled />
-                        <label htmlFor="SuperAdmin" className="ml-2">SuperAdmin</label>
-                    </div>
-                )
-            }
         },
         {
             header: 'Action',
