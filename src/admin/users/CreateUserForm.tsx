@@ -14,13 +14,11 @@ type UserFormProps = {
 //!WIP 
 const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
     const [show, setShow] = useState(false);
-    const [userName, setUserName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [selectedRole, setSelectedRole] = useState(null);
-    const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     
     const { data: roles } = useCustomQuery<RolesUserResponse>(
         ["roles"], () => getRoles(),
@@ -37,18 +35,16 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
     const { toastSuccess, toastError } = useCustomToast()
 
     const userMutation = useCustomMutation<number, UserPayload>(
-        ({ Username, Firstname, Password, Lastname, Email, RoleName, SuperAdmin }) =>
-            postUsers({ Username, Firstname, Password, Lastname, Email, RoleName, SuperAdmin }),
+        ({ Firstname, Password, Lastname, Email, RoleName }) =>
+            postUsers({ Firstname, Password, Lastname, Email, RoleName }),
         [["users"]],
         {
             onSuccess: () => {
-                setUserName("");
                 setFirstName("");
                 setLastName("");
                 setPassword("");
                 setEmail("");
                 setSelectedRole(null);
-                setIsSuperAdmin(false);
                 toastSuccess("User created with success");
             },
             onError: (error: any) => {
@@ -76,8 +72,6 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
             Lastname: lastName,
             Email: email,
             RoleName: selectedRole,
-            SuperAdmin: isSuperAdmin,
-            Username: userName,
             Password: password,
         };
 
@@ -94,19 +88,8 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
 
             <CardBody color={Colors.lightGray}>
                 <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
-                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-3 lg:gap-11">
-                        <Input
-                            label={
-                                <Label value="Username *"
-                                    className="text-sm font-medium text-center"
-                                    align="left" />
-                            }
-                            placeholder="Enter your username"
-                            className="mt-1 lg:mt-3"
-                            value={userName}
-                            required
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setUserName(event.target.value)}
-                        />
+                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
+          
                         <Input
                             label={
                                 <Label value="Firstname *"
@@ -176,16 +159,6 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
                                 placeholder="Select a Rôle"
                                 onChange={handleRoleChange}
                             />
-                        </label>
-
-                        <label htmlFor="superAdmin" className="flex items-center">
-                            <input type="checkbox"
-                                id="superAdmin"
-                                defaultChecked={false}
-                                checked={isSuperAdmin}
-                                onChange={(event) => setIsSuperAdmin(event.target.checked)}
-                            />
-                            <span className="ml-2">Super Admin</span>
                         </label>
                     </div>
 
