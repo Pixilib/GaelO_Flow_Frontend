@@ -20,12 +20,10 @@ type UserFormProps = {
 const EditUserForm = ({ title, className, onClose}: UserFormProps) => {
     const location = useLocation();
     const user = location.state?.user;
-    const [userName, setUserName] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [selectedRole, setSelectedRole] = useState<{ value: string, label: string } | null>(null);
-    const [isSuperAdmin, setIsSuperAdmin] = useState(false);
     
     const { toastSuccess, toastError } = useCustomToast()
     const navigate = useNavigate();
@@ -45,14 +43,12 @@ const EditUserForm = ({ title, className, onClose}: UserFormProps) => {
     useEffect(() => {
         if (user) {
             // Pre-fill form when editing
-            setUserName(user.Username);
             setFirstName(user.Firstname);
             setLastName(user.Lastname);
             setEmail(user.Email);
             if(user && rolesOptions) {
                 setSelectedRole({value:user.RoleName, label:user.RoleName} || "");
             }
-            setIsSuperAdmin(user.SuperAdmin);
         }
     }, [user]);
 
