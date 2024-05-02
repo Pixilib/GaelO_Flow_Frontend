@@ -27,7 +27,6 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
 
   const handleItemClick = (item: Item|string) => {
     const itemPath = typeof item === "string" ? item : item.path;
-    console.log(itemPath)
     navigate(itemPath);
   };
   const handleDropDown = (title: string) => {
