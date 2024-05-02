@@ -2,12 +2,12 @@ import { SignInResponse } from "../utils/types";
 import axios from "./axios";
 
 export const signIn = (
-  username: string,
+  email: string,
   password: string
 ): Promise<SignInResponse> => {
   return axios
     .post("/api/login", {
-      Username : username,
+      Email : email,
       Password : password,
     })
     .then(function (response) {

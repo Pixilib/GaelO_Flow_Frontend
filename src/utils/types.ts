@@ -88,9 +88,7 @@ type User = {
     Id: number;
     Firstname: string;
     Lastname: string;
-    Username: string;
     Email: string;
-    SuperAdmin: boolean;
     RoleName: string;
     Role: RoleUser;
 }
