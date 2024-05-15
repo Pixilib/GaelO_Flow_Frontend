@@ -1,4 +1,4 @@
-import { RolesUserResponse, UserResponse, UserPayload, UserUpdatePayload } from '../utils/types';
+import { RolesUserResponse, UserResponse, UserPayload, UserUpdatePayload, RoleUser } from '../utils/types';
 import axios from "./axios";
 
 export const getRoles = (): Promise<RolesUserResponse> => {
@@ -15,9 +15,9 @@ export const getRoles = (): Promise<RolesUserResponse> => {
     });
 }
 
-export const postRoles = (payload: string): Promise<void> => {
+export const postRoles = (payload: RoleUser ): Promise<void> => {
     return axios
-    .post("api/roles", payload)
+    .post("/api/roles", payload)
     .then(function (response){
       return response.data;
     })

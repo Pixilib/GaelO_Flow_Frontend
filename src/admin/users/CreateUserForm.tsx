@@ -1,9 +1,11 @@
-import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
-import { IoIosCloseCircle } from "react-icons/io";
 import { ChangeEvent, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Input, Label, SelectionInput, ToggleEye } from "../../ui";
+
+import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
+import { IoIosCloseCircle as CloseWindows } from "react-icons/io";
 import { getRoles, postUsers } from "../../services/users";
 import { Colors, useCustomMutation, useCustomQuery, RolesUserResponse, UserPayload, useCustomToast } from '../../utils';
+
+import { Button, Card, CardBody, CardHeader, Input, Label, SelectionInput, ToggleEye } from "../../ui";
 
 
 type UserFormProps = {
@@ -74,13 +76,13 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
             RoleName: selectedRole,
             Password: password,
         };
-
             userMutation.mutate(payload);
         }
+        
     return (
-        <Card className={`my-10 ${className}`}>
+        <Card className={`my-10 h-full ${className}`}>
             <CardHeader title={title} color={Colors.success} >
-                <IoIosCloseCircle size={"1.7rem"}
+                <CloseWindows size={"1.7rem"}
                     onClick={() => onClose()}
                     className="mr-3 text-white transition cursor-pointer duration-70 hover:scale-110"
                 />
@@ -89,7 +91,6 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
             <CardBody color={Colors.lightGray}>
                 <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
                     <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
-          
                         <Input
                             label={
                                 <Label value="Firstname *"
@@ -124,7 +125,6 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
                                     className="text-sm font-medium text-center"
                                     align="left" />
                             }
-                            size="auto"
                             type={show ? "text" : "password"}
                             placeholder="Enter your password"
                             className="mt-1 lg:mt-3 rounded-xl"
@@ -141,7 +141,6 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
                                     className="text-sm font-medium text-center"
                                     align="left" />
                             }
-                            size="auto"
                             type="email"
                             placeholder="example@example.com"
                             className="mt-1 lg:mt-3 rounded-xl"

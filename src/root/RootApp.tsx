@@ -49,7 +49,7 @@ const RootApp = () => {
   }, [location.pathname])
 
   return (
-    <div className="flex bg-white size-full">
+    <div className="flex w-screen h-screen bg-white">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
       <div className="flex flex-col flex-1 bg-secondaryLight">
         <Header

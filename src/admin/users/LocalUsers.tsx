@@ -1,16 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { BsPersonPlusFill as CreateUser } from "react-icons/bs";
+
 import { deleteUser, getUsers } from "../../services/users";
-import { Button, Spinner } from "../../ui";
-import { Colors } from "../../utils/enums";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
-import { UserResponse } from "../../utils/types";
-import UsersTable from "./UsersTable";
 import { useCustomToast } from "../../utils/toastify";
+import { UserResponse } from "../../utils/types";
+import { Colors } from "../../utils/enums";
+
+import { Button, Spinner } from "../../ui";
+import UsersTable from "./UsersTable";
 
 
 //! WIP
-const LocalUsers = () => {
+type LocalUsersProps = {
+    className?: string;
+};
+
+const LocalUsers = ({ className }: LocalUsersProps) => {
     const navigate = useNavigate();
     const { toastSuccess, toastError } = useCustomToast();
     const { data: users, isPending: isLoadingUsers } = useCustomQuery<UserResponse>(
@@ -32,16 +38,16 @@ const LocalUsers = () => {
             },
         }
     );
-
-
-    const handleCreateUser = () => {
-        navigate("create");
-    }
-
+    
     const handleEditUser = (userId: number) => {
         const user = users?.find((user) => user.Id === userId);
         navigate(`edit`, { state: { user } });
     }
+    
+    const handleCreateUser = () => {
+        navigate("create");
+    }
+
 
     //TODO : Replace with modal confirmation when is implemented
     const confirmDelete = (userId: number) => {
@@ -51,7 +57,7 @@ const LocalUsers = () => {
         }
     };
     return (
-        <div>
+        <div className={`flex flex-col h-full ${className}`}>
             {isLoadingUsers ? (
                 <Spinner />
             ) : (

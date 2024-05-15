@@ -66,7 +66,7 @@ export type OrthancJob = {
  * @typedef RoleUser
  * Represent all the roles that a user can have
  */
-type RoleUser = {
+export type RoleUser = {
     Name: string;
     Import: boolean;
     Anonymize: boolean;
@@ -78,6 +78,7 @@ type RoleUser = {
     Modify: boolean;
     CdBurner: boolean;
     AutoRouting: boolean;
+    ReadAll: boolean;
 }
 export type RolesUserResponse = RoleUser[];
 /**

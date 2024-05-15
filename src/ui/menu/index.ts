@@ -8,6 +8,7 @@ import MenuItemsCollapse from "./MenuItemsCollapse";
 import SideBarItems from "./SideBarItems";
 import Tabs, { Tab } from "./Tabs";
 import ToggleSwitch from "./ToggleSwitch";
+import Toogle from "./Toogle";
 import ToogleChevron from "./ToogleChevron";
 
-export { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, Tabs, Tab, ToggleSwitch, ToogleChevron };
+export { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, Tabs, Tab, ToogleChevron, ToggleSwitch, Toogle};

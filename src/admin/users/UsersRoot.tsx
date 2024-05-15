@@ -1,23 +1,24 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab } from "../../ui"; // En supposant que Tab est également exporté
+
+import { Tabs, Tab } from "../../ui";
+
 import LocalUsers from "./LocalUsers";
 import EditUserForm from "./EditUserForm";
 import CreateUserForm from "./CreateUserForm";
 import Roles from "./Roles";
+
 const UsersRoot = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const path = location.pathname;
-
-
-
+    
     const handleTabClick = (tab: string) => {
         navigate(tab);
     }
-    // console.log(path.startsWith("/administration/users/local"),path)
+    
     return (
-        <div className="h-full mx-12 shadow-md rounded-xl">
-            <Tabs className="bg-light-gray">
+        <div className="mx-12 my-12 shadow-md rounded-xl">
+            <Tabs className=" bg-light-gray">
                 <Tab
                     title="local Users"
                     active={path.startsWith("/administration/users/local")}
@@ -35,6 +36,7 @@ const UsersRoot = () => {
                     element={
                         <CreateUserForm
                             title="Create User"
+                            className="bg-[#EFEFEF]"
                             onClose={() => navigate(-1)}
                         />
                     }
@@ -44,6 +46,7 @@ const UsersRoot = () => {
                     element={
                         <EditUserForm
                             title="Edit User"
+                            className="bg-white"
                             onClose={() => navigate(-1)}
                         />
                     }
