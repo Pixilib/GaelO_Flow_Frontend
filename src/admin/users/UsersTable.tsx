@@ -14,8 +14,8 @@ type UsersProps = {
 const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
     const columns = [
         {
-            header: 'Username',
-            accessorKey: 'Username',
+            header: 'Email',
+            accessorKey: 'Email',
             enableColumnFilters: true,
         },
         {
@@ -39,36 +39,21 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
             enableColumnFilters: true,
         },
         {
-            header: 'Super Admin',
-            accessorKey: 'SuperAdmin',
-            enableColumnFilters: true,
-            cell({ row }: { row: any }) {
-                return (
-                    <div className="flex justify-center">
-                        <input id="SuperAdmin" type="checkbox" checked={row.original.SuperAdmin} disabled />
-                        <label htmlFor="SuperAdmin" className="ml-2">SuperAdmin</label>
-                    </div>
-                )
-            }
-        },
-        {
             header: 'Action',
             cell({ row }:{row:any}) {
                 const userId = row.original.Id;
-                console.log(userId);
                 return (
                     <div className="flex justify-center gap-7">
-                        <button onClick={()=> onEdit(userId)}>
-                        <Edit size={'1.3rem'}
-                            className="transition duration-70 hover:scale-110"
-                            color="#DFB520"
-                        />
-                        </button>
-                        {/* <Delete size={'1.3rem'}
+                            <Edit size={'1.3rem'}
+                                className="transition duration-70 hover:scale-110"
+                                color="#DFB520"
+                                onClick={() => onEdit(userId)}
+                            />
+                        <Delete size={'1.3rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
                             onClick={() => onDelete(userId)}
-                        /> */}
+                        />
                     </div>
                 )
             }

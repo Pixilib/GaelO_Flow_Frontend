@@ -20,13 +20,13 @@ export const SignInForm = () => {
   const { t } = useTranslation();
 
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { toastError } = useCustomToast();
 
-  const loginMutation = useCustomMutation<SignInResponse,{username:string,password:string}>(
-    ({ username, password }) => signIn(username, password),
+  const loginMutation = useCustomMutation<SignInResponse,{email:string,password:string}>(
+    ({ email, password }) => signIn(email, password),
     [],
     {
       onSuccess: (data: SignInResponse) => {
@@ -49,7 +49,7 @@ export const SignInForm = () => {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    loginMutation.mutate({ username, password });
+    loginMutation.mutate({ email, password });
   };
 
   return (
@@ -62,13 +62,14 @@ export const SignInForm = () => {
       </p>
       <div className="w-2/3 mt-20 text-dark">
         <Input
-          label="Username:"
+          label="Email:"
           svgLeft={<User />}
           bordered
+          type="email"
           placeholder="Enter your username"
-          value={username}
+          value={email}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setUsername(event.target.value);
+            setEmail(event.target.value);
           }}
           autoComplete="on"
           required
@@ -107,7 +108,7 @@ export const SignInForm = () => {
         <Button
           color={Colors.primary}
           type="submit"
-          disabled={username.length === 0 || password.length === 0}
+          disabled={email.length === 0 || password.length === 0}
         >
           Connect
           <ChevronRight />

@@ -32,25 +32,25 @@ const handleFocus = () => {
   if(isOpen)
   dropDownOpen();
 };
-const handleBlur = () => {
-  setTimeout(() => {
-    if (isOpen) {
-      dropDownOpen();
-    }
-  }, 100);
-};
+// const handleBlur = () => {
+//   setTimeout(() => {
+//     if (isOpen) {
+//       dropDownOpen();
+//     }
+//   }, 100);
+// };
   return (
     <div
       className={`flex w-full cursor-context-menu flex-col text-xs text-white ${className}`}
       data-gaelo-flow="sidebar-item-collapse"
-      onBlur={handleFocus}
-      onFocus={handleBlur}
+      // onBlur={handleBlur}
+      onFocus={handleFocus}
       onClick={handleClick}
       tabIndex={-1}
     >
-      <div className="mx-auto flex justify-start gap-3"  >
+      <div className="flex justify-start gap-3 mx-auto"  >
         <div className={`${bgIsOpen} mx-auto flex`}>
-        <div className="mx-3 flex grow items-center">
+        <div className="flex items-center mx-3 grow">
           <span className="-ml-0.5 mr-5">{icon}</span>
           <span>{title}</span>
         </div>

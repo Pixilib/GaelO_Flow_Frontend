@@ -7,7 +7,7 @@ interface OptionType {
 }
 
 interface SelectionInputProps {
-  value?: OptionType|undefined,
+  value?: OptionType|undefined|null,
   options: OptionType[] | GroupBase<OptionType>[];
   onChange?: (value: any) => void;
   placeholder?: string;

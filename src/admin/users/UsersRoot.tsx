@@ -3,7 +3,7 @@ import { Tabs, Tab } from "../../ui"; // En supposant que Tab est également exp
 import LocalUsers from "./LocalUsers";
 import EditUserForm from "./EditUserForm";
 import CreateUserForm from "./CreateUserForm";
-
+import Roles from "./Roles";
 const UsersRoot = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -14,24 +14,24 @@ const UsersRoot = () => {
     const handleTabClick = (tab: string) => {
         navigate(tab);
     }
+    // console.log(path.startsWith("/administration/users/local"),path)
     return (
         <div className="h-full mx-12 shadow-md rounded-xl">
             <Tabs className="bg-light-gray">
                 <Tab
                     title="local Users"
-                    active={path.startsWith("local/")}
+                    active={path.startsWith("/administration/users/local")}
                     onClick={() => handleTabClick("local")}
                 />
                 <Tab
                     title="Rôles"
                     active={path.endsWith("roles")}
-                    onClick={() => navigate("roles")}
+                    onClick={() => handleTabClick("roles")}
                 />
             </Tabs>
             <Routes>
-                <Route path="local" element={<LocalUsers />} />
                 <Route
-                    path="local/create"
+                    path="/local/create"
                     element={
                         <CreateUserForm
                             title="Create User"
@@ -40,7 +40,7 @@ const UsersRoot = () => {
                     }
                 />
                 <Route
-                    path="local/edit"
+                    path="/local/edit"
                     element={
                         <EditUserForm
                             title="Edit User"
@@ -48,6 +48,8 @@ const UsersRoot = () => {
                         />
                     }
                 />
+                <Route path="/local" element={<LocalUsers />} />
+                <Route path="/roles" element={<Roles />} />
             </Routes>
         </div>
     );
