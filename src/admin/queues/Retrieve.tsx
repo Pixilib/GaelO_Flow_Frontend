@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { useCustomToast } from "../../utils/toastify";
-import { useCustomMutation } from "../../utils/reactQuery";
 import { updateOptions } from "../../services/options";
-import { AutoQueryPayload, OptionsResponse } from '../../utils/types';
-import { timeDiff } from '../../utils/moment';
-import { formatTime, parseTimeString, formatTimeReadable } from '../../utils/date';
+import { Colors, AutoQueryPayload, OptionsResponse, timeDiff, formatTime, formatTimeReadable, parseTimeString, useCustomToast, useCustomMutation  } from '../../utils';
 
 import { Table } from '../../ui';
-import { Colors } from '../../utils/enums';
 import RetrieveForm from "./RetrieveForm";
 
 type RetrieveProps = {
@@ -28,7 +23,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
         const optionClockStop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
         setStartTime(optionClockStart);
         setStopTime(optionClockStop);
-        setTimeDelta(timeDiff(optionClockStart, optionClockStop));
+        setTimeDelta(formatTimeReadable(timeDiff(optionClockStart, optionClockStop)));
     }, [data]);
 
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
