@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Colors } from "../../utils/enums";
 import {
   useReactTable,
@@ -10,9 +10,9 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
   getPaginationRowModel,
-} from '@tanstack/react-table';
-import FilterTable from './FilterTable';
-import Footer from '../table/Footer';
+} from "@tanstack/react-table";
+import FilterTable from "./FilterTable";
+import Footer from "../table/Footer";
 
 type TableProps<TData> = {
   data?: TData[];
@@ -24,14 +24,21 @@ type TableProps<TData> = {
   pageSize?: number;
 };
 
-function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false, headerColor, className, pageSize = 10 }: TableProps<T>) {
+function Table<T>({
+  data = [],
+  columns,
+  enableSorting = false,
+  enableColumnFilters = false,
+  headerColor,
+  className,
+  pageSize = 10,
+}: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0, //initial page index
     pageSize: pageSize, //default page size
   });
-
 
   const table = useReactTable<T>({
     data,
@@ -54,14 +61,18 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
   const headerBgClass = `bg-${headerColor}`;
 
   return (
-    <div className={`max-h-[500px] rounded-xl shadow-md overflow-auto ${className}`}>
-      <table className={`min-w-full rounded-xl border-grayCustom overflow-auto ${className}`}>
+    <div
+      className={`max-h-[500px] rounded-xl shadow-md overflow-auto ${className}`}
+    >
+      <table
+        className={`min-w-full rounded-xl border-grayCustom overflow-auto ${className}`}
+      >
         <thead className={headerBgClass}>
-          {table.getHeaderGroups().map(headerGroup => (
+          {table.getHeaderGroups().map((headerGroup) => (
             <>
               {/* Ligne pour les titres et les flèches de tri */}
               <tr key={headerGroup.id} className={headerBgClass}>
-                {headerGroup.headers.map(header => (
+                {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
                     colSpan={header.column.getCanFilter() ? 1 : undefined}
@@ -69,10 +80,13 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     <div className="flex items-center justify-center space-x-1">
-                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                       {header.column.getCanSort() && (
                         <span className="cursor-pointer">
-                          {header.column.getIsSorted() === 'desc' ? '▼' : '▲'}
+                          {header.column.getIsSorted() === "desc" ? "▼" : "▲"}
                         </span>
                       )}
                     </div>
@@ -80,15 +94,20 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
                 ))}
               </tr>
               {/* Ligne distincte pour les filtres si au moins un filtre est présent */}
-              {headerGroup.headers.some(header => header.column.getCanFilter()) && (
-                <tr key={`${headerGroup.id}-filters`} className="bg-${color}-filter">
-                  {headerGroup.headers.map(header => (
+              {headerGroup.headers.some((header) =>
+                header.column.getCanFilter()
+              ) && (
+                <tr
+                  key={`${headerGroup.id}-filters`}
+                  className="bg-${color}-filter"
+                >
+                  {headerGroup.headers.map((header) => (
                     <th
                       key={`${header.id}-filter`}
                       className="p-2 text-center md:px-4 lg:px-6"
                     >
                       {header.column.getCanFilter() ? (
-                        <div onClick={e => e.stopPropagation()}>
+                        <div onClick={(e) => e.stopPropagation()}>
                           <FilterTable column={header.column} table={table} />
                         </div>
                       ) : null}
@@ -103,27 +122,30 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
           {table.getRowModel().rows.map((row, rowIndex) => (
             <tr
               key={row.id}
-              className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'} ${table.getRowModel().rows.length - 1 === rowIndex ? 'last-row' : ''}`}
+              className={`${rowIndex % 2 === 0 ? "bg-zinc-100" : "bg-white"} ${table.getRowModel().rows.length - 1 === rowIndex ? "last-row" : ""}`}
             >
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id} className="px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6">
+              {row.getVisibleCells().map((cell) => (
+                <td
+                  key={cell.id}
+                  className="px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
             </tr>
           ))}
         </tbody>
-        <tfoot className='w-full bg-white shadow-md rounded-b-xl '>
-          <tr>
-            <td colSpan={columns.length}>
-              <Footer
-                table={table}
-              />
-            </td>
-          </tr>
+        <tfoot className="w-full bg-white shadow-md rounded-b-xl ">
+          {table.getRowModel().rows.length > 0 ? (
+            <tr>
+              <td colSpan={columns.length}>
+                <Footer table={table} />
+              </td>
+            </tr>
+          ) : null}
         </tfoot>
       </table>
     </div>
-  )
+  );
 }
 export default Table;

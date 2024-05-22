@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 
 const meta: Meta<typeof SelectInput> = {
-  title: 'GAELO FLOW UI/SelectionInput',
+  title: 'GAELO FLOW UI/SelectInput',
   component: SelectInput,
   argTypes: {
     onChange: { action: 'changed' },
