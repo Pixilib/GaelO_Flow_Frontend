@@ -87,94 +87,94 @@ const CreateRoleForm = ({ title, className, onClose }: CreateRoleFormProps) => {
                     </div>
 
                     {/* Grille principale des fieldsets */}
-                    <div className="grid gap-4 grid-col-1 md:grid-cols-3">
+                    <div className="grid gap-4 grid-col-1 md:grid-cols-4">
                         {/* Fieldset pour Import/Export/Delete */}
                         <fieldset className="p-3 border border-gray-300 rounded-md">
-                            <legend className="px-2 mb-2 text-sm font-semibold">Role</legend>
+                            <legend className="px-2 mb-2 text-sm font-semibold">Data Access</legend>
                             <div className="grid items-center grid-cols-3 gap-2 justify-items-center">
-                                <Toggle
-                                    label="Import"
-                                    labelPosition="top"
-                                    onChange={() => setImportRole(!importRole)}
-                                />
                                 <Toggle
                                     label="Export"
                                     labelPosition="top"
                                     onChange={() => setExportRole(!exportRole)}
                                 />
                                 <Toggle
+                                    label="Read All"
+                                    labelPosition="top"
+                                    onChange={() => setReadAll(!readAll)}
+                                />
+
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset className="p-3 border border-gray-300 rounded-md">
+                            <legend className="px-2 mb-2 text-sm font-semibold">Query</legend>
+                            <div className="grid items-center grid-cols-3 gap-2 justify-items-center">
+                                <Toggle
+                                    label="Auto Query"
+                                    labelPosition="top"
+                                    onChange={() => setAutoQuery(!autoQuery)}
+                                />
+                                <Toggle
+                                    label="Query"
+                                    labelPosition="top"
+                                    onChange={() => setQuery(!query)}
+                                />
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset className="p-3 border border-gray-300 rounded-md">
+                            <legend className="px-2 mb-2 text-sm font-semibold">Modifications </legend>
+                            <div className="grid items-center grid-cols-3 gap-2 justify-items-center">
+                                <Toggle
+                                    label="Anonymize"
+                                    labelPosition="top"
+                                    onChange={() => setAnonymize(!anonymize)}
+                                />
+                                <Toggle
                                     label="Delete"
                                     labelPosition="top"
                                     onChange={() => setDeleteRole(!deleteRole)}
                                 />
+                                <Toggle
+                                    label="Import"
+                                    labelPosition="top"
+                                    onChange={() => setImportRole(!importRole)}
+                                />
+                                <Toggle
+                                    label="Modify"
+                                    labelPosition="top"
+                                    onChange={() => setModify(!modify)}
+                                />
                             </div>
-                        </fieldset>
 
-                        {/* Fieldset pour Query/Anonymize */}
-                        <fieldset className="p-3 border border-gray-300 rounded-md">
-                            <legend className="px-2 mb-2 text-sm font-semibold">Query/Anonymize</legend>
-                            <div className="grid items-center grid-cols-2 gap-2 justify-items-center">
-                                <div className="col-span-1 space-y-4">
-                                    <Toggle
-                                        label="Query"
-                                        labelPosition="top"
-                                        onChange={() => setQuery(!query)}
-                                    />
-                                    <Toggle
-                                        label="Auto Query"
-                                        labelPosition="top"
-                                        onChange={() => setAutoQuery(!autoQuery)}
-                                    />
-                                </div>
-                                <div className="col-span-1 space-y-4">
-                                    <Toggle
-                                        label="Anonymize"
-                                        labelPosition="top"
-                                        onChange={() => setAnonymize(!anonymize)}
-                                    />
-                                    <Toggle
-                                        label="Read All"
-                                        labelPosition="top"
-                                        onChange={() => setReadAll(!readAll)}
-                                    />
-                                </div>
-                            </div>
-                        </fieldset>
 
+                        </fieldset>
                         {/* Fieldset pour Autres Permissions à droite */}
                         <fieldset className="p-3 border border-gray-300 rounded-md">
-                            <legend className="px-2 mb-2 text-sm font-semibold">Other Permissions</legend>
-                            <div className="grid items-start grid-cols-2 gap-2 align-middle gap-y-4 justify-items-center">
-                                <div className="col-span-1 space-y-4">
-                                    <Toggle
-                                        label="CD Burner"
-                                        labelPosition="top"
-                                        onChange={() => setCdBurner(!cdBurner)}
-                                    />
-                                    <Toggle
-                                        label="Auto Routing"
-                                        labelPosition="top"
-                                        onChange={() => setAutoRouting(!autoRouting)}
-                                    />
-                                </div>
-                                <div className="col-span-1 space-y-4">
-                                    <Toggle
-                                        label="Admin"
-                                        labelPosition="top"
-                                        onChange={() => setAdmin(!admin)}
-                                    />
-                                    <Toggle
-                                        label="Modify"
-                                        labelPosition="top"
-                                        onChange={() => setModify(!modify)}
-                                    />
-                                </div>
+                            <legend className="px-2 mb-2 text-sm font-semibold">Other</legend>
+                            <div className="grid items-start grid-cols-3 gap-2 align-middle gap-y-4 justify-items-center">
+                                <Toggle
+                                    label="CD Burner"
+                                    labelPosition="top"
+                                    onChange={() => setCdBurner(!cdBurner)}
+                                />
+                                <Toggle
+                                    label="Auto Routing"
+                                    labelPosition="top"
+                                    onChange={() => setAutoRouting(!autoRouting)}
+                                />
+                                <Toggle
+                                    label="Admin"
+                                    labelPosition="top"
+                                    onChange={() => setAdmin(!admin)}
+                                />
                             </div>
                         </fieldset>
                     </div>
-
                     {/* Bouton de Soumission */}
-                    <div className="flex justify-center mt-3">
+                    <div className="flex justify-center">
                         <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
                             <SubmitUser size={'1.3rem'} />
                             <div className="">Submit</div>

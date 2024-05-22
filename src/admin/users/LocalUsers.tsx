@@ -38,12 +38,12 @@ const LocalUsers = ({ className }: LocalUsersProps) => {
             },
         }
     );
-    
+
     const handleEditUser = (userId: number) => {
         const user = users?.find((user) => user.Id === userId);
         navigate(`edit`, { state: { user } });
     }
-    
+
     const handleCreateUser = () => {
         navigate("create");
     }
@@ -65,15 +65,15 @@ const LocalUsers = ({ className }: LocalUsersProps) => {
                     <UsersTable
                         data={users || []}
                         onEdit={handleEditUser}
-                        onDelete={confirmDelete} 
+                        onDelete={confirmDelete}
                     />
-                    <div className="flex justify-center mx-10 mb-10 mt-9">
+                    <div className="flex justify-center mx-10 my-10">
                         <Button
                             color={Colors.success}
                             onClick={handleCreateUser}
                             className="flex justify-center gap-4 w-52 h-11 hover:successHover"
                         >
-                            <CreateUser size={'1.3rem'} />
+                        <CreateUser size={'1.3rem'} />
                             Create User
                         </Button>
                     </div>
