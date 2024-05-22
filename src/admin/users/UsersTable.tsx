@@ -40,15 +40,15 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
         },
         {
             header: 'Action',
-            cell({ row }:{row:any}) {
+            cell({ row }: { row: any }) {
                 const userId = row.original.Id;
                 return (
                     <div className="flex justify-center gap-7">
-                            <Edit size={'1.3rem'}
-                                className="transition duration-70 hover:scale-110"
-                                color="#DFB520"
-                                onClick={() => onEdit(userId)}
-                            />
+                        <Edit size={'1.3rem'}
+                            className="transition duration-70 hover:scale-110"
+                            color="#DFB520"
+                            onClick={() => onEdit(userId)}
+                        />
                         <Delete size={'1.3rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"

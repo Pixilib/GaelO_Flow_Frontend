@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Table from '../src/ui/table/Table';
 import { Colors } from '../src/utils/enums';
+import { Card, CardBody, CardHeader } from '../src/ui';
 
 type DataType = {
   id: number;
@@ -86,6 +87,7 @@ export const DefaultTable: Story = {
     enableSorting: true,
     enableColumnFilters: true,
     headerColor: Colors.almond,
+    className:'w-full rounded-xl shadow-md'
   },
 } satisfies Story;
 
@@ -98,6 +100,7 @@ export const WithoutSorting: Story = {
   },
 } satisfies Story;
 
+//render a table in a Card
 export const CustomStyling: Story = {
   args: {
     data,
@@ -115,6 +118,23 @@ export const CustomStyling: Story = {
   },
 } satisfies Story;
 
+export const TableInCard: Story = {
+  render: (args) => (
+    <Card  className="h-full max-w-4xl mx-auto">
+      <CardHeader title="User Data" centerTitle color={Colors.success} />
+      <CardBody>
+        <Table {...args} className='overflow-x-auto' pageSize={5} />
+      </CardBody>
+    </Card>
+  ),
+  args: {
+    data,
+    columns,
+    enableSorting: true,
+    enableColumnFilters: true,
+    headerColor: Colors.almond,
+  },
+} satisfies Story;
 export const HighlightYoungAge: Story = {
   args: {
     data,

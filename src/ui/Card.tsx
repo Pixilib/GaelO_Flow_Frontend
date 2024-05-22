@@ -45,6 +45,7 @@ const colorClasses: Record<keyof typeof Colors, string> = {
   red: "bg-red",
   gray: "bg-gray",
   light: "bg-light",
+  white: "bg-white",
 };
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";

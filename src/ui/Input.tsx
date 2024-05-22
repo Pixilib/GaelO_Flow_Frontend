@@ -15,7 +15,7 @@ type InputProps = {
   max?: number;
   step?: number;
   [key: string]: any;
-};
+}& React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = ({
   className,

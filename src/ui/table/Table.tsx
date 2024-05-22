@@ -18,17 +18,18 @@ type TableProps<TData> = {
   data?: TData[];
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
-  enableColumnFilters? :boolean;
+  enableColumnFilters?: boolean;
   headerColor: Colors;
   className?: string;
+  pageSize?: number;
 };
 
-function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false,  headerColor, className }: TableProps<T>) {
+function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false, headerColor, className, pageSize = 10 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0, //initial page index
-    pageSize: 10, //default page size
+    pageSize: pageSize, //default page size
   });
 
 
@@ -53,8 +54,8 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
   const headerBgClass = `bg-${headerColor}`;
 
   return (
-    <div className={`max-h-[500px] overflow-x-auto rounded-xl shadow-md ${className}`}>
-      <table className={`min-w-full border-grayCustom ${className}`}>
+    <div className={`max-h-[500px] rounded-xl shadow-md overflow-auto ${className}`}>
+      <table className={`min-w-full rounded-xl border-grayCustom overflow-auto ${className}`}>
         <thead className={headerBgClass}>
           {table.getHeaderGroups().map(headerGroup => (
             <>
@@ -112,13 +113,17 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
             </tr>
           ))}
         </tbody>
+        <tfoot className='w-full bg-white shadow-md rounded-b-xl '>
+          <tr>
+            <td colSpan={columns.length}>
+              <Footer
+                table={table}
+              />
+            </td>
+          </tr>
+        </tfoot>
       </table>
-      <div className="w-full">
-        <Footer
-          table={table}
-        />
-      </div>
     </div>
-  );
+  )
 }
 export default Table;

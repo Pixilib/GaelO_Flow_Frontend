@@ -98,13 +98,13 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
         }
     ]
     return (
-        <div>
+        <div className="mx-5 mt-4">
             <Table
                 data={data}
                 columns={columns}
                 headerColor={Colors.almond}
-                enableColumnFilters
                 enableSorting
+                pageSize={2}
             />
         </div>
     );
