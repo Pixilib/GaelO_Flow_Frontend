@@ -32,14 +32,14 @@ const Roles = () => {
             {showCreateRoleForm &&
                 <CreateRoleForm title={"Create Role"} className="bg-[#EFEFEF]" onClose={() => (setShowCreateRoleForm(false))} />}
 
-            <div className="flex justify-center mx-10 mb-10 mt-9">
+            <div className="flex justify-center mx-10 mb-10">
                 {!showCreateRoleForm && (
                     <Button
                         color={Colors.success}
                         onClick={() => setShowCreateRoleForm(true)}
                         className="flex justify-center gap-4 w-52 h-11 hover:successHover "
                     >
-                        <CreateRole size={'1.3rem'} />
+                        <CreateRole size={'1.3rem'} className="" />
                         Create Role
                     </Button>
                 )}

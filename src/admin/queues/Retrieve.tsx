@@ -4,7 +4,8 @@ import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation } from "../../utils/reactQuery";
 import { updateOptions } from "../../services/options";
 import { AutoQueryPayload, OptionsResponse } from '../../utils/types';
-import { formatTime, parseTimeString, formatTimeReadable, timeDiff } from '../../utils/date';
+import { timeDiff } from '../../utils/moment';
+import { formatTime, parseTimeString, formatTimeReadable } from '../../utils/date';
 
 import { Table } from '../../ui';
 import { Colors } from '../../utils/enums';
@@ -27,7 +28,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
         const optionClockStop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
         setStartTime(optionClockStart);
         setStopTime(optionClockStop);
-        setTimeDelta(formatTimeReadable(timeDiff(optionClockStart, optionClockStop)));
+        setTimeDelta(timeDiff(optionClockStart, optionClockStop));
     }, [data]);
 
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
