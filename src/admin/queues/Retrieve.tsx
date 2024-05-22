@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { IoMdSend as SendIcon } from "react-icons/io";
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation } from "../../utils/reactQuery";
 import { updateOptions } from "../../services/options";
@@ -14,51 +14,43 @@ type RetrieveProps = {
     data: OptionsResponse;
 }
 
-//* This component works get the data, update the data with form
-//TODO - Need to refactor the code in differents components
 const Retrieve = ({ data }: RetrieveProps) => {
     const [startTime, setStartTime] = useState("");
     const [stopTime, setStopTime] = useState("");
-    const [timeDelta, setTimeDelta] = useState(timeDiff(startTime, stopTime));
+    const [timeDelta, setTimeDelta] = useState("");
+
     const { toastSuccess, toastError } = useCustomToast();
-
-    useEffect(() => {
-        const optionClockStart = formatTime(data.AutoQueryHourStart, data.AutoQueryMinuteStart);
-        const optionClockStop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
-        setStartTime(optionClockStart);
-        setStopTime(optionClockStop);
-        setTimeDelta(formatTimeReadable(timeDiff(optionClockStart, optionClockStop)));
-    }, [data]);
-
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
         ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) =>
             updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
         [["options"]],
         {
-            onSuccess: () => {
-                toastSuccess("Options updated successfully");
-            },
-            onError: (error: any) => {
-                if (error.data.message) {
-                    toastError(error.data.message);
-                } else {
-                    toastError("An error occurred during updating options.");
-                }
+            onSuccess: () => toastSuccess("Options updated successfully"),
+            onError: error => {
+                const errorMessage = error.data?.message || "An error occurred during updating options.";
+                toastError(errorMessage);
             },
         }
     );
 
-    const handleTimeStart = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        setStartTime(value);
-        setTimeDelta(formatTimeReadable(timeDiff(value, stopTime)));
-    }
+    useEffect(() => {
+        const start = formatTime(data.AutoQueryHourStart, data.AutoQueryMinuteStart);
+        const stop = formatTime(data.AutoQueryHourStop, data.AutoQueryMinuteStop);
+        setStartTime(start);
+        setStopTime(stop);
+        setTimeDelta(formatTimeReadable(timeDiff(start, stop)));
+    }, [data]);
 
-    const handleTimeStop = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        setStopTime(value);
-        setTimeDelta(formatTimeReadable(timeDiff(startTime, value)));
-    }
+    const handleTimeChange = (isStart: boolean) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value;
+        if (isStart) {
+            setStartTime(newValue);
+            setTimeDelta(formatTimeReadable(timeDiff(newValue, stopTime)));
+        } else {
+            setStopTime(newValue);
+            setTimeDelta(formatTimeReadable(timeDiff(startTime, newValue)));
+        }
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

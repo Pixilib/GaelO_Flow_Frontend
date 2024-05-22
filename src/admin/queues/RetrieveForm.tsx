@@ -40,7 +40,7 @@ const RetrieveForm = ({
               onChange={handleTimeStop}
               className="focus:shadow-lg"
             />
-            <div className="flex-col text-center gap-y-4">
+            <div className="flex-col text-center gap-y-4c">
               <Label value="Total Time" className="font-semibold " classParent={"mt-8"} />
               <Badge
                 value={timeDelta}

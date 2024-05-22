@@ -68,9 +68,7 @@ export const BadgeDanger: Story = {
 export const BadgesInline: Story = {
   render: ({ args }) => (
     <div className="flex space-x-4">
-      <Badge {...args} value="Default" />
-      <Badge {...args} value="Rounded Success" backgroundColor="#CDFFCD" textColor="#276749" borderColor="#A3E635" />
-      <Badge {...args} value="Rounded Danger" backgroundColor="#FEE2E2" textColor="#B91C1C" borderColor="#FECACA" />
+ 
     </div>
   ),
   args: {

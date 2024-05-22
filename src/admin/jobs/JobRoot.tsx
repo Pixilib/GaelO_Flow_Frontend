@@ -5,7 +5,6 @@ import { Spinner, Card, CardHeader, CardBody, CardFooter } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { JobPayload, JobsAction, OrthancJob } from '../../utils/types';
-
 import JobTable from "./JobTable";
 
 const JobRoot = () => {

@@ -15,7 +15,7 @@ import Toast from "./toast/Toast";
 import ToastContainer from "./toast/ToastContainer";
 import ToastContext from "./toast/ToastContext";
 
-import SelectionInput from "./SelectInput";
+import SelectInput from "./SelectInput";
 import Spinner from "./Spinner";
 import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems , ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
 
@@ -38,7 +38,7 @@ export {
     MenuItemsCollapse,
     MenuItem,
     Popover,
-    SelectionInput,
+    SelectInput,
     SideBarItems,
     Spinner,
     Tab,
