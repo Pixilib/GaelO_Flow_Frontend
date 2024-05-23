@@ -14,14 +14,14 @@ type UserFormProps = {
     onClose: () => void;
 }
 //!WIP 
-const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
+const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
     const [show, setShow] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [selectedRole, setSelectedRole] = useState(null);
-    
+
     const { data: roles } = useCustomQuery<RolesUserResponse>(
         ["roles"], () => getRoles(),
         {
@@ -59,7 +59,7 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
         }
     )
 
-    const handleRoleChange = (value:any) => {
+    const handleRoleChange = (value: any) => {
         setSelectedRole(value.value);
     };
 
@@ -76,9 +76,9 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
             RoleName: selectedRole,
             Password: password,
         };
-            userMutation.mutate(payload);
-        }
-        
+        userMutation.mutate(payload);
+    }
+
     return (
         <Card className={`my-10 h-full ${className}`}>
             <CardHeader title={title} color={Colors.success} >
@@ -148,9 +148,6 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
                             required
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
                         />
-                    </div>
-
-                    <div className="grid grid-cols-1 col-span-3 lg:grid-cols-2 gap-11">
                         <label className="flex flex-col">
                             <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
                             <SelectionInput
@@ -162,6 +159,7 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
                     </div>
 
                     <div className="grid grid-cols-1 col-span-3 mt-3 ">
+                        
                         <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
                             <SubmitUser size={'1.3rem'} />
                             <div className="">Submit</div>

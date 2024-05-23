@@ -75,6 +75,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
             id="pageSize"
             type="number"
             min="1"
+            max={totalRows}
             value={pageSize}
             onChange={handlePageSizeChange}
             className="w-12 p-1 mr-3 text-center border rounded text-primary hover:font-bold focus-ring-2 focus-ring-primary "

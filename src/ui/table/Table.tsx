@@ -27,12 +27,13 @@ type TableProps<TData> = {
   pageSize?: number;
 };
 
-function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false, headerColor, className, pageSize = 10, headerTextSize="sm" }: TableProps<T>) {
+function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false, headerColor, className, pageSize = 10, headerTextSize = "sm" }: TableProps<T>) {
+  const initialPageSize = Math.min(pageSize, data.length);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0, //initial page index
-    pageSize: pageSize, //default page size
+    pageSize: initialPageSize, //default page size
   });
 
   const handlePageSizeChange = (newPageSize: number) => {
@@ -69,9 +70,9 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
             <>
               {/* Ligne pour les titres et les flèches de tri */}
               <tr key={headerGroup.id} className={headerClass}>
-                {headerGroup.headers.map(header => (
+                {headerGroup.headers.map((header,index) => (
                   <th
-                    key={header.id}
+                    key={`${header.id}-${index}`}
                     colSpan={header.column.getCanFilter() ? 1 : undefined}
                     className="h-2 px-2 py-3 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6"
                     onClick={header.column.getToggleSortingHandler()}
@@ -89,10 +90,10 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
               </tr>
               {/* Ligne distincte pour les filtres si au moins un filtre est présent */}
               {headerGroup.headers.some(header => header.column.getCanFilter()) && (
-                <tr key={`${headerGroup.id}-filters`} className="bg-${color}-filter">
-                  {headerGroup.headers.map(header => (
+                <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}-filter`}>
+                  {headerGroup.headers.map((header, index) => (
                     <th
-                      key={`${header.id}-filter`}
+                      key={`${headerGroup.id}-${header.id}-filter-${index}`}
                       className="p-2 text-center md:px-4 lg:px-6"
                     >
                       {header.column.getCanFilter() ? (
@@ -110,11 +111,11 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
         <tbody>
           {table.getRowModel().rows.map((row, rowIndex) => (
             <tr
-              key={row.id}
+              key={`row-${row.id}-${rowIndex}`}
               className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'} ${table.getRowModel().rows.length - 1 === rowIndex ? 'last-row' : ''}`}
             >
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id} className="px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6">
+              {row.getVisibleCells().map((cell, cellIndex) => (
+                <td key={`cell-${row.id}-${cell.id}-${cellIndex}`} className="px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

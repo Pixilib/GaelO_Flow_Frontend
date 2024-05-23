@@ -2,57 +2,45 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import { Tabs, Tab } from "../../ui";
 
-import LocalUsers from "./LocalUsers";
-import EditUserForm from "./EditUserForm";
-import CreateUserForm from "./CreateUserForm";
+// import EditUserForm from "./EditUserForm";
+// import CreateUserForm from "./CreateUserForm";
 import Roles from "./Roles";
+import Users from "./Users";
+import Oauth2 from "./Oauth2";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const path = location.pathname;
-    
+
     const handleTabClick = (tab: string) => {
         navigate(tab);
     }
-    
+
     return (
         <div className="mx-12 my-12 shadow-md rounded-xl">
             <Tabs className=" bg-light-gray">
                 <Tab
-                    title="local Users"
-                    active={path.startsWith("/administration/users/local")}
-                    onClick={() => handleTabClick("local")}
+                    title="Users"
+                    active={path.endsWith("crud")}
+                    onClick={() => handleTabClick("crud")}
                 />
                 <Tab
                     title="Rôles"
                     active={path.endsWith("roles")}
                     onClick={() => handleTabClick("roles")}
                 />
+                <Tab
+                    title="Oauth2"
+                    active={path.endsWith("oauth2")}
+                    onClick={() => handleTabClick("oauth2")}
+                />
             </Tabs>
+            
             <Routes>
-                <Route
-                    path="/local/create"
-                    element={
-                        <CreateUserForm
-                            title="Create User"
-                            className="bg-[#EFEFEF]"
-                            onClose={() => navigate(-1)}
-                        />
-                    }
-                />
-                <Route
-                    path="/local/edit"
-                    element={
-                        <EditUserForm
-                            title="Edit User"
-                            className="bg-[#EFEFEF]"
-                            onClose={() => navigate(-1)}
-                        />
-                    }
-                />
-                <Route path="/local" element={<LocalUsers />} />
+                <Route path="/crud" element={<Users/>} />
                 <Route path="/roles" element={<Roles />} />
+                <Route path="/oauth2" element={<Oauth2 />} />
             </Routes>
         </div>
     );
