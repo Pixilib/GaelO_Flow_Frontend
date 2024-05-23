@@ -26,7 +26,7 @@ const Banner = ({
           </span>
         )}
         <span>
-          <h1 className="text-4xl font-medium text-primary">{title}</h1>
+          <h1 className="text-2xl font-medium text-primary">{title}</h1>
         </span>
       </span>
       <span className="flex justify-end w-full mr-12">

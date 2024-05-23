@@ -1,0 +1,53 @@
+import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
+import { Table } from "../../ui";
+import { Colors } from "../../utils/enums";
+
+type LabelResponse = {
+    Id: number;
+    Label: string;
+};
+
+type LabelsProps = {
+    data: LabelResponse[];
+    onEdit: (label: string) => void;
+    onDelete: (label: string) => void;
+};
+
+const LabelsTable = ({ data = [], onEdit, onDelete }: LabelsProps) => {
+    const columns = [
+        {
+            header: "Label",
+            accessorKey: "Label",
+            enableColumnFilters: true,
+        },
+        {
+            header: "Actions",
+            accessorKey: "actions",
+            enableColumnFilters: false,
+            Cell: ({ row }: { row: any }) => {
+                const userId = row.original.Id;
+
+                return (
+                    <div className="flex justify-center gap-7">
+                        <Edit
+                            size="1.3rem"
+                            className="transition duration-70 hover:scale-110"
+                            color="#DFB520"
+                            onClick={() => onEdit(row.original.Label)}
+                        />
+                        <Delete
+                            size="1.3rem"
+                            className="transition duration-70 hover:scale-110"
+                            color="#DF3B20"
+                            onClick={() => onDelete(row.original.Label)}
+                        />
+                    </div>
+                );
+            },
+        },
+    ];
+
+    return <Table data={data} columns={columns} />;
+};
+
+export default LabelsTable;
