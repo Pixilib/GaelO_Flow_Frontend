@@ -14,17 +14,20 @@ import {
 import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 
+export type textSize = "xs" | "sm" | "base" | "lg";
+
 type TableProps<TData> = {
   data?: TData[];
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
   enableColumnFilters?: boolean;
   headerColor: Colors;
+  headerTextSize?: textSize;
   className?: string;
   pageSize?: number;
 };
 
-function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false, headerColor, className, pageSize = 10 }: TableProps<T>) {
+function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilters = false, headerColor, className, pageSize = 10, headerTextSize="sm" }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
@@ -32,7 +35,12 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
     pageSize: pageSize, //default page size
   });
 
-
+  const handlePageSizeChange = (newPageSize: number) => {
+    setPagination((prev) => ({
+      ...prev,
+      pageSize: newPageSize,
+    }));
+  };
   const table = useReactTable<T>({
     data,
     columns,
@@ -51,24 +59,24 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
     enableColumnFilters: enableColumnFilters,
     enableSorting,
   });
-  const headerBgClass = `bg-${headerColor}`;
-
+  const headerClass = `bg-${headerColor}`
+  const headerText = `text-${headerTextSize}`
   return (
     <div className={`max-h-[500px] rounded-xl shadow-md overflow-auto ${className}`}>
       <table className={`min-w-full rounded-xl border-grayCustom overflow-auto ${className}`}>
-        <thead className={headerBgClass}>
+        <thead className={headerClass}>
           {table.getHeaderGroups().map(headerGroup => (
             <>
               {/* Ligne pour les titres et les flèches de tri */}
-              <tr key={headerGroup.id} className={headerBgClass}>
+              <tr key={headerGroup.id} className={headerClass}>
                 {headerGroup.headers.map(header => (
                   <th
                     key={header.id}
                     colSpan={header.column.getCanFilter() ? 1 : undefined}
-                    className="h-2 px-2 py-3 text-xs font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6"
+                    className="h-2 px-2 py-3 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6"
                     onClick={header.column.getToggleSortingHandler()}
                   >
-                    <div className="flex items-center justify-center space-x-1">
+                    <div className={`flex items-center justify-center space-x-1 ${headerText}`}>
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       {header.column.getCanSort() && (
                         <span className="cursor-pointer">
@@ -118,6 +126,7 @@ function Table<T>({ data = [], columns, enableSorting = false, enableColumnFilte
             <td colSpan={columns.length}>
               <Footer
                 table={table}
+                onPageSizeChange={handlePageSizeChange}
               />
             </td>
           </tr>

@@ -72,8 +72,15 @@ const meta: Meta<typeof Table<DataType>> = {
     headerColor: {
       control: { type: 'select', options: Object.values(Colors) },
       defaultValue: Colors.almond,
-    }
-  },
+    },
+    pageSize: { control: 'number' },
+    headerTextSize: {
+      control: { type: 'select' },
+        options: ["xs", "sm", "base", "lg"] 
+      }, 
+      className: { control: 'text' },
+      
+    },
   tags: ["autodocs"]
 } satisfies Meta<typeof Table<DataType>>;
 export default meta;
@@ -87,7 +94,8 @@ export const DefaultTable: Story = {
     enableSorting: true,
     enableColumnFilters: true,
     headerColor: Colors.almond,
-    className:'w-full rounded-xl shadow-md'
+    className: 'w-full rounded-xl shadow-md',
+    headerTextSize: "sm",
   },
 } satisfies Story;
 
@@ -97,6 +105,8 @@ export const WithoutSorting: Story = {
     columns: columns.map(col => ({ ...col })),
     enableColumnFilters: true,
     headerColor: Colors.almond,
+    headerTextSize: "sm",
+
   },
 } satisfies Story;
 
@@ -115,12 +125,14 @@ export const CustomStyling: Story = {
     enableSorting: true,
     enableColumnFilters: true,
     headerColor: Colors.almond,
+    headerTextSize: "sm",
+
   },
 } satisfies Story;
 
 export const TableInCard: Story = {
   render: (args) => (
-    <Card  className="h-full max-w-4xl mx-auto">
+    <Card className="h-full max-w-4xl mx-auto">
       <CardHeader title="User Data" centerTitle color={Colors.success} />
       <CardBody>
         <Table {...args} className='overflow-x-auto' pageSize={5} />
@@ -133,6 +145,8 @@ export const TableInCard: Story = {
     enableSorting: true,
     enableColumnFilters: true,
     headerColor: Colors.almond,
+    headerTextSize: "sm",
+
   },
 } satisfies Story;
 export const HighlightYoungAge: Story = {
@@ -149,6 +163,8 @@ export const HighlightYoungAge: Story = {
     enableSorting: true,
     enableColumnFilters: true,
     headerColor: Colors.almond,
+    headerTextSize: "sm",
+
   },
 } satisfies Story;
 
@@ -162,5 +178,7 @@ export const FilterableCities: Story = {
     enableSorting: true,
     enableColumnFilters: true,
     headerColor: Colors.almond,
+    headerTextSize: "sm",
+
   },
 } satisfies Story;

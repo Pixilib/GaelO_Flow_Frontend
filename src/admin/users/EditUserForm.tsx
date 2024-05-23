@@ -168,7 +168,6 @@ const EditUserForm = ({ title, className, onClose}: UserFormProps) => {
                                     className="text-sm font-medium text-center"
                                     align="left" />
                             }
-                            size="auto"
                             type="email"
                             placeholder="example@example.com"
                             className="mt-1 lg:mt-3 rounded-xl"

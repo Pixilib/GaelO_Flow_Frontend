@@ -15,10 +15,10 @@ export const getRoles = (): Promise<RolesUserResponse> => {
     });
 }
 
-export const postRoles = (payload: RoleUser ): Promise<void> => {
-    return axios
-    .post("/api/roles", payload)
-    .then(function (response){
+export const getRole = (roleName: string): Promise<RoleUser> => {
+  return axios
+    .get(`/api/roles/${roleName}`)
+    .then(function (response) {
       return response.data;
     })
     .catch(function (error) {
@@ -27,7 +27,49 @@ export const postRoles = (payload: RoleUser ): Promise<void> => {
       }
       throw error;
     });
-  }
+}
+
+export const updateRole = (roleName: string, RoleUser: RoleUser): Promise<void> => {
+  return axios
+    .put(`/api/roles/${roleName}`, RoleUser)
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+
+export const deleteRole = (roleName: string): Promise<void> => {
+  return axios
+    .delete(`/api/roles/${roleName}`)
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+
+export const postRoles = (payload: RoleUser): Promise<void> => {
+  return axios
+    .post("/api/roles", payload)
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
 
 export const getUsers = (): Promise<UserResponse> => {
   return axios
@@ -57,9 +99,7 @@ export const getUserById = (userId: number): Promise<UserResponse> => {
     });
 };
 
-
-
-export const postUsers = (payload:UserPayload): Promise<number> => {
+export const postUsers = (payload: UserPayload): Promise<number> => {
   return axios
     .post("/api/users", payload)
     .then(function (response) {
@@ -73,7 +113,7 @@ export const postUsers = (payload:UserPayload): Promise<number> => {
     });
 };
 
-export const updateUser = (userId:number ,UserUpdatePayload: UserUpdatePayload): Promise<void> => {
+export const updateUser = (userId: number, UserUpdatePayload: UserUpdatePayload): Promise<void> => {
   return axios
     .put(`/api/users/${userId}`, UserUpdatePayload)
     .then(function (response) {

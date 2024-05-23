@@ -90,7 +90,7 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
 
             <CardBody color={Colors.lightGray}>
                 <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
-                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
+                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-3 lg:gap-11">
                         <Input
                             label={
                                 <Label value="Firstname *"
@@ -117,8 +117,6 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
                             required
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
                         />
-                    </div>
-                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
                         <Input
                             label={
                                 <Label value="Password *"
@@ -135,6 +133,8 @@ const CreateUserForm = ({ title, className, onClose}: UserFormProps) => {
                             required
                             onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
                         />
+                    </div>
+                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
                         <Input
                             label={
                                 <Label value="Email *"

@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import Label from '../Label';
 
 type ToggleProps = {
     onChange: () => void;
     label?: string | React.ReactElement<typeof Label>;
     labelPosition?: 'left' | 'top';
-};
+    checked: boolean;
+} & React.HTMLAttributes<HTMLInputElement>;
 
-const Toggle = ({ onChange, label, labelPosition = 'left' }: ToggleProps) => {
-    const [checked, setChecked] = useState(false);
-
+const Toggle = ({ onChange, label, labelPosition = 'left', checked }: ToggleProps) => {
     // Gestionnaire de changement de l'état
     const handleChange = () => {
-        setChecked(!checked);
         onChange();
     };
 

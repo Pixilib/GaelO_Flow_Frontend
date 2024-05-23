@@ -46,7 +46,7 @@ const UsersRoot = () => {
                     element={
                         <EditUserForm
                             title="Edit User"
-                            className="bg-white"
+                            className="bg-[#EFEFEF]"
                             onClose={() => navigate(-1)}
                         />
                     }

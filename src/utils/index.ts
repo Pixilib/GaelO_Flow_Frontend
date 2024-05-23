@@ -16,6 +16,7 @@ import type {
     AutoQueryPayload,
     OptionsResponse,
     RolesUserResponse,
+    RoleUser,
     UserPayload,
     UserUpdatePayload
 } from "./types";
@@ -30,6 +31,7 @@ export {
     OptionsResponse,
     parseTimeString,
     RolesUserResponse,
+    RoleUser,
     timeDiff,
     useCustomMutation,
     useCustomQuery,
