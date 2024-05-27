@@ -26,7 +26,17 @@ export const addLabel = (label: string): Promise<void> => {
             throw new Error(`Error: ${error.message}`);
         });
 };
-
+export const roleLabel = (labelName: string): Promise<void> => { 
+    return axios
+        .post(`/api/labels/{labelName}/roles`, { label }) 
+        .then(response => response.data)
+        .catch(error => {
+            if (error.response) {
+                throw new Error(`Error: ${error.response.status} - ${error.response.data.message}`);
+            }
+            throw new Error(`Error: ${error.message}`);
+        });
+};
 export const removeLabel = (labelName: string): Promise<void> => {
     return axios
         .delete(`/api/labels/${labelName}`)
