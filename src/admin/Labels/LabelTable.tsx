@@ -1,16 +1,17 @@
+import React from 'react';
+
+import { ColumnDef } from '@tanstack/react-table';
 import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
-import { Table } from "../../ui";
-import { Colors } from "../../utils/enums";
 
-type LabelResponse = {
-    Id: number;
-    Label: string;
-};
+import { Table, Badge, Button } from '../../ui';
+import { Colors } from '../../utils/enums';
 
-type LabelsProps = {
+
+
+interface LabelsProps{
     data: LabelResponse[];
-    onEdit: (label: string) => void;
-    onDelete: (label: string) => void;
+    onEdit: (labelId: number) => void; 
+    onDelete: (labelId: number) => void; 
 };
 
 const LabelsTable = ({ data = [], onEdit, onDelete }: LabelsProps) => {
@@ -25,7 +26,7 @@ const LabelsTable = ({ data = [], onEdit, onDelete }: LabelsProps) => {
             accessorKey: "actions",
             enableColumnFilters: false,
             Cell: ({ row }: { row: any }) => {
-                const userId = row.original.Id;
+                const labelId = row.original.Id; 
 
                 return (
                     <div className="flex justify-center gap-7">
@@ -33,13 +34,13 @@ const LabelsTable = ({ data = [], onEdit, onDelete }: LabelsProps) => {
                             size="1.3rem"
                             className="transition duration-70 hover:scale-110"
                             color="#DFB520"
-                            onClick={() => onEdit(row.original.Label)}
+                            onClick={() => onEdit(labelId)}
                         />
                         <Delete
                             size="1.3rem"
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
-                            onClick={() => onDelete(row.original.Label)}
+                            onClick={() => onDelete(labelId)} 
                         />
                     </div>
                 );
@@ -47,7 +48,12 @@ const LabelsTable = ({ data = [], onEdit, onDelete }: LabelsProps) => {
         },
     ];
 
-    return <Table data={data} columns={columns} />;
+    return <
+        Table columns={columns} 
+        data={data} 
+        headerColor={Colors.almond} 
+        enableColumnFilters enableSorting 
+        />;
 };
 
 export default LabelsTable;

@@ -1,54 +1,41 @@
-
 import axios from './axios';
 
 interface LabelResponse {
     labels: string[];
 }
 
-export const getLabels = (id: string): Promise<LabelResponse> => {
+export const getLabels = (): Promise<LabelResponse> => {
     return axios
-        .get(`/api/instances/${id}/labels`)
+        .get(`/api/labels`)
         .then(response => response.data)
         .catch(error => {
             if (error.response) {
                 throw error.response;
             }
             throw error;
+        });
+};
+export const addLabel = (label: string): Promise<void> => { 
+    return axios
+        .post(`/api/labels`, { label }) 
+        .then(response => response.data)
+        .catch(error => {
+            if (error.response) {
+                throw new Error(`Error: ${error.response.status} - ${error.response.data.message}`);
+            }
+            throw new Error(`Error: ${error.message}`);
         });
 };
 
-export const addLabel = (id: string, label: string): Promise<void> => {
+export const removeLabel = (labelName: string): Promise<void> => {
     return axios
-        .put(`/api/instances/${id}/labels/${label}`)
+        .delete(`/api/labels/${labelName}`)
         .then(response => response.data)
         .catch(error => {
             if (error.response) {
-                throw error.response;
+                throw new Error(`Error: ${error.response.status} - ${error.response.data.message}`);
             }
-            throw error;
+            throw new Error(`Error: ${error.message}`);
         });
 };
 
-export const removeLabel = (id: string, label: string): Promise<void> => {
-    return axios
-        .delete(`/api/instances/${id}/labels/${label}`)
-        .then(response => response.data)
-        .catch(error => {
-            if (error.response) {
-                throw error.response;
-            }
-            throw error;
-        });
-};
-
-export const testLabel = (id: string, label: string): Promise<boolean> => {
-    return axios
-        .get(`/api/instances/${id}/labels/${label}`)
-        .then(response => response.data)
-        .catch(error => {
-            if (error.response) {
-                throw error.response;
-            }
-            throw error;
-        });
-};
