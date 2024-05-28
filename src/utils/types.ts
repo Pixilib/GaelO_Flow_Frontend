@@ -140,3 +140,7 @@ export interface Modality {
     port: number;
     manufacturer: string;
 }
+
+export interface Label {
+    name: string;
+}
