@@ -15,6 +15,7 @@ export enum Colors {
     primaryHover = 'primary-hover',
     red = 'red',
     secondary = 'secondary',
+    secondaryLight= 'secondary-light',
     secondaryHover = 'secondary-hover',
     success = 'success',
     successHover = 'success-hover',

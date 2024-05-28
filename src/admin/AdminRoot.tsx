@@ -9,7 +9,7 @@ import LabelRoot from "./Labels/LabelRoot";
 
 const AdminRoot = () => {
     return (
-        <div className="mt-10 size-full bg-light-gray">
+        <div className="mt-10 size-full">
             <Routes>
                 <Route path="/general" element={<General />} />
                 <Route path="/jobs" element={<JobRoot />} />

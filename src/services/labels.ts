@@ -15,6 +15,7 @@ export const getLabels = (): Promise<LabelResponse> => {
             throw error;
         });
 };
+
 export const addLabel = (label: string): Promise<void> => { 
     return axios
         .post(`/api/labels`, { label }) 
@@ -26,9 +27,10 @@ export const addLabel = (label: string): Promise<void> => {
             throw new Error(`Error: ${error.message}`);
         });
 };
-export const roleLabel = (labelName: string): Promise<void> => { 
+
+export const getRolesByLabelName = (labelName: string): Promise<void> => { 
     return axios
-        .post(`/api/labels/{labelName}/roles`, { label }) 
+        .get(`/api/labels/${labelName}/roles`) 
         .then(response => response.data)
         .catch(error => {
             if (error.response) {
@@ -37,6 +39,7 @@ export const roleLabel = (labelName: string): Promise<void> => {
             throw new Error(`Error: ${error.message}`);
         });
 };
+
 export const removeLabel = (labelName: string): Promise<void> => {
     return axios
         .delete(`/api/labels/${labelName}`)
@@ -48,4 +51,3 @@ export const removeLabel = (labelName: string): Promise<void> => {
             throw new Error(`Error: ${error.message}`);
         });
 };
-
