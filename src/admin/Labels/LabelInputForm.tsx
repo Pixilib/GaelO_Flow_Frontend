@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Button } from '../../ui';
-import { Colors } from '../../utils';
+import { MdOutlineNewLabel } from 'react-icons/md';
+import { Button, Input } from '../../ui';
+import { Colors } from '../../utils/enums';
 
 interface LabelInputFormProps {
     onCreate: (label: string) => void;
@@ -22,18 +23,21 @@ const LabelInputForm: React.FC<LabelInputFormProps> = ({ onCreate }) => {
 
     return (
         <div className="flex items-center">
-            <input
-                type="text"
-                value={label}
-                onChange={handleInputChange}
-                placeholder="Add new label"
-                className="flex-grow p-2 border rounded-md focus:outline-none focus:ring-2"
-            />
+            <div className="relative flex items-center w-full">
+                <MdOutlineNewLabe />
+                <Input
+                    type="text"
+                    value={label}
+                    onChange={handleInputChange}
+                    placeholder="Add new label"
+                    className="w-full px-4 py-4 border border-gray-300 rounded-r-none rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </div>
             <Button
                 type="button"
                 color={Colors.success}
                 onClick={handleCreateClick}
-                className="p-2 ml-2 text-white rounded-md focus:outline-none focus:ring-2"
+                className="p-3 text-white rounded-l-none rounded-r-md"
             >
                 Create
             </Button>

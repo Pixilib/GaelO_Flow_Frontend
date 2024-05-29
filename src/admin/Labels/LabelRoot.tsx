@@ -1,24 +1,16 @@
-
 import React, { useState } from 'react';
-
 import { useCustomToast } from '../../utils/toastify';
 import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
-
 import { Colors } from '../../utils/enums';
-
-
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
-
-
-
 
 const LabelRoot = () => {
     const { toastSuccess, toastError } = useCustomToast();
     const [labels, setLabels] = useState([]);
 
     const handleCreate = (newLabel) => {
-        setLabels([...labels, newLabel]);
+        setLabels([...labels, { id: labels.length + 1, name: newLabel }]);
         toastSuccess("Label created successfully");
     };
 
@@ -28,24 +20,20 @@ const LabelRoot = () => {
     };
 
     return (
-    
-            <Card>
-                <CardHeader title="Labels" color={Colors.primary} />
-                <CardBody color={Colors.light}>
-                    <div className>
-                        <LabelTable
-                            data={labels}
-                            onEdit={() => {}}
-                            onDelete={deleteLabel}
-                        />
-                        <LabelInputForm
-                            onCreate={handleCreate}
-                        />
-                    </div>
-                </CardBody>
-                <CardFooter color={Colors.light}></CardFooter>
-            </Card>
-        );
-    }
+        <Card>
+            <CardHeader title="Labels" color={Colors.primary} />
+            <CardBody color={Colors.light}>
+                    <LabelInputForm onCreate={handleCreate} />
+               
+                <LabelTable
+                    data={labels}
+                    onEdit={() => {}}
+                    onDelete={deleteLabel}
+                />
+            </CardBody>
+            <CardFooter color={Colors.light} />
+        </Card>
+    );
+};
 
 export default LabelRoot;
