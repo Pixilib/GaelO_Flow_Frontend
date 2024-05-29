@@ -62,8 +62,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Users",
-      path: "/administration/users/local",
-      isActive: location.pathname === "/administration/users",
+      path: "/administration/users/crud",
+      isActive: location.pathname === "/administration/users/crud",
     },
     {
       title: "Labels",
@@ -75,7 +75,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="w-64 h-full border-transparent rounded-tr-40"
+      className="w-64 h-full border-transparent rounded-tr-40 flex-shrink-0"
     >
       <main className="h-full rounded-tr-40 bg-primary pt-7">
         <div className="flex h-11% justify-center">

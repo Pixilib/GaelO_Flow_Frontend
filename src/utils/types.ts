@@ -85,7 +85,7 @@ export type RolesUserResponse = RoleUser[];
  * @typedef User
  * Represent a user with all fields who need
  */
-type User = {
+export type User = {
     Id: number;
     Firstname: string;
     Lastname: string;
@@ -124,6 +124,8 @@ export type ChangePasswordVariables = {
 // export type changePasswordResponse = {
 //     ?
 // }
+
+//labels
 
 
 export interface Peer {

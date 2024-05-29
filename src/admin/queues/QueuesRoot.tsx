@@ -21,7 +21,7 @@ const QueuesRoot = () => {
   if (isLoadingOptions) return <Spinner />;
 
   return (
-    <div className="mx-8 shadow-md">
+    <div className="mx-12 mt-12 shadow-md">
       <Tabs className={`bg-light-gray`}>
         <Tab
           title="Retrieve"
