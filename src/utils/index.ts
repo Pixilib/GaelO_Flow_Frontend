@@ -15,10 +15,11 @@ import { getQueryParams } from "./queryParams";
 import type {
     AutoQueryPayload,
     OptionsResponse,
+    Oauth2Config,
     RolesUserResponse,
     RoleUser,
     UserPayload,
-    UserUpdatePayload
+    UserUpdatePayload,
 } from "./types";
 import { useCustomToast } from "./toastify";
 
@@ -28,6 +29,7 @@ export {
     formatTime,
     formatTimeReadable,
     getQueryParams,
+    Oauth2Config,
     OptionsResponse,
     parseTimeString,
     RolesUserResponse,

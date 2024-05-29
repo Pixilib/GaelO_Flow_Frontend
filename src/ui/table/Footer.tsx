@@ -18,7 +18,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
   const { pageIndex, pageSize } = getState().pagination;
   const totalRows = getPrePaginationRowModel().rows.length;
   const btnClassFooter = "border-none bg-transparent p-2 focus:outline-none text-dark";
-
+  console.log({ totalRows, pageIndex, pageSize })
   const handlePageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPageSize = Number(event.target.value);
     onPageSizeChange(newPageSize);
@@ -67,19 +67,19 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
             <MdSkipNext size="2em" />
           </button>
           <div className="flex items-center ml-4">
-          <label htmlFor="pageSize" className="mr-2 italic">
-            Rows per page:
-          </label>
-          <input
-            id="pageSize"
-            type="number"
-            min="1"
-            max={totalRows}
-            value={pageSize}
-            onChange={handlePageSizeChange}
-            className="w-12 p-1 mr-3 text-center border rounded text-primary hover:font-bold focus-ring-2 focus-ring-primary "
-          />
-        </div>
+            <label htmlFor="pageSize" className="mr-2 italic">
+              Rows per page:
+            </label>
+            <input
+              id="pageSize"
+              type="number"
+              min="1"
+              max={totalRows}
+              value={pageSize}
+              onChange={handlePageSizeChange}
+              className="w-12 p-1 mr-4 text-center border rounded text-primary hover:font-bold focus-ring-2 focus-ring-primary"
+            />
+          </div>
         </div>
       </div>
     </div>

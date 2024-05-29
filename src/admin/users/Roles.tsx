@@ -23,7 +23,7 @@ const Roles = () => {
             enabled: true,
         }
     );
-    
+
     const deleteMutation = useCustomMutation<void, string>(
         (roleName: string) => deleteRole(roleName),
         [["roles"]],
@@ -36,8 +36,8 @@ const Roles = () => {
             },
         }
     )
-    
-    const findRole = (roleName: string):RoleUser => {
+
+    const findRole = (roleName: string): RoleUser => {
         const role = roles?.find((role) => role.Name === roleName);
         return role || {} as RoleUser;
     }
@@ -46,14 +46,14 @@ const Roles = () => {
         setRoleToEdit(role);
         setShowRoleForm('edit');
     }
-    
+
     const handleDeleteRole = (roleName: string) => {
         const confirmation = window.confirm("Are you sure you want to delete this role?");
         if (confirmation) {
             deleteMutation.mutate(roleName);
         }
     }
-    
+
 
     return (
         <div className="">
@@ -66,11 +66,14 @@ const Roles = () => {
                     onDelete={handleDeleteRole}
                 />
             )}
-            {showRoleForm ==='create' &&
-                <CreateRole title={"Create Role"} className="bg-[#EFEFEF]" onClose={() => (setShowRoleForm(null))} />
+            {showRoleForm === 'create' &&
+                <CreateRole title={"Create Role"}
+                    className="bg-[#EFEFEF]" onClose={() => (setShowRoleForm(null))} />
             }
-            {showRoleForm ==='edit' &&
-                <EditRole title={"Edit Role"} className="bg-[#EFEFEF]" onClose={() => {setShowRoleForm(null); setRoleToEdit(null);}}  role={roleToEdit||undefined}/>
+            {showRoleForm === 'edit' &&
+                <EditRole title={"Edit Role"}
+                    className="bg-[#EFEFEF]" onClose={() => { setShowRoleForm(null); setRoleToEdit(null); }}
+                    role={roleToEdit || undefined} />
             }
 
             <div className="flex justify-center mx-10">
@@ -80,7 +83,7 @@ const Roles = () => {
                         onClick={() => setShowRoleForm('create')}
                         className="flex justify-center gap-4 my-10 w-52 h-11 hover:successHover "
                     >
-                    <RoleCreate size={'1.3rem'}/>
+                        <RoleCreate size={'1.3rem'} />
                         Create Role
                     </Button>
                 )}

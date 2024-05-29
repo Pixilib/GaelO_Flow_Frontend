@@ -4,7 +4,7 @@ import { Tabs, Tab } from "../../ui";
 
 import Roles from "./Roles";
 import Users from "./Users";
-import Oauth2 from "./Oauth2";
+import Oauth2 from "./Oauth";
 
 const UsersRoot = () => {
     const navigate = useNavigate();

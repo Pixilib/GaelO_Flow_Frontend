@@ -155,7 +155,7 @@ function Table<T>({
         </table>
       </div>
       <div className="w-full bg-white shadow-md rounded-b-xl">
-        {table.getRowModel().rows.length > 0 ? (
+        {data.length > 0 && table ? (
           <Footer
             table={table}
             onPageSizeChange={handlePageSizeChange}
