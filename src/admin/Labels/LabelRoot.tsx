@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useCustomToast } from '../../utils/toastify';
 import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
 import { Colors } from '../../utils/enums';
@@ -23,11 +22,11 @@ const LabelRoot = () => {
         <Card>
             <CardHeader title="Labels" color={Colors.primary} />
             <CardBody color={Colors.light}>
-                    <LabelInputForm onCreate={handleCreate} />
-               
+                <LabelInputForm onCreate={handleCreate} />
+
                 <LabelTable
                     data={labels}
-                    onEdit={() => {}}
+                    onEdit={() => { }}
                     onDelete={deleteLabel}
                 />
             </CardBody>
