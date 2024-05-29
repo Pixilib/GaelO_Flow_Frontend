@@ -32,11 +32,9 @@ const RootApp = () => {
       "/administration/queues/anonymize":"Queues",
       "/administration/queues/delete":"Queues",
       "/administration/peers": "Peers",
-      "/administration/users": "Users",
-      "/administration/users/local": "Users",
-      "/administration/users/local/create": "Users",
-      "/administration/users/local/edit": "Users",
+      "/administration/users/crud": "Users",
       "/administration/users/roles": "Users",
+      "/administration/users/oauth2": "Users",
       "/Orthanc Content": "Orthanc Content",
       "/import": "Import",
       "/query": "Query",
@@ -51,13 +49,13 @@ const RootApp = () => {
   return (
     <div className="flex w-screen h-screen bg-white">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-col flex-1 bg-secondaryLight">
+      <div className="flex flex-col flex-1 overflow-hidden bg-secondaryLight">
         <Header
           title={title}
           openItem={openItem}
           setOpenItem={setOpenItem}
         />
-        <div className="flex">
+        <div className="">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />

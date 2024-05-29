@@ -46,12 +46,13 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
                     <div className="flex justify-center gap-7">
                         <Edit size={'1.3rem'}
                             className="transition duration-70 hover:scale-110"
-                            color="#DFB520"
+                            color="#FF9500"
                             onClick={() => onEdit(userId)}
                         />
+     
                         <Delete size={'1.3rem'}
                             className="transition duration-70 hover:scale-110"
-                            color="#DF3B20"
+                            color="#FF0000"
                             onClick={() => onDelete(userId)}
                         />
                     </div>
@@ -60,7 +61,7 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
         },
     ]
     return (
-        <div className="mx-5 mt-4 ">
+        <div className="mx-5 mt-4">
             <Table
                 data={data}
                 columns={columns}

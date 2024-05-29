@@ -3,14 +3,14 @@ import React from 'react';
 export type TabProps = {
   title: string;
   active: boolean;
-  onClick : () => void
+  onClick: () => void
   variant?: 'basic' | 'underline' | 'pill';
- };
+};
 
-const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick}) => {
+const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick }) => {
   const variantStyles = {
     basic: {
-      active: 'z-50 first:rounded-tl-xl bg-light-gray text-[#929393] rounded-t-xl',
+      active: 'z-50 first:rounded-tl-xl bg-success text-white rounded-t-xl',
       inactive: 'text-gray-400 hover:text-[#929393] bg-primary text-white z-50 first:rounded-tl-xl',
     },
     underline: {
@@ -24,20 +24,20 @@ const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick}) =
   };
 
   return (
-  <>
-    <div 
-       data-gaelo-flow="Tab" 
-       className={`${active ?
-       variantStyles[variant].active : variantStyles[variant].inactive}
+    <>
+      <div
+        data-gaelo-flow="Tab"
+        className={`${active ?
+          variantStyles[variant].active : variantStyles[variant].inactive}
        px-6 py-3 font-medium
        cursor-pointer text-lg 
-       leading-normal`} 
-       onClick={() => onClick()}
-       >
-      {title}
-    </div>
-</>
-);
+       leading-normal`}
+        onClick={() => onClick()}
+      >
+        {title}
+      </div>
+    </>
+  );
 };
 
 export type TabsProps = {
@@ -47,13 +47,16 @@ export type TabsProps = {
 };
 
 const Tabs: React.FC<TabsProps> = ({ children, onClick, className }) => {
-  
+
   return (
     <div
       data-gaelo-flow="Tabs"
-      className={`flex flex-col ${className} 
+      className={
+      `flex flex-col ${className} 
       shadow-md first:rounded-tl-xl
-      last:rounded-tr-xl bg-primary h-auto rounded-t-xl overflow-y-auto`} 
+      last:rounded-tr-xl bg-primary
+      h-auto rounded-t-xl`
+      }
       onClick={onClick}>
       <div className="flex">
         {children}

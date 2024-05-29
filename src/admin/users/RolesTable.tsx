@@ -4,8 +4,8 @@ import { Colors } from "../../utils";
 
 type RolesTableProps = {
     data: any[];
-    onEdit?: (roleId: number) => void;
-    onDelete?: (roleId: number) => void;
+    onEdit?: (roleName: string) => void;
+    onDelete?: (roleName: string) => void;
 }
 const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
 
@@ -16,11 +16,16 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
             enableColumnFilters: true,
         },
         {
-            header: 'Import',
-            accessorKey: 'Import',
+            header: 'Export',
+            accessorKey: 'Export',
             enableColumnFilters: true,
-            cell: ({ row }: { row: any }) => 
-                BooleanIcon({ value: row.original.Import, size: '1.4rem' }),
+            cell: ({ row }: { row: any }) => BooleanIcon({ value: row.original.Export, size: '1.4rem' }),
+        },
+        {
+            header: 'ReadAll',
+            accessorKey: 'ReadAll',
+            enableColumnFilters: true,
+            cell: ({ row }: { row: any }) => BooleanIcon({ value: row.original.ReadAll, size: '1.4rem' }),
         },
         {
             header: 'Anonymize',
@@ -29,10 +34,11 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
             cell: ({ row }: { row: any }) => BooleanIcon({ value: row.original.Anonymize, size: '1.4rem' }),
         },
         {
-            header: 'Export',
-            accessorKey: 'Export',
+            header: 'Import',
+            accessorKey: 'Import',
             enableColumnFilters: true,
-            cell: ({ row }: { row: any }) => BooleanIcon({ value: row.original.Export, size: '1.4rem' }),
+            cell: ({ row }: { row: any }) => 
+                BooleanIcon({ value: row.original.Import, size: '1.4rem' }),
         },
         {
             header: 'Query',
@@ -79,18 +85,18 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
         {
             header: 'Action',
             cell({ row }: { row: any }) {
-                const roleId = row.original.Id;
+                const roleName = row.original.Name;
                 return (
                     <div className="flex justify-center gap-7">
                         <Edit size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DFB520"
-                            onClick={() => onEdit?.(roleId)}
+                            onClick={() => onEdit?.(roleName)}
                         />
                         <Delete size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
-                            onClick={() => onDelete?.(roleId)}
+                            onClick={() => onDelete?.(roleName)}
                         />
                     </div>
                 )
@@ -104,7 +110,10 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                 columns={columns}
                 headerColor={Colors.almond}
                 enableSorting
+                headerTextSize={"xs"}
                 pageSize={2}
+                pinFirstColumn={true}
+                pinLastColumn={true}
             />
         </div>
     );

@@ -7,6 +7,7 @@ const meta = {
   component: Toggle,
   argTypes: {
     onChange: { action: 'toggled' },
+    checked: { control: 'boolean' },
   },
   tags: ['autodocs', 'atoms']
 } satisfies Meta<typeof Toggle>;
@@ -17,5 +18,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     onChange: action('toggled'),
+    checked: false,
   },
 };
