@@ -1,29 +1,20 @@
-import { TbWifi} from "react-icons/tb"; 
 import React from 'react';
 
-import type { ColumnDef } from '@tanstack/react-table';
-import { AiOutlineDelete as DeleteIcon, AiOutlineAudio as EchoIcon } from 'react-icons/ai';
+import { ColumnDef } from '@tanstack/react-table';
+import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi"; 
 
-import {Table, Badge, Button} from '../../ui';
+import { Table, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
-
-interface AetData {
-    name: string;
-    aet: string;
-    host: string;
-    manufacturer: string;
-    isUserCreated?: boolean;
-}
+import { Modality } from '../../utils/types';
 
 interface ModalitiesTableProps {
-    aetData?: AetData[];
+    aetData?: Modality[];
     onDeleteAet: (aetName: string) => void;
-    onEchoAet: (aet: AetData) => void;
+    onEchoAet: (aetName: string) => void;
 }
 
 const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDeleteAet, onEchoAet }) => {
-
-    const columns: ColumnDef<AetData>[] = [
+    const columns: ColumnDef<Modality>[] = [
         {
             accessorKey: 'name',
             header: 'Name'
@@ -45,14 +36,14 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDelet
             header: 'Actions',
             id: 'actions',
             cell: ({ row }) => (
-                    <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}> <TbWifi/> </Button>
+                <div className="flex justify-center items-center gap-2.5">                     <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}>
+                        <EchoIcon />  
+                    </Button>
+                    <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>
+                        <DeleteIcon size={18} />
+                    </Button>
+                </div>
             )
-        },
-        {
-            id: 'delete',
-            cell: ({ row }) => (
-                <DeleteIcon onClick={() => onDeleteAet(row.original.name)} className="text-red-500 cursor-pointer" />
-            ),
         }
     ];
 

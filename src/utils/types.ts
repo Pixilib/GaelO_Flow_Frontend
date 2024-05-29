@@ -128,3 +128,17 @@ export type ChangePasswordVariables = {
 //labels
 
 
+export interface Peer {
+    name: string;
+    password: string;
+    url: string;
+    username: string;
+}
+
+export interface Modality {
+    name: string;
+    aet: string;
+    host: string;
+    port: number;
+    manufacturer: string;
+}

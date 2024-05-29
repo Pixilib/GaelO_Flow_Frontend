@@ -5,7 +5,7 @@ import { IoIosCloseCircle as CloseWindows } from "react-icons/io";
 import { getRoles, postUsers } from "../../services/users";
 import { Colors, useCustomMutation, useCustomQuery, RolesUserResponse, UserPayload, useCustomToast } from '../../utils';
 
-import { Button, Card, CardBody, CardHeader, Input, Label, SelectionInput, ToggleEye } from "../../ui";
+import { Button, Card, CardBody, CardHeader, Input, Label, SelectInput, ToggleEye } from "../../ui";
 
 
 type UserFormProps = {
@@ -150,7 +150,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
                         />
                         <label className="flex flex-col">
                             <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
-                            <SelectionInput
+                            <SelectInput
                                 options={rolesOptions}
                                 placeholder="Select a Rôle"
                                 onChange={handleRoleChange}

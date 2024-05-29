@@ -1,7 +1,7 @@
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 import { IoIosCloseCircle } from "react-icons/io";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Input, Label, SelectionInput } from "../../ui";
+import { Button, Card, CardBody, CardHeader, Input, Label, SelectInput } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getRoles, updateUser } from "../../services/users";
@@ -146,7 +146,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                         />
                         <label className="flex flex-col">
                             <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
-                            <SelectionInput
+                            <SelectInput
                                 options={rolesOptions}
                                 placeholder="Select a Rôle"
                                 onChange={(event) => {

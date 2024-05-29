@@ -65,7 +65,7 @@ const customStyles: StylesConfig<OptionType, boolean> = {
   }),
 };
 
-const SelectionInput: React.FC<SelectionInputProps> = ({
+const SelectInput: React.FC<SelectionInputProps> = ({
   options,
   onChange,
   placeholder = 'Select...',
@@ -89,4 +89,4 @@ const SelectionInput: React.FC<SelectionInputProps> = ({
   />
 );
 
-export default SelectionInput;
+export default SelectInput;
