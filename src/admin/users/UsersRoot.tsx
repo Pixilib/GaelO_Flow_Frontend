@@ -2,8 +2,6 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import { Tabs, Tab } from "../../ui";
 
-// import EditUserForm from "./EditUserForm";
-// import CreateUserForm from "./CreateUserForm";
 import Roles from "./Roles";
 import Users from "./Users";
 import Oauth2 from "./Oauth2";

@@ -112,6 +112,8 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                 enableSorting
                 headerTextSize={"xs"}
                 pageSize={2}
+                pinFirstColumn={true}
+                pinLastColumn={true}
             />
         </div>
     );

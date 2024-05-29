@@ -39,7 +39,7 @@ const JobRoot = () => {
 
   if (isLoadingJobs) return <Spinner />
   return (
-    <div className="flex justify-center w-full h-full">
+    <div className="flex justify-center w-full h-full mt-12">
       <Card className="w-full bg-white">
         <CardHeader title="Jobs" color={Colors.primary} />
         <CardBody>

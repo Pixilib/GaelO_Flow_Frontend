@@ -6,7 +6,6 @@ type FooterProps = {
   table: Table<any>;
   onPageSizeChange: (pageSize: number) => void;
 };
-
 const Footer = ({ table, onPageSizeChange }: FooterProps) => {
   const {
     getState,
@@ -25,7 +24,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
     onPageSizeChange(newPageSize);
   };
   return (
-    <div className="flex items-center justify-end w-full py-1 bg-white rounded-b-xl">
+    <div className="flex items-center justify-end w-full py-0.5 text-sm bg-white rounded-b-xl">
       <div className="flex items-center space-x-2">
         <div className="flex items-center">
           <strong className="mr-2">{totalRows}</strong>
