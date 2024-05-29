@@ -1,6 +1,7 @@
 import React from 'react';
 import { ColumnDef } from '@tanstack/react-table';
-import { BsPencilFill as EditIcon, BsTrashFill as DeleteIcon } from "react-icons/bs";
+import { RiAdminFill as EditIcon } from "react-icons/ri";
+import { BsTrashFill as DeleteIcon } from "react-icons/bs";
 import { Table, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
 
@@ -30,10 +31,17 @@ const LabelsTable: React.FC<LabelsTableProps> = ({ data = [], onEditLabel, onDel
                 return (
                     <div className="flex justify-center gap-2.5">
                         <Button onClick={() => onEditLabel(labelId)} color={Colors.secondary}>
-                            <EditIcon size="1.3rem" className="transition duration-70 hover:scale-110" color="#DFB520" />
+                            <EditIcon 
+                            size="1.3rem" 
+                            className="transition duration-70 hover:scale-110" 
+                            color={Colors.light}
+                            />
                         </Button>
                         <Button onClick={() => onDeleteLabel(labelId)} color={Colors.danger}>
-                            <DeleteIcon size="1.3rem" className="transition duration-70 hover:scale-110" color="#DF3B20" />
+                            <DeleteIcon 
+                            size="1.3rem" 
+                            className="transition duration-70 hover:scale-110" 
+                            color={Colors.light}/>
                         </Button>
                     </div>
                 );

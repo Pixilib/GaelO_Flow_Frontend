@@ -28,9 +28,12 @@ const LabelInputForm: React.FC<LabelInputFormProps> = ({ onCreate }) => {
                 value={label}
                 onChange={handleInputChange}
                 placeholder="Add new label"
-                className="w-full px-12 py-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full py-4 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-"
             />
-            <MdOutlineNewLabel className="absolute text-gray-400 transform -translate-y-1/2 top-1/2 left-3" />
+            <MdOutlineNewLabel 
+                className="absolute text-2xl transform -translate-y-1/2 top-1/2 left-3" 
+                color={Colors.dark}
+            />
             <Button
                 type="button"
                 color={Colors.success}
