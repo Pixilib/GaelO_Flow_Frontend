@@ -146,3 +146,11 @@ export interface Modality {
 export interface LabelType {
     name: string;
 }
+
+// Oauth2 
+export type Oauth2Config = {
+    Name: string;
+    Provider: string;
+    AuthorizationUrl: string;
+    ClientId: string;
+}

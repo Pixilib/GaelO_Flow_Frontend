@@ -17,7 +17,7 @@ import ToastContext from "./toast/ToastContext";
 
 import SelectInput from "./SelectInput";
 import Spinner from "./Spinner";
-import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems , Toogle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
+import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems , Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
 
 export { 
     Badge,
@@ -48,7 +48,7 @@ export {
     ToastContainer,
     ToastContext,
     ToggleEye,
-    Toogle,
+    Toggle,
     ToggleSwitch,
     ToogleChevron
 };
