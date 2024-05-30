@@ -143,6 +143,9 @@ export interface Modality {
     manufacturer: string;
 }
 
+export interface LabelType {
+    name: string;
+}
 
 // Oauth2 
 export type Oauth2Config = {

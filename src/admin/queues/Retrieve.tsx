@@ -31,7 +31,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
 
     const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
         ({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }: AutoQueryPayload) =>
-             updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
+            updateOptions({ AutoQueryHourStart, AutoQueryMinuteStart, AutoQueryHourStop, AutoQueryMinuteStop }),
         [["options"]],
         {
             onSuccess: () => {
@@ -74,7 +74,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
                     <div className='flex items-center justify-around gap-12 mt-1'>
                         <Input
                             type="time"
-                            label={<Label value={"Start Time"} className="text-sm font-medium text-center" align="center" spaceY={2}  />}
+                            label={<Label value={"Start Time"} className="text-sm font-medium text-center" align="center" spaceY={2} />}
                             value={startTime}
                             onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleTimeStart(event)}
                             className={"focus:shadow-2xl shadow-lg"}

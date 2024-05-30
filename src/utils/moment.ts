@@ -1,7 +1,5 @@
 import moment from "moment";
 
-
-
 /**
  * A function that calculates the difference between two dates in HH:mm format
  * @param { string } timeStart 

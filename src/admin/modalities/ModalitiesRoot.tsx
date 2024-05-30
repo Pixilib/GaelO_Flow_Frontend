@@ -62,10 +62,15 @@ const ModalitiesRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets} onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} onEchoAet={handleEchoAet} />
+                        <ModalitiesTable 
+                        aetData={aets} 
+                        onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} 
+                        onEchoAet={handleEchoAet} />
                     </div>
                     {!showNewAetCard && (
-                        <Button color={Colors.success} onClick={handleNewAetClick}>
+                        <Button 
+                        color={Colors.success} 
+                        onClick={handleNewAetClick}>
                             <MoreIcon className="mr-3" size={24} /> New modality
                         </Button>
                     )}
@@ -73,7 +78,9 @@ const ModalitiesRoot: React.FC = () => {
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard onClose={handleCloseNewAetCard} onCreateAet={(aet: Modality) => updateModalityMutate(aet)} />
+                    <NewModalityCard 
+                    onClose={handleCloseNewAetCard} 
+                    onCreateAet={(aet: Modality) => updateModalityMutate(aet)} />
                 )}
             </CardFooter>
         </Card>
