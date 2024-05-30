@@ -1,23 +1,22 @@
 import React from 'react';
+
 import { ColumnDef } from '@tanstack/react-table';
 import { RiAdminFill as EditIcon } from "react-icons/ri";
 import { BsTrashFill as DeleteIcon } from "react-icons/bs";
 import { Table, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
+import { LabelType } from '../../utils/types';
 
-interface Label {
-    Id: number;
-    Label: string;
-}
+
 
 interface LabelsTableProps {
-    data: Label[];
+    data: LabelType[];
     onEditLabel: (labelId: number) => void;
     onDeleteLabel: (labelId: number) => void;
 }
 
 const LabelsTable: React.FC<LabelsTableProps> = ({ data = [], onEditLabel, onDeleteLabel }) => {
-    const columns: ColumnDef<Label>[] = [
+    const columns: ColumnDef<LabelType>[] = [
         {
             accessorKey: 'Label',
             header: 'Label',

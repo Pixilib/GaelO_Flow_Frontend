@@ -1,10 +1,8 @@
+import { LabelType } from '../utils/types';
 import axios from './axios';
 
-interface LabelResponse {
-    labels: string[];
-}
 
-export const getLabels = (): Promise<LabelResponse> => {
+export const getLabels = (): Promise<LabelType[]> => {
     return axios
         .get(`/api/labels`)
         .then(response => response.data)

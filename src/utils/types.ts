@@ -143,6 +143,6 @@ export interface Modality {
     manufacturer: string;
 }
 
-export interface Label {
+export interface LabelType {
     name: string;
 }

@@ -1,21 +1,50 @@
-import { useCustomToast } from '../../utils/toastify';
-import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
+import React from 'react';
+
+import { Card, CardHeader, CardBody, CardFooter } from '../../ui';
 import { Colors } from '../../utils/enums';
+
+import { useCustomToast } from '../../utils/toastify';
+import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
 
-const LabelRoot = () => {
-    const { toastSuccess, toastError } = useCustomToast();
-    const [labels, setLabels] = useState([]);
+import { getLabels, addLabel, removeLabel } from '../../services/labels';
+import { LabelType } from '../../utils/types';
 
-    const handleCreate = (newLabel) => {
-        setLabels([...labels, { id: labels.length + 1, name: newLabel }]);
-        toastSuccess("Label created successfully");
+
+const LabelRoot: React.FC = () => {
+
+    const { toastSuccess, toastError } = useCustomToast();
+
+    const { data: labelsData, isLoading, refetch } = useCustomQuery<LabelType[]>(
+        ['labels'],
+        () => getLabels(), {
+        enabled: true,
+    }
+    )
+
+    const { mutate: addLabelMutate } = useCustomMutation(addLabel, {
+        onSuccess: () => {
+            toastSuccess("Label added successfully");
+            refetch();
+        },
+        onError: (error: { message: any; }) => toastError(`Error while creating label: ${error.message}`)
+    });
+
+    const { mutate: removeLabelMutate } = useCustomMutation(removeLabel, {
+        onSuccess: () => {
+            toastSuccess("Label deleted successfully");
+            refetch();
+        },
+        onError: (error: { message: any; }) => toastError(`Error while deleting label: ${error.message}`)
+    });
+
+    const handleCreate = (label: string) => {
+        addLabelMutate(label);
     };
 
-    const deleteLabel = (labelId) => {
-        setLabels(labels.filter(label => label.id !== labelId));
-        toastSuccess("Label deleted successfully");
+    const handleDelete = (labelName: string) => {
+        removeLabelMutate(labelName);
     };
 
     return (
@@ -23,11 +52,11 @@ const LabelRoot = () => {
             <CardHeader title="Labels" color={Colors.primary} />
             <CardBody color={Colors.light}>
                 <LabelInputForm onCreate={handleCreate} />
-
                 <LabelTable
-                    data={labels}
+                    data={labelsData || []}
                     onEdit={() => { }}
-                    onDelete={deleteLabel}
+                    onDeleteLabel={handleDelete}
+                    isLoading={isLoading}
                 />
             </CardBody>
             <CardFooter color={Colors.light} />
