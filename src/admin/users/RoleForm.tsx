@@ -1,9 +1,10 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
-import { Button, Input } from "../../ui";
-import Toggle from "../../ui/menu/Toogle";
+
 import { RoleUser } from "../../utils/types";
 import { Colors } from "../../utils";
+
+import { Button, Input,Toggle } from "../../ui";
 
 type RoleFormProps = {
     onSubmit: (payload: RoleUser) => void;
@@ -62,7 +63,10 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="grid gap-y-4 lg:gap-y-6">
+        <form onSubmit={handleSubmit} 
+        className="grid gap-y-4 lg:gap-y-6"
+        data-gaelo-flow="role-form"
+        >
             <div className="flex flex-col max-w-lg gap-2">
                 <Input
                     placeholder="Role Name"
@@ -71,10 +75,10 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                     onChange={(e) => setName(e.target.value)}
                 />
             </div>
-            <div className="grid gap-4 grid-col-1 md:grid-cols-4">
+            <div className="grid gap-4 grid-col-1 xl:grid-cols-4">
                 <fieldset className="p-3 border border-gray-300 rounded-md">
                     <legend className="px-2 mb-2 text-sm font-semibold">Data Access</legend>
-                    <div className="grid items-center grid-cols-3 gap-2 justify-items-center">
+                    <div className="grid items-center gap-2 lg:grid-cols-3 justify-items-center">
                         <Toggle
                             label="Export"
                             labelPosition="top"
@@ -91,7 +95,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
                 <fieldset className="p-3 border border-gray-300 rounded-md">
                     <legend className="px-2 mb-2 text-sm font-semibold">Query</legend>
-                    <div className="grid items-center grid-cols-3 gap-2 justify-items-center">
+                    <div className="grid items-center gap-2 lg:grid-cols-3 justify-items-center">
                         <Toggle
                             label="Auto Query"
                             labelPosition="top"
@@ -108,7 +112,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
                 <fieldset className="p-3 border border-gray-300 rounded-md">
                     <legend className="px-2 mb-2 text-sm font-semibold">Modifications</legend>
-                    <div className="grid items-center grid-cols-3 gap-2 justify-items-center">
+                    <div className="grid items-center grid-cols-1 gap-2 lg:grid-cols-3 justify-items-center">
                         <Toggle
                             label="Anonymize"
                             labelPosition="top"
@@ -137,7 +141,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
                 <fieldset className="p-3 border border-gray-300 rounded-md">
                     <legend className="px-2 mb-2 text-sm font-semibold">Other</legend>
-                    <div className="grid items-start grid-cols-3 gap-2 align-middle gap-y-4 justify-items-center">
+                    <div className="grid items-start grid-cols-1 gap-2 align-middle lg:grid-cols-3 gap-y-4 justify-items-center">
                         <Toggle
                             label="CD Burner"
                             labelPosition="top"
