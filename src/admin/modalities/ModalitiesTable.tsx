@@ -1,53 +1,72 @@
-import React from 'react';
+import React from "react";
 
-import { ColumnDef } from '@tanstack/react-table';
-import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi"; 
+import { ColumnDef } from "@tanstack/react-table";
+import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi";
 
-import { Table, Badge, Button } from '../../ui';
-import { Colors } from '../../utils/enums';
-import { Modality } from '../../utils/types';
+import { Table, Badge, Button } from "../../ui";
+import { Colors } from "../../utils/enums";
+import { Modality } from "../../utils/types";
 
 interface ModalitiesTableProps {
-    aetData?: Modality[];
-    onDeleteAet: (aetName: string) => void;
-    onEchoAet: (aetName: string) => void;
+  aetData?: Modality[];
+  onDeleteAet: (aetName: string) => void;
+  onEchoAet: (aetName: string) => void;
 }
 
-const ModalitiesTable: React.FC<ModalitiesTableProps> = ({ aetData = [], onDeleteAet, onEchoAet }) => {
-    const columns: ColumnDef<Modality>[] = [
-        {
-            accessorKey: 'name',
-            header: 'Name'
-        },
-        {
-            accessorKey: 'aet',
-            header: 'AET',
-            cell: info => <Badge value={info.getValue() as string} />
-        },
-        {
-            accessorKey: 'host',
-            header: 'Host'
-        },
-        {
-            accessorKey: 'manufacturer',
-            header: 'Manufacturer'
-        },
-        {
-            header: 'Actions',
-            id: 'actions',
-            cell: ({ row }) => (
-                <div className="flex justify-center items-center gap-2.5">                     <Button onClick={() => onEchoAet(row.original.name)} color={Colors.secondary}>
-                        <EchoIcon />  
-                    </Button>
-                    <Button onClick={() => onDeleteAet(row.original.name)} color={Colors.danger}>
-                        <DeleteIcon size={18} />
-                    </Button>
-                </div>
-            )
-        }
-    ];
+const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
+  aetData = [],
+  onDeleteAet,
+  onEchoAet,
+}) => {
+  const columns: ColumnDef<Modality>[] = [
+    {
+      accessorKey: "name",
+      header: "Name",
+    },
+    {
+      accessorKey: "aet",
+      header: "AET",
+      cell: (info) => <Badge value={info.getValue() as string} />,
+    },
+    {
+      accessorKey: "host",
+      header: "Host",
+    },
+    {
+      accessorKey: "manufacturer",
+      header: "Manufacturer",
+    },
+    {
+      header: "Actions",
+      id: "actions",
+      cell: ({ row }) => (
+        <div className="flex justify-center items-center gap-2.5">
+          <Button
+            onClick={() => onEchoAet(row.original.name)}
+            color={Colors.secondary}
+          >
+            <EchoIcon />
+          </Button>
+          <Button
+            onClick={() => onDeleteAet(row.original.name)}
+            color={Colors.danger}
+          >
+            <DeleteIcon size={18} />
+          </Button>
+        </div>
+      ),
+    },
+  ];
 
-    return <Table columns={columns} data={aetData} headerColor={Colors.almond} enableColumnFilters enableSorting />;
+  return (
+    <Table
+      columns={columns}
+      data={aetData}
+      headerColor={Colors.almond}
+      enableColumnFilters
+      enableSorting
+    />
+  );
 };
 
 export default ModalitiesTable;

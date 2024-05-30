@@ -1,8 +1,6 @@
-import { Table } from "../../ui";
-import { Colors } from '../../utils/enums';
-import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
-
-
+import { Table } from "../../../ui";
+import { Colors } from '../../../utils/enums';
+import { BsTrashFill as Delete } from "react-icons/bs";
 
 type Oauth2TableProps = {
     data: any[];
@@ -11,10 +9,7 @@ type Oauth2TableProps = {
 
 
 const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
-    console.log(data)
-
     const columns = [
-
         {
             header: "Name",
             accessorKey: "Name",

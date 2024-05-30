@@ -1,6 +1,6 @@
 import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
-import { Table, BooleanIcon } from "../../ui";
-import { Colors } from "../../utils";
+import { Table, BooleanIcon } from "../../../ui";
+import { Colors } from "../../../utils";
 
 type RolesTableProps = {
     data: any[];

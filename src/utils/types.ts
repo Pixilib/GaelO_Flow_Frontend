@@ -61,12 +61,7 @@ export type OrthancJob = {
     [key: string]: any
 }
 
-//User
-/**
- * @typedef RoleUser
- * Represent all the roles that a user can have
- */
-export type RoleUser = {
+export type Role = {
     Name: string;
     Import: boolean;
     Anonymize: boolean;
@@ -80,18 +75,14 @@ export type RoleUser = {
     AutoRouting: boolean;
     ReadAll: boolean;
 }
-export type RolesUserResponse = RoleUser[];
-/**
- * @typedef User
- * Represent a user with all fields who need
- */
+export type RolesUserResponse = Role[];
 export type User = {
     Id: number;
     Firstname: string;
     Lastname: string;
     Email: string;
     RoleName: string;
-    Role: RoleUser;
+    Role: Role;
 }
 /**
  * @typedef UserResponse
@@ -107,26 +98,12 @@ export type SignInResponse = {
     UserId: number;
 }
 
-// export type SignUpResponse = {
-//      ?
-// }
-
-// export type lostPasswordResponse = {
-//     ?
-// }
-
-export type ChangePasswordVariables = {
+export type ChangePasswordPayload = {
     NewPassword: string;
     ConfirmationPassword: string;
     Token: string;
     UserId: number;
 }
-// export type changePasswordResponse = {
-//     ?
-// }
-
-//labels
-
 
 export interface Peer {
     name: string;
@@ -143,7 +120,7 @@ export interface Modality {
     manufacturer: string;
 }
 
-export interface LabelType {
+export interface Label {
     name: string;
 }
 

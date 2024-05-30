@@ -1,4 +1,4 @@
-import { RolesUserResponse, UserResponse, UserPayload, UserUpdatePayload, RoleUser } from '../utils/types';
+import { RolesUserResponse, UserResponse, UserPayload, UserUpdatePayload, Role } from '../utils/types';
 import axios from "./axios";
 
 export const getRoles = (): Promise<RolesUserResponse> => {
@@ -15,7 +15,7 @@ export const getRoles = (): Promise<RolesUserResponse> => {
     });
 }
 
-export const getRole = (roleName: string): Promise<RoleUser> => {
+export const getRole = (roleName: string): Promise<Role> => {
   return axios
     .get(`/api/roles/${roleName}`)
     .then(function (response) {
@@ -29,9 +29,9 @@ export const getRole = (roleName: string): Promise<RoleUser> => {
     });
 }
 
-export const updateRole = (roleName: string, RoleUser: RoleUser): Promise<void> => {
+export const updateRole = (role: Role): Promise<void> => {
   return axios
-    .put(`/api/roles/${roleName}`, RoleUser)
+    .put(`/api/roles/${role.Name}`, role)
     .then(function (response) {
       return response.data;
     })
@@ -57,7 +57,7 @@ export const deleteRole = (roleName: string): Promise<void> => {
     });
 }
 
-export const postRoles = (payload: RoleUser): Promise<void> => {
+export const postRoles = (payload: Role): Promise<void> => {
   return axios
     .post("/api/roles", payload)
     .then(function (response) {

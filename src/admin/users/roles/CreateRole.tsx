@@ -1,46 +1,42 @@
 import { IoIosCloseCircle } from "react-icons/io";
-import { Colors, RoleUser, useCustomMutation, useCustomToast } from "../../utils";
-import { Card, CardBody, CardHeader } from "../../ui";
+import { Card, CardBody, CardHeader } from "../../../ui";
+import { postRoles } from "../../../services/users";
+import { useCustomMutation, useCustomToast, Colors } from "../../../utils";
+import { Role } from "../../../utils/types";
 import RoleForm from "./RoleForm";
-import { updateRole } from "../../services/users";
 
-
-//! WIP
-
-type EditRoleProps = {
+type CreateRoleFormProps = {
     title: string;
     className?: string;
     onClose: () => void;
-    role?: RoleUser;
 };
 
-const EditRole = ({ title, className, onClose, role }: EditRoleProps) => {
+const CreateRole = ({ title, className, onClose }: CreateRoleFormProps) => {
     const { toastSuccess, toastError } = useCustomToast();
- 
-    const { mutate: roleMutation } = useCustomMutation<void, RoleUser>(
-        (roleUser:RoleUser) => updateRole(roleUser.Name, roleUser),
+
+    const { mutate: roleMutation } = useCustomMutation<void, Role>(
+        (payload) => postRoles(payload),
         [["roles"]],
         {
             onSuccess: () => {
-                toastSuccess("Role updated successfully");
+                toastSuccess("Role created successfully");
             },
             onError: (error: any) => {
                 if (error.data.message) {
                     toastError(error.data.message);
                 } else {
-                    toastError("An error occurred during user updated.");
+                    toastError("An error occurred during user creation.");
                 }
             }
         }
     );
 
-
-    const handleSubmit = (payload: RoleUser) => {
+    const handleSubmit = (payload: Role) => {
         roleMutation(payload);
-    };        
-    
+    };
+
     return (
-        <Card className={`my-10 rounded-xl ${className}`} >
+        <Card className={`my-10 rounded-xl ${className}`}>
             <CardHeader title={title} color={Colors.success}>
                 <IoIosCloseCircle
                     size={"1.7rem"}
@@ -49,9 +45,10 @@ const EditRole = ({ title, className, onClose, role }: EditRoleProps) => {
                 />
             </CardHeader>
             <CardBody>
-                <RoleForm onSubmit={handleSubmit} buttonText="Update" initialData={role} />
+                <RoleForm onSubmit={handleSubmit} buttonText="Submit" />
             </CardBody>
         </Card>
     );
 };
-export default EditRole;
+
+export default CreateRole;

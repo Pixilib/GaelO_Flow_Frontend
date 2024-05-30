@@ -1,14 +1,14 @@
 import { ChangeEvent, useState, useEffect } from "react";
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 
-import { RoleUser } from "../../utils/types";
-import { Colors } from "../../utils";
+import { Role } from "../../../utils/types";
+import { Colors } from "../../../utils";
 
-import { Button, Input,Toggle } from "../../ui";
+import { Button, Input,Toggle } from "../../../ui";
 
 type RoleFormProps = {
-    onSubmit: (payload: RoleUser) => void;
-    initialData?: RoleUser;
+    onSubmit: (payload: Role) => void;
+    initialData?: Role;
     buttonText: string;
 };
 
@@ -45,7 +45,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
 
     const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const payload: RoleUser = {
+        const payload: Role = {
             Name: name,
             Import: importRole,
             Anonymize: anonymize,

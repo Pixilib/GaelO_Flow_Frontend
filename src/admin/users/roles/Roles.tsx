@@ -1,20 +1,17 @@
 import { useState } from "react";
 import { BsPersonPlusFill as RoleCreate } from "react-icons/bs";
 
-import { deleteRole, getRoles } from "../../services/users";
-import { Colors, RoleUser, RolesUserResponse, useCustomMutation, useCustomQuery, useCustomToast } from "../../utils";
+import { deleteRole, getRoles } from "../../../services/users";
+import { Colors, Role, RolesUserResponse, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
 
 import RolesTable from "./RolesTable";
 import CreateRole from "./CreateRole";
 import EditRole from "./EditRole";
-import { Button, Spinner } from "../../ui";
-
-
-
+import { Button, Spinner } from "../../../ui";
 
 const Roles = () => {
     const [showRoleForm, setShowRoleForm] = useState<'create' | 'edit' | null>(null);
-    const [roleToEdit, setRoleToEdit] = useState<RoleUser | null>(null);
+    const [roleToEdit, setRoleToEdit] = useState<Role | null>(null);
     const { toastSuccess, toastError } = useCustomToast();
     const { data: roles, isPending: isLoadingRoles } = useCustomQuery<RolesUserResponse>(
         ["roles"],
@@ -37,9 +34,9 @@ const Roles = () => {
         }
     )
 
-    const findRole = (roleName: string): RoleUser => {
+    const findRole = (roleName: string): Role => {
         const role = roles?.find((role) => role.Name === roleName);
-        return role || {} as RoleUser;
+        return role || {} as Role;
     }
     const handleEditRole = (roleName: string) => {
         const role = findRole(roleName);

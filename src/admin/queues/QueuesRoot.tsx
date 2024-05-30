@@ -5,7 +5,6 @@ import { useCustomQuery } from "../../utils/reactQuery";
 import { OptionsResponse } from "../../utils/types";
 import { getOptions } from "../../services/options";
 
-import { Card, CardHeader, CardBody, CardFooter, Input, Label, Badge, Button } from '../../ui';
 import Retrieve from "./Retrieve";
 import Anonymize from "./Anonymize";
 import Delete from "./Delete";

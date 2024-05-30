@@ -1,12 +1,12 @@
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 import { IoIosCloseCircle } from "react-icons/io";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Input, Label, SelectInput } from "../../ui";
-import { Colors } from "../../utils/enums";
-import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
-import { getRoles, updateUser } from "../../services/users";
-import { RolesUserResponse, User, UserUpdatePayload } from '../../utils/types';
-import { useCustomToast } from "../../utils/toastify";
+import { Button, Card, CardBody, CardHeader, Input, Label, SelectInput } from "../../../ui";
+import { Colors } from "../../../utils/enums";
+import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
+import { getRoles, updateUser } from "../../../services/users";
+import { RolesUserResponse, User, UserUpdatePayload } from '../../../utils/types';
+import { useCustomToast } from "../../../utils/toastify";
 import { useNavigate } from "react-router-dom";
 
 

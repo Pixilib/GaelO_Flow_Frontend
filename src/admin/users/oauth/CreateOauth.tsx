@@ -1,10 +1,8 @@
-import { postOauth2Config } from "../../services/oauth2";
-import { Colors, Oauth2Config, useCustomMutation, useCustomToast } from "../../utils";
+import { postOauth2Config } from "../../../services/oauth2";
+import { Colors, Oauth2Config, useCustomMutation, useCustomToast } from "../../../utils";
 import { IoIosCloseCircle } from "react-icons/io";
-import { Card, CardHeader, CardBody } from "../../ui";
+import { Card, CardHeader, CardBody } from "../../../ui";
 import OauthForm from "./OauthForm";
-
-
 
 type CreateOauthProps = {
     title: string;

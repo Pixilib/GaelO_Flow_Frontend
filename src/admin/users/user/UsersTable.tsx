@@ -1,8 +1,8 @@
 import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
 
-import { Table } from "../../ui";
-import { Colors } from "../../utils/enums";
-import { UserResponse } from "../../utils/types";
+import { Table } from "../../../ui";
+import { Colors } from "../../../utils/enums";
+import { UserResponse } from "../../../utils/types";
 
 
 type UsersProps = {

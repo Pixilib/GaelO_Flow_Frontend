@@ -2,9 +2,9 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import { Tabs, Tab } from "../../ui";
 
-import Roles from "./Roles";
-import Users from "./Users";
-import Oauth2 from "./Oauth";
+import Roles from "./roles/Roles";
+import Users from "./user/Users";
+import Oauth2 from "./oauth/Oauth";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
@@ -39,7 +39,7 @@ const UsersRoot = () => {
             </Tabs>
             
             <Routes>
-                <Route path="/crud" element={<Users/>} />
+                <Route path="/users" element={<Users/>} />
                 <Route path="/roles" element={<Roles />} />
                 <Route path="/oauth2" element={<Oauth2 />} />
             </Routes>

@@ -17,7 +17,7 @@ import type {
     OptionsResponse,
     Oauth2Config,
     RolesUserResponse,
-    RoleUser,
+    Role,
     UserPayload,
     UserUpdatePayload,
 } from "./types";
@@ -33,7 +33,7 @@ export {
     OptionsResponse,
     parseTimeString,
     RolesUserResponse,
-    RoleUser,
+    Role,
     timeDiff,
     useCustomMutation,
     useCustomQuery,
