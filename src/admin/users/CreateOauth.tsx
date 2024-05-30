@@ -37,7 +37,11 @@ const CreateOauth = ({ title, className, onClose }: CreateOauthProps) => {
     };
     
     return (
-        <Card className={`my-10 rounded-xl ${className}`}>
+
+        <Card 
+        className={`my-12 rounded-xl ${className}`}
+        data-galeo-flow="create-oauth"
+        >
             <CardHeader title={title} color={Colors.success}>
                 <IoIosCloseCircle
                     size={"1.7rem"}
@@ -48,7 +52,7 @@ const CreateOauth = ({ title, className, onClose }: CreateOauthProps) => {
             <CardBody>
                 <OauthForm onSubmit={handleSubmit} buttonText="Create" />
             </CardBody>
-        </Card>
+        </Card>      
     );
 
 }

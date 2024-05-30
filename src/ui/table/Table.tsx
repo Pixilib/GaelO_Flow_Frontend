@@ -11,9 +11,11 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
 } from '@tanstack/react-table';
+
+import { Colors } from "../../utils/enums";
+
 import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
-import { Colors } from "../../utils/enums";
 
 export type textSize = "xs" | "sm" | "base" | "lg";
 
@@ -89,8 +91,8 @@ function Table<T>({
   };
 
   return (
-    <div className={`max-h-[500px] rounded-xl shadow-md overflow-hidden ${className}`}>
-      <div className="overflow-x-auto">
+    <div className={`max-h-[500px] rounded-xl shadow-md overflow-hidden custom-scrollbar ${className}`}>
+      <div className="overflow-x-auto custom-scrollbar">
         <table className={`min-w-full border-grayCustom ${className}`}>
           <thead className={headerClass}>
             {table.getHeaderGroups().map(headerGroup => (
@@ -117,7 +119,7 @@ function Table<T>({
                 </tr>
                 {/* Ligne distincte pour les filtres si au moins un filtre est présent */}
                 {headerGroup.headers.some(header => header.column.getCanFilter()) && (
-                  <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}-filter`}>
+                  <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}`}>
                     {headerGroup.headers.map((header, index) => (
                       <th
                         key={`${headerGroup.id}-${header.id}-filter-${index}`}
@@ -135,7 +137,7 @@ function Table<T>({
               </React.Fragment>
             ))}
           </thead>
-          <tbody className="overflow-y-auto">
+          <tbody className="overflow-y-auto custom-scrollbar">
             {table.getRowModel().rows.map((row, rowIndex) => (
               <tr
                 key={`row-${row.id}-${rowIndex}`}

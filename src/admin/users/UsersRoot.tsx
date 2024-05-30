@@ -16,7 +16,10 @@ const UsersRoot = () => {
     }
 
     return (
-        <div className="mx-12 my-12 shadow-md rounded-xl">
+        <div 
+        className="max-h-full mx-12 my-12 shadow-md rounded-xl"
+        data-gaelo-flow="users-root"
+        >
             <Tabs className=" bg-light-gray">
                 <Tab
                     title="Users"

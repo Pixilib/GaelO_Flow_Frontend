@@ -46,7 +46,6 @@ const Roles = () => {
         setRoleToEdit(role);
         setShowRoleForm('edit');
     }
-
     const handleDeleteRole = (roleName: string) => {
         const confirmation = window.confirm("Are you sure you want to delete this role?");
         if (confirmation) {
@@ -75,7 +74,6 @@ const Roles = () => {
                     className="bg-[#EFEFEF]" onClose={() => { setShowRoleForm(null); setRoleToEdit(null); }}
                     role={roleToEdit || undefined} />
             }
-
             <div className="flex justify-center mx-10">
                 {showRoleForm === null && (
                     <Button

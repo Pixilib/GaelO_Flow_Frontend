@@ -18,7 +18,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
   const { pageIndex, pageSize } = getState().pagination;
   const totalRows = getPrePaginationRowModel().rows.length;
   const btnClassFooter = "border-none bg-transparent p-2 focus:outline-none text-dark";
-  console.log({ totalRows, pageIndex, pageSize })
+  
   const handlePageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPageSize = Number(event.target.value);
     onPageSizeChange(newPageSize);

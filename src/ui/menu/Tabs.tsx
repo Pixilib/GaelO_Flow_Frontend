@@ -10,8 +10,8 @@ export type TabProps = {
 const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick }) => {
   const variantStyles = {
     basic: {
-      active: 'z-50 first:rounded-tl-xl bg-success text-white rounded-t-xl',
-      inactive: 'text-gray-400 hover:text-[#929393] bg-primary text-white z-50 first:rounded-tl-xl',
+      active: ' first:rounded-tl-xl bg-success text-white rounded-t-xl',
+      inactive: 'text-gray-400 hover:text-[#929393] bg-primary text-white first:rounded-tl-xl',
     },
     underline: {
       active: 'border-b-2 border-primary text-primary',
