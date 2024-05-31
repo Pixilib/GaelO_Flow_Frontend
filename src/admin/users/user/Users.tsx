@@ -66,7 +66,7 @@ const Users = ({ className }: UsersProps) => {
           onDelete={confirmDelete}
         />
       )}
-      {!userToEdit === null && (
+      {userToEdit === null && !isCreating && (
         <div className="flex justify-center mx-10 mt-12">
           <Button
             color={Colors.success}

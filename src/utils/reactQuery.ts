@@ -1,11 +1,11 @@
-import { UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { QueryKey, UseMutationOptions, UseQueryOptions, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-const useCustomQuery = <T>(
+const useCustomQuery = <T, R = T>(
     queryKeys: string[],
     queryFn: () => Promise<T>,
-    options?: Omit<UseQueryOptions<T>, 'queryKey' | 'queryFn'>
+    options?: Omit<UseQueryOptions<T,unknown, R, QueryKey>, 'queryKey' | 'queryFn'>
 ) => {
-    return useQuery<T>({
+    return useQuery<T, unknown, R>({
         queryKey: queryKeys,
         queryFn,
         gcTime: 0,

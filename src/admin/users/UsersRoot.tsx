@@ -23,8 +23,8 @@ const UsersRoot = () => {
             <Tabs className=" bg-light-gray">
                 <Tab
                     title="Users"
-                    active={path.endsWith("crud")}
-                    onClick={() => handleTabClick("crud")}
+                    active={path.endsWith("users")}
+                    onClick={() => handleTabClick("users")}
                 />
                 <Tab
                     title="Rôles"

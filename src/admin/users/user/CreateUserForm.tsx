@@ -37,20 +37,17 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState<{ value: string, label: string } | null>(null);
 
-  const { data: rolesOptions } = useCustomQuery<Option[]>(
+
+  const { data: rolesOptions } = useCustomQuery<Role[], Option[]>(
     ["roles"],
-    ()  => getRoles(),
+    getRoles,
     {
-      select: (roles : Role[]) => {
-        roles.map((role: Role) => {
-          return {
-            value: role.Name,
-            label: role.Name,
-          };
-        });
-      },
+      select: (roles) => roles.map((role) => ({
+        value: role.Name,
+        label: role.Name,
+      })),
     }
   );
 
@@ -74,9 +71,6 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
     }
   );
 
-  const handleRoleChange = (option: Option) => {
-    setSelectedRole(option.value);
-  };
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -88,12 +82,11 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       Firstname: firstName,
       Lastname: lastName,
       Email: email,
-      RoleName: selectedRole,
+      RoleName: selectedRole.value,
       Password: password,
     };
     userMutation.mutate(payload);
   };
-
   return (
     <Card className={`my-10 h-full ${className}`}>
       <CardHeader title={title} color={Colors.success}>
@@ -184,7 +177,10 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
               <SelectInput
                 options={rolesOptions ?? []}
                 placeholder="Select a Rôle"
-                onChange={handleRoleChange}
+                onChange={(event) => {
+                  setSelectedRole({ value: event.value, label: event.value });
+              }}
+                value={selectedRole}
               />
             </label>
           </div>

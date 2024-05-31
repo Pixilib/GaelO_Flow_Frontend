@@ -83,7 +83,6 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
         if (user) {
             try {
                 userUpdateMutation.mutate(payload);
-                navigate("/administration/users");
             } catch (e) {
                 console.log(e);
             }

@@ -89,7 +89,6 @@ const meta: Meta<typeof Table<DataType>> = {
         options: ["xs", "sm", "base", "lg"] 
       }, 
       className: { control: 'text' },
-      
     },
   tags: ["autodocs"]
 } satisfies Meta<typeof Table<DataType>>;

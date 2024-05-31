@@ -11,6 +11,7 @@ import FilterTable from "./table/FilterTable";
 import Table from "./table/Table";
 import Footer from "./table/Footer";
 
+import Modal from "./Modal";
 import Toast from "./toast/Toast";
 import ToastContainer from "./toast/ToastContainer";
 import ToastContext from "./toast/ToastContext";
@@ -37,6 +38,7 @@ export {
     Label,
     MenuItemsCollapse,
     MenuItem,
+    Modal,
     Popover,
     SelectInput,
     SideBarItems,
