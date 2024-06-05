@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsPersonPlusFill as RoleCreate } from "react-icons/bs";
 
-import { deleteRole, getRoles } from "../../../services/users";
+import { deleteRole, getRoles } from '../../../services/users';
 import { Colors, Role, RolesUserResponse, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
 
 import RolesTable from "./RolesTable";
@@ -43,11 +43,9 @@ const Roles = () => {
         setRoleToEdit(role);
         setShowRoleForm('edit');
     }
-    const handleDeleteRole = (roleName: string) => {
-        const confirmation = window.confirm("Are you sure you want to delete this role?");
-        if (confirmation) {
-            deleteMutation.mutate(roleName);
-        }
+
+    const deleteRoleHandler = (roleName: string) => {
+        deleteMutation.mutate(roleName);
     }
 
 
@@ -59,7 +57,7 @@ const Roles = () => {
                 <RolesTable
                     data={roles || []}
                     onEdit={handleEditRole}
-                    onDelete={handleDeleteRole}
+                    onDelete={deleteRoleHandler}
                 />
             )}
             {showRoleForm === 'create' &&

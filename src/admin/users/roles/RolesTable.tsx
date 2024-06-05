@@ -1,11 +1,11 @@
 import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
-import { Table, BooleanIcon } from "../../../ui";
-import { Colors } from "../../../utils";
+import { Table, BooleanIcon, ConfirmModal } from "../../../ui";
+import { Colors, useModal } from "../../../utils";
 
 type RolesTableProps = {
     data: any[];
-    onEdit?: (roleName: string) => void;
-    onDelete?: (roleName: string) => void;
+    onEdit: (roleName: string) => void;
+    onDelete: (roleName: string) => void;
 }
 const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
 
@@ -37,7 +37,7 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
             header: 'Import',
             accessorKey: 'Import',
             enableColumnFilters: true,
-            cell: ({ row }: { row: any }) => 
+            cell: ({ row }: { row: any }) =>
                 BooleanIcon({ value: row.original.Import, size: '1.4rem' }),
         },
         {
@@ -86,6 +86,7 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
             header: 'Action',
             cell({ row }: { row: any }) {
                 const roleName = row.original.Name;
+                const { dialogRef, openDialog, closeDialog } = useModal();
                 return (
                     <div className="flex justify-center gap-7">
                         <Edit size={'1.4rem'}
@@ -96,8 +97,16 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                         <Delete size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
-                            onClick={() => onDelete?.(roleName)}
+                            onClick={openDialog}
                         />
+                        <ConfirmModal
+                            dialogRef={dialogRef}
+                            closeDialog={closeDialog}
+                            message={`Are you sure you want to delete this rôle: ${roleName} ?`}
+                            onConfirm={() => onDelete(roleName)}
+                            className=""
+                        />
+
                     </div>
                 )
             }

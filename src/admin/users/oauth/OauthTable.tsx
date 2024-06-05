@@ -1,12 +1,13 @@
-import { Table } from "../../../ui";
-import { Colors } from '../../../utils/enums';
 import { BsTrashFill as Delete } from "react-icons/bs";
+
+import { Colors, useModal } from '../../../utils';
+
+import { ConfirmModal, Table } from "../../../ui";
 
 type Oauth2TableProps = {
     data: any[];
-    onDelete?: (provider: string) => void;
+    onDelete: (provider: string) => void;
 }
-
 
 const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
     const columns = [
@@ -30,13 +31,22 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
         {
             header: 'Action',
             cell({ row }: { row: any }) {
-                const provider = row.original.Name;
+                const provider = row.original;
+                const { dialogRef, openDialog, closeDialog } = useModal();
+
                 return (
                     <div className="flex justify-center gap-7">
                         <Delete size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
-                            onClick={() => onDelete?.(provider)}
+                            onClick={openDialog}
+                        />
+                        <ConfirmModal
+                            dialogRef={dialogRef}
+                            closeDialog={closeDialog}
+                            message={`Are you sure you want to delete this provider ${provider.Name}?`}
+                            onConfirm={() => onDelete(provider.Name)}
+                            className="shadow-xl bg-zinc-200"
                         />
                     </div>
                 )

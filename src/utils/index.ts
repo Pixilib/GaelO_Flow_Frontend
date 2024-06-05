@@ -23,6 +23,7 @@ import type {
     User,
     Option
 } from "./types";
+import { useModal } from "./useModal";
 import { useCustomToast } from "./toastify";
 
 export {
@@ -43,5 +44,6 @@ export {
     User,
     UserPayload,
     UserUpdatePayload,
-    useCustomToast
+    useCustomToast,
+    useModal
 };

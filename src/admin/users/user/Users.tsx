@@ -38,20 +38,12 @@ const Users = ({ className }: UsersProps) => {
     }
   );
 
-  const handleEditUser = (userId: number) => {
-    const user = users?.find((user) => user.Id === userId) ?? null;
+  const editUser = (user: User) => {
     setUserToEdit(user);
   };
 
-  //TODO : Replace with modal confirmation when is implemented
-  const confirmDelete = (userId: number) => {
-    
-    const confirmation = window.confirm(
-      "Are you sure you want to delete this user?"
-    );
-    if (confirmation) {
-      handleDeleteUser.mutate(userId);
-    }
+  const deleteUserHandler = (user: User) => {
+    handleDeleteUser.mutate(user.Id);
   };
   return (
     <div
@@ -61,11 +53,7 @@ const Users = ({ className }: UsersProps) => {
       {isLoadingUsers ? (
         <Spinner />
       ) : (
-        <UsersTable
-          data={users || []}
-          onEdit={handleEditUser}
-          onDelete={confirmDelete}
-        />
+        <UsersTable data={users || []} onEdit={editUser} onDelete={deleteUserHandler} />
       )}
       {userToEdit === null && !isCreating && (
         <div className="flex justify-center mx-10 mt-12">
