@@ -9,7 +9,7 @@ interface ModalProps {
   children?: React.ReactNode;
   [key: string]: any;
 }
-const Modal = ({ show, size = "lg", children, ...props }: ModalProps) => {
+const ModalGaeloUi = ({ show, size = "lg", children, ...props }: ModalProps) => {
   const SizeClasses:Record<Size, string>  = {
     "sm": "min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[300px]",
     "lg": "min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px]",
@@ -126,5 +126,5 @@ const ModalBody = ({ className = "", children, ...props }: BodyProps) => {
   return <div data-gaelo-ui='modal-body' className={"relative w-full gap-x-2 py-3 px-4 overflow-auto " + className} {...props} >{children}</div>;
 };
 
-export default Modal;
+export default ModalGaeloUi;
 export { ModalHeader, ModalTitle, ModalFooter, ModalBody };

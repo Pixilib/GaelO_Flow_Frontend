@@ -45,6 +45,7 @@ const Users = ({ className }: UsersProps) => {
 
   //TODO : Replace with modal confirmation when is implemented
   const confirmDelete = (userId: number) => {
+    
     const confirmation = window.confirm(
       "Are you sure you want to delete this user?"
     );

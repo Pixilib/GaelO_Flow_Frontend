@@ -32,7 +32,7 @@ const RootApp = () => {
       "/administration/queues/anonymize":"Queues",
       "/administration/queues/delete":"Queues",
       "/administration/peers": "Peers",
-      "/administration/users/crud": "Users",
+      "/administration/users/users": "Users",
       "/administration/users/roles": "Users",
       "/administration/users/oauth2": "Users",
       "/Orthanc Content": "Orthanc Content",

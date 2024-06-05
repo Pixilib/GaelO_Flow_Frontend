@@ -1,6 +1,7 @@
 import {Badge} from "./Badge";
 import Button from "./Button";
 import BooleanIcon from "./BooleanIcon";
+import CloseButton from "./CloseButton";
 import Input from "./Input";
 import Label from "./Label";
 import ToggleEye from "./ToggleEye";
@@ -30,6 +31,7 @@ export {
     CardBody,
     CardFooter,
     CardHeader,
+    CloseButton,
     DropDown,
     FilterTable,
     Footer,

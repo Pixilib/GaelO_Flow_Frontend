@@ -20,6 +20,8 @@ import type {
     Role,
     UserPayload,
     UserUpdatePayload,
+    User,
+    Option
 } from "./types";
 import { useCustomToast } from "./toastify";
 
@@ -31,12 +33,14 @@ export {
     getQueryParams,
     Oauth2Config,
     OptionsResponse,
+    Option,
     parseTimeString,
     RolesUserResponse,
     Role,
     timeDiff,
     useCustomMutation,
     useCustomQuery,
+    User,
     UserPayload,
     UserUpdatePayload,
     useCustomToast

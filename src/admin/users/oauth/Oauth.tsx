@@ -51,7 +51,7 @@ const Oauth = () => {
     <div className="" data-gaelo-flow="oauth">
       <Oauth2Table data={oauth2Config || []} onDelete={handleDeleteOauth} />
       <div className="flex justify-center mx-10">
-        {showOauthForm === null && (
+        {showOauthForm === false && (
           <Button
             color={Colors.success}
             onClick={() => setshowOauthForm(true)}

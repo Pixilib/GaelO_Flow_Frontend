@@ -1,6 +1,5 @@
-import { IoIosCloseCircle } from "react-icons/io";
 import { Colors, Role, useCustomMutation, useCustomToast } from "../../../utils";
-import { Card, CardBody, CardHeader } from "../../../ui";
+import { Card, CardBody, CardHeader, CloseButton } from "../../../ui";
 import RoleForm from "./RoleForm";
 import { updateRole } from "../../../services/users";
 
@@ -40,11 +39,7 @@ const EditRole = ({ title, className, onClose, role }: EditRoleProps) => {
   return (
     <Card className={`my-10 rounded-xl ${className}`}>
       <CardHeader title={title} color={Colors.success}>
-        <IoIosCloseCircle
-          size={"1.7rem"}
-          onClick={() => onClose()}
-          className="mr-3 text-white transition cursor-pointer duration-70 hover:scale-110"
-        />
+      <CloseButton onClose={() => onClose()} />
       </CardHeader>
       <CardBody>
         <RoleForm

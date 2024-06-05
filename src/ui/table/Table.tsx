@@ -91,8 +91,8 @@ function Table<T>({
   };
 
   return (
-    <div className={`max-h-[500px] rounded-xl shadow-md overflow-hidden custom-scrollbar ${className}`}>
-      <div className="overflow-x-auto custom-scrollbar">
+    <div className={`rounded-xl shadow-md overflow-visible custom-scrollbar ${className}`}>
+      <div className="overflow-x-auto custom-scrollbar rounded-xl">
         <table className={`min-w-full border-grayCustom ${className}`}>
           <thead className={headerClass}>
             {table.getHeaderGroups().map(headerGroup => (

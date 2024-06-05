@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from "react";
 
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
-import { IoIosCloseCircle as CloseWindows } from "react-icons/io";
 import { getRoles, postUsers } from "../../../services/users";
 import {
   Colors,
@@ -9,6 +8,8 @@ import {
   useCustomQuery,
   UserPayload,
   useCustomToast,
+  Role,
+  Option
 } from "../../../utils";
 
 import {
@@ -16,12 +17,13 @@ import {
   Card,
   CardBody,
   CardHeader,
+  CloseButton,
   Input,
   Label,
   SelectInput,
   ToggleEye,
 } from "../../../ui";
-import { Option, Role } from "../../../utils/types";
+import { getErrorMessage } from "../../../utils/error";
 
 type UserFormProps = {
   title: string;
@@ -65,8 +67,8 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       },
       onError: (error: any) => {
         toastError(
-          "An error occurred during user creation." + (error.data.message ?? "")
-        );
+          "An error occurred during user creation. " + getErrorMessage(error) || "")
+        ;
       },
     }
   );
@@ -90,11 +92,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
   return (
     <Card className={`my-10 h-full ${className}`}>
       <CardHeader title={title} color={Colors.success}>
-        <CloseWindows
-          size={"1.7rem"}
-          onClick={() => onClose()}
-          className="mr-3 text-white transition cursor-pointer duration-70 hover:scale-110"
-        />
+      <CloseButton onClose={() => onClose()} />
       </CardHeader>
 
       <CardBody color={Colors.lightGray}>
@@ -192,7 +190,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
               type="submit"
             >
               <SubmitUser size={"1.3rem"} />
-              <div className="">Submit</div>
+              <div>Create</div>
             </Button>
           </div>
         </form>
