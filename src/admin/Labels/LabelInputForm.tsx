@@ -2,9 +2,10 @@ import { ChangeEvent, useState } from "react";
 import { MdOutlineNewLabel } from "react-icons/md";
 import { Button, Input } from "../../ui";
 import { Colors } from "../../utils/enums";
+import { Label } from "../../utils/types";
 
 type LabelInputFormProps = {
-  onCreateLabel: (labelName: string) => void;
+  onCreateLabel: (payload: Label) => void;
 };
 const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   const [label, setLabel] = useState<string|null>(null);
@@ -14,8 +15,9 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   };
 
   const handleCreateClick = () => {
-    if(!label) return
-    onCreateLabel(label.trim());
+    if (!label) return;
+    const trimmedLabel = label.trim();
+    onCreateLabel({ Name: trimmedLabel });
     setLabel(null);
   };
 

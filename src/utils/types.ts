@@ -121,7 +121,7 @@ export interface Modality {
 }
 
 export interface Label {
-    name: string;
+    Name: string;
 }
 
 // Oauth2 

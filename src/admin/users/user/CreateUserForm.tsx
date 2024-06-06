@@ -41,7 +41,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
 
   const { data: rolesOptions } = useCustomQuery<Option[]>(
     ["roles"],
-    ()  => getRoles(),
+    () => getRoles(),
     {
       select: (roles : Role[]) => {
         roles.map((role: Role) => {

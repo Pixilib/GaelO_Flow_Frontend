@@ -24,8 +24,8 @@ const LabelRoot: React.FC = () => {
     () => getRoles()
   );
 
-  const { mutate: addLabelMutate } = useCustomMutation(
-    ({ name }) => addLabel(name),
+  const { mutate: addLabelMutate } = useCustomMutation<void, Label>(
+    (name) => addLabel(name),
     [["labels"]],
     {
       onSuccess: () => {
@@ -48,8 +48,8 @@ const LabelRoot: React.FC = () => {
     }
   );
 
-  const handleCreate = (labelName: string) => {
-    addLabelMutate({ name: labelName });
+  const handleCreate = (payload: Label) => {
+    addLabelMutate(payload);
   };
 
   const handleDelete = (labelName: string) => {
