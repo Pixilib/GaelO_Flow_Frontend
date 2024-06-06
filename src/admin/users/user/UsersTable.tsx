@@ -58,6 +58,7 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
             />
             <ConfirmModal
               dialogRef={dialogRef}
+              closeDialog={closeDialog}
               message={
                 <div className="italic">
                   Are you sure you want to delete this user: 
