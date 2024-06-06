@@ -58,8 +58,12 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
             />
             <ConfirmModal
               dialogRef={dialogRef}
-              closeDialog={closeDialog}
-              message={`Are you sure you want to delete user: ${user.Firstname} ${user.Lastname}?`}
+              message={
+                <div className="italic">
+                  Are you sure you want to delete this user: 
+                  <span className="text-xl not-italic font-bold text-primary"> {user.Firstname} {user.LastName} ?</span> 
+                </div>
+              }
               onConfirm={() => onDelete(user)}
               className="bg-zinc-200"
             />

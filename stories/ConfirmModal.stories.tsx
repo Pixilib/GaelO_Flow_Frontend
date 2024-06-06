@@ -4,84 +4,84 @@ import { action } from '@storybook/addon-actions';
 import ConfirmModal from '../src/ui/ConfirmModal';
 import Button from '../src/ui/Button';
 import { Colors } from '../src/utils';
+import { useModal } from '../src/utils/useModal';
 
 
-
-const meta = {
-  title: 'Gaelo Flow UI/ConfirmModal',
+const meta: Meta<typeof ConfirmModal> = {
+  
+  title: 'Gaelo FLow UI/ConfirmModal',
   component: ConfirmModal,
   argTypes: {
-    triggerButton: { 
-      control: 'object',
-      description: 'React element used to trigger the modal',
-    },
-    className: { 
-      control: 'text',
-      description: 'Additional classes for the modal',
-    },
-    message: { 
-      control: 'text',
-      description: 'Message displayed in the modal',
-    },
-    onConfirm: { 
-      action: 'confirmed',
-      description: 'Function called when the confirmation button is clicked',
-    },
+    dialogRef: { control: 'object', description: 'Reference to the dialog element' },
+    closeDialog: { action: 'closeDialog', description: 'Callback function to close the dialog' },
+    onConfirm: { action: 'onConfirm', description: 'Callback function when the confirm button is clicked' },
+    className: { control: 'text', description: 'tailwind css class for the modal' },
+    message: { control: 'text', description: 'The message displayed in the modal' },
   },
-  tags: ['confirm', 'modal', 'autodocs'],
-} satisfies Meta<typeof ConfirmModal>;
+  tags: ['autodocs'],
+};
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = {
-  args: {
-    triggerButton: <Button color={Colors.primary}>Open Confirmation Modal</Button>,
-    message: 'Are you sure you want to proceed?',
-    onConfirm: () => console.log('Confirmed'),
-  },
-} satisfies Story;
+const Template = (args: any) => {
+  const { dialogRef, openDialog, closeDialog } = useModal();
+  return (
+    <div>
+      <Button color={Colors.primary} onClick={openDialog}>Open Modal</Button>
+      <ConfirmModal {...args} dialogRef={dialogRef} closeDialog={closeDialog} />
+    </div>
+  );
+};
 
-export const WithCustomClass = {
+export const Default: Story = {
+  render: Template,
   args: {
-    triggerButton: <Button color={Colors.primary}>Open Confirmation Modal</Button>,
-    className: 'bg-gray-200 text-black italic',
-    message: 'Are you sure you want to proceed with this custom class?',
-    onConfirm: () => console.log('Confirmed'),
+    message: 'Are you sure you want to proceed?',
+    onConfirm: action('onConfirm'),
   },
-} satisfies Story;
-export const WithLongMessage = {
+};
+
+export const WithCustomClass: Story = {
+  render: Template,
   args: {
-    triggerButton: <Button color={Colors.primary}>Open Modal</Button>,
+    message: 'This is a custom class modal',
+    className: 'bg-dark text-white',
+    onConfirm: action('onConfirm'),
+  },
+};
+
+export const WithLongMessage: Story = {
+  render: Template,
+  args: {
     message: 'Are you sure you want to proceed? This action is irreversible and will permanently affect your data. Please confirm that you have considered all the consequences before proceeding.',
     onConfirm: action('onConfirm'),
   },
-} satisfies Story;
-export const WithCustomTriggerButton = {
+};
+
+export const WithFormattedMessage: Story = {
+  render: Template,
   args: {
-    triggerButton: <Button color={Colors.primary}>Open Confirmation Modal</Button>,
-    message: 'Do you confirm the action triggered by the custom button?',
-    onConfirm: () => console.log('Confirmed'),
+    message: (
+      <div>
+        <p><strong>Important:</strong> This action cannot be undone.</p>
+        <p>Do you want to continue?</p>
+      </div>
+    ),
+    onConfirm: action('onConfirm'),
   },
-} satisfies Story;
+};
 
-
-export const withBackgroundAlmond = {
-    args: {
-        triggerButton: <Button color={Colors.primary}>Open Confirmation Modal</Button>,
-        className: 'bg-almond text-white',
-        message: 'Do you confirm the action triggered by the custom button?',
-        onConfirm: () => console.log('Confirmed'),
-    },
-    } satisfies Story;
-
-    export const withBackgroundZinc = {
-        args:{
-            triggerButton : <Button color={Colors.primary}>Open Confirmation Modal</Button>,
-            className: 'bg-zinc-100 text-darkGray',
-            message: 'Do you confirm the action triggered by the custom button?',
-            onConfirm: () => console.log('Confirmed'),
-        }
-    }
-
+export const WithEmojiMessage: Story = {
+  render: Template,
+  args: {
+    message: (
+      <div>
+        <p>🚨 <strong>Warning:</strong> This will delete all your data!</p>
+        <p>Are you absolutely sure?</p>
+      </div>
+    ),
+    onConfirm: action('onConfirm'),
+  },
+};

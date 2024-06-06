@@ -44,7 +44,12 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
                         <ConfirmModal
                             dialogRef={dialogRef}
                             closeDialog={closeDialog}
-                            message={`Are you sure you want to delete this provider ${provider.Name}?`}
+                            message={
+                                <div className="italic">
+                                  Are you sure you want to delete this provider: 
+                                  <span className="text-xl not-italic font-bold text-primary">  {provider.Name} ?</span> 
+                                </div>
+                              }
                             onConfirm={() => onDelete(provider.Name)}
                             className="shadow-xl bg-zinc-200"
                         />

@@ -36,7 +36,7 @@ const CreateOauth = ({ title, className, onClose }: CreateOauthProps) => {
     return (
 
         <Card 
-        className={`my-12 rounded-xl ${className}`}
+        className={`my-12 rounded-xl bg-light-gray ${className}`}
         data-galeo-flow="create-oauth"
         >
             <CardHeader title={title} color={Colors.success}>

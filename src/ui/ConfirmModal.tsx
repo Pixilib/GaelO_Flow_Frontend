@@ -9,7 +9,7 @@ type ConfirmModalProps = {
   closeDialog: () => void;
   onConfirm: () => void;
   className?: string;
-  message: string;
+  message: React.ReactNode;
 };
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({ dialogRef, closeDialog, className = "", onConfirm, message }) => {

@@ -1,59 +1,72 @@
-import { Meta, StoryObj } from '@storybook/react';
-import { useState } from 'react';
-import Modal, { ModalHeader, ModalTitle, ModalBody, ModalFooter } from '../src/ui/Modal';
-import Button from '../src/ui/Button';
-import { Colors } from '../src/utils/enums';
+import type { Meta, StoryObj } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
+import { Colors, useModal } from '../src/utils';
+import { Button, Modal } from '../src/ui';
 
-const meta: Meta<typeof Modal> ={
-  title: 'GAELO FLOW UI/Modal',
+const meta = {
+  title:"GAELO FLOW UI/Modal",
   component: Modal,
   argTypes: {
-    size: {
-      options: ['sm', 'lg', 'xl', 'w-full'],
-      control: { type: 'select' },
-      description: 'Choose the size of the Modal',
-    },
-    tags: ['autodocs'],
+    dialogRef: { control: 'object', description: 'Reference to the dialog element.' },
+    closeDialog: { action: 'closeDialog', description: 'Action triggered when the dialog is closed.' },
+    className: { control: 'text', description: 'Custom CSS class for the modal.' },
+    children: { control: 'text', description: 'Content of the modal.' },
   },
-} satisfies Meta<typeof Modal>;
+  parameters: {
+    tags: ['Component', 'UI', 'Modal'],
+    notes: 'This component is used to display modal dialogs in the application. It leverages the `useModal` hook to manage the modal state.',
+    backgrounds: {
+      default: 'light',
+      values: [
+        { name: 'light', value: '#ffffff' },
+        { name: 'dark', value: '#333333' },
+      ],
+    },
+  },
+  tags: ['autodocs'],
+} as Meta<typeof Modal>;
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const TemplateModal: Story = {
-  render: (args) => {
-  const [show, setShow] = useState(false);
+const Template = (args: any) => {
+  const { dialogRef, openDialog, closeDialog } = useModal();
   return (
-    <div className="">
-      <Button color={Colors.success} onClick={() => setShow(true)}>
-        Click to open
-      </Button>
-      <Modal show={show} size={args.size}>
-        <ModalHeader onClose={() => setShow(false)}>
-          <ModalTitle>Header</ModalTitle>
-        </ModalHeader>
-        <ModalBody className="z-[2000]">
-          Lorem ipsum dolor sit amet. Qui repudiandae repellat qui corporis
-          molestiae eum illo distinctio ut repudiandae esse. Et facilis illo
-          et aliquam labore ad enim commodi et facilis itaque est beatae odit
-          ut galisum internos ut soluta dolore.
-
-          Lorem ipsum dolor sit amet. Qui repudiandae repellat qui corporis
-          molestiae eum illo distinctio ut repudiandae esse. Et facilis illo
-          et aliquam labore ad enim commodi et facilis itaque est beatae odit
-          ut galisum internos ut soluta dolore.
-
-          Lorem ipsum dolor sit amet. Qui repudiandae repellat qui corporis
-          molestiae eum illo distinctio ut repudiandae esse. Et facilis illo
-          et aliquam labore ad enim commodi et facilis itaque est beatae odit
-          ut galisum internos ut soluta dolore.
-        </ModalBody>
-        <ModalFooter>
-          Footer
-        </ModalFooter>
-      </Modal>
+    <div>
+      <Button color={Colors.primary} onClick={openDialog}>Open Modal</Button>
+      <Modal {...args} dialogRef={dialogRef} closeDialog={closeDialog} />
     </div>
   );
-;
-  }
 };
+
+export const Default: Story = {
+  render: Template,
+  args: {
+    children: 'This is the default modal content.',
+    closeDialog: action('closeDialog'),
+  },
+};
+
+export const WithBackgroundDark: Story = {
+  render: Template,
+  args: {
+    children: 'This is a modal with a custom class.',
+    className: 'bg-dark text-white',
+    closeDialog: action('closeDialog'),
+  },
+};
+
+export const WithFormattedMessage: Story = {
+  render: Template,
+  args: {
+    children: (
+      <div>
+        <h2 className="text-lg font-bold">Formatted Content</h2>
+        <p>This modal contains formatted content including headings, paragraphs, and more.</p>
+      </div>
+    ),
+    closeDialog: action('closeDialog'),
+  },
+};
+

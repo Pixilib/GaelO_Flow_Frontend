@@ -24,5 +24,10 @@
     .body-blur > *:not([data-gaelo-flow="confirm-modal"]) {
       filter: blur(2.5px);
     }
+
+    .modalClassName::backdrop{
+      filter: blur(2.5px);
+      background: rgba(0, 0, 0, 0.5);
+    }
   }
 

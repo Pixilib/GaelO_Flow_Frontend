@@ -92,7 +92,7 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                         <Edit size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DFB520"
-                            onClick={() => onEdit?.(roleName)}
+                            onClick={() => onEdit(roleName)}
                         />
                         <Delete size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
@@ -102,7 +102,12 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                         <ConfirmModal
                             dialogRef={dialogRef}
                             closeDialog={closeDialog}
-                            message={`Are you sure you want to delete this rôle: ${roleName} ?`}
+                            message={
+                                <div className="italic">
+                                  Are you sure you want to delete this rôle: 
+                                  <span className="text-xl not-italic font-bold text-primary"> { roleName } ?</span> 
+                                </div>
+                              }
                             onConfirm={() => onDelete(roleName)}
                             className=""
                         />
