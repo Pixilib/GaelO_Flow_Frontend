@@ -11806,7 +11806,7 @@ __metadata:
   resolution: "tailwind-scrollbar@npm:3.1.0"
   peerDependencies:
     tailwindcss: 3.x
-  checksum: dad4d5dcc37f09806cb1b5380d7908d113d139638ac606644ba0c689dffb2d72250f6997c0091c2ba596346390b31742859a20933c2d8543f8103e2ddfc3fb82
+  checksum: 10c0/dad4d5dcc37f09806cb1b5380d7908d113d139638ac606644ba0c689dffb2d72250f6997c0091c2ba596346390b31742859a20933c2d8543f8103e2ddfc3fb82
   languageName: node
   linkType: hard
 

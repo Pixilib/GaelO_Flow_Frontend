@@ -30,7 +30,7 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
       />
       <MdOutlineNewLabel
         className="absolute text-2xl transform -translate-y-1/2 top-1/2 left-3"
-        color={Colors.dark}
+        color={Colors.gray}
       />
       <Button
         type="button"
