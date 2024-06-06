@@ -1,5 +1,4 @@
 import React from "react";
-
 import { ColumnDef } from "@tanstack/react-table";
 import { RiAdminFill as EditIcon } from "react-icons/ri";
 import { BsTrashFill as DeleteIcon } from "react-icons/bs";
@@ -26,8 +25,10 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
             header: "Actions",
             id: "actions",
             cell: ({ row }) => {
-                const labelId = row.original.Name;
+                const labelId = row.original.Name; 
                 return (
+
+                    
                     <div className="flex justify-center gap-2.5">
                         <Button
                             color={Colors.secondary}

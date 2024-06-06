@@ -6,7 +6,7 @@ import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getLabels, addLabel, removeLabel } from "../../services/labels";
-import { Label } from "../../utils/types";
+import { Label, Role } from "../../utils/types";
 
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
@@ -49,7 +49,7 @@ const LabelRoot: React.FC = () => {
   );
 
   const handleCreate = (payload: Label) => {
-    addLabelMutate(payload);
+    addLabelMutate(payload );
   };
 
   const handleDelete = (labelName: string) => {
