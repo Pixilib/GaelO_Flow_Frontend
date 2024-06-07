@@ -61,7 +61,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Users",
-      path: "/administration/users/crud",
+      path: "/administration/users/users",
       isActive: location.pathname === "/administration/users/crud",
     },
     {

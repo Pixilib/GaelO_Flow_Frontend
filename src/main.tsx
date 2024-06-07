@@ -11,21 +11,24 @@ import App from "./App.tsx";
 import ErrorBoundary from "./ErrorBoundary.tsx";
 
 import "./index.css";
+import ConfirmContextProvider from "./services/ConfirmContextProvider.tsx";
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ErrorBoundary FallbackComponent={<>Error</>}>
-        <QueryClientProvider client={queryClient}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-          <ReactQueryDevtools initialIsOpen={true} />
-        </QueryClientProvider>
-      <ToastContainer/>
-      </ErrorBoundary>
-    </Provider>
+    <ConfirmContextProvider>
+      <Provider store={store}>
+        <ErrorBoundary FallbackComponent={<>Error</>}>
+          <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+            <ReactQueryDevtools initialIsOpen={true} />
+          </QueryClientProvider>
+          <ToastContainer />
+        </ErrorBoundary>
+      </Provider>
+    </ConfirmContextProvider>
   </React.StrictMode>
 );

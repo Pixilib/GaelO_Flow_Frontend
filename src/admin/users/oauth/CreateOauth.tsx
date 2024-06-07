@@ -1,7 +1,6 @@
 import { postOauth2Config } from "../../../services/oauth2";
 import { Colors, Oauth2Config, useCustomMutation, useCustomToast } from "../../../utils";
-import { IoIosCloseCircle } from "react-icons/io";
-import { Card, CardHeader, CardBody } from "../../../ui";
+import { Card, CardHeader, CardBody, CloseButton } from "../../../ui";
 import OauthForm from "./OauthForm";
 
 type CreateOauthProps = {
@@ -37,15 +36,11 @@ const CreateOauth = ({ title, className, onClose }: CreateOauthProps) => {
     return (
 
         <Card 
-        className={`my-12 rounded-xl ${className}`}
+        className={`my-12 rounded-xl bg-light-gray ${className}`}
         data-galeo-flow="create-oauth"
         >
             <CardHeader title={title} color={Colors.success}>
-                <IoIosCloseCircle
-                    size={"1.7rem"}
-                    onClick={() => onClose()}
-                    className="mr-3 text-white transition cursor-pointer duration-70 hover:scale-110"
-                />
+            <CloseButton onClose={() => onClose()} />
             </CardHeader>
             <CardBody>
                 <OauthForm onSubmit={handleSubmit} buttonText="Create" />

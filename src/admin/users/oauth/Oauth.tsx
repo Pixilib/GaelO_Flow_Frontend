@@ -35,23 +35,16 @@ const Oauth = () => {
     }
   );
 
-  //TODO : Replace with modal confirmation when is implemented
-  const handleDeleteOauth = (name: string) => {
-    const confirmation = window.confirm(
-      `Are you sure you want to delete ${name} ?`
-    );
-    if (confirmation) {
-      deleteMutation.mutate({ name });
-    }
-  };
-
+  const deleteOauthHandler = (name: string) => {
+    deleteMutation.mutate({ name });
+  }
+  
   if (isLoadingOauthConfig) return <Spinner />;
-
   return (
-    <div className="" data-gaelo-flow="oauth">
-      <Oauth2Table data={oauth2Config || []} onDelete={handleDeleteOauth} />
+    <div data-gaelo-flow="oauth">
+      <Oauth2Table data={oauth2Config || []} onDelete={deleteOauthHandler} />
       <div className="flex justify-center mx-10">
-        {showOauthForm === null && (
+        {showOauthForm === false && (
           <Button
             color={Colors.success}
             onClick={() => setshowOauthForm(true)}

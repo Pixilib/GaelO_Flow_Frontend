@@ -1,6 +1,7 @@
-import {Badge} from "./Badge";
+import { Badge } from "./Badge";
 import Button from "./Button";
 import BooleanIcon from "./BooleanIcon";
+import CloseButton from "./CloseButton";
 import Input from "./Input";
 import Label from "./Label";
 import ToggleEye from "./ToggleEye";
@@ -17,9 +18,11 @@ import ToastContext from "./toast/ToastContext";
 
 import SelectInput from "./SelectInput";
 import Spinner from "./Spinner";
-import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems , Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
+import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
+import ConfirmModal from './ConfirmModal';
+import Modal from './Modal';
 
-export { 
+export {
     Badge,
     Banner,
     BannerItems,
@@ -29,6 +32,8 @@ export {
     CardBody,
     CardFooter,
     CardHeader,
+    ConfirmModal,
+    CloseButton,
     DropDown,
     FilterTable,
     Footer,
@@ -37,6 +42,7 @@ export {
     Label,
     MenuItemsCollapse,
     MenuItem,
+    Modal,
     Popover,
     SelectInput,
     SideBarItems,

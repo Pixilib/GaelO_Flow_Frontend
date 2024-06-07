@@ -4,8 +4,8 @@ import { Colors } from "../../../utils";
 
 type RolesTableProps = {
     data: any[];
-    onEdit?: (roleName: string) => void;
-    onDelete?: (roleName: string) => void;
+    onEdit: (roleName: string) => void;
+    onDelete: (roleName: string) => void;
 }
 const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
 
@@ -37,7 +37,7 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
             header: 'Import',
             accessorKey: 'Import',
             enableColumnFilters: true,
-            cell: ({ row }: { row: any }) => 
+            cell: ({ row }: { row: any }) =>
                 BooleanIcon({ value: row.original.Import, size: '1.4rem' }),
         },
         {
@@ -91,13 +91,15 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                         <Edit size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DFB520"
-                            onClick={() => onEdit?.(roleName)}
+                            onClick={() => onEdit(roleName)}
                         />
                         <Delete size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
-                            onClick={() => onDelete?.(roleName)}
+                            onClick={() => onDelete(roleName)}
                         />
+       
+
                     </div>
                 )
             }

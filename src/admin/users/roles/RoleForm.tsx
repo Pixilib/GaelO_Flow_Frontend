@@ -60,6 +60,8 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
             ReadAll: readAll
         };
         onSubmit(payload);
+        if(initialData) return;
+        setName("");
     };
 
     return (

@@ -1,7 +1,6 @@
 import { ChangeEvent, useState } from "react";
 
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
-import { IoIosCloseCircle as CloseWindows } from "react-icons/io";
 import { getRoles, postUsers } from "../../../services/users";
 import {
   Colors,
@@ -9,6 +8,8 @@ import {
   useCustomQuery,
   UserPayload,
   useCustomToast,
+  Role,
+  Option
 } from "../../../utils";
 
 import {
@@ -16,12 +17,13 @@ import {
   Card,
   CardBody,
   CardHeader,
+  CloseButton,
   Input,
   Label,
   SelectInput,
   ToggleEye,
 } from "../../../ui";
-import { Option, Role } from "../../../utils/types";
+import { getErrorMessage } from "../../../utils/error";
 
 type UserFormProps = {
   title: string;
@@ -37,20 +39,17 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState<{ value: string, label: string } | null>(null);
 
-  const { data: rolesOptions } = useCustomQuery<Option[]>(
+
+  const { data: rolesOptions } = useCustomQuery<Role[], Option[]>(
     ["roles"],
-    ()  => getRoles(),
+    getRoles,
     {
-      select: (roles : Role[]) => {
-        roles.map((role: Role) => {
-          return {
-            value: role.Name,
-            label: role.Name,
-          };
-        });
-      },
+      select: (roles) => roles.map((role) => ({
+        value: role.Name,
+        label: role.Name,
+      })),
     }
   );
 
@@ -68,15 +67,12 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       },
       onError: (error: any) => {
         toastError(
-          "An error occurred during user creation." + (error.data.message ?? "")
-        );
+          "An error occurred during user creation. " + getErrorMessage(error) || "")
+        ;
       },
     }
   );
 
-  const handleRoleChange = (option: Option) => {
-    setSelectedRole(option.value);
-  };
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -88,20 +84,15 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       Firstname: firstName,
       Lastname: lastName,
       Email: email,
-      RoleName: selectedRole,
+      RoleName: selectedRole.value,
       Password: password,
     };
     userMutation.mutate(payload);
   };
-
   return (
     <Card className={`my-10 h-full ${className}`}>
       <CardHeader title={title} color={Colors.success}>
-        <CloseWindows
-          size={"1.7rem"}
-          onClick={() => onClose()}
-          className="mr-3 text-white transition cursor-pointer duration-70 hover:scale-110"
-        />
+      <CloseButton onClose={() => onClose()} />
       </CardHeader>
 
       <CardBody color={Colors.lightGray}>
@@ -184,7 +175,10 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
               <SelectInput
                 options={rolesOptions ?? []}
                 placeholder="Select a Rôle"
-                onChange={handleRoleChange}
+                onChange={(event) => {
+                  setSelectedRole({ value: event.value, label: event.value });
+              }}
+                value={selectedRole}
               />
             </label>
           </div>
@@ -196,7 +190,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
               type="submit"
             >
               <SubmitUser size={"1.3rem"} />
-              <div className="">Submit</div>
+              <div>Create</div>
             </Button>
           </div>
         </form>
