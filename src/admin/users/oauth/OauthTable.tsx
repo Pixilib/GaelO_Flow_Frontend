@@ -1,12 +1,12 @@
 import { BsTrashFill as Delete } from "react-icons/bs";
 
-import { Colors } from '../../../utils';
+import { Colors, Oauth2Config } from '../../../utils';
 
 import { Table } from "../../../ui";
 
 type Oauth2TableProps = {
     data: any[];
-    onDelete: (provider: string) => void;
+    onDelete: (provider: Oauth2Config) => void;
 }
 
 const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
