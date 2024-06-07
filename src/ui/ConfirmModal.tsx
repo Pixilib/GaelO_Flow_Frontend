@@ -1,49 +1,66 @@
-import React from 'react';
-import { BiX, BiCheck } from "react-icons/bi";
-
+// import React from 'react';
+// import { BiX, BiCheck } from "react-icons/bi";
 import { Colors } from '../utils';
-import { Modal, Button } from '../ui';
+import Button from './Button';
+import Modal from './Modal';
+
+
 
 type ConfirmModalProps = {
-  dialogRef: React.RefObject<HTMLDialogElement>;
-  closeDialog: () => void;
-  onConfirm: () => void;
-  className?: string;
-  message: React.ReactNode;
-};
-
-const ConfirmModal: React.FC<ConfirmModalProps> = ({ dialogRef, closeDialog, className = "", onConfirm, message }) => {
-
-  const handleConfirm = () => {
-    onConfirm();
-    closeDialog();
-  };
-
+  title? : string;
+  content? : string;
+  confirmLabel? : string;
+  cancelLabel? : string;
+  onConfirm : () => void;
+  onCancel : () => void;
+  onClose : () => void;
+  show : boolean;
+}
+const ConfirmModal = ({
+  title = 'Confirmation',
+  content = 'Do you confirm your action?',
+  confirmLabel = 'Confirm',
+  cancelLabel = 'Cancel',
+  onConfirm,
+  onCancel,
+  onClose,
+  show
+}:ConfirmModalProps) => {
   return (
-    <Modal data-gaelo-flow="confirm-modal" dialogRef={dialogRef} closeDialog={closeDialog} className={className}>
-        <p className='my-5'>{message}</p>
-        <div className="flex justify-end gap-2 mt-4">
+    <Modal show={show} data-gaelo-flow='confirm-dialog' size='sm'>
+      <Modal.Header
+        data-gaelo-flow='confirm-dialog-header'
+        onClose={onClose}
+      >
+        <Modal.Title>{title}</Modal.Title>
+      </Modal.Header>
+
+      <Modal.Body
+        style={{ maxHeight: '600px' }}
+        data-gaelo-flow='confirm-dialog-body'
+      >
+        {content}
+      </Modal.Body>
+
+      <Modal.Footer data-gaelo-flow='confirm-dialog-footer'>
+        <div className='flex justify-end gap-3'>
           <Button
-            type="button"
-            color={Colors.danger}
-            className="gap-1"
-            onClick={closeDialog}
+            color={Colors.primary}
+            onClick={onConfirm}
+            data-gaelo-flow='confirm-dialog-confirm-button'
           >
-            <BiX />
-            No
+            {confirmLabel}
           </Button>
           <Button
-            type="button"
-            color={Colors.success}
-            className="gap-1"
-            onClick={handleConfirm}
+            color={Colors.dark}
+            onClick={onCancel}
+            data-gaelo-flow='confirm-dialog-cancel-button'
           >
-            <BiCheck />
-            Yes
+            {cancelLabel}
           </Button>
         </div>
+      </Modal.Footer>
     </Modal>
-  );
-};
-
+  )
+}
 export default ConfirmModal;

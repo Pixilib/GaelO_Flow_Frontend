@@ -1,4 +1,4 @@
-import {Badge} from "./Badge";
+import { Badge } from "./Badge";
 import Button from "./Button";
 import BooleanIcon from "./BooleanIcon";
 import CloseButton from "./CloseButton";
@@ -18,11 +18,11 @@ import ToastContext from "./toast/ToastContext";
 
 import SelectInput from "./SelectInput";
 import Spinner from "./Spinner";
-import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems , Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
+import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
 import ConfirmModal from './ConfirmModal';
-import Modal from "./Modal";
+import Modal from './Modal';
 
-export { 
+export {
     Badge,
     Banner,
     BannerItems,

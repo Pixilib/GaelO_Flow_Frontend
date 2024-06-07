@@ -20,14 +20,6 @@
       border-radius: 9999px;
       border: 2px solid #edf2f7;
     }
-    /* create an effect when a modal dialog is displayed and the background is blurred while modal is open . */
-    .body-blur > *:not([data-gaelo-flow="confirm-modal"]) {
-      filter: blur(2.5px);
-    }
 
-    .modalClassName::backdrop{
-      filter: blur(2.5px);
-      background: rgba(0, 0, 0, 0.5);
-    }
   }
 

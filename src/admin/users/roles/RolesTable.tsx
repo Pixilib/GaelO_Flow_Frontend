@@ -1,6 +1,6 @@
 import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
-import { Table, BooleanIcon, ConfirmModal } from "../../../ui";
-import { Colors, useModal } from "../../../utils";
+import { Table, BooleanIcon } from "../../../ui";
+import { Colors } from "../../../utils";
 
 type RolesTableProps = {
     data: any[];
@@ -86,7 +86,6 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
             header: 'Action',
             cell({ row }: { row: any }) {
                 const roleName = row.original.Name;
-                const { dialogRef, openDialog, closeDialog } = useModal();
                 return (
                     <div className="flex justify-center gap-7">
                         <Edit size={'1.4rem'}
@@ -97,20 +96,9 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                         <Delete size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
-                            onClick={openDialog}
+                            onClick={() => onDelete(roleName)}
                         />
-                        <ConfirmModal
-                            dialogRef={dialogRef}
-                            closeDialog={closeDialog}
-                            message={
-                                <div className="italic">
-                                  Are you sure you want to delete this rôle: 
-                                  <span className="text-xl not-italic font-bold text-primary"> { roleName } ?</span> 
-                                </div>
-                              }
-                            onConfirm={() => onDelete(roleName)}
-                            className=""
-                        />
+       
 
                     </div>
                 )

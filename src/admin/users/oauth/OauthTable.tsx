@@ -1,8 +1,8 @@
 import { BsTrashFill as Delete } from "react-icons/bs";
 
-import { Colors, useModal } from '../../../utils';
+import { Colors } from '../../../utils';
 
-import { ConfirmModal, Table } from "../../../ui";
+import { Table } from "../../../ui";
 
 type Oauth2TableProps = {
     data: any[];
@@ -32,26 +32,13 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
             header: 'Action',
             cell({ row }: { row: any }) {
                 const provider = row.original;
-                const { dialogRef, openDialog, closeDialog } = useModal();
 
                 return (
                     <div className="flex justify-center gap-7">
                         <Delete size={'1.4rem'}
                             className="transition duration-70 hover:scale-110"
                             color="#DF3B20"
-                            onClick={openDialog}
-                        />
-                        <ConfirmModal
-                            dialogRef={dialogRef}
-                            closeDialog={closeDialog}
-                            message={
-                                <div className="italic">
-                                  Are you sure you want to delete this provider: 
-                                  <span className="text-xl not-italic font-bold text-primary">  {provider.Name} ?</span> 
-                                </div>
-                              }
-                            onConfirm={() => onDelete(provider.Name)}
-                            className="shadow-xl bg-zinc-200"
+                            onClick={() => onDelete(provider)}
                         />
                     </div>
                 )

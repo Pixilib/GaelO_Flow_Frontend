@@ -2284,6 +2284,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@popperjs/core@npm:^2.11.2":
+  version: 2.11.8
+  resolution: "@popperjs/core@npm:2.11.8"
+  checksum: 10c0/4681e682abc006d25eb380d0cf3efc7557043f53b6aea7a5057d0d1e7df849a00e281cd8ea79c902a35a414d7919621fc2ba293ecec05f413598e0b23d5a1e63
+  languageName: node
+  linkType: hard
+
 "@radix-ui/number@npm:1.0.1":
   version: 1.0.1
   resolution: "@radix-ui/number@npm:1.0.1"
@@ -7553,6 +7560,7 @@ __metadata:
     jwt-decode: "npm:^4.0.0"
     moment: "npm:^2.30.1"
     postcss: "npm:^8.4.33"
+    preline: "npm:^2.3.0"
     prettier: "npm:^3.2.2"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
@@ -10163,6 +10171,15 @@ __metadata:
     picocolors: "npm:^1.0.0"
     source-map-js: "npm:^1.2.0"
   checksum: 10c0/955407b8f70cf0c14acf35dab3615899a2a60a26718a63c848cf3c29f2467b0533991b985a2b994430d890bd7ec2b1963e36352b0774a19143b5f591540f7c06
+  languageName: node
+  linkType: hard
+
+"preline@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "preline@npm:2.3.0"
+  dependencies:
+    "@popperjs/core": "npm:^2.11.2"
+  checksum: 10c0/017d920079a1f1d65649226576eb4c70ac1e061f2385b9b1d7287504dfbfd6c6b4b537cf384e702eaf30c486d316f7f8926ee5e8a18821f098d0c5a8df1efb32
   languageName: node
   linkType: hard
 

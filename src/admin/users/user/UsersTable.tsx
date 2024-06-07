@@ -1,7 +1,7 @@
 import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
 
-import { Colors, useModal, User } from "../../../utils";
-import { Table,ConfirmModal } from "../../../ui";
+import { Colors, User } from "../../../utils";
+import { Table, } from "../../../ui";
 
 type UsersProps = {
   data: User[];
@@ -40,7 +40,6 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
       header: 'Action',
       cell({ row }: { row: any }) {
         const user = row.original;
-        const { dialogRef, openDialog, closeDialog } = useModal();
 
         return (
           <div className="flex justify-center gap-7">
@@ -54,20 +53,9 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
               size={'1.3rem'}
               className="transition duration-70 hover:scale-110"
               color="#FF0000"
-              onClick={openDialog}
+              onClick={()=> onDelete(user)}
             />
-            <ConfirmModal
-              dialogRef={dialogRef}
-              closeDialog={closeDialog}
-              message={
-                <div className="italic">
-                  Are you sure you want to delete this user: 
-                  <span className="text-xl not-italic font-bold text-primary"> {user.Firstname} {user.LastName} ?</span> 
-                </div>
-              }
-              onConfirm={() => onDelete(user)}
-              className="bg-zinc-200"
-            />
+
           </div>
         );
       }
