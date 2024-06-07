@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BsPersonPlusFill as CreateUser } from "react-icons/bs";
 
 import { deleteUser, getUsers } from "../../../services/users";
+import { useConfirm } from "../../../services/ConfirmContextProvider";
 import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
 import { useCustomToast } from "../../../utils/toastify";
 import { User, UserResponse } from "../../../utils/types";
@@ -11,7 +12,6 @@ import { Button, Spinner } from "../../../ui";
 import UsersTable from "./UsersTable";
 import CreateUserForm from "./CreateUserForm";
 import EditUserForm from "./EditUserForm";
-import { useConfirm } from "../../../services/ConfirmContextProvider";
 type UsersProps = {
   className?: string;
 };
@@ -19,6 +19,7 @@ type UsersProps = {
 const Users = ({ className }: UsersProps) => {
   const { toastSuccess, toastError } = useCustomToast();
   const { confirm } = useConfirm();
+  
   const [isCreating, setIsCreating] = useState(false);
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
 
@@ -26,7 +27,7 @@ const Users = ({ className }: UsersProps) => {
     useCustomQuery<UserResponse>(["users"], () => getUsers(), {
       enabled: true,
     });
-  const handleDeleteUser = useCustomMutation<void, number>(
+  const deleteMutation = useCustomMutation<void, number>(
     (userId: number) => deleteUser(userId),
     [["users"]],
     {
@@ -38,40 +39,10 @@ const Users = ({ className }: UsersProps) => {
       },
     }
   );
-
+  
   const editUser = (user: User) => {
     setUserToEdit(user);
   };
-
-      /**
-     * Ask confirmation to delete study and
-     * if so delete study
-     */
-    //   const toggleDeleteStudyConfirmation = async (studyName: string) => {
-    //     let reasonForStudyDeletion = null
-    //     let confirmContent = (
-    //         <div>
-    //             <p>You are going to delete this study.</p>
-    //             <Form.Text
-    //                 label='Reason'
-    //                 required
-    //                 name='reasonForStudyDeletion'
-    //                 isTextArea
-    //                 maxLength={255}
-    //                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-    //                     reasonForStudyDeletion = event.target.value
-    //                 }}
-    //             />
-    //         </div>
-    //     )
-    //     if (await confirm({ content: confirmContent })) {
-    //         if (!reasonForStudyDeletion)
-    //             toastError('A reason must be specified')
-    //         else mutateDeleteStudy({ studyName, reasonForStudyDeletion })
-    //     }
-    // }
-
-    
   const deleteUserHandler = async (user: User) => {
     const confirmContent = (
       <div className="italic">
@@ -80,9 +51,10 @@ const Users = ({ className }: UsersProps) => {
     </div>
     );
     if (await confirm({content: confirmContent})) {
-      handleDeleteUser.mutate(user.Id);
+      deleteMutation.mutate(user.Id);
     }
   };
+  
   return (
     <div
       className={`flex flex-col h-full custom-scrollbar overflow-y-auto ${className}`}
