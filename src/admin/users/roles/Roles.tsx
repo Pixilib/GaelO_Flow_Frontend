@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { BsPersonPlusFill as RoleCreate } from "react-icons/bs";
 
-import { deleteRole, getRoles } from "../../../services/users";
+import { deleteRole, getRoles } from '../../../services/users';
+import { useConfirm } from "../../../services/ConfirmContextProvider";
+
 import { Colors, Role, RolesUserResponse, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
 
 import RolesTable from "./RolesTable";
@@ -10,9 +12,12 @@ import EditRole from "./EditRole";
 import { Button, Spinner } from "../../../ui";
 
 const Roles = () => {
+    const { toastSuccess, toastError } = useCustomToast();
+    const { confirm } = useConfirm();
+
     const [showRoleForm, setShowRoleForm] = useState<'create' | 'edit' | null>(null);
     const [roleToEdit, setRoleToEdit] = useState<Role | null>(null);
-    const { toastSuccess, toastError } = useCustomToast();
+    
     const { data: roles, isPending: isLoadingRoles } = useCustomQuery<RolesUserResponse>(
         ["roles"],
         () => getRoles(),
@@ -20,7 +25,6 @@ const Roles = () => {
             enabled: true,
         }
     );
-
     const deleteMutation = useCustomMutation<void, string>(
         (roleName: string) => deleteRole(roleName),
         [["roles"]],
@@ -43,11 +47,17 @@ const Roles = () => {
         setRoleToEdit(role);
         setShowRoleForm('edit');
     }
-    const handleDeleteRole = (roleName: string) => {
-        const confirmation = window.confirm("Are you sure you want to delete this role?");
-        if (confirmation) {
+
+    const deleteRoleHandler = async (roleName: string) => {
+        const confirmContent = (
+            <div className="italic">
+            Are you sure you want to delete this rôle: 
+            <span className="text-xl not-italic font-bold text-primary"> {roleName} ?</span> 
+          </div>
+          );
+          if (await confirm({content: confirmContent})) {
             deleteMutation.mutate(roleName);
-        }
+          }
     }
 
 
@@ -59,7 +69,7 @@ const Roles = () => {
                 <RolesTable
                     data={roles || []}
                     onEdit={handleEditRole}
-                    onDelete={handleDeleteRole}
+                    onDelete={deleteRoleHandler}
                 />
             )}
             {showRoleForm === 'create' &&

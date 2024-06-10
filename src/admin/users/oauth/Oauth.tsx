@@ -13,17 +13,18 @@ import {
 import { Button, Spinner } from "../../../ui";
 import Oauth2Table from "./OauthTable";
 import CreateOauth from "./CreateOauth";
+import { useConfirm } from "../../../services/ConfirmContextProvider";
 
 const Oauth = () => {
   const { toastSuccess, toastError } = useCustomToast();
-
+  const { confirm } = useConfirm();
   const [showOauthForm, setshowOauthForm] = useState(false);
 
   const { data: oauth2Config, isPending: isLoadingOauthConfig } =
     useCustomQuery<Oauth2Config[]>(["oauth2Config"], () => getOauth2Config());
 
-  const deleteMutation = useCustomMutation(
-    ({ name }) => deleteOauth2Config(name),
+  const deleteMutation = useCustomMutation<void,string>(
+    (name) => deleteOauth2Config(name),
     [["oauth2Config"]],
     {
       onSuccess: () => {
@@ -35,23 +36,24 @@ const Oauth = () => {
     }
   );
 
-  //TODO : Replace with modal confirmation when is implemented
-  const handleDeleteOauth = (name: string) => {
-    const confirmation = window.confirm(
-      `Are you sure you want to delete ${name} ?`
+  const deleteOauthHandler = async (provider: Oauth2Config) => {
+    const confirmContent = (
+      <div className="italic">
+      Are you sure you want to delete this provider: 
+      <span className="text-xl not-italic font-bold text-primary"> {provider.Name} ?</span> 
+    </div>
     );
-    if (confirmation) {
-      deleteMutation.mutate({ name });
+    if(await confirm({ content: confirmContent })) {
+      deleteMutation.mutate(provider.Name);
     }
-  };
-
+  }
+  
   if (isLoadingOauthConfig) return <Spinner />;
-
   return (
-    <div className="" data-gaelo-flow="oauth">
-      <Oauth2Table data={oauth2Config || []} onDelete={handleDeleteOauth} />
+    <div data-gaelo-flow="oauth">
+      <Oauth2Table data={oauth2Config || []} onDelete={deleteOauthHandler} />
       <div className="flex justify-center mx-10">
-        {showOauthForm === null && (
+        {showOauthForm === false && (
           <Button
             color={Colors.success}
             onClick={() => setshowOauthForm(true)}

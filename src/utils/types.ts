@@ -81,7 +81,7 @@ export type User = {
     Firstname: string;
     Lastname: string;
     Email: string;
-    RoleName: string;
+    RoleName: Role["Name"];
     Role: Role;
 }
 /**

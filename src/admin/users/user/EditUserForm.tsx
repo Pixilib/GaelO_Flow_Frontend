@@ -1,13 +1,11 @@
-import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
-import { IoIosCloseCircle } from "react-icons/io";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Card, CardBody, CardHeader, Input, Label, SelectInput } from "../../../ui";
-import { Colors } from "../../../utils/enums";
-import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
+
+import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
+
+import { useCustomToast, Colors,useCustomMutation, useCustomQuery, UserUpdatePayload, User, Role,Option } from "../../../utils";
 import { getRoles, updateUser } from "../../../services/users";
-import { RolesUserResponse, User, UserUpdatePayload } from '../../../utils/types';
-import { useCustomToast } from "../../../utils/toastify";
-import { useNavigate } from "react-router-dom";
+
+import { Button, Card, CardBody, CardHeader, CloseButton, Input, Label, SelectInput } from "../../../ui";
 
 
 type UserFormProps = {
@@ -16,7 +14,6 @@ type UserFormProps = {
     userData: User;
     onClose: () => void;
 }
-//!WIP 
 const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) => {
     const user = userData;
     const [firstName, setFirstName] = useState("");
@@ -25,19 +22,17 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
     const [selectedRole, setSelectedRole] = useState<{ value: string, label: string } | null>(null);
 
     const { toastSuccess, toastError } = useCustomToast()
-    const navigate = useNavigate();
-    const { data: roles } = useCustomQuery<RolesUserResponse>(
-        ["roles"], () => getRoles(),
+
+    const { data: rolesOptions } = useCustomQuery<Role[], Option[]>(
+        ["roles"],
+        getRoles,
         {
-            enabled: true,
+            select: (roles) => roles.map((role) => ({
+                value: role.Name,
+                label: role.Name,
+            })),
         }
     );
-    const rolesOptions = roles ? roles.map((role) => {
-        return {
-            value: role.Name,
-            label: role.Name
-        }
-    }) : [];
 
     useEffect(() => {
         if (user) {
@@ -49,7 +44,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                 setSelectedRole({ value: user.RoleName, label: user.RoleName } || "");
             }
         }
-    }, [user]);
+    }, [JSON.stringify(user), JSON.stringify(rolesOptions)]);
 
 
     const userUpdateMutation = useCustomMutation<void, UserUpdatePayload>(
@@ -60,111 +55,99 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                 toastSuccess("User updated with success");
             },
             onError: (error: any) => {
-                console.log(error);
-                if (error.data.message) {
-                    toastError(error.data.message);
-                } else {
-                    toastError("An error occurred during user update.");
-                }
+                toastError(
+                    "An error occurred during user creation." + (error.data.message ?? "")
+                );
             },
         }
     )
 
     const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log({ selectedRole });
-
+        if (!selectedRole) {
+            toastError("Please select a role");
+            return;
+          }
         const payload: UserUpdatePayload = {
             Firstname: firstName,
             Lastname: lastName,
             Email: email,
-            RoleName: selectedRole?.value,
+            RoleName: selectedRole.value,
         };
-        if (user) {
-            try {
-                userUpdateMutation.mutate(payload);
-                navigate("/administration/users");
-            } catch (e) {
-                console.log(e);
-            }
-        }
-        return;
+        userUpdateMutation.mutate(payload);
     }
 
-    return (
-        <Card className={`my-10 ${className}`}>
-            <CardHeader title={title} color={Colors.success} >
-                <IoIosCloseCircle size={"1.7rem"}
-                    onClick={() => onClose()}
-                    className="mr-3 text-white transition cursor-pointer duration-70 hover:scale-110"
-                />
-            </CardHeader>
+return (
+    <Card className={`my-10 ${className}`}>
+        <CardHeader title={title} color={Colors.success} >
+        <CloseButton onClose={() => onClose()} />
+        </CardHeader>
 
-            <CardBody color={Colors.lightGray}>
-                <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
-                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
-                        <Input
-                            label={
-                                <Label value="Firstname *"
-                                    className="text-sm font-medium text-center"
-                                    align="left"
-                                />
-                            }
-                            placeholder="Enter your firstname"
-                            className="mt-1 lg:mt-3"
-                            value={firstName}
-                            required
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}
-                        />
-                        <Input
-                            label={
-                                <Label value="Lastname *"
-                                    className="text-sm font-medium text-center"
-                                    align="left"
-                                />
-                            }
-                            placeholder="Enter your lastname"
-                            className="mt-1 lg:mt-3"
-                            value={lastName}
-                            required
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
-                        />
-                    </div>
-                    <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
-                        <Input
-                            label={
-                                <Label value="Email *"
-                                    className="text-sm font-medium text-center"
-                                    align="left" />
-                            }
-                            type="email"
-                            placeholder="example@example.com"
-                            className="mt-1 lg:mt-3 rounded-xl"
-                            value={email}
-                            required
-                            onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
-                        />
-                        <label className="flex flex-col">
-                            <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
-                            <SelectInput
-                                options={rolesOptions}
-                                placeholder="Select a Rôle"
-                                onChange={(event) => {
-                                    setSelectedRole({ value: event.value, label: event.value });
-                                }}
-                                value={selectedRole}
+        <CardBody color={Colors.lightGray}>
+            <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
+                <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
+                    <Input
+                        label={
+                            <Label value="Firstname *"
+                                className="text-sm font-medium text-center"
+                                align="left"
                             />
-                        </label>
-                    </div>
-                    <div className="grid grid-cols-1 col-span-3 mt-3">
-                        <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
-                            <SubmitUser size={'1.3rem'} />
-                            <div className="">Update</div>
-                        </Button>
-                    </div>
-                </form>
-            </CardBody>
-        </Card>
-    );
+                        }
+                        placeholder="Enter your firstname"
+                        className="mt-1 lg:mt-3"
+                        value={firstName}
+                        required
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}
+                    />
+                    <Input
+                        label={
+                            <Label value="Lastname *"
+                                className="text-sm font-medium text-center"
+                                align="left"
+                            />
+                        }
+                        placeholder="Enter your lastname"
+                        className="mt-1 lg:mt-3"
+                        value={lastName}
+                        required
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
+                    />
+                </div>
+                <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
+                    <Input
+                        label={
+                            <Label value="Email *"
+                                className="text-sm font-medium text-center"
+                                align="left" />
+                        }
+                        type="email"
+                        placeholder="example@example.com"
+                        className="mt-1 lg:mt-3 rounded-xl"
+                        value={email}
+                        required
+                        onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                    />
+                    <label className="flex flex-col">
+                        <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
+                        <SelectInput
+                            options={rolesOptions ?? []}
+                            placeholder="Select a Rôle"
+                            onChange={(event) => {
+                                setSelectedRole({ value: event.value, label: event.value });
+                            }}
+                            value={selectedRole}
+                        />
+                    </label>
+                </div>
+                <div className="grid grid-cols-1 col-span-3 mt-3">
+                    <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
+                        <SubmitUser size={'1.3rem'} />
+                        <div>Update</div>
+                    </Button>
+                </div>
+            </form>
+        </CardBody>
+    </Card>
+);
 };
 export default EditUserForm;

@@ -39,9 +39,9 @@ function Toast({ content, type, animation = 'slide-right', position = "bottom-ri
     const getAnimation = () => {
         switch (animation) {
             case "slide-left":
-                return "animate-[slide-out-left_0.6s_ease-in-out]";
+                return "animate-[slide-out-left_0.3s_ease-in-out]";
             case "slide-right":
-                return "animate-[slide-out-right_0.6s_ease-in-out]";
+                return "animate-[slide-out-right_0.3s_ease-in-out]";
         }
     }
 
