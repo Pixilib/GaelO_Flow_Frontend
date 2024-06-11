@@ -16,13 +16,13 @@ const LabelRoot: React.FC = () => {
     getLabels()
   );
 
-  const { data: rolesData } = useCustomQuery<Role[]>(
+  useCustomQuery<Role[]>(
     ["roles"],
     () => getRoles()
   );
 
-  const { mutate: addLabelMutate } = useCustomMutation<void, Label>(
-    (label) => addLabel(label),
+  const { mutate: mutateAddLabel } = useCustomMutation<void, Label>(
+    (label: Label) => addLabel(label),
     [["labels"]],
     {
       onSuccess: () => {
@@ -33,24 +33,24 @@ const LabelRoot: React.FC = () => {
     }
   );
 
-  const { mutate: removeLabelMutate } = useCustomMutation<void, string>(
-    (labelName) => removeLabel(labelName),
+  const { mutate: mutateRemoveLabel } = useCustomMutation<void, string>(
+    (labelName: string) => removeLabel(labelName),
     [["labels"]],
     {
       onSuccess: () => {
         toastSuccess("Label deleted successfully");
       },
       onError: (error: any) =>
-        toastError(`Error while deleting label: ${error.message}`),
+        toastError(`Error while deleting label: ${error?.message}`),
     }
   );
 
   const handleCreate = (payload: Label) => {
-    addLabelMutate(payload);
+    mutateAddLabel(payload);
   };
 
   const handleDelete = (labelName: string) => {
-    removeLabelMutate(labelName);
+    mutateRemoveLabel(labelName);
   };
 
   return (
@@ -58,7 +58,7 @@ const LabelRoot: React.FC = () => {
       <CardHeader title="Labels" color={Colors.primary} />
       <CardBody color={Colors.light}>
         <LabelInputForm onCreateLabel={handleCreate} />
-        <LabelTable data={labelsData || []} onDeleteLabel={handleDelete} />
+        <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
       </CardBody>
       <CardFooter color={Colors.light} />
     </Card>
