@@ -1,13 +1,10 @@
 import React from "react";
-
 import { Card, CardHeader, CardBody, CardFooter } from "../../ui";
 import { Colors } from "../../utils/enums";
-
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getLabels, addLabel, removeLabel } from "../../services/labels";
 import { Label, Role } from "../../utils/types";
-
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
 import { getRoles } from "../../services/users";
@@ -19,13 +16,13 @@ const LabelRoot: React.FC = () => {
     getLabels()
   );
 
-  const { data: roles } = useCustomQuery<Role[]>(
+  const { data: rolesData } = useCustomQuery<Role[]>(
     ["roles"],
     () => getRoles()
   );
 
   const { mutate: addLabelMutate } = useCustomMutation<void, Label>(
-    (name) => addLabel(name),
+    (label) => addLabel(label),
     [["labels"]],
     {
       onSuccess: () => {
@@ -36,8 +33,8 @@ const LabelRoot: React.FC = () => {
     }
   );
 
-  const { mutate: removeLabelMutate } = useCustomMutation(
-    ({ name }) => removeLabel(name),
+  const { mutate: removeLabelMutate } = useCustomMutation<void, string>(
+    (labelName) => removeLabel(labelName),
     [["labels"]],
     {
       onSuccess: () => {
@@ -49,11 +46,11 @@ const LabelRoot: React.FC = () => {
   );
 
   const handleCreate = (payload: Label) => {
-    addLabelMutate(payload );
+    addLabelMutate(payload);
   };
 
   const handleDelete = (labelName: string) => {
-    removeLabelMutate({ name: labelName });
+    removeLabelMutate(labelName);
   };
 
   return (
