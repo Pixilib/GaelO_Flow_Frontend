@@ -36,7 +36,7 @@ const DropDown = ({ chevronPosition, children, className, isOpen:isOpenProp, dro
       onClick={handleClick}
       onBlur={handleBlur}
     >
-      <div className="flex place-content-center items-center gap-4">
+      <div className="flex items-center gap-4 place-content-center">
         {children}
         {dropDown}
         {chevronPosition &&
