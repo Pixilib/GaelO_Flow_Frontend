@@ -8,6 +8,7 @@ import SideBar from "./SideBar";
 import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
+import QueryRoot from "../query/QueryRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const RootApp = () => {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
+            <Route path="/query" element={<QueryRoot />} />
           </Routes>
         </div>
       </div>

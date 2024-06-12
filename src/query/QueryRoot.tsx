@@ -1,17 +1,20 @@
 import { Route, Routes } from "react-router-dom";
-import QueryForm from "./QueryForm";
+import SearchForm from "./SearchForm";
+
 
 
 const QueryRoot = () => {
 
 
 
-    return(
+    return (
         <div>
-            <h1>QueryRoot</h1>
-        <Routes>
-        <Route path="/query" element={<QueryForm />} />
-        </Routes>
+            <Routes>
+                <Route path="/" 
+                element={
+                    <SearchForm title={"Search"} className={`bg-light-gray`} onClose={() => console.log("close")} />
+                } />
+            </Routes>
         </div>
     )
 }
