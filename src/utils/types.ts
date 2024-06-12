@@ -121,7 +121,7 @@ export type Modality = {
 }
 
 export type Label = {
-    name: string;
+    Name: string;
 }
 
 // Oauth2 

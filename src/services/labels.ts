@@ -14,9 +14,9 @@ export const getLabels = (): Promise<Label[]> => {
         });
 };
 
-export const addLabel = (label: string): Promise<void> => { 
+export const addLabel = (payload: Label): Promise<void> => { 
     return axios
-        .post(`/api/labels`, { label }) 
+        .post(`/api/labels`, payload)
         .then(response => response.data)
         .catch(error => {
             if (error.response) {

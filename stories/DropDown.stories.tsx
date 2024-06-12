@@ -6,7 +6,7 @@ const meta: Meta<typeof DropDown> = {
     component: DropDown,
     tags: ["autodocs"],
     argTypes: {
-        
+
         chevronPosition: { control: { type: 'radio', options: ['left', 'right'] } },
         children: {
             control: 'text'
@@ -21,7 +21,7 @@ const meta: Meta<typeof DropDown> = {
             action: "clicked",
         },
         dropDown: {
-            control:"object"
+            control: "object"
         },
     },
 }
@@ -39,7 +39,7 @@ export const DropDownStory: Story = {
         dropDownOpen: () => { },
         dropDown: <div className="absolute top-full text-dark">BannerItems</div>,
 
-}
+    }
 }
 
 export const DropDownStoryLeft: Story = {
@@ -50,5 +50,33 @@ export const DropDownStoryLeft: Story = {
         isOpen: false,
         dropDownOpen: () => { },
         dropDown: <div className="absolute top-full text-dark">BannerItems</div>,
+    }
 }
-}
+export const DropDownStoryList: Story = {
+    args: {
+        chevronPosition: "right",
+        children: "DropDown with list",
+        className: "w-44 blue-gray-500 flex justify-center relative shadow-md",
+        isOpen: false,
+        dropDownOpen: () => { },
+        dropDown: (
+            <div className="absolute p-2 bg-white rounded-md shadow-md top-full text-dark">
+                <ul>
+                    <li>
+                        <input type="checkbox" id="option1" />
+                        <label htmlFor="option1">Option 1</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="option2" />
+                        <label htmlFor="option2">Option 2</label>
+                    </li>
+                    <li>
+                        <input type="checkbox" id="option3" />
+                        <label htmlFor="option3">Option 3</label>
+                    </li>
+                </ul>
+            </div>
+        ),
+    },
+};
+

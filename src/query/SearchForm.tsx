@@ -29,8 +29,8 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
         {
             select: (labels) =>
                 labels.map((label) => ({
-                    value: label.name,
-                    label: label.name,
+                    value: label.Name,
+                    label: label.Name,
                 })),
         }
     );

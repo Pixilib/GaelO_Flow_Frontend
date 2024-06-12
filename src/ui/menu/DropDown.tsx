@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import ToogleChevron from './ToogleChevron'
 
 type DropDownProps = {
@@ -7,12 +7,12 @@ type DropDownProps = {
   isOpen?: boolean;
   dropDownOpen?: () => void;
   children: React.ReactNode;
-  dropDown: React.ReactNode;
+  dropDown: React.ReactNode | boolean; // Change type of dropDown prop
 };
-const DropDown = ({ chevronPosition, children, className, isOpen:isOpenProp, dropDownOpen, dropDown }: DropDownProps) => {
+const DropDown = ({ chevronPosition, children, className, isOpen: isOpenProp, dropDownOpen, dropDown }: DropDownProps) => {
   const [isOpenState, setIsOpenState] = useState<boolean>(false);
-  
-  const isOpenUse = (isOpenProp  && dropDownOpen) !== undefined ? true: false;
+
+  const isOpenUse = (isOpenProp !== undefined && dropDownOpen !== undefined);
   const isOpen = isOpenProp !== undefined ? isOpenProp : isOpenState;
   //define the setter if the prop is not defined and the state is used
   // const handleClick = dropDownOpen ? dropDownOpen : () => setIsOpenState(!isOpenState);
@@ -20,14 +20,14 @@ const DropDown = ({ chevronPosition, children, className, isOpen:isOpenProp, dro
   
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
-
-    isOpenUse ? dropDownOpen && dropDownOpen() : setIsOpenState(true);
-  };
-  const handleBlur = (event: React.FocusEvent) => {
-    event.stopPropagation();
     isOpenUse ? dropDownOpen && dropDownOpen() : setIsOpenState(!isOpenState);
   };
-  
+
+  const handleBlur = (event: React.FocusEvent) => {
+    event.stopPropagation();
+    isOpenUse ? dropDownOpen && dropDownOpen() : setIsOpenState(false);
+  };
+
   return (
     <div
       data-gaelo-flow="banner-dropdown"
@@ -36,14 +36,34 @@ const DropDown = ({ chevronPosition, children, className, isOpen:isOpenProp, dro
       onClick={handleClick}
       onBlur={handleBlur}
     >
-      <div className="flex place-content-center items-center gap-4">
+      <div className="flex items-center gap-4 place-content-center">
         {children}
-        {dropDown}
+        {typeof dropDown === 'boolean' && dropDown && (
+          <div className="absolute p-2 bg-white rounded-md shadow-md top-full text-dark">
+            <ul>
+              <li>
+                <input type="checkbox" id="option1" />
+                <label htmlFor="option1">Option 1</label>
+              </li>
+              <li>
+                <input type="checkbox" id="option2" />
+                <label htmlFor="option2">Option 2</label>
+              </li>
+              <li>
+                <input type="checkbox" id="option3" />
+                <label htmlFor="option3">Option 3</label>
+              </li>
+            </ul>
+          </div>
+        )}
+        {typeof dropDown !== 'boolean' && dropDown}
         {chevronPosition &&
-          <ToogleChevron isOpen={isOpenUse === true ? isOpen: isOpenState} className={`${chevronPosition === "left" ? "order-first" :"order-last"} flex items-center`} onClick={dropDownOpen} />
+          <ToogleChevron isOpen={isOpenUse === true ? isOpen: isOpenState} className={`${chevronPosition === "left" ? "order-first" : "order-last"} flex items-center`} onClick={dropDownOpen} />
         }
       </div>
     </div>
   );
 };
+
 export default DropDown;
+
