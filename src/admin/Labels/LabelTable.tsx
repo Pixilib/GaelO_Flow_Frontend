@@ -23,8 +23,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
 
     const handleOptionSelect = (option: string) => {
         console.log("Selected Option:", option);
-        // Vous pouvez ajouter votre logique pour éditer l'étiquette ici
-        setIsOpen(false); // Fermez le dropdown après la sélection
+        setIsOpen(false);
     };
 
     const columns: ColumnDef<Label>[] = [

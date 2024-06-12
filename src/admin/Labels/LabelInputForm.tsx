@@ -30,14 +30,15 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
         onChange={handleInputChange}
         placeholder="Add new label"
         bordered
-        className="w-full py-4 pl-12 pr-8 border border-gray-300 rounded-r-none rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300"
+        className="w-full py-4 pl-12 pr-8 border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300" // Ajout de l'ombre ici
       />
       <LabelIcon className="absolute text-2xl text-gray-400 transform -translate-y-1/2 top-1/2 left-4" />
       <Button
         type="button"
         color={Colors.success}
         onClick={handleCreateClick}
-        className="p-4 text-white rounded-l-none shadow-md rounded-r-2xl min-w-20"
+       
+        className="p-4 text-white rounded-l-none shadow-md rounded-r-2xl min-w-20" 
       >
         +
       </Button>

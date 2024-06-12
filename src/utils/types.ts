@@ -131,3 +131,8 @@ export type Oauth2Config = {
     AuthorizationUrl: string;
     ClientId: string;
 }
+
+export interface Roles{
+    ROleName: string;
+    label: string;
+}
