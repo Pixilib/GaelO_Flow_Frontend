@@ -52,13 +52,14 @@ const LabelRoot: React.FC = () => {
   const handleDelete = (labelName: string) => {
     mutateRemoveLabel(labelName);
   };
-
   return (
     <Card>
       <CardHeader title="Labels" color={Colors.primary} />
       <CardBody color={Colors.light}>
-        <LabelInputForm onCreateLabel={handleCreate} />
-        <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
+        <div className="mb-10"> {/* Ajoute un espace en dessous */}
+          <LabelInputForm onCreateLabel={handleCreate} />
+        </div>
+          <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
       </CardBody>
       <CardFooter color={Colors.light} />
     </Card>
