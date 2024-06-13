@@ -105,7 +105,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Button color={Colors.danger} >
                     <IoClose size="20px" title="Shutdown" />
                 </Button>
-                <Popover popover={orthancSystem ? <>{JSON.stringify(orthancSystem, null, 2)}</> : <></>} placement="bottom" >
+                <Popover popover={orthancSystem ? <pre>{JSON.stringify(orthancSystem, null, 2)}</pre> : <></>} placement="bottom" >
                     <Button color={Colors.primary} onClick={orthancInfoHandler}>
                         <BsQuestionLg size="20px" title="Info" />
                     </Button>

@@ -40,7 +40,7 @@ const Popover: React.FC<PopoverProps> = ({
       <div className="z-50 cursor-pointer " >
         {isOpen && (
           <div
-            className={` ${getPlacementClasses(placement)} z-100 w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+            className={` ${getPlacementClasses(placement)} z-100 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
           >
             {popover}
           </div>
