@@ -12,8 +12,12 @@ import { getRoles } from "../../services/users";
 const LabelRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
-  const { data: labelsData } = useCustomQuery<Label[]>(["labels"], () =>
-    getLabels()
+  const { data: labelsData } = useCustomQuery<string[], Label[]>(["labels"],
+    () => getLabels(),
+    {
+      select: (name) => name.map((label) => ({ Name: label })
+      )
+    }
   );
 
   useCustomQuery<Role[]>(

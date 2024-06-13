@@ -15,6 +15,7 @@ interface SelectionInputProps {
   isMulti?: boolean;
   formatGroupLabel?: (group: GroupBase<OptionType>) => React.ReactNode;
   styles?: StylesConfig<OptionType, boolean>;
+  closeMenuOnSelect?: boolean;
 }
 
 const customStyles: StylesConfig<OptionType, boolean> = {
@@ -85,8 +86,10 @@ const SelectInput: React.FC<SelectionInputProps> = ({
     formatGroupLabel={formatGroupLabel}
     styles={{ ...customStyles, ...styles }}
     value={value}
+    closeMenuOnSelect={false}
     {...props}
   />
 );
+
 
 export default SelectInput;

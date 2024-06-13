@@ -1,8 +1,9 @@
+import { FaSearch } from "react-icons/fa"; 
 import { ChangeEvent, useState } from "react";
-import { FormCard, Input, Label, SelectInput } from "../ui";
-import { Label as LabelType, Option } from "../utils/types";
-import { useCustomQuery } from "../utils";
-import { getLabels } from "../services/labels";
+import { FormButton, FormCard, Input, Label, SelectInput } from "../ui";
+
+import { getLabels, getModalities } from "../services";
+import { useCustomQuery, Modality, Option } from "../utils";
 
 
 type QueryFormProps = {
@@ -10,40 +11,58 @@ type QueryFormProps = {
     className?: string;
     onClose: () => void;
 };
-
+//!WIP 
 const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
     const [patientName, setPatientName] = useState<string>("");
     const [patientId, setPatientId] = useState<string>("");
     const [accessionNumber, setAccessionNumber] = useState<number | null>(null);
     const [studyDescription, setStudyDescription] = useState<string>("");
-    const [modality, setModality] = useState<string>("");
+    const [modality, setModality] = useState<Option[]>([]);
     const [dataFrom, setDataFrom] = useState<string>("");
     const [dataTo, setDataTo] = useState<string>("");
-    const [label, setLabel] = useState<{ value: string; label: string } | null>(null);
-    
+    const [dataPreset, setDataPreset] = useState<string>("");
+    const [label, setLabel] = useState<Option[]>([]);
 
 
-    const { data: labelsData } = useCustomQuery<LabelType[], Option[]>(
+
+    const { data: labelsData } = useCustomQuery<string[], Option[]>(
         ["labels"],
-        getLabels,
+        () => getLabels(),
         {
             select: (labels) =>
                 labels.map((label) => ({
-                    value: label.Name,
-                    label: label.Name,
+                    value: label,
+                    label: label,
                 })),
         }
     );
-    
+
+    const { data: aets } = useCustomQuery<Modality[], Option[]>(
+        ['modalities'],
+        () => getModalities(),
+        {
+            select: (modalities) =>
+                modalities.map((modality) => ({
+                    value: modality.name,
+                    label: modality.name,
+                })),
+        }
+    );
+
     const onSubmit = () => {
         console.log("QueryForm submitted");
     }
 
-
-    console.log("labelsData", labelsData)
+    const handleLabelChange = (selectedOptions: Option[]) => {
+        setLabel(selectedOptions || []);
+    }
+    const handleModalityChange = (selectedOptions: Option[]) => {
+        setModality(selectedOptions || []);
+    }
+    
     return (
         <FormCard
-            className={className}
+            className={`${className} gap-y-7`}
             header={{
                 onClose,
                 title
@@ -68,9 +87,10 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setPatientId(event.target.value)}
                 />
             </div>
-            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-4 lg:gap-11">
+            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-4 lg:gap-11 place-content-center">
                 <Input
                     label={<Label value="Accession Number" className="text-sm font-medium text-center" align="left" />}
+                    type="number"
                     placeholder="Search by accession number"
                     className="mt-1 lg:mt-3"
                     value={accessionNumber ?? undefined}
@@ -83,24 +103,36 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
                     value={studyDescription}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setStudyDescription(event.target.value)}
                 />
-                <SelectInput
-                options={[]}
-                placeholder="Select Modality"
-                value={modality}
-                onChange={(event) => setModality(event.value)}
+                <div className="grid ">
+                    <Label
+                        value="Modalities"
+                        className="text-sm font-medium text-center"
+                        align="left"
+                    />
+                    <SelectInput
+                        options={aets ?? []}
+                        placeholder="Select Modality"
+                        onChange={(options: Option[]) => handleModalityChange(options)}
+                    />
+                </div>
+                <Input
+                    label={<Label value="Data Preset" className="text-sm font-medium text-center" align="left" />}
+                    placeholder="Search by data preset"
+                    className="mt-1 lg:mt-3"
+                    value={dataPreset}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => setDataPreset(event.target.value)}
                 />
-                
+
             </div>
 
-            <hr className="" />
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-11">
+            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-3 lg:gap-11">
                 <Input
                     type="date"
                     label={
                         <Label
                             value={"Data From"}
                             className="text-sm font-medium text-center"
-                            align="center"
+                            align="left"
                             spaceY={2}
                         />
                     }
@@ -117,7 +149,7 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
                         <Label
                             value={"Data To"}
                             className="text-sm font-medium text-center"
-                            align="center"
+                            align="left"
                             spaceY={2}
                         />
                     }
@@ -127,25 +159,26 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
                     }
                     className={"focus:shadow-2xl shadow-lg"}
                 />
-                <div className="flex flex-col">
-                <Label
-                  value="Label"
-                    className="text-sm font-medium text-center"
-                    align="center"
-                    spaceY={2}
-                />
-                <SelectInput
-                    isMulti
-                    options={labelsData || []}
-                    value={label ?? undefined}
-                    onChange={(event) => setLabel({ value: event.value, label: event.value })}
-                    placeholder="Select Label(s)"
-                    aria-label="Labels"
-                />      
+                <div className="grid">
+                    <Label
+                        value="Label"
+                        className="text-sm font-medium text-center"
+                        align="left"
+                        spaceY={2}
+                    />
+                    <SelectInput
+                        isMulti
+                        closeMenuOnSelect={false}
+                        options={labelsData || []}
+                        onChange={(options: Option[]) => handleLabelChange(options)}
+                        placeholder="Select Label(s)"
+                        aria-label="Labels"
+                    />
                 </div>
             </div>
-            div.grid.grid-cols-1.gap-3.lg:grid-cols-3.lg
-
+            <div className="grid grid-cols-1 col-span-2">
+            <FormButton text={"Search"} icon={<FaSearch size="1.3rem" />} /> 
+            </div>
         </FormCard>
     )
 }

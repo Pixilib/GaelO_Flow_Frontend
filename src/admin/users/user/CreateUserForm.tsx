@@ -36,7 +36,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
 
   const { data: rolesOptions } = useCustomQuery<Role[], Option[]>(
     ['roles'], 
-    getRoles, 
+    ()=> getRoles(), 
     {
     select: (roles) =>
       roles.map((role) => ({
@@ -45,7 +45,6 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       }))
   });
 
-  console.log('rolesOptions', rolesOptions)
   const userMutation = useCustomMutation<number, UserPayload>(
     (user) => postUsers(user),
     [['users']],

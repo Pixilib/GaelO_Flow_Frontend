@@ -29,7 +29,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
 
     const columns: ColumnDef<Label>[] = [
         {
-            accessorKey: "name",
+            accessorKey: "Name",
             header: "Label",
             cell: (info) => <Badge value={info.getValue() as string} />,
         },
@@ -37,7 +37,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
             header: "Actions",
             id: "actions",
             cell: ({ row }) => {
-                const labelId = row.original.Name; 
+                const labelId = row.original.Name;
                 return (
                     <div className="flex justify-center gap-2.5">
                         {/* Utilisez le composant LabelDropDown */}
