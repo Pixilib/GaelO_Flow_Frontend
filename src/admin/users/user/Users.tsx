@@ -19,7 +19,6 @@ type UsersProps = {
 const Users = ({ className }: UsersProps) => {
   const { toastSuccess, toastError } = useCustomToast();
   const { confirm } = useConfirm();
-  
   const [isCreating, setIsCreating] = useState(false);
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
 
@@ -42,6 +41,7 @@ const Users = ({ className }: UsersProps) => {
   
   const editUser = (user: User) => {
     setUserToEdit(user);
+    setIsCreating(false);
   };
   const deleteUserHandler = async (user: User) => {
     const confirmContent = (
@@ -88,7 +88,8 @@ const Users = ({ className }: UsersProps) => {
             onClose={() => setIsCreating(false)}
           />
         ) : null}
-        {userToEdit ? (
+        {
+        userToEdit ? (
           <EditUserForm
             title={"Edit User"}
             className="bg-[#EFEFEF]"
