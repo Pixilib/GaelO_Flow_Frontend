@@ -2,12 +2,12 @@ import { SignInResponse } from "../utils/types";
 import axios from "./axios";
 
 export const signIn = (
-  username: string,
+  email: string,
   password: string
 ): Promise<SignInResponse> => {
   return axios
     .post("/api/login", {
-      Username : username,
+      Email : email,
       Password : password,
     })
     .then(function (response) {
@@ -22,14 +22,12 @@ export const signIn = (
 };
 
 export const signUp = (
-  username: string,
   lastname: string,
   firstname: string,
   email: string
 ): Promise<void> => {
   return axios
     .post("/api/register", {
-      Username : username,
       Lastname : lastname,
       Firstname : firstname,
       Email : email,

@@ -1,40 +1,45 @@
 import React from 'react';
-import Table from '../../ui/table/Table';
-import Badge from '../../ui/Badge';
-import { ColumnDef } from '@tanstack/react-table';
-import { Colors } from '../../utils/enums';
-import Button from '../../ui/Button';
-import { AiOutlineEdit as EditIcon, AiOutlineDelete as DeleteIcon } from 'react-icons/ai';
 
-interface PeerData {
-    username: string;
-    peername: string;
-    url: string;
-    isUserCreated?: boolean;
-    port: number;
-    ipAddress: string;
-    password: string;
-}
+import { ColumnDef } from '@tanstack/react-table';
+import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi";
+
+import { Table, Badge, Button } from '../../ui';
+import { Colors } from '../../utils/enums';
+import { Peer } from '../../utils/types';
 
 interface PeersTableProps {
-    peerData: PeerData[];
+    peerData: Peer[];
     onDeletePeer: (peerName: string) => void;
-    onEditPeer: (peer: PeerData) => void;
+    onEchoPeer: (peerName: string) => void;
 }
 
-const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEditPeer }) => {
-    const columns: ColumnDef<PeerData>[] = [
-        { accessorKey: 'username', header: 'Username' },
-        { accessorKey: 'peername', header: 'Peer Name', cell: info => <Badge value={info.getValue() as string} /> },
-        { accessorKey: 'url', header: 'URL' },
+const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEchoPeer }) => {
+    const columns: ColumnDef<Peer>[] = [
+        {
+            accessorKey: 'username',
+            header: 'Username',
+        },
+        {
+            accessorKey: 'name',
+            header: 'Peer Name',
+            cell: info => <Badge value={info.getValue() as string} />
+        },
+        {
+            accessorKey: 'url',
+            header: 'URL',
+        },
         {
             header: 'Actions',
             id: 'actions',
             cell: ({ row }) => (
-                <>
-                    <Button onClick={() => onEditPeer(row.original)} color={Colors.primary}><EditIcon /></Button>
-                    <Button onClick={() => onDeletePeer(row.original.peername)} color={Colors.secondary}><DeleteIcon /></Button>
-                </>
+                <div className="flex justify-center items-center gap-2.5">
+                    <Button onClick={() => onEchoPeer(row.original.name)} color={Colors.secondary}>
+                        <EchoIcon />
+                    </Button>
+                    <Button onClick={() => onDeletePeer(row.original.name)} color={Colors.danger}>
+                        <DeleteIcon size={18} />
+                    </Button>
+                </div>
             )
         }
     ];

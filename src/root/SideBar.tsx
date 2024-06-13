@@ -1,20 +1,19 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { IoMdHelpCircleOutline as HelpIcon } from "react-icons/io";
+import { BiLogOut as LogoutIcon } from "react-icons/bi";
+import { TbZoomQuestion as QueryIcon } from "react-icons/tb";
+import { BiHomeAlt as HomeIcon } from "react-icons/bi";
+import { RiUserSettingsLine as AdministratorIcon } from "react-icons/ri";
+import { MdOutlineImageSearch as OrthancContentIcon } from "react-icons/md";
+import { BiImport as ImportIcon } from "react-icons/bi";
+import { MdOutlineRestorePage as RetrieveIcon } from "react-icons/md";
+import { BiImageAdd as DicomIcon } from "react-icons/bi";
 
+import { useNavigate, useLocation } from "react-router-dom";
 import MenuItem from "../ui/menu/MenuItem";
 import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
 import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
-import Administrator from "../assets/administrator.svg?react";
-import Import from "../assets/import-content.svg?react";
-import Search from "../assets/search.svg?react";
-import SearchDocument from "../assets/search-document.svg?react";
-import Auto from "../assets/auto-retrieve.svg?react";
-import MyDicom from "../assets/my-dicom.svg?react";
-import Home from "../assets/home.svg?react";
-import Help from "../assets/help.svg?react";
-import Logout from "../assets/logout.svg?react";
 import { Item } from "../ui/menu/Items";
-
 type SideBarProps = {
   onLogout: () => void;
   openItem: string | null;
@@ -25,16 +24,15 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleItemClick = (item: Item|string) => {
+  const handleItemClick = (item: Item | string) => {
     const itemPath = typeof item === "string" ? item : item.path;
-    console.log(itemPath)
     navigate(itemPath);
   };
   const handleDropDown = (title: string) => {
     console.log()
     setOpenItem(openItem === title ? null : title);
   };
-  //TODO: Add route for the adminItems , when route exist !
+  //TODO: Add route for the adminItems, when route exist !
   const adminItems = [
     {
       title: "General",
@@ -63,8 +61,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     },
     {
       title: "Users",
-      path: "/administration/users/local",
-      isActive: location.pathname === "/administration/users",
+      path: "/administration/users/users",
+      isActive: location.pathname === "/administration/users/crud",
     },
     {
       title: "Labels",
@@ -72,19 +70,19 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       isActive: location.pathname === "/administration/labels",
     },
   ];
-  
+
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="w-64 h-full border-transparent rounded-tr-40 shadow-custom"
+      className="flex-shrink-0 w-64 h-full border-transparent rounded-tr-40"
     >
       <main className="h-full rounded-tr-40 bg-primary pt-7">
         <div className="flex h-11% justify-center">
           <LogoSideBar />
         </div>
-        <div className="flex h-69% flex-col gap-3 overflow-y-auto">
+        <div className="flex h-69% flex-col gap-3 overflow-y-auto custom-scrollbar">
           <MenuItemsCollapse
-            icon={<Administrator />}
+            icon={<AdministratorIcon className="w-6 h-6" />}
             title="Administration"
             elements={adminItems}
             isOpen={openItem === "Administration"}
@@ -93,31 +91,31 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           />
           <MenuItem
             title="Orthanc Content"
-            icon={<Search />}
+            icon={< OrthancContentIcon className="w-6 h-6" />}
             isActive={location.pathname === "/"}
             onClick={() => handleItemClick("/")}
           />
           <MenuItem
             title="Import"
-            icon={<Import />}
+            icon={<ImportIcon className="w-6 h-6" />}
             isActive={location.pathname === "/import"}
-            onClick={()=>handleItemClick("/import")}
+            onClick={() => handleItemClick("/import")}
           />
           <MenuItem
             title="Query"
-            icon={<SearchDocument />}
+            icon={<QueryIcon className="w-6 h-6" />}
             isActive={location.pathname === "/query"}
             onClick={() => handleItemClick("/query")}
           />
           <MenuItem
             title="Auto retrieve"
-            icon={<Auto />}
+            icon={<RetrieveIcon className="w-6 h-6" />}
             isActive={location.pathname === "/auto-retrieve"}
             onClick={() => handleItemClick("/auto-retrieve")}
           />
           <MenuItem
             title="My Dicom"
-            icon={<MyDicom />}
+            icon={<DicomIcon className="w-6 h-6" />}
             isActive={location.pathname === "/mydicom"}
             onClick={() => handleItemClick("/mydicom")}
           />
@@ -126,20 +124,20 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
 
           <MenuItem
             title="Home"
-            icon={<Home />}
+            icon={<HomeIcon className="w-6 h-6" />}
             isActive={location.pathname === "/home"}
             onClick={() => handleItemClick("/home")}
             className="mt-3"
           />
           <MenuItem
             title="Help"
-            icon={<Help />}
+            icon={<HelpIcon className="w-6 h-6" />}
             isActive={location.pathname === "/help"}
             onClick={() => handleItemClick("/help")}
           />
           <MenuItem
             title="Log out"
-            icon={<Logout />}
+            icon={<LogoutIcon className="w-6 h-6" />}
             isActive={location.pathname === "/logout"}
             onClick={onLogout}
           />

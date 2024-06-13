@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+  "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
+  "node_modules/preline/dist/*.js"
+  ],
   theme: {
     extend: {
       fontSize:{
@@ -47,7 +50,7 @@ export default {
         'primary-light':'#8C8BD3',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
-        'secondaryLight': '#F3ECE8',
+        'secondaryLight': '#F1EBE8',
         'danger': '#DB1F22',
         'danger-hover': '#8A1315',
         'success': '#36A56F',
@@ -68,5 +71,8 @@ export default {
       },
     },
   },
-  // plugins: ["prettier-plugin-tailwindcss"],
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('preline/plugin'),
+],
 };

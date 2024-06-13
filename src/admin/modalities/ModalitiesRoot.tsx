@@ -1,23 +1,16 @@
 import React, { useState } from 'react';
-
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
 import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
 import { Colors } from '../../utils/enums';
+import { Modality } from '../../utils/types';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
+import { useCustomToast } from '../../utils/toastify';
 
 import NewModalityCard from './NewModalityCard';
 import ModalitiesTable from './ModalitiesTable';
 import { updateModality, deleteModality, getModalities, echoModality } from '../../services/modalities';
-import { useCustomToast } from '../../utils/toastify';
 
-interface AetData {
-    name: string;
-    aet: string;
-    host: string;
-    port: number;
-    manufacturer: string;
-}
 
 const ModalitiesRoot: React.FC = () => {
 
@@ -25,25 +18,13 @@ const ModalitiesRoot: React.FC = () => {
 
     const [showNewAetCard, setShowNewAetCard] = useState(false);
 
-    const { data: aets, isLoading } = useCustomQuery<AetData[]>(
+    const { data: aets, isLoading } = useCustomQuery<Modality[]>(
         ['modalities'],
-        () => getModalities(),
-        {
-            select: (data): AetData[] => {
-                return Object.entries(data).map(([name, aet]) => {
-                    return {
-                        name: name,
-                        aet: aet.AET,
-                        host: aet.Host,
-                        port: aet.Port,
-                        manufacturer: aet.Manufacturer
-                    }
-                });
-            }
-        });
+        () => getModalities()
+    );
 
     const { mutate: updateModalityMutate } = useCustomMutation(
-        (aet: AetData) => updateModality({ AET: aet.aet, Host: aet.host, Port: aet.port, Manufacturer: aet.manufacturer, Name: aet.name }),
+        (aet: Modality) => updateModality(aet),
         [['modalities']],
         {
             onSuccess: () => toastSuccess("Modality created successfully"),
@@ -52,7 +33,7 @@ const ModalitiesRoot: React.FC = () => {
     );
 
     const { mutate: echoModalityMutate } = useCustomMutation(
-        (aetName :string) => echoModality(aetName),
+        (aetName: string) => echoModality(aetName),
         [['modalities']],
         {
             onSuccess: () => toastSuccess("Echo successful"),
@@ -71,7 +52,7 @@ const ModalitiesRoot: React.FC = () => {
 
     const handleNewAetClick = () => setShowNewAetCard(true);
     const handleCloseNewAetCard = () => setShowNewAetCard(false);
-    const handleEchoAet = (aetName :string) => echoModalityMutate(aetName);
+    const handleEchoAet = (aetName: string) => echoModalityMutate(aetName);
 
     if (isLoading) return <Spinner />;
 
@@ -81,10 +62,15 @@ const ModalitiesRoot: React.FC = () => {
             <CardBody color={Colors.light}>
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable aetData={aets} onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} onEchoAet={handleEchoAet} />
+                        <ModalitiesTable 
+                        aetData={aets} 
+                        onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} 
+                        onEchoAet={handleEchoAet} />
                     </div>
                     {!showNewAetCard && (
-                        <Button color={Colors.success} onClick={handleNewAetClick}>
+                        <Button 
+                        color={Colors.success} 
+                        onClick={handleNewAetClick}>
                             <MoreIcon className="mr-3" size={24} /> New modality
                         </Button>
                     )}
@@ -92,7 +78,9 @@ const ModalitiesRoot: React.FC = () => {
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard onClose={handleCloseNewAetCard} onCreateAet={(aet: AetData) => updateModalityMutate(aet)} />
+                    <NewModalityCard 
+                    onClose={handleCloseNewAetCard} 
+                    onCreateAet={(aet: Modality) => updateModalityMutate(aet)} />
                 )}
             </CardFooter>
         </Card>

@@ -8,6 +8,7 @@ import SideBar from "./SideBar";
 import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
+import QueryRoot from "../query/QueryRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -32,9 +33,9 @@ const RootApp = () => {
       "/administration/queues/anonymize":"Queues",
       "/administration/queues/delete":"Queues",
       "/administration/peers": "Peers",
-      "/administration/users": "Users",
-      "/administration/users/local": "Users",
+      "/administration/users/users": "Users",
       "/administration/users/roles": "Users",
+      "/administration/users/oauth2": "Users",
       "/Orthanc Content": "Orthanc Content",
       "/import": "Import",
       "/query": "Query",
@@ -47,18 +48,19 @@ const RootApp = () => {
   }, [location.pathname])
 
   return (
-    <div className="flex bg-white size-full">
+    <div className="flex w-screen h-screen bg-white">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-col flex-1 bg-secondaryLight">
+      <div className="flex flex-col flex-1 overflow-auto custom-scrollbar bg-secondaryLight">
         <Header
           title={title}
           openItem={openItem}
           setOpenItem={setOpenItem}
         />
-        <div className="flex">
+        <div className="">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
+            <Route path="/query" element={<QueryRoot />} />
           </Routes>
         </div>
       </div>

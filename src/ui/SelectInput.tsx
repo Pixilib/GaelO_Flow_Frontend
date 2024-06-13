@@ -7,14 +7,15 @@ interface OptionType {
 }
 
 interface SelectionInputProps {
-  value: OptionType|undefined,
+  value?: OptionType|undefined|null,
   options: OptionType[] | GroupBase<OptionType>[];
-  onChange: (value: any) => void;
+  onChange?: (value: any) => void;
   placeholder?: string;
   formatOptionLabel?: (option: OptionType) => React.ReactNode;
   isMulti?: boolean;
   formatGroupLabel?: (group: GroupBase<OptionType>) => React.ReactNode;
   styles?: StylesConfig<OptionType, boolean>;
+  closeMenuOnSelect?: boolean;
 }
 
 const customStyles: StylesConfig<OptionType, boolean> = {
@@ -65,7 +66,7 @@ const customStyles: StylesConfig<OptionType, boolean> = {
   }),
 };
 
-const SelectionInput: React.FC<SelectionInputProps> = ({
+const SelectInput: React.FC<SelectionInputProps> = ({
   options,
   onChange,
   placeholder = 'Select...',
@@ -85,8 +86,10 @@ const SelectionInput: React.FC<SelectionInputProps> = ({
     formatGroupLabel={formatGroupLabel}
     styles={{ ...customStyles, ...styles }}
     value={value}
+    closeMenuOnSelect={true}
     {...props}
   />
 );
 
-export default SelectionInput;
+
+export default SelectInput;

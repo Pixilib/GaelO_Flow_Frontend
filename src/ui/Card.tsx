@@ -45,13 +45,14 @@ const colorClasses: Record<keyof typeof Colors, string> = {
   red: "bg-red",
   gray: "bg-gray",
   light: "bg-light",
+  white: "bg-white",
 };
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";
 
 const Card = ({ bordered, className = "", children }: CardsProps) => {
   const borderClass = bordered ? "border" : "";
-  const spacingClass = "mx-4 md:mx-4";
+  const spacingClass = "mx-2 md:mx-10";
 
   return (
     <div data-gaelo-flow="Card" className={`${spacingClass} shadow-md ${className} ${borderClass} rounded-xl`}>

@@ -11,11 +11,12 @@ type InputProps = {
   svgLeft?: React.ReactNode;
   svgRight?: React.ReactNode;
   bordered?: boolean;
+  roundedRight?: boolean;
   min?: number;
   max?: number;
   step?: number;
   [key: string]: any;
-};
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = ({
   className,
@@ -29,9 +30,11 @@ const Input = ({
   svgLeft = null,
   svgRight = null,
   bordered = false,
+  roundedLeft = true, 
+  roundedRight = true, 
   ...props
 }: InputProps) => {
- 
+
   const InputClassName = `
   w-full 
   bg-gray-50 
@@ -55,16 +58,19 @@ const Input = ({
   disabled:bg-gray-100 
   disabled:dark:bg-opacity-50
 `;
-//`bg-gray-50 peer text-dark focus:primary focus:ring-primary focus:ring-2 focus:shadow-outline`
-  
+
+  // Génération de la classe CSS pour contrôler les arrondis
+  const borderClasses = bordered ? " border-2 border-gray " : "border-none";
+  const roundedRightClass = roundedRight ? "rounded-xl" : "rounded-none";
+
   return (
     <div className="w-full">
-      {label && 
-      typeof label === "string" ?  (
-        <label 
-        className="mb-2 text-sm font-medium text-dark">{label}</label>
+      {label &&
+        typeof label === "string" ? (
+        <label
+          className="mb-2 text-sm font-medium text-dark">{label}</label>
       ) : label}
-      
+
       <div className="relative">
         {svgLeft && (
           <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
@@ -83,9 +89,9 @@ const Input = ({
           step={step}
           placeholder={placeholder}
           className={`
-          peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""}
-           ${bordered ? " border-2 border-gray " : "border-none"}
-           text-gray-600 w-full rounded-xl text-sm disabled:pointer-events-none 
+          peer block py-3 ${svgLeft ? "ps-11" : "ps-3"} ${svgRight ? "pe-11" : ""}
+           ${borderClasses}
+           text-gray-600 w-full ${roundedRightClass} text-sm disabled:pointer-events-none 
            disabled:opacity-50 ${InputClassName}${className}
            `}
           {...props}

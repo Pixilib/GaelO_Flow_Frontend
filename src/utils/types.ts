@@ -47,11 +47,11 @@ export type OptionsResponse = {
 };
 
 //Job
-export type PostJobsAction = "resume" | "pause" | "cancel" | "resubmit";
+export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
 
 export type JobPayload = {
     Id: string;
-    Action: PostJobsAction;
+    Action: JobsAction;
 };
 
 export type OrthancJob = {
@@ -61,12 +61,7 @@ export type OrthancJob = {
     [key: string]: any
 }
 
-//User
-/**
- * @typedef RoleUser
- * Represent all the roles that a user can have
- */
-type RoleUser = {
+export type Role = {
     Name: string;
     Import: boolean;
     Anonymize: boolean;
@@ -78,20 +73,16 @@ type RoleUser = {
     Modify: boolean;
     CdBurner: boolean;
     AutoRouting: boolean;
+    ReadAll: boolean;
 }
-/**
- * @typedef User
- * Represent a user with all fields who need
- */
-type User = {
+export type RolesUserResponse = Role[];
+export type User = {
     Id: number;
     Firstname: string;
     Lastname: string;
-    Username: string;
     Email: string;
-    SuperAdmin: boolean;
-    RoleName: string;
-    Role: RoleUser;
+    RoleName: Role["Name"];
+    Role: Role;
 }
 /**
  * @typedef UserResponse
@@ -99,35 +90,49 @@ type User = {
  * Response from the API get users
  */
 export type UserResponse = User[];
-
-
+export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
+export type UserUpdatePayload = Partial<UserPayload>;
 //auth
 export type SignInResponse = {
     AccessToken: string;
     UserId: number;
 }
 
-// export type SignUpResponse = {
-//      ?
-// }
-
-// export type lostPasswordResponse = {
-//     ?
-// }
-
-export type ChangePasswordVariables = {
+export type ChangePasswordPayload = {
     NewPassword: string;
     ConfirmationPassword: string;
     Token: string;
     UserId: number;
 }
-// export type changePasswordResponse = {
-//     ?
-// }
 
-export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
-export type JobMutationPayload = {
-    Id: string;
-    Action: JobsAction;
+export type Peer = {
+    name: string;
+    password: string;
+    url: string;
+    username: string;
 }
 
+export type Modality = {
+    name: string;
+    aet: string;
+    host: string;
+    port: number;
+    manufacturer: string;
+}
+
+export type Label = {
+    Name: string;
+}
+
+// Oauth2 
+export type Oauth2Config = {
+    Name: string;
+    Provider: string;
+    AuthorizationUrl: string;
+    ClientId: string;
+}
+
+export interface Roles{
+    ROleName: string;
+    label: string;
+}

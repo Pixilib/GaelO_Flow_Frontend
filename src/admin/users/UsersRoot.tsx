@@ -1,6 +1,10 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab } from "../../ui"; // En supposant que Tab est également exporté
-import LocalUsers from "./LocalUsers";
+
+import { Tabs, Tab } from "../../ui";
+
+import Roles from "./roles/Roles";
+import Users from "./user/Users";
+import Oauth2 from "./oauth/Oauth";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
@@ -10,24 +14,34 @@ const UsersRoot = () => {
     const handleTabClick = (tab: string) => {
         navigate(tab);
     }
-    
+
     return (
-        <div className="mx-12 shadow-md rounded-xl">
-            <Tabs className="bg-light-gray">
-                <Tab 
-                title="local Users" 
-                active={path.endsWith("local")} 
-                onClick={()=> handleTabClick("local")}
+        <div 
+        className="max-h-full mx-12 my-12 bg-white shadow-md rounded-xl"
+        data-gaelo-flow="users-root"
+        >
+            <Tabs className=" bg-light-gray">
+                <Tab
+                    title="Users"
+                    active={path.endsWith("users")}
+                    onClick={() => handleTabClick("users")}
                 />
-                <Tab 
-                title="Rôles"
-                active={path.endsWith("roles")}
-                onClick={()=> navigate("roles")}
+                <Tab
+                    title="Rôles"
+                    active={path.endsWith("roles")}
+                    onClick={() => handleTabClick("roles")}
+                />
+                <Tab
+                    title="Oauth2"
+                    active={path.endsWith("oauth2")}
+                    onClick={() => handleTabClick("oauth2")}
                 />
             </Tabs>
+            
             <Routes>
-                <Route path="local" element={<LocalUsers />} />
-                {/* <Route path="roles" element={} /> */}
+                <Route path="/users" element={<Users/>} />
+                <Route path="/roles" element={<Roles />} />
+                <Route path="/oauth2" element={<Oauth2 />} />
             </Routes>
         </div>
     );

@@ -25,7 +25,7 @@ const FilterTable = ({
 
 
     return typeof firstValue === "number" ? (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center space-y-1">
             <input
                 type="number"
                 value={(columnFilterValue as [number, number])?.[0] ?? ""}
@@ -36,7 +36,7 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-3/4 h-6 border rounded-lg"
+                className="w-3/4 h-6 pl-1 border rounded-lg"
             />
             <input
                 type="number"
@@ -48,7 +48,7 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-3/4 h-6 border rounded-lg "
+                className="w-3/4 h-6 pl-1 border rounded-lg "
             />
         </div>
     ) : (
