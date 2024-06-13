@@ -56,7 +56,7 @@ const LabelRoot: React.FC = () => {
     <Card>
       <CardHeader title="Labels" color={Colors.primary} />
       <CardBody color={Colors.light}>
-        <div className="mb-10"> {/* Ajoute un espace en dessous */}
+        <div className="mb-10">
           <LabelInputForm onCreateLabel={handleCreate} />
         </div>
           <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />

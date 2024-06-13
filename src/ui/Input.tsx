@@ -11,8 +11,8 @@ type InputProps = {
   svgLeft?: React.ReactNode;
   svgRight?: React.ReactNode;
   bordered?: boolean;
-  roundedLeft?: boolean; // Nouvelle prop pour contrôler l'arrondi à gauche
-  roundedRight?: boolean; // Nouvelle prop pour contrôler l'arrondi à droite
+  roundedLeft?: boolean;
+  roundedRight?: boolean;
   min?: number;
   max?: number;
   step?: number;
@@ -31,8 +31,8 @@ const Input = ({
   svgLeft = null,
   svgRight = null,
   bordered = false,
-  roundedLeft = true, // Par défaut, l'arrondi à gauche est activé
-  roundedRight = true, // Par défaut, l'arrondi à droite est activé
+  roundedLeft = true, 
+  roundedRight = true, 
   ...props
 }: InputProps) => {
 
