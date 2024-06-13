@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { RiAdminFill as EditIcon } from "react-icons/ri";
 import { BsTrashFill as DeleteIcon } from "react-icons/bs";
 import { Table, Button, Label } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label as LabelType } from "../../utils/types";
-import LabelDropDown from "./LabelDropdown";
+
+import LabelsRoles from "./LabelsRoles";
 interface LabelsTableProps {
     data: LabelType[];
     onDeleteLabel: (labelName: string) => void;
@@ -15,16 +15,10 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
     data = [],
     onDeleteLabel,
 }) => {
-    const [isOpen, setIsOpen] = useState(false);
 
-    const handleDropDownOpen = () => {
-        setIsOpen(!isOpen);
-    };
+    const rows = useMemo(()=>{return data}, [JSON.stringify(data)]);
 
-    const handleOptionSelect = (option: string) => {
-        console.log("Selected Option:", option);
-        setIsOpen(false);
-    };
+    useEffect(() => {console.log("tablemount")}, [])
 
     const columns: ColumnDef<LabelType>[] = [
         {
@@ -36,27 +30,12 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
             header: "Actions",
             id: "actions",
             cell: ({ row }) => {
-                const labelId = row.original.Name;
                 return (
                     <div className="flex justify-center gap-2.5">
-                        <LabelDropDown
-                            options={["Edit", "Delete"]}
-                            onSelectOption={handleOptionSelect}
-                            isOpen={isOpen}
-                            dropDownOpen={handleDropDownOpen}
-                        >
-                            <Button
-                                color={Colors.secondary}
-                            >
-                                <EditIcon
-                                    size="1.3rem"
-                                    className="transition duration-70 hover:scale-110"
-                                    color={Colors.light}
-                                />
-                            </Button>
-                        </LabelDropDown>
+
+                        <LabelsRoles key={row.original.Name} labelName={row.original.Name}/>
                         <Button
-                            onClick={() => onDeleteLabel(labelId)}
+                            onClick={() => onDeleteLabel(row.original.Name)}
                             color={Colors.danger}
                         >
                             <DeleteIcon
@@ -65,7 +44,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
                                 color={Colors.light}
                             />
                         </Button>
-                    </div>
+                    </div >
                 );
             },
         },
@@ -74,7 +53,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
     return (
         <Table
             columns={columns}
-            data={data}
+            data={rows}
             headerColor={Colors.almond}
             enableColumnFilters
             enableSorting

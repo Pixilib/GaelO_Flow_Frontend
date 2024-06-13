@@ -1,0 +1,3923 @@
+[33mcommit 55eab123d4ac2d24465c9b8cb1821811fbbd404f[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 13 14:00:27 2024 +0200
+
+    wip
+
+[33mcommit b76e36c1dd9d127640f861c7b2186a42f19ea382[m[33m ([m[1;31morigin/dev[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 13 11:38:55 2024 +0200
+
+    debug
+
+[33mcommit 6c43ffe6f974eb71f498c175fa8f195da5259361[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 13 10:40:23 2024 +0200
+
+    fixes
+
+[33mcommit b82bf6a2403c06df80f1cc800a2ad965afbd0c4c[m
+Merge: 415fef2 d7cb1f5
+Author: Rémi P <69733620+remixxx31@users.noreply.github.com>
+Date:   Thu Jun 13 10:38:09 2024 +0200
+
+    Merge pull request #208 from Pixilib/create/query2
+    
+    Create/query2
+
+[33mcommit d7cb1f59b4c9400ff0d83fabe6534b7cbbad24b7[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jun 13 10:36:15 2024 +0200
+
+    merge form dev
+
+[33mcommit e6318e912798811adc97ea23e95e5995f5fd0abd[m
+Merge: 9074cc3 415fef2
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jun 13 10:36:13 2024 +0200
+
+    Merge branch 'dev' of github.com:Pixilib/GaelO_Flow_Frontend into create/query2
+
+[33mcommit 9074cc3a17ecf8ad7a5e38b4970eab4ad864ea20[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jun 13 10:11:56 2024 +0200
+
+    refac: Update getLabels function to return string array instead of Label array? SearchForm WIP. Index in Services.
+
+[33mcommit 415fef2164ccbcc8794a64e5f2153b31f5629078[m[33m ([m[1;31morigin/labelDropdown[m[33m, [m[1;32mlabelDropdown[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 13 10:09:38 2024 +0200
+
+    style input
+
+[33mcommit c953d7a4d97229e0e2f93cc6d9bce3a0887ab3dd[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 13 10:08:49 2024 +0200
+
+    label table row
+
+[33mcommit 92f8b90ac5d2da7c6f98917b4ecde7902f821251[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jun 12 16:59:00 2024 +0200
+
+    add label types
+
+[33mcommit 3173baea44a7426b636b1a91740e57283e8a5586[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jun 12 16:19:32 2024 +0200
+
+    input : style rounded
+
+[33mcommit 426a430ab16113124e24a181265bd1595392e91c[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jun 12 15:09:59 2024 +0200
+
+    style : style button label inputForm
+
+[33mcommit b23e6ac8db34034356d963fd3e9b6998d2217915[m
+Merge: ec69a7d 6f8c029
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jun 12 14:37:13 2024 +0200
+
+    Merge branch 'dev' of github.com:Pixilib/GaelO_Flow_Frontend into create/query2
+
+[33mcommit ec69a7dc64624448314af8dfee575005dcfcd511[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jun 12 14:25:03 2024 +0200
+
+    refac: Remove QueryForm component and update QueryRoot to use SearchForm
+
+[33mcommit 6f8c029efa6bd2c68a4cbfe058c19fd3673c5930[m[33m ([m[1;31morigin/Labels[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jun 11 16:55:33 2024 +0200
+
+    add roles
+
+[33mcommit 61189c01c94d51118c84a9bffdf755f8bdda4dee[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jun 11 14:39:10 2024 +0200
+
+    create dropdown story List
+
+[33mcommit 86b3db8b14c3e84ea2703c6d9d3b006571636f8e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jun 11 14:06:45 2024 +0200
+
+    correction labelroot
+
+[33mcommit c56b3d96faf5a6dbe0d1a8575e9330272bfd5be9[m
+Merge: 4e9bd8e fd3c194
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Jun 10 09:01:50 2024 +0200
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into Labels
+
+[33mcommit 381332c2c79855ddbe0d0f7ca65f7f3b61b4083e[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jun 7 15:30:30 2024 +0200
+
+    feat: Add QueryForm and QueryRoot components for querying data
+
+[33mcommit 978e03a45bbf26567fa473ede9d069350b2114d1[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jun 7 15:30:01 2024 +0200
+
+    refac: Add FormCard and FormButton components for improved form UI
+
+[33mcommit fd3c19423d0402e89fcfb0f32284cee657f85636[m
+Merge: 6228091 9aeb851
+Author: Rémi P <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Jun 7 12:18:01 2024 +0200
+
+    Merge pull request #206 from Pixilib/fix/merge/dev
+    
+    refac: Update confirmation messages in Oauth and Roles components
+
+[33mcommit 9aeb851f1a0b7f040a4d3eb2d4b7e5c20d5dc6f5[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jun 7 12:16:44 2024 +0200
+
+    refac: Update confirmation messages in Oauth and Roles components
+
+[33mcommit 6228091c1034c0abd02bbbc4ee5e533739dc3bf8[m
+Merge: d5176ba 88e21b3
+Author: Rémi P <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Jun 7 11:19:54 2024 +0200
+
+    Merge pull request #205 from Pixilib/fix/merge/dev
+    
+    Fix/merge/dev
+
+[33mcommit 88e21b307f18bd2441fe398d8b27b6b2f316d57d[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jun 7 11:14:01 2024 +0200
+
+    refacto:(Modal) , add depencies preline
+
+[33mcommit 4e9bd8e8062cbf91562632d670cf48e8ad6e8124[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 6 16:26:36 2024 +0200
+
+    label root affichage label
+
+[33mcommit 0d3a4b155fe9e9fcff6569846b3c6b1aea415803[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 6 15:51:54 2024 +0200
+
+    correction label
+
+[33mcommit ad85741ddd3424bc576e5b8b71a26bb805231d22[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jun 6 14:31:13 2024 +0200
+
+    refacto: Modal WIP
+
+[33mcommit 6a5f1fb7db20915a3f318e9cc07f29a59f7e1c96[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jun 6 14:30:43 2024 +0200
+
+    refacto: Modal WIP
+
+[33mcommit 0aa40b4dc511f1be3203f7b5c1b52f807a47534e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jun 6 13:26:12 2024 +0200
+
+    style color icon label
+
+[33mcommit cf28b2950a8761ff08f471998c88a56c4ac8431c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jun 5 18:11:56 2024 +0200
+
+    refac: Add useModal hook and update dependencies
+
+[33mcommit 4e83d1395eab6294052b69544d44105dc34d8aae[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jun 5 13:39:47 2024 +0200
+
+    refac: Clean up code formatting and remove unused imports
+
+[33mcommit 9930a3e053254846d89acdfd591f4917b8bd1155[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri May 31 18:19:08 2024 +0200
+
+    feat: Add conditional logic to handle initial data in RoleForm
+
+[33mcommit 47b3db0b718f204f15d8c4f2faf7d85bb3325c88[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri May 31 18:08:00 2024 +0200
+
+    Fix: (CreateUserForm | useCustomQuery) Fix problems with use of select in useCustomQuery , adapt the type in Typescript. Fix problems with react-select in form
+
+[33mcommit d5176ba1a2a8461fb6a9df3679e15db8098e4c26[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu May 30 16:40:54 2024 +0200
+
+    refac
+
+[33mcommit bb9e016313ef77512e20cc07f9299b6a52ae2a13[m
+Merge: 8be04b5 582f7a1
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu May 30 15:24:39 2024 +0200
+
+    Merge pull request #204 from Pixilib/label
+    
+    Label
+
+[33mcommit 582f7a119fe1a3f7c7d5927665783cb9837442de[m
+Merge: 1343cf6 8be04b5
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu May 30 15:24:32 2024 +0200
+
+    Merge branch 'dev' into label
+
+[33mcommit 8be04b5889c002547dabf3f8a83ccbe92a4fb733[m
+Merge: 62618eb 0738cae
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu May 30 15:23:28 2024 +0200
+
+    Merge pull request #201 from Pixilib/userRoot
+    
+    User root
+
+[33mcommit 1343cf643e4461f92b1cd5f72db7663251b34f29[m[33m ([m[1;31morigin/label[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu May 30 15:23:05 2024 +0200
+
+    label apis
+
+[33mcommit 0738cae603f354c57bd5bc3e894181eda90669d9[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 30 12:01:11 2024 +0200
+
+    feat: Add Tailwind Scrollbar plugin and update dependencies
+
+[33mcommit c5a4881037704bf44c85f6479cdbdf605f0ee642[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed May 29 17:21:58 2024 +0200
+
+     add moment
+
+[33mcommit 6c9666daa35d0a1c590afc399635bf62df99a654[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 29 17:08:31 2024 +0200
+
+    feat: Add Oauth components
+
+[33mcommit b7358169a1007e782f49e0d14f9ab9e5a5897014[m
+Merge: 6cd7af4 62618eb
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed May 29 17:04:05 2024 +0200
+
+    Merge branch 'dev' into label
+
+[33mcommit 6cd7af47f4d40557009c66a1b5fddccd28860242[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed May 29 16:51:26 2024 +0200
+
+    style : icon SideBar
+
+[33mcommit 62618eb39d51b16fcff8e07baecccb5ad5a78168[m
+Merge: ea3451e e3fbe27
+Author: Rémi P <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed May 29 14:17:05 2024 +0200
+
+    Merge pull request #200 from Pixilib/userRoot
+    
+    User root
+
+[33mcommit e3fbe27da5e8784ffa9de824cbc988a1fa21de95[m
+Merge: e65bdcb ea3451e
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 29 14:10:05 2024 +0200
+
+    Merge branch 'dev' into userRoot
+
+[33mcommit 15d3380f726151627eb892b0f1e4a5030f9b43ee[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed May 29 14:04:30 2024 +0200
+
+    style : add icon input label form
+
+[33mcommit 1f342515176cdafeff4f538f83e5bfc745bfe9ed[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed May 29 13:54:56 2024 +0200
+
+    correction label
+
+[33mcommit e65bdcb76e06c7cb8966afbb372ea0157b1d8d38[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 29 13:42:12 2024 +0200
+
+    refactor: Remove unused LabelsRoot component and related files
+
+[33mcommit f31e0e1ad8d6f40768a53627da915151998243c0[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 29 13:39:07 2024 +0200
+
+    feat: Add LabelsRoot component for managing labels .
+    Change props for Table with FirstColumnPin and LastColumnPin.
+
+[33mcommit 96c3a095704ffa13afc1ac61c1238b7c736b38fe[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue May 28 17:07:13 2024 +0200
+
+    correction labelInputForm
+
+[33mcommit 01bad8983a6483a41832d6c446bcf06a965902b9[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue May 28 14:20:18 2024 +0200
+
+    Style card body and Label
+
+[33mcommit a31d6297ab488448f1e46fd0aa05f5480c9f71ca[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon May 27 16:51:40 2024 +0200
+
+    style : label card
+
+[33mcommit f5a35c7a3f3c150ab7ca11236f40806ff14bb7ed[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon May 27 16:24:31 2024 +0200
+
+    correction label root
+
+[33mcommit 5ea66b014f3f93927a3667ea055300ef0d6b699a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri May 24 00:15:42 2024 +0200
+
+    feat: (Table Footer)  Limit max pagination with row.length
+    
+    refacto:( EditUserForm CreatUserForm Users) Change layout , retire route same logic that roleForm
+    
+    fix:(RootApp , SideBar) Fix overflow and with of SideBar
+
+[33mcommit a5ddd1fee5245d618afe9c781056e87083156686[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu May 23 16:53:00 2024 +0200
+
+    Add labelTable and LabelsRoot
+
+[33mcommit b48d9c392a9f1885757817ca095ccd74a018d189[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 23 14:20:44 2024 +0200
+
+    feat: (Table, Footer) Update Table features with textSIze for header and change rows by page dynamically, Update stories too.
+    Add services API for roles put and delete
+    
+    Refacto: (Role ) with RoleForm
+
+[33mcommit fba379743e78a4ae7585db5f33e5d788e3809ee0[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 22 15:25:06 2024 +0200
+
+    style: (CreateRoleForm) Update form and change minor style
+
+[33mcommit 9610ec1db9e4aab3e1586712a3f7817d51ce003b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 22 14:39:17 2024 +0200
+
+    chore: Update active tab styles in Tabs component
+
+[33mcommit 7a4c389a0014659f963e75f979d0b3e52d2203e7[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 22 14:23:03 2024 +0200
+
+    refacto: replace all utils date with function with moment
+
+[33mcommit af2b773bb29758fb8761b472bbe22dae0886f169[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 22 12:07:43 2024 +0200
+
+    refacto:( moment , style) Add moment dependencies, replace timeDiff in QueuesRoot with moment. FIx some sapces in differnts menu
+
+[33mcommit ea3451e2699f8e0e15c8b220e3ecfe8237aae6df[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed May 22 11:27:41 2024 +0200
+
+    update docker compose
+
+[33mcommit 225df9fc661b1bf909c730b63a9c863b6b6147e2[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed May 22 11:24:06 2024 +0200
+
+    fixes
+
+[33mcommit aafee43106a5d055d52bba91e3dea0e87ecae30d[m
+Merge: c5cee2c 849d445
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed May 22 10:56:25 2024 +0200
+
+    Merge pull request #198 from Pixilib/userRoot
+    
+    Feat UserForm RoleFOrm ect ...
+
+[33mcommit c5cee2c018262b54ee52a22c53948e78cf8a15af[m
+Merge: 9f40df4 49b373b
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed May 22 10:55:02 2024 +0200
+
+    Merge remote-tracking branch 'origin/PeerApi' into dev
+
+[33mcommit 9f40df4d8aa23475dd4d08de62da2370cede2684[m
+Merge: a6ab07f 2a74c5e
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed May 22 10:52:46 2024 +0200
+
+    Merge pull request #196 from Pixilib/fix/api
+    
+    Fix/api
+
+[33mcommit 849d44569e240f78386a64eae6fa91bf714fadf6[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed May 15 17:08:50 2024 +0200
+
+    Feat UserForm RoleFOrm ect ...
+
+[33mcommit 2a74c5e6f2ea4758f634eccdf1145d3835b8608e[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 16:49:49 2024 +0200
+
+    fix:(EditUserForm) Finish
+
+[33mcommit 888888873a4723c57fcb9b8dad767e5b1c263363[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 16:46:56 2024 +0200
+
+    fix:(EditUserForm) Adapt EditUserForm with the new API
+
+[33mcommit 5fb4f8dd4136db1c528859ac7f1ac71437658f09[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 16:41:06 2024 +0200
+
+    fix:(CreatUserForm) Fix form with the new API
+
+[33mcommit 1af1a602994cc5a848a6dc031adee36486f85c49[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 16:33:45 2024 +0200
+
+    fix: (UserTable) Adapt with the new API
+
+[33mcommit ddbdbe295a0a415d7389f615a9171f1760793e9e[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 16:28:14 2024 +0200
+
+    fix(api signin): Fix form and type and service signin
+
+[33mcommit c0d89580e39a2f0499dbbad7ce40a688a23cc31a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 16:15:01 2024 +0200
+
+    WIP fix SignIn API
+
+[33mcommit 22dd4099b2b4c307890cc47a6128797d94c261b4[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 16:00:21 2024 +0200
+
+    feat(Roles , BooleanIcon): Update User component and Roles components
+
+[33mcommit 5ae430fb7381007464d37b803fb0e51f878b1a1c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu May 2 11:02:38 2024 +0200
+
+    feat: ( LocalUsers, EditUserForm, CreateUserForm), Fix Tab.active
+
+[33mcommit 49b373b9512e90c007a2f454340cffac9cbba29f[m[33m ([m[1;31morigin/PeerApi[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 30 15:54:22 2024 +0200
+
+    refacto and add form
+
+[33mcommit 539c8f28756f493942a1fca0535da2c995d67379[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 30 12:31:54 2024 +0200
+
+    apis : peers
+
+[33mcommit 29e3776562113dfa026f4d1ed85f25c99d361b36[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Apr 29 17:40:29 2024 +0200
+
+    peers
+
+[33mcommit a6ab07f568d29eea9e5894b2f925324025ebbca3[m
+Merge: 5bf7f68 60293f5
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Mon Apr 29 10:00:23 2024 +0200
+
+    Merge pull request #195 from Pixilib/userRoot
+    
+    User root
+
+[33mcommit 0b99584e3d12e5e7e0cf9946636af0fe293dde47[m
+Merge: 15e3767 5bf7f68
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Apr 29 09:59:54 2024 +0200
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into PeerApi
+
+[33mcommit 60293f571831659faee64b9699bb79eca76b7ccf[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Mon Apr 29 09:58:38 2024 +0200
+
+    Refactor: (Users) WIP
+
+[33mcommit 63add7a07cc6310e9b27e5a28844fd4ee80093ec[m[33m ([m[1;31morigin/userRoot[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Sat Apr 27 15:34:34 2024 +0200
+
+    Refacto: ( Users ) WIP
+
+[33mcommit bf6e69fc980d7fa39e0670e7c27f4fbc131d4602[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Sat Apr 27 10:55:02 2024 +0200
+
+    Add UserPayload type in types.ts
+    Add Popover in JobTable.tsx
+    Add overflow-y-auto in Tabs.tsx
+    Change the color of the Edit icon in UsersTable.tsx
+    Add postUsers function in users.ts
+
+[33mcommit 65b1256bc50d35a5db355f84aa9eeeed38b89263[m
+Merge: 7f9b467 cda42e4
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Apr 26 15:17:49 2024 +0200
+
+    WIP
+
+[33mcommit 7f9b4673c633e8224621150c986450689f6ad523[m
+Merge: f674026 3c47586
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Apr 26 15:15:13 2024 +0200
+
+    Refacto  Retrieve create RetrievForm
+
+[33mcommit 5bf7f68b4542c5e39c4710fb7bc74ac7b97e8da2[m
+Merge: e981a30 cda42e4
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Apr 26 12:03:19 2024 +0200
+
+    Merge pull request #194 from Pixilib/userRoot
+    
+    User root
+
+[33mcommit cda42e477571dd06c2f29c47c6cdc967ea5a6761[m
+Merge: f674026 e981a30
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Apr 26 12:03:12 2024 +0200
+
+    Merge branch 'dev' into userRoot
+
+[33mcommit f674026133b6ebb366a21a6ed3ba3021efced00e[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Apr 26 11:57:52 2024 +0200
+
+    Refacto Input, Label , Retrieve create RetrievForm
+
+[33mcommit 15e3767fc89d08b082a1de05761bf800abeb6c18[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 25 17:59:06 2024 +0200
+
+    style : card
+
+[33mcommit b7ab374ceee3685beec37980e4be2f59e4fde085[m
+Merge: 6f77e5b e981a30
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 25 16:02:38 2024 +0200
+
+    Merge branch 'dev' into PeerApi
+
+[33mcommit e981a30a5dce3dc86abab9821dc740eadc63a222[m
+Merge: d95acd8 3c47586
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 25 15:44:19 2024 +0200
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into dev
+
+[33mcommit d95acd8ebfbc915974d83309b3e9c8d3f27020ba[m
+Merge: 791bb60 2e647f0
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 25 15:33:25 2024 +0200
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into dev
+
+[33mcommit 780adde75a2f8ac043065ad89eace073b3245345[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Apr 25 15:02:15 2024 +0200
+
+    userForm
+
+[33mcommit 3c4758681c521a0a94998a9d9cd0d08cca947292[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Apr 25 14:59:31 2024 +0200
+
+    refac
+
+[33mcommit 87e11436298d660cdcaf86817c24678106aad1d3[m
+Merge: 8860b75 2e647f0
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Apr 25 14:59:30 2024 +0200
+
+    Merge branch 'dev'
+
+[33mcommit 6f77e5baa1fd215e186a88eeaf5cb543dff7359e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 25 14:50:32 2024 +0200
+
+    modif style badge
+
+[33mcommit 791bb602ca56866ae82ccb4c29349f4378083386[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 25 14:49:11 2024 +0200
+
+    style badge
+
+[33mcommit 2e647f09b3b6e0596f68bf8caf7ce1ebc0bcdaf1[m
+Merge: 9ec63b5 1dffcd1
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Apr 25 14:44:15 2024 +0200
+
+    Merge pull request #192 from Pixilib/users
+    
+    Users
+
+[33mcommit 1dffcd1d97bceedf8443b93250f49f8175ef3e01[m
+Merge: 2c933df 9ec63b5
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Apr 25 14:31:24 2024 +0200
+
+    Merge branch 'dev' of github.com:Pixilib/GaelO_Flow_Frontend into users
+
+[33mcommit 2c933df5382484dd1a36c480700602c2abc24ee9[m[33m ([m[1;31morigin/users[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Apr 25 13:44:58 2024 +0200
+
+    WIP users and adapt implementation Table and fix style problems
+
+[33mcommit 9a16b84e15018c5b0ec4ec432c52b00dfaee0138[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Apr 24 17:15:16 2024 +0200
+
+    Réorganiser l'implémentation des onglets avec les enfants, les utilisateurs
+
+[33mcommit 9ec63b5077946faa36a3a9cd6d2d42f9b1f9e73e[m
+Merge: 7973ba6 185b240
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Apr 24 14:42:38 2024 +0200
+
+    Merge pull request #187 from Pixilib/apis
+    
+    Apis
+
+[33mcommit 48cff55a82f9c2db778267e2161dec3835ce1b4e[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Apr 24 14:39:46 2024 +0200
+
+    refac
+
+[33mcommit 323c0d34c856c0d2b4a496735bb16bb06ab0b65f[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Apr 24 14:01:49 2024 +0200
+
+    change tabs
+
+[33mcommit 26a3a97ea3a100e47b3ed773a489d6e0f7ef74a2[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Apr 24 12:28:26 2024 +0200
+
+    Reorganize tab implementation with children, users
+
+[33mcommit 185b240d573873c127cb56ed63287f13cf8ddeaf[m[33m ([m[1;31morigin/apis[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 23 16:56:36 2024 +0200
+
+    peer : style modalities : style
+
+[33mcommit 2a18381121821b1d52c6dda84a8fa1938dd3c5fb[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 23 14:02:06 2024 +0200
+
+    modification api
+
+[33mcommit 7973ba637b097b990e176faed6d4ee7befbcb658[m
+Merge: 2bbfa54 80eb884
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Mon Apr 22 16:01:58 2024 +0200
+
+    Merge pull request #184 from Pixilib/apiPeer
+    
+    Api peer
+
+[33mcommit 80eb8849b9abc28acb25b69ba1713c887ad58d77[m[33m ([m[1;31morigin/apiPeer[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Apr 22 15:51:14 2024 +0200
+
+    wip
+
+[33mcommit fb2e1dde251bce339339d5ba1a34643365a3f466[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 18 16:54:20 2024 +0200
+
+    correction shadow
+
+[33mcommit 4f38cf9fa3e3d6ece760baa8ff86044580e9daf3[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 18 16:37:00 2024 +0200
+
+    footer filter table : style
+
+[33mcommit cfc67eb46b4ac1e8a4a266f5168ec1815a888e78[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Apr 18 16:01:11 2024 +0200
+
+    fix(Tabs.stories ): Rewrite stories for tabs
+
+[33mcommit e643cdf4f516a00517a5da7d1111b1f4170072b0[m
+Merge: 1565d39 e5a1f91
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Thu Apr 18 15:03:15 2024 +0200
+
+    Merge pull request #183 from Pixilib/Tabs
+    
+    refactor(Tabs, Users): Refacto Tabs  implementation with children, Users
+
+[33mcommit e5a1f918494757b74c004a05aabf3a7130b0c8f7[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Apr 18 15:02:19 2024 +0200
+
+    refactor(Tabs, Users): Refacto Tabs  implementation with children, Users
+
+[33mcommit 1565d39a9a8debf1d7e337a09c9d041d5ffaff3b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Apr 18 12:08:08 2024 +0200
+
+    feat(Users ): WIP
+
+[33mcommit 2bbfa544725dfa8d2ea95fac683ff557655f1e77[m
+Merge: 2e6d518 707573c
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Thu Apr 18 09:31:44 2024 +0200
+
+    Merge pull request #182 from Pixilib/peers
+    
+    Peers
+
+[33mcommit 707573ca90b0c2e105e3b72d5ab6583576cf7d48[m[33m ([m[1;31morigin/peers[m[33m)[m
+Merge: 9497a12 2e6d518
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Apr 17 16:36:20 2024 +0200
+
+    merge dev in peers
+
+[33mcommit 9497a1227cfb0106ce1f8cee38fad8a74ad8cb4a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Apr 17 16:31:46 2024 +0200
+
+    style newmodalitycard
+
+[33mcommit 2e6d5185bdfc66b86d71745e3e8c70b51a0b0544[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Apr 17 16:14:52 2024 +0200
+
+    style(Tabs date): Update style Tabs, refacto date
+
+[33mcommit a539fbe1b4b29c337cd096ae548bdc237729a1a6[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Apr 17 16:07:51 2024 +0200
+
+    style modality and peer
+
+[33mcommit c3e6ab698173a04c4b6d606e96539ac360a6ac9e[m
+Merge: c7059ad 4b5484c
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Apr 17 16:03:59 2024 +0200
+
+    Merge pull request #181 from Pixilib/queues
+    
+    feat(Retrieve, utils/date ):  Retrieve Component, refacto utils…
+
+[33mcommit 4b5484c7411b3869d994b8b84de8aa8475e3674e[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Apr 17 15:58:26 2024 +0200
+
+    feat(Retrieve, utils/date ): Finish Retrieve Component, refacto utils/date
+
+[33mcommit b7c914d7e91ecf22e25ad50fdb0fd57a4e21403f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Apr 17 14:54:25 2024 +0200
+
+    Style : select input et input
+
+[33mcommit 37ed3c1bafd59c097738d4640d6b7afa50b3b9ea[m
+Merge: 7784386 c7059ad
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 16 14:36:01 2024 +0200
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into peers
+
+[33mcommit c7059ada97fdfb1efa6ce3e0fbf356243dcb732a[m
+Merge: c862459 0f704e0
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Mon Apr 15 10:09:36 2024 +0200
+
+    Merge pull request #177 from Pixilib/queues
+    
+    Queues
+
+[33mcommit 0f704e08ca005625191984160cb01ff1028bea45[m[33m ([m[1;31morigin/queues[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Sat Apr 13 16:45:35 2024 +0200
+
+    feat(Queues, retrieve, input2 more personalisable): Tabs, Create, up Stories, new Input
+    
+    Updating tabs in Tabs.stories.tsx
+    
+    Updating types in jobs.ts
+    
+    Updating
+    types in options.ts
+    
+     Updated tab management in QueuesRoot.tsx
+
+[33mcommit 77843866a1b7b9ebca9cfab616d99c573b41663b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 11 10:33:57 2024 +0200
+
+    correction erreurs PeersRoot
+
+[33mcommit c94db8aee55c0459c26d85e3ecdc9f98ce9f79fd[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Apr 11 09:41:00 2024 +0200
+
+    correction ModalitiesRoot
+
+[33mcommit 5d1ae3969bd71f49f2dbb8ebc8dc3b914f839126[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Apr 10 22:18:55 2024 +0200
+
+    feat(Queues , multiple stories): Add STories, Create components, update index
+    
+    Updating getOptions in options.ts
+    
+     Fixing routes in AdminRoot.tsx
+    
+    Added Tabs export to index.ts
+    
+     Removing QueuesForm.tsx
+    
+     Updating
+    ToastContext.Provider in Toast.stories.tsx
+    
+     Updating OptionsResponse in
+    types.ts
+    
+    Updating Popover in PopOver.stories.tsx
+    
+     Updating the export
+    in index.ts
+
+[33mcommit e722bfd026c216469db0747d1c9346d09b3f779a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Apr 10 11:19:30 2024 +0200
+
+    Add peer API
+
+[33mcommit 646d71f086da0daf38b313fc8ca0d0405c2dfe62[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 9 16:35:55 2024 +0200
+
+    feature: create Peerstable PeersRoot NewPeerCard
+
+[33mcommit fd508fbe132e48eac0c46485ed572ee9c975b11c[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 9 11:35:18 2024 +0200
+
+    feat: implement delete action for modalities
+
+[33mcommit 27948a53da9ba4a17ca3756536d516adaf300d72[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Apr 8 16:40:49 2024 +0200
+
+    correction newmodalities
+
+[33mcommit 884496af00fc3eb8819216a3e1fb1bf356d7e1f4[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Apr 8 16:37:27 2024 +0200
+
+    amélioration modalities
+
+[33mcommit 632d5c131d64e4ba0320c66230c9c1e158764df2[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Apr 8 15:56:52 2024 +0200
+
+    Correction erreur Modalities
+
+[33mcommit c862459b8643d7dd877934e5d0592025dcb11e42[m
+Merge: 2542aa3 8883574
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Apr 5 15:05:08 2024 +0200
+
+    Merge pull request #176 from Pixilib/Popover-Modif
+    
+    Popover modif
+
+[33mcommit 888357440222fd2ab7d32fe65f523c7c1b346620[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Apr 5 15:04:01 2024 +0200
+
+    Update index.ts and import
+
+[33mcommit d3bbdf5dfcedc9a79461e6b6028e6673c429be3b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Apr 5 13:25:16 2024 +0200
+
+    Update types and import
+
+[33mcommit 3dfb0761220d4a219b1e165bc1ce0e919b4dc01e[m
+Merge: 88c294a 2542aa3
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Apr 5 12:32:21 2024 +0200
+
+    Merge branch 'dev' into Popover-Modif
+
+[33mcommit 2542aa34b0ccb96ea74787499c0201417796b9db[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Apr 4 16:08:32 2024 +0200
+
+    reorganize
+
+[33mcommit daa2a9c040863e4b1a4683bd1fa66938efc90c61[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Apr 4 16:05:05 2024 +0200
+
+    update props
+
+[33mcommit 8860b75aa6f07b6ccfb2a8ab96511a80748fb7d6[m
+Merge: 549b030 b6a78e2
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Apr 4 16:03:53 2024 +0200
+
+    Merge pull request #175 from Pixilib/Popover-Modif
+    
+    Popover modif
+
+[33mcommit b6a78e2b22a89eea76df4a9aa0014f46cf3f80ea[m
+Merge: 2cff66d 549b030
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Apr 4 16:03:44 2024 +0200
+
+    Merge branch 'main' into Popover-Modif
+
+[33mcommit 2cff66d5ae2b2020799c297deda3aa724a562abd[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Apr 4 16:02:50 2024 +0200
+
+    remove variable
+
+[33mcommit d245a751fb6e50a13e7615264a53d9650f2755a0[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Apr 4 16:01:56 2024 +0200
+
+    remove env
+
+[33mcommit 3a4cb2e772c01f4d116662b09c85b8b5313abab2[m
+Merge: 972092a f7c0cbe
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Apr 4 16:00:42 2024 +0200
+
+    Merge pull request #174 from Pixilib/react-salim
+    
+    types extension to dev dependencies
+
+[33mcommit f7c0cbed86a08620e5440e4dfc07f753aabf64ce[m
+Merge: b621d9f 972092a
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Apr 4 16:00:36 2024 +0200
+
+    Merge branch 'dev' into react-salim
+
+[33mcommit 972092a03db74282dfec0f299c0f830118ef4af3[m
+Merge: 8d728e7 1880638
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Apr 4 15:58:29 2024 +0200
+
+    Merge pull request #173 from Pixilib/modalities
+    
+    Modalities
+
+[33mcommit 267176c5b425bd2d1424874df8c692e0897ff9d5[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Apr 4 15:56:26 2024 +0200
+
+    refactoring
+    
+    Co-authored-by: remixxx31 <remixxx31@users.noreply.github.com>
+
+[33mcommit 88c294a5ef285e980f9ecbe2f629331048f7fa1f[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Apr 4 15:27:27 2024 +0200
+
+    WIP
+
+[33mcommit 18806383f84988eed945b5c5229114dd8fa7d2c3[m[33m ([m[1;31morigin/modalities[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Apr 3 16:21:26 2024 +0200
+
+    Modalities: error data
+
+[33mcommit f70d55fe32d39dda3c79f4368101e8bf07a8eae9[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 2 16:09:45 2024 +0200
+
+    feature : new component Peer
+
+[33mcommit 09b81dd808380d9445ec4001bd7fa143ea4e7582[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Apr 2 15:18:56 2024 +0200
+
+    style : newmodalitycard table Input SIdeBar
+
+[33mcommit 549b030f89b59f5dcaf491d7f03f0d529cd2754f[m
+Merge: 19b7f9f 8d728e7
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 28 16:35:08 2024 +0100
+
+    Merge pull request #170 from Pixilib/dev
+    
+    Dev
+
+[33mcommit eac1fcbb111219bb858e17ddd1354060b9404eb0[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 28 16:07:36 2024 +0100
+
+    Feature : OnSubmit Aet
+
+[33mcommit 8c4883218fe1353cbe0a04b8107a2516ca363c66[m[33m ([m[1;31morigin/Popover-Modif[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 28 14:10:27 2024 +0100
+
+    refactor: Update useCustomMutation with generic
+    
+    Closes 1
+
+[33mcommit 8d728e7558535d229cfbd98b8e7092f680dbac1a[m
+Merge: f332d9d a662d86
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 28 13:55:08 2024 +0100
+
+    Merge pull request #169 from Pixilib/Peers
+    
+    Peers
+
+[33mcommit 953d7b22325ade799618657ace637f39635d7c37[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 28 13:43:03 2024 +0100
+
+    refactor(useCustomQUery with T generics for promise): useCustomQUery refacto with generic
+
+[33mcommit a662d864a06d3eda6d4cbca266031a6c266222fa[m[33m ([m[1;31morigin/Peers[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 28 13:14:40 2024 +0100
+
+    Style: props headercolor for table component
+
+[33mcommit 829007f88dd2ae0559ab68587278fba2033d60d4[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 28 11:38:06 2024 +0100
+
+    error:  table import, add const aet, add adminroot modalities and rootapp modalities
+
+[33mcommit d17ee1daf21b7f12bddfe9ec6f9a4251b95b341b[m
+Merge: 05e2388 f332d9d
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 28 09:43:06 2024 +0100
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into Peers
+
+[33mcommit f332d9d43252e6faeab4fe5df0e3b4ff5012c3e5[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Mar 27 17:46:47 2024 +0100
+
+    removed toastify
+
+[33mcommit 1f6e9a70934d5780cd349deafdef68ac3348d82d[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Mar 27 17:43:52 2024 +0100
+
+    refact salim
+
+[33mcommit dd97700fad9adb5b67d4e35e59b547a0cd9dcb5a[m
+Merge: 454025b ed62567
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Mar 27 17:07:37 2024 +0100
+
+    Merge pull request #168 from Pixilib/Popover-Modif
+    
+    PopOver WIP
+
+[33mcommit ed62567339fe62eceb739518cc65aa0130e69038[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 17:06:20 2024 +0100
+
+    PopOver WIP
+
+[33mcommit 454025b98b4017c62fa8bfbb9b249960d9a4f431[m
+Merge: ad0fd45 cb742ba
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Mar 27 14:09:15 2024 +0100
+
+    Merge pull request #167 from Pixilib/Popover-Modif
+    
+    Popover modif
+
+[33mcommit cb742baf620908ea25a9cffffca3d25d4bb3ad64[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 14:08:17 2024 +0100
+
+    💄 style: [footer] update color  #166
+
+[33mcommit cca331814e668fd9953dfc01d2e19853ab43b869[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 14:03:45 2024 +0100
+
+    fix: Refacto, fix the height of Banner in each comp
+    
+    retire config in eslint.config.json
+
+[33mcommit ad0fd4594ad7e4ce8f88362edee5a17cf5b07aba[m
+Merge: 0f05316 f351e36
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Mar 27 11:47:16 2024 +0100
+
+    Merge pull request #162 from Pixilib/Popover-Modif
+    
+    Popover modif
+
+[33mcommit f351e3611d65c5943a3fefe5e52af8f7c4844a86[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 11:40:04 2024 +0100
+
+    feat: Add props onClick for PopOver
+    
+    if props withOnClick is true, event triggered with onClick instead of
+    onMouseEnter
+
+[33mcommit 9856200b1fd864bc8afcc1f924c953ca6075e093[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 11:26:55 2024 +0100
+
+    fix: fic olor for Button in AetCard
+
+[33mcommit 09f6dd0bd05ebe0818294344882a9fae11baecb6[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 11:21:15 2024 +0100
+
+    fix: Header in Card of JobRoot
+
+[33mcommit 7c3facccd8ccde0337b469f0b962b3aca2aded92[m
+Merge: e94e390 0f05316
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 11:17:39 2024 +0100
+
+    Merge branch 'dev' into Popover-Modif
+
+[33mcommit e94e39092d9f34d7616a9adb258e1c820298f24c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 27 11:14:19 2024 +0100
+
+    fix: Fix: title in Banner for Administration
+    
+    Closes #161
+
+[33mcommit 05e238877bbcf2e31afbcc9c954c902097d5530b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 27 10:47:15 2024 +0100
+
+    o-authored-by: remixxx31 <remixxx31@users.noreply.github.com>
+
+[33mcommit 117d26b8f3a0226a12df270e8cd63aadbd47fa16[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 26 16:28:17 2024 +0100
+
+    correction toast
+
+[33mcommit 5cb54cafdbee191d68e6767bddcc91ead00596fc[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 26 16:26:52 2024 +0100
+
+    appel d'api Aet
+
+[33mcommit e9662a40f4908509844084d3b290a97b24088906[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 26 11:52:25 2024 +0100
+
+    Co-authored-by: Salim Kanoun <salim.kanoun@gmail.com>
+
+[33mcommit b621d9f250531c9e80df8653752a3f007293ce1c[m[33m ([m[1;31morigin/react-salim[m[33m)[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Mar 26 09:35:18 2024 +0000
+
+    types extension to dev dependencies
+
+[33mcommit a524968c4ce5f6164f411f9f5deee3a65645e778[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 26 10:34:46 2024 +0100
+
+    correction
+
+[33mcommit 0f05316b68d7ad035097aec65dbbf40ec160698f[m
+Merge: 4fd4b6f 83cb74b
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Mar 26 10:29:17 2024 +0100
+
+    Merge pull request #158 from Pixilib/NewAet
+    
+    New aet
+
+[33mcommit 83cb74bb734250a6b7ffb4df264050df830b8289[m
+Merge: dfd9e7a 4fd4b6f
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Mar 26 10:29:02 2024 +0100
+
+    Merge branch 'dev' into NewAet
+
+[33mcommit dfd9e7a1bcfb8186d37e31a062c7c66472d32b60[m[33m ([m[1;31morigin/NewAet[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 25 17:39:47 2024 +0100
+
+    style : margin
+
+[33mcommit c221bf41983b871d450cbc989a44a5fe11029b7d[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 25 15:22:09 2024 +0100
+
+    correction color card and margin general
+
+[33mcommit 0be7b340f3c8a8f232eec13834df872461ccd818[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 25 14:58:31 2024 +0100
+
+    correction class css color
+
+[33mcommit 4fd4b6f51b4bf95228785b17d0a5a59d0a706aa6[m
+Merge: 17ae970 08957bf
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Sun Mar 24 19:26:36 2024 +0100
+
+    Merge pull request #160 from Pixilib/Popover-Modif
+    
+    Minor changes
+
+[33mcommit 08957bf253235b4f1dabae93f7965b131492d4fb[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Sun Mar 24 19:25:24 2024 +0100
+
+    Minor changes
+
+[33mcommit 17ae970d86ad7b5c03a702c8bb82afef8d46793d[m
+Merge: c78e0fd 66669ff
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Mar 22 15:45:32 2024 +0100
+
+    Merge pull request #159 from Pixilib/tableFeatures
+    
+    Table features
+
+[33mcommit 66669ff2fe77bc0b707496f42de8a61998c9b9e0[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 22 15:44:55 2024 +0100
+
+    feat: implement toast, replace react-toatsify
+
+[33mcommit 917998dc6f9acb9fcaa6f6524cf1b1fcfe2db2c8[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 21 15:57:55 2024 +0100
+
+    style: change mb to mb-4
+
+[33mcommit 7ad1e3a25b195eca79b643d50166520a4061bf9c[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 21 15:28:06 2024 +0100
+
+    Style : text filter, card header card body and card footer
+
+[33mcommit 917acc297fbf1f878a5bb89da2ec59aafca8c572[m[33m ([m[1;31morigin/tableFeatures[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 21 15:27:04 2024 +0100
+
+    fix: Fix onCLick propagtion in JobIcons and refacto
+    
+    Change bg-white for Banner
+    
+    Closes #156
+
+[33mcommit 7ff43cf525a2c7f109c4fbd3f779b9266c01c231[m
+Merge: f5da586 c78e0fd
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 21 14:04:41 2024 +0100
+
+    Merge branch 'dev' into NewAet
+
+[33mcommit f5da58610604aa51d17a45c56b6e402003150010[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 21 14:02:30 2024 +0100
+
+    style AetCArd and NewAetCard
+
+[33mcommit c78e0fd9f07d9ebf47c839025599de6e356de988[m
+Merge: 752f669 0b43c33
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Thu Mar 21 13:58:08 2024 +0100
+
+    Merge pull request #154 from Pixilib/tableFeatures
+    
+    ✨ 💄 Change Style of Table and implement postJobs and mutation
+
+[33mcommit 0b43c33a8bf78a9b4c79144e7909271bd33da6a9[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 21 13:50:50 2024 +0100
+
+    ✨ 💄 Change Style of Table and implement postJobs and mutation
+
+[33mcommit a4544857c88289472181905506a2f2f67d089023[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 21 12:43:09 2024 +0100
+
+    style : color of banner and card and background rootapp
+
+[33mcommit 352d1ef983bb53aa97c5e451db578f139a13e84a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 20 16:29:44 2024 +0100
+
+    Add NeawAetCard component, style : button and Card
+
+[33mcommit d64ada6e5a6521d5176404319310d8985c79c324[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 20 14:10:28 2024 +0100
+
+    merge dev
+
+[33mcommit a9a0a93f11202923f9e12d34751cf8fe3f0ddfa1[m
+Merge: 2112cfa 752f669
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 20 14:10:09 2024 +0100
+
+    Merge branch 'dev' into NewAet
+
+[33mcommit 752f669a4b7530d0de648ac1f3ab0e2257d509a2[m
+Merge: 87a3ebe eb921a9
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Mar 20 11:45:25 2024 +0100
+
+    Merge pull request #153 from Pixilib/tableFeatures
+    
+    🎨 Add AEtCard in AdminRoot
+
+[33mcommit eb921a92e03650923c5bc2b1ba75e3951794b898[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 20 11:44:10 2024 +0100
+
+    🎨 Add AEtCard in AdminRoot
+
+[33mcommit 2112cfaffc6815db3fc5ecdbc01477525c884ab8[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 20 11:22:20 2024 +0100
+
+    git merge dev
+
+[33mcommit 87a3ebe801894a2e5e05c71d09b538646ffa7e92[m
+Merge: 1fa0cde ceaa642
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Mar 20 11:17:43 2024 +0100
+
+    Merge pull request #152 from Pixilib/tableFeatures
+    
+    Table features
+
+[33mcommit ceaa6425fc915f711ef038f525a846192e76710d[m
+Merge: f1121be 1fa0cde
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 20 11:14:26 2024 +0100
+
+    Merge branch 'dev' into tableFeatures
+
+[33mcommit f1121be030a9255fd5a0201a06ba30670b88290c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 20 11:06:10 2024 +0100
+
+    ✨ Update pagination and add className for PopOver
+
+[33mcommit e07c8f11edb4f176b717a0fd507d3648be9f3382[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 20 11:04:55 2024 +0100
+
+    ✨ popoverin JobTable
+
+[33mcommit c9f3580cda6d04f7d1916e73bccf2d8d31bd62fa[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 20 11:03:43 2024 +0100
+
+    delete white spaces OrthancCard
+
+[33mcommit 1fa0cde3f8e73691460a8d5a5ece0d14385d1d24[m
+Merge: d24a281 449cfdd
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Mar 20 10:54:34 2024 +0100
+
+    Merge pull request #151 from Pixilib/Aet
+    
+    Aet
+
+[33mcommit 449cfdd63e2da8110c08f5a159ea0e6edf40ef77[m[33m ([m[1;31morigin/Aet[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 20 10:04:16 2024 +0100
+
+    style Aet button
+
+[33mcommit 37a373a99478481fed672c590349041a8bf30fa3[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 20 10:03:09 2024 +0100
+
+    OrthancCard correction type
+
+[33mcommit 9f3a149113c095a92ed66977a9f9f8d193b63d3e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 19 16:57:16 2024 +0100
+
+    Add button New Aet
+
+[33mcommit abedf496839d01c0e02b9acf120cace88621bda9[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 19 13:26:38 2024 +0100
+
+    Add column Aet
+
+[33mcommit 3ee6bac1401b6489915b3a156f2be2c6f8caf262[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 19 10:03:36 2024 +0100
+
+    Style : SelectInput  correction tailwindcss
+
+[33mcommit 44021595ec06cf9fbee466d71fa12a52de7163d0[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 18 16:40:54 2024 +0100
+
+    Style : Aet Component
+
+[33mcommit 878606eaa78bb72e71d2216b2910119ecaaa51cd[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 18 15:26:12 2024 +0100
+
+    style : selectinput border and background
+
+[33mcommit 1c5c2dd8f1470056a2e7ef011571d1e6ab2d9808[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 15 21:16:37 2024 +0100
+
+    🚧 COmplete job tbale and other refactos
+
+[33mcommit d24a281e6cf03d4f6978105175e9cbdf55686a08[m
+Merge: 1627212 82eac88
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Thu Mar 14 16:13:37 2024 +0100
+
+    Merge pull request #149 from Pixilib/tableFeatures
+    
+    Table features
+
+[33mcommit 82eac884d622de2f2503fa0d12c19bfbe829d0fc[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 14 16:12:48 2024 +0100
+
+    🚑 Table
+
+[33mcommit 0f50b362643cafd3b58c42560473a80ebf7af4d7[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 14 14:59:11 2024 +0100
+
+    ✨ pagination OK Table
+
+[33mcommit 19b7f9f4f42826496733f05eb0dd4530c8eede59[m
+Merge: 3e88233 1627212
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 14 14:22:17 2024 +0100
+
+    Merge pull request #148 from Pixilib/dev
+    
+    Dev
+
+[33mcommit 16272120cd596cb2c75d3f345019725fc655fbfc[m
+Merge: 4ccb1be 3f37988
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 14 14:21:16 2024 +0100
+
+    Merge pull request #147 from Pixilib/ButtonDetails
+    
+    Button details
+
+[33mcommit 3f3798817c541c579ac82afc1905cce07fc61334[m
+Merge: aab3e70 4ccb1be
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 14 14:21:11 2024 +0100
+
+    Merge branch 'dev' into ButtonDetails
+
+[33mcommit 4ccb1be02927ab596ed66e7e16446c28fdf67ef6[m
+Merge: abcad85 b7334be
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 14 14:18:49 2024 +0100
+
+    Merge pull request #146 from Pixilib/tableFeatures
+    
+    Table features
+
+[33mcommit b7334be74e93a26867216aeaf1a4be41835fe785[m
+Merge: 10eee1f abcad85
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 14 14:18:43 2024 +0100
+
+    Merge branch 'dev' into tableFeatures
+
+[33mcommit 10eee1fd8402dccf8cacd57a29c1bd6948a4e6e9[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 14 14:10:05 2024 +0100
+
+    feat: Add fetaures for table with filter and pagination
+    
+    WIP
+
+[33mcommit aab3e705bb4391666e4704251c5657e191345141[m[33m ([m[1;31morigin/ButtonDetails[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 14 14:04:15 2024 +0100
+
+    Create component Select Input and implement this component in OrthancCard
+
+[33mcommit abcad85326c1f78f128e739d07c8fa1284868bba[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Mar 14 13:42:43 2024 +0100
+
+    fixing for backend
+
+[33mcommit c5e9965b02a07c8ed1e48ca5aa3ef3667c389f12[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 13 13:36:15 2024 +0100
+
+    Style : card et General
+
+[33mcommit f88a847e8cc2e655ec229e51ad05ed040af0fb00[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 13 11:31:05 2024 +0100
+
+    ✨ search value global
+
+[33mcommit 07299e3e9d9a5d7143af939f832206865236464a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 12 16:51:44 2024 +0100
+
+    Add SelectInput component and Add React Select
+
+[33mcommit aeefe881a2b0e2bf5cf971d14faf48133e20a63f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 12 10:29:55 2024 +0100
+
+    add informations in info button and Style : Popover
+
+[33mcommit 354ef52c0c8fa6b93ea61a73860fdb0953979760[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 11 16:36:00 2024 +0100
+
+    OrthancCard : add infos buttons
+
+[33mcommit 2b952eeac2403faf2733704bc2efda0aba621ecb[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 11 16:15:00 2024 +0100
+
+    style button info
+
+[33mcommit 4322a884d805165e62de8dd2dea6bb50e565baba[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 11 16:14:08 2024 +0100
+
+    style : icons buttons
+
+[33mcommit e2bcfb721fd8d1179ec151b0904917130ce55076[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 11 15:59:30 2024 +0100
+
+    💄 style : icons buttons and badge
+
+[33mcommit 44f6583b79fb80cfff75df926548f642d9e9e437[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Fri Mar 8 17:46:03 2024 +0100
+
+    mapping to new keys backend
+
+[33mcommit eee8301908c517d59cf21bc0852d855f1f2dd1ef[m
+Merge: c008cc5 0d75115
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Mar 8 17:28:20 2024 +0100
+
+    Merge pull request #140 from Pixilib/FixRefacto
+    
+    Fix refacto
+
+[33mcommit 0d75115a44f93a76322e810a60c536d23ebeac03[m
+Merge: 080207d c008cc5
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Mar 8 17:27:04 2024 +0100
+
+    Merge branch 'dev' into FixRefacto
+
+[33mcommit 080207dd2fb728d31112a3a57bff85e042f6b35a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 8 17:21:57 2024 +0100
+
+    🚧 WIP Jobs
+
+[33mcommit e2fc6d3586af60de66e79824c3d5985dc3471147[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 8 17:21:25 2024 +0100
+
+    🚧 WIP Jobs
+
+[33mcommit 640a345b537de089ecf520ad0be67f7421321e2a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 8 17:18:09 2024 +0100
+
+    WIP
+
+[33mcommit 78cec8e32f1ed717c58e394e1fb5b2bea86bf80c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 8 17:12:20 2024 +0100
+
+    WIP
+
+[33mcommit 46e59ea295526db8d1c712bb5ce3cf0e8a16c6dd[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 8 17:06:23 2024 +0100
+
+    🎨 Update JobRoot and JobTable
+
+[33mcommit f99d1966e255847f5ae1e201fe082f5b08262ad8[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 8 16:53:47 2024 +0100
+
+    🎨 Add Spinner and Badge components, update routing paths, and fix ports in docker-compose.ym
+
+[33mcommit 46cca3508be22cc0cf0f3aee1b1e1c8a05457f5a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Mar 7 16:32:40 2024 +0100
+
+    🚧 WIP : api Jobs
+
+[33mcommit c008cc5eb958e630276b1d4b7d3cb8f19d627bc1[m
+Merge: fa94e43 7d39aee
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Mar 7 16:31:48 2024 +0100
+
+    Merge pull request #134 from Pixilib/Toggleeye
+    
+    Toggleeye
+
+[33mcommit 7d39aee6548fa75fef79c45981d87e1a6b9ff788[m[33m ([m[1;31morigin/Toggleeye[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 7 12:11:08 2024 +0100
+
+    style : replace svg visibility to toggle eye
+
+[33mcommit 383f91256ffa689ffd87cfd94e2b677132deb89b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 7 12:05:51 2024 +0100
+
+    correction : ontoggle visible
+
+[33mcommit e50942d4229df9ede64e5a7613c597a10fb90724[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Mar 7 09:57:17 2024 +0100
+
+    Style : Toggle eye input orthanc
+
+[33mcommit 8aea7d318d06a7ef410eaa2dfcd20de709627e48[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 6 17:09:33 2024 +0100
+
+    💄 style : change color iconStyle in ToggleEye
+
+[33mcommit b3e24b45765e9064d3596005af4a9a5707fdfa96[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 6 16:38:37 2024 +0100
+
+    ✨ Add component ToggleEye and install React icons
+
+[33mcommit fa94e439b0b50003833b2bddadd50892639f292e[m
+Merge: 29e81ac 353daa3
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Mar 6 14:48:41 2024 +0100
+
+    Merge pull request #133 from Pixilib/FixRefacto
+    
+    fix: 🎨 ♻️ Fix buggs in Banner, add stories
+
+[33mcommit 353daa3b541f9db7a96f35dda932d548e69a9a12[m[33m ([m[1;31morigin/FixRefacto[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Mar 6 14:44:56 2024 +0100
+
+    fix: 🎨 ♻️ Fix buggs in Banner, add stories
+    
+    Closes #125 , #126
+
+[33mcommit 29e81ac02fd0a881d6628acb714db46f0234c09c[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 6 12:00:51 2024 +0100
+
+    Suppression popover button
+
+[33mcommit 6fb578dd4894fc6c3fc4e3d1ce71a6e3535d46b6[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 6 11:50:04 2024 +0100
+
+    Correction PopoverStories
+
+[33mcommit 14edfd720b5c652aa75ee0f4e4f136a54a56a395[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 6 11:46:10 2024 +0100
+
+    correction popover
+
+[33mcommit b7608241ba778c36c54fcda91f1a1aa72a2f9ab8[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Mar 6 11:45:38 2024 +0100
+
+    Popover : simplification component
+
+[33mcommit 68830bed40f7764a96ffec6d744fc5ad9320bbeb[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 5 16:30:08 2024 +0100
+
+    correction popover
+
+[33mcommit 6f781cc1efa16552be81cd9bbc6dff63d0151e55[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 5 10:45:06 2024 +0100
+
+    Style : correction border popover
+
+[33mcommit 534d2932a99b777f5648b58f37ce6a78cb411cc0[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Mar 5 10:43:03 2024 +0100
+
+    Style : correction border button
+
+[33mcommit 3ee10f8ec5658b711d1c2952a3093ed73be00d61[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 4 16:27:30 2024 +0100
+
+    modifications shadow
+
+[33mcommit d8adf28b09850d9842da399e1e2c198d7be8b88b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 4 16:10:04 2024 +0100
+
+    correction title center
+
+[33mcommit 04ac4ccd5006bca26b1738defb1294f1d955778e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 4 13:53:47 2024 +0100
+
+    implement popover in button info to orthanccard
+
+[33mcommit 698eb1417225e2b40befdcfbbd5a5b8ad1fbd5f4[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 4 13:17:08 2024 +0100
+
+    Popover stories
+
+[33mcommit 9e0234d24abec647db2332a28d40d3d5f31a6bfc[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Mar 4 11:29:56 2024 +0100
+
+    correction error  data,  implement root
+
+[33mcommit 9e891d7bd31c4d01c85a31bc684c19298a0bd80f[m[33m ([m[1;31morigin/ToggleEye[m[33m)[m
+Merge: 95f9def a0d61e1
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Mon Mar 4 10:56:17 2024 +0100
+
+    Merge pull request #127 from Pixilib/FixRefacto
+    
+    Fix refacto
+
+[33mcommit a0d61e1dd5b935f0b88d3eca173c3667934b8f88[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 1 16:41:12 2024 +0100
+
+    🐛 Fix: display BannerItems for DropDown Language
+
+[33mcommit db12c48d1f38e8b7422d44eae16917bdbc6e4984[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Mar 1 15:12:10 2024 +0100
+
+    🩹 add disabled property in ToogleSwicth
+
+[33mcommit a945f8498dd9c8e6f21ea0b6f9bed520cbc5c44a[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Mar 1 10:15:35 2024 +0000
+
+    Co-authored-by: remixxx31 <remixxx31@users.noreply.github.com>
+
+[33mcommit 95f9def879bc6fd6615fd38037eb590c6a5fe35a[m[33m ([m[1;31morigin/API[m[33m)[m
+Merge: d5ce658 dcf0df2
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Mar 1 09:40:56 2024 +0100
+
+    Merge pull request #124 from Pixilib/styleSideBar
+    
+    Style side bar
+
+[33mcommit dcf0df2372adb89167ce3e8d7f63e0d33aadeca5[m
+Merge: cdaca4f d5ce658
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Mar 1 09:40:50 2024 +0100
+
+    Merge branch 'dev' into styleSideBar
+
+[33mcommit d5ce65870904d43dba3b260077acf03dfe85156e[m
+Merge: 0338e33 5210103
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Mar 1 09:37:36 2024 +0100
+
+    Merge pull request #123 from Pixilib/SelectInput
+    
+    Select input
+
+[33mcommit 5210103ecd888af019b1feb39a767d54aff4fc09[m
+Merge: f90187f 0338e33
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Mar 1 09:37:31 2024 +0100
+
+    Merge branch 'dev' into SelectInput
+
+[33mcommit 0338e3338e39f3169ad7aa6741cf16c54578fecb[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 29 17:17:25 2024 +0100
+
+    refac
+
+[33mcommit cdaca4ff0aa677e4abab4076ebe9070bc2362761[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 29 15:52:34 2024 +0100
+
+    ♻️ Refactor code
+
+[33mcommit f90187fabe4b054d35000777e47c3da766ace628[m[33m ([m[1;31morigin/SelectInput[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 29 14:32:23 2024 +0100
+
+    🎨 style: Alternating row colors in a table
+
+[33mcommit d4eb5e4947486a6b7f546c222932d17faf68f44b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 29 11:19:20 2024 +0100
+
+    correction app
+
+[33mcommit c901b65aec111f51addafe45b31d13018f96bd92[m[33m ([m[1;31morigin/styleSideBar[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 29 10:57:53 2024 +0100
+
+    fix: Switch click don't open menuand refacto
+
+[33mcommit 53b6db19fe73dd43aad7427358012dc2631e98d9[m
+Merge: bab0313 58d004a
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Feb 28 13:09:33 2024 +0100
+
+    Merge pull request #120 from Pixilib/TriTable
+    
+    TriTable : Improvements in Table Management and Integration of the Orthanc API
+
+[33mcommit 58d004a1855145b1bc3582cbc224be85e2657600[m[33m ([m[1;31morigin/TriTable[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 28 13:02:10 2024 +0100
+
+    Correction : Tailwind css et suppression doublon App
+
+[33mcommit bab0313bc72f763637092f3295b5c06d424d7d16[m
+Merge: ab0ee64 906a228
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Feb 28 12:25:34 2024 +0100
+
+    Merge pull request #121 from Pixilib/styleSideBar
+    
+    🐛 Fix: click on other childrens of BannerDropDown , open and Close menu
+
+[33mcommit 906a228a54305fc51ee1ee82f502bec2d87e9147[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 28 11:43:59 2024 +0100
+
+    🐛 Fix: click on other childrens of BannerDropDown , open and Close menu
+
+[33mcommit 3ec1db00d36573cc18f6bbb4febe7a7f937bfb5c[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 27 16:10:03 2024 +0100
+
+    🥅 correction problems
+
+[33mcommit ae0c63c97f29bfb7671601635664035614991dbe[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 27 15:29:16 2024 +0100
+
+    🎨 improve data handling with 'select' in Orthanc API query
+
+[33mcommit 6b589191f4f8459bce384c1a850a2719051481bf[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 26 15:59:01 2024 +0100
+
+    orthanc
+
+[33mcommit d24dc324b37665b49e1bdcf669458c6440c2354d[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 26 15:44:13 2024 +0100
+
+    orthanccard
+
+[33mcommit 36bf1b24c8e4559f76deaa59dbef6cd563d8e680[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 26 14:53:56 2024 +0100
+
+    correction Redis
+
+[33mcommit a305806f74f7a83b457acb452a79d6dbe31da58a[m
+Merge: 8b421f2 ab0ee64
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 26 14:04:05 2024 +0100
+
+    Merge remote-tracking branch 'origin/dev' into TriTable
+
+[33mcommit 8b421f2c591562143d02c13f3a71e1e15dfdeece[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 26 13:30:05 2024 +0100
+
+    api orthanc
+
+[33mcommit ab0ee646be5bcf5a7aae5b7a2c5fdc3da2d4f976[m
+Merge: 794a63d c14a2a2
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Mon Feb 26 11:41:42 2024 +0100
+
+    Merge pull request #119 from Pixilib/styleSideBar
+    
+    Style side bar
+
+[33mcommit c14a2a22960f24118a7c117db628d1db7b9f6553[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Mon Feb 26 02:26:51 2024 +0100
+
+    🗑️ Clean some code
+
+[33mcommit f74cabf8d9947ffc692f30554058fb8cacc29971[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Mon Feb 26 02:25:32 2024 +0100
+
+    🎨 Refacto BannerDropDown, first try API Orthanc with useCustomQuery
+
+[33mcommit 48ded2041ac15faec0039030ef055e80f8f52c86[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Feb 23 15:36:42 2024 +0100
+
+    🎨 💄
+
+[33mcommit 92cbcf5f5b3c6f1fc5d42c4f05dfdb25b99124ab[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 22 15:00:51 2024 +0100
+
+    Co-authored-by: remixxx31 <remixxx31@users.noreply.github.com>
+
+[33mcommit 57b2ae95c716de24fefcb72b743b3a8b3dc9e3c8[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 22 14:17:37 2024 +0100
+
+    Co-authored-by: remixxx31 <remixxx31@users.noreply.github.com>
+
+[33mcommit 3d6e06c9b452a4820f4ec54527ac543356625a0f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 22 11:10:45 2024 +0100
+
+    API Orthanc
+
+[33mcommit a0a3aaa38b41a0c55bd8ae091c1e545f2d4a1b3e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 21 16:20:33 2024 +0100
+
+    correction erreur  input
+
+[33mcommit 5eba53a32037c1462e3aefebbf9eea9d6c3981ee[m[33m ([m[1;31morigin/i18next[m[33m)[m
+Merge: 14c66d1 794a63d
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 21 13:59:22 2024 +0100
+
+    Merge branch 'dev' of github.com:Pixilib/GaelO_Flow_Frontend into i18next
+
+[33mcommit 14c66d1fd9af170c77679c5c619895e27a4da579[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 21 13:56:10 2024 +0100
+
+    feat: Implement i18next
+    
+    needs to add keys in JSON
+
+[33mcommit 44849c93ec6427e947aba9d1dc218d280e6c6a58[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 21 13:56:02 2024 +0100
+
+    Style cursor pointer
+
+[33mcommit 5e11307d3a12cb6c897a618cc07edd6053b11dd2[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 21 10:50:40 2024 +0100
+
+    Add Sorting Table for column
+
+[33mcommit e3c83f55b1ee4745fb1cf5db51304b8d00dd36dd[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 20 16:32:18 2024 +0100
+
+    Table.tsx
+
+[33mcommit 794a63de3a734d93330b896224613883a353c9aa[m[33m ([m[1;31morigin/styleTable[m[33m)[m
+Merge: 9effb98 54cddfc
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 20 15:15:59 2024 +0100
+
+    Merge branch 'dev' into styleTable
+
+[33mcommit 9effb985f8b90eed659b31b86f33569c33cb9c3f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 20 15:07:28 2024 +0100
+
+    Style : badgeClasses component Orthanc and Redis
+
+[33mcommit c52e364c563740929d7202b7181362e4dd674bcd[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 20 14:53:21 2024 +0100
+
+    Supression import react
+
+[33mcommit 038c744542efda779513af92d57877ca03a65eda[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 20 14:43:49 2024 +0100
+
+    correction badge
+
+[33mcommit b4134e9f4479d4fc77f94e91883dde7732293d44[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 19 18:08:55 2024 +0100
+
+    correction component table, orthanccard and rediscard
+
+[33mcommit 49dd30ec7fed237900681615dc505b284b7c611a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 19 12:51:53 2024 +0100
+
+    "[Table] Enhance data readability by alternating the background colors of each row + overflow" #114
+
+[33mcommit 08093a91b6edfede33ac3e1a39760d33e3b2ba81[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 19 12:18:33 2024 +0100
+
+    🥅 💄style table and correction problems button, orthanc and redis settings
+
+[33mcommit 54cddfc329a018e0c6a8c7d844623497f13c903d[m
+Merge: 0cbfea4 067d4a6
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Sat Feb 17 00:47:06 2024 +0100
+
+    Merge pull request #111 from Pixilib/fixBannerWidth
+    
+    Fix banner width
+
+[33mcommit 067d4a61fb8656d2d67e9eda5576f7bfd34c1f30[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Sat Feb 17 00:44:48 2024 +0100
+
+    💄 🎨 refacto, change style SIdeBar and Language chnage in Banner
+
+[33mcommit a0d104a4b993acff40142a028a51d496a417db48[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Feb 16 14:55:54 2024 +0100
+
+    refactor(♻️ Reafactor: Create Header wrapper of Banner reaorganize files): ♻️Create Header wrapper of Banner reorganize files
+
+[33mcommit b219430aebd9e322ef20532b425d89c82bce5aed[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Feb 16 11:11:33 2024 +0100
+
+    🚧 ♻️ Refacto Banner > Header
+
+[33mcommit 6d3a8165631e9269b332ed9cbd7974946140b789[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Feb 16 10:32:57 2024 +0100
+
+    fix: WIP BannerWidth, fix click outside list
+
+[33mcommit 6bb8f7ba7235c561b30fb8cc17d4656b112fa34e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 15 17:19:29 2024 +0100
+
+    import table component in orthanccard
+
+[33mcommit 8236f96ab14e622752107baba76a585d0ab85a49[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 15 17:08:53 2024 +0100
+
+    style column
+
+[33mcommit b0eb0f61afba8eae8af2a34478d17ff250729be1[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 15 15:58:34 2024 +0100
+
+    add style badge
+
+[33mcommit 0cbfea4c99e7b1b3f3307a8695ef8d4716ff6ae4[m
+Merge: 8204486 97dbb72
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Thu Feb 15 13:59:09 2024 +0100
+
+    Merge pull request #110 from Pixilib/NewSideBar
+    
+    New side bar
+
+[33mcommit 97dbb7262cc36232765db79a363a14360a69fd4d[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 15 13:57:29 2024 +0100
+
+    style: Update new SIdebAR
+    
+    Closes #97 ,#105
+
+[33mcommit 46b842917bf9d6805df601de4f0e81431f7a94a0[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 15 13:56:09 2024 +0100
+
+    style: Change style of Navbar with last recommendations
+    
+    fix also autoscroll menu when height decrease
+    
+    Closes #97, #105
+
+[33mcommit 88e7c409966b4c8247eec56010f0cb60a8ef0321[m
+Merge: 2f25fea 8204486
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 15 10:58:13 2024 +0100
+
+    Merge remote-tracking branch 'origin/dev' into styleTable
+
+[33mcommit 2f25fea896ba870fe11fadb2ec43f32b8d77403f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 15 10:52:26 2024 +0100
+
+    correction
+
+[33mcommit 820448672742da3aad981b6d8eb194686cb88337[m
+Merge: 0467618 6bd7577
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Feb 14 21:04:28 2024 +0100
+
+    Merge pull request #109 from Pixilib/NewSideBar
+    
+    New side bar
+
+[33mcommit 6bd7577958494061126aef04ef825c30084450a4[m[33m ([m[1;31morigin/NewSideBar[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 14 20:29:19 2024 +0100
+
+    Suppression de l'import inutilisé et de l'état non utilisé dans SideBar.tsx
+
+[33mcommit 67703473f33e970b589071ceea7dbf82da902040[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 14 20:27:55 2024 +0100
+
+    Suppression de lignes vides dans SideBar.tsx
+
+[33mcommit c3f7fb5920f276e751659e0d9f90f16be2674ecb[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 14 20:25:45 2024 +0100
+
+    feat(close list when I click outside): close list when i click outside
+    
+    Closes # 107
+
+[33mcommit f332907849501174e101365d86edead98fa755b5[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 14 14:24:16 2024 +0100
+
+    🔀 dev into NewSideBar
+
+[33mcommit 6cdddfe388ca3fdda31e110ca0abca32d69af1d6[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 14 14:23:32 2024 +0100
+
+    🔀 merge dev into NewSideBar
+
+[33mcommit 04676181488d8204499b160847c21804370d57df[m[33m ([m[1;31morigin/table[m[33m)[m
+Merge: e41e78b 559bba2
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 14 10:21:01 2024 +0100
+
+    git pull
+
+[33mcommit e41e78be14e68799c73ec708bddff9367c94ab36[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 14 10:08:23 2024 +0100
+
+    "[Welcome] Restore the missing bordered on the <input> elements #99
+
+[33mcommit 559bba2d29a90b0bb34d5c2b558385fa22072eee[m
+Merge: ff4134e d842860
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Feb 13 17:05:27 2024 +0100
+
+    Merge pull request #106 from Pixilib/NewSideBar
+    
+    💄 🎨 Update syle an user interface
+
+[33mcommit 17bf5695b6e6f0171b29436a5fe02a4f1aa32722[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 13 16:46:19 2024 +0100
+
+    💄 add padding content column, border and style font
+
+[33mcommit cc17dff257e5f1c86803f298fb3940fca90c8496[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 13 14:47:36 2024 +0100
+
+    style : move shadow cards
+
+[33mcommit 0a5bc113ec031d0a3fa43ecca433133aef9de980[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 12 14:44:01 2024 +0100
+
+    correction erreur Redis Setting
+
+[33mcommit a09a429fd0f57c35862a969ee68edb832469e814[m
+Merge: 7805834 ff4134e
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Feb 12 14:12:02 2024 +0100
+
+    Merge remote-tracking branch 'origin/dev' into table
+
+[33mcommit d8428601d63b5edc34bf207285e667a3e6aa6022[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Feb 9 23:11:43 2024 +0100
+
+    💄 🎨 Update syle an user interface
+
+[33mcommit ff4134ee96dc760a29b2c04559508b5ed97de3bd[m
+Merge: 0af9c84 8c3bb4b
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Feb 9 17:05:31 2024 +0100
+
+    Merge pull request #101 from Pixilib/banneR
+    
+    Banne r
+
+[33mcommit 8c3bb4b21d4a4686267246c4d69117c5a7733ed3[m
+Merge: 6132da7 0af9c84
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Feb 9 17:04:02 2024 +0100
+
+    refactor: create a BannerItems and SideBarItems
+    
+    add also a eslint-tailwind plugin for sort yhe ordre of class css
+
+[33mcommit 7805834b97aaadad63d25c4f397d4931894343a3[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 8 15:56:52 2024 +0100
+
+    wip
+
+[33mcommit d37d36208e38021294bc75eb347b6a11f88419d8[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Feb 8 15:56:11 2024 +0100
+
+    style: Style : RedisCard and Table  Correction problems
+
+[33mcommit 6132da711d5192b83b9c7b992e8968987b4ed464[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 8 15:05:17 2024 +0100
+
+    fix: selection in Items BannerDropDown
+    
+    reorganize files and directory
+    
+    Closes #71, #84
+
+[33mcommit b433aec79837066578ae6a0bf0af123e26a0fdbb[m[33m ([m[1;31morigin/banneR[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 7 17:08:07 2024 +0100
+
+    Update import in rediscard
+
+[33mcommit c7cc9292597e291382d10a004b87d7f12c4cd02a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 7 16:57:25 2024 +0100
+
+    wip
+
+[33mcommit 95021cc54fc7b10f554728da45fddc324d991203[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 7 14:49:04 2024 +0100
+
+    correction RedisCard/App.tsx
+
+[33mcommit 2e15d3122c23b38ac514f30e3ceaa39cc9245f6b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 7 14:41:18 2024 +0100
+
+    Correction problem color
+
+[33mcommit 0d6ddd1e3a4d136a5ddf6d5845880bfcd6c65198[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 6 16:22:22 2024 +0100
+
+    feat: :lipstick: add component table
+
+[33mcommit fcd0c6d995dacd502db03aa0b26e183552e7fe30[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 6 11:04:57 2024 +0100
+
+    style: :lipstick: change color for button disabled
+
+[33mcommit 0af9c84c5eadd5374957c64500c26e401d918d7c[m
+Merge: 5ec51cf caaabeb
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Feb 7 16:48:15 2024 +0100
+
+    Merge pull request #98 from Pixilib/sophie
+    
+    Sophie
+
+[33mcommit 4aaba7f401e03d89920fa17fc1f2d79211234ecd[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 7 16:40:23 2024 +0100
+
+    fix: :construction: banner
+
+[33mcommit dbaba0b57736d8311a09b0a63fc26b686dec63d7[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 7 15:20:00 2024 +0100
+
+    Update Items and ItemsVariant
+
+[33mcommit caaabeb07870dee059fb5cd58a2976ba4bb9ce3f[m[33m ([m[1;31morigin/sophie[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 7 14:49:04 2024 +0100
+
+    correction RedisCard/App.tsx
+
+[33mcommit 1dd67686d7ba5e036c9be4e25e2caf71eaf5a5a8[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Feb 7 14:41:18 2024 +0100
+
+    Correction problem color
+
+[33mcommit 8a7c9d74a41bcf6390b20a0321417141cd0ea887[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Feb 7 13:59:05 2024 +0100
+
+    refactor: :art: refacto Items for more genric omponent with ItemsVraiant for customize
+
+[33mcommit 24b5df37a660e29484543191b272cac78e1bd13f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 6 16:22:22 2024 +0100
+
+    feat: :lipstick: add component table
+
+[33mcommit 578360c63fdfa6e26b4ba936964d57fc3c3c9d32[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Feb 6 11:04:57 2024 +0100
+
+    style: :lipstick: change color for button disabled
+
+[33mcommit 3e882330f54f40d234f817dca407eeac90f58388[m
+Merge: a023c5a 5ec51cf
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Sat Feb 3 10:51:31 2024 +0100
+
+    Merge pull request #95 from Pixilib/dev
+    
+    Dev
+
+[33mcommit 5ec51cf7ec2f4ba37a19ef0700806e58bed88d1b[m
+Merge: a611279 db64daf
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Feb 2 11:05:38 2024 +0100
+
+    Merge pull request #94 from Pixilib/banneR
+    
+    Banne r
+
+[33mcommit db64daf485025339335dcd6a7cef1c25229d2f07[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Feb 2 10:58:14 2024 +0100
+
+    feat: :sparkles: Update banner with title and icon
+
+[33mcommit 7c36b27e4611d07a96b43999d4e6aac1574b9cea[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 1 13:25:46 2024 +0100
+
+    Add arrow back foms Legal mention
+
+[33mcommit a61127938826d317f00b9a8904922ee73b03306d[m
+Merge: 93bea47 28ec5ee
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Thu Feb 1 12:05:41 2024 +0100
+
+    Merge pull request #92 from Pixilib/banneR
+    
+    fix: :bug: Fix responive svg, and height of form #90 #91
+
+[33mcommit 28ec5eed2e8fcec427c9c5d5eda00c9a49288b9e[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Feb 1 12:05:03 2024 +0100
+
+    fix: :bug: Fix responive svg, and height of form #90 #91
+
+[33mcommit 93bea47c183a837d75a06d604dc716db30bf87c3[m
+Merge: b2814ac 6a86989
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 31 17:44:25 2024 +0100
+
+    Merge pull request #89 from Pixilib/banneR
+    
+    feat: :art: make logout ok #87
+
+[33mcommit 6a86989d72ecb64104ce2131aca1f30a2d5bf47a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 17:43:23 2024 +0100
+
+    feat: :art: make logout ok #87
+
+[33mcommit b2814ac3d906ebda2d6d5f0513c90f77e771c582[m
+Merge: 59df8f2 3434b81
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 31 16:32:26 2024 +0100
+
+    Merge pull request #88 from Pixilib/bannerMerge
+    
+    Banner merge
+
+[33mcommit 3434b815e4e67bb71f032b44818ae4950e9c5b6b[m
+Merge: d4b1fa2 59df8f2
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 31 16:32:15 2024 +0100
+
+    Merge branch 'dev' into bannerMerge
+
+[33mcommit 59df8f2b73b574c8ead28b89598be8afd9c38ff3[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 16:14:16 2024 +0100
+
+    fix: :twisted_rightwards_arrows: fix problems with branch dev
+
+[33mcommit 128d816fd058b53a37a21b96eb8250a223268414[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 15:23:56 2024 +0100
+
+    🎨 Fix: update Welcome LegalMention: Make just a return link to SignIn #79
+
+[33mcommit 44d245850848a28b0af176dccf9439769d6ff099[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 14:47:08 2024 +0100
+
+    Welcome: Retire signup and login in links
+    Fixes #80
+
+[33mcommit 937f70b750117beb94f311925a8e82d38d11f74e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Jan 29 17:28:15 2024 +0100
+
+    update 8 files and delete 2 files Change the style of the Input component #81
+
+[33mcommit 01bac0b629d43a919ec0968592845db0a39a9a66[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 15:23:56 2024 +0100
+
+    🎨 Fix: update Welcome LegalMention: Make just a return link to SignIn #79
+
+[33mcommit 8e2b8299cddc77bf71aff303c41585711ff12b7b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 14:47:08 2024 +0100
+
+    Welcome: Retire signup and login in links
+    Fixes #80
+
+[33mcommit 4b00f075e554c4627830568fd32598ebc6eeec0b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 15:41:53 2024 +0100
+
+    style: :lipstick: change responsive sidebar , and resolve issues  #74
+
+[33mcommit d4b1fa2b44a98fbc4acd750c01c66ff75c5e6b48[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 16:14:16 2024 +0100
+
+    fix: :twisted_rightwards_arrows: fix problems with branch dev
+
+[33mcommit 692170a7ee948cc5497b84ac508035934bde3de1[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 15:23:56 2024 +0100
+
+    🎨 Fix: update Welcome LegalMention: Make just a return link to SignIn #79
+
+[33mcommit bf596169e8c926b912411ff9b532e40da7650497[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 14:47:08 2024 +0100
+
+    Welcome: Retire signup and login in links
+    Fixes #80
+
+[33mcommit b7f445ad3f7f95c32166d2fbcbe9fd5005a5e5e3[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 30 15:35:46 2024 +0100
+
+    update
+
+[33mcommit 2742d6fbd80b14c064ed47ed819b87f39c7e004e[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Jan 25 17:22:54 2024 +0100
+
+    refactoring
+
+[33mcommit 368c2f09a638e239e2182d477858b832466af70e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Jan 29 17:28:15 2024 +0100
+
+    update 8 files and delete 2 files Change the style of the Input component #81
+
+[33mcommit d698f7e2a29c0d28667ebc7b1a83fe2dcbd2ff25[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 16:02:06 2024 +0100
+
+    update General.tsx and tailwind.config.js
+
+[33mcommit 5955bcd48be653f7083647e98473e4d8141ab427[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 15:39:20 2024 +0100
+
+    update App.tsx, Card.tsx and General.tsx
+
+[33mcommit 2b7132365cb50ba82af690a84d215918f5abd50f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 14:27:40 2024 +0100
+
+    Fix implementation Cards #73
+
+[33mcommit 7a76c77b545aeaa7c25a6ccfc746a8c16a3408fa[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 15:23:56 2024 +0100
+
+    🎨 Fix: update Welcome LegalMention: Make just a return link to SignIn #79
+
+[33mcommit 18e24e47e3c24f1debcdc48849fa20d8402b938b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 31 14:47:08 2024 +0100
+
+    Welcome: Retire signup and login in links
+    Fixes #80
+
+[33mcommit 6c421a8865eeb282f554be5b0f2c73534f5f1340[m
+Merge: c1f74a5 37a65ba
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Tue Jan 30 15:36:53 2024 +0100
+
+    Merge pull request #82 from Pixilib/input-admin
+    
+    Input admin
+
+[33mcommit 37a65ba7dee8c70a0bda02f2130ce0d4d6a3fa95[m[33m ([m[1;31morigin/input-admin[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 30 15:35:46 2024 +0100
+
+    update
+
+[33mcommit 93fb6006f30cda238d3cd040f0612d8913016f15[m
+Merge: e7601d6 c1f74a5
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 30 14:55:43 2024 +0100
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into input-admin
+
+[33mcommit e7601d6812892b1d9a55052fade809a3e6967f76[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Jan 29 17:28:15 2024 +0100
+
+    update 8 files and delete 2 files Change the style of the Input component #81
+
+[33mcommit c1f74a5324be81f63853e6c9403991ae6c661c2b[m
+Merge: cc11e33 b997807
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Jan 26 22:43:04 2024 +0100
+
+    Merge pull request #76 from Pixilib/react-salim
+    
+    React salim
+
+[33mcommit b997807e252fb38dcbb9433f350c69e24db88ffa[m
+Merge: 8ffe89d cc11e33
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Jan 26 22:42:29 2024 +0100
+
+    Merge branch 'dev' into react-salim
+
+[33mcommit cc11e33a683a4404e691755dba68ac5a46a575c9[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 15:41:53 2024 +0100
+
+    style: :lipstick: change responsive sidebar , and resolve issues  #74
+
+[33mcommit 0c38a6cbe05bdebac596956b758db2501dafb936[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 14:19:24 2024 +0100
+
+    spacing sidebar
+
+[33mcommit 13ed474a12e896fb001e6a86851600bc737f006b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 09:29:23 2024 +0100
+
+    style: :lipstick: Adapt components of Sidebar
+
+[33mcommit 28f0e9f75d360e18290d6a74d64abd5beece50bc[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 08:27:24 2024 +0100
+
+    Update wip SideBar
+
+[33mcommit 145950e68e253a1368eade2fd891b26c196e20eb[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 12:20:45 2024 +0100
+
+    update General.tsx
+
+[33mcommit fc84b2a934ef2d82eb2c684898544c7dd2549fd9[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 15:41:53 2024 +0100
+
+    style: :lipstick: change responsive sidebar , and resolve issues  #74
+
+[33mcommit 5e4ab82a29b4e1e80bc95914e45bc2e15d216629[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 14:19:24 2024 +0100
+
+    spacing sidebar
+
+[33mcommit 7e8e75a6803719ef02a1555d6e647d0b710b6e17[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 09:29:23 2024 +0100
+
+    style: :lipstick: Adapt components of Sidebar
+
+[33mcommit bdf78d14da76a00fc2d13ebc85e4a76e42e71214[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 26 08:27:24 2024 +0100
+
+    Update wip SideBar
+
+[33mcommit 8ffe89d42bbf481fc38ae9bf1f906dc8771f60ab[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Jan 25 17:22:54 2024 +0100
+
+    refactoring
+
+[33mcommit 98f949fbf708dce4d583c9e7076aab3d048008bd[m
+Merge: 95de65f 390a6cc
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Jan 25 16:47:23 2024 +0100
+
+    Merge pull request #75 from Pixilib/banner
+    
+    refactor: :lipstick: SideBar wip
+
+[33mcommit 390a6cc5cfd8bb963abb16a54357797377d479d4[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 25 16:44:40 2024 +0100
+
+    refactor: :lipstick: SideBar wip
+
+[33mcommit 68babfc7df7ae186779f4461f8745ffbff2477a7[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 16:02:06 2024 +0100
+
+    update General.tsx and tailwind.config.js
+
+[33mcommit c97a573914fec7d278ef88706986571d31fcec4a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 15:39:20 2024 +0100
+
+    update App.tsx, Card.tsx and General.tsx
+
+[33mcommit 54af6c996413563124f36e08a9c70f9b047205e4[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 14:27:40 2024 +0100
+
+    Fix implementation Cards #73
+
+[33mcommit 95de65fafa49c40f8e2ec43eaa02ff95e2afc5ee[m
+Merge: 0680077 5e6f434
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 12:21:01 2024 +0100
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into dev
+
+[33mcommit 0680077d630b63e005ff2a5eb4295cf3f9431270[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 12:20:45 2024 +0100
+
+    update General.tsx
+
+[33mcommit 5e6f43421c4a23a493429d292f570438636313ca[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 25 11:12:31 2024 +0100
+
+    style: :lipstick: Update NavBar styling and menu items add shadow too
+
+[33mcommit ee17d2c9d300f1ad79eb6aab31440e9d5dc183e6[m[33m ([m[1;31morigin/card-admin-general[m[33m)[m
+Merge: 4a69dfc 53fb0c3
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 25 10:46:04 2024 +0100
+
+    Merge branch 'dev' into card-admin-general
+
+[33mcommit 4a69dfc5593e851b0120af0ac8f9d4b17027ae7b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 24 15:15:37 2024 +0100
+
+    update 9 files, move and rename 1 file and delete 1 file
+
+[33mcommit 53fb0c387ed6cba237451196a738d29d5b67d0aa[m
+Merge: d7772a7 c856391
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 24 11:55:07 2024 +0100
+
+    Merge pull request #68 from Pixilib/RefactoForm
+    
+    Refacto form
+
+[33mcommit c85639198f7fec418d1db9cf09630584566bfbb9[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 24 11:52:17 2024 +0100
+
+    style: :lipstick: Update NavBar styling
+
+[33mcommit 107798e59c7b1fdd8ba3e63dbc99cdc07863e30e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 23 16:58:25 2024 +0100
+
+    update 5 files Card General Admin #67
+
+[33mcommit b0258ee4175d002185c4081c682cd086486810ab[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 23 16:01:23 2024 +0100
+
+    update General.tsx
+
+[33mcommit a023c5a8f861985653b3ae85920eee988673b134[m
+Merge: 4d0cf50 d7772a7
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Jan 23 15:54:38 2024 +0100
+
+    Merge pull request #66 from Pixilib/dev
+    
+    Dev
+
+[33mcommit d7772a7953da190b063e568e15c460c5b3532c0e[m
+Merge: ad70dac a020298
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Jan 23 15:54:10 2024 +0100
+
+    Merge pull request #65 from Pixilib/Card
+    
+    Card
+
+[33mcommit a0202987f79aa4fd05d414327877353356fe2d97[m[33m ([m[1;31morigin/Card[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 23 15:53:37 2024 +0100
+
+    update 5 files Create Card Stories #63
+
+[33mcommit ad70dace2b22616a3d2889008eeb9bd84bf23575[m
+Merge: bb2b27e 7eaf069
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Tue Jan 23 10:59:42 2024 +0100
+
+    Merge pull request #64 from Pixilib/RefactoForm
+    
+    Refacto form
+
+[33mcommit c81c6e3f0b04c376bd7dfc96f7c0289c8c47caeb[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Jan 22 15:56:39 2024 +0100
+
+    update 5 files Create Card Stories #63
+
+[33mcommit 70bbdd871f60895297bc65c5cb6ad67d89d2e880[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Sat Jan 20 23:00:52 2024 +0100
+
+    Fix imports and update form submission in LostPasswordForm and ChangePasswordForm
+
+[33mcommit 7eaf0691bcd9b8d7ccc9392b3688683742d21444[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 17:20:10 2024 +0100
+
+    Fix sign-up path in SideBar and remove unused code
+
+[33mcommit b4184ceaa61da7e69d1c5f0cc328c5e86b43fc8e[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 16:35:16 2024 +0100
+
+    Fix form input attributes in SignInForm component
+
+[33mcommit 4a617112e203d29193425f07e33c4d24987cfbae[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 16:27:18 2024 +0100
+
+    Remove unused import and variable in useAuth.ts
+
+[33mcommit 76b317e5eb478de12c902a265eae1f1b588fc7cb[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 16:26:04 2024 +0100
+
+    Remove unused loginHandle function and update SignInForm component
+
+[33mcommit 8a603a82694490803515fd1dbbda27a89246cd72[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 15:58:00 2024 +0100
+
+    refactor: :building_construction: reafctor Welcome and forms with useAuth also
+
+[33mcommit 13a022695b1608621f119097b4b2c8d5dd1101a5[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 14:51:43 2024 +0100
+
+    refactor: :building_construction: Crete a useAuth a special hook to organize mutation
+
+[33mcommit bb2b27e706e4fb476dbf546c34858f4b9586ecbf[m
+Merge: 99d1a45 ab02d94
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Fri Jan 19 13:46:00 2024 +0100
+
+    Merge pull request #61 from Pixilib/fusionSideBarToDev
+    
+    Stop tracking some files
+
+[33mcommit ab02d942054fe489225068f9a2091d6d9c6fff84[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 13:41:28 2024 +0100
+
+    Stop tracking some files
+
+[33mcommit 99d1a456f76036c3fc58e1d41ba356c7b65b9659[m
+Merge: a2e22ac 9d597fc
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 13:36:58 2024 +0100
+
+    chore: :twisted_rightwards_arrows: merge with dev impossible resolved
+
+[33mcommit 9d597fc27d520ffbd7f5abd3c3064e6431ec6907[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 12:47:38 2024 +0100
+
+    Update .gitignore file
+
+[33mcommit 5056f8011544deb9879cdc50609be72ae80a9351[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 12:26:17 2024 +0100
+
+    Merge remote-tracking branch 'origin' into SideBar
+
+[33mcommit de090194218d46f604daf0454ff27f1e2d403ca7[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 12:05:25 2024 +0100
+
+    Refactor Welcome and SignInForm components
+
+[33mcommit 3f7adebce368e802d41731770a8ad306a8d52947[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 11:56:27 2024 +0100
+
+    rebase from dev
+
+[33mcommit 00e99031187949d3a5ad29384230e87c39de49fb[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 22:15:23 2024 +0100
+
+    Update component titles and add icon to MenuItem
+
+[33mcommit 7b7e508395737d02dc9004cd5f5a518c854cd237[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 18 11:21:06 2024 +0100
+
+    Update CSS Style for SignIn and SignUp on Welcome Page #32  update 5 files
+
+[33mcommit e7aa5d74fd5cf9e956152b380e05aede3df52cd4[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 17 16:49:45 2024 +0100
+
+    welcome style
+
+[33mcommit 2ecf5e83a39bee8d0964c0dbb3fbd3c57e638599[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 18 12:39:57 2024 +0100
+
+     update 2 files
+
+[33mcommit 551a7ed390ce02b0e465cb03fc3683b9323b0313[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 19 10:06:55 2024 +0100
+
+    refactor: :recycle: WIP SideBar and refacto SignInForm
+
+[33mcommit 08cc047a839a8e24bdc533977f74845deec30751[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 18 16:07:51 2024 +0100
+
+    update Card.tsx
+
+[33mcommit b558beb8262230922e42980b00e3d0be34d0cad2[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 18 14:17:25 2024 +0100
+
+    update Dashboard.tsx
+
+[33mcommit a2e22ac788f34680cf85e0fa3bc069b0377cf90a[m
+Merge: 463f014 64e69d3
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Jan 18 14:10:12 2024 +0100
+
+    Merge pull request #49 from Pixilib/Card
+    
+     update 2 files
+
+[33mcommit 64e69d3f003212793519ffc90b29261cf2a57f9d[m
+Merge: 05ff9fa 463f014
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Jan 18 13:50:17 2024 +0100
+
+    Merge branch 'dev' into Card
+
+[33mcommit 7f6ce101a9aba3d753e1a779964e6709642fc6a5[m[33m ([m[1;31morigin/SideBar[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 18 13:42:33 2024 +0100
+
+    refactor: :construction: wip MenuItems add MenuItemsCollapse
+
+[33mcommit 05ff9fa64f3f49d90b2d0f53596fb41fd43c1959[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 18 12:39:57 2024 +0100
+
+     update 2 files
+
+[33mcommit 463f014a190c232776466b628d31d5a5d811ae36[m[33m ([m[1;32mwelcome-style[m[33m)[m
+Merge: 5631df2 8ab50f3
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Thu Jan 18 12:06:30 2024 +0100
+
+    Merge pull request #47 from Pixilib/welcome-style
+    
+    Welcome style
+
+[33mcommit 8ab50f391db3b0d4738d1ec4589fc34613a8b21e[m[33m ([m[1;31morigin/welcome-style[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 18 11:21:06 2024 +0100
+
+    Update CSS Style for SignIn and SignUp on Welcome Page #32  update 5 files
+
+[33mcommit ddcbf05f6edb4b8bdb9845e9b41c810aee2c2045[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 22:15:23 2024 +0100
+
+    Update component titles and add icon to MenuItem
+
+[33mcommit cafc084a18c05a336860cbd311eef8cde5212051[m
+Merge: 4af14d1 5631df2
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 17:19:03 2024 +0100
+
+    Merge branch 'dev' into SideBar
+
+[33mcommit 1020c0ea09a353c3e1ab0f3eb1fe308519f39b90[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 17 16:49:45 2024 +0100
+
+    welcome style
+
+[33mcommit 4af14d1bf29e32457e626e52f1f7b21c2e265608[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 16:40:37 2024 +0100
+
+    update MenuItems and Items WIP
+
+[33mcommit 5631df2c5c4344468ee20873566432807bd0419e[m
+Merge: 79dbac7 c689bca
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 17 15:26:07 2024 +0100
+
+    Merge pull request #46 from Pixilib/SideBar
+    
+    resolve conflict sigInForm
+
+[33mcommit c689bca041f48bf4d3a6b538027ff604ce7534ec[m
+Merge: 1cb9898 79dbac7
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 17 15:25:45 2024 +0100
+
+    Merge branch 'dev' into SideBar
+
+[33mcommit 1cb9898f6e5a9ec5a07dfb3faba5353875794659[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 17 12:29:36 2024 +0100
+
+    Signin form Update CSS Style for SignIn and SignUp on Welcome Page #32
+
+[33mcommit d0d896f24e5c20f93086a9c2b3d34adea98b3aad[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 17 14:51:05 2024 +0100
+
+    small
+
+[33mcommit 7a242fd96d4070f3d429405e917bbd8f9c902fae[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 15:03:18 2024 +0100
+
+    refactor: :construction: WIP MenuItems
+
+[33mcommit 79dbac7aa1341472af9848c912860aeaae9f0249[m
+Merge: 80a31a4 6856d18
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Jan 17 14:52:04 2024 +0100
+
+    Merge pull request #44 from Pixilib/sophie
+    
+    Sophie
+
+[33mcommit 80a31a4e2d777ae8f3b648274a15e9bcdc6b8174[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 17 14:51:05 2024 +0100
+
+    small
+
+[33mcommit 6856d18fee095818770ce502d7fe45e5de851701[m
+Merge: 0f824ea 9985371
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 17 13:19:28 2024 +0100
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into sophie
+
+[33mcommit 9c06476d5178446c2ace30f8803c5b6c357ea8f1[m
+Merge: 9985371 80925ac
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 17 13:07:47 2024 +0100
+
+    Merge pull request #43 from Pixilib/refactoLostPassword
+    
+    Refacto lost password
+
+[33mcommit 80925ac65e5a41002d322a0cb5533cc8e91ab8db[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 13:06:24 2024 +0100
+
+    Update forgotPassword to lostPassword in auth service
+
+[33mcommit 47ff17fbcc17cd54db964293333f13792d3a75be[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 13:00:45 2024 +0100
+
+    feat: :hammer: add button in LostPasswordForm , call API in Welcome
+
+[33mcommit 0f824eab491f804c1b11d0cd16b14b62f31631dc[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 17 12:29:36 2024 +0100
+
+    Signin form Update CSS Style for SignIn and SignUp on Welcome Page #32
+
+[33mcommit 99853710355a7fa31fca4ebe5d68c01cc98f34b7[m
+Merge: 30f0aba bc308b7
+Author: remixxx31 <69733620+remixxx31@users.noreply.github.com>
+Date:   Wed Jan 17 11:51:34 2024 +0100
+
+    Merge pull request #40 from Pixilib/fixForgotPassword
+    
+    fix: :bug: redirect to LostPassword repair #39
+
+[33mcommit bc308b74ab1f15e96819fa903f81b2837f33ad4a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 17 11:50:32 2024 +0100
+
+    fix: :bug: redirect to LostPassword repair #39
+
+[33mcommit 30f0aba1fb5a9e6bdd567fa15c8c66a30fcea3d8[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 17 10:50:49 2024 +0100
+
+    refac
+
+[33mcommit 9118d8f08ac12c99baa669226068d15f78c6b919[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 17 10:46:56 2024 +0100
+
+    use relative import
+
+[33mcommit d520ac8e040cb26dcb24b9213948601fef38600a[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 17 10:44:13 2024 +0100
+
+    refac
+
+[33mcommit 4d0cf50add989eec1b67a10dee51e44429975f05[m[33m ([m[1;32mmain[m[33m)[m
+Merge: bd205b4 ce26d74
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Jan 16 23:18:45 2024 +0100
+
+    Merge pull request #34 from Pixilib/dev
+    
+    Dev
+
+[33mcommit ce26d7438ec92bf35fe0204b5cf6bae3686ccd99[m
+Merge: c9bb8bd 55db331
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Jan 16 23:18:28 2024 +0100
+
+    Merge pull request #35 from Pixilib/sophie
+    
+    Sophie
+
+[33mcommit 55db33174ee6d4db897ee9161b435fb188fa4f85[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 16 16:58:12 2024 +0100
+
+    Update  Input and Button and SigninForm and SigninUp and Welcome
+
+[33mcommit e7f50fc16159415cc1c445257d882fa45da9ecf2[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 16 14:25:18 2024 +0100
+
+    rebase
+
+[33mcommit f7cbc647c2e057c546394b1dfad1d2df7f23ab47[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 16 14:24:26 2024 +0100
+
+    rebase project
+
+[33mcommit c43370d1d8ccf211f93d0eadaa9892436478c8bf[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 16 14:00:01 2024 +0100
+
+    rebase
+
+[33mcommit 97954f246de486ccceb587b392f4a2681e621253[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 16 13:48:01 2024 +0100
+
+    rebase project
+
+[33mcommit c9bb8bd2169fe48b9290345985ca5a7760e1b5f1[m
+Merge: f194ae8 58c9a14
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Tue Jan 16 12:43:17 2024 +0100
+
+    Merge pull request #33 from Pixilib/Panel-Admin
+    
+    Panel admin
+
+[33mcommit 58c9a141e2a89758036f3c5975f98208936d152f[m
+Merge: 6dba51a f194ae8
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Tue Jan 16 12:43:10 2024 +0100
+
+    Merge branch 'dev' into Panel-Admin
+
+[33mcommit 6dba51a4474a3c38e98c4c91248e357b63df089a[m[33m ([m[1;31morigin/Panel-Admin[m[33m)[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 16 12:42:27 2024 +0100
+
+    wip
+
+[33mcommit f194ae81e68f0e89d4b28fb441f34e5c5b67d503[m
+Merge: 440bc07 1b0ad97
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Tue Jan 16 12:41:06 2024 +0100
+
+    Merge pull request #30 from Pixilib/Input
+    
+    Input
+
+[33mcommit 13f910b88c688e02a9c510374394fd96ae9d2eba[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Jan 15 18:02:57 2024 +0100
+
+    SVG: Rename and Delete    Style : SignUpForm and SignInForm
+
+[33mcommit 1b0ad9722aedf510975fe967a457737deca3bcab[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Jan 12 14:15:01 2024 +0100
+
+    feat: :recycle: Create a component who displays differents image in Welcome component
+
+[33mcommit 27a0c770fcfeda713b6f4e337865ff0d0b5e2bae[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 11 17:22:40 2024 +0100
+
+    refactor: :lipstick: change svg and style forms
+
+[33mcommit e13ecbe656157f4a69f2840d6e25351353a60e9a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 11 14:12:50 2024 +0100
+
+    svg
+
+[33mcommit 26a40d0daa83e630026d6bd9f8ef1f5b89a457d3[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 11 13:52:25 2024 +0100
+
+    icon svg user et lock
+
+[33mcommit 2d46f571c367b24b12252e4ca68f5d55eae164eb[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 10 16:57:46 2024 +0100
+
+    style storiescards
+
+[33mcommit a8b031342d9b6062a7cea943f3fdcc14f0542782[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 11 16:14:22 2024 +0100
+
+    Add LostPasswordForm component to Welcome page
+
+[33mcommit 9b0763d26047bbf08d4127a3f528fff64fab658d[m
+Merge: 6dd4547 440bc07
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 11 16:08:13 2024 +0100
+
+    Merge branch 'dev' of https://github.com/Pixilib/GaelO_Flow_Frontend into Panel-Admin
+
+[33mcommit 440bc07a1b8437ed2a3a2c9c8be19e5158f1e287[m
+Merge: 52252dd 5f4a2c2
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Thu Jan 11 15:13:24 2024 +0100
+
+    Merge pull request #26 from Pixilib/Input
+    
+    Input
+
+[33mcommit 5f4a2c23d587acdfc52e9a01912b8b91c2ed3c47[m[33m ([m[1;31morigin/Input[m[33m)[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 11 14:47:53 2024 +0100
+
+    Add navigation functionality to Welcome component
+
+[33mcommit 6dd45477eff530222ed3fd25dd4f3010920ff739[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 11 14:12:50 2024 +0100
+
+    svg
+
+[33mcommit a0fcf7421abf1f25df0d21a2b69cbd25e3bf6b6b[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 11 13:52:25 2024 +0100
+
+    icon svg user et lock
+
+[33mcommit 412bc59ad12e3806c0951c3728f9a22d2dce2afb[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 11 11:44:03 2024 +0100
+
+    Refacto: Welcome component and Update SVG sizes and labels
+
+[33mcommit 338291274cf62163f980a95bd0a0574cdcdfd5f2[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 10 16:57:46 2024 +0100
+
+    style storiescards
+
+[33mcommit ff25b19824df67b12d79b342e83f12a3ce7ed9a7[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 10 16:44:54 2024 +0100
+
+    reafcto: Remove svgOnClick and update password visibility toggle
+
+[33mcommit 954c5afcb8b53c7b8e22a11078c065bc5635516b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 10 16:17:52 2024 +0100
+
+    Refactor Input component and update SignInForm layout
+
+[33mcommit 52252dd447db456d296e87e0f2aa4fce9698bb2c[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 10 13:04:02 2024 +0100
+
+    WIP
+
+[33mcommit 100011ceb6b7d4df1d9edcfa88e69eaba8c7c6be[m
+Merge: 7862a1b e200840
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 10 12:49:10 2024 +0100
+
+    Merge remote-tracking branch 'origin/Panel-Admin' into dev
+
+[33mcommit 7862a1ba092d8f48d370d575512dc1a89a456089[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 10 12:44:20 2024 +0100
+
+    merge signing
+
+[33mcommit f06b4ca9ae9f85d806ef6f9599afdf5d8839e809[m
+Merge: f8b5b96 9462817
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 10 12:44:19 2024 +0100
+
+    Merge branch 'register' into dev
+
+[33mcommit 946281732c487151c324c41baf2f60de7c7ee620[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Jan 10 12:34:03 2024 +0100
+
+    refac
+
+[33mcommit 12e8b71b65fd104482b4c175e96ffcd9fb267e3a[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 10 12:07:26 2024 +0100
+
+    refact:Input2
+
+[33mcommit e20084072a321632a3d9bc652bba47afda524aa6[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Jan 9 16:57:49 2024 +0100
+
+    Button stories et card stories
+
+[33mcommit 65c3eacdd94d4e245e0940750b56e51a2b19ca2a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Jan 8 17:45:46 2024 +0100
+
+    button2 stories + tailwind config
+
+[33mcommit f53b057bd289e54fea958f723b0ce4818797cb64[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 4 10:30:36 2024 +0100
+
+    ajout  cards stories
+
+[33mcommit 77dc3a4711c1660175f1f870a6e8cdf06f7ae035[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Jan 4 10:29:26 2024 +0100
+
+    ajout composant cards et stories cards + button
+
+[33mcommit 7ee290c5c58a719ef692eb47095e823d431815d9[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Jan 4 02:40:57 2024 +0100
+
+    Update SVG sizes and replace Input components and change input2component
+
+[33mcommit 78ed446514a4e5b2c3d9123275bb9b87d4105bc7[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Jan 3 17:24:24 2024 +0100
+
+    Style : Welcome (logo, and visual home)  and Admin General
+
+[33mcommit 32e65e295d93ace4a595fe7602cc45f1b5735c45[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 3 16:13:32 2024 +0100
+
+    Refactor Input2 component and update tailwind.config.js
+
+[33mcommit c190fbe15cfa0898a808c46532ec4349f9324279[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Jan 3 01:10:13 2024 +0100
+
+    feat:new version of input in progress
+
+[33mcommit 750e90b898e04c5eb98428600991efc628506d34[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Tue Jan 2 10:50:23 2024 +0100
+
+    Add new files and modify existing files
+
+[33mcommit 475e04b2d28d170f2e5fb972a8143cbbdf8cf0c5[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Dec 28 16:53:44 2023 +0100
+
+    Create Root
+
+[33mcommit 92a5883417fb4b88d44b2225ded615660011872c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 28 16:45:06 2023 +0100
+
+    feat: add signUpFom with toastSuccess and toastError
+
+[33mcommit f8b5b96e32b03e4f0fd53d96900009e28b566f3e[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Dec 28 12:59:03 2023 +0100
+
+    wip
+
+[33mcommit 52fb864b2f2b34f17972a3bd11ee7dbbe223b379[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Dec 28 12:53:29 2023 +0100
+
+    update
+
+[33mcommit 13fae094a7729803a75bcb82c409d5bcd3dc3ec2[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Dec 28 12:43:58 2023 +0100
+
+    update
+
+[33mcommit 2549bd7b5eae2e51678387108d54d28632817b49[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Dec 28 12:43:09 2023 +0100
+
+    refact
+
+[33mcommit 0273ec8b7fa7f5f4088c71b40688d7cda4632a55[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Dec 28 12:27:03 2023 +0100
+
+    refac
+
+[33mcommit 885ae74d49af15b5546e1b7e590931d91b905d83[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Thu Dec 28 11:35:34 2023 +0100
+
+    cleaning
+
+[33mcommit 3c6db18c399cd585476f0385202964105d30c969[m
+Merge: 1d835a9 fc1a6e9
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Thu Dec 28 10:47:09 2023 +0100
+
+    Merge pull request #20 from Pixilib/Storybook
+    
+    Storybook
+
+[33mcommit fc1a6e9919a845cc968e4d3983841e7ee1ba0317[m
+Merge: e6d5d56 1d835a9
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Thu Dec 28 10:47:01 2023 +0100
+
+    Merge branch 'dev' into Storybook
+
+[33mcommit e6d5d567e1902ad9951f08ee2e3eb6cc2a0cf145[m
+Merge: 7e3bad0 905110d
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Thu Dec 28 10:44:56 2023 +0100
+
+    Merge pull request #19 from Pixilib/section
+    
+    Section
+
+[33mcommit 905110d48f2b59e2b16ab55c2bafc85d10ecf89d[m
+Merge: c001445 7e3bad0
+Author: Sophie <152176619+SophieLab@users.noreply.github.com>
+Date:   Thu Dec 28 10:44:48 2023 +0100
+
+    Merge branch 'Storybook' into section
+
+[33mcommit 7e3bad0bbe10e5935e815d585ba89ddb383ae3ce[m
+Merge: 37cbaeb bd205b4
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 21 15:54:00 2023 +0100
+
+    Merge remote-tracking branch 'origin' into Storybook
+
+[33mcommit 1d835a99a8fb0b7f40e0728b974aa6f6abdbfdb9[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Dec 20 17:39:46 2023 +0100
+
+    refac
+
+[33mcommit c001445ca44f845f281ecde7bb29f8d936029dfe[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Dec 20 17:08:15 2023 +0100
+
+    Create  General :   Style div
+
+[33mcommit 410c0999d9d418161649cc4d21541ff2a9b1720c[m
+Merge: 17a8c47 37cbaeb
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 20 16:46:35 2023 +0100
+
+    Merge pull request #18 from Pixilib/Storybook
+    
+    Storybook
+
+[33mcommit 37cbaeb4628ae438f072bcf54397172aeab038b5[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Dec 20 16:44:40 2023 +0100
+
+    authenticateRoot
+
+[33mcommit 657ea31c177eb103ecfb98bc0f8f816890307bb2[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Dec 20 15:06:54 2023 +0100
+
+    feature: add Authenticator Root
+
+[33mcommit 17a8c47e17b1b1ea032224b02efe3f10b767cb47[m
+Merge: 23bf2d5 23755f8
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 20 16:27:36 2023 +0100
+
+    Merge pull request #17 from Pixilib/Storybook
+    
+    Storybook
+
+[33mcommit 23755f8e125bf0ad1cdb157f2117d8b8a08edcbd[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Wed Dec 20 16:27:01 2023 +0100
+
+    small
+
+[33mcommit b8ba782428b04b1989dd234a49ecd4988ea6d176[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Dec 20 14:58:03 2023 +0100
+
+    add authenticator component
+
+[33mcommit 823f95b8318db2a42932869db8b320e8949e2f2c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Dec 20 13:59:13 2023 +0100
+
+    Update routes and components
+
+[33mcommit 4c8a5665e0b99abc207405a4b1eb7dc2344fcec9[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Dec 19 17:16:04 2023 +0100
+
+    Style div : Flex, color, text + Tailwind config + Style Button Orange
+
+[33mcommit 418ba33b3a7757e32e72e1ea6984fcd4afa9f17f[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Dec 18 16:09:58 2023 +0100
+
+    style div flex
+
+[33mcommit 23bf2d56a457bb81713854600946fa4303f71e69[m
+Merge: efa817b 09bebb9
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Sat Dec 16 22:13:38 2023 +0100
+
+    Merge pull request #16 from Pixilib/Storybook
+    
+    Storybook
+
+[33mcommit 09bebb9cb64666f14b7f193743b1181cccc4eaf8[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Dec 15 12:00:10 2023 +0100
+
+    add STorybook and 2 stories
+
+[33mcommit 9ed784b7807af9f0b3f895f0805046dc2c36f691[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Dec 15 00:07:14 2023 +0100
+
+    feat: install storybook+ fix css preview
+
+[33mcommit 848713857441947c4fcb28938b977f012e7a5bc8[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Dec 14 17:17:24 2023 +0100
+
+    style  div
+
+[33mcommit a7a6e3e38389ec7c4bb045d14bbc4f408e29c613[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 14 16:28:18 2023 +0100
+
+    feat:NavBar feat in progress
+
+[33mcommit 3da80d9f58a0bd6b0bfc031fc7ec0f634734ab3c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 14 14:36:31 2023 +0100
+
+    feat: logout and add set role in store + logout
+
+[33mcommit 257b5ebbffbe2654986b798d0322f2097ddb4bd2[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 14 12:14:12 2023 +0100
+
+    wip
+
+[33mcommit be6557631878175da4cb37707788f1a3d5ccf6fb[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 14 12:11:53 2023 +0100
+
+    feat: login , change state redux ok, redirect Home component ok
+
+[33mcommit bd205b466558461596a9fc8fe9ca784178db3d2e[m
+Merge: 21632b2 efa817b
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 13 15:25:00 2023 +0100
+
+    Merge pull request #13 from Pixilib/dev
+    
+    Dev
+
+[33mcommit efa817bc216fad8da4e485fae6ef0f2ac4f32c0d[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 13 14:23:39 2023 +0000
+
+    fix deps
+
+[33mcommit f16391134bbb22fd5e1715e934e0e66365f65472[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 13 14:15:20 2023 +0000
+
+    fgf
+
+[33mcommit 2a0453bb5740c3ca57e4a1ee020d20c7cc56a077[m
+Merge: da3ca43 02ed457
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 13 14:09:01 2023 +0000
+
+    Merge branch 'react-query' into dev
+
+[33mcommit 02ed4575b7b9410198ae95e1a94c5a2507a3a054[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 13 14:07:24 2023 +0000
+
+    update
+
+[33mcommit 59c6d3597b2ed4a940f3ee79a0860d392871c8bc[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 13 14:04:48 2023 +0000
+
+    fiuxes
+
+[33mcommit b3ac11058af6fa7e66ca39211c1d734853ff2d37[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Wed Dec 13 13:39:34 2023 +0000
+
+    Co-authored-by: remixxx31 <remixxx31@users.noreply.github.com>
+
+[33mcommit 75776d12516e8333cded12ea0dd7b6a33cb6b4ac[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Dec 13 13:52:39 2023 +0100
+
+    wip signin
+
+[33mcommit 2608fc90c9613589550dc19c108b3893d9c1f92b[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Wed Dec 13 11:24:47 2023 +0100
+
+    refacto: reaorganize and use useMutation and more...
+
+[33mcommit 21632b276401f860e34584271d17d06ca4035098[m
+Merge: 703010b da3ca43
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Dec 12 23:45:09 2023 +0100
+
+    Merge pull request #11 from Pixilib/dev
+    
+    Dev
+
+[33mcommit da3ca432934375da3bf448de909cefaf0bfe2722[m
+Merge: 735db8c 3b07929
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Tue Dec 12 23:44:46 2023 +0100
+
+    Merge pull request #10 from Pixilib/sophie
+    
+    Sophie
+
+[33mcommit 313b00d195ef9ad00fbac7656dbd186e470b14ff[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Tue Dec 12 21:36:48 2023 +0100
+
+    feat fetch without react-query
+
+[33mcommit 3b07929ec23d0ad747f77b22de063b4e4c991b44[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Dec 11 18:00:02 2023 +0100
+
+    wip
+
+[33mcommit 97575036278c216b2a696a1786a39eb036aea042[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Dec 11 10:28:04 2023 +0100
+
+    install deps
+
+[33mcommit 703010baf19a6765f6c0d4c940e06093c3965668[m
+Merge: 0d3aa36 735db8c
+Author: Sophielabyt <152176619+Sophielabyt@users.noreply.github.com>
+Date:   Mon Dec 11 10:26:16 2023 +0100
+
+    Merge pull request #9 from Pixilib/dev
+    
+    Dev
+
+[33mcommit 735db8cca8ef2a4973b4dd211672d12f17d88331[m
+Merge: c30b95c 8bb8670
+Author: Sophielabyt <152176619+Sophielabyt@users.noreply.github.com>
+Date:   Mon Dec 11 10:25:57 2023 +0100
+
+    Merge pull request #8 from Pixilib/sophie
+    
+    Sophie
+
+[33mcommit 8bb8670af4732db20ef5241152003d6a5d7ae3ae[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Dec 11 10:19:59 2023 +0100
+
+    wip
+
+[33mcommit 02cfa918d234d6fd1f325a64c40f10ea69eb662d[m
+Merge: fab343f 99c3da7
+Author: Sophielabyt <152176619+Sophielabyt@users.noreply.github.com>
+Date:   Mon Dec 11 10:19:19 2023 +0100
+
+    Merge pull request #7 from Pixilib/react-query
+    
+    React query
+
+[33mcommit 99c3da757abd0b4faf8076fc2b784be9360a594a[m
+Merge: 3271d36 fab343f
+Author: Sophielabyt <152176619+Sophielabyt@users.noreply.github.com>
+Date:   Mon Dec 11 10:19:12 2023 +0100
+
+    Merge branch 'sophie' into react-query
+
+[33mcommit 3271d36934df9328734f21e9cc98bb611d92252c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Dec 8 16:30:22 2023 +0100
+
+    Add Redux Toolkit and React Redux types
+
+[33mcommit b56bcdb720793aafc8461be5f06db85d2ee3ceac[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Dec 8 14:12:35 2023 +0100
+
+    feat: Router | Refactor code and add new dependencies
+
+[33mcommit 6cfcb8adf817a47cc927c7780f1c9593f56296c3[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Fri Dec 8 10:52:33 2023 +0100
+
+    refacto: useFetch with methods of Gaelo
+
+[33mcommit 064fc69719a8f3cadca24466cae90ce25e1f431d[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 7 17:27:25 2023 +0100
+
+    feat: fetch api login OK  + reverse proxy
+
+[33mcommit fab343f677bf240a4796607f3bf82a44cfdfb51c[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Dec 7 16:42:02 2023 +0100
+
+    style: color input import SVG
+
+[33mcommit 2ad4b75642cfaf7a40383672f9baf0dd1973e136[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 7 14:47:03 2023 +0100
+
+    custom-hooks with react-query + hook signIn
+
+[33mcommit bfcfb1d90d898c5a72a639625fe3ef0af2d35e1c[m
+Author: remixxx31 <remi.perray@epitech.eu>
+Date:   Thu Dec 7 12:06:39 2023 +0100
+
+    feat: install react-query
+
+[33mcommit 01dd5313138267c8da07053c50de996bba65e14a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Dec 7 11:40:38 2023 +0100
+
+    prepare api
+
+[33mcommit 0d3aa368f976a05bf606a252fd26cee73488b96e[m
+Merge: 341f310 c30b95c
+Author: Sophielabyt <152176619+Sophielabyt@users.noreply.github.com>
+Date:   Thu Dec 7 11:17:47 2023 +0100
+
+    Merge pull request #6 from Pixilib/dev
+    
+    Dev
+
+[33mcommit c30b95c53445dc8ef6a115fdcf79efe70da34a23[m
+Merge: 341f310 e6e53a2
+Author: Sophielabyt <152176619+Sophielabyt@users.noreply.github.com>
+Date:   Thu Dec 7 11:17:27 2023 +0100
+
+    Merge pull request #5 from Pixilib/sophie
+    
+    fix
+
+[33mcommit e6e53a2b24b0987417ffa6feec9a08ea9cb220d5[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Dec 7 11:16:56 2023 +0100
+
+    fix
+
+[33mcommit 341f3103fefc21f12a354e03dad6640ace8c987f[m
+Merge: 5c25ac0 806f5c3
+Author: Sophielabyt <152176619+Sophielabyt@users.noreply.github.com>
+Date:   Thu Dec 7 11:15:27 2023 +0100
+
+    Merge pull request #4 from Pixilib/main-component
+    
+    Main component
+
+[33mcommit 806f5c33825be8c7af53b4eb271986a69d0dc146[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Thu Dec 7 10:38:52 2023 +0100
+
+    add images
+
+[33mcommit 7de7a5cbddbbb241b180acf40e2769c8c34af44a[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Wed Dec 6 18:24:07 2023 +0100
+
+    page d'accueil
+
+[33mcommit 080999cc8e5c957fcdf713e4537a4f8fa867a276[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Tue Dec 5 16:27:19 2023 +0100
+
+    shadow, input
+
+[33mcommit e262010589b4e0f40d56a592f1af62a32665139c[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Dec 4 16:40:52 2023 +0100
+
+    work login page
+
+[33mcommit b4277cd937d9117d0b399b5c74ccdbcac59820e9[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Dec 4 12:41:51 2023 +0100
+
+    fdf
+
+[33mcommit 5c25ac0bf903d5552f079e56643aaccf5480960e[m
+Author: Sophie Labyt <labytsophie@gmail.com>
+Date:   Mon Dec 4 12:40:08 2023 +0100
+
+    page d'accueil
+
+[33mcommit 26b7234e1360ca2c484fb1f25ea683e6704b3e69[m
+Author: remixxx31 <remiperray@gmail.com>
+Date:   Mon Dec 4 01:16:32 2023 +0100
+
+    wip
+
+[33mcommit 2a47f99167702e4dd3771b150160cc84f0d1da80[m
+Merge: 3cb7021 1b7d9d4
+Author: remixxx31 <remiperray@gmail.com>
+Date:   Mon Dec 4 01:15:28 2023 +0100
+
+    Merge branch 'main' of github.com:Pixilib/GaelO_Flow_Frontend
+
+[33mcommit 3cb70211296aa8e857b4dcff4434572bacced3f2[m
+Author: remixxx31 <remiperray@gmail.com>
+Date:   Mon Dec 4 01:14:50 2023 +0100
+
+    style: Stylise Home Page
+
+[33mcommit e2d0251beb05e06ef859ad7a4bd3246045ceb101[m
+Author: remixxx31 <remiperray@gmail.com>
+Date:   Sun Dec 3 21:11:17 2023 +0100
+
+    feat: component SignInForm and bg-gradient
+
+[33mcommit 1b7d9d4b24f93d287c5424167f4e97b37ffc98a5[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Dec 1 18:49:04 2023 +0100
+
+    Update LICENSE - MIIT-0
+
+[33mcommit e1a46de269ad9557d5309420e2f230f5c52f6cb7[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Dec 1 18:34:35 2023 +0100
+
+    Update LICENSE
+
+[33mcommit a40e0d238f7abd1eedefc1bf6ef6edba0ba65879[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Fri Dec 1 18:30:46 2023 +0100
+
+    Create LICENSE
+
+[33mcommit 53519d4bfc512c91b58e5e54fd2869bab03eae19[m
+Author: salim kanoun <salim.kanoun@gmail.Com>
+Date:   Mon Nov 27 14:58:17 2023 +0100
+
+    init projet
+
+[33mcommit 6c7e3aa69546bd86bcdcff6574034e3dcaef5f65[m
+Author: Salim Kanoun <salim.kanoun@gmail.com>
+Date:   Sat Sep 30 16:08:56 2023 +0200
+
+    Initial commit

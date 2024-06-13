@@ -1,7 +1,7 @@
-import { RolesUserResponse, UserResponse, UserPayload, UserUpdatePayload, Role } from '../utils/types';
+import { UserResponse, UserPayload, UserUpdatePayload, Role } from '../utils/types';
 import axios from "./axios";
 
-export const getRoles = (): Promise<RolesUserResponse> => {
+export const getRoles = (): Promise<Role[]> => {
   return axios
     .get("/api/roles")
     .then(function (response) {
