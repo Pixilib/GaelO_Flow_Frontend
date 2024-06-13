@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { RiAdminFill as EditIcon } from "react-icons/ri";
 import { BsTrashFill as DeleteIcon } from "react-icons/bs";
-import { Table, Badge, Button } from "../../ui";
+import { Table, Button, Label } from "../../ui";
 import { Colors } from "../../utils/enums";
-import { Label } from "../../utils/types";
+import { Label as LabelType } from "../../utils/types";
 import LabelDropDown from "./LabelDropdown";
 interface LabelsTableProps {
-    data: Label[];
+    data: LabelType[];
     onDeleteLabel: (labelName: string) => void;
 }
 
@@ -15,7 +15,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
     data = [],
     onDeleteLabel,
 }) => {
-    const [isOpen, setIsOpen] = useState(false); // État pour contrôler l'ouverture du dropdown
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleDropDownOpen = () => {
         setIsOpen(!isOpen);
@@ -23,15 +23,14 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
 
     const handleOptionSelect = (option: string) => {
         console.log("Selected Option:", option);
-        // Vous pouvez ajouter votre logique pour éditer l'étiquette ici
-        setIsOpen(false); // Fermez le dropdown après la sélection
+        setIsOpen(false);
     };
 
-    const columns: ColumnDef<Label>[] = [
+    const columns: ColumnDef<LabelType>[] = [
         {
             accessorKey: "Name",
             header: "Label",
-            cell: (info) => <Badge value={info.getValue() as string} />,
+            cell: (info) => <Label value={info.getValue() as string} />
         },
         {
             header: "Actions",
@@ -40,7 +39,6 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
                 const labelId = row.original.Name;
                 return (
                     <div className="flex justify-center gap-2.5">
-                        {/* Utilisez le composant LabelDropDown */}
                         <LabelDropDown
                             options={["Edit", "Delete"]}
                             onSelectOption={handleOptionSelect}
