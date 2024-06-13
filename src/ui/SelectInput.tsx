@@ -86,7 +86,7 @@ const SelectInput: React.FC<SelectionInputProps> = ({
     formatGroupLabel={formatGroupLabel}
     styles={{ ...customStyles, ...styles }}
     value={value}
-    closeMenuOnSelect={false}
+    closeMenuOnSelect={true}
     {...props}
   />
 );
