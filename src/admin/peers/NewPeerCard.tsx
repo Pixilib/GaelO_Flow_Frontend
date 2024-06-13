@@ -39,10 +39,10 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
                             <Input required label="Url" bordered value={url} onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)} />
                         </div>
                         <div className="w-1/2 px-2">
-                            <Input label="Username" bordered value={username} onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} />
+                            <Input label="Username" bordered value={username} autocomplete="off" onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} />
                         </div>
                         <div className="w-1/2 px-2">
-                            <Input label="Password" type="password" bordered value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
+                            <Input label="Password" type="password" autocomplete="off" bordered value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
                         </div>
                     </div>
                     <CardFooter className="flex justify-center bg-stone-100">

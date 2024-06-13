@@ -15,6 +15,8 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
     getPageCount,
     getPrePaginationRowModel,
   } = table;
+
+  const pageCount = getPageCount()
   const { pageIndex, pageSize } = getState().pagination;
   const totalRows = getPrePaginationRowModel().rows.length;
   const btnClassFooter = "border-none bg-transparent p-2 focus:outline-none text-dark";
@@ -34,7 +36,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
           <button
             className={`${btnClassFooter}`}
             onClick={() => setPageIndex(0)}
-            disabled={!getCanPreviousPage}
+            disabled={!getCanPreviousPage()}
             aria-label="Go to the first page!"
           >
             <MdSkipPrevious size="2em" />
@@ -42,26 +44,26 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
           <button
             className={`${btnClassFooter}`}
             onClick={() => setPageIndex(Math.max(pageIndex - 1, 0))}
-            disabled={!getCanPreviousPage}
+            disabled={!getCanPreviousPage()}
             aria-label="Go to the previous page!"
           >
             <GrPrevious size="1.3em" />
           </button>
           <span className="flex items-center mx-2">
-            <em className="mr-1">Page</em> <strong>{pageIndex + 1} of {getPageCount()}</strong>
+            <em className="mr-1">Page</em> <strong>{pageIndex + 1} of {pageCount}</strong>
           </span>
           <button
             className={`${btnClassFooter}`}
-            onClick={() => setPageIndex(Math.min(pageIndex + 1, getPageCount() - 1))}
-            disabled={!getCanNextPage}
+            onClick={() => setPageIndex(Math.min(pageIndex + 1, pageCount - 1))}
+            disabled={!getCanNextPage()}
             aria-label="Go to the next page!"
           >
             <GrNext size="1.3em" />
           </button>
           <button
             className={`${btnClassFooter}`}
-            onClick={() => setPageIndex(getPageCount() - 1)}
-            disabled={!getCanNextPage}
+            onClick={() => setPageIndex(pageCount - 1)}
+            disabled={!getCanNextPage()}
             aria-label="Go to the last page"
           >
             <MdSkipNext size="2em" />

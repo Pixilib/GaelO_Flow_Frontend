@@ -13,7 +13,7 @@ const Popover: React.FC<PopoverProps> = ({
   popover,
   withOnClick = "false",
   placement = 'bottom',
-  className,
+  className = '',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 

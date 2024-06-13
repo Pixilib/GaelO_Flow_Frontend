@@ -59,11 +59,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
             header: 'Address',
         },
         {
-            accessorKey: 'port',
-            header: 'Port',
-            cell: (row: any) => <Badge value={row.getValue() as number} />,
-        },
-        {
             accessorKey: 'password',
             header: 'Password',
             cell: (row: any) => {
@@ -99,13 +94,19 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
                 <div className="h-2"></div>
             </CardBody>
-            <CardFooter className="flex justify-center mt-0 space-x-4" color={Colors.light}>                <Button color={Colors.orange} onClick={reset}>
-                <RestartIcon size="20px" title="Restart" />
-            </Button>
+            <CardFooter className="flex justify-center mt-0 space-x-4" color={Colors.light}>
+                <Button color={Colors.orange} onClick={reset}>
+                    <RestartIcon size="20px" title="Restart" />
+                </Button>
                 <Button color={Colors.danger} >
                     <IoClose size="20px" title="Shutdown" />
                 </Button>
-                <Popover popover={orthancSystem ? <pre>{JSON.stringify(orthancSystem, null, 2)}</pre> : <></>} placement="bottom" >
+                <Popover popover={orthancSystem ?
+                    <div className='overflow-x-auto'>
+                        <pre className='whitespace-pre-wrap'>{JSON.stringify(orthancSystem, null, 2)}</pre>
+                    </div>
+                    : <></>
+                } placement="bottom" >
                     <Button color={Colors.primary} onClick={orthancInfoHandler}>
                         <BsQuestionLg size="20px" title="Info" />
                     </Button>
