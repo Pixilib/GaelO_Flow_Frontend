@@ -98,8 +98,6 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                             color="#DF3B20"
                             onClick={() => onDelete(roleName)}
                         />
-       
-
                     </div>
                 )
             }
