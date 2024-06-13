@@ -11,7 +11,6 @@ type InputProps = {
   svgLeft?: React.ReactNode;
   svgRight?: React.ReactNode;
   bordered?: boolean;
-  roundedLeft?: boolean;
   roundedRight?: boolean;
   min?: number;
   max?: number;
@@ -62,7 +61,6 @@ const Input = ({
 
   // Génération de la classe CSS pour contrôler les arrondis
   const borderClasses = bordered ? " border-2 border-gray " : "border-none";
-  const roundedLeftClass = roundedLeft ? "rounded-xl" : "rounded-none";
   const roundedRightClass = roundedRight ? "rounded-xl" : "rounded-none";
 
   return (
@@ -93,7 +91,7 @@ const Input = ({
           className={`
           peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""}
            ${borderClasses}
-           text-gray-600 w-full ${roundedLeftClass} ${roundedRightClass} text-sm disabled:pointer-events-none 
+           text-gray-600 w-full ${roundedRightClass} text-sm disabled:pointer-events-none 
            disabled:opacity-50 ${InputClassName}${className}
            `}
           {...props}

@@ -6,6 +6,8 @@ import Input from "./Input";
 import Label from "./Label";
 import ToggleEye from "./ToggleEye";
 import Card, { CardHeader, CardBody, CardFooter } from "./Card";
+import FormCard from "./FormCard";
+import FormButton from "./FormButton";
 import Popover from "./Popover";
 
 import FilterTable from "./table/FilterTable";
@@ -35,6 +37,8 @@ export {
     ConfirmModal,
     CloseButton,
     DropDown,
+    FormCard,
+    FormButton,
     FilterTable,
     Footer,
     Input,

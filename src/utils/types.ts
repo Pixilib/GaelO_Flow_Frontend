@@ -105,14 +105,14 @@ export type ChangePasswordPayload = {
     UserId: number;
 }
 
-export interface Peer {
+export type Peer = {
     name: string;
     password: string;
     url: string;
     username: string;
 }
 
-export interface Modality {
+export type Modality = {
     name: string;
     aet: string;
     host: string;
@@ -120,7 +120,7 @@ export interface Modality {
     manufacturer: string;
 }
 
-export interface Label {
+export type Label = {
     Name: string;
 }
 

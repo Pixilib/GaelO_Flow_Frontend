@@ -72,7 +72,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
       onError: (error: any) => {
         toastError(
           "An error occurred during updating options." +
-            (error?.data?.message ?? "")
+          (error?.data?.message ?? "")
         );
       },
     }
@@ -155,10 +155,10 @@ const Retrieve = ({ data }: RetrieveProps) => {
               <Badge
                 value={timeDelta ?? ""}
                 className={`
-                                rounded-full bg-[#CDFFCD] shadow-lg 
+                            rounded-full bg-[#CDFFCD] shadow-lg 
                               text-black h-10 w-auto text-nowrap
                                 flex items-center text-sm mt-2
-                               `}
+                    `}
               />
             </div>
           </div>
