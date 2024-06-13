@@ -75,7 +75,6 @@ export type Role = {
     AutoRouting: boolean;
     ReadAll: boolean;
 }
-export type RolesUserResponse = Role[];
 export type User = {
     Id: number;
     Firstname: string;
@@ -130,9 +129,4 @@ export type Oauth2Config = {
     Provider: string;
     AuthorizationUrl: string;
     ClientId: string;
-}
-
-export interface Roles{
-    ROleName: string;
-    label: string;
 }

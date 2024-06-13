@@ -25,10 +25,12 @@ export const addLabel = (payload: Label): Promise<void> => {
         });
 };
 
-export const getRolesByLabelName = (labelName: string): Promise<void> => { 
+export const getRolesByLabelName = (labelName: string): Promise<string[]> => { 
     return axios
         .get(`/api/labels/${labelName}/roles`) 
-        .then(response => response.data)
+        .then(response => {
+            console.log(response.data)
+            return response.data})
         .catch(error => {
             if (error.response) {
                 throw new Error(`Error: ${error.response.status} - ${error.response.data.message}`);

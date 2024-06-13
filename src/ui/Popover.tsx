@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 type PopoverProps = {
   children: React.ReactNode;
   popover: React.ReactNode;
-  withOnClick?: boolean;
   placement?: 'top' | 'right' | 'bottom' | 'left';
   className?: string;
 };
@@ -11,7 +10,6 @@ type PopoverProps = {
 const Popover: React.FC<PopoverProps> = ({
   children,
   popover,
-  withOnClick = "false",
   placement = 'bottom',
   className = '',
 }) => {
@@ -32,15 +30,15 @@ const Popover: React.FC<PopoverProps> = ({
     }
   };
 
-  const handleEvent = withOnClick ? { onClick: () => setIsOpen(!isOpen) } : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
-
   return (
-    <div {...handleEvent} className="relative" >
-      {children}
-      <div className="z-50 cursor-pointer " >
+    <div className="relative" >
+      <span onClick={() => setIsOpen(!isOpen)}>
+        {children}
+      </span>
+      <div className="cursor-pointer" >
         {isOpen && (
           <div
-            className={` ${getPlacementClasses(placement)} z-100 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+            className={` ${getPlacementClasses(placement)} rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
           >
             {popover}
           </div>
