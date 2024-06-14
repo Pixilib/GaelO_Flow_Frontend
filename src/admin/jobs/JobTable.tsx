@@ -24,7 +24,6 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       cell: (row: any) => (
         <Badge
           value={row.getValue()}
-          className="rounded-full bg-badge-grayCustom text-badge-blue-text"
         />
       ),
       enableColumnFilter: true,
@@ -35,7 +34,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       cell: (row: any) => (
         <Badge
           value={row.getValue()}
-          className="rounded-full bg-[#CDFFCD] text-success"
+          variant="success"
         />
       ),
     },
