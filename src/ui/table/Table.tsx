@@ -44,12 +44,11 @@ function Table<T>({
   pinFirstColumn = false, 
   pinLastColumn = false,
 }: TableProps<T>) {
-  const initialPageSize = Math.min(pageSize, data.length);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0, // initial page index
-    pageSize: initialPageSize, // default page size
+    pageSize: pageSize, // default page size
   });
 
   const handlePageSizeChange = (newPageSize: number) => {
@@ -157,7 +156,7 @@ function Table<T>({
         </table>
       </div>
       <div className="w-full bg-white shadow-md rounded-b-xl">
-        {data.length > 0 && table ? (
+        {data.length > 0 ? (
           <Footer
             table={table}
             onPageSizeChange={handlePageSizeChange}

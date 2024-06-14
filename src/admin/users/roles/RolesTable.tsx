@@ -102,7 +102,6 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                 headerColor={Colors.almond}
                 enableSorting
                 headerTextSize={"xs"}
-                pageSize={2}
                 pinFirstColumn={true}
                 pinLastColumn={true}
             />

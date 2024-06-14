@@ -45,7 +45,7 @@ export const getPeers = (): Promise<Peer[]> => {
         });
 };
 export const echoPeer = (name: string): Promise<void> => {
-    return axios.post("/api/peers/" + name + "/echo")
+    return axios.get("/api/peers/" + name + "/system")
         .then(() => undefined)
         .catch(handleAxiosError);
 };
