@@ -5,7 +5,7 @@ import { deleteUser, getUsers } from "../../../services/users";
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
 import { useCustomToast } from "../../../utils/toastify";
-import { User, UserResponse } from "../../../utils/types";
+import { User } from "../../../utils/types";
 import { Colors } from "../../../utils/enums";
 
 import { Button, Spinner } from "../../../ui";
@@ -23,7 +23,7 @@ const Users = ({ className }: UsersProps) => {
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
 
   const { data: users, isPending: isLoadingUsers } =
-    useCustomQuery<UserResponse>(["users"], () => getUsers(), {
+    useCustomQuery<User[]>(["users"], () => getUsers(), {
       enabled: true,
     });
   const deleteMutation = useCustomMutation<void, number>(
@@ -38,7 +38,7 @@ const Users = ({ className }: UsersProps) => {
       },
     }
   );
-  
+
   const editUser = (user: User) => {
     setUserToEdit(user);
     setIsCreating(false);
@@ -46,15 +46,15 @@ const Users = ({ className }: UsersProps) => {
   const deleteUserHandler = async (user: User) => {
     const confirmContent = (
       <div className="italic">
-      Are you sure you want to delete this user: 
-      <span className="text-xl not-italic font-bold text-primary"> {user.Firstname} {user.Lastname} ?</span> 
-    </div>
+        Are you sure you want to delete this user:
+        <span className="text-xl not-italic font-bold text-primary"> {user.Firstname} {user.Lastname} ?</span>
+      </div>
     );
-    if (await confirm({content: confirmContent})) {
+    if (await confirm({ content: confirmContent })) {
       deleteMutation.mutate(user.Id);
     }
   };
-  
+
   return (
     <div
       className={`flex flex-col h-full custom-scrollbar overflow-y-auto ${className}`}
@@ -63,7 +63,10 @@ const Users = ({ className }: UsersProps) => {
       {isLoadingUsers ? (
         <Spinner />
       ) : (
-        <UsersTable data={users || []} onEdit={editUser} onDelete={deleteUserHandler} />
+        <UsersTable data={users || []}
+          onEdit={editUser}
+          onDelete={deleteUserHandler}
+        />
       )}
       {userToEdit === null && !isCreating && (
         <div className="flex justify-center mx-10 mt-12">
@@ -75,7 +78,9 @@ const Users = ({ className }: UsersProps) => {
             }}
             className="flex justify-center gap-4 mb-10 w-52 h-11 hover:successHover"
           >
-            <CreateUser size={"1.3rem"} />
+            <CreateUser
+              size={"1.3rem"}
+            />
             Create User
           </Button>
         </div>
@@ -89,17 +94,17 @@ const Users = ({ className }: UsersProps) => {
           />
         ) : null}
         {
-        userToEdit ? (
-          <EditUserForm
-            title={"Edit User"}
-            className="bg-[#EFEFEF]"
-            onClose={() => {
-              setUserToEdit(null);
-              setIsCreating(false);
-            }}
-            userData={userToEdit}
-          />
-        ) : null}
+          userToEdit ? (
+            <EditUserForm
+              title={"Edit User"}
+              className="bg-[#EFEFEF]"
+              onClose={() => {
+                setUserToEdit(null);
+                setIsCreating(false);
+              }}
+              userData={userToEdit}
+            />
+          ) : null}
       </div>
     </div>
   );

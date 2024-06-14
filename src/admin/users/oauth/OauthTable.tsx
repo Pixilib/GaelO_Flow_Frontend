@@ -12,7 +12,6 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
         {
             header: "Name",
             accessorKey: "Name",
-
         },
         {
             header: "Provider",
@@ -41,7 +40,6 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
             }
         }
     ]
-
     return (
         <div className="mx-5 mt-4">
             <Table

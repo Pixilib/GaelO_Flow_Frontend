@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
 import { BsPersonCheckFill as SubmitUser } from 'react-icons/bs';
-import { getRoles, postUsers } from '../../../services/users';
+import { getRoles, postUsers } from '../../../services';
 import {
   useCustomMutation,
   useCustomQuery,

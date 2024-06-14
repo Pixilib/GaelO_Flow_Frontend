@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 
 import { useCustomToast, Colors,useCustomMutation, useCustomQuery, UserUpdatePayload, User, Role,Option } from "../../../utils";
-import { getRoles, updateUser } from "../../../services/users";
+import { getRoles, updateUser } from "../../../services";
 
 import { Button, Card, CardBody, CardHeader, CloseButton, Input, Label, SelectInput } from "../../../ui";
 
