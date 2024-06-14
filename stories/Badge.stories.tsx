@@ -1,77 +1,79 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Badge } from '../src/ui/Badge';
 
-const meta: Meta<typeof Badge> = {
+const meta = {
   title: 'GAELO FLOW UI/Badge',
   component: Badge,
   argTypes: {
-    value: {
-      control: 'text',
-      defaultValue: 'Badge',
-    },
-    backgroundColor: {
-      control: 'color',
-      defaultValue: '#E0E7FF',
-    },
-    textColor: {
-      control: 'color',
-      defaultValue: '#3730A3',
-    },
-    borderColor: {
-      control: 'color',
-      defaultValue: '#C7D2FE',
-    },
-    className: {
-      control: 'text',
-      defaultValue: 'text-sm py-1.5 px-3',
-    },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: 'Displays a label badge typically used for indicating status or categorizing items.',
+    value: { control: 'text' },
+    className: { control: 'text' },
+    size: { 
+      control: 'select', 
+      options: ["sm", "md", "lg", "xl"] 
       },
-    },
-    tags: ['autodocs'],
-  },
-};
+      variant: { 
+        control: 'select', 
+        options: ["default", "success", "danger", "warning"] 
+        },
+        },
+      tags: ['autodocs'],
+} satisfies Meta<typeof Badge>;
+
 export default meta;
 
-type Story = StoryObj<typeof Badge>;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default = {
   args: {
-    value: 'Default',
+    value: 'Default Badge',
+    variant: 'default',
+    size: 'sm',
   },
-};
+} satisfies Story;
 
-export const BadgeSuccess: Story = {
+export const DefaultWithSizeLg = {
   args: {
-    value: 'Rounded Success',
-    backgroundColor: '#CDFFCD',
-    textColor: '#276749',
-    borderColor: '#A3E635',
-    className: 'rounded-full',
+    value: 'Default Badge',
+    variant: 'default',
+    size: 'lg',
   },
-};
+} satisfies Story;
 
-export const BadgeDanger: Story = {
+export const Success = {
   args: {
-    value: 'Rounded Danger',
-    backgroundColor: '#FEE2E2',
-    textColor: '#B91C1C',
-    borderColor: '#FECACA',
-    className: 'rounded-full',
+    value: 'Success Badge',
+    variant: 'success',
+size: 'sm',
   },
-};
+} satisfies Story;
 
-export const BadgesInline: Story = {
-  render: ({ args }) => (
-    <div className="flex space-x-4">
- 
+export const Danger = {
+  args: {
+    value: 'Danger Badge',
+    variant: 'danger',
+    size: 'sm',
+  },
+} satisfies Story;
+
+export const Warning = {
+  args: {
+    value: 'Warning Badge',
+    variant: 'warning',
+    size: 'sm',
+  },
+} satisfies Story;
+
+export const Sizes = {
+  args: {
+    value: 'Badge',
+    variant: 'default',
+  },
+  render: (args) => (
+    <div className="grid text-center place-content-center gap-y-4">
+      <Badge {...args} value="SM: fdsqfdsqfdsq" size="sm" />
+      <Badge {...args} value="MD: fdsqfdsqfq" size="md" variant="warning" />
+      <Badge {...args} value="LG: fdsqfdsq" size="lg" />
+      <Badge {...args} value="XL: fdsqfdsqf" size="xl" variant="danger" />
     </div>
   ),
-  args: {
-    className: 'text-sm py-1.5 px-3 rounded-lg',
-  },
-};
+} satisfies Story;
