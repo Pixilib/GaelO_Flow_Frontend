@@ -12,6 +12,8 @@ type JobTableProps = {
   onJobAction: (jobId :string, action :JobsAction) => void;
 };
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
+  
+  const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
 
   const columns = [
     {
@@ -56,20 +58,15 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       header: "Info",
       cell: (info: any) => {
         return (
-          <div className="relative">
-            <Popover popover={infoDetails(info.row.original)} placement="left" className="relative w-auto " withOnClick={true}>
-              <div className="relative transition-transform hover:scale-110">
-                <Info size="1.5em" color="gray" className="relative" />
-              </div>
-            </Popover>
-          </div>
+          <Popover popover={infoDetails(info.row.original)} placement="left" className="w-auto" withOnClick={true}>
+            <Info size="1.5em" color="gray" className="hover:scale-110" onClick={() => console.log("ok")} />
+          </Popover>
         );
       },
       enableColumnFilter: false,
     },
   ];
 
-  const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
   return <Table data={data} columns={columns} headerColor={Colors.almond} enableColumnFilters enableSorting/>;
 };
 
