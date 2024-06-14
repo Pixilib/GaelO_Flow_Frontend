@@ -30,7 +30,6 @@ const ChangePasswordForm = () => {
         navigate("/");
       },
       onError: (error: any) => {
-        console.log({ error });
         if (error?.data?.message?.[0]?.constraints) {
           const constraints = error.data.message[0].constraints;
           const errorMessage = Object.values(constraints).join(" ");

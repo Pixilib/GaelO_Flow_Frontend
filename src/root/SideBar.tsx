@@ -1,12 +1,12 @@
+import {
+  BiLogOut as LogoutIcon, BiHomeAlt as HomeIcon,
+  BiImport as ImportIcon, BiImageAdd as DicomIcon
+}
+  from "react-icons/bi";
+import { MdOutlineImageSearch as OrthancContentIcon, MdOutlineRestorePage as RetrieveIcon } from "react-icons/md";
 import { IoMdHelpCircleOutline as HelpIcon } from "react-icons/io";
-import { BiLogOut as LogoutIcon } from "react-icons/bi";
 import { TbZoomQuestion as QueryIcon } from "react-icons/tb";
-import { BiHomeAlt as HomeIcon } from "react-icons/bi";
 import { RiUserSettingsLine as AdministratorIcon } from "react-icons/ri";
-import { MdOutlineImageSearch as OrthancContentIcon } from "react-icons/md";
-import { BiImport as ImportIcon } from "react-icons/bi";
-import { MdOutlineRestorePage as RetrieveIcon } from "react-icons/md";
-import { BiImageAdd as DicomIcon } from "react-icons/bi";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import MenuItem from "../ui/menu/MenuItem";
@@ -29,10 +29,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     navigate(itemPath);
   };
   const handleDropDown = (title: string) => {
-    console.log()
     setOpenItem(openItem === title ? null : title);
   };
-  //TODO: Add route for the adminItems, when route exist !
   const adminItems = [
     {
       title: "General",
