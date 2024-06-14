@@ -1,5 +1,5 @@
 import { Card, CardBody, CardHeader, CloseButton } from "../../../ui";
-import { postRoles } from "../../../services/users";
+import { postRoles } from "../../../services";
 import { useCustomMutation, useCustomToast, Colors } from "../../../utils";
 import { Role } from "../../../utils/types";
 import RoleForm from "./RoleForm";

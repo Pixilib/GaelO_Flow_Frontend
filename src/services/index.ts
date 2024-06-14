@@ -1,7 +1,8 @@
 //create an index for all services in this folder
 
 import { getLabels, addLabel, removeLabel, getRolesByLabelName } from './labels';
-import { getRoles, postUsers, getRole, updateRole, deleteRole, postRoles, getUserById, updateUser, deleteUser } from './users';
+import {  postUsers, getUserById, updateUser, deleteUser } from './users';
+import { getRoles, getRole, updateRole, deleteRole, postRoles } from './roles';
 import { signIn, signUp, lostPassword, changePassword } from './auth';
 import { getJobs, postJobs } from './jobs';
 import { getModalities, updateModality, deleteModality, echoModality } from './modalities';
@@ -46,6 +47,7 @@ export {
     updateModality,
     updateOptions,
     updatePeer,
+    updateUser,
     updateRole,
     updateVerbosity,
 };

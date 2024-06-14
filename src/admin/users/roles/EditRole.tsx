@@ -1,7 +1,7 @@
+import { updateRole } from "../../../services";
 import { Colors, Role, useCustomMutation, useCustomToast } from "../../../utils";
 import { Card, CardBody, CardHeader, CloseButton } from "../../../ui";
 import RoleForm from "./RoleForm";
-import { updateRole } from "../../../services/users";
 
 //! WIP
 

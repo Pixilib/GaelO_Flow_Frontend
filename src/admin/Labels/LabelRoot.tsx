@@ -3,11 +3,10 @@ import { Card, CardHeader, CardBody, CardFooter } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
-import { getLabels, addLabel, removeLabel } from "../../services/labels";
+import { getLabels, addLabel, removeLabel, getRoles } from "../../services";
 import { Label, Role } from "../../utils/types";
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
-import { getRoles } from "../../services/users";
 
 const LabelRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
