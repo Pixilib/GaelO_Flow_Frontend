@@ -24,7 +24,6 @@ export const SignUpForm = () => {
         toastSuccess("An email has been sent to you to confirm your registration.");
       },
       onError: (error: any) => {
-        console.log({error})
         if (error.data.message) {
           toastError(error.data.message);
         } else {

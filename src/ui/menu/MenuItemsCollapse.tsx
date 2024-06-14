@@ -28,23 +28,11 @@ const MenuItemsCollapse = ({
 const handleClick = () => {
   dropDownOpen(); 
 }
-const handleFocus = () => {
-  if(isOpen)
-  dropDownOpen();
-};
-// const handleBlur = () => {
-//   setTimeout(() => {
-//     if (isOpen) {
-//       dropDownOpen();
-//     }
-//   }, 100);
-// };
+
   return (
     <div
       className={`flex w-full cursor-context-menu flex-col text-xs text-white ${className}`}
       data-gaelo-flow="sidebar-item-collapse"
-      // onBlur={handleBlur}
-      onFocus={handleFocus}
       onClick={handleClick}
       tabIndex={-1}
     >
