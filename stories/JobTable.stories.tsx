@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import JobTable from '../src/admin/jobs/JobTable';
 
 const meta: Meta<typeof JobTable> = {
-  title: 'GAELO FLOW UI/JOB/JobTable',
+  title: 'GAELO FLOW COMPONENTS/JOB/JobTable',
   component: JobTable,
   argTypes: {
     data: {
