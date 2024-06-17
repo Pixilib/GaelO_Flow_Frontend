@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const meta: Meta<typeof Header> = {
-    title: 'GAELO FLOW UI/Root/Header',
+    title: 'GAELO FLOW Components/Header',
     component: Header,
     argTypes: {
       title: { control: 'text' },

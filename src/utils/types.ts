@@ -83,12 +83,7 @@ export type User = {
     RoleName: Role["Name"];
     Role: Role;
 }
-/**
- * @typedef UserResponse
- * Represent a list of Users
- * Response from the API get users
- */
-export type UserResponse = User[];
+
 export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
 export type UserUpdatePayload = Partial<UserPayload>;
 //auth

@@ -1,5 +1,4 @@
-import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
-import { Table, BooleanIcon } from "../../../ui";
+import { Table, BooleanIcon, EditButton, DeleteButton } from "../../../ui";
 import { Colors } from "../../../utils";
 
 type RolesTableProps = {
@@ -88,18 +87,8 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
                 const roleName = row.original.Name;
                 return (
                     <div className="flex justify-center gap-7">
-                        <Edit size={'1.4rem'}
-                            className="transition duration-70 hover:scale-110"
-                            color="#DFB520"
-                            onClick={() => onEdit(roleName)}
-                        />
-                        <Delete size={'1.4rem'}
-                            className="transition duration-70 hover:scale-110"
-                            color="#DF3B20"
-                            onClick={() => onDelete(roleName)}
-                        />
-       
-
+                        <EditButton onClick={() => onEdit(roleName)}/>
+                        <DeleteButton onClick={() => onDelete(roleName)}/>
                     </div>
                 )
             }

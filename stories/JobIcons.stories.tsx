@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import JobIcons from '../src/admin/jobs/JobActions';
 
 const meta: Meta<typeof JobIcons> = {
-  title: 'GAELO FLOW UI/JOB/JobIcons',
+  title: 'GAELO FLOW COMPONENTS/JOB/JobIcons',
   component: JobIcons,
   // Aucun argType n'est nécessaire ici car le composant n'accepte pas de props
 };

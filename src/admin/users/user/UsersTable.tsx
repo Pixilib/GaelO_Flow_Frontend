@@ -1,7 +1,5 @@
-import { BsPencilFill as Edit, BsTrashFill as Delete } from "react-icons/bs";
-
 import { Colors, User } from "../../../utils";
-import { Table, } from "../../../ui";
+import { Table, EditButton, DeleteButton  } from "../../../ui";
 
 type UsersProps = {
   data: User[];
@@ -43,16 +41,10 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
 
         return (
           <div className="flex justify-center gap-7">
-            <Edit
-              size={'1.3rem'}
-              className="transition duration-70 hover:scale-110"
-              color="#FF9500"
+            <EditButton
               onClick={() => onEdit(user)}
             />
-            <Delete
-              size={'1.3rem'}
-              className="transition duration-70 hover:scale-110"
-              color="#FF0000"
+            <DeleteButton
               onClick={()=> onDelete(user)}
             />
 

@@ -1,4 +1,4 @@
-import { UserResponse, UserPayload, UserUpdatePayload, Role } from '../utils/types';
+import { User, UserPayload, UserUpdatePayload } from '../utils/types';
 import axios from "./axios";
 
 export const getRoles = (): Promise<Role[]> => {
@@ -85,7 +85,7 @@ export const getUsers = (): Promise<UserResponse> => {
     });
 };
 
-export const getUserById = (userId: number): Promise<UserResponse> => {
+export const getUserById = (userId: number): Promise<User[]> => {
   return axios
     .get(`/api/users/${userId}`)
     .then(function (response) {
