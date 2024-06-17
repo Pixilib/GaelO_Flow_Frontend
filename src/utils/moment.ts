@@ -50,7 +50,7 @@ export const formatTimeReadable = (time: string): string => {
  * @returns {{hours: number, minutes: number}} An object with hour and minute properties.
  * @example
  * * const timeObj = strToHrMin("12:30");
- * * console.log(timeObj); // {hours: 12, minutes: 30}
+ * * {hours: 12, minutes: 30}
  */
 export const parseTimeString = (timeString: string): {hours: number, minutes: number} => {
     const [hours, minutes] = timeString.split(':').map(part => parseInt(part, 10));

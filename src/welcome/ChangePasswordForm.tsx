@@ -44,7 +44,6 @@ const ChangePasswordForm = () => {
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (newPassword === confirmPassword && token && userId) {
-      console.log({ newPassword, confirmPassword, token, userId });
       changePasswordMutation.mutate({
         NewPassword: newPassword,
         ConfirmationPassword: confirmPassword,

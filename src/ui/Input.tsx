@@ -46,7 +46,6 @@ const Input = ({
   focus:shadow-outline
   focus:primary focus:ring-primary focus:ring-2
   p-2.5 
-  pl-10 
   block 
   dark:bg-gray-700 
   dark:border-gray-600 
@@ -89,9 +88,11 @@ const Input = ({
           step={step}
           placeholder={placeholder}
           className={`
-          peer block py-3 ${svgLeft ? "ps-11" : "ps-3"} ${svgRight ? "pe-11" : ""}
+          peer block py-3
            ${borderClasses}
            text-gray-600 w-full ${roundedRightClass} text-sm disabled:pointer-events-none 
+           ${svgLeft ? 'pl-10' :''}
+           ${svgRight ? 'pr-10' :''}
            disabled:opacity-50 ${InputClassName}${className}
            `}
           {...props}

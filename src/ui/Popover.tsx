@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 type PopoverProps = {
   children: React.ReactNode;
+  withOnClick: boolean;
   popover: React.ReactNode;
   placement?: 'top' | 'right' | 'bottom' | 'left';
   className?: string;
@@ -19,15 +20,15 @@ const Popover: React.FC<PopoverProps> = ({
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
       case 'top':
-        return 'bottom-full mb-2';
+        return 'bottom-full';
       case 'right':
-        return 'left-full ml-2';
+        return 'left-full';
       case 'bottom':
-        return 'top-full mt-2';
+        return 'top-full';
       case 'left':
-        return 'right-full mr-2';
+        return 'right-full';
       default:
-        return 'top-full mt-2';
+        return 'top-full';
     }
   };
 
@@ -37,14 +38,16 @@ const Popover: React.FC<PopoverProps> = ({
 
   return (
     <div
-      {...handleEvent}
-      className="relative inline-block"
+      className="relative"
       data-gaelo-flow="Popover"
     >
-      {children}
+      <span  {...handleEvent}>
+        {children}
+      </span>
       {isOpen && (
         <div
-          className={`absolute ${getPlacementClasses(placement)} z-50 w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+
+          className={`absolute m-2 ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
         >
           {popover}
         </div>

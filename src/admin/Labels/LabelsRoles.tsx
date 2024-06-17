@@ -1,19 +1,13 @@
-import { ChangeEvent, useEffect } from "react"
-import { Role, useCustomQuery } from "../../utils"
+import { ChangeEvent } from "react"
+import { Role, useCustomMutation, useCustomQuery } from "../../utils"
 import { getRoles, getRolesByLabelName } from "../../services"
 import { Spinner } from "../../ui"
+import { addLabelToRole, removeLabelFromRole } from "../../services/roles"
 
 type LabelsRolesProps = {
     labelName: string
 }
 const LabelsRoles = ({ labelName }: LabelsRolesProps) => {
-
-    useEffect(() => {
-        console.log("mounted")
-        return (
-            console.log('unmounted')
-        )
-    }, [])
 
     const { data: roles, isLoading: isLoadingRoles } = useCustomQuery<Role[], string[]>(
         ['roles'],
@@ -28,22 +22,31 @@ const LabelsRoles = ({ labelName }: LabelsRolesProps) => {
         () => getRolesByLabelName(labelName)
     )
 
+    const { mutate: addRoleMutation } = useCustomMutation<void>(
+        ({ role }) => addLabelToRole(role, labelName),
+        [['labels', labelName]]
+    )
+
+    const {mutate : removeRoleMutation} = useCustomMutation<void>(
+        ({ role }) => removeLabelFromRole(role, labelName),
+        [['labels', labelName]]
+    )
+
     const handleRoleChange = (name: string, event: ChangeEvent<HTMLInputElement>) => {
         const checked = event.target.checked;
         if (checked) {
-            //onAddRole(name)
+            addRoleMutation({ role: name })
         } else {
-            //onRemoveRole(name)
+            removeRoleMutation({ role: name })
         }
     }
 
-    console.log(existingRoles, roles)
     if (isLoadingRoles || isLoadingExistingRoles) {
         return <Spinner />
     }
 
     return (
-        <div>
+        <div className="flex justify-around w-80">
             {
                 roles?.map((role) => {
                     return (

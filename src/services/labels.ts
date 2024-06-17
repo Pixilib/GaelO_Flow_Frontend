@@ -29,7 +29,6 @@ export const getRolesByLabelName = (labelName: string): Promise<string[]> => {
     return axios
         .get(`/api/labels/${labelName}/roles`) 
         .then(response => {
-            console.log(response.data)
             return response.data})
         .catch(error => {
             if (error.response) {

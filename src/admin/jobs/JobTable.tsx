@@ -59,7 +59,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       cell: (info: any) => {
         return (
           <Popover popover={infoDetails(info.row.original)} placement="left" className="w-auto" withOnClick={true}>
-            <Info size="1.5em" color="gray" className="hover:scale-110" onClick={() => console.log("ok")} />
+            <Info size="1.5em" color="gray" className="hover:scale-110" />
           </Popover>
         );
       },

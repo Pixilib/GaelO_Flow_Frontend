@@ -44,12 +44,11 @@ function Table<T>({
   pinFirstColumn = false, 
   pinLastColumn = false,
 }: TableProps<T>) {
-  const initialPageSize = Math.min(pageSize, data.length);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
     pageIndex: 0, // initial page index
-    pageSize: initialPageSize, // default page size
+    pageSize: pageSize, // default page size
   });
 
   const handlePageSizeChange = (newPageSize: number) => {
@@ -81,13 +80,12 @@ function Table<T>({
   const headerClass = `bg-${headerColor}`;
   const headerText = `text-${headerTextSize}`;
 
-  const firstColumnClass = `sticky left-0 z-100 ${headerClass}`;
-  const lastColumnClass = `sticky right-0 z-100 bg-white`;
+  const firstColumnClass = `sticky left-0 ${headerClass}`;
+  const lastColumnClass = `sticky right-0 bg-white`;
 
   const getColumnClasses = (index: number, length: number) => {
     if (pinFirstColumn && index === 0) return firstColumnClass;
-    if (pinLastColumn && index === length - 1) return lastColumnClass;
-    return 'z-10';
+    if (pinLastColumn && index === length - 1) return lastColumnClass;;
   };
 
   return (
