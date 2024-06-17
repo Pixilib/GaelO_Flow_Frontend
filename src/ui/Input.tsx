@@ -89,7 +89,7 @@ const Input = ({
           step={step}
           placeholder={placeholder}
           className={`
-          peer block py-3 ${svgLeft ? "ps-11" : ""} ${svgRight ? "pe-11" : ""}
+          peer block py-3 ${svgLeft ? "ps-11" : "ps-3"} ${svgRight ? "pe-11" : ""}
            ${borderClasses}
            text-gray-600 w-full ${roundedRightClass} text-sm disabled:pointer-events-none 
            disabled:opacity-50 ${InputClassName}${className}

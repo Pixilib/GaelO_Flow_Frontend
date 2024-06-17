@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsPersonPlusFill as RoleCreate } from "react-icons/bs";
 
-import { deleteRole, getRoles } from '../../../services/users';
+import { deleteRole, getRoles } from '../../../services';
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 
 import { Colors, Role, RolesUserResponse, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
@@ -17,7 +17,7 @@ const Roles = () => {
 
     const [showRoleForm, setShowRoleForm] = useState<'create' | 'edit' | null>(null);
     const [roleToEdit, setRoleToEdit] = useState<Role | null>(null);
-    
+
     const { data: roles, isPending: isLoadingRoles } = useCustomQuery<RolesUserResponse>(
         ["roles"],
         () => getRoles(),
@@ -39,7 +39,7 @@ const Roles = () => {
     )
 
     const findRole = (roleName: string): Role => {
-        const role = roles?.find((role) => role.Name === roleName);
+        const role = roles?.find((role: { Name: string; }) => role.Name === roleName);
         return role || {} as Role;
     }
     const handleEditRole = (roleName: string) => {
@@ -51,13 +51,13 @@ const Roles = () => {
     const deleteRoleHandler = async (roleName: string) => {
         const confirmContent = (
             <div className="italic">
-            Are you sure you want to delete this rôle: 
-            <span className="text-xl not-italic font-bold text-primary"> {roleName} ?</span> 
-          </div>
-          );
-          if (await confirm({content: confirmContent})) {
+                Are you sure you want to delete this rôle:
+                <span className="text-xl not-italic font-bold text-primary"> {roleName} ?</span>
+            </div>
+        );
+        if (await confirm({ content: confirmContent })) {
             deleteMutation.mutate(roleName);
-          }
+        }
     }
 
 
@@ -78,8 +78,10 @@ const Roles = () => {
             }
             {showRoleForm === 'edit' &&
                 <EditRole title={"Edit Role"}
-                    className="bg-[#EFEFEF]" onClose={() => { setShowRoleForm(null); setRoleToEdit(null); }}
-                    role={roleToEdit || undefined} />
+                    className="bg-[#EFEFEF]"
+                    onClose={() => { setShowRoleForm(null); setRoleToEdit(null); }}
+                    role={roleToEdit || undefined}
+                />
             }
             <div className="flex justify-center mx-10">
                 {showRoleForm === null && (

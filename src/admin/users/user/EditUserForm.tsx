@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 
 import { useCustomToast, Colors,useCustomMutation, useCustomQuery, UserUpdatePayload, User, Role,Option } from "../../../utils";
-import { getRoles, updateUser } from "../../../services/users";
+import { getRoles, updateUser } from "../../../services";
 
 import { Button, Card, CardBody, CardHeader, CloseButton, Input, Label, SelectInput } from "../../../ui";
 
@@ -102,15 +102,16 @@ return (
                     <Input
                         label={
                             <Label value="Lastname *"
-                                className="text-sm font-medium text-center"
-                                align="left"
+                            className="text-sm font-medium text-center"
+                            align="left"
                             />
-                        }
-                        placeholder="Enter your lastname"
-                        className="mt-1 lg:mt-3"
-                        value={lastName}
-                        required
-                        onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
+                            }
+                            placeholder="Enter your lastname"
+                            className="mt-1 lg:mt-3"
+                            value={lastName}
+                            required
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
+                            autoComplete='off'
                     />
                 </div>
                 <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
@@ -126,6 +127,7 @@ return (
                         value={email}
                         required
                         onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+                        autoComplete={'off'}
                     />
                     <label className="flex flex-col">
                         <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>

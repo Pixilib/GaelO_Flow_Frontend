@@ -1,5 +1,7 @@
 import { Badge } from "./Badge";
 import Button from "./Button";
+import EditButton from "./EditButton";
+import DeleteButton from "./DeleteButton";
 import BooleanIcon from "./BooleanIcon";
 import CloseButton from "./CloseButton";
 import Input from "./Input";
@@ -37,6 +39,8 @@ export {
     ConfirmModal,
     CloseButton,
     DropDown,
+    EditButton,
+    DeleteButton,
     FormCard,
     FormButton,
     FilterTable,

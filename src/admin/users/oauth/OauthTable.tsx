@@ -1,8 +1,6 @@
-import { BsTrashFill as Delete } from "react-icons/bs";
-
 import { Colors, Oauth2Config } from '../../../utils';
 
-import { Table } from "../../../ui";
+import { DeleteButton, Table } from "../../../ui";
 
 type Oauth2TableProps = {
     data: any[];
@@ -14,7 +12,6 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
         {
             header: "Name",
             accessorKey: "Name",
-
         },
         {
             header: "Provider",
@@ -35,9 +32,7 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
 
                 return (
                     <div className="flex justify-center gap-7">
-                        <Delete size={'1.4rem'}
-                            className="transition duration-70 hover:scale-110"
-                            color="#DF3B20"
+                        <DeleteButton
                             onClick={() => onDelete(provider)}
                         />
                     </div>
@@ -45,7 +40,6 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
             }
         }
     ]
-
     return (
         <div className="mx-5 mt-4">
             <Table

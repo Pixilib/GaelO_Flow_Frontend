@@ -59,7 +59,7 @@ export default {
         'orange': '#DDAD00',
         'orange-hover': '#A88400',
         'dark': '#393838',
-        'red': '#f8d7da',
+        'redCustom': '#f8d7da',
         'grayCustom': '#D4CFCF',
         'light': '#FFFFFF',
         'light-gray':'#EFEFEF',

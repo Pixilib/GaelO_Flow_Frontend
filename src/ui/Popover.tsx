@@ -10,6 +10,7 @@ type PopoverProps = {
 const Popover: React.FC<PopoverProps> = ({
   children,
   popover,
+  withOnClick = false,
   placement = 'bottom',
   className = '',
 }) => {
@@ -18,32 +19,37 @@ const Popover: React.FC<PopoverProps> = ({
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
       case 'top':
-        return 'z-100 absolute bottom-full';
+        return 'bottom-full mb-2';
       case 'right':
-        return 'z-100 absolute left-full';
+        return 'left-full ml-2';
       case 'bottom':
-        return 'z-100 absolute top-full';
+        return 'top-full mt-2';
       case 'left':
-        return 'z-100 absolute right-full';
+        return 'right-full mr-2';
       default:
-        return 'z-100 absolute top-full';
+        return 'top-full mt-2';
     }
   };
 
+  const handleEvent = withOnClick
+    ? { onClick: () => setIsOpen(!isOpen) }
+    : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
+
   return (
-    <div className="relative" >
-      <span onClick={() => setIsOpen(!isOpen)}>
-        {children}
-      </span>
-      <div className="cursor-pointer" >
-        {isOpen && (
-          <div
-            className={` ${getPlacementClasses(placement)} rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
-          >
-            {popover}
-          </div>
-        )}
-      </div>
+    <div
+      {...handleEvent}
+      className="relative inline-block"
+      data-gaelo-flow="Popover"
+    >
+      {children}
+      {isOpen && (
+        <div
+          className={`absolute ${getPlacementClasses(placement)} z-50 w-80 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+        >
+          {popover}
+        </div>
+      )}
+
     </div>
   );
 };

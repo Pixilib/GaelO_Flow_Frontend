@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import SideBar from "../src/root/SideBar";
 
 const meta: Meta<typeof SideBar> = {
-  title: "GAELO FLOW UI/Root/SideBar",
+  title: "GAELO FLOW Components/SideBar",
   component: SideBar,
   tags: ["autodocs"],
   decorators: [withRouter],

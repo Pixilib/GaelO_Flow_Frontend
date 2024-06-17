@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
 import { BsPersonCheckFill as SubmitUser } from 'react-icons/bs';
-import { getRoles, postUsers } from '../../../services/users';
+import { getRoles, postUsers } from '../../../services';
 import {
   useCustomMutation,
   useCustomQuery,
@@ -96,6 +96,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           value={firstName}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => setFirstName(event.target.value)}
+          autoComplete='off'
         />
         <Input
           label={<Label value="Lastname *" className="text-sm font-medium text-center" align="left" />}
@@ -104,6 +105,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           value={lastName}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
+          autoComplete='off'
         />
         <Input
           label={<Label value="Password *" className="text-sm font-medium text-center" align="left" />}
@@ -114,6 +116,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           value={password}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => setPassword(event.target.value)}
+          autoComplete='off'
         />
       </div>
       <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
@@ -125,6 +128,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           value={email}
           required
           onChange={(event: ChangeEvent<HTMLInputElement>) => setEmail(event.target.value)}
+          autoComplete='off'
         />
         <label className="flex flex-col">
           <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
