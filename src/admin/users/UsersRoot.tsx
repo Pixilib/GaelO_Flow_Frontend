@@ -1,10 +1,11 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
-import { Tabs, Tab } from "../../ui";
+import { Tabs, Tab, Card, CardBody } from "../../ui";
 
 import Roles from "./roles/Roles";
 import Users from "./user/Users";
 import Oauth2 from "./oauth/Oauth";
+import { Colors } from "../../utils";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
@@ -16,10 +17,12 @@ const UsersRoot = () => {
     }
 
     return (
-        <div 
-        className="max-h-full mx-12 my-12 bg-white shadow-md rounded-xl"
-        data-gaelo-flow="users-root"
-        >
+        <Card className="mx-12 mt-12 bg-white shadow-md rounded-xl"data-gaelo-flow="users-root">
+
+            <CardBody color={Colors.light} roundedTopLeft roundedTopRight roundedBottomLeft roundedBottomRight>
+
+            <h2 className="mt-4 mb-4 text-2xl font-bold text-dark">Manage Queues</h2>
+
             <Tabs className=" bg-light-gray">
                 <Tab
                     title="Users"
@@ -43,7 +46,8 @@ const UsersRoot = () => {
                 <Route path="/roles" element={<Roles />} />
                 <Route path="/oauth2" element={<Oauth2 />} />
             </Routes>
-        </div>
+            </CardBody>
+            </Card>
     );
 }
 

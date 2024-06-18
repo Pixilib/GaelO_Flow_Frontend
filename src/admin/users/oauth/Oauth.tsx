@@ -50,7 +50,7 @@ const Oauth = () => {
   
   if (isLoadingOauthConfig) return <Spinner />;
   return (
-    <div data-gaelo-flow="oauth">
+    <div data-gaelo-flow="oauth"className="bg-gray-200 rounded-br-xl rounded-bl-xl">
       <Oauth2Table data={oauth2Config || []} onDelete={deleteOauthHandler} />
       <div className="flex justify-center mx-10">
         {showOauthForm === false && (

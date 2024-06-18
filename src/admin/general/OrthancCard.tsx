@@ -4,7 +4,7 @@ import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
 import { BsQuestionLg } from "react-icons/bs";
 
-import { Table, Button, Popover, ToggleEye, Input, Card, CardHeader, CardBody, CardFooter, SelectInput } from '../../ui/';
+import { Table, Button, Popover, ToggleEye, Input, Card, CardBody, CardFooter, SelectInput } from '../../ui/';
 import { Colors } from '../../utils/enums';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, updateVerbosity } from '../../services/orthanc';
@@ -89,8 +89,8 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
 
     return (
         <Card>
-            <CardHeader title="Orthanc Settings" color={Colors.primary} />
-            <CardBody color={Colors.light} className="pb-0">
+            <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
+                <h2 className="mt-4 mb-4 text-2xl font-bold text-dark">Orthanc</h2>
                 <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
                 <div className="h-2"></div>
             </CardBody>

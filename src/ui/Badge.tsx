@@ -1,3 +1,5 @@
+import React from 'react';
+
 type Size = "sm" | "md" | "lg" | "xl";
 
 type BadgeProps = {
@@ -14,14 +16,14 @@ const Badge = ({
   value,
   className = "",
   variant = "default",
-  size = "md",
+  size = "sm",
 }: BadgeProps) => {
 
   const sizeClasses = {
-    sm: "text-xs p-2 ",
-    md: "text-sm p-3 px-3",
-    lg: "text-lg p-4",
-    xl: "text-xl p-6",
+    sm: "text-xs p-1.5", // Réduction légère du texte
+    md: "text-sm p-2 px-3", // Taille par défaut pour md
+    lg: "text-base p-3", // Taille par défaut pour lg
+    xl: "text-lg p-4", // Taille par défaut pour xl
   };
 
   const variants = {
@@ -48,14 +50,13 @@ const Badge = ({
   };
 
   const badgeClasses = `
-    rounded-full
+    rounded-xl
     ${variants[variant].backgroundColor} 
     ${variants[variant].textColor}
     ${sizeClasses[size]} 
     ${variants[variant].borderColor}
     font-medium
     ring-1 ring-inset
-    shadow-lg
     ${className}
   `;
 

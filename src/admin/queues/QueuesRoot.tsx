@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
-import { Spinner, Tabs, Tab } from "../../ui";
+import { Spinner, Tabs, Tab, Card, CardBody } from "../../ui";
 import { useCustomQuery } from "../../utils/reactQuery";
 import { OptionsResponse } from "../../utils/types";
 import { getOptions } from "../../services/options";
@@ -8,6 +8,7 @@ import { getOptions } from "../../services/options";
 import Retrieve from "./Retrieve";
 import Anonymize from "./Anonymize";
 import Delete from "./Delete";
+import { Colors } from "../../utils";
 
 const QueuesRoot = () => {
   const navigate = useNavigate();
@@ -21,8 +22,10 @@ const QueuesRoot = () => {
   if (isLoadingOptions) return <Spinner />;
 
   return (
-    <div className="mx-12 mt-12 shadow-md">
-      <Tabs className={`bg-light-gray`}>
+    <Card className="mx-12 mt-12 ">
+            <CardBody color={Colors.light} roundedTopLeft roundedTopRight roundedBottomLeft roundedBottomRight>
+            <h2 className="mt-4 mb-4 text-2xl font-bold text-dark">Manage Queues</h2>
+    <Tabs className={`bg-light-gray`}>
         <Tab
           title="Retrieve"
           active={path.endsWith("retrieve")}
@@ -54,7 +57,8 @@ const QueuesRoot = () => {
         element={<Delete />} 
         />
       </Routes>
-    </div>
+      </CardBody>
+    </Card>
   );
 };
 

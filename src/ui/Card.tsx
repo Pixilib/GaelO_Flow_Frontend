@@ -1,13 +1,13 @@
 import React from 'react';
 import { Colors } from "../utils/enums";
 
-type CardsProps = {
+type CardProps = {
   children: React.ReactNode;
   className?: string;
   bordered?: boolean;
 };
 
-type BasicHeaderProps = {
+type CardHeaderProps = {
   title: string;
   centerTitle?: boolean;
   className?: string;
@@ -15,19 +15,23 @@ type BasicHeaderProps = {
   color?: Colors;
 };
 
-type BodyProps = {
+type CardBodyProps = {
   children: React.ReactNode;
   color?: Colors;
   className?: string;
+  roundedTopLeft?: boolean; // Optional boolean for rounded top left corner
+  roundedTopRight?: boolean; // Optional boolean for rounded top right corner
+  roundedBottomLeft?: boolean; // Optional boolean for rounded bottom left corner
+  roundedBottomRight?: boolean; // Optional boolean for rounded bottom right corner
 };
 
-type FooterProps = {
+type CardFooterProps = {
   children?: React.ReactNode;
   className?: string;
   color?: Colors;
 };
 
-const colorClasses: Record<keyof typeof Colors, string> = {
+const colorClasses: Record<Colors, string> = {
   almond: "bg-almond",
   primary: "bg-primary",
   primaryHover: "hover:bg-primary-hover",
@@ -50,7 +54,7 @@ const colorClasses: Record<keyof typeof Colors, string> = {
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";
 
-const Card = ({ bordered, className = "", children }: CardsProps) => {
+const Card = ({ bordered, className = "", children }: CardProps) => {
   const borderClass = bordered ? "border" : "";
   const spacingClass = "mx-2 md:mx-10";
 
@@ -61,7 +65,7 @@ const Card = ({ bordered, className = "", children }: CardsProps) => {
   );
 };
 
-const CardHeader = ({ title, centerTitle, className = "", children, color }: BasicHeaderProps) => {
+const CardHeader = ({ title, centerTitle, className = "", children, color }: CardHeaderProps) => {
   const shadowClass = "shadow-[0_-2px_4px_rgba(0,0,0,0.1)]";
   const headerClass = getColorClass(color);
 
@@ -73,17 +77,25 @@ const CardHeader = ({ title, centerTitle, className = "", children, color }: Bas
   );
 };
 
-const CardBody = ({ children, color, className = "" }: BodyProps) => {
+const CardBody = ({ children, color, className = "", roundedTopLeft, roundedTopRight, roundedBottomLeft, roundedBottomRight }: CardBodyProps) => {
   const bodyClass = getColorClass(color);
 
+  // Build an array of rounded corner classes based on props
+  const roundedClasses = [
+    roundedTopLeft && "rounded-tl-xl",
+    roundedTopRight && "rounded-tr-xl",
+    roundedBottomLeft && "rounded-bl-xl",
+    roundedBottomRight && "rounded-br-xl",
+  ].filter(Boolean).join(" ");
+
   return (
-    <div data-gaelo-flow="Card-Body" className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black ${className}`}>
+    <div data-gaelo-flow="Card-Body" className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black ${className} ${roundedClasses}`}>
       {children}
     </div>
   );
 };
 
-const CardFooter = ({ children, className = "", color }: FooterProps) => {
+const CardFooter = ({ children, className = "", color }: CardFooterProps) => {
   const footerClass = getColorClass(color);
 
   return (

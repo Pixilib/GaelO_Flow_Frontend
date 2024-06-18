@@ -1,7 +1,7 @@
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getJobs, postJobs } from "../../services/jobs";
 
-import { Spinner, Card, CardHeader, CardBody, CardFooter } from "../../ui";
+import { Spinner, Card, CardBody, CardFooter } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { JobPayload, JobsAction, OrthancJob } from '../../utils/types';
@@ -40,9 +40,8 @@ const JobRoot = () => {
   return (
     <div className="flex justify-center w-full h-full mt-12">
       <Card className="w-full bg-white">
-        <CardHeader title="Jobs" color={Colors.primary} />
-        <CardBody>
-          <JobTable data={jobData as any} onJobAction={handleJobAction} />
+      <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
+                <h2 className="mt-4 mb-4 text-2xl font-bold text-dark">Manage Operations Jobs</h2>          <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </CardBody>
         <CardFooter>
           

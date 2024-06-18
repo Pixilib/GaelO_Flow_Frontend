@@ -58,7 +58,7 @@ export default {
         'disabled': '#b2b2b2',
         'orange': '#DDAD00',
         'orange-hover': '#A88400',
-        'dark': '#393838',
+        'dark': '#484544',
         'redCustom': '#f8d7da',
         'grayCustom': '#D4CFCF',
         'light': '#FFFFFF',

@@ -12,7 +12,7 @@ const QueryRoot = () => {
             <Routes>
                 <Route path="/" 
                 element={
-                    <SearchForm title={"Search"} className={`bg-light-gray`} onClose={() => console.log("close")} />
+                    <SearchForm title={"Search"} className={`bg-light`} onClose={() => console.log("close")} />
                 } />
             </Routes>
         </div>
