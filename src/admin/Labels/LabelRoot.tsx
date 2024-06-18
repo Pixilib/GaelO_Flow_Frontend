@@ -58,7 +58,7 @@ const LabelRoot: React.FC = () => {
   return (
     <Card>
       <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-        <h2 className="mt-4 mb-4 text-2xl font-bold text-dark">Manage Labels</h2>
+        <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Labels</h2>
         <div className="mb-10">
           <LabelInputForm onCreateLabel={handleCreate} />
         </div>

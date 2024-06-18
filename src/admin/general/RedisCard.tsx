@@ -31,7 +31,7 @@ const RedisCard: React.FC<RedisCardProps> = ({ redisData }) => {
     return (
         <Card>
             <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-                <h2 className="mt-4 mb-5 text-2xl font-bold text-dark">Redis</h2>
+                <h2 className="mt-4 mb-5 text-2xl font-bold text-primary">Redis</h2>
                 <Table columns={columns} data={[redisData]} headerColor={Colors.almond} />
             </CardBody>
             <CardFooter color={Colors.light}>

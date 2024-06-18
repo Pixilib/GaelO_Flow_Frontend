@@ -41,7 +41,7 @@ const JobRoot = () => {
     <div className="flex justify-center w-full h-full mt-12">
       <Card className="w-full bg-white">
       <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-                <h2 className="mt-4 mb-4 text-2xl font-bold text-dark">Manage Operations Jobs</h2>          <JobTable data={jobData as any} onJobAction={handleJobAction} />
+                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Operations Jobs</h2>          <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </CardBody>
         <CardFooter>
           
