@@ -37,7 +37,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
         <label className="mb-2 text-sm font-medium text-dark">{label}</label>
       ) : label}
 
-      <div className="">
+      <div>
         <Input
           type={showPassword ? 'text' : 'password'}
           placeholder={placeholder}

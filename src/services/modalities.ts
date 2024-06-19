@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Modality } from "../utils/types";
+import { Modality, ModalityExtended } from "../utils/types";
 
 
 
@@ -30,19 +30,10 @@ export const deleteModality = (name: string): Promise<string> => {
         .catch(handleAxiosError);
 };
 
-export const getModalities = (): Promise<Modality[]> => {
+export const getModalities = (): Promise<ModalityExtended[]> => {
     return axios.get("/api/modalities?expand")
-        .then(response => {
-            return Object.entries(response.data).map(([name, aet] :any) => {
-                return {
-                    name: name,
-                    aet: aet.AET,
-                    host: aet.Host,
-                    port: aet.Port,
-                    manufacturer: aet.Manufacturer
-                }
-            });
-        }).catch(handleAxiosError);
+        .then(response => response.data)
+        .catch(handleAxiosError);
 };
 
 export const echoModality = (name :string): Promise<void> => {
