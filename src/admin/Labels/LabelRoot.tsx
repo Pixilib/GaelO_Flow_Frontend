@@ -1,13 +1,12 @@
 import React from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "../../ui";
+import { Card, CardBody, CardFooter } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
-import { getLabels, addLabel, removeLabel } from "../../services/labels";
+import { getLabels, addLabel, removeLabel, getRoles } from "../../services";
 import { Label, Role } from "../../utils/types";
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
-import { getRoles } from "../../services/users";
 
 const LabelRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -58,12 +57,12 @@ const LabelRoot: React.FC = () => {
   };
   return (
     <Card>
-      <CardHeader title="Labels" color={Colors.primary} />
-      <CardBody color={Colors.light}>
+      <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
+        <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Labels</h2>
         <div className="mb-10">
           <LabelInputForm onCreateLabel={handleCreate} />
         </div>
-          <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
+        <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
       </CardBody>
       <CardFooter color={Colors.light} />
     </Card>

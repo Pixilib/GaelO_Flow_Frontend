@@ -5,7 +5,6 @@ import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Spinner,
@@ -64,8 +63,8 @@ const PeersRoot: React.FC = () => {
 
   return (
     <Card>
-      <CardHeader title="Peers" color={Colors.primary} />
-      <CardBody color={Colors.light}>
+      <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
+                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Peers</h2>
         <div className="flex flex-col items-center">
           <div className="w-full mb-8">
             <PeersTable

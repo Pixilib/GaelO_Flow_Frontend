@@ -80,13 +80,12 @@ function Table<T>({
   const headerClass = `bg-${headerColor}`;
   const headerText = `text-${headerTextSize}`;
 
-  const firstColumnClass = `sticky left-0 z-100 ${headerClass}`;
-  const lastColumnClass = `sticky right-0 z-100 bg-white`;
+  const firstColumnClass = `sticky left-0 ${headerClass}`;
+  const lastColumnClass = `sticky right-0 bg-white`;
 
   const getColumnClasses = (index: number, length: number) => {
     if (pinFirstColumn && index === 0) return firstColumnClass;
-    if (pinLastColumn && index === length - 1) return lastColumnClass;
-    return 'z-10';
+    if (pinLastColumn && index === length - 1) return lastColumnClass;;
   };
 
   return (
@@ -156,7 +155,7 @@ function Table<T>({
         </table>
       </div>
       <div className="w-full bg-white shadow-md rounded-b-xl">
-        {data.length > 0 ? (
+        {data.length > 0 && table ? (
           <Footer
             table={table}
             onPageSizeChange={handlePageSizeChange}

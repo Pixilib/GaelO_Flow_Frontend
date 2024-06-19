@@ -1,14 +1,12 @@
 import { useState } from 'react';
-
 import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
 import { BsQuestionLg } from "react-icons/bs";
 
-import { Table, Button, Popover, ToggleEye, Input, Card, CardHeader, CardBody, CardFooter, Badge, SelectInput } from '../../ui/';
+import { Table, Button, ToggleEye, Input, Modal, Card, CardBody, CardFooter, SelectInput } from '../../ui/';
 import { Colors } from '../../utils/enums';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, updateVerbosity } from '../../services/orthanc';
-
 type OrthancData = {
     username: string;
     address: string;
@@ -21,6 +19,8 @@ type OrthancCardProps = {
 };
 
 const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
+
+    const [showModal, setShowModal] = useState(false);
 
     const { data: orthancSystem, refetch: refetchOrthancSystem } = useCustomQuery(
         ['system'],
@@ -60,7 +60,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         },
         {
             accessorKey: 'password',
-            header: 'Password',
             cell: (row: any) => {
                 const [show, setShow] = useState(false);
                 return (
@@ -69,7 +68,8 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         <ToggleEye onToggle={(visible) => setShow(visible)} />
                     </div>
                 );
-            }
+            },
+            header: 'Password'
         },
     ];
 
@@ -79,6 +79,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
 
     const orthancInfoHandler = () => {
         refetchOrthancSystem();
+        setShowModal(true);
     }
 
     const selectOptions = [
@@ -89,8 +90,8 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
 
     return (
         <Card>
-            <CardHeader title="Orthanc Settings" color={Colors.primary} />
-            <CardBody color={Colors.light} className="pb-0">
+            <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
+                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Orthanc</h2>
                 <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
                 <div className="h-2"></div>
             </CardBody>
@@ -101,16 +102,9 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Button color={Colors.danger} >
                     <IoClose size="20px" title="Shutdown" />
                 </Button>
-                <Popover popover={orthancSystem ?
-                    <div className='overflow-x-auto'>
-                        <pre className='whitespace-pre-wrap'>{JSON.stringify(orthancSystem, null, 2)}</pre>
-                    </div>
-                    : <></>
-                } placement="bottom" >
-                    <Button color={Colors.primary} onClick={orthancInfoHandler}>
-                        <BsQuestionLg size="20px" title="Info" />
-                    </Button>
-                </Popover>
+                <Button color={Colors.primary} onClick={orthancInfoHandler}>
+                    <BsQuestionLg size="20px" title="Info" />
+                </Button>
                 <SelectInput
                     value={selectOptions.find(option => option.value === orthancVerbosity)}
                     onChange={handleSelectChange}
@@ -118,6 +112,29 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     options={selectOptions}
                 />
             </CardFooter>
+            {showModal && (
+                <Modal show={showModal} size="lg" onClose={() => setShowModal(false)}>
+                    <Modal.Header onClose={() => setShowModal(false)}>
+                        <Modal.Title>Orthanc System Information</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+    {orthancSystem ? (
+        <div className='p-4 bg-gray-200 rounded-lg'>
+            <pre className='text-sm break-all whitespace-pre-wrap'>
+                {JSON.stringify(orthancSystem, null, 2)}
+            </pre>
+        </div>
+    ) : (
+        <p>Loading...</p>
+    )}
+</Modal.Body>
+                    <Modal.Footer>
+                        <Button color={Colors.primary} onClick={() => setShowModal(false)}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            )}
         </Card>
     );
 };

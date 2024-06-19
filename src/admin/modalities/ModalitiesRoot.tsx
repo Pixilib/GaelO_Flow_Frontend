@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
-import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
+import { Button, Card, CardBody, CardFooter, Spinner } from '../../ui';
 import { Colors } from '../../utils/enums';
 import { Modality } from '../../utils/types';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
@@ -58,19 +58,20 @@ const ModalitiesRoot: React.FC = () => {
 
     return (
         <Card>
-            <CardHeader title="Modalities" color={Colors.primary} />
-            <CardBody color={Colors.light}>
+            <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
+                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Modalities</h2>
+
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
-                        <ModalitiesTable 
-                        aetData={aets} 
-                        onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)} 
-                        onEchoAet={handleEchoAet} />
+                        <ModalitiesTable
+                            aetData={aets}
+                            onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}
+                            onEchoAet={handleEchoAet} />
                     </div>
                     {!showNewAetCard && (
-                        <Button 
-                        color={Colors.success} 
-                        onClick={handleNewAetClick}>
+                        <Button
+                            color={Colors.success}
+                            onClick={handleNewAetClick}>
                             <MoreIcon className="mr-3" size={24} /> New modality
                         </Button>
                     )}
@@ -78,9 +79,10 @@ const ModalitiesRoot: React.FC = () => {
             </CardBody>
             <CardFooter color={Colors.light}>
                 {showNewAetCard && (
-                    <NewModalityCard 
-                    onClose={handleCloseNewAetCard} 
-                    onCreateAet={(aet: Modality) => updateModalityMutate(aet)} />
+                    <NewModalityCard
+                        onClose={handleCloseNewAetCard}
+                        onCreateAet={(aet: Modality) => updateModalityMutate(aet)}
+                    />
                 )}
             </CardFooter>
         </Card>

@@ -30,7 +30,6 @@ const ChangePasswordForm = () => {
         navigate("/");
       },
       onError: (error: any) => {
-        console.log({ error });
         if (error?.data?.message?.[0]?.constraints) {
           const constraints = error.data.message[0].constraints;
           const errorMessage = Object.values(constraints).join(" ");
@@ -45,7 +44,6 @@ const ChangePasswordForm = () => {
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (newPassword === confirmPassword && token && userId) {
-      console.log({ newPassword, confirmPassword, token, userId });
       changePasswordMutation.mutate({
         NewPassword: newPassword,
         ConfirmationPassword: confirmPassword,

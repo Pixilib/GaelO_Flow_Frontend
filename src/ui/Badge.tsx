@@ -1,42 +1,66 @@
+import React from 'react';
+
+type Size = "sm" | "md" | "lg" | "xl";
+
 type BadgeProps = {
   value: number | string;
   className?: string;
   backgroundColor?: string;
   textColor?: string;
+  size?: Size;
   borderColor?: string;
+  variant?: "default" | "success" | "danger" | "warning";
 };
 
 const Badge = ({
   value,
   className = "",
-  backgroundColor = "bg-indigo-100",
-  textColor = "text-indigo-700",
-  borderColor = "ring-indigo-300"
+  variant = "default",
+  size = "sm",
 }: BadgeProps) => {
-  const badgeClasses = `rounded-xl ${backgroundColor} px-2 py-1 text-xs font-medium ${textColor} ring-1 ring-inset ${borderColor} ${className}`;
+
+  const sizeClasses = {
+    sm: "text-xs p-1.5", // Réduction légère du texte
+    md: "text-sm p-2 px-3", // Taille par défaut pour md
+    lg: "text-base p-3", // Taille par défaut pour lg
+    xl: "text-lg p-4", // Taille par défaut pour xl
+  };
+
+  const variants = {
+    default: {
+      backgroundColor: "bg-indigo-100",
+      textColor: "text-indigo-700",
+      borderColor: "ring-indigo-300",
+    },
+    success: {
+      backgroundColor: "bg-green-100",
+      textColor: "text-green-700",
+      borderColor: "ring-green-300",
+    },
+    danger: {
+      backgroundColor: "bg-red-100",
+      textColor: "text-red-700",
+      borderColor: "ring-red-300",
+    },
+    warning: {
+      backgroundColor: "bg-yellow-100",
+      textColor: "text-yellow-700",
+      borderColor: "ring-yellow-300",
+    },
+  };
+
+  const badgeClasses = `
+    rounded-xl
+    ${variants[variant].backgroundColor} 
+    ${variants[variant].textColor}
+    ${sizeClasses[size]} 
+    ${variants[variant].borderColor}
+    font-medium
+    ring-1 ring-inset
+    ${className}
+  `;
+
   return <span className={badgeClasses}>{value}</span>;
 };
 
-const BadgeSuccess = ({
-  value,
-  className = "",
-  backgroundColor = "bg-green-100",
-  textColor = "text-green-700",
-  borderColor = "ring-green-300"
-}: BadgeProps) => {
-  const badgeClasses = `rounded-xl ${backgroundColor} px-2 py-1 text-xs font-medium ${textColor} ring-1 ring-inset ${borderColor} ${className}`;
-  return <span className={badgeClasses}>{value}</span>;
-};
-
-const BadgeDanger = ({
-  value,
-  className = "",
-  backgroundColor = "bg-red-100",
-  textColor = "text-red-700",
-  borderColor = "ring-red-300"
-}: BadgeProps) => {
-  const badgeClasses = `rounded-xl ${backgroundColor} px-2 py-1 text-xs font-medium ${textColor} ring-1 ring-inset ${borderColor} ${className}`;
-  return <span className={badgeClasses}>{value}</span>;
-};
-
-export { Badge, BadgeSuccess, BadgeDanger };
+export { Badge };

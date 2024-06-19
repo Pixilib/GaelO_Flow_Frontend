@@ -82,16 +82,16 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
       title={title}
       leftIcon={leftIcon}
       onLeftIconClick={handleLeftIconClick}
-      className="sticky top-0 bg-white z-200"
+      className="sticky top-0 bg-white"
     >
-      <div className="flex justify-end gap-4 z-200">
+      <div className="flex justify-end gap-4">
         <DropDown
           chevronPosition="right"
           className="relative flex flex-col w-44"
           isOpen={isOpen("Language")}
           dropDownOpen={() => handleDropDown("Language")}
           dropDown={
-            <div className="absolute -mt-2 top-full z-200">
+            <div className="absolute -mt-2 top-full">
               <BannerItems
                 elements={ItemsLanguage}
                 onSelect={(item: any) => i18n.changeLanguage(item.code)}

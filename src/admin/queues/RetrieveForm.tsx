@@ -9,7 +9,7 @@ type RetrieveCardProps = {
   timeDelta: string;
   handleTimeStart: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleTimeStop: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;  // Gestionnaire de soumission
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const RetrieveForm = ({

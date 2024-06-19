@@ -13,12 +13,24 @@ const General = () => {
   if (error) return <span>Error: {error.message}</span>;
 
   return (
-    <div className="flex flex-col">
-      <RedisCard redisData={{ address: data.RedisAddress, port: Number(data.RedisPort), password: data.RedisPort }} />
-      <div className="py-8">
-        <OrthancCard orthancData={{ address: data.OrthancAddress, port: Number(data.OrthancPort), password: data.OrthancPassword, username: data.OrthancUsername }} />
+    <div className="flex flex-row">
+      <div className="flex-1">
+        <RedisCard redisData={{
+          address: data.RedisAddress,
+          port: Number(data.RedisPort),
+          password: data.RedisPassword
+        }} />
+      </div>
+      <div className="flex-1">
+        <OrthancCard orthancData={{
+          address: data.OrthancAddress,
+          port: Number(data.OrthancPort),
+          password: data.OrthancPassword,
+          username: data.OrthancUsername
+        }} />
       </div>
     </div>
   );
 };
+
 export default General;

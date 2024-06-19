@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 type PopoverProps = {
   children: React.ReactNode;
+  withOnClick: boolean;
   popover: React.ReactNode;
-  withOnClick?: boolean;
   placement?: 'top' | 'right' | 'bottom' | 'left';
   className?: string;
 };
@@ -11,7 +11,7 @@ type PopoverProps = {
 const Popover: React.FC<PopoverProps> = ({
   children,
   popover,
-  withOnClick = "false",
+  withOnClick = false,
   placement = 'bottom',
   className = '',
 }) => {
@@ -20,32 +20,39 @@ const Popover: React.FC<PopoverProps> = ({
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
       case 'top':
-        return 'z-100 absolute bottom-full';
+        return 'bottom-full';
       case 'right':
-        return 'z-100 absolute left-full';
+        return 'left-full';
       case 'bottom':
-        return 'z-100 absolute top-full';
+        return 'top-full';
       case 'left':
-        return 'z-100 absolute right-full';
+        return 'right-full';
       default:
-        return 'z-100 absolute top-full';
+        return 'top-full';
     }
   };
 
-  const handleEvent = withOnClick ? { onClick: () => setIsOpen(!isOpen) } : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
+  const handleEvent = withOnClick
+    ? { onClick: () => setIsOpen(!isOpen) }
+    : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
   return (
-    <div {...handleEvent} className="relative" >
-      {children}
-      <div className="z-50 cursor-pointer " >
-        {isOpen && (
-          <div
-            className={` ${getPlacementClasses(placement)} z-100 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
-          >
-            {popover}
-          </div>
-        )}
-      </div>
+    <div
+      className="relative"
+      data-gaelo-flow="Popover"
+    >
+      <span  {...handleEvent}>
+        {children}
+      </span>
+      {isOpen && (
+        <div
+
+          className={`absolute m-2 ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+        >
+          {popover}
+        </div>
+      )}
+
     </div>
   );
 };

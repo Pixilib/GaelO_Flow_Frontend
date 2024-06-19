@@ -47,7 +47,7 @@ export const CardStory: Story = {
       <Card color={Colors.primary} bordered={false}>
         <CardHeader title="Card Setting Title" centerTitle={true} rightIcon={<ChevronRight />} >
           <>
-            <button className={`icon-button mr-4`} onClick={() => console.log('click')}>
+            <button className={`icon-button mr-4`}>
               <span className="icon-right">{<DotMenuRightMore />}</span>
             </button>
           </>
