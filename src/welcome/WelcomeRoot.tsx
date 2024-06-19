@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { SignInForm } from "./SignInForm";
+import { SignInForm } from "../ui/menu/SignInForm";
 import { SignUpForm } from "./SignUpForm";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import ChangePasswordForm from "./ChangePasswordForm";

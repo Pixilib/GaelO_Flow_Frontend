@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-
+import ToggleChevron from './menu/ToogleChevron';
 type PopoverProps = {
   children: React.ReactNode;
-  withOnClick: boolean;
   popover: React.ReactNode;
+  withOnClick?: boolean;
   placement?: 'top' | 'right' | 'bottom' | 'left';
   className?: string;
+  showToggleChevron?: boolean; // Prop optionnelle pour montrer le ToggleChevron
 };
 
 const Popover: React.FC<PopoverProps> = ({
@@ -14,8 +15,17 @@ const Popover: React.FC<PopoverProps> = ({
   withOnClick = false,
   placement = 'bottom',
   className = '',
+  showToggleChevron = false, // Par défaut, ne pas montrer le ToggleChevron
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopover = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleEvent = withOnClick
+    ? { onClick: togglePopover }
+    : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
@@ -32,27 +42,19 @@ const Popover: React.FC<PopoverProps> = ({
     }
   };
 
-  const handleEvent = withOnClick
-    ? { onClick: () => setIsOpen(!isOpen) }
-    : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
-
   return (
-    <div
-      className="relative"
-      data-gaelo-flow="Popover"
-    >
-      <span  {...handleEvent}>
+    <div className="relative" data-gaelo-flow="Popover">
+      <div {...handleEvent} className="flex items-center cursor-pointer">
         {children}
-      </span>
+        {showToggleChevron && <ToggleChevron isOpen={isOpen} size="1rem" />}
+      </div>
       {isOpen && (
         <div
-
-          className={`absolute m-2 ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+          className={`absolute ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
         >
           {popover}
         </div>
       )}
-
     </div>
   );
 };
