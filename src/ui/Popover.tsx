@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import ToggleChevron from './menu/ToogleChevron';
 type PopoverProps = {
   children: React.ReactNode;
   popover: React.ReactNode;
   withOnClick?: boolean;
   placement?: 'top' | 'right' | 'bottom' | 'left';
   className?: string;
-  showToggleChevron?: boolean; // Prop optionnelle pour montrer le ToggleChevron
+  showToggleChevron?: boolean; 
 };
 
 const Popover: React.FC<PopoverProps> = ({
@@ -15,7 +14,7 @@ const Popover: React.FC<PopoverProps> = ({
   withOnClick = false,
   placement = 'bottom',
   className = '',
-  showToggleChevron = false, // Par défaut, ne pas montrer le ToggleChevron
+  showToggleChevron = false, 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,7 +45,6 @@ const Popover: React.FC<PopoverProps> = ({
     <div className="relative" data-gaelo-flow="Popover">
       <div {...handleEvent} className="flex items-center cursor-pointer">
         {children}
-        {showToggleChevron && <ToggleChevron isOpen={isOpen} size="1rem" />}
       </div>
       {isOpen && (
         <div
