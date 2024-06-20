@@ -1,4 +1,4 @@
-import { Role } from '../utils/types';
+import { Label, Role } from '../utils/types';
 import axios from "./axios";
 
 
@@ -91,6 +91,21 @@ export const removeLabelFromRole = (roleName: string, labelName: string): Promis
     .delete(`/api/roles/${roleName}/label/${labelName}`)
     .then(function () {
       return undefined;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+
+
+export const getLabelsByRoleName = (roleName: string): Promise<string[]> => {
+  return axios
+    .get(`/api/roles/${roleName}/labels`)
+    .then(function (response) {
+      return response.data;
     })
     .catch(function (error) {
       if (error.response) {

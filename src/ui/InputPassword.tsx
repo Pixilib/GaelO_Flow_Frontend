@@ -37,7 +37,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
         <label className="mb-2 text-sm font-medium text-dark">{label}</label>
       ) : label}
 
-      <div>
+      <div className="relative">
         <Input
           type={showPassword ? 'text' : 'password'}
           placeholder={placeholder}
@@ -61,7 +61,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
           required
           {...props}
         >
-        <p className="mt-2 text-xs text-red-500 peer-invalid:visible peer-valid:invisible">
+        <p className="mt-2 invisible text-xs text-red-500 peer-[&:not(:placeholder-shown):invalid]:visible">
           At least 12 characters, with uppercase, lowercase, number, and special character.
         </p>
         </Input>

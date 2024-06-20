@@ -37,7 +37,7 @@ export const SignInForm = () => {
           login({
             token: data.AccessToken,
             userId: decodedToken.UserId,
-            role: decodedToken.Role,
+            role: decodedToken.role,
           })
         );
       },

@@ -1,8 +1,10 @@
+import { RootState } from "src/store";
+import { useSelector } from "react-redux";
 import { FaSearch } from "react-icons/fa"; 
 import { ChangeEvent, useState } from "react";
 import { FormButton, FormCard, Input, Label, SelectInput } from "../ui";
 
-import { getLabels, getModalities } from "../services";
+import { getLabelsByRoleName, getModalities } from "../services";
 import { useCustomQuery, Modality, Option } from "../utils";
 
 
@@ -23,20 +25,21 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
     const [dataPreset, setDataPreset] = useState<string>("");
     const [label, setLabel] = useState<Option[]>([]);
 
-
-
+    const role = useSelector((state:RootState) => state.user.role?.Name);
+    console.log(role)
     const { data: labelsData } = useCustomQuery<string[], Option[]>(
         ["labels"],
-        () => getLabels(),
-        {
-            select: (labels) =>
-                labels.map((label) => ({
-                    value: label,
-                    label: label,
-                })),
-        }
+        ({role}) => getLabelsByRoleName({role}),
+        // {
+        //     select: (labels) =>
+        //         labels.map((label) => ({
+        //             value: label,
+        //             label: label,
+        //         })),
+        // }
     );
 
+    console.log(labelsData)
     const { data: aets } = useCustomQuery<Modality[], Option[]>(
         ['modalities'],
         () => getModalities(),
