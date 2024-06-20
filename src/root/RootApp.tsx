@@ -9,7 +9,7 @@ import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
-//import ImportRoot from "../import/ImportRoot";
+import ImportCreateRoot from "../import/ImportCreateRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -38,9 +38,9 @@ const RootApp = () => {
       "/administration/users/roles": "Users",
       "/administration/users/oauth2": "Users",
       "/Orthanc Content": "Orthanc Content",
-      "/import": "Import",
-      "/import/ImportDicom/ImportDrop": "Import",
-      "/import/ImportDicom": "Import",
+      "/import": "Import/Create Dicom",
+      "/import/import-dicom": "Import",
+      "/import/create-dicom": "Create",
       "/query": "Query",
       "/users": "Users",
       "/mydicom": "My Dicom",
@@ -64,6 +64,7 @@ const RootApp = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />
+            <Route path="/import/*" element={<ImportCreateRoot />} />
           </Routes>
         </div>
       </div>
