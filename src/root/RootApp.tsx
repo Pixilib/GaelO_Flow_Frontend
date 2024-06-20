@@ -39,6 +39,7 @@ const RootApp = () => {
       "/administration/users/oauth2": "Users",
       "/Orthanc Content": "Orthanc Content",
       "/import": "Import",
+      "/import/ImportDicom/ImportDrop": "Import",
       "/import/ImportDicom": "Import",
       "/query": "Query",
       "/users": "Users",

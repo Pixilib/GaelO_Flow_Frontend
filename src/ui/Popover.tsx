@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+
 type PopoverProps = {
   children: React.ReactNode;
+  withOnClick: boolean;
   popover: React.ReactNode;
-  withOnClick?: boolean;
   placement?: 'top' | 'right' | 'bottom' | 'left';
   className?: string;
-  showToggleChevron?: boolean; 
 };
 
 const Popover: React.FC<PopoverProps> = ({
@@ -14,17 +14,8 @@ const Popover: React.FC<PopoverProps> = ({
   withOnClick = false,
   placement = 'bottom',
   className = '',
-  showToggleChevron = false, 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const togglePopover = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleEvent = withOnClick
-    ? { onClick: togglePopover }
-    : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
@@ -41,11 +32,18 @@ const Popover: React.FC<PopoverProps> = ({
     }
   };
 
+  const handleEvent = withOnClick
+    ? { onClick: () => setIsOpen(!isOpen) }
+    : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
+
   return (
-    <div className="relative" data-gaelo-flow="Popover">
-      <div {...handleEvent} className="flex items-center cursor-pointer">
+    <div
+      className="relative"
+      data-gaelo-flow="Popover"
+    >
+      <span  {...handleEvent}>
         {children}
-      </div>
+      </span>
       {isOpen && (
         <div
           className={`absolute m-2 ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
@@ -53,6 +51,7 @@ const Popover: React.FC<PopoverProps> = ({
           {popover}
         </div>
       )}
+
     </div>
   );
 };
