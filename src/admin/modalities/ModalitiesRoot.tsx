@@ -3,7 +3,7 @@ import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
 import { Button, Card, CardBody, CardFooter, Spinner } from '../../ui';
 import { Colors } from '../../utils/enums';
-import { Modality } from '../../utils/types';
+import { Modality, ModalityExtended } from '../../utils/types';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { useCustomToast } from '../../utils/toastify';
 
@@ -18,19 +18,29 @@ const ModalitiesRoot: React.FC = () => {
 
     const [showNewAetCard, setShowNewAetCard] = useState(false);
 
-    const { data: aets, isLoading } = useCustomQuery<Modality[]>(
+    const { data: aets, isLoading } = useCustomQuery<ModalityExtended[],Modality[]>(
         ['modalities'],
-        () => getModalities()
+        () => getModalities(),
+        {
+            select: (response) =>
+                Object.entries(response).map(([name, aet]) => ({
+                    name: name,
+                    aet: aet.AET,
+                    host: aet.Host,
+                    port: aet.Port,
+                    manufacturer: aet.Manufacturer,
+                })),
+        }
     );
 
     const { mutate: updateModalityMutate } = useCustomMutation(
-        (aet: Modality) => updateModality(aet),
-        [['modalities']],
-        {
-            onSuccess: () => toastSuccess("Modality created successfully"),
-            onError: () => toastError("Error while creating modality"),
-        }
-    );
+            (aet: Modality) => updateModality(aet),
+            [['modalities']],
+            {
+                onSuccess: () => toastSuccess("Modality created successfully"),
+                onError: () => toastError("Error while creating modality"),
+            }
+        );
 
     const { mutate: echoModalityMutate } = useCustomMutation(
         (aetName: string) => echoModality(aetName),

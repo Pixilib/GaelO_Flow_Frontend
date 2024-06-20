@@ -48,7 +48,7 @@ const Popover: React.FC<PopoverProps> = ({
       </div>
       {isOpen && (
         <div
-          className={`absolute ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+          className={`absolute m-2 ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
         >
           {popover}
         </div>

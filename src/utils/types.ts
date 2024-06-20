@@ -114,6 +114,25 @@ export type Modality = {
     manufacturer: string;
 }
 
+export type ModalityExtended = {
+    AET: string;
+    AllowEcho: boolean;
+    AllowEventReport: boolean;
+    AllowFind: boolean;
+    AllowFindWorklist: boolean;
+    AllowGet: boolean;
+    AllowMove: boolean;
+    AllowNAction: boolean;
+    AllowStore: boolean;
+    AllowTranscoding: boolean;
+    Host: string;
+    LocalAet: string;
+    Manufacturer: string;
+    Port: number;
+    Timeout: number;
+    UseDicomTls: boolean;
+}
+
 export type Label = {
     Name: string;
 }
