@@ -21,7 +21,7 @@ const UsersRoot = () => {
 
             <CardBody color={Colors.light} roundedTopLeft roundedTopRight roundedBottomLeft roundedBottomRight>
 
-            <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Queues</h2>
+            <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Users</h2>
 
             <Tabs className=" bg-light-gray">
                 <Tab

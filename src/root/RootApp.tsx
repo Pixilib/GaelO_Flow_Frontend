@@ -9,6 +9,7 @@ import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
+//import ImportRoot from "../import/ImportRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,8 @@ const RootApp = () => {
       "/administration/users/oauth2": "Users",
       "/Orthanc Content": "Orthanc Content",
       "/import": "Import",
+      "/import/ImportDicom/ImportDrop": "Import",
+      "/import/ImportDicom": "Import",
       "/query": "Query",
       "/users": "Users",
       "/mydicom": "My Dicom",

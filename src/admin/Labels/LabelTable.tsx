@@ -1,5 +1,7 @@
 import React, { useMemo } from "react";
 import { BsTrashFill as DeleteIcon } from "react-icons/bs";
+import { RiAdminFill as AdminIcon } from "react-icons/ri";
+import ToggleChevron from "../../ui/menu/ToogleChevron";
 import { Table, Button, Label, Popover } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label as LabelType } from "../../utils/types";
@@ -27,7 +29,10 @@ const LabelsTable: React.FC<LabelsTableProps> = ({ data = [], onDeleteLabel }) =
                 cell: ({ row }) => (
                     <div className="flex justify-center gap-2.5">
                         <Popover withOnClick={true} popover={<LabelsRoles key={row.original.Name} labelName={row.original.Name} />}>
-                            <Button color={Colors.primary}>Edit Roles</Button>
+                            <Button color={Colors.secondary} className="flex items-center gap-1.5">
+                                <AdminIcon size="1.3rem" />
+                               <ToggleChevron isOpen={false} />
+                            </Button>
                         </Popover>
 
                         <Button
