@@ -1,32 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Role } from 'src/utils';
 
 
-interface Role {
-    Name: string;
-    Import: boolean;
-    Anonymize: boolean;
-    Export: boolean;
-    Query: boolean;
-    AutoQuery: boolean;
-    Delete: boolean;
-    Admin: boolean;
-    Modify: boolean;
-    CdBurner: boolean;
-    AutoRouting: boolean;
-    ReadAll: boolean;
-  }
+
 
 export interface UserState {
     token: string | null;
     isLogged: boolean;
     tokenCreationDate: string | null;
-    currentUserId: string | null;
+    currentUserId: number | null;
     role: Role | null;
 }
 
 interface LoginPayload {
     token: string;
-    userId: string;
+    userId: number;
     role: Role;
 }
 
@@ -48,9 +36,6 @@ const userSlice = createSlice({
             state.tokenCreationDate = new Date().toISOString();
             state.currentUserId = action.payload.userId;
             state.role = action.payload.role;
-            console.log(state.role)
-            console.log(state.role?.Name)
-            console.log(action.payload)
         },
         logout(state) {
             state.token = null;
@@ -59,8 +44,7 @@ const userSlice = createSlice({
             state.currentUserId = null;
             state.role = null;
         },
-    }
+        }
 })
-
 export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;

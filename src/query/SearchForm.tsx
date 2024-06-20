@@ -29,14 +29,14 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
     console.log(role)
     const { data: labelsData } = useCustomQuery<string[], Option[]>(
         ["labels"],
-        ({role}) => getLabelsByRoleName({role}),
-        // {
-        //     select: (labels) =>
-        //         labels.map((label) => ({
-        //             value: label,
-        //             label: label,
-        //         })),
-        // }
+        () => getLabelsByRoleName(role??""),
+        {
+            select: (labels) =>
+                labels.map((label) => ({
+                    value: label,
+                    label: label,
+                })),
+        }
     );
 
     console.log(labelsData)
