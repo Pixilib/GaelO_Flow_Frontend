@@ -71,15 +71,13 @@ const Retrieve = ({ data }: RetrieveProps) => {
       onError: (error: any) => {
         toastError(
           'An error occurred during updating options.' +
-            (error?.data?.message ?? '')
+          (error?.data?.message ?? '')
         );
       },
     }
   );
 
-  const handleTimeStart = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleTimeStart = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setStartTime(value);
   };
