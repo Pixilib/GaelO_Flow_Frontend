@@ -57,8 +57,7 @@ const Input = ({
     disabled:bg-gray-200 
     disabled:text-gray-400 
     disabled:border-gray-300
-    disabled:opacity-60
-    `;
+    disabled:opacity-60`;
 
   // Génération de la classe CSS pour contrôler les arrondis
   const borderClasses = bordered ? " border-2 border-gray " : "border-none";

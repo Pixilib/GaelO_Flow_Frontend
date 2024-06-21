@@ -1,28 +1,39 @@
-import  { ReactNode, FormEvent } from 'react';
+import { FaWindowMinimize, FaWindowMaximize } from "react-icons/fa"; 
+import { useState, ReactNode, FormEvent } from 'react';
 import { Card, CardBody, CardHeader, CloseButton } from '../ui';
 import { Colors } from '../utils';
 
 type FormCardProps = {
-  header: {
-    title: string;
-    onClose: () => void;
-  };
+  title: string;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   children: ReactNode;
   className?: string;
+  collapsible?: boolean;
+  onClose?: () => void;
 };
 
-const FormCard = ({ header, onSubmit, children, className }: FormCardProps) => {
+const FormCard = ({ title, onSubmit, children, className, collapsible = false, onClose }: FormCardProps) => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
     <Card className={`my-10 h-full ${className}`}>
-      <CardHeader title={header.title} color={Colors.success}>
-        <CloseButton onClose={header.onClose} />
+      <CardHeader title={title} color={Colors.success}>
+        <div className="flex items-center">
+          {collapsible && (
+            <button onClick={() => setIsCollapsed(!isCollapsed)} className="me-4">
+              {isCollapsed ? <FaWindowMaximize /> : <FaWindowMinimize />}
+            </button>
+          )}
+          {onClose && <CloseButton onClose={onClose} />}
+        </div>
       </CardHeader>
-      <CardBody color={Colors.lightGray}>
-        <form onSubmit={onSubmit} className="grid gap-y-2 lg:gap-y-4">
-          {children}
-        </form>
-      </CardBody>
+      {!isCollapsed && (
+        <CardBody color={Colors.lightGray}>
+          <form onSubmit={onSubmit} className="grid gap-y-2 lg:gap-y-4">
+            {children}
+          </form>
+        </CardBody>
+      )}
     </Card>
   );
 };

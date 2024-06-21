@@ -2,7 +2,7 @@ import moment from "moment";
 import { RootState } from "src/store";
 import { useSelector } from "react-redux";
 import { FaSearch } from "react-icons/fa";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { FormButton, FormCard, Input, Label, SelectInput } from "../ui";
 import { getLabelsByRoleName, getModalities } from "../services";
 import { useCustomQuery, Option } from "../utils";
@@ -38,7 +38,6 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
                 })),
         }
     );
-
     const { data: aets } = useCustomQuery<ModalityExtended[], Option[]>(
         ['modalities'],
         () => getModalities(),
@@ -50,7 +49,6 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
                 })),
         }
     );
-
     const dataPresetOptions: Option[] = [
         { value: null, label: "None" },
         { value: 0, label: "Today" },
@@ -103,10 +101,8 @@ const SearchForm = ({ title, className, onClose }: QueryFormProps) => {
     return (
         <FormCard
             className={`${className} gap-y-7 flex flex-col justify-center`}
-            header={{
-                onClose,
-                title
-            }}
+            title={title}
+            collapsible
             onSubmit={onSubmit}
         >
             <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-2 lg:gap-11">
