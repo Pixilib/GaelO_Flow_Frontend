@@ -1,5 +1,5 @@
+import { BsFillCloudArrowUpFill } from "react-icons/bs"; 
 import { useDropzone } from 'react-dropzone';
-import { FaCloudUploadAlt } from 'react-icons/fa';
 import { useCustomMutation } from '../../utils';
 import { sendDicom } from '../../services/instances';
 
@@ -33,16 +33,14 @@ const ImportDrop = () => {
       }
     }
   });
-
   return (
     <div
       {...getRootProps()}
-      className="flex items-center justify-center p-4 text-center bg-white border-4 border-dashed rounded border-primary"
-      style={{ backgroundColor: '#ffffff' }}
+      className="flex flex-col items-center justify-center p-4 text-center bg-white border-4 border-dashed rounded border-primary"
     >
-      <input {...getInputProps()} />
-      <FaCloudUploadAlt size={24} className="mr-2 text-primary" />
+      <BsFillCloudArrowUpFill size={32} className="mb-2 text-primary" />
       <p className="text-primary">Glissez et déposez les fichiers ici, ou cliquez pour sélectionner des fichiers</p>
+      <input {...getInputProps()} />
     </div>
   );
 };

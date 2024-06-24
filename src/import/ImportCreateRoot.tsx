@@ -17,32 +17,30 @@ const ImportCreateRoot = () => {
     }
 
     return (
-        <Card className="mx-12 mt-12 shadow-md rounded-xl" data-gaelo-flow="users-root">
-            <CardBody color={Colors.light} roundedTopLeft roundedTopRight roundedBottomLeft roundedBottomRight>
-            <Tabs className=" bg-light-gray">
-                <Tab
-                    title="Import Dicom"
-                    active={path.endsWith("import")}
-                    onClick={() => handleTabClick("")}
-                    
-                    
-                />
-                <Tab
-                    title="Create Dicom"
-                    active={path.endsWith("createdicom")}
-                    onClick={() => handleTabClick("create")}
-            
-                />
-            </Tabs>
-            
-            <Routes>
-                <Route path="/" element={<ImportDrop/>} />
-                <Route path="/create" element={<CreateDrop />} /> 
-            </Routes>
-            </CardBody>
-            </Card>
+        <div className="my-6">
+            <form className="p-4 mx-6 bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
+                <Tabs className="bg-primary">
+                    <Tab
+                        title="Import Dicom"
+                        active={path.endsWith("import")}
+                        onClick={() => handleTabClick("")}
+                    />
+                    <Tab
+                        title="Create Dicom"
+                        active={path.endsWith("createdicom")}
+                        onClick={() => handleTabClick("create")}
+                    />
+                </Tabs>
+                
+                <div className="mt-4"> {/* Espace au-dessus du formulaire */}
+                    <Routes>
+                        <Route path="/" element={<ImportDrop />} />
+                        <Route path="/create" element={<CreateDrop />} />
+                    </Routes>
+                </div>
+            </form>
+        </div>
     );
 }
-
 
 export default ImportCreateRoot;
