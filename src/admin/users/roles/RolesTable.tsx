@@ -95,7 +95,7 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
         }
     ]
     return (
-        <div className="mx-5 mt-4">
+        <div className="mx-5">
             <Table
                 data={data}
                 columns={columns}

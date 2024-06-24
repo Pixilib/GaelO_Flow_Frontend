@@ -74,7 +74,7 @@ export const postRoles = (payload: Role): Promise<void> => {
 
 export const addLabelToRole = (roleName: string, labelName: string): Promise<void> => {
   return axios
-    .post(`/api/roles/${roleName}/label`, {Name : labelName})
+    .post(`/api/roles/${roleName}/labels`, {Name : labelName})
     .then(function () {
       return undefined;
     })
@@ -88,7 +88,7 @@ export const addLabelToRole = (roleName: string, labelName: string): Promise<voi
 
 export const removeLabelFromRole = (roleName: string, labelName: string): Promise<void> => {
   return axios
-    .delete(`/api/roles/${roleName}/label/${labelName}`)
+    .delete(`/api/roles/${roleName}/labels/${labelName}`)
     .then(function () {
       return undefined;
     })

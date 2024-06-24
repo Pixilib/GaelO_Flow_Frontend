@@ -152,7 +152,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 handleTimeStop(event)
               }
               className={
-                'bg-gray-100 text-gray-400 focus:text-dark focus:shadow-2xl shadow-lg'
+                'bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl shadow-lg'
               }
             />
             <div className="flex-col text-center">

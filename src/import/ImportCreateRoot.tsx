@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
-import { Tabs,Card, CardBody } from "../ui";
+import { Tabs } from "../ui";
 import ImportDrop from "./Import/ImportDrop";
 import CreateDrop from "./Create/CreateDrop";
 import { Tab } from "../ui";
@@ -32,7 +32,7 @@ const ImportCreateRoot = () => {
                     />
                 </Tabs>
                 
-                <div className="mt-4"> {/* Espace au-dessus du formulaire */}
+                <div className="mt-4"> 
                     <Routes>
                         <Route path="/" element={<ImportDrop />} />
                         <Route path="/create" element={<CreateDrop />} />

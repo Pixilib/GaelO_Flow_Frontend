@@ -21,10 +21,9 @@ interface SelectionInputProps {
 const customStyles: StylesConfig<OptionType, boolean> = {
   control: (provided, state) => ({
     ...provided,
-    borderRadius: '10px',
-    borderColor: state.isFocused ? '#333182' : '#D1D5DB',
-    borderWidth: '2px',
+    borderRadius: '14px',
     boxShadow: 'none',
+    padding: '0.2em',
     '&:hover': {
       borderColor: state.isFocused ? '#333182' : '#D1D5DB',
     },
@@ -37,7 +36,7 @@ const customStyles: StylesConfig<OptionType, boolean> = {
   option: (provided, state) => ({
     ...provided,
     borderRadius: '8px',
-    padding: '8px 16px',
+    padding: '8px 6px',
     backgroundColor: state.isSelected ? '#333182' : 'white',
     color: state.isSelected ? 'white' : 'grey',
     '&:hover': {
