@@ -1,17 +1,14 @@
+import { TiUser } from "react-icons/ti"; 
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { BsFillHouseDoorFill } from "react-icons/bs";
+import { IoLanguage as LanguageIcon } from "react-icons/io5";
+import { MdNotifications as NotificationsIcon, MdSettings as SettingsIcon } from "react-icons/md";
 import Banner from "../ui/menu/Banner";
 import BannerItems from "../ui/menu/BannerItems";
 import DropDown from "../ui/menu/DropDown";
 import ToggleSwitch from "../ui/menu/ToggleSwitch";
-
-import ArrowBack from "../assets/arrow-back.svg?react";
-import BannerHome from "../assets/banner-home.svg?react";
-import Language from "../assets/language.svg?react";
-import Notification from "../assets/notification.svg?react";
-import Settings from "../assets/settings.svg?react";
-import Profile from "../assets/user-banner.svg?react";
 import { Item } from "../ui/menu/Items";
 
 type HeaderProps = {
@@ -42,10 +39,10 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
   const isOpen = (item: string): boolean => openItem === item;
   const leftIcon =
     location.pathname === "/" ? (
-      <BannerHome />
+      <BsFillHouseDoorFill />
     ) : (
       <span>
-        <ArrowBack />
+        <AiOutlineArrowLeft />
       </span>
     );
 
@@ -103,7 +100,7 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
           }
         >
           <span className="inline-flex items-center">
-            <Language />
+            <LanguageIcon />
             <span className="mx-4">
               {ItemsLanguage.find((item) => item.code === i18n.language)?.title}
             </span>
@@ -126,12 +123,17 @@ const Header = ({ title, openItem, setOpenItem }: HeaderProps) => {
             </div>
           }
         >
-          <ToggleSwitch disabled={true} />
-          <Notification className="transition-transform duration-100 size-4 hover:scale-110" />
-          <Settings className="transition-transform duration-100 size-4 hover:scale-110" />
-          <Profile
-            height={23}
-            width={23}
+        <ToggleSwitch
+  isToggled={true} // or pass the state variable controlling the toggle
+  onToggle={(isChecked) => {
+    console.log("Toggle state:", isChecked);
+    // Handle state change logic here
+  }}
+/>
+          <NotificationsIcon className="transition-transform duration-100 size-4 hover:scale-110" />
+          <SettingsIcon className="transition-transform duration-100 size-4 hover:scale-110" />
+          <TiUser 
+            size={23}
             className="transition-transform duration-100 hover:scale-110"
             fill="white"
             stroke="white"
