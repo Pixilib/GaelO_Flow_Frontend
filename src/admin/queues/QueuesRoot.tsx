@@ -1,5 +1,4 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-
 import { Spinner, Tabs, Tab, Card, CardBody } from "../../ui";
 import { useCustomQuery } from "../../utils/reactQuery";
 import { OptionsResponse } from "../../utils/types";
@@ -15,17 +14,14 @@ const QueuesRoot = () => {
   const location = useLocation();
   const path = location.pathname;
 
-
   const { data: options, isPending: isLoadingOptions } =
     useCustomQuery<OptionsResponse>(["options"], () => getOptions());
 
   if (isLoadingOptions) return <Spinner />;
 
   return (
-    <Card className="mx-12 mt-12 ">
-            <CardBody color={Colors.light} roundedTopLeft roundedTopRight roundedBottomLeft roundedBottomRight>
-            <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Queues</h2>
-    <Tabs className={`bg-light-gray`}>
+    <Card className="mx-12 mt-12">
+      <Tabs className="rounded-t bg-light-gray">
         <Tab
           title="Retrieve"
           active={path.endsWith("retrieve")}
@@ -42,21 +38,22 @@ const QueuesRoot = () => {
           onClick={() => navigate("delete")}
         />
       </Tabs>
-      
-      <Routes>
-        <Route
-          path="retrieve"
-          element={<Retrieve data={options as OptionsResponse} />}
-        />
-        <Route 
-        path="anonymize" 
-        element={<Anonymize />} 
-        />
-        <Route 
-        path="delete" 
-        element={<Delete />} 
-        />
-      </Routes>
+      <CardBody
+        color={Colors.light}
+        roundedTopLeft={false}
+        roundedTopRight={false}
+        roundedBottomLeft
+        roundedBottomRight
+      >
+        <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Queues</h2>
+        <Routes>
+          <Route
+            path="retrieve"
+            element={<Retrieve data={options as OptionsResponse} />}
+          />
+          <Route path="anonymize" element={<Anonymize />} />
+          <Route path="delete" element={<Delete />} />
+        </Routes>
       </CardBody>
     </Card>
   );

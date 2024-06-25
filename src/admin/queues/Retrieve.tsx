@@ -108,7 +108,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
     <form
       onSubmit={handleSubmit}
       data-gaelo-flow="retrieve-container-queues"
-      className="flex flex-col items-center w-full mb-6 bg-gray-200 rounded-br-xl rounded-bl-xl"
+      className="flex flex-col items-center w-full mb-6 rounded-br-xl rounded-bl-xl"
     >
       <Card bordered className="w-11/12 mt-8">
         <CardHeader

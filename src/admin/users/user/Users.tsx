@@ -57,7 +57,7 @@ const Users = ({ className }: UsersProps) => {
 
   return (
     <div
-      className={`flex flex-col h-full custom-scrollbar overflow-y-auto bg-gray-200 rounded-br-xl rounded-bl-xl ${className}`}
+      className={`flex flex-col h-full custom-scrollbar overflow-y-auto rounded-br-xl rounded-bl-xl ${className}`}
       data-gaelo-flow="users"
     >
       {isLoadingUsers ? (

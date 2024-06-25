@@ -1,11 +1,8 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-
-import { Tabs } from "../ui";
+import { Tabs, Tab, Card, CardBody } from "../ui";
 import ImportDrop from "./Import/ImportDrop";
 import CreateDrop from "./Create/CreateDrop";
-import { Tab } from "../ui";
 import { Colors } from "../utils";
-
 
 const ImportCreateRoot = () => {
     const navigate = useNavigate();
@@ -17,9 +14,9 @@ const ImportCreateRoot = () => {
     }
 
     return (
-        <div className="my-6">
-            <form className="p-4 mx-6 bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
-                <Tabs className="bg-primary">
+        <div className="mx-6 my-6">
+            <Card className="bg-white shadow-md rounded-xl" data-gaelo-flow="import-create-root">
+                <Tabs className="bg-primary rounded-t-xl">
                     <Tab
                         title="Import Dicom"
                         active={path.endsWith("import")}
@@ -27,18 +24,23 @@ const ImportCreateRoot = () => {
                     />
                     <Tab
                         title="Create Dicom"
-                        active={path.endsWith("createdicom")}
+                        active={path.endsWith("create")}
                         onClick={() => handleTabClick("create")}
                     />
                 </Tabs>
-                
-                <div className="mt-4"> 
+                <CardBody
+                    color={Colors.light}
+                    roundedTopLeft={false}
+                    roundedTopRight={false}
+                    roundedBottomLeft
+                    roundedBottomRight
+                >
                     <Routes>
                         <Route path="/" element={<ImportDrop />} />
                         <Route path="/create" element={<CreateDrop />} />
                     </Routes>
-                </div>
-            </form>
+                </CardBody>
+            </Card>
         </div>
     );
 }
