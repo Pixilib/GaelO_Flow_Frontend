@@ -53,7 +53,7 @@ const RootApp = () => {
   return (
     <div className="flex w-screen h-screen bg-white">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-col flex-1 overflow-auto custom-scrollbar bg-secondaryLight">
+      <div className="flex flex-col flex-1 overflow-auto bg-indigo-100 custom-scrollbar">
         <Header
           title={title}
           openItem={openItem}

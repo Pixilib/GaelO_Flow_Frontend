@@ -95,7 +95,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
                 <div className="h-2"></div>
             </CardBody>
-            <CardFooter className="flex justify-center mt-0 space-x-4" color={Colors.light}>
+            <CardFooter className="flex justify-center mt-0 space-x-4 border-t-2 border-ligth" color={Colors.light}>
                 <Button color={Colors.orange} onClick={reset}>
                     <RestartIcon size="20px" title="Restart" />
                 </Button>

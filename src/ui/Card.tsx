@@ -19,10 +19,10 @@ type CardBodyProps = {
   children: React.ReactNode;
   color?: Colors;
   className?: string;
-  roundedTopLeft?: boolean; // Optional boolean for rounded top left corner
-  roundedTopRight?: boolean; // Optional boolean for rounded top right corner
-  roundedBottomLeft?: boolean; // Optional boolean for rounded bottom left corner
-  roundedBottomRight?: boolean; // Optional boolean for rounded bottom right corner
+  roundedTopLeft?: boolean;
+  roundedTopRight?: boolean; 
+  roundedBottomLeft?: boolean;
+  roundedBottomRight?: boolean;
 };
 
 type CardFooterProps = {
