@@ -78,8 +78,6 @@ export const WithCloseButton = () => {
           title="Form Card with Close Button"
           onClose={handleCloseButton}
           onSubmit={action('form-submitted')}
-          className=""
-          collapsible={false}
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.
         </FormCard>
@@ -87,13 +85,3 @@ export const WithCloseButton = () => {
     </>
   );
 };
-
-export const CustomClass = {
-  args: {
-    title: 'Custom Class Form Card',
-    onSubmit: action('form-submitted'),
-    children: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.',
-    className: 'bg-red-500 text-dark',
-    collapsible: false,
-  },
-} satisfies Story;

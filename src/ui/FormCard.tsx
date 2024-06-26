@@ -5,10 +5,10 @@ import { Colors } from '../utils';
 
 type FormCardProps = {
   title: string;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   children: ReactNode;
   className?: string;
   collapsible?: boolean;
+  onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
   onClose?: () => void;
 };
 
@@ -29,9 +29,13 @@ const FormCard = ({ title, onSubmit, children, className, collapsible = false, o
       </CardHeader>
       {!isCollapsed && (
         <CardBody color={Colors.lightGray}>
-          <form onSubmit={onSubmit} className="grid gap-y-2 lg:gap-y-4">
-            {children}
-          </form>
+          {onSubmit ? (
+            <form onSubmit={onSubmit} className="grid gap-y-2 lg:gap-y-4">
+              {children}
+            </form>
+          ) : (
+            <div className="grid gap-y-2 lg:gap-y-4">{children}</div>
+          )}
         </CardBody>
       )}
     </Card>

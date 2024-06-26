@@ -10,7 +10,7 @@ import { getOauth2Config, postOauth2Config, deleteOauth2Config  } from './oauth2
 import { getOptions, updateOptions } from './options';
 import { getOrthancSystem,orthancReset,orthancShutdown,updateVerbosity,getVerbosity } from './orthanc';
 import { updatePeer,getPeers,echoPeer,deletePeer } from './peers';
-import { postQuery } from './query';
+import { postQueryParsed } from './query';
 export {
     addLabel,
     changePassword,
@@ -39,7 +39,7 @@ export {
     orthancShutdown,
     postJobs,
     postOauth2Config,
-    postQuery,
+    postQueryParsed,
     postRoles,
     postUsers,
     removeLabel,

@@ -1,4 +1,4 @@
-import { Label, Role } from '../utils/types';
+import { Role } from '../utils/types';
 import axios from "./axios";
 
 
