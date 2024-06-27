@@ -1,48 +1,49 @@
-
-import Sun from '../../assets/sun.svg?react';
-import Moon from '../../assets/moon.svg?react';
+import { TiWeatherNight } from "react-icons/ti";
+import { RiSunFill } from "react-icons/ri";
+import { useState } from "react";
 
 type ToggleSwitchProps = {
   isToggled?: boolean;
-  onToggle?: () => void;
-} & React.InputHTMLAttributes<HTMLInputElement>
+  onToggle?: (isChecked: boolean) => void;
+};
 
-const ToggleSwitch = ({ isToggled, onToggle, ...props }: ToggleSwitchProps) => {
-  const handleClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-  }
+const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
+  const [checked, setChecked] = useState<boolean>(isToggled || false);
+
+  const handleClick = () => {
+    const newValue = !checked;
+    setChecked(newValue);
+    if (onToggle) {
+      onToggle(newValue);
+    }
+  };
+
   return (
     <label className="flex items-center cursor-pointer">
       {/* The real hidden checkbox input */}
       <input
-        data-gaelo-flow="toggle-switch"
         type="checkbox"
         className="sr-only"
-        checked={isToggled}
-        onChange={onToggle}
-        onClick={handleClick}
-        aria-labelledby="Light and Dark mode switch"
-        {...props}
+        checked={checked}
+        onChange={handleClick}
       />
       {/* switch design */}
       <div
-        className={`relative flex h-7 w-16 items-center rounded-full pe-3 transition-colors
-       duration-500 ease-in-out 
-        ${isToggled ? 'justify-end bg-primary-active' : 'justify-start rounded-full bg-primary-light'
-          }`}
+        className={`relative flex items-center h-7 w-14 rounded-full transition-colors d ${
+          checked ? "bg-primary-active" : "bg-primary-light"
+        }`}
       >
-        {/* Circle toogle with moon or sun */}
+        {/* Circle toggle with moon or sun */}
         <div
-          className={`transition-opacity- flex size-6
-           items-center justify-center rounded-full shadow transition-all duration-200 ease-in-out
-            ${isToggled ? 'translate-x-2 ' : 'translate-x-0 bg-slate-100'
-            }`}
+          className={`absolute top-0 ${
+            checked ? "right-0 translate-x-0.5" : "left-0 translate-x-0"
+          } w-7 h-7 flex items-center justify-center rounded-full shadow-lg transition-transform duration-200 ease-in-out bg-white`}
         >
-          {/*Display icon according to toogle switch  */}
-          {isToggled ? (
-            <Moon className="size-4" />
+          {/* Display icon according to toggle switch */}
+          {checked ? (
+            <TiWeatherNight size={20} color="#374151" />
           ) : (
-            <Sun className="size-4" />
+            <RiSunFill size={20} color="#FFA500" />
           )}
         </div>
       </div>

@@ -49,8 +49,8 @@ function Table<T>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
-    pageIndex: 0, // initial page index
-    pageSize: pageSize, // default page size
+    pageIndex: 0, 
+    pageSize: pageSize,
   });
 
   const handlePageSizeChange = (newPageSize: number) => {
@@ -87,12 +87,12 @@ function Table<T>({
 
   const getColumnClasses = (index: number, length: number) => {
     if (pinFirstColumn && index === 0) return firstColumnClass;
-    if (pinLastColumn && index === length - 1) return lastColumnClass;;
+    if (pinLastColumn && index === length - 1) return lastColumnClass;
   };
 
   return (
     <div className={`rounded-xl shadow-md overflow-visible custom-scrollbar ${className}`}>
-      <div className="overflow-x-auto custom-scrollbar rounded-xl">
+      <div className="overflow-x-auto custom-scrollbar rounded-t-xl">
         <table className={`min-w-full border-grayCustom ${className}`}>
           <thead className={headerClass}>
             {table.getHeaderGroups().map(headerGroup => (
@@ -141,11 +141,11 @@ function Table<T>({
             {table.getRowModel().rows.map((row, rowIndex) => (
               <tr
                 key={`row-${row.id}-${rowIndex}`}
-                className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'}`}
                 onClick={() => {
                   onRowClick && onRowClick(row.original);
                 }}
 
+                className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'} ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td

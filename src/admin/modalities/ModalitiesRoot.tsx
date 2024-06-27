@@ -18,7 +18,7 @@ const ModalitiesRoot: React.FC = () => {
 
     const [showNewAetCard, setShowNewAetCard] = useState(false);
 
-    const { data: aets, isLoading } = useCustomQuery<ModalityExtended[],Modality[]>(
+    const { data: aets, isLoading } = useCustomQuery<ModalityExtended[], Modality[]>(
         ['modalities'],
         () => getModalities(),
         {
@@ -34,13 +34,13 @@ const ModalitiesRoot: React.FC = () => {
     );
 
     const { mutate: updateModalityMutate } = useCustomMutation(
-            (aet: Modality) => updateModality(aet),
-            [['modalities']],
-            {
-                onSuccess: () => toastSuccess("Modality created successfully"),
-                onError: () => toastError("Error while creating modality"),
-            }
-        );
+        (aet: Modality) => updateModality(aet),
+        [['modalities']],
+        {
+            onSuccess: () => toastSuccess("Modality created successfully"),
+            onError: () => toastError("Error while creating modality"),
+        }
+    );
 
     const { mutate: echoModalityMutate } = useCustomMutation(
         (aetName: string) => echoModality(aetName),
@@ -77,16 +77,20 @@ const ModalitiesRoot: React.FC = () => {
                             onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}
                             onEchoAet={handleEchoAet} />
                     </div>
-                    {!showNewAetCard && (
-                        <Button
-                            color={Colors.success}
-                            onClick={handleNewAetClick}>
-                            <MoreIcon className="mr-3" size={24} /> New modality
-                        </Button>
-                    )}
+
+
                 </div>
             </CardBody>
-            <CardFooter color={Colors.light}>
+            <CardFooter className="border-t-2 border-ligth" color={Colors.light}>
+
+                {!showNewAetCard && (
+                    <Button
+                        color={Colors.success}
+                        onClick={handleNewAetClick}>
+                        <MoreIcon className="mr-3 " size={24} /> New modality
+                    </Button>
+                )}
+
                 {showNewAetCard && (
                     <NewModalityCard
                         onClose={handleCloseNewAetCard}

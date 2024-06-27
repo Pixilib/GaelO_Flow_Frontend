@@ -1,16 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
 
-import { CgClose as CloseIcon } from "react-icons/cg";
 import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
 
 import {
-  Card,
+  FormCard,
   Button,
   Input,
   SelectInput,
-  CardHeader,
-  CardBody,
-  CardFooter,
 } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
@@ -91,16 +87,24 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
   };
 
   return (
-    <Card className="flex flex-col h-full">
-      <CardHeader title="Create New Modality" color={Colors.success}>
-        <CloseIcon
-          size="24px"
-          title="Close"
-          onClick={onClose}
-          className="ml-auto mr-[8px] cursor-pointer"
-        />
-      </CardHeader>
-      <CardBody className="p-4 bg-stone-100">
+    <FormCard
+      header={{
+        title: "Create New Modality",
+        onClose,
+      }}
+      onSubmit={handleSubmit}
+      footer={
+        <Button
+          type="submit"
+          color={Colors.success}
+          aria-label="Submit New Modality"
+        >
+          <CheckIcon size="20px" />
+        </Button>
+      }
+      className="bg-stone-100"
+    >
+      <div className="p-4">
         <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
           <Input
             label="Name"
@@ -148,18 +152,9 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
               aria-label="Manufacturer"
             />
           </div>
-          <CardFooter className="flex justify-center col-span-2 bg-stone-100">
-            <Button
-              type="submit"
-              color={Colors.success}
-              aria-label="Submit New Modality"
-            >
-              <CheckIcon size="20px" />
-            </Button>
-          </CardFooter>
         </form>
-      </CardBody>
-    </Card>
+      </div>
+    </FormCard>
   );
 };
 

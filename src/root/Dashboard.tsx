@@ -7,7 +7,7 @@ const Dashboard = () => {
 
   return (
     <div className="p-8 bg-background size-full">
-      <h1 className="mx-8 text-3xl font-bold">Overview</h1>
+      <h1 className="mx-8 text-3xl font-bold text-transparent bg-gradient-to-r from-indigo-300 to-indigo-800 bg-clip-text">Overview</h1>
       <div className="m-8 flex h-10 items-center rounded-[10px] bg-white p-10 shadow-xl">
         <h2 className="text-xl">
           <span className="font-bold">{username}</span>

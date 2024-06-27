@@ -53,6 +53,7 @@ export default {
         'secondaryLight': '#F1EBE8',
         'danger': '#DB1F22',
         'danger-hover': '#8A1315',
+        'sucess-light': '#CBDCD4',
         'success': '#36A56F',
         'success-hover': '#276A4A',
         'disabled': '#b2b2b2',

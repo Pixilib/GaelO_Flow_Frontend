@@ -184,3 +184,78 @@ export type QueryParseResponse = {
     StudyInstanceUID: string;
     SeriesInstanceUID: string;
 }
+
+export type OrthancImportDicom = {
+    id: string,
+    parentPatient: string,
+    parentSeries: string,
+    parentStudy: string
+}
+
+export type Patient = {
+    id: string;
+    isStable: boolean;
+    Labels: string[];
+    lastUpdate: string;
+    mainDicomTags: {
+        patientBirthDate: string | null;
+        patientID: string | null;
+        patientName: string | null;
+        patientSex: string | null;
+    },
+    studies: string[],
+    type: string
+}
+
+export type Series = {
+        expectedNumberOfInstances : number|null;
+        id : string;
+        instances : string[];
+        isStable : string;
+        labels : string[],
+        lastUpdate : string, 
+        mainDicomTags : {
+          imageOrientationPatient : string|null;
+          manufacturer : string|null;
+          modality : string|null;
+          operatorsName : string|null;
+          protocolName : string|null;
+          seriesDescription : string|null;
+          seriesInstanceUID : string;
+          seriesNumber : string|number|null;
+          stationName : string|null;
+          seriesDate : string|null;
+          seriesTime : string|null;
+        },
+        parentStudy : string;
+        status : string;
+        type : string;
+      
+}
+
+export type Study = {
+    id : string
+    isStable : string
+    labels : string[]
+    lastUpdate : string
+    mainDicomTags : {
+        accessionNumber : string|null
+        institutionName : string|null
+        referringPhysicianName : string|null
+        studyDate : string|null
+        studyDescription : string|null
+        studyID : string|null
+        studyInstanceUID : string
+        studyTime : string|null
+    },
+    patientMainDicomTags : {
+        patientBirthDate : string|null
+        patientID : string
+        patientName : string|null
+        patientSex : string|null
+    },
+    parentPatient : string,
+    series : string[],
+    type : string
+      
+}

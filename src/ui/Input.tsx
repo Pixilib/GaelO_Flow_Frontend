@@ -44,7 +44,7 @@ const Input = ({
     text-gray-500 
     focus:outline
     focus:shadow-outline
-    focus:primary focus:ring-primary focus:ring-2
+    focus:primary focus:ring-primary focus:ring-1
     p-2.5 
     block 
     dark:bg-gray-700 
@@ -60,7 +60,7 @@ const Input = ({
     disabled:opacity-60`;
 
   // Génération de la classe CSS pour contrôler les arrondis
-  const borderClasses = bordered ? " border-2 border-gray " : "border-none";
+  const borderClasses = bordered ? " border-1 border-gray " : "border-none";
   const roundedRightClass = roundedRight ? "rounded-xl" : "rounded-none";
 
   return (
