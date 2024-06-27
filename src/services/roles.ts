@@ -99,3 +99,18 @@ export const removeLabelFromRole = (roleName: string, labelName: string): Promis
       throw error;
     });
 }
+
+
+export const getLabelsByRoleName = (roleName: string): Promise<string[]> => {
+  return axios
+    .get(`/api/roles/${roleName}/labels`)
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}

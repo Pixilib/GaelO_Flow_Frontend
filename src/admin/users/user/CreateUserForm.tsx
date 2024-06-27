@@ -81,10 +81,8 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
   return (
     <FormCard
       className={className}
-      header={{
-        title,
-        onClose,
-      }}
+      title={title}
+      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-3 lg:gap-11">

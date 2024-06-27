@@ -9,7 +9,7 @@ import {
   SortingState,
   ColumnFiltersState,
   getFilteredRowModel,
-  getPaginationRowModel,
+  getPaginationRowModel
 } from '@tanstack/react-table';
 
 import { Colors } from "../../utils/enums";
@@ -30,6 +30,7 @@ type TableProps<TData> = {
   pageSize?: number;
   pinFirstColumn?: boolean;
   pinLastColumn?: boolean;
+  onRowClick?: (row: TData) => void;
 };
 
 function Table<T>({
@@ -43,6 +44,7 @@ function Table<T>({
   headerTextSize = "sm",
   pinFirstColumn = false, 
   pinLastColumn = false,
+  onRowClick,
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -139,6 +141,10 @@ function Table<T>({
             {table.getRowModel().rows.map((row, rowIndex) => (
               <tr
                 key={`row-${row.id}-${rowIndex}`}
+                onClick={() => {
+                  onRowClick && onRowClick(row.original);
+                }}
+
                 className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'} ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => (

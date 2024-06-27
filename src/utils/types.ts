@@ -144,6 +144,46 @@ export type Oauth2Config = {
     AuthorizationUrl: string;
     ClientId: string;
 }
+//Query
+
+type Level = "Series" | "Study";
+
+export type QueryParsedPayload = {
+    Level: Level;
+    Query: {
+        PatientName?: string;
+        PatientID?: string;
+        StudyDate?: string;
+        ModalitiesInStudy?: string;
+        StudyDescription?: string;
+        AccessionNumber?: string;
+        NumberOfStudyRelatedInstances?: string;
+        NumberOfStudyRelatedSeries?: string;
+        SeriesDescription?: string;
+        SeriesInstanceUID?: string;
+        SeriesNumber?: string;
+        ProtocolName?: string;
+    }
+}
+
+export type QueryParseResponse = {
+    AnswerId: string;
+    AnswerNumber: number;
+    Level: Level;
+    OriginAET: string;
+    PatientName: string;
+    PatientID: string;
+    AccessionNumber: string;
+    StudyDescription: string;
+    StudyDate: string;
+    RequestedProcedureDescription: string;
+    Modality: string;
+    SeriesDescription: string;
+    SeriesNumber: string;
+    NumberOfSeriesRelatedInstances: string;
+    StudyInstanceUID: string;
+    SeriesInstanceUID: string;
+}
 
 export type OrthancImportDicom = {
     id: string,

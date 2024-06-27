@@ -32,12 +32,12 @@ export const SignInForm = () => {
       onSuccess: (data: SignInResponse) => {
         const decodedToken: Record<string, any> = jwtDecode(
           data.AccessToken
-        );
+        );  
         dispatch(
           login({
             token: data.AccessToken,
-            userId: decodedToken.UserId,
-            role: decodedToken.Role,
+            userId: data.UserId,
+            role: {...decodedToken.role},
           })
         );
       },

@@ -30,7 +30,7 @@ const Input = ({
   step = undefined,
   svgLeft = null,
   svgRight = null,
-  bordered = false,
+  bordered = true,
   roundedLeft = true,
   roundedRight = true,
   ...props
@@ -52,11 +52,12 @@ const Input = ({
     dark:placeholder-gray-400 
     dark:text-white 
     dark:focus:ring-blue-500 
-    dark:focus:border-blue-500 
-    disabled:cursor-not-allowed 
-    disabled:bg-gray-100 
-    disabled:dark:bg-opacity-50
-  `;
+    dark:focus:border-blue-500
+    hover:disabled:cursor-not-allowed
+    disabled:bg-gray-200 
+    disabled:text-gray-400 
+    disabled:border-gray-300
+    disabled:opacity-60`;
 
   // Génération de la classe CSS pour contrôler les arrondis
   const borderClasses = bordered ? " border-1 border-gray " : "border-none";
@@ -90,10 +91,10 @@ const Input = ({
           className={`
             peer block py-3
             ${borderClasses}
-            text-gray-600 w-full ${roundedRightClass} text-sm disabled:pointer-events-none 
+            text-gray-600 w-full ${roundedRightClass} text-sm 
             ${svgLeft ? 'pl-10' : ''}
             ${svgRight ? 'pr-10' : ''}
-            disabled:opacity-50 ${InputClassName} ${className}
+            ${InputClassName} ${className}
           `}
           {...props}
         />

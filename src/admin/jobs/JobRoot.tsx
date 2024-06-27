@@ -11,12 +11,11 @@ const JobRoot = () => {
 
   const { toastSuccess, toastError } = useCustomToast()
 
-  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<
-    OrthancJob[]
-  >(["jobs"], () => getJobs(), {
-    enabled: true,
-    refetchInterval: 10000,
-  });
+  const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<OrthancJob[]>
+    (["jobs"], () => getJobs(), {
+      enabled: true,
+      refetchInterval: 10000,
+    });
 
   const { mutate } = useCustomMutation<unknown, JobPayload>(
     ({ Id, Action }: JobPayload) =>
@@ -32,19 +31,20 @@ const JobRoot = () => {
     }
   );
 
-  const handleJobAction = (id :string, action : JobsAction) => {
-    mutate({ Id : id, Action : action });
+  const handleJobAction = (id: string, action: JobsAction) => {
+    mutate({ Id: id, Action: action });
   };
 
   if (isLoadingJobs) return <Spinner />
   return (
     <div className="flex justify-center w-full h-full mt-12">
       <Card className="w-full bg-white">
-      <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Operations Jobs</h2>          <JobTable data={jobData as any} onJobAction={handleJobAction} />
+        <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
+          <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Operations Jobs</h2>
+          <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </CardBody>
         <CardFooter>
-          
+
         </CardFooter>
       </Card>
     </div>
