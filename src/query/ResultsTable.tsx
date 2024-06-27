@@ -5,7 +5,7 @@ import { Colors } from "../utils";
 
 type ResultsTableProps = {
     results: QueryParseResponse[] | null;
-    onRowClick: ( row:QueryParseResponse["StudyInstanceUID"] )=> void;
+    onRowClick: (studyInstanceUID :string )=> void;
 };
 const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
 

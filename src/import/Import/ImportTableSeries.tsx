@@ -3,50 +3,41 @@ import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
 import DeleteButton from "../../ui/DeleteButton";
 
-//TODO: Importer le type Study
-
-interface ImportTableStudyProps {
-    data: Study[];
-    onStudyClick : (studyInstanceUID :string) => void
+//TODO: Importer le type Series
+interface ImportTableSeriesProps {
+    data: Series[];
 }
 
-const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [] }) => {
+const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
         return [
             {
-                accessorKey: "patientMainDicomTags.patientID",
-                header: "Patient ID",
+                accessorKey: "mainDicomTags.seriesDescription",
+                header: "Series Description",
                 cell: (info: { getValue: () => string; }) => <span>{info.getValue() as string}</span>
             },
             {
-                accessorKey: "patientMainDicomTags.patientName",
-                header: "Patient Name",
+                accessorKey: "mainDicomTags.modality",
+                header: "Modality",
                 cell: (info: { getValue: () => string; }) => <span>{info.getValue() as string}</span>
             },
             {
-                accessorKey: "mainDicomTags.studyDescription",
-                header: "Study Description",
+                accessorKey: "mainDicomTags.seriesNumber",
+                header: "Series NUmber",
                 cell: (info: { getValue: () => string; }) => <span>{info.getValue() as string}</span>
             },
             {
-                accessorKey: "mainDicomTags.studyDate",
-                header: "Study Date",
-                cell: (info: { getValue: () => string; }) => <span>{info.getValue() as string}</span>
-            },
-            {
-                accessorKey: "mainDicomTags.accessionNumber",
-                header: "Accession Number",
+                accessorFn: ({row})=> row.instances.length,
+                header: "Number Of Instances",
                 cell: (info: { getValue: () => string; }) => <span>{info.getValue() as string}</span>
             }
-            
         ];
     }, []);
 
     return (
         <Table
-            onRowClick = ({studyInstanceUID}) => {onStudyClick(studyInstanceUID)} 
             columns={columns}
             data={rows}
             headerColor={Colors.almond}
@@ -56,4 +47,4 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [] }) => {
     );
 };
 
-export default ImportTableStudy;
+export default ImportTableSeries;
