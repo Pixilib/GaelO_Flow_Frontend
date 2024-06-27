@@ -51,7 +51,6 @@ const Search = ({ title, className }: QueryFormProps) => {
         setStudies(data)
       }
     }
-
   );
 
   const handleSubmit = async (formData: QueryParsedPayload) => {

@@ -40,7 +40,6 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             headerColor={Colors.almond}
             enableColumnFilters={true}
             onRowClick={(row) => {
-                console.log('ResultsTable - Row clicked:', row);
                 onRowClick(row.StudyInstanceUID)
               }}
             headerTextSize="xs"

@@ -143,7 +143,6 @@ function Table<T>({
                 key={`row-${row.id}-${rowIndex}`}
                 className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'}`}
                 onClick={() => {
-                  console.log('Row clicked:', row);
                   onRowClick && onRowClick(row.original);
                 }}
 
