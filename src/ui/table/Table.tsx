@@ -145,7 +145,7 @@ function Table<T>({
                   onRowClick && onRowClick(row.original);
                 }}
 
-                className={`${rowIndex % 2 === 0 ? 'bg-zinc-100' : 'bg-white'} ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
+                className={`odd:bg-zinc-100 even:bg-white ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td
