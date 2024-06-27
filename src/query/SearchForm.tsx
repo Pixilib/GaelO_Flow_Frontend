@@ -4,6 +4,7 @@ import { Option } from "../utils";
 import moment from "moment";
 import { QueryParsedPayload } from "../utils/types";
 import { FaSearch } from "react-icons/fa";
+import SelectModalities from "./SelectModalities";
 
 type SearchFormProps = {
     aets: Option[];
@@ -15,12 +16,12 @@ type SearchFormProps = {
 const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps) => {
     const [patientName, setPatientName] = useState<string>("");
     const [patientId, setPatientId] = useState<string>("");
-    const [accessionNumber, setAccessionNumber] = useState<number | null>(null);
+    const [accessionNumber, setAccessionNumber] = useState<string>("");
     const [studyDescription, setStudyDescription] = useState<string>("");
     const [dataPreset, setDataPreset] = useState<Option[]>([]);
-    const [modality, setModality] = useState<Option[]>([]);
-    const [dataFrom, setDataFrom] = useState<string>("");
-    const [dataTo, setDataTo] = useState<string>("");
+    const [modalities, setModalities] = useState<string[]>([]);
+    const [dateFrom, setDateFrom] = useState<string>("");
+    const [dateTo, setDateTo] = useState<string>("");
     const [label, setLabel] = useState<Option[]>([]);
 
     const dataPresetOptions: Option[] = [
@@ -34,12 +35,12 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
     ];
 
     const handleDataFromChange = (value: string) => {
-        setDataFrom(value);
+        setDateFrom(value);
         setDataPreset([{ value: null, label: "None" }]);
     };
 
     const handleDataToChange = (value: string) => {
-        setDataTo(value);
+        setDateTo(value);
         setDataPreset([{ value: null, label: "None" }]);
     };
 
@@ -48,11 +49,11 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
         if (selectedOption && selectedOption.value !== null) {
             const days = selectedOption.value as number;
             const date = moment().subtract(days, 'days').format('YYYY-MM-DD');
-            setDataTo(moment().format('YYYY-MM-DD'));
-            setDataFrom(date);
+            setDateTo(moment().format('YYYY-MM-DD'));
+            setDateFrom(date);
         } else {
-            setDataFrom("");
-            setDataTo("");
+            setDateFrom("");
+            setDateTo("");
         }
     };
 
@@ -60,32 +61,38 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
         setLabel(selectedOptions || []);
     };
 
-    const handleModalityChange = (selectedOptions: Option[]) => {
-        setModality(selectedOptions || []);
-    };
-
     const isDateDisabled = dataPreset.length > 0 && dataPreset[0].value !== null;
 
     const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
-        const formData: QueryParsedPayload = {
-            Level: "series",
+
+        //Prepare Date string for post data
+        let dateString = '';
+        const dicomDateFrom = dateFrom.split('-').join('')
+        const dicomDateTo = dateTo.split('-').join('')
+        if (dicomDateFrom !== '' && dicomDateTo !== '') {
+            dateString = dicomDateFrom + '-' + dicomDateTo
+        } else if (dicomDateFrom === '' && dicomDateTo !== '') {
+            dateString = '-' + dicomDateTo
+        } else if (dicomDateFrom !== '' && dicomDateTo === '') {
+            dateString = dicomDateFrom + '-'
+        }
+
+        //Prepare POST payload for query (follow Orthanc APIs)
+        let queryPayload: QueryParsedPayload = {
+            Level: 'Study',
             Query: {
                 PatientName: patientName,
                 PatientID: patientId,
-                StudyDate: dataFrom && dataTo ? `${dataFrom}-${dataTo}` : "",
-                ModalitiesInStudy: modality.map(mod => mod.value).join(","),
+                StudyDate: dateString,
+                ModalitiesInStudy: modalities.join('\\'),
                 StudyDescription: studyDescription,
-                AccessionNumber: String(accessionNumber) ?? "",
-                NumberOfStudyRelatedInstances: "",
-                NumberOfStudyRelatedSeries: "",
-                SeriesDescription: "",
-                SeriesInstanceUID: "",
-                SeriesNumber: "",
-                ProtocolName: "",
+                AccessionNumber: accessionNumber,
+                NumberOfStudyRelatedInstances: '',
+                NumberOfStudyRelatedSeries: ''
             }
-        };
-            onSubmit(formData);
+        }
+        onSubmit(queryPayload);
     };
 
     return (
@@ -108,12 +115,12 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
             </div>
             <div className={`grid grid-cols-1 col-span-2 gap-3 ${showLabels ? "lg:grid-cols-4" : "lg:grid-cols-3"} lg:gap-11 place-content-center`}>
                 <Input
-                    label={<Label value="Accession Number" className="text-sm font-medium text-center" align="left" />}
-                    type="number"
-                    placeholder="Search by accession number"
+                    label={<Label value="Accession" className="text-sm font-medium text-center" align="left" />}
+                    type="text"
+                    placeholder="Search by accession"
                     className="mt-1 lg:mt-3"
                     value={accessionNumber !== null ? accessionNumber.toString() : ""}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => setAccessionNumber(Number(event.target.value))}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => setAccessionNumber(event.target.value)}
                 />
                 <Input
                     label={<Label value="Study Description" className="text-sm font-medium text-center" align="left" />}
@@ -128,13 +135,10 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                         className="text-sm font-medium text-center"
                         align="left"
                     />
-                    <SelectInput
-                        options={aets ?? []}
-                        onChange={(options: Option[]) => handleModalityChange(options)}
-                        isMulti
+                    <SelectModalities
+                        modalities={modalities}
+                        onChange={(modalities) => setModalities(modalities)}
                         closeMenuOnSelect={false}
-                        placeholder="Select Modalitie(s)"
-                        aria-label="Labels"
                     />
                 </div>
                 {showLabels && (
@@ -180,7 +184,7 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                             spaceY={2}
                         />
                     }
-                    value={dataFrom ?? undefined}
+                    value={dateFrom ?? undefined}
                     onChange={(event: ChangeEvent<HTMLInputElement>) =>
                         handleDataFromChange(event.target.value)
                     }
@@ -197,7 +201,7 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                             spaceY={2}
                         />
                     }
-                    value={dataTo ?? undefined}
+                    value={dateTo ?? undefined}
                     onChange={(event: ChangeEvent<HTMLInputElement>) =>
                         handleDataToChange(event.target.value)
                     }
@@ -205,7 +209,7 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                     disabled={isDateDisabled}
                 />
             </div>
-            <div className="grid grid-cols-1 col-span-2 mt-3 place-content-center">
+            <div className="grid grid-cols-1 col-span-2 my-3 place-content-center">
                 <FormButton text={"Query"} icon={<FaSearch size="1.3rem" />} />
             </div>
         </form>

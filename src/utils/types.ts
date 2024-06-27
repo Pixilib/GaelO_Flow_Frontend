@@ -146,23 +146,23 @@ export type Oauth2Config = {
 }
 //Query
 
-type Level = "series" | "study";
+type Level = "Series" | "Study";
 
 export type QueryParsedPayload = {
     Level: Level;
     Query: {
-        PatientName: string;
-        PatientID: string;
-        StudyDate: string;
-        ModalitiesInStudy: string;
-        StudyDescription: string;
-        AccessionNumber: string;
-        NumberOfStudyRelatedInstances: string;
-        NumberOfStudyRelatedSeries: string;
-        SeriesDescription: string;
-        SeriesInstanceUID: string;
-        SeriesNumber: string;
-        ProtocolName: string;
+        PatientName?: string;
+        PatientID?: string;
+        StudyDate?: string;
+        ModalitiesInStudy?: string;
+        StudyDescription?: string;
+        AccessionNumber?: string;
+        NumberOfStudyRelatedInstances?: string;
+        NumberOfStudyRelatedSeries?: string;
+        SeriesDescription?: string;
+        SeriesInstanceUID?: string;
+        SeriesNumber?: string;
+        ProtocolName?: string;
     }
 }
 

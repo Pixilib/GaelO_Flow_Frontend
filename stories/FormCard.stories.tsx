@@ -13,7 +13,8 @@ const meta = {
     },
     onSubmit: {
       action: 'submitted',
-      description: 'Function to handle form submission',
+      description: `Optionnal, Function to handle form submission event. 
+      It's possible to use a form inside, if you don't want to use this prop.`,
     },
     children: {
       control: 'text',
