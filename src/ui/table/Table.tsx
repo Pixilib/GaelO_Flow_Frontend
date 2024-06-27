@@ -103,7 +103,7 @@ function Table<T>({
                     <th
                       key={header.id}
                       colSpan={header.column.getCanFilter() ? 1 : undefined}
-                      className={`h-2 px-2 py-3 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
+                      className={`h-2 px-2 py-2 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
                       onClick={header.column.getToggleSortingHandler()}
                     >
                       <div className={`flex items-center justify-center space-x-1 ${headerText}`}>
@@ -145,7 +145,7 @@ function Table<T>({
                   onRowClick && onRowClick(row.original);
                 }}
 
-                className={`odd:bg-zinc-100 even:bg-white ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
+                className={`even:bg-zinc-100 odd:bg-white ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td
