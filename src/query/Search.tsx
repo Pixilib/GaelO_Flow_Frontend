@@ -10,6 +10,7 @@ import SearchForm from "./SearchForm";
 import ResultsTable from "./ResultsTable";
 import SeriesTable from "./SeriesTable";
 import { useState } from "react";
+import { getQueriesAnswers } from "../services/query";
 
 type QueryFormProps = {
   title: string;
@@ -17,7 +18,9 @@ type QueryFormProps = {
 };
 
 const Search = ({ title, className }: QueryFormProps) => {
-  const [studies, setStudies] = useState<QueryParseResponse[]>([])
+  const [studies, setStudies] = useState<QueryParseResponse[]>([]);
+  const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
+
   const role = useSelector((state: RootState) => state.user.role?.Name);
 
   const { data: labelsData } = useCustomQuery<string[], Option[]>(
@@ -43,6 +46,7 @@ const Search = ({ title, className }: QueryFormProps) => {
         })),
     }
   );
+
   const { mutateAsync } = useCustomMutation<QueryParseResponse[], QueryParsedPayload>(
     (data) => postQueryParsed('self', data),
     [],
@@ -56,11 +60,21 @@ const Search = ({ title, className }: QueryFormProps) => {
   const handleSubmit = async (formData: QueryParsedPayload) => {
     await mutateAsync(formData);
   }
-
-  const handleRowClick = (studyInstanceUID: string) => {
-    console.log('Selected Study Instance UID:', studyInstanceUID);
-    // Vous pouvez également faire d'autres opérations avec studyInstanceUID ici
+  
+  const handleRowClick = (AnswerId: string) => {
+    console.log('Selected Study Instance UID:', AnswerId);
+    setSelectedStudyId(AnswerId);
   };
+
+  const { data: seriesData } = useCustomQuery<any[]>(
+    selectedStudyId ? ['series', selectedStudyId] : [],
+    () => getQueriesAnswers(selectedStudyId!),
+    {
+      enabled: !!selectedStudyId,
+    }
+  );
+  console.log('seriesData:', seriesData , 'selectedStudyId:', selectedStudyId)
+  
   return (
     <>
       <FormCard
@@ -80,7 +94,7 @@ const Search = ({ title, className }: QueryFormProps) => {
           <h2 className="mt-4 mb-5 text-2xl font-bold text-primary">Results</h2>
           <div className="grid grid-cols-1 gap-4 mt-3 lg:grid-cols-2">
             <ResultsTable results={studies} onRowClick={handleRowClick} />
-            <SeriesTable series={[]} />
+            <SeriesTable series={seriesData ?? []} />
           </div>
         </CardBody>
       </Card>

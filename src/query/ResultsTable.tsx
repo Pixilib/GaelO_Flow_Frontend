@@ -35,7 +35,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             headerColor={Colors.almond}
             enableColumnFilters={true}
             onRowClick={(row) => {
-                onRowClick(row.StudyInstanceUID)
+                onRowClick(row.AnswerId)
               }}
             headerTextSize="xs"
         />

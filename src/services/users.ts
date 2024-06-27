@@ -1,8 +1,6 @@
 import { User, UserPayload, UserUpdatePayload } from '../utils/types';
 import axios from "./axios";
 
-
-
 export const getUsers = (): Promise<User[]> => {
   return axios
     .get("/api/users")

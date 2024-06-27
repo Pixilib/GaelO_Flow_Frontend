@@ -30,7 +30,6 @@ const useCustomMutation = <T, V = undefined|any> (
             const invalidateAllQueries = (keys: string[][]) => {
                 keys.forEach(key => queryClient.invalidateQueries({ queryKey: key }));
             };
-
             if (options?.onSuccess) {
                 options.onSuccess(data, variables, context);
             }

@@ -13,5 +13,14 @@ export const postQueryParsed = (id: string, payload: QueryParsedPayload): Promis
       });
 };
 
-
-
+export const getQueriesAnswers = (id: string): Promise<any[]> => {
+    return axios
+        .get(`/api/queries/${id}/answers`)
+        .then(response => response.data)
+        .catch(error => {
+            if (error.response) {
+                throw error.response;
+            }
+            throw error;
+        });
+}
