@@ -19,10 +19,6 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             header: "Patient ID",
         },
         {
-            accessorKey: "AccessionNumber",
-            header: "Accession Number",
-        },
-        {
             accessorKey: "StudyDate",
             header: "Study Date",
         },
@@ -30,7 +26,6 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             accessorKey: "StudyDescription",
             header: "Study Description",
         },
-
     ]
 
     return (
