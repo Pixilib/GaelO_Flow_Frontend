@@ -62,7 +62,6 @@ const Search = ({ title, className }: QueryFormProps) => {
   }
   
   const handleRowClick = (AnswerId: string) => {
-    console.log('Selected Study Instance UID:', AnswerId);
     setSelectedStudyId(AnswerId);
   };
 
@@ -73,7 +72,6 @@ const Search = ({ title, className }: QueryFormProps) => {
       enabled: !!selectedStudyId,
     }
   );
-  console.log('seriesData:', seriesData , 'selectedStudyId:', selectedStudyId)
   
   return (
     <>
