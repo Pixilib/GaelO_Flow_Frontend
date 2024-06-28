@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { RootState } from "src/store";
 import { getLabelsByRoleName, getModalities, postQueryParsed } from "../services";
-import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors } from "../utils";
+import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors, useCustomToast } from "../utils";
 import { Card, CardBody, FormCard } from "../ui";
-import { QueryResponse, QueryPayload } from '../utils/types';
+import { QueryResponse, QueryPayload, ExtendedQueryPayload } from '../utils/types';
 import SearchForm from "./SearchForm";
 import ResultsTable from "./ResultsTable";
 import SeriesTable from "./SeriesTable";
@@ -15,9 +15,11 @@ type QueryFormProps = {
 };
 
 const Search = ({ title, className }: QueryFormProps) => {
+  const { toastError } = useCustomToast();
+
   const [studies, setStudies] = useState<QueryResponse[]>([]);
   const [series, setSeries] = useState<any[]>([]);
-  const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
+
   const role = useSelector((state: RootState) => state.user.role?.Name);
 
   const { data: labelsData } = useCustomQuery<string[], Option[]>(
@@ -44,48 +46,52 @@ const Search = ({ title, className }: QueryFormProps) => {
     }
   );
 
-  const { mutateAsync: mutateStudies } = useCustomMutation<QueryResponse[], QueryPayload>(
-    (data) => postQueryParsed('self', data),
+  const { mutateAsync: mutateStudies } = useCustomMutation<QueryResponse[], ExtendedQueryPayload>(
+    ({ queryPayload, aet }) => postQueryParsed(aet, queryPayload),
     [],
     {
       onSuccess: (data) => {
         setStudies(data);
         setSeries([]);
+      },
+      onError:(e) =>{
+        console.log(e);
+        toastError("No Studies found for this query.");
       }
     }
   );
 
-  const { mutateAsync: mutateSeries } = useCustomMutation<QueryResponse[], QueryPayload>(
-    (data) => postQueryParsed('self', data),
+  const { mutateAsync: mutateSeries } = useCustomMutation<QueryResponse[], ExtendedQueryPayload>(
+    ({ queryPayload, aet }) => postQueryParsed(aet, queryPayload),
     [],
     {
       onSuccess: (data) => {
         setSeries(data);
+      },
+      onError:(e:any) =>{
+        console.log(e);
+        if(e.response.status === 404){
+          toastError("No Series found for this query.");
+        }
+        toastError(`${e}. An error occurred while fetching series!`);
       }
     }
   );
 
-  const handleSubmit = async (formData: QueryPayload) => {
-    if (formData.Level === "Study") {
-      await mutateStudies(formData);
-    } else if (formData.Level === "Series") {
-      await mutateSeries(formData);
-    }
+  const handleSubmit = async (formData: QueryPayload, aet: string) => {
+    const extendedPayload = { queryPayload: formData, aet };
+    await mutateStudies(extendedPayload);
   };
 
-  const handleRowClick = async (studyInstanceUID: string) => {
-    setSelectedStudyId(studyInstanceUID);
-    console.log('Selected Study Instance UID:', studyInstanceUID);
-    // payload for Series query
-    let queryPayload: QueryPayload = {
+  const handleRowClick = async (studyInstanceUID: string, OriginAET?: string) => {
+    const queryPayload: QueryPayload = {
       Level: 'Series',
-      Query: {
-        StudyUID: studyInstanceUID,
-      }
+      Query: { StudyUID: studyInstanceUID }
     };
-    await mutateSeries(queryPayload);
+    const extendedPayload = { queryPayload, aet: OriginAET ?? "self" };
+    await mutateSeries(extendedPayload);
   };
-
+  
   return (
     <>
       <FormCard
