@@ -5,7 +5,7 @@ import { Colors } from "../utils";
 
 type ResultsTableProps = {
     results: QueryResponse[] | null;
-    onRowClick: (row: string) => void;
+    onRowClick: (studyInstanceUID: string, originAET: string) => void;
 };
 const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
 
@@ -28,16 +28,17 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
         },
     ]
 
+    const handleRowClick = (row:any) => {
+        onRowClick(row.StudyInstanceUID, row.OriginAET);
+      };
+
     return (
         <Table
             columns={columns}
             data={results ?? []}
             headerColor={Colors.almond}
             enableColumnFilters={true}
-            onRowClick={(row) => {
-                console.log(row)
-                onRowClick(row.StudyInstanceUID)
-            }}
+            onRowClick={handleRowClick}
             headerTextSize="xs"
         />
     );
