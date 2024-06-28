@@ -22,7 +22,8 @@ import type {
     ModalityExtended,
     UserUpdatePayload,
     User,
-    Option
+    Option,
+    QueryPayload
 } from "./types";
 import { useCustomToast } from "./toastify";
 
@@ -38,6 +39,7 @@ export {
     Option,
     OptionsResponse,
     parseTimeString,
+    QueryPayload,
     Role,
     timeDiff,
     useCustomMutation,
