@@ -1,3 +1,4 @@
+
 //option
 export type AutoQueryPayload = {
     AutoQueryHourStart: number;
@@ -168,6 +169,11 @@ type Level = "Series" | "Study";
 export type QueryPayload = {
     Level: Level;
     Query: QueryStudy | QuerySeries;
+}
+
+export type ExtendedQueryPayload = {
+    queryPayload: QueryPayload;
+    aet:string;
 }
 
 export type QueryResponse = {
