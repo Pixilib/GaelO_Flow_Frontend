@@ -1,16 +1,13 @@
 import { useSelector } from "react-redux";
 import { RootState } from "src/store";
-
 import { getLabelsByRoleName, getModalities, postQueryParsed } from "../services";
 import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors } from "../utils";
-
 import { Card, CardBody, FormCard } from "../ui";
-import { QueryParseResponse, QueryParsedPayload } from '../utils/types';
+import { QueryResponse, QueryPayload } from '../utils/types';
 import SearchForm from "./SearchForm";
 import ResultsTable from "./ResultsTable";
 import SeriesTable from "./SeriesTable";
 import { useState } from "react";
-import { getQueriesAnswers } from "../services/query";
 
 type QueryFormProps = {
   title: string;
@@ -18,9 +15,9 @@ type QueryFormProps = {
 };
 
 const Search = ({ title, className }: QueryFormProps) => {
-  const [studies, setStudies] = useState<QueryParseResponse[]>([]);
+  const [studies, setStudies] = useState<QueryResponse[]>([]);
+  const [series, setSeries] = useState<any[]>([]);
   const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
-
   const role = useSelector((state: RootState) => state.user.role?.Name);
 
   const { data: labelsData } = useCustomQuery<string[], Option[]>(
@@ -47,32 +44,48 @@ const Search = ({ title, className }: QueryFormProps) => {
     }
   );
 
-  const { mutateAsync } = useCustomMutation<QueryParseResponse[], QueryParsedPayload>(
+  const { mutateAsync: mutateStudies } = useCustomMutation<QueryResponse[], QueryPayload>(
     (data) => postQueryParsed('self', data),
     [],
     {
       onSuccess: (data) => {
-        setStudies(data)
+        setStudies(data);
+        setSeries([]);
       }
     }
   );
 
-  const handleSubmit = async (formData: QueryParsedPayload) => {
-    await mutateAsync(formData);
-  }
-  
-  const handleRowClick = (AnswerId: string) => {
-    setSelectedStudyId(AnswerId);
-  };
-
-  const { data: seriesData } = useCustomQuery<any[]>(
-    selectedStudyId ? ['series', selectedStudyId] : [],
-    () => getQueriesAnswers(selectedStudyId!),
+  const { mutateAsync: mutateSeries } = useCustomMutation<QueryResponse[], QueryPayload>(
+    (data) => postQueryParsed('self', data),
+    [],
     {
-      enabled: !!selectedStudyId,
+      onSuccess: (data) => {
+        setSeries(data);
+      }
     }
   );
-  
+
+  const handleSubmit = async (formData: QueryPayload) => {
+    if (formData.Level === "Study") {
+      await mutateStudies(formData);
+    } else if (formData.Level === "Series") {
+      await mutateSeries(formData);
+    }
+  };
+
+  const handleRowClick = async (studyInstanceUID: string) => {
+    setSelectedStudyId(studyInstanceUID);
+    console.log('Selected Study Instance UID:', studyInstanceUID);
+    // payload for Series query
+    let queryPayload: QueryPayload = {
+      Level: 'Series',
+      Query: {
+        StudyUID: studyInstanceUID,
+      }
+    };
+    await mutateSeries(queryPayload);
+  };
+
   return (
     <>
       <FormCard
@@ -87,12 +100,12 @@ const Search = ({ title, className }: QueryFormProps) => {
           onSubmit={handleSubmit}
         />
       </FormCard>
-      <Card >
+      <Card>
         <CardBody color={Colors.light} className="rounded-xl">
           <h2 className="mt-4 mb-5 text-2xl font-bold text-primary">Results</h2>
           <div className="grid grid-cols-1 gap-4 mt-3 lg:grid-cols-2">
             <ResultsTable results={studies} onRowClick={handleRowClick} />
-            <SeriesTable series={seriesData ?? []} />
+            <SeriesTable series={series} />
           </div>
         </CardBody>
       </Card>

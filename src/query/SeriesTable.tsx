@@ -22,7 +22,7 @@ const SeriesTable = ({ series }:SeriesTableProps) => {
             header: "Series Number",
         },
         {
-            accessorKey: "InstanceCount",
+            accessorKey: "NumberOfSeriesRelatedInstances",
             header: "Instances",
         },
     ];

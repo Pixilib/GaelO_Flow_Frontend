@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { FormButton, Input, Label, SelectInput } from "../ui";
 import { Option } from "../utils";
 import moment from "moment";
-import { QueryParsedPayload } from "../utils/types";
+import { QueryPayload as QueryPayload } from "../utils/types";
 import { FaSearch } from "react-icons/fa";
 import SelectModalities from "./SelectModalities";
 
@@ -10,7 +10,7 @@ type SearchFormProps = {
     aets: Option[];
     labelsData: Option[];
     showLabels: boolean;
-    onSubmit: (formData: QueryParsedPayload) => void;
+    onSubmit: (formData: QueryPayload) => void;
 };
 
 const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps) => {
@@ -24,6 +24,7 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
     const [dateTo, setDateTo] = useState<string>("");
     const [label, setLabel] = useState<Option[]>([]);
 
+    console.log(aets)
     const dataPresetOptions: Option[] = [
         { value: null, label: "None" },
         { value: 0, label: "Today" },
@@ -79,17 +80,15 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
         }
 
         //Prepare POST payload for query (follow Orthanc APIs)
-        let queryPayload: QueryParsedPayload = {
+        let queryPayload: QueryPayload = {
             Level: 'Study',
             Query: {
                 PatientName: patientName,
                 PatientID: patientId,
                 StudyDate: dateString,
-                ModalitiesInStudy: modalities.join('\\'),
+                Modality: modalities.join('\\'),
                 StudyDescription: studyDescription,
-                AccessionNumber: accessionNumber,
-                NumberOfStudyRelatedInstances: '',
-                NumberOfStudyRelatedSeries: ''
+                AccessionNb: accessionNumber,
             }
         }
         onSubmit(queryPayload);
@@ -160,11 +159,11 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                     </div>
                 )}
             </div>
-            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-3 lg:gap-11">
+            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-4 lg:gap-11">
                 <div className="grid">
                     <Label
                         value="Data Preset"
-                        className="text-sm font-medium text-center"
+                        className="text-sm font-medium"
                         align="left"
                     />
                     <SelectInput
