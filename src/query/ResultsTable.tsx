@@ -1,15 +1,15 @@
 import { Table } from "../ui";
 import { ColumnDef } from "@tanstack/react-table";
-import { QueryParseResponse } from "../utils/types";
+import { QueryResponse } from "../utils/types";
 import { Colors } from "../utils";
 
 type ResultsTableProps = {
-    results: QueryParseResponse[] | null;
-    onRowClick: ( row:QueryParseResponse["StudyInstanceUID"] )=> void;
+    results: QueryResponse[] | null;
+    onRowClick: (studyInstanceUID: string, originAET: string) => void;
 };
 const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
 
-    const columns: ColumnDef<QueryParseResponse>[] = [
+    const columns: ColumnDef<QueryResponse>[] = [
         {
             accessorKey: "PatientName",
             header: "Patient Name",
@@ -28,15 +28,17 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
         },
     ]
 
+    const handleRowClick = (row:any) => {
+        onRowClick(row.StudyInstanceUID, row.OriginAET);
+      };
+
     return (
         <Table
             columns={columns}
             data={results ?? []}
             headerColor={Colors.almond}
             enableColumnFilters={true}
-            onRowClick={(row) => {
-                onRowClick(row.AnswerId)
-              }}
+            onRowClick={handleRowClick}
             headerTextSize="xs"
         />
     );

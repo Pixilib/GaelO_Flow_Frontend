@@ -1,8 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { FormButton, Input, Label, SelectInput } from "../ui";
-import { Option } from "../utils";
 import moment from "moment";
-import { QueryParsedPayload } from "../utils/types";
+import { Option, QueryPayload } from "../utils";
+import { FormButton, Input, Label, SelectInput } from "../ui";
 import { FaSearch } from "react-icons/fa";
 import SelectModalities from "./SelectModalities";
 
@@ -10,7 +9,7 @@ type SearchFormProps = {
     aets: Option[];
     labelsData: Option[];
     showLabels: boolean;
-    onSubmit: (formData: QueryParsedPayload) => void;
+    onSubmit: (formData: QueryPayload, aets: string) => void;
 };
 
 const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps) => {
@@ -18,11 +17,13 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
     const [patientId, setPatientId] = useState<string>("");
     const [accessionNumber, setAccessionNumber] = useState<string>("");
     const [studyDescription, setStudyDescription] = useState<string>("");
+    const [aetsInput, setAetsInput] = useState<Option[]>([]);
     const [dataPreset, setDataPreset] = useState<Option[]>([]);
     const [modalities, setModalities] = useState<string[]>([]);
     const [dateFrom, setDateFrom] = useState<string>("");
     const [dateTo, setDateTo] = useState<string>("");
     const [label, setLabel] = useState<Option[]>([]);
+    
 
     const dataPresetOptions: Option[] = [
         { value: null, label: "None" },
@@ -79,24 +80,23 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
         }
 
         //Prepare POST payload for query (follow Orthanc APIs)
-        let queryPayload: QueryParsedPayload = {
+        let queryPayload: QueryPayload = {
             Level: 'Study',
             Query: {
                 PatientName: patientName,
                 PatientID: patientId,
                 StudyDate: dateString,
-                ModalitiesInStudy: modalities.join('\\'),
+                Modality: modalities.join('\\'),
                 StudyDescription: studyDescription,
-                AccessionNumber: accessionNumber,
-                NumberOfStudyRelatedInstances: '',
-                NumberOfStudyRelatedSeries: ''
+                AccessionNb: accessionNumber,
             }
         }
-        onSubmit(queryPayload);
+        const aet = aetsInput[0]?.value || 'self';
+        onSubmit(queryPayload, aet);
     };
 
     return (
-        <form onSubmit={handleSubmit} className="grid gap-y-6">
+        <form onSubmit={handleSubmit} className="grid gap-y-5">
             <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-2 lg:gap-11">
                 <Input
                     label={<Label value="Patient Name *" className="text-sm font-medium text-center" align="left" />}
@@ -160,11 +160,24 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                     </div>
                 )}
             </div>
-            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-3 lg:gap-11">
+            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-4 lg:gap-11">
+                <div className="grid">
+                    <Label
+                        value="AET"
+                        className="text-sm font-medium"
+                        align="left"
+                    />
+                    <SelectInput
+                        options={aets}
+                        placeholder="Search by AET"
+                        aria-label="AET"
+                        onChange={(options: Option) => setAetsInput([options])}
+                    />
+                </div>
                 <div className="grid">
                     <Label
                         value="Data Preset"
-                        className="text-sm font-medium text-center"
+                        className="text-sm font-medium"
                         align="left"
                     />
                     <SelectInput
