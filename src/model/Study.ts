@@ -54,6 +54,11 @@ class Study {
         }
     }
 
+    getStudyInstanceUID = () : string => {
+        if(!this.studyInstanceUID) throw "missing study instance uid"
+        return this.studyInstanceUID
+    }
+
     toJSON = (): object => {
         return {
             'id': this.id,

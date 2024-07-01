@@ -2,7 +2,6 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Tabs, Tab, Card, CardBody } from "../ui";
 import ImportDrop from "./Import/ImportDrop";
 import CreateDrop from "./Create/CreateDrop";
-import SelectInput from "../ui";
 import { Colors } from "../utils";
 
 const ImportCreateRoot = () => {
@@ -39,7 +38,6 @@ const ImportCreateRoot = () => {
                     <Routes>
                         <Route path="/" element={<ImportDrop />} />
                         <Route path="/create" element={<CreateDrop />} />
-                       
                     </Routes>
                 </CardBody>
             </Card>

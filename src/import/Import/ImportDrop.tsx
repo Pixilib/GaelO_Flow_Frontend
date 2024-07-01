@@ -22,6 +22,7 @@ const ImportDrop = () => {
   const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0)
   const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0)
   const [errors, setErrors] = useState<errorImportDicom[]>([])
+  const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<null|string>(null)
 
   const uploadComplete = useMemo(()=>{
     return numberOfLoadedFiles === numberOfProcessedFiles
@@ -72,14 +73,18 @@ const ImportDrop = () => {
   });
 
   const handleStudyClick = (studyInstanceUID :string) => {
-    //TODO : ouvrir un state pour les données series à afficher
-    //Sur ce callback requeter le modèle pour récupérer les series de la study selectionnée
+    setCurrentStudyInstanceUID(studyInstanceUID)
 
   }
 
-  const data = useMemo(() => {
+  const studiesData = useMemo(() => {
     return refModel.current.getStudies()
   }, [JSON.stringify(refModel.current.toJSON())])
+
+  const seriesData = useMemo(() => {
+    if(!currentStudyInstanceUID) return []
+    return refModel.current.getStudy(currentStudyInstanceUID).getAllseries()
+  }, [currentStudyInstanceUID])
 
   return (
     <div className="flex flex-col items-center mt-4">
@@ -108,8 +113,8 @@ const ImportDrop = () => {
         )}
       </div>
       <div className="w-full mt-4">
-        <ImportTableStudy data={/*A faire venir du modele*/[]} onStudyClick={handleStudyClick} />
-        <ImportTableSeries data={[]} />
+        <ImportTableStudy data={studiesData} onStudyClick={handleStudyClick} />
+        { seriesData.length > 0 ? <ImportTableSeries data={seriesData} /> : null}
       </div>
     </div>
   );

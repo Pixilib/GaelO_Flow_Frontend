@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
-import { Study } from "../../utils/types";
+import Study from "../../model/Study";
 
 interface ImportTableStudyProps {
     data: Study[];
@@ -14,27 +14,27 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
     const columns = useMemo(() => {
         return [
             {
-                accessorKey: "patientMainDicomTags.patientID",
+                accessorKey: "patient.patientId",
                 header: "Patient ID",
                 cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
             },
             {
-                accessorKey: "patientMainDicomTags.patientName",
+                accessorKey: "patient.patientName",
                 header: "Patient Name",
                 cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
             },
             {
-                accessorKey: "mainDicomTags.studyDescription",
+                accessorKey: "studyDescription",
                 header: "Study Description",
                 cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
             },
             {
-                accessorKey: "mainDicomTags.studyDate",
+                accessorKey: "studyDate",
                 header: "Study Date",
                 cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
             },
             {
-                accessorKey: "mainDicomTags.accessionNumber",
+                accessorKey: "accessionNumber",
                 header: "Accession Number",
                 cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
             }
@@ -44,7 +44,9 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
 
     return (
         <Table
-            onRowClick={(study: Study) => onStudyClick(study.mainDicomTags.studyInstanceUID)}
+            onRowClick={(study: Study) => {
+                if(study.studyInstanceUID) onStudyClick(study.studyInstanceUID)
+            }}
             columns={columns}
             data={rows}
             headerColor={Colors.almond}
