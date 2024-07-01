@@ -114,7 +114,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
           color={Colors.success}
         />
         <CardBody
-          color={Colors.light}
+          color={Colors.gray}
           roundedBottomLeft
           roundedBottomRight
         >

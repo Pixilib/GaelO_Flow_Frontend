@@ -3,9 +3,10 @@ import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } f
 import { useDropzone } from 'react-dropzone';
 import { useCustomMutation } from '../../utils';
 import { sendDicom } from '../../services/instances';
-import { OrthancImportDicom } from "../../utils/types";
+
 import Model from "../../model/Model";
-import ImportTableStudy from "./ImportTableStudy"; // Importer le composant
+import ImportTableStudy from "./ImportTableStudy"; 
+import { OrthancImportDicom } from "../../utils/types";
 
 type errorImportDicom = {
   [filename: string]: string
@@ -39,7 +40,7 @@ const ImportDrop = () => {
     })
   }
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, open } = useDropzone({
     onDrop: async (acceptedFiles) => {
       setNumberOfLoadedFiles((loadedFiles) => loadedFiles + acceptedFiles.length)
       setIsUploading(true)
@@ -54,7 +55,6 @@ const ImportDrop = () => {
             const orthancAnswer = await sendDicomMutate({ data: stringBuffer })
             refModel.current.addInstance(orthancAnswer.id, orthancAnswer.parentSeries, orthancAnswer.parentStudy, orthancAnswer.parentPatient)
             
-            // Ajouter les patients importés à l'état
             setImportedPatients((prev) => [
               ...prev,
               { id: orthancAnswer.id, patientId: orthancAnswer.parentPatient },
@@ -78,30 +78,31 @@ const ImportDrop = () => {
   return (
     <div className="flex flex-col items-center mt-4">
       <div
-        {...getRootProps()}
-        className="flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-white border-4 border-dashed rounded border-primary"
+        {...getRootProps({ onClick: open })}
+        className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary ${isUploading ? 'cursor-progress' : 'cursor-pointer'} rounded-lg`}
       >
         {uploadComplete ? (
-          <CheckIcon size={32} className="mb-2 text-green-500" />
+          <CheckIcon size={40} className="mb-2 text-green-500" />
         ) : (
-          <CloudIcon size={32} className={`mb-2 ${isUploading ? "text-gray-400 animate-spin" : "text-primary"}`} />
+          <CloudIcon size={40} className={`mb-2 ${isUploading ? "text-gray-400 animate-spin" : "text-primary"}`} />
         )}
-        <p className="text-primary">Glissez et déposez les fichiers ici, ou cliquez pour sélectionner des fichiers</p>
+        <p className="mb-2 text-primary">Drag the Dicom folder or ZIP, or click to select files</p>
         <input {...getInputProps()} />
-      </div>
-      {numberOfLoadedFiles > 0 && (
-        <div className="w-full mt-4">
-          <div className="relative w-full h-4 bg-gray-200 rounded">
-            <div
-              className="absolute top-0 h-4 transition-all duration-500 ease-out rounded bg-gradient-to-r from-primary to-secondary"
-              style={{ width: `${progression}%` }}
-            />
+
+        {numberOfLoadedFiles > 0 && (
+          <div className="w-full">
+            <div className="relative w-full h-2 bg-gray-200 rounded">
+              <div
+                className="absolute top-0 h-2 transition-all duration-500 ease-out rounded bg-gradient-to-r from-primary to-secondary"
+                style={{ width: `${progression}%` }}
+              />
+            </div>
+            <p className="mt-1 text-sm text-center text-primary">{progression}%</p>
           </div>
-          <p className="mt-2 text-center">{progression}%</p>
-        </div>
-      )}
+        )}
+      </div>
       <div className="w-full mt-4">
-        <ImportTableStudy data={importedPatients} /> {/* Utiliser le composant avec les données importées */}
+        <ImportTableStudy data={importedPatients} /> 
       </div>
     </div>
   );

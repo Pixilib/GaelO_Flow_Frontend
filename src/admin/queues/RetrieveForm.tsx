@@ -22,10 +22,11 @@ const RetrieveForm = ({
 }: RetrieveCardProps) => {
   return (
     <form onSubmit={onSubmit} data-gaelo-flow="retrieve-container-queues" className="flex flex-col items-center justify-around w-full">
-      <Card className="w-11/12 mt-8 border">
+      <Card className="w-11/12 mt-8 border" >
         <CardHeader title="Retrieve Schedule Time:" color={Colors.success} />
-        <CardBody color={Colors.light}>
+        <CardBody color={Colors.secondary}>
           <div className='grid items-center gap-4 md:grid-cols-1 lg:grid-cols-3'>
+            
             <Input
               type="time"
               label={<Label value="Start Time" className="flex justify-center mb-3 font-semibold" />}
