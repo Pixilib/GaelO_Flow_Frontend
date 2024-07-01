@@ -1,25 +1,31 @@
-import React, { useMemo, useRef, useState } from "react";
-import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from "react-icons/bs";
+import { useMemo, useRef, useState } from "react";
 import { useDropzone } from 'react-dropzone';
-import { useCustomMutation } from '../../utils';
-import { sendDicom } from '../../services/instances';
+import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from "react-icons/bs";
 
+import { sendDicom } from '../../services/instances';
 import Model from "../../model/Model";
-import ImportTableStudy from "./ImportTableStudy"; 
+import { useCustomMutation } from '../../utils';
 import { OrthancImportDicom } from "../../utils/types";
+
+import ImportTableStudy from "./ImportTableStudy"; // Importer le composant
+import ImportTableSeries from "./ImportTableSeries";
 
 type errorImportDicom = {
   [filename: string]: string
 }
 
 const ImportDrop = () => {
+
   const refModel = useRef<Model>(new Model())
+
+  const [isUploading, setIsUploading] = useState(false)
   const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0)
   const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0)
   const [errors, setErrors] = useState<errorImportDicom[]>([])
-  const [isUploading, setIsUploading] = useState(false)
-  const [uploadComplete, setUploadComplete] = useState(false)
-  const [importedPatients, setImportedPatients] = useState<{ id: string, patientId: string }[]>([]); // État pour stocker les fichiers importés
+
+  const uploadComplete = useMemo(()=>{
+    return numberOfLoadedFiles === numberOfProcessedFiles
+  }, [numberOfLoadedFiles, numberOfProcessedFiles])
 
   const progression = useMemo(() => {
     return Math.round((numberOfProcessedFiles / numberOfLoadedFiles) * 100)
@@ -44,7 +50,6 @@ const ImportDrop = () => {
     onDrop: async (acceptedFiles) => {
       setNumberOfLoadedFiles((loadedFiles) => loadedFiles + acceptedFiles.length)
       setIsUploading(true)
-      setUploadComplete(false)
 
       for (const file of acceptedFiles) {
         await promiseFileReader(file).then(async (reader: FileReader) => {
@@ -55,10 +60,6 @@ const ImportDrop = () => {
             const orthancAnswer = await sendDicomMutate({ data: stringBuffer })
             refModel.current.addInstance(orthancAnswer.id, orthancAnswer.parentSeries, orthancAnswer.parentStudy, orthancAnswer.parentPatient)
             
-            setImportedPatients((prev) => [
-              ...prev,
-              { id: orthancAnswer.id, patientId: orthancAnswer.parentPatient },
-            ]);
           } catch (e: any) {
             setErrors((errors) => [...errors, { [file.name]: e.statusText }])
           }
@@ -67,9 +68,14 @@ const ImportDrop = () => {
       }
 
       setIsUploading(false)
-      setUploadComplete(true)
     }
   });
+
+  const handleStudyClick = (studyInstanceUID :string) => {
+    //TODO : ouvrir un state pour les données series à afficher
+    //Sur ce callback requeter le modèle pour récupérer les series de la study selectionnée
+
+  }
 
   const data = useMemo(() => {
     return refModel.current.getStudies()
@@ -102,7 +108,8 @@ const ImportDrop = () => {
         )}
       </div>
       <div className="w-full mt-4">
-        <ImportTableStudy data={importedPatients} /> 
+        <ImportTableStudy data={/*A faire venir du modele*/[]} onStudyClick={handleStudyClick} />
+        <ImportTableSeries data={[]} />
       </div>
     </div>
   );

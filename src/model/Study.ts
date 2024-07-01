@@ -33,6 +33,10 @@ class Study {
     setPatient = (patient: Patient) => {
         this.patient = patient
     }
+    
+    getAllseries = () => {
+        return this.series.map(series => series.toJSON())
+    }
 
     getSeries = (seriesId: string) => {
         return this.series.find(series => series.id === seriesId)

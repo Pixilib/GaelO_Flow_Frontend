@@ -80,18 +80,6 @@ export default ({ modalities, onChange, closeMenuOnSelect = true }: SelectModali
         onChange(modalities)
     }
 
-    /*
-    const getValue = () => {
-        let modalityArray = selectedModalities.map((modalitiesObject) => {
-            return modalitiesObject.value;
-        });
-
-        let modalityString = ''
-        if (modalityArray.length > 0) modalityString = modalityArray.join('\\')
-
-        return modalityString;
-    }*/
-
     return (
         <Select
             isMulti
