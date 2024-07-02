@@ -35,10 +35,15 @@ const ImportCreateRoot = () => {
                     roundedBottomLeft
                     roundedBottomRight
                 >
-                    <Routes>
-                        <Route path="/" element={<ImportDrop />} />
-                        <Route path="/create" element={<CreateDrop />} />
-                    </Routes>
+                    <div>
+                        <Routes>
+                            <Route path="/" element={<ImportDrop />} />
+                        </Routes>
+
+                        <Routes>
+                            <Route path="/create" element={<CreateDrop />} />
+                        </Routes>
+                    </div>
                 </CardBody>
             </Card>
         </div>

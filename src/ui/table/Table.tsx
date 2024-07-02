@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -13,9 +12,9 @@ import {
 } from '@tanstack/react-table';
 
 import { Colors } from "../../utils/enums";
-
 import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
+import { FcAlphabeticalSortingAz, FcAlphabeticalSortingZa } from 'react-icons/fc';
 
 export type textSize = "xs" | "sm" | "base" | "lg";
 
@@ -31,6 +30,8 @@ type TableProps<TData> = {
   pinFirstColumn?: boolean;
   pinLastColumn?: boolean;
   onRowClick?: (row: TData) => void;
+  getRowStyles? : (raw :TData) => object|undefined
+  getRowClasses? : (raw :TData) => string|undefined
 };
 
 function Table<T>({
@@ -42,14 +43,16 @@ function Table<T>({
   className,
   pageSize = 10,
   headerTextSize = "sm",
-  pinFirstColumn = false, 
+  pinFirstColumn = false,
   pinLastColumn = false,
   onRowClick,
+  getRowStyles = () => undefined,
+  getRowClasses = () => undefined
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState({
-    pageIndex: 0, 
+    pageIndex: 0,
     pageSize: pageSize,
   });
 
@@ -77,6 +80,10 @@ function Table<T>({
     getSortedRowModel: getSortedRowModel(),
     enableColumnFilters: enableColumnFilters,
     enableSorting,
+    meta : {
+      getRowStyles : getRowStyles,
+      getRowClasses : getRowClasses
+    }
   });
 
   const headerClass = `bg-${headerColor}`;
@@ -97,8 +104,8 @@ function Table<T>({
           <thead className={headerClass}>
             {table.getHeaderGroups().map(headerGroup => (
               <React.Fragment key={headerGroup.id}>
-                {/* Ligne pour les titres et les flèches de tri */}
-                <tr key={headerGroup.id} className={headerClass}>
+                {/* Row for headers and sorting icons */}
+                <tr key={headerGroup.id}  className={headerClass}>
                   {headerGroup.headers.map((header, index) => (
                     <th
                       key={header.id}
@@ -108,16 +115,20 @@ function Table<T>({
                     >
                       <div className={`flex items-center justify-center space-x-1 ${headerText}`}>
                         {flexRender(header.column.columnDef.header, header.getContext())}
-                        {header.column.getCanSort() && (
-                          <span className="cursor-pointer">
-                            {header.column.getIsSorted() === 'desc' ? '▼' : '▲'}
+                        {enableSorting && header.column.getCanSort() && (
+                          <span className="ml-1 text-lg text-white cursor-pointer">
+                            {header.column.getIsSorted() === 'desc' ? (
+                              <FcAlphabeticalSortingZa />
+                            ) : (
+                              <FcAlphabeticalSortingAz />
+                            )}
                           </span>
                         )}
                       </div>
                     </th>
                   ))}
                 </tr>
-                {/* Ligne distincte pour les filtres si au moins un filtre est présent */}
+                {/* Separate row for filters if any filter is present */}
                 {headerGroup.headers.some(header => header.column.getCanFilter()) && (
                   <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}`}>
                     {headerGroup.headers.map((header, index) => (
@@ -141,11 +152,12 @@ function Table<T>({
             {table.getRowModel().rows.map((row, rowIndex) => (
               <tr
                 key={`row-${row.id}-${rowIndex}`}
+                className = {table.options.meta?.getRowClasses(row)}
+                style={table.options.meta?.getRowStyles(row)}
                 onClick={() => {
                   onRowClick && onRowClick(row.original);
                 }}
-
-                className={`${onRowClick ? 'hover:text-primary cursor-pointer' : ''} even:bg-zinc-100 odd:bg-white ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
+                //className={`${onRowClick ? ' hover:bg-indigo-100 cursor-pointer' : ''} even:bg-zinc-100 odd:bg-white ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td
@@ -165,7 +177,7 @@ function Table<T>({
           <Footer
             table={table}
             onPageSizeChange={handlePageSizeChange}
-          />  
+          />
         ) : null}
       </div>
     </div>

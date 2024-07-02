@@ -6,9 +6,10 @@ import Study from "../../model/Study";
 interface ImportTableStudyProps {
     data: Study[];
     onStudyClick: (studyInstanceUID: string) => void
+    studyInstanceUID: string | null
 }
 
-const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick }) => {
+const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, studyInstanceUID }) => {
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
@@ -42,16 +43,27 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
         ];
     }, []);
 
+
+    const getRowClasses = (row: any) => {
+        if (row.original.studyInstanceUID === studyInstanceUID) {
+            return 'bg-red-500 text-white'
+        } else {
+            return undefined
+        }
+    }
+
     return (
         <Table
             onRowClick={(study: Study) => {
-                if(study.studyInstanceUID) onStudyClick(study.studyInstanceUID)
+                if (study.studyInstanceUID) onStudyClick(study.studyInstanceUID)
             }}
             columns={columns}
             data={rows}
             headerColor={Colors.almond}
             enableColumnFilters
             enableSorting
+            headerTextSize="xs"
+            getRowClasses={getRowClasses}
         />
     );
 };

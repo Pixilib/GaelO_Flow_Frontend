@@ -36,6 +36,10 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
         ];
     }, []);
 
+    const getRowClasses = (row: any) => {
+            return 'bg-blue-500 text-white'
+    }
+
     return (
         <Table
             columns={columns}
@@ -43,6 +47,8 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
             headerColor={Colors.almond}
             enableColumnFilters
             enableSorting
+            headerTextSize="xs"
+            getRowClasses = {getRowClasses}
         />
     );
 };

@@ -78,10 +78,12 @@ const CreateDrop = () => {
         <div className="flex flex-col items-center mt-4">
             <div
                 {...getRootProps({ onClick: open })}
-                className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary ${isUploading ? 'cursor-progress' : 'cursor-pointer'} rounded-lg`}
+                className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary 
+                ${isUploading ? 'cursor-progress' : 'cursor-pointer'} 
+                rounded-lg`}
             >
                 {uploadComplete ? (
-                    <CheckIcon size={40} className="mb-2 text-green-500" />
+                    <CheckIcon size={40} className="mb-2 text-success" />
                 ) : (
                     <CloudIcon size={40} className={`mb-2 ${isUploading ? "text-gray-400 animate-spin" : "text-primary"}`} />
                 )}
