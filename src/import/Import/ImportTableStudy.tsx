@@ -1,15 +1,17 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
 import Study from "../../model/Study";
 
 interface ImportTableStudyProps {
     data: Study[];
-    onStudyClick: (studyInstanceUID: string) => void
-    studyInstanceUID: string | null
+    onStudyClick: (studyInstanceUID: string) => void;
+    studyInstanceUID: string | null;
 }
 
 const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, studyInstanceUID }) => {
+    const [selectedStudy, setSelectedStudy] = useState<string | null>(null);
+
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
@@ -39,24 +41,26 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
                 header: "Accession Number",
                 cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
             }
-
         ];
     }, []);
 
-
-    const getRowClasses = (row: any) => {
-        if (row.original.studyInstanceUID === studyInstanceUID) {
-            return 'bg-red-500 text-white'
+    const getRowClasses = (row: Study) => {
+        if (row.studyInstanceUID === selectedStudy) {
+            return 'bg-primary hover:cursor-pointer'; 
         } else {
-            return undefined
+            return 'hover:bg-indigo-100 hover:cursor-pointer';
         }
-    }
+    };
+
+    const handleRowClick = (study: Study) => {
+        if (study.studyInstanceUID !== undefined) {
+            setSelectedStudy(study.studyInstanceUID);
+            onStudyClick(study.studyInstanceUID);
+        }
+    };
 
     return (
         <Table
-            onRowClick={(study: Study) => {
-                if (study.studyInstanceUID) onStudyClick(study.studyInstanceUID)
-            }}
             columns={columns}
             data={rows}
             headerColor={Colors.almond}
@@ -64,6 +68,7 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
             enableSorting
             headerTextSize="xs"
             getRowClasses={getRowClasses}
+            onRowClick={handleRowClick}
         />
     );
 };

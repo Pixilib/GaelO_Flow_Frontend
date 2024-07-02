@@ -16,8 +16,10 @@ import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 import { FcAlphabeticalSortingAz, FcAlphabeticalSortingZa } from 'react-icons/fc';
 
+// Définition des tailles de texte pour les en-têtes de tableau
 export type textSize = "xs" | "sm" | "base" | "lg";
 
+// Props du composant Table
 type TableProps<TData> = {
   data?: TData[];
   columns: ColumnDef<TData>[];
@@ -26,14 +28,16 @@ type TableProps<TData> = {
   headerColor: Colors;
   headerTextSize?: textSize;
   className?: string;
-  pageSize?: number;
+  pageSize?: number; 
   pinFirstColumn?: boolean;
-  pinLastColumn?: boolean;
+  pinLastColumn?: boolean; 
   onRowClick?: (row: TData) => void;
-  getRowStyles? : (raw :TData) => object|undefined
-  getRowClasses? : (raw :TData) => string|undefined
+  getRowStyles?: (raw: TData) => object | undefined;
+  getRowClasses?: (raw: TData) => string | undefined;
+  selectedColor?: string;
 };
 
+// Composant Table principal
 function Table<T>({
   data = [],
   columns,
@@ -47,7 +51,8 @@ function Table<T>({
   pinLastColumn = false,
   onRowClick,
   getRowStyles = () => undefined,
-  getRowClasses = () => undefined
+  getRowClasses = () => undefined,
+  selectedColor = 'bg-primary' // Couleur par défaut pour la sélection
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -55,7 +60,9 @@ function Table<T>({
     pageIndex: 0,
     pageSize: pageSize,
   });
+  const [selectedRow, setSelectedRow] = useState<string | null>(null);
 
+  // Gestion du changement de taille de page
   const handlePageSizeChange = (newPageSize: number) => {
     setPagination((prev) => ({
       ...prev,
@@ -63,6 +70,7 @@ function Table<T>({
     }));
   };
 
+  // Utilisation de useReactTable pour initialiser le tableau avec les données et les options
   const table = useReactTable<T>({
     data,
     columns,
@@ -78,20 +86,24 @@ function Table<T>({
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    enableColumnFilters: enableColumnFilters,
+    enableColumnFilters,
     enableSorting,
-    meta : {
-      getRowStyles : getRowStyles,
-      getRowClasses : getRowClasses
+    meta: {
+      getRowStyles: getRowStyles, 
+      getRowClasses: (row) => {
+        const classes = getRowClasses ? getRowClasses(row) : undefined;
+        return row.id === selectedRow ? selectedColor : classes; // Applique la couleur de sélection si la ligne est sélectionnée
+      }
     }
   });
 
+  // Classes pour les colonnes fixes à gauche ou à droite
   const headerClass = `bg-${headerColor}`;
   const headerText = `text-${headerTextSize}`;
-
   const firstColumnClass = `sticky left-0 ${headerClass}`;
   const lastColumnClass = `sticky right-0 bg-white`;
 
+  // Fonction pour obtenir les classes CSS spécifiques d'une colonne
   const getColumnClasses = (index: number, length: number) => {
     if (pinFirstColumn && index === 0) return firstColumnClass;
     if (pinLastColumn && index === length - 1) return lastColumnClass;
@@ -104,8 +116,8 @@ function Table<T>({
           <thead className={headerClass}>
             {table.getHeaderGroups().map(headerGroup => (
               <React.Fragment key={headerGroup.id}>
-                {/* Row for headers and sorting icons */}
-                <tr key={headerGroup.id}  className={headerClass}>
+                {/* Ligne pour les en-têtes et les icônes de tri */}
+                <tr key={headerGroup.id} className={headerClass}>
                   {headerGroup.headers.map((header, index) => (
                     <th
                       key={header.id}
@@ -128,7 +140,7 @@ function Table<T>({
                     </th>
                   ))}
                 </tr>
-                {/* Separate row for filters if any filter is present */}
+                {/* Ligne séparée pour les filtres si des filtres sont activés */}
                 {headerGroup.headers.some(header => header.column.getCanFilter()) && (
                   <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}`}>
                     {headerGroup.headers.map((header, index) => (
@@ -152,17 +164,19 @@ function Table<T>({
             {table.getRowModel().rows.map((row, rowIndex) => (
               <tr
                 key={`row-${row.id}-${rowIndex}`}
-                className = {table.options.meta?.getRowClasses(row)}
+                className={table.options.meta?.getRowClasses(row)}
                 style={table.options.meta?.getRowStyles(row)}
                 onClick={() => {
-                  onRowClick && onRowClick(row.original);
+                  if (onRowClick) {
+                    onRowClick(row.original);
+                    setSelectedRow(row.id);
+                  }
                 }}
-                //className={`${onRowClick ? ' hover:bg-indigo-100 cursor-pointer' : ''} even:bg-zinc-100 odd:bg-white ${rowIndex === table.getRowModel().rows.length - 1 ? 'last-row' : ''}`}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td
                     key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                    className={`px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)}`}
+                    className={`px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
@@ -173,6 +187,7 @@ function Table<T>({
         </table>
       </div>
       <div className="w-full bg-white shadow-md rounded-b-xl">
+        {/* Affiche le pied de tableau uniquement si des données sont disponibles */}
         {data.length > 0 && table ? (
           <Footer
             table={table}

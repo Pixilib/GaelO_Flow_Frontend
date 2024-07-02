@@ -2,13 +2,11 @@ import React, { useMemo } from "react";
 import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
 
-//TODO: Importer le type Series
 interface ImportTableSeriesProps {
     data: object[];
 }
 
 const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
-
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
@@ -25,7 +23,7 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
             },
             {
                 accessorKey: "seriesNumber",
-                header: "Series NUmber",
+                header: "Series Number",
                 cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
             },
             {
@@ -37,8 +35,12 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
     }, []);
 
     const getRowClasses = (row: any) => {
-            return 'bg-blue-500 text-white'
-    }
+        if (row.someCondition) {
+            return 'bg-primary text-white';
+        } else {
+            return 'bg-indigo-100';
+        }
+    };
 
     return (
         <Table
@@ -48,7 +50,7 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
             enableColumnFilters
             enableSorting
             headerTextSize="xs"
-            getRowClasses = {getRowClasses}
+            getRowClasses={(row) => getRowClasses(row)}
         />
     );
 };
