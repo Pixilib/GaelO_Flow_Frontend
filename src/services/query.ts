@@ -1,9 +1,9 @@
 import axios from "axios"
 import { QueryResponse, QueryPayload } from "../utils/types";
 
-export const postQueryParsed = (id:string, payload: QueryPayload): Promise<QueryResponse[]> => {
+export const queryModality = (modality: string, payload: QueryPayload): Promise<QueryResponse[]> => {
     return axios
-        .post(`/api/modalities/${id}/parsed-query`, payload)
+        .post(`/api/modalities/${modality}/parsed-query`, payload)
         .then(response => response.data)
         .catch(error => {
             if (error.response) {
@@ -13,9 +13,12 @@ export const postQueryParsed = (id:string, payload: QueryPayload): Promise<Query
         });
 };
 
-export const getQueriesAnswers = (id: string): Promise<any[]> => {
+export const makeRetrieve = (AnswerId: string, AnswerNumber: number): Promise<any> => {
+    const payload = {
+        Asynchronous: true
+    }
     return axios
-        .get(`/api/queries/${id}/answers`)
+        .post(`/api/queries/${AnswerId}/answers/${AnswerNumber.toString()}/retrieve`, payload)
         .then(response => response.data)
         .catch(error => {
             if (error.response) {
