@@ -21,7 +21,7 @@ const Button: React.FC<ButtonProps> = ({
     danger: "bg-danger hover:bg-danger-hover",
     success: "bg-success hover:bg-success-hover",
     disabled: "bg-disabled",
-    orange: "bg-orange hover:bg-orange-hover",
+    warning: "bg-warning hover:bg-warning-hover",
     dark: "bg-dark",
     red: "bg-red",
     gray: "bg-gray",
@@ -36,7 +36,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      {...props} 
+      {...props}
       className={`flex items-center justify-center ${colorClass} ${borderClasses} focus:shadow-outline rounded-full p-3 font-semibold text-white shadow-lg focus:outline-none disabled:bg-opacity-70 ${className}`}
     >
       {children}

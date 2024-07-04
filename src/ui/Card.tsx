@@ -20,7 +20,7 @@ type CardBodyProps = {
   color?: Colors;
   className?: string;
   roundedTopLeft?: boolean;
-  roundedTopRight?: boolean; 
+  roundedTopRight?: boolean;
   roundedBottomLeft?: boolean;
   roundedBottomRight?: boolean;
 };
@@ -43,8 +43,8 @@ const colorClasses: Record<Colors, string> = {
   success: "bg-success",
   successHover: "hover:bg-success-hover",
   disabled: "bg-disabled",
-  orange: "bg-orange",
-  orangeHover: "hover:bg-orange-hover",
+  warning: "bg-warning",
+  warningHover: "hover:bg-warning-hover",
   dark: "bg-dark",
   red: "bg-red",
   gray: "bg-gray",
