@@ -2,13 +2,14 @@ import { Table } from "../ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { QueryResponse } from "../utils/types";
 import { Colors } from "../utils";
+import RetrieveButton from './RetrieveButton';
 
 type ResultsTableProps = {
     results: QueryResponse[] | null;
     onRowClick: (studyInstanceUID: string, originAET: string) => void;
 };
-const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
 
+const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
     const columns: ColumnDef<QueryResponse>[] = [
         {
             accessorKey: "PatientName",
@@ -26,11 +27,24 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             accessorKey: "StudyDescription",
             header: "Study Description",
         },
-    ]
+        {
+            header: "Action",
+            cell: ({ row }: { row: any }) => {
+                return (
+                    <div className="flex justify-center">
+                        <RetrieveButton
+                            answerId={row.original.AnswerId}
+                            answerNumber={row.original.AnswerNumber}
+                        />
+                    </div>
+                );
+            }
+        },
+    ];
 
-    const handleRowClick = (row:any) => {
+    const handleRowClick = (row: any) => {
         onRowClick(row.StudyInstanceUID, row.OriginAET);
-      };
+    };
 
     return (
         <Table
@@ -40,7 +54,9 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             enableColumnFilters={true}
             onRowClick={handleRowClick}
             headerTextSize="xs"
+            className="text-xs"
         />
     );
-}
+};
+
 export default ResultsTable;
