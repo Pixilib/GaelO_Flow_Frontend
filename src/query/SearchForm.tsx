@@ -1,29 +1,31 @@
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import moment from "moment";
-import { Option, QueryPayload } from "../utils";
+import { Option, QueryPayload, useCustomToast } from "../utils";
 import { FormButton, Input, Label, SelectInput } from "../ui";
 import { FaSearch } from "react-icons/fa";
 import SelectModalities from "./SelectModalities";
 
 type SearchFormProps = {
     aets: Option[];
-    labelsData: Option[];
-    showLabels: boolean;
+    labelsData?: string[];
+    onLabelChange?: (labels: string[]) => void;
     onSubmit: (formData: QueryPayload, aets: string) => void;
 };
 
-const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps) => {
+const SearchForm = ({ aets, labelsData = [], onLabelChange = () => { }, onSubmit }: SearchFormProps) => {
+    const { toastWarning } = useCustomToast()
+
     const [patientName, setPatientName] = useState<string>("");
     const [patientId, setPatientId] = useState<string>("");
     const [accessionNumber, setAccessionNumber] = useState<string>("");
     const [studyDescription, setStudyDescription] = useState<string>("");
-    const [aetsInput, setAetsInput] = useState<Option[]>([]);
+    const [aetsInput, setAetsInput] = useState<Option | null>(null);
     const [dataPreset, setDataPreset] = useState<Option[]>([]);
     const [modalities, setModalities] = useState<string[]>([]);
     const [dateFrom, setDateFrom] = useState<string>("");
     const [dateTo, setDateTo] = useState<string>("");
-    const [label, setLabel] = useState<Option[]>([]);
-    
+    const [labels, setLabels] = useState<Option[]>([]);
+
 
     const dataPresetOptions: Option[] = [
         { value: null, label: "None" },
@@ -59,8 +61,12 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
     };
 
     const handleLabelChange = (selectedOptions: Option[]) => {
-        setLabel(selectedOptions || []);
+        setLabels(selectedOptions || []);
     };
+
+    useEffect(() => {
+        onLabelChange(labels.map(label => label.value));
+    }, [JSON.stringify(labels)])
 
     const isDateDisabled = dataPreset.length > 0 && dataPreset[0].value !== null;
 
@@ -91,7 +97,11 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                 AccessionNb: accessionNumber,
             }
         }
-        const aet = aetsInput[0]?.value || 'self';
+        const aet = aetsInput?.value;
+        if (!aet) {
+            toastWarning("Choose AET to Query")
+            return
+        }
         onSubmit(queryPayload, aet);
     };
 
@@ -113,7 +123,7 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setPatientId(event.target.value)}
                 />
             </div>
-            <div className={`grid grid-cols-1 col-span-2 gap-3 ${showLabels ? "lg:grid-cols-4" : "lg:grid-cols-3"} lg:gap-11 place-content-center`}>
+            <div className={`grid grid-cols-1 col-span-2 gap-3 ${labelsData.length > 0 ? "lg:grid-cols-4" : "lg:grid-cols-3"} lg:gap-11 place-content-center`}>
                 <Input
                     label={<Label value="Accession" className="text-sm font-medium text-center" align="left" />}
                     type="text"
@@ -141,7 +151,7 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                         closeMenuOnSelect={false}
                     />
                 </div>
-                {showLabels && (
+                {labelsData?.length > 0 ? (
                     <div className="grid">
                         <Label
                             value="Label"
@@ -152,28 +162,15 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                         <SelectInput
                             isMulti
                             closeMenuOnSelect={false}
-                            options={labelsData || []}
+                            options={labelsData.map(label => ({ label: label, value: label })) || []}
                             onChange={(options: Option[]) => handleLabelChange(options)}
                             placeholder="Select Label(s)"
                             aria-label="Labels"
                         />
                     </div>
-                )}
+                ) : null}
             </div>
-            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-4 lg:gap-11">
-                <div className="grid">
-                    <Label
-                        value="AET"
-                        className="text-sm font-medium"
-                        align="left"
-                    />
-                    <SelectInput
-                        options={aets}
-                        placeholder="Search by AET"
-                        aria-label="AET"
-                        onChange={(options: Option) => setAetsInput([options])}
-                    />
-                </div>
+            <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-3 lg:gap-11">
                 <div className="grid">
                     <Label
                         value="Data Preset"
@@ -222,8 +219,23 @@ const SearchForm = ({ aets, labelsData, showLabels, onSubmit }: SearchFormProps)
                     disabled={isDateDisabled}
                 />
             </div>
-            <div className="grid grid-cols-1 col-span-2 my-3 place-content-center">
-                <FormButton text={"Query"} icon={<FaSearch size="1.3rem" />} />
+            <div className="flex justify-center col-span-2 lg:w-1/2 lg:mx-auto lg:gap-11">
+                <div className="w-1/2">
+                    <Label
+                        value="AET"
+                        className="text-sm font-medium"
+                        align="left"
+                    />
+                    <SelectInput
+                        options={aets}
+                        placeholder="Search by AET"
+                        aria-label="AET"
+                        onChange={(options: Option) => setAetsInput(options)}
+                    />
+                </div>
+                <div className="flex items-center justify-center w-1/2 mt-5">
+                    <FormButton text={"Query"} icon={<FaSearch size="1.3rem" />} />
+                </div>
             </div>
         </form>
     );
