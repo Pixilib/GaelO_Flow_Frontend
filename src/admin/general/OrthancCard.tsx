@@ -96,7 +96,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <div className="h-2"></div>
             </CardBody>
             <CardFooter className="flex justify-center mt-0 space-x-4 border-t-2 border-ligth" color={Colors.light}>
-                <Button color={Colors.orange} onClick={reset}>
+                <Button color={Colors.warning} onClick={reset}>
                     <RestartIcon size="20px" title="Restart" />
                 </Button>
                 <Button color={Colors.danger} >
@@ -118,16 +118,16 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         <Modal.Title>Orthanc System Information</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-    {orthancSystem ? (
-        <div className='p-4 bg-gray-200 rounded-lg'>
-            <pre className='text-sm break-all whitespace-pre-wrap'>
-                {JSON.stringify(orthancSystem, null, 2)}
-            </pre>
-        </div>
-    ) : (
-        <p>Loading...</p>
-    )}
-</Modal.Body>
+                        {orthancSystem ? (
+                            <div className='p-4 bg-gray-200 rounded-lg'>
+                                <pre className='text-sm break-all whitespace-pre-wrap'>
+                                    {JSON.stringify(orthancSystem, null, 2)}
+                                </pre>
+                            </div>
+                        ) : (
+                            <p>Loading...</p>
+                        )}
+                    </Modal.Body>
                     <Modal.Footer>
                         <Button color={Colors.primary} onClick={() => setShowModal(false)}>
                             Close
