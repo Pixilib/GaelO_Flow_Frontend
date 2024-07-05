@@ -18,6 +18,7 @@ type RetrieveButtonProps = {
   answerNumber: number;
 };
 const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
+  console.log("RetrieveButton Props:", { answerId, answerNumber }); // Log les props pour vérifier les valeurs
 
   const [jobId, setJobId] = useState<string | null>(null);
 
@@ -26,16 +27,16 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
     [],
     {
       onSuccess: (data) => {
-        setJobId(data.ID);
+        setJobId(data.id);
       }
     }
   );
 
   const handleClick = (event: MouseEvent<SVGAElement>) => {
     event.stopPropagation()
+    console.log("Retrieve data")
     retrieveMutation({})
   }
-
   return (
     <div className="flex justify-center">
       {jobId ?

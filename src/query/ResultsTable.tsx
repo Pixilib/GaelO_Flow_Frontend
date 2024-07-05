@@ -33,8 +33,8 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
                 return (
                     <div className="flex justify-center">
                         <RetrieveButton
-                            answerId={row.original.AnswerId}
-                            answerNumber={row.original.AnswerNumber}
+                            answerId={row.original.answerId}
+                            answerNumber={row.original.answerNumber}
                         />
                     </div>
                 );
@@ -43,6 +43,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
     ];
 
     const handleRowClick = (row: any) => {
+        console.log(row)
         onRowClick(row.StudyInstanceUID, row.OriginAET);
     };
 

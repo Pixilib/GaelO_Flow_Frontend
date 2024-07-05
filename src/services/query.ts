@@ -1,10 +1,11 @@
 import axios from "axios"
-import { QueryResponse, QueryPayload } from "../utils/types";
+import { QueryResponse, QueryPayload, RetrieveResponse } from "../utils/types";
 
 export const queryModality = (modality: string, payload: QueryPayload): Promise<QueryResponse[]> => { // Notez le changement ici
     return axios
         .post(`/api/modalities/${modality}/parsed-query`, payload)
         .then((response: any) => {
+            console.log(response.data)
             return response.data.map((data: any) => ({
                 answerId: data.AnswerId,
                 answerNumber: data.AnswerNumber,
@@ -33,13 +34,19 @@ export const queryModality = (modality: string, payload: QueryPayload): Promise<
 };
 
 
-export const makeRetrieve = (AnswerId: string, AnswerNumber: number): Promise<any> => {
+export const makeRetrieve = (answerId: string, answerNumber: number): Promise<RetrieveResponse> => {
     const payload = {
         Asynchronous: true
     }
     return axios
-        .post(`/api/queries/${AnswerId}/answers/${AnswerNumber.toString()}/retrieve`, payload)
-        .then(response => response.data)
+        .post(`/api/queries/${answerId}/answers/${answerNumber}/retrieve`, payload)
+        .then((response: any) => {
+            const data = response.data
+            return {
+                id: data.ID,
+                path: data.Path
+            }
+        })
         .catch(error => {
             if (error.response) {
                 throw error.response;
