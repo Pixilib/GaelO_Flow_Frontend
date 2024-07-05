@@ -32,8 +32,8 @@ const SeriesTable = ({ series }: SeriesTableProps) => {
                 return (
                     <div className="flex justify-center">
                         <RetrieveButton
-                            answerId={row.original.AnswerId}
-                            answerNumber={row.original.AnswerNumber}
+                            answerId={row.original.answerId}
+                            answerNumber={row.original.answerNumber}
                         />
                     </div>
                 )
