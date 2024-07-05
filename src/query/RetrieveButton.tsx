@@ -18,7 +18,6 @@ type RetrieveButtonProps = {
   answerNumber: number;
 };
 const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
-  console.log("RetrieveButton Props:", { answerId, answerNumber }); // Log les props pour vérifier les valeurs
 
   const [jobId, setJobId] = useState<string | null>(null);
 
@@ -34,7 +33,7 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
 
   const handleClick = (event: MouseEvent<SVGAElement>) => {
     event.stopPropagation()
-    console.log("Retrieve data")
+    if (jobId) return
     retrieveMutation({})
   }
   return (
@@ -46,7 +45,7 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
           color={Colors.warning}
           onClick={handleClick}
           size="2.5em"
-          className="transition-transform transform cursor-pointer hover:text-warning-500 hover:scale-110"
+          className={`transition-transform transform cursor-pointer hover:text-warning-500 hover:scale-110 `}
         />
       }
 

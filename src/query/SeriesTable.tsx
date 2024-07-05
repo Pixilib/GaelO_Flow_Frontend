@@ -1,4 +1,5 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { useMemo } from "react";
+
 import { Table } from "../ui";
 import { Colors } from "../utils";
 import RetrieveButton from './RetrieveButton';
@@ -8,8 +9,8 @@ type SeriesTableProps = {
 };
 
 const SeriesTable = ({ series }: SeriesTableProps) => {
-
-    const columns: ColumnDef<any>[] = [
+    const rows = useMemo(() => series, [series]);
+    const columns = useMemo(() => [
         {
             accessorKey: "seriesDescription",
             header: "Series Description",
@@ -27,7 +28,7 @@ const SeriesTable = ({ series }: SeriesTableProps) => {
             header: "Instances",
         },
         {
-            header: "Action",
+            header: "Retrieve",
             cell: ({ row }: { row: any }) => {
                 return (
                     <div className="flex justify-center">
@@ -39,11 +40,11 @@ const SeriesTable = ({ series }: SeriesTableProps) => {
                 )
             }
         }
-    ];
+    ], []);
     return (
         <Table
             columns={columns}
-            data={series ?? []}
+            data={rows ?? []}
             headerColor={Colors.almond}
             headerTextSize="xs"
             className="text-xs"

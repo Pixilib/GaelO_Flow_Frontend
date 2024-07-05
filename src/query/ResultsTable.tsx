@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { QueryResponse } from "../utils/types";
 import { Colors } from "../utils";
 import RetrieveButton from './RetrieveButton';
+import { useMemo } from "react";
 
 type ResultsTableProps = {
     results: QueryResponse[] | null;
@@ -10,10 +11,18 @@ type ResultsTableProps = {
 };
 
 const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
-    const columns: ColumnDef<QueryResponse>[] = [
+    
+    //memoise les results
+    const rows = useMemo(() => results, [results]);
+    
+    const columns: ColumnDef<QueryResponse>[] = useMemo(() => [
         {
             accessorKey: "patientName",
             header: "Patient Name",
+        },
+        {
+            accessorKey: "accessionNumber",
+            header: "Accession Number",
         },
         {
             accessorKey: "patientID",
@@ -28,10 +37,12 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             header: "Study Description",
         },
         {
-            header: "Action",
+            header: "Retrieve",
             cell: ({ row }: { row: any }) => {
                 return (
-                    <div className="flex justify-center">
+                    <div
+                        className="flex justify-center"
+                    >
                         <RetrieveButton
                             answerId={row.original.answerId}
                             answerNumber={row.original.answerNumber}
@@ -40,17 +51,16 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
                 );
             }
         },
-    ];
+    ], []);
 
     const handleRowClick = (row: any) => {
-        console.log(row)
         onRowClick(row.StudyInstanceUID, row.OriginAET);
     };
 
     return (
         <Table
             columns={columns}
-            data={results ?? []}
+            data={rows ?? []}
             headerColor={Colors.almond}
             enableColumnFilters={true}
             onRowClick={handleRowClick}
