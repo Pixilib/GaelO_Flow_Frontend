@@ -67,6 +67,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       path: "/administration/labels",
       isActive: location.pathname === "/administration/labels",
     },
+
   ];
 
   return (
@@ -90,8 +91,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           <MenuItem
             title="Orthanc Content"
             icon={< OrthancContentIcon className="w-6 h-6" />}
-            isActive={location.pathname === "/"}
-            onClick={() => handleItemClick("/")}
+            isActive={location.pathname === "/orthanc-content"}
+            onClick={() => handleItemClick("/orthanc-content")}
           />
           <MenuItem
             title="Import"

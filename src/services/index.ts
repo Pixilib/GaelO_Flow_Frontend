@@ -1,16 +1,16 @@
 //create an index for all services in this folder
 
 import { getLabels, addLabel, removeLabel, getRolesByLabelName } from './labels';
-import {  postUsers, getUserById, updateUser, deleteUser } from './users';
+import { postUsers, getUserById, updateUser, deleteUser } from './users';
 import { getRoles, getRole, getLabelsByRoleName, updateRole, deleteRole, postRoles } from './roles';
 import { signIn, signUp, lostPassword, changePassword } from './auth';
 import { getJobs, postJobs } from './jobs';
 import { getModalities, updateModality, deleteModality, echoModality } from './modalities';
-import { getOauth2Config, postOauth2Config, deleteOauth2Config  } from './oauth2';
+import { getOauth2Config, postOauth2Config, deleteOauth2Config } from './oauth2';
 import { getOptions, updateOptions } from './options';
-import { getOrthancSystem,orthancReset,orthancShutdown,updateVerbosity,getVerbosity } from './orthanc';
-import { updatePeer,getPeers,echoPeer,deletePeer } from './peers';
-import { postQueryParsed } from './query';
+import { getOrthancSystem, orthancReset, orthancShutdown, updateVerbosity, getVerbosity } from './orthanc';
+import { updatePeer, getPeers, echoPeer, deletePeer } from './peers';
+import { queryModality, makeRetrieve } from './query';
 export {
     addLabel,
     changePassword,
@@ -39,7 +39,8 @@ export {
     orthancShutdown,
     postJobs,
     postOauth2Config,
-    postQueryParsed,
+    queryModality,
+    makeRetrieve,
     postRoles,
     postUsers,
     removeLabel,
