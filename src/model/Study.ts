@@ -1,6 +1,7 @@
 import { getStudies } from "../services/orthanc"
 import Patient from "./Patient"
 import Series from "./Series"
+import type { Study as StudyType } from './../utils/types'
 
 class Study {
 
@@ -30,10 +31,17 @@ class Study {
         this.patient.setPatientSex(study.patientMainDicomTags.patientSex)
     }
 
+    fillData(studyData: StudyType) {
+        this.studyDescription = studyData.mainDicomTags.studyDescription;
+        this.studyDate = studyData.mainDicomTags.studyDate;
+        this.studyTime = studyData.mainDicomTags.studyTime;
+        this.studyInstanceUID = studyData.mainDicomTags.studyInstanceUID;
+    }
+
     setPatient = (patient: Patient) => {
         this.patient = patient
     }
-    
+
     getAllseries = () => {
         return this.series.map(series => series.toJSON())
     }
@@ -54,8 +62,8 @@ class Study {
         }
     }
 
-    getStudyInstanceUID = () : string => {
-        if(!this.studyInstanceUID) throw "missing study instance uid"
+    getStudyInstanceUID = (): string => {
+        if (!this.studyInstanceUID) throw "missing study instance uid"
         return this.studyInstanceUID
     }
 
