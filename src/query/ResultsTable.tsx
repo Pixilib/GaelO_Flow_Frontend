@@ -12,19 +12,19 @@ type ResultsTableProps = {
 const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
     const columns: ColumnDef<QueryResponse>[] = [
         {
-            accessorKey: "PatientName",
+            accessorKey: "patientName",
             header: "Patient Name",
         },
         {
-            accessorKey: "PatientID",
+            accessorKey: "patientID",
             header: "Patient ID",
         },
         {
-            accessorKey: "StudyDate",
+            accessorKey: "studyDate",
             header: "Study Date",
         },
         {
-            accessorKey: "StudyDescription",
+            accessorKey: "studyDescription",
             header: "Study Description",
         },
         {

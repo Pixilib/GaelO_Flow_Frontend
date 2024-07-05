@@ -11,26 +11,25 @@ const SeriesTable = ({ series }: SeriesTableProps) => {
 
     const columns: ColumnDef<any>[] = [
         {
-            accessorKey: "SeriesDescription",
+            accessorKey: "seriesDescription",
             header: "Series Description",
         },
         {
-            accessorKey: "Modality",
+            accessorKey: "modality",
             header: "Modality",
         },
         {
-            accessorKey: "SeriesNumber",
+            accessorKey: "seriesNumber",
             header: "Series Number",
         },
         {
-            accessorKey: "NumberOfSeriesRelatedInstances",
+            accessorKey: "numberOfSeriesRelatedInstances",
             header: "Instances",
         },
         {
             header: "Action",
             cell: ({ row }: { row: any }) => {
                 return (
-                    console.log(row.original),
                     <div className="flex justify-center">
                         <RetrieveButton
                             answerId={row.original.AnswerId}
