@@ -4,6 +4,8 @@ import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import BooleanIcon from "./BooleanIcon";
 import CloseButton from "./CloseButton";
+import RetrieveButton from "../query/RetrieveButton";
+import ProgressCircle from "./ProgressCircle";
 import Input from "./Input";
 import Label from "./Label";
 import ToggleEye from "./ToggleEye";
@@ -52,6 +54,8 @@ export {
     MenuItem,
     Modal,
     Popover,
+    ProgressCircle,
+    RetrieveButton,
     SelectInput,
     SideBarItems,
     Spinner,

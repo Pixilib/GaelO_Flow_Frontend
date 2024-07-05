@@ -10,7 +10,6 @@ export const sendDicom = (payload: Uint8Array): Promise<OrthancImportDicom> => {
                 parentPatient: data.ParentPatient,
                 parentSeries: data.ParentSeries,
                 parentStudy: data.ParentStudy
-
             }
         })
         .catch(function (error) {

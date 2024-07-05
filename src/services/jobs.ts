@@ -23,3 +23,15 @@ export const postJobs = ({ Id, Action }: JobPayload): Promise<unknown> => {
       throw error;
     });
 };
+
+export const getJobById = (id: string): Promise<OrthancJob> => {
+  return axios
+    .get(`/api/jobs/${id}`)
+    .then((response) => response.data as OrthancJob)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}

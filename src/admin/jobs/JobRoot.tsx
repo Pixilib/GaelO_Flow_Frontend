@@ -15,8 +15,8 @@ const JobRoot = () => {
     (["jobs"], () => getJobs(), {
       enabled: true,
       refetchInterval: 10000,
-    });
 
+    });
   const { mutate } = useCustomMutation<unknown, JobPayload>(
     ({ Id, Action }: JobPayload) =>
       postJobs({ Id, Action }),

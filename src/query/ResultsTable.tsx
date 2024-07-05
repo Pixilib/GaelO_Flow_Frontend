@@ -2,45 +2,69 @@ import { Table } from "../ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { QueryResponse } from "../utils/types";
 import { Colors } from "../utils";
+import RetrieveButton from './RetrieveButton';
+import { useMemo } from "react";
 
 type ResultsTableProps = {
     results: QueryResponse[] | null;
     onRowClick: (studyInstanceUID: string, originAET: string) => void;
 };
-const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
 
-    const columns: ColumnDef<QueryResponse>[] = [
+const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
+    const rows = useMemo(() => results, [results]);
+    
+    const columns: ColumnDef<QueryResponse>[] = useMemo(() => [
         {
-            accessorKey: "PatientName",
+            accessorKey: "patientName",
             header: "Patient Name",
         },
         {
-            accessorKey: "PatientID",
+            accessorKey: "accessionNumber",
+            header: "Accession Number",
+        },
+        {
+            accessorKey: "patientID",
             header: "Patient ID",
         },
         {
-            accessorKey: "StudyDate",
+            accessorKey: "studyDate",
             header: "Study Date",
         },
         {
-            accessorKey: "StudyDescription",
+            accessorKey: "studyDescription",
             header: "Study Description",
         },
-    ]
-
-    const handleRowClick = (row:any) => {
-        onRowClick(row.StudyInstanceUID, row.OriginAET);
-      };
-
+        {
+            header: "Retrieve",
+            cell: ({ row }: { row: any }) => {
+                return (
+                    <div
+                        className="flex justify-center"
+                    >
+                        <RetrieveButton
+                            answerId={row.original.answerId}
+                            answerNumber={row.original.answerNumber}
+                        />
+                    </div>
+                );
+            }
+        },
+    ], []);
+    
+    const handleRowClick = (row: any) => {
+        onRowClick(row.studyInstanceUID, row.originAET);
+    };
     return (
         <Table
             columns={columns}
-            data={results ?? []}
+            data={rows ?? []}
             headerColor={Colors.almond}
             enableColumnFilters={true}
             onRowClick={handleRowClick}
             headerTextSize="xs"
+            className="text-xs"
         />
     );
-}
+};
+
 export default ResultsTable;

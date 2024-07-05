@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-  "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
-  "node_modules/preline/dist/*.js"
+    "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
+    "node_modules/preline/dist/*.js"
   ],
   theme: {
     extend: {
-      fontSize:{
+      fontSize: {
         '10': '10px',
       },
       borderRadius: {
@@ -47,7 +47,7 @@ export default {
         'almond':'#FAE7D1',
         'primary': '#4746B8',
         'primary-active': '#333182',
-        'primary-light':'#8C8BD3',
+        'primary-light': '#8C8BD3',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
         'secondaryLight': '#F1EBE8',
@@ -57,13 +57,13 @@ export default {
         'success': '#037F6E',
         'success-hover': '#2E7058',
         'disabled': '#b2b2b2',
-        'orange': '#DDAD00',
-        'orange-hover': '#A88400',
+        'warning': '#DDAD00',
+        'warning-hover': '#A88400',
         'dark': '#484544',
         'redCustom': '#f8d7da',
         'grayCustom': '#D4CFCF',
         'light': '#FFFFFF',
-        'light-gray':'#EFEFEF',
+        'light-gray': '#EFEFEF',
         'badge-grayCustom': '#E6E6F2',
         'badge-blue-text': '#4A4AFF',
       },
@@ -75,5 +75,5 @@ export default {
   plugins: [
     require('tailwind-scrollbar'),
     require('preline/plugin'),
-],
+  ],
 };
