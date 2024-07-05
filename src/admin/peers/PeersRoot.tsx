@@ -77,14 +77,15 @@ const PeersRoot: React.FC = () => {
               }
             />
           </div>
-          {!showNewPeerCard && (
+          
+        </div>
+      </CardBody>
+      <CardFooter color={Colors.light} className="border-ligth">
+      {!showNewPeerCard && (
             <Button color={Colors.success} onClick={handleNewPeerClick}>
               <MoreIcon className="mr-3" size={24} /> New Peer
             </Button>
           )}
-        </div>
-      </CardBody>
-      <CardFooter color={Colors.light}>
         {showNewPeerCard && (
           <NewPeerCard
             onClose={handleCloseNewPeerCard}

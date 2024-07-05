@@ -16,13 +16,14 @@ import type {
     AutoQueryPayload,
     OptionsResponse,
     Oauth2Config,
-    RolesUserResponse,
     Modality,
     Role,
     UserPayload,
+    ModalityExtended,
     UserUpdatePayload,
     User,
-    Option
+    Option,
+    QueryPayload
 } from "./types";
 import { useCustomToast } from "./toastify";
 
@@ -33,12 +34,13 @@ export {
     formatTimeReadable,
     getQueryParams,
     Modality,
+    ModalityExtended,
     Oauth2Config,
     Option,
     OptionsResponse,
     parseTimeString,
+    QueryPayload,
     Role,
-    RolesUserResponse,
     timeDiff,
     useCustomMutation,
     useCustomQuery,

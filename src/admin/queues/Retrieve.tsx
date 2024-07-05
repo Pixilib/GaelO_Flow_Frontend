@@ -71,15 +71,13 @@ const Retrieve = ({ data }: RetrieveProps) => {
       onError: (error: any) => {
         toastError(
           'An error occurred during updating options.' +
-            (error?.data?.message ?? '')
+          (error?.data?.message ?? '')
         );
       },
     }
   );
 
-  const handleTimeStart = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleTimeStart = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setStartTime(value);
   };
@@ -108,7 +106,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
     <form
       onSubmit={handleSubmit}
       data-gaelo-flow="retrieve-container-queues"
-      className="flex flex-col items-center w-full mb-6 bg-gray-200 rounded-br-xl rounded-bl-xl"
+      className="flex flex-col items-center w-full mb-6 rounded-br-xl rounded-bl-xl"
     >
       <Card bordered className="w-11/12 mt-8">
         <CardHeader
@@ -116,7 +114,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
           color={Colors.success}
         />
         <CardBody
-          color={Colors.light}
+          color={Colors.gray}
           roundedBottomLeft
           roundedBottomRight
         >
@@ -152,7 +150,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 handleTimeStop(event)
               }
               className={
-                'bg-gray-100 text-gray-400 focus:text-dark focus:shadow-2xl shadow-lg'
+                'bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl shadow-lg'
               }
             />
             <div className="flex-col text-center">

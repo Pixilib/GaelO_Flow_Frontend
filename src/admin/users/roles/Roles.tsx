@@ -62,7 +62,7 @@ const Roles = () => {
 
 
     return (
-        <div className="bg-gray-200 rounded-br-xl rounded-bl-xl">
+        <div className=" rounded-br-xl rounded-bl-xl">
             {isLoadingRoles ? (
                 <Spinner />
             ) : (

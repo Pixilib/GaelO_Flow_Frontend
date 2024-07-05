@@ -9,6 +9,7 @@ import Dashboard from "./Dashboard";
 import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
+import ImportCreateRoot from "../import/ImportCreateRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,9 @@ const RootApp = () => {
       "/administration/users/roles": "Users",
       "/administration/users/oauth2": "Users",
       "/Orthanc Content": "Orthanc Content",
-      "/import": "Import",
+      "/import": "Import/Create Dicom",
+      "/import/import-dicom": "Import",
+      "/import/create-dicom": "Create",
       "/query": "Query",
       "/users": "Users",
       "/mydicom": "My Dicom",
@@ -50,7 +53,7 @@ const RootApp = () => {
   return (
     <div className="flex w-screen h-screen bg-white">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
-      <div className="flex flex-col flex-1 overflow-auto custom-scrollbar bg-secondaryLight">
+      <div className="flex flex-col flex-1 overflow-auto bg-indigo-100 custom-scrollbar">
         <Header
           title={title}
           openItem={openItem}
@@ -61,6 +64,7 @@ const RootApp = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />
+            <Route path="/import/*" element={<ImportCreateRoot />} />
           </Routes>
         </div>
       </div>

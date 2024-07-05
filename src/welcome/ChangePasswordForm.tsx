@@ -9,14 +9,14 @@ import { useCustomToast } from "../utils/toastify";
 import { Colors } from "../utils/enums";
 import { ChangePasswordPayload } from "../utils/types";
 
-import { Button, Input } from "../ui";
-import { ChevronRight, Key, Visibility, VisibilityOff } from "./../assets";
+import { Button } from "../ui";
+import { ChevronRight } from "./../assets";
+import InputPassword from "../ui/InputPassword";
 
 const ChangePasswordForm = () => {
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setconfirmPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { toastSuccess, toastError } = useCustomToast();
 
   const { token, userId } = getQueryParams();
@@ -57,42 +57,26 @@ const ChangePasswordForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full">
-      <h1 className="mb-6 text-5xl font-bold text-center"> Password </h1>
+      <h1 className="mb-6 text-5xl font-bold text-center">Change Password</h1>
       <p className="mb-12 text-lg text-center text-gray-700">
         Please create/change your password.
       </p>
       <div className="w-full space-y-12">
-        <Input
+        <InputPassword
           label="New Password :"
-          svgLeft={<Key />}
-          svgRight={
-            <span onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <Visibility /> : <VisibilityOff />}
-            </span>
-          }
-          bordered
           placeholder="Enter your new password"
           value={newPassword}
-          type={showPassword ? "text" : "password"}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setNewPassword(event.target.value);
           }}
           required
         />
-        <Input
+        <InputPassword
           label="Confirm New Password :"
-          svgLeft={<Key />}
-          bordered
           placeholder="Confirm your new password"
-          svgRight={
-            <span onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ? <Visibility /> : <VisibilityOff />}
-            </span>
-          }
           value={confirmPassword}
-          type={showPassword ? "text" : "password"}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setconfirmPassword(event.target.value);
+            setConfirmPassword(event.target.value);
           }}
           required
         />
@@ -102,7 +86,7 @@ const ChangePasswordForm = () => {
             type="submit"
             disabled={newPassword !== confirmPassword}
           >
-            Connect
+            Change Password
             <ChevronRight />
           </Button>
         </div>

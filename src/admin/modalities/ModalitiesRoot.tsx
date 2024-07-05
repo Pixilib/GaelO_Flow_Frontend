@@ -3,7 +3,7 @@ import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
 import { Button, Card, CardBody, CardFooter, Spinner } from '../../ui';
 import { Colors } from '../../utils/enums';
-import { Modality } from '../../utils/types';
+import { Modality, ModalityExtended } from '../../utils/types';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { useCustomToast } from '../../utils/toastify';
 
@@ -18,9 +18,19 @@ const ModalitiesRoot: React.FC = () => {
 
     const [showNewAetCard, setShowNewAetCard] = useState(false);
 
-    const { data: aets, isLoading } = useCustomQuery<Modality[]>(
+    const { data: aets, isLoading } = useCustomQuery<ModalityExtended[], Modality[]>(
         ['modalities'],
-        () => getModalities()
+        () => getModalities(),
+        {
+            select: (response) =>
+                Object.entries(response).map(([name, aet]) => ({
+                    name: name,
+                    aet: aet.AET,
+                    host: aet.Host,
+                    port: aet.Port,
+                    manufacturer: aet.Manufacturer,
+                })),
+        }
     );
 
     const { mutate: updateModalityMutate } = useCustomMutation(
@@ -60,7 +70,6 @@ const ModalitiesRoot: React.FC = () => {
         <Card>
             <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
                 <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Modalities</h2>
-
                 <div className="flex flex-col items-center">
                     <div className="w-full mb-8">
                         <ModalitiesTable
@@ -68,16 +77,20 @@ const ModalitiesRoot: React.FC = () => {
                             onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}
                             onEchoAet={handleEchoAet} />
                     </div>
-                    {!showNewAetCard && (
-                        <Button
-                            color={Colors.success}
-                            onClick={handleNewAetClick}>
-                            <MoreIcon className="mr-3" size={24} /> New modality
-                        </Button>
-                    )}
+
+
                 </div>
             </CardBody>
-            <CardFooter color={Colors.light}>
+            <CardFooter className="border-t-2 border-ligth" color={Colors.light}>
+
+                {!showNewAetCard && (
+                    <Button
+                        color={Colors.success}
+                        onClick={handleNewAetClick}>
+                        <MoreIcon className="mr-3 " size={24} /> New modality
+                    </Button>
+                )}
+
                 {showNewAetCard && (
                     <NewModalityCard
                         onClose={handleCloseNewAetCard}

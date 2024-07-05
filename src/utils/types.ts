@@ -1,3 +1,4 @@
+
 //option
 export type AutoQueryPayload = {
     AutoQueryHourStart: number;
@@ -114,6 +115,25 @@ export type Modality = {
     manufacturer: string;
 }
 
+export type ModalityExtended = {
+    AET: string;
+    AllowEcho: boolean;
+    AllowEventReport: boolean;
+    AllowFind: boolean;
+    AllowFindWorklist: boolean;
+    AllowGet: boolean;
+    AllowMove: boolean;
+    AllowNAction: boolean;
+    AllowStore: boolean;
+    AllowTranscoding: boolean;
+    Host: string;
+    LocalAet: string;
+    Manufacturer: string;
+    Port: number;
+    Timeout: number;
+    UseDicomTls: boolean;
+}
+
 export type Label = {
     Name: string;
 }
@@ -124,4 +144,129 @@ export type Oauth2Config = {
     Provider: string;
     AuthorizationUrl: string;
     ClientId: string;
+}
+//Query
+
+type QueryStudy = {
+    PatientName?: string;
+    PatientID?: string;
+    StudyDate?: string;
+    Modality?: string;
+    StudyDescription?: string;
+    AccessionNb?: string;
+    StudyInstanceUID?: string;
+}
+
+type QuerySeries = {
+    StudyUID?: string;
+    Modality?: string;
+    SeriesDescription?: string;
+    SeriesNumber?: string;
+    SeriesInstanceUID?: string;
+}
+
+type Level = "Series" | "Study";
+export type QueryPayload = {
+    Level: Level;
+    Query: QueryStudy | QuerySeries;
+}
+
+export type ExtendedQueryPayload = {
+    queryPayload: QueryPayload;
+    aet:string;
+}
+
+export type QueryResponse = {
+    AnswerId: string;
+    AnswerNumber: number;
+    Level: Level;
+    OriginAET: string;
+    PatientName: string;
+    PatientID: string;
+    AccessionNumber: string;
+    StudyDescription: string;
+    StudyDate: string;
+    RequestedProcedureDescription: string;
+    Modality: string;
+    SeriesDescription: string;
+    SeriesNumber: string;
+    NumberOfSeriesRelatedInstances: string;
+    StudyInstanceUID: string;
+    SeriesInstanceUID: string;
+}
+
+
+export type OrthancImportDicom = {
+    id: string,
+    parentPatient: string,
+    parentSeries: string,
+    parentStudy: string
+}
+
+export type Patient = {
+    id: string;
+    isStable: boolean;
+    Labels: string[];
+    lastUpdate: string;
+    mainDicomTags: {
+        patientBirthDate: string | null;
+        patientID: string | null;
+        patientName: string | null;
+        patientSex: string | null;
+    },
+    studies: string[],
+    type: string
+}
+
+export type Series = {
+    expectedNumberOfInstances: number | null;
+    id: string;
+    instances: string[];
+    isStable: string;
+    labels: string[],
+    lastUpdate: string,
+    mainDicomTags: {
+        imageOrientationPatient: string | null;
+        manufacturer: string | null;
+        modality: string | null;
+        operatorsName: string | null;
+        protocolName: string | null;
+        seriesDescription: string | null;
+        seriesInstanceUID: string;
+        seriesNumber: string | number | null;
+        stationName: string | null;
+        seriesDate: string | null;
+        seriesTime: string | null;
+    },
+    parentStudy: string;
+    status: string;
+    type: string;
+
+}
+
+export type Study = {
+    id: string
+    isStable: string
+    labels: string[]
+    lastUpdate: string
+    mainDicomTags: {
+        accessionNumber: string | null
+        institutionName: string | null
+        referringPhysicianName: string | null
+        studyDate: string | null
+        studyDescription: string | null
+        studyID: string | null
+        studyInstanceUID: string
+        studyTime: string | null
+    },
+    patientMainDicomTags: {
+        patientBirthDate: string | null
+        patientID: string
+        patientName: string | null
+        patientSex: string | null
+    },
+    parentPatient: string,
+    series: string[],
+    type: string
+
 }

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Button } from '../ui';
 import { Colors } from '../utils';
 
@@ -6,7 +6,7 @@ type FormButtonProps = {
   text: string;
   icon: ReactNode;
   className?: string;
-};
+}&React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const FormButton = ({ text, icon, className }: FormButtonProps) => {
   return (
