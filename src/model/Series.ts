@@ -51,6 +51,7 @@ class Series {
         return {
             'id': this.id,
             'seriesDescription': this.seriesDescription,
+            'modality' : this.modality,
             'seriesNumber': this.seriesNumber,
             'seriesDate': this.seriesDate,
             'seriesTime': this.seriesTime,

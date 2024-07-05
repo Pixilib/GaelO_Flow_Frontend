@@ -33,6 +33,10 @@ class Study {
     setPatient = (patient: Patient) => {
         this.patient = patient
     }
+    
+    getAllseries = () => {
+        return this.series.map(series => series.toJSON())
+    }
 
     getSeries = (seriesId: string) => {
         return this.series.find(series => series.id === seriesId)
@@ -48,6 +52,11 @@ class Study {
         if (!existingSeriesOrthancIds.includes(series.id)) {
             this.series.push(series)
         }
+    }
+
+    getStudyInstanceUID = () : string => {
+        if(!this.studyInstanceUID) throw "missing study instance uid"
+        return this.studyInstanceUID
     }
 
     toJSON = (): object => {

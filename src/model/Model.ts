@@ -27,6 +27,13 @@ class Model {
         return studies
     }
 
+    getStudy(studyInstanceUID :string) : Study {
+        const studies = this.patients.map(patient=> patient.getStudies()).flat().filter(study => study.studyInstanceUID === studyInstanceUID)
+        if(studies.length === 1 ){
+            return studies[0]
+        }
+    }
+
     addInstance(instanceId: string, seriesId: string, studyId: string, patientId: string) {
         if (!this.isPatientIdExists(patientId)) {
             const patient = new Patient(patientId)

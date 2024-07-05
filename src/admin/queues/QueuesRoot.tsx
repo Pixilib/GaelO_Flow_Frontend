@@ -20,7 +20,7 @@ const QueuesRoot = () => {
   if (isLoadingOptions) return <Spinner />;
 
   return (
-    <Card className="mx-12 mt-12">
+    <Card className="mx-12 mt-12 bg-light">
       <Tabs className="rounded-t bg-light-gray">
         <Tab
           title="Retrieve"
@@ -39,7 +39,7 @@ const QueuesRoot = () => {
         />
       </Tabs>
       <CardBody
-        color={Colors.light}
+        color={Colors.gray}
         roundedTopLeft={false}
         roundedTopRight={false}
         roundedBottomLeft

@@ -1,110 +1,112 @@
-import React, { useMemo, useRef, useState } from "react";
-import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from "react-icons/bs";
+import { useMemo, useRef, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useCustomMutation } from '../../utils';
+import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
+
 import { sendDicom } from '../../services/instances';
-import { OrthancImportDicom } from "../../utils/types";
-import Model from "../../model/Model";
-import ImportTableStudy from "./ImportTableStudy"; // Importer le composant
+import Model from '../../model/Model';
+import { useCustomMutation } from '../../utils';
+import { OrthancImportDicom } from '../../utils/types';
 
-type errorImportDicom = {
-  [filename: string]: string
-}
+type ImportDropProps = {
+    onFilesUploaded: (files: File[], model: Model) => void;
+};
 
-const ImportDrop = () => {
-  const refModel = useRef<Model>(new Model())
-  const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0)
-  const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0)
-  const [errors, setErrors] = useState<errorImportDicom[]>([])
-  const [isUploading, setIsUploading] = useState(false)
-  const [uploadComplete, setUploadComplete] = useState(false)
-  const [importedPatients, setImportedPatients] = useState<{ id: string, patientId: string }[]>([]); // État pour stocker les fichiers importés
+const ImportDrop: React.FC<ImportDropProps> = ({ onFilesUploaded }) => {
+    const refModel = useRef<Model>(new Model());
 
-  const progression = useMemo(() => {
-    return Math.round((numberOfProcessedFiles / numberOfLoadedFiles) * 100)
-  }, [numberOfProcessedFiles, numberOfLoadedFiles])
+    const [isUploading, setIsUploading] = useState(false);
+    const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
+    const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
+    const [errors, setErrors] = useState<ErrorImportDicom[]>([]);
 
-  const { mutateAsync: sendDicomMutate } = useCustomMutation<OrthancImportDicom>(
-    ({ data }) => sendDicom(data),
-    [[]],
-  )
+    const uploadComplete = useMemo(() => {
+        if (numberOfLoadedFiles > 0) {
+            return numberOfLoadedFiles === numberOfProcessedFiles;
+        } else {
+            return false;
+        }
+    }, [numberOfLoadedFiles, numberOfProcessedFiles]);
 
-  const promiseFileReader = (file: File) => {
-    return new Promise((resolve: (fileReader: FileReader) => void, reject) => {
-      var fr = new FileReader()
-      fr.readAsArrayBuffer(file)
-      fr.onload = () => {
-        resolve(fr)
-      }
-    })
-  }
+    const progression = useMemo(() => {
+        return Math.round((numberOfProcessedFiles / numberOfLoadedFiles) * 100);
+    }, [numberOfProcessedFiles, numberOfLoadedFiles]);
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop: async (acceptedFiles) => {
-      setNumberOfLoadedFiles((loadedFiles) => loadedFiles + acceptedFiles.length)
-      setIsUploading(true)
-      setUploadComplete(false)
+    const { mutateAsync: sendDicomMutate } = useCustomMutation<OrthancImportDicom>(({ data }) =>
+        sendDicom(data)
+    );
 
-      for (const file of acceptedFiles) {
-        await promiseFileReader(file).then(async (reader: FileReader) => {
-          if (!reader.result) return
+    const promiseFileReader = (file: File) => {
+        return new Promise<FileReader>((resolve) => {
+            var fr = new FileReader();
+            fr.readAsArrayBuffer(file);
+            fr.onload = () => {
+                resolve(fr);
+            };
+        });
+    };
 
-          try {
-            const stringBuffer = new Uint8Array(reader.result as ArrayBuffer)
-            const orthancAnswer = await sendDicomMutate({ data: stringBuffer })
-            refModel.current.addInstance(orthancAnswer.id, orthancAnswer.parentSeries, orthancAnswer.parentStudy, orthancAnswer.parentPatient)
-            
-            // Ajouter les patients importés à l'état
-            setImportedPatients((prev) => [
-              ...prev,
-              { id: orthancAnswer.id, patientId: orthancAnswer.parentPatient },
-            ]);
-          } catch (e: any) {
-            setErrors((errors) => [...errors, { [file.name]: e.statusText }])
-          }
-        })
-        setNumberOfProcessedFiles(nbFiles => (nbFiles + 1))
-      }
+    const { getRootProps, getInputProps, open } = useDropzone({
+        onDrop: async (acceptedFiles) => {
+            setNumberOfLoadedFiles((loadedFiles) => loadedFiles + acceptedFiles.length);
+            setIsUploading(true);
 
-      setIsUploading(false)
-      setUploadComplete(true)
-    }
-  });
+            for (const file of acceptedFiles) {
+                await promiseFileReader(file).then(async (reader: FileReader) => {
+                    if (!reader.result) return;
 
-  const data = useMemo(() => {
-    return refModel.current.getStudies()
-  }, [JSON.stringify(refModel.current.toJSON())])
+                    try {
+                        const stringBuffer = new Uint8Array(reader.result as ArrayBuffer);
+                        const orthancAnswer = await sendDicomMutate({ data: stringBuffer });
+                        refModel.current.addInstance(
+                            orthancAnswer.id,
+                            orthancAnswer.parentSeries,
+                            orthancAnswer.parentStudy,
+                            orthancAnswer.parentPatient
+                        );
+                    } catch (e: any) {
+                        setErrors((errors) => [...errors, { [file.name]: e.statusText }]);
+                    }
+                });
+                setNumberOfProcessedFiles((nbFiles) => nbFiles + 1);
+            }
 
-  return (
-    <div className="flex flex-col items-center mt-4">
-      <div
-        {...getRootProps()}
-        className="flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-white border-4 border-dashed rounded border-primary"
-      >
-        {uploadComplete ? (
-          <CheckIcon size={32} className="mb-2 text-green-500" />
-        ) : (
-          <CloudIcon size={32} className={`mb-2 ${isUploading ? "text-gray-400 animate-spin" : "text-primary"}`} />
-        )}
-        <p className="text-primary">Glissez et déposez les fichiers ici, ou cliquez pour sélectionner des fichiers</p>
-        <input {...getInputProps()} />
-      </div>
-      {numberOfLoadedFiles > 0 && (
-        <div className="w-full mt-4">
-          <div className="relative w-full h-4 bg-gray-200 rounded">
+            setIsUploading(false);
+            onFilesUploaded(acceptedFiles, refModel.current);
+        },
+    });
+
+    return (
+        <div className="flex w-full">
             <div
-              className="absolute top-0 h-4 transition-all duration-500 ease-out rounded bg-gradient-to-r from-primary to-secondary"
-              style={{ width: `${progression}%` }}
-            />
-          </div>
-          <p className="mt-2 text-center">{progression}%</p>
+                {...getRootProps({ onClick: open })}
+                className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary ${isUploading ? 'cursor-progress' : 'cursor-pointer'
+                    } rounded-lg`}
+            >
+                {uploadComplete ? (
+                    <CheckIcon size={40} className="mb-2 text-success" />
+                ) : (
+                    <CloudIcon
+                        size={40}
+                        className={`mb-2 ${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`}
+                    />
+                )}
+                <p className="mb-2 text-primary">Drag the Dicom folder or ZIP, or click to select files</p>
+                <input {...getInputProps()} />
+
+                {numberOfLoadedFiles > 0 && (
+                    <div className="w-full">
+                        <div className="relative w-full h-2 bg-gray-200 rounded">
+                            <div
+                                className="absolute top-0 h-2 transition-all duration-500 ease-out rounded bg-gradient-to-r from-primary to-secondary"
+                                style={{ width: `${progression}%` }}
+                            />
+                        </div>
+                        <p className="mt-1 text-sm text-center text-primary">{progression}%</p>
+                    </div>
+                )}
+            </div>
         </div>
-      )}
-      <div className="w-full mt-4">
-        <ImportTableStudy data={importedPatients} /> {/* Utiliser le composant avec les données importées */}
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ImportDrop;

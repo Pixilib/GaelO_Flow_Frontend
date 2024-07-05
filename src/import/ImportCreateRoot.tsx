@@ -1,8 +1,8 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Tabs, Tab, Card, CardBody } from "../ui";
-import ImportDrop from "./Import/ImportDrop";
 import CreateDrop from "./Create/CreateDrop";
 import { Colors } from "../utils";
+import ImportRoot from "./Import/ImportRoot";
 
 const ImportCreateRoot = () => {
     const navigate = useNavigate();
@@ -35,10 +35,15 @@ const ImportCreateRoot = () => {
                     roundedBottomLeft
                     roundedBottomRight
                 >
-                    <Routes>
-                        <Route path="/" element={<ImportDrop />} />
-                        <Route path="/create" element={<CreateDrop />} />
-                    </Routes>
+                    <div>
+                        <Routes>
+                            <Route path="/" element={<ImportRoot />} />
+                        </Routes>
+
+                        <Routes>
+                            <Route path="/create" element={<CreateDrop />} />
+                        </Routes>
+                    </div>
                 </CardBody>
             </Card>
         </div>
