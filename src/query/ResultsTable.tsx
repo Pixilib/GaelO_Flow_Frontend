@@ -11,8 +11,6 @@ type ResultsTableProps = {
 };
 
 const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
-    
-    //memoise les results
     const rows = useMemo(() => results, [results]);
     
     const columns: ColumnDef<QueryResponse>[] = useMemo(() => [
@@ -52,11 +50,10 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             }
         },
     ], []);
-
+    
     const handleRowClick = (row: any) => {
-        onRowClick(row.StudyInstanceUID, row.OriginAET);
+        onRowClick(row.studyInstanceUID, row.originAET);
     };
-
     return (
         <Table
             columns={columns}

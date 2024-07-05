@@ -1,11 +1,10 @@
 import axios from "axios"
 import { QueryResponse, QueryPayload, RetrieveResponse } from "../utils/types";
 
-export const queryModality = (modality: string, payload: QueryPayload): Promise<QueryResponse[]> => { // Notez le changement ici
+export const queryModality = (modality: string, payload: QueryPayload): Promise<QueryResponse[]> => {
     return axios
         .post(`/api/modalities/${modality}/parsed-query`, payload)
         .then((response: any) => {
-            console.log(response.data)
             return response.data.map((data: any) => ({
                 answerId: data.AnswerId,
                 answerNumber: data.AnswerNumber,

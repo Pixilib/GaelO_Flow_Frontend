@@ -68,12 +68,13 @@ const QueryRoot = ({ className }: QueryFormProps) => {
   };
 
 
-  const handleRowClick = async (studyInstanceUID: string, OriginAET?: string) => {
+  const handleRowClick = async (studyInstanceUID: string, originAET?: string) => {
     const queryPayload: QueryPayload = {
       Level: 'Series',
-      Query: { StudyUID: studyInstanceUID }
+      Query: { StudyInstanceUID: studyInstanceUID }
     };
-    const extendedPayload = { queryPayload, aet: OriginAET ?? "self" };
+    console.log(queryPayload.Query, originAET)
+    const extendedPayload = { queryPayload, aet: originAET ?? "self" };
     await mutateQuerySeries(extendedPayload);
   };
 
@@ -94,11 +95,11 @@ const QueryRoot = ({ className }: QueryFormProps) => {
       <Card>
         <CardBody color={Colors.light} className="px-3 rounded-xl">
           <h2 className="mt-4 mb-5 text-2xl font-bold text-primary">Results</h2>
-          <div className="grid grid-cols-1 gap-2 mt-1 xl:grid-cols-12">
-            <div className="grid-cols-1 xl:col-span-7">
+          <div className="grid grid-cols-1 gap-2 mt-1 2xl:grid-cols-12">
+            <div className="2xl:col-span-7">
               <ResultsTable results={studies} onRowClick={handleRowClick} />
             </div>
-            <div className="grid-cols-1 xl:col-span-5">
+            <div className="2xl:col-span-5">
               <SeriesTable series={series} />
             </div>
           </div>
