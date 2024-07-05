@@ -1,5 +1,6 @@
 import { getPatient } from "../services/orthanc"
 import Study from "./Study"
+import type { PatientMainDicomTags } from '../utils/types'
 
 class Patient {
     id: string
@@ -23,15 +24,15 @@ class Patient {
         this.patientId = patientId
     }
 
-    setPatientName = (patientName: string|null) => {
+    setPatientName = (patientName: string | null) => {
         this.patientName = patientName
     }
 
-    setPatientSex = (patientSex: string|null) => {
+    setPatientSex = (patientSex: string | null) => {
         this.patientSex = patientSex
     }
 
-    setPatientBirthDate = (patientBirthDate: string|null) => {
+    setPatientBirthDate = (patientBirthDate: string | null) => {
         this.patientBirthDate = patientBirthDate
     }
 
@@ -42,6 +43,14 @@ class Patient {
         this.patientName = mainDicomTags.patientName;
         this.patientBirthDate = mainDicomTags.patientBirthDate;
         this.patientSex = mainDicomTags.patientSex;
+    }
+
+    fillData(patient: PatientMainDicomTags) {
+        this.patientId = patient.patientID;
+        this.patientName = patient.patientName;
+        this.patientBirthDate = patient.patientBirthDate;
+        this.patientSex = patient.patientSex;
+
     }
 
     getStudy = (studyId: string) => {
@@ -55,7 +64,7 @@ class Patient {
         }
     }
 
-    getStudies = () => {    
+    getStudies = () => {
         return this.studies
     }
 

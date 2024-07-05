@@ -203,7 +203,7 @@ export type QueryResponse = {
 
 export type RetrieveResponse = {
     id: string;
-    path:string;
+    path: string;
 }
 
 export type OrthancImportDicom = {
@@ -254,6 +254,13 @@ export type Series = {
 
 }
 
+export type PatientMainDicomTags = {
+    patientBirthDate: string | null
+    patientID: string
+    patientName: string | null
+    patientSex: string | null
+}
+
 export type Study = {
     id: string
     isStable: string
@@ -269,12 +276,7 @@ export type Study = {
         studyInstanceUID: string
         studyTime: string | null
     },
-    patientMainDicomTags: {
-        patientBirthDate: string | null
-        patientID: string
-        patientName: string | null
-        patientSex: string | null
-    },
+    patientMainDicomTags: PatientMainDicomTags,
     parentPatient: string,
     series: string[],
     type: string

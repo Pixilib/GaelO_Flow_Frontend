@@ -60,11 +60,10 @@ const InputPassword: React.FC<InputPasswordProps> = ({
           pattern={PASSWORD_REGEX.source}
           required
           {...props}
-        >
+        />
         <p className="mt-2 invisible text-xs text-red-500 peer-[&:not(:placeholder-shown):invalid]:visible">
           At least 12 characters, with uppercase, lowercase, number, and special character.
         </p>
-        </Input>
       </div>
     </div>
   );

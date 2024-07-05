@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { Colors } from "../utils/enums";
 import Label from "./Label";
 
@@ -15,7 +15,6 @@ type InputProps = {
   min?: number;
   max?: number;
   step?: number;
-  children?: ReactNode;
   [key: string]: any;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -24,7 +23,6 @@ const Input = ({
   placeholder,
   label,
   type = "text",
-  children,
   min = undefined,
   max = undefined,
   step = undefined,
@@ -35,8 +33,8 @@ const Input = ({
   roundedRight = true,
   ...props
 }: InputProps) => {
-  const InputClassName = `
-    w-full 
+  const InputClassName =
+    `w-full 
     bg-gray-50 
     peer 
     border 
@@ -45,7 +43,8 @@ const Input = ({
     focus:outline
     focus:shadow-outline
     focus:primary focus:ring-primary focus:ring-1
-    p-2.5 
+    pr-3
+    pl-3
     block 
     dark:bg-gray-700 
     dark:border-gray-600 
@@ -71,34 +70,29 @@ const Input = ({
           className="mb-2 text-sm font-medium text-dark">{label}</label>
       ) : label}
 
-      <div className="relative">
+      <div
+        className={
+          `flex items-center peer ${borderClasses} text-gray-600 w-full ${roundedRightClass} text-sm ${InputClassName} ${className}`
+        }>
         {svgLeft && (
-          <div className="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="mr-3 pointer-events-none peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {svgLeft}
           </div>
         )}
-        {svgRight && (
-          <div className="absolute inset-y-0 flex items-center -mt-6 end-0 pe-4 peer-disabled:pointer-events-none peer-disabled:opacity-50">
-            {svgRight}
-          </div>
-        )}
         <input
+          className="w-full bg-transparent min-h-10"
           type={type}
           min={min}
           max={max}
           step={step}
           placeholder={placeholder}
-          className={`
-            peer block py-3
-            ${borderClasses}
-            text-gray-600 w-full ${roundedRightClass} text-sm 
-            ${svgLeft ? 'pl-10' : ''}
-            ${svgRight ? 'pr-10' : ''}
-            ${InputClassName} ${className}
-          `}
           {...props}
         />
-        {children}
+        {svgRight && (
+          <div className="flex justify-end w-full peer-disabled:pointer-events-none peer-disabled:opacity-50">
+            {svgRight}
+          </div>
+        )}
       </div>
     </div>
   );

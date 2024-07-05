@@ -2,6 +2,7 @@ import Instance from "./Instance"
 import Patient from "./Patient"
 import Series from "./Series"
 import Study from "./Study"
+import type { Study as StudyType } from "./../utils/types"
 
 class Model {
     patients: Patient[]
@@ -23,14 +24,30 @@ class Model {
     }
 
     getStudies() {
-        const studies = this.patients.map(patient=> patient.getStudies()).flat().map(study => study.toJSON())
+        const studies = this.patients.map(patient => patient.getStudies()).flat().map(study => study.toJSON())
         return studies
     }
 
-    getStudy(studyInstanceUID :string) : Study {
-        const studies = this.patients.map(patient=> patient.getStudies()).flat().filter(study => study.studyInstanceUID === studyInstanceUID)
-        if(studies.length === 1 ){
+    getStudy(studyInstanceUID: string): Study {
+        const studies = this.patients.map(patient => patient.getStudies()).flat().filter(study => study.studyInstanceUID === studyInstanceUID)
+        if (studies.length === 1) {
             return studies[0]
+        }
+        else throw "study not found"
+    }
+
+    addStudy(studyData: StudyType) {
+        if (!this.isPatientIdExists(studyData.parentPatient)) {
+            const patient = new Patient(studyData.parentPatient)
+            patient.fillData(studyData.patientMainDicomTags)
+            this.patients.push(patient)
+        }
+
+        const patient = this.patients.find(patient => patient.id === (studyData.parentPatient))
+        if (patient && !patient.isStudyExists(studyData.id)) {
+            const study = new Study(studyData.id)
+            study.fillData(studyData)
+            patient.addStudy(study)
         }
     }
 
@@ -42,7 +59,7 @@ class Model {
         }
 
         const patient = this.patients.find(patient => patient.id === patientId)
-        if (!patient?.isStudyExists(studyId)) {
+        if (patient && !patient?.isStudyExists(studyId)) {
             const study = new Study(studyId)
             study.fillFromOrthanc()
             patient.addStudy(study)
@@ -50,14 +67,14 @@ class Model {
         }
 
         const study = patient?.getStudy(studyId)
-        if (!study?.isSeriesExists(seriesId)) {
+        if (study && !study?.isSeriesExists(seriesId)) {
             const series = new Series(seriesId)
             series.fillFromOrthanc()
             study.addSeries(series)
         }
 
         const series = study?.getSeries(seriesId)
-        if (!series?.isInstanceExists(instanceId)) {
+        if (series && !series?.isInstanceExists(instanceId)) {
             const instance = new Instance(instanceId)
             series.addInstance(instance)
         }
