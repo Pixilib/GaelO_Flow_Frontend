@@ -58,11 +58,15 @@ const QueryRoot = ({ className }: QueryFormProps) => {
       }
     }
   );
-
-  const handleSubmit = async (formData: QueryPayload, aet: string) => {
+  const handleSubmit = async (formData: QueryPayload, aet?: string) => {
+    if (!aet) {
+      toastError("Choose AET to Query");
+      return;
+    }
     const extendedPayload = { queryPayload: formData, aet };
     await mutateQueryStudies(extendedPayload);
   };
+
 
   const handleRowClick = async (studyInstanceUID: string, OriginAET?: string) => {
     const queryPayload: QueryPayload = {
@@ -84,6 +88,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
         <SearchForm
           aets={aets ?? []}
           onSubmit={handleSubmit}
+          withAets={true}
         />
       </FormCard>
       <Card>
