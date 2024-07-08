@@ -42,7 +42,7 @@ const CreateRoot: React.FC = () => {
     };
 
     const handleSelectChange = (selectedOption: any) => {
-        
+        // Handle select change
     };
 
     const selectOptions = [
@@ -51,14 +51,19 @@ const CreateRoot: React.FC = () => {
     ];
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center w-full">
             <CreateDrop onFilesUploaded={handleFilesUploaded} />
-            <SelectInput
-                value={selectOptions.find(option => option.value === 'option1')}
-                onChange={handleSelectChange}
-                placeholder="Select option"
-                options={selectOptions}
-            />
+            <div className="w-full mt-4">
+                <label htmlFor="select-input" className="block mb-2 text-sm font-medium text-gray-700">New tag</label>
+                <SelectInput
+                    id="select-input"
+                    value={selectOptions.find(option => option.value === 'option1')}
+                    onChange={handleSelectChange}
+                    placeholder="Select..."
+                    options={selectOptions}
+                    className="w-full"
+                />
+            </div>
             {studiesData.length > 0 && (
                 <div className="flex flex-col w-full mt-4 md:flex-row">
                     <div className="w-full">

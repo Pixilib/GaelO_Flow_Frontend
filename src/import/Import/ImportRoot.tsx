@@ -45,8 +45,8 @@ const ImportRoot: React.FC = () => {
         <div className="flex flex-col items-center">
             <ImportDrop onFilesUploaded={handleFilesUploaded} />
             {studiesData.length > 0 && (
-                <div className="flex flex-col w-full mt-4 md:flex-row">
-                    <div className="w-full">
+                <div className="flex flex-col w-full mt-8 md:flex-row">
+                    <div className="w-full md:w-1/2">
                         <ImportTableStudy
                             data={paginateStudies(studiesData)}
                             studyInstanceUID={currentStudyInstanceUID}
@@ -58,12 +58,13 @@ const ImportRoot: React.FC = () => {
                                     className="px-4 py-2 text-gray-800 bg-gray-200 rounded-md"
                                     onClick={() => setPage(page + 1)}
                                 >
+                                    Load More
                                 </button>
                             </div>
                         )}
                     </div>
                     {showSeries && seriesData.length > 0 && (
-                        <div className="w-full mt-4 md:ml-10 md:mt-0">
+                        <div className="w-full mt-4 md:w-1/2 md:ml-4 md:mt-0">
                             <ImportTableSeries data={seriesData} />
                         </div>
                     )}

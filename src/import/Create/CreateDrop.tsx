@@ -90,7 +90,7 @@ const CreateDrop: React.FC<ImportDropProps> = ({ onFilesUploaded }) => {
                         className={`mb-2 ${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`}
                     />
                 )}
-                <p className="mb-2 text-primary">Drag the Dicom folder or ZIP, or click to select files</p>
+                <p className="mb-2 text-primary">Drop the Dicom folder or ZIP, or click to select files</p>
                 <input {...getInputProps()} />
 
                 {numberOfLoadedFiles > 0 && (
