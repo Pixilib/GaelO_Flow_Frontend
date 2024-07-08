@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Tabs, Tab, Card, CardBody } from "../ui";
-import CreateDrop from "./Create/CreateDrop";
+import CreateRoot from "./Create/CreateRoot";
 import { Colors } from "../utils";
 import ImportRoot from "./Import/ImportRoot";
 
@@ -41,7 +41,7 @@ const ImportCreateRoot = () => {
                         </Routes>
 
                         <Routes>
-                            <Route path="/create" element={<CreateDrop />} />
+                            <Route path="/create" element={<CreateRoot />} />
                         </Routes>
                     </div>
                 </CardBody>
