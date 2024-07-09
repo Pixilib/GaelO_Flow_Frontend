@@ -36,6 +36,7 @@ const CreateInput = ({ onCreateLabel }: CreateInputProps) => {
         options={selectOptions}
         className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300"
       />
+            {/* WIP */}
       <Button
         type="button"
         color={Colors.success}
