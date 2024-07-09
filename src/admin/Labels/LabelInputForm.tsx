@@ -38,7 +38,7 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
         color={Colors.success}
         onClick={handleCreateClick}
 
-        className="text-white ro++unded-l-none shadow-md rounded-r-2xl min-w-20"
+        className="text-white rounded-l-none shadow-md rounded-r-2xl min-w-20"
       >
         +
       </Button>
