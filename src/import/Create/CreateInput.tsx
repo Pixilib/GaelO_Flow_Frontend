@@ -42,7 +42,7 @@ const CreateInput = ({ onCreateLabel }: CreateInputProps) => {
         onClick={handleCreateClick}
         className="text-white rounded-l-none shadow-md rounded-r-2xl min-w-20"
       >
-        +
+      Create 
       </Button>
     </div>
   );
