@@ -3,6 +3,8 @@ import CreateDrop from './CreateDrop';
 import CreateTableStudy from './CreateTableStudy';
 import { SelectInput } from '../../ui';
 import Model from '../../model/Model';
+import CreateInput from './CreateInput';
+import { Label } from '../../utils/types';
 
 const CreateRoot: React.FC = () => {
     const [refModel, setRefModel] = useState<Model | null>(null);
@@ -55,14 +57,9 @@ const CreateRoot: React.FC = () => {
             <CreateDrop onFilesUploaded={handleFilesUploaded} />
             <div className="w-full mt-4">
                 <label htmlFor="select-input" className="block mb-2 text-sm font-medium text-gray-700">New tag</label>
-                <SelectInput
-                    id="select-input"
-                    value={selectOptions.find(option => option.value === 'option1')}
-                    onChange={handleSelectChange}
-                    placeholder="Select..."
-                    options={selectOptions}
-                    className="w-full"
-                />
+                <CreateInput onCreateLabel={function (payload: Label): void {
+                    throw new Error('Function not implemented.');
+                } }                />
             </div>
             {studiesData.length > 0 && (
                 <div className="flex flex-col w-full mt-4 md:flex-row">

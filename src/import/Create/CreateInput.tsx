@@ -1,18 +1,18 @@
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { MdOutlineNewLabel as LabelIcon } from "react-icons/md";
-import { Button, Input } from "../../ui";
+import { Button, SelectInput } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label } from "../../utils/types";
 
-type LabelInputFormProps = {
+type CreateInputProps = {
   onCreateLabel: (payload: Label) => void;
 };
 
-const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
+const CreateInput = ({ onCreateLabel }: CreateInputProps) => {
   const [label, setLabel] = useState<string | null>(null);
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setLabel(event?.target?.value);
+  const handleInputChange = (selectedOption: any) => {
+    setLabel(selectedOption?.value);
   };
 
   const handleCreateClick = () => {
@@ -22,23 +22,25 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
     setLabel(null);
   };
 
+  const selectOptions = [
+    { value: 'option', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+  ];
+
   return (
     <div className="relative flex items-center">
-      <Input
-        svgLeft={<LabelIcon className="text-2xl text-gray-400" />}
-        type="text"
+      <SelectInput
         value={label ?? ""}
         onChange={handleInputChange}
         placeholder="Add new label"
-        bordered
-        className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300" // Ajout de l'ombre ici
+        options={selectOptions}
+        className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300"
       />
       <Button
         type="button"
         color={Colors.success}
         onClick={handleCreateClick}
-
-        className="text-white ro++unded-l-none shadow-md rounded-r-2xl min-w-20"
+        className="text-white rounded-l-none shadow-md rounded-r-2xl min-w-20"
       >
         +
       </Button>
@@ -46,4 +48,4 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   );
 };
 
-export default LabelInputForm;
+export default CreateInput;
