@@ -39,13 +39,12 @@ const QueuesRoot = () => {
         />
       </Tabs>
       <CardBody
-        color={Colors.gray}
+        color={Colors.almond}
         roundedTopLeft={false}
         roundedTopRight={false}
         roundedBottomLeft
         roundedBottomRight
       >
-        <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Queues</h2>
         <Routes>
           <Route
             path="retrieve"

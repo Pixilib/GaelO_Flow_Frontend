@@ -114,7 +114,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
           color={Colors.success}
         />
         <CardBody
-          color={Colors.gray}
+          color={Colors.light}
           roundedBottomLeft
           roundedBottomRight
         >
@@ -171,20 +171,20 @@ const Retrieve = ({ data }: RetrieveProps) => {
               />
             </div>
           </div>
+          <div className="flex items-center justify-center mt-4">
+            <Button
+              color={Colors.success}
+              className="w-32 gap-2 px-8 text-center"
+              type="submit"
+            >
+              <span>
+                <SendIcon />
+              </span>
+              <span>Send</span>
+            </Button>
+          </div>
         </CardBody>
       </Card>
-      <div className="flex justify-center mt-6">
-        <Button
-          color={Colors.success}
-          className="w-32 gap-2 px-8 text-center"
-          type="submit"
-        >
-          <span>
-            <SendIcon />
-          </span>
-          <span>Send</span>
-        </Button>
-      </div>
       <div className="flex mt-6">
         <Table
           data={[]}
