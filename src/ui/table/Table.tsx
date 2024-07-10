@@ -113,10 +113,9 @@ function Table<T>({
     <div className={`rounded-xl shadow-md overflow-visible custom-scrollbar ${className}`}>
       <div className="overflow-x-auto custom-scrollbar rounded-t-xl">
         <table className={`min-w-full border-grayCustom ${className}`}>
-          <thead className={headerClass}>
+          <thead className={`${headerClass} shadow-sm`}>
             {table.getHeaderGroups().map(headerGroup => (
               <React.Fragment key={headerGroup.id}>
-                {/* Ligne pour les en-têtes et les icônes de tri */}
                 <tr key={headerGroup.id} className={headerClass}>
                   {headerGroup.headers.map((header, index) => (
                     <th
@@ -140,7 +139,6 @@ function Table<T>({
                     </th>
                   ))}
                 </tr>
-                {/* Ligne séparée pour les filtres si des filtres sont activés */}
                 {headerGroup.headers.some(header => header.column.getCanFilter()) && (
                   <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}`}>
                     {headerGroup.headers.map((header, index) => (
@@ -162,32 +160,32 @@ function Table<T>({
           </thead>
           <tbody className="overflow-y-auto custom-scrollbar">
             {table.getRowModel().rows.map((row, rowIndex) => (
-              <tr
-                key={`row-${row.id}-${rowIndex}`}
-                className={table.options.meta?.getRowClasses(row)}
-                style={table.options.meta?.getRowStyles(row)}
-                onClick={() => {
-                  if (onRowClick) {
-                    onRowClick(row.original);
-                    setSelectedRow(row.id);
-                  }
-                }}
-              >
-                {row.getVisibleCells().map((cell, cellIndex) => (
-                  <td
-                    key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                    className={`px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
+              <React.Fragment key={`row-${row.id}-${rowIndex}`}>
+                <tr
+                  className={`${table.options.meta?.getRowClasses(row)} border-b border-gray-300`} // Ajout de la ligne grise foncée
+                  style={table.options.meta?.getRowStyles(row)}
+                  onClick={() => {
+                    if (onRowClick) {
+                      onRowClick(row.original);
+                      setSelectedRow(row.id);
+                    }
+                  }}
+                >
+                  {row.getVisibleCells().map((cell, cellIndex) => (
+                    <td
+                      key={`cell-${row.id}-${cell.id}-${cellIndex}`}
+                      className={`px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              </React.Fragment>
             ))}
           </tbody>
         </table>
       </div>
-      <div className="w-full bg-white shadow-md rounded-b-xl">
-        {/* Affiche le pied de tableau uniquement si des données sont disponibles */}
+      <div className="w-full bg-white shadow-sm rounded-b-xl">
         {data.length > 0 && table ? (
           <Footer
             table={table}

@@ -66,16 +66,17 @@ const Card = ({ bordered, className = "", children }: CardProps) => {
 };
 
 const CardHeader = ({ title, centerTitle, className = "", children, color }: CardHeaderProps) => {
-  const shadowClass = "shadow-[0_-2px_4px_rgba(0,0,0,0.1)]";
+  const shadowClass = "shadow-[0 2px 4px rgba(0,0,0,0.1)]";
   const headerClass = getColorClass(color);
 
   return (
-    <div data-gaelo-flow="Card-header" className={`${headerClass} text-white ${shadowClass} rounded-t-xl ${className} flex items-center ${centerTitle ? 'justify-center' : ''} text-center`}>
-      {title && <h2 className="flex-1 p-4 mx-auto text-lg font-bold">{title}</h2>}
+    <div data-gaelo-flow="Card-header" className={`${headerClass} text-white ${shadowClass} rounded-t-2xl ${className} flex items-center ${centerTitle ? 'justify-center' : ''} text-center`}>
+      {title && <h2 className="flex-1 p-2 mx-auto text-lg font-bold">{title}</h2>}
       {children}
     </div>
   );
 };
+
 
 const CardBody = ({ children, color, className = "", roundedTopLeft, roundedTopRight, roundedBottomLeft, roundedBottomRight }: CardBodyProps) => {
   const bodyClass = getColorClass(color);

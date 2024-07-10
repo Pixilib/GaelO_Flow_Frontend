@@ -69,7 +69,7 @@ const Users = ({ className }: UsersProps) => {
         />
       )}
       {userToEdit === null && !isCreating && (
-        <div className="flex justify-center mx-10 mt-12">
+        <div className="flex justify-center mx-10 mt-12 ">
           <Button
             color={Colors.success}
             onClick={() => {
