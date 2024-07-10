@@ -15,7 +15,7 @@ const ImportCreateRoot = () => {
     }
 
     return (
-        <Card className="bg-white shadow-md rounded-xl" data-gaelo-flow="import-create-root">
+        <Card className="shadow-md bg-almond rounded-xl" data-gaelo-flow="import-create-root">
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
                     title="Import Dicom"
@@ -29,7 +29,7 @@ const ImportCreateRoot = () => {
                 />
             </Tabs>
             <CardBody
-                color={Colors.light}
+                color={Colors.almond}
                 roundedTopLeft={false}
                 roundedTopRight={false}
                 roundedBottomLeft

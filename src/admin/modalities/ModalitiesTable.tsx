@@ -62,9 +62,9 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
     <Table
       columns={columns}
       data={aetData}
-      headerColor={Colors.white} // Définir la couleur du header en blanc
-      headerTextSize="sm"     // Taille du texte du header en "base"
-      className="bg-gray-100"   // Appliquer une classe pour définir le fond gris de base du tableau
+      headerColor={Colors.white} 
+      headerTextSize="xs"  
+      className="bg-gray-100"
       enableColumnFilters
       enableSorting
     />

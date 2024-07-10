@@ -1,7 +1,7 @@
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getJobs, postJobs } from "../../services/jobs";
 
-import { Spinner, Card, CardBody, CardFooter } from "../../ui";
+import { Spinner, Card, CardBody, CardFooter, CardHeader } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { JobPayload, JobsAction, OrthancJob } from '../../utils/types';
@@ -37,17 +37,22 @@ const JobRoot = () => {
 
   if (isLoadingJobs) return <Spinner />
   return (
-    <div className="flex justify-center w-full h-full">
-      <Card className="w-full bg-white">
-        <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-          <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Operations Jobs</h2>
+      <Card className="l bg-almond">
+        <CardHeader
+                className="flex items-center justify-center rounded-t-lg text-bg-light"
+                color={Colors.primary}
+                title={'Manage Jobs'}
+            />
+        <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
+        <div className="w-full mt-6 mb-8">
           <JobTable data={jobData as any} onJobAction={handleJobAction} />
+          </div>
         </CardBody>
-        <CardFooter>
+        <CardFooter className="flex justify-center bg-almond">
 
         </CardFooter>
       </Card>
-    </div>
+   
   );
 };
 

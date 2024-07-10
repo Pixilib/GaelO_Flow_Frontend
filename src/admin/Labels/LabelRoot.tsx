@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardBody, CardFooter } from "../../ui";
+import { Card, CardBody, CardFooter, CardHeader } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
@@ -57,14 +57,18 @@ const LabelRoot: React.FC = () => {
   };
   return (
     <Card>
-      <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-        <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Labels</h2>
+        <CardHeader
+                className="flex items-center justify-center rounded-t-lg text-bg-light"
+                color={Colors.primary}
+                title={'Manage Labels'}
+            />
+      <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
         <div className="mt-8 mb-8">
           <LabelInputForm onCreateLabel={handleCreate} />
         </div>
         <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
       </CardBody>
-      <CardFooter color={Colors.light} />
+      <CardFooter color={Colors.almond} />
     </Card>
   );
 };

@@ -34,13 +34,12 @@ const UsersRoot = () => {
                 />
             </Tabs>
             <CardBody
-                color={Colors.light}
+                color={Colors.almond}
                 roundedTopLeft={false}
                 roundedTopRight={false}
                 roundedBottomLeft
                 roundedBottomRight
             >
-                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Users</h2>
                 <Routes>
                     <Route path="/users" element={<Users />} />
                     <Route path="/roles" element={<Roles />} />

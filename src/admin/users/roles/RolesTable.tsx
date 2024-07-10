@@ -99,9 +99,10 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
             <Table
                 data={data}
                 columns={columns}
-                headerColor={Colors.almond}
+                headerColor={Colors.white} 
+                headerTextSize="xs"  
+                className="bg-gray-100"
                 enableSorting
-                headerTextSize={"xs"}
                 pinFirstColumn={true}
                 pinLastColumn={true}
             />

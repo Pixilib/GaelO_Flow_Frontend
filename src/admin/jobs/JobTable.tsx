@@ -67,7 +67,13 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
     },
   ];
 
-  return <Table data={data} columns={columns} headerColor={Colors.almond} enableColumnFilters enableSorting/>;
+  return <Table 
+  data={data} 
+  columns={columns} 
+  headerColor={Colors.white} 
+   headerTextSize="sm"  
+      className="bg-gray-100"
+  enableColumnFilters enableSorting/>;
 };
 
 export default JobTable;
