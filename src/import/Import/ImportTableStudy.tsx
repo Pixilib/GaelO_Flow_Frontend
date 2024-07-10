@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
 import Study from "../../model/Study";
@@ -6,12 +6,10 @@ import Study from "../../model/Study";
 interface ImportTableStudyProps {
     data: Study[];
     onStudyClick: (studyInstanceUID: string) => void;
-    studyInstanceUID: string | null;
+    selectedStudyInstanceUID: string | null;
 }
 
-const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, studyInstanceUID }) => {
-    const [selectedStudy, setSelectedStudy] = useState<string | null>(null);
-
+const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
@@ -45,7 +43,7 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
     }, []);
 
     const getRowClasses = (row: Study) => {
-        if (row.studyInstanceUID === selectedStudy) {
+        if (row.studyInstanceUID === selectedStudyInstanceUID) {
             return 'bg-primary hover:cursor-pointer'; 
         } else {
             return 'hover:bg-indigo-100 hover:cursor-pointer';
@@ -54,7 +52,6 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
 
     const handleRowClick = (study: Study) => {
         if (study.studyInstanceUID !== undefined) {
-            setSelectedStudy(study.studyInstanceUID);
             onStudyClick(study.studyInstanceUID);
         }
     };

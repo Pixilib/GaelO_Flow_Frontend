@@ -81,8 +81,7 @@ const ModalitiesRoot: React.FC = () => {
 
                 </div>
             </CardBody>
-            <CardFooter className="border-t-2 border-ligth" color={Colors.light}>
-
+            <CardFooter className="flex justify-center border-t-2 border-gray" color={Colors.light}>
                 {!showNewAetCard && (
                     <Button
                         color={Colors.success}

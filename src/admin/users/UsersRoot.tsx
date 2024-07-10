@@ -15,7 +15,7 @@ const UsersRoot = () => {
     }
 
     return (
-        <Card className="mx-12 mt-12 bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
+        <Card className="bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
             <Tabs className="bg-light-gray rounded-t-xl">
                 <Tab
                     title="Users"
