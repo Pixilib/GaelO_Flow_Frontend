@@ -19,3 +19,19 @@ export const sendDicom = (payload: Uint8Array): Promise<OrthancImportDicom> => {
             throw error;
         });
 };
+
+export const createDicom = (content: string[], tags: object = {}, parentOrthancId?: string) => {
+
+    let payload = {
+        "Content": content,
+        "Tags": tags,
+        "Parent": parentOrthancId
+    }
+
+    return axios.post('/api/tools/create-dicom', payload)
+        .then(() => {
+            return null
+        }).catch(error => {
+            console.error(error)
+        })
+}

@@ -80,7 +80,7 @@ const PeersRoot: React.FC = () => {
           
         </div>
       </CardBody>
-      <CardFooter color={Colors.light} className="border-ligth">
+      <CardFooter className="flex justify-center border-t-2 border-gray" color={Colors.light}>
       {!showNewPeerCard && (
             <Button color={Colors.success} onClick={handleNewPeerClick}>
               <MoreIcon className="mr-3" size={24} /> New Peer
