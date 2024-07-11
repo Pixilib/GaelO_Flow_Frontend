@@ -8,6 +8,7 @@ import { BsPersonPlusFill as CreateUser } from "react-icons/bs";
 import { useState } from "react";
 import CreateUserForm from "./user/CreateUserForm";
 import CreateRole from "./roles/CreateRole";
+import CreateOauth from "./oauth/CreateOauth";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ const UsersRoot = () => {
     const path = location.pathname;
     const [isCreatingUser, setIsCreatingUser] = useState(false);
     const [isCreatingRole, setIsCreatingRole] = useState(false);
+    const [isCreatingProvider, setIsCreatingProvider] = useState(false);
 
     const handleTabClick = (tab: string) => {
         navigate(tab);
@@ -51,7 +53,9 @@ const UsersRoot = () => {
                 roundedBottomRight={false}
             >
                 <Routes>
-                    <Route path="/users" element={<Users isCreating={isCreatingUser} setIsCreating={setIsCreatingUser} />} />
+                    <Route path="/users" element={<Users isCreating={false} setIsCreating={function (value: boolean): void {
+                        throw new Error("Function not implemented.");
+                    } }  />} />
                     <Route path="/roles" element={<Roles />} />
                     <Route path="/oauth2" element={<Oauth2 />} />
                 </Routes>
@@ -104,7 +108,22 @@ const UsersRoot = () => {
                 {/* Footer pour OAuth2 */}
                 {isOauth2Path && (
                     <>
-                        {/* Ajoutez ici le contenu spécifique pour OAuth2 si nécessaire */}
+                        {!isCreatingProvider && (
+                            <Button
+                                color={Colors.success}
+                                onClick={() => setIsCreatingProvider(true)}
+                                className="flex justify-center gap-4 mb-4 w-52 hover:successHover"
+                            >
+                                <CreateUser size={"1.3rem"} />
+                                Create Provider
+                            </Button>
+                        )}
+                        {isCreatingProvider && (
+                            <CreateOauth
+                                title={"Create Oauth Provider"}
+                                onClose={() => setIsCreatingProvider(false)}
+                            />
+                        )}
                     </>
                 )}
             </CardFooter>
