@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsPersonPlusFill as RoleCreate } from "react-icons/bs";
 
 import { getOauth2Config, deleteOauth2Config } from "../../../services/oauth2";
 import {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
-import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui'; // Assurez-vous que les composants CardHeader, CardBody, CardFooter et Spinner sont correctement importés
+import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
 import { Colors } from '../../utils/enums';
 import { Modality, ModalityExtended } from '../../utils/types';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';

@@ -1,9 +1,12 @@
 import React from "react";
+
 import { Card, CardBody, CardFooter, CardHeader } from "../../ui";
 import { Colors } from "../../utils/enums";
+
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getLabels, addLabel, removeLabel, getRoles } from "../../services";
+
 import { Label, Role } from "../../utils/types";
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
@@ -57,11 +60,11 @@ const LabelRoot: React.FC = () => {
   };
   return (
     <Card>
-        <CardHeader
-                className="flex items-center justify-center rounded-t-lg text-bg-light"
-                color={Colors.primary}
-                title={'Manage Labels'}
-            />
+      <CardHeader
+        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        color={Colors.primary}
+        title={'Manage Labels'}
+      />
       <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
         <div className="mt-8 mb-8">
           <LabelInputForm onCreateLabel={handleCreate} />

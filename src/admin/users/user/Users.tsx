@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsPersonPlusFill as CreateUser } from "react-icons/bs";
 import { deleteUser, getUsers } from "../../../services/users";
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
@@ -73,14 +72,14 @@ const Users = ({ className, isCreating, setIsCreating }: UsersProps) => {
         {isCreating ? (
           <CreateUserForm
             title={"Create User"}
-            className="bg-[#EFEFEF]"
+            className="bg-gray-200"
             onClose={() => setIsCreating(false)}
           />
         ) : null}
         {userToEdit ? (
           <EditUserForm
             title={"Edit User"}
-            className="bg-[#EFEFEF]"
+            className="bg-gray-200"
             onClose={() => {
               setUserToEdit(null);
               setIsCreating(false);

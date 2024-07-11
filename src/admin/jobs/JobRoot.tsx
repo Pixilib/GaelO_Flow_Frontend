@@ -37,22 +37,22 @@ const JobRoot = () => {
 
   if (isLoadingJobs) return <Spinner />
   return (
-      <Card className="l bg-almond">
-        <CardHeader
-                className="flex items-center justify-center rounded-t-lg text-bg-light"
-                color={Colors.primary}
-                title={'Manage Jobs'}
-            />
-        <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
+    <Card className="l bg-almond">
+      <CardHeader
+        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        color={Colors.primary}
+        title={'Manage Jobs'}
+      />
+      <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
         <div className="w-full mt-6 mb-8">
           <JobTable data={jobData as any} onJobAction={handleJobAction} />
-          </div>
-        </CardBody>
-        <CardFooter className="flex justify-center bg-almond">
+        </div>
+      </CardBody>
+      <CardFooter className="flex justify-center bg-almond">
 
-        </CardFooter>
-      </Card>
-   
+      </CardFooter>
+    </Card>
+
   );
 };
 

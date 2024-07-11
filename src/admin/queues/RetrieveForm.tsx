@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Card, CardHeader, CardBody, CardFooter, Input, Label, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
+
 import { IoMdSend as SendIcon } from 'react-icons/io';
 
 type RetrieveCardProps = {

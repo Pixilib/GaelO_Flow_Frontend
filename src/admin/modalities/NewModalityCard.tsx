@@ -1,7 +1,9 @@
 import React, { ChangeEvent, useState } from "react";
+
 import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
 import { FormCard, Button, Input, SelectInput } from "../../ui";
 import { Colors } from "../../utils/enums";
+
 import { useCustomToast } from "../../utils/toastify";
 import { Modality, Option } from "../../utils/types";
 

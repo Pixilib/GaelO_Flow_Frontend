@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
+
 import { AiOutlineCheck as CheckIcon } from 'react-icons/ai';
+
 import { FormCard, Button, Input } from '../../ui';
 import { Colors } from '../../utils/enums';
 import { Peer } from '../../utils/types';
