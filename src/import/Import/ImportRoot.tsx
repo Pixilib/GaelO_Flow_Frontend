@@ -33,17 +33,21 @@ const ImportRoot: React.FC = () => {
     return (
         <div className='space-y-3'>
             <ImportDrop model={refModel.current} onFilesUploaded={handleFilesUploaded} />
-            <div className="space-y-3">
-                {studiesData.length > 0 && (
-                    <ImportTableStudy
-                        data={studiesData}
-                        selectedStudyInstanceUID={currentStudyInstanceUID}
-                        onStudyClick={handleStudyClick}
-                    />
-                )}
-                {seriesData.length > 0 && (
-                    <ImportTableSeries data={seriesData} />
-                )}
+            <div className="space-y-3 md:flex md:space-x-3">
+                <div className="md:w-1/2 md:flex-1">
+                    {studiesData.length > 0 && (
+                        <ImportTableStudy
+                            data={studiesData}
+                            selectedStudyInstanceUID={currentStudyInstanceUID}
+                            onStudyClick={handleStudyClick}
+                        />
+                    )}
+                </div>
+                <div className="md:w-1/2 md:flex-1">
+                    {seriesData.length > 0 && (
+                        <ImportTableSeries data={seriesData} />
+                    )}
+                </div>
             </div>
         </div>
     );
