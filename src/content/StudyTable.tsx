@@ -1,14 +1,14 @@
 import { useMemo } from "react";
-import { RetrieveButton, Table } from "../ui";
+import { Table } from "../ui";
 import { Colors } from "../utils";
 import { ColumnDef } from "@tanstack/react-table";
 
-type StudiesTableProps = {
+type StudyTableProps = {
     studies: any[];
     onRowClick: (studyInstanceUID: string, originAET: string) => void;
 };
 
-const StudiesTable = ({ studies, onRowClick }: StudiesTableProps) => {
+const StudyTable = ({ studies, onRowClick }: StudyTableProps) => {
     const rows = useMemo(() => studies, [studies]);
 
     const columns: ColumnDef<any>[] = useMemo(() => [
@@ -23,20 +23,7 @@ const StudiesTable = ({ studies, onRowClick }: StudiesTableProps) => {
         {
             accessorKey: "studyDescription",
             header: "Study Description",
-        },
-        {
-            header: "Retrieve",
-            cell: ({ row }: { row: any }) => {
-                return (
-                    <div className="flex justify-center">
-                        <RetrieveButton
-                            answerId={row.original.answerId}
-                            answerNumber={row.original.answerNumber}
-                        />
-                    </div>
-                );
-            }
-        },
+        }
     ], []);
 
     const handleRowClick = (row: any) => {
@@ -57,4 +44,4 @@ const StudiesTable = ({ studies, onRowClick }: StudiesTableProps) => {
     );
 };
 
-export default StudiesTable;
+export default StudyTable;

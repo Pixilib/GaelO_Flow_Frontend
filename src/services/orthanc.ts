@@ -103,7 +103,7 @@ export const getSeries = (seriesId: string): Promise<Series> => {
 
 export const getStudies = (studyId: string): Promise<Study> => {
   return axios.get("/api/studies/" + studyId + '?=expand')
-    .then(response => {
+    .then((response) :Study => {
       const data = response.data
       return {
         id: data.ID,
@@ -116,13 +116,13 @@ export const getStudies = (studyId: string): Promise<Study> => {
           referringPhysicianName: data.MainDicomTags.ReferringPhysicianName,
           studyDate: data.MainDicomTags.StudyDate,
           studyDescription: data.MainDicomTags.StudyDescription,
-          studyID: data.MainDicomTags.StudyID,
+          studyId: data.MainDicomTags.StudyID,
           studyInstanceUID: data.MainDicomTags.StudyInstanceUID,
           studyTime: data.MainDicomTags.StudyTime
         },
         patientMainDicomTags: {
           patientBirthDate: data.PatientMainDicomTags.PatientBirthDate,
-          patientID: data.PatientMainDicomTags.PatientID,
+          patientId: data.PatientMainDicomTags.PatientID,
           patientName: data.PatientMainDicomTags.PatientName,
           patientSex: data.PatientMainDicomTags.PatientSex
         },
@@ -140,8 +140,8 @@ export const getStudies = (studyId: string): Promise<Study> => {
 };
 
 
-export const getSeriesOfStudy = (studyId: string): Promise<Series> => {
-  return axios.get("/api/studies/" + studyId + '/series')
+export const getSeriesOfStudy = (studyId: string): Promise<Series[]> => {
+  return axios.get("/api/studies/" + studyId + '/series?expand')
     .then(response => {
       const data = response.data
       //Formater camelcase series
@@ -167,13 +167,52 @@ export const getPatient = (patientId: string): Promise<Patient> => {
         lastUpdate: data.LastUpdate,
         mainDicomTags: {
           patientBirthDate: data.MainDicomTags.PatientBirthDate,
-          patientID: data.MainDicomTags.PatientID,
+          patientId: data.MainDicomTags.PatientID,
           patientName: data.MainDicomTags.PatientName,
           patientSex: data.MainDicomTags.PatientSex
         },
         studies: data.Studies,
         type: data.Type
       }
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const deletePatient = (patientId: string): Promise<void> => {
+  return axios.delete("/api/patients/" + patientId)
+    .then(() => {
+      return undefined
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const deleteStudy = (studyId: string): Promise<void> => {
+  return axios.delete("/api/studies/" + studyId)
+    .then(() => {
+      return undefined
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const deleteSeries = (seriesId: string): Promise<void> => {
+  return axios.delete("/api/series/" + seriesId)
+    .then(() => {
+      return undefined
     })
     .catch(function (error) {
       if (error.response) {

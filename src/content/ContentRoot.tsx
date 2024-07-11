@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import SearchForm from "../query/SearchForm";
 import { getLabels } from "../services";
 import { findTools } from "../services/tools";
 import { QueryPayload, useCustomMutation, useCustomQuery } from "../utils";
 import { Study as StudyType } from "../utils/types";
 import Model from "../model/Model";
-import OrthancResults from "./OrthancResults";
 import { FormCard } from "../ui";
+import AccordionPatient from "./AccordionPatient";
 
 const OrthancRoot = () => {
     const [refModel, setRefModel] = useState<Model | null>(null);
+
+    const patients = useMemo(() => {
+        if(refModel== null) return []
+        return refModel.getPatients()
+    }, [refModel])
 
     const { data: labelsData } = useCustomQuery<string[]>(
         ['labels'],
@@ -21,12 +26,10 @@ const OrthancRoot = () => {
         [],
         {
             onSuccess: (data) => {
-                console.log(data);
                 const model = new Model();
                 data.forEach(studyData => {
                     model.addStudy(studyData);
                 });
-                console.log(model);
                 setRefModel(model);
             },
             onError: (error:any) => {
@@ -35,7 +38,6 @@ const OrthancRoot = () => {
         }
     )
     const handleSubmit = async (formData: QueryPayload) => {
-        console.log(formData);
         await mutateTools({ formData });
     }
 
@@ -53,9 +55,14 @@ const OrthancRoot = () => {
                 />
             </FormCard>
             <div className="flex flex-col items-center w-full">
-                <h2 className="mb-4 text-2xl font-bold text-primary">Results</h2>
+                <div className="mb-4 text-2xl font-bold text-primary">Results</div>
                 <div className="w-11/12">
-                    <OrthancResults model={refModel} onEdit={(id) => console.log("Edit", id)} onDelete={(id) => console.log("Delete", id)} />
+                <div className="w-full">
+                    { patients.map((patient) => {
+                        return (<AccordionPatient key = {patient.id} patient={patient} onDeletePatient={() =>{}} onEditPatient={()=> {}}/>)
+                    })
+                    }
+                </div>
                 </div>
             </div>
         </div>

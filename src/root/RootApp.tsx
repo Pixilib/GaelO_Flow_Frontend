@@ -10,7 +10,7 @@ import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
 import ImportCreateRoot from "../import/ImportCreateRoot";
-import OrthancRoot from "../orthanc/OrthancRoot";
+import ContentRoot from "../content/ContentRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ const RootApp = () => {
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />
-            <Route path="/orthanc-content" element={<OrthancRoot/>} />
+            <Route path="/orthanc-content" element={<ContentRoot/>} />
           </Routes>
         </div>
       </div>

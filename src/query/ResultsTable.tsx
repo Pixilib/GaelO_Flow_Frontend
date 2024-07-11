@@ -23,7 +23,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             header: "Accession Number",
         },
         {
-            accessorKey: "patientID",
+            accessorKey: "patientId",
             header: "Patient ID",
         },
         {

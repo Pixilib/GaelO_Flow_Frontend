@@ -80,6 +80,10 @@ class Model {
 
     }
 
+    getPatients = () => {
+        return this.patients
+    }
+
     toJSON = () => {
         return {
             'patients': this.patients.map(patient => patient.toJSON()),
