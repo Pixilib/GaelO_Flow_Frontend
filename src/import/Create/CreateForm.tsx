@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { BsPersonCheckFill as SubmitUser } from 'react-icons/bs';
 import { useCustomMutation, useCustomQuery, UserPayload, useCustomToast, Role, Option } from '../../utils';
 import { getRoles, postUsers } from '../../services';
 import { FormCard, FormButton, Input, Label, SelectInput } from '../../ui';
@@ -123,8 +122,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       </div>
       <div className="grid grid-cols-1 col-span-3 mt-3">
         <FormButton
-          text="Send"
-      />
+          text="Send" icon={undefined}      />
       </div>
     </FormCard>
   );

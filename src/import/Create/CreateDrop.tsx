@@ -1,80 +1,106 @@
-import React, { useCallback, useState } from "react";
+import React, { useMemo, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
 import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
 
-interface CreateDropProps {
-    onDrop: (files: File[]) => void;
-}
+import { sendDicom } from '../../services/instances';
+import Model from '../../model/Model';
+import { useCustomMutation } from '../../utils';
+import { OrthancImportDicom } from '../../utils/types';
+import ProgressBar from '../../ui/ProgressBar';
 
-const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
+type ErrorImportDicom = {
+    [filename: string]: string;
+};
+
+type ImportDropProps = {
+    model: Model;
+    onFilesUploaded: () => void;
+};
+
+const ImportDrop: React.FC<ImportDropProps> = ({ model, onFilesUploaded }) => {
     const [isUploading, setIsUploading] = useState(false);
-    const [progress, setProgress] = useState(0);
+    const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
+    const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
+    const [errors, setErrors] = useState<ErrorImportDicom[]>([]);
 
-    const handleDrop = useCallback(
-        async (event: React.DragEvent<HTMLDivElement>) => {
-            event.preventDefault();
-            const { files } = event.dataTransfer;
-            if (files && files.length > 0) {
-                setIsUploading(true);
+    const uploadComplete = useMemo(() => {
+        if (numberOfLoadedFiles > 0) {
+            return numberOfLoadedFiles === numberOfProcessedFiles;
+        } else {
+            return false;
+        }
+    }, [numberOfLoadedFiles, numberOfProcessedFiles]);
 
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    try {
-                        // Simulate file upload progress
-                        await uploadFile(file);
-                        setProgress(((i + 1) / files.length) * 100);
-                    } catch (error) {
-                        console.error("Error uploading file:", error);
-                    }
-                }
+    const progression = useMemo(() => {
+        return Math.round((numberOfProcessedFiles / numberOfLoadedFiles) * 100);
+    }, [numberOfProcessedFiles, numberOfLoadedFiles]);
 
-                setIsUploading(false);
-                setProgress(0);
-                onDrop(Array.from(files));
-            }
-        },
-        [onDrop]
+    const { mutateAsync: sendDicomMutate } = useCustomMutation<OrthancImportDicom>(({ data }) =>
+        sendDicom(data)
     );
 
-    const handleDragOver = useCallback(
-        (event: React.DragEvent<HTMLDivElement>) => {
-            event.preventDefault();
-        },
-        []
-    );
-
-    const uploadFile = async (file: File) => {
-        return new Promise<void>((resolve, reject) => {
-            // Simulate file upload
-            setTimeout(() => {
-                console.log(`Uploaded: ${file.name}`);
-                resolve();
-            }, 1000);
+    const promiseFileReader = (file: File) => {
+        return new Promise<FileReader>((resolve) => {
+            var fr = new FileReader();
+            fr.readAsArrayBuffer(file);
+            fr.onload = () => {
+                resolve(fr);
+            };
         });
     };
 
+    const { getRootProps, getInputProps, open } = useDropzone({
+        multiple: true,
+        onDrop: async (acceptedFiles) => {
+            setNumberOfLoadedFiles((loadedFiles) => loadedFiles + acceptedFiles.length);
+            setIsUploading(true);
+
+            for (const file of acceptedFiles) {
+                await promiseFileReader(file).then(async (reader: FileReader) => {
+                    if (!reader.result) return;
+
+                    try {
+                        const stringBuffer = new Uint8Array(reader.result as ArrayBuffer);
+                        const orthancAnswer = await sendDicomMutate({ data: stringBuffer });
+                        model.addInstance(
+                            orthancAnswer.id,
+                            orthancAnswer.parentSeries,
+                            orthancAnswer.parentStudy,
+                            orthancAnswer.parentPatient
+                        );
+                    } catch (e: any) {
+                        setErrors((errors) => [...errors, { [file.name]: e.statusText }]);
+                    }
+                });
+                setNumberOfProcessedFiles((nbFiles) => nbFiles + 1);
+            }
+
+            setIsUploading(false);
+            onFilesUploaded();
+        },
+    });
+
     return (
-        <div
-            className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary rounded-lg cursor-pointer ${isUploading ? 'cursor-progress' : 'cursor-pointer'}`}
-            onDrop={handleDrop}
-            onDragOver={handleDragOver}
-        >
-            {isUploading ? (
-                <div className="flex flex-col items-center space-y-2">
-                    <CloudIcon size={40} className="text-primary animate-bounce" />
-                    <p className="text-primary">Uploading...</p>
-                    <div className="w-full bg-gray-200 rounded-lg">
-                        <div className="rounded-lg bg-primary" style={{ width: `${progress}%`, height: '8px' }} />
-                    </div>
-                </div>
-            ) : (
-                <div className="flex flex-col items-center space-y-2">
-                    <CloudIcon size={40} className="text-primary" />
-                    <p className="mt-3 text-primary">Drag and drop files here</p>
-                    <input type="file" style={{ display: 'none' }} />
-                </div>
-            )}
+        <div className="w-full">
+            <div
+                {...getRootProps({ onClick: open })}
+                className={`relative flex flex-col space-y-3 items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary ${isUploading ? 'cursor-progress' : 'cursor-pointer'
+                    } rounded-lg`}
+            >
+                {uploadComplete ? (
+                    <CheckIcon size={40} className="text-success" />
+                ) : (
+                    <CloudIcon
+                        size={40}
+                        className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`}
+                    />
+                )}
+                <p className="text-primary">Drop the Dicom folder or ZIP, or click to select files</p>
+                <input directory="" webkitdirectory="" {...getInputProps()} />
+                {numberOfLoadedFiles > 0 && <ProgressBar progression={progression} />}
+            </div>
         </div>
     );
 };
 
-export default CreateDrop;
+export default ImportDrop;
