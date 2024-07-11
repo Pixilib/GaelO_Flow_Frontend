@@ -31,7 +31,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({ data = [], onDeleteLabel }) =
                         <Popover withOnClick={true} popover={<LabelsRoles key={row.original.Name} labelName={row.original.Name} />}>
                             <Button color={Colors.secondary} className="flex items-center gap-1.5">
                                 <AdminIcon size="1.3rem" />
-                               <ToggleChevron isOpen={false} />
+                                <ToggleChevron isOpen={false} />
                             </Button>
                         </Popover>
 
@@ -55,7 +55,9 @@ const LabelsTable: React.FC<LabelsTableProps> = ({ data = [], onDeleteLabel }) =
         <Table
             columns={columns}
             data={rows}
-            headerColor={Colors.almond}
+            headerColor={Colors.white}
+            headerTextSize="xs"
+            className="bg-gray-100"
             enableColumnFilters
             enableSorting
         />

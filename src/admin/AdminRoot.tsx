@@ -11,7 +11,7 @@ import LabelRoot from "./Labels/LabelRoot";
 const AdminRoot = () => {
     return (
         <div 
-        className="mt-10 size-full"
+        className="size-full"
         data-gaelo-flow="admin-root"
         >
             <Routes>

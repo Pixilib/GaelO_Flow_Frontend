@@ -60,8 +60,8 @@ const RootApp = () => {
           openItem={openItem}
           setOpenItem={setOpenItem}
         />
-        <div className="">
-          <Routes>
+        <div className="mx-6 my-6">
+        <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />

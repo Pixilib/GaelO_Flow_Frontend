@@ -7,6 +7,7 @@ import {
   Card,
   CardBody,
   CardFooter,
+  CardHeader,
   Spinner,
 } from "../../ui";
 import { Colors } from "../../utils/enums";
@@ -63,10 +64,14 @@ const PeersRoot: React.FC = () => {
 
   return (
     <Card>
-      <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Peers</h2>
-        <div className="flex flex-col items-center">
-          <div className="w-full mb-8">
+            <CardHeader
+                className="flex items-center justify-center rounded-t-lg text-bg-light"
+                color={Colors.primary}
+                title={'Manage Peers'}
+            />
+            <CardBody className="space-x-4 bg-almond">
+            <div className="flex flex-col items-center">
+          <div className="w-full mt-6 mb-8">
             <PeersTable
               peerData={peers || []}
               onDeletePeer={(peerName) =>
@@ -80,7 +85,7 @@ const PeersRoot: React.FC = () => {
           
         </div>
       </CardBody>
-      <CardFooter color={Colors.light} className="border-ligth">
+      <CardFooter className="border-t-2 shadow-inner  border-indigo- bg-light">
       {!showNewPeerCard && (
             <Button color={Colors.success} onClick={handleNewPeerClick}>
               <MoreIcon className="mr-3" size={24} /> New Peer

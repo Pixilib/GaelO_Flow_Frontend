@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
-import { Button, Card, CardBody, CardFooter, Spinner } from '../../ui';
+import { Button, Card, CardHeader, CardBody, CardFooter, Spinner } from '../../ui';
 import { Colors } from '../../utils/enums';
 import { Modality, ModalityExtended } from '../../utils/types';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
@@ -11,10 +11,8 @@ import NewModalityCard from './NewModalityCard';
 import ModalitiesTable from './ModalitiesTable';
 import { updateModality, deleteModality, getModalities, echoModality } from '../../services/modalities';
 
-
 const ModalitiesRoot: React.FC = () => {
-
-    const { toastSuccess, toastError } = useCustomToast()
+    const { toastSuccess, toastError } = useCustomToast();
 
     const [showNewAetCard, setShowNewAetCard] = useState(false);
 
@@ -68,25 +66,28 @@ const ModalitiesRoot: React.FC = () => {
 
     return (
         <Card>
-            <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Manage Modalities</h2>
+            <CardHeader
+                className="flex items-center justify-center rounded-t-lg text-bg-light"
+                color={Colors.primary}
+                title={'Manage Modalities'}
+            />
+            <CardBody className="space-x-4 bg-almond">
                 <div className="flex flex-col items-center">
-                    <div className="w-full mb-8">
+                    <div className="w-full mt-6 mb-8">
                         <ModalitiesTable
                             aetData={aets}
                             onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}
-                            onEchoAet={handleEchoAet} />
+                            onEchoAet={handleEchoAet}
+                        />
                     </div>
-
-
                 </div>
             </CardBody>
-            <CardFooter className="border-t-2 border-ligth" color={Colors.light}>
-
+            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
                 {!showNewAetCard && (
                     <Button
                         color={Colors.success}
-                        onClick={handleNewAetClick}>
+                        onClick={handleNewAetClick}
+                    >
                         <MoreIcon className="mr-3 " size={24} /> New modality
                     </Button>
                 )}

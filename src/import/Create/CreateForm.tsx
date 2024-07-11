@@ -1,23 +1,9 @@
-import { ChangeEvent, useState, FormEvent } from 'react';
-import { BsPersonCheckFill as SubmitUser } from 'react-icons/bs';
-import { getRoles, postUsers } from '../../../services';
-import {
-  useCustomMutation,
-  useCustomQuery,
-  UserPayload,
-  useCustomToast,
-  Role,
-  Option,
-} from '../../../utils';
-import {
-  FormCard,
-  FormButton,
-  Input,
-  Label,
-  SelectInput,
-} from '../../../ui';
-import { getErrorMessage } from '../../../utils/error';
-import InputPassword from '../../../ui/InputPassword';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useCustomMutation, useCustomQuery, UserPayload, useCustomToast, Role, Option } from '../../utils';
+import { getRoles, postUsers } from '../../services';
+import { FormCard, FormButton, Input, Label, SelectInput } from '../../ui';
+import InputPassword from '../../ui/InputPassword';
+import { getErrorMessage } from '../../utils/error';
 
 type UserFormProps = {
   title: string;
@@ -87,11 +73,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
     >
       <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-3 lg:gap-11">
         <Input
-          label={
-            <Label
-              value="Firstname *"
-              className="text-sm font-medium text-center" align="left"
-            />}
+          label={<Label value="Firstname *" className="text-sm font-medium text-center" align="left" />}
           placeholder="Enter your firstname"
           className="mt-1 lg:mt-3"
           value={firstName}
@@ -100,11 +82,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           autoComplete='off'
         />
         <Input
-          label={
-            <Label
-              value="Lastname *"
-              className="text-sm font-medium text-center" align="left"
-            />}
+          label={<Label value="Lastname *" className="text-sm font-medium text-center" align="left" />}
           placeholder="Enter your lastname"
           className="mt-1 lg:mt-3"
           value={lastName}
@@ -113,11 +91,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           autoComplete='off'
         />
         <InputPassword
-          label={
-            <Label
-              value="Password *"
-              className="text-sm font-medium text-center" align="left"
-            />}
+          label={<Label value="Password *" className="text-sm font-medium text-center" align="left" />}
           placeholder="Enter your password"
           className="mt-1 lg:mt-3 rounded-xl"
           value={password}
@@ -127,10 +101,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       </div>
       <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
         <Input
-          label={
-            <Label
-              value="Email *" className="text-sm font-medium text-center" align="left"
-            />}
+          label={<Label value="Email *" className="text-sm font-medium text-center" align="left" />}
           type="email"
           placeholder="example@example.com"
           className="mt-1 lg:mt-3 rounded-xl"
@@ -151,9 +122,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       </div>
       <div className="grid grid-cols-1 col-span-3 mt-3">
         <FormButton
-          text=" "
-          icon={<SubmitUser size="1.3rem" />}
-        />
+          text="Send" icon={undefined}      />
       </div>
     </FormCard>
   );
