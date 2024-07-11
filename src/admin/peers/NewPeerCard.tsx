@@ -1,10 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
-
-import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
-import { CgClose as CloseIcon } from "react-icons/cg";
-
-import { Card, Button, Input, CardHeader, CardBody, CardFooter } from '../../ui';
-import { Colors } from "../../utils/enums";
+import { AiOutlineCheck as CheckIcon } from 'react-icons/ai';
+import { FormCard, Button, Input } from '../../ui';
+import { Colors } from '../../utils/enums';
 import { Peer } from '../../utils/types';
 
 interface NewPeerCardProps {
@@ -18,41 +15,60 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        onCreatePeer({ name, username, url, password });
+        onCreatePeer({ name, url, username, password });
     };
 
     return (
-        <Card className="flex flex-col h-full">
-            <CardHeader title="Create New Peer" color={Colors.success}>
-                <CloseIcon size="24px" title="Close" onClick={onClose} className="ml-auto mr-[8px] cursor-pointer" />
-            </CardHeader>
-
-            <CardBody className="p-4 bg-stone-100">
-                <form onSubmit={handleSubmit}>
-                    <div className="flex flex-wrap -mx-2">
-                        <div className="w-1/2 px-2">
-                            <Input required label="Name" bordered value={name} onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)} />
-                        </div>
-                        <div className="w-1/2 px-2">
-                            <Input required label="Url" bordered value={url} onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)} />
-                        </div>
-                        <div className="w-1/2 px-2">
-                            <Input label="Username" bordered value={username} autocomplete="off" onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} />
-                        </div>
-                        <div className="w-1/2 px-2">
-                            <Input label="Password" type="password" autocomplete="off" bordered value={password} onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} />
-                        </div>
-                    </div>
-                    <CardFooter className="flex justify-center bg-stone-100">
-                        <Button type="submit" color={Colors.success}><CheckIcon size="20px" /></Button>
-                    </CardFooter>
-                </form>
-            </CardBody>
-        </Card>
+        <FormCard
+            className="bg-light-gray"
+            title="Create New Peer"
+            onClose={onClose}
+            onSubmit={handleSubmit}
+            footer={
+                <Button type="submit" color={Colors.success} aria-label="Submit New Peer">
+                    <CheckIcon size="20px" />
+                </Button>
+            }
+        >
+            <div className="grid grid-cols-2 gap-4 p-4">
+                <Input
+                    label="Name"
+                    bordered
+                    value={name}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                    aria-label="Peer Name"
+                    required
+                />
+                <Input
+                    label="Url"
+                    bordered
+                    value={url}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setUrl(e.target.value)}
+                    aria-label="Url"
+                    required
+                />
+                <Input
+                    label="Username"
+                    bordered
+                    value={username}
+                    autoComplete="off"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+                    aria-label="Username"
+                />
+                <Input
+                    label="Password"
+                    type="password"
+                    bordered
+                    value={password}
+                    autoComplete="off"
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+                    aria-label="Password"
+                />
+            </div>
+        </FormCard>
     );
-}
+};
 
 export default NewPeerCard;
-

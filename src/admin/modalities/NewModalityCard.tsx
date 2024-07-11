@@ -1,13 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
-
 import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
-
-import {
-  FormCard,
-  Button,
-  Input,
-  SelectInput,
-} from "../../ui";
+import { FormCard, Button, Input, SelectInput } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
 import { Modality, Option } from "../../utils/types";
@@ -39,13 +32,9 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
     { value: "GE", label: "GE" },
   ];
 
-  const handleSelectChange = (option: Option) => {
-    setManufacturer(option);
-  };
-
   const isValidPort = (port: number) => port > 0 && port <= 65535;
 
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!name.trim()) {
       toastWarning("Name is required.");
@@ -86,73 +75,63 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
     onCreateAet(newAetData);
   };
 
+  const handleSelectChange = (option: Option) => {
+    setManufacturer(option);
+  };
+
   return (
     <FormCard
-      header={{
-        title: "Create New Modality",
-        onClose,
-      }}
+      className="bg-light-gray"
+      title="Create New Modality"
+      onClose={onClose}
       onSubmit={handleSubmit}
       footer={
-        <Button
-          type="submit"
-          color={Colors.success}
-          aria-label="Submit New Modality"
-        >
+        <Button type="submit" color={Colors.success} aria-label="Submit New Modality">
           <CheckIcon size="20px" />
         </Button>
       }
-      className="bg-stone-100"
     >
-      <div className="p-4">
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-          <Input
-            label="Name"
-            bordered
-            value={name}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setName(e.target.value)
-            }
-            aria-label="Modality Name"
+      <div className="grid grid-cols-2 gap-4 p-4">
+        <Input
+          label="Name"
+          bordered
+          value={name}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+          aria-label="Modality Name"
+        />
+        <Input
+          label="AET"
+          bordered
+          value={aet}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setAet(e.target.value)}
+          aria-label="AET"
+        />
+        <Input
+          label="Host"
+          bordered
+          value={host}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setHost(e.target.value)}
+          aria-label="Host"
+        />
+        <Input
+          label="Port"
+          bordered
+          type="number"
+          value={port.toString()}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setPort(e.target.value === "" ? "" : Number(e.target.value))
+          }
+          aria-label="Port"
+        />
+        <div className="col-span-2">
+          <SelectInput
+            options={options}
+            value={manufacturer ?? undefined}
+            onChange={handleSelectChange}
+            placeholder="Select Manufacturer"
+            aria-label="Manufacturer"
           />
-          <Input
-            label="AET"
-            bordered
-            value={aet}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setAet(e.target.value)
-            }
-            aria-label="AET"
-          />
-          <Input
-            label="Host"
-            bordered
-            value={host}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setHost(e.target.value)
-            }
-            aria-label="Host"
-          />
-          <Input
-            label="Port"
-            bordered
-            type="number"
-            value={port.toString()}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setPort(e.target.value === "" ? "" : Number(e.target.value))
-            }
-            aria-label="Port"
-          />
-          <div className="col-span-2">
-            <SelectInput
-              options={options}
-              value={manufacturer ?? undefined}
-              onChange={handleSelectChange}
-              placeholder="Select Manufacturer"
-              aria-label="Manufacturer"
-            />
-          </div>
-        </form>
+        </div>
       </div>
     </FormCard>
   );
