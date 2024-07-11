@@ -45,6 +45,7 @@ export default {
       },
       colors: {
         'almond':'#F7E9D8',
+        'almond-hover':'#F6D1A7',
         'primary': '#4746B8',
         'primary-active': '#333182',
         'primary-light': '#8C8BD3',

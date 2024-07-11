@@ -10,7 +10,10 @@ const EditButton = ({ onClick }: EditButtonProps) => (
     size={'1.3rem'}
     className="transition duration-70 hover:scale-110"
     color={Colors.warning}
-    onClick={onClick}
+    onClick={(e) => {
+      e.stopPropagation();
+      onClick();
+    }}
   />
 );
 

@@ -1,7 +1,7 @@
 import axios from "axios"
-import { QueryPayload, FindAnswer } from "../utils/types";
+import { QueryPayload, Study } from "../utils/types";
 
-export const findTools = (payload: QueryPayload): Promise<FindAnswer[]> => {
+export const findTools = (payload: QueryPayload): Promise<Study[]> => {
     const updatedPayload = {
         ...payload,
         CaseSensitive: false,
@@ -10,24 +10,25 @@ export const findTools = (payload: QueryPayload): Promise<FindAnswer[]> => {
     return axios
         .post(`/api/tools/find`, updatedPayload)
         .then((response: any) => {
-            return response.data.map((data: any) => ({
+            return response.data.map((data: any) : Study => ({
                 id: data.ID,
                 isStable: data.IsStable,
                 labels: data.Labels,
                 lastUpdate: data.LastUpdate,
                 mainDicomTags: {
-                    accesionNumber: data.MainDicomTags.AccessionNumber,
+                    accessionNumber: data.MainDicomTags.AccessionNumber,
                     referringPhysicianName: data.MainDicomTags.ReferringPhysicianName,
                     studyDate: data.MainDicomTags.StudyDate,
                     studyDescription: data.MainDicomTags.StudyDescription,
-                    studyID: data.MainDicomTags.StudyID,
+                    studyId: data.MainDicomTags.StudyID,
                     studyInstanceUID: data.MainDicomTags.StudyInstanceUID,
-                    studyTime: data.MainDicomTags.StudyTime
+                    studyTime: data.MainDicomTags.StudyTime,
+                    institutionName : data.mainDicomTags.InstitutionName
                 },
                 parentPatient: data.ParentPatient,
-                patientMainDIcomTags: {
+                patientMainDicomTags: {
                     patientBirthDate: data.PatientMainDicomTags.PatientBirthDate,
-                    patientID: data.PatientMainDicomTags.PatientID,
+                    patientId: data.PatientMainDicomTags.PatientID,
                     patientName: data.PatientMainDicomTags.PatientName,
                     patientSex: data.PatientMainDicomTags.PatientSex
                 },
