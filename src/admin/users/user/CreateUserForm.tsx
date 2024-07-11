@@ -151,7 +151,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       </div>
       <div className="grid grid-cols-1 col-span-3 mt-3">
         <FormButton
-          text="Create"
+          text=" "
           icon={<SubmitUser size="1.3rem" />}
         />
       </div>

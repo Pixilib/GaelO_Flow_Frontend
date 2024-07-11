@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import ImportDrop from './ImportDrop';
 import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
@@ -34,20 +33,16 @@ const ImportRoot: React.FC = () => {
     return (
         <div className='space-y-3'>
             <ImportDrop model={refModel.current} onFilesUploaded={handleFilesUploaded} />
-            <div className="grid items-center grid-cols-2 gap-3 space-y-3">
+            <div className="space-y-3">
                 {studiesData.length > 0 && (
-                    <div>
-                        <ImportTableStudy
-                            data={studiesData}
-                            selectedStudyInstanceUID={currentStudyInstanceUID}
-                            onStudyClick={handleStudyClick}
-                        />
-                    </div>
+                    <ImportTableStudy
+                        data={studiesData}
+                        selectedStudyInstanceUID={currentStudyInstanceUID}
+                        onStudyClick={handleStudyClick}
+                    />
                 )}
                 {seriesData.length > 0 && (
-                    <div>
-                        <ImportTableSeries data={seriesData} />
-                    </div>
+                    <ImportTableSeries data={seriesData} />
                 )}
             </div>
         </div>
