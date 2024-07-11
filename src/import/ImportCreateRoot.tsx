@@ -4,6 +4,7 @@ import { Tabs, Tab, Card, CardBody, CardFooter, Button } from "../ui";
 import { Colors } from "../utils";
 import CreateRoot from "./Create/CreateRoot";
 import ImportRoot from "./Import/ImportRoot";
+import CreateForm from "./Create/CreateForm";
 
 const ImportCreateRoot = () => {
     const navigate = useNavigate();
@@ -65,7 +66,7 @@ const ImportCreateRoot = () => {
             )}
             {showCreateForm && (
                 <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
-                    <CreateForm onClose={handleCloseForm} />
+                    <CreateForm onClose={handleCloseForm} title={"Create Dicom"} />
                 </CardFooter>
             )}
         </Card>
