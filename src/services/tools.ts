@@ -1,7 +1,7 @@
 import axios from "axios"
-import { QueryPayload, FindAnswer } from "../utils/types";
+import { QueryPayload, Study } from "../utils/types";
 
-export const findTools = (payload: QueryPayload): Promise<FindAnswer[]> => {
+export const findTools = (payload: QueryPayload): Promise<Study[]> => {
     const updatedPayload = {
         ...payload,
         CaseSensitive: false,
@@ -25,7 +25,7 @@ export const findTools = (payload: QueryPayload): Promise<FindAnswer[]> => {
                     studyTime: data.MainDicomTags.StudyTime
                 },
                 parentPatient: data.ParentPatient,
-                patientMainDIcomTags: {
+                patientMainDicomTags: {
                     patientBirthDate: data.PatientMainDicomTags.PatientBirthDate,
                     patientID: data.PatientMainDicomTags.PatientID,
                     patientName: data.PatientMainDicomTags.PatientName,

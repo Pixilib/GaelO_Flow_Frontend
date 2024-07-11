@@ -1,4 +1,5 @@
 import { Badge } from "./Badge";
+import Accordion from "./Accordion";
 import Button from "./Button";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
@@ -29,6 +30,7 @@ import ConfirmModal from './ConfirmModal';
 import Modal from './Modal';
 
 export {
+    Accordion,
     Badge,
     Banner,
     BannerItems,

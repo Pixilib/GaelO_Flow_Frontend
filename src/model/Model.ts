@@ -42,7 +42,6 @@ class Model {
             patient.fillData(studyData.patientMainDicomTags)
             this.patients.push(patient)
         }
-
         const patient = this.patients.find(patient => patient.id === (studyData.parentPatient))
         if (patient && !patient.isStudyExists(studyData.id)) {
             const study = new Study(studyData.id)

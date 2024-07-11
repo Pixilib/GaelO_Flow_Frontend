@@ -10,7 +10,7 @@ import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
 import ImportCreateRoot from "../import/ImportCreateRoot";
-import OrthancRoot from "../orthanc/orthancRoot";
+import OrthancRoot from "../orthanc/OrthancRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();

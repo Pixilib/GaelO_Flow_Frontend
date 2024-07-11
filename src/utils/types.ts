@@ -251,7 +251,6 @@ export type Series = {
     parentStudy: string;
     status: string;
     type: string;
-
 }
 
 export type PatientMainDicomTags = {
@@ -263,7 +262,7 @@ export type PatientMainDicomTags = {
 
 export type Study = {
     id: string
-    isStable: string
+    isStable: boolean
     labels: string[]
     lastUpdate: string
     mainDicomTags: {
@@ -321,6 +320,7 @@ export type FindAnswer = {
     lastUpdate: string;
     mainDicomTags: {
         accessionNumber: string;
+        institutionName: string | null
         referringPhysicianName: string;
         studyDate: string;
         studyDescription: string;
@@ -338,3 +338,30 @@ export type FindAnswer = {
     series: string[];
     type: string;
 }
+
+// {
+//     id: '056aa65d-96dce3c7-4498131f-b8911156-64699216',
+//     isStable: true,
+//     labels: [],
+//     lastUpdate: '20240621T165031',
+//     mainDicomTags: {
+//       accesionNumber: 'REALYSA',
+//       referringPhysicianName: '',
+//       studyDate: '20220315',
+//       studyDescription: 'PET0',
+//       studyID: '',
+//       studyInstanceUID: '1.2.276.0.7230010.3.1.2.1664247091.88.1703691677.1279636',
+//       studyTime: '114919'
+//     },
+//     parentPatient: '89083e2b-c811de66-692d1fe7-cda37cfe-9805effd',
+//     patientMainDIcomTags: {
+//       patientBirthDate: '19000101',
+//       patientID: '202200419918105350042',
+//       patientName: '19918105350042',
+//       patientSex: 'F'
+//     },
+//     series: [
+//       '5e64bb6f-d4f18a56-4b5077e6-1c2d80c3-f6e8450a', '7d909a90-dbf2d491-36ea8164-bdccec80-c22d3381'
+//     ],
+//     type: 'Study'
+//   }
