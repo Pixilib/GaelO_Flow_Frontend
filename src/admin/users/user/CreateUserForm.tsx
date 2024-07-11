@@ -80,7 +80,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
 
   return (
     <FormCard
-      className={className}
+      className={`${className} bg-light-gray`}
       title={title}
       onClose={onClose}
       onSubmit={handleSubmit}

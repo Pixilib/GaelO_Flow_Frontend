@@ -60,7 +60,6 @@ const Roles = () => {
         }
     }
 
-
     return (
         <div className=" rounded-br-xl rounded-bl-xl">
             {isLoadingRoles ? (
@@ -83,19 +82,8 @@ const Roles = () => {
                     role={roleToEdit || undefined}
                 />
             }
-            <div className="flex justify-center mx-10">
-                {showRoleForm === null && (
-                    <Button
-                        color={Colors.success}
-                        onClick={() => setShowRoleForm('create')}
-                        className="flex justify-center gap-4 my-10 w-52 h-11 hover:successHover "
-                    >
-                        <RoleCreate size={'1.3rem'} />
-                        Create Role
-                    </Button>
-                )}
-            </div>
         </div>
     );
 }
+
 export default Roles;
