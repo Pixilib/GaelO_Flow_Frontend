@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Card, CardBody, FormCard } from "../ui";
+import { Card, CardBody, CardHeader, FormCard } from "../ui";
 import { getModalities, queryModality } from "../services";
 import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors, useCustomToast } from "../utils";
 import { QueryResponse, QueryPayload, ExtendedQueryPayload } from '../utils/types';
@@ -93,9 +93,13 @@ const QueryRoot = ({ className }: QueryFormProps) => {
         />
       </FormCard>
       <Card>
-        <CardBody color={Colors.light} className="px-3 rounded-xl">
-          <h2 className="mt-4 mb-5 text-2xl font-bold text-primary">Results</h2>
-          <div className="grid grid-cols-1 gap-2 mt-1 2xl:grid-cols-12">
+            <CardHeader
+                className="flex items-center justify-center rounded-t-lg text-bg-light"
+                color={Colors.primary}
+                title={'Results'}
+            />
+            <CardBody className="space-x-4 bg-almond">
+            <div className="grid grid-cols-1 gap-2 mt-1 2xl:grid-cols-12">
             <div className="2xl:col-span-7">
               <ResultsTable results={studies} onRowClick={handleRowClick} />
             </div>

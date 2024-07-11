@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsPersonPlusFill as RoleCreate } from "react-icons/bs";
 
 import { deleteRole, getRoles } from '../../../services';
 import { useConfirm } from "../../../services/ConfirmContextProvider";
@@ -36,17 +35,18 @@ const Roles = () => {
                 toastError("Role deletion failed");
             },
         }
-    )
+    );
 
     const findRole = (roleName: string): Role => {
         const role = roles?.find((role: { Name: string; }) => role.Name === roleName);
         return role || {} as Role;
-    }
+    };
+
     const handleEditRole = (roleName: string) => {
         const role = findRole(roleName);
         setRoleToEdit(role);
         setShowRoleForm('edit');
-    }
+    };
 
     const deleteRoleHandler = async (roleName: string) => {
         const confirmContent = (
@@ -58,11 +58,10 @@ const Roles = () => {
         if (await confirm({ content: confirmContent })) {
             deleteMutation.mutate(roleName);
         }
-    }
-
+    };
 
     return (
-        <div className=" rounded-br-xl rounded-bl-xl">
+        <div className="rounded-br-xl rounded-bl-xl">
             {isLoadingRoles ? (
                 <Spinner />
             ) : (
@@ -73,29 +72,22 @@ const Roles = () => {
                 />
             )}
             {showRoleForm === 'create' &&
-                <CreateRole title={"Create Role"}
-                    className="bg-[#EFEFEF]" onClose={() => (setShowRoleForm(null))} />
+                <CreateRole
+                    title={"Create Role"}
+                    className="bg-gray-200"
+                    onClose={() => setShowRoleForm(null)}
+                />
             }
             {showRoleForm === 'edit' &&
-                <EditRole title={"Edit Role"}
-                    className="bg-[#EFEFEF]"
+                <EditRole
+                    title={"Edit Role"}
+                    className="bg-gray-200"
                     onClose={() => { setShowRoleForm(null); setRoleToEdit(null); }}
                     role={roleToEdit || undefined}
                 />
             }
-            <div className="flex justify-center mx-10">
-                {showRoleForm === null && (
-                    <Button
-                        color={Colors.success}
-                        onClick={() => setShowRoleForm('create')}
-                        className="flex justify-center gap-4 my-10 w-52 h-11 hover:successHover "
-                    >
-                        <RoleCreate size={'1.3rem'} />
-                        Create Role
-                    </Button>
-                )}
-            </div>
         </div>
     );
 }
+
 export default Roles;

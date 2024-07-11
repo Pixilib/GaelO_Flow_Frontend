@@ -45,9 +45,10 @@ const SeriesTable = ({ series }: SeriesTableProps) => {
         <Table
             columns={columns}
             data={rows ?? []}
-            headerColor={Colors.almond}
             headerTextSize="xs"
-            className="text-xs"
+            headerColor={Colors.white} 
+            className="bg-gray-100"
+            
         />
     );
 

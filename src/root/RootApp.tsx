@@ -61,7 +61,7 @@ const RootApp = () => {
           setOpenItem={setOpenItem}
         />
         <div className="mx-6 my-6">
-          <Routes>
+        <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />
