@@ -3,6 +3,7 @@ import SearchForm from "../query/SearchForm";
 import { getLabels } from "../services";
 import { findTools } from "../services/tools";
 import { QueryPayload, useCustomMutation, useCustomQuery } from "../utils";
+import { Study as StudyType } from "../utils/types";
 import Model from "../model/Model";
 import OrthancResults from "./OrthancResults";
 import { FormCard } from "../ui";
