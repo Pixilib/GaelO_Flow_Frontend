@@ -16,7 +16,7 @@ const ImportCreateRoot = () => {
 
     const handleTabClick = (tab: string) => {
         setIsCreatingDicom(tab === "create");
-        setShowCreateForm(false); // Assurez-vous que le formulaire est fermé lors du changement d'onglet
+        setShowCreateForm(false);
         navigate(tab);
     };
 

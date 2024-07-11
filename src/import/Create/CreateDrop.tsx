@@ -8,6 +8,7 @@ interface CreateDropProps {
 const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
     const [isUploading, setIsUploading] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [uploadComplete, setUploadComplete] = useState(false);
 
     const handleDrop = useCallback(
         async (event: React.DragEvent<HTMLDivElement>) => {
@@ -15,20 +16,27 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
             const { files } = event.dataTransfer;
             if (files && files.length > 0) {
                 setIsUploading(true);
+                setProgress(0);
+
+                let successfulUploads = 0;
+                let failedUploads = 0;
 
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
                     try {
-                        // Simulate file upload progress
                         await uploadFile(file);
-                        setProgress(((i + 1) / files.length) * 100);
+                        successfulUploads++;
                     } catch (error) {
                         console.error("Error uploading file:", error);
+                        failedUploads++;
+                    } finally {
+                        const currentProgress = ((successfulUploads + failedUploads) / files.length) * 100;
+                        setProgress(currentProgress);
                     }
                 }
 
                 setIsUploading(false);
-                setProgress(0);
+                setUploadComplete(true);
                 onDrop(Array.from(files));
             }
         },
@@ -44,7 +52,6 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
 
     const uploadFile = async (file: File) => {
         return new Promise<void>((resolve, reject) => {
-            // Simulate file upload
             setTimeout(() => {
                 console.log(`Uploaded: ${file.name}`);
                 resolve();
@@ -58,19 +65,16 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
         >
-            {isUploading ? (
-                <div className="flex flex-col items-center space-y-2">
-                    <CloudIcon size={40} className="text-primary animate-spin" style={{ transition: 'color 0.3s ease-in-out' }} />
-                    <p className="text-primary">Uploading...</p>
-                    <div className="w-full bg-gray-200 rounded-lg">
-                        <div className="rounded-lg bg-primary" style={{ width: `${progress}%`, height: '8px' }} />
-                    </div>
-                </div>
+            {uploadComplete ? (
+                <CheckIcon size={40} className="text-success" />
             ) : (
-                <div className="flex flex-col items-center space-y-2">
-                    <CloudIcon size={40} className="text-primary" style={{ transition: 'color 0.3s ease-in-out' }} />
-                    <p className="mt-3 text-primary">Drag and drop files here</p>
-                    <input type="file" style={{ display: 'none' }} />
+                <CloudIcon size={40} className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`} />
+            )}
+            <p className="text-primary">{uploadComplete ? 'Upload Complete!' : 'Drag and drop files here'}</p>
+            <input type="file" style={{ display: 'none' }} />
+            {isUploading && (
+                <div className="w-full bg-gray-200 rounded-lg">
+                    <div className="rounded-lg bg-primary" style={{ width: `${progress}%`, height: '8px' }} />
                 </div>
             )}
         </div>
