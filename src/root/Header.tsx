@@ -98,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       title={title}
       leftIcon={leftIcon}
       onLeftIconClick={handleLeftIconClick}
-      className="sticky top-0 bg-white"
+      className="sticky top-0 z-50 bg-white"
     >
       <div className="flex justify-end gap-4">
         <DropDown

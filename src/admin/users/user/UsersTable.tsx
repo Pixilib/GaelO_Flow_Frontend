@@ -25,11 +25,6 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
       enableColumnFilters: true,
     },
     {
-      header: 'E-mail',
-      accessorKey: 'Email',
-      enableColumnFilters: true,
-    },
-    {
       header: 'Rôle',
       accessorKey: 'Role.Name',
       enableColumnFilters: true,
