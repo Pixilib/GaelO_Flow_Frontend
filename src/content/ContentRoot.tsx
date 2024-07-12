@@ -8,13 +8,13 @@ import Model from "../model/Model";
 import { FormCard } from "../ui";
 import AccordionPatient from "./AccordionPatient";
 
-const OrthancRoot = () => {
+const ContentRoot = () => {
     const [refModel, setRefModel] = useState<Model | null>(null);
 
     const patients = useMemo(() => {
-        if(refModel== null) return []
+        if (refModel == null) return []
         return refModel.getPatients()
-    }, [refModel])
+    }, [JSON.stringify(refModel)])
 
     const { data: labelsData } = useCustomQuery<string[]>(
         ['labels'],
@@ -27,13 +27,14 @@ const OrthancRoot = () => {
         {
             onSuccess: (data) => {
                 const model = new Model();
+                console.log("Data", data)
                 data.forEach(studyData => {
                     model.addStudy(studyData);
                 });
                 setRefModel(model);
             },
-            onError: (error:any) => {
-                console.log("Error",error);
+            onError: (error: any) => {
+                console.log("Error", error);
             }
         }
     )
@@ -57,16 +58,14 @@ const OrthancRoot = () => {
             <div className="flex flex-col items-center w-full">
                 <div className="mb-4 text-2xl font-bold text-primary">Results</div>
                 <div className="w-11/12">
-                <div className="w-full">
-                    { patients.map((patient) => {
-                        return (<AccordionPatient key = {patient.id} patient={patient} onDeletePatient={() =>{}} onEditPatient={()=> {}}/>)
+                    {patients.map((patient) => {
+                        return (<AccordionPatient key={patient.id} patient={patient} onDeletePatient={() => { }} onEditPatient={() => { }} />)
                     })
                     }
-                </div>
                 </div>
             </div>
         </div>
     )
 };
 
-export default OrthancRoot;
+export default ContentRoot;
