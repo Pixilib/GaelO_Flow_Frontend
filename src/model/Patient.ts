@@ -39,14 +39,14 @@ class Patient {
     async fillFromOrthanc() {
         const patient = await getPatient(this.id)
         const mainDicomTags = patient.mainDicomTags
-        this.patientId = mainDicomTags.patientID;
+        this.patientId = mainDicomTags.patientId;
         this.patientName = mainDicomTags.patientName;
         this.patientBirthDate = mainDicomTags.patientBirthDate;
         this.patientSex = mainDicomTags.patientSex;
     }
 
     fillData(patient: PatientMainDicomTags) {
-        this.patientId = patient.patientID;
+        this.patientId = patient.patientId;
         this.patientName = patient.patientName;
         this.patientBirthDate = patient.patientBirthDate;
         this.patientSex = patient.patientSex;

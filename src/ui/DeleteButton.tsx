@@ -4,12 +4,15 @@ type DeleteButtonProps = {
   onClick: () => void;
 }
 
-const DeleteButton = ({ onClick }:DeleteButtonProps) => (
+const DeleteButton = ({ onClick }: DeleteButtonProps) => (
   <Delete
     size={'1.3rem'}
     className="transition duration-70 hover:scale-110"
     color="#FF0000"
-    onClick={onClick}
+    onClick={(e) => {
+      e.stopPropagation();
+      onClick();
+    }}
   />
 );
 export default DeleteButton;

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BsPersonPlusFill as RoleCreate } from "react-icons/bs";
 
 import { getOauth2Config, deleteOauth2Config } from "../../../services/oauth2";
 import {
@@ -52,18 +51,7 @@ const Oauth = () => {
   return (
     <div data-gaelo-flow="oauth"className=" rounded-br-xl rounded-bl-xl">
       <Oauth2Table data={oauth2Config || []} onDelete={deleteOauthHandler} />
-      <div className="flex justify-center mx-10">
-        {showOauthForm === false && (
-          <Button
-            color={Colors.success}
-            onClick={() => setshowOauthForm(true)}
-            className="flex justify-center gap-4 my-10 w-52 h-11 hover:successHover "
-          >
-            <RoleCreate size={"1.3rem"} />
-            Create Provider
-          </Button>
-        )}
-      </div>
+    
       <div className="mt-4">
         {showOauthForm ? (
           <CreateOauth

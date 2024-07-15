@@ -60,10 +60,12 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
         <Table
             columns={columns}
             data={rows}
-            headerColor={Colors.almond}
+            headerTextSize='xs'
+            headerColor={Colors.white}
+            className="bg-gray-100"
             enableColumnFilters
             enableSorting
-            headerTextSize="xs"
+          
             getRowClasses={getRowClasses}
             onRowClick={handleRowClick}
         />

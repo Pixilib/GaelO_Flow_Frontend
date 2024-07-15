@@ -44,7 +44,14 @@ const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEchoP
         }
     ];
 
-    return <Table columns={columns} data={peerData} headerColor={Colors.almond} />;
+    return <Table
+        columns={columns}
+        data={peerData}
+        headerTextSize='xs'
+        headerColor={Colors.white}
+        className="bg-gray-100"
+
+    />;
 };
 
 export default PeersTable;

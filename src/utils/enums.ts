@@ -1,5 +1,6 @@
 export enum Colors {
     almond = 'almond',
+    almondHover = 'almond-hover',
     danger = 'danger',
     dangerHover = "danger-hover",
     dark = 'dark',

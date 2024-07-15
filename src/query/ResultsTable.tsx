@@ -23,7 +23,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             header: "Accession Number",
         },
         {
-            accessorKey: "patientID",
+            accessorKey: "patientId",
             header: "Patient ID",
         },
         {
@@ -58,11 +58,11 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
         <Table
             columns={columns}
             data={rows ?? []}
-            headerColor={Colors.almond}
             enableColumnFilters={true}
             onRowClick={handleRowClick}
             headerTextSize="xs"
-            className="text-xs"
+            headerColor={Colors.white} 
+            className="bg-gray-100"
         />
     );
 };
