@@ -11,7 +11,7 @@ interface SelectInputProps {
   options: OptionType[];
   onChange: (selectedOption: OptionType | null) => void;
   placeholder?: string;
-  rounded?: boolean; // Prop pour contrôler les coins arrondis
+  rounded?: boolean;
 }
 
 const customStyles: StylesConfig<OptionType, boolean> = {
@@ -24,7 +24,7 @@ const customStyles: StylesConfig<OptionType, boolean> = {
       borderColor: state.isFocused ? '#333182' : '#D1D5DB',
       borderWidth: '1px',
       padding: '0.1em',
-      minHeight: '32px', // Réduire légèrement la hauteur
+      minHeight: '32px',
       '&:hover': {
         borderColor: '#333182',
       },
@@ -84,7 +84,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     styles={customStyles}
     value={options.find(option => option.value === value)}
     className={`w-full ${rounded ? 'rounded-xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
-    rounded={rounded} // Prop to control rounded corners
+    rounded={rounded} 
   />
 );
 

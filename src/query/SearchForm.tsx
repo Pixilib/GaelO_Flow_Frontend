@@ -15,7 +15,7 @@ type SearchFormProps = {
   withAets: boolean;
 };
 
-const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => { }, onSubmit, withAets }: SearchFormProps) => {
+const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSubmit, withAets }: SearchFormProps) => {
   const { toastWarning } = useCustomToast();
 
   const [patientName, setPatientName] = useState<string>("");
@@ -205,7 +205,7 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => { }, onS
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             handleDataFromChange(event.target.value)
           }
-          className={"focus:shadow-2xl shadow-lg disabled:text-slate-500"}
+          className={"disabled:text-slate-500"}
           disabled={isDateDisabled}
         />
         <Input
@@ -221,7 +221,7 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => { }, onS
           value={dateTo ?? undefined}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             handleDataToChange(event.target.value)}
-          className={"focus:shadow-2xl shadow-lg disabled:text-slate-500"}
+          className={"disabled:text-slate-500"}
           disabled={isDateDisabled}
         />
       </div>
