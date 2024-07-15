@@ -1,10 +1,8 @@
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
-
 import { Option, QueryPayload, useCustomToast } from "../utils";
 import { FormButton, Input, Label, SelectInput } from "../ui";
-
 import SelectModalities from "./SelectModalities";
 
 type SearchFormProps = {
@@ -15,7 +13,13 @@ type SearchFormProps = {
   withAets: boolean;
 };
 
-const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSubmit, withAets }: SearchFormProps) => {
+const SearchForm: React.FC<SearchFormProps> = ({
+  aets = [],
+  labelsData = [],
+  onLabelChange = () => {},
+  onSubmit,
+  withAets
+}: SearchFormProps) => {
   const { toastWarning } = useCustomToast();
 
   const [patientName, setPatientName] = useState<string>("");
@@ -86,7 +90,7 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
       dateString = dicomDateFrom + '-';
     }
 
-    //prepare query payload for submission
+
     let queryPayload: QueryPayload = {
       Level: 'Study',
       Query: {
@@ -98,7 +102,8 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
         AccessionNb: accessionNumber,
       }
     };
-    //check if props withAets is true and aets is not empty
+   
+    
     if (withAets && aets.length > 0) {
       const aet = aetsInput?.value;
       if (!aet) {
@@ -114,7 +119,7 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-y-5">
-      <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-2 lg:gap-11">
+      <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-3 lg:gap-11">
         <Input
           label={<Label value="Patient Name *" className="text-sm font-medium text-center" align="left" />}
           placeholder="Search by patient name"
@@ -129,8 +134,6 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
           value={patientId}
           onChange={(event: ChangeEvent<HTMLInputElement>) => setPatientId(event.target.value)}
         />
-      </div>
-      <div className={`grid grid-cols-1 col-span-2 gap-3 ${withAets ? "lg:grid-cols-3" : "lg:grid-cols-4"} lg:gap-11 place-content-center`}>
         <Input
           label={<Label value="Accession" className="text-sm font-medium text-center" align="left" />}
           type="text"
@@ -139,6 +142,8 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
           value={accessionNumber !== null ? accessionNumber.toString() : ""}
           onChange={(event: ChangeEvent<HTMLInputElement>) => setAccessionNumber(event.target.value)}
         />
+      </div>
+      <div className={`grid grid-cols-1 col-span-2 gap-3 ${withAets ? "lg:grid-cols-3" : "lg:grid-cols-4"} lg:gap-11 place-content-center`}>
         <Input
           label={<Label value="Study Description" className="text-sm font-medium text-center" align="left" />}
           placeholder="Search by study description"
@@ -158,7 +163,20 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
             closeMenuOnSelect={false}
           />
         </div>
-        {!withAets && labelsData?.length > 0 ? (
+        <div className="grid">
+          <Label
+            value="Data Preset"
+            className="text-sm font-medium"
+            align="left"
+          />
+          <SelectInput
+            placeholder="Search by data preset"
+            options={dataPresetOptions}
+            aria-label="Data Preset"
+            onChange={(options: Option) => handleChangeDataPreset(options)}
+          />
+        </div>
+        {!withAets && labelsData?.length > 0 && (
           <div className="grid">
             <Label
               value="Label"
@@ -175,22 +193,9 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
               aria-label="Labels"
             />
           </div>
-        ) : null}
+        )}
       </div>
       <div className="grid grid-cols-1 col-span-2 gap-3 lg:grid-cols-3 lg:gap-11">
-        <div className="grid">
-          <Label
-            value="Data Preset"
-            className="text-sm font-medium"
-            align="left"
-          />
-          <SelectInput
-            placeholder="Search by data preset"
-            options={dataPresetOptions}
-            aria-label="Data Preset"
-            onChange={(options: Option) => handleChangeDataPreset(options)}
-          />
-        </div>
         <Input
           type="date"
           label={
@@ -224,13 +229,11 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
           className={"disabled:text-slate-500"}
           disabled={isDateDisabled}
         />
-      </div>
-      <div className="flex justify-center col-span-2 lg:w-1/2 lg:mx-auto lg:gap-11">
         {withAets && aets.length > 0 && (
-          <div className="w-1/2">
+          <div className="grid">
             <Label
               value="AET"
-              className="text-sm font-medium"
+              className="text-sm font-medium text-center"
               align="left"
             />
             <SelectInput
@@ -241,6 +244,8 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => {}, onSu
             />
           </div>
         )}
+      </div>
+      <div className="flex justify-center col-span-2 lg:w-1/2 lg:mx-auto lg:gap-11">
         <div className={`${withAets && aets.length > 0 ? "w-1/2 mt-5" : "w-full"} flex justify-center items-center`}>
           <FormButton text={"Query"} icon={<FaSearch size="1.3rem" />} />
         </div>
