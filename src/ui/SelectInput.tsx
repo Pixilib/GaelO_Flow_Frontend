@@ -20,12 +20,13 @@ const customStyles: StylesConfig<OptionType, boolean> = {
     return {
       ...provided,
       borderRadius: borderRadius,
-      boxShadow: 'none',
-      padding: '0.2em',
+      backgroundColor: '#f8f9fa',
       borderColor: state.isFocused ? '#333182' : '#D1D5DB',
-      borderWidth: '2px',
+      borderWidth: '1px',
+      padding: '0.1em',
+      minHeight: '32px', // Réduire légèrement la hauteur
       '&:hover': {
-        borderColor: state.isFocused ? '#333182' : '#D1D5DB',
+        borderColor: '#333182',
       },
     };
   },
@@ -82,7 +83,8 @@ const SelectInput: React.FC<SelectInputProps> = ({
     placeholder={placeholder}
     styles={customStyles}
     value={options.find(option => option.value === value)}
-    className={`w-full ${rounded ? 'rounded-l-xl' : ''} shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300`}
+    className={`w-full ${rounded ? 'rounded-xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
+    rounded={rounded} // Prop to control rounded corners
   />
 );
 
