@@ -1,25 +1,28 @@
-import { BsFillInfoCircleFill as InfoIcon } from "react-icons/bs"; 
 import React from 'react';
+import { BsFillInfoCircleFill as InfoIcon } from 'react-icons/bs';
 import { Colors } from '../utils/enums';
 
 export interface BannerProps {
-  color?: Colors; // Make color optional to default to 'red' if not provided
-  bordered?: boolean;
+  color?: Colors;
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  buttonLabel?: string;
+  onClickButton?: () => void;
+  message?: string;
 }
 
 const BannerAlert: React.FC<BannerProps> = ({
-  color = Colors.red, // Default color to 'red' if not provided
-  bordered,
+  color = Colors.red, 
   className = '',
   children,
+  buttonLabel = 'See Errors',
+  onClickButton,
+  message,
   ...props
 }) => {
-  // Define base color classes based on the Colors enum
-  const colorClass = getColorClass(color); // Get the Tailwind CSS class based on the color enum
+  
+  const colorClass = getColorClass(color);
 
-  // Function to map Colors enum to Tailwind CSS classes
   function getColorClass(color: Colors): string {
     switch (color) {
       case Colors.warning:
@@ -33,21 +36,28 @@ const BannerAlert: React.FC<BannerProps> = ({
       case Colors.light:
         return 'text-green-800 border-green-300 bg-green-50 dark:text-green-400 dark:border-green-800 dark:bg-gray-800';
       default:
-        return 'text-red-800 border-red-300 bg-red-50 dark:text-red-400 dark:border-red-800 dark:bg-gray-800'; // Default to 'red' if color is not recognized
+        return 'text-red-800 border-red-300 bg-red-50 dark:text-red-400 dark:border-red-800 dark:bg-gray-800';
     }
   }
 
   return (
     <div
       {...props}
-      className={`flex items-center p-4 mb-4 text-sm ${colorClass} border rounded-lg ${className}`}
+      className={`flex items-center p-4 mb-4 border-t-4 rounded-lg shadow ${colorClass} ${className}`}
       role="alert"
     >
-      <InfoIcon className="flex-shrink-0 inline w-6 h-5 me-6" />
-      <span className="sr-only">Info</span>
-      <div>
-        {children}
+      <InfoIcon className="flex-shrink-0 w-5 h-5" />
+      <div className="text-sm font-medium ms-3">
+        {children || message} 
       </div>
+      {onClickButton && (
+        <button
+          className="px-4 py-2 ml-auto font-bold text-white bg-red-800 rounded-2xl hover:bg-red-900 focus:outline-none focus:shadow-outline"
+          onClick={onClickButton}
+        >
+          {buttonLabel}
+        </button>
+      )}
     </div>
   );
 };

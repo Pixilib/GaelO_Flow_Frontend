@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Route, Routes, To, useLocation, useNavigate } from "react-router-dom";
 import { Tabs, Tab, Card, CardBody, CardFooter, Button } from "../ui";
 import { Colors } from "../utils";
 import CreateRoot from "./Create/CreateRoot";
 import ImportRoot from "./Import/ImportRoot";
 import CreateForm from "./Create/CreateForm";
+import BannerAlert from "../ui/BannerAlert";
 
 const ImportCreateRoot = () => {
     const navigate = useNavigate();
@@ -13,8 +14,9 @@ const ImportCreateRoot = () => {
 
     const [isCreatingDicom, setIsCreatingDicom] = useState(false);
     const [showCreateForm, setShowCreateForm] = useState(false);
+    const [fileFormatError, setFileFormatError] = useState(false);
 
-    const handleTabClick = (tab: string) => {
+    const handleTabClick = (tab: To) => {
         setIsCreatingDicom(tab === "create");
         setShowCreateForm(false);
         navigate(tab);
@@ -26,6 +28,19 @@ const ImportCreateRoot = () => {
 
     const handleCloseForm = () => {
         setShowCreateForm(false);
+    };
+
+    const handleFileUpload = (file: { type: string; }) => {
+        if (file.type !== "application/dicom") {
+            setFileFormatError(true);
+        } else {
+            setFileFormatError(false);
+        }
+    };
+
+    const handleFileChange = (event: { target: { files: any[]; }; }) => {
+        const file = event.target.files[0];
+        handleFileUpload(file);
     };
 
     return (
@@ -69,6 +84,12 @@ const ImportCreateRoot = () => {
                     <CreateForm onClose={handleCloseForm} title={"Create Dicom"} />
                 </CardFooter>
             )}
+            {fileFormatError && (
+                <BannerAlert
+                    message="Invalid file format. Please upload a DICOM file."
+                />
+            )}
+            <input type="file" onChange={handleFileChange} accept=".dcm" style={{ display: 'none' }} />
         </Card>
     );
 };

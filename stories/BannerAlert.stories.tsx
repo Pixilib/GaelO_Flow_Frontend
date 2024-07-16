@@ -1,24 +1,25 @@
+import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import BannerAlert, { BannerProps } from '../src/ui/BannerAlert';
 import { Colors } from '../src/utils/enums';
 
 export default {
-    title: "GAELO FLOW UI/BannerAlert",
+  title: "GAELO FLOW UI/BannerAlert",
   component: BannerAlert,
   argTypes: {
-    type: {
+    color: {
       control: {
         type: 'select',
-        options: ['info', 'danger', 'success', 'warning', 'dark'], // Corrected options here
+        options: ['info', 'danger', 'success', 'warning', 'dark']
       },
     },
-    title: {
+    children: {
       control: 'text',
-      description: 'Title of the alert',
+      description: 'Content of the banner',
     },
-    message: {
+    buttonLabel: {
       control: 'text',
-      description: 'Message content of the alert',
+      description: 'Label text for the button',
     },
   },
   parameters: {
@@ -30,24 +31,40 @@ const Template: Story<BannerProps> = (args) => <BannerAlert {...args} />;
 
 export const Info = Template.bind({});
 Info.args = {
-  color: Colors.primary, 
-  children: 'Change a few things up and try submitting again.',
+  color: Colors.primary,
+  children: 'DICOM files import errors',
+  buttonLabel: 'See Errors',
+  onClickButton: () => {
+    alert('Button clicked!');
+  },
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   color: Colors.red,
-  children: 'Change a few things up and try submitting again.',
+  children: 'DICOM files import errors',
+  buttonLabel: 'See Errors',
+  onClickButton: () => {
+    alert('Button clicked!');
+  },
 };
 
 export const Success = Template.bind({});
 Success.args = {
   color: Colors.light,
-  children: 'Change a few things up and try submitting again.',
+  children: 'DICOM files import errors',
+  buttonLabel: 'See Errors',
+  onClickButton: () => {
+    alert('Button clicked!');
+  },
 };
 
 export const Warning = Template.bind({});
 Warning.args = {
   color: Colors.warning,
-  children: 'Change a few things up and try submitting again.',
+  children: 'DICOM files import errors',
+  buttonLabel: 'See Errors',
+  onClickButton: () => {
+    alert('Button clicked!');
+  },
 };
