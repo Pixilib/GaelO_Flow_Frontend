@@ -27,9 +27,9 @@ const CreateRoot: React.FC = () => {
 
     return (
         <div className="flex flex-col items-center w-full">
-            <footer className="fixed bottom-0 left-0 w-full p-4 bg-gray-200">
+            <footer className="fixed bottom-0 left-0 w-full bg-gray-200">
             </footer>
-            <div className="flex flex-col items-center w-full" style={{ marginBottom: "80px" }}>
+            <div className="flex flex-col items-center w-full p-4">
                 <CreateDrop onDrop={handleDropFiles} />
             </div>
         </div>
