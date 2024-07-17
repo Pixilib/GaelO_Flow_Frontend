@@ -20,7 +20,7 @@ const BannerAlert: React.FC<BannerProps> = ({
   message,
   ...props
 }) => {
-  
+
   const colorClass = getColorClass(color);
 
   function getColorClass(color: Colors): string {

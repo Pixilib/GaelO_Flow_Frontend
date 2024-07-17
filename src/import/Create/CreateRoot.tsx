@@ -1,39 +1,56 @@
-import React, { useState } from "react";
-import CreateDrop from "./CreateDrop";
+import React, { useState, useEffect, useRef } from 'react';
+import CreateDrop from './CreateDrop';
+import Model from '../../model/Model';
+import CreateTableSeries from './CreateTableSeries.tsx';
+import CreateTableStudy from './CreateTableStudy.tsx';
 
 const CreateRoot: React.FC = () => {
-    const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+    const refModel = useRef<Model>(new Model());
 
-    const promiseFileReader = (file: File) => {
-        return new Promise<string>((resolve, reject) => {
-            var fr = new FileReader();
-            fr.readAsDataURL(file);
-            fr.onload = () => {
-                if (typeof fr.result === 'string') {
-                    resolve(fr.result);
-                } else {
-                    reject(new Error("Invalid result type"));
-                }
-            };
-            fr.onerror = (error) => {
-                reject(error);
-            };
-        });
+    const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<string | null>(null);
+    const [studiesData, setStudiesData] = useState<any[]>([]);
+    const [seriesData, setSeriesData] = useState<any[]>([]);
+
+    const handleFilesUploaded = () => {
+        setStudiesData(refModel.current.getStudies());
     };
 
-    const handleDropFiles = (files: File[]) => {
-        setSelectedFiles(files);
+    const handleStudyClick = (studyInstanceUID: string) => {
+        setCurrentStudyInstanceUID(studyInstanceUID);
+        updateSeriesData(studyInstanceUID);
     };
+
+    const updateSeriesData = (studyInstanceUID: string) => {
+        setSeriesData(refModel.current.getStudy(studyInstanceUID).getAllseries());
+    };
+
+    useEffect(() => {
+        if (currentStudyInstanceUID) {
+            updateSeriesData(currentStudyInstanceUID);
+        }
+    }, [currentStudyInstanceUID]);
+
 
     return (
-        <div className="flex flex-col items-center w-full">
-            <footer className="fixed bottom-0 left-0 w-full bg-gray-200">
-            </footer>
-            <div className="flex flex-col items-center w-full p-4">
-                <CreateDrop onDrop={handleDropFiles} />
+        <div className='space-y-3'>
+            <CreateDrop model={refModel.current} onFilesUploaded={handleFilesUploaded} />
+            <div className="space-y-3 md:flex md:space-x-3">
+                <div className="md:w-1/2 md:flex-1">
+                    {studiesData.length > 0 && (
+                        <CreateTableStudy
+                            data={studiesData}
+                            selectedStudyInstanceUID={currentStudyInstanceUID}
+                            onStudyClick={handleStudyClick}
+                        />
+                    )}
+                </div>
+                <div className="md:w-1/2 md:flex-1">
+                    {seriesData.length > 0 && (
+                        <CreateTableSeries data={seriesData} />
+                    )}
+                </div>
             </div>
         </div>
     );
 };
-
 export default CreateRoot;

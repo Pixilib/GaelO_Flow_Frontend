@@ -9,7 +9,7 @@ interface ImportTableStudyProps {
     selectedStudyInstanceUID: string | null;
 }
 
-const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
+const CreateTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
@@ -72,4 +72,4 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
     );
 };
 
-export default ImportTableStudy;
+export default CreateTableStudy;
