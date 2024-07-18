@@ -4,7 +4,8 @@ import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
 import Model from '../../model/Model';
 import BannerAlert from '../../ui/BannerAlert';
-import ImportErrorModal from './ImportErrorModal';t
+import ImportErrorModal from './ImportErrorModal';
+import { Colors } from '../../utils';
 
 const ImportRoot: React.FC = () => {
     const refModel = useRef<Model>(new Model());
@@ -52,9 +53,10 @@ const ImportRoot: React.FC = () => {
             />
             {errors.length > 0 && (
                 <BannerAlert
-                    color="red"
+                    color={Colors.red}
                     message={`Erreur d'importation de ${errors.length} fichier(s)`}
                     onClickButton={handleShowModal}
+                    buttonLabel="Voir les erreurs"
                 />
             )}
             <div className="space-y-3 md:flex md:space-x-3">
