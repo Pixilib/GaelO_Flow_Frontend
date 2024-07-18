@@ -10,7 +10,6 @@ type StudyTableProps = {
 };
 
 const StudyTable = ({ studies, onRowClick }: StudyTableProps) => {
-    console.log(studies)
     const rows = useMemo(() => studies, [studies]);
 
     const columns: ColumnDef<StudyMainDicomTags>[] = useMemo(() => [
@@ -29,7 +28,6 @@ const StudyTable = ({ studies, onRowClick }: StudyTableProps) => {
     ], []);
 
     const handleRowClick = (row: any) => {
-        console.log(row);
         onRowClick(row);
     };
 
