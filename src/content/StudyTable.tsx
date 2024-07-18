@@ -2,18 +2,20 @@ import { useMemo } from "react";
 import { Table } from "../ui";
 import { Colors } from "../utils";
 import { ColumnDef } from "@tanstack/react-table";
+import { StudyMainDicomTags } from "../utils/types";
 
 type StudyTableProps = {
     studies: any[];
-    onRowClick: (studyInstanceUID: string, originAET: string) => void;
+    onRowClick: (row:any) => void;
 };
 
 const StudyTable = ({ studies, onRowClick }: StudyTableProps) => {
+    console.log(studies)
     const rows = useMemo(() => studies, [studies]);
 
-    const columns: ColumnDef<any>[] = useMemo(() => [
+    const columns: ColumnDef<StudyMainDicomTags>[] = useMemo(() => [
         {
-            accessorKey: "accessionNumber",
+            accessorKey: "id",
             header: "Accession Number",
         },
         {
@@ -27,7 +29,8 @@ const StudyTable = ({ studies, onRowClick }: StudyTableProps) => {
     ], []);
 
     const handleRowClick = (row: any) => {
-        onRowClick(row.studyInstanceUID, row.originAET);
+        console.log(row);
+        onRowClick(row);
     };
 
     return (
