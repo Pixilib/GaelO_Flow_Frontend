@@ -30,7 +30,7 @@ const BannerAlert: React.FC<BannerProps> = ({
       case Colors.dark:
         return 'text-gray-800 border-gray-300 bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800';
       case Colors.red:
-        return 'text-red-800 border-red-300 bg-red-50 dark:text-red-400 dark:border-red-800 dark:bg-gray-800';
+        return 'text-red-800 border-red-800 bg-white dark:text-red-400 dark:border-red-800 dark:bg-gray-800';
       case Colors.gray:
         return 'text-gray-800 border-gray-300 bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800';
       case Colors.light:

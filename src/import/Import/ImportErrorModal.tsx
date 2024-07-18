@@ -14,11 +14,14 @@ const ImportErrorModal: React.FC<ImportErrorModalProps> = ({ errors, onClose }) 
             </Modal.Header>
             <Modal.Body>
                 <ul>
-                    {errors.map((error, index) => (
-                        <li key={index}>
-                            {Object.keys(error)[0]}: {Object.values(error)[0]}
-                        </li>
-                    ))}
+                    {errors.map((error, index) => {
+                        const [filename, errorMessage] = Object.entries(error)[0];
+                        return (
+                            <li key={index}>
+                                {filename}: {errorMessage}
+                            </li>
+                        );
+                    })}
                 </ul>
             </Modal.Body>
             <Modal.Footer>

@@ -12,7 +12,7 @@ const ImportRoot: React.FC = () => {
     const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<string | null>(null);
     const [studiesData, setStudiesData] = useState<any[]>([]);
     const [seriesData, setSeriesData] = useState<any[]>([]);
-    const [errors, setErrors] = useState<string[]>([]);
+    const [errors, setErrors] = useState<{ [filename: string]: string }[]>([]);
     const [showErrorModal, setShowErrorModal] = useState(false);
 
     const handleFilesUploaded = () => {
@@ -28,8 +28,8 @@ const ImportRoot: React.FC = () => {
         setSeriesData(refModel.current.getStudy(studyInstanceUID).getAllseries());
     };
 
-    const handleImportError = (errorMessage: string) => {
-        setErrors((prevErrors) => [...prevErrors, errorMessage]);
+    const handleImportError = (filename: string, errorMessage: string) => {
+        setErrors((prevErrors) => [...prevErrors, { [filename]: errorMessage }]);
     };
 
     const handleShowModal = () => {
@@ -79,7 +79,6 @@ const ImportRoot: React.FC = () => {
                 <ImportErrorModal
                     errors={errors}
                     onClose={handleCloseModal}
-                    onClearErrors={clearErrors}
                 />
             )}
         </div>
