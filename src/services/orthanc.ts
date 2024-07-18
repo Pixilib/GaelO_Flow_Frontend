@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Patient, Study, Series } from '../utils/types';
+import { Patient, Study, Series, PatientPayload, PatientResponse } from '../utils/types';
 
 export const getOrthancSystem = (): Promise<unknown> => {
   return axios.get("/api/system").then(response => response.data)
@@ -176,6 +176,39 @@ export const getSeriesOfStudy = (studyId: string): Promise<Series[]> => {
       console.error("Error:", error);
       throw error;
     });
+};
+
+
+export const modifyPatient = (patientId: string, patient: PatientPayload): Promise<PatientResponse> => {
+  console.log('patient', patient, patientId)
+  const patientPayloadUpdate = {
+      Replace: {
+          PatientID: patient.replace.patientId,
+          PatientName: patient.replace.patientName,
+          PatientBirthDate: patient.replace.patientBirthDate,
+          PatientSex: patient.replace.patientSex
+      },
+      Remove: patient.remove.map(field => field.charAt(0).toUpperCase() + field.slice(1)),
+      RemovePrivateTags: patient.removePrivateTags,
+      Force: true,
+      Synchronous: false,
+      KeepSource: patient.keepSource
+  };
+  console.log('patientPayloadUpdate', patientPayloadUpdate)
+  return axios.post(`/api/patients/${patientId}/modify`, patientPayloadUpdate)
+      .then((response: any): PatientResponse => {
+          const data = response.data
+          return {
+              id: data.ID,
+              path: data.Path
+          }
+      })
+      .catch(function (error) {
+          if (error.response) {
+              throw error.response;
+          }
+          throw error;
+      });
 };
 
 export const getPatient = (patientId: string): Promise<Patient> => {
