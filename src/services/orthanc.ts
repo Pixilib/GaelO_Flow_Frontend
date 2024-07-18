@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Patient, Study, Series } from "../utils/types";
+import { Patient, Study, Series } from '../utils/types';
 
 export const getOrthancSystem = (): Promise<unknown> => {
   return axios.get("/api/system").then(response => response.data)
@@ -139,22 +139,44 @@ export const getStudies = (studyId: string): Promise<Study> => {
     });
 };
 
-
 export const getSeriesOfStudy = (studyId: string): Promise<Series[]> => {
-  return axios.get("/api/studies/" + studyId + '/series?expand')
-    .then(response => {
-      const data = response.data
-      //Formater camelcase series
-      return data
-    }
-    ).catch(function (error) {
+  return axios.get(`/api/studies/${studyId}/series?expand`)
+    .then((response:any): Series[] => {
+      const mappedData = response.data.map((data: any): Series => ({
+        expectedNumberOfInstances: data.ExpectedNumberOfInstances,
+        id: data.ID,
+        instances: data.Instances,
+        isStable: data.IsStable,
+        labels: data.Labels,
+        lastUpdate: data.LastUpdate,
+        mainDicomTags: {
+          imageOrientationPatient: data.MainDicomTags.ImageOrientationPatient,
+          manufacturer: data.MainDicomTags.Manufacturer,
+          modality: data.MainDicomTags.Modality,
+          operatorsName: data.MainDicomTags.OperatorsName,
+          protocolName: data.MainDicomTags.ProtocolName,
+          seriesDescription: data.MainDicomTags.SeriesDescription,
+          seriesInstanceUID: data.MainDicomTags.SeriesInstanceUID,
+          seriesNumber: data.MainDicomTags.SeriesNumber,
+          stationName: data.MainDicomTags.StationName,
+          seriesDate: data.MainDicomTags.SeriesDate,
+          seriesTime: data.MainDicomTags.SeriesTime
+        },
+        parentStudy: data.ParentStudy,
+        status: data.Status,
+        type: data.Type
+      }));
+      console.log("Mapped series data:", mappedData);
+      return mappedData;
+    }).catch((error:any) => {
       if (error.response) {
+        console.error("Error response:", error.response);
         throw error.response;
       }
+      console.error("Error:", error);
       throw error;
     });
 };
-
 
 export const getPatient = (patientId: string): Promise<Patient> => {
   return axios.get("/api/patients/" + patientId)
