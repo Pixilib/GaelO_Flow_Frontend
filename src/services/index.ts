@@ -8,9 +8,12 @@ import { getJobs, postJobs } from './jobs';
 import { getModalities, updateModality, deleteModality, echoModality } from './modalities';
 import { getOauth2Config, postOauth2Config, deleteOauth2Config } from './oauth2';
 import { getOptions, updateOptions } from './options';
-import { getOrthancSystem, orthancReset, orthancShutdown, updateVerbosity, getVerbosity } from './orthanc';
+import { modifyPatient } from './patients';
+import { getOrthancSystem, deletePatient, orthancReset, orthancShutdown, updateVerbosity, getVerbosity, getPatient } from './orthanc';
 import { updatePeer, getPeers, echoPeer, deletePeer } from './peers';
 import { queryModality, makeRetrieve } from './query';
+import { findTools } from './tools';
+import { useConfirm } from './ConfirmContextProvider';
 export {
     addLabel,
     changePassword,
@@ -19,14 +22,17 @@ export {
     deletePeer,
     deleteRole,
     deleteUser,
+    deletePatient,
     echoModality,
     echoPeer,
+    findTools,
     getLabels,
     getModalities,
     getOauth2Config,
     getOptions,
     getOrthancSystem,
     getLabelsByRoleName,
+    getPatient,
     getPeers,
     getRole,
     getRoles,
@@ -35,6 +41,7 @@ export {
     getUserById,
     getJobs,
     lostPassword,
+    modifyPatient,
     orthancReset,
     orthancShutdown,
     postJobs,
@@ -52,5 +59,6 @@ export {
     updateUser,
     updateRole,
     updateVerbosity,
+    useConfirm
 };
 
