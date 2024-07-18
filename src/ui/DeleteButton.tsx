@@ -1,7 +1,7 @@
 import { BsTrashFill as Delete } from "react-icons/bs";
 
 type DeleteButtonProps = {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement|SVGElement>) => void;
 }
 
 const DeleteButton = ({ onClick }: DeleteButtonProps) => (
@@ -10,7 +10,7 @@ const DeleteButton = ({ onClick }: DeleteButtonProps) => (
     className="transition duration-70 hover:scale-110 fill-danger"
     onClick={(e) => {
       e.stopPropagation();
-      onClick();
+      onClick(e);
     }}
   />
 );

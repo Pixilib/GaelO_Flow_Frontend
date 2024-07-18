@@ -1,8 +1,7 @@
 import { BsPencilFill as Edit } from 'react-icons/bs';
-import { Colors } from '../utils';
 
 type EditButtonProps = {
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement|SVGElement>) => void;
 }
 
 const EditButton = ({ onClick }: EditButtonProps) => (
@@ -11,7 +10,7 @@ const EditButton = ({ onClick }: EditButtonProps) => (
     className="transition duration-70 hover:scale-110 fill-warning"
     onClick={(e) => {
       e.stopPropagation();
-      onClick();
+      onClick(e);
     }}
   />
 );
