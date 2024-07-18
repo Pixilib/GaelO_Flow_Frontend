@@ -90,7 +90,7 @@ function Table<T>({
     enableSorting,
     meta: {
       getRowStyles: getRowStyles, 
-      getRowClasses: (row) => {
+      getRowClasses: (row:any) => {
         const classes = getRowClasses ? getRowClasses(row) : undefined;
         return row.id === selectedRow ? selectedColor : classes; // Applique la couleur de sélection si la ligne est sélectionnée
       }
@@ -110,8 +110,8 @@ function Table<T>({
   };
 
   return (
-    <div className={`rounded-xl shadow-md overflow-visible custom-scrollbar ${className}`}>
-      <div className="overflow-x-auto custom-scrollbar rounded-t-xl">
+    <div className={`overflow-visible custom-scrollbar ${className}`}>
+      <div className="overflow-x-auto border rounded shadow-lg custom-scrollbar rounded-t-xl">
         <table className={`min-w-full border-grayCustom ${className}`}>
           <thead className={headerClass}>
             {table.getHeaderGroups().map(headerGroup => (
