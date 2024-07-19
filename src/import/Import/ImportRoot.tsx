@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
+import { BannerAlert } from '../../ui';
+
+import Model from '../../model/Model';
+import { Colors } from '../../utils';
+
 import ImportDrop from './ImportDrop';
 import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
-import Model from '../../model/Model';
-import BannerAlert from '../../ui/BannerAlert';
 import ImportErrorModal from './ImportErrorModal';
-import { Colors } from '../../utils';
 
 const ImportRoot: React.FC = () => {
     const refModel = useRef<Model>(new Model());
@@ -29,7 +31,7 @@ const ImportRoot: React.FC = () => {
     };
 
     const handleImportError = (filename: string, errorMessage: string) => {
-        setErrors((prevErrors) => [...prevErrors, { [filename]: errorMessage }]);
+        setErrors((prevErrors) => [...prevErrors, { filename, errorMessage }]);
     };
 
     const handleShowModal = () => {
@@ -45,7 +47,7 @@ const ImportRoot: React.FC = () => {
     };
 
     return (
-        <div className='space-y-3'>
+        <div className='flex flex-col gap-3'>
             <ImportDrop
                 model={refModel.current}
                 onError={handleImportError}
@@ -54,13 +56,19 @@ const ImportRoot: React.FC = () => {
             {errors.length > 0 && (
                 <BannerAlert
                     color={Colors.red}
-                    message={`Erreur d'importation de ${errors.length} fichier(s)`}
+                    message={`Error Importing ${errors.length} file(s)`}
                     onClickButton={handleShowModal}
-                    buttonLabel="Voir les erreurs"
+                    buttonLabel="See Errors"
                 />
             )}
-            <div className="space-y-3 md:flex md:space-x-3">
-                <div className="md:w-1/2 md:flex-1">
+            {showErrorModal && (
+                <ImportErrorModal
+                    errors={errors}
+                    onClose={handleCloseModal}
+                />
+            )}
+            <div className="flex lg:max-xl:flex-col gap-3">
+                <div className='flex align-middle'>
                     {studiesData.length > 0 && (
                         <ImportTableStudy
                             data={studiesData}
@@ -69,18 +77,13 @@ const ImportRoot: React.FC = () => {
                         />
                     )}
                 </div>
-                <div className="md:w-1/2 md:flex-1">
+                <div>
                     {seriesData.length > 0 && (
                         <ImportTableSeries data={seriesData} />
                     )}
                 </div>
             </div>
-            {showErrorModal && (
-                <ImportErrorModal
-                    errors={errors}
-                    onClose={handleCloseModal}
-                />
-            )}
+
         </div>
     );
 };

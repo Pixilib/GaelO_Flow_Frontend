@@ -7,7 +7,7 @@ interface OptionType {
 }
 
 interface SelectInputProps {
-  value: string;
+  value: string|null;
   options: OptionType[];
   onChange: (selectedOption: OptionType | null) => void;
   placeholder?: string;
@@ -82,7 +82,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
     onChange={(selectedOption: any) => onChange(selectedOption)}
     placeholder={placeholder}
     styles={customStyles}
-    value={options.find(option => option.value === value)}
+    value={value ? options.find(option => option.value === value) : null}
     className={`w-full ${rounded ? 'rounded-xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
     rounded={rounded} 
   />

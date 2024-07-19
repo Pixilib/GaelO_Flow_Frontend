@@ -65,7 +65,6 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
             className="bg-gray-100"
             enableColumnFilters
             enableSorting
-
             getRowClasses={getRowClasses}
             onRowClick={handleRowClick}
         />

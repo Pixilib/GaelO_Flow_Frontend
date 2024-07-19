@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import { useCustomMutation, useCustomQuery, UserPayload, useCustomToast, Role, Option } from '../../utils';
 import { getRoles, postUsers } from '../../services';
 import { FormCard, FormButton, Input, Label, SelectInput } from '../../ui';
@@ -11,7 +11,7 @@ type UserFormProps = {
   onClose: () => void;
 };
 
-const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
+const CreateForm = ({ title, className, onClose }: UserFormProps) => {
   const { toastSuccess, toastError } = useCustomToast();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -115,8 +115,8 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           <SelectInput
             options={rolesOptions ?? []}
             placeholder="Select a Rôle"
-            onChange={(event) => setSelectedRole({ value: event.value, label: event.value })}
-            value={selectedRole}
+            onChange={(event) => setSelectedRole(event)}
+            value={selectedRole?.value ?? null}
           />
         </label>
       </div>
@@ -128,4 +128,4 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
   );
 };
 
-export default CreateUserForm;
+export default CreateForm;
