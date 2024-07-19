@@ -68,7 +68,7 @@ const UsersRoot = () => {
                             <Button
                                 color={Colors.success}
                                 onClick={() => setIsCreatingUser(true)}
-                                className="flex justify-center gap-4 mb-4 w-52 hover:successHover"
+                                className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
                             >
                                 <CreateUser size={"1.3rem"} />
                                 Create User
@@ -90,7 +90,7 @@ const UsersRoot = () => {
                             <Button
                                 color={Colors.success}
                                 onClick={() => setIsCreatingRole(true)}
-                                className="flex justify-center gap-4 mb-4 w-52 hover:successHover"
+                                className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
                             >
                                 <CreateUser size={"1.3rem"} />
                                 Create Role
@@ -112,7 +112,7 @@ const UsersRoot = () => {
                             <Button
                                 color={Colors.success}
                                 onClick={() => setIsCreatingProvider(true)}
-                                className="flex justify-center gap-4 mb-4 w-52 hover:successHover"
+                                className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
                             >
                                 <CreateUser size={"1.3rem"} />
                                 Create Provider

@@ -126,14 +126,13 @@ const Retrieve = ({ data }: RetrieveProps) => {
                   value={'Start Time'}
                   className="text-sm font-medium text-center"
                   align="center"
-                  spaceY={2}
                 />
               }
               value={startTime ?? undefined}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleTimeStart(event)
               }
-              className={'focus:shadow-2xl shadow-lg'}
+              className={'focus:shadow-2xl '}
             />
             <Input
               type="time"
@@ -142,7 +141,6 @@ const Retrieve = ({ data }: RetrieveProps) => {
                   value={'Stop Time'}
                   className="text-sm font-medium text-center "
                   align="center"
-                  spaceY={2}
                 />
               }
               value={stopTime ?? undefined}
@@ -150,7 +148,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 handleTimeStop(event)
               }
               className={
-                'bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl shadow-lg'
+                'bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl'
               }
             />
             <div className="flex-col text-center">

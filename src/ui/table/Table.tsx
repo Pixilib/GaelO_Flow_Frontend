@@ -25,12 +25,12 @@ type TableProps<TData> = {
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
   enableColumnFilters?: boolean;
-  headerColor: Colors;
+  headerColor?: Colors;
   headerTextSize?: textSize;
   className?: string;
-  pageSize?: number; 
+  pageSize?: number;
   pinFirstColumn?: boolean;
-  pinLastColumn?: boolean; 
+  pinLastColumn?: boolean;
   onRowClick?: (row: TData) => void;
   getRowStyles?: (raw: TData) => object | undefined;
   getRowClasses?: (raw: TData) => string | undefined;
@@ -43,7 +43,7 @@ function Table<T>({
   columns,
   enableSorting = false,
   enableColumnFilters = false,
-  headerColor,
+  headerColor = Colors.white,
   className,
   pageSize = 10,
   headerTextSize = "sm",
@@ -89,7 +89,7 @@ function Table<T>({
     enableColumnFilters,
     enableSorting,
     meta: {
-      getRowStyles: getRowStyles, 
+      getRowStyles: getRowStyles,
       getRowClasses: (row) => {
         const classes = getRowClasses ? getRowClasses(row) : undefined;
         return row.id === selectedRow ? selectedColor : classes; // Applique la couleur de sélection si la ligne est sélectionnée
@@ -110,81 +110,79 @@ function Table<T>({
   };
 
   return (
-    <div className={`rounded-xl shadow-md overflow-visible custom-scrollbar ${className}`}>
-      <div className="overflow-x-auto custom-scrollbar rounded-t-xl">
-        <table className={`min-w-full border-grayCustom ${className}`}>
-          <thead className={`${headerClass} shadow-sm`}>
-            {table.getHeaderGroups().map(headerGroup => (
-              <React.Fragment key={headerGroup.id}>
-                <tr key={headerGroup.id} className={headerClass}>
+    <div className={`rounded-xl shadow-md overflow-visible overflow-x-auto custom-scrollbar ${className}`}>
+      <table className={`min-w-full border-grayCustom ${className}`}>
+        <thead className={`${headerClass} shadow-sm`}>
+          {table.getHeaderGroups().map(headerGroup => (
+            <React.Fragment key={headerGroup.id}>
+              <tr key={headerGroup.id} className={headerClass}>
+                {headerGroup.headers.map((header, index) => (
+                  <th
+                    key={header.id}
+                    colSpan={header.column.getCanFilter() ? 1 : undefined}
+                    className={`h-2 px-2 pt-5 pb-3 py-2 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
+                    onClick={header.column.getToggleSortingHandler()}
+                  >
+                    <div className={`flex items-center justify-center space-x-1 ${headerText}`}>
+                      {flexRender(header.column.columnDef.header, header.getContext())}
+                      {enableSorting && header.column.getCanSort() && (
+                        <span className="ml-1 text-lg text-white cursor-pointer">
+                          {header.column.getIsSorted() === 'desc' ? (
+                            <FcAlphabeticalSortingZa />
+                          ) : (
+                            <FcAlphabeticalSortingAz />
+                          )}
+                        </span>
+                      )}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+              {headerGroup.headers.some(header => header.column.getCanFilter()) && (
+                <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}`}>
                   {headerGroup.headers.map((header, index) => (
                     <th
-                      key={header.id}
-                      colSpan={header.column.getCanFilter() ? 1 : undefined}
-                      className={`h-2 px-2 pt-5 pb-3 py-2 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
-                      onClick={header.column.getToggleSortingHandler()}
+                      key={`${headerGroup.id}-${header.id}-filter-${index}`}
+                      className={`p-2 text-center md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
                     >
-                      <div className={`flex items-center justify-center space-x-1 ${headerText}`}>
-                        {flexRender(header.column.columnDef.header, header.getContext())}
-                        {enableSorting && header.column.getCanSort() && (
-                          <span className="ml-1 text-lg text-white cursor-pointer">
-                            {header.column.getIsSorted() === 'desc' ? (
-                              <FcAlphabeticalSortingZa />
-                            ) : (
-                              <FcAlphabeticalSortingAz />
-                            )}
-                          </span>
-                        )}
-                      </div>
+                      {header.column.getCanFilter() ? (
+                        <div onClick={e => e.stopPropagation()}>
+                          <FilterTable column={header.column} table={table} />
+                        </div>
+                      ) : null}
                     </th>
                   ))}
                 </tr>
-                {headerGroup.headers.some(header => header.column.getCanFilter()) && (
-                  <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}`}>
-                    {headerGroup.headers.map((header, index) => (
-                      <th
-                        key={`${headerGroup.id}-${header.id}-filter-${index}`}
-                        className={`p-2 text-center md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
-                      >
-                        {header.column.getCanFilter() ? (
-                          <div onClick={e => e.stopPropagation()}>
-                            <FilterTable column={header.column} table={table} />
-                          </div>
-                        ) : null}
-                      </th>
-                    ))}
-                  </tr>
-                )}
-              </React.Fragment>
-            ))}
-          </thead>
-          <tbody className="overflow-y-auto custom-scrollbar">
-            {table.getRowModel().rows.map((row, rowIndex) => (
-              <React.Fragment key={`row-${row.id}-${rowIndex}`}>
-                <tr
-                  className={`${table.options.meta?.getRowClasses(row)} border-b border-gray-300`} // Ajout de la ligne grise foncée
-                  style={table.options.meta?.getRowStyles(row)}
-                  onClick={() => {
-                    if (onRowClick) {
-                      onRowClick(row.original);
-                      setSelectedRow(row.id);
-                    }
-                  }}
-                >
-                  {row.getVisibleCells().map((cell, cellIndex) => (
-                    <td
-                      key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                      className={`px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
-                    >
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              )}
+            </React.Fragment>
+          ))}
+        </thead>
+        <tbody className="overflow-y-auto custom-scrollbar">
+          {table.getRowModel().rows.map((row, rowIndex) => (
+            <React.Fragment key={`row-${row.id}-${rowIndex}`}>
+              <tr
+                className={`${table.options.meta?.getRowClasses(row)} border-b border-gray-300`} // Ajout de la ligne grise foncée
+                style={table.options.meta?.getRowStyles(row)}
+                onClick={() => {
+                  if (onRowClick) {
+                    onRowClick(row.original);
+                    setSelectedRow(row.id);
+                  }
+                }}
+              >
+                {row.getVisibleCells().map((cell, cellIndex) => (
+                  <td
+                    key={`cell-${row.id}-${cell.id}-${cellIndex}`}
+                    className={`px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
       <div className="w-full bg-white shadow-sm rounded-b-xl">
         {data.length > 0 && table ? (
           <Footer

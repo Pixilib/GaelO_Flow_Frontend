@@ -6,7 +6,7 @@ interface ImportTableSeriesProps {
     data: object[];
 }
 
-const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
+const CreateTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
@@ -52,4 +52,4 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
     );
 };
 
-export default ImportTableSeries;
+export default CreateTableSeries;

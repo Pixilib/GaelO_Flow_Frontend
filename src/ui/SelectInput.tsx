@@ -7,11 +7,11 @@ interface OptionType {
 }
 
 interface SelectInputProps {
-  value: string;
+  value: string|null;
   options: OptionType[];
   onChange: (selectedOption: OptionType | null) => void;
   placeholder?: string;
-  rounded?: boolean; // Prop pour contrôler les coins arrondis
+  rounded?: boolean;
 }
 
 const customStyles: StylesConfig<OptionType, boolean> = {
@@ -20,12 +20,13 @@ const customStyles: StylesConfig<OptionType, boolean> = {
     return {
       ...provided,
       borderRadius: borderRadius,
-      boxShadow: 'none',
-      padding: '0.2em',
+      backgroundColor: '#f8f9fa',
       borderColor: state.isFocused ? '#333182' : '#D1D5DB',
-      borderWidth: '2px',
+      borderWidth: '1px',
+      padding: '0.1em',
+      minHeight: '32px',
       '&:hover': {
-        borderColor: state.isFocused ? '#333182' : '#D1D5DB',
+        borderColor: '#333182',
       },
     };
   },
@@ -81,8 +82,9 @@ const SelectInput: React.FC<SelectInputProps> = ({
     onChange={(selectedOption: any) => onChange(selectedOption)}
     placeholder={placeholder}
     styles={customStyles}
-    value={options.find(option => option.value === value)}
-    className={`w-full ${rounded ? 'rounded-l-xl' : ''} shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300`}
+    value={value ? options.find(option => option.value === value) : null}
+    className={`w-full ${rounded ? 'rounded-xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
+    rounded={rounded} 
   />
 );
 

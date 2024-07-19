@@ -28,12 +28,15 @@ import Spinner from "./Spinner";
 import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
 import ConfirmModal from './ConfirmModal';
 import Modal from './Modal';
+import BannerAlert from "./BannerAlert";
+import ProgressBar from "./ProgressBar";
 
 export {
     Accordion,
     Badge,
     Banner,
     BannerItems,
+    BannerAlert,
     BooleanIcon,
     Button,
     Card,
@@ -56,6 +59,7 @@ export {
     MenuItem,
     Modal,
     Popover,
+    ProgressBar,
     ProgressCircle,
     RetrieveButton,
     SelectInput,

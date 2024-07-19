@@ -95,22 +95,24 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
                 <div className="h-2"></div>
             </CardBody>
-            <CardFooter className="flex justify-center mt-0 space-x-4 border-t-2 border-ligth" color={Colors.light}>
+            <CardFooter className="flex justify-center mt-0 space-x-4 border-t-2 border-light" color={Colors.light}>
                 <Button color={Colors.warning} onClick={reset}>
                     <RestartIcon size="20px" title="Restart" />
                 </Button>
-                <Button color={Colors.danger} >
+                <Button color={Colors.danger}>
                     <IoClose size="20px" title="Shutdown" />
                 </Button>
                 <Button color={Colors.primary} onClick={orthancInfoHandler}>
                     <BsQuestionLg size="20px" title="Info" />
                 </Button>
-                <SelectInput
-                    value={selectOptions.find(option => option.value === orthancVerbosity)}
-                    onChange={handleSelectChange}
-                    placeholder="Select option"
-                    options={selectOptions}
-                />
+                <div className="w-1/4"> {/* Ajustez la largeur ici */}
+                    <SelectInput
+                        value={selectOptions.find(option => option.value === orthancVerbosity)}
+                        onChange={handleSelectChange}
+                        placeholder="Select option"
+                        options={selectOptions}
+                    />
+                </div>
             </CardFooter>
             {showModal && (
                 <Modal show={showModal} size="lg" onClose={() => setShowModal(false)}>
