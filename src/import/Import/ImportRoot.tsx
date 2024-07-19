@@ -1,15 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import ImportDrop from './ImportDrop';
 import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
 import Model from '../../model/Model';
+import BannerAlert from '../../ui/BannerAlert';
+import ImportErrorModal from './ImportErrorModal';
+import { Colors } from '../../utils';
 
 const ImportRoot: React.FC = () => {
     const refModel = useRef<Model>(new Model());
-
     const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<string | null>(null);
     const [studiesData, setStudiesData] = useState<any[]>([]);
     const [seriesData, setSeriesData] = useState<any[]>([]);
+    const [errors, setErrors] = useState<{ [filename: string]: string }[]>([]);
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
     const handleFilesUploaded = () => {
         setStudiesData(refModel.current.getStudies());
@@ -24,15 +28,37 @@ const ImportRoot: React.FC = () => {
         setSeriesData(refModel.current.getStudy(studyInstanceUID).getAllseries());
     };
 
-    useEffect(() => {
-        if (currentStudyInstanceUID) {
-            updateSeriesData(currentStudyInstanceUID);
-        }
-    }, [currentStudyInstanceUID]);
+    const handleImportError = (filename: string, errorMessage: string) => {
+        setErrors((prevErrors) => [...prevErrors, { [filename]: errorMessage }]);
+    };
+
+    const handleShowModal = () => {
+        setShowErrorModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowErrorModal(false);
+    };
+
+    const clearErrors = () => {
+        setErrors([]);
+    };
 
     return (
         <div className='space-y-3'>
-            <ImportDrop model={refModel.current} onFilesUploaded={handleFilesUploaded} />
+            <ImportDrop
+                model={refModel.current}
+                onError={handleImportError}
+                onFilesUploaded={handleFilesUploaded}
+            />
+            {errors.length > 0 && (
+                <BannerAlert
+                    color={Colors.red}
+                    message={`Erreur d'importation de ${errors.length} fichier(s)`}
+                    onClickButton={handleShowModal}
+                    buttonLabel="Voir les erreurs"
+                />
+            )}
             <div className="space-y-3 md:flex md:space-x-3">
                 <div className="md:w-1/2 md:flex-1">
                     {studiesData.length > 0 && (
@@ -49,6 +75,12 @@ const ImportRoot: React.FC = () => {
                     )}
                 </div>
             </div>
+            {showErrorModal && (
+                <ImportErrorModal
+                    errors={errors}
+                    onClose={handleCloseModal}
+                />
+            )}
         </div>
     );
 };
