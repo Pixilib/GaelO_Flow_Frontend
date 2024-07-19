@@ -126,7 +126,6 @@ const Retrieve = ({ data }: RetrieveProps) => {
                   value={'Start Time'}
                   className="text-sm font-medium text-center"
                   align="center"
-                  spaceY={2}
                 />
               }
               value={startTime ?? undefined}
@@ -142,7 +141,6 @@ const Retrieve = ({ data }: RetrieveProps) => {
                   value={'Stop Time'}
                   className="text-sm font-medium text-center "
                   align="center"
-                  spaceY={2}
                 />
               }
               value={stopTime ?? undefined}

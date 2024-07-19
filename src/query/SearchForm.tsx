@@ -182,7 +182,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
               value="Label"
               className="text-sm font-medium text-center"
               align="left"
-              spaceY={2}
             />
             <SelectInput
               isMulti
@@ -203,7 +202,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
               value={"Data From"}
               className="text-sm font-medium text-center"
               align="left"
-              spaceY={2}
             />
           }
           value={dateFrom ?? undefined}
@@ -220,7 +218,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
               value={"Data To"}
               className={"text-sm font-medium text-center"}
               align="left"
-              spaceY={2}
             />
           }
           value={dateTo ?? undefined}

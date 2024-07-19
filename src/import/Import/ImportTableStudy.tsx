@@ -11,7 +11,6 @@ interface ImportTableStudyProps {
 
 const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
     const rows = useMemo(() => data, [data]);
-
     const columns = useMemo(() => {
         return [
             {
