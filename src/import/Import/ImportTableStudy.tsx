@@ -15,28 +15,23 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
         return [
             {
                 accessorKey: "patient.patientId",
-                header: "Patient ID",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Patient ID"
             },
             {
                 accessorKey: "patient.patientName",
-                header: "Patient Name",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Patient Name"
             },
             {
                 accessorKey: "studyDescription",
-                header: "Study Description",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Study Description"
             },
             {
                 accessorKey: "studyDate",
-                header: "Study Date",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Study Date"
             },
             {
                 accessorKey: "accessionNumber",
-                header: "Accession Number",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Accession Number"
             }
         ];
     }, []);

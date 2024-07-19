@@ -13,23 +13,19 @@ const CreateTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
         return [
             {
                 accessorKey: "seriesDescription",
-                header: "Series Description",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Series Description"
             },
             {
                 accessorKey: "modality",
-                header: "Modality",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Modality"
             },
             {
                 accessorKey: "seriesNumber",
-                header: "Series Number",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Series Number"
             },
             {
                 accessorFn: (originalRow: any) => originalRow.instances.length,
-                header: "Number Of Instances",
-                cell: (info: { getValue: () => any; }) => <span>{info.getValue() as string}</span>
+                header: "Number Of Instances"
             }
         ];
     }, []);

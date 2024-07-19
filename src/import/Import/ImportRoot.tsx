@@ -42,10 +42,6 @@ const ImportRoot: React.FC = () => {
         setShowErrorModal(false);
     };
 
-    const clearErrors = () => {
-        setErrors([]);
-    };
-
     return (
         <div className='flex flex-col gap-3'>
             <ImportDrop
