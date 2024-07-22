@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CardFooter, Button } from '../../ui';
+import { Button } from '../../ui';
 
 import CreateDrop from './CreateDrop';
 import Model from '../../model/Model';
-import CreateTableSeries from './CreateTableSeries.tsx';
-import CreateTableStudy from './CreateTableStudy.tsx';
-import { Colors } from '../../utils/enums.ts';
-import CreateForm from './CreateForm.tsx';
+import CreateTableSeries from './CreateTableSeries';
+import CreateTableStudy from './CreateTableStudy';
+import { Colors } from '../../utils/enums';
 
 const CreateRoot: React.FC = () => {
     const refModel = useRef<Model>(new Model());
@@ -16,17 +15,16 @@ const CreateRoot: React.FC = () => {
     const [seriesData, setSeriesData] = useState<any[]>([]);
     const [showCreateForm, setShowCreateForm] = useState(false);
 
-    const handleCreateDicomClick = () => {
+    const handleFilesUploaded = () => {
+        setStudiesData(refModel.current.getStudies());
+    };
+
+    const handleCreateDicomClick = () => { 
         setShowCreateForm(true);
     };
 
     const handleCloseForm = () => {
         setShowCreateForm(false);
-    };
-
-
-    const handleFilesUploaded = () => {
-        setStudiesData(refModel.current.getStudies());
     };
 
     const handleStudyClick = (studyInstanceUID: string) => {
@@ -43,7 +41,6 @@ const CreateRoot: React.FC = () => {
             updateSeriesData(currentStudyInstanceUID);
         }
     }, [currentStudyInstanceUID]);
-
 
     return (
         <div className='space-y-3'>
@@ -65,21 +62,16 @@ const CreateRoot: React.FC = () => {
                 </div>
             </div>
 
-            {showCreateForm ?
-                <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
-                    <CreateForm onClose={handleCloseForm} title={"Create Dicom"} />
-                </CardFooter>
-                :
-                <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
-                    <Button
-                        color={Colors.success}
-                        onClick={handleCreateDicomClick}
-                    >
-                        Create Dicom
-                    </Button>
-                </CardFooter>
-            }
+            {showCreateForm && (
+                <Button
+                color={Colors.success}
+                onClick={handleCreateDicomClick}
+            >
+                Create Dicom
+            </Button>
+            )}
         </div>
     );
 };
+
 export default CreateRoot;
