@@ -100,7 +100,7 @@ const CardFooter = ({ children, className = "", color }: CardFooterProps) => {
   const footerClass = getColorClass(color);
 
   return (
-    <div data-gaelo-flow="Card-footer" className={`${footerClass} box-border grow px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+    <div data-gaelo-flow="Card-footer" className={`${footerClass} box-border px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
       {children || <div className="grow"></div>}
     </div>
   );
