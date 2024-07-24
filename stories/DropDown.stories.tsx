@@ -1,82 +1,102 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import DropDown from "../src/ui/menu/DropDown";
+import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
+import { DropDown } from '../src/ui';
 
 const meta: Meta<typeof DropDown> = {
-    title: "GAELO FLOW UI/DropDown",
-    component: DropDown,
-    tags: ["autodocs"],
-    argTypes: {
-
-        chevronPosition: { control: { type: 'radio', options: ['left', 'right'] } },
-        children: {
-            control: 'text'
-        },
-        className: {
-            control: 'text'
-        },
-        isOpen: {
-            control: 'boolean'
-        },
-        dropDownOpen: {
-            action: "clicked",
-        },
-        dropDown: {
-            control: "object"
-        },
+  title: 'GAELO FLOW UI/DropDown',
+  component: DropDown,
+  argTypes: {
+    chevronPosition: {
+      control: { type: 'radio' },
+      options: ['left', 'right'],
+      description: 'Position du chevron',
     },
-}
+    className: { control: 'text', description: 'Classes CSS additionnelles' },
+    isOpen: { control: 'boolean', description: 'État ouvert ou fermé du menu déroulant' },
+    dropDownOpen: { action: 'dropDownOpen', description: 'Action déclenchée lors de l\'ouverture du menu déroulant' },
+    children: { control: 'text', description: 'Contenu du bouton' },
+    dropDown: { control: 'boolean', description: 'Contenu du menu déroulant' },
+  },
+  tags: ['molecules', 'dropdown', 'autodocs'],
+} satisfies Meta<typeof DropDown>;
 
 export default meta;
 
-type Story = StoryObj<typeof DropDown>;
+type Story = StoryObj<typeof meta>;
 
-export const DropDownStory: Story = {
-    args: {
-        chevronPosition: "right",
-        children: "DropDown",
-        className: "w-44 blue-gray-500 flex justify-center relative",
-        isOpen: false,
-        dropDownOpen: () => { },
-        dropDown: <div className="absolute top-full text-dark">BannerItems</div>,
+const Template: Story = {
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
 
-    }
-}
+    const handleDropDownOpen = () => {
+      setIsOpen(!isOpen);
+      if (args.dropDownOpen) {
+        args.dropDownOpen();
+      }
+    };
 
-export const DropDownStoryLeft: Story = {
-    args: {
-        chevronPosition: "left",
-        children: "DropDown",
-        className: "w-44 blue-gray-300 flex justify-center relative",
-        isOpen: false,
-        dropDownOpen: () => { },
-        dropDown: <div className="absolute top-full text-dark">BannerItems</div>,
-    }
-}
-export const DropDownStoryList: Story = {
-    args: {
-        chevronPosition: "right",
-        children: "DropDown with list",
-        className: "w-44 blue-gray-500 flex justify-center relative shadow-md",
-        isOpen: false,
-        dropDownOpen: () => { },
-        dropDown: (
-            <div className="absolute p-2 bg-white rounded-md shadow-md top-full text-dark">
-                <ul>
-                    <li>
-                        <input type="checkbox" id="option1" />
-                        <label htmlFor="option1">Option 1</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="option2" />
-                        <label htmlFor="option2">Option 2</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="option3" />
-                        <label htmlFor="option3">Option 3</label>
-                    </li>
-                </ul>
-            </div>
-        ),
-    },
+    return (
+      <DropDown
+        {...args}
+        isOpen={isOpen}
+        dropDownOpen={handleDropDownOpen}
+      >
+        {args.children}
+      </DropDown>
+    );
+  }
 };
 
+export const Default: Story = {
+  ...Template,
+  args: {
+    children: 'Menu déroulant',
+    dropDown: true,
+    chevronPosition: 'right',
+  },
+};
+
+export const WithoutChevron: Story = {
+  ...Template,
+  args: {
+    children: 'Menu sans chevron',
+    dropDown: true,
+    chevronPosition: undefined,
+  },
+};
+
+export const CustomContent: Story = {
+  ...Template,
+  args: {
+    children: 'Menu avec contenu personnalisé',
+    dropDown: (
+      <div className="absolute p-2 bg-white rounded-md shadow-md top-full text-dark">
+        <ul>
+          <li>
+            <input type="checkbox" id="option1" />
+            <label htmlFor="option1">Option personnalisée 1</label>
+          </li>
+          <li>
+            <input type="checkbox" id="option2" />
+            <label htmlFor="option2">Option personnalisée 2</label>
+          </li>
+          <li>
+            <input type="checkbox" id="option3" />
+            <label htmlFor="option3">Option personnalisée 3</label>
+          </li>
+        </ul>
+      </div>
+    ),
+    chevronPosition: 'left',
+  },
+};
+
+export const InitiallyOpen: Story = {
+  ...Template,
+  args: {
+    children: 'Menu initialement ouvert',
+    dropDown: true,
+    isOpen: true,
+    chevronPosition: 'right',
+  },
+};
