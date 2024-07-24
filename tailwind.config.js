@@ -5,6 +5,7 @@ export default {
     "node_modules/preline/dist/*.js"
   ],
   theme: {
+    prefix: 'hs-',
     extend: {
       fontSize: {
         '10': '10px',
@@ -74,6 +75,7 @@ export default {
     },
   },
   plugins: [
+    require('@tailwindcss/forms'),
     require('tailwind-scrollbar'),
     require('preline/plugin'),
   ],
