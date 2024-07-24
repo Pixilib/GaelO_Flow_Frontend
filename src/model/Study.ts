@@ -25,7 +25,7 @@ class Study {
         this.studyTime = study.mainDicomTags.studyTime;
         this.studyInstanceUID = study.mainDicomTags.studyInstanceUID;
         this.patient = new Patient(study.parentPatient)
-        this.patient.setPatientId(study.patientMainDicomTags.patientID)
+        this.patient.setPatientId(study.patientMainDicomTags.patientId)
         this.patient.setPatientName(study.patientMainDicomTags.patientName)
         this.patient.setPatientBirthDate(study.patientMainDicomTags.patientBirthDate)
         this.patient.setPatientSex(study.patientMainDicomTags.patientSex)
@@ -36,9 +36,11 @@ class Study {
         this.studyDate = studyData.mainDicomTags.studyDate;
         this.studyTime = studyData.mainDicomTags.studyTime;
         this.studyInstanceUID = studyData.mainDicomTags.studyInstanceUID;
+
     }
 
-    setPatient = (patient: Patient) => {
+    setPatient =
+     (patient: Patient) => {
         this.patient = patient
     }
 
@@ -75,7 +77,7 @@ class Study {
             'studyTime': this.studyTime,
             'studyInstanceUID': this.studyInstanceUID,
             'series': this.series.map(series => series.toJSON()),
-            'patient': this.patient?.toJSON() ?? null
+            'patient': this.patient?.id
         }
     }
 
