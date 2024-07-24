@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useCustomToast } from '../../utils';
 import { FormCard, FormButton, Input, Label, Button } from '../../ui';
-import { FaPlus as AddIcon, FaPaperPlane as SendIcon } from 'react-icons/fa';
+import { FaPlus as AddIcon } from 'react-icons/fa';
 import { Colors } from "../../utils/enums";
 
 interface TagFormProps {
@@ -11,20 +11,23 @@ interface TagFormProps {
   onAddTag: (tag: { TagName: string; Value: string }) => void;
 }
 
-const CreateForm = ({ title, className, onClose }: TagFormProps) => {
+const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
   const { toastSuccess } = useCustomToast();
   const [tag, setTag] = useState('');
   const [value, setValue] = useState('');
 
   const handleAddTag = () => {
-    console.log(`Tag: ${tag}, Value: ${value}`);
-    setTag('');
-    setValue('');
+    if (tag && value) {
+      onAddTag({ TagName: tag, Value: value }); // Appel de onAddTag pour mettre à jour l'état du parent
+      console.log(`Tag: ${tag}, Value: ${value}`);
+      setTag('');
+      setValue('');
+    }
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    toastSuccess('Tags sent successfully');
+    toastSuccess('Tags envoyés avec succès');
   };
 
   return (
@@ -38,7 +41,7 @@ const CreateForm = ({ title, className, onClose }: TagFormProps) => {
         <div className="flex-1">
           <Input
             label={<Label value="Tag" className="text-sm font-medium" />}
-            placeholder="Enter tag"
+            placeholder="Entrer le tag"
             value={tag}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setTag(event.target.value)}
             className="w-full"
@@ -46,8 +49,8 @@ const CreateForm = ({ title, className, onClose }: TagFormProps) => {
         </div>
         <div className="flex-1">
           <Input
-            label={<Label value="Value" className="text-sm font-medium" />}
-            placeholder="Enter value"
+            label={<Label value="Valeur" className="text-sm font-medium" />}
+            placeholder="Entrer la valeur"
             value={value}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
             className="w-full"
@@ -59,13 +62,12 @@ const CreateForm = ({ title, className, onClose }: TagFormProps) => {
           className="flex items-center h-10 px-4 space-x-2"
         >
           <AddIcon />
-          Add Tag
+          Ajouter Tag
         </Button>
       </div>
       <div className="flex justify-center mt-3">
         <FormButton
-          text="Send"
-          icon={<SendIcon />}
+          text="Créer Dicom"
         />
       </div>
     </FormCard>

@@ -38,23 +38,28 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
             header: 'Actions',
             Cell: ({ row }: { row: any }) => (
                 <Button
-                onClick={() => onDeleteTag(row.original.TagName)}
-                color={Colors.danger}
-                className="flex items-center space-x-2"
-            >
-                Delete
-            </Button>
+                    onClick={() => onDeleteTag(row.original.TagName)}
+                    color={Colors.danger}
+                    className="flex items-center space-x-2"
+                >
+                    Delete
+                </Button>
             )
         }
     ];
 
     return (
-        <div className="mx-6 mt-4">
+        <div className="w-full mt-4">
             <Table
                 columns={columns}
                 data={data}
-                className="table table-striped table-bordered"
+                className="w-full border-collapse table-auto"
+                headerTextSize='xs'
+                headerColor={Colors.white}
+                enableColumnFilters
+                enableSorting
             />
+
         </div>
     );
 };
