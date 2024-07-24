@@ -68,16 +68,6 @@ const CreateRoot: React.FC = () => {
                 <CreateDrop onDrop={handleFilesUploaded} />
             </div>
 
-            {tags.length > 0 && (
-                <div className="mx-6 mt-4">
-                    <TagTable
-                        data={tags}
-                        onDataUpdate={handleTagUpdate}
-                        onDeleteTag={handleTagDelete}
-                    />
-                </div>
-            )}
-
             <div className="w-full mt-4 space-y-3 md:flex md:space-x-3">
                 <div className="md:w-1/2 md:flex-1">
                     {studiesData.length > 0 && (
@@ -95,22 +85,30 @@ const CreateRoot: React.FC = () => {
                 </div>
             </div>
 
+            {tags.length > 0 && (
+                <div className="mx-6 mt-4">
+                    <TagTable
+                        data={tags}
+                        onDataUpdate={handleTagUpdate}
+                        onDeleteTag={handleTagDelete}
+                    />
+                </div>
+            )}
+
             <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
                 {showCreateForm ? (
-                    <>
-                        <CreateForm
-                            onClose={handleCloseForm}
-                            title={"Create Dicom"}
-                            onAddTag={handleAddTag}
-                        />
-                    </>
+                    <CreateForm
+                        onClose={handleCloseForm}
+                        title="Créer Tag"
+                        onAddTag={handleAddTag}
+                    />
                 ) : (
                     <Button
                         color={Colors.success}
                         onClick={handleCreateDicomClick}
                         className="flex items-center space-x-2">
                         <AddIcon />
-                        <span>Create Dicom</span>
+                        <span>Créer Tag</span>
                     </Button>
                 )}
             </CardFooter>
