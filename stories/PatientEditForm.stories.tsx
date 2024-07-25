@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import PatientEditForm from '../src/content/PatientEditForm';
-import Patient from '../src/model/Patient'; 
+import PatientEditForm from '../src/content/patient/PatientEditForm';
+import Patient from '../src/model/Patient';
 import { PatientPayload } from '../src/utils/types';
 
 const patient = new Patient('89083e2b-c811de66-692d1fe7-cda37cfe-9805effd');
 patient.fillData({
-    patientId: '202200419918105350042',
-    patientName: 'Alice',
-    patientBirthDate: '19800520',
-    patientSex: 'F',
+  patientId: '202200419918105350042',
+  patientName: 'Alice',
+  patientBirthDate: '19800520',
+  patientSex: 'F',
 });
 
 const meta: Meta<typeof PatientEditForm> = {
