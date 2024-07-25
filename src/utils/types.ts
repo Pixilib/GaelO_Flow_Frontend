@@ -231,6 +231,7 @@ export type SeriesMainDicomTags = {
   seriesDate: string | null;
   seriesTime: string | null;
 };
+
 export type PatientMainDicomTags = {
   patientBirthDate: string | null;
   patientId: string;
@@ -241,7 +242,7 @@ export type PatientMainDicomTags = {
 export type StudyMainDicomTags = {
   accessionNumber: string | null;
   institutionName?: string | null;
-  referringPhysicianName: string | null;
+  referringPhysicianName?: string | null;
   studyDate: string | null;
   studyDescription: string | null;
   studyId: string | null;
@@ -252,7 +253,7 @@ export type Series = {
   expectedNumberOfInstances: number | null;
   id: string;
   instances: string[];
-  isStable: string;
+  isStable: boolean;
   labels: string[];
   lastUpdate: string;
   mainDicomTags:SeriesMainDicomTags
@@ -285,7 +286,7 @@ export type PatientPayload = {
   keepSource: boolean;
 };
 
-export type PatientResponse = {
+export type OrthancResponse = {
  id: string;
  path: string;
 }
@@ -301,3 +302,30 @@ export type Study = {
   type: string;
 };
 
+export type StudyPayload = {
+  replace: Partial<StudyMainDicomTags>;
+  remove: string[];
+  removePrivateTags: boolean;
+  force: boolean;
+  synchronous: boolean;
+  keepSource: boolean;
+};
+
+// export type SeriesPayload = {
+//   replace: Partial<SeriesMainDicomTags>;
+//   remove: string[];
+//   removePrivateTags: boolean;
+//   force: boolean;
+//   synchronous: boolean;
+//   keepSource: boolean;
+// };
+export type SeriesPayload = {
+  replace: Partial<{
+      [K in keyof Series['mainDicomTags']]: string | null;
+  }>;
+  remove: string[];
+  removePrivateTags: boolean;
+  keepSource: boolean;
+  force: boolean;
+  synchronous: boolean;
+}
