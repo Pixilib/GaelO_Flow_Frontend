@@ -18,7 +18,7 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
 
   const handleAddTag = () => {
     if (tag && value) {
-      onAddTag({ TagName: tag, Value: value }); // Appel de onAddTag pour mettre à jour l'état du parent
+      onAddTag({ TagName: tag, Value: value });
       console.log(`Tag: ${tag}, Value: ${value}`);
       setTag('');
       setValue('');
@@ -67,7 +67,7 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
       </div>
       <div className="flex justify-center mt-3">
         <FormButton
-          text="Créer Dicom"
+          text="Create Dicom"
         />
       </div>
     </FormCard>

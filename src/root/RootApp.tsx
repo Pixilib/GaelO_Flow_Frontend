@@ -49,28 +49,25 @@ const RootApp = () => {
       "/": "Home"
     };
     return titlePath[location.pathname];
-  }, [location.pathname])
+  }, [location.pathname]);
 
   return (
     <div className="flex w-screen h-screen bg-white">
       <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
       <div className="flex flex-col flex-1 overflow-auto bg-indigo-100 custom-scrollbar">
-        <Header
-          title={title}
-          openItem={openItem}
-          setOpenItem={setOpenItem}
-        />
+        <Header title={title} openItem={openItem} setOpenItem={setOpenItem} />
         <div className="mx-6 my-6">
-        <Routes>
+          <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />
-            <Route path="/orthanc-content" element={<ContentRoot/>} />
+            <Route path="/orthanc-content" element={<ContentRoot />} />
           </Routes>
         </div>
       </div>
     </div>
   );
 };
+
 export default RootApp;

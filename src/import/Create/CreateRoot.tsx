@@ -100,7 +100,7 @@ const CreateRoot: React.FC = () => {
         <CreateForm
             onClose={handleCloseForm}
             title="Create Dicom"
-            onAddTag={handleAddTag} // Passe la fonction handleAddTag en tant que prop
+            onAddTag={handleAddTag}
         />
     ) : (
         <Button

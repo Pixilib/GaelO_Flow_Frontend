@@ -7,7 +7,6 @@ import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
 import ImportErrorModal from './ImportErrorModal';
 
-// Define a type for errors
 interface ImportError {
     filename: string;
     errorMessage: string;
