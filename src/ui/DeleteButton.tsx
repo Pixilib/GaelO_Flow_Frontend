@@ -15,4 +15,5 @@ const DeleteButton = ({ onClick }: DeleteButtonProps) => (
     }}
   />
 );
+
 export default DeleteButton;

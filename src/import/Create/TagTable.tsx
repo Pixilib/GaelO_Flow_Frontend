@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button } from '../../ui';
 import { Table } from '../../ui';
-import { Colors } from "../../utils/enums";
-
+import { ColumnDef } from '@tanstack/react-table';
+import DeleteButton from '../../ui/DeleteButton';
 type TagTableProps = {
     data: { TagName: string, Value: string }[];
     onDataUpdate: (tagName: string, columnId: string, value: string) => void;
@@ -14,21 +13,19 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
         onDataUpdate(tagName, columnId, event.target.value);
     };
 
-    const columns = [
+    const columns: ColumnDef<{ TagName: string, Value: string }>[] = [
         {
-            id: 'TagName',
+            accessorKey: 'TagName',
             header: 'Tag Name',
-            accessor: 'TagName'
         },
         {
-            id: 'Value',
+            accessorKey: 'Value',
             header: 'Value',
-            accessor: 'Value',
-            Cell: ({ row, column }: { row: any, column: any }) => (
+            cell: ({ row }) => (
                 <input
                     type="text"
-                    value={row.values[column.id]}
-                    onChange={(event) => handleInputChange(row.original.TagName, column.id, event)}
+                    value={row.original.Value}
+                    onChange={(event) => handleInputChange(row.original.TagName, 'Value', event)}
                     className="form-control"
                 />
             )
@@ -36,14 +33,10 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
         {
             id: 'delete',
             header: 'Actions',
-            Cell: ({ row }: { row: any }) => (
-                <Button
+            cell: ({ row }) => (
+                <DeleteButton
                     onClick={() => onDeleteTag(row.original.TagName)}
-                    color={Colors.danger}
-                    className="flex items-center space-x-2"
-                >
-                    Delete
-                </Button>
+                />
             )
         }
     ];
@@ -53,13 +46,10 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
             <Table
                 columns={columns}
                 data={data}
-                className="w-full border-collapse table-auto"
-                headerTextSize='xs'
-                headerColor={Colors.white}
-                enableColumnFilters
+                className="bg-gray-100"
                 enableSorting
+                enableColumnFilters
             />
-
         </div>
     );
 };

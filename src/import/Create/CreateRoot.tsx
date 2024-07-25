@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CardFooter, Button } from '../../ui';
 import { FaPlus as AddIcon } from 'react-icons/fa';
-
 import Model from '../../model/Model';
 import CreateTableSeries from './CreateTableSeries';
 import CreateTableStudy from './CreateTableStudy';
@@ -12,24 +11,15 @@ import { Colors } from '../../utils';
 
 const CreateRoot: React.FC = () => {
     const refModel = useRef<Model>(new Model());
-
     const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<string | null>(null);
     const [studiesData, setStudiesData] = useState<any[]>([]);
     const [seriesData, setSeriesData] = useState<any[]>([]);
     const [showCreateForm, setShowCreateForm] = useState(false);
     const [tags, setTags] = useState<{ TagName: string, Value: string }[]>([]);
 
-    const handleCreateDicomClick = () => {
-        setShowCreateForm(true);
-    };
-
-    const handleCloseForm = () => {
-        setShowCreateForm(false);
-    };
-
-    const handleFilesUploaded = () => {
-        setStudiesData(refModel.current.getStudies());
-    };
+    const handleCreateDicomClick = () => setShowCreateForm(true);
+    const handleCloseForm = () => setShowCreateForm(false);
+    const handleFilesUploaded = () => setStudiesData(refModel.current.getStudies());
 
     const handleStudyClick = (studyInstanceUID: string) => {
         setCurrentStudyInstanceUID(studyInstanceUID);
@@ -64,7 +54,7 @@ const CreateRoot: React.FC = () => {
 
     return (
         <>
-            <div className='mx-6 mt-6 smb-4'>
+            <div className='mx-6 mt-6 mb-2'>
                 <CreateDrop onDrop={handleFilesUploaded} />
             </div>
 
@@ -86,7 +76,7 @@ const CreateRoot: React.FC = () => {
             </div>
 
             {tags.length > 0 && (
-                <div className="mx-6 mt-4">
+                <div className="mx-6 mb-8">
                     <TagTable
                         data={tags}
                         onDataUpdate={handleTagUpdate}
@@ -95,23 +85,24 @@ const CreateRoot: React.FC = () => {
                 </div>
             )}
 
-<CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
-    {showCreateForm ? (
-        <CreateForm
-            onClose={handleCloseForm}
-            title="Create Dicom"
-            onAddTag={handleAddTag}
-        />
-    ) : (
-        <Button
-            color={Colors.success}
-            onClick={handleCreateDicomClick}
-            className="flex items-center space-x-2">
-            <AddIcon />
-            <span>Créer Tag</span>
-        </Button>
-    )}
-</CardFooter>
+            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
+                {showCreateForm ? (
+                    <CreateForm
+                        onClose={handleCloseForm}
+                        title="Create Dicom"
+                        onAddTag={handleAddTag}
+                    />
+                ) : (
+                    <Button
+                        color={Colors.success}
+                        onClick={handleCreateDicomClick}
+                        className="flex items-center space-x-2"
+                    >
+                        <AddIcon />
+                        <span>Créer Tag</span>
+                    </Button>
+                )}
+            </CardFooter>
         </>
     );
 };
