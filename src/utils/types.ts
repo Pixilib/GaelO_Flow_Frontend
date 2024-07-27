@@ -320,9 +320,7 @@ export type StudyPayload = {
 //   keepSource: boolean;
 // };
 export type SeriesPayload = {
-  replace: Partial<{
-      [K in keyof Series['mainDicomTags']]: string | null;
-  }>;
+  replace: Partial<SeriesMainDicomTags>;
   remove: string[];
   removePrivateTags: boolean;
   keepSource: boolean;
