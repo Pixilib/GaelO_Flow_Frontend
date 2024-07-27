@@ -10,6 +10,8 @@ type AccordionPatientProps = {
 };
 
 const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient }) => {
+    console.log('AccordionPatient rendering with patient:', patient);
+
     return (
         <Accordion
             summary={

@@ -18,7 +18,7 @@ const handleClick = (e: React.MouseEvent) => {
 }
 function EntityActions<T>({ entity, options }: EntityActionsProps<T>) {
   return (
-    <div onClick={handleClick} className="z-50">
+    <div onClick={handleClick} className="">
 
       <DropdownButton
         options={options}
