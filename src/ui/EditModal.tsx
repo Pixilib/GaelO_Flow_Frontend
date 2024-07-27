@@ -1,5 +1,6 @@
 import React from 'react';
 import FormModal from './FormModal';
+import Spinner from './Spinner';
 
 export type EditModalSubmitParams<P> = {
     id: string;
@@ -8,15 +9,16 @@ export type EditModalSubmitParams<P> = {
 
 type EditModalProps<T, P> = {
     title: string;
-    data: T | undefined;
+    data: T ;
     show: boolean;
     onClose: () => void;
     onSubmit: (params: EditModalSubmitParams<P>) => void;
     FormComponent: React.ComponentType<EditModalFormProps<T, P>>;
+    children?: React.ReactNode;
 };
 
 export type EditModalFormProps<T, P> = {
-    data: T | undefined;
+    data: T;
     onSubmit: (params: EditModalSubmitParams<P>) => void;
     onCancel: () => void;
 };
@@ -27,12 +29,13 @@ const EditModal = <T, P>({
     show,
     onClose,
     onSubmit,
-    FormComponent
+    FormComponent,
+    children
 }: EditModalProps<T, P>) => {
-    
+
     const handleFormSubmit = (params: EditModalSubmitParams<P>) => {
+        console.log('EditModal handleFormSubmit', params);
         onSubmit(params);
-        onClose();
     };
 
     return (
@@ -41,11 +44,14 @@ const EditModal = <T, P>({
             onClose={onClose}
             show={show}
         >
-            <FormComponent
-                data={data}
-                onSubmit={handleFormSubmit}
-                onCancel={onClose}
-            />
+            {data ?
+                <FormComponent
+                    data={data}
+                    onSubmit={handleFormSubmit}
+                    onCancel={onClose}
+                /> :
+                <Spinner />}
+            {children}
         </FormModal>
     );
 }

@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
-import { Button, Input, Label, Spinner } from "../../ui";
-import { Study, StudyPayload, StudyMainDicomTags } from '../../utils/types';
-import { BsTrashFill as Delete } from "react-icons/bs";
-import CheckBox from "../../ui/Checkbox";
-import { Colors } from "../../utils";
-import { EditModalFormProps } from "../../ui/EditModal";
 
+
+import React, { ChangeEvent, useState, useEffect } from "react";
+import { Study, StudyPayload, StudyMainDicomTags } from '../../utils/types';
+import { EditModalFormProps } from "../../ui/EditModal";
+import InputWithDelete from "../../ui/InputWithDelete";
+import CheckBox from "../../ui/Checkbox";
+import FormJobsActions from "../FormJobsActions";
 
 const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data, onSubmit, onCancel }) => {
     const [accessionNumber, setAccessionNumber] = useState<string | null>(null);
@@ -16,17 +16,15 @@ const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data
     const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
+    
+    console.log('StudyEditForm rendering with data:', data);
 
-    if(!data) return <Spinner />;
-    console.log(data);
     useEffect(() => {
-        if (data && data.mainDicomTags) {
-            setAccessionNumber(data.mainDicomTags.accessionNumber || null);
-            setStudyDate(data.mainDicomTags.studyDate || null);
-            setStudyDescription(data.mainDicomTags.studyDescription || null);
-            setStudyId(data.mainDicomTags.studyId || null);
-            setStudyTime(data.mainDicomTags.studyTime || null);
-        }
+        setAccessionNumber(data.mainDicomTags.accessionNumber || null);
+        setStudyDate(data.mainDicomTags.studyDate || null);
+        setStudyDescription(data.mainDicomTags.studyDescription || null);
+        setStudyId(data.mainDicomTags.studyId || null);
+        setStudyTime(data.mainDicomTags.studyTime || null);
     }, [data]);
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
@@ -35,7 +33,7 @@ const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data
         );
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>| React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<StudyMainDicomTags> = {};
 
@@ -53,82 +51,58 @@ const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data
             force: true,
             synchronous: false,
         };
-
-        onSubmit({id:data.id ,payload});
+        console.log('payload', payload, "data", data);
+        onSubmit({id: data.id, payload});
     };
+
 
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-                <fieldset className="flex items-center space-x-2">
-                    <Input
-                        label={<Label value="Accession Number" className="text-sm font-medium" />}
-                        value={accessionNumber || ""}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setAccessionNumber(e.target.value)}
-                    />
-                    <CheckBox
-                        label={<Delete size={"1.3rem"} className="fill-danger" />}
-                        checked={fieldsToRemove.includes("accessionNumber")}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleFieldRemoval("accessionNumber", e.target.checked)}
-                        bordered={false}
-                    />
-                </fieldset>
-                <fieldset className="flex items-center space-x-2">
-                    <Input
-                        label={<Label value="Study Date" className="text-sm font-medium" />}
-                        value={studyDate || ""}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyDate(e.target.value)}
-                    />
-                    <CheckBox
-                        label={<Delete size={"1.3rem"} className="fill-danger" />}
-                        checked={fieldsToRemove.includes("studyDate")}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleFieldRemoval("studyDate", e.target.checked)}
-                        bordered={false}
-                    />
-                </fieldset>
+                  <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+                <InputWithDelete
+                    label="Accession Number"
+                    value={accessionNumber}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setAccessionNumber(e.target.value)}
+                    onRemove={handleFieldRemoval}
+                    fieldName="accessionNumber"
+                    fieldsToRemove={fieldsToRemove}
+                />
+                <InputWithDelete
+                    label="Study Date"
+                    value={studyDate}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyDate(e.target.value)}
+                    onRemove={handleFieldRemoval}
+                    fieldName="studyDate"
+                    fieldsToRemove={fieldsToRemove}
+                />
             </div>
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-                <fieldset className="flex items-center space-x-2">
-                    <Input
-                        label={<Label value="Study Description" className="text-sm font-medium" />}
-                        value={studyDescription || ""}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyDescription(e.target.value)}
-                    />
-                    <CheckBox
-                        label={<Delete size={"1.3rem"} className="fill-danger" />}
-                        checked={fieldsToRemove.includes("studyDescription")}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleFieldRemoval("studyDescription", e.target.checked)}
-                        bordered={false}
-                    />
-                </fieldset>
-                <fieldset className="flex items-center space-x-2">
-                    <Input
-                        label={<Label value="Study ID" className="text-sm font-medium" />}
-                        value={studyId || ""}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyId(e.target.value)}
-                    />
-                    <CheckBox
-                        label={<Delete size={"1.3rem"} className="fill-danger" />}
-                        checked={fieldsToRemove.includes("studyId")}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleFieldRemoval("studyId", e.target.checked)}
-                        bordered={false}
-                    />
-                </fieldset>
+                <InputWithDelete
+                    label="Study Description"
+                    value={studyDescription}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyDescription(e.target.value)}
+                    onRemove={handleFieldRemoval}
+                    fieldName="studyDescription"
+                    fieldsToRemove={fieldsToRemove}
+                />
+                <InputWithDelete
+                    label="Study ID"
+                    value={studyId}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyId(e.target.value)}
+                    onRemove={handleFieldRemoval}
+                    fieldName="studyId"
+                    fieldsToRemove={fieldsToRemove}
+                />
             </div>
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-                <fieldset className="flex items-center space-x-2">
-                    <Input
-                        label={<Label value="Study Time" className="text-sm font-medium" />}
-                        value={studyTime || ""}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyTime(e.target.value)}
-                    />
-                    <CheckBox
-                        label={<Delete size={"1.3rem"} className="fill-danger" />}
-                        checked={fieldsToRemove.includes("studyTime")}
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => handleFieldRemoval("studyTime", e.target.checked)}
-                        bordered={false}
-                    />
-                </fieldset>
+                <InputWithDelete
+                    label="Study Time"
+                    value={studyTime}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyTime(e.target.value)}
+                    onRemove={handleFieldRemoval}
+                    fieldName="studyTime"
+                    fieldsToRemove={fieldsToRemove}
+                />
             </div>
             <div className="grid justify-center grid-cols-1 lg:grid-cols-2">
                 <CheckBox
@@ -144,14 +118,11 @@ const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data
                     bordered={false}
                 />
             </div>
-            <div className="flex justify-center mt-4 space-x-4">
-                <Button color={Colors.secondary} type="button" onClick={onCancel}>
-                    Cancel
-                </Button>
-                <Button type="submit" color={Colors.success}>
-                    Save Changes
-                </Button>
-            </div>
+            
+            <FormJobsActions
+                onCancel={onCancel}
+                onSubmit={handleSubmit}
+            />
         </form>
     );
 };
