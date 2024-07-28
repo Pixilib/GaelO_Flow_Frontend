@@ -7,7 +7,7 @@ export const queryModality = (
 ): Promise<QueryResponse[]> => {
   return axios
     .post(`/api/modalities/${modality}/parsed-query`, payload)
-    .then((response: any) => {
+    .then((response: any):QueryResponse[] => {
       return response.data.map(
         (data: any): QueryResponse => ({
           answerId: data.AnswerId,

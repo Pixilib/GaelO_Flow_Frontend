@@ -1,13 +1,18 @@
+import React, { useEffect } from 'react';
 import { useCustomQuery } from "../utils";
 import { OrthancJob } from "../utils/types";
 import { getJobById } from "../services/jobs";
 import { ProgressCircle } from "../ui";
+import { setJobCompleted } from "../reducers/JobSlice";
+import { useDispatch } from "react-redux";
 
 type ProgressJobsProps = {
-    jobId: string,
+    jobId: string
+    size?: number
 }
 
-const ProgressJobs = ({ jobId }: ProgressJobsProps) => {
+const ProgressJobs: React.FC<ProgressJobsProps> = ({ jobId,size=84 }) => {
+    const dispatch = useDispatch();
 
     const { data: jobData } = useCustomQuery<OrthancJob>(
         ["job", jobId],
@@ -17,6 +22,11 @@ const ProgressJobs = ({ jobId }: ProgressJobsProps) => {
         }
     );
 
+    useEffect(() => {
+        if (jobData && (jobData.State === "Success" || jobData.State === "Failure")) {
+            dispatch(setJobCompleted());
+        }
+    }, [jobData, dispatch]);
 
     const getTextColor = (state: string) => {
         switch (state) {
@@ -36,12 +46,13 @@ const ProgressJobs = ({ jobId }: ProgressJobsProps) => {
                 return "text-dark";
         }
     };
+
     return (
         <ProgressCircle
             progress={jobData?.Progress ?? 0}
             text={jobData?.State ?? ""}
             className={`${getTextColor(jobData?.State ?? "")} text-[11px]`}
-            size={84}
+            size={size}
         />
     );
 }

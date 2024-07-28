@@ -17,7 +17,7 @@ import Footer from '../table/Footer';
 import { FcAlphabeticalSortingAz, FcAlphabeticalSortingZa } from 'react-icons/fc';
 
 // Définition des tailles de texte pour les en-têtes de tableau
-export type textSize = "xs" | "sm" | "base" | "lg";
+export type textSize = "xxs" |"xs" | "sm" | "base" | "lg";
 
 // Props du composant Table
 type TableProps<TData> = {
@@ -98,8 +98,9 @@ function Table<T>({
   });
 
   // Classes pour les colonnes fixes à gauche ou à droite
+  const textXXS = "text-[0.491rem]";
   const headerClass = `bg-${headerColor}`;
-  const headerText = `text-${headerTextSize}`;
+  const headerText = headerTextSize === "xxs" ? `${textXXS}` : `text-${headerTextSize}`;
   const firstColumnClass = `sticky left-0 ${headerClass}`;
   const lastColumnClass = `sticky right-0 bg-white`;
 
@@ -112,7 +113,7 @@ function Table<T>({
   return (
     <div className={`rounded-xl shadow-md overflow-visible overflow-x-auto custom-scrollbar ${className}`}>
       <table className={`min-w-full border-grayCustom ${className}`}>
-        <thead className={`${headerClass} shadow-sm`}>
+        <thead className={`${headerClass}`}>
           {table.getHeaderGroups().map(headerGroup => (
             <React.Fragment key={headerGroup.id}>
               <tr key={headerGroup.id} className={headerClass}>
@@ -173,7 +174,7 @@ function Table<T>({
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td
                     key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                    className={`px-2 py-4 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
+                    className={`px-1 py-2 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>

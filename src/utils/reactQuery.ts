@@ -19,7 +19,10 @@ import { QueryKey, UseMutationOptions, UseMutationResult, UseQueryOptions, useMu
 const useCustomQuery = <T, R = T>(
     queryKeys: string[],
     queryFn: () => Promise<T>,
-    options?: Omit<UseQueryOptions<T,unknown, R, QueryKey>, 'queryKey' | 'queryFn'>
+    options?: Omit<UseQueryOptions<T, unknown, R, QueryKey>, 'queryKey' | 'queryFn'> & {
+        onSuccess?: (data: R) => void;
+        onError?: (error: unknown) => void;
+    }
 ) => {
     return useQuery<T, unknown, R>({
         queryKey: queryKeys,

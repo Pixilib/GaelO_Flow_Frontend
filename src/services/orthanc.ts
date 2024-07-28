@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Patient, Study, Series } from "../utils/types";
+import { Patient, Study, Series, PatientPayload, OrthancResponse, StudyPayload, SeriesPayload } from '../utils/types';
 
 export const getOrthancSystem = (): Promise<unknown> => {
   return axios.get("/api/system").then(response => response.data)
@@ -65,9 +65,10 @@ export const getVerbosity = (): Promise<string> => {
 }
 
 export const getSeries = (seriesId: string): Promise<Series> => {
-  return axios.get("/api/series/" + seriesId + '?=expand')
+  return axios.get("/api/series/" + seriesId + '?expand')
     .then(response => {
       const data = response.data
+      console.log("Series data:", data);
       return {
         expectedNumberOfInstances: data.ExpectedNumberOfInstances,
         id: data.ID,
@@ -102,9 +103,11 @@ export const getSeries = (seriesId: string): Promise<Series> => {
 };
 
 export const getStudies = (studyId: string): Promise<Study> => {
-  return axios.get("/api/studies/" + studyId + '?=expand')
-    .then((response) :Study => {
+  console.log("getStudies called with studyId:", studyId);
+  return axios.get("/api/studies/" + studyId + '?expand')
+    .then((response): Study => {
       const data = response.data
+      console.log("Study data:", data);
       return {
         id: data.ID,
         isStable: data.IsStable,
@@ -132,22 +135,76 @@ export const getStudies = (studyId: string): Promise<Study> => {
       }
     })
     .catch(function (error) {
+      console.log("Error in getStudies:", error);
       if (error.response) {
         throw error.response;
       }
       throw error;
     });
 };
-
 
 export const getSeriesOfStudy = (studyId: string): Promise<Series[]> => {
-  return axios.get("/api/studies/" + studyId + '/series?expand')
-    .then(response => {
+  return axios.get(`/api/studies/${studyId}/series?expand`)
+    .then((response: any): Series[] => {
+      const mappedData = response.data.map((data: any): Series => ({
+        expectedNumberOfInstances: data.ExpectedNumberOfInstances,
+        id: data.ID,
+        instances: data.Instances,
+        isStable: data.IsStable,
+        labels: data.Labels,
+        lastUpdate: data.LastUpdate,
+        mainDicomTags: {
+          imageOrientationPatient: data.MainDicomTags.ImageOrientationPatient,
+          manufacturer: data.MainDicomTags.Manufacturer,
+          modality: data.MainDicomTags.Modality,
+          operatorsName: data.MainDicomTags.OperatorsName,
+          protocolName: data.MainDicomTags.ProtocolName,
+          seriesDescription: data.MainDicomTags.SeriesDescription,
+          seriesInstanceUID: data.MainDicomTags.SeriesInstanceUID,
+          seriesNumber: data.MainDicomTags.SeriesNumber,
+          stationName: data.MainDicomTags.StationName,
+          seriesDate: data.MainDicomTags.SeriesDate,
+          seriesTime: data.MainDicomTags.SeriesTime
+        },
+        parentStudy: data.ParentStudy,
+        status: data.Status,
+        type: data.Type
+      }));
+      return mappedData;
+    }).catch((error: any) => {
+      if (error.response) {
+        console.error("Error response:", error.response);
+        throw error.response;
+      }
+      console.error("Error:", error);
+      throw error;
+    });
+};
+
+
+export const modifyPatient = (patientId: string, patient: PatientPayload): Promise<OrthancResponse> => {
+  const patientPayloadUpdate = {
+    Replace: {
+      PatientID: patient.replace.patientId,
+      PatientName: patient.replace.patientName,
+      PatientBirthDate: patient.replace.patientBirthDate,
+      PatientSex: patient.replace.patientSex
+    },
+    Remove: patient.remove.map(field => field.charAt(0).toUpperCase() + field.slice(1)),
+    RemovePrivateTags: patient.removePrivateTags,
+    Force: true,
+    Synchronous: false,
+    KeepSource: patient.keepSource
+  };
+  return axios.post(`/api/patients/${patientId}/modify`, patientPayloadUpdate)
+    .then((response: any): OrthancResponse => {
       const data = response.data
-      //Formater camelcase series
-      return data
-    }
-    ).catch(function (error) {
+      return {
+        id: data.ID,
+        path: data.Path
+      }
+    })
+    .catch(function (error) {
       if (error.response) {
         throw error.response;
       }
@@ -155,7 +212,75 @@ export const getSeriesOfStudy = (studyId: string): Promise<Series[]> => {
     });
 };
 
+export const modifyStudy = (studyId: string, study: StudyPayload): Promise<OrthancResponse> => {
+  const studyPayloadUpdate = {
+    Replace: {
+      AccessionNumber: study.replace.accessionNumber,
+      StudyDate: study.replace.studyDate,
+      StudyDescription: study.replace.studyDescription,
+      StudyID: study.replace.studyId,
+    },
+    Remove: study.remove.map(field => field.charAt(0).toUpperCase() + field.slice(1)),
+    RemovePrivateTags: study.removePrivateTags,
+    Force: true,
+    Synchronous: false,
+    KeepSource: study.keepSource
+  };
+  return axios.post(`/api/studies/${studyId}/modify`, studyPayloadUpdate)
+    .then((response: any): OrthancResponse => {
+      const data = response.data
+      return {
+        id: data.ID,
+        path: data.Path
+      }
+    }
+    )
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
 
+export const modifySeries = (seriesId: string, series: SeriesPayload): Promise<OrthancResponse> => {
+  const seriesPayloadUpdate = {
+    Replace: {
+      ImageOrientationPatient: series.replace.imageOrientationPatient,
+      Manufacturer : series.replace.manufacturer,
+      Modality: series.replace.modality,
+      OperatorsName: series.replace.operatorsName,
+      ProtocolName: series.replace.protocolName,
+      SeriesDescription: series.replace.seriesDescription,
+      SeriesInstanceUID: series.replace.seriesInstanceUID,
+      SeriesNumber: series.replace.seriesNumber,
+      StationName: series.replace.stationName,
+      SeriesDate: series.replace.seriesDate,
+      SeriesTime: series.replace.seriesTime
+    },
+    Remove: series.remove.map(field => field.charAt(0).toUpperCase() + field.slice(1)),
+    RemovePrivateTags: series.removePrivateTags,
+    Force: true,
+    Synchronous: false,
+    KeepSource: series.keepSource
+  };
+  return axios.post(`/api/series/${seriesId}/modify`, seriesPayloadUpdate)
+    .then((response: any): OrthancResponse => {
+      const data = response.data
+      return {
+        id: data.ID,
+        path: data.Path
+      }
+    }
+    )
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+      
 export const getPatient = (patientId: string): Promise<Patient> => {
   return axios.get("/api/patients/" + patientId)
     .then((response): Patient => {

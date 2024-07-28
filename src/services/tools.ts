@@ -23,7 +23,7 @@ export const findTools = (payload: QueryPayload): Promise<Study[]> => {
                     studyId: data.MainDicomTags.StudyID,
                     studyInstanceUID: data.MainDicomTags.StudyInstanceUID,
                     studyTime: data.MainDicomTags.StudyTime,
-                    institutionName : data.mainDicomTags.InstitutionName
+                    // institutionName : data?.mainDicomTags.InstitutionName
                 },
                 parentPatient: data.ParentPatient,
                 patientMainDicomTags: {

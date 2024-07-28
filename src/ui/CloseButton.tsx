@@ -4,15 +4,16 @@ import { IoIosCloseCircle as CloseWindows } from "react-icons/io";
 type CloseButtonProps = {
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
-  variant?: "default" | "danger" | "success";
+  variant?: "default" | "danger" | "success" |"warning";
 };
 
 const CloseButton = ({ onClose, variant="default", className}: CloseButtonProps) => {
   
   const variants = {
-    default: "text-white",
-    danger: "text-danger",
-    success: "text-success",
+    default: "fill-white",
+    warning: "fill-warning",
+    danger: "fill-danger",
+    success: "fill-success",
   };
  
   const color = variants[variant];

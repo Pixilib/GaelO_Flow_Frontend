@@ -46,8 +46,9 @@ const SeriesTable = ({ series }: SeriesTableProps) => {
             columns={columns}
             data={rows ?? []}
             headerTextSize="xs"
-            headerColor={Colors.white} 
-            className="bg-gray-100"
+            headerColor={Colors.almond} 
+            className="text-xs bg-gray-100"
+
             
         />
     );
