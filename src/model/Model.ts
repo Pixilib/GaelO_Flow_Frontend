@@ -50,17 +50,17 @@ class Model {
         }
     }
 
-    addInstance(instanceId: string, seriesId: string, studyId: string, patientId: string) {
+    async addInstance (instanceId: string, seriesId: string, studyId: string, patientId: string) {
         if (!this.isPatientIdExists(patientId)) {
             const patient = new Patient(patientId)
-            patient.fillFromOrthanc()
+            await patient.fillFromOrthanc()
             this.patients.push(patient)
         }
 
         const patient = this.patients.find(patient => patient.id === patientId)
         if (patient && !patient?.isStudyExists(studyId)) {
             const study = new Study(studyId)
-            study.fillFromOrthanc()
+            await study.fillFromOrthanc()
             patient.addStudy(study)
 
         }
@@ -68,7 +68,7 @@ class Model {
         const study = patient?.getStudy(studyId)
         if (study && !study?.isSeriesExists(seriesId)) {
             const series = new Series(seriesId)
-            series.fillFromOrthanc()
+            await series.fillFromOrthanc()
             study.addSeries(series)
         }
 

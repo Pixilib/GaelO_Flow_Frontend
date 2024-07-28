@@ -1,38 +1,43 @@
 import React from 'react';
-import Select, { GroupBase, StylesConfig } from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 
 interface OptionType {
   value: string;
   label: string;
 }
 
-interface SelectionInputProps {
-  value?: OptionType|undefined|null,
-  options: OptionType[] | GroupBase<OptionType>[];
-  onChange?: (value: any) => void;
+interface SelectInputProps {
+  value: string|null;
+  options: OptionType[];
+  onChange: (selectedOption: OptionType | null) => void;
   placeholder?: string;
-  formatOptionLabel?: (option: OptionType) => React.ReactNode;
-  isMulti?: boolean;
-  formatGroupLabel?: (group: GroupBase<OptionType>) => React.ReactNode;
-  styles?: StylesConfig<OptionType, boolean>;
-  closeMenuOnSelect?: boolean;
+  rounded?: boolean;
 }
 
 const customStyles: StylesConfig<OptionType, boolean> = {
-  control: (provided, state) => ({
-    ...provided,
-    borderRadius: '14px',
-    boxShadow: 'none',
-    padding: '0.2em',
-    '&:hover': {
+  control: (provided, state) => {
+    const borderRadius = state.selectProps.rounded ? '14px' : '0px';
+    return {
+      ...provided,
+      borderRadius: borderRadius,
+      backgroundColor: '#f8f9fa',
       borderColor: state.isFocused ? '#333182' : '#D1D5DB',
-    },
-  }),
-  menu: (provided) => ({
-    ...provided,
-    borderRadius: '10px',
-    padding: '12px',
-  }),
+      borderWidth: '1px',
+      padding: '0.1em',
+      minHeight: '32px',
+      '&:hover': {
+        borderColor: '#333182',
+      },
+    };
+  },
+  menu: (provided, state) => {
+    const borderRadius = state.selectProps.rounded ? '10px' : '0px';
+    return {
+      ...provided,
+      borderRadius: borderRadius,
+      padding: '12px',
+    };
+  },
   option: (provided, state) => ({
     ...provided,
     borderRadius: '8px',
@@ -65,30 +70,22 @@ const customStyles: StylesConfig<OptionType, boolean> = {
   }),
 };
 
-const SelectInput: React.FC<SelectionInputProps> = ({
+const SelectInput: React.FC<SelectInputProps> = ({
+  value,
   options,
   onChange,
   placeholder = 'Select...',
-  formatOptionLabel = (option) => option.label,
-  isMulti = false,
-  formatGroupLabel,
-  styles,
-  value,
-  ...props
+  rounded = true,
 }) => (
   <Select
     options={options}
-    isMulti={isMulti}
-    onChange={onChange}
+    onChange={(selectedOption: any) => onChange(selectedOption)}
     placeholder={placeholder}
-    formatOptionLabel={formatOptionLabel}
-    formatGroupLabel={formatGroupLabel}
-    styles={{ ...customStyles, ...styles }}
-    value={value}
-    closeMenuOnSelect={true}
-    {...props}
+    styles={customStyles}
+    value={value ? options.find(option => option.value === value) : null}
+    className={`w-full ${rounded ? 'rounded-xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
+    rounded={rounded} 
   />
 );
-
 
 export default SelectInput;

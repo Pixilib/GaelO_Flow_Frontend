@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-
 import General from "./general/General";
 import JobRoot from "./jobs/JobRoot";
 import QueuesRoot from "./queues/QueuesRoot";
@@ -10,12 +9,9 @@ import LabelRoot from "./Labels/LabelRoot";
 
 const AdminRoot = () => {
     return (
-        <div 
-        className="mt-10 size-full"
-        data-gaelo-flow="admin-root"
-        >
+        <div className="size-full" data-gaelo-flow="admin-root">
             <Routes>
-                <Route path="/general" element={<General />} />
+                <Route path="/general/*" element={<General />} />
                 <Route path="/jobs" element={<JobRoot />} />
                 <Route path="/modalities" element={<ModalitiesRoot />} />
                 <Route path="/queues/*" element={<QueuesRoot />} />
@@ -24,7 +20,7 @@ const AdminRoot = () => {
                 <Route path="/labels" element={<LabelRoot />} />
             </Routes>
         </div>
-    )
-}
+    );
+};
 
 export default AdminRoot;

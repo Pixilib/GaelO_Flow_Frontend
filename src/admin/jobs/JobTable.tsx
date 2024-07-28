@@ -1,5 +1,5 @@
 import { BsInfoCircle as Info } from "react-icons/bs";
-import {Table, Badge, Popover} from "../../ui";
+import { Table, Badge, Popover } from "../../ui";
 
 import { Colors } from "../../utils/enums";
 import { JobsAction } from "../../utils/types";
@@ -9,10 +9,10 @@ import JobActions from "./JobActions";
 //! Needs to fix implemntation of PopOver
 type JobTableProps = {
   data: any[];
-  onJobAction: (jobId :string, action :JobsAction) => void;
+  onJobAction: (jobId: string, action: JobsAction) => void;
 };
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
-  
+
   const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
 
   const columns = [
@@ -67,7 +67,13 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
     },
   ];
 
-  return <Table data={data} columns={columns} headerColor={Colors.almond} enableColumnFilters enableSorting/>;
+  return <Table
+    data={data}
+    columns={columns}
+    headerColor={Colors.white}
+    headerTextSize="sm"
+    className="bg-gray-100"
+    enableColumnFilters enableSorting />;
 };
 
 export default JobTable;

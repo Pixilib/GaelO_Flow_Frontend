@@ -3,7 +3,7 @@ import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
 import { BsQuestionLg } from "react-icons/bs";
 
-import { Table, Button, ToggleEye, Input, Modal, Card, CardBody, CardFooter, SelectInput } from '../../ui/';
+import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui/';
 import { Colors } from '../../utils/enums';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, updateVerbosity } from '../../services/orthanc';
@@ -64,7 +64,10 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 const [show, setShow] = useState(false);
                 return (
                     <div className="flex items-center">
-                        <Input disabled className="text-center" type={show ? "text" : "password"} value={row.getValue()} />
+                        <Input disabled
+                            className="text-center"
+                            type={show ? "text" : "password"}
+                            value={row.getValue()} />
                         <ToggleEye onToggle={(visible) => setShow(visible)} />
                     </div>
                 );
@@ -89,31 +92,46 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     ];
 
     return (
-        <Card>
-            <CardBody color={Colors.light} roundedTopLeft roundedTopRight>
-                <h2 className="mt-4 mb-4 text-2xl font-bold text-primary">Orthanc</h2>
-                <Table columns={columns} data={[orthancData]} headerColor={Colors.almond} />
-                <div className="h-2"></div>
-            </CardBody>
-            <CardFooter className="flex justify-center mt-0 space-x-4 border-t-2 border-ligth" color={Colors.light}>
-                <Button color={Colors.warning} onClick={reset}>
-                    <RestartIcon size="20px" title="Restart" />
+        <>
+            <Table
+                columns={columns}
+                data={[orthancData]}
+                className="bg-gray-100"
+                headerTextSize='xs'
+                headerColor={Colors.white}
+            />
+            <CardFooter
+                className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
+                <Button
+                    color={Colors.warning}
+                    onClick={reset}>
+                    <RestartIcon
+                        size="20px"
+                        title="Restart" />
                 </Button>
-                <Button color={Colors.danger} >
-                    <IoClose size="20px" title="Shutdown" />
+                <Button
+                    color={Colors.danger}>
+                    <IoClose
+                        size="20px"
+                        title="Shutdown" />
                 </Button>
                 <Button color={Colors.primary} onClick={orthancInfoHandler}>
                     <BsQuestionLg size="20px" title="Info" />
                 </Button>
-                <SelectInput
-                    value={selectOptions.find(option => option.value === orthancVerbosity)}
-                    onChange={handleSelectChange}
-                    placeholder="Select option"
-                    options={selectOptions}
-                />
+                <div className="w-1/4">
+                    <SelectInput
+                        value={selectOptions.find(option => option.value === orthancVerbosity)}
+                        onChange={handleSelectChange}
+                        placeholder="Select option"
+                        options={selectOptions}
+                    />
+                </div>
             </CardFooter>
             {showModal && (
-                <Modal show={showModal} size="lg" onClose={() => setShowModal(false)}>
+                <Modal
+                    show={showModal}
+                    size="lg"
+                    onClose={() => setShowModal(false)}>
                     <Modal.Header onClose={() => setShowModal(false)}>
                         <Modal.Title>Orthanc System Information</Modal.Title>
                     </Modal.Header>
@@ -135,7 +153,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     </Modal.Footer>
                 </Modal>
             )}
-        </Card>
+        </>
     );
 };
 

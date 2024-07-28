@@ -1,76 +1,99 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
+import { BannerAlert, CardFooter } from '../../ui';
+import Model from '../../model/Model';
+import { Colors } from '../../utils';
 import ImportDrop from './ImportDrop';
 import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
-import Model from '../../model/Model';
+import ImportErrorModal from './ImportErrorModal';
+
+interface ImportError {
+    filename: string;
+    errorMessage: string;
+}
 
 const ImportRoot: React.FC = () => {
-    const [refModel, setRefModel] = useState<Model | null>(null);
+    const refModel = useRef<Model>(new Model());
     const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<string | null>(null);
-    const [showSeries, setShowSeries] = useState(false);
     const [studiesData, setStudiesData] = useState<any[]>([]);
     const [seriesData, setSeriesData] = useState<any[]>([]);
-    const [page, setPage] = useState<number>(1);
-    const studiesPerPage = 10;
+    const [errors, setErrors] = useState<ImportError[]>([]);
+    const [showErrorModal, setShowErrorModal] = useState(false);
 
-    const handleFilesUploaded = (files: File[], model: Model) => {
-        setRefModel(model);
-        setStudiesData(model.getStudies());
+    const handleFilesUploaded = () => {
+        setStudiesData(refModel.current.getStudies());
     };
 
     const handleStudyClick = (studyInstanceUID: string) => {
         setCurrentStudyInstanceUID(studyInstanceUID);
-        setShowSeries(true);
         updateSeriesData(studyInstanceUID);
     };
 
     const updateSeriesData = (studyInstanceUID: string) => {
-        if (refModel) {
-            setSeriesData(refModel.getStudy(studyInstanceUID).getAllseries());
+        const study = refModel.current.getStudy(studyInstanceUID);
+        if (study) {
+            setSeriesData(study.getAllseries());
         }
     };
 
-    useEffect(() => {
-        if (currentStudyInstanceUID && refModel) {
-            updateSeriesData(currentStudyInstanceUID);
-        }
-    }, [currentStudyInstanceUID, refModel]);
+    const handleImportError = (filename: string, errorMessage: string) => {
+        setErrors((prevErrors) => [...prevErrors, { filename, errorMessage }]);
+    };
 
-    const paginateStudies = (data: any[]) => {
-        const startIndex = (page - 1) * studiesPerPage;
-        return data.slice(startIndex, startIndex + studiesPerPage);
+    const handleShowModal = () => {
+        setShowErrorModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowErrorModal(false);
     };
 
     return (
-        <div className="flex flex-col items-center">
-            <ImportDrop onFilesUploaded={handleFilesUploaded} />
-            {studiesData.length > 0 && (
-                <div className="flex flex-col w-full mt-4 md:flex-row">
-                    <div className="w-full">
+        <>
+            <div className='mx-6 mt-6 mb-4'>
+                <ImportDrop
+                    model={refModel.current}
+                    onError={handleImportError}
+                    onFilesUploaded={handleFilesUploaded}
+                />
+            </div>
+
+            {errors.length > 0 && (
+                <BannerAlert
+                    color={Colors.red}
+                    message={`Error Importing ${errors.length} file(s)`}
+                    onClickButton={handleShowModal}
+                    buttonLabel="See Errors"
+                />
+            )}
+
+            {showErrorModal && (
+                <ImportErrorModal
+                    errors={errors}
+                    onClose={handleCloseModal}
+                />
+            )}
+
+            <div className="flex flex-col gap-3 lg:flex-row">
+                <div className='flex-1'>
+                    {studiesData.length > 0 && (
                         <ImportTableStudy
-                            data={paginateStudies(studiesData)}
-                            studyInstanceUID={currentStudyInstanceUID}
+                            data={studiesData}
+                            selectedStudyInstanceUID={currentStudyInstanceUID}
                             onStudyClick={handleStudyClick}
                         />
-                        {studiesData.length > studiesPerPage && (
-                            <div className="flex justify-center mt-4">
-                                <button
-                                    className="px-4 py-2 text-gray-800 bg-gray-200 rounded-md"
-                                    onClick={() => setPage(page + 1)}
-                                >
-                                    Voir plus
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                    {showSeries && seriesData.length > 0 && (
-                        <div className="w-full mt-4 md:ml-10 md:mt-0">
-                            <ImportTableSeries data={seriesData} />
-                        </div>
                     )}
                 </div>
-            )}
-        </div>
+                <div className='flex-1'>
+                    {seriesData.length > 0 && (
+                        <ImportTableSeries data={seriesData} />
+                    )}
+                </div>
+            </div>
+
+            <CardFooter className="flex justify-center w-full h-16 bg-almonde">
+            </CardFooter>
+        </>
     );
 };
 

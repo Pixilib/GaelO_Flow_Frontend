@@ -54,7 +54,9 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
       <Table
         data={data}
         columns={columns}
-        headerColor={Colors.almond}
+        headerColor={Colors.white} 
+        headerTextSize="xs"  
+        className="bg-gray-100"
         enableColumnFilters
         enableSorting
       />

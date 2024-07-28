@@ -89,7 +89,7 @@ const Input = ({
           {...props}
         />
         {svgRight && (
-          <div className="flex justify-end w-full peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="flex justify-end peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {svgRight}
           </div>
         )}

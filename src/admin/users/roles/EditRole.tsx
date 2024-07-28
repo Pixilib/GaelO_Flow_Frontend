@@ -37,7 +37,7 @@ const EditRole = ({ title, className, onClose, role }: EditRoleProps) => {
   };
 
   return (
-    <Card className={`my-10 rounded-xl ${className}`}>
+    <Card className={`my-5 rounded-xl ${className}`}>
       <CardHeader title={title} color={Colors.success}>
       <CloseButton onClose={() => onClose()} />
       </CardHeader>

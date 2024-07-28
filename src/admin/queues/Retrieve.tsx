@@ -114,7 +114,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
           color={Colors.success}
         />
         <CardBody
-          color={Colors.gray}
+          color={Colors.light}
           roundedBottomLeft
           roundedBottomRight
         >
@@ -126,14 +126,13 @@ const Retrieve = ({ data }: RetrieveProps) => {
                   value={'Start Time'}
                   className="text-sm font-medium text-center"
                   align="center"
-                  spaceY={2}
                 />
               }
               value={startTime ?? undefined}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleTimeStart(event)
               }
-              className={'focus:shadow-2xl shadow-lg'}
+              className={'focus:shadow-2xl '}
             />
             <Input
               type="time"
@@ -142,7 +141,6 @@ const Retrieve = ({ data }: RetrieveProps) => {
                   value={'Stop Time'}
                   className="text-sm font-medium text-center "
                   align="center"
-                  spaceY={2}
                 />
               }
               value={stopTime ?? undefined}
@@ -150,7 +148,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 handleTimeStop(event)
               }
               className={
-                'bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl shadow-lg'
+                'bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl'
               }
             />
             <div className="flex-col text-center">
@@ -171,20 +169,20 @@ const Retrieve = ({ data }: RetrieveProps) => {
               />
             </div>
           </div>
+          <div className="flex items-center justify-center mt-4">
+            <Button
+              color={Colors.success}
+              className="w-32 gap-2 px-8 text-center"
+              type="submit"
+            >
+              <span>
+                <SendIcon />
+              </span>
+              <span>Send</span>
+            </Button>
+          </div>
         </CardBody>
       </Card>
-      <div className="flex justify-center mt-6">
-        <Button
-          color={Colors.success}
-          className="w-32 gap-2 px-8 text-center"
-          type="submit"
-        >
-          <span>
-            <SendIcon />
-          </span>
-          <span>Send</span>
-        </Button>
-      </div>
       <div className="flex mt-6">
         <Table
           data={[]}

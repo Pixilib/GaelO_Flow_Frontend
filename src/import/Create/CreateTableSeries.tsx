@@ -2,11 +2,11 @@ import React, { useMemo } from "react";
 import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
 
-interface ImportTableSeriesProps {
+interface CreateTableSeriesProps {
     data: object[];
 }
 
-const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
+const CreateTableSeries: React.FC<CreateTableSeriesProps> = ({ data = [] }) => {
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {
@@ -52,4 +52,4 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
     );
 };
 
-export default ImportTableSeries;
+export default CreateTableSeries;
