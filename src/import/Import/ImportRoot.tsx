@@ -1,20 +1,23 @@
 import React, { useState, useRef } from 'react';
-import { BannerAlert } from '../../ui';
-
+import { BannerAlert, CardFooter } from '../../ui';
 import Model from '../../model/Model';
 import { Colors } from '../../utils';
-
 import ImportDrop from './ImportDrop';
 import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
 import ImportErrorModal from './ImportErrorModal';
+
+interface ImportError {
+    filename: string;
+    errorMessage: string;
+}
 
 const ImportRoot: React.FC = () => {
     const refModel = useRef<Model>(new Model());
     const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<string | null>(null);
     const [studiesData, setStudiesData] = useState<any[]>([]);
     const [seriesData, setSeriesData] = useState<any[]>([]);
-    const [errors, setErrors] = useState<{ [filename: string]: string }[]>([]);
+    const [errors, setErrors] = useState<ImportError[]>([]);
     const [showErrorModal, setShowErrorModal] = useState(false);
 
     const handleFilesUploaded = () => {
@@ -27,7 +30,10 @@ const ImportRoot: React.FC = () => {
     };
 
     const updateSeriesData = (studyInstanceUID: string) => {
-        setSeriesData(refModel.current.getStudy(studyInstanceUID).getAllseries());
+        const study = refModel.current.getStudy(studyInstanceUID);
+        if (study) {
+            setSeriesData(study.getAllseries());
+        }
     };
 
     const handleImportError = (filename: string, errorMessage: string) => {
@@ -43,12 +49,15 @@ const ImportRoot: React.FC = () => {
     };
 
     return (
-        <div className='flex flex-col gap-3'>
-            <ImportDrop
-                model={refModel.current}
-                onError={handleImportError}
-                onFilesUploaded={handleFilesUploaded}
-            />
+        <>
+            <div className='mx-6 mt-6 mb-4'>
+                <ImportDrop
+                    model={refModel.current}
+                    onError={handleImportError}
+                    onFilesUploaded={handleFilesUploaded}
+                />
+            </div>
+
             {errors.length > 0 && (
                 <BannerAlert
                     color={Colors.red}
@@ -57,14 +66,16 @@ const ImportRoot: React.FC = () => {
                     buttonLabel="See Errors"
                 />
             )}
+
             {showErrorModal && (
                 <ImportErrorModal
                     errors={errors}
                     onClose={handleCloseModal}
                 />
             )}
-            <div className="flex lg:max-xl:flex-col gap-3">
-                <div className='flex align-middle'>
+
+            <div className="flex flex-col gap-3 lg:flex-row">
+                <div className='flex-1'>
                     {studiesData.length > 0 && (
                         <ImportTableStudy
                             data={studiesData}
@@ -73,14 +84,16 @@ const ImportRoot: React.FC = () => {
                         />
                     )}
                 </div>
-                <div>
+                <div className='flex-1'>
                     {seriesData.length > 0 && (
                         <ImportTableSeries data={seriesData} />
                     )}
                 </div>
             </div>
 
-        </div>
+            <CardFooter className="flex justify-center w-full h-16 bg-almonde">
+            </CardFooter>
+        </>
     );
 };
 

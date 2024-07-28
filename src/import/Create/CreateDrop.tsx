@@ -51,7 +51,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
     );
 
     const uploadFile = async (file: File) => {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>((resolve) => {
             setTimeout(() => {
                 console.log(`Uploaded: ${file.name}`);
                 resolve();

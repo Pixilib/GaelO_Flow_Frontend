@@ -1,36 +1,71 @@
+import { Route, Routes, To, useLocation, useNavigate } from "react-router-dom";
+import { Tabs, Tab } from "../../ui";
 import RedisCard from "./RedisCard";
-import OrthancCard from "./OrthancCard";
+import OrthancSettingsCard from "./OrthancCard";
 import { getOptions } from "../../services/options";
 import { useCustomQuery } from "../../utils/reactQuery";
 
 const General = () => {
-  const { data, error, isPending } = useCustomQuery(
-    ["options"],
-    () => getOptions()
-  );
+    const location = useLocation();
+    const navigate = useNavigate();
 
-  if (isPending) return <span>Loading...</span>;
-  if (error) return <span>Error: {error.message}</span>;
+    const { data, error, isPending } = useCustomQuery(
+        ["options"],
+        () => getOptions()
+    );
 
-  return (
-    <div className="flex flex-row">
-      <div className="flex-1">
-        <RedisCard redisData={{
-          address: data.RedisAddress,
-          port: Number(data.RedisPort),
-          password: data.RedisPassword
-        }} />
-      </div>
-      <div className="flex-1">
-        <OrthancCard orthancData={{
-          address: data.OrthancAddress,
-          port: Number(data.OrthancPort),
-          password: data.OrthancPassword,
-          username: data.OrthancUsername
-        }} />
-      </div>
-    </div>
-  );
+    const handleTabClick = (tab: To) => {
+        navigate(tab);
+    };
+
+    if (isPending) return <span>Loading...</span>;
+    if (error) return <span>Error: {error.message}</span>;
+
+    return (
+        <div className="mx-4 mt-4 mb-4 shadow-md bg-almond rounded-xl" data-gaelo-flow="general-root">
+            <Tabs className="bg-primary rounded-t-xl">
+                <Tab
+                    title="Redis"
+                    active={location.pathname === '/administration/general'}
+                    onClick={() => handleTabClick("/administration/general")}
+                />
+                <Tab
+                    title="Orthanc"
+                    active={location.pathname === '/administration/general/orthanc'}
+                    onClick={() => handleTabClick("/administration/general/orthanc")}
+                />
+            </Tabs>
+            <div className="mt-4 mb-4">
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <RedisCard
+                                redisData={{
+                                    address: data?.RedisAddress,
+                                    port: Number(data?.RedisPort),
+                                    password: data?.RedisPassword,
+                                }}
+                            />
+                        }
+                    />
+                    <Route
+                        path="orthanc"
+                        element={
+                            <OrthancSettingsCard
+                                orthancData={{
+                                    address: data?.OrthancAddress,
+                                    port: Number(data?.OrthancPort),
+                                    password: data?.OrthancPassword,
+                                    username: data?.OrthancUsername,
+                                }}
+                            />
+                        }
+                    />
+                </Routes>
+            </div>
+        </div>
+    );
 };
 
 export default General;
