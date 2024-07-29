@@ -8,7 +8,7 @@ import ProgressJobs from '../query/ProgressJobs';
 import { Button } from '../ui';
 import { Colors } from '../utils';
 import { resetJob } from '../reducers/JobSlice';
-import { useContent } from '../services/useContent';
+//import { useContent } from '../services/useContent';
 
 interface FormJobsActionsProps {
     onCancel: () => void;

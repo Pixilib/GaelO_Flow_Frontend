@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useCustomToast } from '../../utils';
-import { FormCard, FormButton, Input, Label, Button } from '../../ui';
+import { FormCard, Input, Label, Button } from '../../ui';
 import { FaPlus as AddIcon } from 'react-icons/fa';
 import { Colors } from "../../utils/enums";
 
@@ -28,6 +28,10 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     toastSuccess('Tags envoyés avec succès');
+  };
+
+  const isFormValid = () => {
+    return tag.trim() !== '' && value.trim() !== '';
   };
 
   return (
@@ -66,9 +70,20 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
         </Button>
       </div>
       <div className="flex justify-center mt-3">
-        <FormButton
-          text="Create Dicom"
-        />
+        <Button
+          type="submit"
+          disabled={!isFormValid()}
+          className={`
+            ${isFormValid() ? 'bg-primary' : 'bg-gray-300'}
+            text-white
+            font-medium
+            py-2
+            px-4
+            rounded
+          `}
+        >
+          Create Dicom
+        </Button>
       </div>
     </FormCard>
   );

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import ToogleChevron from './ToogleChevron'
+import React, { useState, forwardRef } from "react";
+import ToogleChevron from './ToogleChevron';
 
 type DropDownProps = {
   chevronPosition?: "left" | "right";
@@ -7,17 +7,15 @@ type DropDownProps = {
   isOpen?: boolean;
   dropDownOpen?: () => void;
   children: React.ReactNode;
-  dropDown: React.ReactNode | boolean; // Change type of dropDown prop
+  dropDown: React.ReactNode | boolean;
 };
-const DropDown = ({ chevronPosition, children, className, isOpen: isOpenProp, dropDownOpen, dropDown }: DropDownProps) => {
+
+const DropDown = forwardRef<HTMLDivElement, DropDownProps>(({ chevronPosition, children, className, isOpen: isOpenProp, dropDownOpen, dropDown }, ref) => {
   const [isOpenState, setIsOpenState] = useState<boolean>(false);
 
   const isOpenUse = (isOpenProp !== undefined && dropDownOpen !== undefined);
   const isOpen = isOpenProp !== undefined ? isOpenProp : isOpenState;
-  //define the setter if the prop is not defined and the state is used
-  // const handleClick = dropDownOpen ? dropDownOpen : () => setIsOpenState(!isOpenState);
-  // const handleBlur = () => setIsOpenState(false);
-  
+
   const handleClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     isOpenUse ? dropDownOpen && dropDownOpen() : setIsOpenState(!isOpenState);
@@ -30,6 +28,7 @@ const DropDown = ({ chevronPosition, children, className, isOpen: isOpenProp, dr
 
   return (
     <div
+      ref={ref}
       data-gaelo-flow="banner-dropdown"
       className={`mx-4 flex place-content-center rounded-18 border-transparent bg-primary px-4 py-3 font-semibold text-white ${className}`}
       tabIndex={0}
@@ -63,7 +62,6 @@ const DropDown = ({ chevronPosition, children, className, isOpen: isOpenProp, dr
       </div>
     </div>
   );
-};
+});
 
 export default DropDown;
-

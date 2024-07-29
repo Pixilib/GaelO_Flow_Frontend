@@ -285,7 +285,7 @@ import StudyEditForm from "./studies/StudyEditForm";
 import SeriesEditForm from "./series/SeriesEditForm";
 import { setJob, resetJob } from '../reducers/JobSlice';
 import { useDispatch } from "react-redux";
-import { useContent } from "../services/useContent";
+//import { useContent } from "../services/useContent";
 
 const StudiesManager: React.FC<{ patient: Patient }> = ({ patient }) => {
     const dispatch = useDispatch();

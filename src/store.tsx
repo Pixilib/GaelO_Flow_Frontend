@@ -2,13 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import UserSlice from "./reducers/UserSlice";
 import JobSlice from "./reducers/JobSlice";
-import ModelSlice from "./reducers/ModelSlice";
+//import ModelSlice from "./reducers/ModelSlice";
 
 const store = configureStore({
   reducer: {
     user: UserSlice,
     job: JobSlice,
-    model: ModelSlice,
+    //model: ModelSlice,
   },
   devTools: true,
 });
