@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
+import { ProgressBar } from '../../ui';
 
 interface CreateDropProps {
     onDrop: (files: File[]) => void;
@@ -7,40 +8,38 @@ interface CreateDropProps {
 
 const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
     const [isUploading, setIsUploading] = useState(false);
-    const [progress, setProgress] = useState(0);
-    const [uploadComplete, setUploadComplete] = useState(false);
+    const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
+    const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
+
+    const uploadComplete = numberOfLoadedFiles > 0 && numberOfLoadedFiles === numberOfProcessedFiles;
 
     const handleDrop = useCallback(
         async (event: React.DragEvent<HTMLDivElement>) => {
             event.preventDefault();
             const { files } = event.dataTransfer;
             if (files && files.length > 0) {
+                setNumberOfLoadedFiles(files.length);
                 setIsUploading(true);
-                setProgress(0);
-
-                let successfulUploads = 0;
-                let failedUploads = 0;
+                setNumberOfProcessedFiles(0);
 
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
                     try {
-                        await uploadFile(file);
-                        successfulUploads++;
+                        await convertToDicom(file);
+                        setNumberOfProcessedFiles((prev) => prev + 1);
                     } catch (error) {
-                        console.error("Error uploading file:", error);
-                        failedUploads++;
+                        console.error("Error processing file:", error);
                     } finally {
-                        const currentProgress = ((successfulUploads + failedUploads) / files.length) * 100;
+                        const currentProgress = (numberOfProcessedFiles / numberOfLoadedFiles) * 100;
                         setProgress(currentProgress);
                     }
                 }
 
                 setIsUploading(false);
-                setUploadComplete(true);
                 onDrop(Array.from(files));
             }
         },
-        [onDrop]
+        [onDrop, numberOfLoadedFiles, numberOfProcessedFiles]
     );
 
     const handleDragOver = useCallback(
@@ -50,10 +49,10 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
         []
     );
 
-    const uploadFile = async (file: File) => {
+    const convertToDicom = async (file: File) => {
         return new Promise<void>((resolve) => {
             setTimeout(() => {
-                console.log(`Uploaded: ${file.name}`);
+                console.log(`Converted ${file.name} to DICOM`);
                 resolve();
             }, 1000);
         });
@@ -66,16 +65,19 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
             onDragOver={handleDragOver}
         >
             {uploadComplete ? (
-                <CheckIcon size={40} className="text-success" />
+                <CheckIcon
+                    size={40}
+                    className="text-success" />
             ) : (
-                <CloudIcon size={40} className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`} />
+                <CloudIcon
+                    size={40}
+                    className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`} />
             )}
             <p className="text-primary">{uploadComplete ? 'Upload Complete!' : 'Drag and drop files here'}</p>
             <input type="file" style={{ display: 'none' }} />
-            {isUploading && (
-                <div className="w-full bg-gray-200 rounded-lg">
-                    <div className="rounded-lg bg-primary" style={{ width: `${progress}%`, height: '8px' }} />
-                </div>
+            {numberOfLoadedFiles > 0 && (
+                <ProgressBar
+                    progression={Math.round((numberOfProcessedFiles / numberOfLoadedFiles) * 100)} />
             )}
         </div>
     );

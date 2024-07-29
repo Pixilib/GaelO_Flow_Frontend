@@ -74,14 +74,13 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
           type="submit"
           disabled={!isFormValid()}
           className={`
-            ${isFormValid() ? 'bg-primary' : 'bg-gray-300'}
+            ${isFormValid() ? 'bg-success' : 'bg-gray-400'}
             text-white
             font-medium
             py-2
             px-4
             rounded
-          `}
-        >
+          `}    >
           Create Dicom
         </Button>
       </div>

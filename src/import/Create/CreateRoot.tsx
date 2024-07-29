@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { CardFooter, Button } from '../../ui';
 import { FaPlus as AddIcon } from 'react-icons/fa';
+
+import { CardFooter, Button } from '../../ui';
 import Model from '../../model/Model';
 import CreateTableSeries from './CreateTableSeries';
 import CreateTableStudy from './CreateTableStudy';
@@ -85,7 +86,8 @@ const CreateRoot: React.FC = () => {
                 </div>
             )}
 
-            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
+            <CardFooter
+                className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
                 {showCreateForm ? (
                     <CreateForm
                         onClose={handleCloseForm}
@@ -99,7 +101,7 @@ const CreateRoot: React.FC = () => {
                         className="flex items-center space-x-2"
                     >
                         <AddIcon />
-                        <span>Créer Tag</span>
+                        <span>Create Tag</span>
                     </Button>
                 )}
             </CardFooter>

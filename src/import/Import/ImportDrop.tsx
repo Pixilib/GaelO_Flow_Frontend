@@ -80,14 +80,19 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                     } rounded-lg`}
             >
                 {uploadComplete ? (
-                    <CheckIcon size={40} className="text-success" />
+                    <CheckIcon
+                        size={40}
+                        className="text-success" />
                 ) : (
-                    <CloudIcon size={40} className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`} />
+                    <CloudIcon
+                        size={40} 
+                        className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`} />
                 )}
                 <p className="text-primary">Drop the Dicom folder or ZIP, or click to select files</p>
                 <input directory="" webkitdirectory="" {...getInputProps()} />
                 {numberOfLoadedFiles > 0 &&
-                    <ProgressBar progression={Math.round(numberOfProcessedFiles / numberOfLoadedFiles * 100)} />}
+                    <ProgressBar
+                        progression={Math.round(numberOfProcessedFiles / numberOfLoadedFiles * 100)} />}
             </div>
         </div>
     );

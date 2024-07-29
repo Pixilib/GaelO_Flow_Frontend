@@ -6,6 +6,7 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { IoLanguage as LanguageIcon } from 'react-icons/io5';
 import { MdNotifications as NotificationsIcon, MdSettings as SettingsIcon } from 'react-icons/md';
 import { TiUser } from 'react-icons/ti';
+
 import Banner from '../ui/menu/Banner';
 import DropDown from '../ui/menu/DropDown';
 import ToggleSwitch from '../ui/menu/ToggleSwitch';
@@ -38,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
         dropdownRefSettingsUser.current &&
         !dropdownRefSettingsUser.current.contains(event.target as Node)
       ) {
-        setOpenItem(null); // Close dropdown if clicked outside
+        setOpenItem(null);
       }
     };
 
@@ -59,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 
   const handleSettingsItemClick = (item: Item) => {
     navigate(item.path);
-    setOpenItem(null); // Close dropdown after navigation
+    setOpenItem(null);
   };
 
   const handleLeftIconClick = () => {
@@ -154,14 +155,15 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           }
         >
           <ToggleSwitch
-            isToggled={true} // Replace with actual state variable controlling the toggle
+            isToggled={true}
             onToggle={(isChecked) => {
               console.log('Toggle state:', isChecked);
-              // Handle state change logic here
             }}
           />
-          <NotificationsIcon className="transition-transform duration-100 size-4 hover:scale-110" />
-          <SettingsIcon className="transition-transform duration-100 size-4 hover:scale-110" />
+          <NotificationsIcon
+            className="transition-transform duration-100 size-4 hover:scale-110" />
+          <SettingsIcon
+            className="transition-transform duration-100 size-4 hover:scale-110" />
           <TiUser
             size={23}
             className="transition-transform duration-100 hover:scale-110"
