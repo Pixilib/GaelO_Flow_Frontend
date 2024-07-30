@@ -29,9 +29,6 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
                         setNumberOfProcessedFiles((prev) => prev + 1);
                     } catch (error) {
                         console.error("Error processing file:", error);
-                    } finally {
-                        const currentProgress = (numberOfProcessedFiles / numberOfLoadedFiles) * 100;
-                        setProgress(currentProgress);
                     }
                 }
 
@@ -39,7 +36,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
                 onDrop(Array.from(files));
             }
         },
-        [onDrop, numberOfLoadedFiles, numberOfProcessedFiles]
+        [onDrop]
     );
 
     const handleDragOver = useCallback(
