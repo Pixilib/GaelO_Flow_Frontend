@@ -80,7 +80,7 @@ const Input = ({
           </div>
         )}
         <input
-          className="w-full bg-transparent min-h-10"
+          className="w-full bg-transparent border-none min-h-10"
           type={type}
           min={min}
           max={max}
