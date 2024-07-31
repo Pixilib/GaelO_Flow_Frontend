@@ -44,7 +44,7 @@ const RootApp = () => {
       "/import/create-dicom": "Create",
       "/query": "Query",
       "/users": "Users",
-      "/mydicom": "My Dicom",
+      "/dataset": "DataSet",
       "/auto-retrieve": "Auto retrieve",
       "/": "Home"
     };
