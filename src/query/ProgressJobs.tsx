@@ -1,49 +1,39 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useCustomQuery } from "../utils";
 import { OrthancJob } from "../utils/types";
 import { getJobById } from "../services/jobs";
 import { ProgressCircle } from "../ui";
-import { setJobCompleted } from "../reducers/JobSlice";
-import { useDispatch } from "react-redux";
 
 type ProgressJobsProps = {
-    jobId: string
-    size?: number
+    jobId: string;
+    size?: number;
+    onJobCompleted?: (job: OrthancJob) => void;
 }
 
-const ProgressJobs: React.FC<ProgressJobsProps> = ({ jobId,size=84 }) => {
-    const dispatch = useDispatch();
+const ProgressJobs: React.FC<ProgressJobsProps> = React.memo(({ jobId, size = 84, onJobCompleted  }) => {
 
     const { data: jobData } = useCustomQuery<OrthancJob>(
         ["job", jobId],
         () => getJobById(jobId),
         {
-            refetchInterval: 10000,
+            refetchInterval: 1000,
+            onSuccess: (data) => {
+                if (data.State === "Success" || data.State === "Failure") {
+                    onJobCompleted && onJobCompleted(data);
+                }
+            },
         }
     );
 
-    useEffect(() => {
-        if (jobData && (jobData.State === "Success" || jobData.State === "Failure")) {
-            dispatch(setJobCompleted());
-        }
-    }, [jobData, dispatch]);
-
     const getTextColor = (state: string) => {
         switch (state) {
-            case "Pending":
-                return "text-green-500";
-            case "Running":
-                return "text-warning";
-            case "Success":
-                return "text-green-500";
-            case "Failure":
-                return "text-red-500";
-            case "Paused":
-                return "text-blue-500";
-            case "Retry":
-                return "text-red-500";
-            default:
-                return "text-dark";
+            case "Pending": return "text-green-500";
+            case "Running": return "text-warning";
+            case "Success": return "text-green-500";
+            case "Failure": return "text-red-500";
+            case "Paused": return "text-blue-500";
+            case "Retry": return "text-red-500";
+            default: return "text-dark";
         }
     };
 
@@ -55,6 +45,6 @@ const ProgressJobs: React.FC<ProgressJobsProps> = ({ jobId,size=84 }) => {
             size={size}
         />
     );
-}
+});
 
 export default ProgressJobs;
