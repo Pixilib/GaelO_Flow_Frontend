@@ -73,7 +73,6 @@ const QueryRoot = ({ className }: QueryFormProps) => {
       Level: 'Series',
       Query: { StudyInstanceUID: studyInstanceUID }
     };
-    console.log(queryPayload.Query, originAET)
     const extendedPayload = { queryPayload, aet: originAET ?? "self" };
     await mutateQuerySeries(extendedPayload);
   };
