@@ -115,8 +115,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           <MenuItem
             title="Dataset"
             icon={<DicomIcon className="w-6 h-6" />}
-            isActive={location.pathname === "/mydicom"}
-            onClick={() => handleItemClick("/mydicom")}
+            isActive={location.pathname === "/dataset"}
+            onClick={() => handleItemClick("/dataset")}
           />
         </div>
         <div className="flex h-20% flex-col gap-2 border-t border-white">

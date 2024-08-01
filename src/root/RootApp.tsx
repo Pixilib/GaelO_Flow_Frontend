@@ -11,6 +11,7 @@ import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
 import ImportCreateRoot from "../import/ImportCreateRoot";
 import ContentRoot from "../content/ContentRoot";
+import DatasetRoot from "../content/Dataset/DatasetRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,10 @@ const RootApp = () => {
             <Route path="/query" element={<QueryRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />
             <Route path="/orthanc-content" element={<ContentRoot />} />
+            <Route path="/" element={<ContentRoot />} />
+            <Route path="/dataset" element={<DatasetRoot />} />
+
+
           </Routes>
         </div>
       </div>
