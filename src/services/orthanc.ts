@@ -102,12 +102,10 @@ export const getSeries = (seriesId: string): Promise<Series> => {
     });
 };
 
-export const getStudies = (studyId: string): Promise<Study> => {
-  console.log("getStudies called with studyId:", studyId);
+export const getStudy = (studyId: string): Promise<Study> => {
   return axios.get("/api/studies/" + studyId + '?expand')
     .then((response): Study => {
       const data = response.data
-      console.log("Study data:", data);
       return {
         id: data.ID,
         isStable: data.IsStable,
@@ -135,7 +133,6 @@ export const getStudies = (studyId: string): Promise<Study> => {
       }
     })
     .catch(function (error) {
-      console.log("Error in getStudies:", error);
       if (error.response) {
         throw error.response;
       }

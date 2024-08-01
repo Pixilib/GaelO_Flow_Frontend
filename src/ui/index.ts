@@ -1,6 +1,7 @@
 import { Badge } from "./Badge";
 import Accordion from "./Accordion";
 import Button from "./Button";
+import CheckBox from "./Checkbox";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
 import BooleanIcon from "./BooleanIcon";
@@ -24,6 +25,7 @@ import ToastContainer from "./toast/ToastContainer";
 import ToastContext from "./toast/ToastContext";
 
 import SelectInput from "./SelectInput";
+import InputWithDelete from "./InputWithDelete";    
 import Spinner from "./Spinner";
 import { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
 import ConfirmModal from './ConfirmModal';
@@ -44,6 +46,7 @@ export {
     CardFooter,
     CardHeader,
     ConfirmModal,
+    CheckBox,
     CloseButton,
     DropDown,
     EditButton,
@@ -53,6 +56,7 @@ export {
     FilterTable,
     Footer,
     Input,
+    InputWithDelete,
     Items,
     Label,
     MenuItemsCollapse,

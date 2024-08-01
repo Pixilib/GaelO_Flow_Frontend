@@ -23,7 +23,8 @@ import type {
     UserUpdatePayload,
     User,
     Option,
-    QueryPayload
+    QueryPayload,
+    Study,
 } from "./types";
 import { useCustomToast } from "./toastify";
 
@@ -41,6 +42,7 @@ export {
     parseTimeString,
     QueryPayload,
     Role,
+    Study,
     timeDiff,
     useCustomMutation,
     useCustomQuery,

@@ -10,6 +10,7 @@ type ActionOption = {
 type EntityActionsProps<T> = {
   entity: T;
   options: ActionOption[];
+  [key: string]: any;
 };
 
 

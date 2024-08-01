@@ -13,7 +13,7 @@ type SeriesTableProps = {
     onActionClick: (action: string, series: Series) => void;
 };
 const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
-
+    
     const rows = useMemo(() => series.map(s => ({
         ...s,
         ...s.mainDicomTags,
@@ -48,7 +48,6 @@ const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
                         icon: <FaEdit />,
                         color: 'orange',
                         action: () => {
-                            console.log("Modify action clicked for series:", JSON.stringify(seriesData, null, 2));
                             onActionClick('edit', seriesData);
                         }
                     },
@@ -57,7 +56,6 @@ const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
                         icon: <FaTrash />,
                         color: 'red',
                         action: () => {
-                            console.log("Delete action clicked for series:", JSON.stringify(seriesData, null, 2));
                             onActionClick('delete', seriesData);
                         }
                     },

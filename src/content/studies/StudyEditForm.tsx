@@ -1,31 +1,26 @@
 
 
-import React, { ChangeEvent, useState, useEffect } from "react";
-import { Study, StudyPayload, StudyMainDicomTags } from '../../utils/types';
-import { EditModalFormProps } from "../../ui/EditModal";
-import InputWithDelete from "../../ui/InputWithDelete";
-import CheckBox from "../../ui/Checkbox";
+import React, { ChangeEvent, useState } from "react";
+import { StudyPayload, StudyMainDicomTags } from '../../utils/types';
+import { CheckBox, InputWithDelete  } from "../../ui";
+
 import FormJobsActions from "../FormJobsActions";
 
-const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data, onSubmit, onCancel }) => {
-    const [accessionNumber, setAccessionNumber] = useState<string | null>(null);
-    const [studyDate, setStudyDate] = useState<string | null>(null);
-    const [studyDescription, setStudyDescription] = useState<string | null>(null);
-    const [studyId, setStudyId] = useState<string | null>(null);
-    const [studyTime, setStudyTime] = useState<string | null>(null);
+type StudyEditFormProps = {
+    data: StudyMainDicomTags & { id: string };
+    onSubmit: (params: { id: string; payload: StudyPayload }) => void;
+    onCancel: () => void;
+};
+
+const StudyEditForm = ({ data, onSubmit, onCancel }: StudyEditFormProps) => {
+    const [accessionNumber, setAccessionNumber] = useState<string | null>(data?.accessionNumber ?? null);
+    const [studyDate, setStudyDate] = useState<string | null>(data?.studyDate ?? null);
+    const [studyDescription, setStudyDescription] = useState<string | null>(data?.studyDescription ?? null);
+    const [studyTime, setStudyTime] = useState<string | null>(data?.studyTime ?? null);
+    const [studyId, setStudyId] = useState<string | null>(data?.studyId ?? null);
     const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
-    
-    console.log('StudyEditForm rendering with data:', data);
-
-    useEffect(() => {
-        setAccessionNumber(data.mainDicomTags.accessionNumber || null);
-        setStudyDate(data.mainDicomTags.studyDate || null);
-        setStudyDescription(data.mainDicomTags.studyDescription || null);
-        setStudyId(data.mainDicomTags.studyId || null);
-        setStudyTime(data.mainDicomTags.studyTime || null);
-    }, [data]);
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -33,15 +28,15 @@ const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data
         );
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>| React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<StudyMainDicomTags> = {};
 
-        if (accessionNumber !== data.mainDicomTags.accessionNumber) replace.accessionNumber = accessionNumber;
-        if (studyDate !== data.mainDicomTags.studyDate) replace.studyDate = studyDate;
-        if (studyDescription !== data.mainDicomTags.studyDescription) replace.studyDescription = studyDescription;
-        if (studyId !== data.mainDicomTags.studyId) replace.studyId = studyId;
-        if (studyTime !== data.mainDicomTags.studyTime) replace.studyTime = studyTime;
+        if (accessionNumber !== data.accessionNumber) replace.accessionNumber = accessionNumber;
+        if (studyDate !== data.studyDate) replace.studyDate = studyDate;
+        if (studyDescription !== data.studyDescription) replace.studyDescription = studyDescription;
+        if (studyId !== data.studyId) replace.studyId = studyId;
+        if (studyTime !== data.studyTime) replace.studyTime = studyTime;
 
         const payload: StudyPayload = {
             replace,
@@ -51,14 +46,13 @@ const StudyEditForm: React.FC<EditModalFormProps<Study, StudyPayload>> = ({ data
             force: true,
             synchronous: false,
         };
-        console.log('payload', payload, "data", data);
         onSubmit({id: data.id, payload});
     };
 
 
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
-                  <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
                 <InputWithDelete
                     label="Accession Number"
                     value={accessionNumber}

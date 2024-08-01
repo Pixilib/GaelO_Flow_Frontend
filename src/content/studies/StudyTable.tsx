@@ -1,26 +1,29 @@
 import React, { useMemo } from "react";
-import { Table } from "../../ui";
-import { Colors } from "../../utils";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { ColumnDef } from "@tanstack/react-table";
 import { StudyMainDicomTags } from "../../utils/types";
+import { Colors } from "../../utils";
+
+import { Table } from "../../ui";
 import EntityActions from "../EntityAction";
-import { FaEdit, FaTrash } from "react-icons/fa";
+
+type StudyWithId = StudyMainDicomTags & { id: string }
 
 type StudyTableProps = {
-    studies: any[];
-    onRowClick: (row: StudyMainDicomTags) => void;
-    onActionClick: (action: string, study: StudyMainDicomTags) => void;
+    studies: StudyWithId[];
+    onRowClick: (studyId: string) => void;
+    onActionClick: (action: string, studyId: string) => void;
 };
 
-const StudyTable: React.FC<StudyTableProps> = ({
+const  StudyTable: React.FC<StudyTableProps> = ({
     studies,
     onRowClick,
     onActionClick,
 }) => {
 
-    const columns: ColumnDef<StudyMainDicomTags>[] = useMemo(() => [
+    const columns: ColumnDef<StudyWithId>[] = useMemo(() => [
         {
-            accessorKey: "id",
+            accessorKey: "accessionNumber",
             header: "Accession Number",
         },
         {
@@ -40,13 +43,13 @@ const StudyTable: React.FC<StudyTableProps> = ({
                         label: 'Modify',
                         icon: <FaEdit />,
                         color: 'orange',
-                        action: () => onActionClick('edit', study)
+                        action: () => onActionClick('edit', study.id)
                     },
                     {
                         label: 'Delete',
                         icon: <FaTrash />,
                         color: 'red',
-                        action: () => onActionClick('delete', study)
+                        action: () => onActionClick('delete', study.id)
                     },
                 ];
                 return <EntityActions entity={study} options={options} />;
@@ -63,7 +66,7 @@ const StudyTable: React.FC<StudyTableProps> = ({
             headerColor={Colors.almond}
             headerTextSize="xxs"
             className="text-[10px]"
-            onRowClick={onRowClick}
+            onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}
         />
     );

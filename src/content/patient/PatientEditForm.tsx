@@ -4,57 +4,50 @@ import Patient from "../../model/Patient";
 import { PatientMainDicomTags, PatientPayload } from "../../utils/types";
 import CheckBox from "../../ui/Checkbox";
 import { Colors } from "../../utils";
-import { EditModalFormProps } from "../../ui/EditModal";
 import InputWithDelete from "../../ui/InputWithDelete";
 
-type PatientEditFormProps = EditModalFormProps<Patient, PatientPayload>;
+type PatientEditFormProps = {
+    data: Patient;
+    onSubmit: (data: { id: string; payload: PatientPayload }) => void;
+    onCancel: () => void;
+};
 
-const PatientEditForm: React.FC<PatientEditFormProps> = ({ data, onSubmit, onCancel }) => {
-    const [patientId, setPatientId] = useState<string>("");
-    const [patientName, setPatientName] = useState<string | null>(null);
-    const [patientBirthDate, setPatientBirthDate] = useState<string | null>(null);
-    const [patientSex, setPatientSex] = useState<string | null>(null);
-    const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
-    const [keepSource, setKeepSource] = useState<boolean>(false);
-    const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
+    const PatientEditForm = ({ data, onSubmit, onCancel }: PatientEditFormProps) => {
+        const [patientId] = useState<string>(data?.id ?? "");
+        const [patientName, setPatientName] = useState<string | null>(data?.patientName ?? null);
+        const [patientBirthDate, setPatientBirthDate] = useState<string | null>(data?.patientBirthDate ?? null);
+        const [patientSex, setPatientSex] = useState<string | null>(data?.patientSex ?? null);
+        const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
+        const [keepSource, setKeepSource] = useState<boolean>(false);
+        const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
+        
+        if (!data) return <Spinner/>;
     
-    if (!data) return <Spinner/>;
-
-    useEffect(() => {
-        if (data) {
-            setPatientId(data.id);
-            setPatientName(data.patientName);
-            setPatientBirthDate(data.patientBirthDate);
-            setPatientSex(data.patientSex);
-        }
-    }, [data]);
-
-    const handleFieldRemoval = (field: string, checked: boolean) => {
-        setFieldsToRemove((prev) =>
-            checked ? [...prev, field] : prev.filter((item) => item !== field)
-        );
-    };
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const replace: Partial<PatientMainDicomTags> = {};
-
-        if (patientName !== data.patientName) replace.patientName = patientName;
-        if (patientBirthDate !== data.patientBirthDate) replace.patientBirthDate = patientBirthDate;
-        if (patientSex !== data.patientSex) replace.patientSex = patientSex;
-        if (patientId !== data.patientId && patientId !== null) replace.patientId = patientId;
-
-        const payload: PatientPayload = {
-            replace,
-            remove: fieldsToRemove,
-            removePrivateTags,
-            keepSource,
-            force: true,
-            synchronous: false,
+        const handleFieldRemoval = (field: string, checked: boolean) => {
+            setFieldsToRemove((prev) =>
+                checked ? [...prev, field] : prev.filter((item) => item !== field)
+            );
         };
-        console.log("PatientEditForm", payload);
-        onSubmit({ id: patientId, payload });
-    };
+    
+        const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+            event.preventDefault();
+            const replace: Partial<PatientMainDicomTags> = {};
+    
+            if (patientName !== data.patientName) replace.patientName = patientName;
+            if (patientBirthDate !== data.patientBirthDate) replace.patientBirthDate = patientBirthDate;
+            if (patientSex !== data.patientSex) replace.patientSex = patientSex;
+    
+            const payload: PatientPayload = {
+                replace,
+                remove: fieldsToRemove,
+                removePrivateTags,
+                keepSource,
+                force: true,
+                synchronous: false,
+            };
+            onSubmit({ id: patientId, payload });
+        };
+    
 
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
