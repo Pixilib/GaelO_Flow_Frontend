@@ -1,29 +1,24 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { Series, SeriesPayload, SeriesMainDicomTags } from '../../utils/types';
-import { EditModalFormProps } from "../../ui/EditModal";
 import InputWithDelete from "../../ui/InputWithDelete";
 import CheckBox from "../../ui/Checkbox";
 import FormJobsActions from "../FormJobsActions";
 
-const SeriesEditForm: React.FC<EditModalFormProps<Series, SeriesPayload>> = ({ data, onSubmit, onCancel }) => {
-    const [manufacturer, setManufacturer] = useState<string | null>(null);
-    const [modality, setModality] = useState<string | null>(null);
-    const [seriesDescription, setSeriesDescription] = useState<string | null>(null);
-    const [seriesNumber, setSeriesNumber] = useState<string | null>(null);
-    const [seriesDate, setSeriesDate] = useState<string | null>(null);
-    const [seriesTime, setSeriesTime] = useState<string | null>(null);
+type SeriesEditFormProps = {
+    data: Series;
+    onSubmit: (data: { id: string; payload: SeriesPayload }) => void;
+    onCancel: () => void;
+}
+const SeriesEditForm = ({ data, onSubmit, onCancel }: SeriesEditFormProps) => {
+    const [manufacturer, setManufacturer] = useState<string | null>(data.mainDicomTags.manufacturer ?? null);
+    const [modality, setModality] = useState<string | null>(data.mainDicomTags.modality ?? null);
+    const [seriesDescription, setSeriesDescription] = useState<string | null>(data.mainDicomTags.seriesDescription ?? null);
+    const [seriesNumber, setSeriesNumber] = useState<string | null>(data.mainDicomTags.seriesNumber?.toString() ?? null);
+    const [seriesDate, setSeriesDate] = useState<string | null>(data.mainDicomTags.seriesDate ?? null);
+    const [seriesTime, setSeriesTime] = useState<string | null>(data.mainDicomTags.seriesTime ?? null);
     const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
-
-    useEffect(() => {
-        setManufacturer(data.mainDicomTags.manufacturer || null);
-        setModality(data.mainDicomTags.modality || null);
-        setSeriesDescription(data.mainDicomTags.seriesDescription || null);
-        setSeriesNumber(data.mainDicomTags.seriesNumber?.toString() || null);
-        setSeriesDate(data.mainDicomTags.seriesDate || null);
-        setSeriesTime(data.mainDicomTags.seriesTime || null);
-    }, [data]);
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -31,7 +26,7 @@ const SeriesEditForm: React.FC<EditModalFormProps<Series, SeriesPayload>> = ({ d
         );
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>| React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<SeriesMainDicomTags> = {};
 
@@ -52,7 +47,7 @@ const SeriesEditForm: React.FC<EditModalFormProps<Series, SeriesPayload>> = ({ d
         };
 
         onSubmit({id: data.id, payload});
-    };
+    }
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
