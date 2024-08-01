@@ -2,7 +2,7 @@
 
 import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import AccordionPatient from '../src/content/patient/AccordionPatient';
+import AccordionPatient from '../src/content/patients/AccordionPatient';
 import Patient from '../src/model/Patient';
 import Study from '../src/model/Study';
 import Series from '../src/model/Series';

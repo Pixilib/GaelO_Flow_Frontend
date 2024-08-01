@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import PatientEditForm from '../src/content/patient/PatientEditForm';
+import PatientEditForm from '../src/content/patients/PatientEditForm';
 import Patient from '../src/model/Patient';
 import { PatientPayload } from '../src/utils/types';
 

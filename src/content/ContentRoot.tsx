@@ -9,7 +9,7 @@ import Patient from "../model/Patient";
 import { FormCard, Spinner } from "../ui";
 
 import SearchForm from "../query/SearchForm";
-import AccordionPatient from "./patient/AccordionPatient";
+import AccordionPatient from "./patients/AccordionPatient";
 
 const ContentRoot: React.FC = () => {
     const { toastError } = useCustomToast();
