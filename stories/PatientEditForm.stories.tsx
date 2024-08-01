@@ -16,7 +16,7 @@ const meta: Meta<typeof PatientEditForm> = {
   title: 'GAELO FLOW COMPONENTS/PatientEditForm',
   component: PatientEditForm,
   argTypes: {
-    patient: { control: 'object', description: 'Le patient à éditer.' },
+    data: { control: 'object', description: 'Le patient à éditer.' },
     onSubmit: { action: 'onSubmit', description: 'Action déclenchée lorsque le formulaire est soumis.' },
     onCancel: { action: 'onCancel', description: 'Action déclenchée lorsque le formulaire est annulé.' },
   },
@@ -27,40 +27,44 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const handleSubmit = (params: { id:string , payload: PatientPayload}) => {
+  const { id, payload } = params;
+  action('submit-form')({ id, payload });
+  console.log('Données du patient soumises:', { id, payload });
+};
+
+const handleCancel = () => {
+  action('cancel-form')();
+};
+
 export const Default: Story = {
   args: {
-    patient,
-    onSubmit: (payload: PatientPayload, patientId: string) => {
-      action('submit-form')({ patientId, payload });
-      console.log('Données du patient soumises:', { patientId, payload });
-    },
-    onCancel: action('cancel-form'),
+    data: patient,
+    onSubmit: handleSubmit,
+    onCancel: handleCancel,
   },
 } satisfies Story;
 
 export const FilledForm: Story = {
   args: {
-    patient: (() => {
+    data: (() => {
       const filledPatient = new Patient('89083e2b-c811de66-692d1fe7-cda37cfe-9805effd');
       filledPatient.fillData({
         patientId: '202200419918105350043',
         patientName: 'Robert',
         patientBirthDate: '19900101',
-        patientSex: 'F',
+        patientSex: 'M',
       });
       return filledPatient;
     })(),
-    onSubmit: (payload: PatientPayload, patientId: string) => {
-      action('submit-form')({ patientId, payload });
-      console.log('Données du patient soumises:', { patientId, payload });
-    },
-    onCancel: action('cancel-form'),
+    onSubmit: handleSubmit,
+    onCancel: handleCancel,
   },
 } satisfies Story;
 
 export const EmptyForm: Story = {
   args: {
-    patient: (() => {
+    data: (() => {
       const emptyPatient = new Patient('89083e2b-c811de66-692d1fe7-cda37cfe-9805effd');
       emptyPatient.fillData({
         patientId: '',
@@ -70,10 +74,7 @@ export const EmptyForm: Story = {
       });
       return emptyPatient;
     })(),
-    onSubmit: (payload: PatientPayload, patientId: string) => {
-      action('submit-form')({ patientId, payload });
-      console.log('Données du patient soumises:', { patientId, payload });
-    },
-    onCancel: action('cancel-form'),
+    onSubmit: handleSubmit,
+    onCancel: handleCancel,
   },
 } satisfies Story;
