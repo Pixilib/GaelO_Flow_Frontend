@@ -43,8 +43,8 @@ const Input = ({
     focus:outline
     focus:shadow-outline
     focus:primary focus:ring-primary focus:ring-1
-    pr-3
-    pl-3
+    mr-3
+    ml-3
     block 
     dark:bg-gray-700 
     dark:border-gray-600 

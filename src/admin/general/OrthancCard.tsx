@@ -101,7 +101,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 headerColor={Colors.white}
             />
             <CardFooter
-                className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
+                className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light gap-3">
                 <Button
                     color={Colors.warning}
                     onClick={reset}>
@@ -120,7 +120,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 </Button>
                 <div className="w-1/4">
                     <SelectInput
-                        value={selectOptions.find(option => option.value === orthancVerbosity)}
+                        value={selectOptions.find(option => option.value === orthancVerbosity)?.value ?? null}
                         onChange={handleSelectChange}
                         placeholder="Select option"
                         options={selectOptions}

@@ -32,7 +32,7 @@ type TableProps<TData> = {
   pinFirstColumn?: boolean;
   pinLastColumn?: boolean;
   enableRowSelection?: boolean;
-  selectedRow: Record<string, boolean>;
+  selectedRow?: Record<string, boolean>;
   onRowSelectionChange?: OnChangeFn<RowSelectionState>;
   onRowClick?: (row: TData) => void;
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
@@ -137,7 +137,7 @@ function Table<T>({
   };
 
   return (
-    <div className={`overflow-x-auto border rounded shadow-lg custom-scrollbar ${className}`}>
+    <div className={`overflow-x-auto border rounded-xl shadow-lg custom-scrollbar ${className}`}>
       <table className={`min-w-full border-grayCustom ${className}`}>
         <thead className={`${headerClass}`}>
           {table.getHeaderGroups().map(headerGroup => (
