@@ -2,15 +2,13 @@ import { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 
-import { Series } from '../../utils/types';
 import { Table } from "../../ui";
-import { Colors } from "../../utils";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import EntityActions from "../EntityAction";
+import { Colors, Series as SeriesType } from "../../utils";
+import SeriesActions from "./SeriesActions";
 
 type SeriesTableProps = {
-    series: Series[];
-    onActionClick: (action: string, series: Series) => void;
+    series: SeriesType[];
+    onActionClick: (action: string, series: SeriesType) => void;
 };
 const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
     
@@ -41,26 +39,7 @@ const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
             header: "Actions",
             cell: ({ row }) => {
                 const seriesData = row.original;
-                console.log("Series data for actions:", JSON.stringify(seriesData, null, 2));
-                const options = [
-                    {
-                        label: 'Modify',
-                        icon: <FaEdit />,
-                        color: 'orange',
-                        action: () => {
-                            onActionClick('edit', seriesData);
-                        }
-                    },
-                    {
-                        label: 'Delete',
-                        icon: <FaTrash />,
-                        color: 'red',
-                        action: () => {
-                            onActionClick('delete', seriesData);
-                        }
-                    },
-                ];
-                return <EntityActions entity={seriesData} options={options} />;
+                return <SeriesActions series={seriesData} onActionClick={onActionClick} />;
             },
         },
     ], []);
@@ -70,7 +49,7 @@ const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
             data={rows ?? []}
             headerColor={Colors.almond}
             headerTextSize="xs"
-            className="text-xs"
+            className="text-xs"            
         />
     );
 

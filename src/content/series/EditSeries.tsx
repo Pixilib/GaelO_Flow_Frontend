@@ -3,10 +3,9 @@
  * @name EditSeries
  */
 
-import React from "react";
-import { Series, SeriesPayload } from "../../utils/types";
+import React, { useState } from "react";
 import { modifySeries } from "../../services/orthanc";
-import { useCustomMutation, useCustomToast } from "../../utils";
+import { useCustomMutation, useCustomToast, Series, SeriesPayload } from "../../utils";
 import SeriesEditForm from './SeriesEditForm';
 import { Modal } from "../../ui";
 
@@ -19,18 +18,18 @@ type EditSeriesProps = {
 
 const EditSeries: React.FC<EditSeriesProps> = ({ series, onEditSeries, onClose, show }) => {
     const { toastSuccess, toastError } = useCustomToast();
+    const [jobId, setJobId] = useState<string | null>(null);
+
 
     const { mutateAsync: mutateSeries } = useCustomMutation<any, { id: string, payload: SeriesPayload }>(
         ({ id, payload }) => modifySeries(id, payload),
         [['series'], ['jobs']],
         {
             onSuccess: (data) => {
-                toastSuccess(`Series ${series.id} updated successfully ${data}`);
-                onEditSeries(series);
-                onClose();
+                setJobId(data.id);
             },
             onError: (error) => {
-                toastError(`Failed to update series ${series.id} ${error}`);
+                toastError(`Failed to update series ${error}`);
             },
         }
     );
@@ -39,12 +38,29 @@ const EditSeries: React.FC<EditSeriesProps> = ({ series, onEditSeries, onClose, 
         mutateSeries({ id, payload });
     };
 
+
+    const handleJobCompletion = (job: string) => {
+        if (job === "Success") {
+            onEditSeries(series);
+            onClose();
+            toastSuccess(`Series updated successfully`);
+        } else if (job === "Failure") {
+            toastError(`Failed to update series ${series.id}`);
+        }
+    };
+    
     return (
 
         <Modal show={show} size='xl'>
             <Modal.Header onClose={onClose} > Edit series </Modal.Header>
             <Modal.Body>
-                <SeriesEditForm data={series} onSubmit={handleSubmit} onCancel={onClose} />
+                <SeriesEditForm 
+                  data={series} 
+                  onSubmit={handleSubmit} 
+                  onCancel={onClose}
+                  jobId={jobId ?? undefined}
+                  onJobCompleted={handleJobCompletion}
+                  />
             </Modal.Body>
         </Modal>
     );

@@ -2,7 +2,7 @@
  * Component to edit a study with a modal and a form
  */
 
-import React from "react";
+import React, { useState } from "react";
 import { Study, StudyPayload } from "../../utils/types";
 import { getStudy, modifyStudy } from "../../services/orthanc";
 import { useCustomMutation, useCustomQuery, useCustomToast } from "../../utils";
@@ -18,14 +18,17 @@ type EditStudyProps = {
 
 const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose, show }) => {
     const { toastSuccess, toastError } = useCustomToast();
+    const [jobId, setJobId] = useState<string | null>(null);
+
+    console.log("EditStudyProps", studyId, onStudyUpdated, onClose, show);
     const { mutateAsync: mutateStudy } = useCustomMutation<any, { id: string, payload: StudyPayload }>(
         ({ id, payload }) => modifyStudy(id, payload),
         [['studies'], ['jobs']],
         {
             onSuccess: (data) => {
-                toastSuccess(`Study ${data.id} updated successfully`);
-                onStudyUpdated();
-                onClose();
+                // toastSuccess(`Study ${data.id} updated successfully`);
+                setJobId(data.id);
+                // onClose();
             },
             onError: (error) => {
                 toastError("Failed to update study: " + error );
@@ -47,6 +50,16 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
         mutateStudy({ id, payload });
     };
 
+    const handleJobCompletion = (job: string) => {
+        if (job === "Success") {
+            onStudyUpdated();
+            onClose();
+            toastSuccess(`Study updated successfully`);
+        } else if (job === "Failure") {
+            toastError(`Failed to update Study `);
+        }
+    };
+
     if (isPending) return <Spinner/>
 
     return (
@@ -61,6 +74,8 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
                         data={{...editingStudyDetails.mainDicomTags, id: editingStudyDetails.id}}
                         onSubmit={handleSubmit} 
                         onCancel={onClose} 
+                        jobId={jobId ?? undefined}
+                        onJobCompleted={handleJobCompletion}
                     />
                 )}
             </Modal.Body>

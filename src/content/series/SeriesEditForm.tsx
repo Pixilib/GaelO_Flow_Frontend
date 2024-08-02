@@ -1,15 +1,17 @@
 import React, { ChangeEvent, useState } from "react";
-import { Series, SeriesPayload, SeriesMainDicomTags } from '../../utils/types';
-import InputWithDelete from "../../ui/InputWithDelete";
-import CheckBox from "../../ui/Checkbox";
+import { Series, SeriesPayload, SeriesMainDicomTags, OrthancJob } from '../../utils/types';
+import { InputWithDelete, CheckBox } from "../../ui";
+
 import FormJobsActions from "../FormJobsActions";
 
 type SeriesEditFormProps = {
     data: Series;
     onSubmit: (data: { id: string; payload: SeriesPayload }) => void;
     onCancel: () => void;
+    jobId?: string;
+    onJobCompleted?: (jobState: string) => void;
 }
-const SeriesEditForm = ({ data, onSubmit, onCancel }: SeriesEditFormProps) => {
+const SeriesEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: SeriesEditFormProps) => {
     const [manufacturer, setManufacturer] = useState<string | null>(data.mainDicomTags.manufacturer ?? null);
     const [modality, setModality] = useState<string | null>(data.mainDicomTags.modality ?? null);
     const [seriesDescription, setSeriesDescription] = useState<string | null>(data.mainDicomTags.seriesDescription ?? null);
@@ -26,6 +28,7 @@ const SeriesEditForm = ({ data, onSubmit, onCancel }: SeriesEditFormProps) => {
         );
     };
 
+    
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<SeriesMainDicomTags> = {};
@@ -121,6 +124,8 @@ const SeriesEditForm = ({ data, onSubmit, onCancel }: SeriesEditFormProps) => {
             <FormJobsActions
                 onCancel={onCancel}
                 onSubmit={handleSubmit}
+                jobId={jobId}
+                onJobCompleted={onJobCompleted}
             />
         </form>
     );

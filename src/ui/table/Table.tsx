@@ -8,7 +8,9 @@ import {
   SortingState,
   ColumnFiltersState,
   getFilteredRowModel,
-  getPaginationRowModel
+  getPaginationRowModel,
+  RowSelectionState,
+  OnChangeFn,
 } from '@tanstack/react-table';
 
 import { Colors } from "../../utils/enums";
@@ -16,10 +18,8 @@ import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 import { FcAlphabeticalSortingAz, FcAlphabeticalSortingZa } from 'react-icons/fc';
 
-// Définition des tailles de texte pour les en-têtes de tableau
-export type textSize = "xxs" |"xs" | "sm" | "base" | "lg";
+export type textSize = "xxs" | "xs" | "sm" | "base" | "lg";
 
-// Props du composant Table
 type TableProps<TData> = {
   data?: TData[];
   columns: ColumnDef<TData>[];
@@ -31,13 +31,14 @@ type TableProps<TData> = {
   pageSize?: number;
   pinFirstColumn?: boolean;
   pinLastColumn?: boolean;
+  enableRowSelection?: boolean;
+  selectedRow: Record<string, boolean>;
+  onRowSelectionChange?: OnChangeFn<RowSelectionState>;
   onRowClick?: (row: TData) => void;
-  getRowStyles?: (raw: TData) => object | undefined;
-  getRowClasses?: (raw: TData) => string | undefined;
-  selectedColor?: string;
+  getRowStyles?: (row: TData) => React.CSSProperties | undefined;
+  getRowClasses?: (row: TData) => string | undefined;
 };
 
-// Composant Table principal
 function Table<T>({
   data = [],
   columns,
@@ -49,10 +50,12 @@ function Table<T>({
   headerTextSize = "sm",
   pinFirstColumn = false,
   pinLastColumn = false,
+  enableRowSelection = false,
+  selectedRow = {},
+  onRowSelectionChange,
   onRowClick,
-  getRowStyles = () => undefined,
-  getRowClasses = () => undefined,
-  selectedColor = 'bg-primary' // Couleur par défaut pour la sélection
+  getRowStyles,
+  getRowClasses,
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -60,9 +63,7 @@ function Table<T>({
     pageIndex: 0,
     pageSize: pageSize,
   });
-  const [selectedRow, setSelectedRow] = useState<string | null>(null);
 
-  // Gestion du changement de taille de page
   const handlePageSizeChange = (newPageSize: number) => {
     setPagination((prev) => ({
       ...prev,
@@ -70,48 +71,70 @@ function Table<T>({
     }));
   };
 
-  // Utilisation de useReactTable pour initialiser le tableau avec les données et les options
+  const selectionColumn: ColumnDef<T> = {
+    id: 'selection',
+    header: ({ table }) => (
+      <input
+        type="checkbox"
+        checked={table.getIsAllRowsSelected()}
+        onChange={table.getToggleAllRowsSelectedHandler()}
+      />
+    ),
+    cell: ({ row }) => (
+      <input
+        type="checkbox"
+        checked={row.getIsSelected()}
+        onChange={row.getToggleSelectedHandler()}
+        onClick={(e) => e.stopPropagation()}
+      />
+    ),
+  };
+
+  const tableColumns = enableRowSelection ? [selectionColumn, ...columns] : columns;
+
   const table = useReactTable<T>({
     data,
-    columns,
+    columns: tableColumns,
     state: {
       sorting,
       columnFilters,
       pagination,
+      rowSelection: selectedRow,
     },
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onRowSelectionChange: onRowSelectionChange,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    enableRowSelection,
     enableColumnFilters,
     enableSorting,
     meta: {
       getRowStyles: getRowStyles,
-      getRowClasses: (row) => {
+      getRowClasses: (row: any) => {
         const classes = getRowClasses ? getRowClasses(row) : undefined;
-        return row.id === selectedRow ? selectedColor : classes; // Applique la couleur de sélection si la ligne est sélectionnée
+        return classes;
       }
     }
   });
 
-  // Classes pour les colonnes fixes à gauche ou à droite
   const textXXS = "text-[0.491rem]";
   const headerClass = `bg-${headerColor}`;
   const headerText = headerTextSize === "xxs" ? `${textXXS}` : `text-${headerTextSize}`;
   const firstColumnClass = `sticky left-0 ${headerClass}`;
   const lastColumnClass = `sticky right-0 bg-white`;
 
-  // Fonction pour obtenir les classes CSS spécifiques d'une colonne
   const getColumnClasses = (index: number, length: number) => {
     if (pinFirstColumn && index === 0) return firstColumnClass;
     if (pinLastColumn && index === length - 1) return lastColumnClass;
+    return '';
   };
 
   return (
-    <div className={`rounded-xl shadow-md overflow-visible overflow-x-auto custom-scrollbar ${className}`}>
+    <div className={`overflow-x-auto border rounded shadow-lg custom-scrollbar ${className}`}>
       <table className={`min-w-full border-grayCustom ${className}`}>
         <thead className={`${headerClass}`}>
           {table.getHeaderGroups().map(headerGroup => (
@@ -167,14 +190,13 @@ function Table<T>({
                 onClick={() => {
                   if (onRowClick) {
                     onRowClick(row.original);
-                    setSelectedRow(row.id);
                   }
                 }}
               >
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td
                     key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                    className={`px-1 py-2 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
+                    className={`px-1 py-2 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)}`}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>

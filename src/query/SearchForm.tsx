@@ -110,7 +110,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
         toastWarning("Choose AET to Query");
         return;
       }
-      console.log({ ...queryPayload, aet });
       onSubmit(queryPayload, aet);
     } else {
       onSubmit(queryPayload);

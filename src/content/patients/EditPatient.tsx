@@ -26,8 +26,8 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
         ({ id, payload }) => modifyPatient(id, payload),
         [['jobs']],
         {
-            onSuccess: async (data) => {
-                toastSuccess(`Patient updated successfully ${data}`);
+            onSuccess: async () => {
+                toastSuccess(`Patient updated successfully `);
                 onEditPatient(patient);
                 onClose();
             },

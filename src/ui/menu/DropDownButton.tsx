@@ -24,12 +24,11 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonTex
   }, []);
 
   const handleOptionClick = (option: DropdownOption) => {
-    console.log(`Option clicked: ${option.label}`);
     option.action(row);
   };
 
   return (
-    <div ref={dropdownRef} className="relative inline-flex hs-dropdown">
+    <div ref={dropdownRef} className="relative inline-flex hs-dropdown [--placement:top-left]">
       <button
         id="hs-dropdown-custom-trigger"
         type="button"

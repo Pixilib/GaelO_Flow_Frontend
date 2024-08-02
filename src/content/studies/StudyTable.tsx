@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa";
 import { ColumnDef } from "@tanstack/react-table";
 import { StudyMainDicomTags } from "../../utils/types";
 import { Colors } from "../../utils";
 
 import { Table } from "../../ui";
-import EntityActions from "../EntityAction";
+import StudyActions from "./StudyActions";
 
 type StudyWithId = StudyMainDicomTags & { id: string }
 
@@ -20,7 +19,6 @@ const  StudyTable: React.FC<StudyTableProps> = ({
     onRowClick,
     onActionClick,
 }) => {
-
     const columns: ColumnDef<StudyWithId>[] = useMemo(() => [
         {
             accessorKey: "accessionNumber",
@@ -38,24 +36,9 @@ const  StudyTable: React.FC<StudyTableProps> = ({
             header: "Actions",
             cell: ({ row }) => {
                 const study = row.original;
-                const options = [
-                    {
-                        label: 'Modify',
-                        icon: <FaEdit />,
-                        color: 'orange',
-                        action: () => onActionClick('edit', study.id)
-                    },
-                    {
-                        label: 'Delete',
-                        icon: <FaTrash />,
-                        color: 'red',
-                        action: () => onActionClick('delete', study.id)
-                    },
-                ];
-                return <EntityActions entity={study} options={options} />;
+                return <StudyActions study={study} onActionClick={onActionClick} />;
             },
         },
-
     ], [onActionClick]);
 
     return (
@@ -68,6 +51,7 @@ const  StudyTable: React.FC<StudyTableProps> = ({
             className="text-[10px]"
             onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}
+            enableRowSelection={true}
         />
     );
 };
