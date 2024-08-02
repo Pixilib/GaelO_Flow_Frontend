@@ -7,24 +7,27 @@ import { ProgressCircle } from "../ui";
 type ProgressJobsProps = {
     jobId: string;
     size?: number;
-    onJobCompleted?: (job: OrthancJob) => void;
+    onJobCompleted?: (jobStatus: string) => void;
 }
 
 const ProgressJobs: React.FC<ProgressJobsProps> = React.memo(({ jobId, size = 84, onJobCompleted  }) => {
-
-    const { data: jobData } = useCustomQuery<OrthancJob>(
+    const { data: jobData, isLoading, error } = useCustomQuery<OrthancJob>(
         ["job", jobId],
         () => getJobById(jobId),
         {
-            refetchInterval: 1000,
-            onSuccess: (data) => {
-                if (data.State === "Success" || data.State === "Failure") {
-                    onJobCompleted && onJobCompleted(data);
+            refetchInterval: (query) => {
+                if (query.state.data?.State === 'Success' || query.state.data?.State === 'Failure') {
+                    onJobCompleted && onJobCompleted(query.state.data?.State);
+                    return false;
                 }
-            },
+                return 1000;
+            }
         }
     );
 
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error: </div>;
+    if (!jobData) return <div>No job data available</div>;
     const getTextColor = (state: string) => {
         switch (state) {
             case "Pending": return "text-green-500";
@@ -36,7 +39,6 @@ const ProgressJobs: React.FC<ProgressJobsProps> = React.memo(({ jobId, size = 84
             default: return "text-dark";
         }
     };
-
     return (
         <ProgressCircle
             progress={jobData?.Progress ?? 0}

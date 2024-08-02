@@ -1,26 +1,22 @@
 
-
 import React from 'react';
-
-import ProgressJobs from '../query/ProgressJobs';
 import { Button } from '../ui';
 import { Colors } from '../utils';
 
+import ProgressJobs from '../query/ProgressJobs';
 interface FormJobsActionsProps {
     onCancel: () => void;
     onSubmit: (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => void;
-    jobId ?: string;
+    jobId?: string;
+    onJobCompleted?: (jobState: string) => void;
 }
-
 
 const FormJobsActions: React.FC<FormJobsActionsProps> = ({
     onCancel,
     onSubmit,
     jobId,
+    onJobCompleted,
 }) => {
-
-
-
     if (!jobId) {
         return (
             <div className="flex justify-center mt-4 space-x-4">
@@ -36,8 +32,9 @@ const FormJobsActions: React.FC<FormJobsActionsProps> = ({
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <ProgressJobs jobId={jobId} />
+            <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
         </div>
     );
 };
-export default FormJobsActions; 
+
+export default FormJobsActions;
