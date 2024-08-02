@@ -218,6 +218,50 @@ export type OrthancImportDicom = {
   parentStudy: string;
 };
 
+export type SeriesMainDicomTags = {
+  imageOrientationPatient: string | null;
+  manufacturer: string | null;
+  modality: string | null;
+  operatorsName: string | null;
+  protocolName: string | null;
+  seriesDescription: string | null;
+  seriesInstanceUID: string;
+  seriesNumber: string | number | null;
+  stationName: string | null;
+  seriesDate: string | null;
+  seriesTime: string | null;
+};
+
+export type PatientMainDicomTags = {
+  patientBirthDate: string | null;
+  patientId: string;
+  patientName: string | null;
+  patientSex: string | null;
+};
+
+export type StudyMainDicomTags = {
+  accessionNumber: string | null;
+  institutionName?: string | null;
+  referringPhysicianName?: string | null;
+  studyDate: string | null;
+  studyDescription: string | null;
+  studyId: string | null;
+  studyInstanceUID: string;
+  studyTime: string | null;
+};
+export type Series = {
+  expectedNumberOfInstances: number | null;
+  id: string;
+  instances: string[];
+  isStable: boolean;
+  labels: string[];
+  lastUpdate: string;
+  mainDicomTags:SeriesMainDicomTags
+  parentStudy: string;
+  status: string;
+  type: string;
+};
+
 export type Patient = {
   id: string;
   isStable: boolean;
@@ -233,49 +277,19 @@ export type Patient = {
   type: string;
 };
 
-export type Series = {
-  expectedNumberOfInstances: number | null;
-  id: string;
-  instances: string[];
-  isStable: string;
-  labels: string[];
-  lastUpdate: string;
-  mainDicomTags: {
-    imageOrientationPatient: string | null;
-    manufacturer: string | null;
-    modality: string | null;
-    operatorsName: string | null;
-    protocolName: string | null;
-    seriesDescription: string | null;
-    seriesInstanceUID: string;
-    seriesNumber: string | number | null;
-    stationName: string | null;
-    seriesDate: string | null;
-    seriesTime: string | null;
-  };
-  parentStudy: string;
-  status: string;
-  type: string;
+export type PatientPayload = {
+  replace: Partial<PatientMainDicomTags>;
+  remove: string[];
+  removePrivateTags: boolean;
+  force: boolean;
+  synchronous: boolean;
+  keepSource: boolean;
 };
 
-export type PatientMainDicomTags = {
-  patientBirthDate: string | null;
-  patientId: string | null;
-  patientName: string | null;
-  patientSex: string | null;
-};
-
-export type StudyMainDicomTags = {
-  accessionNumber: string | null;
-  institutionName: string | null;
-  referringPhysicianName: string | null;
-  studyDate: string | null;
-  studyDescription: string | null;
-  studyId: string | null;
-  studyInstanceUID: string;
-  studyTime: string | null;
-};
-
+export type OrthancResponse = {
+ id: string;
+ path: string;
+}
 export type Study = {
   id: string;
   isStable: boolean;
@@ -287,3 +301,29 @@ export type Study = {
   series: string[];
   type: string;
 };
+
+export type StudyPayload = {
+  replace: Partial<StudyMainDicomTags>;
+  remove: string[];
+  removePrivateTags: boolean;
+  force: boolean;
+  synchronous: boolean;
+  keepSource: boolean;
+};
+
+// export type SeriesPayload = {
+//   replace: Partial<SeriesMainDicomTags>;
+//   remove: string[];
+//   removePrivateTags: boolean;
+//   force: boolean;
+//   synchronous: boolean;
+//   keepSource: boolean;
+// };
+export type SeriesPayload = {
+  replace: Partial<SeriesMainDicomTags>;
+  remove: string[];
+  removePrivateTags: boolean;
+  keepSource: boolean;
+  force: boolean;
+  synchronous: boolean;
+}

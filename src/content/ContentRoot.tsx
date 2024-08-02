@@ -1,72 +1,83 @@
-import { useMemo, useState } from "react";
-import SearchForm from "../query/SearchForm";
-import { getLabels } from "../services";
-import { findTools } from "../services/tools";
-import { QueryPayload, useCustomMutation, useCustomQuery } from "../utils";
-import { Study as StudyType } from "../utils/types";
+
+import React, { useMemo, useState } from "react";
+import { getLabels, findTools } from "../services";
+import { QueryPayload, useCustomMutation, useCustomQuery, useCustomToast, Study as StudyType } from "../utils";
+
 import Model from "../model/Model";
-import { FormCard } from "../ui";
-import AccordionPatient from "./AccordionPatient";
+import Patient from "../model/Patient";
 
-const OrthancRoot = () => {
-    const [refModel, setRefModel] = useState<Model | null>(null);
+import { FormCard, Spinner } from "../ui";
 
-    const patients = useMemo(() => {
-        if(refModel== null) return []
-        return refModel.getPatients()
-    }, [refModel])
+import SearchForm from "../query/SearchForm";
+import AccordionPatient from "./patients/AccordionPatient";
+
+const ContentRoot: React.FC = () => {
+    const { toastError } = useCustomToast();
+
+    const [model, setModel] = useState<Model | null>(null);
+    const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
+
+    const patients = useMemo(() => model?.getPatients() || [], [model]);
 
     const { data: labelsData } = useCustomQuery<string[]>(
         ['labels'],
         () => getLabels(),
     );
 
-    const { mutateAsync: mutateTools } = useCustomMutation<StudyType[], any>(
-        ({ formData }) => findTools(formData),
+    const { mutateAsync: mutateToolsFind, isPending } = useCustomMutation<StudyType[], QueryPayload>(
+        findTools,
         [],
         {
             onSuccess: (data) => {
-                const model = new Model();
-                data.forEach(studyData => {
-                    model.addStudy(studyData);
-                });
-                setRefModel(model);
+                const newModel = new Model();
+                data.forEach(studyData => newModel.addStudy(studyData));
+                setModel(newModel);
             },
             onError: (error:any) => {
-                console.log("Error",error);
+                toastError("Failed to load data: " + error);
             }
         }
-    )
+    );
+
     const handleSubmit = async (formData: QueryPayload) => {
-        await mutateTools({ formData });
-    }
+        setQueryPayload(formData);
+        mutateToolsFind(formData);
+    };
+
+    const refreshFind = () => {
+        if (queryPayload) {
+            mutateToolsFind(queryPayload);
+        }
+    };
 
     return (
         <div className="flex flex-col items-center w-full">
             <FormCard
                 className="flex flex-col justify-center w-11/12 bg-white gap-y-2"
-                title={"Search"}
+                title="Search"
                 collapsible={true}
             >
-                <SearchForm
-                    onSubmit={handleSubmit}
-                    labelsData={labelsData}
-                    withAets={true}
-                />
+                <SearchForm onSubmit={handleSubmit} labelsData={labelsData} withAets={true} />
             </FormCard>
             <div className="flex flex-col items-center w-full">
                 <div className="mb-4 text-2xl font-bold text-primary">Results</div>
                 <div className="w-11/12">
-                <div className="w-full">
-                    { patients.map((patient) => {
-                        return (<AccordionPatient key = {patient.id} patient={patient} onDeletePatient={() =>{}} onEditPatient={()=> {}}/>)
-                    })
-                    }
-                </div>
+                    {isPending ? (
+                        <Spinner />
+                    ) : (
+                        patients.map((patient: Patient) => (
+                            <AccordionPatient
+                                key={patient.id}
+                                patient={patient}
+                                onPatientEdited={refreshFind}
+                                onPatientDeleted={refreshFind}
+                            />
+                        ))
+                    )}
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
-export default OrthancRoot;
+export default ContentRoot;

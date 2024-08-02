@@ -3,7 +3,7 @@ import { useState } from "react";
 import { deleteRole, getRoles } from '../../../services';
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 
-import { Colors, Role, RolesUserResponse, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
+import { Colors, Role, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
 
 import RolesTable from "./RolesTable";
 import CreateRole from "./CreateRole";
@@ -17,7 +17,7 @@ const Roles = () => {
     const [showRoleForm, setShowRoleForm] = useState<'create' | 'edit' | null>(null);
     const [roleToEdit, setRoleToEdit] = useState<Role | null>(null);
 
-    const { data: roles, isPending: isLoadingRoles } = useCustomQuery<RolesUserResponse>(
+    const { data: roles, isPending: isLoadingRoles } = useCustomQuery<Role[]>(
         ["roles"],
         () => getRoles(),
         {

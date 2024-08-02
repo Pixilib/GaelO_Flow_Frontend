@@ -1,4 +1,4 @@
-import { FaWindowMinimize, FaWindowMaximize } from "react-icons/fa"; 
+import { FaWindowMinimize, FaWindowMaximize } from "react-icons/fa";
 import { useState, ReactNode, FormEvent } from 'react';
 import { Card, CardBody, CardHeader, CloseButton } from '../ui';
 import { Colors } from '../utils';

@@ -16,6 +16,7 @@ import type {
     AutoQueryPayload,
     OptionsResponse,
     Oauth2Config,
+    OrthancJob,
     Modality,
     Role,
     UserPayload,
@@ -23,7 +24,10 @@ import type {
     UserUpdatePayload,
     User,
     Option,
-    QueryPayload
+    QueryPayload,
+    Series,
+    SeriesPayload,
+    Study,
 } from "./types";
 import { useCustomToast } from "./toastify";
 
@@ -37,10 +41,12 @@ export {
     ModalityExtended,
     Oauth2Config,
     Option,
+    OrthancJob,
     OptionsResponse,
     parseTimeString,
     QueryPayload,
     Role,
+    Study,
     timeDiff,
     useCustomMutation,
     useCustomQuery,
@@ -48,4 +54,6 @@ export {
     User,
     UserPayload,
     UserUpdatePayload,
+    Series,
+    SeriesPayload
 };

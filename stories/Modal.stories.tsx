@@ -1,20 +1,27 @@
+// Modal.stories.tsx
+
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Colors, useModal } from '../src/utils';
+import { Colors } from '../src/utils';
 import { Button, Modal } from '../src/ui';
+import { useState } from 'react';
 
 const meta = {
-  title:"GAELO FLOW UI/Modal",
+  title: "GAELO FLOW UI/Modal",
   component: Modal,
   argTypes: {
-    dialogRef: { control: 'object', description: 'Reference to the dialog element.' },
-    closeDialog: { action: 'closeDialog', description: 'Action triggered when the dialog is closed.' },
+    show: { control: 'boolean', description: 'Whether the modal is shown.' },
+    size: {
+      control: { type: 'select' },
+      options: ['sm', 'lg', 'xl', 'w-full'],
+      description: 'Size of the modal.',
+    },
     className: { control: 'text', description: 'Custom CSS class for the modal.' },
     children: { control: 'text', description: 'Content of the modal.' },
   },
   parameters: {
     tags: ['Component', 'UI', 'Modal'],
-    notes: 'This component is used to display modal dialogs in the application. It leverages the `useModal` hook to manage the modal state.',
+    notes: 'This component is used to display modal dialogs in the application.',
     backgrounds: {
       default: 'light',
       values: [
@@ -24,18 +31,27 @@ const meta = {
     },
   },
   tags: ['autodocs'],
-} as Meta<typeof Modal>;
+} satisfies Meta<typeof Modal>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 const Template = (args: any) => {
-  const { dialogRef, openDialog, closeDialog } = useModal();
+  const [show, setShow] = useState(false);
+
+  const openModal = () => setShow(true);
+  const closeModal = () => {
+    setShow(false);
+    args.closeDialog();
+  };
+
   return (
     <div>
-      <Button color={Colors.primary} onClick={openDialog}>Open Modal</Button>
-      <Modal {...args} dialogRef={dialogRef} closeDialog={closeDialog} />
+      <Button color={Colors.primary} onClick={openModal}>Open Modal</Button>
+      <Modal {...args} show={show} closeDialog={closeModal}>
+        {args.children}
+      </Modal>
     </div>
   );
 };
@@ -43,6 +59,8 @@ const Template = (args: any) => {
 export const Default: Story = {
   render: Template,
   args: {
+    show: false,
+    size: 'lg',
     children: 'This is the default modal content.',
     closeDialog: action('closeDialog'),
   },
@@ -51,6 +69,8 @@ export const Default: Story = {
 export const WithBackgroundDark: Story = {
   render: Template,
   args: {
+    show: false,
+    size: 'lg',
     children: 'This is a modal with a custom class.',
     className: 'bg-dark text-white',
     closeDialog: action('closeDialog'),
@@ -60,6 +80,8 @@ export const WithBackgroundDark: Story = {
 export const WithFormattedMessage: Story = {
   render: Template,
   args: {
+    show: false,
+    size: 'lg',
     children: (
       <div>
         <h2 className="text-lg font-bold">Formatted Content</h2>
@@ -69,4 +91,3 @@ export const WithFormattedMessage: Story = {
     closeDialog: action('closeDialog'),
   },
 };
-

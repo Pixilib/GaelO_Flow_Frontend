@@ -28,11 +28,6 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
             title="Create New Peer"
             onClose={onClose}
             onSubmit={handleSubmit}
-            footer={
-                <Button type="submit" color={Colors.success} aria-label="Submit New Peer">
-                    <CheckIcon size="20px" />
-                </Button>
-            }
         >
             <div className="grid grid-cols-2 gap-4 p-4">
                 <Input
@@ -68,6 +63,11 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
                     aria-label="Password"
                 />
+            </div>
+            <div className='flex justify-center'>
+            <Button type="submit" color={Colors.success} aria-label="Submit New Peer">
+                    <CheckIcon size="20px" />
+                </Button>
             </div>
         </FormCard>
     );

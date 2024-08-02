@@ -4,7 +4,7 @@ import { Colors } from '../utils';
 
 type FormButtonProps = {
   text: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   className?: string;
 }&React.ButtonHTMLAttributes<HTMLButtonElement>;
 

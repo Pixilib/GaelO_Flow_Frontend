@@ -1,5 +1,4 @@
-// import React from 'react';
-// import { BiX, BiCheck } from "react-icons/bi";
+
 import { Colors } from '../utils';
 import Button from './Button';
 import Modal from './Modal';
@@ -8,7 +7,7 @@ import Modal from './Modal';
 
 type ConfirmModalProps = {
   title? : string;
-  content? : string;
+  content? : string|React.ReactNode;
   confirmLabel? : string;
   cancelLabel? : string;
   onConfirm : () => void;
@@ -27,7 +26,7 @@ const ConfirmModal = ({
   show
 }:ConfirmModalProps) => {
   return (
-    <Modal show={show} data-gaelo-flow='confirm-dialog' size='sm'>
+    <Modal show={show} data-gaelo-flow='confirm-dialog' size='lg'>
       <Modal.Header
         data-gaelo-flow='confirm-dialog-header'
         onClose={onClose}
@@ -36,7 +35,6 @@ const ConfirmModal = ({
       </Modal.Header>
 
       <Modal.Body
-        style={{ maxHeight: '600px' }}
         data-gaelo-flow='confirm-dialog-body'
       >
         {content}

@@ -2,7 +2,7 @@ import React from "react";
 
 interface ModalProps {
   show: boolean;
-  size: "sm" | "lg" | "xl" | "w-full";
+  size: "sm" | "lg" | "xl" | "full";
   children?: React.ReactNode;
   [key: string]: any;
 }
@@ -12,7 +12,7 @@ const Modal = ({ show, size = "lg", children, ...props }: ModalProps) => {
     "sm": "min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[300px]",
     "lg": "min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px]",
     "xl": "min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:max-w-[500px] min-[992px]:max-w-[800px] min-[1200px]:max-w-[1140px]",
-    "w-full": "h-full w-full"
+    "full": "h-full w-full"
   };
   return (
     <div

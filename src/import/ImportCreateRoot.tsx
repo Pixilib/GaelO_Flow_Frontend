@@ -1,18 +1,19 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab, Card, CardBody} from "../ui";
-import { Colors } from "../utils";
+import { Tabs, Tab } from "../ui";
+
 import CreateRoot from "./Create/CreateRoot";
 import ImportRoot from "./Import/ImportRoot";
 
 const ImportCreateRoot = () => {
-    const location = useLocation()
+    const location = useLocation();
     const navigate = useNavigate();
 
     const handleTabClick = (tab: string) => {
         navigate(tab);
     };
+
     return (
-        <Card className="shadow-md bg-almond rounded-xl" data-gaelo-flow="import-create-root">
+        <div className="shadow-md bg-almond rounded-xl" data-gaelo-flow="import-create-root">
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
                     title="Import Dicom"
@@ -25,17 +26,13 @@ const ImportCreateRoot = () => {
                     onClick={() => handleTabClick("create")}
                 />
             </Tabs>
-            <CardBody
-                color={Colors.almond}
-                roundedTopLeft={false}
-                roundedTopRight={false}
-            >
+            <div className="card-body">
                 <Routes>
                     <Route path="/" element={<ImportRoot />} />
                     <Route path="/create" element={<CreateRoot />} />
                 </Routes>
-            </CardBody>
-        </Card>
+            </div>
+        </div>
     );
 };
 

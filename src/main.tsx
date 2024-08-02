@@ -9,11 +9,11 @@ import './i18n.ts'
 import { store } from "./store.tsx";
 import App from "./App.tsx";
 import ErrorBoundary from "./ErrorBoundary.tsx";
-
 import "./index.css";
 import ConfirmContextProvider from "./services/ConfirmContextProvider.tsx";
 
 const queryClient = new QueryClient();
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

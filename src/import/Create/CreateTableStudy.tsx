@@ -3,13 +3,13 @@ import { Table } from "../../ui";
 import { Colors } from "../../utils/enums";
 import Study from "../../model/Study";
 
-interface ImportTableStudyProps {
+interface CreateTableStudyProps {
     data: Study[];
     onStudyClick: (studyInstanceUID: string) => void;
     selectedStudyInstanceUID: string | null;
 }
 
-const CreateTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
+const CreateTableStudy: React.FC<CreateTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
     const rows = useMemo(() => data, [data]);
 
     const columns = useMemo(() => {

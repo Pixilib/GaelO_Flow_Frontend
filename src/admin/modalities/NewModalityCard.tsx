@@ -77,7 +77,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
     onCreateAet(newAetData);
   };
 
-  const handleSelectChange = (option: Option) => {
+  const handleSelectChange = (option: Option|null) => {
     setManufacturer(option);
   };
 
@@ -87,16 +87,11 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
       title="Create New Modality"
       onClose={onClose}
       onSubmit={handleSubmit}
-      footer={
-        <Button type="submit" color={Colors.success} aria-label="Submit New Modality">
-          <CheckIcon size="20px" />
-        </Button>
-      }
     >
       <div className="grid grid-cols-2 gap-4 p-4">
         <Input
           label="Name"
-          bordered
+          bordered = {false}
           value={name}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
           aria-label="Modality Name"
@@ -128,13 +123,19 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
         <div className="col-span-2">
           <SelectInput
             options={options}
-            value={manufacturer ?? undefined}
+            value={manufacturer?.value ?? null}
             onChange={handleSelectChange}
             placeholder="Select Manufacturer"
             aria-label="Manufacturer"
           />
         </div>
       </div>
+      <div className="flex justify-center">
+      <Button type="submit" color={Colors.success} aria-label="Submit New Modality">
+          <CheckIcon size="20px" />
+        </Button>
+      </div>
+
     </FormCard>
   );
 };

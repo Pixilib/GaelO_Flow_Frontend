@@ -6,6 +6,7 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { IoLanguage as LanguageIcon } from 'react-icons/io5';
 import { MdNotifications as NotificationsIcon, MdSettings as SettingsIcon } from 'react-icons/md';
 import { TiUser } from 'react-icons/ti';
+
 import Banner from '../ui/menu/Banner';
 import DropDown from '../ui/menu/DropDown';
 import ToggleSwitch from '../ui/menu/ToggleSwitch';
@@ -25,14 +26,20 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { i18n } = useTranslation();
-  
+
   const [openItem, setOpenItem] = useState<string | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRefLanguage = useRef<HTMLDivElement>(null);
+  const dropdownRefSettingsUser = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setOpenItem(null); // Close dropdown if clicked outside
+      if (
+        dropdownRefLanguage.current &&
+        !dropdownRefLanguage.current.contains(event.target as Node) &&
+        dropdownRefSettingsUser.current &&
+        !dropdownRefSettingsUser.current.contains(event.target as Node)
+      ) {
+        setOpenItem(null);
       }
     };
 
@@ -53,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 
   const handleSettingsItemClick = (item: Item) => {
     navigate(item.path);
-    setOpenItem(null); // Close dropdown after navigation
+    setOpenItem(null);
   };
 
   const handleLeftIconClick = () => {
@@ -98,11 +105,11 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       title={title}
       leftIcon={leftIcon}
       onLeftIconClick={handleLeftIconClick}
-      className="sticky top-0 bg-white"
+      className="sticky top-0 z-50 bg-white"
     >
       <div className="flex justify-end gap-4">
         <DropDown
-          ref={dropdownRef}
+          ref={dropdownRefLanguage}
           chevronPosition="right"
           className="relative flex flex-col w-44"
           isOpen={isOpen('Language')}
@@ -117,6 +124,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                 }}
                 isOpen={isOpen('Language')}
                 className="w-40"
+                setOpenItem={setOpenItem}
               />
             </div>
           }
@@ -129,7 +137,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           </span>
         </DropDown>
         <DropDown
-          ref={dropdownRef}
+          ref={dropdownRefSettingsUser}
           chevronPosition="left"
           className="relative flex flex-col w-60"
           isOpen={isOpen('SettingsUser')}
@@ -138,25 +146,24 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             <div className="absolute -mt-2 top-full">
               <BannerItems
                 elements={ItemsSettingsUser}
-                onSelect={(item) => {
-                  handleSettingsItemClick(item);
-                }}
+                onSelect={(item) => handleSettingsItemClick(item)}
                 isOpen={isOpen('SettingsUser')}
-                setOpenItem={() => setOpenItem(null)}
+                setOpenItem={setOpenItem}
                 className="w-56"
               />
             </div>
           }
         >
           <ToggleSwitch
-            isToggled={true} // Replace with actual state variable controlling the toggle
+            isToggled={true}
             onToggle={(isChecked) => {
               console.log('Toggle state:', isChecked);
-              // Handle state change logic here
             }}
           />
-          <NotificationsIcon className="transition-transform duration-100 size-4 hover:scale-110" />
-          <SettingsIcon className="transition-transform duration-100 size-4 hover:scale-110" />
+          <NotificationsIcon
+            className="transition-transform duration-100 size-4 hover:scale-110" />
+          <SettingsIcon
+            className="transition-transform duration-100 size-4 hover:scale-110" />
           <TiUser
             size={23}
             className="transition-transform duration-100 hover:scale-110"

@@ -43,8 +43,8 @@ const Input = ({
     focus:outline
     focus:shadow-outline
     focus:primary focus:ring-primary focus:ring-1
-    pr-3
-    pl-3
+    mr-3
+    ml-3
     block 
     dark:bg-gray-700 
     dark:border-gray-600 
@@ -75,12 +75,12 @@ const Input = ({
           `flex items-center peer ${borderClasses} text-gray-600 w-full ${roundedRightClass} text-sm ${InputClassName} ${className}`
         }>
         {svgLeft && (
-          <div className="mr-3 pointer-events-none peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="p-3 pointer-events-none peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {svgLeft}
           </div>
         )}
         <input
-          className="w-full bg-transparent min-h-10"
+          className="w-full bg-transparent border-none min-h-10"
           type={type}
           min={min}
           max={max}
@@ -89,7 +89,7 @@ const Input = ({
           {...props}
         />
         {svgRight && (
-          <div className="flex justify-end peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="flex justify-end peer-disabled:pointer-events-none peer-disabled:opacity-50 p-3">
             {svgRight}
           </div>
         )}
