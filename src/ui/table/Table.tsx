@@ -113,7 +113,10 @@ function Table<T>({
     enableColumnFilters,
     enableSorting,
     meta: {
-      getRowStyles: getRowStyles,
+      getRowStyles:  (row: any) => {
+        const styles = getRowStyles ? getRowStyles(row) : undefined;
+        return styles;
+      },
       getRowClasses: (row: any) => {
         const classes = getRowClasses ? getRowClasses(row) : undefined;
         return classes;
