@@ -36,8 +36,8 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
     (id) => deleteSeries(id),
     [],
     {
-      onSuccess: () => {
-        toastSuccess('Series deleted successfully');
+      onSuccess: (_, variables) => {
+        toastSuccess('Series deleted successfully' + variables);
         refetchSeries();
         onSeriesUpdate();
       },
@@ -51,14 +51,18 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
     setEditingSeries(series);
   };
 
-  const handleDeleteSeries = async (series: Series) => {
-    if (await confirm({
-      title: 'Confirm Deletion',
-      message: `Are you sure you want to delete the series "${series.mainDicomTags.seriesDescription}"?`
-    })) {
-      mutateDeleteSeries(series.id);
-    }
+  const handleDeleteSeries = async (seriesId: string) => {
+    const confirmContent = (
+      <div className="italic">
+          Are you sure you want to delete this Series:
+          <span className="text-xl not-italic font-bold text-primary">{seriesId} ?</span>
+      </div>
+  );
+  if (await confirm({content: confirmContent})) {
+    mutateDeleteSeries(seriesId);
+}
   };
+
 
   const handleSeriesAction = (action: string, series: Series) => {
     switch (action) {
@@ -66,7 +70,7 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
         handleEditSeries(series);
         break;
       case 'delete':
-        handleDeleteSeries(series);
+        handleDeleteSeries(series.id);
         break;
       default:
         console.log(`Unhandled action: ${action}`);
