@@ -75,7 +75,7 @@ const Input = ({
           `flex items-center peer ${borderClasses} text-gray-600 w-full ${roundedRightClass} text-sm ${InputClassName} ${className}`
         }>
         {svgLeft && (
-          <div className="mr-3 pointer-events-none peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="p-3 pointer-events-none peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {svgLeft}
           </div>
         )}
@@ -89,7 +89,7 @@ const Input = ({
           {...props}
         />
         {svgRight && (
-          <div className="flex justify-end peer-disabled:pointer-events-none peer-disabled:opacity-50">
+          <div className="flex justify-end peer-disabled:pointer-events-none peer-disabled:opacity-50 p-3">
             {svgRight}
           </div>
         )}

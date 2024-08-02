@@ -1,17 +1,16 @@
 import React, { ChangeEvent, useState } from "react";
-import { Series, SeriesPayload, SeriesMainDicomTags, OrthancJob } from '../../utils/types';
+import { Series, SeriesPayload, SeriesMainDicomTags } from '../../utils/types';
 import { InputWithDelete, CheckBox } from "../../ui";
 
-import FormJobsActions from "../FormJobsActions";
+import ProgressJobs from "../../query/ProgressJobs";
 
 type SeriesEditFormProps = {
     data: Series;
     onSubmit: (data: { id: string; payload: SeriesPayload }) => void;
-    onCancel: () => void;
     jobId?: string;
     onJobCompleted?: (jobState: string) => void;
 }
-const SeriesEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: SeriesEditFormProps) => {
+const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFormProps) => {
     const [manufacturer, setManufacturer] = useState<string | null>(data.mainDicomTags.manufacturer ?? null);
     const [modality, setModality] = useState<string | null>(data.mainDicomTags.modality ?? null);
     const [seriesDescription, setSeriesDescription] = useState<string | null>(data.mainDicomTags.seriesDescription ?? null);
@@ -28,7 +27,7 @@ const SeriesEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: Ser
         );
     };
 
-    
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<SeriesMainDicomTags> = {};
@@ -49,7 +48,7 @@ const SeriesEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: Ser
             synchronous: false,
         };
 
-        onSubmit({id: data.id, payload});
+        onSubmit({ id: data.id, payload });
     }
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
@@ -121,12 +120,13 @@ const SeriesEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: Ser
                     bordered={false}
                 />
             </div>
-            <FormJobsActions
-                onCancel={onCancel}
-                onSubmit={handleSubmit}
-                jobId={jobId}
-                onJobCompleted={onJobCompleted}
-            />
+            {
+                jobId && (
+                    <div className="flex flex-col items-center justify-center">
+                        <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                    </div>
+                )
+            }
         </form>
     );
 };

@@ -2,19 +2,18 @@
 
 import React, { ChangeEvent, useState } from "react";
 import { StudyPayload, StudyMainDicomTags } from '../../utils/types';
-import { CheckBox, InputWithDelete  } from "../../ui";
+import { CheckBox, InputWithDelete } from "../../ui";
 
-import FormJobsActions from "../FormJobsActions";
+import ProgressJobs from "../../query/ProgressJobs";
 
 type StudyEditFormProps = {
     data: StudyMainDicomTags & { id: string };
     onSubmit: (params: { id: string; payload: StudyPayload }) => void;
-    onCancel: () => void;
     jobId?: string;
     onJobCompleted?: (jobState: string) => void;
 };
 
-const StudyEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: StudyEditFormProps) => {
+const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormProps) => {
     const [accessionNumber, setAccessionNumber] = useState<string | null>(data?.accessionNumber ?? null);
     const [studyDate, setStudyDate] = useState<string | null>(data?.studyDate ?? null);
     const [studyDescription, setStudyDescription] = useState<string | null>(data?.studyDescription ?? null);
@@ -46,13 +45,13 @@ const StudyEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: Stud
             force: true,
             synchronous: false,
         };
-        onSubmit({id: data.id, payload});
+        onSubmit({ id: data.id, payload });
     };
 
 
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
-                <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
                 <InputWithDelete
                     label="Accession Number"
                     value={accessionNumber}
@@ -112,13 +111,13 @@ const StudyEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: Stud
                     bordered={false}
                 />
             </div>
-            
-            <FormJobsActions
-                onCancel={onCancel}
-                onSubmit={handleSubmit}
-                jobId={jobId}
-                onJobCompleted={onJobCompleted}
-            />
+            {jobId &&
+                (
+                    <div className="flex flex-col items-center justify-center">
+                        <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                    </div>
+                )
+            }
         </form>
     );
 };
