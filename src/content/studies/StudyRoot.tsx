@@ -43,10 +43,13 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
     }
 
     const handleDeleteStudy = async (studyId: string) => {
-        if (await confirm({
-            title: 'Confirm Deletion',
-            message: `Are you sure you want to delete the study "${studyId}"?`
-        })) {
+        const confirmContent = (
+            <div className="italic">
+                Are you sure you want to delete this study:
+                <span className="text-xl not-italic font-bold text-primary">{studyId} ?</span>
+            </div>
+        );
+        if (await confirm({content: confirmContent})) {
             mutateDeleteStudy({ id: studyId });
         }
     };
@@ -64,6 +67,11 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
             }
     };
 
+
+    const handleStudyEdit = () => {
+        onStudyUpdated();
+        setEditingStudy(null);
+    };
     return (
         <div>
             <StudyTable
@@ -74,7 +82,7 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
             {editingStudy && (
                 <EditStudy
                     studyId={editingStudy}
-                    onStudyUpdated={onStudyUpdated}
+                    onStudyUpdated={handleStudyEdit}
                     onClose={() => setEditingStudy(null)}
                     show={!!editingStudy}
                 />

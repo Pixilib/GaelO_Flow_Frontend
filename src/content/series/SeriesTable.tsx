@@ -41,7 +41,6 @@ const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
             header: "Actions",
             cell: ({ row }) => {
                 const seriesData = row.original;
-                console.log("Series data for actions:", JSON.stringify(seriesData, null, 2));
                 const options = [
                     {
                         label: 'Modify',

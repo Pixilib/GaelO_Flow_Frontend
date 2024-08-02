@@ -105,7 +105,6 @@ const SearchForm = ({ aets = [], labelsData = [], onLabelChange = () => { }, onS
         toastWarning("Choose AET to Query");
         return;
       }
-      console.log({ ...queryPayload, aet });
       onSubmit(queryPayload, aet);
     } else {
       onSubmit(queryPayload);

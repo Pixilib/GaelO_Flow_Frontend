@@ -25,9 +25,11 @@ export const postJobs = ({ Id, Action }: JobPayload): Promise<unknown> => {
 };
 
 export const getJobById = (id: string): Promise<OrthancJob> => {
-  return axios
-    .get(`/api/jobs/${id}`)
-    .then((response) => response.data as OrthancJob)
+  return axios.get(`/api/jobs/${id}`)
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    })
     .catch(function (error) {
       if (error.response) {
         throw error.response;

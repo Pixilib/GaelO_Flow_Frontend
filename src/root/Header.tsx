@@ -149,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           }
         >
           <ToggleSwitch
-            isToggled={true} // Replace with actual state variable controlling the toggle
+            isToggled={true}
             onToggle={(isChecked) => {
               console.log('Toggle state:', isChecked);
               // Handle state change logic here

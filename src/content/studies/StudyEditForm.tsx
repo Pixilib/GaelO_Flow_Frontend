@@ -10,9 +10,11 @@ type StudyEditFormProps = {
     data: StudyMainDicomTags & { id: string };
     onSubmit: (params: { id: string; payload: StudyPayload }) => void;
     onCancel: () => void;
+    jobId?: string;
+    onJobCompleted?: (jobState: string) => void;
 };
 
-const StudyEditForm = ({ data, onSubmit, onCancel }: StudyEditFormProps) => {
+const StudyEditForm = ({ data, onSubmit, onCancel, jobId, onJobCompleted }: StudyEditFormProps) => {
     const [accessionNumber, setAccessionNumber] = useState<string | null>(data?.accessionNumber ?? null);
     const [studyDate, setStudyDate] = useState<string | null>(data?.studyDate ?? null);
     const [studyDescription, setStudyDescription] = useState<string | null>(data?.studyDescription ?? null);
@@ -21,13 +23,11 @@ const StudyEditForm = ({ data, onSubmit, onCancel }: StudyEditFormProps) => {
     const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
-
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
             checked ? [...prev, field] : prev.filter((item) => item !== field)
         );
     };
-
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<StudyMainDicomTags> = {};
@@ -116,6 +116,8 @@ const StudyEditForm = ({ data, onSubmit, onCancel }: StudyEditFormProps) => {
             <FormJobsActions
                 onCancel={onCancel}
                 onSubmit={handleSubmit}
+                jobId={jobId}
+                onJobCompleted={onJobCompleted}
             />
         </form>
     );
