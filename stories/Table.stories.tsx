@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import Table from '../src/ui/table/Table';
 import { Colors } from '../src/utils/enums';
 import { Card, CardBody, CardHeader } from '../src/ui';
@@ -8,8 +9,8 @@ type DataType = {
   name: string;
   age: number;
   city: string;
-  actions:string;
-  edit:string;
+  actions: string;
+  edit: string;
 };
 
 const columns = [
@@ -32,12 +33,12 @@ const columns = [
     header: 'City',
   },
   {
-    accesorKey: 'actions',
-    header:'Actions'
+    accessorKey: 'actions',
+    header: 'Actions',
   },
   {
-    accesorKey: 'edit',
-    header:'Edit'
+    accessorKey: 'edit',
+    header: 'Edit',
   }
 ];
 
@@ -69,8 +70,6 @@ const data: DataType[] = [
   { id: 25, name: 'John Smith', age: 32, city: 'New York', actions: 'View', edit: 'Edit' },
 ];
 
-
-
 const meta: Meta<typeof Table<DataType>> = {
   title: 'GAELO FLOW UI/Table',
   component: Table,
@@ -85,11 +84,11 @@ const meta: Meta<typeof Table<DataType>> = {
     },
     pageSize: { control: 'number' },
     headerTextSize: {
-      control: { type: 'select' },
-        options: ["xs", "sm", "base", "lg"] 
-      }, 
-      className: { control: 'text' },
+      control: { type: 'select', options: ["xxs", "xs", "sm", "base", "lg"] },
+      defaultValue: "sm"
     },
+    className: { control: 'text' },
+  },
   tags: ["autodocs"]
 } satisfies Meta<typeof Table<DataType>>;
 export default meta;
@@ -115,11 +114,9 @@ export const WithoutSorting: Story = {
     enableColumnFilters: true,
     headerColor: Colors.almond,
     headerTextSize: "sm",
-
   },
 } satisfies Story;
 
-//render a table in a Card
 export const CustomStyling: Story = {
   args: {
     data,
@@ -135,7 +132,6 @@ export const CustomStyling: Story = {
     enableColumnFilters: true,
     headerColor: Colors.almond,
     headerTextSize: "sm",
-
   },
 } satisfies Story;
 
@@ -155,9 +151,9 @@ export const TableInCard: Story = {
     enableColumnFilters: true,
     headerColor: Colors.almond,
     headerTextSize: "sm",
-
   },
 } satisfies Story;
+
 export const HighlightYoungAge: Story = {
   args: {
     data,
@@ -173,7 +169,6 @@ export const HighlightYoungAge: Story = {
     enableColumnFilters: true,
     headerColor: Colors.almond,
     headerTextSize: "sm",
-
   },
 } satisfies Story;
 
@@ -188,6 +183,36 @@ export const FilterableCities: Story = {
     enableColumnFilters: true,
     headerColor: Colors.almond,
     headerTextSize: "sm",
+  },
+} satisfies Story;
 
+export const RowSelection: Story = {
+  render: (args) => {
+    const [selectedRows, setSelectedRows] = useState<DataType[]>([]);
+    
+    const handleRowSelectionChange = (selected: DataType[]) => {
+      setSelectedRows(selected);
+      console.log('Selected Rows:', selected);
+    };
+
+    return (
+      <div>
+        <Table {...args} onRowSelectionChange={handleRowSelectionChange} enableRowSelection />
+        <div className="p-4 mt-4 bg-gray-100 rounded">
+          <h3 className="text-lg font-bold">Selected Rows:</h3>
+          <pre className="whitespace-pre-wrap">{JSON.stringify(selectedRows, null, 2)}</pre>
+        </div>
+      </div>
+    );
+  },
+  args: {
+    data,
+    columns,
+    enableSorting: true,
+    enableColumnFilters: true,
+    enableRowSelection: true,
+    headerColor: Colors.almond,
+    headerTextSize: "sm",
+    className: 'w-full rounded-xl shadow-md',
   },
 } satisfies Story;

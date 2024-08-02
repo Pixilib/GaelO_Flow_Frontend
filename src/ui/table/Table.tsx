@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -8,7 +8,8 @@ import {
   SortingState,
   ColumnFiltersState,
   getFilteredRowModel,
-  getPaginationRowModel
+  getPaginationRowModel,
+  RowSelectionState,
 } from '@tanstack/react-table';
 
 import { Colors } from "../../utils/enums";
@@ -16,10 +17,8 @@ import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 import { FcAlphabeticalSortingAz, FcAlphabeticalSortingZa } from 'react-icons/fc';
 
-// Définition des tailles de texte pour les en-têtes de tableau
 export type textSize = "xxs" |"xs" | "sm" | "base" | "lg";
 
-// Props du composant Table
 type TableProps<TData> = {
   data?: TData[];
   columns: ColumnDef<TData>[];
@@ -31,13 +30,15 @@ type TableProps<TData> = {
   pageSize?: number; 
   pinFirstColumn?: boolean;
   pinLastColumn?: boolean; 
+  enableRowSelection?: boolean;
+  onRowSelectionChange?: (selectedRows: TData[]) => void;
   onRowClick?: (row: TData) => void;
-  getRowStyles?: (raw: TData) => object | undefined;
-  getRowClasses?: (raw: TData) => string | undefined;
-  selectedColor?: string;
+  getRowStyles?: (row: TData) => React.CSSProperties | undefined;
+  getRowClasses?: (row: TData) => string | undefined;
+  selectedRowColor?: string;
+  clickedRowColor?: string;
 };
 
-// Composant Table principal
 function Table<T>({
   data = [],
   columns,
@@ -49,10 +50,13 @@ function Table<T>({
   headerTextSize = "sm",
   pinFirstColumn = false,
   pinLastColumn = false,
+  enableRowSelection = false,
+  onRowSelectionChange,
   onRowClick,
-  getRowStyles = () => undefined,
-  getRowClasses = () => undefined,
-  selectedColor = 'bg-primary' // Couleur par défaut pour la sélection
+  getRowStyles,
+  getRowClasses,
+  selectedRowColor = 'bg-blue-100',
+  clickedRowColor = 'bg-primary'
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -60,9 +64,16 @@ function Table<T>({
     pageIndex: 0,
     pageSize: pageSize,
   });
-  const [selectedRow, setSelectedRow] = useState<string | null>(null);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [clickedRowId, setClickedRowId] = useState<string | null>(null);
 
-  // Gestion du changement de taille de page
+  useEffect(() => {
+    if (onRowSelectionChange) {
+      const selectedRows = table.getSelectedRowModel().flatRows.map(row => row.original);
+      onRowSelectionChange(selectedRows);
+    }
+  }, [rowSelection, onRowSelectionChange]);
+
   const handlePageSizeChange = (newPageSize: number) => {
     setPagination((prev) => ({
       ...prev,
@@ -70,44 +81,59 @@ function Table<T>({
     }));
   };
 
-  // Utilisation de useReactTable pour initialiser le tableau avec les données et les options
+  const selectionColumn: ColumnDef<T> = {
+    id: 'selection',
+    header: ({ table }) => (
+      <input
+        type="checkbox"
+        checked={table.getIsAllRowsSelected()}
+        onChange={table.getToggleAllRowsSelectedHandler()}
+      />
+    ),
+    cell: ({ row }) => (
+      <input
+        type="checkbox"
+        checked={row.getIsSelected()}
+        onChange={row.getToggleSelectedHandler()}
+        onClick={(e) => e.stopPropagation()}
+      />
+    ),
+  };
+
+  const tableColumns = enableRowSelection ? [selectionColumn, ...columns] : columns;
+
   const table = useReactTable<T>({
     data,
-    columns,
+    columns: tableColumns,
     state: {
       sorting,
       columnFilters,
       pagination,
+      rowSelection,
     },
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onRowSelectionChange: setRowSelection,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    enableRowSelection,
     enableColumnFilters,
     enableSorting,
-    meta: {
-      getRowStyles: getRowStyles, 
-      getRowClasses: (row:any) => {
-        const classes = getRowClasses ? getRowClasses(row) : undefined;
-        return row.id === selectedRow ? selectedColor : classes; // Applique la couleur de sélection si la ligne est sélectionnée
-      }
-    }
   });
 
-  // Classes pour les colonnes fixes à gauche ou à droite
   const textXXS = "text-[0.491rem]";
   const headerClass = `bg-${headerColor}`;
   const headerText = headerTextSize === "xxs" ? `${textXXS}` : `text-${headerTextSize}`;
   const firstColumnClass = `sticky left-0 ${headerClass}`;
   const lastColumnClass = `sticky right-0 bg-white`;
 
-  // Fonction pour obtenir les classes CSS spécifiques d'une colonne
   const getColumnClasses = (index: number, length: number) => {
     if (pinFirstColumn && index === 0) return firstColumnClass;
     if (pinLastColumn && index === length - 1) return lastColumnClass;
+    return '';
   };
 
   return (
@@ -117,7 +143,6 @@ function Table<T>({
           <thead className={headerClass}>
             {table.getHeaderGroups().map(headerGroup => (
               <React.Fragment key={headerGroup.id}>
-                {/* Ligne pour les en-têtes et les icônes de tri */}
                 <tr key={headerGroup.id} className={headerClass}>
                   {headerGroup.headers.map((header, index) => (
                     <th
@@ -141,7 +166,6 @@ function Table<T>({
                     </th>
                   ))}
                 </tr>
-                {/* Ligne séparée pour les filtres si des filtres sont activés */}
                 {headerGroup.headers.some(header => header.column.getCanFilter()) && (
                   <tr key={`${headerGroup.id}-filters`} className={`bg-${headerColor}`}>
                     {headerGroup.headers.map((header, index) => (
@@ -162,28 +186,34 @@ function Table<T>({
             ))}
           </thead>
           <tbody className="overflow-y-auto custom-scrollbar">
-            {table.getRowModel().rows.map((row, rowIndex) => (
-              <tr
-                key={`row-${row.id}-${rowIndex}`}
-                className={table.options.meta?.getRowClasses(row)}
-                style={table.options.meta?.getRowStyles(row)}
-                onClick={() => {
-                  if (onRowClick) {
-                    onRowClick(row.original);
-                    setSelectedRow(row.id);
-                  }
-                }}
-              >
-                {row.getVisibleCells().map((cell, cellIndex) => (
-                  <td
-                    key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                    className={`px-1 py-2 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} ${row.id === selectedRow ? 'text-white' : ''}`}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            {table.getRowModel().rows.map((row, rowIndex) => {
+              const isSelected = rowSelection[row.id];
+              const isClicked = row.id === clickedRowId;
+              const rowClasses = getRowClasses ? getRowClasses(row.original) : '';
+              const rowStyles = getRowStyles ? getRowStyles(row.original) : {};
+              return (
+                <tr
+                  key={`row-${row.id}-${rowIndex}`}
+                  className={`${rowClasses} ${isSelected ? selectedRowColor : ''} ${isClicked ? clickedRowColor : ''}`}
+                  style={rowStyles}
+                  onClick={() => {
+                    if (onRowClick) {
+                      onRowClick(row.original);
+                      setClickedRowId(row.id);
+                    }
+                  }}
+                >
+                  {row.getVisibleCells().map((cell, cellIndex) => (
+                    <td
+                      key={`cell-${row.id}-${cell.id}-${cellIndex}`}
+                      className={`px-1 py-2 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)}`}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
