@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Select, { ActionMeta, MultiValue } from 'react-select';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
@@ -25,7 +26,7 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
 
   useEffect(() => {
     if (!roleName) {
-      setError('Role name is required');
+      setError('error');
       return;
     }
 
