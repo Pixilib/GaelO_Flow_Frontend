@@ -1,42 +1,65 @@
-import React, { useState } from 'react';
-import Select from 'react-select/creatable';
+import React, { useState, useEffect } from 'react';
+import Select, { ActionMeta, MultiValue } from 'react-select';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { getLabelsByRoleName } from '../../services';
 
 type OptionType = {
   value: string;
   label: string;
 };
 
-type SelectLabelsProps = {
-  options: OptionType[];  
-  onChange: (selectedOptions: OptionType[]) => void;  
+interface SelectLabelsProps {
+  onChange: (options: OptionType[]) => void;
   closeMenuOnSelect?: boolean;
-};
+}
 
-const SelectLabels: React.FC<SelectLabelsProps> = ({ options, onChange, closeMenuOnSelect = true }) => {
-  const [selectedOptions, setSelectedOptions] = useState<OptionType[]>([]); 
+const SelectLabels: React.FC<SelectLabelsProps> = ({
+  onChange,
+  closeMenuOnSelect = true,
+}) => {
+  const [options, setOptions] = useState<OptionType[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-  const formatOptionLabel = ({ label }: OptionType): JSX.Element => (
-    <div className='flex'>
-      <div>{label}</div>
-    </div>
-  );
+  const roleName = useSelector((state: RootState) => state.user.role?.name || '');
 
-  const changeListener = (options: OptionType[] | null) => {
-    const newOptions = options ?? [];
-    setSelectedOptions(newOptions);
-    onChange(newOptions);
+  useEffect(() => {
+    if (!roleName) {
+      setError('Role name is required');
+      return;
+    }
+
+    const fetchLabels = async () => {
+      try {
+        const labels = await getLabelsByRoleName(roleName);
+        const formattedOptions = labels.map((label) => ({ value: label, label }));
+        setOptions(formattedOptions);
+        setError(null);
+      } catch (error: any) {
+        setError(`Failed to fetch labels: ${error.message}`);
+      }
+    };
+
+    fetchLabels();
+  }, [roleName]);
+
+  const handleChange = (newValue: MultiValue<OptionType>, _actionMeta: ActionMeta<OptionType>) => {
+    onChange(newValue);
   };
 
   return (
-    <Select
-      isMulti
-      menuPosition="fixed"
-      options={options}
-      formatOptionLabel={formatOptionLabel}
-      value={selectedOptions}
-      onChange={changeListener}
-      closeMenuOnSelect={closeMenuOnSelect}
-    />
+    <>
+      {error && <div className="error-message">{error}</div>}
+      <Select
+        isMulti
+        menuPosition="fixed"
+        options={options}
+        onChange={handleChange}
+        closeMenuOnSelect={closeMenuOnSelect}
+        className="basic-single"
+        classNamePrefix="select"
+      />
+    </>
   );
 };
 
