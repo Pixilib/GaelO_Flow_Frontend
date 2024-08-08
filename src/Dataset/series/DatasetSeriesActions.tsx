@@ -1,7 +1,5 @@
 import React from 'react';
-
-import { SeriesMainDicomTags } from '../../utils/types';
-
+import { Series } from '../../utils';
 import { Button } from '../../ui';
 import { Colors } from '../../utils';
 import DropdownButton from '../../ui/menu/DropDownButton';
@@ -10,33 +8,33 @@ interface DropdownOption {
     label: string;
     icon?: React.ReactNode;
     color?: string;
-    action: (row: any) => void;
+    action: (row: Series) => void;
 }
+
 const options: DropdownOption[] = [
     {
         label: "View Metadata",
-        action: (row: any) => {
+        action: (row: Series) => {
             console.log("View Metadata", row);
         },
     },
     {
         label: "Download nii",
-        action: (row: any) => {
+        action: (row: Series) => {
             console.log("Download nii", row);
         },
-    }
-    ,
+    },
     {
         label: "Download nii.gz",
-        action: (row: any) => {
+        action: (row: Series) => {
             console.log("Download nii.gz", row);
         },
     }
 ];
 
 type DataSetSeriesActionsProps = {
-    series: SeriesMainDicomTags & { id: string };
-    onActionClick: (action: string, studyId: string) => void;
+    series: Series& { id: string };
+    onActionClick: (action: string, seriesId: string) => void
 };
 
 const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onActionClick }) => {
