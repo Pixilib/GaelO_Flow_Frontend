@@ -11,8 +11,7 @@ import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
 import ImportCreateRoot from "../import/ImportCreateRoot";
 import ContentRoot from "../content/ContentRoot";
-import DatasetRoot from "../content/Dataset/DatasetRoot";
-
+import DatasetRoot from "../Dataset/DatasetRoot";
 const RootApp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

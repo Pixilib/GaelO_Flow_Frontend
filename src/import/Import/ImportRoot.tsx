@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { BannerAlert, CardFooter } from '../../ui';
 import Model from '../../model/Model';
 import { Colors } from '../../utils';
 import ImportDrop from './ImportDrop';
-import ImportTableStudy from './ImportTableStudy';
-import ImportTableSeries from './ImportTableSeries';
+import ImportAccordion from './ImportAccordion';
 import ImportErrorModal from './ImportErrorModal';
 
 interface ImportError {
@@ -20,14 +19,18 @@ const ImportRoot: React.FC = () => {
     const [errors, setErrors] = useState<ImportError[]>([]);
     const [showErrorModal, setShowErrorModal] = useState(false);
 
-    const handleFilesUploaded = () => {
-        setStudiesData(refModel.current.getStudies());
-    };
+    const handleFilesUploaded = useCallback(() => {
+        const studies = refModel.current.getStudies();
+        setStudiesData(studies);
+        if (studies.length > 0) {
+            setSeriesData([]);
+        }
+    }, []);
 
-    const handleStudyClick = (studyInstanceUID: string) => {
+    const handleStudyClick = useCallback((studyInstanceUID: string) => {
         setCurrentStudyInstanceUID(studyInstanceUID);
         updateSeriesData(studyInstanceUID);
-    };
+    }, []);
 
     const updateSeriesData = (studyInstanceUID: string) => {
         const study = refModel.current.getStudy(studyInstanceUID);
@@ -36,21 +39,27 @@ const ImportRoot: React.FC = () => {
         }
     };
 
-    const handleImportError = (filename: string, errorMessage: string) => {
+    const handleImportError = useCallback((filename: string, errorMessage: string) => {
         setErrors((prevErrors) => [...prevErrors, { filename, errorMessage }]);
-    };
+    }, []);
 
-    const handleShowModal = () => {
+    const handleShowModal = useCallback(() => {
         setShowErrorModal(true);
-    };
+    }, []);
 
-    const handleCloseModal = () => {
+    const handleCloseModal = useCallback(() => {
         setShowErrorModal(false);
-    };
+    }, []);
+
+    useEffect(() => {
+        if (currentStudyInstanceUID) {
+            updateSeriesData(currentStudyInstanceUID);
+        }
+    }, [currentStudyInstanceUID]);
 
     return (
         <>
-            <div className='mx-6 mt-6 mb-4'>
+            <div className="mx-6 mt-6 mb-4 lg:mx-12">
                 <ImportDrop
                     model={refModel.current}
                     onError={handleImportError}
@@ -74,22 +83,17 @@ const ImportRoot: React.FC = () => {
                 />
             )}
 
-            <div className="flex flex-col gap-3 lg:flex-row">
-                <div className='flex-1'>
-                    {studiesData.length > 0 && (
-                        <ImportTableStudy
-                            data={studiesData}
-                            selectedStudyInstanceUID={currentStudyInstanceUID}
-                            onStudyClick={handleStudyClick}
-                        />
-                    )}
+            {studiesData.length > 0 && (
+            <div className="mx-6 mt-6 mb-4 lg:mx-12">
+                    <ImportAccordion
+                        title="ID Patient"
+                        studiesData={studiesData}
+                        seriesData={seriesData}
+                        selectedStudyInstanceUID={currentStudyInstanceUID}
+                        onStudyClick={handleStudyClick}
+                    />
                 </div>
-                <div className='flex-1'>
-                    {seriesData.length > 0 && (
-                        <ImportTableSeries data={seriesData} />
-                    )}
-                </div>
-            </div>
+            )}
 
             <CardFooter className="flex justify-center w-full h-16 bg-almonde">
             </CardFooter>
