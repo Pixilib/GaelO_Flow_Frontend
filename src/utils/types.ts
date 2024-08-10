@@ -170,7 +170,7 @@ export type ModalityExtended = {
 };
 
 export type Label = {
-  Name: string;
+  name: string;
 };
 
 // Oauth2
