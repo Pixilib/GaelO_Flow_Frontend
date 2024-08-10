@@ -3,12 +3,12 @@ import { useState } from "react";
 import { deleteRole, getRoles } from '../../../services';
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 
-import { Colors, Role, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
+import { Role, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
 
 import RolesTable from "./RolesTable";
 import CreateRole from "./CreateRole";
 import EditRole from "./EditRole";
-import { Button, Spinner } from "../../../ui";
+import { Spinner } from "../../../ui";
 
 const Roles = () => {
     const { toastSuccess, toastError } = useCustomToast();
@@ -38,7 +38,7 @@ const Roles = () => {
     );
 
     const findRole = (roleName: string): Role => {
-        const role = roles?.find((role: { Name: string; }) => role.Name === roleName);
+        const role = roles?.find((role: { name: string; }) => role.name === roleName);
         return role || {} as Role;
     };
 

@@ -28,8 +28,8 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
         getRoles,
         {
             select: (roles) => roles.map((role) => ({
-                value: role.Name,
-                label: role.Name,
+                value: role.name,
+                label: role.name,
             })),
         }
     );
@@ -133,7 +133,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                             <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
                             <SelectInput
                                 options={rolesOptions ?? []}
-                                placeholder="Select a Rôle"
+                                placeholder="Select a Role"
                                 onChange={(event) => {
                                     setSelectedRole({ value: event.value, label: event.value });
                                 }}

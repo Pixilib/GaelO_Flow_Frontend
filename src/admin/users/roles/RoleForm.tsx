@@ -13,7 +13,7 @@ type RoleFormProps = {
 };
 
 const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
-    const [name, setName] = useState<string>(initialData?.Name || "");
+    const [name, setName] = useState<string>(initialData?.name || "");
     const [importRole, setImportRole] = useState<boolean>(false);
     const [anonymize, setAnonymize] = useState<boolean>(false);
     const [exportRole, setExportRole] = useState<boolean>(false);
@@ -28,36 +28,36 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
 
     useEffect(() => {
         if (initialData) {
-            setName(initialData.Name);
-            setImportRole(initialData.Import);
-            setAnonymize(initialData.Anonymize);
-            setExportRole(initialData.Export);
-            setQuery(initialData.Query);
-            setAutoQuery(initialData.AutoQuery);
-            setDeleteRole(initialData.Delete);
-            setAdmin(initialData.Admin);
-            setModify(initialData.Modify);
-            setCdBurner(initialData.CdBurner);
-            setAutoRouting(initialData.AutoRouting);
-            setReadAll(initialData.ReadAll);
+            setName(initialData.name);
+            setImportRole(initialData.import);
+            setAnonymize(initialData.anonymize);
+            setExportRole(initialData.export);
+            setQuery(initialData.query);
+            setAutoQuery(initialData.autoQuery);
+            setDeleteRole(initialData.delete);
+            setAdmin(initialData.admin);
+            setModify(initialData.modify);
+            setCdBurner(initialData.cdBurner);
+            setAutoRouting(initialData.autoRouting);
+            setReadAll(initialData.readAll);
         }
     }, [initialData]);
 
     const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
         const payload: Role = {
-            Name: name,
-            Import: importRole,
-            Anonymize: anonymize,
-            Export: exportRole,
-            Query: query,
-            AutoQuery: autoQuery,
-            Delete: deleteRole,
-            Admin: admin,
-            Modify: modify,
-            CdBurner: cdBurner,
-            AutoRouting: autoRouting,
-            ReadAll: readAll
+            name: name,
+            import: importRole,
+            anonymize: anonymize,
+            export: exportRole,
+            query: query,
+            autoQuery: autoQuery,
+            delete: deleteRole,
+            admin: admin,
+            modify: modify,
+            cdBurner: cdBurner,
+            autoRouting: autoRouting,
+            readAll: readAll
         };
         onSubmit(payload);
         if(initialData) return;

@@ -95,20 +95,19 @@ export type OrthancJob = {
   //TODO: AJOUTER LES PROPIETE MANQUANTE ET UPDATER LES SERVICE API POUR LES FILL
 };
 
-//TODO: camelCase
 export type Role = {
-  Name: string;
-  Import: boolean;
-  Anonymize: boolean;
-  Export: boolean;
-  Query: boolean;
-  AutoQuery: boolean;
-  Delete: boolean;
-  Admin: boolean;
-  Modify: boolean;
-  CdBurner: boolean;
-  AutoRouting: boolean;
-  ReadAll: boolean;
+  name: string;
+  import: boolean;
+  anonymize: boolean;
+  export: boolean;
+  query: boolean;
+  autoQuery: boolean;
+  delete: boolean;
+  admin: boolean;
+  modify: boolean;
+  cdBurner: boolean;
+  autoRouting: boolean;
+  readAll: boolean;
 };
 
 //TODO : camelCase
@@ -117,7 +116,7 @@ export type User = {
   Firstname: string;
   Lastname: string;
   Email: string;
-  RoleName: Role["Name"];
+  RoleName: Role["name"];
   Role: Role;
 };
 

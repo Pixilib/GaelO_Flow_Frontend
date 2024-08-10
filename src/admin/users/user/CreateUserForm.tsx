@@ -39,8 +39,8 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
     {
       select: (roles) =>
         roles.map((role) => ({
-          value: role.Name,
-          label: role.Name,
+          value: role.name,
+          label: role.name,
         }))
     });
 
