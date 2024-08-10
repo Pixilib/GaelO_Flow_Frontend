@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import Select, { ActionMeta, MultiValue } from 'react-select';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { getLabelsByRoleName } from '../../services';
+import Select, { ActionMeta, MultiValue } from "react-select";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { getLabelsByRoleName } from "../services";
 
 type OptionType = {
   value: string;
@@ -22,18 +22,23 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
   const [options, setOptions] = useState<OptionType[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  const roleName = useSelector((state: RootState) => state.user.role?.name || '');
+  const roleName = useSelector(
+    (state: RootState) => state.user.role?.Name || ""
+  );
 
   useEffect(() => {
     if (!roleName) {
-      setError('error');
+      setError("error");
       return;
     }
 
     const fetchLabels = async () => {
       try {
         const labels = await getLabelsByRoleName(roleName);
-        const formattedOptions = labels.map((label) => ({ value: label, label }));
+        const formattedOptions = labels.map((label) => ({
+          value: label,
+          label,
+        }));
         setOptions(formattedOptions);
         setError(null);
       } catch (error: any) {
@@ -44,7 +49,10 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
     fetchLabels();
   }, [roleName]);
 
-  const handleChange = (newValue: MultiValue<OptionType>, _actionMeta: ActionMeta<OptionType>) => {
+  const handleChange = (
+    newValue: MultiValue<OptionType>,
+    _actionMeta: ActionMeta<OptionType>
+  ) => {
     onChange(newValue);
   };
 

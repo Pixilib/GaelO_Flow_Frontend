@@ -2,13 +2,13 @@ import { BsInfoCircle as Info } from "react-icons/bs";
 import { Table, Badge, Popover } from "../../ui";
 
 import { Colors } from "../../utils/enums";
-import { JobsAction } from "../../utils/types";
+import { JobsAction, OrthancJob } from "../../utils/types";
 import JobActions from "./JobActions";
 
 //!WIP 
 //! Needs to fix implemntation of PopOver
 type JobTableProps = {
-  data: any[];
+  data: OrthancJob[];
   onJobAction: (jobId: string, action: JobsAction) => void;
 };
 const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
@@ -17,11 +17,11 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
 
   const columns = [
     {
-      accessorKey: "Type",
+      accessorKey: "type",
       header: "Type",
     },
     {
-      accessorKey: "Progress",
+      accessorKey: "progress",
       header: "Progress",
       cell: (row: any) => (
         <Badge
@@ -31,7 +31,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       enableColumnFilter: true,
     },
     {
-      accessorKey: "State",
+      accessorKey: "state",
       header: "State",
       cell: (row: any) => (
         <Badge

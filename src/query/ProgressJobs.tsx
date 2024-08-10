@@ -16,8 +16,8 @@ const ProgressJobs: React.FC<ProgressJobsProps> = React.memo(({ jobId, size = 84
         () => getJobById(jobId),
         {
             refetchInterval: (query) => {
-                if (query.state.data?.State === 'Success' || query.state.data?.State === 'Failure') {
-                    onJobCompleted && onJobCompleted(query.state.data?.State);
+                if (query.state.data?.state === 'Success' || query.state.data?.state === 'Failure') {
+                    onJobCompleted && onJobCompleted(query.state.data?.state);
                     return false;
                 }
                 return 1000;
@@ -41,9 +41,9 @@ const ProgressJobs: React.FC<ProgressJobsProps> = React.memo(({ jobId, size = 84
     };
     return (
         <ProgressCircle
-            progress={jobData?.Progress ?? 0}
-            text={jobData?.State ?? ""}
-            className={`${getTextColor(jobData?.State ?? "")} text-[11px]`}
+            progress={jobData?.progress ?? 0}
+            text={jobData?.state ?? ""}
+            className={`${getTextColor(jobData?.state ?? "")} text-[11px]`}
             size={size}
         />
     );

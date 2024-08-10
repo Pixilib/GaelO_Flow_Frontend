@@ -1,15 +1,15 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useCustomToast } from '../../utils/toastify';
-import { useCustomMutation } from '../../utils/reactQuery';
-import { updateOptions } from '../../services/options';
-import { AutoQueryPayload, OptionsResponse } from '../../utils/types';
+import React, { useEffect, useMemo, useState } from "react";
+import { useCustomToast } from "../../utils/toastify";
+import { useCustomMutation } from "../../utils/reactQuery";
+import { updateAutoQueryOptions } from "../../services/options";
+import { AutoQueryPayload, Options } from "../../utils/types";
 import {
   formatTime,
   formatTimeReadable,
   parseTimeString,
   timeDiff,
-} from '../../utils/moment';
-import { IoMdSend as SendIcon } from 'react-icons/io';
+} from "../../utils/moment";
+import { IoMdSend as SendIcon } from "react-icons/io";
 import {
   Card,
   CardHeader,
@@ -19,11 +19,11 @@ import {
   Table,
   Input,
   Label,
-} from '../../ui';
-import { Colors } from '../../utils/enums';
+} from "../../ui";
+import { Colors } from "../../utils/enums";
 
 type RetrieveProps = {
-  data: OptionsResponse;
+  data: Options;
 };
 
 const Retrieve = ({ data }: RetrieveProps) => {
@@ -39,39 +39,28 @@ const Retrieve = ({ data }: RetrieveProps) => {
 
   useEffect(() => {
     const optionClockStart = formatTime(
-      data.AutoQueryHourStart,
-      data.AutoQueryMinuteStart
+      data.autoQueryHourStart,
+      data.autoQueryMinuteStart
     );
     const optionClockStop = formatTime(
-      data.AutoQueryHourStop,
-      data.AutoQueryMinuteStop
+      data.autoQueryHourStop,
+      data.autoQueryMinuteStop
     );
     setStartTime(optionClockStart);
     setStopTime(optionClockStop);
   }, [JSON.stringify(data)]);
 
   const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
-    ({
-      AutoQueryHourStart,
-      AutoQueryMinuteStart,
-      AutoQueryHourStop,
-      AutoQueryMinuteStop,
-    }: AutoQueryPayload) =>
-      updateOptions({
-        AutoQueryHourStart,
-        AutoQueryMinuteStart,
-        AutoQueryHourStop,
-        AutoQueryMinuteStop,
-      }),
-    [['options']],
+    (autoQueryPayload: AutoQueryPayload) => updateAutoQueryOptions(autoQueryPayload),
+    [["options"]],
     {
       onSuccess: () => {
-        toastSuccess('Options updated successfully');
+        toastSuccess("Options updated successfully");
       },
       onError: (error: any) => {
         toastError(
-          'An error occurred during updating options.' +
-          (error?.data?.message ?? '')
+          "An error occurred during updating options." +
+            (error?.data?.message ?? "")
         );
       },
     }
@@ -95,10 +84,10 @@ const Retrieve = ({ data }: RetrieveProps) => {
     const { hours: stopHours, minutes: stopMinutes } =
       parseTimeString(stopTime);
     optionsMutation.mutate({
-      AutoQueryHourStart: startHours,
-      AutoQueryMinuteStart: startMinutes,
-      AutoQueryHourStop: stopHours,
-      AutoQueryMinuteStop: stopMinutes,
+      autoQueryHourStart: startHours,
+      autoQueryMinuteStart: startMinutes,
+      autoQueryHourStop: stopHours,
+      autoQueryMinuteStop: stopMinutes,
     });
   };
 
@@ -109,21 +98,14 @@ const Retrieve = ({ data }: RetrieveProps) => {
       className="flex flex-col items-center w-full mb-6 rounded-br-xl rounded-bl-xl"
     >
       <Card bordered className="w-11/12 mt-8">
-        <CardHeader
-          title="Retrieve Schedule Time : "
-          color={Colors.success}
-        />
-        <CardBody
-          color={Colors.light}
-          roundedBottomLeft
-          roundedBottomRight
-        >
+        <CardHeader title="Retrieve Schedule Time : " color={Colors.success} />
+        <CardBody color={Colors.light} roundedBottomLeft roundedBottomRight>
           <div className="flex items-center justify-around gap-12 mt-1">
             <Input
               type="time"
               label={
                 <Label
-                  value={'Start Time'}
+                  value={"Start Time"}
                   className="text-sm font-medium text-center"
                   align="center"
                 />
@@ -132,13 +114,13 @@ const Retrieve = ({ data }: RetrieveProps) => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleTimeStart(event)
               }
-              className={'focus:shadow-2xl '}
+              className={"focus:shadow-2xl "}
             />
             <Input
               type="time"
               label={
                 <Label
-                  value={'Stop Time'}
+                  value={"Stop Time"}
                   className="text-sm font-medium text-center "
                   align="center"
                 />
@@ -148,19 +130,16 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 handleTimeStop(event)
               }
               className={
-                'bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl'
+                "bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl"
               }
             />
             <div className="flex-col text-center">
-              <label
-                htmlFor="time-delta"
-                className="text-sm text-bold"
-              >
-                {' '}
+              <label htmlFor="time-delta" className="text-sm text-bold">
+                {" "}
                 Total Time
               </label>
               <Badge
-                value={timeDelta ?? ''}
+                value={timeDelta ?? ""}
                 className={`
                   rounded-full bg-[#CDFFCD] 
                   text-black h-10 w-auto text-nowrap
@@ -184,11 +163,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
         </CardBody>
       </Card>
       <div className="flex mt-6">
-        <Table
-          data={[]}
-          columns={[]}
-          headerColor={Colors.almond}
-        />
+        <Table data={[]} columns={[]} headerColor={Colors.almond} />
       </div>
     </form>
   );

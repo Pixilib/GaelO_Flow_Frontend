@@ -1,9 +1,9 @@
 //option
 export type AutoQueryPayload = {
-  AutoQueryHourStart: number;
-  AutoQueryMinuteStart: number;
-  AutoQueryHourStop: number;
-  AutoQueryMinuteStop: number;
+  autoQueryHourStart: number;
+  autoQueryMinuteStart: number;
+  autoQueryHourStop: number;
+  autoQueryMinuteStop: number;
 };
 
 // ? we can use this type to validate the payload who check if object contains properties of OptionsResponse
@@ -12,15 +12,9 @@ type AtLeastOne<T> = {
   [K in keyof T]: Pick<T, K>;
 }[keyof T];
 
-export type OptionsPayload = AtLeastOne<OptionsResponse>;
-
-export type Option = {
-  value: any;
-  label: string;
-};
-
+export type OptionsPayload = AtLeastOne<OptionsRequest>;
 // * This is the response from the API getOptions
-export type OptionsResponse = {
+type OptionsRequest = {
   AutoQueryHourStart: number;
   AutoQueryMinuteStart: number;
   AutoQueryHourStop: number;
@@ -46,12 +40,43 @@ export type OptionsResponse = {
   RedisPort: string;
 };
 
+export type Option = {
+  value: any;
+  label: string;
+};
+
+export type Options = {
+  autoQueryHourStart: number;
+  autoQueryMinuteStart: number;
+  autoQueryHourStop: number;
+  autoQueryMinuteStop: number;
+  orthancMonitoringRate: number;
+  BurnerStarted: boolean;
+  burnerLabelPath: string;
+  burnerMonitoringLevel: string;
+  burnerManifacturer: string;
+  burnerMonitoredPath: string;
+  burnerDeleteStudyAfterSent: boolean;
+  burnerSupportType: string;
+  burnerViewerPath: string;
+  burnerTransferSyntax: string;
+  burnerDateFormat: string;
+  burnerTranscoding: string;
+  autorouterStarted: boolean;
+  orthancAddress: string;
+  orthancPort: string;
+  orthancUsername: string;
+  orthancPassword: string;
+  redisAddress: string;
+  redisPort: string;
+};
+
 //Job
 export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
 
 export type JobPayload = {
-  Id: string;
-  Action: JobsAction;
+  id: string;
+  action: JobsAction;
 };
 
 type StateJob =
@@ -63,10 +88,11 @@ type StateJob =
   | "Retry";
 
 export type OrthancJob = {
-  Type: string;
-  Progress: number;
-  State: StateJob | string;
-  [key: string]: any;
+  id : string;
+  type: string;
+  progress: number;
+  state: StateJob | string;
+  //TODO: AJOUTER LES PROPIETE MANQUANTE ET UPDATER LES SERVICE API POUR LES FILL
 };
 
 export type Role = {
@@ -83,6 +109,7 @@ export type Role = {
   AutoRouting: boolean;
   ReadAll: boolean;
 };
+
 export type User = {
   Id: number;
   Firstname: string;
@@ -256,7 +283,7 @@ export type Series = {
   isStable: boolean;
   labels: string[];
   lastUpdate: string;
-  mainDicomTags:SeriesMainDicomTags
+  mainDicomTags: SeriesMainDicomTags;
   parentStudy: string;
   status: string;
   type: string;
@@ -287,9 +314,9 @@ export type PatientPayload = {
 };
 
 export type OrthancResponse = {
- id: string;
- path: string;
-}
+  id: string;
+  path: string;
+};
 export type Study = {
   id: string;
   isStable: boolean;
@@ -311,14 +338,6 @@ export type StudyPayload = {
   keepSource: boolean;
 };
 
-// export type SeriesPayload = {
-//   replace: Partial<SeriesMainDicomTags>;
-//   remove: string[];
-//   removePrivateTags: boolean;
-//   force: boolean;
-//   synchronous: boolean;
-//   keepSource: boolean;
-// };
 export type SeriesPayload = {
   replace: Partial<SeriesMainDicomTags>;
   remove: string[];
@@ -326,4 +345,4 @@ export type SeriesPayload = {
   keepSource: boolean;
   force: boolean;
   synchronous: boolean;
-}
+};

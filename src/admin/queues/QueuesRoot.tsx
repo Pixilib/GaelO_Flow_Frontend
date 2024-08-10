@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Spinner, Tabs, Tab, Card, CardBody } from "../../ui";
 import { useCustomQuery } from "../../utils/reactQuery";
-import { OptionsResponse } from "../../utils/types";
+import { Options } from "../../utils/types";
 import { getOptions } from "../../services/options";
 
 import Retrieve from "./Retrieve";
@@ -15,7 +15,7 @@ const QueuesRoot = () => {
   const path = location.pathname;
 
   const { data: options, isPending: isLoadingOptions } =
-    useCustomQuery<OptionsResponse>(["options"], () => getOptions());
+    useCustomQuery<Options>(["options"], () => getOptions());
 
   if (isLoadingOptions) return <Spinner />;
 
@@ -48,7 +48,7 @@ const QueuesRoot = () => {
         <Routes>
           <Route
             path="retrieve"
-            element={<Retrieve data={options as OptionsResponse} />}
+            element={<Retrieve data={options as Options} />}
           />
           <Route path="anonymize" element={<Anonymize />} />
           <Route path="delete" element={<Delete />} />

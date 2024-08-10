@@ -4,7 +4,15 @@ import { JobPayload, OrthancJob } from "../utils/types";
 export const getJobs = (): Promise<OrthancJob[]> => {
   return axios
     .get("/api/jobs?expand")
-    .then((response) => response.data as OrthancJob[])
+    .then((response) => {
+      const data = response.data;
+      return data.map((job: any) => ({
+        id : job.ID,
+        type: job.Type,
+        progress: job.Progress,
+        state: job.State,
+      }));
+    })
     .catch(function (error) {
       if (error.response) {
         throw error.response;
@@ -13,9 +21,10 @@ export const getJobs = (): Promise<OrthancJob[]> => {
     });
 };
 
-export const postJobs = ({ Id, Action }: JobPayload): Promise<unknown> => {
-  return axios.post(`/api/jobs/${Id}/${Action}`)
-    .then(response => response.data)
+export const postJobs = ({ id, action }: JobPayload): Promise<unknown> => {
+  return axios
+    .post(`/api/jobs/${id}/${action}`)
+    .then((response) => response.data)
     .catch(function (error) {
       if (error.response) {
         throw error.response;
@@ -25,10 +34,16 @@ export const postJobs = ({ Id, Action }: JobPayload): Promise<unknown> => {
 };
 
 export const getJobById = (id: string): Promise<OrthancJob> => {
-  return axios.get(`/api/jobs/${id}`)
+  return axios
+    .get(`/api/jobs/${id}`)
     .then((response) => {
-      console.log(response);
-      return response.data;
+      const data = response.data;
+      return {
+        id : data.ID,
+        type: data.Type,
+        progress: data.Progress,
+        state: data.State,
+      };
     })
     .catch(function (error) {
       if (error.response) {
@@ -36,4 +51,4 @@ export const getJobById = (id: string): Promise<OrthancJob> => {
       }
       throw error;
     });
-}
+};

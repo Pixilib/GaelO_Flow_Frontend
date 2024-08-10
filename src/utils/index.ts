@@ -14,7 +14,6 @@ import {
 import { getQueryParams } from "./queryParams";
 import type {
     AutoQueryPayload,
-    OptionsResponse,
     Oauth2Config,
     OrthancJob,
     Modality,
@@ -42,7 +41,6 @@ export {
     Oauth2Config,
     Option,
     OrthancJob,
-    OptionsResponse,
     parseTimeString,
     QueryPayload,
     Role,
