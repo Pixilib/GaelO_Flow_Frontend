@@ -51,7 +51,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
   }, [JSON.stringify(data)]);
 
   const optionsMutation = useCustomMutation<void, AutoQueryOptionsPayload>(
-    (autoQueryPayload: AutoQueryPayload) => updateAutoQueryOptions(autoQueryPayload),
+    (autoQueryPayload: AutoQueryOptionsPayload) => updateAutoQueryOptions(autoQueryPayload),
     [["options"]],
     {
       onSuccess: () => {

@@ -31,7 +31,6 @@ export const getOptions = (): Promise<Options> => {
         redisAddress: data.RedisAddress,
         redisPort: data.RedisPort,
       };
-      return response.data;
     })
     .catch(function (error) {
       if (error.response) {

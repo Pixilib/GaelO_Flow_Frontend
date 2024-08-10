@@ -51,7 +51,7 @@ export type Options = {
   autoQueryHourStop: number;
   autoQueryMinuteStop: number;
   orthancMonitoringRate: number;
-  BurnerStarted: boolean;
+  burnerStarted: boolean;
   burnerLabelPath: string;
   burnerMonitoringLevel: string;
   burnerManifacturer: string;
@@ -95,6 +95,7 @@ export type OrthancJob = {
   //TODO: AJOUTER LES PROPIETE MANQUANTE ET UPDATER LES SERVICE API POUR LES FILL
 };
 
+//TODO: camelCase
 export type Role = {
   Name: string;
   Import: boolean;
@@ -110,6 +111,7 @@ export type Role = {
   ReadAll: boolean;
 };
 
+//TODO : camelCase
 export type User = {
   Id: number;
   Firstname: string;
@@ -128,6 +130,7 @@ export type SignInResponse = {
   userId: number;
 };
 
+//TODO : camelCase
 export type ChangePasswordPayload = {
   NewPassword: string;
   ConfirmationPassword: string;
@@ -150,6 +153,7 @@ export type Modality = {
   manufacturer: string;
 };
 
+//TODO : camelCase
 export type ModalityExtended = {
   AET: string;
   AllowEcho: boolean;
@@ -174,6 +178,7 @@ export type Label = {
 };
 
 // Oauth2
+//TODO : camelCase
 export type Oauth2Config = {
   Name: string;
   Provider: string;
