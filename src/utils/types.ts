@@ -1,5 +1,5 @@
 //option
-export type AutoQueryPayload = {
+export type AutoQueryOptionsPayload = {
   autoQueryHourStart: number;
   autoQueryMinuteStart: number;
   autoQueryHourStop: number;
@@ -88,7 +88,7 @@ type StateJob =
   | "Retry";
 
 export type OrthancJob = {
-  id : string;
+  id: string;
   type: string;
   progress: number;
   state: StateJob | string;
@@ -121,10 +121,11 @@ export type User = {
 
 export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
 export type UserUpdatePayload = Partial<UserPayload>;
-//auth
+
+
 export type SignInResponse = {
-  AccessToken: string;
-  UserId: number;
+  accessToken: string;
+  userId: number;
 };
 
 export type ChangePasswordPayload = {

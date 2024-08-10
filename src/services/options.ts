@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { AutoQueryPayload, Options } from "src/utils/types";
+import { AutoQueryOptionsPayload, Options } from "src/utils/types";
 
 export const getOptions = (): Promise<Options> => {
   return axios
@@ -42,7 +42,7 @@ export const getOptions = (): Promise<Options> => {
 };
 
 export const updateAutoQueryOptions = (
-  autoQueryOptions: AutoQueryPayload
+  autoQueryOptions: AutoQueryOptionsPayload
 ): Promise<void> => {
   const payload = {
     AutoQueryHourStart: autoQueryOptions.autoQueryHourStart,

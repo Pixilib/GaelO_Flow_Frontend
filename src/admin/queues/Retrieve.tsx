@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useCustomToast } from "../../utils/toastify";
 import { useCustomMutation } from "../../utils/reactQuery";
 import { updateAutoQueryOptions } from "../../services/options";
-import { AutoQueryPayload, Options } from "../../utils/types";
+import { AutoQueryOptionsPayload, Options } from "../../utils/types";
 import {
   formatTime,
   formatTimeReadable,
@@ -50,7 +50,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
     setStopTime(optionClockStop);
   }, [JSON.stringify(data)]);
 
-  const optionsMutation = useCustomMutation<void, AutoQueryPayload>(
+  const optionsMutation = useCustomMutation<void, AutoQueryOptionsPayload>(
     (autoQueryPayload: AutoQueryPayload) => updateAutoQueryOptions(autoQueryPayload),
     [["options"]],
     {

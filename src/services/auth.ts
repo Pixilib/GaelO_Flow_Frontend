@@ -11,7 +11,11 @@ export const signIn = (
       Password : password,
     })
     .then(function (response) {
-      return response.data;
+      const data = response.data
+      return {
+        accessToken : data.AccessToken,
+        userId : data.UserId
+      }
     })
     .catch(function (error) {
       if (error.response) {

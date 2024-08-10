@@ -31,12 +31,12 @@ export const SignInForm = () => {
     {
       onSuccess: (data: SignInResponse) => {
         const decodedToken: Record<string, any> = jwtDecode(
-          data.AccessToken
+          data.accessToken
         );  
         dispatch(
           login({
-            token: data.AccessToken,
-            userId: data.UserId,
+            token: data.accessToken,
+            userId: data.userId,
             role: {...decodedToken.role},
           })
         );
