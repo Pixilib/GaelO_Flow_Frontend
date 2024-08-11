@@ -5,7 +5,7 @@ import QueuesRoot from "./queues/QueuesRoot";
 import ModalitiesRoot from "./modalities/ModalitiesRoot";
 import UsersRoot from "./users/UsersRoot";
 import PeersRoot from "./peers/PeersRoot";
-import LabelRoot from "./Labels/LabelRoot";
+import LabelRoot from "./labels/LabelRoot";
 
 const AdminRoot = () => {
     return (

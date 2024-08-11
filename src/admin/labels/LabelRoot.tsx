@@ -14,11 +14,15 @@ import LabelTable from "./LabelTable";
 const LabelRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
-  const { data: labelsData } = useCustomQuery<Label[]>(["labels"], () =>
-    getLabels()
+  const { data: labelsData } = useCustomQuery<Label[]>(
+    ["labels"],
+    () => getLabels()
   );
 
-  useCustomQuery<Role[]>(["roles"], () => getRoles());
+  useCustomQuery<Role[]>(
+    ["roles"],
+    () => getRoles()
+  );
 
   const { mutate: mutateAddLabel } = useCustomMutation<void, Label>(
     ({ name }) => addLabel(name),

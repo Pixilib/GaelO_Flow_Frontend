@@ -4,6 +4,8 @@ import Select, { ActionMeta, MultiValue } from "react-select";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { getLabelsByRoleName } from "../services";
+import { useCustomQuery } from "../utils";
+import { Spinner } from "../ui";
 
 type OptionType = {
   value: string;
@@ -11,7 +13,7 @@ type OptionType = {
 };
 
 interface SelectLabelsProps {
-  onChange: (options: OptionType[]) => void;
+  onChange: (labels: string[]) => void;
   closeMenuOnSelect?: boolean;
 }
 
@@ -19,50 +21,46 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
   onChange,
   closeMenuOnSelect = true,
 }) => {
-  const [options, setOptions] = useState<OptionType[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [selectedLabels, setSelectedLabels] =
+    useState<MultiValue<OptionType> | null>(null);
 
   const roleName = useSelector(
-    (state: RootState) => state.user.role?.Name || ""
+    (state: RootState) => state.user.role?.name || ""
   );
 
   useEffect(() => {
-    if (!roleName) {
-      setError("error");
-      return;
-    }
+    onChange(selectedLabels?.map((option) => option.value) ?? []);
+  }, [selectedLabels]);
 
-    const fetchLabels = async () => {
-      try {
-        const labels = await getLabelsByRoleName(roleName);
+  const { data: labelsOptions, isPending } = useCustomQuery(
+    ["roles", roleName, "labels"],
+    () => getLabelsByRoleName(roleName),
+    {
+      select: (labels) => {
         const formattedOptions = labels.map((label) => ({
           value: label,
           label,
         }));
-        setOptions(formattedOptions);
-        setError(null);
-      } catch (error: any) {
-        setError(`Failed to fetch labels: ${error.message}`);
-      }
-    };
-
-    fetchLabels();
-  }, [roleName]);
+        return formattedOptions;
+      },
+    }
+  );
 
   const handleChange = (
-    newValue: MultiValue<OptionType>,
+    options: MultiValue<OptionType>,
     _actionMeta: ActionMeta<OptionType>
   ) => {
-    onChange(newValue);
+    setSelectedLabels(options);
   };
+
+  if (isPending) return <Spinner />;
 
   return (
     <>
-      {error && <div className="error-message">{error}</div>}
       <Select
         isMulti
         menuPosition="fixed"
-        options={options}
+        options={labelsOptions}
         onChange={handleChange}
         closeMenuOnSelect={closeMenuOnSelect}
         className="basic-single"

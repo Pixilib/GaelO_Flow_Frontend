@@ -113,10 +113,10 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             onClick={() => handleItemClick("/auto-retrieve")}
           />
           <MenuItem
-            title="Dataset"
+            title="Datasets"
             icon={<DicomIcon className="w-6 h-6" />}
-            isActive={location.pathname === "/dataset"}
-            onClick={() => handleItemClick("/dataset")}
+            isActive={location.pathname === "/datasets"}
+            onClick={() => handleItemClick("/datasets")}
           />
         </div>
         <div className="flex h-20% flex-col gap-2 border-t border-white">

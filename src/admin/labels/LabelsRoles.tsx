@@ -9,13 +9,14 @@ type LabelsRolesProps = {
 };
 
 const LabelsRoles = ({ labelName }: LabelsRolesProps) => {
+
   const { data: roles, isLoading: isLoadingRoles } = useCustomQuery<
     Role[],
     string[]
   >(["roles"], () => getRoles(), {
     select: (roles) => roles.map((role) => role.name),
   });
-
+  
   const { data: existingRoles, isLoading: isLoadingExistingRoles } =
     useCustomQuery<string[]>(["labels", labelName], () =>
       getRolesByLabelName(labelName)

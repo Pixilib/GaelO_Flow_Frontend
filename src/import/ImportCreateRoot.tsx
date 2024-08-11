@@ -1,8 +1,8 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Tabs, Tab } from "../ui";
 
-import CreateRoot from "./Create/CreateRoot";
-import ImportRoot from "./Import/ImportRoot";
+import CreateRoot from "./create/CreateRoot";
+import ImportRoot from "./import/ImportRoot";
 
 const ImportCreateRoot = () => {
     const location = useLocation();

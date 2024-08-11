@@ -6,9 +6,9 @@ import SelectLabels from "./SelectLabels";
 
 const DatasetRoot = () => {
   const handleSelectChange = (
-    selectedOptions: { value: string; label: string }[]
+    selectedLabels: string[]
   ) => {
-    console.log("Selected options:", selectedOptions);
+    console.log("Selected options:", selectedLabels);
   };
 
   return (
