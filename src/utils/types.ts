@@ -1,9 +1,9 @@
 //option
-export type AutoQueryPayload = {
-  AutoQueryHourStart: number;
-  AutoQueryMinuteStart: number;
-  AutoQueryHourStop: number;
-  AutoQueryMinuteStop: number;
+export type AutoQueryOptionsPayload = {
+  autoQueryHourStart: number;
+  autoQueryMinuteStart: number;
+  autoQueryHourStop: number;
+  autoQueryMinuteStop: number;
 };
 
 // ? we can use this type to validate the payload who check if object contains properties of OptionsResponse
@@ -12,15 +12,9 @@ type AtLeastOne<T> = {
   [K in keyof T]: Pick<T, K>;
 }[keyof T];
 
-export type OptionsPayload = AtLeastOne<OptionsResponse>;
-
-export type Option = {
-  value: any;
-  label: string;
-};
-
+export type OptionsPayload = AtLeastOne<OptionsRequest>;
 // * This is the response from the API getOptions
-export type OptionsResponse = {
+type OptionsRequest = {
   AutoQueryHourStart: number;
   AutoQueryMinuteStart: number;
   AutoQueryHourStop: number;
@@ -46,12 +40,43 @@ export type OptionsResponse = {
   RedisPort: string;
 };
 
+export type Option = {
+  value: any;
+  label: string;
+};
+
+export type Options = {
+  autoQueryHourStart: number;
+  autoQueryMinuteStart: number;
+  autoQueryHourStop: number;
+  autoQueryMinuteStop: number;
+  orthancMonitoringRate: number;
+  burnerStarted: boolean;
+  burnerLabelPath: string;
+  burnerMonitoringLevel: string;
+  burnerManifacturer: string;
+  burnerMonitoredPath: string;
+  burnerDeleteStudyAfterSent: boolean;
+  burnerSupportType: string;
+  burnerViewerPath: string;
+  burnerTransferSyntax: string;
+  burnerDateFormat: string;
+  burnerTranscoding: string;
+  autorouterStarted: boolean;
+  orthancAddress: string;
+  orthancPort: string;
+  orthancUsername: string;
+  orthancPassword: string;
+  redisAddress: string;
+  redisPort: string;
+};
+
 //Job
 export type JobsAction = "resume" | "pause" | "cancel" | "resubmit";
 
 export type JobPayload = {
-  Id: string;
-  Action: JobsAction;
+  id: string;
+  action: JobsAction;
 };
 
 type StateJob =
@@ -63,48 +88,43 @@ type StateJob =
   | "Retry";
 
 export type OrthancJob = {
-  Type: string;
-  Progress: number;
-  State: StateJob | string;
-  [key: string]: any;
+  id: string;
+  type: string;
+  progress: number;
+  state: StateJob | string;
+  //TODO: AJOUTER LES PROPIETE MANQUANTE ET UPDATER LES SERVICE API POUR LES FILL
 };
 
 export type Role = {
-  Name: string;
-  Import: boolean;
-  Anonymize: boolean;
-  Export: boolean;
-  Query: boolean;
-  AutoQuery: boolean;
-  Delete: boolean;
-  Admin: boolean;
-  Modify: boolean;
-  CdBurner: boolean;
-  AutoRouting: boolean;
-  ReadAll: boolean;
+  name: string;
+  import: boolean;
+  anonymize: boolean;
+  export: boolean;
+  query: boolean;
+  autoQuery: boolean;
+  delete: boolean;
+  admin: boolean;
+  modify: boolean;
+  cdBurner: boolean;
+  autoRouting: boolean;
+  readAll: boolean;
 };
+
 export type User = {
-  Id: number;
-  Firstname: string;
-  Lastname: string;
-  Email: string;
-  RoleName: Role["Name"];
-  Role: Role;
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  roleName: Role["name"];
+  role: Role;
 };
 
-export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
+export type UserPayload = Omit<User, "id" | "role"> & { password: string };
 export type UserUpdatePayload = Partial<UserPayload>;
-//auth
-export type SignInResponse = {
-  AccessToken: string;
-  UserId: number;
-};
 
-export type ChangePasswordPayload = {
-  NewPassword: string;
-  ConfirmationPassword: string;
-  Token: string;
-  UserId: number;
+export type SignInResponse = {
+  accessToken: string;
+  userId: number;
 };
 
 export type Peer = {
@@ -123,37 +143,37 @@ export type Modality = {
 };
 
 export type ModalityExtended = {
-  AET: string;
-  AllowEcho: boolean;
-  AllowEventReport: boolean;
-  AllowFind: boolean;
-  AllowFindWorklist: boolean;
-  AllowGet: boolean;
-  AllowMove: boolean;
-  AllowNAction: boolean;
-  AllowStore: boolean;
-  AllowTranscoding: boolean;
-  Host: string;
-  LocalAet: string;
-  Manufacturer: string;
-  Port: number;
-  Timeout: number;
-  UseDicomTls: boolean;
+  aet: string;
+  allowEcho: boolean;
+  allowEventReport: boolean;
+  allowFind: boolean;
+  allowFindWorklist: boolean;
+  allowGet: boolean;
+  allowMove: boolean;
+  allowNAction: boolean;
+  allowStore: boolean;
+  allowTranscoding: boolean;
+  host: string;
+  localAet: string;
+  manufacturer: string;
+  port: number;
+  timeout: number;
+  useDicomTls: boolean;
 };
 
 export type Label = {
-  Name: string;
+  name: string;
 };
 
 // Oauth2
 export type Oauth2Config = {
-  Name: string;
-  Provider: string;
-  AuthorizationUrl: string;
-  ClientId: string;
+  name: string;
+  provider: string;
+  authorizationUrl: string;
+  clientId: string;
 };
-//Query
 
+//Query
 type QueryStudy = {
   PatientName?: string;
   PatientID?: string;
@@ -249,6 +269,7 @@ export type StudyMainDicomTags = {
   studyInstanceUID: string;
   studyTime: string | null;
 };
+
 export type Series = {
   expectedNumberOfInstances: number | null;
   id: string;
@@ -256,7 +277,7 @@ export type Series = {
   isStable: boolean;
   labels: string[];
   lastUpdate: string;
-  mainDicomTags:SeriesMainDicomTags
+  mainDicomTags: SeriesMainDicomTags;
   parentStudy: string;
   status: string;
   type: string;
@@ -287,9 +308,10 @@ export type PatientPayload = {
 };
 
 export type OrthancResponse = {
- id: string;
- path: string;
-}
+  id: string;
+  path: string;
+};
+
 export type Study = {
   id: string;
   isStable: boolean;
@@ -311,14 +333,6 @@ export type StudyPayload = {
   keepSource: boolean;
 };
 
-// export type SeriesPayload = {
-//   replace: Partial<SeriesMainDicomTags>;
-//   remove: string[];
-//   removePrivateTags: boolean;
-//   force: boolean;
-//   synchronous: boolean;
-//   keepSource: boolean;
-// };
 export type SeriesPayload = {
   replace: Partial<SeriesMainDicomTags>;
   remove: string[];
@@ -326,4 +340,4 @@ export type SeriesPayload = {
   keepSource: boolean;
   force: boolean;
   synchronous: boolean;
-}
+};

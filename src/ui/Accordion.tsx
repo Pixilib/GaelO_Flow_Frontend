@@ -26,7 +26,7 @@ const Accordion: React.FC<AccordionProps> = ({ summary, children, variant = 'def
             case 'primary':
                 return {
                     container: `border border-light-gray ${rounded} my-2 shadow-md`,
-                    summary: `cursor-pointer flex justify-between items-center p-4 bg-light-gray hover:bg-grayCustom ${rounded}`,
+                    summary: `cursor-pointer flex justify-between items-center p-4 bg-white hover:bg-grayCustom ${rounded}`,
                     content: `p-4 bg-light-gray ${isOpen ? 'rounded-b-2xl' : ''}`,
                 };
             case 'default':

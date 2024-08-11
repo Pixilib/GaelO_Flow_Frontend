@@ -1,11 +1,36 @@
 import axios from "./axios";
-import { AutoQueryPayload, OptionsResponse } from "src/utils/types";
+import { AutoQueryOptionsPayload, Options } from "src/utils/types";
 
-export const getOptions = (): Promise<OptionsResponse> => {
+export const getOptions = (): Promise<Options> => {
   return axios
     .get("/api/options")
     .then(function (response) {
-      return response.data;
+      const data = response.data;
+      return {
+        autoQueryHourStart: data.AutoQueryHourStart,
+        autoQueryMinuteStart: data.AutoQueryMinuteStart,
+        autoQueryHourStop: data.AutoQueryHourStop,
+        autoQueryMinuteStop: data.AutoQueryMinuteStop,
+        orthancMonitoringRate: data.OrthancMonitoringRate,
+        burnerStarted: data.BurnerStarted,
+        burnerLabelPath: data.BurnerLabelPath,
+        burnerMonitoringLevel: data.BurnerMonitoringLevel,
+        burnerManifacturer: data.BurnerManifacturer,
+        burnerMonitoredPath: data.BurnerMonitoredPath,
+        burnerDeleteStudyAfterSent: data.BurnerDeleteStudyAfterSent,
+        burnerSupportType: data.BurnerSupportType,
+        burnerViewerPath: data.BurnerViewerPath,
+        burnerTransferSyntax: data.BurnerTransferSyntax,
+        burnerDateFormat: data.BurnerDateFormat,
+        burnerTranscoding: data.BurnerTranscoding,
+        autorouterStarted: data.AutorouterStarted,
+        orthancAddress: data.OrthancAddress,
+        orthancPort: data.OrthancPort,
+        orthancUsername: data.OrthancUsername,
+        orthancPassword: data.OrthancPassword,
+        redisAddress: data.RedisAddress,
+        redisPort: data.RedisPort,
+      };
     })
     .catch(function (error) {
       if (error.response) {
@@ -15,13 +40,22 @@ export const getOptions = (): Promise<OptionsResponse> => {
     });
 };
 
-export const updateOptions =  (payload:AutoQueryPayload):Promise<void> =>{
-return axios.patch("/api/options", payload)
-    .then(response => response.data)
+export const updateAutoQueryOptions = (
+  autoQueryOptions: AutoQueryOptionsPayload
+): Promise<void> => {
+  const payload = {
+    AutoQueryHourStart: autoQueryOptions.autoQueryHourStart,
+    AutoQueryMinuteStart: autoQueryOptions.autoQueryMinuteStart,
+    AutoQueryHourStop: autoQueryOptions.autoQueryHourStop,
+    AutoQueryMinuteStop: autoQueryOptions.autoQueryMinuteStop,
+  };
+  return axios
+    .patch("/api/options", payload)
+    .then((response) => response.data)
     .catch(function (error) {
       if (error.response) {
         throw error.response;
       }
       throw error;
     });
-}
+};

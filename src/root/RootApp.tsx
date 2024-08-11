@@ -11,7 +11,7 @@ import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";
 import ImportCreateRoot from "../import/ImportCreateRoot";
 import ContentRoot from "../content/ContentRoot";
-import DatasetRoot from "../content/Dataset/DatasetRoot";
+import DatasetRoot from "../datasets/DatasetRoot";
 
 const RootApp = () => {
   const dispatch = useDispatch();
@@ -31,10 +31,10 @@ const RootApp = () => {
       "/administration/modalities": "Modalities",
       "/administration/jobs": "Jobs",
       "/administration/labels": "Labels",
-      "/administration/queues":"Queues",
-      "/administration/queues/retrieve":"Queues",
-      "/administration/queues/anonymize":"Queues",
-      "/administration/queues/delete":"Queues",
+      "/administration/queues": "Queues",
+      "/administration/queues/retrieve": "Queues",
+      "/administration/queues/anonymize": "Queues",
+      "/administration/queues/delete": "Queues",
       "/administration/peers": "Peers",
       "/administration/users/users": "Users",
       "/administration/users/roles": "Users",
@@ -47,16 +47,21 @@ const RootApp = () => {
       "/users": "Users",
       "/dataset": "DataSet",
       "/auto-retrieve": "Auto retrieve",
-      "/": "Home"
+      "/datasets": "Datasets",
+      "/": "Home",
     };
     return titlePath[location.pathname];
   }, [location.pathname]);
 
   return (
     <div className="flex w-screen h-screen bg-white">
-      <SideBar openItem={openItem} setOpenItem={setOpenItem} onLogout={handleLogout} />
+      <SideBar
+        openItem={openItem}
+        setOpenItem={setOpenItem}
+        onLogout={handleLogout}
+      />
       <div className="flex flex-col flex-1 overflow-auto bg-indigo-100 custom-scrollbar">
-        <Header title={title} openItem={openItem} setOpenItem={setOpenItem} />
+        <Header title={title} />
         <div className="mx-6 my-6">
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -65,9 +70,7 @@ const RootApp = () => {
             <Route path="/import/*" element={<ImportCreateRoot />} />
             <Route path="/orthanc-content" element={<ContentRoot />} />
             <Route path="/" element={<ContentRoot />} />
-            <Route path="/dataset" element={<DatasetRoot />} />
-
-
+            <Route path="/datasets" element={<DatasetRoot />} />
           </Routes>
         </div>
       </div>

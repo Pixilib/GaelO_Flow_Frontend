@@ -11,19 +11,19 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
     const columns = [
         {
             header: "Name",
-            accessorKey: "Name",
+            accessorKey: "name",
         },
         {
             header: "Provider",
-            accessorKey: "Provider",
+            accessorKey: "provider",
         },
         {
             header: "Authorization URL",
-            accessorKey: "AuthorizationUrl",
+            accessorKey: "authorizationUrl",
         },
         {
             header: "Client ID",
-            accessorKey: "ClientId",
+            accessorKey: "clientId",
         },
         {
             header: 'Action',

@@ -13,8 +13,7 @@ import {
 } from "./reactQuery";
 import { getQueryParams } from "./queryParams";
 import type {
-    AutoQueryPayload,
-    OptionsResponse,
+    AutoQueryOptionsPayload,
     Oauth2Config,
     OrthancJob,
     Modality,
@@ -32,7 +31,7 @@ import type {
 import { useCustomToast } from "./toastify";
 
 export {
-    AutoQueryPayload,
+    AutoQueryOptionsPayload,
     Colors,
     formatTime,
     formatTimeReadable,
@@ -42,7 +41,6 @@ export {
     Oauth2Config,
     Option,
     OrthancJob,
-    OptionsResponse,
     parseTimeString,
     QueryPayload,
     Role,

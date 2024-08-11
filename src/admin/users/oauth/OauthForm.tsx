@@ -11,29 +11,29 @@ type OauthFormProps = {
 };
 
 const OauthForm = ({ onSubmit, initialData, buttonText }: OauthFormProps) => {
-  const [name, setName] = useState<string>(initialData?.Name || "");
-  const [provider, setProvider] = useState<string>(initialData?.Provider || "");
+  const [name, setName] = useState<string>(initialData?.name || "");
+  const [provider, setProvider] = useState<string>(initialData?.provider || "");
   const [authorizationUrl, setAuthorizationUrl] = useState<string>(
-    initialData?.AuthorizationUrl || ""
+    initialData?.authorizationUrl || ""
   );
-  const [clientId, setClientId] = useState<string>(initialData?.ClientId || "");
+  const [clientId, setClientId] = useState<string>(initialData?.clientId || "");
 
   useEffect(() => {
     if (initialData) {
-      setName(initialData.Name);
-      setProvider(initialData.Provider);
-      setAuthorizationUrl(initialData.AuthorizationUrl);
-      setClientId(initialData.ClientId);
+      setName(initialData.name);
+      setProvider(initialData.provider);
+      setAuthorizationUrl(initialData.authorizationUrl);
+      setClientId(initialData.clientId);
     }
   }, [initialData]);
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     const payload: Oauth2Config = {
-      Name: name,
-      Provider: provider,
-      AuthorizationUrl: authorizationUrl,
-      ClientId: clientId,
+      name: name,
+      provider: provider,
+      authorizationUrl: authorizationUrl,
+      clientId: clientId,
     };
 
     onSubmit(payload);

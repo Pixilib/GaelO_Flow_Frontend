@@ -2,10 +2,9 @@ import { ChangeEvent, useState } from "react";
 import { MdOutlineNewLabel as LabelIcon } from "react-icons/md";
 import { Button, Input } from "../../ui";
 import { Colors } from "../../utils/enums";
-import { Label } from "../../utils/types";
 
 type LabelInputFormProps = {
-  onCreateLabel: (payload: Label) => void;
+  onCreateLabel: (label: string) => void;
 };
 
 const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
@@ -18,7 +17,7 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   const handleCreateClick = () => {
     if (!label) return;
     const trimmedLabel = label.trim();
-    onCreateLabel({ Name: trimmedLabel });
+    onCreateLabel(trimmedLabel);
     setLabel(null);
   };
 
@@ -37,7 +36,6 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
         type="button"
         color={Colors.success}
         onClick={handleCreateClick}
-
         className="text-white rounded-l-none shadow-md rounded-r-2xl min-w-20"
       >
         +

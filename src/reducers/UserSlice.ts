@@ -1,9 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { Role } from 'src/utils';
 
-
-
-
 export interface UserState {
     token: string | null;
     isLogged: boolean;

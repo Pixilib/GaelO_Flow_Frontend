@@ -14,12 +14,9 @@ import LabelTable from "./LabelTable";
 const LabelRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
-  const { data: labelsData } = useCustomQuery<string[], Label[]>(["labels"],
-    () => getLabels(),
-    {
-      select: (name) => name.map((label) => ({ Name: label })
-      )
-    }
+  const { data: labelsData } = useCustomQuery<Label[]>(
+    ["labels"],
+    () => getLabels()
   );
 
   useCustomQuery<Role[]>(
@@ -28,7 +25,7 @@ const LabelRoot: React.FC = () => {
   );
 
   const { mutate: mutateAddLabel } = useCustomMutation<void, Label>(
-    (label: Label) => addLabel(label),
+    ({ name }) => addLabel(name),
     [["labels"]],
     {
       onSuccess: () => {
@@ -63,11 +60,13 @@ const LabelRoot: React.FC = () => {
       <CardHeader
         className="flex items-center justify-center rounded-t-lg text-bg-light"
         color={Colors.primary}
-        title={'Manage Labels'}
+        title={"Manage Labels"}
       />
       <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
         <div className="mt-8 mb-8">
-          <LabelInputForm onCreateLabel={handleCreate} />
+          <LabelInputForm
+            onCreateLabel={(label) => handleCreate({ name: label })}
+          />
         </div>
         <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
       </CardBody>

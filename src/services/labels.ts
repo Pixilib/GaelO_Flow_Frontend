@@ -1,10 +1,13 @@
 import { Label } from '../utils/types';
 import axios from './axios';
 
-export const getLabels = (): Promise<string[]> => {
+export const getLabels = (): Promise<Label[]> => {
     return axios
         .get(`/api/labels`)
-        .then(response => response.data)
+        .then(response => {
+            const data = response.data
+            return data.map((label :string) => ({name : label}))
+        })
         .catch(error => {
             if (error.response) {
                 throw error.response;
@@ -13,9 +16,9 @@ export const getLabels = (): Promise<string[]> => {
         });
 };
 
-export const addLabel = (payload: Label): Promise<void> => { 
+export const addLabel = (label : string): Promise<void> => { 
     return axios
-        .post(`/api/labels`, payload)
+        .post(`/api/labels`, {Name : label})
         .then(response => response.data)
         .catch(error => {
             if (error.response) {

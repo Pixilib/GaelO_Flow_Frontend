@@ -19,33 +19,42 @@ export const SignInForm = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { toastError } = useCustomToast();
 
-  const loginMutation = useCustomMutation<SignInResponse,{email:string,password:string}>(
-    ({ email, password }) => signIn(email, password),
-    [],
-    {
-      onSuccess: (data: SignInResponse) => {
-        const decodedToken: Record<string, any> = jwtDecode(
-          data.AccessToken
-        );  
-        dispatch(
-          login({
-            token: data.AccessToken,
-            userId: data.UserId,
-            role: {...decodedToken.role},
-          })
-        );
-      },
-      onError: () => {
-        toastError("Error in creadentials");
-      },
-    }
-  );
+  const loginMutation = useCustomMutation<
+    SignInResponse,
+    { email: string; password: string }
+  >(({ email, password }) => signIn(email, password), [], {
+    onSuccess: (data: SignInResponse) => {
+      const decodedToken: Record<string, any> = jwtDecode(data.accessToken);
+      dispatch(
+        login({
+          token: data.accessToken,
+          userId: data.userId,
+          role: {
+            name: decodedToken.role.Name,
+            import: decodedToken.role.Import,
+            anonymize: decodedToken.role.Anonymize,
+            export: decodedToken.role.Export,
+            query: decodedToken.role.Query,
+            autoQuery: decodedToken.role.AutoQuery,
+            delete: decodedToken.role.Delete,
+            admin: decodedToken.role.Admin,
+            modify: decodedToken.role.Modify,
+            cdBurner: decodedToken.role.CdBurner,
+            autoRouting: decodedToken.role.AutoRouting,
+            readAll: decodedToken.role.ReadAll,
+          },
+        })
+      );
+    },
+    onError: () => {
+      toastError("Error in creadentials");
+    },
+  });
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,7 +64,7 @@ export const SignInForm = () => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
       <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
-        {t('titleSignInForm')}
+        {t("titleSignInForm")}
       </h1>
       <p className="mb-12 text-lg text-center text-dark">
         Please Log in to your Account
@@ -91,9 +100,7 @@ export const SignInForm = () => {
             }
             required
           />
-          
         </div>
-
       </div>
       <div className="mt-3 text-xs text-right">
         <span
@@ -114,7 +121,6 @@ export const SignInForm = () => {
           <ChevronRight />
         </Button>
       </div>
-
-    </form >
+    </form>
   );
 };

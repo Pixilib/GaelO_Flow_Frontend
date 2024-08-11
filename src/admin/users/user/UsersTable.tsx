@@ -11,22 +11,22 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
   const columns = [
     {
       header: 'Email',
-      accessorKey: 'Email',
+      accessorKey: 'email',
       enableColumnFilters: true,
     },
     {
       header: 'FirstName',
-      accessorKey: 'Firstname',
+      accessorKey: 'firstname',
       enableColumnFilters: true,
     },
     {
       header: 'Lastname',
-      accessorKey: 'Lastname',
+      accessorKey: 'lastname',
       enableColumnFilters: true,
     },
     {
-      header: 'Rôle',
-      accessorKey: 'Role.Name',
+      header: 'Role',
+      accessorKey: 'role.name',
       enableColumnFilters: true,
     },
     {

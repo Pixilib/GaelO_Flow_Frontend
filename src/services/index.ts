@@ -7,7 +7,7 @@ import { signIn, signUp, lostPassword, changePassword } from './auth';
 import { getJobs, postJobs } from './jobs';
 import { getModalities, updateModality, deleteModality, echoModality } from './modalities';
 import { getOauth2Config, postOauth2Config, deleteOauth2Config } from './oauth2';
-import { getOptions, updateOptions } from './options';
+import { getOptions, updateAutoQueryOptions } from './options';
 import { getOrthancSystem, modifyPatient, deletePatient, orthancReset, orthancShutdown, updateVerbosity, getVerbosity, getPatient } from './orthanc';
 import { updatePeer, getPeers, echoPeer, deletePeer } from './peers';
 import { queryModality, makeRetrieve } from './query';
@@ -53,7 +53,7 @@ export {
     signIn,
     signUp,
     updateModality,
-    updateOptions,
+    updateAutoQueryOptions,
     updatePeer,
     updateUser,
     updateRole,

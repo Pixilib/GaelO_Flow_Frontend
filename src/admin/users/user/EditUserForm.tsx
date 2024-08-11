@@ -28,8 +28,8 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
         getRoles,
         {
             select: (roles) => roles.map((role) => ({
-                value: role.Name,
-                label: role.Name,
+                value: role.name,
+                label: role.name,
             })),
         }
     );
@@ -37,18 +37,18 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
     useEffect(() => {
         if (user) {
             // Pre-fill form when editing
-            setFirstName(user.Firstname);
-            setLastName(user.Lastname);
-            setEmail(user.Email);
+            setFirstName(user.firstname);
+            setLastName(user.lastname);
+            setEmail(user.email);
             if (user && rolesOptions) {
-                setSelectedRole({ value: user.RoleName, label: user.RoleName } || "");
+                setSelectedRole({ value: user.roleName, label: user.roleName } || "");
             }
         }
     }, [JSON.stringify(user), JSON.stringify(rolesOptions)]);
 
 
     const userUpdateMutation = useCustomMutation<void, UserUpdatePayload>(
-        (payload) => updateUser((user.Id), payload),
+        (payload) => updateUser((user.id), payload),
         [["users"]],
         {
             onSuccess: () => {
@@ -69,10 +69,10 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
             return;
         }
         const payload: UserUpdatePayload = {
-            Firstname: firstName,
-            Lastname: lastName,
-            Email: email,
-            RoleName: selectedRole.value,
+            firstname: firstName,
+            lastname: lastName,
+            email: email,
+            roleName: selectedRole.value,
         };
         userUpdateMutation.mutate(payload);
     }
@@ -133,7 +133,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                             <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
                             <SelectInput
                                 options={rolesOptions ?? []}
-                                placeholder="Select a Rôle"
+                                placeholder="Select a Role"
                                 onChange={(event) => {
                                     setSelectedRole({ value: event.value, label: event.value });
                                 }}

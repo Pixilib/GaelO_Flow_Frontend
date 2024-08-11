@@ -1,12 +1,25 @@
-import { Role } from '../utils/types';
+import { Role } from "../utils/types";
 import axios from "./axios";
-
 
 export const getRoles = (): Promise<Role[]> => {
   return axios
     .get("/api/roles")
     .then(function (response) {
-      return response.data;
+      const data = response.data;
+      return data.map((role: any) => ({
+        name: role.Name,
+        import: role.Import,
+        anonymize: role.Anonymize,
+        export: role.Export,
+        query: role.Query,
+        autoQuery: role.AutoQuery,
+        delete: role.Delete,
+        admin: role.Admin,
+        modify: role.Modify,
+        cdBurner: role.CdBurner,
+        autoRouting: role.AutoRouting,
+        readAll: role.ReadAll,
+      }));
     })
     .catch(function (error) {
       if (error.response) {
@@ -14,13 +27,27 @@ export const getRoles = (): Promise<Role[]> => {
       }
       throw error;
     });
-}
+};
 
 export const getRole = (roleName: string): Promise<Role> => {
   return axios
     .get(`/api/roles/${roleName}`)
     .then(function (response) {
-      return response.data;
+      const role = response.data;
+      return {
+        name: role.Name,
+        import: role.Import,
+        anonymize: role.Anonymize,
+        export: role.Export,
+        query: role.Query,
+        autoQuery: role.AutoQuery,
+        delete: role.Delete,
+        admin: role.Admin,
+        modify: role.Modify,
+        cdBurner: role.CdBurner,
+        autoRouting: role.AutoRouting,
+        readAll: role.ReadAll,
+      };
     })
     .catch(function (error) {
       if (error.response) {
@@ -28,11 +55,25 @@ export const getRole = (roleName: string): Promise<Role> => {
       }
       throw error;
     });
-}
+};
 
 export const updateRole = (role: Role): Promise<void> => {
+  const payload = {
+    Name: role.name,
+    Import: role.import,
+    Anonymize: role.anonymize,
+    Export: role.export,
+    Query: role.query,
+    AutoQuery: role.autoQuery,
+    Delete: role.delete,
+    Admin: role.admin,
+    Modify: role.modify,
+    CdBurner: role.cdBurner,
+    AutoRouting: role.autoRouting,
+    ReadAll: role.readAll,
+  };
   return axios
-    .put(`/api/roles/${role.Name}`, role)
+    .put(`/api/roles/${role.name}`, payload)
     .then(function (response) {
       return response.data;
     })
@@ -42,7 +83,7 @@ export const updateRole = (role: Role): Promise<void> => {
       }
       throw error;
     });
-}
+};
 
 export const deleteRole = (roleName: string): Promise<void> => {
   return axios
@@ -56,9 +97,23 @@ export const deleteRole = (roleName: string): Promise<void> => {
       }
       throw error;
     });
-}
+};
 
-export const postRoles = (payload: Role): Promise<void> => {
+export const postRoles = (role: Role): Promise<void> => {
+  const payload = {
+    Name: role.name,
+    Import: role.import,
+    Anonymize: role.anonymize,
+    Export: role.export,
+    Query: role.query,
+    AutoQuery: role.autoQuery,
+    Delete: role.delete,
+    Admin: role.admin,
+    Modify: role.modify,
+    CdBurner: role.cdBurner,
+    AutoRouting: role.autoRouting,
+    ReadAll: role.readAll,
+  };
   return axios
     .post("/api/roles", payload)
     .then(function (response) {
@@ -70,11 +125,14 @@ export const postRoles = (payload: Role): Promise<void> => {
       }
       throw error;
     });
-}
+};
 
-export const addLabelToRole = (roleName: string, labelName: string): Promise<void> => {
+export const addLabelToRole = (
+  roleName: string,
+  labelName: string
+): Promise<void> => {
   return axios
-    .post(`/api/roles/${roleName}/labels`, {Name : labelName})
+    .post(`/api/roles/${roleName}/labels`, { Name: labelName })
     .then(function () {
       return undefined;
     })
@@ -84,9 +142,12 @@ export const addLabelToRole = (roleName: string, labelName: string): Promise<voi
       }
       throw error;
     });
-}
+};
 
-export const removeLabelFromRole = (roleName: string, labelName: string): Promise<void> => {
+export const removeLabelFromRole = (
+  roleName: string,
+  labelName: string
+): Promise<void> => {
   return axios
     .delete(`/api/roles/${roleName}/labels/${labelName}`)
     .then(function () {
@@ -98,8 +159,7 @@ export const removeLabelFromRole = (roleName: string, labelName: string): Promis
       }
       throw error;
     });
-}
-
+};
 
 export const getLabelsByRoleName = (roleName: string): Promise<string[]> => {
   return axios
@@ -113,4 +173,4 @@ export const getLabelsByRoleName = (roleName: string): Promise<string[]> => {
       }
       throw error;
     });
-}
+};

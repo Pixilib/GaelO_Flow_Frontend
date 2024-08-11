@@ -6,66 +6,68 @@ import { getOptions } from "../../services/options";
 import { useCustomQuery } from "../../utils/reactQuery";
 
 const General = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+  const location = useLocation();
+  const navigate = useNavigate();
 
-    const { data, error, isPending } = useCustomQuery(
-        ["options"],
-        () => getOptions()
-    );
+  const { data, error, isPending } = useCustomQuery(["options"], () =>
+    getOptions()
+  );
 
-    const handleTabClick = (tab: To) => {
-        navigate(tab);
-    };
+  const handleTabClick = (tab: To) => {
+    navigate(tab);
+  };
 
-    if (isPending) return <span>Loading...</span>;
-    if (error) return <span>Error: {error.message}</span>;
+  if (isPending) return <span>Loading...</span>;
+  if (error || !data) return <span>Error: {error.message}</span>;
 
-    return (
-        <div className="mx-4 mt-4 mb-4 shadow-md bg-almond rounded-xl" data-gaelo-flow="general-root">
-            <Tabs className="bg-primary rounded-t-xl">
-                <Tab
-                    title="Redis"
-                    active={location.pathname === '/administration/general'}
-                    onClick={() => handleTabClick("/administration/general")}
-                />
-                <Tab
-                    title="Orthanc"
-                    active={location.pathname === '/administration/general/orthanc'}
-                    onClick={() => handleTabClick("/administration/general/orthanc")}
-                />
-            </Tabs>
-            <div className="mt-4 mb-4">
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <RedisCard
-                                redisData={{
-                                    address: data?.RedisAddress,
-                                    port: Number(data?.RedisPort),
-                                    password: data?.RedisPassword,
-                                }}
-                            />
-                        }
-                    />
-                    <Route
-                        path="orthanc"
-                        element={
-                            <OrthancSettingsCard
-                                orthancData={{
-                                    address: data?.OrthancAddress,
-                                    port: Number(data?.OrthancPort),
-                                    password: data?.OrthancPassword,
-                                    username: data?.OrthancUsername,
-                                }}
-                            />
-                        }
-                    />
-                </Routes>
-            </div>
-        </div>
-    );
+  return (
+    <div
+      className="mx-4 mt-4 mb-4 shadow-md bg-almond rounded-xl"
+      data-gaelo-flow="general-root"
+    >
+      <Tabs className="bg-primary rounded-t-xl">
+        <Tab
+          title="Redis"
+          active={location.pathname === "/administration/general"}
+          onClick={() => handleTabClick("/administration/general")}
+        />
+        <Tab
+          title="Orthanc"
+          active={location.pathname === "/administration/general/orthanc"}
+          onClick={() => handleTabClick("/administration/general/orthanc")}
+        />
+      </Tabs>
+      <div className="mt-4 mb-4">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RedisCard
+                redisData={{
+                  address: data.redisAddress,
+                  port: Number(data.redisPort),
+                  //password: data.redisPassword,
+                }}
+              />
+            }
+          />
+          <Route
+            path="orthanc"
+            element={
+              <OrthancSettingsCard
+                orthancData={{
+                  address: data.orthancAddress,
+                  port: Number(data.orthancPort),
+                  password: data.orthancPassword,
+                  username: data.orthancUsername,
+                }}
+              />
+            }
+          />
+        </Routes>
+      </div>
+    </div>
+  );
 };
 
 export default General;
