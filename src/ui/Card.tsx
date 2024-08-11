@@ -34,6 +34,7 @@ type CardFooterProps = {
 const colorClasses: Record<Colors, string> = {
   almond: "bg-almond",
   primary: "bg-primary",
+  transparent : "bg-transparent",
   primaryHover: "hover:bg-primary-hover",
   secondary: "bg-secondary",
   secondaryHover: "hover:bg-secondary-hover",

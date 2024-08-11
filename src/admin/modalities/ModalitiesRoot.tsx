@@ -71,7 +71,7 @@ const ModalitiesRoot: React.FC = () => {
                 color={Colors.primary}
                 title={'Manage Modalities'}
             />
-            <CardBody className="space-x-4 bg-almond">
+            <CardBody color={Colors.almond} className="space-x-4">
                 <div className="flex flex-col items-center">
                     <div className="w-full mt-6 mb-8">
                         <ModalitiesTable
@@ -82,7 +82,7 @@ const ModalitiesRoot: React.FC = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
+            <CardFooter color={Colors.light} className="flex justify-center">
                 {!showNewAetCard && (
                     <Button
                         color={Colors.success}

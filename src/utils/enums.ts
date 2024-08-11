@@ -22,4 +22,5 @@ export enum Colors {
     successHover = 'success-hover',
     sucessLight = 'sucess-light',
     white = 'white',
+    transparent = 'transparent'
 }
