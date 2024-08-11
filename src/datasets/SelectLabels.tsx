@@ -4,13 +4,8 @@ import Select, { ActionMeta, MultiValue } from "react-select";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { getLabelsByRoleName } from "../services";
-import { useCustomQuery } from "../utils";
+import { Option, useCustomQuery } from "../utils";
 import { Spinner } from "../ui";
-
-type OptionType = {
-  value: string;
-  label: string;
-};
 
 interface SelectLabelsProps {
   onChange: (labels: string[]) => void;
@@ -22,7 +17,7 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
   closeMenuOnSelect = true,
 }) => {
   const [selectedLabels, setSelectedLabels] =
-    useState<MultiValue<OptionType> | null>(null);
+    useState<MultiValue<Option> | null>(null);
 
   const roleName = useSelector(
     (state: RootState) => state.user.role?.name || ""
@@ -43,12 +38,13 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
         }));
         return formattedOptions;
       },
+      enabled : roleName != null
     }
   );
 
   const handleChange = (
-    options: MultiValue<OptionType>,
-    _actionMeta: ActionMeta<OptionType>
+    options: MultiValue<Option>,
+    _actionMeta: ActionMeta<Option>
   ) => {
     setSelectedLabels(options);
   };

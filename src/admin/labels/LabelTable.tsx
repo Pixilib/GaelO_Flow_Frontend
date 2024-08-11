@@ -16,6 +16,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
   data = [],
   onDeleteLabel,
 }) => {
+  console.log(data)
   const rows = useMemo(() => data, [data]);
 
   const columns = useMemo(() => {

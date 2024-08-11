@@ -6,7 +6,7 @@ export const getLabels = (): Promise<Label[]> => {
         .get(`/api/labels`)
         .then(response => {
             const data = response.data
-            return data.map((label :any) => ({name : label.Name}))
+            return data.map((label :string) => ({name : label}))
         })
         .catch(error => {
             if (error.response) {
