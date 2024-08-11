@@ -7,10 +7,19 @@ export const getJobs = (): Promise<OrthancJob[]> => {
     .then((response) => {
       const data = response.data;
       return data.map((job: any) => ({
-        id : job.ID,
+        id: job.ID,
         type: job.Type,
         progress: job.Progress,
         state: job.State,
+        completionTime: job.CompletionTime,
+        content: job.Content,
+        creationTime: job.CreationTime,
+        effectiveRuntime: job.EffectiveRuntime,
+        errorCode: job.ErrorCode,
+        errorDescription: job.ErrorDescription,
+        errorDetails: job.ErrorDetails,
+        priority: job.Priority,
+        timestamp: job.Timestamp,
       }));
     })
     .catch(function (error) {
@@ -37,12 +46,21 @@ export const getJobById = (id: string): Promise<OrthancJob> => {
   return axios
     .get(`/api/jobs/${id}`)
     .then((response) => {
-      const data = response.data;
+      const job = response.data;
       return {
-        id : data.ID,
-        type: data.Type,
-        progress: data.Progress,
-        state: data.State,
+        id: job.ID,
+        type: job.Type,
+        progress: job.Progress,
+        state: job.State,
+        completionTime: job.CompletionTime,
+        content: job.Content,
+        creationTime: job.CreationTime,
+        effectiveRuntime: job.EffectiveRuntime,
+        errorCode: job.ErrorCode,
+        errorDescription: job.ErrorDescription,
+        errorDetails: job.ErrorDetails,
+        priority: job.Priority,
+        timestamp: job.Timestamp,
       };
     })
     .catch(function (error) {

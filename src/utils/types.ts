@@ -92,7 +92,15 @@ export type OrthancJob = {
   type: string;
   progress: number;
   state: StateJob | string;
-  //TODO: AJOUTER LES PROPIETE MANQUANTE ET UPDATER LES SERVICE API POUR LES FILL
+  completionTime :string;
+  content : Record<string,any>
+  creationTime : string;
+  effectiveRuntime :number;
+  errorCode :number
+  errorDescription :string;
+  errorDetails : string;
+  priority : number;
+  timestamp :string;
 };
 
 export type Role = {
@@ -143,6 +151,7 @@ export type Modality = {
 };
 
 export type ModalityExtended = {
+  name : string;
   aet: string;
   allowEcho: boolean;
   allowEventReport: boolean;

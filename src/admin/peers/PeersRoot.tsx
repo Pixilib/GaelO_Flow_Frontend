@@ -64,13 +64,13 @@ const PeersRoot: React.FC = () => {
 
   return (
     <Card>
-            <CardHeader
-                className="flex items-center justify-center rounded-t-lg text-bg-light"
-                color={Colors.primary}
-                title={'Manage Peers'}
-            />
-            <CardBody className="space-x-4 bg-almond">
-            <div className="flex flex-col items-center">
+      <CardHeader
+        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        color={Colors.primary}
+        title={"Manage Peers"}
+      />
+      <CardBody className="space-x-4 bg-almond">
+        <div className="flex flex-col items-center">
           <div className="w-full mt-6 mb-8">
             <PeersTable
               peerData={peers || []}
@@ -82,15 +82,14 @@ const PeersRoot: React.FC = () => {
               }
             />
           </div>
-          
         </div>
       </CardBody>
-      <CardFooter className="border-t-2 shadow-inner  border-indigo- bg-light">
-      {!showNewPeerCard && (
-            <Button color={Colors.success} onClick={handleNewPeerClick}>
-              <MoreIcon className="mr-3" size={24} /> New Peer
-            </Button>
-          )}
+      <CardFooter className="border-t-2 shadow-inner border-indigo bg-light flex justify-center">
+        {!showNewPeerCard && (
+          <Button color={Colors.success} onClick={handleNewPeerClick}>
+            <MoreIcon className="mr-3" size={24} /> New Peer
+          </Button>
+        )}
         {showNewPeerCard && (
           <NewPeerCard
             onClose={handleCloseNewPeerCard}

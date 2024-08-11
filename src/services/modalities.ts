@@ -33,7 +33,8 @@ export const getModalities = (): Promise<ModalityExtended[]> => {
     .get("/api/modalities?expand")
     .then((response) => {
       const data = response.data;
-      return data.map((modality: Record<string, any>) => ({
+      return Object.entries(data).map(([name, modality]: any) => ({
+        name : name,
         aet: modality.AET,
         allowEcho: modality.AllowEcho,
         allowEventReport: modality.AllowEventReport,
