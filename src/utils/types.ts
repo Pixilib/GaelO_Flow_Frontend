@@ -143,6 +143,7 @@ export type Modality = {
 };
 
 export type ModalityExtended = {
+  name : string;
   aet: string;
   allowEcho: boolean;
   allowEventReport: boolean;

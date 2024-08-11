@@ -18,6 +18,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
   onDeleteAet,
   onEchoAet,
 }) => {
+  
   const columns: ColumnDef<Modality>[] = [
     {
       accessorKey: "name",

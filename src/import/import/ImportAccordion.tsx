@@ -4,23 +4,23 @@ import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
 
 interface ImportAccordionProps {
-    title: string;
     studiesData: any[];
     seriesData: any[];
     selectedStudyInstanceUID: string | null;
     onStudyClick: (studyInstanceUID: string) => void;
 }
 
-const ImportAccordion: React.FC<ImportAccordionProps> = ({ title, studiesData, seriesData, selectedStudyInstanceUID, onStudyClick }) => {
+const ImportAccordion: React.FC<ImportAccordionProps> = ({ studiesData, seriesData, selectedStudyInstanceUID, onStudyClick }) => {
     return (
         <Accordion
             summary={
                 <div className="flex items-center justify-between w-full cursor-pointer lg:gap-x-10">
-                    <span className="text-sm font-medium text-primary lg:text-lg">{title}</span>
+                    <span className="text-sm font-medium text-primary lg:text-lg">Patients</span>
                 </div>
             }
             variant="primary"
             className="w-full rounded-2xl"
+            defaultOpen={true}
         >
             <div className="flex flex-col gap-4 lg:flex-row lg:gap-8">
                 <div className="flex-1">

@@ -24,10 +24,9 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     ['modalities'],
     () => getModalities(),
     {
-      select: (response) =>
-        Object.entries(response).map(([name, aet]) => ({
-          value: name,
-          label: aet.aet,
+      select: (response) => response.map((modality) => ({
+          value: modality.aet,
+          label: modality.aet,
         })),
     }
   );
