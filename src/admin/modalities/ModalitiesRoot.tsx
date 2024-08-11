@@ -23,10 +23,10 @@ const ModalitiesRoot: React.FC = () => {
             select: (response) =>
                 Object.entries(response).map(([name, aet]) => ({
                     name: name,
-                    aet: aet.AET,
-                    host: aet.Host,
-                    port: aet.Port,
-                    manufacturer: aet.Manufacturer,
+                    aet: aet.aet,
+                    host: aet.host,
+                    port: aet.port,
+                    manufacturer: aet.manufacturer,
                 })),
         }
     );

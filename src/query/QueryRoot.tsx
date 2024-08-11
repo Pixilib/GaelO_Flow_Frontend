@@ -27,7 +27,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
       select: (response) =>
         Object.entries(response).map(([name, aet]) => ({
           value: name,
-          label: aet.AET,
+          label: aet.aet,
         })),
     }
   );

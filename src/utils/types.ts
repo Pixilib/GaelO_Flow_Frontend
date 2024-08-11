@@ -142,24 +142,23 @@ export type Modality = {
   manufacturer: string;
 };
 
-//TODO : camelCase
 export type ModalityExtended = {
-  AET: string;
-  AllowEcho: boolean;
-  AllowEventReport: boolean;
-  AllowFind: boolean;
-  AllowFindWorklist: boolean;
-  AllowGet: boolean;
-  AllowMove: boolean;
-  AllowNAction: boolean;
-  AllowStore: boolean;
-  AllowTranscoding: boolean;
-  Host: string;
-  LocalAet: string;
-  Manufacturer: string;
-  Port: number;
-  Timeout: number;
-  UseDicomTls: boolean;
+  aet: string;
+  allowEcho: boolean;
+  allowEventReport: boolean;
+  allowFind: boolean;
+  allowFindWorklist: boolean;
+  allowGet: boolean;
+  allowMove: boolean;
+  allowNAction: boolean;
+  allowStore: boolean;
+  allowTranscoding: boolean;
+  host: string;
+  localAet: string;
+  manufacturer: string;
+  port: number;
+  timeout: number;
+  useDicomTls: boolean;
 };
 
 export type Label = {
