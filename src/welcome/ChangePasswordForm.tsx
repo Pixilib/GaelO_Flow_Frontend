@@ -7,7 +7,6 @@ import { useCustomMutation } from "../utils/reactQuery";
 import { getQueryParams } from "../utils/queryParams";
 import { useCustomToast } from "../utils/toastify";
 import { Colors } from "../utils/enums";
-import { ChangePasswordPayload } from "../utils/types";
 
 import { Button } from "../ui";
 import { ChevronRight } from "./../assets";
@@ -20,12 +19,12 @@ const ChangePasswordForm = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
   const { token, userId } = getQueryParams();
-  const changePasswordMutation = useCustomMutation<any, ChangePasswordPayload>(
+  const changePasswordMutation = useCustomMutation<void>(
     () => changePassword(newPassword, confirmPassword, token, Number(userId)),
     [],
     {
-      onSuccess: (responseData) => {
-        const successMessage = responseData || "Password changed successfully.";
+      onSuccess: () => {
+        const successMessage = "Password changed successfully.";
         toastSuccess(successMessage);
         navigate("/");
       },

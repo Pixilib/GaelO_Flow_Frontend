@@ -5,11 +5,10 @@ import {
   Oauth2Config,
   useCustomToast,
   useCustomQuery,
-  useCustomMutation,
-  Colors,
+  useCustomMutation
 } from "../../../utils";
 
-import { Button, Spinner } from "../../../ui";
+import { Spinner } from "../../../ui";
 import Oauth2Table from "./OauthTable";
 import CreateOauth from "./CreateOauth";
 import { useConfirm } from "../../../services/ConfirmContextProvider";
@@ -39,11 +38,11 @@ const Oauth = () => {
     const confirmContent = (
       <div className="italic">
       Are you sure you want to delete this provider: 
-      <span className="text-xl not-italic font-bold text-primary"> {provider.Name} ?</span> 
+      <span className="text-xl not-italic font-bold text-primary"> {provider.name} ?</span> 
     </div>
     );
     if(await confirm({ content: confirmContent })) {
-      deleteMutation.mutate(provider.Name);
+      deleteMutation.mutate(provider.name);
     }
   }
   

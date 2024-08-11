@@ -37,18 +37,18 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
     useEffect(() => {
         if (user) {
             // Pre-fill form when editing
-            setFirstName(user.Firstname);
-            setLastName(user.Lastname);
-            setEmail(user.Email);
+            setFirstName(user.firstname);
+            setLastName(user.lastname);
+            setEmail(user.email);
             if (user && rolesOptions) {
-                setSelectedRole({ value: user.RoleName, label: user.RoleName } || "");
+                setSelectedRole({ value: user.roleName, label: user.roleName } || "");
             }
         }
     }, [JSON.stringify(user), JSON.stringify(rolesOptions)]);
 
 
     const userUpdateMutation = useCustomMutation<void, UserUpdatePayload>(
-        (payload) => updateUser((user.Id), payload),
+        (payload) => updateUser((user.id), payload),
         [["users"]],
         {
             onSuccess: () => {
@@ -69,10 +69,10 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
             return;
         }
         const payload: UserUpdatePayload = {
-            Firstname: firstName,
-            Lastname: lastName,
-            Email: email,
-            RoleName: selectedRole.value,
+            firstname: firstName,
+            lastname: lastName,
+            email: email,
+            roleName: selectedRole.value,
         };
         userUpdateMutation.mutate(payload);
     }

@@ -69,11 +69,11 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
       return;
     }
     const payload: UserPayload = {
-      Firstname: firstName,
-      Lastname: lastName,
-      Email: email,
-      RoleName: selectedRole.value,
-      Password: password,
+      firstname: firstName,
+      lastname: lastName,
+      email: email,
+      roleName: selectedRole.value,
+      password: password,
     };
     userMutation.mutate(payload);
   };
@@ -144,7 +144,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
           <SelectInput
             options={rolesOptions ?? []}
             placeholder="Select a Rôle"
-            onChange={(event) => setSelectedRole({ value: event.value, label: event.value })}
+            onChange={(option) => setSelectedRole({ value: option.value, label: option.value })}
             value={selectedRole}
           />
         </label>

@@ -110,31 +110,21 @@ export type Role = {
   readAll: boolean;
 };
 
-//TODO : camelCase
 export type User = {
-  Id: number;
-  Firstname: string;
-  Lastname: string;
-  Email: string;
-  RoleName: Role["name"];
-  Role: Role;
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  roleName: Role["name"];
+  role: Role;
 };
 
-export type UserPayload = Omit<User, "Id" | "Role"> & { Password: string };
+export type UserPayload = Omit<User, "id" | "role"> & { password: string };
 export type UserUpdatePayload = Partial<UserPayload>;
-
 
 export type SignInResponse = {
   accessToken: string;
   userId: number;
-};
-
-//TODO : camelCase
-export type ChangePasswordPayload = {
-  NewPassword: string;
-  ConfirmationPassword: string;
-  Token: string;
-  UserId: number;
 };
 
 export type Peer = {
@@ -177,15 +167,14 @@ export type Label = {
 };
 
 // Oauth2
-//TODO : camelCase
 export type Oauth2Config = {
-  Name: string;
-  Provider: string;
-  AuthorizationUrl: string;
-  ClientId: string;
+  name: string;
+  provider: string;
+  authorizationUrl: string;
+  clientId: string;
 };
-//Query
 
+//Query
 type QueryStudy = {
   PatientName?: string;
   PatientID?: string;
@@ -281,6 +270,7 @@ export type StudyMainDicomTags = {
   studyInstanceUID: string;
   studyTime: string | null;
 };
+
 export type Series = {
   expectedNumberOfInstances: number | null;
   id: string;
@@ -322,6 +312,7 @@ export type OrthancResponse = {
   id: string;
   path: string;
 };
+
 export type Study = {
   id: string;
   isStable: boolean;

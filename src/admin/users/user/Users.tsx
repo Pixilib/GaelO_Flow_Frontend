@@ -3,9 +3,8 @@ import { deleteUser, getUsers } from "../../../services/users";
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
 import { useCustomToast } from "../../../utils/toastify";
-import { User } from "../../../utils/types";
-import { Colors } from "../../../utils/enums";
-import { Button, Spinner } from "../../../ui";
+import { User } from "../../../utils/types"
+import { Spinner } from "../../../ui";
 import UsersTable from "./UsersTable";
 import CreateUserForm from "./CreateUserForm";
 import EditUserForm from "./EditUserForm";
@@ -47,11 +46,11 @@ const Users = ({ className, isCreating, setIsCreating }: UsersProps) => {
     const confirmContent = (
       <div className="italic">
         Are you sure you want to delete this user:
-        <span className="text-xl not-italic font-bold text-primary"> {user.Firstname} {user.Lastname} ?</span>
+        <span className="text-xl not-italic font-bold text-primary"> {user.firstname} {user.lastname} ?</span>
       </div>
     );
     if (await confirm({ content: confirmContent })) {
-      deleteMutation.mutate(user.Id);
+      deleteMutation.mutate(user.id);
     }
   };
 
