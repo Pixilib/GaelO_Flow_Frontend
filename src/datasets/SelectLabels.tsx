@@ -65,7 +65,11 @@ const customStyles = {
     ':hover': {
       backgroundColor: "#025D57",
     },
-  }),
+    // Centrage
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+}),
 };
 
 interface SelectLabelsProps {

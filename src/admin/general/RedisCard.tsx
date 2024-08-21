@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ColumnDef } from '@tanstack/react-table';
-import { Table} from '../../ui/';
+import { Table } from '../../ui/';
 import { Colors } from '../../utils/enums';
 import { Badge } from '../../ui';
 
@@ -29,15 +29,16 @@ const RedisCard: React.FC<RedisCardProps> = ({ redisData }) => {
     ];
 
     return (
-        <>
-                <Table 
-                    columns={columns}
-                    data={[redisData]}
-                    className="bg-gray-100"
-                    headerTextSize='xs'
-                    headerColor={Colors.white}
-                />
-        </>
+        <div className="mx-6 mt-6">
+            <Table 
+                columns={columns}
+                data={[redisData]}
+                className="bg-gray-100"
+                headerTextSize='xs'
+                headerColor={Colors.white}
+            />
+            <div className="h-16"></div>
+        </div>
     );
 };
 
