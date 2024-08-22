@@ -38,7 +38,7 @@ const Welcome = () => {
           {getImage()}
         </div>
         <div className="flex items-center justify-center w-1/2 bg-white shadow-xl rounded-l-3xl">
-          <div className="w-full max-w-md p-8">
+          <div className="w-full max-w-md p-4"> {/* Reduced padding */}
             <Routes>
               <Route path="/*" element={<SignInForm />} />
               <Route path="/change-password" element={<ChangePasswordForm />} />
@@ -47,7 +47,7 @@ const Welcome = () => {
               <Route path="sign-up" element={<SignUpForm />} />
             </Routes>
 
-            <hr className="my-8 mt-20 border-primary" />
+            <hr className="w-full my-8 mt-20 border-primary" /> {/* Extended width */}
             <div className="flex justify-between mx-auto text-center text-balance">
               {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
                 <span onClick={() => navigate("/sign-up")} className={classLink}>
