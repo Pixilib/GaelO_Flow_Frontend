@@ -47,9 +47,9 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
             columns={columns}
             data={studies}
             enableColumnFilters={true}
-            headerColor={Colors.almond}
+            headerColor={Colors.white}
             headerTextSize="xxs"
-            className="text-[10px]"
+            className="text-xs bg-gray-100"
             onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}
             enableRowSelection={true}

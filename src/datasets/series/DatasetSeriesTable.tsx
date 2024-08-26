@@ -45,9 +45,9 @@ const DatasetSeriesTable: React.FC<DatasetSeriesTableProps> = ({ series, onActio
         <Table
             columns={columns}
             data={rows ?? []}
-            headerColor={Colors.almond}
+            headerColor={Colors.white}
             headerTextSize="xs"
-            className="text-xs"
+            className="text-xs bg-gray-100"
         />
     );
 };
