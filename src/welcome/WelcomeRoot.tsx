@@ -37,7 +37,7 @@ const Welcome = () => {
           />
           {getImage()}
         </div>
-        <div className="flex items-center justify-center w-1/2 bg-white shadow-xl rounded-l-3xl">
+        <div className="flex items-center justify-center w-1/2 bg-white shadow-xl ">
           <div className="w-full max-w-md p-4"> {/* Reduced padding */}
             <Routes>
               <Route path="/*" element={<SignInForm />} />

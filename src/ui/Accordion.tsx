@@ -31,18 +31,18 @@ const Accordion: React.FC<AccordionProps> = ({
             "cursor-pointer flex justify-between items-center p-4 bg-blue-100 hover:bg-blue-200",
           content: "p-4 bg-blue-50",
         };
-      case "primary":
-        return {
-          container: `border border-light-gray ${rounded} my-2 shadow-md`,
-          summary: `cursor-pointer flex justify-between items-center p-4 bg-white hover:bg-grayCustom ${rounded}`,
-          content: `p-4 bg-light-gray ${isOpen ? "rounded-b-2xl" : ""}`,
-        };
+        case "primary":
+          return {
+            container: `border border-light-gray hover:text-white  ${rounded} my-2 shadow-md`,
+            summary: `cursor-pointer flex justify-between items-center p-4 bg-white hover:bg-primary-active ${rounded}`,
+            content: `p-4 bg-light-gray ${isOpen ? "rounded-b-2xl" : ""}`,
+          };
       case "default":
       default:
         return {
           container: "border border-gray-300 rounded-lg my-2 shadow-md",
           summary:
-            "cursor-pointer flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200",
+            "cursor-pointer flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-00",
           content: "p-4 bg-white",
         };
     }

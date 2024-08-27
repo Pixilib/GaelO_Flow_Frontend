@@ -65,11 +65,11 @@ const customStyles = {
     ':hover': {
       backgroundColor: "#025D57",
     },
-    // Centrage
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-}),
+    // // Centrage
+    // display: "flex",
+    // alignItems: "center",
+    // justifyContent: "center",
+  }),
 };
 
 interface SelectLabelsProps {
@@ -102,7 +102,7 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
         }));
         return formattedOptions;
       },
-      enabled : roleName != null
+      enabled: roleName != null
     }
   );
 

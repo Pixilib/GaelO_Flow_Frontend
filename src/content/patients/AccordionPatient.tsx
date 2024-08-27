@@ -60,6 +60,7 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onPatientE
     const handleStudySelected = (studyId: string) => {
         setSelectedStudyId(studyId);
     };
+
     return (
         <>
             {isModalOpen && (
@@ -72,10 +73,10 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onPatientE
             )}
             <Accordion
                 summary={
-                    <div className="flex items-center justify-between w-full lg:gap-x-10">
-                        <span className="text-sm font-medium text-primary lg:text-lg">Patient ID: {patient.patientId}</span>
-                        <span className="text-sm">Name: {patient.patientName}</span>
-                        <span className="text-sm">Nb of Studies: {patient.getStudies().length}</span>
+                    <div className="flex items-center justify-between w-full lg:gap-x-10 group hover:bg-primary-active">
+                        <span className="text-sm font-medium text-primary lg:text-lg group-hover:text-white">Patient ID: {patient.patientId}</span>
+                        <span className="text-sm group-hover:text-white">Name: {patient.patientName}</span>
+                        <span className="text-sm group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
                         <div className="flex space-x-7">
                             <EditButton onClick={() => setIsModalOpen(true)} />
                             <DeleteButton onClick={handleDeletePatient} />
@@ -83,7 +84,7 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onPatientE
                     </div>
                 }
                 variant="primary"
-                className="w-full rounded-2xl"
+                className="w-full rounded-2xl group"
             >
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                     <div className={`${!selectedStudyId ? 'lg:col-span-2' : ''}`}>
@@ -108,5 +109,3 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onPatientE
 };
 
 export default AccordionPatient;
-
-
