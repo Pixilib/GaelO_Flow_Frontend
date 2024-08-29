@@ -25,7 +25,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     () => getModalities(),
     {
       select: (response) => response.map((modality) => ({
-          value: modality.aet,
+          value: modality.name,
           label: modality.aet,
         })),
     }

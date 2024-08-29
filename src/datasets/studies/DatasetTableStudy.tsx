@@ -1,26 +1,29 @@
 import React, { useMemo } from "react";
-
 import { ColumnDef } from "@tanstack/react-table";
-import { StudyMainDicomTags } from "../../utils/types";
 import { Colors } from "../../utils";
-
 import { Table } from "../../ui";
 import StudyActions from "./DatasetStudyActions";
-
-type StudyWithId = StudyMainDicomTags & { id: string }
+import Study from "../../model/Study";
 
 type StudyTableProps = {
-    studies: StudyWithId[];
+    studies: Study[];
     onRowClick: (studyId: string) => void;
     onActionClick: (action: string, studyId: string) => void;
+    selectedStudyId: string | null;
 };
 
 const DatasetTableStudy: React.FC<StudyTableProps> = ({
     studies,
     onRowClick,
     onActionClick,
+    selectedStudyId,
 }) => {
-    const columns: ColumnDef<StudyWithId>[] = useMemo(() => [
+
+    const data = useMemo(() => {
+        return studies.map(study => study.toJSON())
+    }, [studies]);
+
+    const columns: ColumnDef<any>[] = useMemo(() => [
         {
             accessorKey: "accessionNumber",
             header: "Accession Number",
@@ -42,17 +45,26 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
         },
     ], [onActionClick]);
 
+    const getRowClasses = (row: any) => {
+        const isSelected = row.original.id === selectedStudyId;
+        return isSelected
+            ? 'bg-primary hover:cursor-pointer'
+            : 'hover:bg-indigo-100 hover:cursor-pointer';
+    };
+
+
     return (
         <Table
             columns={columns}
-            data={studies}
+            data={data}
             enableColumnFilters={true}
-            headerColor={Colors.almond}
-            headerTextSize="xxs"
-            className="text-[10px]"
+            headerColor={Colors.white}
             onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}
             enableRowSelection={true}
+            headerTextSize='xs'
+            className="text-xs bg-gray-100"
+            getRowClasses={getRowClasses} 
         />
     );
 };

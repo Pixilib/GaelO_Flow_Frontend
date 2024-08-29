@@ -52,7 +52,7 @@ export const SignInForm = () => {
       );
     },
     onError: () => {
-      toastError("Error in creadentials");
+      toastError("Error in credentials");
     },
   });
 
@@ -62,65 +62,74 @@ export const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
-      <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
-        {t("titleSignInForm")}
-      </h1>
-      <p className="mb-12 text-lg text-center text-dark">
-        Please Log in to your Account
-      </p>
-      <div className="w-2/3 mt-20 text-dark">
-        <Input
-          label="Email:"
-          svgLeft={<User />}
-          bordered
-          type="email"
-          placeholder="Enter your username"
-          value={email}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setEmail(event.target.value);
-          }}
-          autoComplete="on"
-          required
-        />
+    <div className="relative flex items-center justify-center">
+      {/* Background square */}
+      <div className="absolute h-[40vh] w-[30vh] sm:h-[45vh] sm:w-[35vh] md:h-[40vh] md:w-[40vh] lg:h-[55vh] lg:w-[45vh] xl:h-[60vh] xl:w-[50vh] bg-gradient-to-r from-indigo-500 to-[#926874] shadow-2xl transform rounded-3xl rotate-6 z-0"></div>
+      
+      <div className="relative w-full px-10 bg-white shadow-lg py-14 rounded-3xl">
+        <form onSubmit={handleSubmit} className="relative z-10 flex flex-col items-center w-full">
+          <h1 className="mb-4 text-4xl font-semibold text-center text-dark">
+            {t("titleSignInForm")} 
+          </h1>
+          <p className="mb-10 text-lg text-center text-dark">
+            Please Log in to your Account
+          </p>
+          <div className="w-2/3 mt-10 text-dark">
+            <Input
+              label="Email:"
+              svgLeft={<User />}
+              bordered
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                setEmail(event.target.value);
+              }}
+              autoComplete="on"
+              required
+            />
 
-        <div className="w-full mt-12 text-dark">
-          <Input
-            label="Password:"
-            svgLeft={<PasswordKeyOn />}
-            bordered
-            placeholder="Enter your password"
-            value={password}
-            type={showPassword ? "text" : "password"}
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setPassword(event.target.value);
-            }}
-            svgRight={
-              <ToggleEye onToggle={() => setShowPassword(!showPassword)} />
-            }
-            required
-          />
-        </div>
-      </div>
-      <div className="mt-3 text-xs text-right">
-        <span
-          className="inline-block cursor-pointer hover:text-indigo-800 hover:underline"
-          onClick={() => navigate("/lost-password")}
-        >
-          Forgot Password ?
-        </span>
-      </div>
+            <div className="w-full mt-12 text-dark">
+              <Input
+                label="Password:"
+                svgLeft={<PasswordKeyOn />}
+                bordered
+                placeholder="Enter your password"
+                value={password}
+                type={showPassword ? "text" : "password"}
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                  setPassword(event.target.value);
+                }}
+                svgRight={
+                  <ToggleEye onToggle={() => setShowPassword(!showPassword)} />
+                }
+                required
+              />
+            </div>
+          </div>
 
-      <div className="flex justify-center mt-12">
-        <Button
-          color={Colors.primary}
-          type="submit"
-          disabled={email.length === 0 || password.length === 0}
-        >
-          Connect
-          <ChevronRight />
-        </Button>
+          <div className="mt-3 text-xs text-right">
+            <span
+              className="inline-block cursor-pointer hover:text-indigo-800 hover:underline"
+              onClick={() => navigate("/lost-password")}
+            >
+              Forgot Password?
+            </span>
+          </div>
+
+          <div className="flex justify-center w-full mt-12">
+            <Button
+              color={Colors.primary}
+              type="submit"
+              disabled={email.length === 0 || password.length === 0}
+              className="w-full"
+            >
+              Connect
+              <ChevronRight />
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };

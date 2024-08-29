@@ -84,8 +84,8 @@ const ModalitiesRoot: React.FC = () => {
         title={"Manage Modalities"}
       />
       <CardBody color={Colors.almond} className="space-x-4">
-        <div className="flex flex-col items-center">
-          <div className="w-full mt-6 mb-8">
+        <div className="flex flex-col items-center w-full mt-6 mb-8">
+          <div className="">
             <ModalitiesTable
               aetData={aets}
               onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}

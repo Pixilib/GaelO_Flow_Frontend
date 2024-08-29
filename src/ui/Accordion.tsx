@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 type AccordionProps = {
-  summary: React.ReactNode;
+  header: React.ReactNode;
   children: React.ReactNode;
   className?: string;
   defaultOpen?: boolean;
@@ -9,7 +9,7 @@ type AccordionProps = {
 };
 
 const Accordion: React.FC<AccordionProps> = ({
-  summary,
+  header,
   children,
   variant = "default",
   defaultOpen = false,
@@ -20,46 +20,66 @@ const Accordion: React.FC<AccordionProps> = ({
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  const rounded = `{ ${isOpen ? "rounded-t-2xl" : "rounded-2xl"} }`;
+
 
   const getVariantClasses = () => {
     switch (variant) {
       case "secondary":
         return {
-          container: "border border-blue-300 rounded-lg my-2",
-          summary:
-            "cursor-pointer flex justify-between items-center p-4 bg-blue-100 hover:bg-blue-200",
-          content: "p-4 bg-blue-50",
+          container: "border-blue-300 ",
         };
       case "primary":
         return {
-          container: `border border-light-gray ${rounded} my-2 shadow-md`,
-          summary: `cursor-pointer flex justify-between items-center p-4 bg-white hover:bg-grayCustom ${rounded}`,
-          content: `p-4 bg-light-gray ${isOpen ? "rounded-b-2xl" : ""}`,
+          container: `border-light-gray bg-primary text-white`,
         };
       case "default":
       default:
         return {
-          container: "border border-gray-300 rounded-lg my-2 shadow-md",
-          summary:
-            "cursor-pointer flex justify-between items-center p-4 bg-gray-100 hover:bg-gray-200",
-          content: "p-4 bg-white",
+          container: "border-gray-300 bg-white",
         };
     }
   };
 
-  const classes = getVariantClasses();
 
   return (
     <div
-      className={`transition-all duration-300 ease-in-out ${classes.container} ${className}`}
+      className={`transition-all duration-300 ease-in-out my-2 border rounded-lg shadow-md space-y-2 ${getVariantClasses().container} ${className}`}
     >
-      <div className={`${classes.summary}`} onClick={handleToggle}>
-        {summary}
+      <div onClick={handleToggle}>
+        {header}
       </div>
-      {isOpen && <div className={`${classes.content}`}>{children}</div>}
+      {isOpen && <div>{children}</div>}
     </div>
   );
 };
 
+type AccordionHeaderProps = {
+  children?: React.ReactNode;
+  variant?: string
+  className? : string
+}
+const AccordionHeader = ({ children, className="", variant="default" }: AccordionHeaderProps) => {
+
+  const getVariantClasses = () => {
+    switch (variant) {
+      case "secondary":
+        return "cursor-pointer flex justify-between items-center p-4 bg-secondary text-white"
+      case "primary":
+        return "cursor-pointer flex justify-between items-center p-4 bg-primary-active text-white"
+      case "default":
+      default:
+        return "cursor-pointer flex justify-between items-center p-4 bg-gray-100"
+    };
+  }
+
+
+  return (
+    <div className={"rounded-lg shadow-md " + getVariantClasses() + " "+ className} >
+      {children}
+    </div>
+  )
+
+}
+
 export default Accordion;
+export { AccordionHeader };
