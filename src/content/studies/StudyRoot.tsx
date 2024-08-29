@@ -3,6 +3,7 @@ import { useCustomMutation } from '../../utils/reactQuery';
 import { deleteStudy } from '../../services/orthanc';
 import StudyTable from './StudyTable';
 import EditStudy from './EditStudy';
+// import PreviewStudy from './PreviewStudy';
 import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import Patient from '../../model/Patient';
@@ -13,9 +14,9 @@ type StudyRootProps = {
     onStudySelected?: (studyId: string) => void;
 }
 
-const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudySelected}) => {
+const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudySelected }) => {
     const [editingStudy, setEditingStudy] = useState<string | null>(null);
-   
+
     const { confirm } = useConfirm();
     const { toastSuccess, toastError } = useCustomToast();
 
@@ -33,11 +34,11 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                 onStudyUpdated();
             },
             onError: (error: any) => {
-                toastError('Failed to delete study: ' + error); 
+                toastError('Failed to delete study: ' + error);
             },
         }
     );
-   
+
     const handleRowClick = (studyId: string) => {
         onStudySelected && onStudySelected(studyId);
     }
@@ -49,7 +50,7 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                 <span className="text-xl not-italic font-bold text-primary">{studyId} ?</span>
             </div>
         );
-        if (await confirm({content: confirmContent})) {
+        if (await confirm({ content: confirmContent })) {
             mutateDeleteStudy({ id: studyId });
         }
     };
@@ -62,9 +63,12 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
             case 'delete':
                 handleDeleteStudy(studyId);
                 break;
+            case 'preview':
+                // handlePreviewStudy(studyId);
+                break;
             default:
                 break;
-            }
+        }
     };
 
 
@@ -87,6 +91,13 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                     show={!!editingStudy}
                 />
             )}
+            {/* {previewStudy && (
+                <PreviewStudy
+                    studyId={previewStudy.id}
+                    onClose={() => setPreviewStudy(null)}
+                    show={!!previewStudy}
+                />
+            )} */}
         </div>
     );
 };

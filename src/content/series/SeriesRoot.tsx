@@ -8,6 +8,7 @@ import { getSeriesOfStudy, deleteSeries } from '../../services/orthanc';
 import { Series } from '../../utils/types';
 import SeriesTable from './SeriesTable';
 import EditSeries from './EditSeries';
+import PreviewSeries from './PreviewSeries';
 import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import { Spinner } from '../../ui';
@@ -19,6 +20,7 @@ interface SeriesRootProps {
 
 const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
   const [editingSeries, setEditingSeries] = useState<Series | null>(null);
+  const [previewSeries, setPreviewSeries] = useState<Series | null>(null);
 
   const { confirm } = useConfirm();
   const { toastSuccess, toastError } = useCustomToast();
@@ -51,6 +53,10 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
     setEditingSeries(series);
   };
 
+  const handlePreviewSeries = (series: Series) => {
+    setPreviewSeries(series);
+  }
+
   const handleDeleteSeries = async (seriesId: string) => {
     const confirmContent = (
       <div className="italic">
@@ -71,6 +77,9 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
         break;
       case 'delete':
         handleDeleteSeries(series.id);
+        break;
+      case 'preview':
+        handlePreviewSeries(series);
         break;
       default:
         console.log(`Unhandled action: ${action}`);
@@ -102,6 +111,13 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
           onClose={() => setEditingSeries(null)}
           show={!!editingSeries}
         />
+      )}
+      {previewSeries && (
+        <PreviewSeries
+          seriesId={previewSeries.id}
+          onClose={() => setPreviewSeries(null)}
+          show={!!previewSeries}
+          />
       )}
     </div>
   );

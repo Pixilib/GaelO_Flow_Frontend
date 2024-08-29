@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type AccordionProps = {
     summary: React.ReactNode;
     children: React.ReactNode;
     className?: string;
     variant?: 'default' | 'primary' | 'secondary';
+    onOpenChange? : (open : boolean)=> void
 };
 
 const Accordion: React.FC<AccordionProps> = ({ summary, children, variant = 'default', className="" }) => {
     const [isOpen, setIsOpen] = useState(false);
+
+    // , onOpenChange = () => void
+
+    // useEffect(()=>{
+    //     onOpenChange(isOpen)
+    // }, [isOpen])
 
     const handleToggle = () => {
         setIsOpen(!isOpen);

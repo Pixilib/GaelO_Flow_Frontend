@@ -1,6 +1,6 @@
 // SeriesActions.tsx
 import React from 'react';
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { Series } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
 
@@ -22,6 +22,12 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
             icon: <FaTrash />,
             color: 'red',
             action: () => onActionClick('delete', series)
+        },
+        {
+            label: 'Preview Series',
+            icon: <FaEye />,
+            color: 'green',
+            action: () => onActionClick('preview', series),
         },
     ];
 
