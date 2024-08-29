@@ -1,10 +1,7 @@
 import React from 'react';
 
-import { StudyMainDicomTags } from "../../utils/types";
-
-import { Button } from '../../ui';
-import { Colors } from '../../utils';
 import DropdownButton from '../../ui/menu/DropDownButton';
+import Study from '../../model/Study';
 
 interface DropdownOption {
     label: string;
@@ -27,12 +24,12 @@ const options: DropdownOption[] = [
     }
 ];
 
-type DataSetStudyActionsProps = {
-    study: StudyMainDicomTags & { id: string };
-    onActionClick: (action: string, studyId: string) => void;
-};
+type DatasetStudyActionsProps = {
+    study: Study,
+    onActionClick: (actionType: string, studyId: string) => void
+}
 
-const DatasetStudyActions: React.FC<DataSetStudyActionsProps> = ({ study, onActionClick }) => {
+const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps) => {
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
     };
@@ -48,12 +45,6 @@ const DatasetStudyActions: React.FC<DataSetStudyActionsProps> = ({ study, onActi
 
     return (
         <div onClick={handleClick}>
-            <Button color={Colors.primary} onClick={() => handleDropdownAction("View in OHIF")}>
-                View in OHIF
-            </Button>
-            <Button color={Colors.primary} onClick={() => handleDropdownAction("View in Stone")}>
-                View in Stone
-            </Button>
             <DropdownButton
                 row={study}
                 options={dropdownOptions}

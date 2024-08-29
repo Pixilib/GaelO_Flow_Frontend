@@ -16,7 +16,7 @@ type SearchFormProps = {
 const SearchForm: React.FC<SearchFormProps> = ({
   aets = [],
   labelsData = [],
-  onLabelChange = () => {},
+  onLabelChange = () => { },
   onSubmit,
   withAets
 }: SearchFormProps) => {
@@ -27,15 +27,14 @@ const SearchForm: React.FC<SearchFormProps> = ({
   const [accessionNumber, setAccessionNumber] = useState<string>("");
   const [studyDescription, setStudyDescription] = useState<string>("");
   const [aetsInput, setAetsInput] = useState<Option | null>(null);
-  const [dataPreset, setDataPreset] = useState<Option[]>([]);
+  const [dataPreset, setDataPreset] = useState<Option | null>(null);
   const [modalities, setModalities] = useState<string[]>([]);
   const [dateFrom, setDateFrom] = useState<string>("");
   const [dateTo, setDateTo] = useState<string>("");
   const [labels, setLabels] = useState<Option[]>([]);
 
   const dataPresetOptions: Option[] = [
-    { value: null, label: "None" },
-    { value: 0, label: "Today" },
+    { value: 0.01, label: "Today" },
     { value: 1, label: "Yesterday" },
     { value: 7, label: "Last Week" },
     { value: 31, label: "Last Month" },
@@ -45,16 +44,16 @@ const SearchForm: React.FC<SearchFormProps> = ({
 
   const handleDataFromChange = (value: string) => {
     setDateFrom(value);
-    setDataPreset([{ value: null, label: "None" }]);
+    setDataPreset({ value: null, label: "None" });
   };
 
   const handleDataToChange = (value: string) => {
     setDateTo(value);
-    setDataPreset([{ value: null, label: "None" }]);
+    setDataPreset({ value: null, label: "None" });
   };
 
-  const handleChangeDataPreset = (selectedOption: Option) => {
-    setDataPreset([selectedOption]);
+  const handleChangeDataPreset = (selectedOption: Option | null) => {
+    setDataPreset(selectedOption);
     if (selectedOption && selectedOption.value !== null) {
       const days = selectedOption.value as number;
       const date = moment().subtract(days, 'days').format('YYYY-MM-DD');
@@ -74,7 +73,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
     onLabelChange(labels.map(label => label.value));
   }, [labels]);
 
-  const isDateDisabled = dataPreset.length > 0 && dataPreset[0].value !== null;
+  const isDateDisabled = dataPreset?.value != null;
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -102,8 +101,8 @@ const SearchForm: React.FC<SearchFormProps> = ({
         AccessionNb: accessionNumber,
       }
     };
-   
-    
+
+
     if (withAets && aets.length > 0) {
       const aet = aetsInput?.value;
       if (!aet) {
@@ -170,9 +169,11 @@ const SearchForm: React.FC<SearchFormProps> = ({
           />
           <SelectInput
             placeholder="Search by data preset"
+            value={dataPreset?.value}
             options={dataPresetOptions}
             aria-label="Data Preset"
-            onChange={(options: Option) => handleChangeDataPreset(options)}
+            isClearable
+            onChange={(options: Option | null) => handleChangeDataPreset(options)}
           />
         </div>
         {!withAets && labelsData?.length > 0 && (
@@ -233,6 +234,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
               align="left"
             />
             <SelectInput
+              value={aetsInput?.value}
               options={aets}
               placeholder="Search by AET"
               aria-label="AET"

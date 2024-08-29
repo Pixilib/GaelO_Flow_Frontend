@@ -209,6 +209,7 @@ export type QueryPayload = {
 
 export type FindPayload = QueryPayload & {
   Labels: string[];
+  LabelsConstraint : string
 };
 
 export type ExtendedQueryPayload = {
@@ -278,6 +279,26 @@ export type StudyMainDicomTags = {
   studyInstanceUID: string;
   studyTime: string | null;
 };
+
+export type Instances = {
+  fileSize : number
+  fileUuid : string
+  id : string
+  indexInSeries : number
+  labels : string[]
+  mainDicomTags : {
+    acquisitionNumber : string|null
+    imageComments : string|null
+    imageOrientationPatient: string|null
+    imagePositionPatient : string|null
+    instanceCreationDate :string|null
+    instanceCreationTime :string|null
+    instanceNumber : string|null
+    sopInstanceUID : string|null
+  }
+  parentSeries :string
+  type :string
+}
 
 export type Series = {
   expectedNumberOfInstances: number | null;

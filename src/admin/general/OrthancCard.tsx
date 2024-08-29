@@ -7,6 +7,7 @@ import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from 
 import { Colors } from '../../utils/enums';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, updateVerbosity } from '../../services/orthanc';
+
 type OrthancData = {
     username: string;
     address: string;
@@ -77,13 +78,13 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     ];
 
     const handleSelectChange = (selectedOption: any) => {
-        mutateVerbosity({ level: selectedOption.value })
+        mutateVerbosity({ level: selectedOption.value });
     };
 
     const orthancInfoHandler = () => {
         refetchOrthancSystem();
         setShowModal(true);
-    }
+    };
 
     const selectOptions = [
         { value: 'trace', label: 'Trace' },
@@ -93,15 +94,17 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
 
     return (
         <>
-            <Table
-                columns={columns}
-                data={[orthancData]}
-                className="bg-gray-100"
-                headerTextSize='xs'
-                headerColor={Colors.white}
-            />
+            <div className="mx-6 mt-6 mb-6">
+                <Table
+                    columns={columns}
+                    data={[orthancData]}
+                    className="bg-gray-100"
+                    headerTextSize='xs'
+                    headerColor={Colors.white}
+                />
+            </div>
             <CardFooter
-                className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light gap-3">
+                className="flex justify-center gap-3 border-t-2 border-indigo-100 shadow-inner bg-light">
                 <Button
                     color={Colors.warning}
                     onClick={reset}>

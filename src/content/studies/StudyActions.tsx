@@ -1,6 +1,6 @@
 // StudyActions.tsx
 import React from 'react';
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { StudyMainDicomTags } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
 
@@ -22,6 +22,12 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             icon: <FaTrash />,
             color: 'red',
             action: () => onActionClick('delete', study.id)
+        },
+        {
+            label: 'Preview Study',
+            icon: <FaEye />,
+            color: 'green',
+            action: () => onActionClick('preview', study.id)
         },
     ];
 

@@ -48,19 +48,19 @@ const EditSeries: React.FC<EditSeriesProps> = ({ series, onEditSeries, onClose, 
             toastError(`Failed to update series ${series.id}`);
         }
     };
-    
+
     return (
 
         <Modal show={show} size='xl'>
             <Modal.Header onClose={onClose} > Edit series </Modal.Header>
             <Modal.Body>
-                <SeriesEditForm 
-                  data={series} 
-                  onSubmit={handleSubmit} 
-                  onCancel={onClose}
-                  jobId={jobId ?? undefined}
-                  onJobCompleted={handleJobCompletion}
-                  />
+                <SeriesEditForm
+                    data={series}
+                    onSubmit={handleSubmit}
+                    onCancel={onClose}
+                    jobId={jobId ?? undefined}
+                    onJobCompleted={handleJobCompletion}
+                />
             </Modal.Body>
         </Modal>
     );

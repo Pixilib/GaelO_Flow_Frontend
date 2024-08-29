@@ -1,7 +1,6 @@
 import React from 'react';
 import { Series } from '../../utils';
-import { Button } from '../../ui';
-import { Colors } from '../../utils';
+
 import DropdownButton from '../../ui/menu/DropDownButton';
 
 interface DropdownOption {
@@ -37,35 +36,22 @@ type DataSetSeriesActionsProps = {
     onActionClick: (action: string, seriesId: string) => void
 };
 
-const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onActionClick }) => {
+const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) => {
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
     };
 
-    const handleDropdownAction = (actionLabel: string) => {
-        onActionClick(actionLabel, series.id);
-    };
-
-    const dropdownOptions: DropdownOption[] = options.map(option => ({
-        ...option,
-        action: () => handleDropdownAction(option.label),
-    }));
 
     return (
         <div onClick={handleClick}>
-            <Button color={Colors.primary} onClick={() => handleDropdownAction("View in OHIF")}>
-                View in OHIF
-            </Button>
-            <Button color={Colors.primary} onClick={() => handleDropdownAction("View in Stone")}>
-                View in Stone
-            </Button>
             <DropdownButton
-                row={series}
-                options={dropdownOptions}
+                options={options}
                 buttonText="Actions"
+                row={series}
             />
         </div>
     );
 };
+
 
 export default DatasetSeriesActions;

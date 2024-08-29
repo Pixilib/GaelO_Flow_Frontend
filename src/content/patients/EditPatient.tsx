@@ -1,9 +1,3 @@
-/**
- * Component to edit a patient with a modal and a form
- * @name EditPatient
- */
-
-
 import React from "react";
 import Patient from "../../model/Patient";
 import { modifyPatient } from "../../services";
@@ -27,7 +21,7 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
         [['jobs']],
         {
             onSuccess: async () => {
-                toastSuccess(`Patient updated successfully `);
+                toastSuccess(`Patient updated successfully`);
                 onEditPatient(patient);
                 onClose();
             },
@@ -43,9 +37,9 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
 
     return (
         <Modal show={show} size='xl'>
-            <Modal.Header onClose={onClose} > Edit patient </Modal.Header>
+            <Modal.Header onClose={onClose}> Edit patient </Modal.Header>
             <Modal.Body>
-                <PatientEditForm data={patient} onSubmit={handleSubmit} onCancel={onClose} />
+                <PatientEditForm patient={patient} onSubmit={handleSubmit} onCancel={onClose} />
             </Modal.Body>
         </Modal>
     );

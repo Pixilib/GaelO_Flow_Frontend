@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
-import { Button, Spinner } from "../../ui";
+import { Button, Input, Spinner } from "../../ui";
 import Patient from "../../model/Patient";
 import { PatientMainDicomTags, PatientPayload } from "../../utils/types";
 import CheckBox from "../../ui/Checkbox";
@@ -7,21 +7,21 @@ import { Colors } from "../../utils";
 import InputWithDelete from "../../ui/InputWithDelete";
 
 type PatientEditFormProps = {
-    data: Patient;
+    patient: Patient;
     onSubmit: (data: { id: string; payload: PatientPayload }) => void;
     onCancel: () => void;
 };
 
-    const PatientEditForm = ({ data, onSubmit, onCancel }: PatientEditFormProps) => {
-        const [patientId] = useState<string>(data?.id ?? "");
-        const [patientName, setPatientName] = useState<string | null>(data?.patientName ?? null);
-        const [patientBirthDate, setPatientBirthDate] = useState<string | null>(data?.patientBirthDate ?? null);
-        const [patientSex, setPatientSex] = useState<string | null>(data?.patientSex ?? null);
+    const PatientEditForm = ({ patient, onSubmit, onCancel }: PatientEditFormProps) => {
+        const [patientId, setPatientId] = useState<string>(patient?.patientId ?? "");
+        const [patientName, setPatientName] = useState<string | null>(patient?.patientName ?? null);
+        const [patientBirthDate, setPatientBirthDate] = useState<string | null>(patient?.patientBirthDate ?? null);
+        const [patientSex, setPatientSex] = useState<string | null>(patient?.patientSex ?? null);
         const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
         const [keepSource, setKeepSource] = useState<boolean>(false);
         const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
         
-        if (!data) return <Spinner/>;
+        if (!patient) return <Spinner/>;
     
         const handleFieldRemoval = (field: string, checked: boolean) => {
             setFieldsToRemove((prev) =>
@@ -33,9 +33,9 @@ type PatientEditFormProps = {
             event.preventDefault();
             const replace: Partial<PatientMainDicomTags> = {};
     
-            if (patientName !== data.patientName) replace.patientName = patientName;
-            if (patientBirthDate !== data.patientBirthDate) replace.patientBirthDate = patientBirthDate;
-            if (patientSex !== data.patientSex) replace.patientSex = patientSex;
+            if (patientName !== patient.patientName) replace.patientName = patientName;
+            if (patientBirthDate !== patient.patientBirthDate) replace.patientBirthDate = patientBirthDate;
+            if (patientSex !== patient.patientSex) replace.patientSex = patientSex;
     
             const payload: PatientPayload = {
                 replace,
@@ -52,14 +52,13 @@ type PatientEditFormProps = {
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-                <InputWithDelete
+                <Input
                     label="Patient ID"
-                    value={data.id}
-                    onChange={() => {}} // Readonly field
+                    value={patientId}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPatientId(e.target.value)}
                     onRemove={handleFieldRemoval}
                     fieldName="patientId"
                     fieldsToRemove={fieldsToRemove}
-                    readOnly={true}
                 />
                 <InputWithDelete
                     label="Patient Name"
@@ -80,7 +79,6 @@ type PatientEditFormProps = {
                     onRemove={handleFieldRemoval}
                     fieldName="patientBirthDate"
                     fieldsToRemove={fieldsToRemove}
-                    required={true}
                     placeholder="Enter patient birth date"
                 />
                 <InputWithDelete
@@ -90,7 +88,6 @@ type PatientEditFormProps = {
                     onRemove={handleFieldRemoval}
                     fieldName="patientSex"
                     fieldsToRemove={fieldsToRemove}
-                    required={true}
                     placeholder="Enter patient sex"
                 />
             </div>
