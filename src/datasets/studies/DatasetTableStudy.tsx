@@ -1,16 +1,15 @@
 import React, { useMemo } from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { StudyMainDicomTags } from "../../utils/types";
 import { Colors } from "../../utils";
 
 import { Table } from "../../ui";
 import StudyActions from "./DatasetStudyActions";
+import Study from "../../model/Study";
 
-type StudyWithId = StudyMainDicomTags & { id: string }
 
 type StudyTableProps = {
-    studies: StudyWithId[];
+    studies: Study[];
     onRowClick: (studyId: string) => void;
     onActionClick: (action: string, studyId: string) => void;
 };
@@ -20,7 +19,12 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
     onRowClick,
     onActionClick,
 }) => {
-    const columns: ColumnDef<StudyWithId>[] = useMemo(() => [
+
+    const data = useMemo(() => {
+        return studies.map(study => study.toJSON())
+    }, [studies.length])
+    
+    const columns: ColumnDef<any>[] = useMemo(() => [
         {
             accessorKey: "accessionNumber",
             header: "Accession Number",
@@ -45,7 +49,7 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
     return (
         <Table
             columns={columns}
-            data={studies}
+            data={data}
             enableColumnFilters={true}
             headerColor={Colors.white}
             headerTextSize="xxs"

@@ -209,6 +209,7 @@ export type QueryPayload = {
 
 export type FindPayload = QueryPayload & {
   Labels: string[];
+  LabelsConstraint : string
 };
 
 export type ExtendedQueryPayload = {

@@ -1,21 +1,48 @@
 import Card from "../ui/Card";
 import { CardHeader, CardFooter, CardBody } from "../ui/Card";
-import { Colors } from "../utils";
+import { Colors, QueryPayload, useCustomMutation, useCustomToast } from "../utils";
 import { Button } from "../ui";
 import SelectLabels from "./SelectLabels";
 import DatasetTableStudy from "./studies/DatasetTableStudy";
 import DatasetSeriesTable from "./series/DatasetSeriesTable";
-import { Series, StudyMainDicomTags } from "../utils/types";
+import { findTools } from "../services";
+import Model from "../model/Model";
+import { useState } from "react";
+import Series from "../model/Series";
+import { FindPayload } from "../utils/types";
 
-const studies: (StudyMainDicomTags & { id: string; })[] = [
-];
-
-const series: Series[] = [
-];
 
 const DatasetRoot = () => {
+    const [model, setModel] = useState<Model | null>(null);
+    const { toastError } = useCustomToast();
+
+    const studies = model?.getPatients().map(patient => patient.getStudies()).flat() ?? []
+    const series  : Series[] = [];
+
+
+    const { mutateAsync: mutateToolsFind } = useCustomMutation(
+        ({ queryPayload }) => findTools(queryPayload),
+        [],
+        {
+            onSuccess: (data) => {
+                const newModel = new Model();
+                data.forEach(studyData => newModel.addStudy(studyData));
+                setModel(newModel);
+            },
+            onError: (error: any) => {
+                toastError("Failed to load data: " + error);
+            }
+        }
+    );
+
     const handleSelectChange = (selectedLabels: any) => {
-        console.log("Selected options:", selectedLabels);
+        let queryPayload: FindPayload = {
+            Level: 'Study',
+            Labels : selectedLabels,
+            LabelsConstraint : "Any",
+            Query : {}
+          };
+        mutateToolsFind({queryPayload})
     };
 
     const handleButtonClick = () => {

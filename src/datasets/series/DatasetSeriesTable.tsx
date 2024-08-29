@@ -2,23 +2,22 @@ import React, { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Table } from "../../ui";
-import { Colors, Series as SeriesType } from "../../utils";
+import { Colors } from "../../utils";
 import DatasetSeriesActions from "./DatasetSeriesActions";
+import Series from "../../model/Series";
 
 type DatasetSeriesTableProps = {
-    series: SeriesType[];
+    series: Series[];
     onActionClick: (action: string, seriesId: string) => void;
 };
 
 const DatasetSeriesTable: React.FC<DatasetSeriesTableProps> = ({ series, onActionClick }) => {
-    const rows = useMemo(
-        () => series.map((s) => ({
-            ...s,
-            ...s.mainDicomTags,
-            instancesLength: s.instances?.length ?? 0,
-        })),
-        [series]
-    );
+
+    const data = useMemo(() => {
+        return series.map((series) => series.toJSON())
+    },
+    [series.length]
+)
 
     const columns: ColumnDef<any>[] = useMemo(
         () => [
@@ -52,7 +51,7 @@ const DatasetSeriesTable: React.FC<DatasetSeriesTableProps> = ({ series, onActio
     return (
         <Table
             columns={columns}
-            data={rows ?? []}
+            data={data ?? []}
             headerColor={Colors.white}
             headerTextSize="xs"
             className="text-xs bg-gray-100"
