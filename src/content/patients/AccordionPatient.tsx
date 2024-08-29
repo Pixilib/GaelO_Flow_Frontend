@@ -1,96 +1,61 @@
 import React, { useState } from "react";
 
-import { deletePatient, useConfirm } from "../../services";
-import { useCustomMutation, useCustomToast } from "../../utils";
 import { Accordion, DeleteButton, EditButton } from "../../ui";
 
 import Patient from "../../model/Patient";
 
-import EditPatient from "./EditPatient";
+
 import StudyRoot from "../studies/StudyRoot";
 import SeriesRoot from "../series/SeriesRoot";
+import { AccordionHeader } from "../../ui/Accordion";
 
 type AccordionPatientProps = {
     patient: Patient;
-    onPatientEdited: () => void;
-    onPatientDeleted: () => void;
+    onEditPatient: (patient :Patient) => void;
+    onDeletePatient: (patient :Patient) => void;
 };
 
-const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onPatientEdited, onPatientDeleted }) => {
-    const { toastSuccess, toastError } = useCustomToast();
-    const { confirm } = useConfirm();
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
+const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient }) => {
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
-
-    const { mutateAsync: mutateDeletePatient } = useCustomMutation<void, string>(
-        (patientId) => deletePatient(patientId),
-        [['jobs']],
-        {
-            onSuccess: async () => {
-                toastSuccess("Patient deleted successfully");
-                onPatientDeleted();
-            },
-            onError: (error: any) => {
-                toastError(`Failed to delete patient ${error}`);
-            }
-        }
-    );
-    const handleDeletePatient = async () => {
-        const confirmContent = (
-            <div className="italic">
-                Are you sure you want to delete this patient:
-                <span className="text-xl not-italic font-bold text-primary">{patient.id} {patient.patientName} ?</span>
-            </div>
-        );
-        if (await confirm({ content: confirmContent })) {
-            mutateDeletePatient(patient.id);
-        }
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
-    const handlePatientUpdate = () => {
-        onPatientEdited();
-        closeModal();
-    };
 
     const handleStudySelected = (studyId: string) => {
         setSelectedStudyId(studyId);
     };
 
+    const handleEditClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
+        event.stopPropagation();
+        onEditPatient(patient); 
+    }
+
+    const handleDeleteClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
+        event.stopPropagation();
+        onDeletePatient(patient); 
+    }
+
     return (
         <>
-            {isModalOpen && (
-                <EditPatient
-                    patient={patient}
-                    onEditPatient={handlePatientUpdate}
-                    onClose={closeModal}
-                    show={isModalOpen}
-                />
-            )}
             <Accordion
-                summary={
-                    <div className="flex items-center justify-between w-full lg:gap-x-10 group hover:bg-primary-active">
-                        <span className="text-sm font-medium text-primary lg:text-lg group-hover:text-white">Patient ID: {patient.patientId}</span>
-                        <span className="text-sm group-hover:text-white">Name: {patient.patientName}</span>
-                        <span className="text-sm group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
-                        <div className="flex space-x-7">
-                            <EditButton onClick={() => setIsModalOpen(true)} />
-                            <DeleteButton onClick={handleDeletePatient} />
+                header={
+                    <AccordionHeader className="hover:bg-primary-active group">
+                        <div className="grid items-center justify-between w-full grid-cols-4 lg:gap-x-10 ">
+                            <span className="text-sm font-medium text-primary group-hover:text-white lg:text-lg">Patient ID: {patient.patientId}</span>
+                            <span className="text-sm group-hover:text-white ">Name: {patient.patientName}</span>
+                            <span className="text-sm group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
+                            <div className="flex justify-end w-full space-x-7">
+                                <EditButton onClick={handleEditClick} />
+                                <DeleteButton onClick={handleDeleteClick} />
+                            </div>
                         </div>
-                    </div>
+                    </AccordionHeader>
+
                 }
-                variant="primary"
-                className="w-full rounded-2xl group"
+                className="w-full rounded-2xl"
             >
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                     <div className={`${!selectedStudyId ? 'lg:col-span-2' : ''}`}>
                         <StudyRoot
                             patient={patient}
-                            onStudyUpdated={onPatientEdited}
+                            onStudyUpdated={() => onEditPatient(patient)}
                             onStudySelected={handleStudySelected}
                         />
                     </div>
@@ -98,7 +63,6 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onPatientE
                         <div>
                             <SeriesRoot
                                 studyId={selectedStudyId}
-                                onSeriesUpdate={onPatientEdited}
                             />
                         </div>
                     )}

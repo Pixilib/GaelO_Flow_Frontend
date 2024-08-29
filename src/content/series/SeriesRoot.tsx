@@ -14,10 +14,9 @@ import { Spinner } from '../../ui';
 
 interface SeriesRootProps {
   studyId: string;
-  onSeriesUpdate: () => void;
 }
 
-const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
+const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   const [editingSeries, setEditingSeries] = useState<Series | null>(null);
 
   const { confirm } = useConfirm();
@@ -39,7 +38,6 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
       onSuccess: (_, variables) => {
         toastSuccess('Series deleted successfully' + variables);
         refetchSeries();
-        onSeriesUpdate();
       },
       onError: (error: any) => {
         toastError(`Failed to delete series ${error}`);
@@ -79,7 +77,6 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId, onSeriesUpdate }) => {
 
   const handleSeriesUpdate = () => {
     refetchSeries();
-    onSeriesUpdate();
   };
 
   if (isLoading) {

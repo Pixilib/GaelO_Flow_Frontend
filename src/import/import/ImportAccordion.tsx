@@ -13,7 +13,7 @@ interface ImportAccordionProps {
 const ImportAccordion: React.FC<ImportAccordionProps> = ({ studiesData, seriesData, selectedStudyInstanceUID, onStudyClick }) => {
     return (
         <Accordion
-            summary={
+            header={
                 <div className="flex items-center justify-between w-full cursor-pointer lg:gap-x-10">
                     <span className="text-sm font-medium text-primary lg:text-lg">Patients</span>
                 </div>

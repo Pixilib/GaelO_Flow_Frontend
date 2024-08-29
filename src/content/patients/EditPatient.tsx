@@ -11,10 +11,9 @@ type EditPatientProps = {
     onEditPatient: (patient: Patient) => void;
     onClose: () => void;
     show: boolean;
-    className?: string;
 }
 
-const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClose, show, className }) => {
+const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClose, show }) => {
     const { toastSuccess, toastError } = useCustomToast();
 
     const { mutateAsync: mutatePatient } = useCustomMutation<OrthancResponse, { id: string, payload: PatientPayload }>(
@@ -37,7 +36,7 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
     };
 
     return (
-        <Modal show={show} size='xl' className={className}> {/* Application de la classe */}
+        <Modal show={show} size='xl'>
             <Modal.Header onClose={onClose}> Edit patient </Modal.Header>
             <Modal.Body>
                 <PatientEditForm data={patient} onSubmit={handleSubmit} onCancel={onClose} />
