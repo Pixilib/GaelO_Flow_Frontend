@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Patient, Study, Series, PatientPayload, OrthancResponse, StudyPayload, SeriesPayload } from '../utils/types';
+import { Patient, Study, Series, PatientPayload, OrthancResponse, StudyPayload, SeriesPayload, Instances } from '../utils/types';
 
 export const getOrthancSystem = (): Promise<unknown> => {
   return axios.get("/api/system").then(response => response.data)
@@ -178,6 +178,39 @@ export const getSeriesOfStudy = (studyId: string): Promise<Series[]> => {
     });
 };
 
+export const getInstancesOfSeries = (seriesId: string) => {
+  return axios.get(`/api/series/${seriesId}/instances`)
+    .then((response: any): Instances[] => {
+      const mappedData = response.data.map((data: any) : Instances => ({
+        fileSize: data.FileSize,
+        fileUuid: data.FileUuid,
+        id: data.ID,
+        indexInSeries: data.IndexInSeries,
+        labels: data.Labels,
+        mainDicomTags: {
+          acquisitionNumber: data.MainDicomTags.AcquisitionNumber,
+          imageComments: data.MainDicomTags.ImageComments,
+          imageOrientationPatient: data.MainDicomTags.ImageOrientationPatient,
+          imagePositionPatient: data.MainDicomTags.ImagePositionPatient,
+          instanceCreationDate: data.MainDicomTags.InstanceCreationDate,
+          instanceCreationTime: data.MainDicomTags.InstanceCreationTime,
+          instanceNumber: data.MainDicomTags.InstanceNumber,
+          sopInstanceUID: data.MainDicomTags.SopInstanceUID
+        },
+        parentSeries: data.ParentSeries,
+        type: data.Type
+      }));
+      return mappedData;
+    }).catch((error: any) => {
+      if (error.response) {
+        console.error("Error response:", error.response);
+        throw error.response;
+      }
+      console.error("Error:", error);
+      throw error;
+    });
+}
+
 
 export const modifyPatient = (patientId: string, patient: PatientPayload): Promise<OrthancResponse> => {
   const patientPayloadUpdate = {
@@ -244,7 +277,7 @@ export const modifySeries = (seriesId: string, series: SeriesPayload): Promise<O
   const seriesPayloadUpdate = {
     Replace: {
       ImageOrientationPatient: series.replace.imageOrientationPatient,
-      Manufacturer : series.replace.manufacturer,
+      Manufacturer: series.replace.manufacturer,
       Modality: series.replace.modality,
       OperatorsName: series.replace.operatorsName,
       ProtocolName: series.replace.protocolName,
@@ -277,7 +310,7 @@ export const modifySeries = (seriesId: string, series: SeriesPayload): Promise<O
       throw error;
     });
 }
-      
+
 export const getPatient = (patientId: string): Promise<Patient> => {
   return axios.get("/api/patients/" + patientId)
     .then((response): Patient => {

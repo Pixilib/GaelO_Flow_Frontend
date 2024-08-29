@@ -35,3 +35,14 @@ export const createDicom = (content: string[], tags: object = {}, parentOrthancI
             console.error(error)
         })
 }
+
+
+export const previewInstance = (instanceUID : string) : Promise<any>=> {
+
+    return axios.get('/api/instances/'+instanceUID+'/preview',  {responseType : "blob"})
+        .then((response) => {
+            return response.data
+        }).catch(error => {
+            console.error(error)
+        })
+}
