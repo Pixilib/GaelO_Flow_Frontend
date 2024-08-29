@@ -39,7 +39,7 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
         <Modal show={show} size='xl'>
             <Modal.Header onClose={onClose}> Edit patient </Modal.Header>
             <Modal.Body>
-                <PatientEditForm data={patient} onSubmit={handleSubmit} onCancel={onClose} />
+                <PatientEditForm patient={patient} onSubmit={handleSubmit} onCancel={onClose} />
             </Modal.Body>
         </Modal>
     );
