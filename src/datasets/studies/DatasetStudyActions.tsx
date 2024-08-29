@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { Button } from '../../ui';
-import { Colors } from '../../utils';
 import DropdownButton from '../../ui/menu/DropDownButton';
 import Study from '../../model/Study';
 
@@ -47,12 +45,6 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
 
     return (
         <div onClick={handleClick}>
-            <Button color={Colors.primary} onClick={() => handleDropdownAction("View in OHIF")}>
-                View in OHIF
-            </Button>
-            <Button color={Colors.primary} onClick={() => handleDropdownAction("View in Stone")}>
-                View in Stone
-            </Button>
             <DropdownButton
                 row={study}
                 options={dropdownOptions}

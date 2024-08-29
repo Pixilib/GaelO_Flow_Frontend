@@ -53,6 +53,10 @@ class Study {
     return this.series.map((series) => series.toJSON());
   };
 
+  getAllSeriesObject = () => {
+    return this.series
+  }
+
   getSeries = (seriesId: string) => {
     return this.series.find((series) => series.id === seriesId);
   };

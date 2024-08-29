@@ -2,9 +2,8 @@ import React, { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Table } from "../../ui";
-import { Colors } from "../../utils";
+import { Colors, Series } from "../../utils";
 import DatasetSeriesActions from "./DatasetSeriesActions";
-import Series from "../../model/Series";
 
 type DatasetSeriesTableProps = {
     series: Series[];
@@ -13,28 +12,24 @@ type DatasetSeriesTableProps = {
 
 const DatasetSeriesTable: React.FC<DatasetSeriesTableProps> = ({ series, onActionClick }) => {
 
-    const data = useMemo(() => {
-        return series.map((series) => series.toJSON())
-    },
-    [series.length]
-)
+    console.log(series)
 
     const columns: ColumnDef<any>[] = useMemo(
         () => [
             {
-                accessorKey: "seriesDescription",
+                accessorKey: "mainDicomTags.seriesDescription",
                 header: "Series Description",
             },
             {
-                accessorKey: "modality",
+                accessorKey: "mainDicomTags.modality",
                 header: "Modality",
             },
             {
-                accessorKey: "seriesNumber",
+                accessorKey: "mainDicomTags.seriesNumber",
                 header: "Series Number",
             },
             {
-                accessorKey: "instancesLength",
+                accessorFn: (data) => data.instances.length,
                 header: "Instances",
             },
             {
@@ -51,9 +46,11 @@ const DatasetSeriesTable: React.FC<DatasetSeriesTableProps> = ({ series, onActio
     return (
         <Table
             columns={columns}
-            data={data ?? []}
+            data={series ?? []}
             headerColor={Colors.white}
-            headerTextSize="xs"
+            headerTextSize='xs'
+            enableColumnFilters
+            enableSorting
             className="text-xs bg-gray-100"
         />
     );

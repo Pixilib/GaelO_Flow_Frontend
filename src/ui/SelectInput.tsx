@@ -12,6 +12,7 @@ interface SelectInputProps {
   onChange: (selectedOption: OptionType | null) => void;
   placeholder?: string;
   rounded?: boolean;
+  isClearable?: boolean
 }
 
 const customStyles: StylesConfig<OptionType, boolean> = {
@@ -76,12 +77,14 @@ const SelectInput: React.FC<SelectInputProps> = ({
   onChange,
   placeholder = 'Select...',
   rounded = true,
+  isClearable = false
 }) => (
   <Select
     options={options}
     onChange={(selectedOption: any) => onChange(selectedOption)}
     placeholder={placeholder}
     styles={customStyles}
+    isClearable = {isClearable}
     value={value ? options.find(option => option.value === value) : null}
     className={`w-full ${rounded ? 'rounded-xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
     rounded={rounded} 

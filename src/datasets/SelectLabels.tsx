@@ -123,6 +123,7 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
         options={labelsOptions}
         onChange={handleChange}
         closeMenuOnSelect={closeMenuOnSelect}
+        placeholder = 'Select labels ...'
         className="basic-single"
         classNamePrefix="select"
         styles={customStyles}
