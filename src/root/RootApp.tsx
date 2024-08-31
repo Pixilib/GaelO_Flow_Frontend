@@ -13,6 +13,32 @@ import ImportCreateRoot from "../import/ImportCreateRoot";
 import ContentRoot from "../content/ContentRoot";
 import DatasetRoot from "../datasets/DatasetRoot";
 
+const titlePath: { [key: string]: string } = {
+  "/administration/general": "General",
+  "/administration/modalities": "Modalities",
+  "/administration/jobs": "Jobs",
+  "/administration/labels": "Labels",
+  "/administration/queues": "Queues",
+  "/administration/queues/retrieve": "Queues",
+  "/administration/queues/anonymize": "Queues",
+  "/administration/queues/delete": "Queues",
+  "/administration/peers": "Peers",
+  "/administration/users/users": "Users",
+  "/administration/users/roles": "Users",
+  "/administration/users/oauth2": "Users",
+  "/Orthanc Content": "Orthanc Content",
+  "/import/upload": "Import/Create Dicom",
+  "/import/create": "Import/Create Dicom",
+  "/import/import-dicom": "Import",
+  "/import/create-dicom": "Create",
+  "/query": "Query",
+  "/users": "Users",
+  "/dataset": "DataSet",
+  "/auto-retrieve": "Auto retrieve",
+  "/datasets": "Datasets",
+  "/": "Home",
+};
+
 const RootApp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,30 +52,6 @@ const RootApp = () => {
   };
 
   const title = useMemo(() => {
-    const titlePath: { [key: string]: string } = {
-      "/administration/general": "General",
-      "/administration/modalities": "Modalities",
-      "/administration/jobs": "Jobs",
-      "/administration/labels": "Labels",
-      "/administration/queues": "Queues",
-      "/administration/queues/retrieve": "Queues",
-      "/administration/queues/anonymize": "Queues",
-      "/administration/queues/delete": "Queues",
-      "/administration/peers": "Peers",
-      "/administration/users/users": "Users",
-      "/administration/users/roles": "Users",
-      "/administration/users/oauth2": "Users",
-      "/Orthanc Content": "Orthanc Content",
-      "/import": "Import/Create Dicom",
-      "/import/import-dicom": "Import",
-      "/import/create-dicom": "Create",
-      "/query": "Query",
-      "/users": "Users",
-      "/dataset": "DataSet",
-      "/auto-retrieve": "Auto retrieve",
-      "/datasets": "Datasets",
-      "/": "Home",
-    };
     return titlePath[location.pathname];
   }, [location.pathname]);
 
