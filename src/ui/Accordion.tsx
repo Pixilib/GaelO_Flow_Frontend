@@ -30,7 +30,7 @@ const Accordion: React.FC<AccordionProps> = ({
         };
       case "primary":
         return {
-          container: `border-light-gray bg-primary text-white`,
+          container: `border-light-gray bg-primary`,
         };
       case "default":
       default:

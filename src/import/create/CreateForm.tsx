@@ -41,7 +41,7 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <div className="flex items-end w-full mt-3 space-x-3">
+      <div className="flex items-end w-full mt-3 gap-3">
         <div className="flex-1">
           <Input
             label={<Label value="Tag" className="text-sm font-medium" />}
@@ -60,14 +60,16 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
             className="w-full"
           />
         </div>
-        <Button
-          color={Colors.secondary}
-          onClick={handleAddTag}
-          className="flex items-center h-10 px-4 space-x-2"
-        >
-          <AddIcon />
-          Ajouter Tag
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            color={Colors.secondary}
+            onClick={handleAddTag}
+            className="flex items-center h-10 px-4 space-x-2"
+          >
+            <AddIcon />
+            Add Tag
+          </Button>
+        </div>
       </div>
       <div className="flex justify-center mt-3">
         <Button

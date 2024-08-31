@@ -86,8 +86,8 @@ const CreateRoot: React.FC = () => {
                 </div>
             )}
 
-            <CardFooter
-                className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
+            <div
+                className="flex justify-center border-indigo-100 shadow-inner bg-light">
                 {showCreateForm ? (
                     <CreateForm
                         onClose={handleCloseForm}
@@ -104,7 +104,7 @@ const CreateRoot: React.FC = () => {
                         <span>Create Tag</span>
                     </Button>
                 )}
-            </CardFooter>
+            </div>
         </>
     );
 };
