@@ -50,13 +50,23 @@ const CreateRoot: React.FC = () => {
         setTags(prevTags => prevTags.filter(tag => tag.TagName !== tagName));
     };
 
+    const readFileAsDataURL = (file : File) => {
+        return new Promise((resolve) => {
+            var reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => {
+                resolve(reader.result)
+            }
+        })
+    }
+    
     return (
         <>
-            <div className='p-6'>
-                <CreateDrop onDrop={handleFilesUploaded} />
-            </div>
 
-            <div className="w-full space-y-3 md:flex md:space-x-3">
+
+            <div className="w-full space-y-3 md:flex md:space-x-3 p-6">
+                <CreateDrop onDrop={handleFilesUploaded} />
+
                 <div className="md:w-1/2 md:flex-1">
                     {studiesData.length > 0 && (
                         <CreateTableStudy
@@ -90,7 +100,7 @@ const CreateRoot: React.FC = () => {
                 <Button
                     color={tags.length > 0 ? Colors.primary : Colors.almond}
                 >
-                    Create Dicom
+                    Create Dicoms
                 </Button>
             </div>
         </>

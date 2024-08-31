@@ -18,7 +18,6 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
   const handleAddTag = () => {
     if (tag && value) {
       onAddTag({ TagName: tag, Value: value });
-      console.log(`Tag: ${tag}, Value: ${value}`);
       setTag('');
       setValue('');
     }
@@ -26,7 +25,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    toastSuccess('Tags envoyés avec succès');
+    toastSuccess('Tag Add');
   };
 
   return (
