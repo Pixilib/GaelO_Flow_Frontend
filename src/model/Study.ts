@@ -88,7 +88,8 @@ class Study {
       accessionNumber: this.accessionNumber,
       studyInstanceUID: this.studyInstanceUID as string,
       series: this.series.map((series) => series.toJSON()),
-      patient: this.patient?.id
+      patientId: this.patient?.id,
+      patient : this.patient?.toJSON()
     };
   };
 }
