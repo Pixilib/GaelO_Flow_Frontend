@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from '../../ui';
+import { Input, Table } from '../../ui';
 import { ColumnDef } from '@tanstack/react-table';
 import DeleteButton from '../../ui/DeleteButton';
 type TagTableProps = {
@@ -22,7 +22,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
             accessorKey: 'Value',
             header: 'Value',
             cell: ({ row }) => (
-                <input
+                <Input
                     type="text"
                     value={row.original.Value}
                     onChange={(event) => handleInputChange(row.original.TagName, 'Value', event)}
@@ -34,9 +34,12 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
             id: 'delete',
             header: 'Actions',
             cell: ({ row }) => (
-                <DeleteButton
-                    onClick={() => onDeleteTag(row.original.TagName)}
-                />
+                <div className='w-full flex justify-center'>
+                    <DeleteButton
+                        onClick={() => onDeleteTag(row.original.TagName)}
+                    />
+                </div>
+
             )
         }
     ];
@@ -48,7 +51,6 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
                 data={data}
                 className="bg-gray-100"
                 enableSorting
-                enableColumnFilters
             />
         </div>
     );

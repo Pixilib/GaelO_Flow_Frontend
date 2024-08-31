@@ -70,7 +70,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
                     size={40}
                     className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`} />
             )}
-            <p className="text-primary">{uploadComplete ? 'Upload Complete!' : 'Drag and drop files here'}</p>
+            <p className="text-primary">{uploadComplete ? numberOfLoadedFiles + ' files loaded' : 'Drag and drop files here'}</p>
             <input type="file" style={{ display: 'none' }} />
             {numberOfLoadedFiles > 0 && (
                 <ProgressBar

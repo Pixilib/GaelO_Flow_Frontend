@@ -76,7 +76,7 @@ const CreateRoot: React.FC = () => {
                 </div>
             </div>
 
-            {tags.length > 0 && (
+            {(
                 <div className="mx-6 mb-8">
                     <TagTable
                         data={tags}
