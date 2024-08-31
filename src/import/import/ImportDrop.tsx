@@ -73,7 +73,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
     });
 
     return (
-        <div className="w-full">
+        <div className='w-full p-6'>
             <div
                 {...getRootProps({ onClick: open })}
                 className={`relative flex flex-col space-y-3 items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary ${isUploading ? 'cursor-progress' : 'cursor-pointer'

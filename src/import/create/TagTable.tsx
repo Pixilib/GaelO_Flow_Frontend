@@ -2,6 +2,7 @@ import React from 'react';
 import { Input, Table } from '../../ui';
 import { ColumnDef } from '@tanstack/react-table';
 import DeleteButton from '../../ui/DeleteButton';
+import { Colors } from '../../utils';
 type TagTableProps = {
     data: { TagName: string, Value: string }[];
     onDataUpdate: (tagName: string, columnId: string, value: string) => void;
@@ -47,6 +48,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
     return (
         <div className="w-full mt-4">
             <Table
+                headerColor={Colors.warning}
                 columns={columns}
                 data={data}
                 className="bg-gray-100"

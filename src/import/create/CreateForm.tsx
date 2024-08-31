@@ -7,11 +7,10 @@ import { Colors } from "../../utils/enums";
 interface TagFormProps {
   title: string;
   className?: string;
-  onClose: () => void;
   onAddTag: (tag: { TagName: string; Value: string }) => void;
 }
 
-const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
+const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
   const { toastSuccess } = useCustomToast();
   const [tag, setTag] = useState('');
   const [value, setValue] = useState('');
@@ -30,15 +29,10 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
     toastSuccess('Tags envoyés avec succès');
   };
 
-  const isFormValid = () => {
-    return tag.trim() !== '' && value.trim() !== '';
-  };
-
   return (
     <FormCard
       className={`${className} w-full bg-light-gray`}
       title={title}
-      onClose={onClose}
       onSubmit={handleSubmit}
     >
       <div className="flex items-end w-full mt-3 gap-3">
@@ -70,21 +64,6 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
             Add Tag
           </Button>
         </div>
-      </div>
-      <div className="flex justify-center mt-3">
-        <Button
-          type="submit"
-          disabled={!isFormValid()}
-          className={`
-            ${isFormValid() ? 'bg-success' : 'bg-gray-400'}
-            text-white
-            font-medium
-            py-2
-            px-4
-            rounded
-          `}    >
-          Create Dicom
-        </Button>
       </div>
     </FormCard>
   );

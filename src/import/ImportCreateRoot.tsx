@@ -26,7 +26,7 @@ const ImportCreateRoot = () => {
                     onClick={() => handleTabClick("create")}
                 />
             </Tabs>
-            <div className="card-body">
+            <div>
                 <Routes>
                     <Route path="/" element={<ImportRoot />} />
                     <Route path="/create" element={<CreateRoot />} />

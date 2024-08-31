@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
 import { ProgressBar } from '../../ui';
+import { useDropzone } from "react-dropzone";
 
 interface CreateDropProps {
     onDrop: (files: File[]) => void;
@@ -13,10 +14,10 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
 
     const uploadComplete = numberOfLoadedFiles > 0 && numberOfLoadedFiles === numberOfProcessedFiles;
 
-    const handleDrop = useCallback(
-        async (event: React.DragEvent<HTMLDivElement>) => {
-            event.preventDefault();
-            const { files } = event.dataTransfer;
+    const { getRootProps, open } = useDropzone({
+        multiple: true,
+        onDrop: async (files : File[]) => {
+            
             if (files && files.length > 0) {
                 setNumberOfLoadedFiles(files.length);
                 setIsUploading(true);
@@ -36,8 +37,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
                 onDrop(Array.from(files));
             }
         },
-        [onDrop]
-    );
+    });
 
     const handleDragOver = useCallback(
         (event: React.DragEvent<HTMLDivElement>) => {
@@ -58,7 +58,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
     return (
         <div
             className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary rounded-lg cursor-pointer ${isUploading ? 'cursor-progress' : 'cursor-pointer'}`}
-            onDrop={handleDrop}
+            {...getRootProps({ onClick: open })}
             onDragOver={handleDragOver}
         >
             {uploadComplete ? (
