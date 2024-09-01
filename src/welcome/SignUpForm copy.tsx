@@ -41,7 +41,7 @@ export const SignUpForm = () => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col items-center w-full">
       <h1 className="mb-6 text-4xl font-semibold text-center text-dark">
-        Welcome to <span className="text-primary">Gaelo Flow</span>
+        Welcome to <span className="text-primary">GaelO Flow</span>
       </h1>
       <p className="mb-12 text-lg text-center">
         Please create your Account
