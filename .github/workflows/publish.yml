@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - dev
+      - '*'
     tags:
       - '*'
 
@@ -65,7 +66,7 @@ jobs:
           push: true
           pull: true
           tags: ${{ steps.meta.outputs.tags }}
-          
+
 permissions:
   contents: read
   packages: write
