@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
 import { IoClose } from "react-icons/io5";
 import { BsQuestionLg } from "react-icons/bs";
@@ -6,7 +6,8 @@ import { BsQuestionLg } from "react-icons/bs";
 import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui/';
 import { Colors } from '../../utils/enums';
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
-import { getOrthancSystem, getVerbosity, orthancReset, updateVerbosity } from '../../services/orthanc';
+import { getOrthancSystem, getVerbosity, orthancReset, orthancShutdown, updateVerbosity } from '../../services/orthanc';
+import { useConfirm } from '../../services';
 
 type OrthancData = {
     username: string;
@@ -19,7 +20,14 @@ type OrthancCardProps = {
     orthancData: OrthancData;
 };
 
+const selectOptions = [
+    { value: 'trace', label: 'Trace' },
+    { value: 'default', label: 'Default' },
+    { value: 'verbose', label: 'Verbose' },
+];
+
 const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
+    const {confirm} = useConfirm()
 
     const [showModal, setShowModal] = useState(false);
 
@@ -41,10 +49,19 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         []
     );
 
+    const { mutate: shutdownOrthanc } = useCustomMutation(
+        () => orthancShutdown(),
+        []
+    );
+
     const { mutate: mutateVerbosity } = useCustomMutation(
         ({ level }) => updateVerbosity(level),
         [['log-level']],
     );
+
+    const currentVerbosityOption = useMemo(()=>{
+        return selectOptions.find(option => option.value === orthancVerbosity)?.value ?? null
+    }, [orthancVerbosity])
 
     const reset = () => {
         resetOrthanc(undefined);
@@ -86,11 +103,13 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         setShowModal(true);
     };
 
-    const selectOptions = [
-        { value: 'trace', label: 'Trace' },
-        { value: 'default', label: 'Default' },
-        { value: 'verbose', label: 'Verbose' },
-    ];
+    const handleOrthancShutdown = async () => {
+        if(await confirm({ content: "Are you sure to shutdown Orthanc ?" })) {
+            shutdownOrthanc({});
+          }
+    }
+
+
 
     return (
         <>
@@ -113,7 +132,9 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         title="Restart" />
                 </Button>
                 <Button
-                    color={Colors.danger}>
+                    color={Colors.danger}
+                    onClick={handleOrthancShutdown}
+                    >
                     <IoClose
                         size="20px"
                         title="Shutdown" />
@@ -123,7 +144,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 </Button>
                 <div className="w-1/4">
                     <SelectInput
-                        value={selectOptions.find(option => option.value === orthancVerbosity)?.value ?? null}
+                        value={currentVerbosityOption}
                         onChange={handleSelectChange}
                         placeholder="Select option"
                         options={selectOptions}

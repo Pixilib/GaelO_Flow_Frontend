@@ -52,7 +52,6 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
                     value={username}
                     autoComplete="off"
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
-                    aria-label="Username"
                 />
                 <Input
                     label="Password"
@@ -61,7 +60,6 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
                     value={password}
                     autoComplete="off"
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                    aria-label="Password"
                 />
             </div>
             <div className='flex justify-center'>

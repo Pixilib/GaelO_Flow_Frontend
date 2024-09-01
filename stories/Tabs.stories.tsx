@@ -26,7 +26,7 @@ export const Default: Story = {
   args: {
     children: [
       <Tab key="1" title="Local Users" path="local" component={<Users />} />,
-      <Tab key="2" title="Rôles" path="roles" component={<RoleManagement />} />
+      <Tab key="2" title="Roles" path="roles" component={<RoleManagement />} />
     ],
     variant: 'basic',
     onTabClick: action('Navigate to'),

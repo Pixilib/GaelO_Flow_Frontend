@@ -4,32 +4,20 @@ import { ColumnDef } from '@tanstack/react-table';
 import DeleteButton from '../../ui/DeleteButton';
 import { Colors } from '../../utils';
 type TagTableProps = {
-    data: { TagName: string, Value: string }[];
-    onDataUpdate: (tagName: string, columnId: string, value: string) => void;
+    data: { name: string, value: string }[];
     onDeleteTag: (tagName: string) => void;
 };
 
-const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) => {
-    const handleInputChange = (tagName: string, columnId: string, event: React.ChangeEvent<HTMLInputElement>) => {
-        onDataUpdate(tagName, columnId, event.target.value);
-    };
+const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
 
-    const columns: ColumnDef<{ TagName: string, Value: string }>[] = [
+    const columns: ColumnDef<{ name: string, value: string }>[] = [
         {
-            accessorKey: 'TagName',
+            accessorKey: 'name',
             header: 'Tag Name',
         },
         {
-            accessorKey: 'Value',
+            accessorKey: 'value',
             header: 'Value',
-            cell: ({ row }) => (
-                <Input
-                    type="text"
-                    value={row.original.Value}
-                    onChange={(event) => handleInputChange(row.original.TagName, 'Value', event)}
-                    className="form-control"
-                />
-            )
         },
         {
             id: 'delete',
@@ -37,7 +25,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
             cell: ({ row }) => (
                 <div className='w-full flex justify-center'>
                     <DeleteButton
-                        onClick={() => onDeleteTag(row.original.TagName)}
+                        onClick={() => onDeleteTag(row.original.name)}
                     />
                 </div>
 

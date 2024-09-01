@@ -7,7 +7,7 @@ import { Colors } from "../../utils/enums";
 interface TagFormProps {
   title: string;
   className?: string;
-  onAddTag: (tag: { TagName: string; Value: string }) => void;
+  onAddTag: (tag: { name: string; value: string }) => void;
 }
 
 const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
@@ -17,7 +17,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
 
   const handleAddTag = () => {
     if (tag && value) {
-      onAddTag({ TagName: tag, Value: value });
+      onAddTag({ name: tag, value: value });
       setTag('');
       setValue('');
     }
