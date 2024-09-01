@@ -97,8 +97,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           <MenuItem
             title="Import"
             icon={<ImportIcon className="w-6 h-6" />}
-            isActive={location.pathname === "/import"}
-            onClick={() => handleItemClick("/import")}
+            isActive={location.pathname.includes("/import/")}
+            onClick={() => handleItemClick("/import/upload")}
           />
           <MenuItem
             title="Query"

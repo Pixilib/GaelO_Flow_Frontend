@@ -17,18 +17,18 @@ const ImportCreateRoot = () => {
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
                     title="Import Dicom"
-                    active={location.pathname.endsWith('/import')}
-                    onClick={() => handleTabClick("")}
+                    active={location.pathname.endsWith('/upload')}
+                    onClick={() => handleTabClick("upload")}
                 />
                 <Tab
                     title="Create Dicom"
-                    active={location.pathname.includes('/create')}
+                    active={location.pathname.endsWith('/create')}
                     onClick={() => handleTabClick("create")}
                 />
             </Tabs>
-            <div className="card-body">
+            <div>
                 <Routes>
-                    <Route path="/" element={<ImportRoot />} />
+                    <Route path="/upload" element={<ImportRoot />} />
                     <Route path="/create" element={<CreateRoot />} />
                 </Routes>
             </div>

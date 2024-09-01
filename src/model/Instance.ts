@@ -2,8 +2,8 @@ import Series from "./Series";
 
 class Instance {
   id: string;
-  sopInstanceUID: string;
-  series: Series;
+  sopInstanceUID: string|undefined;
+  series: Series|undefined;
 
   constructor(id: string) {
     this.id = id;

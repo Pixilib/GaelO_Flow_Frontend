@@ -20,12 +20,10 @@ import { getErrorMessage } from '../../../utils/error';
 import InputPassword from '../../../ui/InputPassword';
 
 type UserFormProps = {
-  title: string;
   className?: string;
-  onClose: () => void;
 };
 
-const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
+const CreateUserForm = ({ className }: UserFormProps) => {
   const { toastSuccess, toastError } = useCustomToast();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -81,8 +79,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
   return (
     <FormCard
       className={`${className} bg-light-gray`}
-      title={title}
-      onClose={onClose}
+      title={"Create user"}
       onSubmit={handleSubmit}
     >
       <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-3 lg:gap-11">
@@ -145,7 +142,7 @@ const CreateUserForm = ({ title, className, onClose }: UserFormProps) => {
             options={rolesOptions ?? []}
             placeholder="Select a Rôle"
             onChange={(option) => setSelectedRole({ value: option.value, label: option.value })}
-            value={selectedRole}
+            value={selectedRole?.value ?? null}
           />
         </label>
       </div>
