@@ -1,12 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
-
 import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
-
 import { useCustomToast, Colors, useCustomMutation, useCustomQuery, UserUpdatePayload, User, Role, Option } from "../../../utils";
 import { getRoles, updateUser } from "../../../services";
-
 import { Button, Card, CardBody, CardHeader, CloseButton, Input, Label, SelectInput } from "../../../ui";
-
 
 type UserFormProps = {
     title: string;
@@ -25,7 +21,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
 
     const { data: rolesOptions } = useCustomQuery<Role[], Option[]>(
         ["roles"],
-        getRoles,
+        () => getRoles(),
         {
             select: (roles) => roles.map((role) => ({
                 value: role.name,
@@ -72,7 +68,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
             firstname: firstName,
             lastname: lastName,
             email: email,
-            roleName: selectedRole.value,
+            roleName: selectedRole.value
         };
         userUpdateMutation.mutate(payload);
     }
@@ -130,14 +126,14 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                             autoComplete={'off'}
                         />
                         <label className="flex flex-col">
-                            <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Rôles *</span>
+                            <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Roles *</span>
                             <SelectInput
                                 options={rolesOptions ?? []}
                                 placeholder="Select a Role"
-                                onChange={(event) => {
-                                    setSelectedRole({ value: event.value, label: event.value });
+                                onChange={(option) => {
+                                    setSelectedRole(option);
                                 }}
-                                value={selectedRole}
+                                value={selectedRole?.value ?? null}
                             />
                         </label>
                     </div>

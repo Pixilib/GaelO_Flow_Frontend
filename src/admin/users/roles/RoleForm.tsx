@@ -14,34 +14,17 @@ type RoleFormProps = {
 
 const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
     const [name, setName] = useState<string>(initialData?.name || "");
-    const [importRole, setImportRole] = useState<boolean>(false);
-    const [anonymize, setAnonymize] = useState<boolean>(false);
-    const [exportRole, setExportRole] = useState<boolean>(false);
-    const [query, setQuery] = useState<boolean>(false);
-    const [autoQuery, setAutoQuery] = useState<boolean>(false);
-    const [deleteRole, setDeleteRole] = useState<boolean>(false);
-    const [admin, setAdmin] = useState<boolean>(false);
-    const [modify, setModify] = useState<boolean>(false);
-    const [cdBurner, setCdBurner] = useState<boolean>(false);
-    const [autoRouting, setAutoRouting] = useState<boolean>(false);
-    const [readAll, setReadAll] = useState<boolean>(false);
-
-    useEffect(() => {
-        if (initialData) {
-            setName(initialData.name);
-            setImportRole(initialData.import);
-            setAnonymize(initialData.anonymize);
-            setExportRole(initialData.export);
-            setQuery(initialData.query);
-            setAutoQuery(initialData.autoQuery);
-            setDeleteRole(initialData.delete);
-            setAdmin(initialData.admin);
-            setModify(initialData.modify);
-            setCdBurner(initialData.cdBurner);
-            setAutoRouting(initialData.autoRouting);
-            setReadAll(initialData.readAll);
-        }
-    }, [initialData]);
+    const [importRole, setImportRole] = useState<boolean>(initialData?.import || false);
+    const [anonymize, setAnonymize] = useState<boolean>(initialData?.anonymize || false);
+    const [exportRole, setExportRole] = useState<boolean>(initialData?.export || false);
+    const [query, setQuery] = useState<boolean>(initialData?.query || false);
+    const [autoQuery, setAutoQuery] = useState<boolean>(initialData?.autoQuery || false);
+    const [deleteRole, setDeleteRole] = useState<boolean>(initialData?.delete || false);
+    const [admin, setAdmin] = useState<boolean>(initialData?.admin || false);
+    const [modify, setModify] = useState<boolean>(initialData?.modify || false);
+    const [cdBurner, setCdBurner] = useState<boolean>(initialData?.cdBurner || false);
+    const [autoRouting, setAutoRouting] = useState<boolean>(initialData?.autoRouting || false);
+    const [readAll, setReadAll] = useState<boolean>(initialData?.readAll || false);
 
     const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -168,7 +151,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
             <div className="flex justify-center">
                 <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
                     <SubmitUser size={'1.3rem'} />
-                    <div className="">{buttonText}</div>
+                    <div>{buttonText}</div>
                 </Button>
             </div>
         </form>

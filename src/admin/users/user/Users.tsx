@@ -4,10 +4,11 @@ import { useConfirm } from "../../../services/ConfirmContextProvider";
 import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
 import { useCustomToast } from "../../../utils/toastify";
 import { User } from "../../../utils/types"
-import { Spinner } from "../../../ui";
+import { Button, Spinner } from "../../../ui";
 import UsersTable from "./UsersTable";
 import CreateUserForm from "./CreateUserForm";
 import EditUserForm from "./EditUserForm";
+import { Colors } from "../../../utils";
 
 type UsersProps = {
   className?: string;
@@ -17,6 +18,7 @@ const Users = ({ className = "" }: UsersProps) => {
   const { toastSuccess, toastError } = useCustomToast();
   const { confirm } = useConfirm();
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
 
   const { data: users, isPending: isLoadingUsers } =
     useCustomQuery<User[]>(["users"], () => getUsers(), {
@@ -64,23 +66,33 @@ const Users = ({ className = "" }: UsersProps) => {
           onDelete={deleteUserHandler}
         />
       )}
-      <div>
-       
-          <CreateUserForm
-            className="bg-gray-200"
-          />
-        
-        {userToEdit ? (
-          <EditUserForm
-            title={"Edit User"}
-            className="bg-gray-200"
-            onClose={() => {
-              setUserToEdit(null);
-            }}
-            userData={userToEdit}
-          />
-        ) : null}
-      </div>
+
+      {userToEdit ? (
+        <EditUserForm
+          title={"Edit User"}
+          className="bg-gray-200"
+          onClose={() => {
+            setUserToEdit(null);
+          }}
+          userData={userToEdit}
+        />
+      ) : null}
+
+
+      {!isCreatingUser ?
+        <div className="flex justify-center">
+          <Button
+            color={Colors.success}
+            onClick={() => setIsCreatingUser(true)}
+            className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
+          >
+            Create User
+          </Button>
+        </div>
+        :
+        <CreateUserForm onClose={() => setIsCreatingUser(null)} />
+      }
+
     </div>
   );
 };

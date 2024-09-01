@@ -3,8 +3,6 @@ import { Colors, Role, useCustomMutation, useCustomToast } from "../../../utils"
 import { Card, CardBody, CardHeader, CloseButton } from "../../../ui";
 import RoleForm from "./RoleForm";
 
-//! WIP
-
 type EditRoleProps = {
   title: string;
   className?: string;

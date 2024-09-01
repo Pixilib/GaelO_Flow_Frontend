@@ -94,7 +94,7 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
     {
       header: "Action",
       cell({ row }: { row: any }) {
-        const roleName = row.original.Name;
+        const roleName = row.original.name;
         return (
           <div className="flex justify-center gap-7">
             <EditButton onClick={() => onEdit(roleName)} />
@@ -105,7 +105,6 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
     },
   ];
   return (
-    <div className="mx-5">
       <Table
         data={data}
         columns={columns}
@@ -116,7 +115,6 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
         pinFirstColumn={true}
         pinLastColumn={true}
       />
-    </div>
   );
 };
 export default RolesTable;
