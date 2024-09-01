@@ -53,9 +53,7 @@ const UsersRoot = () => {
                 roundedBottomRight={false}
             >
                 <Routes>
-                    <Route path="/users" element={<Users isCreating={false} setIsCreating={function (value: boolean): void {
-                        throw new Error("Function not implemented.");
-                    } }  />} />
+                    <Route path="/users" element={<Users />} />
                     <Route path="/roles" element={<Roles />} />
                     <Route path="/oauth2" element={<Oauth2 />} />
                 </Routes>
@@ -75,10 +73,7 @@ const UsersRoot = () => {
                             </Button>
                         )}
                         {isCreatingUser && (
-                            <CreateUserForm
-                                title={"Create User"}
-                                onClose={() => setIsCreatingUser(false)}
-                            />
+                            <CreateUserForm />
                         )}
                     </>
                 )}

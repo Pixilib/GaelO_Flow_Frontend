@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Size = "sm" | "md" | "lg" | "xl";
 
 type BadgeProps = {

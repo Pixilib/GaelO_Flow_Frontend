@@ -29,7 +29,7 @@
   "include": [
     "src",
     "types.d.ts",
-    "stories", 
+    //"stories", 
     "vite-env.d.ts",
   ],
   "references": [
