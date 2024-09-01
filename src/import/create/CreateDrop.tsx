@@ -1,38 +1,32 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
-import { ProgressBar } from '../../ui';
 import { useDropzone } from "react-dropzone";
 import { useCustomToast } from "../../utils";
 
 interface CreateDropProps {
+    files: File[],
     onDrop: (files: File[]) => void;
 }
 
-const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
+const CreateDrop: React.FC<CreateDropProps> = ({ files, onDrop }) => {
 
-    const {toastError} = useCustomToast()
-    const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
-    const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
-
-    const uploadComplete = numberOfLoadedFiles > 0 && numberOfLoadedFiles === numberOfProcessedFiles;
+    const { toastError } = useCustomToast()
 
     const { getRootProps, open } = useDropzone({
         multiple: true,
-        onDrop: async (files : File[]) => {
+        onDrop: async (files: File[]) => {
             if (files && files.length > 0) {
-                setNumberOfLoadedFiles(files.length);
-                setNumberOfProcessedFiles(files.length);
                 onDrop(files);
             }
         },
-        onDropRejected : (_fileRejection :any)=>{
+        onDropRejected: (_fileRejection: any) => {
             toastError("File format rejected (accepts png, jpeg or pdf)")
         },
         accept: {
             'image/png': [],
             'image/jpeg': [],
-            'application/pdf' : []
-          }
+            'application/pdf': []
+        }
     });
 
     const handleDragOver = useCallback(
@@ -48,7 +42,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
             {...getRootProps({ onClick: open })}
             onDragOver={handleDragOver}
         >
-            {uploadComplete ? (
+            {files.length > 0 ? (
                 <CheckIcon
                     size={40}
                     className="text-success" />
@@ -57,12 +51,8 @@ const CreateDrop: React.FC<CreateDropProps> = ({ onDrop }) => {
                     size={40}
                     className={`text-primary`} />
             )}
-            <p className="text-primary">{uploadComplete ? numberOfLoadedFiles + ' files loaded' : 'Drag and drop image files here'}</p>
+            <p className="text-primary">{files.length > 0 ? files.length + ' files loaded' : 'Drag and drop image files here'}</p>
             <input type="file" style={{ display: 'none' }} />
-            {numberOfLoadedFiles > 0 && (
-                <ProgressBar
-                    progression={Math.round((numberOfProcessedFiles / numberOfLoadedFiles) * 100)} />
-            )}
         </div>
     );
 };
