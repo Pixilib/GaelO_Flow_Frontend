@@ -78,7 +78,7 @@ class Study {
     return this.studyInstanceUID;
   };
 
-  toJSON = () => {
+  toJSON = ()  : Record<string,any> => {
     return {
       id: this.id,
       studyDescription: this.studyDescription,
