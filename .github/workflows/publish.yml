@@ -16,7 +16,7 @@ jobs:
     steps:
     
       - name: 'Build checkout'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           
@@ -40,11 +40,18 @@ jobs:
           username: 'salimkanoun'
           password: ${{ secrets.GITHUB_TOKEN }}
     
-      - name: 'Install and Build'
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
-          registry-url: 'https://npm.pkg.github.com'
+          node-version: '20'
+          cache: 'yarn'
+        env:
+          SKIP_YARN_COREPACK_CHECK: true
+
+      - run: |
+          corepack enable
+        
+      - run: |
+          yarn set version berry
           
       - name: setup git config
         run: |
