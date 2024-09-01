@@ -12,6 +12,7 @@ type InputProps = {
   svgRight?: React.ReactNode;
   bordered?: boolean;
   roundedRight?: boolean;
+  autoComplete?: string;
   min?: number;
   max?: number;
   step?: number;
@@ -23,6 +24,7 @@ const Input = ({
   placeholder,
   label,
   type = "text",
+  autoComplete,
   min = undefined,
   max = undefined,
   step = undefined,
@@ -31,6 +33,7 @@ const Input = ({
   bordered = true,
   roundedLeft = true,
   roundedRight = true,
+
   ...props
 }: InputProps) => {
   const InputClassName =
@@ -85,6 +88,7 @@ const Input = ({
           min={min}
           max={max}
           step={step}
+          autoComplete={autoComplete}
           placeholder={placeholder}
           {...props}
         />

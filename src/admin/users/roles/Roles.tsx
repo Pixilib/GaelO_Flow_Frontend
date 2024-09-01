@@ -3,12 +3,12 @@ import { useState } from "react";
 import { deleteRole, getRoles } from '../../../services';
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 
-import { Role, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
+import { Colors, Role, useCustomMutation, useCustomQuery, useCustomToast } from "../../../utils";
 
 import RolesTable from "./RolesTable";
 import CreateRole from "./CreateRole";
 import EditRole from "./EditRole";
-import { Spinner } from "../../../ui";
+import { Button, Spinner } from "../../../ui";
 
 const Roles = () => {
     const { toastSuccess, toastError } = useCustomToast();
@@ -16,6 +16,8 @@ const Roles = () => {
 
     const [showRoleForm, setShowRoleForm] = useState<'create' | 'edit' | null>(null);
     const [roleToEdit, setRoleToEdit] = useState<Role | null>(null);
+
+    const [isCreatingRole, setIsCreatingRole] = useState(false);
 
     const { data: roles, isPending: isLoadingRoles } = useCustomQuery<Role[]>(
         ["roles"],
@@ -44,6 +46,7 @@ const Roles = () => {
 
     const handleEditRole = (roleName: string) => {
         const role = findRole(roleName);
+        console.log(roleName, role)
         setRoleToEdit(role);
         setShowRoleForm('edit');
     };
@@ -60,17 +63,14 @@ const Roles = () => {
         }
     };
 
+    if (isLoadingRoles) return <Spinner />
     return (
-        <div className="rounded-br-xl rounded-bl-xl">
-            {isLoadingRoles ? (
-                <Spinner />
-            ) : (
-                <RolesTable
-                    data={roles || []}
-                    onEdit={handleEditRole}
-                    onDelete={deleteRoleHandler}
-                />
-            )}
+        <div className="flex flex-col justify-center">
+            <RolesTable
+                data={roles || []}
+                onEdit={handleEditRole}
+                onDelete={deleteRoleHandler}
+            />
             {showRoleForm === 'create' &&
                 <CreateRole
                     title={"Create Role"}
@@ -80,10 +80,28 @@ const Roles = () => {
             }
             {showRoleForm === 'edit' &&
                 <EditRole
+                    key={roleToEdit.name}
                     title={"Edit Role"}
                     className="bg-gray-200"
                     onClose={() => { setShowRoleForm(null); setRoleToEdit(null); }}
                     role={roleToEdit || undefined}
+                />
+            }
+
+            {!isCreatingRole ?
+                <div className="w-full flex justify-center">
+                    <Button
+                        color={Colors.success}
+                        onClick={() => setIsCreatingRole(true)}
+                        className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
+                    >
+                        Create Role
+                    </Button>
+                </div>
+                :
+                <CreateRole
+                    title={"Create Role"}
+                    onClose={() => setIsCreatingRole(false)}
                 />
             }
         </div>

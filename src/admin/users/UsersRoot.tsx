@@ -1,22 +1,14 @@
-import { Tabs, Tab, Card, CardBody, CardFooter, Button } from "../../ui";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Tabs, Tab, Card, CardBody } from "../../ui";
+import { Colors } from "../../utils";
 import Roles from "./roles/Roles";
 import Users from "./user/Users";
 import Oauth2 from "./oauth/Oauth";
-import { Colors } from "../../utils";
-import { BsPersonPlusFill as CreateUser } from "react-icons/bs";
-import { useState } from "react";
-import CreateUserForm from "./user/CreateUserForm";
-import CreateRole from "./roles/CreateRole";
-import CreateOauth from "./oauth/CreateOauth";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const path = location.pathname;
-    const [isCreatingUser, setIsCreatingUser] = useState(false);
-    const [isCreatingRole, setIsCreatingRole] = useState(false);
-    const [isCreatingProvider, setIsCreatingProvider] = useState(false);
 
     const handleTabClick = (tab: string) => {
         navigate(tab);
@@ -35,7 +27,7 @@ const UsersRoot = () => {
                     onClick={() => handleTabClick("users")}
                 />
                 <Tab
-                    title="Rôles"
+                    title="Roles"
                     active={isRolesPath}
                     onClick={() => handleTabClick("roles")}
                 />
@@ -58,70 +50,6 @@ const UsersRoot = () => {
                     <Route path="/oauth2" element={<Oauth2 />} />
                 </Routes>
             </CardBody>
-            <CardFooter className="flex flex-col items-center border-t-2 shadow-inner border-indigo- bg-light">
-                {/* Footer pour Users */}
-                {isUsersPath && (
-                    <>
-                        {!isCreatingUser && (
-                            <Button
-                                color={Colors.success}
-                                onClick={() => setIsCreatingUser(true)}
-                                className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
-                            >
-                                <CreateUser size={"1.3rem"} />
-                                Create User
-                            </Button>
-                        )}
-                        {isCreatingUser && (
-                            <CreateUserForm />
-                        )}
-                    </>
-                )}
-
-                {/* Footer pour Roles */}
-                {isRolesPath && (
-                    <>
-                        {!isCreatingRole && (
-                            <Button
-                                color={Colors.success}
-                                onClick={() => setIsCreatingRole(true)}
-                                className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
-                            >
-                                <CreateUser size={"1.3rem"} />
-                                Create Role
-                            </Button>
-                        )}
-                        {isCreatingRole && (
-                            <CreateRole
-                                title={"Create Role"}
-                                onClose={() => setIsCreatingRole(false)}
-                            />
-                        )}
-                    </>
-                )}
-
-                {/* Footer pour OAuth2 */}
-                {isOauth2Path && (
-                    <>
-                        {!isCreatingProvider && (
-                            <Button
-                                color={Colors.success}
-                                onClick={() => setIsCreatingProvider(true)}
-                                className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
-                            >
-                                <CreateUser size={"1.3rem"} />
-                                Create Provider
-                            </Button>
-                        )}
-                        {isCreatingProvider && (
-                            <CreateOauth
-                                title={"Create Oauth Provider"}
-                                onClose={() => setIsCreatingProvider(false)}
-                            />
-                        )}
-                    </>
-                )}
-            </CardFooter>
         </Card>
     );
 };

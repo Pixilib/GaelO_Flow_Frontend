@@ -77,6 +77,7 @@ export const postUsers = (data: UserPayload): Promise<number> => {
     Lastname: data.lastname,
     Email: data.email,
     RoleName: data.roleName,
+    Password : data.password
   };
   return axios
     .post("/api/users", payload)
@@ -93,10 +94,17 @@ export const postUsers = (data: UserPayload): Promise<number> => {
 
 export const updateUser = (
   userId: number,
-  UserUpdatePayload: UserUpdatePayload
+  userUpdatePayload: UserUpdatePayload
 ): Promise<void> => {
+  const payload = {
+    Email: userUpdatePayload.email,
+    Firstname: userUpdatePayload.firstname,
+    Lastname: userUpdatePayload.lastname,
+    RoleName: userUpdatePayload.roleName,
+    Password : userUpdatePayload.password
+  };
   return axios
-    .put(`/api/users/${userId}`, UserUpdatePayload)
+    .put(`/api/users/${userId}`, payload)
     .then(function (response) {
       return response.data;
     })
