@@ -32,8 +32,8 @@ export const getModalities = (): Promise<ModalityExtended[]> => {
   return axios
     .get("/api/modalities?expand")
     .then((response) => {
-      const data = response.data;
-      return Object.entries(data).map(([name, modality]: any) => ({
+      const data = response.data as Record<string,any>;
+      return Object.entries(data).map(([name, modality]: [string, any]) => ({
         name : name,
         aet: modality.AET,
         allowEcho: modality.AllowEcho,
@@ -52,8 +52,7 @@ export const getModalities = (): Promise<ModalityExtended[]> => {
         timeout: modality.Timeout,
         useDicomTls: modality.UseDicomTls,
       }));
-    })
-    .catch(handleAxiosError);
+    }).catch(handleAxiosError);
 };
 
 export const echoModality = (name: string): Promise<void> => {

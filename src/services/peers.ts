@@ -31,7 +31,7 @@ export const deletePeer = (name: string): Promise<void> => {
 export const getPeers = (): Promise<Peer[]> => {
     return axios.get("/api/peers?expand")
         .then(response => {
-            return Object.entries(response.data).map(([name, peer]) => {
+            return Object.entries(response.data).map(([name, peer] : [string, any]) => {
                 return {
                     name : name,
                     url : peer.Url,

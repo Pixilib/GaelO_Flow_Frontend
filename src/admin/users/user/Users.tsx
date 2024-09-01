@@ -76,7 +76,6 @@ const Users = ({ className = "" }: UsersProps) => {
             className="bg-gray-200"
             onClose={() => {
               setUserToEdit(null);
-              setIsCreating(false);
             }}
             userData={userToEdit}
           />

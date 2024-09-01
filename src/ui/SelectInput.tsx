@@ -9,7 +9,7 @@ interface OptionType {
 interface SelectInputProps {
   value: string|null;
   options: OptionType[];
-  onChange: (selectedOption: OptionType | null) => void;
+  onChange: (selectedOption: OptionType | OptionType[] | null) => void;
   placeholder?: string;
   rounded?: boolean;
   isClearable?: boolean

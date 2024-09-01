@@ -26,7 +26,19 @@ const Button: React.FC<ButtonProps> = ({
     red: "bg-red",
     gray: "bg-gray",
     light: "bg-light",
-    grayCustom: ""
+    grayCustom: "",
+    almondHover: '',
+    dangerHover: '',
+    lightGray: '',
+    warningHover: '',
+    primaryActive: '',
+    primaryHover: '',
+    secondaryLight: '',
+    secondaryHover: '',
+    successHover: '',
+    sucessLight: '',
+    white: '',
+    transparent: ''
   };
 
   const isDisabled = props.disabled;
