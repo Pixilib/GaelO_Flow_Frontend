@@ -15,14 +15,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     
-      - name: 'Build checkout'
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-          
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
+          node-version: '20'
+          cache: 'yarn'
+        env:
+          SKIP_YARN_COREPACK_CHECK: true    
+
+      - run: |
+          corepack enable
+        
+      - run: |
+          yarn set version berry
+
+      - name: setup git config
+        run: |
+          git config user.name "Salim Kanoun"
+          git config user.email "salim.kanoun@gmail.com"
+      
+      - uses: docker/metadata-action@v4
         with:
           images: ghcr.io/pixilib/gaelo-flow-frontend
           tags: |
@@ -40,24 +53,6 @@ jobs:
           username: 'salimkanoun'
           password: ${{ secrets.GITHUB_TOKEN }}
     
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'yarn'
-        env:
-          SKIP_YARN_COREPACK_CHECK: true
-
-      - run: |
-          corepack enable
-        
-      - run: |
-          yarn set version berry
-          
-      - name: setup git config
-        run: |
-          git config user.name "Salim Kanoun"
-          git config user.email "salim.kanoun@gmail.com"
-          
       - run: yarn install
 
       - name: 'set version'
