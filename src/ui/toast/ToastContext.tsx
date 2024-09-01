@@ -10,8 +10,8 @@ export type Toast = {
 };
 
 const defaultValue = {
-  pushToastRef: { current: (toast:Toast) : number=> {return 1} },
-  updateToastRef: { current: (id :number, toast: Toast) => { } },
+  pushToastRef: { current: (_toast:Toast) : number=> {return 1} },
+  updateToastRef: { current: (_id :number, _toast: Toast) => { } },
 };
 
 const ToastContext = createContext(defaultValue);

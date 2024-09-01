@@ -1,5 +1,5 @@
 import React from 'react';
-import { Accordion } from '../../ui';
+import { Accordion, AccordionHeader } from '../../ui';
 import ImportTableStudy from './ImportTableStudy';
 import ImportTableSeries from './ImportTableSeries';
 
@@ -14,11 +14,10 @@ const ImportAccordion: React.FC<ImportAccordionProps> = ({ studiesData, seriesDa
     return (
         <Accordion
             header={
-                <div className="flex items-center justify-between w-full cursor-pointer lg:gap-x-10">
-                    <span className="text-sm font-medium text-primary lg:text-lg">Patients</span>
-                </div>
+                <AccordionHeader variant='primary'>
+                    Patients
+                </AccordionHeader>
             }
-            variant="primary"
             className="w-full rounded-2xl"
             defaultOpen={true}
         >

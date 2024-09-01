@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaPlus as AddIcon } from 'react-icons/fa';
 
-import { CardFooter, Button } from '../../ui';
+import { Button } from '../../ui';
 import Model from '../../model/Model';
 import CreateTableSeries from './CreateTableSeries';
 import CreateTableStudy from './CreateTableStudy';
@@ -15,11 +14,9 @@ const CreateRoot: React.FC = () => {
     const [currentStudyInstanceUID, setCurrentStudyInstanceUID] = useState<string | null>(null);
     const [studiesData, setStudiesData] = useState<any[]>([]);
     const [seriesData, setSeriesData] = useState<any[]>([]);
-    const [showCreateForm, setShowCreateForm] = useState(false);
     const [tags, setTags] = useState<{ TagName: string, Value: string }[]>([]);
 
-    const handleCreateDicomClick = () => setShowCreateForm(true);
-    const handleCloseForm = () => setShowCreateForm(false);
+
     const handleFilesUploaded = () => setStudiesData(refModel.current.getStudies());
 
     const handleStudyClick = (studyInstanceUID: string) => {
@@ -53,13 +50,23 @@ const CreateRoot: React.FC = () => {
         setTags(prevTags => prevTags.filter(tag => tag.TagName !== tagName));
     };
 
+    const readFileAsDataURL = (file : File) => {
+        return new Promise((resolve) => {
+            var reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => {
+                resolve(reader.result)
+            }
+        })
+    }
+    
     return (
         <>
-            <div className='mx-6 mt-6 mb-2'>
-                <CreateDrop onDrop={handleFilesUploaded} />
-            </div>
 
-            <div className="w-full mt-4 space-y-3 md:flex md:space-x-3">
+
+            <div className="w-full space-y-3 md:flex md:space-x-3 p-6">
+                <CreateDrop onDrop={handleFilesUploaded} />
+
                 <div className="md:w-1/2 md:flex-1">
                     {studiesData.length > 0 && (
                         <CreateTableStudy
@@ -76,35 +83,26 @@ const CreateRoot: React.FC = () => {
                 </div>
             </div>
 
-            {tags.length > 0 && (
-                <div className="mx-6 mb-8">
-                    <TagTable
-                        data={tags}
-                        onDataUpdate={handleTagUpdate}
-                        onDeleteTag={handleTagDelete}
-                    />
-                </div>
-            )}
+            <div className="flex flex-col justify-center border-indigo-100 shadow-inner p-3 bg-light">
+                <TagTable
+                    data={tags}
+                    onDataUpdate={handleTagUpdate}
+                    onDeleteTag={handleTagDelete}
+                />
+                <CreateForm
+                    title="Define DICOM Tags"
+                    onAddTag={handleAddTag}
+                />
 
-            <CardFooter
-                className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
-                {showCreateForm ? (
-                    <CreateForm
-                        onClose={handleCloseForm}
-                        title="Create Dicom"
-                        onAddTag={handleAddTag}
-                    />
-                ) : (
-                    <Button
-                        color={Colors.success}
-                        onClick={handleCreateDicomClick}
-                        className="flex items-center space-x-2"
-                    >
-                        <AddIcon />
-                        <span>Create Tag</span>
-                    </Button>
-                )}
-            </CardFooter>
+
+            </div>
+            <div className="flex bg-white justify-center p-3">
+                <Button
+                    color={tags.length > 0 ? Colors.primary : Colors.almond}
+                >
+                    Create Dicoms
+                </Button>
+            </div>
         </>
     );
 };

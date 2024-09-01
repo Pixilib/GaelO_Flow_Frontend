@@ -10,7 +10,7 @@ interface ImportTableStudyProps {
 }
 
 const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
-    const rows = useMemo(() => data, [data]);
+    
     const columns = useMemo(() => {
         return [
             {
@@ -53,7 +53,7 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
     return (
         <Table
             columns={columns}
-            data={rows}
+            data={data}
             headerTextSize='xs'
             headerColor={Colors.white}
             className="bg-gray-100"

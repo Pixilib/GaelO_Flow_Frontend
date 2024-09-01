@@ -47,7 +47,6 @@ const  StudyTable: React.FC<StudyTableProps> = ({
             data={studies}
             enableColumnFilters={true}
             headerColor={Colors.almond}
-            headerTextSize="xxs"
             className="text-[10px]"
             onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}

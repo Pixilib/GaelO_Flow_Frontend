@@ -103,7 +103,6 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <Banner
       title={title}
-      leftIcon={leftIcon}
       onLeftIconClick={handleLeftIconClick}
       className="sticky top-0 z-50 bg-white"
     >

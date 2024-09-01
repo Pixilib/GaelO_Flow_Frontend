@@ -11,11 +11,9 @@ import EditUserForm from "./EditUserForm";
 
 type UsersProps = {
   className?: string;
-  isCreating: boolean;
-  setIsCreating: (value: boolean) => void;
 };
 
-const Users = ({ className, isCreating, setIsCreating }: UsersProps) => {
+const Users = ({ className = "" }: UsersProps) => {
   const { toastSuccess, toastError } = useCustomToast();
   const { confirm } = useConfirm();
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
@@ -39,7 +37,6 @@ const Users = ({ className, isCreating, setIsCreating }: UsersProps) => {
 
   const editUser = (user: User) => {
     setUserToEdit(user);
-    setIsCreating(false);
   };
 
   const deleteUserHandler = async (user: User) => {
@@ -68,20 +65,17 @@ const Users = ({ className, isCreating, setIsCreating }: UsersProps) => {
         />
       )}
       <div>
-        {isCreating ? (
+       
           <CreateUserForm
-            title={"Create User"}
             className="bg-gray-200"
-            onClose={() => setIsCreating(false)}
           />
-        ) : null}
+        
         {userToEdit ? (
           <EditUserForm
             title={"Edit User"}
             className="bg-gray-200"
             onClose={() => {
               setUserToEdit(null);
-              setIsCreating(false);
             }}
             userData={userToEdit}
           />

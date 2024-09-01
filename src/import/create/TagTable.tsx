@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table } from '../../ui';
+import { Input, Table } from '../../ui';
 import { ColumnDef } from '@tanstack/react-table';
 import DeleteButton from '../../ui/DeleteButton';
+import { Colors } from '../../utils';
 type TagTableProps = {
     data: { TagName: string, Value: string }[];
     onDataUpdate: (tagName: string, columnId: string, value: string) => void;
@@ -22,7 +23,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
             accessorKey: 'Value',
             header: 'Value',
             cell: ({ row }) => (
-                <input
+                <Input
                     type="text"
                     value={row.original.Value}
                     onChange={(event) => handleInputChange(row.original.TagName, 'Value', event)}
@@ -34,9 +35,12 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
             id: 'delete',
             header: 'Actions',
             cell: ({ row }) => (
-                <DeleteButton
-                    onClick={() => onDeleteTag(row.original.TagName)}
-                />
+                <div className='w-full flex justify-center'>
+                    <DeleteButton
+                        onClick={() => onDeleteTag(row.original.TagName)}
+                    />
+                </div>
+
             )
         }
     ];
@@ -44,11 +48,11 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDataUpdate, onDeleteTag }) 
     return (
         <div className="w-full mt-4">
             <Table
+                headerColor={Colors.warning}
                 columns={columns}
                 data={data}
                 className="bg-gray-100"
                 enableSorting
-                enableColumnFilters
             />
         </div>
     );

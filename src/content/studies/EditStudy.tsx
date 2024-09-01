@@ -72,8 +72,7 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
             {editingStudyDetails && (
                     <StudyEditForm 
                         data={{...editingStudyDetails.mainDicomTags, id: editingStudyDetails.id}}
-                        onSubmit={handleSubmit} 
-                        onCancel={onClose} 
+                        onSubmit={handleSubmit}
                         jobId={jobId ?? undefined}
                         onJobCompleted={handleJobCompletion}
                     />

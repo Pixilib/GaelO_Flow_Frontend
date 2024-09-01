@@ -41,7 +41,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
             setLastName(user.lastname);
             setEmail(user.email);
             if (user && rolesOptions) {
-                setSelectedRole({ value: user.roleName, label: user.roleName } || "");
+                setSelectedRole({ value: user.roleName, label: user.roleName } || null);
             }
         }
     }, [JSON.stringify(user), JSON.stringify(rolesOptions)]);

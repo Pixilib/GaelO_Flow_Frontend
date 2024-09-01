@@ -7,11 +7,10 @@ import { Colors } from "../../utils/enums";
 interface TagFormProps {
   title: string;
   className?: string;
-  onClose: () => void;
   onAddTag: (tag: { TagName: string; Value: string }) => void;
 }
 
-const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
+const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
   const { toastSuccess } = useCustomToast();
   const [tag, setTag] = useState('');
   const [value, setValue] = useState('');
@@ -19,7 +18,6 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
   const handleAddTag = () => {
     if (tag && value) {
       onAddTag({ TagName: tag, Value: value });
-      console.log(`Tag: ${tag}, Value: ${value}`);
       setTag('');
       setValue('');
     }
@@ -27,21 +25,16 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    toastSuccess('Tags envoyés avec succès');
-  };
-
-  const isFormValid = () => {
-    return tag.trim() !== '' && value.trim() !== '';
+    toastSuccess('Tag Add');
   };
 
   return (
     <FormCard
       className={`${className} w-full bg-light-gray`}
       title={title}
-      onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <div className="flex items-end w-full mt-3 space-x-3">
+      <div className="flex items-end w-full mt-3 gap-3">
         <div className="flex-1">
           <Input
             label={<Label value="Tag" className="text-sm font-medium" />}
@@ -60,29 +53,16 @@ const CreateForm = ({ title, className, onClose, onAddTag }: TagFormProps) => {
             className="w-full"
           />
         </div>
-        <Button
-          color={Colors.secondary}
-          onClick={handleAddTag}
-          className="flex items-center h-10 px-4 space-x-2"
-        >
-          <AddIcon />
-          Ajouter Tag
-        </Button>
-      </div>
-      <div className="flex justify-center mt-3">
-        <Button
-          type="submit"
-          disabled={!isFormValid()}
-          className={`
-            ${isFormValid() ? 'bg-success' : 'bg-gray-400'}
-            text-white
-            font-medium
-            py-2
-            px-4
-            rounded
-          `}    >
-          Create Dicom
-        </Button>
+        <div className="flex justify-end">
+          <Button
+            color={Colors.secondary}
+            onClick={handleAddTag}
+            className="flex items-center h-10 px-4 space-x-2"
+          >
+            <AddIcon />
+            Add Tag
+          </Button>
+        </div>
       </div>
     </FormCard>
   );

@@ -61,7 +61,7 @@ const ImportRoot: React.FC = () => {
   }, [currentStudyInstanceUID]);
 
   return (
-    <div className="mx-6 mt-6 mb-6 lg:mx-12 space-y-3">
+    <div className="space-y-3">
       <ImportDrop
         model={refModel.current}
         onError={handleImportError}

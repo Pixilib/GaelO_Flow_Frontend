@@ -1,5 +1,5 @@
 import { Badge } from "./Badge";
-import Accordion from "./Accordion";
+import Accordion, {AccordionHeader} from "./Accordion";
 import Button from "./Button";
 import CheckBox from "./Checkbox";
 import EditButton from "./EditButton";
@@ -35,6 +35,7 @@ import ProgressBar from "./ProgressBar";
 
 export {
     Accordion,
+    AccordionHeader,
     Badge,
     Banner,
     BannerItems,
