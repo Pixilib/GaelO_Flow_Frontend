@@ -6,5 +6,3 @@ ENV NGINX_PORT='80'
 
 COPY default.conf.template /etc/nginx/templates/default.conf.template
 COPY ./dist /usr/share/nginx/html
-
-CMD ["/bin/bash", "-c", "nginx -g \"daemon off;\""]
