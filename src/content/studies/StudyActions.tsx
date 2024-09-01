@@ -3,6 +3,8 @@ import React from 'react';
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import { StudyMainDicomTags } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
+import OhifViewerLink from '../OhifViewerLink';
+import StoneViewerLink from '../StoneViewerLink';
 
 type StudyActionsProps = {
     study: StudyMainDicomTags & { id: string };
@@ -11,6 +13,18 @@ type StudyActionsProps = {
 
 const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => {
     const options = [
+        {
+            label: '',
+            icon: <FaEye />,
+            color: 'green',
+            component: <OhifViewerLink studyInstanceUID={study.studyInstanceUID} />
+        },
+        {
+            label: '',
+            icon: <FaEye />,
+            color: 'green',
+            component: <StoneViewerLink studyInstanceUID={study.studyInstanceUID} />
+        },
         {
             label: 'Modify',
             icon: <FaEdit />,

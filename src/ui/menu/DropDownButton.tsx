@@ -3,9 +3,10 @@ import { HSDropdown } from 'preline/preline';
 
 type DropdownOption = {
   label: string;
+  component?: React.ReactNode;
   icon?: React.ReactNode;
   color?: string;
-  action: (row: any) => void;
+  action?: (row: any) => void;
 };
 
 type DropdownButtonProps = {
@@ -24,7 +25,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonTex
   }, []);
 
   const handleOptionClick = (option: DropdownOption) => {
-    option.action(row);
+    option.action? option.action(row) : null;
   };
 
   return (
@@ -52,7 +53,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonTex
         </svg>
       </button>
       <div
-        className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
+        className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
         aria-labelledby="hs-dropdown-custom-trigger"
       >
         {options?.map((option, index) => (
@@ -64,6 +65,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonTex
           >
             {option.icon && <span>{option.icon}</span>}
             {option.label}
+            {option.component && <span>{option.component}</span>}
           </button>
         ))}
       </div>
