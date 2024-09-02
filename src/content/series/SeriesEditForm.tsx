@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useState } from "react";
 import { Series, SeriesPayload, SeriesMainDicomTags } from '../../utils/types';
-import { InputWithDelete, CheckBox } from "../../ui";
+import { InputWithDelete, CheckBox, Button } from "../../ui";
 
 import ProgressJobs from "../../query/ProgressJobs";
+import { Colors } from "../../utils";
 
 type SeriesEditFormProps = {
     data: Series;
@@ -119,6 +120,9 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepSource(e.target.checked)}
                     bordered={false}
                 />
+            </div>
+            <div>
+                <Button type="submit" color={Colors.secondary}>Modify</Button>
             </div>
             {
                 jobId && (
