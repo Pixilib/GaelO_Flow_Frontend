@@ -43,7 +43,7 @@ const Accordion: React.FC<AccordionProps> = ({
 
   return (
     <div
-      className={`transition-all duration-300 ease-in-out my-2 border rounded-lg shadow-md space-y-2 ${getVariantClasses().container} ${className}`}
+      className={`transition-all duration-300 ease-in-out p-3 border rounded-lg shadow-md w-full ${getVariantClasses().container} ${className}`}
     >
       <div onClick={handleToggle}>
         {header}
@@ -56,25 +56,25 @@ const Accordion: React.FC<AccordionProps> = ({
 type AccordionHeaderProps = {
   children?: React.ReactNode;
   variant?: string
-  className? : string
+  className?: string
 }
-const AccordionHeader = ({ children, className="", variant="default" }: AccordionHeaderProps) => {
+const AccordionHeader = ({ children, className = "", variant = "default" }: AccordionHeaderProps) => {
 
   const getVariantClasses = () => {
     switch (variant) {
       case "secondary":
-        return "cursor-pointer flex justify-between items-center p-4 bg-secondary text-white"
+        return "bg-secondary text-white"
       case "primary":
-        return "cursor-pointer flex justify-between items-center p-4 bg-primary-active text-white"
+        return "bg-primary-active text-white"
       case "default":
       default:
-        return "cursor-pointer flex justify-between items-center p-4 bg-gray-100"
+        return "bg-gray-100"
     };
   }
 
 
   return (
-    <div className={"rounded-lg shadow-md " + getVariantClasses() + " "+ className} >
+    <div className={"w-full rounded-lg shadow-md flex flex justify-between items-center p-4 cursor-pointer " + getVariantClasses() + " " + className} >
       {children}
     </div>
   )
