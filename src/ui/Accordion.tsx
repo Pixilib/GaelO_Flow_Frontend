@@ -74,7 +74,7 @@ const AccordionHeader = ({ children, className = "", variant = "default" }: Acco
 
 
   return (
-    <div className={"w-full rounded-lg shadow-md flex flex justify-between items-center p-4 cursor-pointer " + getVariantClasses() + " " + className} >
+    <div className={"w-full rounded-lg shadow-md flex justify-between items-center p-4 cursor-pointer mb-2 " + getVariantClasses() + " " + className} >
       {children}
     </div>
   )

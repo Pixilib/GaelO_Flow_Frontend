@@ -37,8 +37,8 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     (id) => deleteSeries(id),
     [],
     {
-      onSuccess: (_, variables) => {
-        toastSuccess('Series deleted successfully' + variables);
+      onSuccess: () => {
+        toastSuccess('Series deleted successfully');
         refetchSeries();
       },
       onError: (error: any) => {
