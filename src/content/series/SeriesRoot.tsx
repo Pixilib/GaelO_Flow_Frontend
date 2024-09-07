@@ -41,8 +41,8 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         toastSuccess('Series deleted successfully');
         refetchSeries();
       },
-      onError: (error: any) => {
-        toastError(`Failed to delete series ${error}`);
+      onError: () => {
+        toastError(`Failed to delete series`);
       },
     }
   );

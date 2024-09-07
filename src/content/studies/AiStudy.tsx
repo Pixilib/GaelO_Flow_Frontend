@@ -47,7 +47,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
         [[]],
         {
             onSuccess: (jobId) => {
-                toastSuccess("Job Created " + jobId)
+                toastSuccess("Job Created")
                 setJobId(jobId)
             }
         }

@@ -12,10 +12,11 @@ import { AccordionHeader } from "../../ui/Accordion";
 type AccordionPatientProps = {
     patient: Patient;
     onEditPatient: (patient :Patient) => void;
+    onStudyUpdated: (patient :Patient) => void;
     onDeletePatient: (patient :Patient) => void;
 };
 
-const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient }) => {
+const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient, onStudyUpdated }) => {
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
 
     const handleStudySelected = (studyId: string) => {
@@ -55,7 +56,7 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                     <div className={`${!selectedStudyId ? 'lg:col-span-2' : ''}`}>
                         <StudyRoot
                             patient={patient}
-                            onStudyUpdated={() => onEditPatient(patient)}
+                            onStudyUpdated={() => onStudyUpdated(patient)}
                             onStudySelected={handleStudySelected}
                         />
                     </div>

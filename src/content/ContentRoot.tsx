@@ -119,6 +119,7 @@ const ContentRoot: React.FC = () => {
                                 patient={patient}
                                 onDeletePatient={handleDeletePatient}
                                 onEditPatient={(patient) => setEditingPatient(patient)}
+                                onStudyUpdated={() => refreshFind()}
                             />
                         ))
                     )}

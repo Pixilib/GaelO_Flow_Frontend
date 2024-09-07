@@ -37,7 +37,7 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                 onStudyUpdated();
             },
             onError: (error: any) => {
-                toastError('Failed to delete study: ' + error);
+                toastError('Failed to delete study');
             },
         }
     );
