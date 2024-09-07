@@ -11,7 +11,7 @@ import EditSeries from './EditSeries';
 import PreviewSeries from './PreviewSeries';
 import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
-import { Spinner } from '../../ui';
+import { Modal, Spinner } from '../../ui';
 
 interface SeriesRootProps {
   studyId: string;
@@ -23,11 +23,11 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
 
   const { confirm } = useConfirm();
   const { toastSuccess, toastError } = useCustomToast();
-  
+
   const { data: seriesList, isLoading, refetch: refetchSeries } = useCustomQuery<Series[]>(
     ['series', studyId],
     () => getSeriesOfStudy(studyId),
-    { 
+    {
       onError: (error) => {
         console.error(`No series for this study or an error occured: ${error}`);
       }
@@ -37,8 +37,8 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     (id) => deleteSeries(id),
     [],
     {
-      onSuccess: (_, variables) => {
-        toastSuccess('Series deleted successfully' + variables);
+      onSuccess: () => {
+        toastSuccess('Series deleted successfully');
         refetchSeries();
       },
       onError: (error: any) => {
@@ -58,13 +58,13 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   const handleDeleteSeries = async (seriesId: string) => {
     const confirmContent = (
       <div className="italic">
-          Are you sure you want to delete this Series:
-          <span className="text-xl not-italic font-bold text-primary">{seriesId} ?</span>
+        Are you sure you want to delete this Series:
+        <span className="text-xl not-italic font-bold text-primary">{seriesId} ?</span>
       </div>
-  );
-  if (await confirm({content: confirmContent})) {
-    mutateDeleteSeries(seriesId);
-}
+    );
+    if (await confirm({ content: confirmContent })) {
+      mutateDeleteSeries(seriesId);
+    }
   };
 
 
@@ -110,11 +110,14 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         />
       )}
       {previewSeries && (
-        <PreviewSeries
-          seriesId={previewSeries.id}
-          onClose={() => setPreviewSeries(null)}
-          show={!!previewSeries}
-          />
+        <Modal show={!!previewSeries} size='xl'>
+          <Modal.Header onClose={() => setPreviewSeries(null)} >
+            <Modal.Title>Preview Series</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <PreviewSeries seriesId={previewSeries.id} />
+          </Modal.Body>
+        </Modal>
       )}
     </div>
   );

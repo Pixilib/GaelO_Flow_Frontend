@@ -57,7 +57,6 @@ const EditSeries: React.FC<EditSeriesProps> = ({ series, onEditSeries, onClose, 
                 <SeriesEditForm
                     data={series}
                     onSubmit={handleSubmit}
-                    onCancel={onClose}
                     jobId={jobId ?? undefined}
                     onJobCompleted={handleJobCompletion}
                 />
