@@ -92,15 +92,15 @@ export type OrthancJob = {
   type: string;
   progress: number;
   state: StateJob | string;
-  completionTime :string;
-  content : Record<string,any>
-  creationTime : string;
-  effectiveRuntime :number;
-  errorCode :number
-  errorDescription :string;
-  errorDetails : string;
-  priority : number;
-  timestamp :string;
+  completionTime: string;
+  content: Record<string, any>;
+  creationTime: string;
+  effectiveRuntime: number;
+  errorCode: number;
+  errorDescription: string;
+  errorDetails: string;
+  priority: number;
+  timestamp: string;
 };
 
 export type Role = {
@@ -135,6 +135,13 @@ export type SignInResponse = {
   userId: number;
 };
 
+export type ProcessingJob = {
+  progress: number;
+  state: string;
+  id: string;
+  results : Record<string,any>
+};
+
 export type Peer = {
   name: string;
   password: string;
@@ -151,7 +158,7 @@ export type Modality = {
 };
 
 export type ModalityExtended = {
-  name : string;
+  name: string;
   aet: string;
   allowEcho: boolean;
   allowEventReport: boolean;
@@ -209,7 +216,7 @@ export type QueryPayload = {
 
 export type FindPayload = QueryPayload & {
   Labels: string[];
-  LabelsConstraint : string
+  LabelsConstraint: string;
 };
 
 export type ExtendedQueryPayload = {
@@ -281,24 +288,24 @@ export type StudyMainDicomTags = {
 };
 
 export type Instances = {
-  fileSize : number
-  fileUuid : string
-  id : string
-  indexInSeries : number
-  labels : string[]
-  mainDicomTags : {
-    acquisitionNumber : string|null
-    imageComments : string|null
-    imageOrientationPatient: string|null
-    imagePositionPatient : string|null
-    instanceCreationDate :string|null
-    instanceCreationTime :string|null
-    instanceNumber : string|null
-    sopInstanceUID : string|null
-  }
-  parentSeries :string
-  type :string
-}
+  fileSize: number;
+  fileUuid: string;
+  id: string;
+  indexInSeries: number;
+  labels: string[];
+  mainDicomTags: {
+    acquisitionNumber: string | null;
+    imageComments: string | null;
+    imageOrientationPatient: string | null;
+    imagePositionPatient: string | null;
+    instanceCreationDate: string | null;
+    instanceCreationTime: string | null;
+    instanceNumber: string | null;
+    sopInstanceUID: string | null;
+  };
+  parentSeries: string;
+  type: string;
+};
 
 export type Series = {
   expectedNumberOfInstances: number | null;

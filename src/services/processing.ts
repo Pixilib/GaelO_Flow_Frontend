@@ -1,3 +1,4 @@
+import { ProcessingJob } from "../utils/types";
 import axios, { handleAxiosError } from "./axios";
 
 export const createProcessingJob = (
@@ -5,7 +6,7 @@ export const createProcessingJob = (
   jobPayload: Record<string, any>
 ): Promise<string> => {
   const payload = {
-    jobType,
+    JobType: jobType,
     TmtvJob: jobPayload,
   };
 
@@ -15,17 +16,24 @@ export const createProcessingJob = (
     .catch(handleAxiosError);
 };
 
-export const getProcessingJob = (jobId: string): Promise<string> => {
+export const getProcessingJob = (jobId: string): Promise<ProcessingJob[]> => {
   return axios
     .get(`/api/processing/` + jobId)
-    .then((response) => response.data.JobId)
+    .then((response) => {
+      const data = response.data;
+      return data.map((jobdata) => ({
+        progress: jobdata.Progress,
+        state: jobdata.State,
+        id: jobdata.Id,
+        results: jobdata.Results,
+      }));
+    })
     .catch(handleAxiosError);
 };
 
-
 export const deleteProcessingJob = (jobId: string): Promise<void> => {
-    return axios
-      .delete(`/api/processing/` + jobId)
-      .then((response) => undefined)
-      .catch(handleAxiosError);
-  };
+  return axios
+    .delete(`/api/processing/` + jobId)
+    .then((response) => undefined)
+    .catch(handleAxiosError);
+};

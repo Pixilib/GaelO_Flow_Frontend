@@ -8,7 +8,7 @@ import { getSeriesOfStudy } from "../../services/orthanc";
 import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../../utils";
 
 import { Button, Modal, ProgressCircle, Spinner } from "../../ui";
-import { Series } from "../../utils/types";
+import { ProcessingJob, Series } from "../../utils/types";
 import { createProcessingJob, getProcessingJob } from "../../services/processing";
 
 type AIStudyProps = {
@@ -33,7 +33,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
         }
     )
 
-    const { data: jobData } = useCustomQuery(
+    const { data: jobData } = useCustomQuery<ProcessingJob[]>(
         ['processing', jobId ?? ''],
         () => getProcessingJob(jobId),
         {
@@ -73,7 +73,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
             jobPayload: {
                 CtOrthancSeriesId: selectedSeries[0],
                 PtOrthancSeriesId: selectedSeries[1],
-                SendMaskToOrthancAs: ['MASK'],
+                SendMaskToOrthancAs: ['seg'],
                 WithFragmentedMask: true,
             }
         })
@@ -103,7 +103,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
             <Modal.Footer>
                 <div className={"flex justify-center"}>
                     <Button color={Colors.success} onClick={handleExecute}>Execute TMTV Model</Button>
-                    <ProgressCircle progress={10}/> 
+                    {jobData && jobData.map(job => <ProgressCircle progress={job.progress} text={job.state} />)}
                 </div>
             </Modal.Footer>
         </Modal>
