@@ -7,6 +7,7 @@ import PreviewStudy from './PreviewStudy';
 import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import Patient from '../../model/Patient';
+import AiStudy from './AiStudy';
 
 type StudyRootProps = {
     patient: Patient;
@@ -16,6 +17,7 @@ type StudyRootProps = {
 
 const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudySelected }) => {
     const [editingStudy, setEditingStudy] = useState<string | null>(null);
+    const [aiStudyId, setAIStudyId] = useState<string | null>(null);
     const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
 
     const { confirm } = useConfirm();
@@ -60,6 +62,10 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
         setPreviewStudyId(studyId);
     }
 
+    const handleAIStudy=(studyId : string) => {
+        setAIStudyId(studyId)
+    }
+
     const handleStudyAction = (action: string, studyId: string) => {
         switch (action) {
             case 'edit':
@@ -70,6 +76,9 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                 break;
             case 'preview':
                 handlePreviewStudy(studyId);
+                break;
+            case 'ai':
+                handleAIStudy(studyId);
                 break;
             default:
                 break;
@@ -101,6 +110,13 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                     studyId={previewStudyId}
                     onClose={() => setPreviewStudyId(null)}
                     show={!!previewStudyId}
+                />
+            )}
+            {aiStudyId && (
+                <AiStudy
+                    studyId={aiStudyId}
+                    onClose={() => setAIStudyId(null)}
+                    show={!!aiStudyId}
                 />
             )}
         </div>
