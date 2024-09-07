@@ -33,4 +33,11 @@ export const getToken = () => {
     return store?.getState()?.user.token
 }
 
+export const handleAxiosError = (error: any) => {
+    if (error.response) {
+        throw error.response;
+    }
+    throw error;
+}
+
 export default axios

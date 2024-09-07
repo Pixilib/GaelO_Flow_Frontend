@@ -5,10 +5,11 @@
 
 import React, { useState } from "react";
 import { getSeriesOfStudy } from "../../services/orthanc";
-import { Colors, useCustomQuery } from "../../utils";
+import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../../utils";
 
-import { Button, Modal, Spinner } from "../../ui";
+import { Button, Modal, ProgressCircle, Spinner } from "../../ui";
 import { Series } from "../../utils/types";
+import { createProcessingJob, getProcessingJob } from "../../services/processing";
 
 type AIStudyProps = {
     studyId: string;
@@ -17,8 +18,10 @@ type AIStudyProps = {
 }
 
 const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
+    const { toastSuccess, toastError } = useCustomToast()
 
     const [selectedSeries, setSelectedSeries] = useState([]);
+    const [jobId, setJobId] = useState<string | null>(null);
 
     const { data: series, isLoading } = useCustomQuery(
         ['study', studyId, 'series'],
@@ -26,6 +29,26 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
         {
             select: (instances: Series[]) => {
                 return instances.sort((a, b) => a.mainDicomTags?.seriesDescription?.localeCompare(b.mainDicomTags?.seriesDescription ?? "") ?? 0)
+            }
+        }
+    )
+
+    const { data: jobData } = useCustomQuery(
+        ['processing', jobId ?? ''],
+        () => getProcessingJob(jobId),
+        {
+            enabled: jobId != null,
+            refetchInterval: 2000
+        }
+    )
+
+    const { mutate: createProcessingJobMutate } = useCustomMutation(
+        ({ jobType, jobPayload }) => createProcessingJob(jobType, jobPayload),
+        [[]],
+        {
+            onSuccess: (jobId) => {
+                toastSuccess("Job Created " + jobId)
+                setJobId(jobId)
             }
         }
     )
@@ -41,9 +64,22 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
     }
 
     const handleExecute = () => {
-
+        if (selectedSeries.length !== 2) {
+            toastError('Select only 2 series, PT and CT')
+            return;
+        }
+        createProcessingJobMutate({
+            jobType: 'tmtv',
+            jobPayload: {
+                CtOrthancSeriesId: selectedSeries[0],
+                PtOrthancSeriesId: selectedSeries[1],
+                SendMaskToOrthancAs: ['MASK'],
+                WithFragmentedMask: true,
+            }
+        })
     }
 
+    console.log(jobData)
     if (isLoading) return <Spinner />
 
     return (
@@ -56,7 +92,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
                     {
                         series?.map((series: Series) => {
                             return (
-                                <Button color={selectedSeries.includes(series.id) ? Colors.success : Colors.secondary} onClick={() => handleSeriesClick(series.id)} >
+                                <Button key={series.id} color={selectedSeries.includes(series.id) ? Colors.success : Colors.secondary} onClick={() => handleSeriesClick(series.id)} >
                                     {series.mainDicomTags.modality} - {series.mainDicomTags.seriesDescription}
                                 </Button>
                             )
@@ -66,7 +102,8 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
             </Modal.Body>
             <Modal.Footer>
                 <div className={"flex justify-center"}>
-                    <Button color={Colors.success} onClick={() => { handleExecute }}>Execute TMTV Model</Button>
+                    <Button color={Colors.success} onClick={handleExecute}>Execute TMTV Model</Button>
+                    <ProgressCircle progress={10}/> 
                 </div>
             </Modal.Footer>
         </Modal>
