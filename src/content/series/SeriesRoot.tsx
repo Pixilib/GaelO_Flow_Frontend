@@ -12,6 +12,7 @@ import PreviewSeries from './PreviewSeries';
 import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import { Modal, Spinner } from '../../ui';
+import Tags from './Tags';
 
 interface SeriesRootProps {
   studyId: string;
@@ -20,6 +21,7 @@ interface SeriesRootProps {
 const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   const [editingSeries, setEditingSeries] = useState<Series | null>(null);
   const [previewSeries, setPreviewSeries] = useState<Series | null>(null);
+  const [previewMetadata, setPreviewMetadata] = useState<Series | null>(null);
 
   const { confirm } = useConfirm();
   const { toastSuccess, toastError } = useCustomToast();
@@ -55,6 +57,10 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     setPreviewSeries(series);
   }
 
+  const handleMetadataPreview = (series: Series) => {
+    setPreviewMetadata(series)
+  }
+
   const handleDeleteSeries = async (seriesId: string) => {
     const confirmContent = (
       <div className="italic">
@@ -78,6 +84,9 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         break;
       case 'preview':
         handlePreviewSeries(series);
+        break;
+      case 'metadata':
+        setPreviewMetadata(series);
         break;
       default:
         console.log(`Unhandled action: ${action}`);
@@ -116,6 +125,17 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
           </Modal.Header>
           <Modal.Body>
             <PreviewSeries seriesId={previewSeries.id} />
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {previewMetadata && (
+        <Modal show={!!previewMetadata} size='xl'>
+          <Modal.Header onClose={() => setPreviewMetadata(null)} >
+            <Modal.Title>Preview Metadata</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Tags seriesId={previewMetadata.id} />
           </Modal.Body>
         </Modal>
       )}

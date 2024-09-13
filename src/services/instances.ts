@@ -37,9 +37,29 @@ export const createDicom = (content: string[], tags: object = {}, parentOrthancI
 }
 
 
-export const previewInstance = (instanceUID : string) : Promise<any>=> {
+export const previewInstance = (instanceId : string) : Promise<any>=> {
 
-    return axios.get('/api/instances/'+instanceUID+'/preview',  {responseType : "blob"})
+    return axios.get('/api/instances/'+instanceId+'/preview',  {responseType : "blob"})
+        .then((response) => {
+            return response.data
+        }).catch(error => {
+            console.error(error)
+        })
+}
+
+export const instanceTags = (instanceId : string) : Promise<any>=> {
+
+    return axios.get('/api/instances/'+instanceId+'/tags')
+        .then((response) => {
+            return response.data
+        }).catch(error => {
+            console.error(error)
+        })
+}
+
+export const instanceHeader = (instanceId : string) : Promise<any>=> {
+
+    return axios.get('/api/instances/'+instanceId+'/header')
         .then((response) => {
             return response.data
         }).catch(error => {

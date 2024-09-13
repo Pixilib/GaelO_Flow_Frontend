@@ -24,6 +24,12 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
             action: () => onActionClick('delete', series)
         },
         {
+            label: 'Metadata',
+            icon: <FaEye />,
+            color: 'green',
+            action: () => onActionClick('metadata', series),
+        },
+        {
             label: 'Preview Series',
             icon: <FaEye />,
             color: 'green',
