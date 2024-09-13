@@ -17,6 +17,8 @@ type StudyEditFormProps = {
 const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormProps) => {
     const [patientName, setPatientName] = useState<string | null>(data?.patientMainDicomTags?.patientName ?? null);
     const [patientId, setPatientId] = useState<string | null>(data?.patientMainDicomTags?.patientId ?? null);
+    const [patientBirthDate, setPatientBirthDate] = useState<string | null>(data?.patientMainDicomTags?.patientBirthDate ?? null);
+    const [patientSex, setPatientSex] = useState<string | null>(data?.patientMainDicomTags?.patientSex ?? null);
 
     const [accessionNumber, setAccessionNumber] = useState<string | null>(data?.mainDicomTags?.accessionNumber ?? null);
     const [studyDate, setStudyDate] = useState<string | null>(data?.mainDicomTags?.studyDate ?? null);
@@ -27,10 +29,6 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
-
-    useEffect(() => {
-        if (keepUIDs) setKeepSource(true)
-    }, [keepUIDs])
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -43,6 +41,11 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
 
         if (patientId !== data?.patientMainDicomTags?.patientId) replace.patientId = patientId;
         if (patientName !== data?.patientMainDicomTags?.patientName) replace.patientName = patientName;
+        if (replace.patientId || replace.patientName) {
+            replace.patientBirthDate = patientBirthDate;
+            replace.patientSex = patientSex;
+        }
+
         if (accessionNumber !== data?.mainDicomTags?.accessionNumber) replace.accessionNumber = accessionNumber;
         if (studyDate !== data?.mainDicomTags?.studyDate) replace.studyDate = studyDate;
         if (studyDescription !== data?.mainDicomTags?.studyDescription) replace.studyDescription = studyDescription;
@@ -77,6 +80,18 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                     value={patientId}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setPatientId(e.target.value)}
                     fieldName="patientID"
+                />
+                <Input
+                    label="Patient Birthdate"
+                    value={patientBirthDate}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPatientBirthDate(e.target.value)}
+                    fieldName="patientBirthdate"
+                />
+                <Input
+                    label="Patient Sex"
+                    value={patientSex}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPatientSex(e.target.value)}
+                    fieldName="patientSex"
                 />
             </div>
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">

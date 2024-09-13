@@ -282,6 +282,8 @@ export const modifyStudy = (
     Replace: {
       PatientID: study.replace.patientId,
       PatientName: study.replace.patientName,
+      PatientSex : study.replace.patientSex,
+      PatientBirthDate : study.replace.patientBirthDate,
       AccessionNumber: study.replace.accessionNumber,
       StudyDate: study.replace.studyDate,
       StudyDescription: study.replace.studyDescription,
