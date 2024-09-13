@@ -40,7 +40,6 @@ const PreviewSeries: React.FC<PreviewSeriesProps> = ({ seriesId}) => {
         if (!instanceUIDs) return null
         const start = Math.max(imageIndex, 0)
         const end = Math.min(start + (pageSize - 1), instanceUIDs.length - 1)
-        console.log(start, end)
         const selectedUIDs = []
         for (let i = start; i <= end; i++) {
             selectedUIDs.push(instanceUIDs[i])
