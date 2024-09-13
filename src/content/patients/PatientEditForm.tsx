@@ -5,13 +5,16 @@ import { PatientMainDicomTags, PatientModifyPayload } from "../../utils/types";
 import CheckBox from "../../ui/Checkbox";
 import { Colors } from "../../utils";
 import InputWithDelete from "../../ui/InputWithDelete";
+import ProgressJobs from "../../query/ProgressJobs";
 
 type PatientEditFormProps = {
+    jobId: string | null;
     patient: Patient;
     onSubmit: (data: { id: string; payload: PatientModifyPayload }) => void;
+    onJobCompleted: (jobStatus :string) => void;
 };
 
-const PatientEditForm = ({ patient, onSubmit }: PatientEditFormProps) => {
+const PatientEditForm = ({ patient, jobId, onSubmit, onJobCompleted }: PatientEditFormProps) => {
     const [patientId, setPatientId] = useState<string>(patient?.patientId ?? "");
     const [patientName, setPatientName] = useState<string | null>(patient?.patientName ?? null);
     const [patientBirthDate, setPatientBirthDate] = useState<string | null>(patient?.patientBirthDate ?? null);
@@ -22,6 +25,10 @@ const PatientEditForm = ({ patient, onSubmit }: PatientEditFormProps) => {
     const [keepUIDs, setKeepUIDs] = useState(false)
 
     if (!patient) return <Spinner />;
+
+    useEffect(() => {
+        if (keepUIDs) setKeepSource(true)
+    }, [keepUIDs])
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -34,6 +41,7 @@ const PatientEditForm = ({ patient, onSubmit }: PatientEditFormProps) => {
         const replace: Partial<PatientMainDicomTags> = {};
 
         if (patientName !== patient.patientName) replace.patientName = patientName;
+        if (patientId !== patient.patientId) replace.patientId = patientId;
         if (patientBirthDate !== patient.patientBirthDate) replace.patientBirthDate = patientBirthDate;
         if (patientSex !== patient.patientSex) replace.patientSex = patientSex;
 
@@ -46,7 +54,7 @@ const PatientEditForm = ({ patient, onSubmit }: PatientEditFormProps) => {
             synchronous: false,
             keep: keepUIDs ? ['StudyInstanceUID', 'SeriesInstanceUID', 'SOPInstanceUID'] : [],
         };
-        onSubmit({ id: patientId, payload });
+        onSubmit({ id: patient.id, payload });
     };
 
 
@@ -116,6 +124,13 @@ const PatientEditForm = ({ patient, onSubmit }: PatientEditFormProps) => {
                 <Button type="submit" color={Colors.success}>
                     Save Changes
                 </Button>
+                {jobId &&
+                    (
+                        <div className="flex flex-col items-center justify-center">
+                            <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                        </div>
+                    )
+                }
             </div>
         </form>
     );

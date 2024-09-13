@@ -25,9 +25,7 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
         [['studies'], ['jobs']],
         {
             onSuccess: (data) => {
-                // toastSuccess(`Study ${data.id} updated successfully`);
                 setJobId(data.id);
-                // onClose();
             },
             onError: (error) => {
                 console.log(error)

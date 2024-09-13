@@ -1,6 +1,6 @@
 
 
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { StudyModifyPayload, StudyMainDicomTags, Study, PatientMainDicomTags } from '../../utils/types';
 import { Button, CheckBox, Input, InputWithDelete } from "../../ui";
 
@@ -27,6 +27,10 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
+
+    useEffect(() => {
+        if (keepUIDs) setKeepSource(true)
+    }, [keepUIDs])
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>

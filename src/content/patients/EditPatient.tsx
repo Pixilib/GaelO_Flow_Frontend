@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Patient from "../../model/Patient";
 import { modifyPatient } from "../../services";
 import { useCustomMutation, useCustomToast } from "../../utils";
@@ -14,19 +14,18 @@ type EditPatientProps = {
 }
 
 const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClose, show }) => {
-    const { toastSuccess, toastError } = useCustomToast();
+    const { toastError } = useCustomToast();
+    const [jobId, setJobId] = useState<string | null>(null);
 
     const { mutateAsync: mutatePatient } = useCustomMutation<OrthancResponse, { id: string, payload: PatientModifyPayload }>(
         ({ id, payload }) => modifyPatient(id, payload),
         [['jobs']],
         {
-            onSuccess: async () => {
-                toastSuccess(`Patient updated successfully`);
-                onEditPatient(patient);
-                onClose();
+            onSuccess: async (data) => {
+                setJobId(data.id);
             },
-            onError: (error: any) => {
-                toastError(`Failed to update patient: ${error}`);
+            onError: () => {
+                toastError(`Failed to update patient`);
             }
         }
     );
@@ -35,11 +34,20 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
         mutatePatient({ id, payload });
     };
 
+    const handleJobCompletion = (job: string) => {
+        if (job === "Success") {
+            onEditPatient(patient);
+            onClose();
+        } else if (job === "Failure") {
+            toastError(`Failed to update Study `);
+        }
+    };
+
     return (
         <Modal show={show} size='xl'>
             <Modal.Header onClose={onClose}> Edit patient </Modal.Header>
             <Modal.Body>
-                <PatientEditForm patient={patient} onSubmit={handleSubmit} />
+                <PatientEditForm patient={patient} jobId={jobId} onSubmit={handleSubmit} onJobCompleted={handleJobCompletion} />
             </Modal.Body>
         </Modal>
     );

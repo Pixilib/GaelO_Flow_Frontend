@@ -95,6 +95,7 @@ const ContentRoot: React.FC = () => {
     return (
         <div className="flex flex-col items-center w-full">
             <EditPatient
+                key={editingPatient?.id ?? undefined}
                 patient={editingPatient as Patient}
                 onEditPatient={handlePatientUpdate}
                 onClose={closeEditModal}
