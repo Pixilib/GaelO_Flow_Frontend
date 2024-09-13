@@ -5,9 +5,10 @@
 
 import React, { useState } from "react";
 import { modifySeries } from "../../services/orthanc";
-import { useCustomMutation, useCustomToast, Series, SeriesPayload } from "../../utils";
+import { useCustomMutation, useCustomToast, Series } from "../../utils";
 import SeriesEditForm from './SeriesEditForm';
 import { Modal } from "../../ui";
+import { SeriesModifyPayload } from "../../utils/types";
 
 type EditSeriesProps = {
     series: Series;
@@ -21,7 +22,7 @@ const EditSeries: React.FC<EditSeriesProps> = ({ series, onEditSeries, onClose, 
     const [jobId, setJobId] = useState<string | null>(null);
 
 
-    const { mutateAsync: mutateSeries } = useCustomMutation<any, { id: string, payload: SeriesPayload }>(
+    const { mutateAsync: mutateSeries } = useCustomMutation<any, { id: string, payload: SeriesModifyPayload }>(
         ({ id, payload }) => modifySeries(id, payload),
         [['series'], ['jobs']],
         {
@@ -34,7 +35,7 @@ const EditSeries: React.FC<EditSeriesProps> = ({ series, onEditSeries, onClose, 
         }
     );
 
-    const handleSubmit = ({ id, payload }: { id: string; payload: SeriesPayload }) => {
+    const handleSubmit = ({ id, payload }: { id: string; payload: SeriesModifyPayload }) => {
         mutateSeries({ id, payload });
     };
 

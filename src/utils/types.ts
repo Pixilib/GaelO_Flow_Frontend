@@ -372,11 +372,12 @@ export type StudyModifyPayload = {
   keepSource: boolean;
 };
 
-export type SeriesPayload = {
+export type SeriesModifyPayload = {
   replace: Partial<SeriesMainDicomTags>;
   remove: string[];
   removePrivateTags: boolean;
   keepSource: boolean;
   force: boolean;
   synchronous: boolean;
+  keep : string[];
 };
