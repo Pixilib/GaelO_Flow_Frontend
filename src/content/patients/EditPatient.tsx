@@ -2,7 +2,7 @@ import React from "react";
 import Patient from "../../model/Patient";
 import { modifyPatient } from "../../services";
 import { useCustomMutation, useCustomToast } from "../../utils";
-import { PatientPayload, OrthancResponse } from "../../utils/types";
+import { PatientModifyPayload, OrthancResponse } from "../../utils/types";
 import PatientEditForm from './PatientEditForm';
 import { Modal } from "../../ui";
 
@@ -16,7 +16,7 @@ type EditPatientProps = {
 const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClose, show }) => {
     const { toastSuccess, toastError } = useCustomToast();
 
-    const { mutateAsync: mutatePatient } = useCustomMutation<OrthancResponse, { id: string, payload: PatientPayload }>(
+    const { mutateAsync: mutatePatient } = useCustomMutation<OrthancResponse, { id: string, payload: PatientModifyPayload }>(
         ({ id, payload }) => modifyPatient(id, payload),
         [['jobs']],
         {
@@ -31,7 +31,7 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
         }
     );
 
-    const handleSubmit = ({ id, payload }: { id: string; payload: PatientPayload }) => {
+    const handleSubmit = ({ id, payload }: { id: string; payload: PatientModifyPayload }) => {
         mutatePatient({ id, payload });
     };
 
@@ -39,7 +39,7 @@ const EditPatient: React.FC<EditPatientProps> = ({ patient, onEditPatient, onClo
         <Modal show={show} size='xl'>
             <Modal.Header onClose={onClose}> Edit patient </Modal.Header>
             <Modal.Body>
-                <PatientEditForm patient={patient} onSubmit={handleSubmit} onCancel={onClose} />
+                <PatientEditForm patient={patient} onSubmit={handleSubmit} />
             </Modal.Body>
         </Modal>
     );

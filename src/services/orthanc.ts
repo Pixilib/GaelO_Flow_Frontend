@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Patient, Study, Series, PatientPayload, OrthancResponse, StudyPayload, SeriesPayload, Instances } from '../utils/types';
+import { Patient, Study, Series, PatientModifyPayload, OrthancResponse, StudyModifyPayload, SeriesPayload, Instances } from '../utils/types';
 
 export const getOrthancSystem = (): Promise<unknown> => {
   return axios.get("/api/system").then(response => response.data)
@@ -212,7 +212,7 @@ export const getInstancesOfSeries = (seriesId: string) => {
 }
 
 
-export const modifyPatient = (patientId: string, patient: PatientPayload): Promise<OrthancResponse> => {
+export const modifyPatient = (patientId: string, patient: PatientModifyPayload): Promise<OrthancResponse> => {
   const patientPayloadUpdate = {
     Replace: {
       PatientID: patient.replace.patientId,
@@ -220,6 +220,7 @@ export const modifyPatient = (patientId: string, patient: PatientPayload): Promi
       PatientBirthDate: patient.replace.patientBirthDate,
       PatientSex: patient.replace.patientSex
     },
+    Keep: patient.keep,
     Remove: patient.remove.map(field => field.charAt(0).toUpperCase() + field.slice(1)),
     RemovePrivateTags: patient.removePrivateTags,
     Force: true,
@@ -242,9 +243,11 @@ export const modifyPatient = (patientId: string, patient: PatientPayload): Promi
     });
 };
 
-export const modifyStudy = (studyId: string, study: StudyPayload): Promise<OrthancResponse> => {
+export const modifyStudy = (studyId: string, study: StudyModifyPayload): Promise<OrthancResponse> => {
   const studyPayloadUpdate = {
     Replace: {
+      PatientID : study.replace.patientId,
+      PatientName : study.replace.patientName,
       AccessionNumber: study.replace.accessionNumber,
       StudyDate: study.replace.studyDate,
       StudyDescription: study.replace.studyDescription,
@@ -252,6 +255,7 @@ export const modifyStudy = (studyId: string, study: StudyPayload): Promise<Ortha
     },
     Remove: study.remove.map(field => field.charAt(0).toUpperCase() + field.slice(1)),
     RemovePrivateTags: study.removePrivateTags,
+    Keep : study.keep,
     Force: true,
     Synchronous: false,
     KeepSource: study.keepSource
