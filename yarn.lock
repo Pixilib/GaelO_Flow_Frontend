@@ -3146,6 +3146,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/mime-types@npm:^2":
+  version: 2.1.4
+  resolution: "@types/mime-types@npm:2.1.4"
+  checksum: 10c0/a10d57881d14a053556b3d09292de467968d965b0a06d06732c748da39b3aa569270b5b9f32529fd0e9ac1e5f3b91abb894f5b1996373254a65cb87903c86622
+  languageName: node
+  linkType: hard
+
 "@types/mime@npm:^1":
   version: 1.3.5
   resolution: "@types/mime@npm:1.3.5"
@@ -5816,6 +5823,7 @@ __metadata:
     "@tanstack/react-query-devtools": "npm:^5.51.23"
     "@tanstack/react-table": "npm:^8.20.1"
     "@types/jwt-decode": "npm:^3.1.0"
+    "@types/mime-types": "npm:^2"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-query": "npm:^1.2.9"
@@ -5833,6 +5841,7 @@ __metadata:
     eslint-plugin-tailwindcss: "npm:^3.17.4"
     i18next: "npm:^23.12.2"
     jwt-decode: "npm:^4.0.0"
+    mime-types: "npm:^2.1.35"
     moment: "npm:^2.30.1"
     native-file-system-adapter: "npm:^3.0.1"
     postcss: "npm:^8.4.41"
@@ -7214,7 +7223,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.35, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:

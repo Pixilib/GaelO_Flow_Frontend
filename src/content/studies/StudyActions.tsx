@@ -2,6 +2,7 @@
 import React from 'react';
 import { FaEdit as EditIcon, FaEye as EyeIcon, FaTrash as TrashIcon } from "react-icons/fa";
 import { GiBrain as BrainIcon } from 'react-icons/gi'
+import { RiDownload2Line as DownloadIcon } from "react-icons/ri";
 import { StudyMainDicomTags } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
 import OhifViewerLink from '../OhifViewerLink';
@@ -45,18 +46,17 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             action: () => onActionClick('preview', study.id)
         },
         {
+            label: 'Download',
+            icon: <DownloadIcon />,
+            color: 'green',
+            action: () => onActionClick('download', study.id)
+        },
+        {
             label: 'Delete',
             icon: <TrashIcon />,
             color: 'red',
             action: () => onActionClick('delete', study.id)
         },
-        {
-            label: 'Download',
-            icon: <TrashIcon />,
-            color: 'orange',
-            action: () => onActionClick('download', study.id)
-        },
-
     ];
 
     const handleClick = (e: React.MouseEvent) => {

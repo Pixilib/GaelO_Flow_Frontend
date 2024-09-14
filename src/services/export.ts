@@ -1,5 +1,6 @@
 import { getToken } from "./axios";
 import { showSaveFilePicker } from "native-file-system-adapter";
+import mime from 'mime-types'
 
 const getContentType = (headers: any) => {
   const contentType = headers.get("Content-Type");
@@ -10,6 +11,7 @@ const getContentType = (headers: any) => {
 const getContentDispositionFilename = (headers: any) => {
   const contentDisposition = headers.get("Content-Disposition");
   const parts = contentDisposition?.split(";");
+  if(!parts) return null
   let filename = parts[1].split("=")[1];
   return filename;
 };
@@ -17,17 +19,17 @@ const getContentDispositionFilename = (headers: any) => {
 export const exportFileThroughFilesystemAPI = async (
   readableStream: ReadableStream<Uint8Array> | null,
   mimeType: string,
-  suggestedName: string
+  suggestedName: string|null
 ) => {
   if (!readableStream) return;
   let acceptedTypes = [];
 
-  let extension = suggestedName.split(".").pop();
+  let extension = mime.extension(mimeType);
   acceptedTypes.push({ accept: { [mimeType]: ["." + extension] } });
 
   const fileHandle = await showSaveFilePicker({
     _preferPolyfill: true,
-    suggestedName: suggestedName,
+    suggestedName: suggestedName ?? "download."+ extension,
     types: acceptedTypes,
     excludeAcceptAllOption: false, // default
   }).catch((err: any) => console.log(err));

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
-import { Accordion, DeleteButton, EditButton } from "../../ui";
+import { Accordion, DeleteButton, DownloadButton, EditButton } from "../../ui";
 
 import Patient from "../../model/Patient";
-
 
 import StudyRoot from "../studies/StudyRoot";
 import SeriesRoot from "../series/SeriesRoot";
@@ -50,8 +49,8 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                             <span className="text-sm group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
                             <div className="flex justify-end w-full space-x-7">
                                 <EditButton onClick={handleEditClick} />
+                                <DownloadButton onClick={handleSaveClick} />
                                 <DeleteButton onClick={handleDeleteClick} />
-                                <DeleteButton onClick={handleSaveClick} />
                             </div>
                         </div>
                     </AccordionHeader>

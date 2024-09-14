@@ -13,6 +13,7 @@ import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import { Modal, Spinner } from '../../ui';
 import Tags from './Tags';
+import { exportRessource } from '../../services/export';
 
 interface SeriesRootProps {
   studyId: string;
@@ -57,6 +58,10 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     setPreviewSeries(series);
   }
 
+  const handleDownloadSeries = (series: Series) => {
+    exportRessource('series', series.id)
+  }
+
   const handleMetadataPreview = (series: Series) => {
     setPreviewMetadata(series)
   }
@@ -87,6 +92,9 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         break;
       case 'metadata':
         setPreviewMetadata(series);
+        break;
+      case 'download':
+        handleDownloadSeries(series);
         break;
       default:
         console.log(`Unhandled action: ${action}`);
