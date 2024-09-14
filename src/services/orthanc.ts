@@ -220,6 +220,7 @@ export const getInstancesOfSeries = (seriesId: string) => {
             instanceCreationTime: data.MainDicomTags.InstanceCreationTime,
             instanceNumber: data.MainDicomTags.InstanceNumber,
             sopInstanceUID: data.MainDicomTags.SopInstanceUID,
+            numberOfFrames: data.MainDicomTags.NumberOfFrames
           },
           parentSeries: data.ParentSeries,
           type: data.Type,

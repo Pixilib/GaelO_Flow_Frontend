@@ -12,18 +12,18 @@ type ToastContainerProps = {
   className?: string
 }
 
-function ToastContainer({ className }:ToastContainerProps) {
+function ToastContainer({ className }: ToastContainerProps) {
 
   const [toasts, setToasts] = useState([] as ToastItem[]);
 
   const { pushToastRef, updateToastRef } = useContext(ToastContext);
 
-  pushToastRef.current = ({ duration = 5, ...props }: Toast) => {
+  pushToastRef.current = ({ type = 'info', position = 'bottom-right', animation = "slide-right", duration = 5, ...props }: Toast) => {
     const id = Math.random();
     const timer = setTimeout(() => {
       setToasts((v) => v.filter((t) => t.id !== id));
     }, (duration) * 1000);
-    const newToast = { ...props, id, timer, duration };
+    const newToast = { id, type, position, animation, duration, ...props };
     setToasts((toasts: ToastItem[]) => [...toasts, newToast]);
     return id
   };
