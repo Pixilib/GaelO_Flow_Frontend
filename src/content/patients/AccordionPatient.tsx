@@ -8,6 +8,7 @@ import Patient from "../../model/Patient";
 import StudyRoot from "../studies/StudyRoot";
 import SeriesRoot from "../series/SeriesRoot";
 import { AccordionHeader } from "../../ui/Accordion";
+import { exportRessource } from "../../services/export";
 
 type AccordionPatientProps = {
     patient: Patient;
@@ -33,6 +34,11 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
         onDeletePatient(patient); 
     }
 
+    const handleSaveClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
+        event.stopPropagation();
+        exportRessource("patients", patient.id)
+    }
+
     return (
         <>
             <Accordion
@@ -45,6 +51,7 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                             <div className="flex justify-end w-full space-x-7">
                                 <EditButton onClick={handleEditClick} />
                                 <DeleteButton onClick={handleDeleteClick} />
+                                <DeleteButton onClick={handleSaveClick} />
                             </div>
                         </div>
                     </AccordionHeader>

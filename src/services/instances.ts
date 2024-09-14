@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from './axios';
 import { OrthancImportDicom } from "../utils/types";
 
 export const sendDicom = (payload: Uint8Array): Promise<OrthancImportDicom> => {

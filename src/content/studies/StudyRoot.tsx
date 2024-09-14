@@ -8,6 +8,7 @@ import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import Patient from '../../model/Patient';
 import AiStudy from './AiStudy';
+import { exportRessource } from '../../services/export';
 
 type StudyRootProps = {
     patient: Patient;
@@ -62,8 +63,12 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
         setPreviewStudyId(studyId);
     }
 
-    const handleAIStudy=(studyId : string) => {
+    const handleAIStudy = (studyId: string) => {
         setAIStudyId(studyId)
+    }
+
+    const handleDownloadStudy = (studyId: string) => {
+        exportRessource('studies', studyId)
     }
 
     const handleStudyAction = (action: string, studyId: string) => {
@@ -79,6 +84,9 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                 break;
             case 'ai':
                 handleAIStudy(studyId);
+                break;
+            case 'download':
+                handleDownloadStudy(studyId);
                 break;
             default:
                 break;

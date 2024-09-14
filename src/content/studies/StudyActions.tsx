@@ -50,6 +50,12 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             color: 'red',
             action: () => onActionClick('delete', study.id)
         },
+        {
+            label: 'Download',
+            icon: <TrashIcon />,
+            color: 'orange',
+            action: () => onActionClick('download', study.id)
+        },
 
     ];
 
