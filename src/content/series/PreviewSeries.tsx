@@ -10,6 +10,7 @@ import { useCustomQuery } from "../../utils";
 import { Input, Spinner } from "../../ui";
 import PreviewInstance from "./PreviewInstance";
 import { Instances } from "../../utils/types";
+import PreviewInstanceMultiframe from "./PreviewInstanceMultiframe";
 
 type PreviewSeriesProps = {
     seriesId: string;
@@ -64,7 +65,12 @@ const PreviewSeries: React.FC<PreviewSeriesProps> = ({ seriesId}) => {
             <div className={"flex w-full h-full"} style={{ display: 'grid', gridTemplateColumns: `repeat(${columns}, 1fr)`, gridTemplateRows: `repeat(${rows}, 1fr)` }}>
                 {
                     selectedInstanceUIDs?.map((instance: Instances) => {
-                        return <PreviewInstance key={instance.id} instanceUID={instance.id} />
+                        if(instance.mainDicomTags.numberOfFrames){
+                            return <PreviewInstanceMultiframe key={instance.id} instanceUID={instance.id} />
+                        }else{
+                            return <PreviewInstance key={instance.id} instanceUID={instance.id} />
+                        }
+                        
                     })
                 }
             </div>

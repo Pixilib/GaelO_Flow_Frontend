@@ -25,7 +25,7 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   const [previewMetadata, setPreviewMetadata] = useState<Series | null>(null);
 
   const { confirm } = useConfirm();
-  const { toastSuccess, toastError } = useCustomToast();
+  const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
 
   const { data: seriesList, isLoading, refetch: refetchSeries } = useCustomQuery<Series[]>(
     ['series', studyId],
@@ -59,8 +59,8 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   }
 
   const handleDownloadSeries = (series: Series) => {
-    toastSuccess("Download started, follow progression in console")
-    exportRessource('series', series.id, (mb)=>{console.log(mb+ "mb")})
+    const id = toastSuccess("Download started")
+    exportRessource("series", series.id, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
   }
 
   const handleMetadataPreview = (series: Series) => {

@@ -12,33 +12,33 @@ import { useCustomToast } from "../../utils";
 
 type AccordionPatientProps = {
     patient: Patient;
-    onEditPatient: (patient :Patient) => void;
-    onStudyUpdated: (patient :Patient) => void;
-    onDeletePatient: (patient :Patient) => void;
+    onEditPatient: (patient: Patient) => void;
+    onStudyUpdated: (patient: Patient) => void;
+    onDeletePatient: (patient: Patient) => void;
 };
 
 const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient, onStudyUpdated }) => {
-    const {toastSuccess} = useCustomToast()
+    const { toastSuccess, updateExistingToast } = useCustomToast()
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
 
     const handleStudySelected = (studyId: string) => {
         setSelectedStudyId(studyId);
     };
 
-    const handleEditClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
+    const handleEditClick = (event: React.MouseEvent<HTMLButtonElement | SVGElement>) => {
         event.stopPropagation();
-        onEditPatient(patient); 
+        onEditPatient(patient);
     }
 
-    const handleDeleteClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
+    const handleDeleteClick = (event: React.MouseEvent<HTMLButtonElement | SVGElement>) => {
         event.stopPropagation();
-        onDeletePatient(patient); 
+        onDeletePatient(patient);
     }
 
-    const handleSaveClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
+    const handleSaveClick = (event: React.MouseEvent<HTMLButtonElement | SVGElement>) => {
         event.stopPropagation();
-        toastSuccess("Download started, follow progression in console")
-        exportRessource("patients", patient.id, (mb)=>{console.log(mb + "mb")})
+        const id = toastSuccess("Download started")
+        exportRessource("patients", patient.id, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
     }
 
     return (
