@@ -22,7 +22,7 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
     const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
 
     const { confirm } = useConfirm();
-    const { toastSuccess, toastError } = useCustomToast();
+    const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
 
     const studies = useMemo(() => {
         return patient.getStudies().map(study => study.toJSON());
@@ -68,8 +68,8 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
     }
 
     const handleDownloadStudy = (studyId: string) => {
-        toastSuccess("Download started, follow progression in console")
-        exportRessource('studies', studyId, (mb)=>{console.log(mb+ "mb")})
+        const id = toastSuccess("Download started, follow progression in console")
+        exportRessource("studies", studyId, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
     }
 
     const handleStudyAction = (action: string, studyId: string) => {
