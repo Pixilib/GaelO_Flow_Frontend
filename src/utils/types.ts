@@ -302,6 +302,7 @@ export type Instances = {
     instanceCreationTime: string | null;
     instanceNumber: string | null;
     sopInstanceUID: string | null;
+    numberOfFrames: string|null;
   };
   parentSeries: string;
   type: string;
