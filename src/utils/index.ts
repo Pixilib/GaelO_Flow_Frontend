@@ -25,7 +25,6 @@ import type {
     Option,
     QueryPayload,
     Series,
-    SeriesPayload,
     Study,
 } from "./types";
 import { useCustomToast } from "./toastify";
@@ -52,6 +51,5 @@ export {
     User,
     UserPayload,
     UserUpdatePayload,
-    Series,
-    SeriesPayload
+    Series
 };

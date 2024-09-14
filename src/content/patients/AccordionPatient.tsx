@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
-import { Accordion, DeleteButton, EditButton } from "../../ui";
+import { Accordion, DeleteButton, DownloadButton, EditButton } from "../../ui";
 
 import Patient from "../../model/Patient";
-
 
 import StudyRoot from "../studies/StudyRoot";
 import SeriesRoot from "../series/SeriesRoot";
 import { AccordionHeader } from "../../ui/Accordion";
+import { exportRessource } from "../../services/export";
+import { useCustomToast } from "../../utils";
 
 type AccordionPatientProps = {
     patient: Patient;
@@ -17,6 +18,7 @@ type AccordionPatientProps = {
 };
 
 const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient, onStudyUpdated }) => {
+    const {toastSuccess} = useCustomToast()
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
 
     const handleStudySelected = (studyId: string) => {
@@ -33,6 +35,12 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
         onDeletePatient(patient); 
     }
 
+    const handleSaveClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
+        event.stopPropagation();
+        toastSuccess("Download started, follow progression in console")
+        exportRessource("patients", patient.id, (mb)=>{console.log(mb + "mb")})
+    }
+
     return (
         <>
             <Accordion
@@ -44,6 +52,7 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                             <span className="text-sm group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
                             <div className="flex justify-end w-full space-x-7">
                                 <EditButton onClick={handleEditClick} />
+                                <DownloadButton onClick={handleSaveClick} />
                                 <DeleteButton onClick={handleDeleteClick} />
                             </div>
                         </div>

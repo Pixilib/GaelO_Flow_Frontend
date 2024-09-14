@@ -4,6 +4,7 @@ import Button from "./Button";
 import CheckBox from "./Checkbox";
 import EditButton from "./EditButton";
 import DeleteButton from "./DeleteButton";
+import DownloadButton from "./DownloadButton"
 import BooleanIcon from "./BooleanIcon";
 import CloseButton from "./CloseButton";
 import RetrieveButton from "../query/RetrieveButton";
@@ -49,6 +50,7 @@ export {
     ConfirmModal,
     CheckBox,
     CloseButton,
+    DownloadButton,
     DropDown,
     EditButton,
     DeleteButton,

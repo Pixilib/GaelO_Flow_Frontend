@@ -335,13 +335,14 @@ export type Patient = {
   type: string;
 };
 
-export type PatientPayload = {
+export type PatientModifyPayload = {
   replace: Partial<PatientMainDicomTags>;
   remove: string[];
   removePrivateTags: boolean;
   force: boolean;
   synchronous: boolean;
   keepSource: boolean;
+  keep : string[];
 };
 
 export type OrthancResponse = {
@@ -361,20 +362,22 @@ export type Study = {
   type: string;
 };
 
-export type StudyPayload = {
-  replace: Partial<StudyMainDicomTags>;
+export type StudyModifyPayload = {
+  replace: Partial<StudyMainDicomTags&PatientMainDicomTags>;
   remove: string[];
   removePrivateTags: boolean;
   force: boolean;
+  keep : string[];
   synchronous: boolean;
   keepSource: boolean;
 };
 
-export type SeriesPayload = {
+export type SeriesModifyPayload = {
   replace: Partial<SeriesMainDicomTags>;
   remove: string[];
   removePrivateTags: boolean;
   keepSource: boolean;
   force: boolean;
   synchronous: boolean;
+  keep : string[];
 };
