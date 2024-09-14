@@ -59,7 +59,8 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   }
 
   const handleDownloadSeries = (series: Series) => {
-    exportRessource('series', series.id)
+    toastSuccess("Download started, follow progression in console")
+    exportRessource('series', series.id, (mb)=>{console.log(mb+ "mb")})
   }
 
   const handleMetadataPreview = (series: Series) => {

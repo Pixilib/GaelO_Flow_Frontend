@@ -68,7 +68,8 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
     }
 
     const handleDownloadStudy = (studyId: string) => {
-        exportRessource('studies', studyId)
+        toastSuccess("Download started, follow progression in console")
+        exportRessource('studies', studyId, (mb)=>{console.log(mb+ "mb")})
     }
 
     const handleStudyAction = (action: string, studyId: string) => {

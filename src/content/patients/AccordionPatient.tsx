@@ -8,6 +8,7 @@ import StudyRoot from "../studies/StudyRoot";
 import SeriesRoot from "../series/SeriesRoot";
 import { AccordionHeader } from "../../ui/Accordion";
 import { exportRessource } from "../../services/export";
+import { useCustomToast } from "../../utils";
 
 type AccordionPatientProps = {
     patient: Patient;
@@ -17,6 +18,7 @@ type AccordionPatientProps = {
 };
 
 const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient, onStudyUpdated }) => {
+    const {toastSuccess} = useCustomToast()
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
 
     const handleStudySelected = (studyId: string) => {
@@ -35,7 +37,8 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
 
     const handleSaveClick = (event:  React.MouseEvent<HTMLButtonElement|SVGElement>) => {
         event.stopPropagation();
-        exportRessource("patients", patient.id)
+        toastSuccess("Download started, follow progression in console")
+        exportRessource("patients", patient.id, (mb)=>{console.log(mb + "mb")})
     }
 
     return (
