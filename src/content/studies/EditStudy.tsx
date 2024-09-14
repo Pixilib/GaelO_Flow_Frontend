@@ -3,7 +3,7 @@
  */
 
 import React, { useState } from "react";
-import { Study, StudyPayload } from "../../utils/types";
+import { Study, StudyModifyPayload } from "../../utils/types";
 import { getStudy, modifyStudy } from "../../services/orthanc";
 import { useCustomMutation, useCustomQuery, useCustomToast } from "../../utils";
 import StudyEditForm from './StudyEditForm';
@@ -20,17 +20,15 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
     const { toastSuccess, toastError } = useCustomToast();
     const [jobId, setJobId] = useState<string | null>(null);
 
-    console.log("EditStudyProps", studyId, onStudyUpdated, onClose, show);
-    const { mutateAsync: mutateStudy } = useCustomMutation<any, { id: string, payload: StudyPayload }>(
+    const { mutateAsync: mutateStudy } = useCustomMutation<any, { id: string, payload: StudyModifyPayload }>(
         ({ id, payload }) => modifyStudy(id, payload),
         [['studies'], ['jobs']],
         {
             onSuccess: (data) => {
-                // toastSuccess(`Study ${data.id} updated successfully`);
                 setJobId(data.id);
-                // onClose();
             },
             onError: (error) => {
+                console.log(error)
                 toastError("Failed to update study: " + error );
             },
         }
@@ -46,7 +44,7 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
         }
     );
 
-    const handleSubmit = ({ id, payload }: { id: string; payload: StudyPayload }) => {
+    const handleSubmit = ({ id, payload }: { id: string; payload: StudyModifyPayload }) => {
         mutateStudy({ id, payload });
     };
 
@@ -71,7 +69,7 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
             <Modal.Body>
             {editingStudyDetails && (
                     <StudyEditForm 
-                        data={{...editingStudyDetails.mainDicomTags, id: editingStudyDetails.id}}
+                        data={editingStudyDetails}
                         onSubmit={handleSubmit}
                         jobId={jobId ?? undefined}
                         onJobCompleted={handleJobCompletion}

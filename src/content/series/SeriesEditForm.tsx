@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
-import { Series, SeriesPayload, SeriesMainDicomTags } from '../../utils/types';
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { Series, SeriesModifyPayload, SeriesMainDicomTags } from '../../utils/types';
 import { InputWithDelete, CheckBox, Button } from "../../ui";
 
 import ProgressJobs from "../../query/ProgressJobs";
@@ -7,7 +7,7 @@ import { Colors } from "../../utils";
 
 type SeriesEditFormProps = {
     data: Series;
-    onSubmit: (data: { id: string; payload: SeriesPayload }) => void;
+    onSubmit: (data: { id: string; payload: SeriesModifyPayload }) => void;
     jobId?: string;
     onJobCompleted?: (jobState: string) => void;
 }
@@ -21,6 +21,11 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
     const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
+    const [keepUIDs, setKeepUIDs] = useState(false)
+
+    useEffect(() => {
+        if (keepUIDs) setKeepSource(true)
+    }, [keepUIDs])
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -40,13 +45,14 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         if (seriesDate !== data.mainDicomTags.seriesDate) replace.seriesDate = seriesDate;
         if (seriesTime !== data.mainDicomTags.seriesTime) replace.seriesTime = seriesTime;
 
-        const payload: SeriesPayload = {
+        const payload: SeriesModifyPayload = {
             replace,
             remove: fieldsToRemove,
             removePrivateTags,
             keepSource,
             force: true,
             synchronous: false,
+            keep: keepUIDs ? ['SeriesInstanceUID', 'SOPInstanceUID'] : [],
         };
 
         onSubmit({ id: data.id, payload });
@@ -107,7 +113,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                     fieldsToRemove={fieldsToRemove}
                 />
             </div>
-            <div className="grid justify-center grid-cols-1 lg:grid-cols-2">
+            <div className="flex justify-around">
                 <CheckBox
                     label="Removing private tags"
                     checked={removePrivateTags}
@@ -120,17 +126,24 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepSource(e.target.checked)}
                     bordered={false}
                 />
+                <CheckBox
+                    label="Keep UIDs"
+                    checked={keepUIDs}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepUIDs(e.target.checked)}
+                    bordered={false}
+                />
             </div>
-            <div>
+            <div className="flex justify-center">
                 <Button type="submit" color={Colors.secondary}>Modify</Button>
+                {
+                    jobId && (
+                        <div className="flex flex-col items-center justify-center">
+                            <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                        </div>
+                    )
+                }
             </div>
-            {
-                jobId && (
-                    <div className="flex flex-col items-center justify-center">
-                        <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
-                    </div>
-                )
-            }
+
         </form>
     );
 };

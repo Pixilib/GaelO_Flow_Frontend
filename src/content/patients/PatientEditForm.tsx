@@ -1,53 +1,62 @@
 import React, { ChangeEvent, useState, useEffect } from "react";
 import { Button, Input, Spinner } from "../../ui";
 import Patient from "../../model/Patient";
-import { PatientMainDicomTags, PatientPayload } from "../../utils/types";
+import { PatientMainDicomTags, PatientModifyPayload } from "../../utils/types";
 import CheckBox from "../../ui/Checkbox";
 import { Colors } from "../../utils";
 import InputWithDelete from "../../ui/InputWithDelete";
+import ProgressJobs from "../../query/ProgressJobs";
 
 type PatientEditFormProps = {
+    jobId: string | null;
     patient: Patient;
-    onSubmit: (data: { id: string; payload: PatientPayload }) => void;
-    onCancel: () => void;
+    onSubmit: (data: { id: string; payload: PatientModifyPayload }) => void;
+    onJobCompleted: (jobStatus :string) => void;
 };
 
-    const PatientEditForm = ({ patient, onSubmit, onCancel }: PatientEditFormProps) => {
-        const [patientId, setPatientId] = useState<string>(patient?.patientId ?? "");
-        const [patientName, setPatientName] = useState<string | null>(patient?.patientName ?? null);
-        const [patientBirthDate, setPatientBirthDate] = useState<string | null>(patient?.patientBirthDate ?? null);
-        const [patientSex, setPatientSex] = useState<string | null>(patient?.patientSex ?? null);
-        const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
-        const [keepSource, setKeepSource] = useState<boolean>(false);
-        const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
-        
-        if (!patient) return <Spinner/>;
-    
-        const handleFieldRemoval = (field: string, checked: boolean) => {
-            setFieldsToRemove((prev) =>
-                checked ? [...prev, field] : prev.filter((item) => item !== field)
-            );
+const PatientEditForm = ({ patient, jobId, onSubmit, onJobCompleted }: PatientEditFormProps) => {
+    const [patientId, setPatientId] = useState<string>(patient?.patientId ?? "");
+    const [patientName, setPatientName] = useState<string | null>(patient?.patientName ?? null);
+    const [patientBirthDate, setPatientBirthDate] = useState<string | null>(patient?.patientBirthDate ?? null);
+    const [patientSex, setPatientSex] = useState<string | null>(patient?.patientSex ?? null);
+    const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
+    const [keepSource, setKeepSource] = useState<boolean>(false);
+    const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
+    const [keepUIDs, setKeepUIDs] = useState(false)
+
+    if (!patient) return <Spinner />;
+
+    useEffect(() => {
+        if (keepUIDs) setKeepSource(true)
+    }, [keepUIDs])
+
+    const handleFieldRemoval = (field: string, checked: boolean) => {
+        setFieldsToRemove((prev) =>
+            checked ? [...prev, field] : prev.filter((item) => item !== field)
+        );
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        const replace: Partial<PatientMainDicomTags> = {};
+
+        if (patientName !== patient.patientName) replace.patientName = patientName;
+        if (patientId !== patient.patientId) replace.patientId = patientId;
+        if (patientBirthDate !== patient.patientBirthDate) replace.patientBirthDate = patientBirthDate;
+        if (patientSex !== patient.patientSex) replace.patientSex = patientSex;
+
+        const payload: PatientModifyPayload = {
+            replace,
+            remove: fieldsToRemove,
+            removePrivateTags,
+            keepSource,
+            force: true,
+            synchronous: false,
+            keep: keepUIDs ? ['StudyInstanceUID', 'SeriesInstanceUID', 'SOPInstanceUID'] : [],
         };
-    
-        const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const replace: Partial<PatientMainDicomTags> = {};
-    
-            if (patientName !== patient.patientName) replace.patientName = patientName;
-            if (patientBirthDate !== patient.patientBirthDate) replace.patientBirthDate = patientBirthDate;
-            if (patientSex !== patient.patientSex) replace.patientSex = patientSex;
-    
-            const payload: PatientPayload = {
-                replace,
-                remove: fieldsToRemove,
-                removePrivateTags,
-                keepSource,
-                force: true,
-                synchronous: false,
-            };
-            onSubmit({ id: patientId, payload });
-        };
-    
+        onSubmit({ id: patient.id, payload });
+    };
+
 
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
@@ -91,9 +100,9 @@ type PatientEditFormProps = {
                     placeholder="Enter patient sex"
                 />
             </div>
-            <div className="grid justify-center grid-cols-1 lg:grid-cols-2">
+            <div className="flex justify-around">
                 <CheckBox
-                    label="Removing private tags"
+                    label="Remove private tags"
                     checked={removePrivateTags}
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setRemovePrivateTags(event.target.checked)}
                     bordered={false}
@@ -104,14 +113,24 @@ type PatientEditFormProps = {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => setKeepSource(event.target.checked)}
                     bordered={false}
                 />
+                <CheckBox
+                    label="Keep UIDs"
+                    checked={keepUIDs}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepUIDs(e.target.checked)}
+                    bordered={false}
+                />
             </div>
-            <div className="flex justify-center mt-4 space-x-4">
-                <Button color={Colors.secondary} type="button" onClick={onCancel}>
-                    Cancel
-                </Button>
+            <div className="flex justify-center">
                 <Button type="submit" color={Colors.success}>
                     Save Changes
                 </Button>
+                {jobId &&
+                    (
+                        <div className="flex flex-col items-center justify-center">
+                            <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                        </div>
+                    )
+                }
             </div>
         </form>
     );

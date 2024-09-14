@@ -63,6 +63,7 @@ services:
             PYTHON_PLUGIN_ENABLED: "true"
             TRANSFERS_PLUGIN_ENABLED: "true"
             WORKLISTS_PLUGIN_ENABLED: "true"
+            ORTHANC__OVERWRITE_INSTANCES: "true"
             ORTHANC__DICOM_WEB__ENABLE: "true"
             ORTHANC__DICOM_WEB__ROOT: "/dicom-web/"
             ORTHANC__DICOM_WEB__ENABLEWADO: "true"
@@ -70,6 +71,7 @@ services:
             ORTHANC__DICOM_WEB__SSL: "true"
             ORTHANC__DICOM_WEB__STUDIES_METADATA: "MainDicomTags"
             ORTHANC__DICOM_WEB__SERIES_METADATA: "Full"
+            
 
 volumes:
         orthanc-flow:
