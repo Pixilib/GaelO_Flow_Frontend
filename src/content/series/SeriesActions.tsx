@@ -42,6 +42,12 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
             color: 'red',
             action: () => onActionClick('delete', series)
         },
+        {
+            label: 'addToDeleteList',
+            icon: <FaTrash />,
+            color: 'red',
+            action: () => onActionClick('addToDeleteList', series)
+        },
     ];
 
     const handleClick = (e: React.MouseEvent) => {
