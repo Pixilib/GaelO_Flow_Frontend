@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab, Card, CardBody } from "../../ui";
+import { Tabs, Tab, Card, CardBody, CardFooter } from "../../ui";
 import { Colors } from "../../utils";
 import Roles from "./roles/Roles";
 import Users from "./user/Users";
@@ -43,6 +43,7 @@ const UsersRoot = () => {
                 roundedTopRight={false}
                 roundedBottomLeft={false}
                 roundedBottomRight={false}
+                className="px-0 py-0"
             >
                 <Routes>
                     <Route path="/users" element={<Users />} />

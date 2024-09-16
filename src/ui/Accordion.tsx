@@ -43,7 +43,7 @@ const Accordion: React.FC<AccordionProps> = ({
 
   return (
     <div
-      className={`transition-all duration-300 ease-in-out p-3 border rounded-lg shadow-md w-full ${getVariantClasses().container} ${className}`}
+      className={`transition-all duration-300 ease-in-out p-3 border rounded-2xl shadow-md w-full ${getVariantClasses().container} ${className}`}
     >
       <div onClick={handleToggle}>
         {header}

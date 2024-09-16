@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -22,6 +22,7 @@ export type textSize = "xxs" | "xs" | "sm" | "base" | "lg";
 
 type TableProps<TData> = {
   data?: TData[];
+  id?: string;
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
   enableColumnFilters?: boolean;
@@ -33,7 +34,7 @@ type TableProps<TData> = {
   pinLastColumn?: boolean;
   enableRowSelection?: boolean;
   selectedRow?: Record<string, boolean>;
-  onRowSelectionChange?: OnChangeFn<RowSelectionState>;
+  onRowSelectionChange?: (selectedState: Record<string, boolean>) => {};
   onRowClick?: (row: TData) => void;
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
   getRowClasses?: (row: TData) => string | undefined;
@@ -42,6 +43,7 @@ type TableProps<TData> = {
 function Table<T>({
   data = [],
   columns,
+  id = 'id',
   enableSorting = false,
   enableColumnFilters = false,
   headerColor = Colors.white,
@@ -52,17 +54,22 @@ function Table<T>({
   pinLastColumn = false,
   enableRowSelection = false,
   selectedRow = {},
-  onRowSelectionChange,
+  onRowSelectionChange = (selectedState: Record<string, boolean>) => { return null },
   onRowClick,
   getRowStyles,
   getRowClasses,
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [rowSelection, setRowSelection] = useState({})
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: pageSize,
   });
+
+  useEffect(() => {
+    onRowSelectionChange(rowSelection)
+  }, [JSON.stringify(rowSelection)])
 
   const handlePageSizeChange = (newPageSize: number) => {
     setPagination((prev) => ({
@@ -101,10 +108,11 @@ function Table<T>({
       pagination,
       rowSelection: selectedRow,
     },
+    getRowId: (originalRow, index) => originalRow?.[id] ?? index,
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    onRowSelectionChange: onRowSelectionChange,
+    onRowSelectionChange: setRowSelection,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
@@ -113,7 +121,7 @@ function Table<T>({
     enableColumnFilters,
     enableSorting,
     meta: {
-      getRowStyles:  (row: any) => {
+      getRowStyles: (row: any) => {
         const styles = getRowStyles ? getRowStyles(row) : undefined;
         return styles;
       },

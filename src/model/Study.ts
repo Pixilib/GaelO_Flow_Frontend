@@ -1,7 +1,7 @@
 import { getStudy } from "../services/orthanc";
 import Patient from "./Patient";
 import Series from "./Series";
-import type { Study as StudyType } from "./../utils/types";
+import type { StudyMainDicomTags, Study as StudyType } from "./../utils/types";
 
 class Study {
   id: string;
@@ -77,6 +77,17 @@ class Study {
     if (!this.studyInstanceUID) throw "missing study instance uid";
     return this.studyInstanceUID;
   };
+
+  getMainDicomTags = () :StudyMainDicomTags => {
+    return {
+      accessionNumber : this.accessionNumber,
+      studyDescription : this.studyDescription,
+      studyDate : this.studyDate,
+      studyTime : this.studyTime,
+      studyId : this.studyId,
+      studyInstanceUID : this.studyInstanceUID
+    }
+  }
 
   toJSON = ()  : Record<string,any> => {
     return {

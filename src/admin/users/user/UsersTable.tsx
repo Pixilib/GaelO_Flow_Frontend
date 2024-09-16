@@ -50,7 +50,7 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
   ];
 
   return (
-    <div className="mx-5 mt-4">
+    <div className="pb-6 mx-5 mt-4">
       <Table
         data={data}
         columns={columns}

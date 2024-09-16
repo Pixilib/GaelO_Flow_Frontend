@@ -11,6 +11,7 @@ import Banner from '../ui/menu/Banner';
 import DropDown from '../ui/menu/DropDown';
 import ToggleSwitch from '../ui/menu/ToggleSwitch';
 import BannerItems from '../ui/menu/BannerItems';
+import DeleteList from './DeleteList';
 
 type Item = {
   title: string;
@@ -107,6 +108,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       className="sticky top-0 z-50 bg-white"
     >
       <div className="flex justify-end gap-4">
+        <DeleteList />
         <DropDown
           ref={dropdownRefLanguage}
           chevronPosition="right"

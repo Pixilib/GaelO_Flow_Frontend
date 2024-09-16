@@ -1,28 +1,24 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Series, SeriesMainDicomTags, Study, StudyMainDicomTags } from '../utils/types';
+import { Study } from '../utils/types';
 
 export interface DeleteState {
-    series: {
-        [seriesId: string]: {
-            studyId: string,
-            seriesId: string,
-            studyMainDicomTags: StudyMainDicomTags,
-            seriesMainDicomTags: SeriesMainDicomTags
+    studies: {
+        [studyId: string]: {
+            study: Study,
         }
     }
 }
 
 type DeletePayload = {
-    study: Study,
-    series: Series
+    study : Study
 }
 
 type RemovePayload = {
-    seriesId: string
+    studyId: string
 }
 
 const initialState: DeleteState = {
-    series: {},
+    studies: {},
 }
 
 const deleteSlice = createSlice({
@@ -31,21 +27,17 @@ const deleteSlice = createSlice({
     reducers: {
         addSeriesToDeleteList: (state, action: PayloadAction<DeletePayload>) => {
             const study = action.payload.study;
-            const series = action.payload.series;
 
-            state.series[series.id] = {
-                studyId: study.id,
-                seriesId: series.id,
-                studyMainDicomTags: study.mainDicomTags,
-                seriesMainDicomTags: series.mainDicomTags
+            state.studies[study.id] = {
+                study: study,
             }
 
         },
-        removeSeriesFromDeleteList: (state, action: PayloadAction<RemovePayload>) => {
-            const seriesId = action.payload.seriesId;
-            delete state.series?.[seriesId]
+        removeStudyFromDeleteList: (state, action: PayloadAction<RemovePayload>) => {
+            const studyId = action.payload.studyId;
+            delete state.studies?.[studyId]
         }
     }
 })
-export const { addSeriesToDeleteList, removeSeriesFromDeleteList } = deleteSlice.actions;
+export const { addSeriesToDeleteList, removeStudyFromDeleteList } = deleteSlice.actions;
 export default deleteSlice.reducer;

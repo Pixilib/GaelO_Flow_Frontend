@@ -9,6 +9,11 @@ import { useCustomToast } from '../../utils/toastify';
 import Patient from '../../model/Patient';
 import AiStudy from './AiStudy';
 import { exportRessource } from '../../services/export';
+import { useDispatch } from 'react-redux';
+import { addSeriesToDeleteList } from '../../reducers/DeleteSlice';
+import { Button } from '../../ui';
+import { Colors } from '../../utils';
+import { addStudyToDeleteList } from '../../utils/actionsUtils';
 
 type StudyRootProps = {
     patient: Patient;
@@ -17,9 +22,12 @@ type StudyRootProps = {
 }
 
 const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudySelected }) => {
+
+    const dispatch = useDispatch()
     const [editingStudy, setEditingStudy] = useState<string | null>(null);
     const [aiStudyId, setAIStudyId] = useState<string | null>(null);
     const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
+    const [selectedStudies, setSelectedStudies] = useState<{[studyId :string] : boolean}>({})
 
     const { confirm } = useConfirm();
     const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
@@ -72,6 +80,18 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
         exportRessource("studies", studyId, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
     }
 
+    const handleRowSelectionChange = (selectedState) => {
+        setSelectedStudies(selectedState)
+    }
+
+    const handleSendDeleteList = async () => {
+        const studyIds = Object.keys(selectedStudies)
+        for(const studyId of studyIds){
+            await addStudyToDeleteList(studyId)
+        }
+        
+    }
+
     const handleStudyAction = (action: string, studyId: string) => {
         switch (action) {
             case 'edit':
@@ -105,6 +125,8 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                 studies={studies}
                 onRowClick={handleRowClick}
                 onActionClick={handleStudyAction}
+                selectedRows={selectedStudies}
+                onRowSelectionChange={handleRowSelectionChange}
             />
             {editingStudy && (
                 <EditStudy
@@ -128,6 +150,9 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                     show={!!aiStudyId}
                 />
             )}
+            <div>
+                <Button color={Colors.danger} onClick={handleSendDeleteList}>Send to delete</Button>
+            </div>
         </div>
     );
 };

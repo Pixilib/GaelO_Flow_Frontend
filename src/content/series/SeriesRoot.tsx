@@ -14,8 +14,6 @@ import { useCustomToast } from '../../utils/toastify';
 import { Modal, Spinner } from '../../ui';
 import Tags from './Tags';
 import { exportRessource } from '../../services/export';
-import { useDispatch } from 'react-redux';
-import { addSeriesToDeleteList } from '../../reducers/DeleteSlice';
 
 interface SeriesRootProps {
   studyId: string;
@@ -27,7 +25,6 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   const [previewMetadata, setPreviewMetadata] = useState<Series | null>(null);
 
   const { confirm } = useConfirm();
-  const dispatch = useDispatch()
   const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
 
   const { data: seriesList, isLoading, refetch: refetchSeries } = useCustomQuery<Series[]>(
@@ -82,13 +79,6 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     }
   };
 
-  const handleTestSendRedux = (series: Series) => {
-    dispatch(addSeriesToDeleteList({
-      study: null,
-      series: series,
-    }))
-  }
-
 
   const handleSeriesAction = (action: string, series: Series) => {
     switch (action) {
@@ -106,9 +96,6 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         break;
       case 'download':
         handleDownloadSeries(series);
-        break;
-      case 'addToDeleteList':
-        handleTestSendRedux(series)
         break;
       default:
         console.log(`Unhandled action: ${action}`);
