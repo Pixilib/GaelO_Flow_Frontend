@@ -9,11 +9,11 @@ export interface DeleteState {
     }
 }
 
-type DeletePayload = {
+type AddDeletePayload = {
     study : Study
 }
 
-type RemovePayload = {
+type RemoveDeletePayload = {
     studyId: string
 }
 
@@ -25,7 +25,7 @@ const deleteSlice = createSlice({
     name: 'delete',
     initialState,
     reducers: {
-        addSeriesToDeleteList: (state, action: PayloadAction<DeletePayload>) => {
+        addStudyToDeleteList: (state, action: PayloadAction<AddDeletePayload>) => {
             const study = action.payload.study;
 
             state.studies[study.id] = {
@@ -33,11 +33,14 @@ const deleteSlice = createSlice({
             }
 
         },
-        removeStudyFromDeleteList: (state, action: PayloadAction<RemovePayload>) => {
+        flushDeleteList : (state) =>{
+            state.studies = {}
+        },
+        removeStudyFromDeleteList: (state, action: PayloadAction<RemoveDeletePayload>) => {
             const studyId = action.payload.studyId;
             delete state.studies?.[studyId]
         }
     }
 })
-export const { addSeriesToDeleteList, removeStudyFromDeleteList } = deleteSlice.actions;
+export const { addStudyToDeleteList, removeStudyFromDeleteList, flushDeleteList } = deleteSlice.actions;
 export default deleteSlice.reducer;

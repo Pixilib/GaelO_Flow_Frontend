@@ -98,8 +98,8 @@ const ModalitiesRoot: React.FC = () => {
         {!showNewAetCard && (
           <Button color={Colors.success} onClick={handleNewAetClick}>
             <MoreIcon className="mr-3 "
-             size={24} /> 
-             New modality
+              size={24} />
+            New modality
           </Button>
         )}
 

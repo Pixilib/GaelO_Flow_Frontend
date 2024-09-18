@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ColumnDef, selectRowsFn } from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { StudyMainDicomTags } from "../../utils/types";
 import { Colors } from "../../utils";
 
@@ -49,9 +49,9 @@ const  StudyTable: React.FC<StudyTableProps> = ({
         <Table
             columns={columns}
             data={studies}
-            enableColumnFilters={true}
-            headerColor={Colors.almond}
-            className="text-[10px]"
+            headerColor={Colors.light}
+            headerTextSize="xs"
+            className="text-xs"               
             onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}
             enableRowSelection={true}

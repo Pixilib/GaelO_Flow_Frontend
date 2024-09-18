@@ -9,8 +9,6 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
   getPaginationRowModel,
-  RowSelectionState,
-  OnChangeFn,
 } from '@tanstack/react-table';
 
 import { Colors } from "../../utils/enums";
@@ -34,7 +32,7 @@ type TableProps<TData> = {
   pinLastColumn?: boolean;
   enableRowSelection?: boolean;
   selectedRow?: Record<string, boolean>;
-  onRowSelectionChange?: (selectedState: Record<string, boolean>) => {};
+  onRowSelectionChange?: (selectedState: Record<string, boolean>) => void;
   onRowClick?: (row: TData) => void;
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
   getRowClasses?: (row: TData) => string | undefined;
@@ -57,7 +55,7 @@ function Table<T>({
   onRowSelectionChange = (selectedState: Record<string, boolean>) => { return null },
   onRowClick,
   getRowStyles,
-  getRowClasses,
+  getRowClasses = (row) => 'bg-indigo-50',
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -196,7 +194,7 @@ function Table<T>({
           {table.getRowModel().rows.map((row, rowIndex) => (
             <React.Fragment key={`row-${row.id}-${rowIndex}`}>
               <tr
-                className={`${table.options.meta?.getRowClasses(row)} border-b border-gray-300`} // Ajout de la ligne grise foncée
+                className={`${table.options.meta?.getRowClasses(row)} border-b border-gray-100`}
                 style={table.options.meta?.getRowStyles(row)}
                 onClick={() => {
                   if (onRowClick) {

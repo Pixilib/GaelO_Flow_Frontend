@@ -10,10 +10,11 @@ import Patient from '../../model/Patient';
 import AiStudy from './AiStudy';
 import { exportRessource } from '../../services/export';
 import { useDispatch } from 'react-redux';
-import { addSeriesToDeleteList } from '../../reducers/DeleteSlice';
 import { Button } from '../../ui';
 import { Colors } from '../../utils';
-import { addStudyToDeleteList } from '../../utils/actionsUtils';
+import { addStudyIdToDeleteList } from '../../utils/actionsUtils';
+import { addSeriesToExportList} from '../../utils/actionsUtils';
+import { addStudyToAnonymizeList } from '../../utils/actionsUtils';
 
 type StudyRootProps = {
     patient: Patient;
@@ -87,11 +88,29 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
     const handleSendDeleteList = async () => {
         const studyIds = Object.keys(selectedStudies)
         for(const studyId of studyIds){
-            await addStudyToDeleteList(studyId)
+            await addStudyIdToDeleteList(studyId)
         }
         
     }
+    const handleSendExportList = () => {
+        const studyIds = Object.keys(selectedStudies);
+        studyIds.forEach(studyId => {
+            const series = studies.find(study => study.id === studyId);
+            if (series) {
+                dispatch(addSeriesToExportList({ series }));
+            }
+        });
+    };
 
+    const handleSendAnonymizeList = () => {
+        const studyIds = Object.keys(selectedStudies);
+        studyIds.forEach(studyId => {
+            const series = studies.find(study => study.id === studyId);
+            if (series) {
+                dispatch(addStudyToAnonymizeList({ series }));
+            }
+        });
+    };
     const handleStudyAction = (action: string, studyId: string) => {
         switch (action) {
             case 'edit':
@@ -152,6 +171,9 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
             )}
             <div>
                 <Button color={Colors.danger} onClick={handleSendDeleteList}>Send to delete</Button>
+                <Button color={Colors.secondary} onClick={handleSendExportList}>Send to Export</Button>
+                <Button color={Colors.secondary} onClick={handleSendAnonymizeList}>Send to Anonymize</Button>
+
             </div>
         </div>
     );

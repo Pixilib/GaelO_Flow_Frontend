@@ -60,7 +60,7 @@ const RootApp = () => {
         setOpenItem={setOpenItem}
         onLogout={handleLogout}
       />
-      <div className="flex flex-col flex-1 overflow-auto bg-indigo-100 custom-scrollbar">
+      <div className="flex flex-col flex-1 overflow-auto bg-slate-100 custom-scrollbar">
         <Header title={title} />
         <div className="mx-6 my-6">
           <Routes>

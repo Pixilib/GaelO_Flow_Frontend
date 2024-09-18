@@ -35,7 +35,7 @@ const Accordion: React.FC<AccordionProps> = ({
       case "default":
       default:
         return {
-          container: "border-gray-300 bg-white",
+          container: "",
         };
     }
   };
@@ -43,7 +43,7 @@ const Accordion: React.FC<AccordionProps> = ({
 
   return (
     <div
-      className={`transition-all duration-300 ease-in-out p-3 border rounded-2xl shadow-md w-full ${getVariantClasses().container} ${className}`}
+      className={`transition-all duration-300 ease-in-out rounded-2xl w-full ${getVariantClasses().container} ${className}`}
     >
       <div onClick={handleToggle}>
         {header}
@@ -68,13 +68,13 @@ const AccordionHeader = ({ children, className = "", variant = "default" }: Acco
         return "bg-primary-active text-white"
       case "default":
       default:
-        return "bg-gray-100"
+        return "bg-light"
     };
   }
 
 
   return (
-    <div className={"w-full rounded-lg shadow-md flex justify-between items-center p-4 cursor-pointer mb-2 " + getVariantClasses() + " " + className} >
+    <div className={"w-full rounded-2xl shadow-md flex justify-between items-center p-4 cursor-pointer mb-2 " + getVariantClasses() + " " + className} >
       {children}
     </div>
   )

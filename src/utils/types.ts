@@ -363,6 +363,14 @@ export type Study = {
   type: string;
 };
 
+export type AnonStudy = {
+  newPatientName : string,
+  newPatientId : string,
+  newStudyDescription : string,
+  newAccessionNumber : string,
+  originalStudy : Study;
+}
+
 export type StudyModifyPayload = {
   replace: Partial<StudyMainDicomTags&PatientMainDicomTags>;
   remove: string[];

@@ -35,7 +35,7 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
         const user = row.original;
 
         return (
-          <div className="flex justify-center gap-7">
+          <div className="flex justify-center gap-2">
             <EditButton
               onClick={() => onEdit(user)}
             />
