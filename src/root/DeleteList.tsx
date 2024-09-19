@@ -1,46 +1,43 @@
 import { useSelector } from "react-redux"
 import { BsTrashFill as DeleteIcon } from "react-icons/bs"
-import { BiExport as ExportIcon } from "react-icons/bi"
-import { FaUserSecret as AnonIcon } from "react-icons/fa";
-
+import { FaFileExport as ExportIcon } from "react-icons/fa"
+import AnonIcon from "../ui/AnonIcon"
 import { RootState } from "../store"
 
 const DeleteList = () => {
-
     const deleteList = useSelector((state: RootState) => state.delete.studies)
     const anonList = useSelector((state: RootState) => state.anonymize.studies)
     const exportList = useSelector((state: RootState) => state.export.series)
 
     return (
-        <div className="flex items-center gap-3 p-3 border rounded-xl">
-            <span className="flex items-center">
+        <div className="flex items-center gap-4 p-1 mx-4 bg-primary rounded-2xl">
+            <span className="flex items-center p-0.5 bg-white rounded-md shadow-md hover:bg-blue-500 transition-colors group">
                 <AnonIcon
-                    className="mr-2 text-2xl text-blue-900 cursor-pointer hover:text-red-700"
-                    onClick={() => alert('Delete action triggered!')}
+                    className="mr-2 text-xl text-blue-900 cursor-pointer group-hover:text-white"
+                    onClick={() => alert('Anonymize action triggered!')}
                 />
-                <span className="px-2 py-0.5 bg-white rounded-md border border-gray-300 shadow-[0_4px_6px_rgba(255,0,0,0.3)]">
+                <span className="px-1 py-0.5 rounded-full border border-gray-300 shadow-[0_4px_6px rgba(47,123,186,0.5)]">
                     {Object.keys(anonList).length}
                 </span>
             </span>
-            <span className="flex items-center">
+            <span className="flex items-center p-0.5 bg-white rounded-md shadow-md hover:bg-orange-500 transition-colors group">
                 <ExportIcon
-                    className="mr-2 text-2xl cursor-pointer text-secondary hover:text-orange-700"
-                    onClick={() => alert('Delete action triggered!')}
+                    className="mr-2 text-xl cursor-pointer text-secondary group-hover:text-white"
+                    onClick={() => alert('Export action triggered!')}
                 />
-                <span className="px-2 py-0.5 bg-white rounded-md border border-gray-300 shadow-[0_4px_6px_rgba(255,165,0,0.5)]">
+                <span className="px-1 py-0.5 rounded-full border border-gray-300 shadow-[0_4px_6px rgba(255,165,0,0.5)]">
                     {Object.keys(exportList).length}
                 </span>
             </span>
-            <span className="flex items-center">
+            <span className="flex items-center p-0.5 bg-white rounded-md shadow-md hover:bg-red-500 transition-colors group">
                 <DeleteIcon
-                    className="mr-2 text-2xl text-red-500 cursor-pointer hover:text-red-700"
+                    className="mr-2 text-xl text-red-500 cursor-pointer group-hover:text-white"
                     onClick={() => alert('Delete action triggered!')}
                 />
-                <span className="px-2 py-0.5 bg-white rounded-md border border-gray-300 shadow-[0_4px_6px_rgba(255,0,0,0.3)]">
+                <span className="px-1 py-0.5 rounded-full border border-gray-300 shadow-[0_4px_6px rgba(255,0,0,0.3)]">
                     {Object.keys(deleteList).length}
                 </span>
             </span>
-
         </div>
     )
 }

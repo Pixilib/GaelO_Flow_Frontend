@@ -14,7 +14,7 @@ import { Button } from '../../ui';
 import { Colors } from '../../utils';
 import { addStudyIdToDeleteList } from '../../utils/actionsUtils';
 import { addSeriesToExportList} from '../../utils/actionsUtils';
-import { addStudyToAnonymizeList } from '../../utils/actionsUtils';
+// import { addStudyToAnonymizeList } from '../../utils/actionsUtils';
 
 type StudyRootProps = {
     patient: Patient;
