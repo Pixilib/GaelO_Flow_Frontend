@@ -70,7 +70,7 @@ export const SignInForm = () => {
         <form onSubmit={handleSubmit} className="relative z-10 flex flex-col items-center w-full">
           <h1 className="mb-4 text-4xl font-semibold text-center text-dark">
             {t("titleSignInForm")} 
-          </h1>
+          </h1>)
           <p className="mb-10 text-lg text-center text-dark">
             Please Log in to your Account
           </p>
