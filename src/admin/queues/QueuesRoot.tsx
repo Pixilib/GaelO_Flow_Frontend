@@ -20,8 +20,8 @@ const QueuesRoot = () => {
   if (isLoadingOptions) return <Spinner />;
 
   return (
-    <Card className="bg-light">
-      <Tabs className="rounded-t bg-light-gray">
+    <Card >
+      <Tabs className="rounded- bg-light-gray">
         <Tab
           title="Retrieve"
           active={path.endsWith("retrieve")}

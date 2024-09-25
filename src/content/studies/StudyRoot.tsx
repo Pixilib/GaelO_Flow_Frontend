@@ -182,7 +182,7 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
             </div>
 
             {isToolsbarVisible && (
-                <Toolsbar isSticky={true} className="sticky bottom-0 flex items-center justify-center w-full bg-white">
+                <Toolsbar isSticky={true} className="sticky bottom-0 flex items-center justify-center w-full bg-white"> //
                     <Button
                         color={Colors.danger}
                         className="flex items-center mx-2 text-sm transition-transform duration-200 hover:scale-105"
@@ -201,7 +201,7 @@ const StudyRoot: React.FC<StudyRootProps> = ({ patient, onStudyUpdated, onStudyS
                         <span className="ml-2">Send to Export</span>
                     </Button>
 
-                    <Button // TODO: Add anonymize action
+                    <Button //TODO: Add anonymize action
                         className="flex items-center mx-2 text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
                         onClick={handleSendAnonymizeList}>
                         <AnonIcon className="text-xl" onClick={undefined} />

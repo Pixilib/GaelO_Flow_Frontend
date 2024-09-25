@@ -13,12 +13,14 @@ const DeleteList = () => {
 
         <div className="flex items-center w-full gap-6 p-1 -mx-4 bg-primary rounded-2xl">
             {/* Anon Button */}
-            <span className="flex items-center px-4 py-0.5 ml-6 bg-white rounded-md shadow-md hover:bg-blue-500 transition-colors group">
+            <span
+                className="flex items-center px-4 py-0.5 ml-6 bg-white rounded-md shadow-md hover:bg-blue-500 transition-colors group">
                 <AnonIcon
                     className="mr-2 text-xl text-blue-900 cursor-pointer group-hover:text-white"
                     onClick={() => alert('Anonymize action triggered!')}
                 />
-                <span className="px-2 py-0.5 rounded-full border border-gray-300 shadow-[0_4px_6px rgba(47,123,186,0.5)]">
+                <span
+                    className="px-2 py-0.5 rounded-full border border-gray-300 shadow-[0_4px_6px rgba(47,123,186,0.5)]">
                     {Object.keys(anonList).length}
                 </span>
             </span>

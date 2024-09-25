@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab, Card, CardBody, CardFooter } from "../../ui";
+import { Tabs, Tab, Card, CardBody } from "../../ui";
 import { Colors } from "../../utils";
 import Roles from "./roles/Roles";
 import Users from "./user/Users";
@@ -19,7 +19,7 @@ const UsersRoot = () => {
     const isOauth2Path = path.endsWith("oauth2");
 
     return (
-        <Card className="bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
+        <Card className="p-0 bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
             <Tabs className="bg-light-gray rounded-t-xl">
                 <Tab
                     title="Users"
@@ -37,20 +37,14 @@ const UsersRoot = () => {
                     onClick={() => handleTabClick("oauth2")}
                 />
             </Tabs>
-            <CardBody
-                color={Colors.almond}
-                roundedTopLeft={false}
-                roundedTopRight={false}
-                roundedBottomLeft={false}
-                roundedBottomRight={false}
-                className="px-0 py-0"
-            >
+            <CardBody noPadding color={Colors.almond} roundedTopLeft={false} roundedTopRight={false} roundedBottomLeft={false} roundedBottomRight={false}>
                 <Routes>
                     <Route path="/users" element={<Users />} />
                     <Route path="/roles" element={<Roles />} />
                     <Route path="/oauth2" element={<Oauth2 />} />
                 </Routes>
             </CardBody>
+
         </Card>
     );
 };
