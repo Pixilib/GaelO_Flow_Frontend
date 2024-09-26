@@ -16,7 +16,7 @@ const FormCard = ({ title, onSubmit, children, className, collapsible = false, o
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <Card className={` ${className}`}>
+    <Card className={`w-full ${className}`}>
       <CardHeader title={title} color={Colors.success}>
         <div className="">
           {collapsible && (

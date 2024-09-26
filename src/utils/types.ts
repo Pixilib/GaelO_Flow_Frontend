@@ -390,3 +390,11 @@ export type SeriesModifyPayload = {
   synchronous: boolean;
   keep : string[];
 };
+
+export type Queue = {
+  progress : number
+  state : string
+  id : string
+  results : Record<string,any>  
+  userId : number
+}

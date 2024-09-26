@@ -26,9 +26,10 @@ export const addStudyIdToAnonymizeList = async (studyId: string) => {
 }
 
 export const addSeriesOfStudyIdToExportList = async (studyId: string) => {
+    const study = await getStudy(studyId)
     const series = await getSeriesOfStudy(studyId)
     series.forEach(series =>
-        store.dispatch(addSeriesToExportList({ series: series }))
+        store.dispatch(addSeriesToExportList({ series: series, study: study }))
     )
 }
 

@@ -11,7 +11,7 @@ import Banner from '../ui/menu/Banner';
 import DropDown from '../ui/menu/DropDown';
 import ToggleSwitch from '../ui/menu/ToggleSwitch';
 import BannerItems from '../ui/menu/BannerItems';
-import DeleteList from './DeleteList';
+import DeleteList from './ToolList';
 
 type Item = {
   title: string;

@@ -59,7 +59,7 @@ function Table<T>({
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [rowSelection, setRowSelection] = useState({})
+  const [rowSelection, setRowSelection] = useState(selectedRow)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: pageSize,

@@ -3,9 +3,7 @@ import { Study } from '../utils/types';
 
 export interface DeleteState {
     studies: {
-        [studyId: string]: {
-            study: Study,
-        }
+        [studyId: string]: Study,
     }
 }
 
@@ -28,9 +26,7 @@ const deleteSlice = createSlice({
         addStudyToDeleteList: (state, action: PayloadAction<AddDeletePayload>) => {
             const study = action.payload.study;
 
-            state.studies[study.id] = {
-                study: study,
-            }
+            state.studies[study.id] = study
 
         },
         flushDeleteList : (state) =>{

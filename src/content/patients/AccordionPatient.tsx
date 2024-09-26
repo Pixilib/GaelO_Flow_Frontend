@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Accordion, DeleteButton, DownloadButton, EditButton } from "../../ui";
+import { Accordion, CheckBox, DeleteButton, DownloadButton, EditButton } from "../../ui";
 
 import Patient from "../../model/Patient";
 
@@ -12,14 +12,24 @@ import { useCustomToast } from "../../utils";
 
 type AccordionPatientProps = {
     patient: Patient;
+    onPatientSelectionChange: (selected: boolean, patient: Patient) => void
     onEditPatient: (patient: Patient) => void;
     onStudyUpdated: (patient: Patient) => void;
     onDeletePatient: (patient: Patient) => void;
+    selectedStudies: { [studyId: string]: boolean }
+    onSelectedStudyChange: (selectedState: { [studyId: string]: boolean }) => void
 };
 
-const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient, onStudyUpdated }) => {
+const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, onDeletePatient, onStudyUpdated, selectedStudies, onSelectedStudyChange }: AccordionPatientProps) => {
+
     const { toastSuccess, updateExistingToast } = useCustomToast()
+    const [selected, setSelected] = useState(false)
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
+
+
+    useEffect(() => {
+        onPatientSelectionChange(selected, patient)
+    }, [selected])
 
     const handleStudySelected = (studyId: string) => {
         setSelectedStudyId(studyId);
@@ -51,6 +61,7 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                             <span className="text-sm font-medium group-hover:text-white ">Name: {patient.patientName}</span>
                             <span className="text-sm font-medium group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
                             <div className="flex justify-end w-full space-x-7">
+                                <CheckBox bordered={false} onClick={(event) => event.stopPropagation()} onChange={(event) => setSelected(event.target.checked)} checked={selected} />
                                 <EditButton onClick={handleEditClick} />
                                 <DownloadButton onClick={handleSaveClick} />
                                 <DeleteButton onClick={handleDeleteClick} />
@@ -61,12 +72,14 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                 }
                 className="w-full rounded-2xl"
             >
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
                     <div className={`${!selectedStudyId ? 'lg:col-span-2' : ''}`}>
                         <StudyRoot
                             patient={patient}
                             onStudyUpdated={() => onStudyUpdated(patient)}
                             onStudySelected={handleStudySelected}
+                            selectedStudies={selectedStudies}
+                            onSelectedStudyChange={onSelectedStudyChange}
                         />
                     </div>
                     {selectedStudyId && (
