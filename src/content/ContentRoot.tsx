@@ -1,36 +1,27 @@
-
 import React, { useMemo, useState } from "react";
 import { getLabels, findTools, useConfirm, deletePatient } from "../services";
 import { QueryPayload, useCustomMutation, useCustomQuery, useCustomToast, Study as StudyType } from "../utils";
-
 import Model from "../model/Model";
 import Patient from "../model/Patient";
-
 import { FormCard, Spinner, Button } from "../ui";
-
 import SearchForm from "../query/SearchForm";
 import AccordionPatient from "./patients/AccordionPatient";
 import EditPatient from "./patients/EditPatient";
 import { Label } from "../utils/types";
-
 import { addStudyIdToDeleteList, addSeriesOfStudyIdToExportList, addStudyIdToAnonymizeList } from '../utils/actionsUtils';
-
 import { Colors } from '../utils';
-
 import AnonIcon from './../assets/Anon.svg?react';
 import { BsTrashFill as DeleteIcon } from "react-icons/bs";
 import { FaFileExport as ExportIcon } from "react-icons/fa";
-
+import SelectLabels from "../datasets/SelectLabels";
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
     const { toastSuccess, toastError } = useCustomToast();
 
     const [selectedStudies, setSelectedStudies] = useState<{ [studyId: string]: boolean }>({});
-
     const [model, setModel] = useState<Model | null>(null);
     const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
     const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
-
     const patients = useMemo(() => model?.getPatients() || [], [model]);
 
     const handleDeletePatient = async (patient: Patient) => {
@@ -97,20 +88,20 @@ const ContentRoot: React.FC = () => {
     };
 
     const handlePatientSelectionChange = (selected: boolean, patient: Patient) => {
-        const studies = patient.getStudies().map(study => study.id)
+        const studies = patient.getStudies().map(study => study.id);
         const newSelectedStudies = { ...selectedStudies };
         if (selected) {
             studies.forEach((studyId) => {
                 newSelectedStudies[studyId] = true;
-            })
+            });
             setSelectedStudies(newSelectedStudies);
         } else {
             studies.forEach((studyId) => {
                 delete newSelectedStudies[studyId];
-            })
+            });
             setSelectedStudies(newSelectedStudies);
         }
-    }
+    };
 
     const refreshFind = () => {
         if (queryPayload) {
@@ -128,7 +119,7 @@ const ContentRoot: React.FC = () => {
     const handleSendExportList = async () => {
         const studyIds = Object.keys(selectedStudies);
         for (const studyId of studyIds) {
-            await addSeriesOfStudyIdToExportList(studyId)
+            await addSeriesOfStudyIdToExportList(studyId);
         }
     };
 
@@ -157,13 +148,12 @@ const ContentRoot: React.FC = () => {
             </FormCard>
             <div className="flex flex-col items-center w-full gap-3">
                 <div className="flex justify-center w-full text-2xl font-bold text-primary">Results</div>
-                <div className="flex w-full">
-
+                <div className="flex w-full p-4 bg-white shadow-md rounded-3xl">
                     <Button
                         color={Colors.primary}
                         className="flex items-center mx-2 text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
                         onClick={handleSendAnonymizeList}>
-                        <AnonIcon className="text-xl" onClick={undefined} />
+                        <AnonIcon className="text-xl" />
                         <span className="ml-2">Send to Anonymize</span>
                     </Button>
 
@@ -184,6 +174,11 @@ const ContentRoot: React.FC = () => {
                         <DeleteIcon className="text-xl" />
                         <span className="ml-2">Send to delete</span>
                     </Button>
+
+                    <SelectLabels
+                        onChange={(labels) => console.log(labels)}
+                        closeMenuOnSelect={true}
+                    />
                 </div>
                 <div className="w-full">
                     {isPending ? (
@@ -204,7 +199,6 @@ const ContentRoot: React.FC = () => {
                     )}
                 </div>
             </div>
-
         </div>
     );
 };
