@@ -36,6 +36,7 @@ const titlePath: { [key: string]: string } = {
   "/users": "Users",
   "/dataset": "DataSet",
   "/auto-retrieve": "Auto retrieve",
+  "/auto-routing": "Auto routing",
   "/datasets": "Datasets",
   "/": "Home",
 };
@@ -72,7 +73,6 @@ const RootApp = () => {
             <Route path="/query" element={<QueryRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />
             <Route path="/orthanc-content" element={<ContentRoot />} />
-            <Route path="/" element={<ContentRoot />} />
             <Route path="/datasets" element={<DatasetRoot />} />
             <Route path="/anonymize" element={<AnonymizeRoot />} />
             <Route path="/export" element={<ExportRoot />} />
