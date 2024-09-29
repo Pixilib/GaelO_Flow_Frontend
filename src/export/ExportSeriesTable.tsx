@@ -2,14 +2,17 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Button, Table } from "../ui"
 import { Colors, Series } from "../utils";
 import { useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { removeSeriesFromExportList } from "../reducers/ExportSlice";
 
 type ExportSeriesTableProps = {
     series: Series[]
 }
 const ExportSeriesTable = ({ series }: ExportSeriesTableProps) => {
-    console.log(series)
+    const dispatch = useDispatch()
 
     const handleDelete = (seriesId: string) => {
+        dispatch(removeSeriesFromExportList({seriesId : seriesId}))
     };
 
     const columns: ColumnDef<Series>[] = useMemo(

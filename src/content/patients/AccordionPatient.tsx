@@ -45,7 +45,7 @@ const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, on
         onDeletePatient(patient);
     }
 
-    const handleSaveClick = (event: React.MouseEvent<HTMLButtonElement | SVGElement>) => {
+    const handleDownloadClick = (event: React.MouseEvent<HTMLButtonElement | SVGElement>) => {
         event.stopPropagation();
         const id = toastSuccess("Download started")
         exportRessource("patients", patient.id, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
@@ -63,7 +63,7 @@ const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, on
                             <div className="flex justify-end w-full space-x-7">
                                 <CheckBox bordered={false} onClick={(event) => event.stopPropagation()} onChange={(event) => setSelected(event.target.checked)} checked={selected} />
                                 <EditButton onClick={handleEditClick} />
-                                <DownloadButton onClick={handleSaveClick} />
+                                <DownloadButton onClick={handleDownloadClick} />
                                 <DeleteButton onClick={handleDeleteClick} />
                             </div>
                         </div>

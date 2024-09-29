@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Table, Button } from "../ui";
 import { Colors, Study } from "../utils";
+import { removeSeriesFromExportList } from "../reducers/ExportSlice";
 
 type ExportStudyTableProps = {
     studies: Study[];
@@ -13,6 +14,10 @@ const ExportStudyTable = ({ studies }: ExportStudyTableProps) => {
     const dispatch = useDispatch();
 
     const handleDelete = (studyId: string) => {
+        const studyToDelete = studies.find(study => study.id === studyId)
+        for(const seriesId of studyToDelete.series){
+            dispatch(removeSeriesFromExportList({seriesId : seriesId}))
+        }
     };
 
     const columns: ColumnDef<Study>[] = useMemo(
