@@ -131,8 +131,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           <MenuItem
             title="Home"
             icon={<HomeIcon className="w-6 h-6" />}
-            isActive={location.pathname === "/home"}
-            onClick={() => handleItemClick("/home")}
+            isActive={location.pathname === "/"}
+            onClick={() => handleItemClick("/")}
             className="mt-3"
           />
           <MenuItem
