@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Modality, ModalityExtended } from "../utils/types";
 
-function handleAxiosError(error: any) {
+function handleAxiosError(error: any): any {
   if (error.response) {
     throw error.response;
   }
@@ -32,9 +32,9 @@ export const getModalities = (): Promise<ModalityExtended[]> => {
   return axios
     .get("/api/modalities?expand")
     .then((response) => {
-      const data = response.data as Record<string,any>;
+      const data = response.data as Record<string, any>;
       return Object.entries(data).map(([name, modality]: [string, any]) => ({
-        name : name,
+        name: name,
         aet: modality.AET,
         allowEcho: modality.AllowEcho,
         allowEventReport: modality.AllowEventReport,
@@ -52,12 +52,27 @@ export const getModalities = (): Promise<ModalityExtended[]> => {
         timeout: modality.Timeout,
         useDicomTls: modality.UseDicomTls,
       }));
-    }).catch(handleAxiosError);
+    })
+    .catch(handleAxiosError);
 };
 
 export const echoModality = (name: string): Promise<void> => {
   return axios
     .post("/api/modalities/" + name + "/echo")
     .then(() => undefined)
+    .catch(handleAxiosError);
+};
+
+export const storeToModality = (
+  name: string,
+  resources: string[]
+): Promise<string> => {
+  const payload = {
+    Asynchronous: true,
+    Resources: resources,
+  };
+  return axios
+    .post("/api/modalities/" + name + "/store", payload)
+    .then((response) => response.data.ID)
     .catch(handleAxiosError);
 };

@@ -8,9 +8,10 @@ import { removeSeriesFromExportList } from "../reducers/ExportSlice";
 
 type ExportStudyTableProps = {
     studies: Study[];
+    onClickStudy : (study : Study) => void
 };
 
-const ExportStudyTable = ({ studies }: ExportStudyTableProps) => {
+const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
     const dispatch = useDispatch();
 
     const handleDelete = (studyId: string) => {
@@ -64,7 +65,7 @@ const ExportStudyTable = ({ studies }: ExportStudyTableProps) => {
         [dispatch]
     );
 
-    return <Table data={studies} columns={columns} />;
+    return <Table onRowClick={onClickStudy} data={studies} columns={columns} />;
 };
 
 export default ExportStudyTable;

@@ -1,16 +1,18 @@
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import ExportStudyTable from "./ExportStudyTable";
 import ExportSeriesTable from "./ExportSeriesTable";
 import { RiDownload2Line as DownloadIcon } from "react-icons/ri";
 import { Button, Card, CardFooter } from "../ui";
-import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
+import { Colors, Study, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import DropdownButton from "../ui/menu/DropDownButton";
 import { getModalities, getPeers } from "../services";
-import { useMemo } from "react";
-import useToasts from "../services/useToasts";
-import { exportResourcesId, exportRessource } from "../services/export";
+import { exportResourcesId } from "../services/export";
 import { flushExportList } from "../reducers/ExportSlice";
+import { storeToModality } from "../services/modalities";
+import ProgressJobs from "../query/ProgressJobs";
+import { sendResourcesToPeer } from "../services/peers";
 
 const ExportRoot = () => {
 
@@ -19,19 +21,48 @@ const ExportRoot = () => {
     const exportSeriesList = useSelector((state: RootState) => state.export.series);
     const exportStudyList = useSelector((state: RootState) => state.export.studies);
 
+    const [currentStudyId, setCurrentStudyId] = useState(null)
+    const [storeJobId, setStoreJobId] = useState(null)
+    const [sendPeerJobId, setsendPeerJobId] = useState(null)
+
+    const series = useMemo(() => {
+        if (!currentStudyId) return []
+        return Object.values(exportSeriesList).filter(series => series.parentStudy === currentStudyId)
+    }, [currentStudyId])
+
     const { data: modalities } = useCustomQuery(
         ['modalities'],
         () => getModalities()
     )
 
     const { data: peers } = useCustomQuery(
-        ['modalities'],
+        ['peers'],
         () => getPeers()
     )
 
-    const { } = useCustomMutation(
-
+    const { mutate: storeMutate } = useCustomMutation(
+        ({ modalityName, resources }) => storeToModality(modalityName, resources),
+        [[]],
+        {
+            onSuccess: (jobId: string) => {
+                setStoreJobId(jobId)
+            }
+        }
     )
+
+    const { mutate: sendPeerMutate } = useCustomMutation(
+        ({ peerName, resources }) => sendResourcesToPeer(peerName, resources),
+        [[]],
+        {
+            onSuccess: (jobId: string) => {
+                setsendPeerJobId(jobId)
+            }
+        }
+    )
+
+    const handleClickStudy = (study: Study) => {
+        setCurrentStudyId(study.id)
+    }
 
     const handleClearList = () => {
         dispatch(flushExportList())
@@ -44,7 +75,13 @@ const ExportRoot = () => {
     }
 
     const handleExportToModality = (modalityName: string) => {
+        const resources = Object.values(exportSeriesList).map((series) => series.id)
+        storeMutate({ modalityName, resources })
+    }
 
+    const handleExportToPeer = (peerName: string) => {
+        const resources = Object.values(exportSeriesList).map((series) => series.id)
+        sendPeerMutate({ peerName, resources })
     }
 
     const downloadOptions = [
@@ -62,7 +99,7 @@ const ExportRoot = () => {
         },
     ];
 
-    const aetOptions = useMemo(() => {
+    const modalitiesOptions = useMemo(() => {
         return modalities?.map((modality) => {
             return {
                 label: modality.name,
@@ -74,12 +111,12 @@ const ExportRoot = () => {
     }, [modalities])
 
     const peersOptions = useMemo(() => {
-        return peers?.map((modality) => {
+        return peers?.map((peer) => {
             return {
-                label: modality.name,
+                label: peer.name,
                 //icon: <DownloadIcon />,
                 //color: 'green',
-                action: () => handleExportToModality(modality.name)
+                action: () => handleExportToPeer(peer.name)
             }
         }) ?? []
     }, [peers])
@@ -87,8 +124,8 @@ const ExportRoot = () => {
     return (
         <Card>
             <div className="flex flex-col">
-                <ExportStudyTable studies={Object.values(exportStudyList)} />
-                <ExportSeriesTable series={Object.values(exportSeriesList)} />
+                <ExportStudyTable onClickStudy={handleClickStudy} studies={Object.values(exportStudyList)} />
+                <ExportSeriesTable series={series} />
             </div>
             <div>
                 <CardFooter color={Colors.light} className="flex flex-grow justify-center gap-3">
@@ -101,13 +138,19 @@ const ExportRoot = () => {
                         <DropdownButton
                             row={null}
                             buttonText="Send To Modality"
-                            options={aetOptions}
+                            options={modalitiesOptions}
                         />
+                        {
+                            storeJobId && <ProgressJobs size={50} jobId={storeJobId} />
+                        }
                         <DropdownButton
                             row={null}
                             buttonText="Send To Peer"
                             options={peersOptions}
                         />
+                        {
+                            sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />
+                        }
                         <Button
                             color={Colors.primary}
                             disabled
@@ -124,7 +167,6 @@ const ExportRoot = () => {
                             Empty List
                         </Button>
                     </div>
-
                 </CardFooter>
             </div>
         </Card>
