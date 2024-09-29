@@ -110,7 +110,10 @@ const ExportRoot = () => {
                         />
                         <Button
                             color={Colors.primary}
-                        >Send To GaelO</Button>
+                            disabled
+                        >
+                            Send To GaelO
+                        </Button>
                     </div>
                     <div className="flex w-1/5 justify-end gap-3">
                         <Button color={Colors.secondary}>Download as CSV</Button>
