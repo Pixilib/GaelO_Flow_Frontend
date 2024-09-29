@@ -17,18 +17,19 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ConfirmContextProvider>
-      <Provider store={store}>
-        <ErrorBoundary FallbackComponent={<>Error</>}>
-          <QueryClientProvider client={queryClient}>
-            <BrowserRouter>
+    <Provider store={store}>
+      <ErrorBoundary FallbackComponent={<>Error</>}>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <ConfirmContextProvider>
               <App />
-            </BrowserRouter>
-            <ReactQueryDevtools initialIsOpen={true} />
-          </QueryClientProvider>
-          <ToastContainer />
-        </ErrorBoundary>
-      </Provider>
-    </ConfirmContextProvider>
+            </ConfirmContextProvider>
+          </BrowserRouter>
+          <ReactQueryDevtools initialIsOpen={true} />
+        </QueryClientProvider>
+        <ToastContainer />
+      </ErrorBoundary>
+    </Provider>
+
   </React.StrictMode>
 );

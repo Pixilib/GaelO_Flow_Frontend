@@ -78,10 +78,18 @@ const CardHeader = ({ title, centerTitle, className = "", children, color }: Car
 };
 
 
-const CardBody = ({ children, color, className = "", roundedTopLeft, roundedTopRight, roundedBottomLeft, roundedBottomRight }: CardBodyProps) => {
+const CardBody = ({
+  children,
+  color,
+  className = "",
+  roundedTopLeft,
+  roundedTopRight,
+  roundedBottomLeft,
+  roundedBottomRight,
+  noPadding, 
+}: CardBodyProps & { noPadding?: boolean }) => {
   const bodyClass = getColorClass(color);
 
-  // Build an array of rounded corner classes based on props
   const roundedClasses = [
     roundedTopLeft && "rounded-tl-xl",
     roundedTopRight && "rounded-tr-xl",
@@ -90,11 +98,15 @@ const CardBody = ({ children, color, className = "", roundedTopLeft, roundedTopR
   ].filter(Boolean).join(" ");
 
   return (
-    <div data-gaelo-flow="Card-Body" className={`${bodyClass} box-border px-12 py-3 leading-relaxed text-black ${className} ${roundedClasses}`}>
+    <div
+      data-gaelo-flow="Card-Body"
+      className={`${bodyClass} box-border ${noPadding ? "p-0" : "px-12 py-3"} leading-relaxed text-black ${className} ${roundedClasses}`}
+    >
       {children}
     </div>
   );
 };
+
 
 const CardFooter = ({ children, className = "", color }: CardFooterProps) => {
   const footerClass = getColorClass(color);

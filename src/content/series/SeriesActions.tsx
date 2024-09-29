@@ -41,7 +41,7 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
             icon: <FaTrash />,
             color: 'red',
             action: () => onActionClick('delete', series)
-        },
+        }
     ];
 
     const handleClick = (e: React.MouseEvent) => {

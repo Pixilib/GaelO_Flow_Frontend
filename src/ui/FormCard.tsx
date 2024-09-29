@@ -16,9 +16,9 @@ const FormCard = ({ title, onSubmit, children, className, collapsible = false, o
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <Card className={`my-5 h-full ${className}`}>
+    <Card className={`w-full ${className}`}>
       <CardHeader title={title} color={Colors.success}>
-        <div className="flex items-center">
+        <div className="">
           {collapsible && (
             <button onClick={() => setIsCollapsed(!isCollapsed)} className="me-4">
               {isCollapsed ? <FaWindowMaximize /> : <FaWindowMinimize />}

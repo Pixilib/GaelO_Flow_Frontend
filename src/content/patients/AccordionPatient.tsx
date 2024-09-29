@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Accordion, DeleteButton, DownloadButton, EditButton } from "../../ui";
+import { Accordion, CheckBox, DeleteButton, DownloadButton, EditButton } from "../../ui";
 
 import Patient from "../../model/Patient";
 
@@ -12,14 +12,24 @@ import { useCustomToast } from "../../utils";
 
 type AccordionPatientProps = {
     patient: Patient;
+    onPatientSelectionChange: (selected: boolean, patient: Patient) => void
     onEditPatient: (patient: Patient) => void;
     onStudyUpdated: (patient: Patient) => void;
     onDeletePatient: (patient: Patient) => void;
+    selectedStudies: { [studyId: string]: boolean }
+    onSelectedStudyChange: (selectedState: { [studyId: string]: boolean }) => void
 };
 
-const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPatient, onDeletePatient, onStudyUpdated }) => {
+const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, onDeletePatient, onStudyUpdated, selectedStudies, onSelectedStudyChange }: AccordionPatientProps) => {
+
     const { toastSuccess, updateExistingToast } = useCustomToast()
+    const [selected, setSelected] = useState(false)
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
+
+
+    useEffect(() => {
+        onPatientSelectionChange(selected, patient)
+    }, [selected])
 
     const handleStudySelected = (studyId: string) => {
         setSelectedStudyId(studyId);
@@ -35,7 +45,7 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
         onDeletePatient(patient);
     }
 
-    const handleSaveClick = (event: React.MouseEvent<HTMLButtonElement | SVGElement>) => {
+    const handleDownloadClick = (event: React.MouseEvent<HTMLButtonElement | SVGElement>) => {
         event.stopPropagation();
         const id = toastSuccess("Download started")
         exportRessource("patients", patient.id, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
@@ -47,12 +57,13 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                 header={
                     <AccordionHeader className="hover:bg-primary-active group">
                         <div className="grid items-center justify-between w-full grid-cols-4 lg:gap-x-10 ">
-                            <span className="text-sm font-medium text-primary group-hover:text-white lg:text-lg">Patient ID: {patient.patientId}</span>
-                            <span className="text-sm group-hover:text-white ">Name: {patient.patientName}</span>
-                            <span className="text-sm group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
+                            <span className="text-sm font-medium text-gray-600 group-hover:text-white">Patient ID: {patient.patientId}</span>
+                            <span className="text-sm font-medium group-hover:text-white ">Name: {patient.patientName}</span>
+                            <span className="text-sm font-medium group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
                             <div className="flex justify-end w-full space-x-7">
+                                <CheckBox bordered={false} onClick={(event) => event.stopPropagation()} onChange={(event) => setSelected(event.target.checked)} checked={selected} />
                                 <EditButton onClick={handleEditClick} />
-                                <DownloadButton onClick={handleSaveClick} />
+                                <DownloadButton onClick={handleDownloadClick} />
                                 <DeleteButton onClick={handleDeleteClick} />
                             </div>
                         </div>
@@ -61,12 +72,14 @@ const AccordionPatient: React.FC<AccordionPatientProps> = ({ patient, onEditPati
                 }
                 className="w-full rounded-2xl"
             >
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
                     <div className={`${!selectedStudyId ? 'lg:col-span-2' : ''}`}>
                         <StudyRoot
                             patient={patient}
                             onStudyUpdated={() => onStudyUpdated(patient)}
                             onStudySelected={handleStudySelected}
+                            selectedStudies={selectedStudies}
+                            onSelectedStudyChange={onSelectedStudyChange}
                         />
                     </div>
                     {selectedStudyId && (

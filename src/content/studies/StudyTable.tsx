@@ -10,14 +10,18 @@ type StudyWithId = StudyMainDicomTags & { id: string }
 
 type StudyTableProps = {
     studies: StudyWithId[];
-    onRowClick: (studyId: string) => void;
+    selectedRows?: Record<string, boolean>;
+    onRowClick?: (studyId: string) => void;
     onActionClick: (action: string, studyId: string) => void;
+    onRowSelectionChange?: (selectedRow: Record<string, boolean>) => void
 };
 
 const  StudyTable: React.FC<StudyTableProps> = ({
     studies,
+    selectedRows,
     onRowClick,
     onActionClick,
+    onRowSelectionChange,
 }) => {
     const columns: ColumnDef<StudyWithId>[] = useMemo(() => [
         {
@@ -45,12 +49,14 @@ const  StudyTable: React.FC<StudyTableProps> = ({
         <Table
             columns={columns}
             data={studies}
-            enableColumnFilters={true}
-            headerColor={Colors.almond}
-            className="text-[10px]"
+            headerColor={Colors.light}
+            headerTextSize="xs"
+            className="text-xs"               
             onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}
             enableRowSelection={true}
+            selectedRow={selectedRows}
+            onRowSelectionChange={onRowSelectionChange}
         />
     );
 };

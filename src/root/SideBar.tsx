@@ -5,6 +5,7 @@ import {
   from "react-icons/bi";
 import { MdOutlineImageSearch as OrthancContentIcon, MdOutlineRestorePage as RetrieveIcon } from "react-icons/md";
 import { IoMdHelpCircleOutline as HelpIcon } from "react-icons/io";
+import { SlDirections } from "react-icons/sl";
 import { TbZoomQuestion as QueryIcon } from "react-icons/tb";
 import { RiUserSettingsLine as AdministratorIcon } from "react-icons/ri";
 
@@ -113,6 +114,12 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             onClick={() => handleItemClick("/auto-retrieve")}
           />
           <MenuItem
+            title="Auto routing"
+            icon={<SlDirections className="w-6 h-6" />}
+            isActive={location.pathname === "/auto-routing"}
+            onClick={() => handleItemClick("/auto-routing")}
+          />
+          <MenuItem
             title="Datasets"
             icon={<DicomIcon className="w-6 h-6" />}
             isActive={location.pathname === "/datasets"}
@@ -124,8 +131,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           <MenuItem
             title="Home"
             icon={<HomeIcon className="w-6 h-6" />}
-            isActive={location.pathname === "/home"}
-            onClick={() => handleItemClick("/home")}
+            isActive={location.pathname === "/"}
+            onClick={() => handleItemClick("/")}
             className="mt-3"
           />
           <MenuItem

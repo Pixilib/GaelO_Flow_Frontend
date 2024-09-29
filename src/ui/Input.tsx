@@ -47,7 +47,6 @@ const Input = ({
     focus:shadow-outline
     focus:primary focus:ring-primary focus:ring-1
     mr-3
-    ml-3
     block 
     dark:bg-gray-700 
     dark:border-gray-600 
@@ -93,7 +92,7 @@ const Input = ({
           {...props}
         />
         {svgRight && (
-          <div className="flex justify-end peer-disabled:pointer-events-none peer-disabled:opacity-50 p-3">
+          <div className="flex justify-end p-3 peer-disabled:pointer-events-none peer-disabled:opacity-50">
             {svgRight}
           </div>
         )}

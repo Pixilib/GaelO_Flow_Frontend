@@ -65,21 +65,19 @@ const customStyles = {
     ':hover': {
       backgroundColor: "#025D57",
     },
-    // // Centrage
-    // display: "flex",
-    // alignItems: "center",
-    // justifyContent: "center",
   }),
 };
 
 interface SelectLabelsProps {
   onChange: (labels: string[]) => void;
   closeMenuOnSelect?: boolean;
+  className?: string;
 }
 
 const SelectLabels: React.FC<SelectLabelsProps> = ({
   onChange,
   closeMenuOnSelect = true,
+  className,
 }) => {
   const [selectedLabels, setSelectedLabels] = useState<MultiValue<Option> | null>(null);
 
@@ -116,19 +114,17 @@ const SelectLabels: React.FC<SelectLabelsProps> = ({
   if (isPending) return <Spinner />;
 
   return (
-    <>
-      <Select
-        isMulti
-        menuPosition="fixed"
-        options={labelsOptions}
-        onChange={handleChange}
-        closeMenuOnSelect={closeMenuOnSelect}
-        placeholder = 'Select labels ...'
-        className="basic-single"
-        classNamePrefix="select"
-        styles={customStyles}
-      />
-    </>
+    <Select
+      isMulti
+      menuPosition="fixed"
+      options={labelsOptions}
+      onChange={handleChange}
+      closeMenuOnSelect={closeMenuOnSelect}
+      placeholder='Select labels ...'
+      className={`basic-single ${className}`}
+      classNamePrefix="select"
+      styles={customStyles}
+    />
   );
 };
 

@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
+
 import { deleteUser, getUsers } from "../../../services/users";
+import { Colors } from "../../../utils";
 import { useConfirm } from "../../../services/ConfirmContextProvider";
 import { useCustomMutation, useCustomQuery } from "../../../utils/reactQuery";
 import { useCustomToast } from "../../../utils/toastify";
-import { User } from "../../../utils/types"
-import { Button, Spinner } from "../../../ui";
+import { User } from "../../../utils/types";
+import { Button, CardFooter, Spinner } from "../../../ui";
 import UsersTable from "./UsersTable";
 import CreateUserForm from "./CreateUserForm";
 import EditUserForm from "./EditUserForm";
-import { Colors } from "../../../utils";
 
 type UsersProps = {
   className?: string;
@@ -24,6 +26,7 @@ const Users = ({ className = "" }: UsersProps) => {
     useCustomQuery<User[]>(["users"], () => getUsers(), {
       enabled: true,
     });
+
   const deleteMutation = useCustomMutation<void, number>(
     (userId: number) => deleteUser(userId),
     [["users"]],
@@ -55,16 +58,13 @@ const Users = ({ className = "" }: UsersProps) => {
 
   return (
     <div
-      className={`flex flex-col h-full custom-scrollbar overflow-y-auto rounded-br-xl rounded-bl-xl ${className}`}
+      className={`flex flex-col h-full custom-scrollbar overflow-y-auto rounded-br-xl ${className}`}
       data-gaelo-flow="users"
     >
       {isLoadingUsers ? (
         <Spinner />
       ) : (
-        <UsersTable data={users || []}
-          onEdit={editUser}
-          onDelete={deleteUserHandler}
-        />
+        <UsersTable data={users || []} onEdit={editUser} onDelete={deleteUserHandler} />
       )}
 
       {userToEdit ? (
@@ -78,21 +78,22 @@ const Users = ({ className = "" }: UsersProps) => {
         />
       ) : null}
 
-
-      {!isCreatingUser ?
+      <CardFooter className="p-0 border-t rounded-b-lg bg-light">
         <div className="flex justify-center">
-          <Button
-            color={Colors.success}
-            onClick={() => setIsCreatingUser(true)}
-            className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
-          >
-            Create User
-          </Button>
+          {!isCreatingUser ? (
+            <Button
+              color={Colors.success}
+              onClick={() => setIsCreatingUser(true)}
+              className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
+            >
+              <MoreIcon size={24} />
+              Create User
+            </Button>
+          ) : (
+            <CreateUserForm onClose={() => setIsCreatingUser(null)} />
+          )}
         </div>
-        :
-        <CreateUserForm onClose={() => setIsCreatingUser(null)} />
-      }
-
+      </CardFooter>
     </div>
   );
 };

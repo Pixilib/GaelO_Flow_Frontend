@@ -47,7 +47,7 @@ const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
         <Table
             columns={columns}
             data={rows ?? []}
-            headerColor={Colors.almond}
+            headerColor={Colors.light}
             headerTextSize="xs"
             className="text-xs"            
         />

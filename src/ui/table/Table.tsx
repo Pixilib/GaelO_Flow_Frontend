@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
@@ -9,8 +9,6 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
   getPaginationRowModel,
-  RowSelectionState,
-  OnChangeFn,
 } from '@tanstack/react-table';
 
 import { Colors } from "../../utils/enums";
@@ -22,6 +20,7 @@ export type textSize = "xxs" | "xs" | "sm" | "base" | "lg";
 
 type TableProps<TData> = {
   data?: TData[];
+  id?: string;
   columns: ColumnDef<TData>[];
   enableSorting?: boolean;
   enableColumnFilters?: boolean;
@@ -33,7 +32,8 @@ type TableProps<TData> = {
   pinLastColumn?: boolean;
   enableRowSelection?: boolean;
   selectedRow?: Record<string, boolean>;
-  onRowSelectionChange?: OnChangeFn<RowSelectionState>;
+  columnVisibility?: Record<string, boolean>;
+  onRowSelectionChange?: (selectedState: Record<string, boolean>) => void;
   onRowClick?: (row: TData) => void;
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
   getRowClasses?: (row: TData) => string | undefined;
@@ -42,6 +42,7 @@ type TableProps<TData> = {
 function Table<T>({
   data = [],
   columns,
+  id = 'id',
   enableSorting = false,
   enableColumnFilters = false,
   headerColor = Colors.white,
@@ -52,17 +53,23 @@ function Table<T>({
   pinLastColumn = false,
   enableRowSelection = false,
   selectedRow = {},
-  onRowSelectionChange,
+  columnVisibility = {},
+  onRowSelectionChange = (selectedState: Record<string, boolean>) => { return null },
   onRowClick,
   getRowStyles,
-  getRowClasses,
+  getRowClasses = (row) => 'bg-indigo-50',
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [rowSelection, setRowSelection] = useState(selectedRow)
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: pageSize,
   });
+
+  useEffect(() => {
+    onRowSelectionChange(rowSelection)
+  }, [JSON.stringify(rowSelection)])
 
   const handlePageSizeChange = (newPageSize: number) => {
     setPagination((prev) => ({
@@ -100,11 +107,13 @@ function Table<T>({
       columnFilters,
       pagination,
       rowSelection: selectedRow,
+      columnVisibility : columnVisibility
     },
+    getRowId: (originalRow, index) => originalRow?.[id] ?? index,
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
-    onRowSelectionChange: onRowSelectionChange,
+    onRowSelectionChange: setRowSelection,
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getCoreRowModel: getCoreRowModel(),
@@ -113,7 +122,7 @@ function Table<T>({
     enableColumnFilters,
     enableSorting,
     meta: {
-      getRowStyles:  (row: any) => {
+      getRowStyles: (row: any) => {
         const styles = getRowStyles ? getRowStyles(row) : undefined;
         return styles;
       },
@@ -188,7 +197,7 @@ function Table<T>({
           {table.getRowModel().rows.map((row, rowIndex) => (
             <React.Fragment key={`row-${row.id}-${rowIndex}`}>
               <tr
-                className={`${table.options.meta?.getRowClasses(row)} border-b border-gray-300`} // Ajout de la ligne grise foncée
+                className={`${table.options.meta?.getRowClasses(row)} border-b border-gray-100`}
                 style={table.options.meta?.getRowStyles(row)}
                 onClick={() => {
                   if (onRowClick) {

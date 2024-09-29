@@ -18,19 +18,22 @@ const Banner = ({
   return (
     <div
       data-gaelo-flow="banner"
-      className={`p-5 w-full flex rounded-br-2xl border-transparent shadow-lg bg-white ${className}`}
+      className={`p-5 w-full flex flex-col md:flex-row items-center justify-between rounded-br-2xl border-transparent shadow-lg bg-white ${className}`}
     >
-      <span className="flex items-center w-full ml-12">
+      <div className="flex items-center w-full md:w-auto">
         {onLeftIconClick && (
-          <span className="flex items-center mr-4 cursor-pointer text-primary" onClick={onLeftIconClick}>
+          <span
+            className="flex items-center mr-4 cursor-pointer text-primary"
+            onClick={onLeftIconClick}
+          >
             <Arrowlefticon className="text-3xl leading-none text-primary" />
           </span>
         )}
-        <h1 className="text-2xl font-medium text-primary">{title}</h1>
-      </span>
-      <span className="flex justify-end w-full mr-12">
+        <h1 className="text-xl font-medium md:text-2xl text-primary">{title}</h1>
+      </div>
+      <div className="flex justify-end w-full mt-4 md:w-auto md:mt-0">
         {children}
-      </span>
+      </div>
     </div>
   );
 };
