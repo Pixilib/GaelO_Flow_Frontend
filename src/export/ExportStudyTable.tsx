@@ -26,7 +26,6 @@ const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
             {
                 id: "id",
                 accessorKey: "id",
-                header: "ID",
             },
             {
                 accessorKey: "patientMainDicomTags.patientName",
@@ -62,10 +61,10 @@ const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
                 ),
             },
         ],
-        [dispatch]
+        []
     );
 
-    return <Table onRowClick={onClickStudy} data={studies} columns={columns} />;
+    return <Table onRowClick={onClickStudy} columnVisibility={{id : false}} data={studies} columns={columns} />;
 };
 
 export default ExportStudyTable;

@@ -20,7 +20,6 @@ const ExportSeriesTable = ({ series }: ExportSeriesTableProps) => {
             {
                 id: "id",
                 accessorKey: "id",
-                header: "ID",
             },
             {
                 accessorKey: "mainDicomTags.seriesDescription",
@@ -56,7 +55,7 @@ const ExportSeriesTable = ({ series }: ExportSeriesTableProps) => {
     );
 
     return (
-        <Table data={series} columns={columns} />
+        <Table data={series} columnVisibility={{id : false}} columns={columns} />
     )
 }
 

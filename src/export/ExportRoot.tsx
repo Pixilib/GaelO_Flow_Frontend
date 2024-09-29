@@ -28,7 +28,7 @@ const ExportRoot = () => {
     const series = useMemo(() => {
         if (!currentStudyId) return []
         return Object.values(exportSeriesList).filter(series => series.parentStudy === currentStudyId)
-    }, [currentStudyId])
+    }, [currentStudyId, exportSeriesList])
 
     const { data: modalities } = useCustomQuery(
         ['modalities'],

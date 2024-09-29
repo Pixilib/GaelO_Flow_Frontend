@@ -32,6 +32,7 @@ type TableProps<TData> = {
   pinLastColumn?: boolean;
   enableRowSelection?: boolean;
   selectedRow?: Record<string, boolean>;
+  columnVisibility?: Record<string, boolean>;
   onRowSelectionChange?: (selectedState: Record<string, boolean>) => void;
   onRowClick?: (row: TData) => void;
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
@@ -52,6 +53,7 @@ function Table<T>({
   pinLastColumn = false,
   enableRowSelection = false,
   selectedRow = {},
+  columnVisibility = {},
   onRowSelectionChange = (selectedState: Record<string, boolean>) => { return null },
   onRowClick,
   getRowStyles,
@@ -105,6 +107,7 @@ function Table<T>({
       columnFilters,
       pagination,
       rowSelection: selectedRow,
+      columnVisibility : columnVisibility
     },
     getRowId: (originalRow, index) => originalRow?.[id] ?? index,
     onPaginationChange: setPagination,
