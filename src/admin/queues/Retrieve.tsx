@@ -95,9 +95,9 @@ const Retrieve = ({ data }: RetrieveProps) => {
     <form
       onSubmit={handleSubmit}
       data-gaelo-flow="retrieve-container-queues"
-      className="flex flex-col items-center w-full mb-6 rounded-br-xl rounded-bl-xl"
+      className="w-full rounded-br-xl rounded-bl-xl"
     >
-      <Card bordered className="w-11/12 mt-8">
+      <Card bordered className="mt-8 ">
         <CardHeader title="Retrieve Schedule Time : " color={Colors.success} />
         <CardBody color={Colors.light} roundedBottomLeft roundedBottomRight>
           <div className="flex items-center justify-around gap-12 mt-1">

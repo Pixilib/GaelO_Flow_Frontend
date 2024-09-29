@@ -83,60 +83,61 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
 
   return (
     <FormCard
-      className="bg-light-gray"
-      title="Create New Modality"
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    >
-      <div className="grid grid-cols-2 gap-4 p-4">
-        <Input
-          label="Name"
-          bordered = {false}
-          value={name}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-          aria-label="Modality Name"
+    className="w-full bg-light-gray"
+    title="Create New Modality"
+    onClose={onClose}
+    onSubmit={handleSubmit}
+  >
+    <div className="grid w-full grid-cols-2 gap-4 p-4"> 
+      <Input
+        label="Name"
+        bordered={false}
+        value={name}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+        aria-label="Modality Name"
+      />
+      <Input
+        label="AET"
+        bordered
+        value={aet}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setAet(e.target.value)}
+        aria-label="AET"
+      />
+      <Input
+        label="Host"
+        bordered
+        value={host}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setHost(e.target.value)}
+        aria-label="Host"
+      />
+      <Input
+        label="Port"
+        bordered
+        type="number"
+        value={port.toString()}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setPort(e.target.value === "" ? "" : Number(e.target.value))
+        }
+        aria-label="Port"
+      />
+      <div className="col-span-2">
+        <SelectInput
+          options={options}
+          value={manufacturer?.value ?? null}
+          onChange={handleSelectChange}
+          placeholder="Select Manufacturer"
+          aria-label="Manufacturer"
         />
-        <Input
-          label="AET"
-          bordered
-          value={aet}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setAet(e.target.value)}
-          aria-label="AET"
-        />
-        <Input
-          label="Host"
-          bordered
-          value={host}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setHost(e.target.value)}
-          aria-label="Host"
-        />
-        <Input
-          label="Port"
-          bordered
-          type="number"
-          value={port.toString()}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setPort(e.target.value === "" ? "" : Number(e.target.value))
-          }
-          aria-label="Port"
-        />
-        <div className="col-span-2">
-          <SelectInput
-            options={options}
-            value={manufacturer?.value ?? null}
-            onChange={handleSelectChange}
-            placeholder="Select Manufacturer"
-            aria-label="Manufacturer"
-          />
-        </div>
       </div>
-      <div className="flex justify-center">
-      <Button type="submit" color={Colors.success} aria-label="Submit New Modality">
-          <CheckIcon size="20px" />
-        </Button>
-      </div>
-
-    </FormCard>
+    </div>
+    <div className="flex justify-center">
+      <Button type="submit" 
+      color={Colors.success} aria-label="Submit New Modality">
+        
+        <CheckIcon size="20px" />
+      </Button>
+    </div>
+  </FormCard>
   );
 };
 

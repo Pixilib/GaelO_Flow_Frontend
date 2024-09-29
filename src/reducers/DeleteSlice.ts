@@ -1,51 +1,42 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Series, SeriesMainDicomTags, Study, StudyMainDicomTags } from '../utils/types';
+import { Study } from '../utils/types';
 
 export interface DeleteState {
-    series: {
-        [seriesId: string]: {
-            studyId: string,
-            seriesId: string,
-            studyMainDicomTags: StudyMainDicomTags,
-            seriesMainDicomTags: SeriesMainDicomTags
-        }
+    studies: {
+        [studyId: string]: Study,
     }
 }
 
-type DeletePayload = {
-    study: Study,
-    series: Series
+type AddDeletePayload = {
+    study : Study
 }
 
-type RemovePayload = {
-    seriesId: string
+type RemoveDeletePayload = {
+    studyId: string
 }
 
 const initialState: DeleteState = {
-    series: {},
+    studies: {},
 }
 
 const deleteSlice = createSlice({
     name: 'delete',
     initialState,
     reducers: {
-        addSeriesToDeleteList: (state, action: PayloadAction<DeletePayload>) => {
+        addStudyToDeleteList: (state, action: PayloadAction<AddDeletePayload>) => {
             const study = action.payload.study;
-            const series = action.payload.series;
 
-            state.series[series.id] = {
-                studyId: study.id,
-                seriesId: series.id,
-                studyMainDicomTags: study.mainDicomTags,
-                seriesMainDicomTags: series.mainDicomTags
-            }
+            state.studies[study.id] = study
 
         },
-        removeSeriesFromDeleteList: (state, action: PayloadAction<RemovePayload>) => {
-            const seriesId = action.payload.seriesId;
-            delete state.series?.[seriesId]
+        flushDeleteList : (state) =>{
+            state.studies = {}
+        },
+        removeStudyFromDeleteList: (state, action: PayloadAction<RemoveDeletePayload>) => {
+            const studyId = action.payload.studyId;
+            delete state.studies?.[studyId]
         }
     }
 })
-export const { addSeriesToDeleteList, removeSeriesFromDeleteList } = deleteSlice.actions;
+export const { addStudyToDeleteList, removeStudyFromDeleteList, flushDeleteList } = deleteSlice.actions;
 export default deleteSlice.reducer;

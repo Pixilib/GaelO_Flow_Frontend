@@ -12,6 +12,9 @@ import QueryRoot from "../query/QueryRoot";
 import ImportCreateRoot from "../import/ImportCreateRoot";
 import ContentRoot from "../content/ContentRoot";
 import DatasetRoot from "../datasets/DatasetRoot";
+import DeleteRoot from "../delete/DeleteRoot";
+import AnonymizeRoot from "../anonymize/AnonymizeRoot";
+import ExportRoot from "../export/ExportRoot";
 
 const titlePath: { [key: string]: string } = {
   "/administration/general": "General",
@@ -60,7 +63,7 @@ const RootApp = () => {
         setOpenItem={setOpenItem}
         onLogout={handleLogout}
       />
-      <div className="flex flex-col flex-1 overflow-auto bg-indigo-100 custom-scrollbar">
+      <div className="flex flex-col flex-1 overflow-auto bg-slate-100 custom-scrollbar">
         <Header title={title} />
         <div className="mx-6 my-6">
           <Routes>
@@ -71,6 +74,9 @@ const RootApp = () => {
             <Route path="/orthanc-content" element={<ContentRoot />} />
             <Route path="/" element={<ContentRoot />} />
             <Route path="/datasets" element={<DatasetRoot />} />
+            <Route path="/anonymize" element={<AnonymizeRoot />} />
+            <Route path="/export" element={<ExportRoot />} />
+            <Route path="/delete" element={<DeleteRoot />} />
           </Routes>
         </div>
       </div>

@@ -84,7 +84,7 @@ const ModalitiesRoot: React.FC = () => {
         title={"Manage Modalities"}
       />
       <CardBody color={Colors.almond} className="space-x-4">
-        <div className="flex flex-col items-center w-full mt-6 mb-8">
+        <div className="items-center w-full mt-6 mb-8 f">
           <div className="">
             <ModalitiesTable
               aetData={aets}
@@ -97,7 +97,9 @@ const ModalitiesRoot: React.FC = () => {
       <CardFooter color={Colors.light} className="flex justify-center">
         {!showNewAetCard && (
           <Button color={Colors.success} onClick={handleNewAetClick}>
-            <MoreIcon className="mr-3 " size={24} /> New modality
+            <MoreIcon className="mr-3 "
+              size={24} />
+            New modality
           </Button>
         )}
 

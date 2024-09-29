@@ -30,7 +30,7 @@ const Modal = ({ show, size = "lg", children, ...props }: ModalProps) => {
             SizeClasses[size]
           }
         >
-          <div className="relative flex w-full flex-col bg-white border shadow-sm rounded-2xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+          <div className="relative flex w-full flex-col bg-white shadow-sm rounded-2xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
             {children}
           </div>
 
