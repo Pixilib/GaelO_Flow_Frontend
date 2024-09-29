@@ -18,22 +18,19 @@ const ToolList = () => {
     return (
 
         <div className="flex justify-between gap-3 p-3 grow flex-nowrap bg-primary rounded-2xl w-60">
-            <ToolItem count={Object.keys(anonList).length}>
+            <ToolItem count={Object.keys(anonList).length} onClick={() => navigate('/anonymize')}>
                 <AnonIcon
                     className="text-blue-900 cursor-pointer group-hover:text-white"
-                    onClick={() => navigate('/anonymize')}
                 />
             </ToolItem>
-            <ToolItem count={Object.keys(exportList).length}>
+            <ToolItem count={Object.keys(exportList).length} onClick={() => navigate('/export')}>
                 <ExportIcon
                     className="cursor-pointer text-secondary group-hover:text-white"
-                    onClick={() =>  navigate('/export')}
                 />
             </ToolItem>
-            <ToolItem count={Object.keys(deleteList).length}>
+            <ToolItem count={Object.keys(deleteList).length} onClick={() => navigate('/delete')}>
                 <DeleteIcon
                     className="text-red-500 cursor-pointer group-hover:text-white"
-                    onClick={() =>  navigate('/delete')}
                 />
             </ToolItem>
         </div>

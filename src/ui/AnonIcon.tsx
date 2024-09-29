@@ -1,5 +1,5 @@
 // AnonIcon.tsx
-const AnonIcon = ({ className, onClick }) => (
+const AnonIcon = ({ className }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -7,7 +7,6 @@ const AnonIcon = ({ className, onClick }) => (
         fill="none"
         viewBox="0 0 24 23"
         className={`${className} transition-colors duration-300 cursor-pointer`}
-        onClick={onClick}
     >
         <path
             className="fill-current"
