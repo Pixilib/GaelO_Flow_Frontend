@@ -24,44 +24,49 @@ const DeleteRoot = () => {
         [[]],
         {
             onSuccess: (uuid) => {
-                setQueueUuid(uuid)
+                setQueueUuid(uuid);
             },
         }
-    )
+    );
 
     const handleDeleteList = () => {
-        const seriesIds = Object.values(deleteList).map((study) => study.series).flat();
+        const seriesIds = Object.values(deleteList)
+            .map((study) => study.series)
+            .flat();
         mutateDelete({ seriesIds });
-    }
+    };
 
     return (
-        <Card>
-            <CardHeader
-                className="flex items-center justify-center rounded-t-lg text-bg-light"
-                color={Colors.primary}
-                title={"Delete"}
-            />
-            <CardBody color={Colors.almond}>
-                <DeleteStudyTable studies={Object.values(deleteList)} />
-            </CardBody>
-            <CardFooter color={Colors.light} className="flex justify-center gap-3">
-                <Button
-                    onClick={handleClearList}
-                    color={Colors.warning}
+        <>
+            <Card>
+                <CardHeader
+                    className="flex items-center justify-center rounded-t-lg text-bg-light"
+                    color={Colors.primary}
+                    title={"Delete"}
+                />
+                <CardBody color={Colors.almond}>
+                    <DeleteStudyTable studies={Object.values(deleteList)} />
+                </CardBody>
+                <CardFooter color={Colors.light} className="flex justify-center gap-3">
+                    <Button onClick={handleClearList} color={Colors.warning}>
+                        Empty List
+                    </Button>
+                    <Button onClick={handleDeleteList} color={Colors.danger}>
+                        Delete List
+                    </Button>
+                </CardFooter>
+            </Card>
+
+            <Card className="mt-4">
+                <CardBody 
+                    color={Colors.white}
+                    className="flex items-center justify-center rounded-b-xl"
                 >
-                    Empty List
-                </Button>
-                <Button
-                    onClick={handleDeleteList}
-                    color={Colors.danger}
-                >
-                    Delete List
-                </Button>
-                <DeleteQueues />
-            </CardFooter>
-        </Card>
+                    <DeleteQueues />
+                </CardBody>
+            </Card>
+        </>
     );
 };
-
 
 export default DeleteRoot;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Select, { StylesConfig } from 'react-select';
+import Select, { ActionMeta, ClassNamesConfig } from 'react-select';
 
 interface OptionType {
   value: string;
@@ -7,87 +7,60 @@ interface OptionType {
 }
 
 interface SelectInputProps {
-  value: string|null;
-  options: OptionType[];
-  onChange: (selectedOption: OptionType | OptionType[] | null) => void;
+  isMulti?: boolean;
+  value: string | string[] | null;
+  options: OptionType[] | any;
+  onChange: (selectedOption: OptionType | OptionType[] | null, meta: ActionMeta<OptionType>) => void;
   placeholder?: string;
   rounded?: boolean;
-  isClearable?: boolean
+  isClearable?: boolean;
+  closeMenuOnSelect?: boolean;
+  menuPosition?: "fixed";
+  formatOptionLabel?: any;
+  formatGroupLabel?: any;
 }
 
-const customStyles: StylesConfig<OptionType, boolean> = {
-  control: (provided, state) => {
-    const borderRadius = state.selectProps.rounded ? '14px' : '0px';
-    return {
-      ...provided,
-      borderRadius: borderRadius,
-      backgroundColor: '#f8f9fa',
-      borderColor: state.isFocused ? '#333182' : '#D1D5DB',
-      borderWidth: '1px',
-      padding: '0.1em',
-      minHeight: '32px',
-      '&:hover': {
-        borderColor: '#333182',
-      },
-    };
+const customClass: ClassNamesConfig<OptionType, boolean> = {
+  control: (state) => {
+    const borderRadius = state.selectProps.rounded ? 'rounded-lxl' : 'rounded';
+    return `border border-gray-300 min-h-[32px] bg-white ${borderRadius} focus:border-blue-500 hover:border-blue-500`;
   },
-  menu: (provided, state) => {
-    const borderRadius = state.selectProps.rounded ? '10px' : '0px';
-    return {
-      ...provided,
-      borderRadius: borderRadius,
-      padding: '12px',
-    };
+  menu: (state) => {
+    return 'rounded-lg p-2 bg-white';
   },
-  option: (provided, state) => ({
-    ...provided,
-    borderRadius: '8px',
-    padding: '8px 6px',
-    backgroundColor: state.isSelected ? '#333182' : 'white',
-    color: state.isSelected ? 'white' : 'grey',
-    '&:hover': {
-      backgroundColor: '#333182',
-      color: 'white',
-    },
-  }),
-  multiValue: (provided) => ({
-    ...provided,
-    backgroundColor: '#E2E8F0',
-    borderRadius: '6px',
-    padding: '2px 6px',
-    margin: '2px',
-  }),
-  multiValueLabel: (provided) => ({
-    ...provided,
-    color: '#1F2937',
-  }),
-  multiValueRemove: (provided) => ({
-    ...provided,
-    color: '#EF4444',
-    '&:hover': {
-      backgroundColor: '#FEE2E2',
-      color: '#DC2626',
-    },
-  }),
+  option: (state) => {
+    return `rounded-lg p-2 ${state.isSelected ? ' text-white' : 'bg-white text-gray-800'} hover:bg-blue-500 hover:text-white`;
+  },
+  multiValue: () => 'bg-gray-200 rounded-lg px-2 py-1',
+  multiValueLabel: () => 'text-gray-800',
+  multiValueRemove: () => 'text-red-500 hover:bg-red-200 rounded-full p-1',
 };
 
-const SelectInput: React.FC<SelectInputProps> = ({
+const SelectInput = ({
   value,
+  isMulti = false,
   options,
   onChange,
   placeholder = 'Select...',
   rounded = true,
-  isClearable = false
-}) => (
+  isClearable = false,
+  closeMenuOnSelect = true,
+  menuPosition = undefined,
+  formatOptionLabel = undefined,
+  formatGroupLabel = undefined
+}: SelectInputProps) => (
   <Select
     options={options}
-    onChange={(selectedOption: any) => onChange(selectedOption)}
+    onChange={(selectedOption: any, meta: any) => onChange(selectedOption, meta)}
     placeholder={placeholder}
-    styles={customStyles}
-    isClearable = {isClearable}
-    value={value ? options.find(option => option.value === value) : null}
+    classNames={customClass}
+    isClearable={isClearable}
+    menuPosition={menuPosition}
+    formatOptionLabel={formatOptionLabel}
+    formatGroupLabel={formatGroupLabel}
+    value={value ? (isMulti ? options.filter(option => option.value === value) : options.find(option => option.value === value)) : null}
     className={`w-full ${rounded ? 'rounded-xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
-    rounded={rounded} 
+    closeMenuOnSelect={closeMenuOnSelect}
   />
 );
 

@@ -11,6 +11,21 @@ import App from "./App.tsx";
 import ErrorBoundary from "./ErrorBoundary.tsx";
 import "./index.css";
 import ConfirmContextProvider from "./services/ConfirmContextProvider.tsx";
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
+
+const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {
+  const cache = React.useMemo(
+    () =>
+      createCache({
+        key: 'with-tailwind',
+        insertionPoint: document.querySelector('title')!,
+      }),
+    []
+  );
+
+  return <CacheProvider value={cache}>{children}</CacheProvider>;
+};
 
 const queryClient = new QueryClient();
 
@@ -22,7 +37,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <ConfirmContextProvider>
-              <App />
+              <EmotionCacheProvider>
+                <App />
+              </EmotionCacheProvider>
             </ConfirmContextProvider>
           </BrowserRouter>
           <ReactQueryDevtools initialIsOpen={true} />
@@ -30,6 +47,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ToastContainer />
       </ErrorBoundary>
     </Provider>
-
   </React.StrictMode>
 );

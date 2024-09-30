@@ -144,7 +144,7 @@ const ContentRoot: React.FC = () => {
                 title="Search"
                 collapsible={true}
             >
-                <SearchForm onSubmit={handleSubmit} labelsData={labelsData} withAets={true} />
+                <SearchForm onSubmit={handleSubmit} existingLabels={labelsData} withAets={false} />
             </FormCard>
             <div className="flex flex-col items-center w-full gap-3">
                 <div className="flex justify-center w-full text-2xl font-bold text-primary">Results</div>

@@ -16,13 +16,12 @@ const DatasetRoot = () => {
     const { toastError } = useCustomToast();
     const studies = model?.getPatients().map(patient => patient.getStudies()).flat() ?? [];
 
-
     const { data: series } = useCustomQuery<Series[]>(
         ['series', (currentStudyId as string)],
         () => getSeriesOfStudy(currentStudyId as string),
         {
             onError: (error) => {
-                console.error(`No series for this study or an error occured: ${error}`);
+                console.error(`No series for this study or an error occurred: ${error}`);
             },
             enabled: !!currentStudyId
         },
@@ -45,7 +44,7 @@ const DatasetRoot = () => {
 
     const handleSelectChange = (selectedLabels: any) => {
         if (selectedLabels.length === 0) {
-            setModel(new Model()); return
+            setModel(new Model()); return;
         }
         
         const queryPayload: FindPayload = {
@@ -57,12 +56,8 @@ const DatasetRoot = () => {
         mutateToolsFind({ queryPayload });
     };
 
-    const handleButtonClick = () => {
-        console.log("Button clicked");
-    };
-
     const handleStudyRowClick = (studyId: string) => {
-        console.log(studyId)
+        console.log(studyId);
         setCurrentStudyId(studyId);
     };
 
@@ -74,6 +69,10 @@ const DatasetRoot = () => {
         console.log(`Series action "${action}" clicked for series:`, series);
     };
 
+    const handleButtonClick = () => {
+        console.log("Button clicked");
+    };
+
     return (
         <Card>
             <CardHeader
@@ -81,26 +80,30 @@ const DatasetRoot = () => {
                 color={Colors.primary}
                 title="Dataset"
             />
-            <CardBody color={Colors.almond} className="px-3 space-y-4">
+            <CardBody className="bg-almond">
                 <div className="space-y-2">
                     <span className="text-base font-semibold text-gray-700">Labels</span>
                     <SelectLabels onChange={handleSelectChange} closeMenuOnSelect={false} />
                 </div>
-                <div className="p-4 mt-4 bg-white ">
-                    <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Studies</span>
-                    <DatasetTableStudy
-                        studies={studies}
-                        onRowClick={handleStudyRowClick}
-                        onActionClick={handleStudyActionClick}
-                        selectedStudyId={null}
-                    />
-                    <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Series</span>
-                    {series && (
-                        <DatasetSeriesTable
-                            series={series}
-                            onActionClick={handleSeriesActionClick}
+                <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
+                    <div className="2xl:col-span-7">
+                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Studies</span>
+                        <DatasetTableStudy
+                            studies={studies}
+                            onRowClick={handleStudyRowClick}
+                            onActionClick={handleStudyActionClick}
+                            selectedStudyId={null}
                         />
-                    )}
+                    </div>
+                    <div className="2xl:col-span-5">
+                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Series</span>
+                        {series && (
+                            <DatasetSeriesTable
+                                series={series}
+                                onActionClick={handleSeriesActionClick}
+                            />
+                        )}
+                    </div>
                 </div>
             </CardBody>
             <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
