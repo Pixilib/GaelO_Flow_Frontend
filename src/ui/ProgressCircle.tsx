@@ -1,11 +1,11 @@
 type ProgressCircleProps = {
-    progress: number; // Valeur entre 0 et 100
-    text?: string; // Texte affiché au centre (par défaut 'mph')
-    size?: number; // Taille de la jauge (par défaut 150px)
+    progress: number;
+    text?: string;
+    size?: number;
 };
 
 const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCircleProps) => {
-    const radius = 16; // Rayon fixe pour une vue SVG 36x36
+    const radius = 16;
     const circumference = 2 * Math.PI * radius;
     const progressValue = (progress / 100) * circumference;
 
@@ -24,7 +24,7 @@ const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCirclePr
                     fill="none"
                     className="stroke-current text-primary dark:text-neutral-700"
                     strokeWidth="2"
-                    strokeDasharray="75 100" // Arrière-plan avec 75% de l'arc complet
+                    strokeDasharray="75 100"
                 />
 
                 {/* Cercle de progression */}

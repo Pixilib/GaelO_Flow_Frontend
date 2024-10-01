@@ -6,13 +6,11 @@ import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
 import { Colors, useCustomMutation } from "../utils";
 import { createDeleteQueue } from "../services/queues";
 import { useState } from "react";
-import ProgressQueue from "./ProgressQueue";
 import DeleteQueues from "./DeleteQueues";
 
 const DeleteRoot = () => {
     const dispatch = useDispatch();
     const deleteList = useSelector((state: RootState) => state.delete.studies);
-
     const [queueUuid, setQueueUuid] = useState<string | null>(null);
 
     const handleClearList = () => {
@@ -37,8 +35,8 @@ const DeleteRoot = () => {
     };
 
     return (
-        <>
-            <Card>
+        <div className="flex flex-col md:flex-row md:space-x-4">
+            <Card className="w-full md:w-2/3">
                 <CardHeader
                     className="flex items-center justify-center rounded-t-lg text-bg-light"
                     color={Colors.primary}
@@ -57,15 +55,12 @@ const DeleteRoot = () => {
                 </CardFooter>
             </Card>
 
-            <Card className="mt-4">
-                <CardBody 
-                    color={Colors.white}
-                    className="flex items-center justify-center rounded-b-xl"
-                >
+            <Card className="flex items-center justify-center w-full bg-almond md:w-1/3">
+                <div className="flex flex-col items-center justify-center w-full p-4">
                     <DeleteQueues />
-                </CardBody>
+                </div>
             </Card>
-        </>
+        </div>
     );
 };
 
