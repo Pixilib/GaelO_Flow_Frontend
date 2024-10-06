@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { Card, CardBody, CardHeader, FormCard } from "../ui";
 import { getModalities, queryModality } from "../services";
 import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors, useCustomToast } from "../utils";
@@ -57,6 +56,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
       }
     }
   );
+
   const handleSubmit = async (formData: QueryPayload, aet?: string) => {
     if (!aet) {
       toastError("Choose AET to Query");
@@ -65,7 +65,6 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     const extendedPayload = { queryPayload: formData, aet };
     await mutateQueryStudies(extendedPayload);
   };
-
 
   const handleRowClick = async (studyInstanceUID: string, originAET?: string) => {
     const queryPayload: QueryPayload = {
@@ -76,11 +75,10 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     await mutateQuerySeries(extendedPayload);
   };
 
-
   return (
-    <div>
+    <div className={`${className} space-y-6`}>
       <FormCard
-        className={`${className} gap-y-7 flex flex-col justify-center bg-white`}
+        className="flex flex-col justify-center bg-white gap-y-7"
         title={"Search"}
         collapsible={true}
       >
@@ -90,23 +88,23 @@ const QueryRoot = ({ className }: QueryFormProps) => {
           withAets={true}
         />
       </FormCard>
-      <Card>
-            <CardHeader
-                className="flex items-center justify-center rounded-t-lg text-bg-light"
-                color={Colors.primary}
-                title={'Results'}
-            />
-            <CardBody className="space-x-4 bg-almond">
-            <div className="grid grid-cols-1 gap-2 mt-1 2xl:grid-cols-12">
-            <div className="2xl:col-span-7">
-              <ResultsTable results={studies} onRowClick={handleRowClick} />
-            </div>
-            <div className="2xl:col-span-5">
-              <SeriesTable series={series} />
-            </div>
+
+      {/* Section for results */}
+      <div className="flex flex-col w-full p-4 bg-white shadow-md rounded-3xl">
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-2xl font-bold text-primary">Results</div>
+          <div className="text-lg text-gray-600">
+            {studies.length} {studies.length === 1 ? "result" : "results"} found
           </div>
-        </CardBody>
-      </Card>
+        </div>
+        
+      </div>
+      <div className="2xl:col-span-7">
+            <ResultsTable results={studies} onRowClick={handleRowClick} />
+          </div>
+          <div className="2xl:col-span-5">
+            <SeriesTable series={series} />
+          </div>
     </div>
   );
 };

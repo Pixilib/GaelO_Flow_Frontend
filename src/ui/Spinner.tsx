@@ -6,7 +6,7 @@ type SpinnerProps = {
 const Spinner = ({className = ""} : SpinnerProps) => {
     return (
       <div className={"flex items-center justify-center"+ className}>
-        <div className="size-16 animate-spin rounded-full border-b-2 border-primary bg-white"></div>
+        <div className="bg-white border-b-2 rounded-full size-16 animate-spin border-primary"></div>
       </div>
     );
   };

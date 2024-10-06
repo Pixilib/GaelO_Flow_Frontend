@@ -2,6 +2,7 @@ import { BsPencilFill as Edit } from 'react-icons/bs';
 
 type EditButtonProps = {
   onClick: (e: React.MouseEvent<HTMLButtonElement|SVGElement>) => void;
+  className?: string;
 }
 
 const EditButton = ({ onClick }: EditButtonProps) => (

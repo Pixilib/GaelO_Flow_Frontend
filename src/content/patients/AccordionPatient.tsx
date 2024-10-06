@@ -55,14 +55,20 @@ const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, on
         <>
             <Accordion
                 header={
-                    <AccordionHeader className="hover:bg-primary-active group">
-                        <div className="grid items-center justify-between w-full grid-cols-4 lg:gap-x-10 ">
+                    <AccordionHeader className=" hover:bg-primary-active group">
+                        <CheckBox bordered={false}
+                            onClick={(event) => event.stopPropagation()}
+                            onChange={(event) => setSelected(event.target.checked)}
+                            checked={selected} />
+                        <div className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
                             <span className="text-sm font-medium text-gray-600 group-hover:text-white">Patient ID: {patient.patientId}</span>
                             <span className="text-sm font-medium group-hover:text-white ">Name: {patient.patientName}</span>
                             <span className="text-sm font-medium group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
                             <div className="flex justify-end w-full space-x-7">
-                                <CheckBox bordered={false} onClick={(event) => event.stopPropagation()} onChange={(event) => setSelected(event.target.checked)} checked={selected} />
-                                <EditButton onClick={handleEditClick} />
+                                <EditButton
+                                    onClick={handleEditClick}
+                                    className="group-hover:fill-white" 
+                                />
                                 <DownloadButton onClick={handleDownloadClick} />
                                 <DeleteButton onClick={handleDeleteClick} />
                             </div>
