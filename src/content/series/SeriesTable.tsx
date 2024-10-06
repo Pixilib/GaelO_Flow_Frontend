@@ -1,23 +1,28 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-
-
 import { Table } from "../../ui";
 import { Colors, Series as SeriesType } from "../../utils";
 import SeriesActions from "./SeriesActions";
 
 type SeriesTableProps = {
     series: SeriesType[];
+    selectedRows?: Record<string, boolean>;
+    onRowClick?: (seriesId: string) => void;
     onActionClick: (action: string, series: SeriesType) => void;
 };
-const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
-    
+
+const SeriesTable: React.FC<SeriesTableProps> = ({
+    series,
+    selectedRows,
+    onRowClick,
+    onActionClick,
+}) => {
     const rows = useMemo(() => series.map(s => ({
         ...s,
         ...s.mainDicomTags,
         instancesLength: s.instances?.length ?? 0
     })), [series]);
-    
+
     const columns: ColumnDef<any>[] = useMemo(() => [
         {
             accessorKey: "seriesDescription",
@@ -42,16 +47,27 @@ const SeriesTable = ({ series, onActionClick }: SeriesTableProps) => {
                 return <SeriesActions series={seriesData} onActionClick={onActionClick} />;
             },
         },
-    ], []);
+    ], [onActionClick]);
+
+    const getRowClasses = (row: SeriesType) => {
+        if (selectedRows?.[row.id]) {
+            return 'bg-primary hover:cursor-pointer';
+        } else {
+            return 'hover:bg-indigo-100 hover:cursor-pointer';
+        }
+    };
+
     return (
         <Table
             columns={columns}
             data={rows ?? []}
             headerColor={Colors.light}
             headerTextSize="xs"
-            className="text-xs"            
+            className="text-xs"
+            getRowClasses={getRowClasses}
+            onRowClick={(row) => onRowClick && onRowClick(row.id)}
         />
     );
-
 }
+
 export default SeriesTable;

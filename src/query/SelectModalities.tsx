@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
-import Select from 'react-select/creatable'
 import { Option } from '../utils';
+import { SelectInput } from '../ui';
 
 type SelectModalitiesProps = {
     modalities: string[];
     onChange: (modalities: string[]) => void;
     closeMenuOnSelect?: boolean;
 }
-export default ({ modalities, onChange, closeMenuOnSelect = true }: SelectModalitiesProps) => {
+const SelectModalities = ({ modalities, onChange, closeMenuOnSelect = true }: SelectModalitiesProps) => {
 
     const [selectedModalities, setSelectedModalities] = useState<Option[]>([])
 
@@ -74,19 +74,20 @@ export default ({ modalities, onChange, closeMenuOnSelect = true }: SelectModali
         </div>
     );
 
-    const changeListener = (options: any) => {
-        if (options === null) options = []
-        const modalities = options.map((option: any) => option.value)
-        onChange(modalities)
+    const changeListener = (selectedOption, meta) => {
+        if(meta.action === "select-option") {
+        }
+
+        
     }
 
     return (
-        <Select
+        <SelectInput
             isMulti
             menuPosition="fixed"
             options={groupedOptions}
             formatOptionLabel={formatOptionLabel}
-            value={selectedModalities}
+            value={selectedModalities.map(option => option.value)}
             onChange={changeListener}
             formatGroupLabel={formatGroupLabel}
             closeMenuOnSelect={closeMenuOnSelect}
@@ -94,3 +95,5 @@ export default ({ modalities, onChange, closeMenuOnSelect = true }: SelectModali
     )
 
 }
+
+export default SelectModalities

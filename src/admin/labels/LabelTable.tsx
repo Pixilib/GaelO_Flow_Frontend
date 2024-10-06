@@ -19,7 +19,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
   console.log(data)
   const rows = useMemo(() => data, [data]);
 
-  const columns = useMemo(() => {
+ const columns = useMemo(() => {
     return [
       {
         accessorKey: "name",
@@ -33,31 +33,16 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
           <div className="flex justify-center gap-2.5">
             <Popover
               withOnClick={true}
-              popover={
-                <LabelsRoles
-                  key={row.original.name}
-                  labelName={row.original.name}
-                />
-              }
+              popover={<LabelsRoles key={row.original.name} labelName={row.original.name} />}
+              placement="bottom"
             >
-              <Button
-                color={Colors.secondary}
-                className="flex items-center gap-1.5"
-              >
+              <Button color={Colors.secondary} className="flex items-center gap-1.5">
                 <AdminIcon size="1.3rem" />
                 <ToggleChevron isOpen={false} />
               </Button>
             </Popover>
-
-            <Button
-              onClick={() => onDeleteLabel(row.original.name)}
-              color={Colors.danger}
-            >
-              <DeleteIcon
-                size="1.3rem"
-                className="transition duration-70 hover:scale-110"
-                color={Colors.light}
-              />
+            <Button onClick={() => onDeleteLabel(row.original.name)} color={Colors.danger}>
+              <DeleteIcon size="1.3rem" className="transition duration-70 hover:scale-110" color={Colors.light} />
             </Button>
           </div>
         ),
@@ -77,5 +62,4 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
     />
   );
 };
-
 export default LabelsTable;

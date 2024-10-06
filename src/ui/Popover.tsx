@@ -20,15 +20,15 @@ const Popover: React.FC<PopoverProps> = ({
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
       case 'top':
-        return 'bottom-full';
+        return 'bottom-full left-1/2 transform -translate-x-1/2 mb-2';
       case 'right':
-        return 'left-full';
+        return 'left-full top-1/2 transform -translate-y-1/2 ml-2';
       case 'bottom':
-        return 'top-full';
+        return 'top-full left-1/2 transform -translate-x-1/2 mt-2';
       case 'left':
-        return 'right-full';
+        return 'right-full top-1/2 transform -translate-y-1/2 mr-2';
       default:
-        return 'top-full';
+        return 'top-full left-1/2 transform -translate-x-1/2 mt-2';
     }
   };
 
@@ -37,21 +37,17 @@ const Popover: React.FC<PopoverProps> = ({
     : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
   return (
-    <div
-      className="relative"
-      data-gaelo-flow="Popover"
-    >
-      <span  {...handleEvent}>
+    <div className="relative" data-gaelo-flow="Popover">
+      <span {...handleEvent}>
         {children}
       </span>
       {isOpen && (
         <div
-          className={`absolute m-2 ${getPlacementClasses(placement)} z-10 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+          className={`absolute ${getPlacementClasses(placement)} z-50 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
         >
           {popover}
         </div>
       )}
-
     </div>
   );
 };

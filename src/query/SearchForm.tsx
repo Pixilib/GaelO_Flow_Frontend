@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import moment from "moment";
 import { FaSearch } from "react-icons/fa";
 import { Option, QueryPayload, useCustomToast } from "../utils";
@@ -7,16 +7,14 @@ import SelectModalities from "./SelectModalities";
 
 type SearchFormProps = {
   aets?: Option[];
-  labelsData?: string[];
-  onLabelChange?: (labels: string[]) => void;
+  existingLabels?: string[];
   onSubmit: (formData: QueryPayload, aets?: string) => void;
   withAets: boolean;
 };
 
 const SearchForm: React.FC<SearchFormProps> = ({
   aets = [],
-  labelsData = [],
-  onLabelChange = () => { },
+  existingLabels = [],
   onSubmit,
   withAets
 }: SearchFormProps) => {
@@ -31,7 +29,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
   const [modalities, setModalities] = useState<string[]>([]);
   const [dateFrom, setDateFrom] = useState<string>("");
   const [dateTo, setDateTo] = useState<string>("");
-  const [labels, setLabels] = useState<Option[]>([]);
+  const [labels, setLabels] = useState<string[]>([]);
 
   const dataPresetOptions: Option[] = [
     { value: 0.01, label: "Today" },
@@ -65,13 +63,10 @@ const SearchForm: React.FC<SearchFormProps> = ({
     }
   };
 
-  const handleLabelChange = (selectedOptions: Option[]) => {
-    setLabels(selectedOptions || []);
+  const handleLabelChange = (selectedOptions: Option[], meta) => {
+    console.log(selectedOptions, meta)
+    setLabels(selectedOptions.map(option => option.value) || []);
   };
-
-  useEffect(() => {
-    onLabelChange(labels.map(label => label.value));
-  }, [labels]);
 
   const isDateDisabled = dataPreset?.value != null;
 
@@ -176,7 +171,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
             onChange={(options: Option | null) => handleChangeDataPreset(options)}
           />
         </div>
-        {!withAets && labelsData?.length > 0 && (
+        {!withAets && existingLabels?.length > 0 && (
           <div className="grid">
             <Label
               value="Label"
@@ -186,8 +181,9 @@ const SearchForm: React.FC<SearchFormProps> = ({
             <SelectInput
               isMulti
               closeMenuOnSelect={false}
-              options={labelsData.map(label => ({ label: label, value: label })) || []}
-              onChange={(options: Option[]) => handleLabelChange(options)}
+              options={existingLabels.map(label => ({ label: label, value: label })) || []}
+              value={labels}
+              onChange={handleLabelChange}
               placeholder="Select Label(s)"
               aria-label="Labels"
             />
