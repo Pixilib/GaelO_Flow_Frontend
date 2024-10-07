@@ -1,4 +1,4 @@
-import { BsPencilFill as Edit } from 'react-icons/bs';
+import { Edit } from "../icons";
 
 type EditButtonProps = {
   onClick: (e: React.MouseEvent<HTMLButtonElement|SVGElement>) => void;

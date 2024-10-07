@@ -1,9 +1,8 @@
 // SeriesActions.tsx
 import React from 'react';
-import { FaEdit, FaEye } from "react-icons/fa";
 import { Series } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
-import { Download, Trash } from '../../icons';
+import { Download, Edit, Eye, Trash } from '../../icons';
 
 type SeriesActionsProps = {
     series: Series;
@@ -14,19 +13,19 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
     const options = [
         {
             label: 'Modify',
-            icon: <FaEdit />,
+            icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', series)
         },
         {
             label: 'Metadata',
-            icon: <FaEye />,
+            icon: <Eye />,
             color: 'green',
             action: () => onActionClick('metadata', series),
         },
         {
             label: 'Preview Series',
-            icon: <FaEye />,
+            icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', series),
         },
