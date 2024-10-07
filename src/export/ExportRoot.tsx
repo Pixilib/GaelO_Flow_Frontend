@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Papa from "papaparse"
 import { RootState } from "../store";
 import ExportStudyTable from "./ExportStudyTable";
 import ExportSeriesTable from "./ExportSeriesTable";
@@ -13,9 +14,10 @@ import { flushExportList } from "../reducers/ExportSlice";
 import { storeToModality } from "../services/modalities";
 import ProgressJobs from "../query/ProgressJobs";
 import { sendResourcesToPeer } from "../services/peers";
+import { exportCsv } from "../utils/export";
 
 const ExportRoot = () => {
-    const { toastSuccess, updateExistingToast } = useCustomToast();
+    const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
     const dispatch = useDispatch();
     const exportSeriesList = useSelector((state: RootState) => state.export.series);
     const exportStudyList = useSelector((state: RootState) => state.export.studies);
@@ -89,6 +91,29 @@ const ExportRoot = () => {
         sendPeerMutate({ peerName, resources });
     };
 
+    const handleDownloadCsv = () => {
+        const series = Object.values(exportSeriesList)
+        if (series.length === 0) {
+            toastWarning("Empty export list");
+            return;
+        }
+
+        const exportData = series.map(series => {
+            const study = exportStudyList[series.parentStudy]
+            return {
+                ...study.patientMainDicomTags,
+                ...study.mainDicomTags,
+                ...series.mainDicomTags,
+                numberOfInstances: series.instances.length,
+                orthancSeriesId: series.id,
+                orthancStudyId: series.parentStudy,
+                orthancPatientId: study.parentPatient
+            }
+        })
+        const csvString = Papa.unparse(exportData, {})
+        exportCsv(csvString, '.csv', 'export-list.csv')
+    }
+
     const downloadOptions = [
         {
             label: "Dicomdir",
@@ -147,7 +172,7 @@ const ExportRoot = () => {
                     </Button>
                 </div>
                 <div className="flex justify-end w-1/5 gap-3">
-                    <Button color={Colors.secondary}>Download as CSV</Button>
+                    <Button onClick={handleDownloadCsv} color={Colors.secondary}>Download as CSV</Button>
                     <Button onClick={handleClearList} color={Colors.warning}>
                         Empty List
                     </Button>

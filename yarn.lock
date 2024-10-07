@@ -3254,6 +3254,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/papaparse@npm:^5":
+  version: 5.3.14
+  resolution: "@types/papaparse@npm:5.3.14"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10c0/feb4d215903b67442feaa9836a6a5771e78dc6a9da24781e399c6f891622fa82245cd783ab2613c5be43e4a2d6a94da52325538e4485af258166864576ecd0d8
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.2
   resolution: "@types/parse-json@npm:4.0.2"
@@ -5893,6 +5902,7 @@ __metadata:
     "@tanstack/react-table": "npm:^8.20.1"
     "@types/jwt-decode": "npm:^3.1.0"
     "@types/mime-types": "npm:^2"
+    "@types/papaparse": "npm:^5"
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@types/react-query": "npm:^1.2.9"
@@ -5913,6 +5923,7 @@ __metadata:
     mime-types: "npm:^2.1.35"
     moment: "npm:^2.30.1"
     native-file-system-adapter: "npm:^3.0.1"
+    papaparse: "npm:^5.4.1"
     postcss: "npm:^8.4.41"
     preline: "npm:^2.4.1"
     prettier: "npm:^3.3.3"
@@ -7899,6 +7910,13 @@ __metadata:
   version: 1.0.0
   resolution: "package-json-from-dist@npm:1.0.0"
   checksum: 10c0/e3ffaf6ac1040ab6082a658230c041ad14e72fabe99076a2081bb1d5d41210f11872403fc09082daf4387fc0baa6577f96c9c0e94c90c394fd57794b66aa4033
+  languageName: node
+  linkType: hard
+
+"papaparse@npm:^5.4.1":
+  version: 5.4.1
+  resolution: "papaparse@npm:5.4.1"
+  checksum: 10c0/201f37c4813453fed5bfb4c01816696b099d2db9ff1e8fb610acc4771fdde91d2a22b6094721edb0fedb21ca3c46f04263f68be4beb3e35b8c72278f0cedc7b7
   languageName: node
   linkType: hard
 
