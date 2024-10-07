@@ -187,9 +187,8 @@ const ContentRoot: React.FC = () => {
 
                     <div className="flex-grow w-full md:w-auto">
                         <SelectLabels
+                            values={[]}
                             onChange={(labels) => console.log(labels)}
-                            closeMenuOnSelect
-                            className="w-full"
                         />
                     </div>
                 </div>

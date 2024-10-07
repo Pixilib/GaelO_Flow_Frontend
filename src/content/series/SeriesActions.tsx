@@ -37,6 +37,12 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
             action: () => onActionClick('download', series)
         },
         {
+            label: 'Download Nifti',
+            icon: <DownloadIcon />,
+            color: 'green',
+            action: () => onActionClick('download-nifti', series)
+        },
+        {
             label: 'Delete',
             icon: <FaTrash />,
             color: 'red',
