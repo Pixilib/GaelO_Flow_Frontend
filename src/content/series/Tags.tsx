@@ -58,12 +58,14 @@ const Tags = ({ seriesId }: TagsProps) => {
                 {Object.entries(jsonNameValues).map(([key, value]) => (
                     <div key={key}>
                         <strong>{key}:</strong> {JSON.stringify(value)}
+                        <hr/>
                     </div>
                 ))}
-                <hr />
+                <hr/><hr/><hr/><hr/><hr/>
                 {Object.entries(jsonNameValues2).map(([key, value]) => (
                     <div key={key}>
                         <strong>{key}:</strong> {JSON.stringify(value)}
+                        <hr/>
                     </div>
                 ))}
                 {/* {JSON.stringify(header, null, 2)}  */}
