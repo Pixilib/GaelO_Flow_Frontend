@@ -30,13 +30,25 @@ const Tags = ({ seriesId }: TagsProps) => {
         }
     )
 
+    const json = JSON.parse(JSON.stringify(header, null, 2))
+    const json_values = Object.values(json)
+    var names_list = []
+    var values_list = []
+    for (var index = 0; index < json_values.length; index++) {
+        names_list.push(json_values[index]["Name"])
+        values_list.push(json_values[index]["Value"])
+    }
+
+    const jsonNameValues = Object.fromEntries(names_list.map((key, index) => [key, values_list[index]]));
+
     if (!instances) return <Spinner />
     return (
         <>
             <Input label="Instance Number" min={1} max={instances.length} value={instanceNumber ?? 1} onChange={(event) => setInstanceNumber(Number(event.target?.value))} />
             <pre>
-                {JSON.stringify(header, null, 2)}
-                {JSON.stringify(tags, null, 2)}
+                {JSON.stringify(jsonNameValues, null, 2)}
+                {JSON.stringify(header, null, 2)} 
+                {/* {JSON.stringify(tags, null, 2)} */}
             </pre>
         </>
     )
