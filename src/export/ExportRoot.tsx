@@ -15,6 +15,7 @@ import { storeToModality } from "../services/modalities";
 import ProgressJobs from "../query/ProgressJobs";
 import { sendResourcesToPeer } from "../services/peers";
 import { exportCsv } from "../utils/export";
+import SelectTransferSyntax from "./SelectTransferSyntax";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
@@ -25,6 +26,7 @@ const ExportRoot = () => {
     const [currentStudyId, setCurrentStudyId] = useState(null);
     const [storeJobId, setStoreJobId] = useState(null);
     const [sendPeerJobId, setsendPeerJobId] = useState(null);
+    const [transferSyntax, setTrasferSyntax] = useState('None')
 
     const series = useMemo(() => {
         if (!currentStudyId) return [];
@@ -77,7 +79,7 @@ const ExportRoot = () => {
             (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"),
             undefined,
             hierarchical,
-            undefined
+            transferSyntax != "None" ? transferSyntax  : undefined
         );
     };
 
@@ -163,6 +165,7 @@ const ExportRoot = () => {
             <CardFooter color={Colors.light} className="flex justify-center flex-grow gap-3">
                 <div className="flex justify-center w-4/5 gap-3">
                     <DropdownButton row={null} buttonText="Download" options={downloadOptions} />
+                    <SelectTransferSyntax value={transferSyntax} onChange={(value)=>setTrasferSyntax(value)} />
                     <DropdownButton row={null} buttonText="Send To Modality" options={modalitiesOptions} />
                     {storeJobId && <ProgressJobs size={50} jobId={storeJobId} />}
                     <DropdownButton row={null} buttonText="Send To Peer" options={peersOptions} />
