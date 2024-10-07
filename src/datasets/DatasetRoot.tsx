@@ -17,16 +17,20 @@ const DatasetRoot = () => {
     const { toastError } = useCustomToast();
     const studies = model?.getPatients().map(patient => patient.getStudies()).flat() ?? [];
 
-    const { data: series } = useCustomQuery<Series[]>(
+    const { data: series, refetch } = useCustomQuery<Series[]>(
         ['series', (currentStudyId as string)],
-        () => getSeriesOfStudy(currentStudyId as string),
+        () => currentStudyId ? getSeriesOfStudy(currentStudyId as string) : new Promise((success, reject) => success([])),
         {
             onError: (error) => {
                 console.error(`No series for this study or an error occurred: ${error}`);
             },
-            enabled: !!currentStudyId
+            enabled: false
         },
     );
+
+    useEffect(() => {
+        refetch()
+    }, [currentStudyId])
 
     const { mutateAsync: mutateToolsFind } = useCustomMutation(
         ({ queryPayload }) => findTools(queryPayload),
@@ -43,9 +47,11 @@ const DatasetRoot = () => {
         }
     );
 
-    useEffect(()=>{
+    useEffect(() => {
         if (selectedLabels.length === 0) {
-            setModel(new Model()); return;
+            setModel(new Model());
+            setCurrentStudyId(null);
+            return;
         }
 
         const queryPayload: FindPayload = {
@@ -83,7 +89,7 @@ const DatasetRoot = () => {
             <CardBody className="bg-almond">
                 <div className="space-y-2">
                     <span className="text-base font-semibold text-gray-700">Labels</span>
-                    <SelectLabels values={selectedLabels} onChange={(labels) => {console.log(labels); setSelectedLabels(labels)}} />
+                    <SelectLabels values={selectedLabels} onChange={(labels) => { console.log(labels); setSelectedLabels(labels) }} />
                 </div>
                 <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
                     <div className="2xl:col-span-7">
