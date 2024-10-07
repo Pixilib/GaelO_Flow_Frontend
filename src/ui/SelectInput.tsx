@@ -1,4 +1,3 @@
-import React from 'react';
 import Select, { ActionMeta, ClassNamesConfig } from 'react-select';
 
 interface OptionType {
@@ -22,7 +21,7 @@ interface SelectInputProps {
 
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
-    const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded';
+    const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
     return `border border-gray-300 min-h-[48px] bg-white ${borderRadius} focus:border-blue-500 hover:border-blue-500`;
   },
   menu: (state) => {

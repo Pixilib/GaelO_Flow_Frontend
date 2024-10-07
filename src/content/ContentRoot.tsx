@@ -151,7 +151,7 @@ const ContentRoot: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                     <div className="text-2xl font-bold text-primary">Results</div>
                     <div className="text-lg text-gray-600">
-                        {patients.length} {patients.length === 1 ? "result" : "results"} found
+                        {patients.length} {patients.length === 1 ? "patient" : "patients"} found
                     </div>
                 </div>
 
