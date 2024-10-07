@@ -38,16 +38,35 @@ const Tags = ({ seriesId }: TagsProps) => {
         names_list.push(json_values[index]["Name"])
         values_list.push(json_values[index]["Value"])
     }
-
     const jsonNameValues = Object.fromEntries(names_list.map((key, index) => [key, values_list[index]]));
+
+    const json2 = JSON.parse(JSON.stringify(tags, null, 2))
+    const json_values2 = Object.values(json2)
+    var names_list2 = []
+    var values_list2 = []
+    for (var index = 0; index < json_values2.length; index++) {
+        names_list2.push(json_values2[index]["Name"])
+        values_list2.push(json_values2[index]["Value"])
+    }
+    const jsonNameValues2 = Object.fromEntries(names_list2.map((key, index) => [key, values_list2[index]]));
 
     if (!instances) return <Spinner />
     return (
         <>
             <Input label="Instance Number" min={1} max={instances.length} value={instanceNumber ?? 1} onChange={(event) => setInstanceNumber(Number(event.target?.value))} />
             <pre>
-                {JSON.stringify(jsonNameValues, null, 2)}
-                {JSON.stringify(header, null, 2)} 
+                {Object.entries(jsonNameValues).map(([key, value]) => (
+                    <div key={key}>
+                        <strong>{key}:</strong> {JSON.stringify(value)}
+                    </div>
+                ))}
+                <hr />
+                {Object.entries(jsonNameValues2).map(([key, value]) => (
+                    <div key={key}>
+                        <strong>{key}:</strong> {JSON.stringify(value)}
+                    </div>
+                ))}
+                {/* {JSON.stringify(header, null, 2)}  */}
                 {/* {JSON.stringify(tags, null, 2)} */}
             </pre>
         </>
