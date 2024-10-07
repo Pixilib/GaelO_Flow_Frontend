@@ -1,9 +1,9 @@
 // SeriesActions.tsx
 import React from 'react';
-import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
-import { RiDownload2Line as DownloadIcon } from "react-icons/ri";
+import { FaEdit, FaEye } from "react-icons/fa";
 import { Series } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
+import { Download, Trash } from '../../icons';
 
 type SeriesActionsProps = {
     series: Series;
@@ -32,19 +32,19 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
         },
         {
             label: 'Download',
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: 'green',
             action: () => onActionClick('download', series)
         },
         {
             label: 'Download Nifti',
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: 'green',
             action: () => onActionClick('download-nifti', series)
         },
         {
             label: 'Delete',
-            icon: <FaTrash />,
+            icon: <Trash />,
             color: 'red',
             action: () => onActionClick('delete', series)
         }

@@ -26,9 +26,9 @@ import {
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
 import AnonIcon from "../assets/Anon.svg?react";
-import { BsTrashFill as DeleteIcon } from "react-icons/bs";
 import { FaFileExport as ExportIcon } from "react-icons/fa";
 import SelectLabels from "../datasets/SelectLabels";
+import { Trash } from "../icons";
 
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
@@ -181,7 +181,7 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendDeleteList}
                     >
-                        <DeleteIcon className="text-xl" />
+                        <Trash className="text-xl" />
                         <span className="ml-2">Send to Delete</span>
                     </Button>
 

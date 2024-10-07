@@ -4,7 +4,6 @@ import Papa from "papaparse"
 import { RootState } from "../store";
 import ExportStudyTable from "./ExportStudyTable";
 import ExportSeriesTable from "./ExportSeriesTable";
-import { RiDownload2Line as DownloadIcon } from "react-icons/ri";
 import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
 import { Colors, Study, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import DropdownButton from "../ui/menu/DropDownButton";
@@ -16,6 +15,7 @@ import ProgressJobs from "../query/ProgressJobs";
 import { sendResourcesToPeer } from "../services/peers";
 import { exportCsv } from "../utils/export";
 import SelectTransferSyntax from "./SelectTransferSyntax";
+import { Download } from "../icons";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
@@ -119,13 +119,13 @@ const ExportRoot = () => {
     const downloadOptions = [
         {
             label: "Dicomdir",
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: "green",
             action: () => handleDownload(false),
         },
         {
             label: "Hierarchical",
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: "green",
             action: () => handleDownload(true),
         },

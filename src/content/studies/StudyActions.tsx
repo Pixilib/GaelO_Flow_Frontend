@@ -1,12 +1,12 @@
 // StudyActions.tsx
 import React from 'react';
-import { FaEdit as EditIcon, FaEye as EyeIcon, FaTrash as TrashIcon } from "react-icons/fa";
+import { FaEdit as EditIcon, FaEye as EyeIcon} from "react-icons/fa";
 import { GiBrain as BrainIcon } from 'react-icons/gi'
-import { RiDownload2Line as DownloadIcon } from "react-icons/ri";
 import { StudyMainDicomTags } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
 import OhifViewerLink from '../OhifViewerLink';
 import StoneViewerLink from '../StoneViewerLink';
+import { Download, Trash } from '../../icons';
 
 type StudyActionsProps = {
     study: StudyMainDicomTags & { id: string };
@@ -47,13 +47,13 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
         },
         {
             label: 'Download',
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: 'green',
             action: () => onActionClick('download', study.id)
         },
         {
             label: 'Delete',
-            icon: <TrashIcon />,
+            icon: <Trash />,
             color: 'red',
             action: () => onActionClick('delete', study.id)
         },

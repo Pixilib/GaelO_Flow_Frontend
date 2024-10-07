@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux"
 import { RootState } from "../store"
 
-import { BsTrashFill as DeleteIcon } from "react-icons/bs"
 import { FaFileExport as ExportIcon } from "react-icons/fa"
 import AnonIcon from "../ui/AnonIcon"
 import ToolItem from "./ToolItem"
 import { useNavigate } from "react-router-dom"
+import { Trash } from "../icons"
 
 const ToolList = () => {
 
@@ -29,7 +29,7 @@ const ToolList = () => {
                 />
             </ToolItem>
             <ToolItem count={Object.keys(deleteList).length} onClick={() => navigate('/delete')}>
-                <DeleteIcon
+                <Trash
                     className="text-red-500 cursor-pointer group-hover:text-white"
                 />
             </ToolItem>
