@@ -1,8 +1,8 @@
-import { RiAdminFill } from "react-icons/ri";
+import { RiAdminLine } from "react-icons/ri";
 
 const Admin = (props) => {
     return (
-        <RiAdminFill {...props} />
+        <RiAdminLine {...props} />
     )
 }
 
