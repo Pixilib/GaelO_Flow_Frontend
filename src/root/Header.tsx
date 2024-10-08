@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { BsFillHouseDoorFill } from 'react-icons/bs';
-import { IoLanguage as LanguageIcon } from 'react-icons/io5';
-import { MdNotifications as NotificationsIcon, MdSettings as SettingsIcon } from 'react-icons/md';
-import { TiUser } from 'react-icons/ti';
 
 import Banner from '../ui/menu/Banner';
 import DropDown from '../ui/menu/DropDown';
 import ToggleSwitch from '../ui/menu/ToggleSwitch';
 import BannerItems from '../ui/menu/BannerItems';
 import DeleteList from './ToolList';
+import { Gear, Language, Notification, User } from '../icons';
 
 type Item = {
   title: string;
@@ -71,7 +67,6 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   };
 
   const isOpen = (item: string): boolean => openItem === item;
-  const leftIcon = location.pathname === '/' ? <BsFillHouseDoorFill /> : <AiOutlineArrowLeft />;
 
   const ItemsLanguage = [
     {
@@ -131,7 +126,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           }
         >
           <span className="inline-flex items-center" onClick={() => handleDropDown('Language')}>
-            <LanguageIcon />
+            <Language />
             <span className="mx-4">
               {ItemsLanguage.find((item) => item.code === i18n.language)?.title}
             </span>
@@ -161,11 +156,11 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
               console.log('Toggle state:', isChecked);
             }}
           />
-          <NotificationsIcon
+          <Notification
             className="transition-transform duration-100 size-4 hover:scale-110" />
-          <SettingsIcon
+          <Gear
             className="transition-transform duration-100 size-4 hover:scale-110" />
-          <TiUser
+          <User
             size={23}
             className="transition-transform duration-100 hover:scale-110"
             fill="white"

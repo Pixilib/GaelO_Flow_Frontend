@@ -22,12 +22,14 @@ import ImageSearch from './ImageSearch'
 import Import from './Import'
 import Info from './Info'
 import Label from './Label'
+import Language from './Language'
 import Logout from './Logout'
 import Maximize from './Maximize'
 import Minimize from './Minimize'
 import Moon from './Moon'
 import More from './More'
 import Next from './Next'
+import Notification from './Notification'
 import Pause from './Pause'
 import Play from './Play'
 import Previous from './Previous'
@@ -44,6 +46,7 @@ import SortZa from './SortZa'
 import SubmitUser from './SubmitUser'
 import Sun from './Sun'
 import Trash from './Trash'
+import User from './User'
 import Wifi from './Wifi'
 import ZoomQuestion from './ZoomQuestion'
 
@@ -72,12 +75,14 @@ export {
     Import,
     Info,
     Label,
+    Language,
     Logout,
     Maximize,
     Minimize,
     Moon,
     More,
     Next,
+    Notification,
     Pause,
     Play,
     Previous,
@@ -94,6 +99,7 @@ export {
     SubmitUser,
     Sun,
     Trash,
+    User,
     Wifi,
     ZoomQuestion
 }
