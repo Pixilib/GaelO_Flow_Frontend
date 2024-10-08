@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { OrthancImportDicom } from "../utils/types";
+import { OrthancImportDicom, Tags } from "../utils/types";
 
 export const sendDicom = (payload: Uint8Array): Promise<OrthancImportDicom> => {
   return axios
@@ -71,24 +71,34 @@ export const previewFrame = (
     });
 };
 
-export const instanceTags = (instanceId: string): Promise<any> => {
+export const instanceTags = (
+  instanceId: string
+): Promise<Tags> => {
   return axios
-    .get("/api/instances/" + instanceId + "/tags")
+    .get("/api/instances/" + instanceId + "/tags?simplfy")
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
-      console.error(error);
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
     });
 };
 
-export const instanceHeader = (instanceId: string): Promise<any> => {
+export const instanceHeader = (
+  instanceId: string
+): Promise<Tags> => {
   return axios
-    .get("/api/instances/" + instanceId + "/header")
+    .get("/api/instances/" + instanceId + "/header?simplfy")
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
-      console.error(error);
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
     });
 };
