@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
 import { deleteUser, getUsers } from "../../../services/users";
 import { Colors } from "../../../utils";
@@ -11,6 +10,7 @@ import { Button, CardFooter, Spinner } from "../../../ui";
 import UsersTable from "./UsersTable";
 import CreateUserForm from "./CreateUserForm";
 import EditUserForm from "./EditUserForm";
+import { More } from "../../../icons";
 
 type UsersProps = {
   className?: string;
@@ -86,7 +86,7 @@ const Users = ({ className = "" }: UsersProps) => {
               onClick={() => setIsCreatingUser(true)}
               className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
             >
-              <MoreIcon size={24} />
+              <More size={24} />
               Create User
             </Button>
           ) : (

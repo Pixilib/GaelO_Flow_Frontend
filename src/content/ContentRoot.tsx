@@ -26,9 +26,9 @@ import {
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
 import AnonIcon from "../assets/Anon.svg?react";
-import { BsTrashFill as DeleteIcon } from "react-icons/bs";
 import { FaFileExport as ExportIcon } from "react-icons/fa";
-import SelectLabels from "../datasets/SelectLabels";
+import { MdNewLabel as LabelIcon } from "react-icons/md"; 
+import { Trash } from "../icons";
 
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
@@ -151,7 +151,7 @@ const ContentRoot: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                     <div className="text-2xl font-bold text-primary">Results</div>
                     <div className="text-lg text-gray-600">
-                        {patients.length} {patients.length === 1 ? "result" : "results"} found
+                        {patients.length} {patients.length === 1 ? "patient" : "patients"} found
                     </div>
                 </div>
 
@@ -159,7 +159,6 @@ const ContentRoot: React.FC = () => {
 
                 <div className="flex flex-wrap gap-2 mb-4">
                     <Button
-                        color={Colors.primary}
                         className="flex items-center text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
                         onClick={handleSendAnonymizeList}
                     >
@@ -181,17 +180,19 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendDeleteList}
                     >
-                        <DeleteIcon className="text-xl" />
+                        <Trash className="text-xl" />
                         <span className="ml-2">Send to Delete</span>
                     </Button>
 
-                    <div className="flex-grow w-full md:w-auto">
-                        <SelectLabels
-                            onChange={(labels) => console.log(labels)}
-                            closeMenuOnSelect
-                            className="w-full"
-                        />
-                    </div>
+                    <Button
+                        color={Colors.primary}
+                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                        onClick={handleSendDeleteList}
+                    >
+                        <LabelIcon className="text-xl" />
+                        <span className="ml-2">Labels</span>
+                    </Button>
+
                 </div>
             </div>
 

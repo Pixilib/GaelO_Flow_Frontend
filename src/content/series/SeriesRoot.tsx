@@ -13,7 +13,7 @@ import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import { Modal, Spinner } from '../../ui';
 import Tags from './Tags';
-import { exportRessource } from '../../services/export';
+import { exportRessource, exportSeriesToNifti } from '../../services/export';
 
 interface SeriesRootProps {
   studyId: string;
@@ -63,6 +63,11 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     exportRessource("series", series.id, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
   }
 
+  const handleDownloadSeriesNifti = (series: Series) => {
+    const id = toastSuccess("Download started", 60)
+    exportSeriesToNifti(series.id, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
+  }
+
   const handleMetadataPreview = (series: Series) => {
     setPreviewMetadata(series)
   }
@@ -96,6 +101,9 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         break;
       case 'download':
         handleDownloadSeries(series);
+        break;
+      case 'download-nifti':
+        handleDownloadSeriesNifti(series);
         break;
       default:
         console.log(`Unhandled action: ${action}`);

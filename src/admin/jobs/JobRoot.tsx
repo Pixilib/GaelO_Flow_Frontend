@@ -1,9 +1,9 @@
 import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { getJobs, postJobs } from "../../services/jobs";
-
 import { Spinner, Card, CardBody, CardFooter, CardHeader } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { useCustomToast } from "../../utils/toastify";
+
 import { JobPayload, JobsAction, OrthancJob } from "../../utils/types";
 import JobTable from "./JobTable";
 

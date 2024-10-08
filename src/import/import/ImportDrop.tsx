@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
+import { BsFillCloudArrowUpFill as CloudIcon} from 'react-icons/bs';
 
 import { ProgressBar } from '../../ui';
 
@@ -8,6 +8,7 @@ import { sendDicom } from '../../services/instances';
 import Model from '../../model/Model';
 import { useCustomMutation } from '../../utils';
 import { OrthancImportDicom } from '../../utils/types';
+import { Check } from '../../icons';
 
 
 type ImportDropProps = {
@@ -80,7 +81,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                     } rounded-lg`}
             >
                 {uploadComplete ? (
-                    <CheckIcon
+                    <Check
                         size={40}
                         className="text-success" />
                 ) : (

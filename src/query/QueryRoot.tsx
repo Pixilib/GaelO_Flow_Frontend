@@ -24,9 +24,9 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     () => getModalities(),
     {
       select: (response) => response.map((modality) => ({
-          value: modality.name,
-          label: modality.aet,
-        })),
+        value: modality.name,
+        label: modality.aet,
+      })),
     }
   );
 
@@ -94,17 +94,17 @@ const QueryRoot = ({ className }: QueryFormProps) => {
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-primary">Results</div>
           <div className="text-lg text-gray-600">
-            {studies.length} {studies.length === 1 ? "result" : "results"} found
+            {studies.length} {studies.length === 1 ? "study" : "studies"} found
           </div>
         </div>
-        
+
       </div>
       <div className="2xl:col-span-7">
-            <ResultsTable results={studies} onRowClick={handleRowClick} />
-          </div>
-          <div className="2xl:col-span-5">
-            <SeriesTable series={series} />
-          </div>
+        <ResultsTable results={studies} onRowClick={handleRowClick} />
+      </div>
+      <div className="2xl:col-span-5">
+        <SeriesTable series={series} />
+      </div>
     </div>
   );
 };

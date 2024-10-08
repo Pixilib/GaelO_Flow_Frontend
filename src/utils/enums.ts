@@ -1,6 +1,8 @@
 export enum Colors {
     almond = 'almond',
     almondHover = 'almond-hover',
+    blueCustom = 'buel-custom',
+    blusCustomHover = 'buel-custom-hover',
     danger = 'danger',
     dangerHover = "danger-hover",
     dark = 'dark',

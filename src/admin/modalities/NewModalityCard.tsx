@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 
-import { AiOutlineCheck as CheckIcon } from "react-icons/ai";
 import { FormCard, Button, Input, SelectInput } from "../../ui";
+import { Check } from "../../icons";
 import { Colors } from "../../utils/enums";
 
 import { useCustomToast } from "../../utils/toastify";
@@ -133,8 +133,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
     <div className="flex justify-center">
       <Button type="submit" 
       color={Colors.success} aria-label="Submit New Modality">
-        
-        <CheckIcon size="20px" />
+        <Check size="20px" />
       </Button>
     </div>
   </FormCard>

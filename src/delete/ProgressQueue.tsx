@@ -1,6 +1,7 @@
 import { deleteDeleteQueue, getDeleteQueue } from "../services/queues";
 import { Colors, useCustomMutation, useCustomQuery } from "../utils";
-import { Button, ProgressCircle, Spinner } from "../ui";
+import { ProgressCircle, Spinner } from "../ui";
+import { Cancel, Pause, Trash } from "../icons"; // Import your icon components
 
 type ProgressQueueProps = {
     uuid: string;
@@ -8,28 +9,37 @@ type ProgressQueueProps = {
 
 const ProgressQueue = ({ uuid }: ProgressQueueProps) => {
     const { data, isPending } = useCustomQuery(
-        ['queue', 'delete', uuid], 
-        () => getDeleteQueue(uuid), 
+        ['queue', 'delete', uuid],
+        () => getDeleteQueue(uuid),
         { refetchInterval: 2000 }
     );
-    
+
     const { mutate: mutateDeleteQueue } = useCustomMutation(
-        () => deleteDeleteQueue(uuid), 
+        () => deleteDeleteQueue(uuid),
         [['queue', 'delete']]
     );
 
     if (isPending) return <Spinner />;
 
     return (
-        <div className="flex items-center justify-between">
-            <ProgressCircle text={data?.state} progress={data?.progress || 0} />
-            <Button 
-                color={Colors.danger} 
-                onClick={() => mutateDeleteQueue({})}
-                className="ml-1" // Adds margin-left for spacing
-            >
-                Delete Queue
-            </Button>
+        <div className="flex-col items-center justify-center">
+            <ProgressCircle text={data?.state} progress={data?.progress || 0} size={150}>
+                <div className="flex justify-center">
+                    {/* Clickable Trash Icon */}
+
+                    <Pause
+                        className={`text-sm cursor-pointer text- hover:text-yellow-500 mr-2`} // Change color on hover, add margin for spacing
+                        onClick={() => {/* Implement pause functionality here */ }}
+                    />
+                    <Cancel
+                        className={`text-sm text-danger cursor-pointer hover:text-danger-hover `} // Change color on hover
+                        onClick={() => mutateDeleteQueue({})}
+                    />
+                    
+                    {/* Clickable Pause Icon */}
+                   
+                </div>
+            </ProgressCircle>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import { RiDownload2Line as Download } from "react-icons/ri";
+import { Download } from "../icons";
 
 type DownloadButtonProps = {
   onClick: (e: React.MouseEvent<HTMLButtonElement|SVGElement>) => void;

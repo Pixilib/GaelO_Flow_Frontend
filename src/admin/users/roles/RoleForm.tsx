@@ -1,10 +1,10 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
+import { ChangeEvent, useState } from "react";
 
 import { Role } from "../../../utils/types";
 import { Colors } from "../../../utils";
 
 import { Button, Input,Toggle } from "../../../ui";
+import { SubmitUser } from "../../../icons";
 
 type RoleFormProps = {
     onSubmit: (payload: Role) => void;
@@ -150,7 +150,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
             </div>
             <div className="flex justify-center">
                 <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
-                    <SubmitUser size={'1.3rem'} />
+                    <SubmitUser size='1.3rem' />
                     <div>{buttonText}</div>
                 </Button>
             </div>

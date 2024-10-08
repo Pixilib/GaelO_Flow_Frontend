@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
-import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
+import { BsFillCloudArrowUpFill as CloudIcon } from 'react-icons/bs';
 import { useDropzone } from "react-dropzone";
 import { useCustomToast } from "../../utils";
+import { Check } from "../../icons";
 
 interface CreateDropProps {
     files: File[],
@@ -43,7 +44,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ files, onDrop }) => {
             onDragOver={handleDragOver}
         >
             {files.length > 0 ? (
-                <CheckIcon
+                <Check
                     size={40}
                     className="text-success" />
             ) : (

@@ -7,6 +7,8 @@ import { Colors, useCustomMutation } from "../utils";
 import { createDeleteQueue } from "../services/queues";
 import { useState } from "react";
 import DeleteQueues from "./DeleteQueues";
+import Empty from "../icons/Empty";
+import { Trash } from "../icons";
 
 const DeleteRoot = () => {
     const dispatch = useDispatch();
@@ -35,33 +37,38 @@ const DeleteRoot = () => {
     };
 
     return (
-        <div className="flex flex-col md:flex-row md:space-x-4">
-            <Card className="w-full md:w-2/3">
-                <CardHeader
-                    className="flex items-center justify-center rounded-t-lg text-bg-light"
-                    color={Colors.primary}
-                    title={"Delete"}
-                />
-                <CardBody color={Colors.almond}>
-                    <DeleteStudyTable studies={Object.values(deleteList)} />
-                </CardBody>
-                <CardFooter color={Colors.light} className="flex justify-center gap-3">
-                    <Button onClick={handleClearList} color={Colors.warning}>
-                        Empty List
-                    </Button>
-                    <Button onClick={handleDeleteList} color={Colors.danger}>
-                        Delete List
-                    </Button>
-                </CardFooter>
-            </Card>
-
-            <Card className="flex items-center justify-center w-full bg-almond md:w-1/3">
-                <div className="flex flex-col items-center justify-center w-full p-4">
-                    <DeleteQueues />
+        <Card>
+        <CardHeader color={Colors.primary}>
+            <div className="flex items-center w-full">
+                <div className="w-4/5 text-lg font-bold text-center">
+                    Delete Resources
                 </div>
-            </Card>
-        </div>
+                <div className="flex justify-end w-1/5 gap-3 p-3">
+                    <Button
+                        onClick={handleClearList}
+                        color={Colors.light}
+                        className="rounded-lg hover:bg-secondary group"
+                    >
+                        <Empty className="text-xl text-bold text-primary group-hover:text-white" />
+                    </Button>
+                </div>
+            </div>
+        </CardHeader>
+        <CardBody color={Colors.almond}>
+            <DeleteStudyTable studies={Object.values(deleteList)} />
+        </CardBody>
+        <CardFooter color={Colors.light} className="flex justify-center gap-3">
+            <Button
+                onClick={handleDeleteList}
+                color={Colors.danger}
+                className="h-10" // Set a fixed height for the button
+            >
+                <Trash /> Delete List
+            </Button>
+
+            <DeleteQueues />
+        </CardFooter>
+    </Card>
     );
 };
-
 export default DeleteRoot;

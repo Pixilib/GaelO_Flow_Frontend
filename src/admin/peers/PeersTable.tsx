@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { ColumnDef } from '@tanstack/react-table';
-import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi";
 
 import { Table, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
 import { Peer } from '../../utils/types';
+import { Trash, Wifi } from '../../icons';
 
 interface PeersTableProps {
     peerData: Peer[];
@@ -34,10 +34,10 @@ const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEchoP
             cell: ({ row }) => (
                 <div className="flex justify-center items-center gap-2.5">
                     <Button onClick={() => onEchoPeer(row.original.name)} color={Colors.secondary}>
-                        <EchoIcon />
+                        <Wifi />
                     </Button>
                     <Button onClick={() => onDeletePeer(row.original.name)} color={Colors.danger}>
-                        <DeleteIcon size={18} />
+                        <Trash size={18} />
                     </Button>
                 </div>
             )

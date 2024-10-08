@@ -1,11 +1,12 @@
 type ProgressCircleProps = {
     progress: number;
     text?: string;
-    size?: number;
+    size?: number; // This defines the size of the circle
+    children?: React.ReactNode;
 };
 
-const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCircleProps) => {
-    const radius = 16;
+const ProgressCircle = ({ progress, text = '%', size = 100, children }: ProgressCircleProps) => { // Reduced default size
+    const radius = 12; // Reduced radius for a smaller circle
     const circumference = 2 * Math.PI * radius;
     const progressValue = (progress / 100) * circumference;
 
@@ -16,7 +17,7 @@ const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCirclePr
                 viewBox="0 0 36 36"
                 xmlns="http://www.w3.org/2000/svg"
             >
-                {/* Cercle d'arrière-plan */}
+                {/* Background circle */}
                 <circle
                     cx="18"
                     cy="18"
@@ -27,7 +28,7 @@ const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCirclePr
                     strokeDasharray="75 100"
                 />
 
-                {/* Cercle de progression */}
+                {/* Progress circle */}
                 <circle
                     cx="18"
                     cy="18"
@@ -39,12 +40,15 @@ const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCirclePr
                 />
             </svg>
 
-            {/* Texte au centre */}
+            {/* Centered text */}
             <div className="absolute text-center transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                <span className="text-4xl font-bold text-primary dark:text-primary">
+                <span className="text-xl font-bold text-primary dark:text-primary"> {/* Reduced text size */}
                     {progress}
                 </span>
-                <span className="block text-primary dark:text-primary">{text}</span>
+                <span className="block text-sm text-darj dark:text-primary">{text}</span>
+                <span>
+                    {children}
+                </span>
             </div>
         </div>
     );
