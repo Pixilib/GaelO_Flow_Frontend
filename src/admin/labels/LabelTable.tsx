@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
-import { RiAdminFill as AdminIcon } from "react-icons/ri";
 import ToggleChevron from "../../ui/menu/ToogleChevron";
 import { Table, Button, Label, Popover } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label as LabelType } from "../../utils/types";
 import LabelsRoles from "./LabelsRoles";
-import { Trash } from "../../icons";
+import { Admin, Trash } from "../../icons";
 
 interface LabelsTableProps {
   data: LabelType[];
@@ -37,7 +36,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
               placement="bottom"
             >
               <Button color={Colors.secondary} className="flex items-center gap-1.5">
-                <AdminIcon size="1.3rem" />
+                <Admin size="1.3rem" />
                 <ToggleChevron isOpen={false} />
               </Button>
             </Popover>

@@ -1,6 +1,7 @@
+import React from "react"
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { Edit, Trash } from '../src/icons';
 import DropdownButton from '../src/ui/menu/DropDownButton';
 
 const meta: Meta<typeof DropdownButton> = {
@@ -21,13 +22,13 @@ type Story = StoryObj<typeof meta>;
 const options = [
   {
     label: 'Edit',
-    icon: <FaEdit />,
+    icon: <Edit />,
     color: 'blue',
     action: action('edit-action'),
   },
   {
     label: 'Delete',
-    icon: <FaTrash />,
+    icon: <Trash />,
     color: 'red',
     action: action('delete-action'),
   },
@@ -60,12 +61,12 @@ export const OnlyIcons: Story = {
     options: [
       {
         label: 'Edit',
-        icon: <FaEdit />,
+        icon: <Edit />,
         action: action('edit-action'),
       },
       {
         label: 'Delete',
-        icon: <FaTrash />,
+        icon: <Trash />,
         action: action('delete-action'),
       },
     ],
@@ -80,13 +81,13 @@ export const ColoredOptions: Story = {
     options: [
       {
         label: 'Edit',
-        icon: <FaEdit />,
+        icon: <Edit />,
         color: 'green',
         action: action('edit-action'),
       },
       {
         label: 'Delete',
-        icon: <FaTrash />,
+        icon: <Trash />,
         color: 'orange',
         action: action('delete-action'),
       },

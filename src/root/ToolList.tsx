@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux"
 import { RootState } from "../store"
 
-import { FaFileExport as ExportIcon } from "react-icons/fa"
 import AnonIcon from "../ui/AnonIcon"
 import ToolItem from "./ToolItem"
 import { useNavigate } from "react-router-dom"
-import { Trash } from "../icons"
+import { Export, Trash } from "../icons"
 
 const ToolList = () => {
 
@@ -24,7 +23,7 @@ const ToolList = () => {
                 />
             </ToolItem>
             <ToolItem count={Object.keys(exportList).length} onClick={() => navigate('/export')}>
-                <ExportIcon
+                <Export
                     className="cursor-pointer text-secondary group-hover:text-white"
                 />
             </ToolItem>

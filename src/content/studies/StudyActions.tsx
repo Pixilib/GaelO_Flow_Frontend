@@ -1,11 +1,10 @@
 // StudyActions.tsx
 import React from 'react';
-import { GiBrain as BrainIcon } from 'react-icons/gi'
 import { StudyMainDicomTags } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
 import OhifViewerLink from '../OhifViewerLink';
 import StoneViewerLink from '../StoneViewerLink';
-import { Download, Edit, Eye, Trash } from '../../icons';
+import { Brain, Download, Edit, Eye, Trash } from '../../icons';
 
 type StudyActionsProps = {
     study: StudyMainDicomTags & { id: string };
@@ -34,7 +33,7 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
         },
         {
             label: 'AI',
-            icon: <BrainIcon />,
+            icon: <Brain />,
             color: 'green',
             action: () => onActionClick('ai', study.id)
         },

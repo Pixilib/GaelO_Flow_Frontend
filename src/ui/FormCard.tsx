@@ -1,7 +1,7 @@
-import { FaWindowMinimize, FaWindowMaximize } from "react-icons/fa";
 import { useState, ReactNode, FormEvent } from 'react';
-import { Card, CardBody, CardHeader, CloseButton } from '../ui';
 import { Colors } from '../utils';
+import { Card, CardBody, CardHeader, CloseButton } from '../ui';
+import { Maximize, Minimize } from '../icons';
 
 type FormCardProps = {
   title: string;
@@ -21,7 +21,7 @@ const FormCard = ({ title, onSubmit, children, className, collapsible = false, o
         <div className="">
           {collapsible && (
             <button onClick={() => setIsCollapsed(!isCollapsed)} className="me-4">
-              {isCollapsed ? <FaWindowMaximize /> : <FaWindowMinimize />}
+              {isCollapsed ? <Maximize /> : <Minimize />}
             </button>
           )}
           {onClose && <CloseButton onClose={onClose} />}

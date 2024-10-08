@@ -26,9 +26,7 @@ import {
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
 import AnonIcon from "../assets/Anon.svg?react";
-import { FaFileExport as ExportIcon } from "react-icons/fa";
-import { MdNewLabel as LabelIcon } from "react-icons/md"; 
-import { Trash } from "../icons";
+import { Export, Label as LabelIcon, Trash } from "../icons";
 
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
@@ -171,7 +169,7 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendExportList}
                     >
-                        <ExportIcon className="text-xl" />
+                        <Export className="text-xl" />
                         <span className="ml-2">Send to Export</span>
                     </Button>
 

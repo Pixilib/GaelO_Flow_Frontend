@@ -7,7 +7,6 @@ import { MdOutlineImageSearch as OrthancContentIcon, MdOutlineRestorePage as Ret
 import { IoMdHelpCircleOutline as HelpIcon } from "react-icons/io";
 import { SlDirections } from "react-icons/sl";
 import { TbZoomQuestion as QueryIcon } from "react-icons/tb";
-import { RiUserSettingsLine as AdministratorIcon } from "react-icons/ri";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import MenuItem from "../ui/menu/MenuItem";
@@ -15,6 +14,7 @@ import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
 import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import { Item } from "../ui/menu/Items";
+import { Admin } from "../icons";
 type SideBarProps = {
   onLogout: () => void;
   openItem: string | null;
@@ -82,7 +82,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
         </div>
         <div className="flex h-69% flex-col gap-3 overflow-y-auto custom-scrollbar">
           <MenuItemsCollapse
-            icon={<AdministratorIcon className="w-6 h-6" />}
+            icon={<Admin className="w-6 h-6" />}
             title="Administration"
             elements={adminItems}
             isOpen={openItem === "Administration"}

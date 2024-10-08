@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import moment from "moment";
-import { FaSearch } from "react-icons/fa";
 import { Option, QueryPayload, useCustomToast } from "../utils";
 import { FormButton, Input, Label, SelectInput } from "../ui";
 import SelectModalities from "./SelectModalities";
+import { Search } from "../icons";
 
 type SearchFormProps = {
   aets?: Option[];
@@ -241,7 +241,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
       )}
       <div className="flex justify-center col-span-2 lg:w-1/2 lg:mx-auto lg:gap-11">
         <div className={`${withAets && aets.length > 0 ? "w-1/2 mt-5" : "w-full"} flex justify-center items-center`}>
-          <FormButton text={"Query"} icon={<FaSearch size="1.3rem" />} />
+          <FormButton text={"Query"} icon={<Search size="1.3rem" />} />
         </div>
       </div>
     </form>
