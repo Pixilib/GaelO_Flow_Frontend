@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { PiBroomBold as EmptyIcon } from "react-icons/pi"; import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import ExportStudyTable from "./ExportStudyTable";
@@ -13,6 +13,7 @@ import { flushExportList } from "../reducers/ExportSlice";
 import { storeToModality } from "../services/modalities";
 import ProgressJobs from "../query/ProgressJobs";
 import { sendResourcesToPeer } from "../services/peers";
+import { GaeloIcon } from "../assets";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast } = useCustomToast();
@@ -125,14 +126,28 @@ const ExportRoot = () => {
     return (
         <Card>
             <CardHeader
-                className="flex items-center justify-center rounded-t-lg text-bg-light"
+                className="flex items-center justify-between rounded-t-lg text-bg-light"
                 color={Colors.primary}
                 title={"Export Resources"}
-            />
-            <CardBody color={Colors.almond}>
-                <div className="flex flex-col">
-                    <ExportStudyTable onClickStudy={handleClickStudy} studies={Object.values(exportStudyList)} />
-                    <ExportSeriesTable series={series} />
+            >
+                <div className="flex space-x-3">
+                    <Button color={Colors.secondary} className="flex items-center rounded-lg">
+                        <DownloadIcon className="" />
+                    </Button>
+                    <Button onClick={handleClearList} color={Colors.warning} className="flex items-center rounded-lg">
+                        <EmptyIcon className="" />
+                    </Button>
+
+                </div>
+            </CardHeader>
+            <CardBody color={Colors.almond} className="overflow-auto">
+                <div className="flex flex-col space-x-4 md:flex-row">
+                    <div className="flex-1 mb-4">
+                        <ExportStudyTable onClickStudy={handleClickStudy} studies={Object.values(exportStudyList)} />
+                    </div>
+                    <div className="flex-1 mb-4">
+                        <ExportSeriesTable series={series} />
+                    </div>
                 </div>
             </CardBody>
             <CardFooter color={Colors.light} className="flex justify-center flex-grow gap-3">
@@ -143,18 +158,15 @@ const ExportRoot = () => {
                     <DropdownButton row={null} buttonText="Send To Peer" options={peersOptions} />
                     {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}
                     <Button className="text-white bg-cyan-700" disabled>
-                        Send To GaelO
-                    </Button>
-                </div>
-                <div className="flex justify-end w-1/5 gap-3">
-                    <Button color={Colors.secondary}>Download as CSV</Button>
-                    <Button onClick={handleClearList} color={Colors.warning}>
-                        Empty List
+                        Send to
+                        <GaeloIcon className="ml-2" />
                     </Button>
                 </div>
             </CardFooter>
         </Card>
     );
+
+
 };
 
 export default ExportRoot;

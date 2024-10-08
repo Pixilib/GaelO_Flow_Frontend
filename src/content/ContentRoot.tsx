@@ -28,7 +28,8 @@ import { Colors } from "../utils";
 import AnonIcon from "../assets/Anon.svg?react";
 import { BsTrashFill as DeleteIcon } from "react-icons/bs";
 import { FaFileExport as ExportIcon } from "react-icons/fa";
-import SelectLabels from "../datasets/SelectLabels";
+import { MdNewLabel as LabelIcon } from "react-icons/md"; 
+
 
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
@@ -159,7 +160,7 @@ const ContentRoot: React.FC = () => {
 
                 <div className="flex flex-wrap gap-2 mb-4">
                     <Button
-                        color={Colors.primary}
+                        color={Colors.primary} // Mettre à jour colors et rajouter la couleur bleue
                         className="flex items-center text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
                         onClick={handleSendAnonymizeList}
                     >
@@ -185,13 +186,15 @@ const ContentRoot: React.FC = () => {
                         <span className="ml-2">Send to Delete</span>
                     </Button>
 
-                    <div className="flex-grow w-full md:w-auto">
-                        <SelectLabels
-                            onChange={(labels) => console.log(labels)}
-                            closeMenuOnSelect
-                            className="w-full"
-                        />
-                    </div>
+                    <Button
+                        color={Colors.primary}
+                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                        onClick={handleSendDeleteList}
+                    >
+                        <LabelIcon className="text-xl" />
+                        <span className="ml-2">Labels</span>
+                    </Button>
+
                 </div>
             </div>
 

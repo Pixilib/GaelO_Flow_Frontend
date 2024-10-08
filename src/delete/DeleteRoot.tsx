@@ -35,8 +35,8 @@ const DeleteRoot = () => {
     };
 
     return (
-        <div className="flex flex-col md:flex-row md:space-x-4">
-            <Card className="w-full md:w-2/3">
+        <div className="flex flex-col space-y-4">
+            <Card className="w-full">
                 <CardHeader
                     className="flex items-center justify-center rounded-t-lg text-bg-light"
                     color={Colors.primary}
@@ -55,11 +55,9 @@ const DeleteRoot = () => {
                 </CardFooter>
             </Card>
 
-            <Card className="flex items-center justify-center w-full bg-almond md:w-1/3">
                 <div className="flex flex-col items-center justify-center w-full p-4">
                     <DeleteQueues />
                 </div>
-            </Card>
         </div>
     );
 };
