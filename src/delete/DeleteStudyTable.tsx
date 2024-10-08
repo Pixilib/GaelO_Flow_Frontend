@@ -24,6 +24,7 @@ const DeleteStudyTable = ({ studies }: DeleteStudyTableProps) => {
                 id: "id",
                 accessorKey: "id",
                 header: "ID",
+
             },
             {
                 accessorKey: "patientMainDicomTags.patientName",
@@ -51,7 +52,7 @@ const DeleteStudyTable = ({ studies }: DeleteStudyTableProps) => {
                     <div className="flex justify-center">
                         <Button
                             onClick={() => handleDelete(row.original.id)}
-                            color={Colors.danger}
+                            color={Colors.warning}
                         >
                             <Trash />
                         </Button>
@@ -62,7 +63,7 @@ const DeleteStudyTable = ({ studies }: DeleteStudyTableProps) => {
         [dispatch]
     );
 
-    return <Table data={studies} columns={columns} />;
+    return <Table data={studies} columnVisibility={{id : false}} columns={columns} />;
 };
 
 export default DeleteStudyTable;
