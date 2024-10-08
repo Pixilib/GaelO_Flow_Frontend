@@ -1,8 +1,8 @@
-import { BiTrash } from "react-icons/bi";
+import { BsFillTrashFill } from "react-icons/bs"; 
 
 const Trash = (props) => {
     return (
-        <BiTrash {...props} />
+        <BsFillTrashFill {...props} />
     )
 }
 

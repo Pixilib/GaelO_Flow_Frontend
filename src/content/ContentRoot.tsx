@@ -159,7 +159,6 @@ const ContentRoot: React.FC = () => {
 
                 <div className="flex flex-wrap gap-2 mb-4">
                     <Button
-                        color={Colors.primary} // Mettre à jour colors et rajouter la couleur bleue
                         className="flex items-center text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
                         onClick={handleSendAnonymizeList}
                     >

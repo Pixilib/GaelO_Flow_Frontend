@@ -25,7 +25,6 @@ const DeleteQueues = () => {
 
     return (
         <div className="flex flex-col">
-            <p className="text-lg font-semibold text-center">Progress </p>
             <div className="flex gap-4">
                 {existingDeleteQueues?.map((uuid) => (
                     <div key={uuid} >

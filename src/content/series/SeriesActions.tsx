@@ -2,7 +2,7 @@
 import React from 'react';
 import { Series } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
-import { Download, Edit, Eye, Trash } from '../../icons';
+import { Download, Edit, Eye, Label, Trash } from '../../icons';
 
 type SeriesActionsProps = {
     series: Series;
@@ -11,6 +11,12 @@ type SeriesActionsProps = {
 
 const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) => {
     const options = [
+        {
+            label: 'Labels',
+            icon: <Label />,
+            color: 'bg-indigo-500',
+            action: () => setLabelsModalOpen(true)      
+          },
         {
             label: 'Modify',
             icon: <Edit />,
@@ -65,3 +71,7 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
 };
 
 export default SeriesActions;
+
+function setLabelsModalOpen(arg0: boolean) {
+    throw new Error('Function not implemented.');
+}

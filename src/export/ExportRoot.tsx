@@ -1,4 +1,3 @@
-import { PiBroomBold as EmptyIcon } from "react-icons/pi";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Papa from "papaparse"
@@ -18,6 +17,7 @@ import { GaeloIcon } from "../assets";
 import { exportCsv } from "../utils/export";
 import SelectTransferSyntax from "./SelectTransferSyntax";
 import { Download } from "../icons";
+import Empty from "../icons/Empty";
 
 
 const ExportRoot = () => {
@@ -159,22 +159,25 @@ const ExportRoot = () => {
             >
                 <div className="flex items-center w-full">
                     <div className="w-4/5 text-lg font-bold text-center">Export Ressources</div>
-                    <div className="flex justify-end w-1/5 gap-1 p-3">
-                        <SelectTransferSyntax value={transferSyntax} onChange={(value) => setTrasferSyntax(value)} />
+                    <div className="flex justify-end w-1/5 gap-3 p-3">
+
                         <Button
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary">
+                            className="rounded-lg hover:bg-secondary group">
                             <Download
-                                onClick={handleDownloadCsv} 
-                                className="text-primary"/>
+                                onClick={handleDownloadCsv}
+                                className="text-xl text-primary group-hover:text-white" />
                         </Button>
+
                         <Button
                             onClick={handleClearList}
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary">
-                            <EmptyIcon 
-                            className="text-primary" />
+                            className="rounded-lg hover:bg-secondary group">
+                            <Empty
+                                className="text-xl text-bol text-primary group-hover:text-white" />
                         </Button>
+                        <SelectTransferSyntax value={transferSyntax} onChange={(value) => setTrasferSyntax(value)} />
+
                     </div>
 
                 </div>
