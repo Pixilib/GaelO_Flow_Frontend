@@ -35,8 +35,8 @@ const SelectTransferSyntax = ({ value, onChange }: SelectTransferSyntaxProps) =>
             popover={
                 <SelectInput options={TRANSCODING_OPTIONS} value={value} onChange={(option) => onChange(option?.value)} />}
         >
-            <div className="flex justify-center items-center w-5 h-full">
-                <Gear className='text-warning w-full h-full' />
+            <div className="flex items-center justify-center w-5 h-full">
+                <Gear className='w-full h-full text-white' />
             </div>
         </Popover>
     )

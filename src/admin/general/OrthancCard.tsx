@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react';
 
-import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui/';
+import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui';
+import { Close, Question, Restart } from '../../icons';
 import { Colors } from '../../utils/enums';
+import { useConfirm } from '../../services';
+
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, orthancShutdown, updateVerbosity } from '../../services/orthanc';
-import { useConfirm } from '../../services';
-import { Close, Question, Restart } from '../../icons';
 
 type OrthancData = {
     username: string;

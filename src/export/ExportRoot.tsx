@@ -1,4 +1,5 @@
-import { PiBroomBold as EmptyIcon } from "react-icons/pi"; import { useMemo, useState } from "react";
+import { PiBroomBold as EmptyIcon } from "react-icons/pi";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Papa from "papaparse"
 import { RootState } from "../store";
@@ -160,11 +161,19 @@ const ExportRoot = () => {
                     <div className="w-4/5 text-lg font-bold text-center">Export Ressources</div>
                     <div className="flex justify-end w-1/5 gap-1 p-3">
                         <SelectTransferSyntax value={transferSyntax} onChange={(value) => setTrasferSyntax(value)} />
-                        <Button color={Colors.secondary} className="rounded-lg">
-                            <Download onClick={handleDownloadCsv} />
+                        <Button
+                            color={Colors.light}
+                            className="rounded-lg hover:bg-secondary">
+                            <Download
+                                onClick={handleDownloadCsv} 
+                                className="text-primary"/>
                         </Button>
-                        <Button onClick={handleClearList} color={Colors.warning} className="rounded-lg">
-                            <EmptyIcon className="" />
+                        <Button
+                            onClick={handleClearList}
+                            color={Colors.light}
+                            className="rounded-lg hover:bg-secondary">
+                            <EmptyIcon 
+                            className="text-primary" />
                         </Button>
                     </div>
 
@@ -173,7 +182,9 @@ const ExportRoot = () => {
             <CardBody color={Colors.almond} className="overflow-auto">
                 <div className="flex flex-col space-x-4 md:flex-row">
                     <div className="flex-1 mb-4">
-                        <ExportStudyTable onClickStudy={handleClickStudy} studies={Object.values(exportStudyList)} />
+                        <ExportStudyTable
+                            onClickStudy={handleClickStudy}
+                            studies={Object.values(exportStudyList)} />
                     </div>
                     <div className="flex-1 mb-4">
                         <ExportSeriesTable series={series} />
@@ -187,8 +198,8 @@ const ExportRoot = () => {
                     {storeJobId && <ProgressJobs size={50} jobId={storeJobId} />}
                     <DropdownButton row={null} buttonText="Send To Peer" options={peersOptions} />
                     {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}
-                    <Button color={Colors.primary} className="text-white bg-cyan-700" disabled>
-                        <GaeloIcon />
+                    <Button color={Colors.blueCustom} className="text-white bg-cyan-700" disabled>
+                        Send to <GaeloIcon className="ml-1" />
                     </Button>
                 </div>
             </CardFooter>
