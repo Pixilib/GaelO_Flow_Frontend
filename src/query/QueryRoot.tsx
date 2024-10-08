@@ -94,7 +94,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-primary">Results</div>
           <div className="text-lg text-gray-600">
-            {studies.length} {studies.length === 1 ? "result" : "results"} found
+            {studies.length} {studies.length === 1 ? "study" : "studies"} found
           </div>
         </div>
 

@@ -24,9 +24,9 @@ const DeleteQueues = () => {
     if (isPending) return <Spinner />;
 
     return (
-        <div className="flex flex-col w-full p-4">
+        <div className="flex flex-col">
             <p className="text-lg font-semibold text-center">Progress </p>
-            <div className="flex flex-col space-y-4">
+            <div className="flex gap-4">
                 {existingDeleteQueues?.map((uuid) => (
                     <div key={uuid} >
                         <ProgressQueue

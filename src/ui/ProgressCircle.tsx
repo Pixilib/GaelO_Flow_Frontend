@@ -2,9 +2,10 @@ type ProgressCircleProps = {
     progress: number;
     text?: string;
     size?: number;
+    children?: React.ReactNode
 };
 
-const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCircleProps) => {
+const ProgressCircle = ({ progress, text = '%', size = 150, children }: ProgressCircleProps) => {
     const radius = 16;
     const circumference = 2 * Math.PI * radius;
     const progressValue = (progress / 100) * circumference;
@@ -45,6 +46,9 @@ const ProgressCircle = ({ progress, text = 'mph', size = 150 }: ProgressCirclePr
                     {progress}
                 </span>
                 <span className="block text-primary dark:text-primary">{text}</span>
+                <span>
+                    {children}
+                </span>
             </div>
         </div>
     );

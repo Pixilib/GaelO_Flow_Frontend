@@ -81,7 +81,7 @@ const ExportRoot = () => {
             (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"),
             undefined,
             hierarchical,
-            transferSyntax != "None" ? transferSyntax  : undefined
+            transferSyntax != "None" ? transferSyntax : undefined
         );
     };
 
@@ -154,18 +154,19 @@ const ExportRoot = () => {
     return (
         <Card>
             <CardHeader
-                className="flex items-center justify-between rounded-t-lg text-bg-light"
                 color={Colors.primary}
-                title={"Export Resources"}
             >
-                <div className="flex space-x-3">
-                    <Button color={Colors.secondary} className="flex items-center rounded-lg">
-                        <Button color={Colors.secondary}>Download as CSV</Button>
-                        <DownloadIcon className="" />
-                    </Button>
-                    <Button onClick={handleClearList} color={Colors.warning} className="flex items-center rounded-lg">
-                        <EmptyIcon className="" />
-                    </Button>
+                <div className="flex items-center w-full">
+                    <div className="w-4/5 text-lg font-bold text-center">Export Ressources</div>
+                    <div className="flex justify-end w-1/5 gap-1 p-3">
+                        <SelectTransferSyntax value={transferSyntax} onChange={(value) => setTrasferSyntax(value)} />
+                        <Button color={Colors.secondary} className="rounded-lg">
+                            <Download onClick={handleDownloadCsv} />
+                        </Button>
+                        <Button onClick={handleClearList} color={Colors.warning} className="rounded-lg">
+                            <EmptyIcon className="" />
+                        </Button>
+                    </div>
 
                 </div>
             </CardHeader>
@@ -182,13 +183,12 @@ const ExportRoot = () => {
             <CardFooter color={Colors.light} className="flex justify-center flex-grow gap-3">
                 <div className="flex justify-center w-4/5 gap-3">
                     <DropdownButton row={null} buttonText="Download" options={downloadOptions} />
-                    <SelectTransferSyntax value={transferSyntax} onChange={(value)=>setTrasferSyntax(value)} />
                     <DropdownButton row={null} buttonText="Send To Modality" options={modalitiesOptions} />
                     {storeJobId && <ProgressJobs size={50} jobId={storeJobId} />}
                     <DropdownButton row={null} buttonText="Send To Peer" options={peersOptions} />
                     {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}
-                    <Button className="text-white bg-cyan-700" disabled>
-                        Send To GaelO
+                    <Button color={Colors.primary} className="text-white bg-cyan-700" disabled>
+                        <GaeloIcon />
                     </Button>
                 </div>
             </CardFooter>

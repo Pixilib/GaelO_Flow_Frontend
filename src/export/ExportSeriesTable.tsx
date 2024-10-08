@@ -4,6 +4,7 @@ import { Colors, Series } from "../utils";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { removeSeriesFromExportList } from "../reducers/ExportSlice";
+import { Trash } from "../icons";
 
 type ExportSeriesTableProps = {
     series: Series[]
@@ -45,7 +46,7 @@ const ExportSeriesTable = ({ series }: ExportSeriesTableProps) => {
                             onClick={() => handleDelete(row.original.id)}
                             color={Colors.danger}
                         >
-                            Remove
+                            <Trash />
                         </Button>
                     </div>
                 ),

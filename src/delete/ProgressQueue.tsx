@@ -9,37 +9,37 @@ type ProgressQueueProps = {
 
 const ProgressQueue = ({ uuid }: ProgressQueueProps) => {
     const { data, isPending } = useCustomQuery(
-        ['queue', 'delete', uuid], 
-        () => getDeleteQueue(uuid), 
+        ['queue', 'delete', uuid],
+        () => getDeleteQueue(uuid),
         { refetchInterval: 2000 }
     );
-    
+
     const { mutate: mutateDeleteQueue } = useCustomMutation(
-        () => deleteDeleteQueue(uuid), 
+        () => deleteDeleteQueue(uuid),
         [['queue', 'delete']]
     );
 
     if (isPending) return <Spinner />;
 
     return (
-        <div className="relative flex items-center justify-center">
-            <ProgressCircle text={data?.state} progress={data?.progress || 0} size={150} />
-            <div className="absolute bottom-0 flex flex-col items-center space-y-1 transform -translate-x-1/2 left-1/2">
-                <Button 
-                    color={Colors.danger} 
-                    onClick={() => mutateDeleteQueue({})}
-                    className="flex items-center"
-                >
-                    <FaTrash className="mr-1" /> {/* Delete icon */}
-                </Button>
-                <Button 
-                    color={Colors.warning} 
-                    onClick={() => {/* Implement pause functionality here */}}
-                    className="flex items-center"
-                >
-                    <FaPause className="mr-1" /> {/* Pause icon */}
-                </Button>
-            </div>
+        <div className="flex-col items-center justify-center">
+            <ProgressCircle text={data?.state} progress={data?.progress || 0} size={150} >
+                <div className="flex justify-center">
+                    <Button
+                        color={Colors.danger}
+                        onClick={() => mutateDeleteQueue({})}
+                    >
+                        <FaTrash className="mr-1" /> {/* Delete icon */}
+                    </Button>
+                    <Button
+                        color={Colors.warning}
+                        onClick={() => {/* Implement pause functionality here */ }}
+                    >
+                        <FaPause className="mr-1" /> {/* Pause icon */}
+                    </Button>
+                </div>
+            </ProgressCircle>
+
         </div>
     );
 };

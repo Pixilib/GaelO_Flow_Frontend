@@ -8,7 +8,7 @@ type CardProps = {
 };
 
 type CardHeaderProps = {
-  title: string;
+  title?: string;
   centerTitle?: boolean;
   className?: string;
   children?: React.ReactNode;
@@ -70,8 +70,8 @@ const CardHeader = ({ title, centerTitle, className = "", children, color }: Car
   const headerClass = getColorClass(color);
 
   return (
-    <div data-gaelo-flow="Card-header" className={`${headerClass} text-white ${shadowClass} rounded-t-2xl ${className} flex items-center ${centerTitle ? 'justify-center' : ''} text-center`}>
-      {title && <h2 className="flex-1 p-3 mx-auto text-lg font-bold">{title}</h2>}
+    <div data-gaelo-flow="Card-header" className={`${headerClass} w-full min-h-12 text-white ${shadowClass} rounded-t-2xl flex items-center ${centerTitle ? 'justify-center' : ''} ${className}`}>
+      {title && <div className="text-lg font-bold">{title}</div>}
       {children}
     </div>
   );

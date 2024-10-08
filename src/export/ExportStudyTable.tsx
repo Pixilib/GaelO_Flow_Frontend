@@ -5,6 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Table, Button } from "../ui";
 import { Colors, Study } from "../utils";
 import { removeSeriesFromExportList } from "../reducers/ExportSlice";
+import { Trash } from "../icons";
 
 type ExportStudyTableProps = {
     studies: Study[];
@@ -55,7 +56,7 @@ const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
                             onClick={() => handleDelete(row.original.id)}
                             color={Colors.danger}
                         >
-                            Remove
+                            <Trash />
                         </Button>
                     </div>
                 ),
