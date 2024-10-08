@@ -3,7 +3,6 @@ import {
   BiImport as ImportIcon, BiImageAdd as DicomIcon
 }
   from "react-icons/bi";
-import { MdOutlineImageSearch as OrthancContentIcon, MdOutlineRestorePage as RetrieveIcon } from "react-icons/md";
 import { IoMdHelpCircleOutline as HelpIcon } from "react-icons/io";
 import { SlDirections } from "react-icons/sl";
 import { TbZoomQuestion as QueryIcon } from "react-icons/tb";
@@ -14,7 +13,7 @@ import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
 import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import { Item } from "../ui/menu/Items";
-import { Admin } from "../icons";
+import { Admin, ImageSearch, RestorePage } from "../icons";
 type SideBarProps = {
   onLogout: () => void;
   openItem: string | null;
@@ -91,7 +90,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           />
           <MenuItem
             title="Orthanc Content"
-            icon={< OrthancContentIcon className="w-6 h-6" />}
+            icon={< ImageSearch className="w-6 h-6" />}
             isActive={location.pathname === "/orthanc-content"}
             onClick={() => handleItemClick("/orthanc-content")}
           />
@@ -109,7 +108,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           />
           <MenuItem
             title="Auto retrieve"
-            icon={<RetrieveIcon className="w-6 h-6" />}
+            icon={<RestorePage className="w-6 h-6" />}
             isActive={location.pathname === "/auto-retrieve"}
             onClick={() => handleItemClick("/auto-retrieve")}
           />

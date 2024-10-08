@@ -1,6 +1,5 @@
-import { TiWeatherNight } from "react-icons/ti";
-import { RiSunFill } from "react-icons/ri";
 import { useState } from "react";
+import { Moon, Sun } from "../../icons";
 
 type ToggleSwitchProps = {
   isToggled?: boolean;
@@ -41,9 +40,9 @@ const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
         >
           {/* Display icon according to toggle switch */}
           {checked ? (
-            <TiWeatherNight size={20} color="#374151" />
+            <Moon size={20} color="#374151" />
           ) : (
-            <RiSunFill size={20} color="#FFA500" />
+            <Sun size={20} color="#FFA500" />
           )}
         </div>
       </div>

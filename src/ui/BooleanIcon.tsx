@@ -1,5 +1,4 @@
-import { RxCross2 } from "react-icons/rx"; 
-import { BiCheck } from "react-icons/bi"; 
+import { Check, Cross } from "../icons";
 
 type BooleanIconProps = {
     value: boolean;
@@ -8,9 +7,8 @@ type BooleanIconProps = {
 
 const BooleanIcon: React.FC<BooleanIconProps> = ({ value, size}) => {
     return value ? 
-        <BiCheck color={"green"}  size={size} className="mx-auto"/>:
-        <RxCross2 color={"red"}  size={size} className="mx-auto"/>;
-        
+        <Check color={"green"}  size={size} className="mx-auto"/>:
+        <Cross color={"red"}  size={size} className="mx-auto"/>;       
 }
 
 export default BooleanIcon;

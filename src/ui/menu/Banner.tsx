@@ -1,5 +1,5 @@
 import React from 'react';
-import { BiLeftArrowAlt as Arrowlefticon } from 'react-icons/bi';
+import { ArrowLeft } from '../../icons';
 
 type BannerProps = {
   title: string;
@@ -26,7 +26,7 @@ const Banner = ({
             className="flex items-center mr-4 cursor-pointer text-primary"
             onClick={onLeftIconClick}
           >
-            <Arrowlefticon className="text-3xl leading-none text-primary" />
+            <ArrowLeft className="text-3xl leading-none text-primary" />
           </span>
         )}
         <h1 className="text-xl font-medium md:text-2xl text-primary">{title}</h1>
