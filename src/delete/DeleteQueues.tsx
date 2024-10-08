@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { getExistingDeleteQueues, deleteDeleteQueue } from "../services/queues";
-import { useCustomQuery, useCustomMutation } from "../utils";
+import { getExistingDeleteQueues } from "../services/queues";
+import { useCustomQuery } from "../utils";
 import { RootState } from "../store";
 import { Spinner } from "../ui";
 import ProgressQueue from "./ProgressQueue";
@@ -13,14 +13,6 @@ const DeleteQueues = () => {
         () => getExistingDeleteQueues(currentUserId)
     );
 
-    const { mutate: mutateDeleteQueue } = useCustomMutation(
-        (uuid: string) => deleteDeleteQueue(uuid),
-        {
-            onSuccess: () => {
-            },
-        }
-    );
-
     if (isPending) return <Spinner />;
 
     return (
@@ -30,7 +22,6 @@ const DeleteQueues = () => {
                     <div key={uuid} >
                         <ProgressQueue
                             uuid={uuid}
-                            onStop={() => mutateDeleteQueue(uuid)}
                         />
                     </div>
                 ))}
