@@ -1,4 +1,3 @@
-import React from 'react';
 import Select, { ActionMeta, ClassNamesConfig } from 'react-select';
 
 interface OptionType {
@@ -22,7 +21,7 @@ interface SelectInputProps {
 
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
-    const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded';
+    const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
     return `border border-gray-300 min-h-[48px] bg-white ${borderRadius} focus:border-blue-500 hover:border-blue-500`;
   },
   menu: (state) => {
@@ -48,20 +47,24 @@ const SelectInput = ({
   menuPosition = undefined,
   formatOptionLabel = undefined,
   formatGroupLabel = undefined
-}: SelectInputProps) => (
-  <Select
-    options={options}
-    onChange={(selectedOption: any, meta: any) => onChange(selectedOption, meta)}
-    placeholder={placeholder}
-    classNames={customClass}
-    isClearable={isClearable}
-    menuPosition={menuPosition}
-    formatOptionLabel={formatOptionLabel}
-    formatGroupLabel={formatGroupLabel}
-    value={value ? (isMulti ? options.filter(option => option.value === value) : options.find(option => option.value === value)) : null}
-    className={`w-full ${rounded ? 'rounded-3xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
-    closeMenuOnSelect={closeMenuOnSelect}
-  />
-);
+}: SelectInputProps) => {
+  console.log(value)
+  return (
+    <Select
+      options={options}
+      onChange={(selectedOption: any, meta: any) => onChange(selectedOption, meta)}
+      placeholder={placeholder}
+      classNames={customClass}
+      isClearable={isClearable}
+      menuPosition={menuPosition}
+      formatOptionLabel={formatOptionLabel}
+      formatGroupLabel={formatGroupLabel}
+      isMulti={isMulti}
+      value={value ? (isMulti ? options.filter(option => value.includes(option.value)) : options.find(option => option.value === value)) : null}
+      className={`w-full ${rounded ? 'rounded-3xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
+      closeMenuOnSelect={closeMenuOnSelect}
+    />
+  )
+};
 
 export default SelectInput;

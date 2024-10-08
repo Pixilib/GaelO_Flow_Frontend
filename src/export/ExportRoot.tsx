@@ -1,9 +1,9 @@
 import { PiBroomBold as EmptyIcon } from "react-icons/pi"; import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Papa from "papaparse"
 import { RootState } from "../store";
 import ExportStudyTable from "./ExportStudyTable";
 import ExportSeriesTable from "./ExportSeriesTable";
-import { RiDownload2Line as DownloadIcon } from "react-icons/ri";
 import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
 import { Colors, Study, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import DropdownButton from "../ui/menu/DropDownButton";
@@ -14,9 +14,13 @@ import { storeToModality } from "../services/modalities";
 import ProgressJobs from "../query/ProgressJobs";
 import { sendResourcesToPeer } from "../services/peers";
 import { GaeloIcon } from "../assets";
+import { exportCsv } from "../utils/export";
+import SelectTransferSyntax from "./SelectTransferSyntax";
+import { Download } from "../icons";
+
 
 const ExportRoot = () => {
-    const { toastSuccess, updateExistingToast } = useCustomToast();
+    const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
     const dispatch = useDispatch();
     const exportSeriesList = useSelector((state: RootState) => state.export.series);
     const exportStudyList = useSelector((state: RootState) => state.export.studies);
@@ -24,6 +28,7 @@ const ExportRoot = () => {
     const [currentStudyId, setCurrentStudyId] = useState(null);
     const [storeJobId, setStoreJobId] = useState(null);
     const [sendPeerJobId, setsendPeerJobId] = useState(null);
+    const [transferSyntax, setTrasferSyntax] = useState('None')
 
     const series = useMemo(() => {
         if (!currentStudyId) return [];
@@ -76,7 +81,7 @@ const ExportRoot = () => {
             (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"),
             undefined,
             hierarchical,
-            undefined
+            transferSyntax != "None" ? transferSyntax  : undefined
         );
     };
 
@@ -90,16 +95,39 @@ const ExportRoot = () => {
         sendPeerMutate({ peerName, resources });
     };
 
+    const handleDownloadCsv = () => {
+        const series = Object.values(exportSeriesList)
+        if (series.length === 0) {
+            toastWarning("Empty export list");
+            return;
+        }
+
+        const exportData = series.map(series => {
+            const study = exportStudyList[series.parentStudy]
+            return {
+                ...study.patientMainDicomTags,
+                ...study.mainDicomTags,
+                ...series.mainDicomTags,
+                numberOfInstances: series.instances.length,
+                orthancSeriesId: series.id,
+                orthancStudyId: series.parentStudy,
+                orthancPatientId: study.parentPatient
+            }
+        })
+        const csvString = Papa.unparse(exportData, {})
+        exportCsv(csvString, '.csv', 'export-list.csv')
+    }
+
     const downloadOptions = [
         {
             label: "Dicomdir",
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: "green",
             action: () => handleDownload(false),
         },
         {
             label: "Hierarchical",
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: "green",
             action: () => handleDownload(true),
         },
@@ -132,6 +160,7 @@ const ExportRoot = () => {
             >
                 <div className="flex space-x-3">
                     <Button color={Colors.secondary} className="flex items-center rounded-lg">
+                        <Button color={Colors.secondary}>Download as CSV</Button>
                         <DownloadIcon className="" />
                     </Button>
                     <Button onClick={handleClearList} color={Colors.warning} className="flex items-center rounded-lg">
@@ -153,13 +182,13 @@ const ExportRoot = () => {
             <CardFooter color={Colors.light} className="flex justify-center flex-grow gap-3">
                 <div className="flex justify-center w-4/5 gap-3">
                     <DropdownButton row={null} buttonText="Download" options={downloadOptions} />
+                    <SelectTransferSyntax value={transferSyntax} onChange={(value)=>setTrasferSyntax(value)} />
                     <DropdownButton row={null} buttonText="Send To Modality" options={modalitiesOptions} />
                     {storeJobId && <ProgressJobs size={50} jobId={storeJobId} />}
                     <DropdownButton row={null} buttonText="Send To Peer" options={peersOptions} />
                     {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}
                     <Button className="text-white bg-cyan-700" disabled>
-                        Send to
-                        <GaeloIcon className="ml-2" />
+                        Send To GaelO
                     </Button>
                 </div>
             </CardFooter>

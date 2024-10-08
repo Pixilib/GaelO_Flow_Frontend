@@ -1,8 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 
-import { AiOutlineCheck as CheckIcon } from 'react-icons/ai';
-
 import { FormCard, Button, Input } from '../../ui';
+import { Check } from '../../icons';
 import { Colors } from '../../utils/enums';
 import { Peer } from '../../utils/types';
 
@@ -64,7 +63,7 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
         </div>
         <div className="flex justify-center">
             <Button type="submit" color={Colors.success} aria-label="Submit New Peer">
-                <CheckIcon size="20px" />
+                <Check size="20px" />
             </Button>
         </div>
     </FormCard>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, CardFooter, Input, Label, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
-import { IoMdSend as SendIcon } from 'react-icons/io';
+import { Send } from '../../icons';
 
 type RetrieveCardProps = {
   startTime: string;
@@ -51,7 +51,7 @@ const RetrieveForm = ({
         </CardBody>
         <CardFooter className="flex justify-center bg-white">
           <Button color={Colors.success} type="submit" className="w-36">
-            <SendIcon /> Send
+            <Send /> Send
           </Button>
         </CardFooter>
       </Card>

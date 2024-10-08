@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { getInstancesOfSeries } from "../../services/orthanc"
 import { Input, Spinner } from "../../ui"
 import { useCustomQuery } from "../../utils"
@@ -10,15 +10,21 @@ type TagsProps = {
 const Tags = ({ seriesId }: TagsProps) => {
 
     const { data: instances } = useCustomQuery(['series', seriesId, 'instances'], () => getInstancesOfSeries(seriesId))
-    const [instanceNumber, setInstanceNumber] = useState<number>(1)
+    const [instanceNumber, setInstanceNumber] = useState<number>(0)
 
-    const currentInstanceId = (instanceNumber != null && instances != null) ? instances[instanceNumber - 1].id : null
+    const currentInstanceId = useMemo(()=>{
+        if(!instances ) return null
+        return instances[instanceNumber].id
+
+
+    }, [instances, instanceNumber])
+
 
     const { data: header } = useCustomQuery(
         ['instances', currentInstanceId, 'metadata'],
         () => instanceHeader(currentInstanceId),
         {
-            enabled: (currentInstanceId !== null)
+            enabled: (currentInstanceId  != null)
         }
     )
 
@@ -31,9 +37,10 @@ const Tags = ({ seriesId }: TagsProps) => {
     )
 
     if (!instances) return <Spinner />
+
     return (
         <>
-            <Input label="Instance Number" min={1} max={instances.length} value={instanceNumber ?? 1} onChange={(event) => setInstanceNumber(Number(event.target?.value))} />
+            <Input label="Instance Number" min={1} max={instances.length} value={instanceNumber} onChange={(event) => setInstanceNumber(Number(event.target?.value) - 1)} />
             <pre>
                 {JSON.stringify(header, null, 2)}
                 {JSON.stringify(tags, null, 2)}

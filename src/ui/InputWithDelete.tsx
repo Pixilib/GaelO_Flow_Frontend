@@ -1,8 +1,7 @@
 // EditableField.tsx
 import React, { ChangeEvent } from 'react';
 import { Input, Label } from '../ui';
-import { BsTrashFill as Delete } from "react-icons/bs";
-import CheckBox from './Checkbox';
+import { Trash } from '../icons';
 
 type InputWithDeleteProps = {
     label: string;
@@ -47,7 +46,7 @@ const InputWithDelete: React.FC<InputWithDeleteProps> = ({
                         ${isMarkedForRemoval ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : ''}
                     `}
             />
-            <Delete size={"1.3rem"} className="fill-danger" onClick={() => onRemove(fieldName, !isMarkedForRemoval)} />
+            <Trash size={"1.3rem"} className="fill-danger" onClick={() => onRemove(fieldName, !isMarkedForRemoval)} />
         </fieldset>
     );
 };

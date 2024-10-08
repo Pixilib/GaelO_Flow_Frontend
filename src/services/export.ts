@@ -59,14 +59,16 @@ export const exportResourcesId = (
   onProgress = (_mb: number) => {},
   abortController = new AbortController(),
   hierarchical = true,
-  transferSyntax: string | undefined = undefined,
+  transferSyntax: string | undefined = undefined
 ): Promise<any> => {
   const body = {
-    Resources:ids,
+    Resources: ids,
     Asynchronous: false,
     Transcode: transferSyntax,
   };
-  let url = hierarchical ? "/api/tools/create-archive" : "/api/tools/create-media"
+  let url = hierarchical
+    ? "/api/tools/create-archive"
+    : "/api/tools/create-media";
 
   return fetch(url, {
     method: "POST",
@@ -76,14 +78,19 @@ export const exportResourcesId = (
       Accept: "application/zip",
     },
     body: JSON.stringify(body),
-    signal: abortController.signal
+    signal: abortController.signal,
   })
     .then((answer) => {
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
       let filename = getContentDispositionFilename(answer.headers);
-      exportFileThroughFilesystemAPI(readableStream, contentType, filename, onProgress);
+      exportFileThroughFilesystemAPI(
+        readableStream,
+        contentType,
+        filename,
+        onProgress
+      );
       return true;
     })
     .catch((error) => {
@@ -96,7 +103,7 @@ export const exportRessource = (
   studyId: string,
   onProgress = (_mb: number) => {},
   abortController = new AbortController(),
-  transferSyntax: string | undefined = undefined,
+  transferSyntax: string | undefined = undefined
 ): Promise<any> => {
   const body = {
     Asynchronous: false,
@@ -111,14 +118,54 @@ export const exportRessource = (
       Accept: "application/zip",
     },
     body: JSON.stringify(body),
-    signal: abortController.signal
+    signal: abortController.signal,
   })
     .then((answer) => {
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
       let filename = getContentDispositionFilename(answer.headers);
-      exportFileThroughFilesystemAPI(readableStream, contentType, filename, onProgress);
+      exportFileThroughFilesystemAPI(
+        readableStream,
+        contentType,
+        filename,
+        onProgress
+      );
+      return true;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const exportSeriesToNifti = (
+  seriesId: string,
+  compress: boolean,
+  onProgress = (_mb: number) => {},
+  abortController = new AbortController()
+): Promise<any> => {
+  return fetch(
+    "/api/series/" + seriesId + "/nifti" + (compress ? "?compress" : ""),
+    {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + getToken(),
+        "Content-Type": "application/json",
+        Accept: "application/zip",
+      },
+      signal: abortController.signal,
+    }
+  )
+    .then((answer) => {
+      if (!answer.ok) throw answer;
+      const readableStream = answer.body;
+      let contentType = getContentType(answer.headers);
+      exportFileThroughFilesystemAPI(
+        readableStream,
+        contentType,
+        seriesId + '.nii.gz',
+        onProgress
+      );
       return true;
     })
     .catch((error) => {

@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 
 import { Colors, Oauth2Config } from "../../../utils";
 import { Button, Input } from "../../../ui";
+import { SubmitUser } from "../../../icons";
 
 type OauthFormProps = {
   onSubmit: (payload: Oauth2Config) => void;
@@ -83,7 +83,7 @@ const OauthForm = ({ onSubmit, initialData, buttonText }: OauthFormProps) => {
           className="h-12 gap-3 justify-self-center w-36 md:justify-center"
           type="submit"
         >
-          <SubmitUser size={"1.3rem"} />
+          <SubmitUser size="1.3rem" />
           <div className="">{buttonText}</div>
         </Button>
       </div>

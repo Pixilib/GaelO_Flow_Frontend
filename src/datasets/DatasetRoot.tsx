@@ -6,26 +6,31 @@ import DatasetTableStudy from "./studies/DatasetTableStudy";
 import DatasetSeriesTable from "./series/DatasetSeriesTable";
 import { findTools } from "../services";
 import Model from "../model/Model";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FindPayload, Series } from "../utils/types";
 import { getSeriesOfStudy } from "../services/orthanc";
 
 const DatasetRoot = () => {
     const [model, setModel] = useState<Model | null>(null);
     const [currentStudyId, setCurrentStudyId] = useState<string | null>(null);
+    const [selectedLabels, setSelectedLabels] = useState<string[]>([])
     const { toastError } = useCustomToast();
     const studies = model?.getPatients().map(patient => patient.getStudies()).flat() ?? [];
 
-    const { data: series } = useCustomQuery<Series[]>(
+    const { data: series, refetch } = useCustomQuery<Series[]>(
         ['series', (currentStudyId as string)],
-        () => getSeriesOfStudy(currentStudyId as string),
+        () => currentStudyId ? getSeriesOfStudy(currentStudyId as string) : new Promise((success, reject) => success([])),
         {
             onError: (error) => {
                 console.error(`No series for this study or an error occurred: ${error}`);
             },
-            enabled: !!currentStudyId
+            enabled: false
         },
     );
+
+    useEffect(() => {
+        refetch()
+    }, [currentStudyId])
 
     const { mutateAsync: mutateToolsFind } = useCustomMutation(
         ({ queryPayload }) => findTools(queryPayload),
@@ -42,11 +47,13 @@ const DatasetRoot = () => {
         }
     );
 
-    const handleSelectChange = (selectedLabels: any) => {
+    useEffect(() => {
         if (selectedLabels.length === 0) {
-            setModel(new Model()); return;
+            setModel(new Model());
+            setCurrentStudyId(null);
+            return;
         }
-        
+
         const queryPayload: FindPayload = {
             Level: 'Study',
             Labels: selectedLabels,
@@ -54,10 +61,9 @@ const DatasetRoot = () => {
             Query: {}
         };
         mutateToolsFind({ queryPayload });
-    };
+    }, [selectedLabels])
 
     const handleStudyRowClick = (studyId: string) => {
-        console.log(studyId);
         setCurrentStudyId(studyId);
     };
 
@@ -83,7 +89,7 @@ const DatasetRoot = () => {
             <CardBody className="bg-almond">
                 <div className="space-y-2">
                     <span className="text-base font-semibold text-gray-700">Labels</span>
-                    <SelectLabels onChange={handleSelectChange} closeMenuOnSelect={false} />
+                    <SelectLabels values={selectedLabels} onChange={(labels) => { console.log(labels); setSelectedLabels(labels) }} />
                 </div>
                 <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
                     <div className="2xl:col-span-7">

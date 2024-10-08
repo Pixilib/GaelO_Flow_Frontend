@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardBody, CardHeader, FormCard } from "../ui";
+import { FormCard } from "../ui";
 import { getModalities, queryModality } from "../services";
 import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors, useCustomToast } from "../utils";
 import { QueryResponse, QueryPayload, ExtendedQueryPayload } from '../utils/types';
@@ -24,9 +24,9 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     () => getModalities(),
     {
       select: (response) => response.map((modality) => ({
-          value: modality.name,
-          label: modality.aet,
-        })),
+        value: modality.name,
+        label: modality.aet,
+      })),
     }
   );
 
@@ -97,14 +97,14 @@ const QueryRoot = ({ className }: QueryFormProps) => {
             {studies.length} {studies.length === 1 ? "result" : "results"} found
           </div>
         </div>
-        
+
       </div>
       <div className="2xl:col-span-7">
-            <ResultsTable results={studies} onRowClick={handleRowClick} />
-          </div>
-          <div className="2xl:col-span-5">
-            <SeriesTable series={series} />
-          </div>
+        <ResultsTable results={studies} onRowClick={handleRowClick} />
+      </div>
+      <div className="2xl:col-span-5">
+        <SeriesTable series={series} />
+      </div>
     </div>
   );
 };
