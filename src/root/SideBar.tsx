@@ -1,19 +1,11 @@
-import {
-  BiLogOut as LogoutIcon, BiHomeAlt as HomeIcon,
-  BiImport as ImportIcon, BiImageAdd as DicomIcon
-}
-  from "react-icons/bi";
-import { IoMdHelpCircleOutline as HelpIcon } from "react-icons/io";
-import { SlDirections } from "react-icons/sl";
-import { TbZoomQuestion as QueryIcon } from "react-icons/tb";
-
 import { useNavigate, useLocation } from "react-router-dom";
 import MenuItem from "../ui/menu/MenuItem";
 import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
 import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import { Item } from "../ui/menu/Items";
-import { Admin, ImageSearch, RestorePage } from "../icons";
+import { Admin, Directions, Help, Home, ImageAdd, ImageSearch, Import, Logout, RestorePage, ZoomQuestion } from "../icons";
+
 type SideBarProps = {
   onLogout: () => void;
   openItem: string | null;
@@ -96,13 +88,13 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           />
           <MenuItem
             title="Import"
-            icon={<ImportIcon className="w-6 h-6" />}
+            icon={<Import className="w-6 h-6" />}
             isActive={location.pathname.includes("/import/")}
             onClick={() => handleItemClick("/import/upload")}
           />
           <MenuItem
             title="Query"
-            icon={<QueryIcon className="w-6 h-6" />}
+            icon={<ZoomQuestion className="w-6 h-6" />}
             isActive={location.pathname === "/query"}
             onClick={() => handleItemClick("/query")}
           />
@@ -114,13 +106,13 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
           />
           <MenuItem
             title="Auto routing"
-            icon={<SlDirections className="w-6 h-6" />}
+            icon={<Directions className="w-6 h-6" />}
             isActive={location.pathname === "/auto-routing"}
             onClick={() => handleItemClick("/auto-routing")}
           />
           <MenuItem
             title="Datasets"
-            icon={<DicomIcon className="w-6 h-6" />}
+            icon={<ImageAdd className="w-6 h-6" />}
             isActive={location.pathname === "/datasets"}
             onClick={() => handleItemClick("/datasets")}
           />
@@ -129,20 +121,20 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
 
           <MenuItem
             title="Home"
-            icon={<HomeIcon className="w-6 h-6" />}
+            icon={<Home className="w-6 h-6" />}
             isActive={location.pathname === "/"}
             onClick={() => handleItemClick("/")}
             className="mt-3"
           />
           <MenuItem
             title="Help"
-            icon={<HelpIcon className="w-6 h-6" />}
+            icon={<Help className="w-6 h-6" />}
             isActive={location.pathname === "/help"}
             onClick={() => handleItemClick("/help")}
           />
           <MenuItem
             title="Log out"
-            icon={<LogoutIcon className="w-6 h-6" />}
+            icon={<Logout className="w-6 h-6" />}
             isActive={location.pathname === "/logout"}
             onClick={onLogout}
           />

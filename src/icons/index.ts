@@ -7,6 +7,7 @@ import Check from './Check'
 import Close from './Close'
 import Cloud from './Cloud'
 import Cross from './Cross'
+import Directions from './Directions'
 import Download from './Download'
 import Edit from './Edit'
 import Empty from './Empty'
@@ -14,9 +15,14 @@ import Export from './Export'
 import Eye from './Eye'
 import EyeSlash from './EyeSlash'
 import Gear from './Gear'
+import Help from './Help'
+import Home from './Home'
+import ImageAdd from './ImageAdd'
 import ImageSearch from './ImageSearch'
+import Import from './Import'
 import Info from './Info'
 import Label from './Label'
+import Logout from './Logout'
 import Maximize from './Maximize'
 import Minimize from './Minimize'
 import Moon from './Moon'
@@ -39,6 +45,7 @@ import SubmitUser from './SubmitUser'
 import Sun from './Sun'
 import Trash from './Trash'
 import Wifi from './Wifi'
+import ZoomQuestion from './ZoomQuestion'
 
 export {
     Add,
@@ -50,6 +57,7 @@ export {
     Close,
     Cloud,
     Cross,
+    Directions,
     Download,
     Edit,
     Empty,
@@ -57,9 +65,14 @@ export {
     Eye,
     EyeSlash,
     Gear,
+    Help,
+    Home,
+    ImageAdd,
     ImageSearch,
+    Import,
     Info,
     Label,
+    Logout,
     Maximize,
     Minimize,
     Moon,
@@ -81,5 +94,6 @@ export {
     SubmitUser,
     Sun,
     Trash,
-    Wifi
+    Wifi,
+    ZoomQuestion
 }
