@@ -1,42 +1,42 @@
 import React from 'react';
-import { Series } from '../../utils';
+import { Series, useCustomToast } from '../../utils';
 
 import DropdownButton from '../../ui/menu/DropDownButton';
+import { exportSeriesToNifti } from '../../services/export';
 
 interface DropdownOption {
     label: string;
     icon?: React.ReactNode;
     color?: string;
-    action: (row: Series) => void;
+    action: (seriesId: string) => void;
 }
 
-const options: DropdownOption[] = [
-    {
-        label: "View Metadata",
-        action: (row: Series) => {
-            console.log("View Metadata", row);
-        },
-    },
-    {
-        label: "Download nii",
-        action: (row: Series) => {
-            console.log("Download nii", row);
-        },
-    },
-    {
-        label: "Download nii.gz",
-        action: (row: Series) => {
-            console.log("Download nii.gz", row);
-        },
-    }
-];
-
 type DataSetSeriesActionsProps = {
-    series: Series& { id: string };
+    series: Series & { id: string };
     onActionClick: (action: string, seriesId: string) => void
 };
 
 const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) => {
+
+    const { toastSuccess, updateExistingToast } = useCustomToast();
+
+
+    const options: DropdownOption[] = [
+        {
+            label: "View Metadata",
+            action: (seriesId :string) => {
+                console.log("View Metadata", seriesId);
+            },
+        },
+        {
+            label: "Download nii.gz",
+            action: (seriesId :string) => {
+                const id = toastSuccess("Download started", 60)
+                exportSeriesToNifti(seriesId, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
+            },
+        }
+    ];
+
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
     };

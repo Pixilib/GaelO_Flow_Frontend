@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { getLabelsByRoleName } from "../services";
@@ -6,13 +6,11 @@ import { useCustomQuery } from "../utils";
 import { SelectInput, Spinner } from "../ui";
 
 type SelectLabelsProps = {
-  value: string[];
+  values: string[];
   onChange: (labels: string[]) => void;
 }
 
-const SelectLabels = ({ onChange, value }: SelectLabelsProps) => {
-
-  const [selectedLabels, setSelectedLabels] = useState([])
+const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
 
   const roleName = useSelector(
     (state: RootState) => state.user.role?.name || ""
@@ -33,16 +31,8 @@ const SelectLabels = ({ onChange, value }: SelectLabelsProps) => {
     }
   );
 
-  console.log(selectedLabels)
-  const handleChange = (option, meta) => {
-    console.log(option, meta)
-    if (meta.action === "select-option") {
-      setSelectedLabels(labels => [...labels, option.value])
-    }
-    else if (meta.action === "deselect-option") {
-      setSelectedLabels(labels => labels.filter(label => label !== option.value))
-
-    }
+  const handleChange = (options) => {
+    onChange(options.map((option) => option.value))
   }
 
   if (isPending) return <Spinner />;
@@ -55,7 +45,7 @@ const SelectLabels = ({ onChange, value }: SelectLabelsProps) => {
       onChange={handleChange}
       closeMenuOnSelect={true}
       placeholder='Select labels ...'
-      value={selectedLabels.map(option => option.value)}
+      value={values}
     />
   );
 };

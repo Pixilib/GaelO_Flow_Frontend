@@ -1,8 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useCustomToast } from '../../utils';
 import { FormCard, Input, Label, Button } from '../../ui';
-import { FaPlus as AddIcon } from 'react-icons/fa';
 import { Colors } from "../../utils/enums";
+import { Add } from '../../icons';
 
 interface TagFormProps {
   title: string;
@@ -59,7 +59,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
             onClick={handleAddTag}
             className="flex items-center h-10 px-4 space-x-2"
           >
-            <AddIcon />
+            <Add />
             Add Tag
           </Button>
         </div>

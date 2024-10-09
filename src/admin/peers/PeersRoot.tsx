@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
-
 import {
   Button,
   Card,
@@ -23,6 +21,7 @@ import {
 } from "../../services/peers";
 import { useCustomToast } from "../../utils/toastify";
 import { Peer } from "../../utils/types";
+import { More } from "../../icons";
 
 const PeersRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -65,7 +64,7 @@ const PeersRoot: React.FC = () => {
   return (
     <Card>
       <CardHeader
-        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        centerTitle
         color={Colors.primary}
         title={"Manage Peers"}
       />
@@ -84,10 +83,10 @@ const PeersRoot: React.FC = () => {
           </div>
         </div>
       </CardBody>
-      <CardFooter className="border-t-2 shadow-inner border-indigo bg-light flex justify-center">
+      <CardFooter className="flex justify-center border-t-2 shadow-inner border-indigo bg-light">
         {!showNewPeerCard && (
           <Button color={Colors.success} onClick={handleNewPeerClick}>
-            <MoreIcon className="mr-3" size={24} /> New Peer
+            <More className="mr-3" size={24} /> New Peer
           </Button>
         )}
         {showNewPeerCard && (

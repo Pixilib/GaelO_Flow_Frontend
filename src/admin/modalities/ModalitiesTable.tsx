@@ -1,11 +1,11 @@
 import React from "react";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi";
 
 import { Table, Badge, Button } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Modality } from "../../utils/types";
+import { Trash, Wifi } from "../../icons";
 
 interface ModalitiesTableProps {
   aetData?: Modality[];
@@ -46,13 +46,13 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
             onClick={() => onEchoAet(row.original.name)}
             color={Colors.secondary}
           >
-            <EchoIcon />
+            <Wifi />
           </Button>
           <Button
             onClick={() => onDeleteAet(row.original.name)}
             color={Colors.danger}
           >
-            <DeleteIcon size={18} />
+            <Trash size={18} />
           </Button>
         </div>
       ),

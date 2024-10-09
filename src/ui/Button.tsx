@@ -20,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
     secondary: "bg-secondary hover:bg-secondary-hover",
     danger: "bg-danger hover:bg-danger-hover",
     success: "bg-success hover:bg-success-hover",
+    blueCustom: "bg-blue-custom hover:bg-blue-custom-hover",
     disabled: "bg-disabled",
     warning: "bg-warning hover:bg-warning-hover",
     dark: "bg-dark",

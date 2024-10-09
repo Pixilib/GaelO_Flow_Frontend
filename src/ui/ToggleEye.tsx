@@ -1,6 +1,6 @@
 import { useState, MouseEvent } from 'react';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Colors } from '../utils/enums';
+import { Eye, EyeSlash } from '../icons';
 
 interface ToggleEyeProps {
     onToggle: (isVisible: boolean) => void;
@@ -19,7 +19,7 @@ const ToggleEye = ({ onToggle }: ToggleEyeProps) => {
 
     return (
         <button onClick={toggleVisibility} className="text-xl" type="button">
-            {isVisible ? <FaEye style={iconStyle} /> : <FaEyeSlash style={iconStyle} />}
+            {isVisible ? <Eye style={iconStyle} /> : <EyeSlash style={iconStyle} />}
         </button>
     );
 };

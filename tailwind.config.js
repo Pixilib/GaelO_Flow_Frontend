@@ -63,6 +63,8 @@ export default {
         'warning-hover': '#A88400',
         'dark': '#484544',
         'redCustom': '#f8d7da',
+        'blueCustom': '#0595a0',
+        'blue-custom-hover': '#0a7e87',
         'grayCustom': '#D4CFCF',
         'light': '#FFFFFF',
         'light-gray': '#EFEFEF',

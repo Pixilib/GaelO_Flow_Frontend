@@ -1,4 +1,4 @@
-import { Card, CardBody, CardHeader, CloseButton } from "../../../ui";
+import { Card, CardBody, CardHeader, CloseButton, FormCard } from "../../../ui";
 import { postRoles } from "../../../services";
 import { useCustomMutation, useCustomToast, Colors } from "../../../utils";
 import { Role } from "../../../utils/types";
@@ -35,15 +35,10 @@ const CreateRole = ({ title, className, onClose }: CreateRoleFormProps) => {
   };
 
   return (
-    <Card className={`my-10 rounded-xl ${className}`}>
-      <CardHeader title={title} color={Colors.success}>
-        <CloseButton onClose={() => onClose()} />
-      </CardHeader>
-      <CardBody className="bg-gray-100">
-        {" "}
-        <RoleForm onSubmit={handleSubmit} buttonText="Submit" />
-      </CardBody>
-    </Card>
+    <FormCard title={title} onClose={() => onClose()}>
+      <RoleForm onSubmit={handleSubmit} buttonText="Submit" />
+    </FormCard>
+
   );
 };
 

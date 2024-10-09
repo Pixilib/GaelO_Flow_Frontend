@@ -1,13 +1,12 @@
 import { useMemo, useState } from 'react';
-import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
-import { IoClose } from "react-icons/io5";
-import { BsQuestionLg } from "react-icons/bs";
 
-import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui/';
+import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui';
+import { Close, Question, Restart } from '../../icons';
 import { Colors } from '../../utils/enums';
+import { useConfirm } from '../../services';
+
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, orthancShutdown, updateVerbosity } from '../../services/orthanc';
-import { useConfirm } from '../../services';
 
 type OrthancData = {
     username: string;
@@ -27,7 +26,7 @@ const selectOptions = [
 ];
 
 const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
-    const {confirm} = useConfirm()
+    const { confirm } = useConfirm()
 
     const [showModal, setShowModal] = useState(false);
 
@@ -59,7 +58,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         [['log-level']],
     );
 
-    const currentVerbosityOption = useMemo(()=>{
+    const currentVerbosityOption = useMemo(() => {
         return selectOptions.find(option => option.value === orthancVerbosity)?.value ?? null
     }, [orthancVerbosity])
 
@@ -104,9 +103,9 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     };
 
     const handleOrthancShutdown = async () => {
-        if(await confirm({ content: "Are you sure to shutdown Orthanc ?" })) {
+        if (await confirm({ content: "Are you sure to shutdown Orthanc ?" })) {
             shutdownOrthanc({});
-          }
+        }
     }
 
 
@@ -127,20 +126,22 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Button
                     color={Colors.warning}
                     onClick={reset}>
-                    <RestartIcon
+                    <Restart
                         size="20px"
-                        title="Restart" />
+                        title="Restart"
+                    />
                 </Button>
                 <Button
                     color={Colors.danger}
                     onClick={handleOrthancShutdown}
-                    >
-                    <IoClose
+                >
+                    <Close
                         size="20px"
-                        title="Shutdown" />
+                        title="Shutdown"
+                    />
                 </Button>
                 <Button color={Colors.primary} onClick={orthancInfoHandler}>
-                    <BsQuestionLg size="20px" title="Info" />
+                    <Question size="20px" title="Info" />
                 </Button>
                 <div className="w-1/4">
                     <SelectInput

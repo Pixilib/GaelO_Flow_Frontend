@@ -26,9 +26,9 @@ import {
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
 import AnonIcon from "../assets/Anon.svg?react";
-import { BsTrashFill as DeleteIcon } from "react-icons/bs";
-import { FaFileExport as ExportIcon } from "react-icons/fa";
-import SelectLabels from "../datasets/SelectLabels";
+import { Export } from "../icons";
+import Labels from "./Labels";
+
 
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
@@ -38,6 +38,7 @@ const ContentRoot: React.FC = () => {
     const [model, setModel] = useState<Model | null>(null);
     const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
     const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
+
 
     const patients = useMemo(() => model?.getPatients() || [], [model]);
 
@@ -108,10 +109,14 @@ const ContentRoot: React.FC = () => {
             });
         } else {
             studies.forEach((studyId) => {
-                delete updatedSelectedStudies[studyId];
+                updatedSelectedStudies[studyId] = false;
             });
         }
         setSelectedStudies(updatedSelectedStudies);
+    };
+
+    const handleStudySelectedChange = (changeObject) => {
+        setSelectedStudies(changeObject);
     };
 
     const refreshFind = () => queryPayload && mutateToolsFind(queryPayload);
@@ -141,7 +146,7 @@ const ContentRoot: React.FC = () => {
                 patient={editingPatient as Patient}
                 onEditPatient={handlePatientUpdate}
                 onClose={closeEditModal}
-                show={editingPatient != null}
+                show={!!editingPatient}
             />
             <FormCard className="bg-white" title="Search" collapsible>
                 <SearchForm onSubmit={handleSubmit} existingLabels={labelsData} withAets={false} />
@@ -151,7 +156,7 @@ const ContentRoot: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                     <div className="text-2xl font-bold text-primary">Results</div>
                     <div className="text-lg text-gray-600">
-                        {patients.length} {patients.length === 1 ? "result" : "results"} found
+                        {patients.length} {patients.length === 1 ? "patient" : "patients"} found
                     </div>
                 </div>
 
@@ -172,7 +177,7 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendExportList}
                     >
-                        <ExportIcon className="text-xl" />
+                        <Export className="text-xl" />
                         <span className="ml-2">Send to Export</span>
                     </Button>
 
@@ -181,36 +186,30 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendDeleteList}
                     >
-                        <DeleteIcon className="text-xl" />
+                        <Export className="text-xl" />
                         <span className="ml-2">Send to Delete</span>
                     </Button>
 
-                    <div className="flex-grow w-full md:w-auto">
-                        <SelectLabels
-                            onChange={(labels) => console.log(labels)}
-                            closeMenuOnSelect
-                            className="w-full"
-                        />
-                    </div>
+                    <Labels selectedStudies={selectedStudies} />
+
                 </div>
             </div>
 
-            <div className="w-full mt-4">
-                {isPending ? (
-                    <Spinner />
-                ) : (
-                    patients.map((patient: Patient) => (
+            <div className="flex flex-col w-full gap-4">
+                {patients.length > 0 ? (
+                    patients.map((patient) => (
                         <AccordionPatient
                             key={patient.id}
                             patient={patient}
                             onPatientSelectionChange={handlePatientSelectionChange}
                             onDeletePatient={handleDeletePatient}
-                            onEditPatient={(patient) => setEditingPatient(patient)}
+                            onEditPatient={setEditingPatient}
                             onStudyUpdated={refreshFind}
                             selectedStudies={selectedStudies}
+                            onSelectedStudyChange={handleStudySelectedChange}
                         />
                     ))
-                )}
+                ) : null}
             </div>
         </div>
     );

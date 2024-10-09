@@ -1,6 +1,6 @@
 import React from 'react';
-import { BsFillInfoCircleFill as InfoIcon } from 'react-icons/bs';
 import { Colors } from '../utils';
+import { Info } from '../icons';
 
 export interface BannerProps {
   color?: Colors;
@@ -46,7 +46,7 @@ const BannerAlert: React.FC<BannerProps> = ({
       className={`flex items-center p-4 mb-4 border-t-4 rounded-lg shadow ${colorClass} ${className}`}
       role="alert"
     >
-      <InfoIcon className="flex-shrink-0 w-5 h-5" />
+      <Info className="flex-shrink-0 w-5 h-5" />
       <div className="text-sm font-medium ms-3">
         {children || message}
       </div>

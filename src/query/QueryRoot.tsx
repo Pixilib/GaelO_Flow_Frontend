@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, CardBody, CardHeader, FormCard } from "../ui";
+import { FormCard } from "../ui";
 import { getModalities, queryModality } from "../services";
 import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors, useCustomToast } from "../utils";
 import { QueryResponse, QueryPayload, ExtendedQueryPayload } from '../utils/types';
@@ -24,9 +24,9 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     () => getModalities(),
     {
       select: (response) => response.map((modality) => ({
-          value: modality.name,
-          label: modality.aet,
-        })),
+        value: modality.name,
+        label: modality.aet,
+      })),
     }
   );
 
@@ -94,17 +94,17 @@ const QueryRoot = ({ className }: QueryFormProps) => {
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-primary">Results</div>
           <div className="text-lg text-gray-600">
-            {studies.length} {studies.length === 1 ? "result" : "results"} found
+            {studies.length} {studies.length === 1 ? "study" : "studies"} found
           </div>
         </div>
-        
+
       </div>
       <div className="2xl:col-span-7">
-            <ResultsTable results={studies} onRowClick={handleRowClick} />
-          </div>
-          <div className="2xl:col-span-5">
-            <SeriesTable series={series} />
-          </div>
+        <ResultsTable results={studies} onRowClick={handleRowClick} />
+      </div>
+      <div className="2xl:col-span-5">
+        <SeriesTable series={series} />
+      </div>
     </div>
   );
 };

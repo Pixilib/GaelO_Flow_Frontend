@@ -41,9 +41,9 @@ const Welcome = () => {
           <Routes>
             <Route path="/*" element={<SignInForm />} />
             <Route path="/change-password" element={<ChangePasswordForm />} />
-            <Route path="lost-password" element={<ForgotPasswordForm />} />
-            <Route path="legal-mention" element={<div>Legal Mention</div>} />
-            <Route path="sign-up" element={<SignUpForm />} />
+            <Route path="/lost-password" element={<ForgotPasswordForm />} />
+            <Route path="/legal-mention" element={<div>Legal Mention</div>} />
+            <Route path="/sign-up" element={<SignUpForm />} />
           </Routes>
 
           <hr className="w-full my-8 mt-20 border-primary" />

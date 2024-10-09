@@ -1,5 +1,4 @@
-// CloseButton.tsx
-import { IoIosCloseCircle as CloseWindows } from "react-icons/io";
+import { Close } from "../icons";
 
 type CloseButtonProps = {
   onClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -19,7 +18,7 @@ const CloseButton = ({ onClose, variant="default", className}: CloseButtonProps)
   const color = variants[variant];
   return (
     <button title="Close" onClick={onClose}>
-      <CloseWindows
+      <Close
         size={"1.7rem"}
         className={`mr-3 ${color} ${className} transition cursor-pointer t duration-70 hover:scale-110`}
       />

@@ -1,12 +1,12 @@
 // StudyActions.tsx
-import React from 'react';
-import { FaEdit as EditIcon, FaEye as EyeIcon, FaTrash as TrashIcon } from "react-icons/fa";
-import { GiBrain as BrainIcon } from 'react-icons/gi'
-import { RiDownload2Line as DownloadIcon } from "react-icons/ri";
+import React, { useState } from 'react';
 import { StudyMainDicomTags } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
 import OhifViewerLink from '../OhifViewerLink';
 import StoneViewerLink from '../StoneViewerLink';
+import { Brain, Download, Edit, Eye, Label, Trash } from '../../icons';
+import LabelModal from './LabelModal';
+
 
 type StudyActionsProps = {
     study: StudyMainDicomTags & { id: string };
@@ -14,46 +14,55 @@ type StudyActionsProps = {
 };
 
 const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => {
+
+    const [isLabelsModalOpen, setLabelsModalOpen] = useState(false);
+
     const options = [
         {
             label: '',
-            icon: <EyeIcon />,
+            icon: <Eye />,
             color: 'green',
             component: <OhifViewerLink studyInstanceUID={study.studyInstanceUID} />
         },
         {
             label: '',
-            icon: <EyeIcon />,
+            icon: <Eye />,
             color: 'green',
             component: <StoneViewerLink studyInstanceUID={study.studyInstanceUID} />
         },
         {
+            label: 'Labels',
+            icon: <Label />,
+            color: 'bg-indigo-500',
+            action: () => setLabelsModalOpen(true)
+        },
+        {
             label: 'Modify',
-            icon: <EditIcon />,
+            icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', study.id)
         },
         {
             label: 'AI',
-            icon: <BrainIcon />,
+            icon: <Brain />,
             color: 'green',
             action: () => onActionClick('ai', study.id)
         },
         {
             label: 'Preview Study',
-            icon: <EyeIcon />,
+            icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', study.id)
         },
         {
             label: 'Download',
-            icon: <DownloadIcon />,
+            icon: <Download />,
             color: 'green',
             action: () => onActionClick('download', study.id)
         },
         {
             label: 'Delete',
-            icon: <TrashIcon />,
+            icon: <Trash />,
             color: 'red',
             action: () => onActionClick('delete', study.id)
         },
@@ -70,6 +79,13 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
                 buttonText="Actions"
                 row={study}
             />
+                        {isLabelsModalOpen && (
+                <LabelModal 
+                    studyId={study.id} 
+                    show={isLabelsModalOpen}
+                    onClose={() => setLabelsModalOpen(false)} 
+                />
+            )}
         </div>
     );
 };

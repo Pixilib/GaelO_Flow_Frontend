@@ -85,7 +85,6 @@ export const getSeries = (seriesId: string): Promise<Series> => {
     .get("/api/series/" + seriesId + "?expand")
     .then((response) => {
       const data = response.data;
-      console.log("Series data:", data);
       return {
         expectedNumberOfInstances: data.ExpectedNumberOfInstances,
         id: data.ID,
@@ -149,6 +148,49 @@ export const getStudy = (studyId: string): Promise<Study> => {
         series: data.Series,
         type: data.Type,
       };
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const getLabelsOfStudy = (studyId: string): Promise<string[]> => {
+  return axios
+    .get("/api/studies/" + studyId + "/labels")
+    .then((response) => {
+      const data = response.data;
+      return data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const addLabelForStudy = (studyId: string, label: string): Promise<void> => {
+  return axios
+    .put("/api/studies/" + studyId + "/labels/" + label)
+    .then(() => {
+      return undefined;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const removeLabelForStudy = (studyId: string, label: string): Promise<void> => {
+  return axios
+    .delete("/api/studies/" + studyId + "/labels/" + label)
+    .then(() => {
+      return undefined;
     })
     .catch(function (error) {
       if (error.response) {
@@ -283,8 +325,8 @@ export const modifyStudy = (
     Replace: {
       PatientID: study.replace.patientId,
       PatientName: study.replace.patientName,
-      PatientSex : study.replace.patientSex,
-      PatientBirthDate : study.replace.patientBirthDate,
+      PatientSex: study.replace.patientSex,
+      PatientBirthDate: study.replace.patientBirthDate,
       AccessionNumber: study.replace.accessionNumber,
       StudyDate: study.replace.studyDate,
       StudyDescription: study.replace.studyDescription,

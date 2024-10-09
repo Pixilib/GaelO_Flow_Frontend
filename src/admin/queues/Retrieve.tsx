@@ -9,7 +9,6 @@ import {
   parseTimeString,
   timeDiff,
 } from "../../utils/moment";
-import { IoMdSend as SendIcon } from "react-icons/io";
 import {
   Card,
   CardHeader,
@@ -21,6 +20,7 @@ import {
   Label,
 } from "../../ui";
 import { Colors } from "../../utils/enums";
+import { Send } from "../../icons";
 
 type RetrieveProps = {
   data: Options;
@@ -98,7 +98,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
       className="w-full rounded-br-xl rounded-bl-xl"
     >
       <Card bordered className="mt-8 ">
-        <CardHeader title="Retrieve Schedule Time : " color={Colors.success} />
+        <CardHeader centerTitle title="Retrieve Schedule Time : " color={Colors.success} />
         <CardBody color={Colors.light} roundedBottomLeft roundedBottomRight>
           <div className="flex items-center justify-around gap-12 mt-1">
             <Input
@@ -155,7 +155,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
               type="submit"
             >
               <span>
-                <SendIcon />
+                <Send />
               </span>
               <span>Send</span>
             </Button>

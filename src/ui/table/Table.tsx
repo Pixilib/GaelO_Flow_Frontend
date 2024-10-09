@@ -14,7 +14,7 @@ import {
 import { Colors } from "../../utils/enums";
 import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
-import { FcAlphabeticalSortingAz, FcAlphabeticalSortingZa } from 'react-icons/fc';
+import { SortAz, SortZa } from '../../icons';
 
 export type textSize = "xxs" | "xs" | "sm" | "base" | "lg";
 
@@ -164,9 +164,9 @@ function Table<T>({
                       {enableSorting && header.column.getCanSort() && (
                         <span className="ml-1 text-lg text-white cursor-pointer">
                           {header.column.getIsSorted() === 'desc' ? (
-                            <FcAlphabeticalSortingZa />
+                            <SortZa />
                           ) : (
-                            <FcAlphabeticalSortingAz />
+                            <SortAz />
                           )}
                         </span>
                       )}

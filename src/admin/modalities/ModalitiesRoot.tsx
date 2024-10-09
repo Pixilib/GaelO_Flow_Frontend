@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
 import {
   Button,
@@ -22,6 +21,7 @@ import {
   getModalities,
   echoModality,
 } from "../../services/modalities";
+import { More } from "../../icons";
 
 const ModalitiesRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -79,7 +79,7 @@ const ModalitiesRoot: React.FC = () => {
   return (
     <Card>
       <CardHeader
-        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        centerTitle
         color={Colors.primary}
         title={"Manage Modalities"}
       />
@@ -97,7 +97,7 @@ const ModalitiesRoot: React.FC = () => {
       <CardFooter color={Colors.light} className="flex justify-center">
         {!showNewAetCard && (
           <Button color={Colors.success} onClick={handleNewAetClick}>
-            <MoreIcon className="mr-3 "
+            <More className="mr-3 "
               size={24} />
             New modality
           </Button>

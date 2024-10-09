@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
-import { BsTrashFill as DeleteIcon } from "react-icons/bs";
-import { RiAdminFill as AdminIcon } from "react-icons/ri";
 import ToggleChevron from "../../ui/menu/ToogleChevron";
 import { Table, Button, Label, Popover } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label as LabelType } from "../../utils/types";
 import LabelsRoles from "./LabelsRoles";
+import { Admin, Trash } from "../../icons";
 
 interface LabelsTableProps {
   data: LabelType[];
@@ -16,7 +15,6 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
   data = [],
   onDeleteLabel,
 }) => {
-  console.log(data)
   const rows = useMemo(() => data, [data]);
 
  const columns = useMemo(() => {
@@ -27,8 +25,9 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
         cell: ({ getValue }: any) => <Label value={getValue() as string} />,
       },
       {
-        header: "Actions",
-        id: "actions",
+        header: "roles",
+        id: "roles",
+
         cell: ({ row }: any) => (
           <div className="flex justify-center gap-2.5">
             <Popover
@@ -37,14 +36,24 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
               placement="bottom"
             >
               <Button color={Colors.secondary} className="flex items-center gap-1.5">
-                <AdminIcon size="1.3rem" />
+                <Admin size="1.3rem" />
                 <ToggleChevron isOpen={false} />
               </Button>
             </Popover>
+          </div>
+        ),
+      },
+      {
+        header: "Delete",
+        id: "delete",
+        cell: ({ row }: any) => (
+          <div className="flex justify-center w-full">
             <Button onClick={() => onDeleteLabel(row.original.name)} color={Colors.danger}>
-              <DeleteIcon size="1.3rem" className="transition duration-70 hover:scale-110" color={Colors.light} />
+              <Trash size="1.3rem" className="transition duration-70 hover:scale-110" color={Colors.light} />
             </Button>
           </div>
+
+
         ),
       },
     ];
