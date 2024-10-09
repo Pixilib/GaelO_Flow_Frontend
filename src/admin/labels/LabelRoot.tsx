@@ -58,7 +58,7 @@ const LabelRoot: React.FC = () => {
   return (
     <Card>
       <CardHeader
-        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        centerTitle
         color={Colors.primary}
         title={"Manage Labels"}
       />

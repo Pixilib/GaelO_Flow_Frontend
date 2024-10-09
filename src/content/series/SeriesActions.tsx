@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Series } from "../../utils/types";
 import DropdownButton from '../../ui/menu/DropDownButton';
-import { Download, Edit, Eye, Label, Trash } from '../../icons';
-import LabelModal from './LabelModal'; // Assure-toi d'importer le composant LabelModal
+import { Download, Edit, Eye, Trash } from '../../icons';
 
 type SeriesActionsProps = {
     series: Series;
@@ -10,15 +9,10 @@ type SeriesActionsProps = {
 };
 
 const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) => {
-    const [isLabelsModalOpen, setLabelsModalOpen] = useState(false);
+
 
     const options = [
-        {
-            label: 'Labels',
-            icon: <Label />,
-            color: 'bg-indigo-500',
-            action: () => setLabelsModalOpen(true)
-        },
+        
         {
             label: 'Modify',
             icon: <Edit />,
@@ -68,13 +62,6 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
                 buttonText="Actions"
                 row={series}
             />
-            {isLabelsModalOpen && (
-                <LabelModal 
-                    series={series} 
-                    show={isLabelsModalOpen}
-                    onClose={() => setLabelsModalOpen(false)} 
-                />
-            )}
         </div>
     );
 };

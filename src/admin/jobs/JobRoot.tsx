@@ -37,7 +37,7 @@ const JobRoot = () => {
   return (
     <Card className="l bg-almond">
       <CardHeader
-        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        centerTitle
         color={Colors.primary}
         title={"Manage Jobs"}
       />

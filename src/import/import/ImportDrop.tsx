@@ -92,7 +92,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                 <input directory="" webkitdirectory="" {...getInputProps()} />
                 {numberOfLoadedFiles > 0 &&
                     <ProgressBar
-                        progression={Math.round(numberOfProcessedFiles / numberOfLoadedFiles * 100)} />}
+                        progress={Math.round(numberOfProcessedFiles / numberOfLoadedFiles * 100)} />}
             </div>
         </div>
     );

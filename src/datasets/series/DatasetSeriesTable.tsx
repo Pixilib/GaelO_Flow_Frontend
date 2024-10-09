@@ -12,8 +12,6 @@ type DatasetSeriesTableProps = {
 
 const DatasetSeriesTable: React.FC<DatasetSeriesTableProps> = ({ series, onActionClick }) => {
 
-    console.log(series)
-
     const columns: ColumnDef<any>[] = useMemo(
         () => [
             {
