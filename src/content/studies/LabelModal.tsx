@@ -43,7 +43,9 @@ const LabelModal: React.FC<LabelModalProps> = ({ studyId, onClose, show }) => {
         <Modal show={show} size='lg'>
             <Modal.Header onClose={onClose}>Assign Labels</Modal.Header>
             <Modal.Body>
-                <SelectLabels values={existingLabelsOptions} onChange={handleLabelChanges} />
+                <SelectLabels 
+                values={existingLabelsOptions} 
+                onChange={handleLabelChanges} />
                 <p>{studyId}</p>
             </Modal.Body>
         </Modal>

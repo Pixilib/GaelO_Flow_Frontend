@@ -26,7 +26,9 @@ import {
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
 import AnonIcon from "../assets/Anon.svg?react";
-import { Export, Label as LabelIcon, Trash } from "../icons";
+import { Export } from "../icons";
+import Labels from "./Labels";
+
 
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
@@ -36,6 +38,7 @@ const ContentRoot: React.FC = () => {
     const [model, setModel] = useState<Model | null>(null);
     const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
     const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
+
 
     const patients = useMemo(() => model?.getPatients() || [], [model]);
 
@@ -113,8 +116,8 @@ const ContentRoot: React.FC = () => {
     };
 
     const handleStudySelectedChange = (changeObject) => {
-        setSelectedStudies(changeObject)
-    }
+        setSelectedStudies(changeObject);
+    };
 
     const refreshFind = () => queryPayload && mutateToolsFind(queryPayload);
 
@@ -143,7 +146,7 @@ const ContentRoot: React.FC = () => {
                 patient={editingPatient as Patient}
                 onEditPatient={handlePatientUpdate}
                 onClose={closeEditModal}
-                show={editingPatient != null}
+                show={!!editingPatient}
             />
             <FormCard className="bg-white" title="Search" collapsible>
                 <SearchForm onSubmit={handleSubmit} existingLabels={labelsData} withAets={false} />
@@ -161,6 +164,7 @@ const ContentRoot: React.FC = () => {
 
                 <div className="flex flex-wrap gap-2 mb-4">
                     <Button
+                        color={Colors.primary}
                         className="flex items-center text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
                         onClick={handleSendAnonymizeList}
                     >
@@ -182,39 +186,30 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendDeleteList}
                     >
-                        <Trash className="text-xl" />
+                        <Export className="text-xl" />
                         <span className="ml-2">Send to Delete</span>
                     </Button>
 
-                    <Button
-                        color={Colors.primary}
-                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-                        onClick={handleSendDeleteList}
-                    >
-                        <LabelIcon className="text-xl" />
-                        <span className="ml-2">Labels</span>
-                    </Button>
+                    <Labels selectedStudies={selectedStudies} />
 
                 </div>
             </div>
 
-            <div className="w-full mt-4">
-                {isPending ? (
-                    <Spinner />
-                ) : (
-                    patients.map((patient: Patient) => (
+            <div className="flex flex-col w-full gap-4">
+                {patients.length > 0 ? (
+                    patients.map((patient) => (
                         <AccordionPatient
                             key={patient.id}
                             patient={patient}
                             onPatientSelectionChange={handlePatientSelectionChange}
                             onDeletePatient={handleDeletePatient}
-                            onEditPatient={(patient) => setEditingPatient(patient)}
+                            onEditPatient={setEditingPatient}
                             onStudyUpdated={refreshFind}
                             selectedStudies={selectedStudies}
                             onSelectedStudyChange={handleStudySelectedChange}
                         />
                     ))
-                )}
+                ) : null}
             </div>
         </div>
     );
