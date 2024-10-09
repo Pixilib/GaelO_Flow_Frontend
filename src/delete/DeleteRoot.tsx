@@ -57,7 +57,7 @@ const DeleteRoot = () => {
             <CardBody color={Colors.almond}>
                 <DeleteStudyTable studies={Object.values(deleteList)} />
             </CardBody>
-            <CardFooter color={Colors.light} className="flex justify-center gap-3">
+            <CardFooter color={Colors.light} className="flex flex-col justify-center gap-3">
                 <Button
                     onClick={handleDeleteList}
                     color={Colors.danger}

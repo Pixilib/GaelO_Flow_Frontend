@@ -106,7 +106,7 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         handleDownloadSeriesNifti(series);
         break;
       default:
-        console.log(`Unhandled action: ${action}`);
+        console.warn(`Unhandled action: ${action}`);
     }
   };
 

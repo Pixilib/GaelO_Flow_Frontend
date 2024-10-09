@@ -15,7 +15,6 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
   data = [],
   onDeleteLabel,
 }) => {
-  console.log(data)
   const rows = useMemo(() => data, [data]);
 
  const columns = useMemo(() => {
@@ -26,8 +25,9 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
         cell: ({ getValue }: any) => <Label value={getValue() as string} />,
       },
       {
-        header: "Actions",
-        id: "actions",
+        header: "roles",
+        id: "roles",
+
         cell: ({ row }: any) => (
           <div className="flex justify-center gap-2.5">
             <Popover
@@ -40,10 +40,20 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
                 <ToggleChevron isOpen={false} />
               </Button>
             </Popover>
+          </div>
+        ),
+      },
+      {
+        header: "Delete",
+        id: "delete",
+        cell: ({ row }: any) => (
+          <div className="flex justify-center w-full">
             <Button onClick={() => onDeleteLabel(row.original.name)} color={Colors.danger}>
               <Trash size="1.3rem" className="transition duration-70 hover:scale-110" color={Colors.light} />
             </Button>
           </div>
+
+
         ),
       },
     ];

@@ -22,7 +22,7 @@ const Dashboard = () => {
       <div className="flex gap-6 mx-8 columns-3">
         {/* Card Anonymisation */}
         <Card className="flex-1 ">
-          <CardHeader title="Anonymisation" color={Colors.primary} />
+          <CardHeader centerTitle title="Anonymisation" color={Colors.primary} />
           <CardBody color={Colors.light}>
             <h3 className="text-xl">Progress</h3>
           </CardBody>
@@ -35,7 +35,7 @@ const Dashboard = () => {
 
         {/* Card Delete */}
         <Card className="flex-1 ">
-          <CardHeader title="Delete" color={Colors.primary} />
+          <CardHeader centerTitle title="Delete" color={Colors.primary} />
           <CardBody color={Colors.light}>
             <h3 className="text-xl">Progress</h3>
           </CardBody>
@@ -48,7 +48,7 @@ const Dashboard = () => {
 
         {/* Card Retrieve */}
         <Card className="flex-1 ">
-          <CardHeader title="Delete" color={Colors.primary} />
+          <CardHeader centerTitle title="Delete" color={Colors.primary} />
           <CardBody color={Colors.light}>
             <h3 className="text-xl">Retrieve</h3>
           </CardBody>

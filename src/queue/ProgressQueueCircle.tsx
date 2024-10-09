@@ -7,7 +7,7 @@ type ProgressQueueProps = {
     uuid: string;
 };
 
-const ProgressQueue = ({ uuid }: ProgressQueueProps) => {
+const ProgressQueueCircle = ({ uuid }: ProgressQueueProps) => {
     const { data, isPending } = useCustomQuery(
         ['queue', 'delete', uuid],
         () => getDeleteQueue(uuid),
@@ -40,4 +40,4 @@ const ProgressQueue = ({ uuid }: ProgressQueueProps) => {
     );
 };
 
-export default ProgressQueue;
+export default ProgressQueueCircle;

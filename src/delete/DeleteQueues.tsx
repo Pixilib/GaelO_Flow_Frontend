@@ -3,7 +3,7 @@ import { getExistingDeleteQueues } from "../services/queues";
 import { useCustomQuery } from "../utils";
 import { RootState } from "../store";
 import { Spinner } from "../ui";
-import ProgressQueue from "./ProgressQueue";
+import ProgressQueueBar from "../queue/ProgressQueueBar";
 
 const DeleteQueues = () => {
     const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
@@ -16,17 +16,15 @@ const DeleteQueues = () => {
     if (isPending) return <Spinner />;
 
     return (
-        <div className="flex flex-col">
-            <div className="flex gap-4">
+        <div className="w-full">
                 {existingDeleteQueues?.map((uuid) => (
                     <div key={uuid} >
-                        <ProgressQueue
+                        <ProgressQueueBar
                             uuid={uuid}
                         />
                     </div>
                 ))}
             </div>
-        </div>
     );
 };
 

@@ -106,11 +106,15 @@ const ContentRoot: React.FC = () => {
             });
         } else {
             studies.forEach((studyId) => {
-                delete updatedSelectedStudies[studyId];
+                updatedSelectedStudies[studyId] = false;
             });
         }
         setSelectedStudies(updatedSelectedStudies);
     };
+
+    const handleStudySelectedChange = (changeObject) => {
+        setSelectedStudies(changeObject)
+    }
 
     const refreshFind = () => queryPayload && mutateToolsFind(queryPayload);
 
@@ -207,6 +211,7 @@ const ContentRoot: React.FC = () => {
                             onEditPatient={(patient) => setEditingPatient(patient)}
                             onStudyUpdated={refreshFind}
                             selectedStudies={selectedStudies}
+                            onSelectedStudyChange={handleStudySelectedChange}
                         />
                     ))
                 )}

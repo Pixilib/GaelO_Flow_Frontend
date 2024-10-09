@@ -28,7 +28,6 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
                 setJobId(data.id);
             },
             onError: (error) => {
-                console.log(error)
                 toastError("Failed to update study: " + error );
             },
         }

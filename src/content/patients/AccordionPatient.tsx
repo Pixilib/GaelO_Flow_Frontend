@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { Accordion, CheckBox, DeleteButton, DownloadButton, EditButton } from "../../ui";
 
@@ -23,13 +23,26 @@ type AccordionPatientProps = {
 const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, onDeletePatient, onStudyUpdated, selectedStudies, onSelectedStudyChange }: AccordionPatientProps) => {
 
     const { toastSuccess, updateExistingToast } = useCustomToast()
-    const [selected, setSelected] = useState(false)
+    const [selectedPatient, setSelectedPatient] = useState(false)
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
+
+    const selectedStudyIdsForPatient = useMemo(()=>{
+        const filteredSelectedState = {...selectedStudies}
+        const patientStudiesId = patient.studies.map(study => study.id)
+        for(const studyId of Object.keys(filteredSelectedState)){
+            if(!patientStudiesId.includes(studyId)){
+                delete filteredSelectedState[studyId]
+            }
+        }
+
+        return filteredSelectedState
+
+    }, [selectedStudies])
 
 
     useEffect(() => {
-        onPatientSelectionChange(selected, patient)
-    }, [selected])
+        onPatientSelectionChange(selectedPatient, patient)
+    }, [selectedPatient])
 
     const handleStudySelected = (studyId: string) => {
         setSelectedStudyId(studyId);
@@ -58,8 +71,8 @@ const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, on
                     <AccordionHeader className=" hover:bg-primary-active group">
                         <CheckBox bordered={false}
                             onClick={(event) => event.stopPropagation()}
-                            onChange={(event) => setSelected(event.target.checked)}
-                            checked={selected} />
+                            onChange={(event) => setSelectedPatient(event.target.checked)}
+                            checked={selectedPatient} />
                         <div className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
                             <span className="text-sm font-medium text-gray-600 group-hover:text-white">Patient ID: {patient.patientId}</span>
                             <span className="text-sm font-medium group-hover:text-white ">Name: {patient.patientName}</span>
@@ -84,7 +97,7 @@ const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, on
                             patient={patient}
                             onStudyUpdated={() => onStudyUpdated(patient)}
                             onStudySelected={handleStudySelected}
-                            selectedStudies={selectedStudies}
+                            selectedStudies={selectedStudyIdsForPatient}
                             onSelectedStudyChange={onSelectedStudyChange}
                         />
                     </div>

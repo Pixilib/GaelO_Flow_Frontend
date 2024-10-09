@@ -48,7 +48,6 @@ const SelectInput = ({
   formatOptionLabel = undefined,
   formatGroupLabel = undefined
 }: SelectInputProps) => {
-  console.log(value)
   return (
     <Select
       options={options}
