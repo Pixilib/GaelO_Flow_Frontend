@@ -89,7 +89,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
         />
       </FormCard>
 
-      {/* Section for results */}
+      {/* Section for results and series tables */}
       <div className="flex flex-col w-full p-4 bg-white shadow-md rounded-3xl">
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-primary">Results</div>
@@ -97,13 +97,15 @@ const QueryRoot = ({ className }: QueryFormProps) => {
             {studies.length} {studies.length === 1 ? "study" : "studies"} found
           </div>
         </div>
+      </div>
 
-      </div>
-      <div className="2xl:col-span-7">
-        <ResultsTable results={studies} onRowClick={handleRowClick} />
-      </div>
-      <div className="2xl:col-span-5">
-        <SeriesTable series={series} />
+      <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2">
+        <div className="2xl:col-span-1">
+          <ResultsTable results={studies} onRowClick={handleRowClick} />
+        </div>
+        <div className="2xl:col-span-1">
+          <SeriesTable series={series} />
+        </div>
       </div>
     </div>
   );
