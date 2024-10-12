@@ -206,6 +206,8 @@ type QuerySeries = {
   SeriesDescription?: string;
   SeriesNumber?: string;
   SeriesInstanceUID?: string;
+  NumberOfSeriesRelatedInstances? : string;
+  ProtocolName? :string;
 };
 
 type Level = "Series" | "Study";

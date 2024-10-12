@@ -57,22 +57,31 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     }
   );
 
-  const handleSubmit = async (formData: QueryPayload, aet?: string) => {
+  const handleSubmit = (formData: QueryPayload, aet?: string) => {
     if (!aet) {
       toastError("Choose AET to Query");
       return;
     }
     const extendedPayload = { queryPayload: formData, aet };
-    await mutateQueryStudies(extendedPayload);
+    mutateQueryStudies(extendedPayload);
   };
 
-  const handleRowClick = async (studyInstanceUID: string, originAET?: string) => {
+  const handleRowClick = (studyInstanceUID: string, originAET: string) => {
+
     const queryPayload: QueryPayload = {
       Level: 'Series',
-      Query: { StudyInstanceUID: studyInstanceUID }
+      Query: { 
+        Modality : '',
+        ProtocolName: '',
+        SeriesDescription: '',
+        StudyInstanceUID: studyInstanceUID,
+        SeriesInstanceUID: '',
+        SeriesNumber: '',
+        NumberOfSeriesRelatedInstances: ''
+      }
     };
-    const extendedPayload = { queryPayload, aet: originAET ?? "self" };
-    await mutateQuerySeries(extendedPayload);
+    const extendedPayload = { queryPayload, aet: originAET};
+    mutateQuerySeries(extendedPayload);
   };
 
   return (
