@@ -14,7 +14,7 @@ import {
 } from "../utils";
 import Model from "../model/Model";
 import Patient from "../model/Patient";
-import { FormCard, Spinner, Button } from "../ui";
+import { FormCard, Button } from "../ui";
 import SearchForm from "../query/SearchForm";
 import AccordionPatient from "./patients/AccordionPatient";
 import EditPatient from "./patients/EditPatient";
@@ -34,13 +34,18 @@ const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
     const { toastSuccess, toastError } = useCustomToast();
 
-    const [selectedStudies, setSelectedStudies] = useState<{ [studyId: string]: boolean }>({});
+    const [selectedStudies, setSelectedStudies] = useState<{ [patientId: string]: { [studyId: string]: boolean } }>({});
     const [model, setModel] = useState<Model | null>(null);
     const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
     const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
 
-
     const patients = useMemo(() => model?.getPatients() || [], [model]);
+
+    const selectedStudiesIds = useMemo(() => {
+        const studiesState = Object.values(selectedStudies).reduce((a, v) => ({ ...a, ...v}), {})
+        const selectedIds = Object.entries(studiesState).filter(([id, status]) => status === true).map(([id, status]) => id)
+        return selectedIds
+    }, [selectedStudies])
 
     const handleDeletePatient = async (patient: Patient) => {
         const confirmContent = (
@@ -101,40 +106,40 @@ const ContentRoot: React.FC = () => {
 
     const handlePatientSelectionChange = (selected: boolean, patient: Patient) => {
         const studies = patient.getStudies().map((study) => study.id);
-        const updatedSelectedStudies = { ...selectedStudies };
+        const currentPatientState = selectedStudies?.[patient.id] ?? {}
 
         if (selected) {
             studies.forEach((studyId) => {
-                updatedSelectedStudies[studyId] = true;
+                currentPatientState[studyId] = true;
             });
         } else {
             studies.forEach((studyId) => {
-                updatedSelectedStudies[studyId] = false;
+                currentPatientState[studyId] = false;
             });
         }
-        setSelectedStudies(updatedSelectedStudies);
+        setSelectedStudies((state) => ({ ...state, [patient.id]: currentPatientState }));
     };
 
-    const handleStudySelectedChange = (changeObject) => {
-        setSelectedStudies(changeObject);
+    const handleStudySelectedChange = (patient: Patient, changeObject) => {
+        setSelectedStudies((state) => ({ ...state, [patient.id]: changeObject }));
     };
 
     const refreshFind = () => queryPayload && mutateToolsFind(queryPayload);
 
     const handleSendAnonymizeList = async () => {
-        for (const studyId of Object.keys(selectedStudies)) {
+        for (const studyId of selectedStudiesIds) {
             await addStudyIdToAnonymizeList(studyId);
         }
     };
 
     const handleSendExportList = async () => {
-        for (const studyId of Object.keys(selectedStudies)) {
+        for (const studyId of selectedStudiesIds) {
             await addSeriesOfStudyIdToExportList(studyId);
         }
     };
 
     const handleSendDeleteList = async () => {
-        for (const studyId of Object.keys(selectedStudies)) {
+        for (const studyId of selectedStudiesIds) {
             await addStudyIdToDeleteList(studyId);
         }
     };
@@ -190,7 +195,7 @@ const ContentRoot: React.FC = () => {
                         <span className="ml-2">Send to Delete</span>
                     </Button>
 
-                    <Labels selectedStudies={selectedStudies} />
+                    <Labels selectedStudyIds={selectedStudiesIds} />
 
                 </div>
             </div>

@@ -16,8 +16,8 @@ type AccordionPatientProps = {
     onEditPatient: (patient: Patient) => void;
     onStudyUpdated: (patient: Patient) => void;
     onDeletePatient: (patient: Patient) => void;
-    selectedStudies: { [studyId: string]: boolean }
-    onSelectedStudyChange: (selectedState: { [studyId: string]: boolean }) => void
+    selectedStudies: { [patientId: string]: { [studyId: string]: boolean } }
+    onSelectedStudyChange: (patient: Patient, selectedState: { [studyId: string]: boolean }) => void
 };
 
 const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, onDeletePatient, onStudyUpdated, selectedStudies, onSelectedStudyChange }: AccordionPatientProps) => {
@@ -26,17 +26,8 @@ const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, on
     const [selectedPatient, setSelectedPatient] = useState(false)
     const [selectedStudyId, setSelectedStudyId] = useState<string | null>(null);
 
-    const selectedStudyIdsForPatient = useMemo(()=>{
-        const filteredSelectedState = {...selectedStudies}
-        const patientStudiesId = patient.studies.map(study => study.id)
-        for(const studyId of Object.keys(filteredSelectedState)){
-            if(!patientStudiesId.includes(studyId)){
-                delete filteredSelectedState[studyId]
-            }
-        }
-
-        return filteredSelectedState
-
+    const selectedStudyIdsForPatient = useMemo(() => {
+        return selectedStudies[patient.id]
     }, [selectedStudies])
 
 
@@ -65,52 +56,49 @@ const AccordionPatient = ({ patient, onPatientSelectionChange, onEditPatient, on
     }
 
     return (
-        <>
-            <Accordion
-                header={
-                    <AccordionHeader className=" hover:bg-primary-active group">
-                        <CheckBox bordered={false}
-                            onClick={(event) => event.stopPropagation()}
-                            onChange={(event) => setSelectedPatient(event.target.checked)}
-                            checked={selectedPatient} />
-                        <div className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
-                            <span className="text-sm font-medium text-gray-600 group-hover:text-white">Patient ID: {patient.patientId}</span>
-                            <span className="text-sm font-medium group-hover:text-white ">Name: {patient.patientName}</span>
-                            <span className="text-sm font-medium group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
-                            <div className="flex justify-end w-full space-x-7">
-                                <EditButton
-                                    onClick={handleEditClick}
-                                    className="group-hover:fill-white" 
-                                />
-                                <DownloadButton onClick={handleDownloadClick} />
-                                <DeleteButton onClick={handleDeleteClick} />
-                            </div>
+        <Accordion
+            header={
+                <AccordionHeader className=" hover:bg-primary-active group">
+                    <CheckBox bordered={false}
+                        onClick={(event) => event.stopPropagation()}
+                        onChange={(event) => setSelectedPatient(event.target.checked)}
+                        checked={selectedPatient} />
+                    <div className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
+                        <span className="text-sm font-medium text-gray-600 group-hover:text-white">Patient ID: {patient.patientId}</span>
+                        <span className="text-sm font-medium group-hover:text-white ">Name: {patient.patientName}</span>
+                        <span className="text-sm font-medium group-hover:text-white">Nb of Studies: {patient.getStudies().length}</span>
+                        <div className="flex justify-end w-full space-x-7">
+                            <EditButton
+                                onClick={handleEditClick}
+                                className="group-hover:fill-white"
+                            />
+                            <DownloadButton onClick={handleDownloadClick} />
+                            <DeleteButton onClick={handleDeleteClick} />
                         </div>
-                    </AccordionHeader>
-
-                }
-                className="w-full rounded-2xl"
-            >
-                <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
-                    <div className={`${!selectedStudyId ? 'lg:col-span-2' : ''}`}>
-                        <StudyRoot
-                            patient={patient}
-                            onStudyUpdated={() => onStudyUpdated(patient)}
-                            onStudySelected={handleStudySelected}
-                            selectedStudies={selectedStudyIdsForPatient}
-                            onSelectedStudyChange={onSelectedStudyChange}
+                    </div>
+                </AccordionHeader>
+            }
+            className="w-full rounded-2xl"
+        >
+            <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
+                <div className={`${!selectedStudyId ? 'lg:col-span-2' : ''}`}>
+                    <StudyRoot
+                        patient={patient}
+                        onStudyUpdated={() => onStudyUpdated(patient)}
+                        onStudySelected={handleStudySelected}
+                        selectedStudies={selectedStudyIdsForPatient}
+                        onSelectedStudyChange={(selectedState) => onSelectedStudyChange(patient, selectedState)}
+                    />
+                </div>
+                {selectedStudyId && (
+                    <div>
+                        <SeriesRoot
+                            studyId={selectedStudyId}
                         />
                     </div>
-                    {selectedStudyId && (
-                        <div>
-                            <SeriesRoot
-                                studyId={selectedStudyId}
-                            />
-                        </div>
-                    )}
-                </div>
-            </Accordion>
-        </>
+                )}
+            </div>
+        </Accordion>
     );
 };
 

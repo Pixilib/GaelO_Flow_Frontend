@@ -4,22 +4,29 @@ import { Colors } from "../utils";
 import PatientTable from "./PatientTable";
 import StudyTable from "./StudyTable";
 import { RootState } from "../store";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { flushAnonymizeList, removeStudyFromAnonymizeList, updateAnonymizePatientValue, updateAnonymizeStudyValue } from "../reducers/AnonymizeSlice";
 import { Empty } from "../icons";
+import { Patient } from "../utils/types";
 
 const AnonymizeRoot = () => {
-    const anonList = useSelector((state: RootState) => state.anonymize);
     const dispatch = useDispatch();
+    const anonList = useSelector((state: RootState) => state.anonymize);
+    const [selectedPatientId, setSelectedPatientId] = useState<string|null>(null)
+
 
     const patients = useMemo(() => {
         return Object.values(anonList.patients);
     }, [anonList]);
 
     const studies = useMemo(() => {
-        return Object.values(anonList.studies);
-    }, [anonList]);
+        if(!selectedPatientId) return []
+        return Object.values(anonList.studies).filter(study => study.originalStudy.parentPatient === selectedPatientId);
+    }, [anonList, selectedPatientId]);
 
+    const handlePatientSelect = (patient : Patient) => {
+        setSelectedPatientId(patient.id)
+    }
     const handleRemovePatient = (patientId: string) => {
         const studiesIds = studies
             .filter((study) => study.originalStudy.parentPatient === patientId)
@@ -66,7 +73,7 @@ const AnonymizeRoot = () => {
             <CardBody color={Colors.almond}>
                 <div className="flex flex-row w-full gap-4">
                     <div className="flex-1 overflow-auto">
-                        <PatientTable patients={patients} onChangePatient={handleChangePatient} onRemovePatient={handleRemovePatient} />
+                        <PatientTable patients={patients} onClickRow={handlePatientSelect} onChangePatient={handleChangePatient} onRemovePatient={handleRemovePatient} />
                     </div>
                     <div className="flex-1 overflow-auto">
                         <StudyTable studies={studies} onChangeStudy={handleChangeStudy} onRemoveStudy={handleRemoveStudy} />

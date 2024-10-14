@@ -7,10 +7,11 @@ import { Trash } from "../icons";
 
 type PatientTableProps = {
     patients: Patient[]
+    onClickRow : (patient :Patient) => void;
     onChangePatient: (patientId: string, key: 'newPatientId' | 'newPatientName', value: string) => void;
     onRemovePatient: (patientId: string) => void
 }
-const PatientTable = ({ patients, onChangePatient, onRemovePatient }: PatientTableProps) => {
+const PatientTable = ({ patients, onClickRow, onChangePatient, onRemovePatient }: PatientTableProps) => {
 
 
     const columns: ColumnDef<Patient>[] = useMemo(() => [
@@ -51,7 +52,7 @@ const PatientTable = ({ patients, onChangePatient, onRemovePatient }: PatientTab
     ], []);
 
     return (
-        <Table columns={columns} data={patients} columnVisibility={{ id: false }} />
+        <Table columns={columns} onRowClick={onClickRow} data={patients} columnVisibility={{ id: false }} />
     )
 }
 

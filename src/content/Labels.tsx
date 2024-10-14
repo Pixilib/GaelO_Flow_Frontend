@@ -7,9 +7,9 @@ import { addLabelForStudy, removeLabelForStudy } from "../services/orthanc";
 import SelectRoleLabels from "./SelectLabels";
 
 type LabelProps = {
-    selectedStudies: { [studyId: string]: boolean };
+    selectedStudyIds: string[];
 }
-const Labels = ({ selectedStudies }: LabelProps) => {
+const Labels = ({ selectedStudyIds }: LabelProps) => {
 
     const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
     const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
@@ -22,12 +22,8 @@ const Labels = ({ selectedStudies }: LabelProps) => {
         ({ studyId, label }) => removeLabelForStudy(studyId, label)
     )
 
-    const selectedStudiesId = useMemo(() => {
-        return Object.entries(selectedStudies)?.filter(([id, status]) => status === true).map(([id, status]) => id)
-    }, [selectedStudies])
-
     const handleAddLabels = async () => {
-        for (const studyId of selectedStudiesId) {
+        for (const studyId of selectedStudyIds) {
             for (const label of selectedLabels) {
                 await addMutate({ studyId, label })
             }
@@ -35,7 +31,7 @@ const Labels = ({ selectedStudies }: LabelProps) => {
     };
 
     const handleRemoveLabels = async () => {
-        for (const studyId of selectedStudiesId) {
+        for (const studyId of selectedStudyIds) {
             for (const label of selectedLabels) {
                 await deleteMutate({ studyId, label })
             }
@@ -75,7 +71,7 @@ const Labels = ({ selectedStudies }: LabelProps) => {
                             />
                         </div>
                         <div className="flex justify-start mt-2">
-                            <span>Apply to {selectedStudiesId.length} studies</span>
+                            <span>Apply to {selectedStudyIds.length} studies</span>
                         </div>
                     </div>
 
