@@ -6,6 +6,7 @@ import RolesTable from "./RolesTable";
 import CreateRole from "./CreateRole";
 import EditRole from "./EditRole";
 import { Button, CardFooter, Spinner } from "../../../ui";
+import { More } from "../../../icons";
 
 const Roles = () => {
     const { toastSuccess, toastError } = useCustomToast();
@@ -71,7 +72,8 @@ const Roles = () => {
                 <EditRole
                     key={roleToEdit?.name}
                     title={"Edit Role"}
-                    className="px-4 mb-4 bg-gray-200"                    onClose={() => setRoleToEdit(null)}
+                    className="px-4 mb-4 bg-gray-200"                    
+                    onClose={() => setRoleToEdit(null)}
                     role={roleToEdit || undefined}
                 />
             )}
@@ -89,9 +91,10 @@ const Roles = () => {
                             color={Colors.success}
                             onClick={() => setShowCreateRoleForm(true)}
                             className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
-                        >
+                            >
+                            <More size={18} />
                             Create Role
-                        </Button>
+                          </Button>
                     )}
                 </div>
             </CardFooter>

@@ -1,10 +1,8 @@
 import React from "react";
 import { Modal } from "../../ui";
-import SelectLabels from "../../datasets/SelectLabels";
 import { useCustomMutation, useCustomQuery } from "../../utils";
 import { addLabelForStudy, getLabelsOfStudy, removeLabelForStudy } from "../../services/orthanc";
-import { addLabel } from "../../services";
-
+import SelectLabels from "../SelectLabels";
 type LabelModalProps = {
     studyId: string;
     onClose: () => void;
@@ -43,7 +41,7 @@ const LabelModal: React.FC<LabelModalProps> = ({ studyId, onClose, show }) => {
         <Modal show={show} size='lg'>
             <Modal.Header onClose={onClose}>Assign Labels</Modal.Header>
             <Modal.Body>
-                <SelectLabels 
+                <SelectLabels
                 values={existingLabelsOptions} 
                 onChange={handleLabelChanges} />
                 <p>{studyId}</p>

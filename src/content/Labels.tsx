@@ -3,9 +3,8 @@ import { Button } from "../ui";
 import { Add, Cancel, Label } from "../icons";
 import ToggleChevron from "../ui/menu/ToogleChevron";
 import { Colors, useCustomMutation } from "../utils";
-import SelectLabels from "../datasets/SelectLabels";
-import { useQueries } from "@tanstack/react-query";
 import { addLabelForStudy, removeLabelForStudy } from "../services/orthanc";
+import SelectRoleLabels from "./SelectLabels";
 
 type LabelProps = {
     selectedStudies: { [studyId: string]: boolean };
@@ -62,7 +61,7 @@ const Labels = ({ selectedStudies }: LabelProps) => {
                     <div className="flex gap-3">
 
                         <div className="flex items-center gap-3">
-                            <SelectLabels
+                            <SelectRoleLabels
                                 values={selectedLabels}
                                 onChange={setSelectedLabels}
                             />

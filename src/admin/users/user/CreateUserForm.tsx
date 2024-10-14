@@ -148,9 +148,10 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
           />
         </label>
       </div>
-      <div className="grid grid-cols-1 col-span-3 mt-3">
+      <div className="grid grid-cols-1 col-span-3 ">
         <FormButton
-          text=" "
+          text=" Create user"
+          className='w-40'
           icon={<SubmitUser size="1.3rem" />}
         />
       </div>
