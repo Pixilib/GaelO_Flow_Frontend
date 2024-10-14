@@ -12,19 +12,18 @@ import { Patient } from "../utils/types";
 const AnonymizeRoot = () => {
     const dispatch = useDispatch();
     const anonList = useSelector((state: RootState) => state.anonymize);
-    const [selectedPatientId, setSelectedPatientId] = useState<string|null>(null)
-
+    const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null)
 
     const patients = useMemo(() => {
         return Object.values(anonList.patients);
     }, [anonList]);
 
     const studies = useMemo(() => {
-        if(!selectedPatientId) return []
+        if (!selectedPatientId) return []
         return Object.values(anonList.studies).filter(study => study.originalStudy.parentPatient === selectedPatientId);
     }, [anonList, selectedPatientId]);
 
-    const handlePatientSelect = (patient : Patient) => {
+    const handlePatientSelect = (patient: Patient) => {
         setSelectedPatientId(patient.id)
     }
     const handleRemovePatient = (patientId: string) => {
@@ -40,11 +39,12 @@ const AnonymizeRoot = () => {
         dispatch(removeStudyFromAnonymizeList({ studyId }));
     };
 
-    const handleChangeStudy = (studyId: string, newStudyDescription: string) => {
+    const handleChangeStudy = (studyId: string, key: string, newStudyDescription: string) => {
+        console.log(studyId, key, newStudyDescription)
         dispatch(updateAnonymizeStudyValue({ newStudyDescription, studyId }));
     };
 
-    const handleChangePatient = (patientId: string, key: 'newPatientId' | 'newPatientName', value: string) => {
+    const handleChangePatient = (patientId: string, key: string, value: string) => {
         dispatch(updateAnonymizePatientValue({ patientId, [key]: value }));
     }
 
@@ -73,10 +73,10 @@ const AnonymizeRoot = () => {
             <CardBody color={Colors.almond}>
                 <div className="flex flex-row w-full gap-4">
                     <div className="flex-1 overflow-auto">
-                        <PatientTable patients={patients} onClickRow={handlePatientSelect} onChangePatient={handleChangePatient} onRemovePatient={handleRemovePatient} />
+                        <PatientTable patients={patients} onClickRow={handlePatientSelect} onCellEdit={handleChangePatient} onRemovePatient={handleRemovePatient} />
                     </div>
                     <div className="flex-1 overflow-auto">
-                        <StudyTable studies={studies} onChangeStudy={handleChangeStudy} onRemoveStudy={handleRemoveStudy} />
+                        <StudyTable studies={studies} onCellEdit={handleChangeStudy} onRemoveStudy={handleRemoveStudy} />
                     </div>
                 </div>
             </CardBody>

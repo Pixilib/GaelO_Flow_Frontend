@@ -7,11 +7,11 @@ import { Trash } from "../icons";
 
 type PatientTableProps = {
     patients: Patient[]
-    onClickRow : (patient :Patient) => void;
-    onChangePatient: (patientId: string, key: 'newPatientId' | 'newPatientName', value: string) => void;
+    onClickRow: (patient: Patient) => void;
     onRemovePatient: (patientId: string) => void
+    onCellEdit: (patientId: string | number, columnId: any, value: any) => void
 }
-const PatientTable = ({ patients, onClickRow, onChangePatient, onRemovePatient }: PatientTableProps) => {
+const PatientTable = ({ patients, onClickRow, onRemovePatient, onCellEdit }: PatientTableProps) => {
 
 
     const columns: ColumnDef<Patient>[] = useMemo(() => [
@@ -28,20 +28,14 @@ const PatientTable = ({ patients, onClickRow, onChangePatient, onRemovePatient }
             header: "Patient Name",
         },
         {
-            accessorKey: "newPatientId",
+            id: "newPatientId",
             header: "New Patient ID",
-            cell: ({ row }) => {
-                const patientId = row.original.id;
-                return <Input onChange={(event) => onChangePatient(patientId, "newPatientId", event.target.value)} />;
-            },
+            isEditable: true
         },
         {
-            accessorKey: "newPatientName",
+            id: "newPatientName",
             header: "New Patient Name",
-            cell: ({ row }) => {
-                const patientId = row.original.id;
-                return <Input onChange={(event) => onChangePatient(patientId, "newPatientName", event.target.value)} />;
-            },
+            isEditable: true
         },
         {
             header: "remove",
@@ -52,7 +46,7 @@ const PatientTable = ({ patients, onClickRow, onChangePatient, onRemovePatient }
     ], []);
 
     return (
-        <Table columns={columns} onRowClick={onClickRow} data={patients} columnVisibility={{ id: false }} />
+        <Table id={'id'} columns={columns} onRowClick={onClickRow} data={patients} columnVisibility={{ id: false }} onCellEdit={onCellEdit} />
     )
 }
 

@@ -15,6 +15,7 @@ import { Colors } from "../../utils/enums";
 import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 import { SortAz, SortZa } from '../../icons';
+import EditableCell from './EditableCell';
 
 export type textSize = "xxs" | "xs" | "sm" | "base" | "lg";
 
@@ -37,6 +38,7 @@ type TableProps<TData> = {
   onRowClick?: (row: TData) => void;
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
   getRowClasses?: (row: TData) => string | undefined;
+  onCellEdit?: (rowIndex: string | number, columnId: any, value: any) => void
 };
 
 function Table<T>({
@@ -58,6 +60,7 @@ function Table<T>({
   onRowClick,
   getRowStyles,
   getRowClasses = (row) => 'bg-indigo-50',
+  onCellEdit = () => { },
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -102,14 +105,17 @@ function Table<T>({
   const table = useReactTable<T>({
     data,
     columns: tableColumns,
+    defaultColumn: {
+      cell: EditableCell,
+    },
     state: {
       sorting,
       columnFilters,
       pagination,
       rowSelection: selectedRow,
-      columnVisibility : columnVisibility
+      columnVisibility: columnVisibility
     },
-    getRowId: (originalRow, index) => originalRow?.[id] ?? index,
+    getRowId: (originalRow, index) => { return originalRow?.[id] ?? index},
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -129,6 +135,13 @@ function Table<T>({
       getRowClasses: (row: any) => {
         const classes = getRowClasses ? getRowClasses(row) : undefined;
         return classes;
+      },
+      updateData: (
+        rowIndex: string | number,
+        columnId: any,
+        value: any
+      ) => {
+        onCellEdit(rowIndex, columnId, value)
       }
     }
   });

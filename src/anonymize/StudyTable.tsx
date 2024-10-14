@@ -1,21 +1,21 @@
-import { useMemo } from "react";
-import { Button, Input, Table } from "../ui";
+import { Button, Table } from "../ui";
 import { Colors } from "../utils";
 import { Trash } from "../icons";
 import { ColumnDef } from "@tanstack/react-table";
-import { AnonStudy, Study } from "../utils/types";
+import { AnonStudy } from "../utils/types";
+import { useMemo } from "react";
 
 type StudyTableProps = {
     studies: AnonStudy[];
-    onChangeStudy: (studyId: string, studyDescription: string) => void;
     onRemoveStudy: (studyId: string) => void;
+    onCellEdit: (studyId: string | number, columnId: any, value: any) => void
 };
 
-const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) => {
-    const columns: ColumnDef<AnonStudy>[] = [
+const StudyTable = ({ studies, onRemoveStudy, onCellEdit }: StudyTableProps) => {
+    const columns: ColumnDef<AnonStudy>[] = useMemo(() => [
         {
             id: "id",
-            accessorKey: "originalStudy.id",
+            accessorFn: (row)=> row.originalStudy.id,
         },
         {
             accessorKey: "originalStudy.mainDicomTags.studyDate",
@@ -26,22 +26,9 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) 
             header: "Study Description",
         },
         {
-            accessorKey: "newStudyDescription",
+            id: "newStudyDescription",
             header: "New Study Description",
-            cell: ({ row }) => {
-                return (
-                    <Input
-                        key={row.original.originalStudy.id}
-                        value={row.original.newStudyDescription ?? ""}
-                        onChange={(event) =>
-                            onChangeStudy(
-                                row.original.originalStudy.id,
-                                event.target.value
-                            )
-                        }
-                    />
-                );
-            },
+            isEditable: true
         },
         {
             header: "Remove",
@@ -58,9 +45,9 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) 
                 );
             },
         },
-    ];
+    ], []);
 
-    return <Table columns={columns} data={studies} columnVisibility={{ id: false }} />;
+    return <Table id={"id"} columns={columns} data={studies} columnVisibility={{ id: false }} onCellEdit={onCellEdit} />;
 };
 
 export default StudyTable;
