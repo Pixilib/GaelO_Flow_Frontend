@@ -7,14 +7,15 @@ import { Trash } from "../icons";
 
 type PatientTableProps = {
     patients: Patient[]
+    onChangePatient: (patientId: string, key: 'newPatientId' | 'newPatientName', value: string) => void;
     onRemovePatient: (patientId: string) => void
 }
-const PatientTable = ({ patients, onRemovePatient}: PatientTableProps) => {
+const PatientTable = ({ patients, onChangePatient, onRemovePatient }: PatientTableProps) => {
 
 
     const columns: ColumnDef<Patient>[] = useMemo(() => [
         {
-            id : "id",
+            id: "id",
             accessorKey: "id"
         },
         {
@@ -29,21 +30,22 @@ const PatientTable = ({ patients, onRemovePatient}: PatientTableProps) => {
             accessorKey: "newPatientId",
             header: "New Patient ID",
             cell: ({ row }) => {
-                return <Input />;
+                const patientId = row.original.id;
+                return <Input onChange={(event) => onChangePatient(patientId, "newPatientId", event.target.value)} />;
             },
         },
         {
             accessorKey: "newPatientName",
             header: "New Patient Name",
             cell: ({ row }) => {
-                const patient = row.original;
-                return <Input />;
+                const patientId = row.original.id;
+                return <Input onChange={(event) => onChangePatient(patientId, "newPatientName", event.target.value)} />;
             },
         },
         {
             header: "remove",
             cell: ({ row }) => {
-                return <Button color={Colors.danger} onClick={()=>onRemovePatient(row.original.id)}><Trash /></Button>;
+                return <Button color={Colors.danger} onClick={() => onRemovePatient(row.original.id)}><Trash /></Button>;
             },
         },
     ], []);

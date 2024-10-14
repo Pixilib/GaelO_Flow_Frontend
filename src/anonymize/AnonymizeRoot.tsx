@@ -5,7 +5,7 @@ import PatientTable from "./PatientTable";
 import StudyTable from "./StudyTable";
 import { RootState } from "../store";
 import { useMemo } from "react";
-import { removeStudyFromAnonymizeList, updateAnonymizeValue } from "../reducers/AnonymizeSlice";
+import { flushAnonymizeList, removeStudyFromAnonymizeList, updateAnonymizePatientValue, updateAnonymizeStudyValue } from "../reducers/AnonymizeSlice";
 import { Empty } from "../icons";
 
 const AnonymizeRoot = () => {
@@ -34,11 +34,15 @@ const AnonymizeRoot = () => {
     };
 
     const handleChangeStudy = (studyId: string, newStudyDescription: string) => {
-        console.log(studyId, newStudyDescription);
-        dispatch(updateAnonymizeValue({ newStudyDescription, studyId }));
+        dispatch(updateAnonymizeStudyValue({ newStudyDescription, studyId }));
     };
 
+    const handleChangePatient = (patientId: string, key: 'newPatientId' | 'newPatientName', value: string) => {
+        dispatch(updateAnonymizePatientValue({ patientId, [key]: value }));
+    }
+
     const handleClearList = () => {
+        dispatch(flushAnonymizeList());
     };
 
     return (
@@ -49,9 +53,6 @@ const AnonymizeRoot = () => {
                 <div className="flex items-center w-full">
                     <div className="w-4/5 text-lg font-bold text-center">Anonymize Ressources</div>
                     <div className="flex justify-end w-1/5 gap-3 p-3">
-
-
-
                         <Button
                             onClick={handleClearList}
                             color={Colors.light}
@@ -59,15 +60,13 @@ const AnonymizeRoot = () => {
                             <Empty
                                 className="text-xl text-bol text-primary group-hover:text-white" />
                         </Button>
-
                     </div>
-
                 </div>
             </CardHeader>
             <CardBody color={Colors.almond}>
                 <div className="flex flex-row w-full gap-4">
                     <div className="flex-1 overflow-auto">
-                        <PatientTable patients={patients} onRemovePatient={handleRemovePatient} />
+                        <PatientTable patients={patients} onChangePatient={handleChangePatient} onRemovePatient={handleRemovePatient} />
                     </div>
                     <div className="flex-1 overflow-auto">
                         <StudyTable studies={studies} onChangeStudy={handleChangeStudy} onRemoveStudy={handleRemoveStudy} />
