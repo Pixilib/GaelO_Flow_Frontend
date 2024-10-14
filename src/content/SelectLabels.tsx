@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
-import { getLabelsByRoleName } from "../services";
+import { getLabels, getLabelsByRoleName } from "../services";
 import { useCustomQuery } from "../utils";
 import { SelectInput, Spinner } from "../ui";
+import { Label, Option } from "../utils/types";
 
 type SelectLabelsProps = {
   values: string[];
@@ -12,22 +10,17 @@ type SelectLabelsProps = {
 
 const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
 
-  const roleName = useSelector(
-    (state: RootState) => state.user.role?.name || ""
-  );
-
-  const { data: labelsOptions, isPending } = useCustomQuery(
-    ["roles", roleName, "labels"],
-    () => getLabelsByRoleName(roleName),
+  const { data: labelsOptions, isPending } = useCustomQuery<Label[], Option[]>(
+    ["labels"],
+    () => getLabels(),
     {
-      select: (labels) => {
+      select: (labels : Label[]) => {
         const formattedOptions = labels.map((label) => ({
-          value: label,
-          label,
+          value: label.name,
+          label : label.name,
         }));
         return formattedOptions;
-      },
-      enabled: roleName != null
+      }
     }
   );
 

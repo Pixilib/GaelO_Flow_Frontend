@@ -97,7 +97,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
       data-gaelo-flow="retrieve-container-queues"
       className="w-full rounded-br-xl rounded-bl-xl"
     >
-      <Card bordered className="mt-8 ">
+      <Card bordered >
         <CardHeader centerTitle title="Retrieve Schedule Time : " color={Colors.success} />
         <CardBody color={Colors.light} roundedBottomLeft roundedBottomRight>
           <div className="flex items-center justify-around gap-12 mt-1">
@@ -133,8 +133,10 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 "bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl"
               }
             />
-            <div className="flex-col text-center">
-              <label htmlFor="time-delta" className="text-sm text-bold">
+            <div className="flex-col w-48 text-center">
+              <label 
+                    htmlFor="time-delta" 
+                    className="justify-center text-sm text-bold">
                 {" "}
                 Total Time
               </label>

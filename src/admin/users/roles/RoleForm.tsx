@@ -49,7 +49,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
 
     return (
         <form onSubmit={handleSubmit} 
-        className="grid gap-y-4 lg:gap-y-6"
+        className="grid gap-y-4 lg:gap-y-6 "
         data-gaelo-flow="role-form"
         >
             <div className="flex flex-col max-w-lg gap-2">
@@ -149,7 +149,9 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
             </div>
             <div className="flex justify-center">
-                <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
+                <Button color={Colors.success} 
+                className="h-12 gap-3 justify-self-center w-36 md:justify-center" 
+                type="submit">
                     <SubmitUser size='1.3rem' />
                     <div>{buttonText}</div>
                 </Button>
