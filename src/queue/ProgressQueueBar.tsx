@@ -7,7 +7,7 @@ type ProgressQueueProps = {
     uuid: string;
 };
 
-const ProgressQueueBar= ({ uuid }: ProgressQueueProps) => {
+const ProgressQueueBar = ({ uuid }: ProgressQueueProps) => {
     const { data, isPending } = useCustomQuery(
         ['queue', 'delete', uuid],
         () => getDeleteQueue(uuid),
@@ -22,17 +22,18 @@ const ProgressQueueBar= ({ uuid }: ProgressQueueProps) => {
     if (isPending) return <Spinner />;
 
     return (
-        <div className="flex-col items-center justify-center">
-            <ProgressBar progress={data?.progress || 0}/>
-            <div>{data?.state}</div>
-            <div className="flex justify-center">
+        <div className="flex items-center justify-center space-x-4">
+            <ProgressBar progress={data?.progress || 0} />
+            <div className="flex">
                 <Pause
-                    className={`text-sm cursor-pointer text- hover:text-yellow-500 mr-2`} // Change color on hover, add margin for spacing
+                    className="mr-2 text-sm cursor-pointer hover:text-yellow-500"
                     disabled
-                    onClick={() => {/* Implement pause functionality here */ }}
+                    onClick={() => {
+                        // Implement pause functionality here
+                    }}
                 />
                 <Cancel
-                    className={`text-sm text-danger cursor-pointer hover:text-danger-hover `} // Change color on hover
+                    className="text-sm cursor-pointer text-danger hover:text-danger-hover"
                     onClick={() => mutateDeleteQueue({})}
                 />
             </div>

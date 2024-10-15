@@ -365,6 +365,12 @@ export type Study = {
   type: string;
 };
 
+export type AnonPatient = {
+  newPatientName : string,
+  newPatientId : string,
+  originalPatient : Patient
+}
+
 export type AnonStudy = {
   newPatientName : string,
   newPatientId : string,

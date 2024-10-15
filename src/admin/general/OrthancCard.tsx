@@ -172,7 +172,9 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         )}
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color={Colors.primary} onClick={() => setShowModal(false)}>
+                        <Button
+                            color={Colors.primary}
+                            onClick={() => setShowModal(false)}>
                             Close
                         </Button>
                     </Modal.Footer>

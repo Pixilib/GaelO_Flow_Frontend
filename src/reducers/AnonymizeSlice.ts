@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { AnonStudy, Patient } from "../utils/types";
+import { AnonPatient, AnonStudy } from "../utils/types";
 
 export type AnonymizeState = {
   patients: {
-    [patientId: string]: Patient;
+    [patientId: string]: AnonPatient;
   };
   studies: {
     [studyId: string]: AnonStudy;
@@ -16,7 +16,7 @@ type setAnonymizationProfilePayload = {
 };
 
 type AddAnonymizePayload = {
-  patient: Patient;
+  patient: AnonPatient;
   study: AnonStudy;
 };
 
@@ -46,7 +46,7 @@ const anonymizeSlice = createSlice({
   name: "anonymize",
   initialState,
   reducers: {
-    setAnonymizationProfile: (
+    updateAnonymizationProfile: (
       state,
       action: PayloadAction<setAnonymizationProfilePayload>
     ) => {
@@ -57,7 +57,7 @@ const anonymizeSlice = createSlice({
       action: PayloadAction<AddAnonymizePayload>
     ) => {
       const study = action.payload.study;
-      const patientId = action.payload.patient.id;
+      const patientId = action.payload.patient.originalPatient.id;
       state.studies[study.originalStudy.id] = study;
       state.patients[patientId] = action.payload.patient;
     },
@@ -67,15 +67,21 @@ const anonymizeSlice = createSlice({
     ) => {
 
       const patientId = action.payload.patientId;
+
       const studyIdsToUpdate = Object.values(state.studies)
         .filter((study) => study.originalStudy.parentPatient === patientId)
         .map((study) => study.originalStudy.id);
 
       for (const studyId of studyIdsToUpdate) {
-        if (action.payload.newPatientName)
+        if (action.payload.newPatientName) {
           state.studies[studyId].newPatientName = action.payload.newPatientName;
-        if (action.payload.newPatientId)
+          state[patientId].newPatientName = action.payload.newPatientName;
+        }
+
+        if (action.payload.newPatientId) {
           state.studies[studyId].newPatientId = action.payload.newPatientId;
+          state[patientId].newPatientId = action.payload.newPatientId;
+        }
       }
 
     },
@@ -114,7 +120,7 @@ const anonymizeSlice = createSlice({
 });
 
 export const {
-  setAnonymizationProfile,
+  updateAnonymizationProfile,
   addStudyToAnonymizeList,
   removeStudyFromAnonymizeList,
   flushAnonymizeList,

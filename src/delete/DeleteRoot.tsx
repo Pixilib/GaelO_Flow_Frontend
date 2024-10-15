@@ -55,7 +55,8 @@ const DeleteRoot = () => {
                 </div>
             </CardHeader>
             <CardBody color={Colors.almond}>
-                <DeleteStudyTable studies={Object.values(deleteList)} />
+                <DeleteStudyTable 
+                studies={Object.values(deleteList)} />
             </CardBody>
             <CardFooter
                 color={Colors.light}
