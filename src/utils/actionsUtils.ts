@@ -16,7 +16,11 @@ export const addStudyIdToAnonymizeList = async (studyId: string) => {
     const study = await getStudy(studyId)
     const patient = await getPatient(study.parentPatient)
     store.dispatch(addStudyToAnonymizeList({
-        patient : patient,
+        patient : {
+            newPatientId: null,
+            newPatientName: null,
+            originalPatient: patient
+        },
         study: {
             newPatientId: null,
             newPatientName: null,

@@ -6,7 +6,7 @@ import { AnonStudy } from "../utils/types";
 
 type StudyTableProps = {
     studies: AnonStudy[];
-    onChangeStudy: (studyId: string, studyDescription: string) => void;
+    onChangeStudy: (studyId: string, key:string, value: string) => void;
     onRemoveStudy: (studyId: string) => void;
 };
 
@@ -25,22 +25,10 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) 
             header: "Study Description",
         },
         {
+            id : "newStudyDescription",
             accessorKey: "newStudyDescription",
             header: "New Study Description",
-            cell: ({ row }) => {
-                return (
-                    <Input
-                        key={row.original.originalStudy.id}
-                        value={row.original.newStudyDescription ?? ""}
-                        onChange={(event) =>
-                            onChangeStudy(
-                                row.original.originalStudy.id,
-                                event.target.value
-                            )
-                        }
-                    />
-                );
-            },
+            isEditable: true,
         },
         {
             header: "Remove",
@@ -61,9 +49,12 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) 
 
     return <Table
         columns={columns}
-        data={studies} columnVisibility={{ id: false }}
+        data={studies} 
+        columnVisibility={{ id: false }}
         headerTextSize="xs"
         className="text-xs"
+        onCellEdit={onChangeStudy}
+        getRowId={(row) => row.originalStudy.id}
 
     />;
 

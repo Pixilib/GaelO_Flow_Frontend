@@ -22,6 +22,7 @@ const PatientTable = ({
     onChangePatient,
     onRowSelectionChange,
 }: PatientTableProps) => {
+    console.log(patients)
     const columns: ColumnDef<AnonPatient>[] = useMemo(() => [
         {
             id: "id",
@@ -37,11 +38,13 @@ const PatientTable = ({
         },
         {
             id: "newPatientId",
+            accessorKey: "newPatientId",
             header: "New Patient ID",
             isEditable: true
         },
         {
             id: "newPatientName",
+            accessorKey: "newPatientName",
             header: "New Patient Name",
             isEditable: true
         },
@@ -76,9 +79,9 @@ const PatientTable = ({
             onRowClick={(row) => onClickRow(row.originalPatient.id)}
             onCellEdit={onChangePatient}
             getRowClasses={getRowClasses}
-            enableRowSelection={true}
             selectedRow={selectedRows}
             onRowSelectionChange={onRowSelectionChange}
+            getRowId={(row) => row.originalPatient.id}
         />
     );
 };

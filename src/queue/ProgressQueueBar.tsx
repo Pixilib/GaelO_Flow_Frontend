@@ -29,7 +29,6 @@ const ProgressQueueBar = ({ uuid }: ProgressQueueProps) => {
                     className="mr-2 text-sm cursor-pointer hover:text-yellow-500"
                     disabled
                     onClick={() => {
-                        // Implement pause functionality here
                     }}
                 />
                 <Cancel

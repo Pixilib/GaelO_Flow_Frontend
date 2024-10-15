@@ -39,6 +39,7 @@ type TableProps<TData> = {
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
   getRowClasses?: (row: TData) => string | undefined;
   onCellEdit?: (rowIndex: string | number, columnId: any, value: any) => void
+  getRowId?: (originalRow: TData, index: number) => string
 };
 
 function Table<T>({
@@ -61,6 +62,7 @@ function Table<T>({
   getRowStyles,
   getRowClasses = (row) => 'bg-indigo-50',
   onCellEdit = () => { },
+  getRowId = (originalRow, index) => { return originalRow?.[id] ?? index}
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -115,7 +117,7 @@ function Table<T>({
       rowSelection: selectedRow,
       columnVisibility: columnVisibility
     },
-    getRowId: (originalRow, index) => { return originalRow?.[id] ?? index},
+    getRowId: getRowId,
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

@@ -56,9 +56,9 @@ const anonymizeSlice = createSlice({
       state,
       action: PayloadAction<AddAnonymizePayload>
     ) => {
-      const study = action.payload.study;
+      const studyId = action.payload.study.originalStudy.id;
       const patientId = action.payload.patient.originalPatient.id;
-      state.studies[study.originalStudy.id] = study;
+      state.studies[studyId] = action.payload.study;
       state.patients[patientId] = action.payload.patient;
     },
     updateAnonymizePatientValue: (
@@ -75,12 +75,12 @@ const anonymizeSlice = createSlice({
       for (const studyId of studyIdsToUpdate) {
         if (action.payload.newPatientName) {
           state.studies[studyId].newPatientName = action.payload.newPatientName;
-          state[patientId].newPatientName = action.payload.newPatientName;
+          state.patients[patientId].newPatientName = action.payload.newPatientName;
         }
 
         if (action.payload.newPatientId) {
           state.studies[studyId].newPatientId = action.payload.newPatientId;
-          state[patientId].newPatientId = action.payload.newPatientId;
+          state.patients[patientId].newPatientId = action.payload.newPatientId;
         }
       }
 
