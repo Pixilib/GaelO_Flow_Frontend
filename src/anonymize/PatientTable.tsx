@@ -74,7 +74,7 @@ const PatientTable = ({
             columns={columns}
             data={patients}
             headerTextSize="xs"
-            className="text-xs bg-gray-100"
+            className="text-sm break-words bg-gray-100"
             columnVisibility={{ id: false }}
             onRowClick={(row) => onClickRow(row.originalPatient.id)}
             onCellEdit={onChangePatient}

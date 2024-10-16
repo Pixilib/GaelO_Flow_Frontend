@@ -15,10 +15,10 @@ const ToolList = () => {
 
     return (
 
-        <div className="flex justify-between gap-3 p-3 grow flex-nowrap bg-primary rounded-2xl w-60">
+        <div className="flex justify-between w-48 gap-2 p-3 grow flex-nowrap bg-primary rounded-2xl">
             <ToolItem count={Object.keys(anonList).length} onClick={() => navigate('/anonymize')}>
                 <Anon
-                    className="text-blue-900 cursor-pointer group-hover:text-white"
+                    className="text-blue-900 cursor-pointer group-hover:text-white size-6"
                 />
             </ToolItem>
             <ToolItem count={Object.keys(exportList).length} onClick={() => navigate('/export')}>

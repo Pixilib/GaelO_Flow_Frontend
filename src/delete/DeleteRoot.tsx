@@ -65,7 +65,8 @@ const DeleteRoot = () => {
                         color={Colors.danger}
                         className="flex items-center justify-center"
                     >
-                        <Trash />
+                        <Trash 
+                        className=""/>
                         <span className="ml-2">Delete List</span>
                     </Button>
 

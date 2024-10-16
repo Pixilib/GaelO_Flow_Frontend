@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Card, CardHeader, CardBody, CardFooter, Button, SelectInput } from "../ui";
-import { Colors } from "../utils";
+import { Card, CardHeader, CardBody, CardFooter, Button, SelectInput, Input, CheckBox } from "../ui";
+import { Colors, useCustomMutation } from "../utils";
 import PatientTable from "./PatientTable";
 import StudyTable from "./StudyTable";
 import { RootState } from "../store";
@@ -14,9 +14,14 @@ import {
 } from "../reducers/AnonymizeSlice";
 import { Anon, Empty } from "../icons";
 import AutoFill from "../icons/AutofIll";
+import { AnonItem } from "../utils/types";
+import { createAnonymizeQueue } from "../services/queues";
+import AnonQueues from "./AnonQueues";
+import DropdownButton from "../ui/menu/DropDownButton";
+
 const profileOptions = [
-    { value: "default", label: "Default" },
-    { value: "full", label: "Full" },
+    { value: "Default", label: "Default" },
+    { value: "Full", label: "Full" },
 ];
 
 const AnonymizeRoot = () => {
@@ -25,6 +30,18 @@ const AnonymizeRoot = () => {
     const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
         null
     );
+
+    const [anonJobId, setAnonJobId] = useState<string | null>(null);
+
+    const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
+        ({ anonItems }) => createAnonymizeQueue(anonItems),
+        [['queue', 'anon']],
+        {
+            onSuccess: (jobId) => {
+                setAnonJobId(jobId)
+            },
+        }
+    )
 
     const patients = useMemo(() => Object.values(anonList.patients), [anonList]);
 
@@ -75,17 +92,33 @@ const AnonymizeRoot = () => {
 
     const onRemovePatient = (patientId) => {
         studies.filter((study) => study.originalStudy.parentPatient === patientId).
-        forEach((study) =>{
+            forEach((study) => {
                 console.log(study.originalStudy.id)
                 dispatch(
                     removeStudyFromAnonymizeList({ studyId: study.originalStudy.id })
-                )}
+                )
+            }
             )
 
     }
 
-    const onChangeProfile = (option) =>{
+    const onChangeProfile = (option) => {
         dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }))
+    }
+
+    const handleAnonymizeStart = () => {
+        const anonItems: AnonItem[] = Object.values(anonList.studies).map((study) => {
+            return {
+                OrthancStudyID: study.originalStudy.id,
+                Profile: anonList.anonymizationProfile,
+                NewPatientID: study.newPatientId,
+                NewPatientName: study.newPatientName,
+                NewStudyDescription: study.newStudyDescription,
+                NewAccessionNumber: study.newAccessionNumber
+            }
+
+        })
+        mutateCreateAnonymizeQueue({ anonItems })
     }
 
     return (
@@ -93,9 +126,23 @@ const AnonymizeRoot = () => {
             <CardHeader color={Colors.primary}>
                 <div className="flex items-center w-full">
                     <div className="w-4/5 text-lg font-bold text-center">
-                        Anonymiser les ressources
-                    </div>
-                    <div className="flex justify-end w-1/5 gap-3 p-3">
+                        Anonymize resources                    </div>
+                    <div className="flex justify-end w-1/5 p-3">
+
+
+                        <DropdownButton row={null}
+                            options={[]} buttonText="Auto Fill"
+                            className="">
+                            <Input
+                                type="text"
+                                placeholder="Enter value"
+                                className="w-full p-2 border"
+                            />
+                            <CheckBox bordered={false}
+                            />
+                        </DropdownButton>
+
+                        <AutoFill className="text-xl text-primary group-hover:text-white" />
                         <Button
                             onClick={() => dispatch(flushAnonymizeList())}
                             color={Colors.light}
@@ -115,7 +162,7 @@ const AnonymizeRoot = () => {
             </CardHeader>
             <CardBody color={Colors.almond}>
                 <div className="flex flex-row w-full gap-4">
-                    <div className="flex-1 overflow-auto">
+                    <div className="flex-1 overflow-auto break-words">
                         <PatientTable
                             patients={patients}
                             onClickRow={setSelectedPatientId}
@@ -132,10 +179,14 @@ const AnonymizeRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter color={Colors.light} className="flex justify-center gap-3">
-                <Button className="flex items-center gap-2 px-3 py-1" color={Colors.blueCustom}>
+            <CardFooter
+                color={Colors.light}
+                className="flex items-center gap-3">
+                <Button
+                    className="flex items-center gap-2 "
+                    color={Colors.blueCustom} onClick={handleAnonymizeStart}>
                     <Anon />
-                    Anonymiser
+                    Anonymise
                 </Button>
                 <SelectInput
                     placeholder="Select an option"
@@ -143,6 +194,7 @@ const AnonymizeRoot = () => {
                     options={profileOptions}
                     onChange={onChangeProfile}
                 />
+                <AnonQueues />
             </CardFooter>
         </Card>
     );

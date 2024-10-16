@@ -2,38 +2,22 @@ import { deleteDeleteQueue, getDeleteQueue } from "../services/queues";
 import { useCustomMutation, useCustomQuery } from "../utils";
 import { ProgressBar, ProgressCircle, Spinner } from "../ui";
 import { Cancel, Pause } from "../icons";
+import { Queue } from "../utils/types";
 
 type ProgressQueueProps = {
-    uuid: string;
+    queueData : Queue,
+    onDelete: (event: React.MouseEvent) => void
 };
 
-const ProgressQueueBar = ({ uuid }: ProgressQueueProps) => {
-    const { data, isPending } = useCustomQuery(
-        ['queue', 'delete', uuid],
-        () => getDeleteQueue(uuid),
-        { refetchInterval: 2000 }
-    );
-
-    const { mutate: mutateDeleteQueue } = useCustomMutation(
-        () => deleteDeleteQueue(uuid),
-        [['queue', 'delete']]
-    );
-
-    if (isPending) return <Spinner />;
+const ProgressQueueBar = ({ queueData, onDelete }: ProgressQueueProps) => {
 
     return (
         <div className="flex items-center justify-center space-x-4">
-            <ProgressBar progress={data?.progress || 0} />
+            <ProgressBar progress={queueData.progress} />
             <div className="flex">
-                <Pause
-                    className="mr-2 text-sm cursor-pointer et hover:text-secondary-hover"
-                    disabled
-                    onClick={() => {
-                    }}
-                />
                 <Cancel
                     className="text-sm cursor-pointer text-danger hover:text-danger-hover"
-                    onClick={() => mutateDeleteQueue({})}
+                    onClick={onDelete}
                 />
             </div>
         </div>
