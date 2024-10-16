@@ -35,7 +35,7 @@ const AnonymizeRoot = () => {
 
     const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
         ({ anonItems }) => createAnonymizeQueue(anonItems),
-        [['queue', 'anon']],
+        [['queue', 'anonymize']],
         {
             onSuccess: (jobId) => {
                 setAnonJobId(jobId)
@@ -93,7 +93,6 @@ const AnonymizeRoot = () => {
     const onRemovePatient = (patientId) => {
         studies.filter((study) => study.originalStudy.parentPatient === patientId).
             forEach((study) => {
-                console.log(study.originalStudy.id)
                 dispatch(
                     removeStudyFromAnonymizeList({ studyId: study.originalStudy.id })
                 )
@@ -181,20 +180,22 @@ const AnonymizeRoot = () => {
             </CardBody>
             <CardFooter
                 color={Colors.light}
-                className="flex items-center gap-3">
-                <Button
-                    className="flex items-center gap-2 "
-                    color={Colors.blueCustom} onClick={handleAnonymizeStart}>
-                    <Anon />
-                    Anonymise
-                </Button>
-                <SelectInput
-                    placeholder="Select an option"
-                    value={anonList.anonymizationProfile}
-                    options={profileOptions}
-                    onChange={onChangeProfile}
-                />
-                <AnonQueues />
+                className="flex flex-col items-center gap-3">
+                <div className="flex gap-3">
+                    <Button
+                        className="flex items-center gap-2 "
+                        color={Colors.blueCustom} onClick={handleAnonymizeStart}>
+                        <Anon />
+                        Anonymise
+                    </Button>
+                    <SelectInput
+                        placeholder="Select an option"
+                        value={anonList.anonymizationProfile}
+                        options={profileOptions}
+                        onChange={onChangeProfile}
+                    />
+                </div>
+                <AnonQueues showResults={true} />
             </CardFooter>
         </Card>
     );

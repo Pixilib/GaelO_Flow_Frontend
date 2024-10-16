@@ -407,6 +407,14 @@ export type Queue = {
   userId: number
 }
 
+export type AnonQueue = {
+  progress: number
+  state: string
+  id: string
+  results: Study
+  userId: number
+}
+
 export type AnonItem = {
   OrthancStudyID: string,
   Profile: 'full' | 'default',

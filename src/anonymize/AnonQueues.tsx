@@ -4,42 +4,71 @@ import { useCustomMutation, useCustomQuery } from "../utils";
 import { RootState } from "../store";
 import { Spinner } from "../ui";
 import ProgressQueueBar from "../queue/ProgressQueueBar";
-import { Queue } from "../utils/types";
+import { AnonQueue } from "../utils/types";
+import AnonymizeResultTable from "./AnonymizeResultTable";
+import { useMemo } from "react";
 
-const AnonQueues = () => {
+type AnonQueuesProps = {
+    showResults: boolean
+}
+
+const AnonQueues = ({ showResults }: AnonQueuesProps) => {
+
     const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
 
     const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
-        ['queue', 'anon', currentUserId?.toString() || ''],
+        ['queue', 'anonymize', currentUserId?.toString() || ''],
         () => getExistingAnonymizeQueues(currentUserId)
     );
 
-    const firstQueue  = existingAnonymizeQueues?.[0]
+    const firstQueue = existingAnonymizeQueues?.[0]
 
-    const { data, isPending , isLoading} = useCustomQuery<Queue>(
-        ['queue', 'anon', firstQueue],
+    const { data, isPending, isFetching } = useCustomQuery<AnonQueue[]>(
+        ['queue', 'anonymize', firstQueue],
         () => getAnonymizeQueue(firstQueue),
-        {   refetchInterval: 2000, 
-            enabled : existingAnonymizeQueues?.length > 0 }
+        {
+            refetchInterval: 2000,
+            enabled: (firstQueue != null)
+        }
     );
 
     const { mutate: mutateDeleteQueue } = useCustomMutation(
         () => deleteAnonymizeQueue(firstQueue),
-        [['queue', 'anon']]
+        [['queue', 'anonymize']]
     );
 
-    if (existingAnonymizeQueues?.length > 0 && isPending) return <Spinner />;
+    const anonymizedStudies = useMemo(() => {
+        if (!data) return []
+        return (data).map(job => job.results)
+    }, [data])
+
+
+    const globalProgress = useMemo(() => {
+        if (!data) return 0
+        const totalProgress = data.map(job => job.progress === 100 ? 1 : 0)
+        const sumProgress = totalProgress.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue
+        }, 0);
+        return (sumProgress / data.length) * 100
+    }, [data])
+
+    //If no queue, nothing to show
+    if (!firstQueue) return null
+    //if awaiting value show spinner
+    if (isPending || isFetching) return <Spinner />;
 
     return (
         <div className="w-full space-y-4">
-            {existingAnonymizeQueues?.map((uuid) => (
-                <div
-                    key={uuid}
-                    className="p-4 bg-white border border-gray-100 shadow-inner rounded-xl"
-                >
-                    <ProgressQueueBar queueData={data} onDelete={mutateDeleteQueue} />
-                </div>
-            ))}
+            <div
+                className="p-4 bg-white border border-gray-100 shadow-inner rounded-xl"
+            >
+                <ProgressQueueBar progress={globalProgress} onDelete={mutateDeleteQueue} />
+            </div>
+            {
+                showResults && (
+                    <AnonymizeResultTable studies={anonymizedStudies} />
+                )
+            }
         </div>
     );
 };

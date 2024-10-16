@@ -22,7 +22,7 @@ const PatientTable = ({
     onChangePatient,
     onRowSelectionChange,
 }: PatientTableProps) => {
-    console.log(patients)
+    
     const columns: ColumnDef<AnonPatient>[] = useMemo(() => [
         {
             id: "id",
