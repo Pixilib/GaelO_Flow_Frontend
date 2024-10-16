@@ -26,7 +26,7 @@ const ProgressQueueBar = ({ uuid }: ProgressQueueProps) => {
             <ProgressBar progress={data?.progress || 0} />
             <div className="flex">
                 <Pause
-                    className="mr-2 text-sm cursor-pointer hover:text-yellow-500"
+                    className="mr-2 text-sm cursor-pointer et hover:text-secondary-hover"
                     disabled
                     onClick={() => {
                     }}

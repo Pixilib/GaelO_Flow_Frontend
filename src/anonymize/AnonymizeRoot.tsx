@@ -57,6 +57,37 @@ const AnonymizeRoot = () => {
         });
     };
 
+    const onChangeStudy = (studyId, key, value) => {
+        dispatch(
+            updateAnonymizeStudyValue({ studyId, [key]: value })
+        )
+    }
+
+    const onRemoveStudy = (studyId) => {
+        dispatch(removeStudyFromAnonymizeList({ studyId }))
+    }
+
+    const onChangePatient = (patientId, key, value) => {
+        dispatch(
+            updateAnonymizePatientValue({ patientId, [key]: value })
+        )
+    }
+
+    const onRemovePatient = (patientId) => {
+        studies.filter((study) => study.originalStudy.parentPatient === patientId).
+        forEach((study) =>{
+                console.log(study.originalStudy.id)
+                dispatch(
+                    removeStudyFromAnonymizeList({ studyId: study.originalStudy.id })
+                )}
+            )
+
+    }
+
+    const onChangeProfile = (option) =>{
+        dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }))
+    }
+
     return (
         <Card>
             <CardHeader color={Colors.primary}>
@@ -88,35 +119,15 @@ const AnonymizeRoot = () => {
                         <PatientTable
                             patients={patients}
                             onClickRow={setSelectedPatientId}
-                            onChangePatient={(patientId, key, value) =>
-                                dispatch(
-                                    updateAnonymizePatientValue({ patientId, [key]: value })
-                                )
-                            }
-                            onRemovePatient={(patientId) =>
-                                studies
-                                    .filter(
-                                        (study) => study.originalStudy.parentPatient === patientId
-                                    )
-                                    .forEach((study) =>
-                                        dispatch(
-                                            removeStudyFromAnonymizeList({ studyId: study.originalStudy.id })
-                                        )
-                                    )
-                            }
+                            onChangePatient={onChangePatient}
+                            onRemovePatient={onRemovePatient}
                         />
                     </div>
                     <div className="flex-1 overflow-auto">
                         <StudyTable
                             studies={studies}
-                            onChangeStudy={(studyId, key, value) =>
-                                dispatch(
-                                    updateAnonymizeStudyValue({ studyId, [key]: value })
-                                )
-                            }
-                            onRemoveStudy={(studyId) =>
-                                dispatch(removeStudyFromAnonymizeList({ studyId }))
-                            }
+                            onChangeStudy={onChangeStudy}
+                            onRemoveStudy={onRemoveStudy}
                         />
                     </div>
                 </div>
@@ -127,12 +138,10 @@ const AnonymizeRoot = () => {
                     Anonymiser
                 </Button>
                 <SelectInput
-                    placeholder="Sélectionner une option"
+                    placeholder="Select an option"
                     value={anonList.anonymizationProfile}
                     options={profileOptions}
-                    onChange={(option) =>
-                        dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }))
-                    }
+                    onChange={onChangeProfile}
                 />
             </CardFooter>
         </Card>

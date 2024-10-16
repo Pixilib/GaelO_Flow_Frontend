@@ -52,7 +52,7 @@ const PatientTable = ({
             header: "remove",
             cell: ({ row }) => {
                 return (
-                    <Button color={Colors.danger} onClick={() => onRemovePatient(row.original.id)}>
+                    <Button color={Colors.danger} onClick={() => onRemovePatient(row.original.originalPatient.id)}>
                         <Trash />
                     </Button>
                 );

@@ -52,7 +52,7 @@ const DeleteStudyTable = ({ studies }: DeleteStudyTableProps) => {
                     <div className="flex justify-center">
                         <Button
                             onClick={() => handleDelete(row.original.id)}
-                            color={Colors.warning}
+                            color={Colors.danger}
                         >
                             <Trash />
                         </Button>
