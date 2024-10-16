@@ -1,53 +1,89 @@
+import React, { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button, Input, Table } from "../ui"
-import { useMemo } from "react";
-import { Patient } from "../utils/types";
+import { Button, Table } from "../ui";
+import { AnonPatient } from "../utils/types";
 import { Colors } from "../utils";
 import { Trash } from "../icons";
 
 type PatientTableProps = {
-    patients: Patient[]
-    onClickRow: (patient: Patient) => void;
-    onRemovePatient: (patientId: string) => void
-    onCellEdit: (patientId: string | number, columnId: any, value: any) => void
-}
-const PatientTable = ({ patients, onClickRow, onRemovePatient, onCellEdit }: PatientTableProps) => {
+    patients: AnonPatient[];
+    selectedRows?: Record<string, boolean>;
+    onClickRow: (patientId :string) => void;
+    onRemovePatient: (patientId: string) => void;
+    onChangePatient: (patientId: string | number, columnId: any, value: any) => void;
+    onRowSelectionChange?: (selectedRow: Record<string, boolean>) => void;
+};
 
-
-    const columns: ColumnDef<Patient>[] = useMemo(() => [
+const PatientTable = ({
+    patients,
+    selectedRows,
+    onClickRow,
+    onRemovePatient,
+    onChangePatient,
+    onRowSelectionChange,
+}: PatientTableProps) => {
+    console.log(patients)
+    const columns: ColumnDef<AnonPatient>[] = useMemo(() => [
         {
             id: "id",
             accessorKey: "id"
         },
         {
-            accessorKey: "mainDicomTags.patientId",
+            accessorKey: "originalPatient.mainDicomTags.patientId",
             header: "Patient ID",
         },
         {
-            accessorKey: "mainDicomTags.patientName",
+            accessorKey: "originalPatient.mainDicomTags.patientName",
             header: "Patient Name",
         },
         {
             id: "newPatientId",
+            accessorKey: "newPatientId",
             header: "New Patient ID",
             isEditable: true
         },
         {
             id: "newPatientName",
+            accessorKey: "newPatientName",
             header: "New Patient Name",
             isEditable: true
         },
         {
             header: "remove",
             cell: ({ row }) => {
-                return <Button color={Colors.danger} onClick={() => onRemovePatient(row.original.id)}><Trash /></Button>;
+                return (
+                    <Button color={Colors.danger} onClick={() => onRemovePatient(row.original.originalPatient.id)}>
+                        <Trash />
+                    </Button>
+                );
             },
         },
-    ], []);
+    ], [onRemovePatient]);
+
+    const getRowClasses = (row: AnonPatient) => {
+        if (selectedRows?.[row.originalPatient.id]) {
+            return 'bg-primary hover:cursor-pointer';
+        } else {
+            return 'hover:bg-indigo-100 hover:cursor-pointer';
+        }
+    };
 
     return (
-        <Table id={'id'} columns={columns} onRowClick={onClickRow} data={patients} columnVisibility={{ id: false }} onCellEdit={onCellEdit} />
-    )
-}
+        <Table
+            id="id"
+            columns={columns}
+            data={patients}
+            headerTextSize="xs"
+            className="text-sm break-words bg-gray-100"
+            columnVisibility={{ id: false }}
+            onRowClick={(row) => onClickRow(row.originalPatient.id)}
+            onCellEdit={onChangePatient}
+            getRowClasses={getRowClasses}
+            selectedRow={selectedRows}
+            onRowSelectionChange={onRowSelectionChange}
+            getRowId={(row) => row.originalPatient.id}
+        />
+    );
+};
 
-export default PatientTable
+export default PatientTable;

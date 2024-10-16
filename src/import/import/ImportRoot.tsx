@@ -70,7 +70,7 @@ const ImportRoot: React.FC = () => {
 
       {errors.length > 0 && (
         <BannerAlert
-          color={Colors.red}
+          color={Colors.danger}
           message={`Error Importing ${errors.length} file(s)`}
           onClickButton={handleShowModal}
           buttonLabel="See Errors"

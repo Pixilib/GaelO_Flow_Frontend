@@ -1,21 +1,20 @@
-import { Button, Table } from "../ui";
+import { Button, Input, Table } from "../ui";
 import { Colors } from "../utils";
 import { Trash } from "../icons";
 import { ColumnDef } from "@tanstack/react-table";
 import { AnonStudy } from "../utils/types";
-import { useMemo } from "react";
 
 type StudyTableProps = {
     studies: AnonStudy[];
+    onChangeStudy: (studyId: string, key:string, value: string) => void;
     onRemoveStudy: (studyId: string) => void;
-    onCellEdit: (studyId: string | number, columnId: any, value: any) => void
 };
 
-const StudyTable = ({ studies, onRemoveStudy, onCellEdit }: StudyTableProps) => {
-    const columns: ColumnDef<AnonStudy>[] = useMemo(() => [
+const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) => {
+    const columns: ColumnDef<AnonStudy>[] = [
         {
             id: "id",
-            accessorFn: (row)=> row.originalStudy.id,
+            accessorKey: "originalStudy.id",
         },
         {
             accessorKey: "originalStudy.mainDicomTags.studyDate",
@@ -26,9 +25,10 @@ const StudyTable = ({ studies, onRemoveStudy, onCellEdit }: StudyTableProps) => 
             header: "Study Description",
         },
         {
-            id: "newStudyDescription",
+            id : "newStudyDescription",
+            accessorKey: "newStudyDescription",
             header: "New Study Description",
-            isEditable: true
+            isEditable: true,
         },
         {
             header: "Remove",
@@ -45,9 +45,19 @@ const StudyTable = ({ studies, onRemoveStudy, onCellEdit }: StudyTableProps) => 
                 );
             },
         },
-    ], []);
+    ];
 
-    return <Table id={"id"} columns={columns} data={studies} columnVisibility={{ id: false }} onCellEdit={onCellEdit} />;
+    return <Table
+        columns={columns}
+        data={studies} 
+        columnVisibility={{ id: false }}
+        headerTextSize="xs"
+        className="text-xs"
+        onCellEdit={onChangeStudy}
+        getRowId={(row) => row.originalStudy.id}
+
+    />;
+
 };
 
 export default StudyTable;

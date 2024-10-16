@@ -55,9 +55,6 @@ const EditableCell = ({
             placeholder={placeholder}
             value={value ?? ""}
             onChange={onChange}
-            onClick={(e) => {
-                e.stopPropagation()
-            }}
             onBlur={onBlur}
         />
     )

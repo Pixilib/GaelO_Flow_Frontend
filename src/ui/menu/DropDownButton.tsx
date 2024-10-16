@@ -13,9 +13,11 @@ type DropdownButtonProps = {
   row: any;
   options: DropdownOption[];
   buttonText?: string;
+  children?: React.ReactNode;
+  className?: string;
 };
 
-const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonText = "Action" }) => {
+const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonText = "Action", children, className }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,11 +27,11 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonTex
   }, []);
 
   const handleOptionClick = (option: DropdownOption) => {
-    option.action? option.action(row) : null;
+    option.action ? option.action(row) : null;
   };
 
   return (
-    <div ref={dropdownRef} className="relative inline-flex hs-dropdown [--placement:top-left]">
+    <div ref={dropdownRef} className={`relative inline-flex hs-dropdown [--placement:bottom-left] ${className}`}>
       <button
         id="hs-dropdown-custom-trigger"
         type="button"
@@ -56,6 +58,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonTex
         className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
         aria-labelledby="hs-dropdown-custom-trigger"
       >
+        {children} 
         {options?.map((option, index) => (
           <button
             key={index}

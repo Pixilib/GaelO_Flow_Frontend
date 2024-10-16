@@ -25,8 +25,7 @@ import {
     addStudyIdToAnonymizeList,
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
-import AnonIcon from "../assets/Anon.svg?react";
-import { Export } from "../icons";
+import { Anon, Export } from "../icons";
 import Labels from "./Labels";
 
 
@@ -173,7 +172,7 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
                         onClick={handleSendAnonymizeList}
                     >
-                        <AnonIcon className="text-xl" />
+                        <Anon className="text-xl" />
                         <span className="ml-2">Send to Anonymize</span>
                     </Button>
 

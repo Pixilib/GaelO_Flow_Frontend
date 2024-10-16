@@ -39,6 +39,7 @@ type TableProps<TData> = {
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
   getRowClasses?: (row: TData) => string | undefined;
   onCellEdit?: (rowIndex: string | number, columnId: any, value: any) => void
+  getRowId?: (originalRow: TData, index: number) => string
 };
 
 function Table<T>({
@@ -61,6 +62,7 @@ function Table<T>({
   getRowStyles,
   getRowClasses = (row) => 'bg-indigo-50',
   onCellEdit = () => { },
+  getRowId = (originalRow, index) => { return originalRow?.[id] ?? index }
 }: TableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -115,7 +117,7 @@ function Table<T>({
       rowSelection: selectedRow,
       columnVisibility: columnVisibility
     },
-    getRowId: (originalRow, index) => { return originalRow?.[id] ?? index},
+    getRowId: getRowId,
     onPaginationChange: setPagination,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -160,7 +162,7 @@ function Table<T>({
 
   return (
     <div className={`overflow-x-auto border rounded-xl shadow-lg custom-scrollbar ${className}`}>
-      <table className={`min-w-full border-grayCustom ${className}`}>
+      <table className={`min-w-full border-gray-custom ${className}`}>
         <thead className={`${headerClass}`}>
           {table.getHeaderGroups().map(headerGroup => (
             <React.Fragment key={headerGroup.id}>
@@ -169,7 +171,7 @@ function Table<T>({
                   <th
                     key={header.id}
                     colSpan={header.column.getCanFilter() ? 1 : undefined}
-                    className={`h-2 px-2 pt-5 pb-3 py-2 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
+                    className={`h-2 break-words px-2 pt-5 pb-3 py-2 font-bold tracking-wider text-center uppercase cursor-pointer md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     <div className={`flex items-center justify-center space-x-1 ${headerText}`}>
@@ -221,7 +223,7 @@ function Table<T>({
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td
                     key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                    className={`px-1 py-2 text-center whitespace-nowrap md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)}`}
+                    className={`px-1 py-2 text-center whitespace-normal break-words md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)}`}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
@@ -230,6 +232,7 @@ function Table<T>({
             </React.Fragment>
           ))}
         </tbody>
+
       </table>
       <div className="w-full bg-white shadow-sm rounded-b-xl">
         {data.length > 0 && table ? (

@@ -176,7 +176,10 @@ const ExportRoot = () => {
                             <Empty
                                 className="text-xl text-bol text-primary group-hover:text-white" />
                         </Button>
-                        <SelectTransferSyntax value={transferSyntax} onChange={(value) => setTrasferSyntax(value)} />
+                        <SelectTransferSyntax 
+                            value={transferSyntax} 
+                            onChange={(value) => setTrasferSyntax(value)} 
+                        />
 
                     </div>
 
@@ -188,20 +191,30 @@ const ExportRoot = () => {
                         <ExportStudyTable
                             onClickStudy={handleClickStudy}
                             studies={Object.values(exportStudyList)} />
-                    </div>
-                    <div className="flex-1 mb-4">
+                            
                         <ExportSeriesTable series={series} />
                     </div>
                 </div>
             </CardBody>
             <CardFooter color={Colors.light} className="flex justify-center flex-grow gap-3">
                 <div className="flex justify-center w-4/5 gap-3">
-                    <DropdownButton row={null} buttonText="Download" options={downloadOptions} />
-                    <DropdownButton row={null} buttonText="Send To Modality" options={modalitiesOptions} />
+                    <DropdownButton
+                        row={null}
+                        buttonText="Download"
+                        options={downloadOptions} />
+                    <DropdownButton
+                        row={null}
+                        buttonText="Send To Modality"
+                        options={modalitiesOptions} />
                     {storeJobId && <ProgressJobs size={50} jobId={storeJobId} />}
-                    <DropdownButton row={null} buttonText="Send To Peer" options={peersOptions} />
+                    <DropdownButton
+                        row={null}
+                        buttonText="Send To Peer"
+                        options={peersOptions} />
                     {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}
-                    <Button color={Colors.blueCustom} className="text-white bg-cyan-700" disabled>
+                    <Button
+                        color={Colors.blueCustom}
+                        className="text-white bg-cyan-700" disabled>
                         Send to <GaeloIcon className="ml-1" />
                     </Button>
                 </div>

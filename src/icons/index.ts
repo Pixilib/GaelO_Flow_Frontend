@@ -1,5 +1,6 @@
 import Add from './Add'
 import Admin from './Admin'
+import Anon from './Anon'
 import ArrowLeft from './ArrowLeft'
 import Brain from './Brain'
 import Cancel from './Cancel'
@@ -53,6 +54,7 @@ import ZoomQuestion from './ZoomQuestion'
 export {
     Add,
     Admin,
+    Anon,
     ArrowLeft,
     Brain,
     Cancel,

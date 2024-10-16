@@ -139,7 +139,7 @@ export type ProcessingJob = {
   progress: number;
   state: string;
   id: string;
-  results : Record<string,any>
+  results: Record<string, any>
 };
 
 export type Peer = {
@@ -206,8 +206,8 @@ type QuerySeries = {
   SeriesDescription?: string;
   SeriesNumber?: string;
   SeriesInstanceUID?: string;
-  NumberOfSeriesRelatedInstances? : string;
-  ProtocolName? :string;
+  NumberOfSeriesRelatedInstances?: string;
+  ProtocolName?: string;
 };
 
 type Level = "Series" | "Study";
@@ -304,7 +304,7 @@ export type Instances = {
     instanceCreationTime: string | null;
     instanceNumber: string | null;
     sopInstanceUID: string | null;
-    numberOfFrames: string|null;
+    numberOfFrames: string | null;
   };
   parentSeries: string;
   type: string;
@@ -345,7 +345,7 @@ export type PatientModifyPayload = {
   force: boolean;
   synchronous: boolean;
   keepSource: boolean;
-  keep : string[];
+  keep: string[];
 };
 
 export type OrthancResponse = {
@@ -365,20 +365,26 @@ export type Study = {
   type: string;
 };
 
+export type AnonPatient = {
+  newPatientName: string,
+  newPatientId: string,
+  originalPatient: Patient
+}
+
 export type AnonStudy = {
-  newPatientName : string,
-  newPatientId : string,
-  newStudyDescription : string,
-  newAccessionNumber : string,
-  originalStudy : Study;
+  newPatientName: string,
+  newPatientId: string,
+  newStudyDescription: string,
+  newAccessionNumber: string,
+  originalStudy: Study;
 }
 
 export type StudyModifyPayload = {
-  replace: Partial<StudyMainDicomTags&PatientMainDicomTags>;
+  replace: Partial<StudyMainDicomTags & PatientMainDicomTags>;
   remove: string[];
   removePrivateTags: boolean;
   force: boolean;
-  keep : string[];
+  keep: string[];
   synchronous: boolean;
   keepSource: boolean;
 };
@@ -390,13 +396,25 @@ export type SeriesModifyPayload = {
   keepSource: boolean;
   force: boolean;
   synchronous: boolean;
-  keep : string[];
+  keep: string[];
 };
 
 export type Queue = {
-  progress : number
-  state : string
-  id : string
-  results : Record<string,any>  
-  userId : number
+  progress: number
+  state: string
+  id: string
+  results: Record<string, any>
+  userId: number
+}
+
+export type AnonItem = {
+  OrthancStudyID: string,
+  Profile: 'full' | 'default',
+  NewAccessionNumber: string
+  NewPatientID: string
+  NewPatientName: string
+}
+
+export type AnonymizePayload = {
+  Anonymizes: AnonItem[]
 }

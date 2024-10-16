@@ -12,7 +12,7 @@ export interface BannerProps {
 }
 
 const BannerAlert: React.FC<BannerProps> = ({
-  color = Colors.red,
+  color = Colors.danger,
   className = '',
   children,
   buttonLabel = 'See Errors',
@@ -29,7 +29,7 @@ const BannerAlert: React.FC<BannerProps> = ({
         return 'text-yellow-800 border-yellow-300 bg-yellow-50 dark:text-yellow-300 dark:border-yellow-800 dark:bg-gray-800';
       case Colors.dark:
         return 'text-gray-800 border-gray-300 bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800';
-      case Colors.red:
+      case Colors.danger:
         return 'text-red-800 border-red-800 bg-white dark:text-red-400 dark:border-red-800 dark:bg-gray-800';
       case Colors.gray:
         return 'text-gray-800 border-gray-300 bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800';
