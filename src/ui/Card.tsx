@@ -34,23 +34,16 @@ type CardFooterProps = {
 const colorClasses: Record<Colors, string> = {
   almond: "bg-almond",
   primary: "bg-primary",
-  transparent : "bg-transparent",
-  primaryHover: "hover:bg-primary-hover",
   secondary: "bg-secondary",
-  secondaryHover: "hover:bg-secondary-hover",
   danger: "bg-danger",
-  dangerHover: "hover:bg-danger-hover",
-  grayCustom: "bg-grayCustom",
   success: "bg-success",
-  successHover: "hover:bg-success-hover",
-  disabled: "bg-disabled",
   warning: "bg-warning",
-  warningHover: "hover:bg-warning-hover",
   dark: "bg-dark",
-  red: "bg-red",
   gray: "bg-gray",
   light: "bg-light",
   white: "bg-white",
+  [Colors.blueCustom]: '',
+  [Colors.lightGray]: ''
 };
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";

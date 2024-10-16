@@ -162,7 +162,7 @@ function Table<T>({
 
   return (
     <div className={`overflow-x-auto border rounded-xl shadow-lg custom-scrollbar ${className}`}>
-      <table className={`min-w-full border-grayCustom ${className}`}>
+      <table className={`min-w-full border-gray-custom ${className}`}>
         <thead className={`${headerClass}`}>
           {table.getHeaderGroups().map(headerGroup => (
             <React.Fragment key={headerGroup.id}>
