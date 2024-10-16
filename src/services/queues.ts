@@ -17,18 +17,18 @@ export const createDeleteQueue = (seriesId: string[]): Promise<string> => {
     });
 };
 
-export const getDeleteQueue = (uuid: string): Promise<Queue> => {
+export const getDeleteQueue = (uuid: string): Promise<Queue[]> => {
   return axios
     .get(`/api/queues/delete/${uuid}`)
     .then((response) => {
-      const data: any = Object.values(response.data)[0];
-      return {
-        userId: data.UserId,
-        progress: data.Progress,
-        state: data.State,
-        id: data.Id,
-        results: data.Results,
-      };
+      const data: any = Object.values(response.data);
+      return data.map((job) => ({
+        userId: job.UserId,
+        progress: job.Progress,
+        state: job.State,
+        id: job.Id,
+        results: job.Results,
+      }));
     })
     .catch(function (error) {
       if (error.response) {

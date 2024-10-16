@@ -60,17 +60,17 @@ const DeleteRoot = () => {
             </CardBody>
             <CardFooter color={Colors.light}>
                 <div className="flex items-center justify-center gap-3">
-                    <Button
-                        onClick={handleDeleteList}
-                        color={Colors.danger}
-                        className="flex items-center justify-center"
-                    >
-                        <Trash 
-                        className=""/>
-                        <span className="ml-2">Delete List</span>
-                    </Button>
-
-                    <div className="w-80">
+                    <div>
+                        <Button
+                            onClick={handleDeleteList}
+                            color={Colors.danger}
+                            className="flex items-center justify-center"
+                        >
+                            <Trash />
+                            <span className="ml-2">Delete List</span>
+                        </Button>
+                    </div>
+                    <div>
                         <DeleteQueues />
                     </div>
                 </div>

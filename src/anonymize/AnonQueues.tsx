@@ -45,7 +45,7 @@ const AnonQueues = ({ showResults }: AnonQueuesProps) => {
 
     const globalProgress = useMemo(() => {
         if (!data) return 0
-        const totalProgress = data.map(job => job.progress === 100 ? 1 : 0)
+        const totalProgress = data.map(job => job.state !== 'wait' ? 1 : 0)
         const sumProgress = totalProgress.reduce((accumulator, currentValue) => {
             return accumulator + currentValue
         }, 0);
