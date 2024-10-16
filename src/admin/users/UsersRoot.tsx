@@ -19,8 +19,8 @@ const UsersRoot = () => {
     const isOauth2Path = path.endsWith("oauth2");
 
     return (
-        <Card className="p-0 bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
-            <Tabs className="bg-light-gray rounded-t-xl">
+        <Card className="bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
+            <Tabs className=" bg-light-gray rounded-t-xl">
                 <Tab
                     title="Users"
                     active={isUsersPath}
@@ -37,7 +37,12 @@ const UsersRoot = () => {
                     onClick={() => handleTabClick("oauth2")}
                 />
             </Tabs>
-            <CardBody noPadding color={Colors.almond} roundedTopLeft={false} roundedTopRight={false} roundedBottomLeft={false} roundedBottomRight={false}>
+            <CardBody noPadding 
+                color={Colors.almond} 
+                roundedTopLeft={false} 
+                roundedTopRight={false} 
+                roundedBottomLeft={false} 
+                roundedBottomRight={false}>
                 <Routes>
                     <Route path="/users" element={<Users />} />
                     <Route path="/roles" element={<Roles />} />

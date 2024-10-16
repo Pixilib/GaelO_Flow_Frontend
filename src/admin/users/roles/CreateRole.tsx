@@ -35,8 +35,13 @@ const CreateRole = ({ title, className, onClose }: CreateRoleFormProps) => {
   };
 
   return (
-    <FormCard title={title} onClose={() => onClose()}>
-      <RoleForm onSubmit={handleSubmit} buttonText="Submit" />
+    <FormCard 
+      title={title} 
+      onClose={() => onClose()}
+      className="bg-gray-200 ">
+      <RoleForm 
+      onSubmit={handleSubmit} 
+      buttonText="Submit" />
     </FormCard>
 
   );

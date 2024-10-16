@@ -55,19 +55,27 @@ const DeleteRoot = () => {
                 </div>
             </CardHeader>
             <CardBody color={Colors.almond}>
-                <DeleteStudyTable studies={Object.values(deleteList)} />
+                <DeleteStudyTable
+                    studies={Object.values(deleteList)} />
             </CardBody>
-            <CardFooter color={Colors.light} className="flex flex-col justify-center gap-3">
-                <Button
-                    onClick={handleDeleteList}
-                    color={Colors.danger}
-                    className="h-10" // Set a fixed height for the button
-                >
-                    <Trash /> Delete List
-                </Button>
+            <CardFooter color={Colors.light}>
+                <div className="flex items-center justify-center gap-3">
+                    <Button
+                        onClick={handleDeleteList}
+                        color={Colors.danger}
+                        className="flex items-center justify-center"
+                    >
+                        <Trash 
+                        className=""/>
+                        <span className="ml-2">Delete List</span>
+                    </Button>
 
-                <DeleteQueues />
+                    <div className="w-80">
+                        <DeleteQueues />
+                    </div>
+                </div>
             </CardFooter>
+
         </Card>
     );
 };

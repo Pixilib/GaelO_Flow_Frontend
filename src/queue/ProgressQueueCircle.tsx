@@ -1,39 +1,22 @@
-import { deleteDeleteQueue, getDeleteQueue } from "../services/queues";
-import { useCustomMutation, useCustomQuery } from "../utils";
-import { ProgressCircle, Spinner } from "../ui";
-import { Cancel, Pause } from "../icons";
+import { ProgressCircle } from "../ui";
+import { Cancel } from "../icons";
+import { Queue } from "../utils/types";
 
 type ProgressQueueProps = {
-    uuid: string;
+    queueData: Queue,
+    onDelete: (event: React.MouseEvent) => void
 };
 
-const ProgressQueueCircle = ({ uuid }: ProgressQueueProps) => {
-    const { data, isPending } = useCustomQuery(
-        ['queue', 'delete', uuid],
-        () => getDeleteQueue(uuid),
-        { refetchInterval: 2000 }
-    );
-
-    const { mutate: mutateDeleteQueue } = useCustomMutation(
-        () => deleteDeleteQueue(uuid),
-        [['queue', 'delete']]
-    );
-
-    if (isPending) return <Spinner />;
+const ProgressQueueCircle = ({ queueData, onDelete }: ProgressQueueProps) => {
 
     return (
         <div className="flex-col items-center justify-center">
-            <ProgressCircle text={data?.state} progress={data?.progress || 0} size={150}>
+            <ProgressCircle text={queueData?.state} progress={queueData?.progress || 0} size={150}>
                 <div className="flex justify-center">
-                    <Pause
-                        className={`text-sm cursor-pointer text- hover:text-yellow-500 mr-2`} // Change color on hover, add margin for spacing
-                        disabled
-                        onClick={() => {/* Implement pause functionality here */ }}
-                    />
                     <Cancel
-                        className={`text-sm text-danger cursor-pointer hover:text-danger-hover `} // Change color on hover
-                        onClick={() => mutateDeleteQueue({})}
-                    />                   
+                        className={`text-sm text-danger cursor-pointer hover:text-danger-hover `}
+                        onClick={onDelete}
+                    />
                 </div>
             </ProgressCircle>
         </div>

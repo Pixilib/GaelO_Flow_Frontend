@@ -1,7 +1,7 @@
 import Card, { CardHeader, CardFooter, CardBody } from "../ui/Card";
 import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import { Button } from "../ui";
-import SelectLabels from "./SelectLabels";
+import SelectRoleLabels from "./SelectRoleLabels";
 import DatasetTableStudy from "./studies/DatasetTableStudy";
 import DatasetSeriesTable from "./series/DatasetSeriesTable";
 import { findTools } from "../services";
@@ -89,7 +89,7 @@ const DatasetRoot = () => {
             <CardBody className="bg-almond">
                 <div className="space-y-2">
                     <span className="text-base font-semibold text-gray-700">Labels</span>
-                    <SelectLabels values={selectedLabels} onChange={(labels) => { console.log(labels); setSelectedLabels(labels) }} />
+                    <SelectRoleLabels values={selectedLabels} onChange={(labels) => { console.log(labels); setSelectedLabels(labels) }} />
                 </div>
                 <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
                     <div className="2xl:col-span-7">

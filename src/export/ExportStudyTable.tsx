@@ -9,7 +9,7 @@ import { Trash } from "../icons";
 
 type ExportStudyTableProps = {
     studies: Study[];
-    onClickStudy : (study : Study) => void
+    onClickStudy: (study: Study) => void
 };
 
 const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
@@ -17,8 +17,8 @@ const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
 
     const handleDelete = (studyId: string) => {
         const studyToDelete = studies.find(study => study.id === studyId)
-        for(const seriesId of studyToDelete.series){
-            dispatch(removeSeriesFromExportList({seriesId : seriesId}))
+        for (const seriesId of studyToDelete.series) {
+            dispatch(removeSeriesFromExportList({ seriesId: seriesId }))
         }
     };
 
@@ -65,7 +65,12 @@ const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
         []
     );
 
-    return <Table onRowClick={onClickStudy} columnVisibility={{id : false}} data={studies} columns={columns} />;
+    return <Table
+        onRowClick={onClickStudy}
+        columnVisibility={{ id: false }} data={studies}
+        headerTextSize="xs"
+        className="text-sm break-words bg-gray-100"
+        columns={columns} />;
 };
 
 export default ExportStudyTable;

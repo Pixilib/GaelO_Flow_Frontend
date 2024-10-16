@@ -86,7 +86,7 @@ const Users = ({ className = "" }: UsersProps) => {
               onClick={() => setIsCreatingUser(true)}
               className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
             >
-              <More size={24} />
+              <More size={18} />
               Create User
             </Button>
           ) : (

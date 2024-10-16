@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Queue } from "../utils/types";
+import { AnonItem, AnonymizePayload, Queue } from "../utils/types";
 
 export const createDeleteQueue = (seriesId: string[]): Promise<string> => {
     const payload = {
@@ -57,6 +57,72 @@ export const getExistingDeleteQueues = (userId: number | undefined): Promise<str
     return axios
         .get(url)
         .then((response) => response.data)
+        .catch(function (error) {
+            if (error.response) {
+                throw error.response;
+            }
+            throw error;
+        });
+};
+
+
+export const createAnonymizeQueue = (anonItems : AnonItem[]): Promise<string> => {
+    const payload : AnonymizePayload = {
+        Anonymizes: anonItems
+    }
+    return axios
+        .post(`/api/queues/anonymize`, payload)
+        .then((response) => response.data.Uuid)
+        .catch(function (error) {
+            if (error.response) {
+                throw error.response;
+            }
+            throw error;
+        });
+};
+
+export const getExistingAnonymizeQueues = (userId: number | undefined): Promise<string[]> => {
+    const url = userId ? `/api/queues/anonymize?userId=${userId}` : '/api/queues/anon'
+    return axios
+        .get(url)
+        .then((response) => response.data)
+        .catch(function (error) {
+            if (error.response) {
+                throw error.response;
+            }
+            throw error;
+        });
+};
+
+
+export const getAnonymizeQueue = (uuid: string): Promise<Queue> => {
+
+    return axios
+        .get(`/api/queues/anonymize/${uuid}`)
+        .then((response) => {
+            const data: any = Object.values(response.data)[0];
+            return {
+                userId: data.UserId,
+                progress: data.Progress,
+                state: data.State,
+                id: data.Id,
+                results: data.Results
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                throw error.response;
+            }
+            throw error;
+        });
+};
+
+
+export const deleteAnonymizeQueue = (uuid: string): Promise<void> => {
+
+    return axios
+        .delete(`/api/queues/anonymize/${uuid}`)
+        .then(() => undefined)
         .catch(function (error) {
             if (error.response) {
                 throw error.response;

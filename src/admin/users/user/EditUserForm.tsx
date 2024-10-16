@@ -79,7 +79,8 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                 <CloseButton onClose={() => onClose()} />
             </CardHeader>
 
-            <CardBody color={Colors.lightGray}>
+            <CardBody 
+                color={Colors.lightGray}>
                 <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
                     <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
                         <Input

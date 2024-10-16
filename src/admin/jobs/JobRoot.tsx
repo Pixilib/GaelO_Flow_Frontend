@@ -42,7 +42,7 @@ const JobRoot = () => {
         title={"Manage Jobs"}
       />
       <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
-        <div className="w-full mt-6 mb-8">
+        <div className="w-full ">
           <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </div>
       </CardBody>
