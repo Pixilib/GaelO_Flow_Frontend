@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Button, Table } from "../ui"
+import { Button, Table } from "../ui";
 import { Colors, Series } from "../utils";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
@@ -7,13 +7,15 @@ import { removeSeriesFromExportList } from "../reducers/ExportSlice";
 import { Trash } from "../icons";
 
 type ExportSeriesTableProps = {
-    series: Series[]
-}
-const ExportSeriesTable = ({ series }: ExportSeriesTableProps) => {
-    const dispatch = useDispatch()
+    series: Series[];
+    selectedRows?: Record<string, boolean>;
+};
+
+const ExportSeriesTable = ({ series, selectedRows }: ExportSeriesTableProps) => {
+    const dispatch = useDispatch();
 
     const handleDelete = (seriesId: string) => {
-        dispatch(removeSeriesFromExportList({seriesId : seriesId}))
+        dispatch(removeSeriesFromExportList({ seriesId }));
     };
 
     const columns: ColumnDef<Series>[] = useMemo(
@@ -35,7 +37,7 @@ const ExportSeriesTable = ({ series }: ExportSeriesTableProps) => {
                 header: "Series Number",
             },
             {
-                accessorFn: (row) =>  row.instances.length,
+                accessorFn: (row) => row.instances.length,
                 header: "Instances",
             },
             {
@@ -55,9 +57,23 @@ const ExportSeriesTable = ({ series }: ExportSeriesTableProps) => {
         []
     );
 
-    return (
-        <Table data={series} columnVisibility={{id : false}} columns={columns} />
-    )
-}
+    const getRowClasses = (row: Series) => {
+        if (selectedRows?.[row.id]) {
+            return 'bg-primary hover:cursor-pointer';
+        } else {
+            return 'hover:bg-indigo-100 hover:cursor-pointer';
+        }
+    };
 
-export default ExportSeriesTable
+    return (
+        <Table
+            data={series}
+            columnVisibility={{ id: false }}
+            columns={columns}
+            className="bg-gray-100"
+            getRowClasses={getRowClasses}
+        />
+    );
+};
+
+export default ExportSeriesTable;

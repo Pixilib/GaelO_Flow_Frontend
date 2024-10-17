@@ -40,9 +40,9 @@ const colorClasses: Record<Colors, string> = {
   warning: "bg-warning",
   dark: "bg-dark",
   gray: "bg-gray",
+  blueCustom: "bg-blue-custom",
   light: "bg-light",
   white: "bg-white",
-  [Colors.blueCustom]: '',
   [Colors.lightGray]: ''
 };
 
