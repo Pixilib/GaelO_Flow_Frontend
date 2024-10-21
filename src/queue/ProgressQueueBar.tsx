@@ -1,19 +1,16 @@
-import { deleteDeleteQueue, getDeleteQueue } from "../services/queues";
-import { useCustomMutation, useCustomQuery } from "../utils";
-import { ProgressBar, ProgressCircle, Spinner } from "../ui";
-import { Cancel, Pause } from "../icons";
-import { Queue } from "../utils/types";
+import { ProgressBar } from "../ui";
+import { Cancel } from "../icons";
 
 type ProgressQueueProps = {
-    queueData : Queue,
+    progress : number,
     onDelete: (event: React.MouseEvent) => void
 };
 
-const ProgressQueueBar = ({ queueData, onDelete }: ProgressQueueProps) => {
+const ProgressQueueBar = ({ progress, onDelete }: ProgressQueueProps) => {
 
     return (
         <div className="flex items-center justify-center space-x-4">
-            <ProgressBar progress={queueData.progress} />
+            <ProgressBar progress={progress} />
             <div className="flex">
                 <Cancel
                     className="text-sm cursor-pointer text-danger hover:text-danger-hover"

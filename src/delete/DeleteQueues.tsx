@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { deleteDeleteQueue, getDeleteQueue, getExistingDeleteQueues } from "../services/queues";
 import { useCustomMutation, useCustomQuery } from "../utils";
 import { RootState } from "../store";
-import { ProgressCircle, Spinner } from "../ui";
+import { Spinner } from "../ui";
 import ProgressQueueBar from "../queue/ProgressQueueBar";
 import { Queue } from "../utils/types";
 import ProgressQueueCircle from "../queue/ProgressQueueCircle";
@@ -21,12 +21,12 @@ const DeleteQueues = ({ circle = false }: DeleteQueueProps) => {
 
     const firstQueue = existingDeleteQueues?.[0]
 
-    const { data, isPending } = useCustomQuery<Queue>(
+    const { data, isPending } = useCustomQuery<Queue[]>(
         ['queue', 'delete', firstQueue],
         () => getDeleteQueue(firstQueue),
         {
             refetchInterval: 2000,
-            enabled: existingDeleteQueues?.length > 0
+            enabled: firstQueue != null
         }
     );
 
@@ -35,6 +35,7 @@ const DeleteQueues = ({ circle = false }: DeleteQueueProps) => {
         [['queue', 'delete']]
     );
 
+    if (!firstQueue) return null;
     if (isPending) return <Spinner />;
 
     return (
@@ -46,9 +47,9 @@ const DeleteQueues = ({ circle = false }: DeleteQueueProps) => {
                 >
                     {
                         circle ?
-                            <ProgressQueueCircle queueData={data} onDelete={() => mutateDeleteQueue({})} />
+                            <ProgressQueueCircle queueData={data[0]} onDelete={() => mutateDeleteQueue({})} />
                             :
-                            <ProgressQueueBar queueData={data} onDelete={() => mutateDeleteQueue({})} />
+                            <ProgressQueueBar progress={data[0].progress} onDelete={() => mutateDeleteQueue({})} />
                     }
 
                 </div>

@@ -8,11 +8,11 @@ export type AnonymizeState = {
   studies: {
     [studyId: string]: AnonStudy;
   };
-  anonymizationProfile: "default" | "full";
+  anonymizationProfile: "Default" | "Full";
 };
 
 type setAnonymizationProfilePayload = {
-  anonymizationProfile: "default" | "full";
+  anonymizationProfile: "Default" | "Full";
 };
 
 type AddAnonymizePayload = {
@@ -39,7 +39,7 @@ type RemoveAnonymizePayload = {
 const initialState: AnonymizeState = {
   patients: {},
   studies: {},
-  anonymizationProfile: "default",
+  anonymizationProfile: "Default",
 };
 
 const anonymizeSlice = createSlice({

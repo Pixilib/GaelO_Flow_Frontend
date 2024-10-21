@@ -9,6 +9,7 @@ import {
   Instances,
   SeriesModifyPayload,
 } from "../utils/types";
+import { orthancStudyToStudy } from "./utils";
 
 export const getOrthancSystem = (): Promise<unknown> => {
   return axios
@@ -123,31 +124,7 @@ export const getStudy = (studyId: string): Promise<Study> => {
     .get("/api/studies/" + studyId + "?expand")
     .then((response): Study => {
       const data = response.data;
-      return {
-        id: data.ID,
-        isStable: data.IsStable,
-        labels: data.Labels,
-        lastUpdate: data.LastUpdate,
-        mainDicomTags: {
-          accessionNumber: data.MainDicomTags.AccessionNumber,
-          institutionName: data.MainDicomTags.InstitutionName,
-          referringPhysicianName: data.MainDicomTags.ReferringPhysicianName,
-          studyDate: data.MainDicomTags.StudyDate,
-          studyDescription: data.MainDicomTags.StudyDescription,
-          studyId: data.MainDicomTags.StudyID,
-          studyInstanceUID: data.MainDicomTags.StudyInstanceUID,
-          studyTime: data.MainDicomTags.StudyTime,
-        },
-        patientMainDicomTags: {
-          patientBirthDate: data.PatientMainDicomTags.PatientBirthDate,
-          patientId: data.PatientMainDicomTags.PatientID,
-          patientName: data.PatientMainDicomTags.PatientName,
-          patientSex: data.PatientMainDicomTags.PatientSex,
-        },
-        parentPatient: data.ParentPatient,
-        series: data.Series,
-        type: data.Type,
-      };
+      return orthancStudyToStudy(data);
     })
     .catch(function (error) {
       if (error.response) {
