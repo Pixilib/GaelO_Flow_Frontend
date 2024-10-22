@@ -18,7 +18,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
   onDeleteAet,
   onEchoAet,
 }) => {
-  
+
   const columns: ColumnDef<Modality>[] = [
     {
       accessorKey: "name",
@@ -41,7 +41,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
       header: "Actions",
       id: "actions",
       cell: ({ row }) => (
-        <div className="flex justify-center items-center gap-2.5">
+        <div className="sticky right-0 z-10 bg-white">
           <Button
             onClick={() => onEchoAet(row.original.name)}
             color={Colors.secondary}
@@ -63,8 +63,8 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
     <Table
       columns={columns}
       data={aetData}
-      headerColor={Colors.white} 
-      headerTextSize="xs"  
+      headerColor={Colors.white}
+      headerTextSize="xs"
       className="bg-gray-100"
       enableColumnFilters
       enableSorting
