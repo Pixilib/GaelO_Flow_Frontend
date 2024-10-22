@@ -36,7 +36,7 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-3/4 h-6 pl-1 border rounded-lg"
+                className="w-1/2 h-5 pl-1 text-xs border border-gray-300 rounded-2xl"
             />
             <input
                 type="number"
@@ -48,18 +48,19 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-3/4 h-6 pl-1 border rounded-lg "
+                className="w-1/2 h-5 pl-1 text-xs border border-gray-300 rounded-2xl"
             />
         </div>
     ) : (
         <input
-        type="text"
-        value={(columnFilterValue ?? "") as string}
-        onClick={stopPropagation}
-        onChange={(e) => column.setFilterValue(e.target.value)}
-        placeholder="Search..."
-        className="w-full pl-2 -mt-2 text-sm font-medium border rounded-lg"
-    />
-);
+            type="text"
+            value={(columnFilterValue ?? "") as string}
+            onClick={stopPropagation}
+            onChange={(e) => column.setFilterValue(e.target.value)}
+            placeholder="Search..."
+            className="w-2/3 h-5 pl-1 text-xs border border-gray-300 rounded-2xl"
+        />
+    );
 };
+
 export default FilterTable;

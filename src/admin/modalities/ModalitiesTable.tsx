@@ -1,7 +1,5 @@
 import React from "react";
-
 import { ColumnDef } from "@tanstack/react-table";
-
 import { Table, Badge, Button } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Modality } from "../../utils/types";
@@ -41,7 +39,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
       header: "Actions",
       id: "actions",
       cell: ({ row }) => (
-        <div className="sticky right-0 z-10 bg-white">
+        <div className="flex items-center justify-center space-x-2">
           <Button
             onClick={() => onEchoAet(row.original.name)}
             color={Colors.secondary}
@@ -59,6 +57,10 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
     },
   ];
 
+  const getRowClasses = () => {
+    return "hover:bg-indigo-100 hover:cursor-pointer";
+  };
+
   return (
     <Table
       columns={columns}
@@ -68,6 +70,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
       className="bg-gray-100"
       enableColumnFilters
       enableSorting
+      getRowClasses={getRowClasses}
     />
   );
 };

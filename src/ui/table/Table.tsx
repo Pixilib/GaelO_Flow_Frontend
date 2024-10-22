@@ -38,8 +38,8 @@ type TableProps<TData> = {
   onRowClick?: (row: TData) => void;
   getRowStyles?: (row: TData) => React.CSSProperties | undefined;
   getRowClasses?: (row: TData) => string | undefined;
-  onCellEdit?: (rowIndex: string | number, columnId: any, value: any) => void
-  getRowId?: (originalRow: TData, index: number) => string
+  onCellEdit?: (rowIndex: string | number, columnId: any, value: any) => void;
+  getRowId?: (originalRow: TData, index: number) => string;
 };
 
 function Table<T>({
@@ -149,7 +149,7 @@ function Table<T>({
   });
 
   const textXXS = "text-[0.491rem]";
-  const headerClass = `bg-${headerColor}`;
+  const headerClass = `bg-${headerColor} border-b border-gray-200`;
   const headerText = headerTextSize === "xxs" ? `${textXXS}` : `text-${headerTextSize}`;
   const firstColumnClass = `sticky left-0 ${headerClass}`;
   const lastColumnClass = `sticky right-0 bg-white`;
@@ -163,7 +163,7 @@ function Table<T>({
   return (
     <div className={`overflow-x-auto border rounded-xl shadow-lg custom-scrollbar ${className}`}>
       <table className={`min-w-full border-gray-custom ${className}`}>
-        <thead className={`${headerClass}`}>
+        <thead className={headerClass}>
           {table.getHeaderGroups().map(headerGroup => (
             <React.Fragment key={headerGroup.id}>
               <tr key={headerGroup.id} className={headerClass}>
@@ -234,13 +234,12 @@ function Table<T>({
         </tbody>
 
       </table>
-      <div className="w-full bg-white shadow-sm rounded-b-xl">
-        {data.length > 0 && table ? (
-          <Footer
-            table={table}
-            onPageSizeChange={handlePageSizeChange}
-          />
-        ) : null}
+      <div className='flex flex-col'>
+        <Footer
+          className='p-4'
+          table={table}
+          onPageSizeChange={handlePageSizeChange}
+        />
       </div>
     </div>
   );
