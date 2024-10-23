@@ -6,7 +6,7 @@ type PopoverProps = {
   popover: React.ReactNode;
   placement?: 'top' | 'right' | 'bottom' | 'left' | 'bottom-left' | 'bottom-right';
   className?: string;
-  backgroundColor?: string;
+  backgroundColor?: string; // Color class name
 };
 
 const Popover: React.FC<PopoverProps> = ({
@@ -15,7 +15,7 @@ const Popover: React.FC<PopoverProps> = ({
   withOnClick = false,
   placement = 'bottom',
   className = '',
-  backgroundColor = 'bg-secondary',
+  backgroundColor = 'bg-secondary', // Default background color
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement | null>(null);

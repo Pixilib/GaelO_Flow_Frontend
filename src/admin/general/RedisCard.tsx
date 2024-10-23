@@ -14,17 +14,19 @@ type RedisCardProps = {
 }
 
 const RedisCard: React.FC<RedisCardProps> = ({ redisData }) => {
-
     const columns: ColumnDef<RedisData>[] = [
         {
             accessorKey: 'address',
-            header: () => 'Address',
+            header: () => <div>Address</div>, // Default left alignment
+            cell: ({ getValue }) => (
+                <div>{getValue() as string}</div> // Default left alignment
+            ),
         },
         {
             accessorKey: 'port',
-            header: () => 'Port',
-            cell: ({ getValue }) => <Badge value={getValue() as number} />,
-        }
+            header: () => <div>Port</div>, // Default left alignment
+            cell: ({ getValue }) => <Badge value={getValue() as number} />, // Badge component for port
+        },
     ];
 
     return (

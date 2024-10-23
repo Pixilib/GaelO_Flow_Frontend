@@ -54,7 +54,7 @@ const Oauth = () => {
         data={oauth2Config || []} onDelete={deleteOauthHandler} />
 
       <CardFooter
-        className="border-t rounded-b-lg bg-light">
+        className="border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200">
         <div className="flex justify-center w-full">
           {!showOauthForm ? (
             <Button

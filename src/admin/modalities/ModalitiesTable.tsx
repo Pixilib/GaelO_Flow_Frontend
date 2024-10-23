@@ -39,7 +39,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
       header: "Actions",
       id: "actions",
       cell: ({ row }) => (
-        <div className="flex items-center justify-center space-x-2">
+        <div className="flex items-center space-x-2">
           <Button
             onClick={() => onEchoAet(row.original.name)}
             color={Colors.secondary}

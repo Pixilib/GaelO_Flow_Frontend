@@ -9,6 +9,7 @@ import { Admin, Trash } from "../../icons";
 interface LabelsTableProps {
   data: LabelType[];
   onDeleteLabel: (labelName: string) => void;
+  className?: string;
 }
 
 const LabelsTable: React.FC<LabelsTableProps> = ({
@@ -29,11 +30,12 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
         id: "roles",
 
         cell: ({ row }: any) => (
-          <div className="flex justify-center gap-2.5">
+          <div className="flex  gap-2.5">
             <Popover
               withOnClick={true}
               popover={<LabelsRoles key={row.original.name} labelName={row.original.name} />}
               placement="bottom"
+              backgroundColor="bg-white"
             >
               <Button color={Colors.secondary} className="flex items-center gap-1.5">
                 <Admin size="1.3rem" />
@@ -57,6 +59,8 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
         ),
       },
     ];
+
+    
   }, []);
 
   return (

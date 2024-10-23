@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { ColumnDef } from '@tanstack/react-table';
-
 import { Table, Badge, Button } from '../../ui';
 import { Colors } from '../../utils/enums';
 import { Peer } from '../../utils/types';
@@ -32,7 +30,7 @@ const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEchoP
             header: 'Actions',
             id: 'actions',
             cell: ({ row }) => (
-                <div className="flex justify-center items-center gap-2.5">
+                <div className="flex justify-start items-center gap-2.5"> {/* Alignement à gauche */}
                     <Button onClick={() => onEchoPeer(row.original.name)} color={Colors.secondary}>
                         <Wifi />
                     </Button>
@@ -44,14 +42,15 @@ const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEchoP
         }
     ];
 
-    return <Table
-        columns={columns}
-        data={peerData}
-        headerTextSize='xs'
-        headerColor={Colors.white}
-        className="bg-gray-100"
-
-    />;
+    return (
+        <Table
+            columns={columns}
+            data={peerData}
+            headerTextSize='xs'
+            headerColor={Colors.white}
+            className="bg-gray-100"
+        />
+    );
 };
 
 export default PeersTable;

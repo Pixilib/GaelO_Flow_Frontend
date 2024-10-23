@@ -5,6 +5,7 @@ import { Label } from "../../icons";
 
 type LabelInputFormProps = {
   onCreateLabel: (label: string) => void;
+  className?: string;
 };
 
 const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {

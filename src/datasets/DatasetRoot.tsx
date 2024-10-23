@@ -112,7 +112,7 @@ const DatasetRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
+            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light border-slate-200">
                 <Button color={Colors.secondary} onClick={handleButtonClick}>
                     To Export
                 </Button>
