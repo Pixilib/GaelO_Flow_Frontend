@@ -69,7 +69,7 @@ const CardAnon = () => {
             </CardBody>
             <CardFooter color={Colors.light}>
                 <Button className="self-center" color={Colors.blueCustom}>
-                    Vider la liste
+                    Empty List
                 </Button>
             </CardFooter>
         </Card>

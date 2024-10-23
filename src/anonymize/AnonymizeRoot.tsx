@@ -35,7 +35,7 @@ const AnonymizeRoot = () => {
         [['queue', 'anonymize']],
         {
             onSuccess: (jobId) => {
-                setAnonJobId(jobId)
+                setAnonJobId(jobId);
             },
         }
     );
@@ -70,51 +70,44 @@ const AnonymizeRoot = () => {
         });
     };
 
-    const onChangeStudy = (studyId, key, value) => {
-        dispatch(
-            updateAnonymizeStudyValue({ studyId, [key]: value })
-        );
+    const onChangeStudy = (studyId: string, key: string, value: string) => {
+        dispatch(updateAnonymizeStudyValue({ studyId, [key]: value }));
     };
 
-    const onRemoveStudy = (studyId) => {
+    const onRemoveStudy = (studyId: string) => {
         dispatch(removeStudyFromAnonymizeList({ studyId }));
     };
 
-    const onChangePatient = (patientId, key, value) => {
-        dispatch(
-            updateAnonymizePatientValue({ patientId, [key]: value })
-        );
+    const onChangePatient = (patientId: string, key: string, value: string) => {
+        dispatch(updateAnonymizePatientValue({ patientId, [key]: value }));
     };
 
-    const onRemovePatient = (patientId) => {
-        studies.filter((study) => study.originalStudy.parentPatient === patientId).
-            forEach((study) => {
-                dispatch(
-                    removeStudyFromAnonymizeList({ studyId: study.originalStudy.id })
-                );
+    const onRemovePatient = (patientId: string) => {
+        studies
+            .filter((study) => study.originalStudy.parentPatient === patientId)
+            .forEach((study) => {
+                dispatch(removeStudyFromAnonymizeList({ studyId: study.originalStudy.id }));
             });
     };
 
-    const onChangeProfile = (option) => {
+    const onChangeProfile = (option: { value: string }) => {
         dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }));
     };
 
     const handleAnonymizeStart = () => {
-        const anonItems: AnonItem[] = Object.values(anonList.studies).map((study) => {
-            return {
-                OrthancStudyID: study.originalStudy.id,
-                Profile: anonList.anonymizationProfile,
-                NewPatientID: study.newPatientId,
-                NewPatientName: study.newPatientName,
-                NewStudyDescription: study.newStudyDescription,
-                NewAccessionNumber: study.newAccessionNumber
-            };
-        });
+        const anonItems: AnonItem[] = Object.values(anonList.studies).map((study) => ({
+            OrthancStudyID: study.originalStudy.id,
+            Profile: anonList.anonymizationProfile,
+            NewPatientID: study.newPatientId,
+            NewPatientName: study.newPatientName,
+            NewStudyDescription: study.newStudyDescription,
+            NewAccessionNumber: study.newAccessionNumber,
+        }));
         mutateCreateAnonymizeQueue({ anonItems });
     };
 
     return (
-        <Card>
+        <>
             <CardHeader color={Colors.primary}>
                 <div className="flex flex-col items-center w-full sm:flex-row">
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
@@ -152,12 +145,11 @@ const AnonymizeRoot = () => {
                             </div>
                         </DropdownButton>
 
-
-
                         <Button
                             onClick={() => dispatch(flushAnonymizeList())}
                             color={Colors.light}
                             className="rounded-lg hover:bg-secondary"
+                            aria-label="Clear all anonymized data"
                         >
                             <Empty className="text-xl text-primary" />
                         </Button>
@@ -165,7 +157,7 @@ const AnonymizeRoot = () => {
                 </div>
             </CardHeader>
             <CardBody color={Colors.almond}>
-                <div className="flex flex-col w-full gap-4 sm:flex-row">
+                <div className="flex flex-col w-full gap-4">
                     <div className="flex-1 overflow-auto break-words">
                         <PatientTable
                             patients={patients}
@@ -183,15 +175,16 @@ const AnonymizeRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter color={Colors.light} className="flex flex-col items-center gap-3">
+            <CardFooter color={Colors.light} className="flex flex-col items-center gap-3 border-t-2 shadow-inner border-slate-200 bg-light">
                 <div className="flex flex-col gap-3 sm:flex-row">
                     <Button
                         className="flex items-center w-full gap-2 sm:w-auto"
                         color={Colors.blueCustom}
                         onClick={handleAnonymizeStart}
+                        aria-label="Start anonymization process"
                     >
                         <Anon />
-                        Anonymise
+                        Anonymize
                     </Button>
                     <SelectInput
                         placeholder="Select an option"
@@ -201,9 +194,11 @@ const AnonymizeRoot = () => {
                         className="w-full sm:w-auto"
                     />
                 </div>
-                <AnonQueues showResults={true} />
             </CardFooter>
-        </Card>
+            <div className="mt-4">
+                <AnonQueues showResults={true} />
+            </div>
+        </>
     );
 };
 
