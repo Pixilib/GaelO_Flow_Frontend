@@ -82,7 +82,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       className="bg-gray-100"
       enableColumnFilters
       enableSorting
-      getRowClasses={() => "hover:bg-indigo-100 cursor-pointer"} // Ajout de l'effet hover ici
+      getRowClasses={() => "hover:bg-indigo-100 cursor-pointer"}
     />
   );
 };

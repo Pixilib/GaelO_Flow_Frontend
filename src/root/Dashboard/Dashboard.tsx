@@ -1,5 +1,3 @@
-// src/components/Dashboard.js
-
 import CardAnon from "./CardAnon";
 import CardExport from "./CardExport";
 import Cardretrieve from "./Cardretrieve";

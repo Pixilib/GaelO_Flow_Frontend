@@ -1,10 +1,10 @@
 type ProgressCircleProps = {
   progress: number;
   text?: string;
-  size?: number; // This defines the size of the circle
+  size?: number;
   children?: React.ReactNode;
-  className?: string; // Prop for custom CSS class
-  progressColor?: string; // Ajout pour la couleur de progression
+  className?: string;
+  progressColor?: string;
 };
 
 const ProgressCircle = ({
@@ -12,10 +12,10 @@ const ProgressCircle = ({
   text = 'Average',
   size = 120,
   children,
-  className = '', // Default to an empty string if no class is provided
-  progressColor = 'text-orange-600', // Couleur de progression par défaut
+  className = '',
+  progressColor = 'text-orange-600',
 }: ProgressCircleProps) => {
-  const radius = 15; // Increased radius for a larger circle
+  const radius = 15;
   const circumference = 2 * Math.PI * radius;
   const progressValue = (progress / 100) * circumference;
 
@@ -33,7 +33,7 @@ const ProgressCircle = ({
           r={radius}
           fill="none"
           className={`stroke-current text-neutral-300 dark:text-neutral-700`}
-          strokeWidth="3" // Increased stroke width for better visibility
+          strokeWidth="3"
         />
 
         {/* Progress circle */}
@@ -42,8 +42,8 @@ const ProgressCircle = ({
           cy="18"
           r={radius}
           fill="none"
-          className={`stroke-current ${progressColor}`} // Utilisation de la couleur de progression
-          strokeWidth="3" // Increased stroke width for better visibility
+          className={`stroke-current ${progressColor}`}
+          strokeWidth="3"
           strokeDasharray={`${progressValue} ${circumference}`}
         />
       </svg>

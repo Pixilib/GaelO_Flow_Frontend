@@ -17,15 +17,15 @@ const RedisCard: React.FC<RedisCardProps> = ({ redisData }) => {
     const columns: ColumnDef<RedisData>[] = [
         {
             accessorKey: 'address',
-            header: () => <div>Address</div>, // Default left alignment
+            header: () => <div>Address</div>,
             cell: ({ getValue }) => (
-                <div>{getValue() as string}</div> // Default left alignment
+                <div>{getValue() as string}</div>
             ),
         },
         {
             accessorKey: 'port',
-            header: () => <div>Port</div>, // Default left alignment
-            cell: ({ getValue }) => <Badge value={getValue() as number} />, // Badge component for port
+            header: () => <div>Port</div>,
+            cell: ({ getValue }) => <Badge value={getValue() as number} />,
         },
     ];
 

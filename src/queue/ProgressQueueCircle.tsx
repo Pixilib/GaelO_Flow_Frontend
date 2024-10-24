@@ -5,7 +5,7 @@ import { Queue } from "../utils/types";
 type ProgressQueueProps = {
     queueData: Queue;
     onDelete: (event: React.MouseEvent) => void;
-    colors: { background: string; progress: string }; // Ajout des couleurs
+    colors: { background: string; progress: string };
 };
 
 const ProgressQueueCircle = ({ queueData, onDelete, colors }: ProgressQueueProps) => {
@@ -15,11 +15,11 @@ const ProgressQueueCircle = ({ queueData, onDelete, colors }: ProgressQueueProps
                 text={queueData?.state}
                 progress={queueData?.progress || 0}
                 size={150}
-                className={colors.background} // Utiliser la couleur de fond
+                className={colors.background}
             >
                 <div className="flex justify-center">
                     <Cancel
-                        className={`text-sm ${colors.progress} cursor-pointer hover:text-danger-hover`} // Utiliser la couleur de progression
+                        className={`text-sm ${colors.progress} cursor-pointer hover:text-danger-hover`}
                         onClick={onDelete}
                     />
                 </div>

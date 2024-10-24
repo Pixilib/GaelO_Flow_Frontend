@@ -31,7 +31,7 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
         onChange={handleInputChange}
         placeholder="Add new label"
         bordered
-        className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300" // Ajout de l'ombre ici
+        className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300"
       />
       <Button
         type="button"

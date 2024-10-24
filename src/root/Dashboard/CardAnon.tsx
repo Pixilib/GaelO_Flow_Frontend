@@ -12,7 +12,6 @@ import { AnonQueue } from "../../utils/types";
 const CardAnon = () => {
     const currentUserId = useSelector((state) => state.user.currentUserId);
 
-    // Récupération des files d'attente existantes
     const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
         ['queue', 'anonymize', currentUserId?.toString() || ''],
         () => getExistingAnonymizeQueues(currentUserId)
@@ -20,17 +19,15 @@ const CardAnon = () => {
 
     const firstQueue = existingAnonymizeQueues?.[0];
 
-    // Récupération des données de la première file d'attente
     const { data, isPending, isFetching } = useCustomQuery<AnonQueue[]>(
         ['queue', 'anonymize', firstQueue],
         () => getAnonymizeQueue(firstQueue),
         {
-            refetchInterval: 2000, // Initialement défini, sera remplacé par globalProgress
+            refetchInterval: 2000,
             enabled: !!firstQueue,
         }
     );
 
-    // Calcul de la progression globale
     const globalProgress = useMemo(() => {
         if (!data || data.length === 0) return 0;
 
@@ -40,15 +37,14 @@ const CardAnon = () => {
         return (totalJobs === 0) ? 0 : (completedJobs / totalJobs) * 100;
     }, [data]);
 
-    // Réinitialiser le refetchInterval si la progression atteint 100
     useCustomQuery<AnonQueue[]>(['queue', 'anonymize', firstQueue], () => getAnonymizeQueue(firstQueue), {
         refetchInterval: globalProgress < 100 ? 2000 : false,
         enabled: !!firstQueue,
     });
 
-    // Si aucune file d'attente n'est trouvée, ne rien afficher
+    // If no queue is found, display nothing
     if (!firstQueue) return null;
-    // Si les données sont en cours de chargement, afficher un spinner
+    // If data is loading, display a spinner
     if (isPending || isFetching) return <Spinner />;
 
     return (
@@ -56,12 +52,12 @@ const CardAnon = () => {
             <CardHeader centerTitle title="Anonymisation" color={Colors.blueCustom} />
             <CardBody className="flex items-center justify-center" color={Colors.light}>
                 <ProgressQueueCircle
-                    onDelete={() => { }} // Ajoutez votre fonction de suppression ici
+                    onDelete={() => { }}
                     queueData={{
                         progress: globalProgress,
-                        state: "", // Vous pouvez mettre à jour ceci si nécessaire
-                        id: "",    // Mettez l'ID de la queue ici si nécessaire
-                        results: undefined, // Mettez à jour si vous avez des résultats à afficher
+                        state: "",
+                        id: "",
+                        results: undefined,
                         userId: currentUserId || 0
                     }}
                     colors={{ background: 'text-gray-300', progress: Colors.primary }}

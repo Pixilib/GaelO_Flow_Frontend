@@ -147,15 +147,12 @@ function Table<T>({
         }
     });
 
-    // Set the header styles and text size based on props
     const textXXS = "text-[0.491rem]";
     const headerText = headerTextSize === "xxs" ? textXXS : `text-${headerTextSize}`;
-    
-    // Classes for the sticky first and last columns
+
     const firstColumnClass = `sticky left-0 bg-${headerColor} border-b border-gray-300 text-center`;
     const lastColumnClass = "sticky right-0 bg-white";
 
-    // Function to get classes for columns
     const getColumnClasses = (index: number, length: number) => {
         if (pinFirstColumn && index === 0) return firstColumnClass;
         if (pinLastColumn && index === length - 1) return lastColumnClass;
