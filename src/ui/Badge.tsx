@@ -18,10 +18,10 @@ const Badge = ({
 }: BadgeProps) => {
 
   const sizeClasses = {
-    sm: "text-xs p-1.5", // Réduction légère du texte
-    md: "text-sm p-2 px-3", // Taille par défaut pour md
-    lg: "text-base p-3", // Taille par défaut pour lg
-    xl: "text-lg p-4", // Taille par défaut pour xl
+    sm: "text-xs p-1.5",
+    md: "text-sm p-2 px-3",
+    lg: "text-base p-3",
+    xl: "text-lg p-4"
   };
 
   const variants = {

@@ -1,9 +1,11 @@
-import { BiWifi } from "react-icons/bi";
+import { FaWifi } from "react-icons/fa";
 
 const Wifi = (props) => {
     return (
-        <BiWifi {...props} />
-    )
+        <>
+            <FaWifi {...props} />
+        </>
+    );
 }
 
-export default Wifi
+export default Wifi;

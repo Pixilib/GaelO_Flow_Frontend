@@ -27,10 +27,7 @@ const profileOptions = [
 const AnonymizeRoot = () => {
     const dispatch = useDispatch();
     const anonList = useSelector((state: RootState) => state.anonymize);
-    const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
-        null
-    );
-
+    const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
     const [anonJobId, setAnonJobId] = useState<string | null>(null);
 
     const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
@@ -38,13 +35,12 @@ const AnonymizeRoot = () => {
         [['queue', 'anonymize']],
         {
             onSuccess: (jobId) => {
-                setAnonJobId(jobId)
+                setAnonJobId(jobId);
             },
         }
-    )
+    );
 
     const patients = useMemo(() => Object.values(anonList.patients), [anonList]);
-
     const studies = useMemo(() => {
         if (!selectedPatientId) return [];
         return Object.values(anonList.studies).filter(
@@ -74,93 +70,94 @@ const AnonymizeRoot = () => {
         });
     };
 
-    const onChangeStudy = (studyId, key, value) => {
-        dispatch(
-            updateAnonymizeStudyValue({ studyId, [key]: value })
-        )
-    }
+    const onChangeStudy = (studyId: string, key: string, value: string) => {
+        dispatch(updateAnonymizeStudyValue({ studyId, [key]: value }));
+    };
 
-    const onRemoveStudy = (studyId) => {
-        dispatch(removeStudyFromAnonymizeList({ studyId }))
-    }
+    const onRemoveStudy = (studyId: string) => {
+        dispatch(removeStudyFromAnonymizeList({ studyId }));
+    };
 
-    const onChangePatient = (patientId, key, value) => {
-        dispatch(
-            updateAnonymizePatientValue({ patientId, [key]: value })
-        )
-    }
+    const onChangePatient = (patientId: string, key: string, value: string) => {
+        dispatch(updateAnonymizePatientValue({ patientId, [key]: value }));
+    };
 
-    const onRemovePatient = (patientId) => {
-        studies.filter((study) => study.originalStudy.parentPatient === patientId).
-            forEach((study) => {
-                dispatch(
-                    removeStudyFromAnonymizeList({ studyId: study.originalStudy.id })
-                )
-            }
-            )
+    const onRemovePatient = (patientId: string) => {
+        studies
+            .filter((study) => study.originalStudy.parentPatient === patientId)
+            .forEach((study) => {
+                dispatch(removeStudyFromAnonymizeList({ studyId: study.originalStudy.id }));
+            });
+    };
 
-    }
-
-    const onChangeProfile = (option) => {
-        dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }))
-    }
+    const onChangeProfile = (option: { value: string }) => {
+        dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }));
+    };
 
     const handleAnonymizeStart = () => {
-        const anonItems: AnonItem[] = Object.values(anonList.studies).map((study) => {
-            return {
-                OrthancStudyID: study.originalStudy.id,
-                Profile: anonList.anonymizationProfile,
-                NewPatientID: study.newPatientId,
-                NewPatientName: study.newPatientName,
-                NewStudyDescription: study.newStudyDescription,
-                NewAccessionNumber: study.newAccessionNumber
-            }
-
-        })
-        mutateCreateAnonymizeQueue({ anonItems })
-    }
+        const anonItems: AnonItem[] = Object.values(anonList.studies).map((study) => ({
+            OrthancStudyID: study.originalStudy.id,
+            Profile: anonList.anonymizationProfile,
+            NewPatientID: study.newPatientId,
+            NewPatientName: study.newPatientName,
+            NewStudyDescription: study.newStudyDescription,
+            NewAccessionNumber: study.newAccessionNumber,
+        }));
+        mutateCreateAnonymizeQueue({ anonItems });
+    };
 
     return (
-        <Card>
+        <>
             <CardHeader color={Colors.primary}>
-                <div className="flex items-center w-full">
-                    <div className="w-4/5 text-lg font-bold text-center">
-                        Anonymize resources                    </div>
-                    <div className="flex justify-end w-1/5 p-3">
-
-
-                        <DropdownButton row={null}
-                            options={[]} buttonText="Auto Fill"
-                            className="">
-                            <Input
-                                type="text"
-                                placeholder="Enter value"
-                                className="w-full p-2 border"
-                            />
-                            <CheckBox bordered={false}
-                            />
+                <div className="flex flex-col items-center w-full sm:flex-row">
+                    <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
+                        Anonymize resources
+                    </div>
+                    <div className="flex justify-end w-full p-3 sm:w-1/5">
+                        <DropdownButton
+                            row={null}
+                            options={[]}
+                            buttonText={
+                                <div className="flex items-center justify-center">
+                                    <AutoFill className="text-2xl text-primary" />
+                                    <span className="ml-2">Auto Fill</span>
+                                </div>
+                            }
+                            className="mr-4"
+                        >
+                            <div className="flex flex-col items-center">
+                                <Input
+                                    type="text"
+                                    placeholder="Enter value"
+                                    className="w-full p-2 border"
+                                />
+                                <div className="flex items-center w-full mt-2">
+                                    <CheckBox bordered={false} className="mr-2" />
+                                    <span className="text-black">Auto</span>
+                                </div>
+                                <Button
+                                    onClick={handleAutoFill}
+                                    color={Colors.secondary}
+                                    className="mx-auto rounded-lg hover:bg-secondary group"
+                                >
+                                    <span className="ml-2">Auto Fill</span>
+                                </Button>
+                            </div>
                         </DropdownButton>
 
-                        <AutoFill className="text-xl text-primary group-hover:text-white" />
                         <Button
                             onClick={() => dispatch(flushAnonymizeList())}
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary group"
+                            className="rounded-lg hover:bg-secondary"
+                            aria-label="Clear all anonymized data"
                         >
-                            <Empty className="text-xl text-primary group-hover:text-white" />
-                        </Button>
-                        <Button
-                            onClick={handleAutoFill}
-                            color={Colors.light}
-                            className="rounded-lg hover:bg-secondary group"
-                        >
-                            <AutoFill className="text-xl text-primary group-hover:text-white" />
+                            <Empty className="text-xl text-primary" />
                         </Button>
                     </div>
                 </div>
             </CardHeader>
             <CardBody color={Colors.almond}>
-                <div className="flex flex-row w-full gap-4">
+                <div className="flex flex-col w-full gap-4">
                     <div className="flex-1 overflow-auto break-words">
                         <PatientTable
                             patients={patients}
@@ -178,26 +175,30 @@ const AnonymizeRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter
-                color={Colors.light}
-                className="flex flex-col items-center gap-3">
-                <div className="flex gap-3">
+            <CardFooter color={Colors.light} className="flex flex-col items-center gap-3 border-t-2 shadow-inner border-slate-200 bg-light">
+                <div className="flex flex-col gap-3 sm:flex-row">
                     <Button
-                        className="flex items-center gap-2 "
-                        color={Colors.blueCustom} onClick={handleAnonymizeStart}>
+                        className="flex items-center w-full gap-2 sm:w-auto"
+                        color={Colors.blueCustom}
+                        onClick={handleAnonymizeStart}
+                        aria-label="Start anonymization process"
+                    >
                         <Anon />
-                        Anonymise
+                        Anonymize
                     </Button>
                     <SelectInput
                         placeholder="Select an option"
                         value={anonList.anonymizationProfile}
                         options={profileOptions}
                         onChange={onChangeProfile}
+                        className="w-full sm:w-auto"
                     />
                 </div>
-                <AnonQueues showResults={true} />
             </CardFooter>
-        </Card>
+            <div className="mt-4">
+                <AnonQueues showResults={true} />
+            </div>
+        </>
     );
 };
 

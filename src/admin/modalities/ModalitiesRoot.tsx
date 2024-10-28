@@ -94,7 +94,7 @@ const ModalitiesRoot: React.FC = () => {
           </div>
         </div>
       </CardBody>
-      <CardFooter color={Colors.light} className="flex justify-center">
+      <CardFooter color={Colors.light} className="flex justify-center border-t-2 shadow-inner border-slate-200 bg-light">
         {!showNewAetCard && (
           <Button color={Colors.success} onClick={handleNewAetClick}>
             <More className="mr-3 "

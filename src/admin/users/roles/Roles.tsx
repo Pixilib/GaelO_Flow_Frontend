@@ -72,31 +72,32 @@ const Roles = () => {
                 <EditRole
                     key={roleToEdit?.name}
                     title={"Edit Role"}
-                    className="px-4 mb-4 bg-gray-200"                    
+                    className="px-4 mb-4 bg-gray-200"
                     onClose={() => setRoleToEdit(null)}
                     role={roleToEdit || undefined}
                 />
             )}
 
-<CardFooter className="p-0 mt-4 border-t rounded-b-lg bg-light"> {/* Added mt-4 for extra spacing */}                <div className="flex justify-center w-full">
-                    {showCreateRoleForm && (
-                        <CreateRole
-                            title={"Create Role"}
-                            className="w-full p-4"
-                            onClose={() => setShowCreateRoleForm(false)}
-                        />
-                    )}
-                    {!showCreateRoleForm && (
-                        <Button
-                            color={Colors.success}
-                            onClick={() => setShowCreateRoleForm(true)}
-                            className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
-                            >
-                            <More size={18} />
-                            Create Role
-                          </Button>
-                    )}
-                </div>
+            <CardFooter className="p-0 mt-4 border-t border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200">
+                <div className="flex justify-center w-full">
+                {showCreateRoleForm && (
+                    <CreateRole
+                        title={"Create Role"}
+                        className="w-full p-4"
+                        onClose={() => setShowCreateRoleForm(false)}
+                    />
+                )}
+                {!showCreateRoleForm && (
+                    <Button
+                        color={Colors.success}
+                        onClick={() => setShowCreateRoleForm(true)}
+                        className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
+                    >
+                        <More size={18} />
+                        Create Role
+                    </Button>
+                )}
+            </div>
             </CardFooter>
         </div>
     );

@@ -6,14 +6,15 @@ import { Spinner } from "../ui";
 import ProgressQueueBar from "../queue/ProgressQueueBar";
 import { AnonQueue } from "../utils/types";
 import AnonymizeResultTable from "./AnonymizeResultTable";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
+import ProgressQueueCircle from "../queue/ProgressQueueCircle";
 
 type AnonQueuesProps = {
-    showResults: boolean
-}
+    showResults: boolean;
+    circle?: boolean;
+};
 
-const AnonQueues = ({ showResults }: AnonQueuesProps) => {
-
+const AnonQueues = ({ showResults, circle }: AnonQueuesProps) => {
     const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
 
     const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
@@ -21,14 +22,41 @@ const AnonQueues = ({ showResults }: AnonQueuesProps) => {
         () => getExistingAnonymizeQueues(currentUserId)
     );
 
-    const firstQueue = existingAnonymizeQueues?.[0]
+    const firstQueue = existingAnonymizeQueues?.[0];
 
     const { data, isPending, isFetching } = useCustomQuery<AnonQueue[]>(
         ['queue', 'anonymize', firstQueue],
         () => getAnonymizeQueue(firstQueue),
         {
-            refetchInterval: 2000,
-            enabled: (firstQueue != null)
+            enabled: !!firstQueue,
+        }
+    );
+
+    const globalProgress = useMemo(() => {
+        if (!data || data.length === 0) return 0;
+        const completedJobs = data.filter(job => job.state !== 'wait');
+        return (completedJobs.length / data.length) * 100
+    }, [data]);
+
+    const [shouldRefetch, setShouldRefetch] = useState(true);
+
+    useEffect(() => {
+        if (globalProgress < 100) {
+            const interval = setInterval(() => {
+                setShouldRefetch(true);
+            }, 2000);
+            return () => clearInterval(interval);
+        } else {
+            setShouldRefetch(false);
+        }
+    }, [globalProgress]);
+
+    const { data: queuedData } = useCustomQuery<AnonQueue[]>(
+        ['queue', 'anonymize', firstQueue],
+        () => getAnonymizeQueue(firstQueue),
+        {
+            enabled: shouldRefetch && !!firstQueue,
+            refetchInterval: shouldRefetch ? 2000 : false,
         }
     );
 
@@ -38,37 +66,39 @@ const AnonQueues = ({ showResults }: AnonQueuesProps) => {
     );
 
     const anonymizedStudies = useMemo(() => {
-        if (!data) return []
-        return (data).map(job => job.results)
-    }, [data])
+        if (!queuedData) return [];
+        return queuedData.map(job => job.results);
+    }, [queuedData]);
 
+    // If no queue, nothing to display
+    if (!firstQueue) return null;
 
-    const globalProgress = useMemo(() => {
-        if (!data) return 0
-        const totalProgress = data.map(job => job.state !== 'wait' ? 1 : 0)
-        const sumProgress = totalProgress.reduce((accumulator, currentValue) => {
-            return accumulator + currentValue
-        }, 0);
-        return (sumProgress / data.length) * 100
-    }, [data])
-
-    //If no queue, nothing to show
-    if (!firstQueue) return null
-    //if awaiting value show spinner
+    // If pending, display the spinner
     if (isPending || isFetching) return <Spinner />;
 
     return (
         <div className="w-full space-y-4">
-            <div
-                className="p-4 bg-white border border-gray-100 shadow-inner rounded-xl"
-            >
-                <ProgressQueueBar progress={globalProgress} onDelete={mutateDeleteQueue} />
+            <div className="p-4 bg-white border border-gray-100 shadow-inner rounded-xl">
+                {circle ? (
+                    <ProgressQueueCircle
+                        queueData={{
+                            progress: globalProgress,
+                            state: queuedData?.[0]?.state || '',
+                            id: firstQueue || '',
+                            results: queuedData?.[0]?.results,
+                            userId: currentUserId || 0,
+                        }}
+                        onDelete={mutateDeleteQueue}
+                        colors={{
+                            background: "",
+                            progress: ""
+                        }}
+                    />
+                ) : (
+                    <ProgressQueueBar progress={globalProgress} onDelete={mutateDeleteQueue} />
+                )}
             </div>
-            {
-                showResults && (
-                    <AnonymizeResultTable studies={anonymizedStudies} />
-                )
-            }
+            {showResults && <AnonymizeResultTable studies={anonymizedStudies} />}
         </div>
     );
 };
