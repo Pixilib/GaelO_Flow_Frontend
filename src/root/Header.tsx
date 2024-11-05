@@ -91,47 +91,46 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     >
       <div className="flex justify-end gap-4">
         <DeleteList />
-        <DropDown
-          ref={dropdownRef}
-          className="relative flex flex-col w-80"
-          isOpen={openItem === 'Dropdown'}
-          dropDownOpen={handleDropDown}
-          dropDown={
-            <div className="absolute -mt-2 top-full w-80">
-              <BannerItems
-                elements={Items}
-                onSelect={(item) => handleItemClick(item)}
-                isOpen={openItem === 'Dropdown'}
-                setOpenItem={setOpenItem}
-                className="w-80"
-              />
-            </div>
-          }
-        ><ToggleSwitch
-            isToggled={true}
-            onToggle={(isChecked) => {
-              console.log('Toggle state:', isChecked);
-            }}
-          />
-          <div className="flex items-center gap-2">
-
-            <Language className="w-5 h-5 mx-1" fill="currentColor" />
-            <span className="text-sm">
-              {Items.find((item) => item.code === i18n.language)?.title}
-            </span>
-            <ToogleChevron
-              isOpen={openItem === 'Dropdown'}
-              className="ml-1"
-              onClick={handleDropDown}
+        <div className="relative">
+          <DropDown
+            ref={dropdownRef}
+            className="flex flex-col"
+            isOpen={openItem === 'Dropdown'}
+            dropDownOpen={handleDropDown}
+            dropDown={
+              <div className={`absolute -mt-2 top-full w-80 bg-white shadow-lg rounded-lg transition-all duration-200 ${openItem === 'Dropdown' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                <BannerItems
+                  elements={Items}
+                  onSelect={(item) => handleItemClick(item)}
+                  isOpen={openItem === 'Dropdown'}
+                  setOpenItem={setOpenItem}
+                  className="w-80"
+                />
+              </div>
+            }
+          >
+            <ToggleSwitch
+              isToggled={true}
+              onToggle={(isChecked) => {
+                console.log('Toggle state:', isChecked);
+              }}
             />
-            <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
-            <Gear className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
-            <User className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
-
-          </div>
-
-
-        </DropDown>
+            <div className="relative flex items-center gap-2">
+              <Language className="w-5 h-5 mx-1" fill="currentColor" />
+              <span className="text-sm">
+                {Items.find((item) => item.code === i18n.language)?.title}
+              </span>
+              <ToogleChevron
+                isOpen={openItem === 'Dropdown'}
+                className="ml-1 cursor-pointer"
+                onClick={handleDropDown}
+              />
+              <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
+              <Gear className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
+              <User className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
+            </div>
+          </DropDown>
+        </div>
       </div>
     </Banner>
   );

@@ -70,7 +70,7 @@ const PeersRoot: React.FC = () => {
       />
       <CardBody className="space-x-4 bg-almond">
         <div className="flex flex-col items-center">
-          <div className="w-full mt-6 mb-8">
+          <div className="w-full mt-2 mb-2">
             <PeersTable
               peerData={peers || []}
               onDeletePeer={(peerName) =>
@@ -83,7 +83,7 @@ const PeersRoot: React.FC = () => {
           </div>
         </div>
       </CardBody>
-      <CardFooter className="flex justify-center border-t-2 shadow-inner border-indigo bg-light">
+      <CardFooter className="flex justify-center py-4 border-t-2 shadow-inner border-slate-200 bg-light"> {/* Classe corrigée ici */}
         {!showNewPeerCard && (
           <Button color={Colors.success} onClick={handleNewPeerClick}>
             <More className="mr-3" size={24} /> New Peer
