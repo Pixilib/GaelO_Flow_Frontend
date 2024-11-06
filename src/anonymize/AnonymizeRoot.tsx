@@ -176,7 +176,7 @@ const AnonymizeRoot = () => {
                 </div>
             </CardBody>
             <CardFooter color={Colors.light} className="flex flex-col items-center gap-3 border-t-2 shadow-inner border-slate-200 bg-light">
-                <div className="flex flex-col gap-3 sm:flex-row">
+                <div className="flex flex-col gap-3 mt-2 mb-2 sm:flex-row">
                     <Button
                         className="flex items-center w-full gap-2 sm:w-auto"
                         color={Colors.blueCustom}
@@ -191,7 +191,7 @@ const AnonymizeRoot = () => {
                         value={anonList.anonymizationProfile}
                         options={profileOptions}
                         onChange={onChangeProfile}
-                        className="w-full sm:w-auto"
+                        className="justify-center w-full sm:w-auto"
                     />
                 </div>
             </CardFooter>

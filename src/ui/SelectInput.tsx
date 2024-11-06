@@ -22,7 +22,7 @@ interface SelectInputProps {
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
     const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
-    return `border border-gray-300 min-h-[40px] bg-white ${borderRadius} focus:border-active hover:border-primary-active px-2`;
+    return `border border-gray-300 min-h-[40px] bg-gray-50 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
   },
   menu: () => 'rounded-3xl p-1 bg-white',
   option: (state) => {
