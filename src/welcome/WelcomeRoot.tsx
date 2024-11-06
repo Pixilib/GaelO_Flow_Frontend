@@ -31,7 +31,7 @@ const Welcome = () => {
       <div className="relative flex items-center justify-center w-1/2 h-full">
         <img
           src="/gaelo-flow-white2.svg"
-          className="absolute w-12 h-auto max-w-full left-7 top-7"
+          className="absolute w-20 h-auto max-w-full left-7 top-7"
           alt="Logo"
         />
         {getImage()}
