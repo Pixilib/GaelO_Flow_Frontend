@@ -124,26 +124,26 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     headerTextSize='xs'
                     headerColor={Colors.white}
                 />            </div>
-            <CardFooter
-                className="flex justify-center gap-3 border-t-2 shadow-inner border-slate-200 bg-light">
+            <CardFooter className="flex justify-center gap-3 py-2 border-t-2 shadow-inner border-slate-200 bg-light">
                 <Button
                     color={Colors.warning}
-                    onClick={reset}>
-                    <Restart
-                        size="20px"
-                        title="Restart"
-                    />
+                    onClick={reset}
+                    className="flex items-center justify-center"
+                >
+                    <Restart size="20px" title="Restart" />
                 </Button>
                 <Button
                     color={Colors.danger}
                     onClick={handleOrthancShutdown}
+                    className="flex items-center justify-center"
                 >
-                    <Close
-                        size="20px"
-                        title="Shutdown"
-                    />
+                    <Close size="20px" title="Shutdown" />
                 </Button>
-                <Button color={Colors.primary} onClick={orthancInfoHandler}>
+                <Button
+                    color={Colors.primary}
+                    onClick={orthancInfoHandler}
+                    className="flex items-center justify-center"
+                >
                     <Question size="20px" title="Info" />
                 </Button>
                 <div className="w-1/4">
@@ -155,6 +155,8 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     />
                 </div>
             </CardFooter>
+
+
             {showModal && (
                 <Modal
                     show={showModal}
