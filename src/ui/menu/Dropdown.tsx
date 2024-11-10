@@ -1,7 +1,7 @@
 import React, { useState, forwardRef } from "react";
 import ToogleChevron from './ToogleChevron';
 
-type DropDownProps = {
+type DropdownProps = {
   chevronPosition?: "left" | "right";
   className?: string;
   isOpen?: boolean;
@@ -10,7 +10,7 @@ type DropDownProps = {
   dropDown: React.ReactNode | boolean;
 };
 
-const DropDown = forwardRef<HTMLDivElement, DropDownProps>(
+const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
   ({ chevronPosition, children, className, isOpen: isOpenProp, dropDownOpen, dropDown }, ref) => {
     const [isOpenState, setIsOpenState] = useState<boolean>(false);
 
@@ -73,4 +73,4 @@ const DropDown = forwardRef<HTMLDivElement, DropDownProps>(
   }
 );
 
-export default DropDown;
+export default Dropdown;

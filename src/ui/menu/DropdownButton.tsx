@@ -6,18 +6,17 @@ type DropdownOption = {
   component?: React.ReactNode;
   icon?: React.ReactNode;
   color?: string;
-  action?: (row: any) => void;
+  action?: () => void;
 };
 
 type DropdownButtonProps = {
-  row: any;
   options: DropdownOption[];
-  buttonText?: string;
+  buttonText?: string|React.ReactNode;
   children?: React.ReactNode;
   className?: string;
 };
 
-const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonText = "Action", children, className }) => {
+const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "Action", children, className }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ row, options, buttonTex
   }, []);
 
   const handleOptionClick = (option: DropdownOption) => {
-    option.action ? option.action(row) : null;
+    option.action ? option.action() : null;
   };
 
   return (

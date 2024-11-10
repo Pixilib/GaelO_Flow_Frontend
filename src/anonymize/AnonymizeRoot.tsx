@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Card, CardHeader, CardBody, CardFooter, Button, SelectInput, Input, CheckBox } from "../ui";
+import { DropdownButton, CardHeader, CardBody, CardFooter, Button, SelectInput, Input, CheckBox } from "../ui";
 import { Colors, useCustomMutation } from "../utils";
 import PatientTable from "./PatientTable";
 import StudyTable from "./StudyTable";
@@ -17,7 +17,6 @@ import AutoFill from "../icons/AutofIll";
 import { AnonItem } from "../utils/types";
 import { createAnonymizeQueue } from "../services/queues";
 import AnonQueues from "./AnonQueues";
-import DropdownButton from "../ui/menu/DropDownButton";
 
 const profileOptions = [
     { value: "Default", label: "Default" },
@@ -115,7 +114,6 @@ const AnonymizeRoot = () => {
                     </div>
                     <div className="flex justify-end w-full p-3 sm:w-1/5">
                         <DropdownButton
-                            row={null}
                             options={[]}
                             buttonText={
                                 <div className="flex items-center justify-center">

@@ -4,9 +4,8 @@ import Papa from "papaparse";
 import { RootState } from "../store";
 import ExportStudyTable from "./ExportStudyTable";
 import ExportSeriesTable from "./ExportSeriesTable";
-import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
+import { Button, Card, CardHeader, CardBody, CardFooter, DropdownButton } from "../ui";
 import { Colors, Study, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
-import DropdownButton from "../ui/menu/DropDownButton";
 import { getModalities, getPeers } from "../services";
 import { exportResourcesId } from "../services/export";
 import { flushExportList } from "../reducers/ExportSlice";
@@ -182,13 +181,13 @@ const ExportRoot = () => {
             <CardFooter color={Colors.light} className="flex justify-center gap-3">
                 <div className="flex flex-col justify-center w-full gap-3 md:flex-row md:w-4/5">
                     <DropdownButton
-                        row={null} buttonText="Download"
+                        buttonText="Download"
                         options={downloadOptions} />
-                    <DropdownButton row={null}
+                    <DropdownButton 
                         buttonText="Send To Modality" options={modalitiesOptions} />
                     {storeJobId && <ProgressJobs
                         size={50} jobId={storeJobId} />}
-                    <DropdownButton row={null}
+                    <DropdownButton
                         buttonText="Send To Peer"
                         options={peersOptions} />
                     {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}

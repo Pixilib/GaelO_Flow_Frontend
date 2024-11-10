@@ -21,7 +21,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     navigate(itemPath);
   };
 
-  const handleDropDown = (title: string) => {
+  const handleDropdown = (title: string) => {
     setOpenItem(openItem === title ? null : title);
   };
 
@@ -54,7 +54,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
               title="Administration"
               elements={adminItems}
               isOpen={openItem === "Administration"}
-              dropDownOpen={() => handleDropDown("Administration")}
+              dropDownOpen={() => handleDropdown("Administration")}
               onNavigate={handleItemClick}
             />
             <MenuItem

@@ -3,12 +3,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import Banner from '../ui/menu/Banner';
-import DropDown from '../ui/menu/DropDown';
 import ToggleSwitch from '../ui/menu/ToggleSwitch';
 import BannerItems from '../ui/menu/BannerItems';
 import DeleteList from './ToolList';
 import { Gear, Language, Notification, User } from '../icons';
-import { ToogleChevron } from '../ui';
+import { Dropdown, ToogleChevron } from '../ui';
 
 type Item = {
   title: string;
@@ -47,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     };
   }, [openItem]);
 
-  const handleDropDown = () => {
+  const handleDropdown = () => {
     setOpenItem(prev => (prev ? null : 'Dropdown'));
   };
 
@@ -92,11 +91,11 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       <div className="flex justify-end gap-4">
         <DeleteList />
         <div className="relative">
-          <DropDown
+          <Dropdown
             ref={dropdownRef}
             className="flex flex-col"
             isOpen={openItem === 'Dropdown'}
-            dropDownOpen={handleDropDown}
+            dropDownOpen={handleDropdown}
             dropDown={
               <div className={`absolute -mt-2 top-full w-80 bg-white shadow-lg rounded-lg transition-all duration-200 ${openItem === 'Dropdown' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <BannerItems
@@ -123,13 +122,13 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
               <ToogleChevron
                 isOpen={openItem === 'Dropdown'}
                 className="ml-1 cursor-pointer"
-                onClick={handleDropDown}
+                onClick={handleDropdown}
               />
               <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
               <Gear className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
               <User className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
             </div>
-          </DropDown>
+          </Dropdown>
         </div>
       </div>
     </Banner>

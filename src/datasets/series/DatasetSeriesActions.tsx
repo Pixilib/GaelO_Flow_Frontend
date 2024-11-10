@@ -1,19 +1,18 @@
 import React from 'react';
 import { Series, useCustomToast } from '../../utils';
 
-import DropdownButton from '../../ui/menu/DropDownButton';
 import { exportSeriesToNifti } from '../../services/export';
+import { DropdownButton } from '../../ui';
 
 interface DropdownOption {
     label: string;
     icon?: React.ReactNode;
     color?: string;
-    action: (seriesId: string) => void;
+    action: () => void;
 }
 
 type DataSetSeriesActionsProps = {
     series: Series & { id: string };
-    onActionClick: (action: string, seriesId: string) => void
 };
 
 const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) => {
@@ -24,15 +23,15 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) =
     const options: DropdownOption[] = [
         {
             label: "View Metadata",
-            action: (seriesId :string) => {
-                console.log("View Metadata", seriesId);
+            action: () => {
+                console.log("View Metadata", series.id);
             },
         },
         {
             label: "Download nii.gz",
-            action: (seriesId :string) => {
+            action: () => {
                 const id = toastSuccess("Download started", 60)
-                exportSeriesToNifti(seriesId, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
+                exportSeriesToNifti(series.id, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
             },
         }
     ];
@@ -47,7 +46,6 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) =
             <DropdownButton
                 options={options}
                 buttonText="Actions"
-                row={series}
             />
         </div>
     );
