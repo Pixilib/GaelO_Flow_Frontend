@@ -14,17 +14,19 @@ type RedisCardProps = {
 }
 
 const RedisCard: React.FC<RedisCardProps> = ({ redisData }) => {
-
     const columns: ColumnDef<RedisData>[] = [
         {
             accessorKey: 'address',
-            header: () => 'Address',
+            header: () => <div>Address</div>,
+            cell: ({ getValue }) => (
+                <div>{getValue() as string}</div>
+            ),
         },
         {
             accessorKey: 'port',
-            header: () => 'Port',
+            header: () => <div>Port</div>,
             cell: ({ getValue }) => <Badge value={getValue() as number} />,
-        }
+        },
     ];
 
     return (

@@ -6,11 +6,12 @@ import { AnonStudy } from "../utils/types";
 
 type StudyTableProps = {
     studies: AnonStudy[];
-    onChangeStudy: (studyId: string, key:string, value: string) => void;
+    onChangeStudy: (studyId: string, key: string, value: string) => void;
     onRemoveStudy: (studyId: string) => void;
+    selectedRows?: Record<string, boolean>;
 };
 
-const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) => {
+const StudyTable = ({ studies, onChangeStudy, onRemoveStudy, selectedRows }: StudyTableProps) => {
     const columns: ColumnDef<AnonStudy>[] = [
         {
             id: "id",
@@ -25,7 +26,7 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) 
             header: "Study Description",
         },
         {
-            id : "newStudyDescription",
+            id: "newStudyDescription",
             accessorKey: "newStudyDescription",
             header: "New Study Description",
             isEditable: true,
@@ -36,9 +37,7 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) 
                 return (
                     <Button
                         color={Colors.danger}
-                        onClick={() =>
-                            onRemoveStudy(row.original.originalStudy.id)
-                        }
+                        onClick={() => onRemoveStudy(row.original.originalStudy.id)}
                     >
                         <Trash />
                     </Button>
@@ -47,17 +46,26 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy }: StudyTableProps) 
         },
     ];
 
-    return <Table
-        columns={columns}
-        data={studies} 
-        columnVisibility={{ id: false }}
-        headerTextSize="xs"
-        className="text-xs"
-        onCellEdit={onChangeStudy}
-        getRowId={(row) => row.originalStudy.id}
+    const getRowClasses = (row: AnonStudy) => {
+        if (selectedRows?.[row.originalStudy.id]) {
+            return 'bg-primary hover:cursor-pointer';
+        } else {
+            return 'hover:bg-indigo-100 hover:cursor-pointer';
+        }
+    };
 
-    />;
-
+    return (
+        <Table
+            columns={columns}
+            data={studies}
+            columnVisibility={{ id: false }}
+            headerTextSize="xs"
+            className="text-xs bg-gray-100"
+            onCellEdit={onChangeStudy}
+            getRowId={(row) => row.originalStudy.id}
+            getRowClasses={getRowClasses}
+        />
+    );
 };
 
 export default StudyTable;

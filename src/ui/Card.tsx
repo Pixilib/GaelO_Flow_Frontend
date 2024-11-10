@@ -40,9 +40,9 @@ const colorClasses: Record<Colors, string> = {
   warning: "bg-warning",
   dark: "bg-dark",
   gray: "bg-gray",
+  blueCustom: "bg-blue-custom",
   light: "bg-light",
   white: "bg-white",
-  [Colors.blueCustom]: '',
   [Colors.lightGray]: ''
 };
 
@@ -93,7 +93,7 @@ const CardBody = ({
   return (
     <div
       data-gaelo-flow="Card-Body"
-      className={`${bodyClass} box-border ${noPadding ? "p-0" : "px-12 py-3"} leading-relaxed text-black ${className} ${roundedClasses}`}
+      className={`${bodyClass} box-border ${noPadding ? "p-0" : "px-5 py-3"} leading-relaxed text-black ${className} ${roundedClasses}`}
     >
       {children}
     </div>
@@ -105,7 +105,7 @@ const CardFooter = ({ children, className = "", color }: CardFooterProps) => {
   const footerClass = getColorClass(color);
 
   return (
-    <div data-gaelo-flow="Card-footer" className={`${footerClass} box-border px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+    <div data-gaelo-flow="Card-footer" className={`${footerClass} box-border px-3 py-1 leading-relaxed text-black ${className} rounded-b-xl`}>
       {children || <div className="grow"></div>}
     </div>
   );

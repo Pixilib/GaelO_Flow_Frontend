@@ -25,7 +25,7 @@ export const addStudyIdToAnonymizeList = async (studyId: string) => {
             newPatientId: null,
             newPatientName: null,
             newAccessionNumber: "GaelO-Flow",
-            newStudyDescription: null,
+            newStudyDescription: study.mainDicomTags.studyDescription,
             originalStudy: study
         }
     }))

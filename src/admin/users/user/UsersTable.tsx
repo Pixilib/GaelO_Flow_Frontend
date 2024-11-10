@@ -1,51 +1,46 @@
 import { Colors, User } from "../../../utils";
-import { Table, EditButton, DeleteButton  } from "../../../ui";
+import { Table, EditButton, DeleteButton } from "../../../ui";
 
 type UsersProps = {
   data: User[];
   onEdit: (user: User) => void;
   onDelete: (user: User) => void;
-}
+};
 
 const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
   const columns = [
     {
-      header: 'Email',
-      accessorKey: 'email',
+      header: "Email",
+      accessorKey: "email",
       enableColumnFilters: true,
     },
     {
-      header: 'FirstName',
-      accessorKey: 'firstname',
+      header: "FirstName",
+      accessorKey: "firstname",
       enableColumnFilters: true,
     },
     {
-      header: 'Lastname',
-      accessorKey: 'lastname',
+      header: "Lastname",
+      accessorKey: "lastname",
       enableColumnFilters: true,
     },
     {
-      header: 'Role',
-      accessorKey: 'role.name',
+      header: "Role",
+      accessorKey: "role.name",
       enableColumnFilters: true,
     },
     {
-      header: 'Action',
+      header: "Action",
       cell({ row }: { row: any }) {
         const user = row.original;
 
         return (
           <div className="flex justify-center gap-2">
-            <EditButton
-              onClick={() => onEdit(user)}
-            />
-            <DeleteButton
-              onClick={()=> onDelete(user)}
-            />
-
+            <EditButton onClick={() => onEdit(user)} />
+            <DeleteButton onClick={() => onDelete(user)} />
           </div>
         );
-      }
+      },
     },
   ];
 
@@ -54,14 +49,15 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
       <Table
         data={data}
         columns={columns}
-        headerColor={Colors.white} 
-        headerTextSize="xs"  
+        headerColor={Colors.white}
+        headerTextSize="xs"
         className="bg-gray-100"
         enableColumnFilters
         enableSorting
+        getRowClasses={() => "hover:bg-blue-100 cursor-pointer"}
       />
     </div>
   );
-}
+};
 
 export default UsersTable;

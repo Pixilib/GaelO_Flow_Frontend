@@ -24,6 +24,7 @@ const DeleteRoot = () => {
         [[]],
         {
             onSuccess: (uuid) => {
+                console.log("Queue created with UUID:", uuid);
                 setQueueUuid(uuid);
             },
         }

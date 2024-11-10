@@ -80,18 +80,22 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
             cell: (row: any) => {
                 const [show, setShow] = useState(false);
                 return (
-                    <div className="flex items-center">
-                        <Input disabled
-                            className="text-center"
+                    <div className="flex items-center justify-center gap-2">
+                        <Input
+                            disabled
+                            className="text-center "
                             type={show ? "text" : "password"}
-                            value={row.getValue()} />
+                            value={row.getValue()}
+                        />
                         <ToggleEye onToggle={(visible) => setShow(visible)} />
                     </div>
                 );
             },
             header: 'Password'
         },
+
     ];
+
 
     const handleSelectChange = (selectedOption: any) => {
         mutateVerbosity({ level: selectedOption.value });
@@ -116,31 +120,30 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Table
                     columns={columns}
                     data={[orthancData]}
-                    className="bg-gray-100"
+                    className="justify-center bg-gray-100"
                     headerTextSize='xs'
                     headerColor={Colors.white}
-                />
-            </div>
-            <CardFooter
-                className="flex justify-center gap-3 border-t-2 border-indigo-100 shadow-inner bg-light">
+                />            </div>
+            <CardFooter className="flex justify-center gap-3 py-2 border-t-2 shadow-inner border-slate-200 bg-light">
                 <Button
                     color={Colors.warning}
-                    onClick={reset}>
-                    <Restart
-                        size="20px"
-                        title="Restart"
-                    />
+                    onClick={reset}
+                    className="flex items-center justify-center"
+                >
+                    <Restart size="20px" title="Restart" />
                 </Button>
                 <Button
                     color={Colors.danger}
                     onClick={handleOrthancShutdown}
+                    className="flex items-center justify-center"
                 >
-                    <Close
-                        size="20px"
-                        title="Shutdown"
-                    />
+                    <Close size="20px" title="Shutdown" />
                 </Button>
-                <Button color={Colors.primary} onClick={orthancInfoHandler}>
+                <Button
+                    color={Colors.primary}
+                    onClick={orthancInfoHandler}
+                    className="flex items-center justify-center"
+                >
                     <Question size="20px" title="Info" />
                 </Button>
                 <div className="w-1/4">
@@ -152,6 +155,8 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     />
                 </div>
             </CardFooter>
+
+
             {showModal && (
                 <Modal
                     show={showModal}
