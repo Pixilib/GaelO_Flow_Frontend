@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
+    "./index.html", 
+    "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/preline/dist/*.js"
   ],
   theme: {
@@ -39,14 +40,13 @@ export default {
         '80%': '80%',
         '85%': '85%',
         '90%': '90%',
-
       },
       borderWidth: {
         '1,5': '1.5px',
       },
       colors: {
-        'almond':'#F7E9D8',
-        'almond-hover':'#F6D1A7',
+        'almond': '#F7E9D8',
+        'almond-hover': '#F6D1A7',
         'primary': '#4746B8',
         'primary-active': '#333182',
         'primary-light': '#8C8BD3',
@@ -69,6 +69,15 @@ export default {
       },
       boxShadow: {
         'custom': '5px 17px 15px rgba(58, 51, 51, 0.20)',
+      },
+      animation: {
+        'typing': 'typing 3s steps(30) 1s 1 normal both',
+      },
+      keyframes: {
+        typing: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
       },
     },
   },
