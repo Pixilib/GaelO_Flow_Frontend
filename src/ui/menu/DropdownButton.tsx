@@ -11,7 +11,7 @@ type DropdownOption = {
 
 type DropdownButtonProps = {
   options: DropdownOption[];
-  buttonText?: string|React.ReactNode;
+  buttonText?: string | React.ReactNode;
   children?: React.ReactNode;
   className?: string;
 };
@@ -26,7 +26,11 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
   }, []);
 
   const handleOptionClick = (option: DropdownOption) => {
-    option.action ? option.action() : null;
+    option.action && option.action();
+  };
+
+  const handleDropdownClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
   };
 
   return (
@@ -54,6 +58,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
         </svg>
       </button>
       <div
+        onClick={handleDropdownClick}
         className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
         aria-labelledby="hs-dropdown-custom-trigger"
       >
