@@ -50,7 +50,7 @@ const CardAnon = () => {
     return (
         <Card className="flex-1">
             <CardHeader centerTitle title="Anonymisation" color={Colors.blueCustom} />
-            <CardBody className="flex items-center justify-center" color={Colors.light}>
+            <CardBody className="flex items-center justify-center" color={Colors.white}>
                 <ProgressQueueCircle
                     onDelete={() => { }}
                     queueData={{
@@ -63,7 +63,7 @@ const CardAnon = () => {
                     colors={{ background: 'text-gray-300', progress: Colors.primary }}
                 />
             </CardBody>
-            <CardFooter color={Colors.light}>
+            <CardFooter color={Colors.lightGray}>
                 <Button className="self-center" color={Colors.blueCustom}>
                     Empty List
                 </Button>
