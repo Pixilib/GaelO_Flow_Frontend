@@ -25,9 +25,7 @@ const Toggle = ({ onChange, label, labelPosition = 'left', checked }: ToggleProp
 
     return (
         <label className={`flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row items-center'} gap-2`}>
-            {/* Label à gauche ou en haut */}
             {renderLabel()}
-            {/* Input checkbox avec Switch */}
             <div className="relative inline-flex items-center cursor-pointer">
                 <input
                     type="checkbox"

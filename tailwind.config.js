@@ -6,7 +6,7 @@ export default {
     "node_modules/preline/dist/*.js"
   ],
   theme: {
-    prefix: 'hs-',
+    prefix: 'hs-', // Custom prefix for all Tailwind classes
     extend: {
       fontSize: {
         '10': '10px',
@@ -42,7 +42,7 @@ export default {
         '90%': '90%',
       },
       borderWidth: {
-        '1,5': '1.5px',
+        '1.5': '1.5px',
       },
       colors: {
         'almond': '#F7E9D8',
@@ -54,7 +54,7 @@ export default {
         'secondary-hover': '#BD6800',
         'danger': '#DB1F22',
         'danger-hover': '#8A1315',
-        'sucess-light': '#CBDCD4',
+        'success-light': '#CBDCD4',
         'success': '#037F6E',
         'success-hover': '#2E7058',
         'disabled': '#b2b2b2',
