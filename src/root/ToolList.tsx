@@ -15,7 +15,7 @@ const ToolList = () => {
 
     return (
 
-        <div className="flex justify-between w-48 gap-2 p-3 grow flex-nowrap bg-primary rounded-2xl">
+        <div className="flex justify-between w-64 gap-3 p-2 grow flex-nowrap bg-primary rounded-2xl">
             <ToolItem count={Object.keys(anonList).length} onClick={() => navigate('/anonymize')}>
                 <Anon
                     className="text-blue-900 cursor-pointer group-hover:text-white size-6"

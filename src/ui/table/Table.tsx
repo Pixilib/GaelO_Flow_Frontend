@@ -15,6 +15,7 @@ import FilterTable from './FilterTable';
 import Footer from '../table/Footer';
 import { SortAz, SortZa } from '../../icons';
 import EditableCell from './EditableCell';
+import CheckBox from '../Checkbox';
 
 export type textSize = "xxs" | "xs" | "sm" | "base" | "lg";
 
@@ -85,15 +86,13 @@ function Table<T>({
     const selectionColumn: ColumnDef<T> = {
         id: 'selection',
         header: ({ table }) => (
-            <input
-                type="checkbox"
+            <CheckBox
                 checked={table.getIsAllRowsSelected()}
                 onChange={table.getToggleAllRowsSelectedHandler()}
             />
         ),
         cell: ({ row }) => (
-            <input
-                type="checkbox"
+            <CheckBox
                 checked={row.getIsSelected()}
                 onChange={row.getToggleSelectedHandler()}
                 onClick={(e) => e.stopPropagation()}
@@ -210,7 +209,7 @@ function Table<T>({
                                 {row.getVisibleCells().map((cell, cellIndex) => (
                                     <td
                                         key={`cell-${row.id}-${cell.id}-${cellIndex}`}
-                                        className={`px-1 py-2 whitespace-normal break-words md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} text-left`} // Left aligned cell text
+                                        className={`px-1 py-2 whitespace-normal break-words md:px-4 lg:px-6 ${getColumnClasses(cellIndex, row.getVisibleCells().length)} text-left`}
                                     >
                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                     </td>

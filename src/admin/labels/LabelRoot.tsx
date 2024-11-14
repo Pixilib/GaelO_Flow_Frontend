@@ -52,7 +52,7 @@ const LabelRoot: React.FC = () => {
       <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
         <LabelInputForm onCreateLabel={(label) => handleCreate({ name: label })} />
         
-        <div className="mt-5"> {/* Ajout de la marge ici */}
+        <div className="mt-5">
           <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
         </div>
       </CardBody>

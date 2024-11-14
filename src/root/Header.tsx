@@ -60,16 +60,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   };
 
   const Items: Item[] = [
-    {
-      title: 'Profile',
-      path: '/profile',
-      isActive: location.pathname === '/profile',
-    },
-    {
-      title: 'Settings',
-      path: '/settings',
-      isActive: location.pathname === '/settings',
-    },
+    
     {
       title: 'English',
       code: 'en',
@@ -95,7 +86,6 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             ref={dropdownRef}
             className="flex flex-col"
             isOpen={openItem === 'Dropdown'}
-            dropDownOpen={handleDropdown}
             dropDown={
               <div className={`absolute -mt-2 top-full w-80 bg-white shadow-lg rounded-lg transition-all duration-200 ${openItem === 'Dropdown' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <BannerItems
@@ -114,16 +104,14 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                 console.log('Toggle state:', isChecked);
               }}
             />
-            <div className="relative flex items-center gap-2">
-              <Language className="w-5 h-5 mx-1" fill="currentColor" />
-              <span className="text-sm">
-                {Items.find((item) => item.code === i18n.language)?.title}
-              </span>
-              <ToogleChevron
-                isOpen={openItem === 'Dropdown'}
-                className="ml-1 cursor-pointer"
-                onClick={handleDropdown}
-              />
+            <div className="relative flex items-center gap-5">
+              <div className="flex items-center gap-1 cursor-pointer" onClick={handleDropdown}>
+                <Language className="w-5 h-5 mx-1" fill="currentColor" />
+                <span className="text-sm">
+                  {Items.find((item) => item.code === i18n.language)?.title}
+                </span>
+                <ToogleChevron isOpen={openItem === 'Dropdown'} />
+              </div>
               <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
               <Gear className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
               <User className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />

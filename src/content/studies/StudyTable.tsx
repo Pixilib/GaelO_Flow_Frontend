@@ -46,7 +46,7 @@ const StudyTable: React.FC<StudyTableProps> = ({
 
     const getRowClasses = (row: StudyWithId) => {
         if (selectedRows?.[row.id]) {
-            return 'bg-primary hover:cursor-pointer';
+            return 'bg-indigo-200 hover:cursor-pointer';
         } else {
             return 'hover:bg-indigo-100 hover:cursor-pointer';
         }

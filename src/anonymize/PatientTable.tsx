@@ -23,7 +23,7 @@ const PatientTable = ({
     onRowSelectionChange,
 }: PatientTableProps) => {
     
-    const columns: ColumnDef<AnonPatient>[] = useMemo(() => [
+    const columns: ColumnDef<AnonPatient>[] = [
         {
             id: "id",
             accessorKey: "id"
@@ -58,7 +58,7 @@ const PatientTable = ({
                 );
             },
         },
-    ], [onRemovePatient]);
+    ];
 
     const getRowClasses = (row: AnonPatient) => {
         if (selectedRows?.[row.originalPatient.id]) {

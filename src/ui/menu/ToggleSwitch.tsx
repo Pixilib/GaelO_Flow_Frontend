@@ -4,6 +4,7 @@ import { Moon, Sun } from "../../icons";
 type ToggleSwitchProps = {
   isToggled?: boolean;
   onToggle?: (isChecked: boolean) => void;
+  className?: string;
 };
 
 const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {

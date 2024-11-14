@@ -46,7 +46,7 @@ const General = () => {
                 redisData={{
                   address: data.redisAddress,
                   port: Number(data.redisPort),
-                  //password: data.redisPassword,
+                  // password: data.redisPassword,
                 }}
               />
             }
