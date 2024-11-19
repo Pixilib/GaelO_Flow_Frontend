@@ -6,8 +6,12 @@ export default {
     "node_modules/preline/dist/*.js"
   ],
   theme: {
-    prefix: 'hs-', // Custom prefix for all Tailwind classes
+    prefix: 'hs-',
     extend: {
+
+      zIndex: {
+        'dropdown': '1000',
+      },
       fontSize: {
         '10': '10px',
       },
@@ -81,6 +85,7 @@ export default {
       },
     },
   },
+  darkMode: 'selector',
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwind-scrollbar'),

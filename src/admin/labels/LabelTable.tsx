@@ -18,7 +18,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
 }) => {
   const rows = useMemo(() => data, [data]);
 
- const columns = useMemo(() => {
+  const columns = useMemo(() => {
     return [
       {
         accessorKey: "name",
@@ -34,12 +34,13 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
             <Popover
               withOnClick={true}
               popover={<LabelsRoles key={row.original.name} labelName={row.original.name} />}
-              placement="bottom"
+              placement="top"
               backgroundColor="bg-white"
+              width="200px"
             >
               <Button color={Colors.secondary} className="flex items-center gap-1.5">
                 <Admin size="1.3rem" />
-                <ToggleChevron isOpen={false} />
+                <ToggleChevron isOpen={false} /> 
               </Button>
             </Popover>
           </div>
@@ -60,7 +61,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
       },
     ];
 
-    
+
   }, []);
 
   return (

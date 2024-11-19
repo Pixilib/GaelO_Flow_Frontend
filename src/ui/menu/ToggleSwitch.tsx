@@ -1,22 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Moon, Sun } from "../../icons";
 
-type ToggleSwitchProps = {
-  isToggled?: boolean;
-  onToggle?: (isChecked: boolean) => void;
-  className?: string;
-};
 
-const ToggleSwitch = ({ isToggled, onToggle }: ToggleSwitchProps) => {
-  const [checked, setChecked] = useState<boolean>(isToggled || false);
+const ToggleSwitch = ()  => {
+  const [checked, setChecked] = useState<boolean>(localStorage.getItem('theme') === 'dark');
 
   const handleClick = () => {
     const newValue = !checked;
     setChecked(newValue);
-    if (onToggle) {
-      onToggle(newValue);
-    }
   };
+
+  useEffect(()=>{
+    localStorage.setItem('theme', checked ? 'dark' : 'light')
+    window.dispatchEvent(new Event("storage"));
+  }, [checked])
 
   return (
     <label className="flex items-center cursor-pointer">

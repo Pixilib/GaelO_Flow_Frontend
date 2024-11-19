@@ -36,16 +36,16 @@ export const SignUpForm = () => {
 
   return (
     <div className="relative flex items-center justify-center">
-      <div className="absolute h-full w-full bg-gradient-to-r from-indigo-500 to-[#926874] shadow-2xl transform rounded-3xl rotate-6 z-0"></div>
-      <div className="relative px-10 bg-white shadow-lg py-14 rounded-3xl">
-                  <form onSubmit={handleSubmit} className="relative z-10 flex flex-col items-center w-full">
-          <h1 className="mb-4 text-2xl font-semibold text-center md:text-3xl lg:text-4xl text-dark">
-            Welcome to <span className="text-primary">GaelO Flow</span>
-          </h1>
-          <p className="mb-6 text-sm text-center md:text-base lg:text-lg text-dark">
+      <div className="absolute h-full w-full bg-gradient-to-r from-indigo-500 to-[#926874] dark:from-blue-950 dark:to-rose-950 shadow-2xl transform rounded-3xl rotate-6 z-0"></div>
+      <div className="relative px-10 bg-white shadow-lg py-14 rounded-3xl dark:bg-neutral-800">                  
+        <form onSubmit={handleSubmit} className="relative z-10 flex flex-col items-center w-full">
+      <h1 className="mb-4 text-2xl font-semibold text-center md:text-3xl lg:text-4xl text-dark dark:text-white">
+  Welcome to <span className="text-primary dark:text-white">GaelO Flow</span>
+</h1>
+          <p className="mb-6 text-sm text-center md:text-base lg:text-lg text-dark dark:text-white">
             Please create your Account
           </p>
-          <div className="w-full max-w-sm text-dark">
+          <div className="w-full max-w-sm text-dark ">
             <Input
               label="Firstname:"
               svgLeft={<User />}

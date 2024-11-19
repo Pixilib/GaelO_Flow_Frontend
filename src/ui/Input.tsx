@@ -69,7 +69,7 @@ const Input = ({
       {label &&
         typeof label === "string" ? (
         <label
-          className="mb-2 text-sm font-medium text-dark">{label}</label>
+          className="mb-2 text-sm font-medium text-dark dark:text-white">{label}</label>
       ) : label}
 
       <div

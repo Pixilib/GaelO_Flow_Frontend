@@ -40,7 +40,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       data-gaelo-flow="sidebar"
       className="flex-shrink-0 w-64 h-screen border-transparent rounded-tr-40"
     >
-      <main className="flex flex-col h-full rounded-tr-40 bg-primary">
+      <main className="flex flex-col h-full rounded-tr-40 bg-primary dark:bg-stone-950">
         {/* Logo */}
         <div className="flex justify-center py-4">
           <LogoSideBar className="h-16" />

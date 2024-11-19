@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { HSDropdown } from 'preline/preline';
 
 type DropdownOption = {
@@ -18,6 +18,7 @@ type DropdownButtonProps = {
 
 const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "Action", children, className }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
 
   useEffect(() => {
     if (dropdownRef.current) {
@@ -29,9 +30,32 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
     option.action && option.action();
   };
 
-  const handleDropdownClick = (e: React.MouseEvent) => {
+  const handleDropdownClick = (e: React.MouseEvent, dropdownId: string) => {
     e.stopPropagation();
+    if (activeDropdownId !== dropdownId) {
+      const previousDropdownMenu = document.querySelector(`.hs-dropdown-menu#${activeDropdownId}`);
+      if (previousDropdownMenu) {
+        previousDropdownMenu.classList.add('hidden');
+      }
+      setActiveDropdownId(dropdownId);
+    }
   };
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const dropdownMenu = dropdownRef.current.querySelector('.hs-dropdown-menu');
+      if (dropdownMenu) {
+        dropdownMenu.classList.add('hidden');
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
   return (
     <div ref={dropdownRef} className={`relative inline-flex hs-dropdown [--placement:bottom-left] ${className}`}>
@@ -58,9 +82,10 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
         </svg>
       </button>
       <div
-        onClick={handleDropdownClick}
-        className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
+        onClick={(e) => handleDropdownClick(e, 'dropdown-id')}
+        className="hs-dropdown-menu hs-dropdown z-dropdown transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
         aria-labelledby="hs-dropdown-custom-trigger"
+        id="dropdown-id"
       >
         {children} 
         {options?.map((option, index) => (
