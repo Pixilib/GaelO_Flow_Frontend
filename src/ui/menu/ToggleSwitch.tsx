@@ -27,7 +27,7 @@ const ToggleSwitch = ()  => {
       {/* switch design */}
       <div
         className={`relative flex items-center h-7 w-14 rounded-full transition-colors d ${
-          checked ? "bg-primary-active" : "bg-primary-light"
+          checked ? "dark:bg-neutral-700" : "bg-primary-light"
         }`}
       >
         {/* Circle toggle with moon or sun */}

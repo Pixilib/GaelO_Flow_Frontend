@@ -36,11 +36,11 @@ const colorClasses: Record<Colors, string> = {
   primary: "bg-primary",
   secondary: "bg-secondary",
   danger: "bg-danger",
-  success: "bg-success",
+  success: "bg-success dark:bg-green-700",
   warning: "bg-warning",
   dark: "bg-dark",
   gray: "bg-gray",
-  blueCustom: "bg-blue-custom",
+  blueCustom: "bg-blue-custom dark:bg-blue-700",
   light: "bg-light",
   white: "bg-white",
   [Colors.lightGray]: ''

@@ -48,11 +48,11 @@ const Input = ({
     focus:primary focus:ring-primary focus:ring-1
     mr-3
     block 
-    dark:bg-gray-700 
-    dark:border-gray-600 
-    dark:placeholder-gray-400 
+    dark:bg-stone-800 
+    dark:border-gray-500 
+    dark:placeholder-gray-200 
     dark:text-white 
-    dark:focus:ring-blue-500 
+    dark:focus:ring-indogp-300 
     dark:focus:border-blue-500
     hover:disabled:cursor-not-allowed
     disabled:bg-gray-200 

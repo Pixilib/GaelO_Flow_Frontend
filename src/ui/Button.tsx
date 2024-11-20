@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseColorClasses: Record<keyof typeof Colors, string> = {
     almond: "bg-almond hover:bg-almond-hover",
-    primary: "bg-primary hover:bg-primary-active",
+    primary: "bg-primary hover:bg-primary-active dark:bg-indigo-500 dark:hover:bg-indigo-600",
     secondary: "bg-secondary hover:bg-secondary-hover",
     danger: "bg-danger hover:bg-danger-hover",
     success: "bg-success hover:bg-success-hover",

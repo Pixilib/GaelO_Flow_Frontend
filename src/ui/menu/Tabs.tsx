@@ -10,7 +10,7 @@ export type TabProps = {
 const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick }) => {
   const variantStyles = {
     basic: {
-      active: 'first:rounded-tl-xl bg-success text-white rounded-t-xl',
+      active: 'first:rounded-tl-xl bg-success dark:bg-emerald-600 text-white rounded-t-xl',
       inactive: 'text-gray-400 bg-primary text-white first:rounded-tl-xl',
     },
     underline: {
@@ -50,7 +50,7 @@ const Tabs: React.FC<TabsProps> = ({ children, onClick, className }) => {
       data-gaelo-flow="Tabs"
       className={`flex flex-col sm:flex-row ${className} 
       shadow-md first:rounded-tl-xl last:rounded-tr-xl 
-      bg-primary h-auto rounded-t-xl`}
+      bg-primary dark:bg-indigo-700 h-auto rounded-t-xl`}
       onClick={onClick}
     >
       <div className="flex flex-wrap justify-center w-full sm:justify-start">

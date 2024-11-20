@@ -58,13 +58,13 @@ const RootApp = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex w-screen h-screen bg-white">
+    <div className="flex w-screen h-screen bg-white dark:bg-neutral-800">
       <SideBar
         openItem={openItem}
         setOpenItem={setOpenItem}
         onLogout={handleLogout}
       />
-      <div className="flex flex-col flex-1 overflow-auto bg-slate-100 dark:bg-neutral-800 custom-scrollbar">
+      <div className="flex flex-col flex-1 overflow-auto bg-slate-100 dark:bg-neutral-700 custom-scrollbar">
         <Header title={title} />
         <div className="mx-6 my-6">
           <Routes>

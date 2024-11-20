@@ -18,7 +18,7 @@ const Banner = ({
   return (
     <div
       data-gaelo-flow="banner"
-      className={`p-3 w-full flex flex-col items-center sm:flex-row sm:justify-between rounded-br-2xl border-transparent shadow-lg bg-white ${className}`}
+      className={`p-3 w-full flex flex-col items-center sm:flex-row sm:justify-between rounded-br-2xl border-transparent shadow-lg bg-white dark:bg-neutral-800  ${className}`}
     >
       <div className="flex items-center justify-between w-full sm:w-auto">
         {onLeftIconClick && (
@@ -26,10 +26,10 @@ const Banner = ({
             className="flex items-center mr-2 cursor-pointer text-primary"
             onClick={onLeftIconClick}
           >
-            <ArrowLeft className="text-xl sm:text-2xl text-primary" />
+            <ArrowLeft className="text-xl sm:text-2xl text-primary dark:text-white" />
           </span>
         )}
-        <h1 className="text-lg font-medium text-center sm:text-left sm:text-xl lg:text-2xl text-primary">
+        <h1 className="text-lg font-medium text-center sm:text-left sm:text-xl lg:text-2xl text-primary dark:text-white">
           {title}
         </h1>
       </div>
