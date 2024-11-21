@@ -36,7 +36,7 @@ const colorClasses: Record<Colors, string> = {
   primary: "bg-primary",
   secondary: "bg-secondary",
   danger: "bg-danger",
-  success: "bg-success dark:bg-green-700",
+  success: "bg-success dark:bg-emerald-600",
   warning: "bg-warning",
   dark: "bg-dark",
   gray: "bg-gray",
@@ -49,10 +49,10 @@ const colorClasses: Record<Colors, string> = {
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";
 
 const Card = ({ bordered, className = "", children }: CardProps) => {
-  const borderClass = bordered ? "border" : "";
+  const borderClass = bordered ? "" : "";
 
   return (
-    <div data-gaelo-flow="Card" className={`shadow-md ${className} ${borderClass} rounded-xl`}>
+    <div data-gaelo-flow="Card" className={`shadow-md ${className} ${borderClass} rounded-2xl`}>
       {children}
     </div>
   );
@@ -84,10 +84,10 @@ const CardBody = ({
   const bodyClass = getColorClass(color);
 
   const roundedClasses = [
-    roundedTopLeft && "rounded-tl-xl",
-    roundedTopRight && "rounded-tr-xl",
-    roundedBottomLeft && "rounded-bl-xl",
-    roundedBottomRight && "rounded-br-xl",
+    roundedTopLeft && "rounded-tl-2xl",
+    roundedTopRight && "rounded-tr-2xl",
+    roundedBottomLeft && "rounded-bl-2xl",
+    roundedBottomRight && "rounded-br-2xl",
   ].filter(Boolean).join(" ");
 
   return (

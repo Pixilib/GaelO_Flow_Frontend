@@ -19,8 +19,8 @@ const UsersRoot = () => {
     const isOauth2Path = path.endsWith("oauth2");
 
     return (
-        <Card className="bg-white shadow-md rounded-xl" data-gaelo-flow="users-root">
-            <Tabs className=" bg-light-gray rounded-t-xl">
+        <Card className="bg-white shadow-md rounded-2xl" data-gaelo-flow="users-root">
+            <Tabs className=" bg-light-gray rounded-t-2xl">
                 <Tab
                     title="Users"
                     active={isUsersPath}
@@ -42,7 +42,8 @@ const UsersRoot = () => {
                 roundedTopLeft={false} 
                 roundedTopRight={false} 
                 roundedBottomLeft={false} 
-                roundedBottomRight={false}>
+                roundedBottomRight={false}
+                className="rounded-br-2xl rounded-bl-2xl dark:bg-neutral-500">
                 <Routes>
                     <Route path="/users" element={<Users />} />
                     <Route path="/roles" element={<Roles />} />

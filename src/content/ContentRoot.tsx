@@ -152,13 +152,13 @@ const ContentRoot: React.FC = () => {
                 onClose={closeEditModal}
                 show={!!editingPatient}
             />
-            <FormCard className="bg-white" title="Search" collapsible>
+            <FormCard className="bg-white dark:bg-neutral-500" title="Search" collapsible>
                 <SearchForm onSubmit={handleSubmit} existingLabels={labelsData} withAets={false} />
             </FormCard>
 
-            <div className="flex flex-col w-full p-4 bg-white shadow-md rounded-3xl">
+            <div className="flex flex-col w-full p-4 bg-white shadow-md dark:bg-neutral-500 rounded-3xl">
                 <div className="flex items-center justify-between mb-4">
-                    <div className="text-2xl font-bold text-primary">Results</div>
+                    <div className="text-2xl font-bold text-primary dark:text-white">Results</div>
                     <div className="text-lg text-gray-600">
                         {patients.length} {patients.length === 1 ? "patient" : "patients"} found
                     </div>

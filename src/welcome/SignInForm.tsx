@@ -66,9 +66,9 @@ export const SignInForm = () => {
   return (
     <div className="relative flex items-center justify-center w-full ">
       {/* Background square */}
-      <div className="absolute h-full w-full bg-gradient-to-r from-indigo-500 to-[#926874] dark:from-blue-950 dark:to-orange-900 shadow-2xl transform rounded-3xl rotate-6 z-0"></div>
+      <div className="absolute h-full w-full bg-gradient-to-r from-indigo-500 to-[#926874] dark:from-blue-950 dark:to-rose-950 shadow-2xl transform rounded-3xl rotate-6 z-0"></div>
 
-      <div className="relative px-10 bg-white shadow-lg dark:bg-neutral-700 py-14 rounded-3xl">
+      <div className="relative px-10 bg-white shadow-lg dark:text-white dark:opacity-70 dark:bg-neutral-700 py-14 rounded-3xl">
         <form onSubmit={handleSubmit} className="relative z-10 flex flex-col items-center w-full">
           <h1 className="mb-4 text-4xl font-semibold text-center text-dark dark:text-white">
             {t("titleSignInForm")}

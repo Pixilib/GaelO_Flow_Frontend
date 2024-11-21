@@ -49,12 +49,12 @@ const Oauth = () => {
   if (isLoadingOauthConfig) return <Spinner />;
 
   return (
-    <div data-gaelo-flow="oauth" className="rounded-br-xl rounded-bl-xl">
+    <div data-gaelo-flow="oauth" className="flex flex-col justify-center">
       <Oauth2Table
         data={oauth2Config || []} onDelete={deleteOauthHandler} />
 
       <CardFooter
-        className="border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200">
+        className="border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200 dark:border-neutral-700 dark:bg-slate-950">
         <div className="flex justify-center w-full">
           {!showOauthForm ? (
             <Button

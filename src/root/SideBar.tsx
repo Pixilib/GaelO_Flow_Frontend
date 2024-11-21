@@ -47,7 +47,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
         </div>
 
         {/* Contenu de la barre latérale avec défilement toujours visible */}
-        <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+        <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 dark:scrollbar-white scrollbar-track-transparent">
           <div className="flex flex-col gap-3">
             <MenuItemsCollapse
               icon={<Admin className="w-6 h-6" />}

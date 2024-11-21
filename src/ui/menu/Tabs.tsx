@@ -11,7 +11,7 @@ const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick }) 
   const variantStyles = {
     basic: {
       active: 'first:rounded-tl-xl bg-success dark:bg-emerald-600 text-white rounded-t-xl',
-      inactive: 'text-gray-400 bg-primary text-white first:rounded-tl-xl',
+      inactive: 'text-gray-400 bg-primary dark:bg-indigo-700 text-white first:rounded-tl-xl',
     },
     underline: {
       active: 'border-b-2 border-primary text-primary',
@@ -26,7 +26,7 @@ const Tab: React.FC<TabProps> = ({ title, active, variant = 'basic', onClick }) 
   return (
     <div
       data-gaelo-flow="Tab"
-      className={`${active ? 
+      className={`${active ?
         variantStyles[variant].active : variantStyles[variant].inactive} 
         px-4 sm:px-6 py-2 sm:py-3 font-medium 
         cursor-pointer text-sm sm:text-lg 

@@ -83,7 +83,7 @@ const ModalitiesRoot: React.FC = () => {
         color={Colors.primary}
         title={"Manage Modalities"}
       />
-      <CardBody color={Colors.almond} className="space-x-2">
+      <CardBody color={Colors.almond} className="space-x-2 dark:bg-neutral-500">
         <div className="w-full mt-2 mb-2">
           <ModalitiesTable
             aetData={aets}
@@ -94,7 +94,7 @@ const ModalitiesRoot: React.FC = () => {
       </CardBody>
       <CardFooter
         color={Colors.light}
-        className="flex flex-col justify-center py-4 border-t-2 shadow-inner sm:flex-row border-slate-200 bg-light"
+        className="flex flex-col justify-center py-4 border-t-2 shadow-inner sm:flex-row border-slate-200 dark:border-neutral-700 bg-light dark:bg-slate-950"
       >
         {!showNewAetCard && (
           <Button color={Colors.success} onClick={handleNewAetClick} className="w-full mb-4 sm:w-auto sm:mb-0">
