@@ -83,7 +83,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
 
   return (
     <FormCard
-    className="w-full bg-light-gray dark:bg-neutral-500"
+    className="w-full bg-light-gray dark:bg-gray-500"
     title="Create New Modality"
     onClose={onClose}
     onSubmit={handleSubmit}

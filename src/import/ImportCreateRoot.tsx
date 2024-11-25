@@ -13,7 +13,7 @@ const ImportCreateRoot = () => {
     };
 
     return (
-        <div className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl" data-gaelo-flow="import-create-root">
+        <div className="shadow-md bg-almond dark:bg-gray-500 rounded-xl" data-gaelo-flow="import-create-root">
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
                     title="Import Dicom"

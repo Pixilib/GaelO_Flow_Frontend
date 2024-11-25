@@ -22,14 +22,14 @@ interface SelectInputProps {
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
     const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
-    return `border border-gray-300 min-h-[40px] bg-gray-50 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
+    return `border border-gray-300 min-h-[40px] bg-gray-50 dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
   },
-  menu: () => 'rounded-3xl p-1 bg-white',
+  menu: () => 'rounded-3xl p-1 bg-white dark:bg-neutral-800',
   option: (state) => {
-    return `rounded-xl p-2 ${state.isSelected ? 'bg-primary-active text-white' : 'bg-white text-gray-800'} hover:bg-primary hover:text-white px-2`;
+    return `rounded-xl p-2 ${state.isSelected ? 'bg-primary-active text-white' : 'bg-white dark:bg-neutral-800 text-gray-800 dark:text-white'} hover:bg-primary hover:text-white px-2`;
   },
-  multiValue: () => 'bg-gray-200 rounded-3xl px-2 py-0.5',
-  multiValueLabel: () => 'text-gray-800',
+  multiValue: () => 'bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5',
+  multiValueLabel: () => 'text-gray-800 ',
   multiValueRemove: () => 'text-red-500 hover:bg-red-200 rounded-full p-0.5',
 };
 

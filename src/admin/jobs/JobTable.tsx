@@ -79,10 +79,10 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       columns={columns}
       headerColor={Colors.white}
       headerTextSize="sm"
-      className="bg-gray-100"
+      className="bg-gray-100 dark:bg-slate-950 dark:text-white"
       enableColumnFilters
       enableSorting
-      getRowClasses={() => "hover:bg-indigo-100 cursor-pointer"}
+      getRowClasses={() => "hover:bg-indigo-100 cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer"}
     />
   );
 };

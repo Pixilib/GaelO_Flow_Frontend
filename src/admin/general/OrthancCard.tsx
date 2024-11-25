@@ -125,7 +125,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     headerColor={Colors.white}
                     headerclassName='text-center'
                 />            </div>
-            <CardFooter className="flex justify-center gap-3 py-2 border-t-2 shadow-inner border-slate-200 bg-light dark:bg-slate-950">
+            <CardFooter className="flex justify-center gap-3 py-2 border-t-2 shadow-inner border-slate-200 dark:border-neutral-700 bg-light dark:bg-slate-950">
                 <Button
                     color={Colors.warning}
                     onClick={reset}

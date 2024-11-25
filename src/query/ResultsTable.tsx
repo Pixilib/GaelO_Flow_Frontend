@@ -74,7 +74,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             getRowClasses={getRowClasses}
             headerTextSize="xs"
             headerColor={Colors.white} 
-            className="bg-gray-100s"
+            className="bg-gray-100"
         />
     );
 };

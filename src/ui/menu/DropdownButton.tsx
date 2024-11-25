@@ -62,11 +62,11 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
       <button
         id="hs-dropdown-custom-trigger"
         type="button"
-        className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 align-middle transition-all bg-white border border-gray-200 rounded-md shadow-sm hs-dropdown-toggle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 dark:bg-slate-800 dark:border-gray-700 dark:hover:bg-slate-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+        className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 align-middle transition-all bg-white rounded-md shadow-sm hover:text-white hs-dropdown-togglefocus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-primary dark:bg-slate-700 dark:border-gray-700 dark:hover:bg-secondary hover:bg-secondary dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
       >
         {buttonText}
         <svg
-          className="w-2.5 h-2.5 text-gray-600"
+          className="w-2.5 h-2.5 text-gray-600  dark:text-white"
           width="16"
           height="16"
           viewBox="0 0 16 16"

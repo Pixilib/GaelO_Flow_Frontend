@@ -62,7 +62,7 @@ function Table<T>({
     onRowSelectionChange = () => {},
     onRowClick,
     getRowStyles,
-    getRowClasses = () => 'bg-indigo-50',
+    getRowClasses = () => 'bg-indigo-50 dark:bg-slate-950 text-black dark:text-white',
     onCellEdit = () => {},
     getRowId = (originalRow, index) => originalRow?.[id] ?? index,
 }: TableProps<T>) {
@@ -134,14 +134,13 @@ function Table<T>({
     });
 
     const headerClass = {
-        'white': 'bg-white dark:bg-gray-800',
-        'primary': 'bg-primary-active text-white',
+        'white': 'bg-white dark:bg-neutral-800 text-black dark:text-white', // Adjust for dark mode
     }
 
     const headerText = headerTextSize === "xxs" ? "text-[0.491rem]" : `text-${headerTextSize}`;
 
-    const firstColumnClass = `sticky left-0 ${headerClass[headerColor]} border-b border-gray-300 text-center`;
-    const lastColumnClass = "sticky right-0 bg-white";
+    const firstColumnClass = `sticky left-0 ${headerClass[headerColor]} border-b border-gray-300 dark:border-gray-700 text-center`;
+    const lastColumnClass = "sticky right-0 bg-white dark:bg-gray-800 text-black dark:text-white"; 
 
     const getColumnClasses = (index: number, length: number) => {
         if (pinFirstColumn && index === 0) return firstColumnClass;
@@ -150,9 +149,9 @@ function Table<T>({
     };
 
     return (
-        <div className={`overflow-x-auto border rounded-xl shadow-lg custom-scrollbar ${className}`}>
-            <table className="min-w-full border-gray-custom">
-                <thead className={`bg-${headerColor} border-b border-gray-300 ${headerclassName}`}>
+        <div className={`overflow-x-auto  rounded-xl shadow-lg custom-scrollbar ${className} dark:border-gray-700`}>
+            <table className="min-w-full border-gray-custom dark:border-gray-600">
+                <thead className={`bg-${headerColor} dark:bg-neutral-800 text-black dark:text-white border-b border-gray-300 dark:border-gray-700 ${headerclassName}`}>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map((header, index) => (
@@ -186,7 +185,7 @@ function Table<T>({
                     {table.getRowModel().rows.map((row) => (
                         <tr
                             key={row.id}
-                            className={`border-b ${getRowClasses(row.original)}`}
+                            className={`border-b dark:border-neutral-800 ${getRowClasses(row.original)}`}
                             style={getRowStyles?.(row.original)}
                             onClick={() => onRowClick?.(row.original)}
                         >

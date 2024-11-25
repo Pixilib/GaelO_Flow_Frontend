@@ -40,7 +40,7 @@ const colorClasses: Record<Colors, string> = {
   warning: "bg-warning",
   dark: "bg-dark",
   gray: "bg-gray",
-  blueCustom: "bg-blue-custom dark:bg-blue-700",
+  blueCustom: "bg-blue-custom dark:bg-blue-600",
   light: "bg-light",
   white: "bg-white",
   [Colors.lightGray]: ''

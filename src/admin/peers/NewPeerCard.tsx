@@ -23,7 +23,7 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
 
     return (
         <FormCard
-            className="w-full bg-light-gray dark:bg-neutral-500"
+            className="w-full bg-light-gray dark:bg-gray-500"
             title="Create New Peer"
             onClose={onClose}
             onSubmit={handleSubmit}

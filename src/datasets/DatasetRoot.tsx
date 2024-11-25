@@ -86,7 +86,7 @@ const DatasetRoot = () => {
                 color={Colors.primary}
                 title="Dataset"
             />
-            <CardBody className="bg-almond dark:bg-neutral-500">
+            <CardBody className="bg-almond dark:bg-gray-500">
                 <div className="space-y-2">
                     <span className="text-base font-semibold text-gray-700 dark:text-white">Labels</span>
                     <SelectRoleLabels values={selectedLabels} onChange={(labels) => setSelectedLabels(labels)} />

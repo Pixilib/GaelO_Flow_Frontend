@@ -48,18 +48,22 @@ const DeleteRoot = () => {
                         <Button
                             onClick={handleClearList}
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary group"
+                            className="rounded-lg hover:bg-secondary dark:bg-slate-700"
                         >
-                            <Empty className="text-xl text-bold text-primary group-hover:text-white" />
+                            <Empty className="text-xl text-bold text-primary dark:text-white group-hover:text-white" />
                         </Button>
                     </div>
                 </div>
             </CardHeader>
-            <CardBody color={Colors.almond}>
+            <CardBody 
+            color={Colors.almond}
+            className="dark:bg-gray-500">
                 <DeleteStudyTable
                     studies={Object.values(deleteList)} />
             </CardBody>
-            <CardFooter color={Colors.light}>
+            <CardFooter 
+            color={Colors.light}
+            className="dark:bg-slate-950">
                 <div className="flex items-center justify-center gap-3">
                     <div>
                         <Button

@@ -141,22 +141,23 @@ const ExportRoot = () => {
 
     return (
         <Card>
-            <CardHeader color={Colors.primary}>
+            <CardHeader
+                color={Colors.primary}>
                 <div className="flex items-center w-full">
                     <div className="w-4/5 text-lg font-bold text-center">Export Resources</div>
                     <div className="flex justify-end w-1/5 gap-3 p-3">
                         <Button
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary group">
+                            className="rounded-lg dark:bg-neutral-700 hover:bg-secondary group">
                             <Download
                                 onClick={handleDownloadCsv}
-                                className="text-xl text-primary group-hover:text-white" />
+                                className="text-xl text-primary dark:text-white group-hover:text-white" />
                         </Button>
                         <Button
                             onClick={handleClearList}
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary group">
-                            <Empty className="text-xl text-primary group-hover:text-white" />
+                            className="rounded-lg hover:bg-secondary dark:bg-neutral-700 group">
+                            <Empty className="text-xl text-primary dark:text-white group-hover:text-white" />
                         </Button>
                         <SelectTransferSyntax
                             value={transferSyntax}
@@ -165,7 +166,9 @@ const ExportRoot = () => {
                     </div>
                 </div>
             </CardHeader>
-            <CardBody color={Colors.almond} className="overflow-x-auto">
+            <CardBody
+                color={Colors.almond}
+                className="overflow-x-auto dark:bg-gray-500">
                 <div className="flex flex-col md:flex-row md:space-x-4">
                     <div className="flex-1 min-w-0">
                         <ExportStudyTable
@@ -178,12 +181,14 @@ const ExportRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter color={Colors.light} className="flex justify-center gap-3">
+            <CardFooter
+                color={Colors.light}
+                className="flex justify-center gap-3 dark:bg-slate-950">
                 <div className="flex flex-col justify-center w-full gap-3 md:flex-row md:w-4/5">
                     <DropdownButton
                         buttonText="Download"
                         options={downloadOptions} />
-                    <DropdownButton 
+                    <DropdownButton
                         buttonText="Send To Modality" options={modalitiesOptions} />
                     {storeJobId && <ProgressJobs
                         size={50} jobId={storeJobId} />}

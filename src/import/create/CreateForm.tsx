@@ -30,7 +30,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
 
   return (
     <FormCard
-      className={`${className} w-full bg-light-gray dark:bg-neutral-500`}
+      className={`${className} w-full bg-light-gray dark:bg-gray-500`}
       title={title}
       onSubmit={handleSubmit}
     >

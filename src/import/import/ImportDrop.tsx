@@ -85,7 +85,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                         className="text-success dark:text-emerald-600" />
                 ) : (
                     <Cloud
-                        size={40} 
+                        size={40}
                         className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary dark:text-white'}`} />
                 )}
                 <p className="text-primary dark:text-white">Drop the Dicom folder or ZIP, or click to select files</p>

@@ -50,7 +50,7 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy, selectedRows }: Stu
         if (selectedRows?.[row.originalStudy.id]) {
             return 'bg-primary hover:cursor-pointer';
         } else {
-            return 'hover:bg-indigo-100 hover:cursor-pointer';
+            return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';
         }
     };
 
@@ -60,7 +60,7 @@ const StudyTable = ({ studies, onChangeStudy, onRemoveStudy, selectedRows }: Stu
             data={studies}
             columnVisibility={{ id: false }}
             headerTextSize="xs"
-            className="text-xs bg-gray-100"
+            className="text-xs bg-gray-100 dark:bg-slate-950 dark:text-white"
             onCellEdit={onChangeStudy}
             getRowId={(row) => row.originalStudy.id}
             getRowClasses={getRowClasses}

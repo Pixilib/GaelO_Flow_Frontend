@@ -89,7 +89,8 @@ const AnonymizeRoot = () => {
 
     return (
         <>
-            <CardHeader color={Colors.primary}>
+            <CardHeader 
+            color={Colors.primary}>
                 <div className="flex flex-col items-center w-full sm:flex-row">
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
                         Anonymize resources
@@ -99,8 +100,8 @@ const AnonymizeRoot = () => {
                             options={[]}
                             buttonText={
                                 <div className="flex items-center justify-center">
-                                    <AutoFill className="text-2xl text-primary" />
-                                    <span className="ml-2">Auto Fill</span>
+                                    <AutoFill className="text-2xl text-primary group-hover:text-white dark:text-white" />
+                                    <span className="ml-2 dark:text-white">Auto Fill</span>
                                 </div>
                             }
                             className="mr-4"
@@ -111,15 +112,17 @@ const AnonymizeRoot = () => {
                         <Button
                             onClick={() => dispatch(flushAnonymizeList())}
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary"
+                            className="rounded-lg hover:bg-secondary dark:bg-slate-700"
                             aria-label="Clear all anonymized data"
                         >
-                            <Empty className="text-xl text-primary" />
+                            <Empty className="text-xl text-primary dark:text-white" />
                         </Button>
                     </div>
                 </div>
             </CardHeader>
-            <CardBody color={Colors.almond}>
+            <CardBody 
+            color={Colors.almond}
+            className="dark:bg-gray-500">
                 <div className="flex flex-col w-full gap-4">
                     <div className="flex-1 overflow-auto break-words">
                         <PatientTable
@@ -138,7 +141,7 @@ const AnonymizeRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter color={Colors.light} className="flex flex-col items-center gap-3 border-t-2 shadow-inner border-slate-200 bg-light">
+            <CardFooter color={Colors.light} className="flex flex-col items-center gap-3 border-t-2 shadow-inner border-slate-200 dark:border-slate-700 bg-light dark:bg-slate-950">
                 <div className="flex flex-col gap-3 mt-2 mb-2 sm:flex-row">
                     <Button
                         className="flex items-center w-full h-10 gap-2 sm:w-auto"

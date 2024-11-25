@@ -31,7 +31,7 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Min`}
-                className="w-1/2 h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 rounded-2xl placeholder:text-gray-400"
+                className="w-1/2 h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 dark:bg-stone-800 rounded-2xl placeholder:text-gray-400"
             />
             <input
                 type="number"
@@ -43,7 +43,7 @@ const FilterTable = ({
                     ])
                 }
                 placeholder={`Max`}
-                className="w-1/2 h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 rounded-2xl placeholder:text-gray-400"
+                className="w-1/2 h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 dark:bg-stone-800 rounded-2xl placeholder:text-gray-400"
             />
         </div>
     ) : (
@@ -53,7 +53,7 @@ const FilterTable = ({
             onClick={stopPropagation}
             onChange={(e) => column.setFilterValue(e.target.value)}
             placeholder="Search..."
-            className="w-2/3 h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 rounded-2xl placeholder:text-gray-400"
+            className="w-2/3 h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 dark:bg-stone-800 rounded-2xl placeholder:text-gray-400"
         />
     );
 };

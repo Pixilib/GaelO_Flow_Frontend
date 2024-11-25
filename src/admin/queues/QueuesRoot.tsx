@@ -44,7 +44,7 @@ const QueuesRoot = () => {
         roundedTopRight={false}
         roundedBottomLeft
         roundedBottomRight
-        className="dark:bg-neutral-500"
+        className="dark:bg-gray-500"
       >
         <Routes>
           <Route
