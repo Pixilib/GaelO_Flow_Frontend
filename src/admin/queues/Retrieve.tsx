@@ -98,8 +98,11 @@ const Retrieve = ({ data }: RetrieveProps) => {
       className="w-full rounded-br-xl rounded-bl-xl"
     >
       <Card bordered>
-        <CardHeader centerTitle title="Retrieve Schedule Time : " color={Colors.success} />
-        <CardBody color={Colors.light} roundedBottomLeft roundedBottomRight>
+        <CardHeader centerTitle 
+        title="Retrieve Schedule Time : " color={Colors.success} />
+        <CardBody 
+        color={Colors.light} roundedBottomLeft roundedBottomRight
+        className="dark:bg-neutral-800 dark:text-white">
           <div className="flex flex-col items-center justify-between gap-4 mt-1 sm:flex-row sm:gap-12">
             <Input
               type="time"

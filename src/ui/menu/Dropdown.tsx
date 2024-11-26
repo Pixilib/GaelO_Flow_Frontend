@@ -31,7 +31,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       <div
         ref={ref}
         data-gaelo-flow="banner-dropdown"
-        className={`mx-4 flex place-content-center rounded-18 border-transparent bg-primary px-4 py-3 font-semibold text-white ${className}`}
+        className={`mx-4 flex place-content-center rounded-18 border-transparent bg-primary dark:bg-indigo-600 px-4 py-3 font-semibold text-white ${className}`}
         tabIndex={0}
         onClick={handleClick}
         onBlur={handleBlur}

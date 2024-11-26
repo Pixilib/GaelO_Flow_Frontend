@@ -26,14 +26,14 @@ const Badge = ({
 
   const variants = {
     default: {
-      backgroundColor: "bg-indigo-100",
-      textColor: "text-indigo-700",
-      borderColor: "ring-indigo-300",
+      backgroundColor: "bg-indigo-100 dark:bg-neutral-700",
+      textColor: "text-indigo-700 dark:text-indigo-300",
+      borderColor: "ring-indigo-300 dark:ring-indigo-300",
     },
     success: {
-      backgroundColor: "bg-green-100",
-      textColor: "text-green-700",
-      borderColor: "ring-green-300",
+      backgroundColor: "bg-green-100 dark:bg-neutral-700",
+      textColor: "text-green-700 dark:text-emerald-400",
+      borderColor: "ring-green-300 dark:ring-emerald-400",
     },
     danger: {
       backgroundColor: "bg-red-100",

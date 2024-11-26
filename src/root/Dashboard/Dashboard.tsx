@@ -22,11 +22,11 @@ const Dashboard = () => {
 
   return (
     <div className="p-4 md:p-8 bg-background size-full">
-      <h1 className="text-2xl font-medium md:text-4xl animate-typing text-slate-400">
-        Bonjour,
-      </h1>
+     <h1 className="text-2xl font-medium md:text-4xl animate-typing text-slate-400 dark:text-white">
+  Hello,
+</h1>
 
-      <h2 className="flex items-center mb-6 overflow-hidden text-3xl font-medium text-transparent md:mb-10 md:text-5xl bg-gradient-to-r from-orange-500 via-indigo-400 to-violet-800 bg-clip-text whitespace-nowrap animate-typing">
+      <h2 className="flex items-center mb-6 overflow-hidden text-3xl font-medium text-transparent md:mb-10 md:text-5xl bg-gradient-to-r from-indigo-800 via-orange-400 to-violet-800 dark:from-indigo-500 dark:via-orange-500 dark:to-violet-800 bg-clip-text whitespace-nowrap animate-typing">
         {username}
         <span className="ml-4 text-4xl text-primary">👋🏻</span>
       </h2>

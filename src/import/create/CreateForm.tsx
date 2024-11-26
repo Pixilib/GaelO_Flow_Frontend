@@ -30,11 +30,11 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
 
   return (
     <FormCard
-      className={`${className} w-full bg-light-gray`}
+      className={`${className} w-full bg-light-gray dark:bg-neutral-500`}
       title={title}
       onSubmit={handleSubmit}
     >
-      <div className="flex items-end w-full mt-3 gap-3">
+      <div className="flex items-end w-full gap-3 mt-3">
         <div className="flex-1">
           <Input
             label={<Label value="Tag" className="text-sm font-medium" />}

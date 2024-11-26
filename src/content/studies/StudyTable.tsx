@@ -46,9 +46,9 @@ const StudyTable: React.FC<StudyTableProps> = ({
 
     const getRowClasses = (row: StudyWithId) => {
         if (selectedRows?.[row.id]) {
-            return 'bg-indigo-200 hover:cursor-pointer';
+            return 'bg-primary hover:cursor-pointer';
         } else {
-            return 'hover:bg-indigo-100 hover:cursor-pointer';
+            return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';
         }
     };
 
@@ -58,7 +58,7 @@ const StudyTable: React.FC<StudyTableProps> = ({
             data={studies}
             headerColor={Colors.light}
             headerTextSize="xs"
-            className="text-xs"
+            className="bg-gray-100 dark:bg-slate-950 dark:text-white"
             getRowClasses={getRowClasses}
             onRowClick={(row) => onRowClick && onRowClick(row.id)}
             enableSorting={true}

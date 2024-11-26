@@ -68,7 +68,7 @@ const PeersRoot: React.FC = () => {
         color={Colors.primary}
         title={"Manage Peers"}
       />
-      <CardBody className="space-x-4 bg-almond">
+      <CardBody className="space-x-4 bg-almond dark:bg-neutral-500">
         <div className="flex flex-col items-center">
           <div className="w-full mt-2 mb-2">
             <PeersTable
@@ -83,7 +83,7 @@ const PeersRoot: React.FC = () => {
           </div>
         </div>
       </CardBody>
-      <CardFooter className="flex justify-center py-4 border-t-2 shadow-inner border-slate-200 bg-light"> {/* Classe corrigée ici */}
+      <CardFooter className="flex justify-center py-4 border-t-2 shadow-inner border-slate-200 dark:border-neutral-700 dark:bg-slate-950 bg-light">
         {!showNewPeerCard && (
           <Button color={Colors.success} onClick={handleNewPeerClick}>
             <More className="mr-3" size={24} /> New Peer

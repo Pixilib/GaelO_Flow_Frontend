@@ -53,7 +53,7 @@ const SeriesTable: React.FC<SeriesTableProps> = ({
         if (selectedRows?.[row.id]) {
             return 'bg-primary hover:cursor-pointer';
         } else {
-            return 'hover:bg-indigo-100 hover:cursor-pointer';
+            return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';
         }
     };
 
@@ -63,7 +63,7 @@ const SeriesTable: React.FC<SeriesTableProps> = ({
             data={rows ?? []}
             headerColor={Colors.light}
             headerTextSize="xs"
-            className="text-xs"
+            className="text-xs bg-gray-100 dark:bg-slate-950 dark:text-white"
             getRowClasses={getRowClasses}
             onRowClick={(row) => onRowClick && onRowClick(row.id)}
         />

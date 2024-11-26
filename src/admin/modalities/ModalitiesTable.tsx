@@ -58,8 +58,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
   ];
 
   const getRowClasses = () => {
-    return "hover:bg-indigo-100 hover:cursor-pointer";
-  };
+    return "hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer";  };
 
   return (
     <Table
@@ -67,7 +66,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
       data={aetData}
       headerColor={Colors.white}
       headerTextSize="xs"
-      className="bg-gray-100"
+      className="bg-gray-100 dark:bg-slate-950 dark:text-white"
       enableColumnFilters
       enableSorting
       getRowClasses={getRowClasses}

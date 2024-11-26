@@ -1,5 +1,4 @@
 import { useState, MouseEvent } from 'react';
-import { Colors } from '../utils/enums';
 import { Eye, EyeSlash } from '../icons';
 
 interface ToggleEyeProps {
@@ -7,7 +6,7 @@ interface ToggleEyeProps {
     className?: string;
 }
 
-const ToggleEye = ({ onToggle }: ToggleEyeProps) => {
+const ToggleEye = ({ onToggle, className }: ToggleEyeProps) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = (e: MouseEvent<HTMLButtonElement>) => {
@@ -16,11 +15,17 @@ const ToggleEye = ({ onToggle }: ToggleEyeProps) => {
         if (onToggle) onToggle(!isVisible);
     };
 
-    const iconStyle = { color: Colors.gray };
-
     return (
-        <button onClick={toggleVisibility} className="text-xl" type="button">
-            {isVisible ? <Eye style={iconStyle} /> : <EyeSlash style={iconStyle} />}
+        <button
+            onClick={toggleVisibility}
+            className={`text-xl ${className} transition-colors duration-200`}
+            type="button"
+        >
+            {isVisible ? (
+                <Eye className="text-gray-500 dark:text-white" />
+            ) : (
+                <EyeSlash className="text-gray-500 dark:text-white" />
+            )}
         </button>
     );
 };

@@ -5,6 +5,7 @@ type FooterProps = {
   table: Table<any>;
   onPageSizeChange: (pageSize: number) => void;
 };
+
 const Footer = ({ table, onPageSizeChange }: FooterProps) => {
   const {
     getState,
@@ -15,17 +16,22 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
     getPrePaginationRowModel,
   } = table;
 
-  const pageCount = getPageCount()
+  const pageCount = getPageCount();
   const { pageIndex, pageSize } = getState().pagination;
   const totalRows = getPrePaginationRowModel().rows.length;
-  const btnClassFooter = "border-none bg-transparent p-2 focus:outline-none text-dark";
-  
+
+  // Styles Tailwind avec gestion du mode sombre par défaut
+  const btnClassFooter = "border-none bg-transparent p-2 focus:outline-none text-dark dark:text-white";
+  const containerClass = "flex items-center justify-end w-full py-0.5 text-sm rounded-b-xl bg-white dark:bg-neutral-800 text-dark dark:text-white";
+  const inputClass = "w-12 p-1 mr-4 text-center border rounded text-primary dark:text-white bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary";
+
   const handlePageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newPageSize = Number(event.target.value);
     onPageSizeChange(newPageSize);
   };
+
   return (
-    <div className="flex items-center justify-end w-full py-0.5 text-sm bg-white rounded-b-xl">
+    <div className={containerClass}>
       <div className="flex items-center space-x-2">
         <div className="flex items-center">
           <strong className="mr-2">{totalRows}</strong>
@@ -33,7 +39,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
         </div>
         <div className="flex items-center">
           <button
-            className={`${btnClassFooter}`}
+            className={btnClassFooter}
             onClick={() => setPageIndex(0)}
             disabled={!getCanPreviousPage()}
             aria-label="Go to the first page!"
@@ -41,7 +47,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
             <SkipPrevious size="2em" />
           </button>
           <button
-            className={`${btnClassFooter}`}
+            className={btnClassFooter}
             onClick={() => setPageIndex(Math.max(pageIndex - 1, 0))}
             disabled={!getCanPreviousPage()}
             aria-label="Go to the previous page!"
@@ -52,7 +58,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
             <em className="mr-1">Page</em> <strong>{pageIndex + 1} of {pageCount}</strong>
           </span>
           <button
-            className={`${btnClassFooter}`}
+            className={btnClassFooter}
             onClick={() => setPageIndex(Math.min(pageIndex + 1, pageCount - 1))}
             disabled={!getCanNextPage()}
             aria-label="Go to the next page!"
@@ -60,7 +66,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
             <Next size="1.3em" />
           </button>
           <button
-            className={`${btnClassFooter}`}
+            className={btnClassFooter}
             onClick={() => setPageIndex(pageCount - 1)}
             disabled={!getCanNextPage()}
             aria-label="Go to the last page"
@@ -78,7 +84,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
               max={totalRows}
               value={pageSize}
               onChange={handlePageSizeChange}
-              className="w-12 p-1 mr-4 text-center border rounded text-primary hover:font-bold focus-ring-2 focus-ring-primary"
+              className={inputClass}
             />
           </div>
         </div>

@@ -49,7 +49,7 @@ export const SignUpForm = () => {
       <div className="flex flex-col items-center w-full max-w-md space-y-12">
         <Input
           label="Firstname :"
-          svgLeft={<User />}
+          svgLeft={<UserId/>}
           bordered
           placeholder="Enter your firstname"
           value={firstname}

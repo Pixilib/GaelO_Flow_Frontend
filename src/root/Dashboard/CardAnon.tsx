@@ -45,7 +45,7 @@ const CardAnon = () => {
                 <Anon className="mr-3 text-xl text-white" /> 
                 <span className="text-lg font-bold text-white">Anonymisation</span>
             </CardHeader>
-            <CardBody className="flex items-center justify-center p-4" color={Colors.white}>
+            <CardBody className="flex items-center justify-center p-4 dark:bg-neutral-500" color={Colors.white}>
                 {
                     firstQueue ?
                         (<ProgressQueueCircle
@@ -63,8 +63,7 @@ const CardAnon = () => {
                         "None"
                 }
             </CardBody>
-            <CardFooter className="flex justify-center" color={Colors.white}>
-                {/* You can add footer content here if needed */}
+            <CardFooter className="flex justify-center dark:bg-neutral-500" color={Colors.white}>
             </CardFooter>
         </Card>
     );

@@ -40,14 +40,14 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       data-gaelo-flow="sidebar"
       className="flex-shrink-0 w-64 h-screen border-transparent rounded-tr-40"
     >
-      <main className="flex flex-col h-full rounded-tr-40 bg-primary">
+      <main className="flex flex-col h-full rounded-tr-40 bg-primary dark:bg-slate-950">
         {/* Logo */}
-        <div className="flex justify-center py-4">
+        <div className="flex justify-center py-4 ">
           <LogoSideBar className="h-16" />
         </div>
 
         {/* Contenu de la barre latérale avec défilement toujours visible */}
-        <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+        <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 dark:scrollbar-white scrollbar-track-transparent">
           <div className="flex flex-col gap-3">
             <MenuItemsCollapse
               icon={<Admin className="w-6 h-6" />}
