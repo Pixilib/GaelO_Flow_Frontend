@@ -1,10 +1,11 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import { DropDown } from '../src/ui';
+import { Dropdown } from '../src/ui';
 
-const meta: Meta<typeof DropDown> = {
-  title: 'GAELO FLOW UI/DropDown',
-  component: DropDown,
+const meta: Meta<typeof Dropdown> = {
+  title: 'GAELO FLOW UI/Dropdown',
+  component: Dropdown,
   argTypes: {
     chevronPosition: {
       control: { type: 'radio' },
@@ -18,7 +19,7 @@ const meta: Meta<typeof DropDown> = {
     dropDown: { control: 'boolean', description: 'Contenu du menu déroulant' },
   },
   tags: ['molecules', 'dropdown', 'autodocs'],
-} satisfies Meta<typeof DropDown>;
+} satisfies Meta<typeof Dropdown>;
 
 export default meta;
 
@@ -28,7 +29,7 @@ const Template: Story = {
   render: (args) => {
     const [isOpen, setIsOpen] = useState(args.isOpen);
 
-    const handleDropDownOpen = () => {
+    const handleDropdownOpen = () => {
       setIsOpen(!isOpen);
       if (args.dropDownOpen) {
         args.dropDownOpen();
@@ -36,13 +37,13 @@ const Template: Story = {
     };
 
     return (
-      <DropDown
+      <Dropdown
         {...args}
         isOpen={isOpen}
-        dropDownOpen={handleDropDownOpen}
+        dropDownOpen={handleDropdownOpen}
       >
         {args.children}
-      </DropDown>
+      </Dropdown>
     );
   }
 };

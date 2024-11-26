@@ -76,7 +76,7 @@ const AccordionPatient = ({
                         checked={selectedPatient}
                     />
                     <div className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
-                        <span className="text-sm font-medium text-gray-600 group-hover:text-white">
+                        <span className="text-sm font-medium text-gray-600 group-hover:text-white dark:text-white">
                             Patient ID: {patient.patientId}
                         </span>
                         <span className="text-sm font-medium group-hover:text-white ">

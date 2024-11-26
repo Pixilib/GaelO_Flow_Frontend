@@ -1,7 +1,7 @@
 import React from 'react';
 import { Series } from "../../utils/types";
-import DropdownButton from '../../ui/menu/DropDownButton';
 import { Download, Edit, Eye, Trash } from '../../icons';
+import { DropdownButton } from '../../ui';
 
 type SeriesActionsProps = {
     series: Series;
@@ -60,7 +60,6 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
             <DropdownButton
                 options={options}
                 buttonText="Actions"
-                row={series}
             />
         </div>
     );

@@ -1,33 +1,40 @@
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { UserState } from '../../reducers/UserSlice';
+import { Card, CardBody, Spinner } from "../../ui";
 import CardAnon from "./CardAnon";
 import CardExport from "./CardExport";
-import Cardretrieve from "./Cardretrieve";
+import CardRetrieve from "./CardRetrieve";
+import { Colors } from "../../utils/enums";
+import { useCustomQuery, User } from '../../utils';
+import { getUserById } from '../../services';
+
 const Dashboard = () => {
-  const username = "M.Ohma";
+  const userState = useSelector((state: RootState) => state.user) as UserState;
+
+  const { data: userData, isPending } = useCustomQuery<User>(['users', userState?.currentUserId.toString()],
+    () => getUserById(userState?.currentUserId)
+  )
+
+  if (isPending) return <Spinner />
+
+  const username = `${userData?.firstname} ${userData?.lastname}`;
 
   return (
-    <div className="p-8 bg-background size-full">
-      <h1 className="mx-8 text-3xl font-bold text-transparent bg-gradient-to-r from-indigo-300 to-indigo-800 bg-clip-text">Overview</h1>
-      <div className="m-8 flex h-10 items-center rounded-[10px] bg-white p-10 shadow-xl">
-        <h2 className="text-xl">
-          <span className="font-bold">{username}</span>
-        </h2>
-        <img
-          src="hello.svg"
-          style={{ width: "40px", height: "40px", marginLeft: "4px" }}
-          alt="Hello Image"
-        />
-      </div>
+    <div className="p-4 md:p-8 bg-background size-full">
+     <h1 className="text-2xl font-medium md:text-4xl animate-typing text-slate-400 dark:text-white">
+  Hello,
+</h1>
 
-      <div className="flex gap-6 mx-8 columns-3">
-        {/* Card Anonymisation */}
+      <h2 className="flex items-center mb-6 overflow-hidden text-3xl font-medium text-transparent md:mb-10 md:text-5xl bg-gradient-to-r from-indigo-800 via-orange-400 to-violet-800 dark:from-indigo-500 dark:via-orange-500 dark:to-violet-800 bg-clip-text whitespace-nowrap animate-typing">
+        {username}
+        <span className="ml-4 text-4xl text-primary">👋🏻</span>
+      </h2>
+
+      <div className="flex flex-col gap-4 md:flex-row md:gap-6">
         <CardAnon />
-
-        {/* Card Export */}
         <CardExport />
-
-        {/* Card Retrieve */}
-
-        <Cardretrieve />
+        <CardRetrieve />
       </div>
     </div>
   );

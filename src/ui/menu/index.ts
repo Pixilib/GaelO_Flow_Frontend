@@ -1,7 +1,8 @@
 //import all compoenents of the menu folder and export them
 import Banner from "./Banner";
 import BannerItems from "./BannerItems";
-import DropDown from "./DropDown";
+import Dropdown from "./Dropdown";
+import DropdownButton from "./DropdownButton";
 import Items from "./Items";
 import MenuItem from "./MenuItem";
 import MenuItemsCollapse from "./MenuItemsCollapse";
@@ -11,4 +12,4 @@ import ToggleSwitch from "./ToggleSwitch";
 import Toggle from "./Toogle";
 import ToogleChevron from "./ToogleChevron";
 
-export { Banner, BannerItems, DropDown, Items, MenuItem, MenuItemsCollapse, SideBarItems, Tabs, Tab, ToogleChevron, ToggleSwitch, Toggle};
+export { Banner, BannerItems, Dropdown, DropdownButton, Items, MenuItem, MenuItemsCollapse, SideBarItems, Tabs, Tab, ToogleChevron, ToggleSwitch, Toggle};

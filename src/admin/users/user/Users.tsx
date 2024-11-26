@@ -78,7 +78,7 @@ const Users = ({ className = "" }: UsersProps) => {
         />
       ) : null}
 
-      <CardFooter className="p-0 border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200">
+      <CardFooter className="p-0 border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200 dark:border-neutral-700 dark:bg-slate-950">
         <div className="flex justify-center">
           {!isCreatingUser ? (
             <Button

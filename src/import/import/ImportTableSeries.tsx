@@ -34,7 +34,7 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
         if (row.someCondition) {
             return 'bg-primary text-white';
         } else {
-            return 'bg-indigo-100';
+            return 'bg-indigo-100 dark:bg-indigo-700';
         }
     };
 
@@ -44,7 +44,7 @@ const ImportTableSeries: React.FC<ImportTableSeriesProps> = ({ data = [] }) => {
             data={rows}
             headerTextSize='xs'
             headerColor={Colors.white}
-            className="bg-gray-100"
+            className="bg-gray-100 dark:bg-slate-950 dark:text-white"
             enableColumnFilters
             enableSorting
             getRowClasses={(row) => getRowClasses(row)}

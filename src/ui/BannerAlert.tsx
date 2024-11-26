@@ -1,6 +1,7 @@
 import React from 'react';
 import { Colors } from '../utils';
 import { Info } from '../icons';
+import Button from './Button';
 
 export interface BannerProps {
   color?: Colors;
@@ -30,7 +31,7 @@ const BannerAlert: React.FC<BannerProps> = ({
       case Colors.dark:
         return 'text-gray-800 border-gray-300 bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800';
       case Colors.danger:
-        return 'text-red-800 border-red-800 bg-white dark:text-red-400 dark:border-red-800 dark:bg-gray-800';
+        return 'text-red-800 border-red-800 bg-white dark:text-white dark:border-red-700 dark:bg-neutral-800';
       case Colors.gray:
         return 'text-gray-800 border-gray-300 bg-gray-50 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800';
       case Colors.light:
@@ -47,16 +48,15 @@ const BannerAlert: React.FC<BannerProps> = ({
       role="alert"
     >
       <Info className="flex-shrink-0 w-5 h-5" />
-      <div className="text-sm font-medium ms-3">
+      <div className="text-lg font-medium g ms-3">
         {children || message}
       </div>
       {onClickButton && (
-        <button
-          className="px-4 py-2 ml-auto font-bold text-white bg-red-800 rounded-2xl hover:bg-red-900 focus:outline-none focus:shadow-outline"
-          onClick={onClickButton}
-        >
+        <Button
+          className="px-4 py-2 ml-auto font-bold text-white focus:outline-none focus:shadow-outline"
+          onClick={onClickButton} color={Colors.danger}       >
           {buttonLabel}
-        </button>
+        </Button>
       )}
     </div>
   );

@@ -8,7 +8,7 @@ import { Trash } from "../icons";
 type PatientTableProps = {
     patients: AnonPatient[];
     selectedRows?: Record<string, boolean>;
-    onClickRow: (patientId :string) => void;
+    onClickRow: (patientId: string) => void;
     onRemovePatient: (patientId: string) => void;
     onChangePatient: (patientId: string | number, columnId: any, value: any) => void;
     onRowSelectionChange?: (selectedRow: Record<string, boolean>) => void;
@@ -22,8 +22,8 @@ const PatientTable = ({
     onChangePatient,
     onRowSelectionChange,
 }: PatientTableProps) => {
-    
-    const columns: ColumnDef<AnonPatient>[] = useMemo(() => [
+
+    const columns: ColumnDef<AnonPatient>[] = [
         {
             id: "id",
             accessorKey: "id"
@@ -58,13 +58,13 @@ const PatientTable = ({
                 );
             },
         },
-    ], [onRemovePatient]);
+    ];
 
     const getRowClasses = (row: AnonPatient) => {
         if (selectedRows?.[row.originalPatient.id]) {
             return 'bg-primary hover:cursor-pointer';
         } else {
-            return 'hover:bg-indigo-100 hover:cursor-pointer';
+            return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';
         }
     };
 
@@ -74,7 +74,7 @@ const PatientTable = ({
             columns={columns}
             data={patients}
             headerTextSize="xs"
-            className="text-sm break-words bg-gray-100"
+            className="text-sm break-words bg-gray-100 dark:bg-slate-950 dark:text-white"
             columnVisibility={{ id: false }}
             onRowClick={(row) => onClickRow(row.originalPatient.id)}
             onCellEdit={onChangePatient}

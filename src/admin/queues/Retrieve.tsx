@@ -97,10 +97,13 @@ const Retrieve = ({ data }: RetrieveProps) => {
       data-gaelo-flow="retrieve-container-queues"
       className="w-full rounded-br-xl rounded-bl-xl"
     >
-      <Card bordered >
-        <CardHeader centerTitle title="Retrieve Schedule Time : " color={Colors.success} />
-        <CardBody color={Colors.light} roundedBottomLeft roundedBottomRight>
-          <div className="flex items-center justify-around gap-12 mt-1">
+      <Card bordered>
+        <CardHeader centerTitle 
+        title="Retrieve Schedule Time : " color={Colors.success} />
+        <CardBody 
+        color={Colors.light} roundedBottomLeft roundedBottomRight
+        className="dark:bg-neutral-800 dark:text-white">
+          <div className="flex flex-col items-center justify-between gap-4 mt-1 sm:flex-row sm:gap-12">
             <Input
               type="time"
               label={
@@ -114,14 +117,14 @@ const Retrieve = ({ data }: RetrieveProps) => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleTimeStart(event)
               }
-              className={"focus:shadow-2xl "}
+              className={"focus:shadow-2xl w-full sm:w-auto"}
             />
             <Input
               type="time"
               label={
                 <Label
                   value={"Stop Time"}
-                  className="text-sm font-medium text-center "
+                  className="text-sm font-medium text-center"
                   align="center"
                 />
               }
@@ -130,14 +133,13 @@ const Retrieve = ({ data }: RetrieveProps) => {
                 handleTimeStop(event)
               }
               className={
-                "bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl"
+                "bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl w-full sm:w-auto"
               }
             />
-            <div className="flex-col w-48 text-center">
+            <div className="flex flex-col w-full text-center sm:w-auto">
               <label 
                     htmlFor="time-delta" 
-                    className="justify-center text-sm text-bold">
-                {" "}
+                    className="justify-center text-sm font-bold">
                 Total Time
               </label>
               <Badge
@@ -150,7 +152,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
               />
             </div>
           </div>
-          <div className="flex items-center justify-center mt-4">
+          <div className="flex justify-center mt-4">
             <Button
               color={Colors.success}
               className="w-32 gap-2 px-8 text-center"
@@ -164,7 +166,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
           </div>
         </CardBody>
       </Card>
-      <div className="flex mt-6">
+      <div className="mt-6 overflow-x-auto">
         <Table data={[]} columns={[]} headerColor={Colors.almond} />
       </div>
     </form>

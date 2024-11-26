@@ -10,9 +10,11 @@ import { signIn } from "../services/auth";
 import { useCustomToast } from "../utils/toastify";
 import { Colors } from "../utils/enums";
 import { SignInResponse } from "../utils/types";
+import PasswordLock from "../icons/PasswordLock";
 
 import { Button, Input, ToggleEye } from "../ui";
-import { PasswordKeyOn, ChevronRight, User } from "./../assets";
+import { ChevronRight, User } from "./../assets";
+import UserId from "../icons/UserId";
 
 export const SignInForm = () => {
   const navigate = useNavigate();
@@ -64,20 +66,20 @@ export const SignInForm = () => {
   return (
     <div className="relative flex items-center justify-center w-full ">
       {/* Background square */}
-      <div className="absolute h-full w-full bg-gradient-to-r from-indigo-500 to-[#926874] shadow-2xl transform rounded-3xl rotate-6 z-0"></div>
-      
-      <div className="relative px-10 bg-white shadow-lg py-14 rounded-3xl">
+      <div className="absolute h-full w-full bg-gradient-to-r from-indigo-500 to-[#926874] dark:from-blue-950 dark:to-rose-950 shadow-2xl transform rounded-3xl rotate-6 z-0"></div>
+
+      <div className="relative px-10 bg-white shadow-lg dark:text-white dark:opacity-70 dark:bg-neutral-700 py-14 rounded-3xl">
         <form onSubmit={handleSubmit} className="relative z-10 flex flex-col items-center w-full">
-          <h1 className="mb-4 text-4xl font-semibold text-center text-dark">
-            {t("titleSignInForm")} 
+          <h1 className="mb-4 text-4xl font-semibold text-center text-dark dark:text-white">
+            {t("titleSignInForm")}
           </h1>
-          <p className="mb-10 text-lg text-center text-dark">
+          <p className="mb-10 text-lg text-center text-dark dark:text-white">
             Please Log in to your Account
           </p>
           <div className="w-2/3 mt-10 text-dark">
             <Input
               label="Email:"
-              svgLeft={<User />}
+              svgLeft={<UserId />}
               bordered
               type="email"
               placeholder="Enter your email"
@@ -92,7 +94,7 @@ export const SignInForm = () => {
             <div className="w-full mt-12 text-dark">
               <Input
                 label="Password:"
-                svgLeft={<PasswordKeyOn />}
+                svgLeft={<PasswordLock />}
                 bordered
                 placeholder="Enter your password"
                 value={password}
@@ -110,7 +112,8 @@ export const SignInForm = () => {
 
           <div className="mt-3 text-xs text-right">
             <span
-              className="inline-block cursor-pointer hover:text-indigo-800 hover:underline"
+              className="inline-block text-white cursor-pointer hover:text-indigo-800 hover:underline dark:text-white dark:hover:text-indigo-300"
+
               onClick={() => navigate("/lost-password")}
             >
               Forgot Password?

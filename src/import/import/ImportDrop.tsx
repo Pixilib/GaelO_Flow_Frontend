@@ -76,19 +76,19 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
         <div className='w-full p-6'>
             <div
                 {...getRootProps({ onClick: open })}
-                className={`relative flex flex-col space-y-3 items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary ${isUploading ? 'cursor-progress' : 'cursor-pointer'
+                className={`relative flex flex-col space-y-3 items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 dark:bg-neutral-800 border-4 border-dashed border-primary dark:border-white ${isUploading ? 'cursor-progress' : 'cursor-pointer'
                     } rounded-lg`}
             >
                 {uploadComplete ? (
                     <Check
                         size={40}
-                        className="text-success" />
+                        className="text-success dark:text-emerald-600" />
                 ) : (
                     <Cloud
-                        size={40} 
-                        className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary'}`} />
+                        size={40}
+                        className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary dark:text-white'}`} />
                 )}
-                <p className="text-primary">Drop the Dicom folder or ZIP, or click to select files</p>
+                <p className="text-primary dark:text-white">Drop the Dicom folder or ZIP, or click to select files</p>
                 <input directory="" webkitdirectory="" {...getInputProps()} />
                 {numberOfLoadedFiles > 0 &&
                     <ProgressBar

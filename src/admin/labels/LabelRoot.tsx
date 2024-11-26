@@ -49,14 +49,16 @@ const LabelRoot: React.FC = () => {
   return (
     <Card>
       <CardHeader centerTitle color={Colors.primary} title={"Manage Labels"} />
-      <CardBody color={Colors.almond} roundedTopLeft roundedTopRight>
+      <CardBody
+        color={Colors.almond}
+        className="dark:bg-neutral-500 rounded-br-2xl rounded-bl-2xl">
         <LabelInputForm onCreateLabel={(label) => handleCreate({ name: label })} />
-        
-        <div className="mt-5"> {/* Ajout de la marge ici */}
-          <LabelTable data={labelsData ?? []} onDeleteLabel={handleDelete} />
+
+        <div className="mt-5">
+          <LabelTable
+            data={labelsData ?? []} onDeleteLabel={handleDelete} />
         </div>
       </CardBody>
-      <CardFooter color={Colors.almond} />
     </Card>
   );
 };

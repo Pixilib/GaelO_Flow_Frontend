@@ -139,7 +139,7 @@ export type ProcessingJob = {
   progress: number;
   state: string;
   id: string;
-  results: Record<string, any>
+  results: Record<string, any>;
 };
 
 export type Peer = {
@@ -372,12 +372,12 @@ export type AnonPatient = {
 }
 
 export type AnonStudy = {
-  newPatientName: string,
-  newPatientId: string,
-  newStudyDescription: string,
-  newAccessionNumber: string,
+  newPatientName: string;
+  newPatientId: string;
+  newStudyDescription: string;
+  newAccessionNumber: string;
   originalStudy: Study;
-}
+};
 
 export type StudyModifyPayload = {
   replace: Partial<StudyMainDicomTags & PatientMainDicomTags>;

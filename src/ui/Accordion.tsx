@@ -68,7 +68,7 @@ const AccordionHeader = ({ children, className = "", variant = "default" }: Acco
         return "bg-primary-active text-white"
       case "default":
       default:
-        return "bg-light"
+        return "bg-light dark:bg-neutral-800 dark:text-white"
     };
   }
 

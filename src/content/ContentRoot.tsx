@@ -152,14 +152,14 @@ const ContentRoot: React.FC = () => {
                 onClose={closeEditModal}
                 show={!!editingPatient}
             />
-            <FormCard className="bg-white" title="Search" collapsible>
+            <FormCard className="bg-white dark:bg-neutral-500" title="Search" collapsible>
                 <SearchForm onSubmit={handleSubmit} existingLabels={labelsData} withAets={false} />
             </FormCard>
 
-            <div className="flex flex-col w-full p-4 bg-white shadow-md rounded-3xl">
+            <div className="flex flex-col w-full p-4 bg-white shadow-md dark:bg-neutral-800 rounded-3xl">
                 <div className="flex items-center justify-between mb-4">
-                    <div className="text-2xl font-bold text-primary">Results</div>
-                    <div className="text-lg text-gray-600">
+                    <div className="text-2xl font-bold text-primary dark:text-white">Results</div>
+                    <div className="text-lg text-gray-600 dark:text-white">
                         {patients.length} {patients.length === 1 ? "patient" : "patients"} found
                     </div>
                 </div>
@@ -169,7 +169,7 @@ const ContentRoot: React.FC = () => {
                 <div className="flex flex-wrap gap-2 mb-4">
                     <Button
                         color={Colors.blueCustom}
-                        className="flex items-center text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
+                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendAnonymizeList}
                     >
                         <Anon className="text-xl" />

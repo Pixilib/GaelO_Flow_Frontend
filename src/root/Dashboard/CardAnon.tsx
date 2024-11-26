@@ -8,9 +8,11 @@ import { useMemo } from "react";
 import ProgressQueueCircle from "../../queue/ProgressQueueCircle";
 import { Spinner } from "../../ui";
 import { AnonQueue } from "../../utils/types";
+import { RootState } from "../../store";
+import Anon from "../../icons/Anon"; // Import the Anon icon
 
 const CardAnon = () => {
-    const currentUserId = useSelector((state) => state.user.currentUserId);
+    const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
 
     const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
         ['queue', 'anonymize', currentUserId?.toString() || ''],
@@ -19,12 +21,12 @@ const CardAnon = () => {
 
     const firstQueue = existingAnonymizeQueues?.[0];
 
-    const { data, isPending, isFetching } = useCustomQuery<AnonQueue[]>(
+    const { data } = useCustomQuery<AnonQueue[]>(
         ['queue', 'anonymize', firstQueue],
         () => getAnonymizeQueue(firstQueue),
         {
             refetchInterval: 2000,
-            enabled: !!firstQueue,
+            enabled: firstQueue != null,
         }
     );
 
@@ -37,36 +39,31 @@ const CardAnon = () => {
         return (totalJobs === 0) ? 0 : (completedJobs / totalJobs) * 100;
     }, [data]);
 
-    useCustomQuery<AnonQueue[]>(['queue', 'anonymize', firstQueue], () => getAnonymizeQueue(firstQueue), {
-        refetchInterval: globalProgress < 100 ? 2000 : false,
-        enabled: !!firstQueue,
-    });
-
-    // If no queue is found, display nothing
-    if (!firstQueue) return null;
-    // If data is loading, display a spinner
-    if (isPending || isFetching) return <Spinner />;
-
     return (
-        <Card className="flex-1">
-            <CardHeader centerTitle title="Anonymisation" color={Colors.blueCustom} />
-            <CardBody className="flex items-center justify-center" color={Colors.light}>
-                <ProgressQueueCircle
-                    onDelete={() => { }}
-                    queueData={{
-                        progress: globalProgress,
-                        state: "",
-                        id: "",
-                        results: undefined,
-                        userId: currentUserId || 0
-                    }}
-                    colors={{ background: 'text-gray-300', progress: Colors.primary }}
-                />
+        <Card className="flex-1 md:max-w-md">
+            <CardHeader centerTitle color={Colors.blueCustom} className="flex items-center">
+                <Anon className="mr-3 text-xl text-white" /> 
+                <span className="text-lg font-bold text-white">Anonymisation</span>
+            </CardHeader>
+            <CardBody className="flex items-center justify-center p-4 dark:bg-neutral-500" color={Colors.white}>
+                {
+                    firstQueue ?
+                        (<ProgressQueueCircle
+                            onDelete={() => { }}
+                            queueData={{
+                                progress: globalProgress,
+                                state: "",
+                                id: "",
+                                results: undefined,
+                                userId: currentUserId || 0
+                            }}
+                            colors={{ background: 'text-gray-300', progress: Colors.primary }}
+                        />)
+                        :
+                        "None"
+                }
             </CardBody>
-            <CardFooter color={Colors.light}>
-                <Button className="self-center" color={Colors.blueCustom}>
-                    Empty List
-                </Button>
+            <CardFooter className="flex justify-center dark:bg-neutral-500" color={Colors.white}>
             </CardFooter>
         </Card>
     );

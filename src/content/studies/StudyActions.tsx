@@ -1,11 +1,12 @@
 // StudyActions.tsx
 import React, { useState } from 'react';
+import { Brain, Download, Edit, Eye, Label, Trash } from '../../icons';
 import { StudyMainDicomTags } from "../../utils/types";
-import DropdownButton from '../../ui/menu/DropDownButton';
 import OhifViewerLink from '../OhifViewerLink';
 import StoneViewerLink from '../StoneViewerLink';
-import { Brain, Download, Edit, Eye, Label, Trash } from '../../icons';
+
 import LabelModal from './LabelModal';
+import { DropdownButton } from '../../ui';
 
 
 type StudyActionsProps = {
@@ -77,7 +78,6 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             <DropdownButton
                 options={options}
                 buttonText="Actions"
-                row={study}
             />
                         {isLabelsModalOpen && (
                 <LabelModal 

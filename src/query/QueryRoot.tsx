@@ -87,7 +87,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
   return (
     <div className={`${className} space-y-6`}>
       <FormCard
-        className="flex flex-col justify-center bg-white gap-y-7"
+        className="flex flex-col justify-center bg-white dark:bg-neutral-500 gap-y-7"
         title={"Search"}
         collapsible={true}
       >
@@ -99,10 +99,10 @@ const QueryRoot = ({ className }: QueryFormProps) => {
       </FormCard>
 
       {/* Section for results and series tables */}
-      <div className="flex flex-col w-full p-4 bg-white shadow-md rounded-3xl">
+      <div className="flex flex-col w-full p-4 bg-white shadow-md dark:bg-neutral-500 rounded-3xl">
         <div className="flex items-center justify-between mb-4">
-          <div className="text-2xl font-bold text-primary">Results</div>
-          <div className="text-lg text-gray-600">
+          <div className="text-2xl font-bold text-primary dark:text-white">Results</div>
+          <div className="text-lg text-neutral-600">
             {studies.length} {studies.length === 1 ? "study" : "studies"} found
           </div>
         </div>

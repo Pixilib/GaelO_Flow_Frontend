@@ -78,7 +78,7 @@ const Roles = () => {
                 />
             )}
 
-            <CardFooter className="p-0 mt-4 border-t border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200">
+            <CardFooter className="p-0 mt-4 border-t-2 rounded-b-lg shadow-inner dark:bg-slate-950 dark:border-neutral-700 bg-light border-slate-200">
                 <div className="flex justify-center w-full">
                 {showCreateRoleForm && (
                     <CreateRole

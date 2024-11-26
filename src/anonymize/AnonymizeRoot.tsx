@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Card, CardHeader, CardBody, CardFooter, Button, SelectInput, Input, CheckBox } from "../ui";
+import { DropdownButton, CardHeader, CardBody, CardFooter, Button, SelectInput } from "../ui";
 import { Colors, useCustomMutation } from "../utils";
 import PatientTable from "./PatientTable";
 import StudyTable from "./StudyTable";
@@ -17,7 +17,7 @@ import AutoFill from "../icons/AutofIll";
 import { AnonItem } from "../utils/types";
 import { createAnonymizeQueue } from "../services/queues";
 import AnonQueues from "./AnonQueues";
-import DropdownButton from "../ui/menu/DropDownButton";
+import AutoFillInput from "./AutoFillInput";
 
 const profileOptions = [
     { value: "Default", label: "Default" },
@@ -48,27 +48,7 @@ const AnonymizeRoot = () => {
         );
     }, [anonList, selectedPatientId]);
 
-    const handleAutoFill = () => {
-        patients.forEach((patient) => {
-            dispatch(
-                updateAnonymizePatientValue({
-                    patientId: patient.originalPatient.id,
-                    newPatientName: `Patient_${patient.originalPatient.id}`,
-                    newPatientId: `ID_${patient.originalPatient.id}`,
-                })
-            );
-        });
 
-        studies.forEach((study) => {
-            dispatch(
-                updateAnonymizeStudyValue({
-                    studyId: study.originalStudy.id,
-                    newStudyDescription: `Study_${study.originalStudy.id}`,
-                    newAccessionNumber: `Acc_${study.originalStudy.id}`,
-                })
-            );
-        });
-    };
 
     const onChangeStudy = (studyId: string, key: string, value: string) => {
         dispatch(updateAnonymizeStudyValue({ studyId, [key]: value }));
@@ -83,6 +63,7 @@ const AnonymizeRoot = () => {
     };
 
     const onRemovePatient = (patientId: string) => {
+        console.log(patientId)
         studies
             .filter((study) => study.originalStudy.parentPatient === patientId)
             .forEach((study) => {
@@ -108,55 +89,40 @@ const AnonymizeRoot = () => {
 
     return (
         <>
-            <CardHeader color={Colors.primary}>
+            <CardHeader 
+            color={Colors.primary}>
                 <div className="flex flex-col items-center w-full sm:flex-row">
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
                         Anonymize resources
                     </div>
                     <div className="flex justify-end w-full p-3 sm:w-1/5">
                         <DropdownButton
-                            row={null}
                             options={[]}
                             buttonText={
                                 <div className="flex items-center justify-center">
-                                    <AutoFill className="text-2xl text-primary" />
-                                    <span className="ml-2">Auto Fill</span>
+                                    <AutoFill className="text-2xl text-primary group-hover:text-white dark:text-white" />
+                                    <span className="ml-2 dark:text-white">Auto Fill</span>
                                 </div>
                             }
                             className="mr-4"
                         >
-                            <div className="flex flex-col items-center">
-                                <Input
-                                    type="text"
-                                    placeholder="Enter value"
-                                    className="w-full p-2 border"
-                                />
-                                <div className="flex items-center w-full mt-2">
-                                    <CheckBox bordered={false} className="mr-2" />
-                                    <span className="text-black">Auto</span>
-                                </div>
-                                <Button
-                                    onClick={handleAutoFill}
-                                    color={Colors.secondary}
-                                    className="mx-auto rounded-lg hover:bg-secondary group"
-                                >
-                                    <span className="ml-2">Auto Fill</span>
-                                </Button>
-                            </div>
+                            <AutoFillInput />
                         </DropdownButton>
 
                         <Button
                             onClick={() => dispatch(flushAnonymizeList())}
                             color={Colors.light}
-                            className="rounded-lg hover:bg-secondary"
+                            className="rounded-lg hover:bg-secondary dark:bg-slate-700"
                             aria-label="Clear all anonymized data"
                         >
-                            <Empty className="text-xl text-primary" />
+                            <Empty className="text-xl text-primary dark:text-white" />
                         </Button>
                     </div>
                 </div>
             </CardHeader>
-            <CardBody color={Colors.almond}>
+            <CardBody 
+            color={Colors.almond}
+            className="dark:bg-neutral-500">
                 <div className="flex flex-col w-full gap-4">
                     <div className="flex-1 overflow-auto break-words">
                         <PatientTable
@@ -175,10 +141,10 @@ const AnonymizeRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter color={Colors.light} className="flex flex-col items-center gap-3 border-t-2 shadow-inner border-slate-200 bg-light">
+            <CardFooter color={Colors.light} className="flex flex-col items-center gap-3 border-t-2 shadow-inner border-slate-200 dark:border-slate-700 bg-light dark:bg-slate-950">
                 <div className="flex flex-col gap-3 mt-2 mb-2 sm:flex-row">
                     <Button
-                        className="flex items-center w-full gap-2 sm:w-auto"
+                        className="flex items-center w-full h-10 gap-2 sm:w-auto"
                         color={Colors.blueCustom}
                         onClick={handleAnonymizeStart}
                         aria-label="Start anonymization process"
@@ -191,10 +157,11 @@ const AnonymizeRoot = () => {
                         value={anonList.anonymizationProfile}
                         options={profileOptions}
                         onChange={onChangeProfile}
-                        className="justify-center w-full sm:w-auto"
+                        className="justify-center w-full h-10 sm:w-auto"
                     />
                 </div>
             </CardFooter>
+
             <div className="mt-4">
                 <AnonQueues showResults={true} />
             </div>

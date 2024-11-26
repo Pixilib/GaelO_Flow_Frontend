@@ -1,8 +1,8 @@
-import { AiOutlineCheck } from "react-icons/ai";
+import { BsFillCloudCheckFill } from "react-icons/bs"; 
 
 const Check = (props) => {
     return (
-        <AiOutlineCheck {...props} />
+        <BsFillCloudCheckFill {...props} />
     )
 }
 

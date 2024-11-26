@@ -86,14 +86,14 @@ const DatasetRoot = () => {
                 color={Colors.primary}
                 title="Dataset"
             />
-            <CardBody className="bg-almond">
+            <CardBody className="bg-almond dark:bg-neutral-500">
                 <div className="space-y-2">
-                    <span className="text-base font-semibold text-gray-700">Labels</span>
+                    <span className="text-base font-semibold text-gray-700 dark:text-white">Labels</span>
                     <SelectRoleLabels values={selectedLabels} onChange={(labels) => setSelectedLabels(labels)} />
                 </div>
                 <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
                     <div className="2xl:col-span-7">
-                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Studies</span>
+                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">Studies</span>
                         <DatasetTableStudy
                             studies={studies}
                             onRowClick={handleStudyRowClick}
@@ -102,7 +102,7 @@ const DatasetRoot = () => {
                         />
                     </div>
                     <div className="2xl:col-span-5">
-                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Series</span>
+                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">Series</span>
                         {series && (
                             <DatasetSeriesTable
                                 series={series}
@@ -112,8 +112,10 @@ const DatasetRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light border-slate-200">
-                <Button color={Colors.secondary} onClick={handleButtonClick}>
+            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner dark:border-slate-600 bg-light dark:bg-slate-950">
+                <Button
+                    color={Colors.secondary}
+                    onClick={handleButtonClick}>
                     To Export
                 </Button>
             </CardFooter>
