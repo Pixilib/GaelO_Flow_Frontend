@@ -83,7 +83,7 @@ const ModalitiesRoot: React.FC = () => {
         color={Colors.primary}
         title={"Manage Modalities"}
       />
-      <CardBody color={Colors.almond} className="space-x-2 dark:bg-gray-500">
+      <CardBody color={Colors.almond} className="space-x-2 dark:bg-neutral-500">
         <div className="w-full mt-2 mb-2">
           <ModalitiesTable
             aetData={aets}

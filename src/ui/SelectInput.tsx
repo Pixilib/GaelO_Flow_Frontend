@@ -1,4 +1,4 @@
-import Select, { ActionMeta, ClassNamesConfig } from 'react-select';
+import Select, { ActionMeta, StylesConfig } from 'react-select';
 
 interface OptionType {
   value: string;
@@ -19,6 +19,22 @@ interface SelectInputProps {
   formatGroupLabel?: (group: { label: string; options: OptionType[] }) => JSX.Element;
 }
 
+// Styles personnalisés pour React-Select
+const customStyles: StylesConfig<OptionType, boolean> = {
+  placeholder: (base) => ({
+    ...base,
+    color: 'white', // Placeholder en blanc
+  }),
+  input: (base) => ({
+    ...base,
+    color: 'white', // Texte saisi en blanc
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: 'white', // Valeur sélectionnée en blanc
+  }),
+};
+
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
     const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
@@ -29,7 +45,7 @@ const customClass: ClassNamesConfig<OptionType, boolean> = {
     return `rounded-xl p-2 ${state.isSelected ? 'bg-primary-active text-white' : 'bg-white dark:bg-neutral-800 text-gray-800 dark:text-white'} hover:bg-primary hover:text-white px-2`;
   },
   multiValue: () => 'bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5',
-  multiValueLabel: () => 'text-gray-800 ',
+  multiValueLabel: () => 'text-gray-800',
   multiValueRemove: () => 'text-red-500 hover:bg-red-200 rounded-full p-0.5',
 };
 
@@ -55,6 +71,7 @@ const SelectInput = ({
       options={options}
       onChange={onChange}
       placeholder={placeholder}
+      styles={customStyles}
       classNames={customClass}
       isClearable={isClearable}
       menuPosition={menuPosition}

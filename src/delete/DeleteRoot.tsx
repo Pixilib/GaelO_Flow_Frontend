@@ -57,7 +57,7 @@ const DeleteRoot = () => {
             </CardHeader>
             <CardBody 
             color={Colors.almond}
-            className="dark:bg-gray-500">
+            className="dark:bg-neutral-500">
                 <DeleteStudyTable
                     studies={Object.values(deleteList)} />
             </CardBody>

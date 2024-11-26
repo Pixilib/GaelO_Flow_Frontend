@@ -68,7 +68,7 @@ const PeersRoot: React.FC = () => {
         color={Colors.primary}
         title={"Manage Peers"}
       />
-      <CardBody className="space-x-4 bg-almond dark:bg-gray-500">
+      <CardBody className="space-x-4 bg-almond dark:bg-neutral-500">
         <div className="flex flex-col items-center">
           <div className="w-full mt-2 mb-2">
             <PeersTable

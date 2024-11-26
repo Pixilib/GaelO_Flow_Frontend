@@ -1,31 +1,39 @@
+import React, { useEffect, useState, useMemo } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { SignUpForm } from "./SignUpForm";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import ChangePasswordForm from "./ChangePasswordForm";
+import { SignIn as SignInImage, SignUp as SignUpImage, SignInUpDark as SignUpImageDark, signIndark as SignInImageDark, ArrowBack } from "../assets";
 import { SignInForm } from "./SignInForm";
-import SignUpImage from "../assets/sign-up.svg";
-import { ArrowBack } from "../assets";
 
 const Welcome = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isDark, setIsDark] = useState(localStorage.getItem("theme") === "dark");
 
-  const getImage = () => {
-    let imageComponent;
-    switch (location.pathname) {
-      case "/sign-in":
-        imageComponent = SignUpImage;
-        break;
-      case "/sign-up":
-        imageComponent = SignUpImage;
-        break;
-      default:
-        imageComponent = SignUpImage;
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsDark(localStorage.getItem("theme") === "dark");
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const getImage = useMemo(() => {
+    if (location.pathname === "/sign-up") {
+      return isDark ? (
+        <SignUpImageDark className="w-full h-auto max-w-2xl" />
+      ) : (
+        <SignUpImage className="w-full h-auto max-w-2xl" />
+      );
     }
-    return <div className="w-full max-w-2xl mx-auto">
-      <img src={imageComponent} alt="Sign Up" /> 
-    </div>;
-  };
+    return isDark ? (
+      <SignInImageDark className="w-full h-auto max-w-2xl" />
+    ) : (
+      <SignInImage className="w-full h-auto max-w-2xl" />
+    );
+  }, [location.pathname, isDark]);
 
   const classLink = "text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer";
 
@@ -37,7 +45,7 @@ const Welcome = () => {
           className="absolute w-20 h-auto max-w-full left-7 top-7"
           alt="Logo"
         />
-        {getImage()}
+        <div className="w-full max-w-2xl mx-auto">{getImage}</div>
       </div>
       <div className="flex items-center justify-center w-1/2 bg-white shadow-xl dark:bg-stone-900">
         <div className="w-full max-w-md p-4">
@@ -49,30 +57,41 @@ const Welcome = () => {
             <Route path="/sign-up" element={<SignUpForm />} />
           </Routes>
 
-          <hr className="w-full my-8 mt-20 border-primary dark:border-white dark:hover:text-indigo-300" />
+          <hr className="w-full my-8 mt-20 border-primary dark:border-white" />
 
           <div className="flex justify-between mx-auto text-center text-balance">
             {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
-              <span onClick={() => navigate("/sign-up")} className={`${classLink} dark:text-white dark:hover:text-indigo-300`}>
+              <span
+                onClick={() => navigate("/sign-up")}
+                className={`${classLink} dark:text-white dark:hover:text-indigo-300`}
+              >
                 Don’t have an account?
               </span>
             )}
 
             {location.pathname === "/legal-mention" ? (
-              <div onClick={() => navigate("/")} className="flex items-center gap-2 cursor-pointer">
+              <div
+                onClick={() => navigate("/")}
+                className="flex items-center gap-2 cursor-pointer"
+              >
                 <ArrowBack />
-                <span className="text-gray-600 dark:text-white dark:hover:text-indigo-300">Back</span>
+                <span className="text-gray-600 dark:text-white dark:hover:text-indigo-300">
+                  Back
+                </span>
               </div>
             ) : (
-              <span onClick={() => navigate("/")} className={`${classLink} dark:text-white dark:hover:text-indigo-300`}>
+              <span
+                onClick={() => navigate("/")}
+                className={`${classLink} dark:text-white dark:hover:text-indigo-300`}
+              >
                 Already have an account?
               </span>
             )}
 
             {location.pathname !== "/legal-mention" && (
               <span
-                className={`${classLink} inline-block dark:text-white dark:hover:text-indigo-300`}
                 onClick={() => navigate("/legal-mention")}
+                className={`${classLink} inline-block dark:text-white dark:hover:text-indigo-300`}
               >
                 Legal Mention
               </span>

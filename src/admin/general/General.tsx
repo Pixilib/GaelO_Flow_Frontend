@@ -22,7 +22,7 @@ const General = () => {
 
   return (
     <div
-      className="mx-4 mt-4 mb-4 shadow-md bg-almond dark:bg-gray-500 rounded-xl"
+      className="mx-4 mt-4 mb-4 shadow-md bg-almond 292929 rounded-xl"
       data-gaelo-flow="general-root"
     >
       <Tabs className="bg-primary rounded-t-xl">

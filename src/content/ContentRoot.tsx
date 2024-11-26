@@ -152,7 +152,7 @@ const ContentRoot: React.FC = () => {
                 onClose={closeEditModal}
                 show={!!editingPatient}
             />
-            <FormCard className="bg-white dark:bg-gray-500" title="Search" collapsible>
+            <FormCard className="bg-white dark:bg-neutral-500" title="Search" collapsible>
                 <SearchForm onSubmit={handleSubmit} existingLabels={labelsData} withAets={false} />
             </FormCard>
 

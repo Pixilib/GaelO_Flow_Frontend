@@ -122,7 +122,7 @@ const AnonymizeRoot = () => {
             </CardHeader>
             <CardBody 
             color={Colors.almond}
-            className="dark:bg-gray-500">
+            className="dark:bg-neutral-500">
                 <div className="flex flex-col w-full gap-4">
                     <div className="flex-1 overflow-auto break-words">
                         <PatientTable

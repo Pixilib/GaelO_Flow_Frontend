@@ -49,9 +49,9 @@ const Input = ({
     mr-3
     block 
     dark:bg-stone-800 
-    dark:border-gray-500 
+    dark:border-white
     dark:placeholder-gray-200 
-    dark:text-white 
+    dark:text-gray-200 
     dark:focus:ring-indogp-300 
     dark:focus:border-blue-500
     hover:disabled:cursor-not-allowed
@@ -74,7 +74,7 @@ const Input = ({
 
       <div
         className={
-          `flex items-center peer ${borderClasses} text-gray-600 w-full ${roundedRightClass} text-sm ${InputClassName} ${className}`
+          `flex items-center peer ${borderClasses} text-gray-600 dark:text-white w-full ${roundedRightClass} text-sm ${InputClassName} ${className}`
         }>
         {svgLeft && (
           <div className="p-3 pointer-events-none peer-disabled:pointer-events-none peer-disabled:opacity-50">

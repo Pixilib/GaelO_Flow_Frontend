@@ -168,7 +168,7 @@ const ExportRoot = () => {
             </CardHeader>
             <CardBody
                 color={Colors.almond}
-                className="overflow-x-auto dark:bg-gray-500">
+                className="overflow-x-auto dark:bg-neutral-500">
                 <div className="flex flex-col md:flex-row md:space-x-4">
                     <div className="flex-1 min-w-0">
                         <ExportStudyTable
