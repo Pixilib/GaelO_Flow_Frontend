@@ -1,22 +1,21 @@
 import { useMemo, useState } from "react";
 import { getInstancesOfSeries } from "../../services/orthanc";
-import { Input, Spinner } from "../../ui";
+import { Badge, Input, Spinner } from "../../ui";
 import { useCustomQuery } from "../../utils";
 import { instanceHeader, instanceTags } from "../../services/instances";
-import { Metadata, Tag } from "../../utils/types";
-import { Meta } from "@storybook/react";
+import { Metadata, Tag as TagType } from "../../utils/types";
+import Tag from "./metadata/tag";
 
 type TagsProps = {
   seriesId: string;
 };
 
-const Tags = ({ seriesId }: TagsProps) => {
+const TagsTree = ({ seriesId }: TagsProps) => {
   const { data: instances } = useCustomQuery(
     ["series", seriesId, "instances"],
     () => getInstancesOfSeries(seriesId)
   );
   const [instanceNumber, setInstanceNumber] = useState<number>(1);
-  const [expanded, setExpanded] = useState<{ [key: string]: boolean }>({});
 
   const currentInstanceId =
     instanceNumber != null && instances != null
@@ -47,42 +46,27 @@ const Tags = ({ seriesId }: TagsProps) => {
     };
   }, [header, tags]);
 
-  const toggleExpand = (key: string) => {
-    setExpanded((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
-  const getComponent = (tagAddress: string, tag: Tag) => {
+  const getComponent = (tagAddress: string, tag: TagType) => {
     if (Array.isArray(tag.Value)) {
       return (
         <li key={tagAddress} className="ml-4">
-          <button
-            onClick={() => toggleExpand(tagAddress)}
-            className="text-blue-600 underline"
-          >
-            {tag.Name} {expanded[tagAddress] ? "▲" : "▼"}
-          </button>
-          {expanded[tagAddress] && (
-            <ul className="list-disc pl-4">
-              {tag.Value.map((metadata, index) => (
-                <li key={`${tagAddress}-${index}`}>
-                  <ul>
-                    {Object.entries(metadata).map(([addressTag, tag]) =>
-                      getComponent(addressTag, tag)
-                    )}
-                  </ul>
-                </li>
-              ))}
-            </ul>
-          )}
+          <Tag tag={tag}>
+            {tag.Value.map((metadata, index) => (
+              <li key={`${tagAddress}-${index}`}>
+                <ul>
+                  {Object.entries(metadata).map(([addressTag, tag]) =>
+                    getComponent(addressTag, tag)
+                  )}
+                </ul>
+              </li>
+            ))}
+          </Tag>
         </li>
       );
     } else {
       return (
         <li className="ml-4 px-2" key={tagAddress}>
-          {tag.Name} - {tag.Value}
+          <Badge value={tag.Name +" - "+ (tag.Value as string)}/>
         </li>
       );
     }
@@ -100,7 +84,7 @@ const Tags = ({ seriesId }: TagsProps) => {
         onChange={(event) => setInstanceNumber(Number(event.target?.value))}
       />
       <div>
-        <ul className="list-disc">
+        <ul className="list-disc space-y-3">
           {Object.entries(metadata).map(([tagAddress, tag]) =>
             getComponent(tagAddress, tag)
           )}
@@ -110,4 +94,4 @@ const Tags = ({ seriesId }: TagsProps) => {
   );
 };
 
-export default Tags;
+export default TagsTree;

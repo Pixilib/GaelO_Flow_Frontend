@@ -399,4 +399,10 @@ export type Queue = {
   userId: number;
 };
 
-export type Tags = Record<string, string | Record<string, string>[]>;
+export type Tag = {
+  Name :string;
+  Type :string;
+  Value : string| Record<string, Tag>[]
+}
+
+export type Metadata = Record<string, Tag>;
