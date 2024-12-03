@@ -8,6 +8,7 @@ type BadgeProps = {
   size?: Size;
   borderColor?: string;
   variant?: "default" | "success" | "danger" | "warning";
+  [key :string] : any
 };
 
 const Badge = ({
@@ -15,6 +16,7 @@ const Badge = ({
   className = "",
   variant = "default",
   size = "sm",
+  ...props
 }: BadgeProps) => {
 
   const sizeClasses = {
@@ -58,7 +60,7 @@ const Badge = ({
     ${className}
   `;
 
-  return <span className={badgeClasses}>{value}</span>;
+  return <span className={badgeClasses} {...props}>{value}</span>;
 };
 
 export { Badge };

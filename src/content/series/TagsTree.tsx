@@ -49,7 +49,7 @@ const TagsTree = ({ seriesId }: TagsProps) => {
   const getComponent = (tagAddress: string, tag: TagType) => {
     if (Array.isArray(tag.Value)) {
       return (
-        <li key={tagAddress} className="ml-4">
+        <li key={tagAddress} className="ml-4 list-none">
           <Tag tag={tag}>
             {tag.Value.map((metadata, index) => (
               <li key={`${tagAddress}-${index}`}>
@@ -65,8 +65,8 @@ const TagsTree = ({ seriesId }: TagsProps) => {
       );
     } else {
       return (
-        <li className="ml-4 px-2" key={tagAddress}>
-          <Badge value={tag.Name +" - "+ (tag.Value as string)}/>
+        <li className="ml-4 px-2 list-none" key={tagAddress}>
+          <Badge variant="success" className="p-1" value={tagAddress + ' - ' +tag.Name +" : "+ (tag.Value as string)}/>
         </li>
       );
     }
@@ -75,7 +75,7 @@ const TagsTree = ({ seriesId }: TagsProps) => {
   if (!instances) return <Spinner />;
 
   return (
-    <>
+    <div className="space-y-3 max-h-screen overflow-auto">
       <Input
         label="Instance Number"
         min={1}
@@ -85,12 +85,12 @@ const TagsTree = ({ seriesId }: TagsProps) => {
       />
       <div>
         <ul className="list-disc space-y-3">
-          {Object.entries(metadata).map(([tagAddress, tag]) =>
+          {Object.entries(metadata).sort().map(([tagAddress, tag]) =>
             getComponent(tagAddress, tag)
           )}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 
