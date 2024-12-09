@@ -15,6 +15,7 @@ import DatasetRoot from "../datasets/DatasetRoot";
 import DeleteRoot from "../delete/DeleteRoot";
 import AnonymizeRoot from "../anonymize/AnonymizeRoot";
 import ExportRoot from "../export/ExportRoot";
+import AutoRoutingRoot from "../autorouting/AutoRoutingRoot";
 
 const titlePath: { [key: string]: string } = {
   "/administration/general": "General",
@@ -35,8 +36,8 @@ const titlePath: { [key: string]: string } = {
   "/query": "Query",
   "/users": "Users",
   "/dataset": "DataSet",
-  "/auto-retrieve": "Auto retrieve",
-  "/auto-routing": "Auto routing",
+  "/auto-retrieve": "Auto Retrieve",
+  "/autorouting": "Auto Routing",
   "/datasets": "Datasets",
   "/": "Home",
 };
@@ -77,6 +78,7 @@ const RootApp = () => {
             <Route path="/anonymize" element={<AnonymizeRoot />} />
             <Route path="/export" element={<ExportRoot />} />
             <Route path="/delete" element={<DeleteRoot />} />
+            <Route path="/autorouting" element={<AutoRoutingRoot />} />
           </Routes>
         </div>
       </div>
