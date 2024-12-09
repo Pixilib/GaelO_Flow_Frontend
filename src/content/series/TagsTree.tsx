@@ -16,6 +16,7 @@ const TagsTree = ({ seriesId }: TagsProps) => {
     () => getInstancesOfSeries(seriesId)
   );
   const [instanceNumber, setInstanceNumber] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const currentInstanceId =
     instanceNumber != null && instances != null
@@ -46,6 +47,26 @@ const TagsTree = ({ seriesId }: TagsProps) => {
     };
   }, [header, tags]);
 
+  const filteredMetadata = useMemo(() => {
+    if (!searchTerm) return metadata;
+    const lowerSearchTerm = searchTerm.toLowerCase();
+
+    return Object.entries(metadata).reduce((filtered, [tagAddress, tag]) => {
+      const tagValue = String(tag.Value).toLowerCase();
+      const tagName = tag.Name?.toLowerCase();
+
+      if (
+        tagAddress.toLowerCase().includes(lowerSearchTerm) ||
+        tagName?.includes(lowerSearchTerm) ||
+        tagValue.includes(lowerSearchTerm)
+      ) {
+        filtered[tagAddress] = tag;
+      }
+
+      return filtered;
+    }, {} as Metadata);
+  }, [metadata, searchTerm]);
+
   const getComponent = (tagAddress: string, tag: TagType) => {
     if (Array.isArray(tag.Value)) {
       return (
@@ -66,7 +87,11 @@ const TagsTree = ({ seriesId }: TagsProps) => {
     } else {
       return (
         <li className="ml-4 px-2 list-none" key={tagAddress}>
-          <Badge variant="success" className="p-1" value={tagAddress + ' - ' +tag.Name +" : "+ (tag.Value as string)}/>
+          <Badge
+            variant="success"
+            className="p-1"
+            value={`${tagAddress} - ${tag.Name} : ${tag.Value}`}
+          />
         </li>
       );
     }
@@ -83,11 +108,17 @@ const TagsTree = ({ seriesId }: TagsProps) => {
         value={instanceNumber ?? 1}
         onChange={(event) => setInstanceNumber(Number(event.target?.value))}
       />
+      <Input
+        label="Search Metadata"
+        value={searchTerm}
+        onChange={(event) => setSearchTerm(event.target?.value)}
+        placeholder="Search by tag address, name, or value"
+      />
       <div>
         <ul className="list-disc space-y-3">
-          {Object.entries(metadata).sort().map(([tagAddress, tag]) =>
-            getComponent(tagAddress, tag)
-          )}
+          {Object.entries(filteredMetadata)
+            .sort()
+            .map(([tagAddress, tag]) => getComponent(tagAddress, tag))}
         </ul>
       </div>
     </div>
