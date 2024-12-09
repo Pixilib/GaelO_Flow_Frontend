@@ -12,8 +12,9 @@ import PreviewSeries from './PreviewSeries';
 import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import { Modal, Spinner } from '../../ui';
-import Tags from './Tags';
+import Tags from './TagsTree';
 import { exportRessource, exportSeriesToNifti } from '../../services/export';
+
 
 interface SeriesRootProps {
   studyId: string;

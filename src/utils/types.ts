@@ -407,6 +407,14 @@ export type Queue = {
   userId: number
 }
 
+export type Tag = {
+  Name :string;
+  Type :string;
+  Value : string| Record<string, Tag>[]
+}
+
+export type Metadata = Record<string, Tag>;
+
 export type AnonQueue = {
   progress: number
   state: string
