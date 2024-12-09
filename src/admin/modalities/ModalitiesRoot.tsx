@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AiOutlinePlus as MoreIcon } from "react-icons/ai";
 
 import {
   Button,
@@ -22,6 +21,7 @@ import {
   getModalities,
   echoModality,
 } from "../../services/modalities";
+import { More } from "../../icons";
 
 const ModalitiesRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -79,26 +79,26 @@ const ModalitiesRoot: React.FC = () => {
   return (
     <Card>
       <CardHeader
-        className="flex items-center justify-center rounded-t-lg text-bg-light"
+        centerTitle
         color={Colors.primary}
         title={"Manage Modalities"}
       />
-      <CardBody color={Colors.almond} className="space-x-4">
-        <div className="items-center w-full mt-6 mb-8 f">
-          <div className="">
-            <ModalitiesTable
-              aetData={aets}
-              onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}
-              onEchoAet={handleEchoAet}
-            />
-          </div>
+      <CardBody color={Colors.almond} className="space-x-2 dark:bg-neutral-500">
+        <div className="w-full mt-2 mb-2">
+          <ModalitiesTable
+            aetData={aets}
+            onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}
+            onEchoAet={handleEchoAet}
+          />
         </div>
       </CardBody>
-      <CardFooter color={Colors.light} className="flex justify-center">
+      <CardFooter
+        color={Colors.light}
+        className="flex flex-col justify-center py-4 border-t-2 shadow-inner sm:flex-row border-slate-200 dark:border-neutral-700 bg-light dark:bg-slate-950"
+      >
         {!showNewAetCard && (
-          <Button color={Colors.success} onClick={handleNewAetClick}>
-            <MoreIcon className="mr-3 "
-              size={24} />
+          <Button color={Colors.success} onClick={handleNewAetClick} className="w-full mb-4 sm:w-auto sm:mb-0">
+            <More className="mr-3" size={24} />
             New modality
           </Button>
         )}

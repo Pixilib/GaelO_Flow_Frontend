@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
-import { BsFillCloudArrowUpFill as CloudIcon, BsCheckCircleFill as CheckIcon } from 'react-icons/bs';
 import { useDropzone } from "react-dropzone";
 import { useCustomToast } from "../../utils";
+import { Check, Cloud } from "../../icons";
 
 interface CreateDropProps {
     files: File[],
@@ -38,20 +38,20 @@ const CreateDrop: React.FC<CreateDropProps> = ({ files, onDrop }) => {
 
     return (
         <div
-            className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 border-4 border-dashed border-primary rounded-lg cursor-pointer`}
+            className={`relative flex flex-col items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 dark:bg-neutral-800  border-4 border-dashed dark:border-white border-primary rounded-lg cursor-pointer`}
             {...getRootProps({ onClick: open })}
             onDragOver={handleDragOver}
         >
             {files.length > 0 ? (
-                <CheckIcon
+                <Check
                     size={40}
-                    className="text-success" />
+                    className="text-success dark:text-emerald-600" />
             ) : (
-                <CloudIcon
+                <Cloud
                     size={40}
-                    className={`text-primary`} />
+                    className={`text-primary dark:text-white`} />
             )}
-            <p className="text-primary">{files.length > 0 ? files.length + ' files loaded' : 'Drag and drop image files here'}</p>
+            <p className="text-primary dark:text-white">{files.length > 0 ? files.length + ' files loaded' : 'Drag and drop image files here'}</p>
             <input type="file" style={{ display: 'none' }} />
         </div>
     );

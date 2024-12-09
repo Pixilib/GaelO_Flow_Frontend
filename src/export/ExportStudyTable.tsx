@@ -1,23 +1,24 @@
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { ColumnDef } from "@tanstack/react-table";
-
 import { Table, Button } from "../ui";
 import { Colors, Study } from "../utils";
 import { removeSeriesFromExportList } from "../reducers/ExportSlice";
+import { Trash } from "../icons";
 
 type ExportStudyTableProps = {
     studies: Study[];
-    onClickStudy : (study : Study) => void
+    selectedRows?: Record<string, boolean>;
+    onClickStudy: (study: Study) => void;
 };
 
-const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
+const ExportStudyTable = ({ studies, selectedRows, onClickStudy }: ExportStudyTableProps) => {
     const dispatch = useDispatch();
 
     const handleDelete = (studyId: string) => {
-        const studyToDelete = studies.find(study => study.id === studyId)
-        for(const seriesId of studyToDelete.series){
-            dispatch(removeSeriesFromExportList({seriesId : seriesId}))
+        const studyToDelete = studies.find(study => study.id === studyId);
+        for (const seriesId of studyToDelete.series) {
+            dispatch(removeSeriesFromExportList({ seriesId }));
         }
     };
 
@@ -55,7 +56,7 @@ const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
                             onClick={() => handleDelete(row.original.id)}
                             color={Colors.danger}
                         >
-                            Remove
+                            <Trash />
                         </Button>
                     </div>
                 ),
@@ -64,7 +65,25 @@ const ExportStudyTable = ({ studies, onClickStudy }: ExportStudyTableProps) => {
         []
     );
 
-    return <Table onRowClick={onClickStudy} columnVisibility={{id : false}} data={studies} columns={columns} />;
+    const getRowClasses = (row: Study) => {
+        if (selectedRows?.[row.id]) {
+            return 'bg-primary hover:cursor-pointer';
+        } else {
+            return 'hover:bg-indigo-100 hover:cursor-pointer';
+        }
+    };
+
+    return (
+        <Table
+            onRowClick={onClickStudy}
+            columnVisibility={{ id: false }}
+            data={studies}
+            headerTextSize="xs"
+            className="text-sm break-words bg-gray-100"
+            columns={columns}
+            getRowClasses={getRowClasses}
+        />
+    );
 };
 
 export default ExportStudyTable;

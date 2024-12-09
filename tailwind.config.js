@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
+    "./index.html", 
+    "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/preline/dist/*.js"
   ],
   theme: {
     prefix: 'hs-',
     extend: {
+
+      zIndex: {
+        'dropdown': '1000',
+      },
       fontSize: {
         '10': '10px',
       },
@@ -39,41 +44,48 @@ export default {
         '80%': '80%',
         '85%': '85%',
         '90%': '90%',
-
       },
       borderWidth: {
-        '1,5': '1.5px',
+        '1.5': '1.5px',
       },
       colors: {
-        'almond':'#F7E9D8',
-        'almond-hover':'#F6D1A7',
+        'almond': '#F7E9D8',
+        'almond-hover': '#F6D1A7',
         'primary': '#4746B8',
         'primary-active': '#333182',
         'primary-light': '#8C8BD3',
         'secondary': '#EB9124',
         'secondary-hover': '#BD6800',
-        'secondaryLight': '#F1EBE8',
         'danger': '#DB1F22',
         'danger-hover': '#8A1315',
-        'sucess-light': '#CBDCD4',
+        'success-light': '#CBDCD4',
         'success': '#037F6E',
         'success-hover': '#2E7058',
         'disabled': '#b2b2b2',
         'warning': '#DDAD00',
         'warning-hover': '#A88400',
         'dark': '#484544',
-        'redCustom': '#f8d7da',
-        'grayCustom': '#D4CFCF',
+        'blue-custom': '#2F77BA',
+        'blue-custom-hover': '#245D92',
+        'gray-custom': '#D4CFCF',
         'light': '#FFFFFF',
         'light-gray': '#EFEFEF',
-        'badge-grayCustom': '#E6E6F2',
-        'badge-blue-text': '#4A4AFF',
       },
       boxShadow: {
         'custom': '5px 17px 15px rgba(58, 51, 51, 0.20)',
       },
+      animation: {
+        'typing': 'typing 3s steps(30) 1s 1 normal both',
+      },
+      keyframes: {
+        typing: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+      },
     },
   },
+  darkMode: 'selector',
   plugins: [
     require('@tailwindcss/forms'),
     require('tailwind-scrollbar'),

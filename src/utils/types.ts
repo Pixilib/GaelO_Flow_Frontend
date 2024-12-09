@@ -206,6 +206,8 @@ type QuerySeries = {
   SeriesDescription?: string;
   SeriesNumber?: string;
   SeriesInstanceUID?: string;
+  NumberOfSeriesRelatedInstances?: string;
+  ProtocolName?: string;
 };
 
 type Level = "Series" | "Study";
@@ -363,6 +365,12 @@ export type Study = {
   type: string;
 };
 
+export type AnonPatient = {
+  newPatientName: string,
+  newPatientId: string,
+  originalPatient: Patient
+}
+
 export type AnonStudy = {
   newPatientName: string;
   newPatientId: string;
@@ -392,12 +400,12 @@ export type SeriesModifyPayload = {
 };
 
 export type Queue = {
-  progress: number;
-  state: string;
-  id: string;
-  results: Record<string, any>;
-  userId: number;
-};
+  progress: number
+  state: string
+  id: string
+  results: Record<string, any>
+  userId: number
+}
 
 export type Tag = {
   Name :string;
@@ -406,3 +414,23 @@ export type Tag = {
 }
 
 export type Metadata = Record<string, Tag>;
+
+export type AnonQueue = {
+  progress: number
+  state: string
+  id: string
+  results: Study
+  userId: number
+}
+
+export type AnonItem = {
+  OrthancStudyID: string,
+  Profile: 'full' | 'default',
+  NewAccessionNumber: string
+  NewPatientID: string
+  NewPatientName: string
+}
+
+export type AnonymizePayload = {
+  Anonymizes: AnonItem[]
+}

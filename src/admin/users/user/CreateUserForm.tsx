@@ -1,5 +1,4 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
-import { BsPersonCheckFill as SubmitUser } from 'react-icons/bs';
 import { getRoles, postUsers } from '../../../services';
 import {
   useCustomMutation,
@@ -18,6 +17,7 @@ import {
 } from '../../../ui';
 import { getErrorMessage } from '../../../utils/error';
 import InputPassword from '../../../ui/InputPassword';
+import { SubmitUser } from '../../../icons';
 
 type UserFormProps = {
   onClose : () => void;
@@ -79,7 +79,7 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
 
   return (
     <FormCard
-      className={`${className} bg-light-gray`}
+      className={`${className} bg-light-gray dark:bg-neutral-500 `}
       title={"Create user"}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -148,9 +148,10 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
           />
         </label>
       </div>
-      <div className="grid grid-cols-1 col-span-3 mt-3">
+      <div className="grid grid-cols-1 col-span-3 ">
         <FormButton
-          text=" "
+          text=" Create user"
+          className='w-40'
           icon={<SubmitUser size="1.3rem" />}
         />
       </div>

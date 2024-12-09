@@ -1,10 +1,5 @@
-import {
-  FaRedo as Resume,
-  FaPlay as Play,
-  FaPause as Pause,
-  FaTimes as Cancel,
-} from "react-icons/fa";
 import { JobsAction } from "src/utils/types";
+import { Cancel, Pause, Play, Resume } from "../../icons";
 
 type JobActionsProps = {
   jobId: string;

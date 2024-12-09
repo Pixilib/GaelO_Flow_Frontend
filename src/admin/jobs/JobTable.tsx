@@ -1,19 +1,18 @@
-import { BsInfoCircle as Info } from "react-icons/bs";
+import { Info } from "../../icons";
 import { Table, Badge, Popover } from "../../ui";
-
 import { Colors } from "../../utils/enums";
 import { JobsAction, OrthancJob } from "../../utils/types";
 import JobActions from "./JobActions";
 
-//!WIP 
-//! Needs to fix implemntation of PopOver
 type JobTableProps = {
   data: OrthancJob[];
   onJobAction: (jobId: string, action: JobsAction) => void;
 };
-const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
 
-  const infoDetails = (rowData: any) => <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>;
+const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
+  const infoDetails = (rowData: any) => (
+    <code><pre className="text-xs">{JSON.stringify(rowData, null, 4)}</pre></code>
+  );
 
   const columns = [
     {
@@ -26,6 +25,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       cell: (row: any) => (
         <Badge
           value={row.getValue()}
+          className="max-w-[100px] overflow-hidden text-ellipsis"
         />
       ),
       enableColumnFilter: true,
@@ -44,7 +44,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       header: "Action",
       cell: (info: any) => {
         return (
-          <div className="flex justify-center">
+          <div className="flex">
             <JobActions
               jobId={info.row.original.ID}
               onJobAction={onJobAction}
@@ -58,8 +58,14 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       header: "Info",
       cell: (info: any) => {
         return (
-          <Popover popover={infoDetails(info.row.original)} placement="left" className="w-auto" withOnClick={true}>
-            <Info size="1.5em" color="gray" className="hover:scale-110" />
+          <Popover 
+            popover={infoDetails(info.row.original)} 
+            placement="left" 
+            className="w-auto "
+            withOnClick={true}
+            backgroundColor="bg-white "
+          >
+            <Info size="1.5em"  className="hover:scale-110 " />
           </Popover>
         );
       },
@@ -67,13 +73,18 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
     },
   ];
 
-  return <Table
-    data={data}
-    columns={columns}
-    headerColor={Colors.white}
-    headerTextSize="sm"
-    className="bg-gray-100"
-    enableColumnFilters enableSorting />;
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      headerColor={Colors.white}
+      headerTextSize="sm"
+      className="bg-gray-100 dark:bg-slate-950 dark:text-white"
+      enableColumnFilters
+      enableSorting
+      getRowClasses={() => "hover:bg-indigo-100 cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer"}
+    />
+  );
 };
 
 export default JobTable;

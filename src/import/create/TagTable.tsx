@@ -23,7 +23,7 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
             id: 'delete',
             header: 'Actions',
             cell: ({ row }) => (
-                <div className='w-full flex justify-center'>
+                <div className='flex justify-center w-full'>
                     <DeleteButton
                         onClick={() => onDeleteTag(row.original.name)}
                     />
@@ -36,11 +36,13 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
     return (
         <div className="w-full mt-4">
             <Table
-                headerColor={Colors.warning}
+                headerColor={Colors.light}
                 columns={columns}
                 data={data}
                 className="bg-gray-100"
                 enableSorting
+            
+            
             />
         </div>
     );

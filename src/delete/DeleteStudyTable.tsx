@@ -5,6 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Table, Button } from "../ui";
 import { Colors, Study } from "../utils";
 import { removeStudyFromDeleteList } from "../reducers/DeleteSlice";
+import { Trash } from "../icons";
 
 type DeleteStudyTableProps = {
     studies: Study[];
@@ -23,6 +24,7 @@ const DeleteStudyTable = ({ studies }: DeleteStudyTableProps) => {
                 id: "id",
                 accessorKey: "id",
                 header: "ID",
+
             },
             {
                 accessorKey: "patientMainDicomTags.patientName",
@@ -52,7 +54,7 @@ const DeleteStudyTable = ({ studies }: DeleteStudyTableProps) => {
                             onClick={() => handleDelete(row.original.id)}
                             color={Colors.danger}
                         >
-                            Remove
+                            <Trash />
                         </Button>
                     </div>
                 ),
@@ -61,7 +63,7 @@ const DeleteStudyTable = ({ studies }: DeleteStudyTableProps) => {
         [dispatch]
     );
 
-    return <Table data={studies} columns={columns} />;
+    return <Table data={studies} columnVisibility={{id : false}} columns={columns} />;
 };
 
 export default DeleteStudyTable;

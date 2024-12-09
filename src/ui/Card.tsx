@@ -8,7 +8,7 @@ type CardProps = {
 };
 
 type CardHeaderProps = {
-  title: string;
+  title?: string;
   centerTitle?: boolean;
   className?: string;
   children?: React.ReactNode;
@@ -34,32 +34,25 @@ type CardFooterProps = {
 const colorClasses: Record<Colors, string> = {
   almond: "bg-almond",
   primary: "bg-primary",
-  transparent : "bg-transparent",
-  primaryHover: "hover:bg-primary-hover",
   secondary: "bg-secondary",
-  secondaryHover: "hover:bg-secondary-hover",
   danger: "bg-danger",
-  dangerHover: "hover:bg-danger-hover",
-  grayCustom: "bg-grayCustom",
-  success: "bg-success",
-  successHover: "hover:bg-success-hover",
-  disabled: "bg-disabled",
+  success: "bg-success dark:bg-emerald-600",
   warning: "bg-warning",
-  warningHover: "hover:bg-warning-hover",
   dark: "bg-dark",
-  red: "bg-red",
   gray: "bg-gray",
+  blueCustom: "bg-blue-custom dark:bg-blue-600",
   light: "bg-light",
   white: "bg-white",
+  [Colors.lightGray]: ''
 };
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";
 
 const Card = ({ bordered, className = "", children }: CardProps) => {
-  const borderClass = bordered ? "border" : "";
+  const borderClass = bordered ? "" : "";
 
   return (
-    <div data-gaelo-flow="Card" className={`shadow-md ${className} ${borderClass} rounded-xl`}>
+    <div data-gaelo-flow="Card" className={`shadow-md ${className} ${borderClass} rounded-2xl`}>
       {children}
     </div>
   );
@@ -70,8 +63,8 @@ const CardHeader = ({ title, centerTitle, className = "", children, color }: Car
   const headerClass = getColorClass(color);
 
   return (
-    <div data-gaelo-flow="Card-header" className={`${headerClass} text-white ${shadowClass} rounded-t-2xl ${className} flex items-center ${centerTitle ? 'justify-center' : ''} text-center`}>
-      {title && <h2 className="flex-1 p-3 mx-auto text-lg font-bold">{title}</h2>}
+    <div data-gaelo-flow="Card-header" className={`${headerClass} w-full min-h-12 text-white ${shadowClass} rounded-t-2xl flex items-center ${centerTitle ? 'justify-center' : ''} ${className}`}>
+      {title && <div className="text-lg font-bold">{title}</div>}
       {children}
     </div>
   );
@@ -91,16 +84,16 @@ const CardBody = ({
   const bodyClass = getColorClass(color);
 
   const roundedClasses = [
-    roundedTopLeft && "rounded-tl-xl",
-    roundedTopRight && "rounded-tr-xl",
-    roundedBottomLeft && "rounded-bl-xl",
-    roundedBottomRight && "rounded-br-xl",
+    roundedTopLeft && "rounded-tl-2xl",
+    roundedTopRight && "rounded-tr-2xl",
+    roundedBottomLeft && "rounded-bl-2xl",
+    roundedBottomRight && "rounded-br-2xl",
   ].filter(Boolean).join(" ");
 
   return (
     <div
       data-gaelo-flow="Card-Body"
-      className={`${bodyClass} box-border ${noPadding ? "p-0" : "px-12 py-3"} leading-relaxed text-black ${className} ${roundedClasses}`}
+      className={`${bodyClass} box-border ${noPadding ? "p-0" : "px-5 py-3"} leading-relaxed text-black ${className} ${roundedClasses}`}
     >
       {children}
     </div>
@@ -112,7 +105,7 @@ const CardFooter = ({ children, className = "", color }: CardFooterProps) => {
   const footerClass = getColorClass(color);
 
   return (
-    <div data-gaelo-flow="Card-footer" className={`${footerClass} box-border px-3 py-3 leading-relaxed text-black ${className} rounded-b-xl`}>
+    <div data-gaelo-flow="Card-footer" className={`${footerClass} box-border px-3 py-1 leading-relaxed text-black ${className} rounded-b-xl`}>
       {children || <div className="grow"></div>}
     </div>
   );

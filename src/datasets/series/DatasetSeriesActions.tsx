@@ -1,42 +1,41 @@
 import React from 'react';
-import { Series } from '../../utils';
+import { Series, useCustomToast } from '../../utils';
 
-import DropdownButton from '../../ui/menu/DropDownButton';
+import { exportSeriesToNifti } from '../../services/export';
+import { DropdownButton } from '../../ui';
 
 interface DropdownOption {
     label: string;
     icon?: React.ReactNode;
     color?: string;
-    action: (row: Series) => void;
+    action: () => void;
 }
 
-const options: DropdownOption[] = [
-    {
-        label: "View Metadata",
-        action: (row: Series) => {
-            console.log("View Metadata", row);
-        },
-    },
-    {
-        label: "Download nii",
-        action: (row: Series) => {
-            console.log("Download nii", row);
-        },
-    },
-    {
-        label: "Download nii.gz",
-        action: (row: Series) => {
-            console.log("Download nii.gz", row);
-        },
-    }
-];
-
 type DataSetSeriesActionsProps = {
-    series: Series& { id: string };
-    onActionClick: (action: string, seriesId: string) => void
+    series: Series & { id: string };
 };
 
 const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) => {
+
+    const { toastSuccess, updateExistingToast } = useCustomToast();
+
+
+    const options: DropdownOption[] = [
+        {
+            label: "View Metadata",
+            action: () => {
+                console.log("View Metadata", series.id);
+            },
+        },
+        {
+            label: "Download nii.gz",
+            action: () => {
+                const id = toastSuccess("Download started", 60)
+                exportSeriesToNifti(series.id, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
+            },
+        }
+    ];
+
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
     };
@@ -47,7 +46,6 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) =
             <DropdownButton
                 options={options}
                 buttonText="Actions"
-                row={series}
             />
         </div>
     );

@@ -1,12 +1,14 @@
-// AnonIcon.tsx
-const AnonIcon = ({ className }) => (
+type AnonProps = {
+    className?: string;
+}
+const Anon = ({ className = "" } : AnonProps) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="23"
         fill="none"
         viewBox="0 0 24 23"
-        className={`${className} transition-colors duration-300 cursor-pointer`}
+        className={` transition-colors duration-300 cursor-pointer ${className}`}
     >
         <path
             className="fill-current"
@@ -15,4 +17,4 @@ const AnonIcon = ({ className }) => (
     </svg>
 );
 
-export default AnonIcon;
+export default Anon;

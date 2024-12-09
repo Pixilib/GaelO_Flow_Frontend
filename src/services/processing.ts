@@ -7,7 +7,7 @@ export const createProcessingJob = (
 ): Promise<string> => {
   const payload = {
     JobType: jobType,
-    TmtvJob: jobPayload,
+    Payload: jobPayload,
   };
 
   return axios

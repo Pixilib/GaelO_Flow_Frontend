@@ -1,10 +1,11 @@
 import { ChangeEvent, useState } from "react";
-import { MdOutlineNewLabel as LabelIcon } from "react-icons/md";
 import { Button, Input } from "../../ui";
 import { Colors } from "../../utils/enums";
+import { Label } from "../../icons";
 
 type LabelInputFormProps = {
   onCreateLabel: (label: string) => void;
+  className?: string;
 };
 
 const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
@@ -24,13 +25,13 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   return (
     <div className="relative flex items-center">
       <Input
-        svgLeft={<LabelIcon className="text-2xl text-gray-400" />}
+        svgLeft={<Label className="text-2xl text-gray-400 dark:text-white" />}
         type="text"
         value={label ?? ""}
         onChange={handleInputChange}
         placeholder="Add new label"
         bordered
-        className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300" // Ajout de l'ombre ici
+        className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-300"
       />
       <Button
         type="button"

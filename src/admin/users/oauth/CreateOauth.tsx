@@ -32,20 +32,25 @@ const CreateOauth = ({ title, className, onClose }: CreateOauthProps) => {
     const handleSubmit = (payload: Oauth2Config) => {
         oauthMutation(payload);
     };
-    
+
     return (
 
-        <Card 
-        className={`my-12 rounded-xl bg-light-gray ${className}`}
-        data-galeo-flow="create-oauth"
+        <Card
+            className={`rounded-xl w-full bg-gray-200 ${className}`}
+            data-galeo-flow="create-oauth"
         >
-            <CardHeader title={title} color={Colors.success}>
-            <CloseButton onClose={() => onClose()} />
+            <CardHeader color={Colors.success}>
+                <div className="flex w-full">
+                    <span className="flex items-center justify-center w-4/5 text-lg font-bold">{title}</span>
+                    <div className="flex justify-end w-1/5">
+                        <CloseButton onClose={() => onClose()} />
+                    </div>
+                </div>
             </CardHeader>
             <CardBody>
                 <OauthForm onSubmit={handleSubmit} buttonText="Create" />
             </CardBody>
-        </Card>      
+        </Card>
     );
 
 }

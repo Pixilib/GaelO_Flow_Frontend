@@ -1,27 +1,56 @@
-
-import useToasts from '../services/useToasts'
+import useToasts from "../services/useToasts";
 export const useCustomToast = () => {
-    const { pushToast, updateToast } = useToasts()
+  const { pushToast, updateToast } = useToasts();
 
-    const toastSuccess = (message: string) => {
-        return pushToast({ content: message, type: 'success', duration: 1.3, position: 'bottom-right', animation: 'slide-left' })
-    }
+  const toastSuccess = (message: string, duration = 1.3) => {
+    return pushToast({
+      content: message,
+      type: "success",
+      duration,
+      position: "bottom-right",
+      animation: "slide-left",
+    });
+  };
 
-    const toastWarning = (message: string) => {
-        return pushToast({ content: message, type: 'warning', duration: 1.3, position: 'bottom-right', animation: 'slide-left' })
-    }
+  const toastWarning = (message: string, duration = 1.3) => {
+    return pushToast({
+      content: message,
+      type: "warning",
+      duration,
+      position: "bottom-right",
+      animation: "slide-left",
+    });
+  };
 
-    const toastError = (message: string) => {
-        return pushToast({ content: message, type: 'danger', duration: 1.3, position: 'bottom-right', animation: 'slide-left' })
-    }
+  const toastError = (message: string, duration = 1.3) => {
+    return pushToast({
+      content: message,
+      type: "danger",
+      duration,
+      position: "bottom-right",
+      animation: "slide-left",
+    });
+  };
 
-    const toastInfo = (message: string) => {
-        return pushToast({ content: message, type: 'info', duration: 1.3, position: 'bottom-right', animation: 'slide-left' })
-    }
+  const toastInfo = (message: string, duration = 1.3) => {
+    return pushToast({
+      content: message,
+      type: "info",
+      duration,
+      position: "bottom-right",
+      animation: "slide-left",
+    });
+  };
 
-    const updateExistingToast = (id :number, message : string)=>{
-        updateToast(id, {content : message})
-    }
+  const updateExistingToast = (id: number, message: string, duration = 1.3) => {
+    updateToast(id, { content: message, duration });
+  };
 
-    return { toastSuccess, toastWarning, toastError, toastInfo, updateExistingToast }
-}
+  return {
+    toastSuccess,
+    toastWarning,
+    toastError,
+    toastInfo,
+    updateExistingToast,
+  };
+};

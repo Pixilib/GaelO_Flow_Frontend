@@ -1,28 +1,11 @@
 import React from 'react';
 
-import DropdownButton from '../../ui/menu/DropDownButton';
+import { Eye } from '../../icons';
 import Study from '../../model/Study';
 
-interface DropdownOption {
-    label: string;
-    icon?: React.ReactNode;
-    color?: string;
-    action: (row: any) => void;
-}
-const options: DropdownOption[] = [
-    {
-        label: "View in OHIF",
-        action: (row: any) => {
-            console.log("View in OHIF", row);
-        },
-    },
-    {
-        label: "View in Stone",
-        action: (row: any) => {
-            console.log("View in Stone", row);
-        },
-    }
-];
+import OhifViewerLink from '../../content/OhifViewerLink';
+import StoneViewerLink from '../../content/StoneViewerLink';
+import DropdownButton from '../../ui/menu/DropdownButton';
 
 type DatasetStudyActionsProps = {
     study: Study,
@@ -30,6 +13,22 @@ type DatasetStudyActionsProps = {
 }
 
 const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps) => {
+
+    const options = [
+        {
+            label: "View in OHIF",
+            icon: <Eye />,
+            color: 'green',
+            component: <OhifViewerLink studyInstanceUID={study.studyInstanceUID} />
+        },
+        {
+            label: "View in Stone",
+            icon: <Eye />,
+            color: 'green',
+            component: <StoneViewerLink studyInstanceUID={study.studyInstanceUID} />
+        }
+    ];
+
     const handleClick = (e: React.MouseEvent) => {
         e.stopPropagation();
     };
@@ -38,7 +37,7 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
         onActionClick(actionLabel, study.id);
     };
 
-    const dropdownOptions: DropdownOption[] = options.map(option => ({
+    const dropdownOptions = options.map(option => ({
         ...option,
         action: () => handleDropdownAction(option.label),
     }));
@@ -46,7 +45,6 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
     return (
         <div onClick={handleClick}>
             <DropdownButton
-                row={study}
                 options={dropdownOptions}
                 buttonText="Actions"
             />

@@ -1,6 +1,6 @@
 import { updateRole } from "../../../services";
 import { Colors, Role, useCustomMutation, useCustomToast } from "../../../utils";
-import { Card, CardBody, CardHeader, CloseButton } from "../../../ui";
+import { Card, CardBody, CardHeader, CloseButton, FormCard } from "../../../ui";
 import RoleForm from "./RoleForm";
 
 type EditRoleProps = {
@@ -35,18 +35,13 @@ const EditRole = ({ title, className, onClose, role }: EditRoleProps) => {
   };
 
   return (
-    <Card className={`my-5 rounded-xl ${className}`}>
-      <CardHeader title={title} color={Colors.success}>
-      <CloseButton onClose={() => onClose()} />
-      </CardHeader>
-      <CardBody>
-        <RoleForm
-          onSubmit={handleSubmit}
-          buttonText="Update"
-          initialData={role}
-        />
-      </CardBody>
-    </Card>
+    <FormCard title={title} className="bg-light" onClose={() => onClose()}>
+      <RoleForm
+        onSubmit={handleSubmit}
+        buttonText="Update"
+        initialData={role}
+      />
+    </FormCard>
   );
 };
 export default EditRole;

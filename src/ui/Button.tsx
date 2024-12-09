@@ -16,29 +16,17 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const baseColorClasses: Record<keyof typeof Colors, string> = {
     almond: "bg-almond hover:bg-almond-hover",
-    primary: "bg-primary hover:bg-primary-active",
-    secondary: "bg-secondary hover:bg-secondary-hover",
-    danger: "bg-danger hover:bg-danger-hover",
-    success: "bg-success hover:bg-success-hover",
-    disabled: "bg-disabled",
+    primary: "bg-primary hover:bg-primary-active dark:bg-indigo-700 dark:hover:bg-indigo-800",
+    secondary: "bg-secondary hover:bg-secondary-hover dark:bg-amber-600 dark:hover:bg-amber-700",
+    danger: "bg-danger hover:bg-danger-hover dark:bg-red-600 dark:hover:bg-red-700",
+    success: "bg-success hover:bg-success-hover dark:bg-emerald-600 dark:hover:bg-emerald-700",
+    blueCustom: "bg-blue-custom hover:bg-blue-custom-hover dark:bg-blue-600 dark:hover:bg-blue-800",
     warning: "bg-warning hover:bg-warning-hover",
     dark: "bg-dark",
-    red: "bg-red",
     gray: "bg-gray",
     light: "bg-light",
-    grayCustom: "",
-    almondHover: '',
-    dangerHover: '',
     lightGray: '',
-    warningHover: '',
-    primaryActive: '',
-    primaryHover: '',
-    secondaryLight: '',
-    secondaryHover: '',
-    successHover: '',
-    sucessLight: '',
     white: '',
-    transparent: ''
   };
 
   const isDisabled = props.disabled;

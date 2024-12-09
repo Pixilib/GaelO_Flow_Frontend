@@ -1,36 +1,37 @@
 import React from 'react';
 import type { ColumnDef } from '@tanstack/react-table';
-import { Table } from '../../ui/';
+import { Table, Badge } from '../../ui';
 import { Colors } from '../../utils/enums';
-import { Badge } from '../../ui';
 
-interface RedisData {
+type RedisData = {
     address: string;
     port: number;
     password?: string;
 }
 
-interface RedisCardProps {
+type RedisCardProps = {
     redisData: RedisData;
 }
 
 const RedisCard: React.FC<RedisCardProps> = ({ redisData }) => {
-
     const columns: ColumnDef<RedisData>[] = [
         {
             accessorKey: 'address',
-            header: () => 'Address',
+            header: () => <div>Address</div>,
+            cell: ({ getValue }) => (
+                <div>{getValue() as string}</div>
+            ),
         },
         {
             accessorKey: 'port',
-            header: () => 'Port',
+            header: () => <div>Port</div>,
             cell: ({ getValue }) => <Badge value={getValue() as number} />,
-        }
+        },
     ];
 
     return (
         <div className="mx-6 mt-6">
-            <Table 
+            <Table
                 columns={columns}
                 data={[redisData]}
                 className="bg-gray-100"

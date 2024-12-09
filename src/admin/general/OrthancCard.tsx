@@ -1,13 +1,12 @@
 import { useMemo, useState } from 'react';
-import { VscDebugRestart as RestartIcon } from "react-icons/vsc";
-import { IoClose } from "react-icons/io5";
-import { BsQuestionLg } from "react-icons/bs";
 
-import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui/';
+import { Table, Button, ToggleEye, Input, Modal, CardFooter, SelectInput } from '../../ui';
+import { Close, Question, Restart } from '../../icons';
 import { Colors } from '../../utils/enums';
+import { useConfirm } from '../../services';
+
 import { useCustomMutation, useCustomQuery } from '../../utils/reactQuery';
 import { getOrthancSystem, getVerbosity, orthancReset, orthancShutdown, updateVerbosity } from '../../services/orthanc';
-import { useConfirm } from '../../services';
 
 type OrthancData = {
     username: string;
@@ -27,7 +26,7 @@ const selectOptions = [
 ];
 
 const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
-    const {confirm} = useConfirm()
+    const { confirm } = useConfirm()
 
     const [showModal, setShowModal] = useState(false);
 
@@ -59,7 +58,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
         [['log-level']],
     );
 
-    const currentVerbosityOption = useMemo(()=>{
+    const currentVerbosityOption = useMemo(() => {
         return selectOptions.find(option => option.value === orthancVerbosity)?.value ?? null
     }, [orthancVerbosity])
 
@@ -81,18 +80,22 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
             cell: (row: any) => {
                 const [show, setShow] = useState(false);
                 return (
-                    <div className="flex items-center">
-                        <Input disabled
-                            className="text-center"
+                    <div className="flex items-center justify-center gap-2">
+                        <Input
+                            disabled
+                            className="text-center "
                             type={show ? "text" : "password"}
-                            value={row.getValue()} />
+                            value={row.getValue()}
+                        />
                         <ToggleEye onToggle={(visible) => setShow(visible)} />
                     </div>
                 );
             },
             header: 'Password'
         },
+
     ];
+
 
     const handleSelectChange = (selectedOption: any) => {
         mutateVerbosity({ level: selectedOption.value });
@@ -104,9 +107,9 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
     };
 
     const handleOrthancShutdown = async () => {
-        if(await confirm({ content: "Are you sure to shutdown Orthanc ?" })) {
+        if (await confirm({ content: "Are you sure to shutdown Orthanc ?" })) {
             shutdownOrthanc({});
-          }
+        }
     }
 
 
@@ -117,30 +120,32 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 <Table
                     columns={columns}
                     data={[orthancData]}
-                    className="bg-gray-100"
+                    className="justify-center bg-gray-100"
                     headerTextSize='xs'
                     headerColor={Colors.white}
-                />
-            </div>
-            <CardFooter
-                className="flex justify-center gap-3 border-t-2 border-indigo-100 shadow-inner bg-light">
+                    headerclassName='text-center'
+                />            </div>
+            <CardFooter className="flex justify-center gap-3 py-2 border-t-2 shadow-inner border-slate-200 dark:border-neutral-700 bg-light dark:bg-slate-950">
                 <Button
                     color={Colors.warning}
-                    onClick={reset}>
-                    <RestartIcon
-                        size="20px"
-                        title="Restart" />
+                    onClick={reset}
+                    className="flex items-center justify-center"
+                >
+                    <Restart size="20px" title="Restart" />
                 </Button>
                 <Button
                     color={Colors.danger}
                     onClick={handleOrthancShutdown}
-                    >
-                    <IoClose
-                        size="20px"
-                        title="Shutdown" />
+                    className="flex items-center justify-center"
+                >
+                    <Close size="20px" title="Shutdown" />
                 </Button>
-                <Button color={Colors.primary} onClick={orthancInfoHandler}>
-                    <BsQuestionLg size="20px" title="Info" />
+                <Button
+                    color={Colors.primary}
+                    onClick={orthancInfoHandler}
+                    className="flex items-center justify-center"
+                >
+                    <Question size="20px" title="Info" />
                 </Button>
                 <div className="w-1/4">
                     <SelectInput
@@ -151,6 +156,8 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     />
                 </div>
             </CardFooter>
+
+
             {showModal && (
                 <Modal
                     show={showModal}
@@ -171,7 +178,9 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                         )}
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button color={Colors.primary} onClick={() => setShowModal(false)}>
+                        <Button
+                            color={Colors.primary}
+                            onClick={() => setShowModal(false)}>
                             Close
                         </Button>
                     </Modal.Footer>

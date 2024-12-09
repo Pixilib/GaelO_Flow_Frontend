@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
 import { useCustomToast, Colors, useCustomMutation, useCustomQuery, UserUpdatePayload, User, Role, Option } from "../../../utils";
 import { getRoles, updateUser } from "../../../services";
 import { Button, Card, CardBody, CardHeader, CloseButton, Input, Label, SelectInput } from "../../../ui";
+import { SubmitUser } from "../../../icons";
 
 type UserFormProps = {
     title: string;
@@ -79,7 +79,8 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                 <CloseButton onClose={() => onClose()} />
             </CardHeader>
 
-            <CardBody color={Colors.lightGray}>
+            <CardBody 
+                color={Colors.lightGray}>
                 <form onSubmit={handleSubmit} className="grid gap-y-2 lg:gap-y-4">
                     <div className="grid grid-cols-1 col-span-3 gap-3 lg:grid-cols-2 lg:gap-11">
                         <Input

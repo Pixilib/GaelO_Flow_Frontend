@@ -6,12 +6,13 @@ import RolesTable from "./RolesTable";
 import CreateRole from "./CreateRole";
 import EditRole from "./EditRole";
 import { Button, CardFooter, Spinner } from "../../../ui";
+import { More } from "../../../icons";
 
 const Roles = () => {
     const { toastSuccess, toastError } = useCustomToast();
     const { confirm } = useConfirm();
 
-    const [showRoleForm, setShowRoleForm] = useState<'create' | 'edit' | null>(null);
+    const [showCreateRoleForm, setShowCreateRoleForm] = useState(false);
     const [roleToEdit, setRoleToEdit] = useState<Role | null>(null);
 
     const { data: roles, isPending: isLoadingRoles } = useCustomQuery<Role[]>(
@@ -43,7 +44,6 @@ const Roles = () => {
     const handleEditRole = (roleName: string) => {
         const role = findRole(roleName);
         setRoleToEdit(role);
-        setShowRoleForm('edit');
     };
 
     const deleteRoleHandler = async (roleName: string) => {
@@ -68,34 +68,36 @@ const Roles = () => {
                 onDelete={deleteRoleHandler}
             />
 
-            {showRoleForm === 'edit' && (
+            {roleToEdit && (
                 <EditRole
                     key={roleToEdit?.name}
                     title={"Edit Role"}
-                    className="bg-gray-200"
-                    onClose={() => { setShowRoleForm(null); setRoleToEdit(null); }}
+                    className="px-4 mb-4 bg-gray-200"
+                    onClose={() => setRoleToEdit(null)}
                     role={roleToEdit || undefined}
                 />
             )}
 
-            <CardFooter className="p-0 border-t rounded-b-lg bg-light">
+            <CardFooter className="p-0 mt-4 border-t-2 rounded-b-lg shadow-inner dark:bg-slate-950 dark:border-neutral-700 bg-light border-slate-200">
                 <div className="flex justify-center w-full">
-                    {!showRoleForm ? (
-                        <Button
-                            color={Colors.success}
-                            onClick={() => setShowRoleForm('create')}
-                            className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
-                        >
-                            Create Role
-                        </Button>
-                    ) : (
-                        <CreateRole
-                            title={"Create Role"}
-                            className="w-full p-4"
-                            onClose={() => setShowRoleForm(null)}
-                        />
-                    )}
-                </div>
+                {showCreateRoleForm && (
+                    <CreateRole
+                        title={"Create Role"}
+                        className="w-full p-4"
+                        onClose={() => setShowCreateRoleForm(false)}
+                    />
+                )}
+                {!showCreateRoleForm && (
+                    <Button
+                        color={Colors.success}
+                        onClick={() => setShowCreateRoleForm(true)}
+                        className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
+                    >
+                        <More size={18} />
+                        Create Role
+                    </Button>
+                )}
+            </div>
             </CardFooter>
         </div>
     );

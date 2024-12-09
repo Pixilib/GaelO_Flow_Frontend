@@ -11,6 +11,7 @@ import { Button, Spinner, CardFooter } from "../../../ui";
 import Oauth2Table from "./OauthTable";
 import CreateOauth from "./CreateOauth";
 import { useConfirm } from "../../../services/ConfirmContextProvider";
+import { More } from "../../../icons";
 
 const Oauth = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -48,10 +49,12 @@ const Oauth = () => {
   if (isLoadingOauthConfig) return <Spinner />;
 
   return (
-    <div data-gaelo-flow="oauth" className="rounded-br-xl rounded-bl-xl">
-      <Oauth2Table data={oauth2Config || []} onDelete={deleteOauthHandler} />
+    <div data-gaelo-flow="oauth" className="flex flex-col justify-center">
+      <Oauth2Table
+        data={oauth2Config || []} onDelete={deleteOauthHandler} />
 
-      <CardFooter className="border-t rounded-b-lg bg-light">
+      <CardFooter
+        className="border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200 dark:border-neutral-700 dark:bg-slate-950">
         <div className="flex justify-center w-full">
           {!showOauthForm ? (
             <Button
@@ -59,6 +62,7 @@ const Oauth = () => {
               onClick={() => setShowOauthForm(true)}
               className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
             >
+              <More size={18} />
               Create Provider
             </Button>
           ) : (

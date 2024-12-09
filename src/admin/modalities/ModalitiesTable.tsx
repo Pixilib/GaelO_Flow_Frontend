@@ -1,11 +1,9 @@
 import React from "react";
-
 import { ColumnDef } from "@tanstack/react-table";
-import { BiTrash as DeleteIcon, BiWifi as EchoIcon } from "react-icons/bi";
-
 import { Table, Badge, Button } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Modality } from "../../utils/types";
+import { Trash, Wifi } from "../../icons";
 
 interface ModalitiesTableProps {
   aetData?: Modality[];
@@ -18,7 +16,7 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
   onDeleteAet,
   onEchoAet,
 }) => {
-  
+
   const columns: ColumnDef<Modality>[] = [
     {
       accessorKey: "name",
@@ -41,33 +39,37 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
       header: "Actions",
       id: "actions",
       cell: ({ row }) => (
-        <div className="flex justify-center items-center gap-2.5">
+        <div className="flex items-center space-x-2">
           <Button
             onClick={() => onEchoAet(row.original.name)}
             color={Colors.secondary}
           >
-            <EchoIcon />
+            <Wifi />
           </Button>
           <Button
             onClick={() => onDeleteAet(row.original.name)}
             color={Colors.danger}
           >
-            <DeleteIcon size={18} />
+            <Trash size={18} />
           </Button>
         </div>
       ),
     },
   ];
 
+  const getRowClasses = () => {
+    return "hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer";  };
+
   return (
     <Table
       columns={columns}
       data={aetData}
-      headerColor={Colors.white} 
-      headerTextSize="xs"  
-      className="bg-gray-100"
+      headerColor={Colors.white}
+      headerTextSize="xs"
+      className="bg-gray-100 dark:bg-slate-950 dark:text-white"
       enableColumnFilters
       enableSorting
+      getRowClasses={getRowClasses}
     />
   );
 };

@@ -14,7 +14,7 @@ import {
 } from "../utils";
 import Model from "../model/Model";
 import Patient from "../model/Patient";
-import { FormCard, Spinner, Button } from "../ui";
+import { FormCard, Button } from "../ui";
 import SearchForm from "../query/SearchForm";
 import AccordionPatient from "./patients/AccordionPatient";
 import EditPatient from "./patients/EditPatient";
@@ -25,21 +25,26 @@ import {
     addStudyIdToAnonymizeList,
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
-import AnonIcon from "../assets/Anon.svg?react";
-import { BsTrashFill as DeleteIcon } from "react-icons/bs";
-import { FaFileExport as ExportIcon } from "react-icons/fa";
-import SelectLabels from "../datasets/SelectLabels";
+import { Anon, Export } from "../icons";
+import Labels from "./Labels";
+
 
 const ContentRoot: React.FC = () => {
     const { confirm } = useConfirm();
     const { toastSuccess, toastError } = useCustomToast();
 
-    const [selectedStudies, setSelectedStudies] = useState<{ [studyId: string]: boolean }>({});
+    const [selectedStudies, setSelectedStudies] = useState<{ [patientId: string]: { [studyId: string]: boolean } }>({});
     const [model, setModel] = useState<Model | null>(null);
     const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
     const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
 
     const patients = useMemo(() => model?.getPatients() || [], [model]);
+
+    const selectedStudiesIds = useMemo(() => {
+        const studiesState = Object.values(selectedStudies).reduce((a, v) => ({ ...a, ...v}), {})
+        const selectedIds = Object.entries(studiesState).filter(([id, status]) => status === true).map(([id, status]) => id)
+        return selectedIds
+    }, [selectedStudies])
 
     const handleDeletePatient = async (patient: Patient) => {
         const confirmContent = (
@@ -100,36 +105,40 @@ const ContentRoot: React.FC = () => {
 
     const handlePatientSelectionChange = (selected: boolean, patient: Patient) => {
         const studies = patient.getStudies().map((study) => study.id);
-        const updatedSelectedStudies = { ...selectedStudies };
+        const currentPatientState = selectedStudies?.[patient.id] ?? {}
 
         if (selected) {
             studies.forEach((studyId) => {
-                updatedSelectedStudies[studyId] = true;
+                currentPatientState[studyId] = true;
             });
         } else {
             studies.forEach((studyId) => {
-                delete updatedSelectedStudies[studyId];
+                currentPatientState[studyId] = false;
             });
         }
-        setSelectedStudies(updatedSelectedStudies);
+        setSelectedStudies((state) => ({ ...state, [patient.id]: currentPatientState }));
+    };
+
+    const handleStudySelectedChange = (patient: Patient, changeObject) => {
+        setSelectedStudies((state) => ({ ...state, [patient.id]: changeObject }));
     };
 
     const refreshFind = () => queryPayload && mutateToolsFind(queryPayload);
 
     const handleSendAnonymizeList = async () => {
-        for (const studyId of Object.keys(selectedStudies)) {
+        for (const studyId of selectedStudiesIds) {
             await addStudyIdToAnonymizeList(studyId);
         }
     };
 
     const handleSendExportList = async () => {
-        for (const studyId of Object.keys(selectedStudies)) {
+        for (const studyId of selectedStudiesIds) {
             await addSeriesOfStudyIdToExportList(studyId);
         }
     };
 
     const handleSendDeleteList = async () => {
-        for (const studyId of Object.keys(selectedStudies)) {
+        for (const studyId of selectedStudiesIds) {
             await addStudyIdToDeleteList(studyId);
         }
     };
@@ -141,17 +150,17 @@ const ContentRoot: React.FC = () => {
                 patient={editingPatient as Patient}
                 onEditPatient={handlePatientUpdate}
                 onClose={closeEditModal}
-                show={editingPatient != null}
+                show={!!editingPatient}
             />
-            <FormCard className="bg-white" title="Search" collapsible>
+            <FormCard className="bg-white dark:bg-neutral-500" title="Search" collapsible>
                 <SearchForm onSubmit={handleSubmit} existingLabels={labelsData} withAets={false} />
             </FormCard>
 
-            <div className="flex flex-col w-full p-4 bg-white shadow-md rounded-3xl">
+            <div className="flex flex-col w-full p-4 bg-white shadow-md dark:bg-neutral-800 rounded-3xl">
                 <div className="flex items-center justify-between mb-4">
-                    <div className="text-2xl font-bold text-primary">Results</div>
-                    <div className="text-lg text-gray-600">
-                        {patients.length} {patients.length === 1 ? "result" : "results"} found
+                    <div className="text-2xl font-bold text-primary dark:text-white">Results</div>
+                    <div className="text-lg text-gray-600 dark:text-white">
+                        {patients.length} {patients.length === 1 ? "patient" : "patients"} found
                     </div>
                 </div>
 
@@ -159,11 +168,11 @@ const ContentRoot: React.FC = () => {
 
                 <div className="flex flex-wrap gap-2 mb-4">
                     <Button
-                        color={Colors.primary}
-                        className="flex items-center text-sm transition-transform duration-200 bg-blue-700 hover:scale-105"
+                        color={Colors.blueCustom}
+                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendAnonymizeList}
                     >
-                        <AnonIcon className="text-xl" />
+                        <Anon className="text-xl" />
                         <span className="ml-2">Send to Anonymize</span>
                     </Button>
 
@@ -172,7 +181,7 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendExportList}
                     >
-                        <ExportIcon className="text-xl" />
+                        <Export className="text-xl" />
                         <span className="ml-2">Send to Export</span>
                     </Button>
 
@@ -181,36 +190,30 @@ const ContentRoot: React.FC = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendDeleteList}
                     >
-                        <DeleteIcon className="text-xl" />
+                        <Export className="text-xl" />
                         <span className="ml-2">Send to Delete</span>
                     </Button>
 
-                    <div className="flex-grow w-full md:w-auto">
-                        <SelectLabels
-                            onChange={(labels) => console.log(labels)}
-                            closeMenuOnSelect
-                            className="w-full"
-                        />
-                    </div>
+                    <Labels selectedStudyIds={selectedStudiesIds} />
+
                 </div>
             </div>
 
-            <div className="w-full mt-4">
-                {isPending ? (
-                    <Spinner />
-                ) : (
-                    patients.map((patient: Patient) => (
+            <div className="flex flex-col w-full gap-4">
+                {patients.length > 0 ? (
+                    patients.map((patient) => (
                         <AccordionPatient
                             key={patient.id}
                             patient={patient}
                             onPatientSelectionChange={handlePatientSelectionChange}
                             onDeletePatient={handleDeletePatient}
-                            onEditPatient={(patient) => setEditingPatient(patient)}
+                            onEditPatient={setEditingPatient}
                             onStudyUpdated={refreshFind}
                             selectedStudies={selectedStudies}
+                            onSelectedStudyChange={handleStudySelectedChange}
                         />
                     ))
-                )}
+                ) : null}
             </div>
         </div>
     );

@@ -20,22 +20,22 @@ const Badge = ({
 }: BadgeProps) => {
 
   const sizeClasses = {
-    sm: "text-xs p-1.5", // Réduction légère du texte
-    md: "text-sm p-2 px-3", // Taille par défaut pour md
-    lg: "text-base p-3", // Taille par défaut pour lg
-    xl: "text-lg p-4", // Taille par défaut pour xl
+    sm: "text-xs p-1.5",
+    md: "text-sm p-2 px-3",
+    lg: "text-base p-3",
+    xl: "text-lg p-4"
   };
 
   const variants = {
     default: {
-      backgroundColor: "bg-indigo-100",
-      textColor: "text-indigo-700",
-      borderColor: "ring-indigo-300",
+      backgroundColor: "bg-indigo-100 dark:bg-neutral-700",
+      textColor: "text-indigo-700 dark:text-indigo-300",
+      borderColor: "ring-indigo-300 dark:ring-indigo-300",
     },
     success: {
-      backgroundColor: "bg-green-100",
-      textColor: "text-green-700",
-      borderColor: "ring-green-300",
+      backgroundColor: "bg-green-100 dark:bg-neutral-700",
+      textColor: "text-green-700 dark:text-emerald-400",
+      borderColor: "ring-green-300 dark:ring-emerald-400",
     },
     danger: {
       backgroundColor: "bg-red-100",

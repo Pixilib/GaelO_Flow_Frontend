@@ -55,9 +55,9 @@ const ForgotPasswordForm = () => {
       />
       <div className="flex justify-center mt-16">
         <Button
-          color={email.length === 0 ? Colors.disabled : Colors.primary}
-          type="submit"
+          color={Colors.primary}
           disabled={email.length === 0}
+          type="submit"
         >
           Connect
           <ChevronRight />

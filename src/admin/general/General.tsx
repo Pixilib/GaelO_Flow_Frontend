@@ -22,7 +22,7 @@ const General = () => {
 
   return (
     <div
-      className="mx-4 mt-4 mb-4 shadow-md bg-almond rounded-xl"
+      className="mx-4 mt-4 mb-4 shadow-md bg-almond 292929 rounded-xl"
       data-gaelo-flow="general-root"
     >
       <Tabs className="bg-primary rounded-t-xl">
@@ -46,7 +46,7 @@ const General = () => {
                 redisData={{
                   address: data.redisAddress,
                   port: Number(data.redisPort),
-                  //password: data.redisPassword,
+                  // password: data.redisPassword,
                 }}
               />
             }

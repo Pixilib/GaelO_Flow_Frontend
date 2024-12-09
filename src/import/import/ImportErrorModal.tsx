@@ -12,8 +12,6 @@ interface ImportErrorModalProps {
 }
 
 const ImportErrorModal: React.FC<ImportErrorModalProps> = ({ errors, onClose }) => {
-    console.log(errors);
-
     const columns = [
         {
             accessorKey: "filename",

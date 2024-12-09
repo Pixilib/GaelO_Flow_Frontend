@@ -45,8 +45,8 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
             <Table
                 data={data}
                 columns={columns}
-                headerColor={Colors.white} 
-                headerTextSize="xs"  
+                headerColor={Colors.white}
+                headerTextSize="xs"
                 className="bg-gray-100"
                 enableSorting
             />

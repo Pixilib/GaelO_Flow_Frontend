@@ -79,7 +79,6 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
         })
     }
 
-    console.log(jobData)
     if (isLoading) return <Spinner />
 
     return (

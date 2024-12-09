@@ -1,11 +1,9 @@
 import { useSelector } from "react-redux"
 import { RootState } from "../store"
 
-import { BsTrashFill as DeleteIcon } from "react-icons/bs"
-import { FaFileExport as ExportIcon } from "react-icons/fa"
-import AnonIcon from "../ui/AnonIcon"
 import ToolItem from "./ToolItem"
 import { useNavigate } from "react-router-dom"
+import { Anon, Export, Trash } from "../icons"
 
 const ToolList = () => {
 
@@ -17,19 +15,19 @@ const ToolList = () => {
 
     return (
 
-        <div className="flex justify-between gap-3 p-3 grow flex-nowrap bg-primary rounded-2xl w-60">
-            <ToolItem count={Object.keys(anonList).length} onClick={() => navigate('/anonymize')}>
-                <AnonIcon
-                    className="text-blue-900 cursor-pointer group-hover:text-white"
+<div className="flex justify-between w-64 gap-3 p-2 grow flex-nowrap bg-primary rounded-2xl dark:bg-indigo-700 ">     
+           <ToolItem count={Object.keys(anonList).length} onClick={() => navigate('/anonymize')}>
+                <Anon
+                    className="text-blue-900 cursor-pointer dark:text-blue-400 dark:to-blue-500 group-hover:text-white size-6"
                 />
             </ToolItem>
             <ToolItem count={Object.keys(exportList).length} onClick={() => navigate('/export')}>
-                <ExportIcon
+                <Export
                     className="cursor-pointer text-secondary group-hover:text-white"
                 />
             </ToolItem>
             <ToolItem count={Object.keys(deleteList).length} onClick={() => navigate('/delete')}>
-                <DeleteIcon
+                <Trash
                     className="text-red-500 cursor-pointer group-hover:text-white"
                 />
             </ToolItem>

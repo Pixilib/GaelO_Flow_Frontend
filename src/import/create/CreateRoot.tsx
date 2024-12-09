@@ -61,21 +61,22 @@ const CreateRoot: React.FC = () => {
 
     return (
         <>
-            <div className="w-full space-y-3 md:flex md:space-x-3 p-6">
+            <div className="w-full p-6 space-y-3 md:flex md:space-x-3 ">
                 <CreateDrop files={files} onDrop={handleFilesUploaded} />
             </div>
 
-            <div className="flex flex-col justify-center border-indigo-100 shadow-inner p-3 bg-light">
+            <div className="flex flex-col justify-center p-3 border-t-2 shadow-inner bg-light dark:bg-neutral-950 border-slate-200 dark:border-neutral-700">
+            <CreateForm
+                    title="Define DICOM Tags"
+                    onAddTag={handleAddTag}
+                />
                 <TagTable
                     data={tags}
                     onDeleteTag={handleTagDelete}
                 />
-                <CreateForm
-                    title="Define DICOM Tags"
-                    onAddTag={handleAddTag}
-                />
+                
             </div>
-            <div className="flex bg-white justify-center p-3">
+            <div className="flex justify-center p-3 bg-white dark:bg-neutral-950 rounded-b-xl">
                 <Button
                     color={tags.length > 0 ? Colors.primary : Colors.almond}
                     onClick={handleCreateDicoms}

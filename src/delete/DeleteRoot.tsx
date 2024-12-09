@@ -1,12 +1,14 @@
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import { RootState } from "../store";
 import DeleteStudyTable from "./DeleteStudyTable";
 import { flushDeleteList } from "../reducers/DeleteSlice";
-import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
 import { Colors, useCustomMutation } from "../utils";
 import { createDeleteQueue } from "../services/queues";
-import { useState } from "react";
 import DeleteQueues from "./DeleteQueues";
+import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
+import { Trash, Empty } from "../icons";
 
 const DeleteRoot = () => {
     const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const DeleteRoot = () => {
         [[]],
         {
             onSuccess: (uuid) => {
+                console.log("Queue created with UUID:", uuid);
                 setQueueUuid(uuid);
             },
         }
@@ -35,33 +38,50 @@ const DeleteRoot = () => {
     };
 
     return (
-        <div className="flex flex-col md:flex-row md:space-x-4">
-            <Card className="w-full md:w-2/3">
-                <CardHeader
-                    className="flex items-center justify-center rounded-t-lg text-bg-light"
-                    color={Colors.primary}
-                    title={"Delete"}
-                />
-                <CardBody color={Colors.almond}>
-                    <DeleteStudyTable studies={Object.values(deleteList)} />
-                </CardBody>
-                <CardFooter color={Colors.light} className="flex justify-center gap-3">
-                    <Button onClick={handleClearList} color={Colors.warning}>
-                        Empty List
-                    </Button>
-                    <Button onClick={handleDeleteList} color={Colors.danger}>
-                        Delete List
-                    </Button>
-                </CardFooter>
-            </Card>
-
-            <Card className="flex items-center justify-center w-full bg-almond md:w-1/3">
-                <div className="flex flex-col items-center justify-center w-full p-4">
-                    <DeleteQueues />
+        <Card>
+            <CardHeader color={Colors.primary}>
+                <div className="flex items-center w-full">
+                    <div className="w-4/5 text-lg font-bold text-center">
+                        Delete Resources
+                    </div>
+                    <div className="flex justify-end w-1/5 gap-3 p-3">
+                        <Button
+                            onClick={handleClearList}
+                            color={Colors.light}
+                            className="rounded-lg hover:bg-secondary dark:bg-slate-700"
+                        >
+                            <Empty className="text-xl text-bold text-primary dark:text-white group-hover:text-white" />
+                        </Button>
+                    </div>
                 </div>
-            </Card>
-        </div>
+            </CardHeader>
+            <CardBody 
+            color={Colors.almond}
+            className="dark:bg-neutral-500">
+                <DeleteStudyTable
+                    studies={Object.values(deleteList)} />
+            </CardBody>
+            <CardFooter 
+            color={Colors.light}
+            className="dark:bg-slate-950">
+                <div className="flex items-center justify-center gap-3">
+                    <div>
+                        <Button
+                            onClick={handleDeleteList}
+                            color={Colors.danger}
+                            className="flex items-center justify-center"
+                        >
+                            <Trash />
+                            <span className="ml-2">Delete List</span>
+                        </Button>
+                    </div>
+                    <div>
+                        <DeleteQueues />
+                    </div>
+                </div>
+            </CardFooter>
+
+        </Card>
     );
 };
-
 export default DeleteRoot;

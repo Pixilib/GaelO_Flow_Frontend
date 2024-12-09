@@ -1,31 +1,36 @@
 import Card, { CardHeader, CardFooter, CardBody } from "../ui/Card";
 import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import { Button } from "../ui";
-import SelectLabels from "./SelectLabels";
+import SelectRoleLabels from "./SelectRoleLabels";
 import DatasetTableStudy from "./studies/DatasetTableStudy";
 import DatasetSeriesTable from "./series/DatasetSeriesTable";
 import { findTools } from "../services";
 import Model from "../model/Model";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FindPayload, Series } from "../utils/types";
 import { getSeriesOfStudy } from "../services/orthanc";
 
 const DatasetRoot = () => {
     const [model, setModel] = useState<Model | null>(null);
     const [currentStudyId, setCurrentStudyId] = useState<string | null>(null);
+    const [selectedLabels, setSelectedLabels] = useState<string[]>([])
     const { toastError } = useCustomToast();
     const studies = model?.getPatients().map(patient => patient.getStudies()).flat() ?? [];
 
-    const { data: series } = useCustomQuery<Series[]>(
+    const { data: series, refetch } = useCustomQuery<Series[]>(
         ['series', (currentStudyId as string)],
-        () => getSeriesOfStudy(currentStudyId as string),
+        () => currentStudyId ? getSeriesOfStudy(currentStudyId as string) : new Promise((success, reject) => success([])),
         {
             onError: (error) => {
                 console.error(`No series for this study or an error occurred: ${error}`);
             },
-            enabled: !!currentStudyId
+            enabled: false
         },
     );
+
+    useEffect(() => {
+        refetch()
+    }, [currentStudyId])
 
     const { mutateAsync: mutateToolsFind } = useCustomMutation(
         ({ queryPayload }) => findTools(queryPayload),
@@ -42,11 +47,13 @@ const DatasetRoot = () => {
         }
     );
 
-    const handleSelectChange = (selectedLabels: any) => {
+    useEffect(() => {
         if (selectedLabels.length === 0) {
-            setModel(new Model()); return;
+            setModel(new Model());
+            setCurrentStudyId(null);
+            return;
         }
-        
+
         const queryPayload: FindPayload = {
             Level: 'Study',
             Labels: selectedLabels,
@@ -54,10 +61,9 @@ const DatasetRoot = () => {
             Query: {}
         };
         mutateToolsFind({ queryPayload });
-    };
+    }, [selectedLabels])
 
     const handleStudyRowClick = (studyId: string) => {
-        console.log(studyId);
         setCurrentStudyId(studyId);
     };
 
@@ -76,18 +82,18 @@ const DatasetRoot = () => {
     return (
         <Card>
             <CardHeader
-                className="flex items-center justify-center rounded-t-lg text-bg-light"
+                centerTitle
                 color={Colors.primary}
                 title="Dataset"
             />
-            <CardBody className="bg-almond">
+            <CardBody className="bg-almond dark:bg-neutral-500">
                 <div className="space-y-2">
-                    <span className="text-base font-semibold text-gray-700">Labels</span>
-                    <SelectLabels onChange={handleSelectChange} closeMenuOnSelect={false} />
+                    <span className="text-base font-semibold text-gray-700 dark:text-white">Labels</span>
+                    <SelectRoleLabels values={selectedLabels} onChange={(labels) => setSelectedLabels(labels)} />
                 </div>
                 <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
                     <div className="2xl:col-span-7">
-                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Studies</span>
+                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">Studies</span>
                         <DatasetTableStudy
                             studies={studies}
                             onRowClick={handleStudyRowClick}
@@ -96,7 +102,7 @@ const DatasetRoot = () => {
                         />
                     </div>
                     <div className="2xl:col-span-5">
-                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700">Series</span>
+                        <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">Series</span>
                         {series && (
                             <DatasetSeriesTable
                                 series={series}
@@ -106,8 +112,10 @@ const DatasetRoot = () => {
                     </div>
                 </div>
             </CardBody>
-            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner bg-light">
-                <Button color={Colors.secondary} onClick={handleButtonClick}>
+            <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner dark:border-slate-600 bg-light dark:bg-slate-950">
+                <Button
+                    color={Colors.secondary}
+                    onClick={handleButtonClick}>
                     To Export
                 </Button>
             </CardFooter>

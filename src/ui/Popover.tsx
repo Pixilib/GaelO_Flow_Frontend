@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 type PopoverProps = {
   children: React.ReactNode;
   withOnClick: boolean;
   popover: React.ReactNode;
-  placement?: 'top' | 'right' | 'bottom' | 'left';
+  placement?: 'top' | 'right' | 'bottom' | 'left' | 'bottom-left' | 'bottom-right';
   className?: string;
+  backgroundColor?: string;
+  disableAutoPlacement?: boolean;
+  width?: string;
 };
 
 const Popover: React.FC<PopoverProps> = ({
@@ -14,8 +17,13 @@ const Popover: React.FC<PopoverProps> = ({
   withOnClick = false,
   placement = 'bottom',
   className = '',
+  backgroundColor = 'bg-secondary',
+  disableAutoPlacement = false,
+  width = '200px',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+  const triggerRef = useRef<HTMLSpanElement | null>(null);
 
   const getPlacementClasses = (placement: string) => {
     switch (placement) {
@@ -27,6 +35,10 @@ const Popover: React.FC<PopoverProps> = ({
         return 'top-full left-1/2 transform -translate-x-1/2 mt-2';
       case 'left':
         return 'right-full top-1/2 transform -translate-y-1/2 mr-2';
+      case 'bottom-left':
+        return 'top-full left-0 mt-2';
+      case 'bottom-right':
+        return 'top-full right-0 mt-2';
       default:
         return 'top-full left-1/2 transform -translate-x-1/2 mt-2';
     }
@@ -36,14 +48,37 @@ const Popover: React.FC<PopoverProps> = ({
     ? { onClick: () => setIsOpen(!isOpen) }
     : { onMouseEnter: () => setIsOpen(true), onMouseLeave: () => setIsOpen(false) };
 
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (
+      popoverRef.current && !popoverRef.current.contains(event.target as Node) &&
+      triggerRef.current && !triggerRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleOutsideClick);
+    } else {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [isOpen]);
+
   return (
     <div className="relative" data-gaelo-flow="Popover">
-      <span {...handleEvent}>
+      <span {...handleEvent} ref={triggerRef}>
         {children}
       </span>
       {isOpen && (
         <div
-          className={`absolute ${getPlacementClasses(placement)} z-50 rounded-lg bg-white p-4 text-gray-600 shadow-md dark:bg-gray-800 dark:text-gray-400 ${className}`}
+          ref={popoverRef}
+          className={`absolute ${getPlacementClasses(placement)} z-50 rounded-lg p-4 text-gray-600 shadow-md dark:text-gray-400 ${className} ${backgroundColor}`}
+          style={{ width }}
         >
           {popover}
         </div>

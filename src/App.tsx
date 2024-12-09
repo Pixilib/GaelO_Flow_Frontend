@@ -4,7 +4,7 @@ import WelcomeRoot from "./welcome/WelcomeRoot";
 import RootApp from "./root/RootApp";
 import "preline/preline";
 import { IStaticMethods } from "preline/preline";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 declare global {
   interface Window {
@@ -15,6 +15,14 @@ declare global {
 function App() {
   const isLogged = useSelector((state: RootState) => state.user.isLogged);
   const location = useLocation();
+  const [isDark, setDark] = useState(localStorage.getItem('theme') === 'dark')
+
+  useEffect(() => {
+    window.onstorage = () => {
+      const isDark = localStorage.getItem('theme') === 'dark';
+      setDark(isDark);
+    };
+  }, []);
 
   useEffect(() => {
     window.HSStaticMethods.autoInit();
@@ -22,7 +30,7 @@ function App() {
 
 
   return (
-    <div className="w-screen h-screen">
+    <div className={`w-screen h-screen ${isDark ? 'dark' : ''}`}>
       {isLogged ? <RootApp /> : <WelcomeRoot />}
     </div>
   )

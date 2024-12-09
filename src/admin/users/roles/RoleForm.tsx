@@ -1,10 +1,10 @@
-import { ChangeEvent, useState, useEffect } from "react";
-import { BsPersonCheckFill as SubmitUser } from "react-icons/bs";
+import { ChangeEvent, useState } from "react";
 
 import { Role } from "../../../utils/types";
 import { Colors } from "../../../utils";
 
 import { Button, Input,Toggle } from "../../../ui";
+import { SubmitUser } from "../../../icons";
 
 type RoleFormProps = {
     onSubmit: (payload: Role) => void;
@@ -49,7 +49,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
 
     return (
         <form onSubmit={handleSubmit} 
-        className="grid gap-y-4 lg:gap-y-6"
+        className="grid gap-y-4 lg:gap-y-6 "
         data-gaelo-flow="role-form"
         >
             <div className="flex flex-col max-w-lg gap-2">
@@ -149,8 +149,10 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
             </div>
             <div className="flex justify-center">
-                <Button color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
-                    <SubmitUser size={'1.3rem'} />
+                <Button color={Colors.success} 
+                className="h-12 gap-3 justify-self-center w-36 md:justify-center" 
+                type="submit">
+                    <SubmitUser size='1.3rem' />
                     <div>{buttonText}</div>
                 </Button>
             </div>

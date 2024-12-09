@@ -1,5 +1,5 @@
 import React from 'react';
-import { BiLeftArrowAlt as Arrowlefticon } from 'react-icons/bi';
+import { ArrowLeft } from '../../icons';
 
 type BannerProps = {
   title: string;
@@ -18,20 +18,22 @@ const Banner = ({
   return (
     <div
       data-gaelo-flow="banner"
-      className={`p-5 w-full flex flex-col md:flex-row items-center justify-between rounded-br-2xl border-transparent shadow-lg bg-white ${className}`}
+      className={`p-3 w-full flex flex-col items-center sm:flex-row sm:justify-between rounded-br-2xl border-transparent shadow-lg bg-white dark:bg-neutral-800  ${className}`}
     >
-      <div className="flex items-center w-full md:w-auto">
+      <div className="flex items-center justify-between w-full sm:w-auto">
         {onLeftIconClick && (
           <span
-            className="flex items-center mr-4 cursor-pointer text-primary"
+            className="flex items-center mr-2 cursor-pointer text-primary"
             onClick={onLeftIconClick}
           >
-            <Arrowlefticon className="text-3xl leading-none text-primary" />
+            <ArrowLeft className="text-xl sm:text-2xl text-primary dark:text-white" />
           </span>
         )}
-        <h1 className="text-xl font-medium md:text-2xl text-primary">{title}</h1>
+        <h1 className="text-lg font-medium text-center sm:text-left sm:text-xl lg:text-2xl text-primary dark:text-white">
+          {title}
+        </h1>
       </div>
-      <div className="flex justify-end w-full mt-4 md:w-auto md:mt-0">
+      <div className="flex justify-end w-full mt-3 sm:w-auto sm:mt-0">
         {children}
       </div>
     </div>

@@ -30,11 +30,14 @@ import Settings from "./settings.svg?react";
 import Shutdown from "./shutdown.svg?react";
 import SignIn from "./sign-in.svg?react";
 import SignUp from "./sign-up.svg?react";
+import SignInUpDark from "./sign-up-dark.svg?react";
+import signIndark from "./sign-in-dark.svg?react";
 import Sun from "./sun.svg?react";
 import UserBanner from "./user-banner.svg?react";
 import User from "./user.svg?react";
 import VisibilityOff from "./visibility-off.svg?react";
 import Visibility from "./visibility.svg?react";
+import GaeloIcon from "./gaelo-logo-white.svg?react";
 
 export {
     Administrator,
@@ -48,6 +51,7 @@ export {
     DotMenuMore,
     EyeOff,
     EyeOn,
+    GaeloIcon,
     Help,
     Home,
     ImportContent,
@@ -69,6 +73,8 @@ export {
     Shutdown,
     SignIn,
     SignUp,
+    SignInUpDark,
+    signIndark,
     Sun,
     UserBanner,
     User,

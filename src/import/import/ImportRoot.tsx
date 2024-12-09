@@ -3,7 +3,8 @@ import { BannerAlert } from "../../ui";
 import Model from "../../model/Model";
 import { Colors } from "../../utils";
 import ImportDrop from "./ImportDrop";
-import ImportAccordion from "./ImportAccordion";
+import ImportTableStudy from "./ImportTableStudy"; // Import de ImportTableStudy
+import ImportTableSeries from "./ImportTableSeries"; // Import de ImportTableSeries
 import ImportErrorModal from "./ImportErrorModal";
 
 interface ImportError {
@@ -61,7 +62,7 @@ const ImportRoot: React.FC = () => {
   }, [currentStudyInstanceUID]);
 
   return (
-    <div className="space-y-3">
+    <div className="mx-4 mb-4 space-y-3"> {/* Ajout de mb-4 pour l'espace en bas */}
       <ImportDrop
         model={refModel.current}
         onError={handleImportError}
@@ -70,7 +71,7 @@ const ImportRoot: React.FC = () => {
 
       {errors.length > 0 && (
         <BannerAlert
-          color={Colors.red}
+          color={Colors.danger}
           message={`Error Importing ${errors.length} file(s)`}
           onClickButton={handleShowModal}
           buttonLabel="See Errors"
@@ -82,12 +83,21 @@ const ImportRoot: React.FC = () => {
       )}
 
       {studiesData.length > 0 && (
-        <ImportAccordion
-          studiesData={studiesData}
-          seriesData={seriesData}
-          selectedStudyInstanceUID={currentStudyInstanceUID}
-          onStudyClick={handleStudyClick}
-        />
+        <div className="flex gap-4">
+          <div className="flex-1 mb-4 overflow-x-auto shadow-lg rounded-xl">
+            <ImportTableStudy
+              data={studiesData}
+              selectedStudyInstanceUID={currentStudyInstanceUID}
+              onStudyClick={handleStudyClick}
+            />
+          </div>
+
+          {currentStudyInstanceUID && seriesData.length > 0 && (
+            <div className="flex-1 overflow-x-auto shadow-lg rounded-xl mb">
+              <ImportTableSeries data={seriesData} />
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

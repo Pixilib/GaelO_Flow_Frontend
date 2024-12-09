@@ -1,8 +1,8 @@
-import { BiDownload } from 'react-icons/bi';
 import { Colors, useCustomMutation } from '../utils';
 import { MouseEvent, useState } from 'react';
 import ProgressJobs from './ProgressJobs';
 import { makeRetrieve } from '../services';
+import { Download } from '../icons';
 
 
 /**
@@ -41,7 +41,7 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
       {jobId ?
         <ProgressJobs jobId={jobId} />
         :
-        <BiDownload
+        <Download
           color={Colors.warning}
           onClick={handleClick}
           size="2.5em"
