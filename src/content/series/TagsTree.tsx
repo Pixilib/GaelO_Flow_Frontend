@@ -1,27 +1,30 @@
 import { useMemo, useState } from "react";
-import { getInstancesOfSeries } from "../../services/orthanc";
 import { Badge, Input, Spinner } from "../../ui";
-import { useCustomQuery } from "../../utils";
 import { instanceHeader, instanceTags } from "../../services/instances";
+import { getInstancesOfSeries } from "../../services/orthanc";
 import { Metadata, Tag as TagType } from "../../utils/types";
-import Tag from "./metadata/tag";
+import { useCustomQuery } from "../../utils";
+import TagSequence from "./metadata/TagSequence";
+import TagItem from "./metadata/TagItem";
 
 type TagsProps = {
   seriesId: string;
 };
 
 const TagsTree = ({ seriesId }: TagsProps) => {
+  const [instanceNumber, setInstanceNumber] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
   const { data: instances } = useCustomQuery(
     ["series", seriesId, "instances"],
     () => getInstancesOfSeries(seriesId)
   );
-  const [instanceNumber, setInstanceNumber] = useState<number>(1);
-  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const currentInstanceId =
-    instanceNumber != null && instances != null
-      ? instances[instanceNumber - 1].id
+  const currentInstanceId = useMemo(() => {
+    return instanceNumber != null && instances != null
+      ? instances[instanceNumber - 1]?.id
       : null;
+  }, [instanceNumber, instances]);
 
   const { data: header } = useCustomQuery<Metadata>(
     ["instances", currentInstanceId, "metadata"],
@@ -70,41 +73,36 @@ const TagsTree = ({ seriesId }: TagsProps) => {
   const getComponent = (tagAddress: string, tag: TagType) => {
     if (Array.isArray(tag.Value)) {
       return (
-        <li key={tagAddress} className="ml-4 list-none">
-          <Tag tag={tag}>
+        <li key={tagAddress} className="ml-4 list-none ">
+          <TagSequence tag={tag}>
             {tag.Value.map((metadata, index) => (
-              <li key={`${tagAddress}-${index}`}>
-                <ul>
+              <li key={`${tagAddress}-${index}`} >
+                <ul className="list-disc">
                   {Object.entries(metadata).map(([addressTag, tag]) =>
                     getComponent(addressTag, tag)
                   )}
                 </ul>
               </li>
             ))}
-          </Tag>
+          </TagSequence>
         </li>
       );
     } else {
       return (
-        <li className="ml-4 px-2 list-none" key={tagAddress}>
-          <Badge
-            variant="success"
-            className="p-1"
-            value={`${tagAddress} - ${tag.Name} : ${tag.Value}`}
-          />
+        <li className="ml-4 list-none odd:bg-white even:bg-light-gray" key={tagAddress}>
+          <TagItem address={tagAddress} tag={tag} />
         </li>
       );
     }
   };
 
-  if (!instances) return <Spinner />;
-
   return (
-    <div className="space-y-3 max-h-screen overflow-auto">
+    <div className="space-y-3">
       <Input
-        label="Instance Number"
+        label={"Instance Number " + (instanceNumber ?? 1)}
+        type="range"
         min={1}
-        max={instances.length}
+        max={instances?.length ?? 0}
         value={instanceNumber ?? 1}
         onChange={(event) => setInstanceNumber(Number(event.target?.value))}
       />
@@ -114,8 +112,8 @@ const TagsTree = ({ seriesId }: TagsProps) => {
         onChange={(event) => setSearchTerm(event.target?.value)}
         placeholder="Search by tag address, name, or value"
       />
-      <div>
-        <ul className="list-disc space-y-3">
+      <div className="overflow-auto min-h-[800px] max-h-[800px] p-3 pl-0">
+        <ul className="list-disc">
           {Object.entries(filteredMetadata)
             .sort()
             .map(([tagAddress, tag]) => getComponent(tagAddress, tag))}
