@@ -95,7 +95,7 @@ export enum AutoroutingEventType {
   } 
 
 
-  export type Destination {
+  export type Destination = {
     Destination: DestinationType;
     Name: string;
   }
