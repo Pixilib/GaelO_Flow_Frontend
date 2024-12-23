@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import { Input, SelectInput, Label } from "../ui";
 import { AutoroutingEventType, AutoRoutingRule, Destination, RuleCondition } from "./types";
 
@@ -7,8 +7,8 @@ const AutoRoutingRoot = () => {
   const [eventType, setEventType] = useState<AutoroutingEventType|null>(null);
   const [isActivated, setIsActivated] = useState(false);
   const [condition, setCondition] = useState<RuleCondition>(RuleCondition.AND);
-  const [rules, setRules] = useState<AutoRoutingRule[]>("value1");
-  const [destinations, setDestinations] = useState<Destination[]>("value1");
+  const [rules, setRules] = useState<AutoRoutingRule[]>([]);
+  const [destinations, setDestinations] = useState<Destination[]>([]);
 
   const eventTypeOptions = [
     { label: "New Instance", value: AutoroutingEventType.NEW_INSTANCE },
@@ -53,15 +53,7 @@ const AutoRoutingRoot = () => {
 
   return (
     <div
-      style={{
-        padding: "20px",
-        fontFamily: "Arial, sans-serif",
-        maxWidth: "600px",
-        margin: "auto",
-        backgroundColor: "#f9f9f9",
-        borderRadius: "8px",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      }}
+      className=""
     >
       <Input
         label="Name : "
@@ -79,12 +71,10 @@ const AutoRoutingRoot = () => {
         placeholder="Select Label(s)"
         aria-label="Labels"
       />
-      <label
+      <Label
+      value="Activated"
         htmlFor="activatedSwitch"
-        style={{ display: "block", marginBottom: "8px", fontWeight: "bold" }}
-      >
-        Activated:{" "}
-      </label>
+      / >
       <input
         id="activatedSwitch"
         type="checkbox"
