@@ -30,15 +30,15 @@ interface SelectInputProps {
 const customStyles: StylesConfig<OptionType, boolean> = {
   placeholder: (base) => ({
     ...base,
-    color: "white", // Placeholder en blanc
+    color: "black", // Placeholder en blanc
   }),
   input: (base) => ({
     ...base,
-    color: "white", // Texte saisi en blanc
+    color: "black", // Texte saisi en blanc
   }),
   singleValue: (base) => ({
     ...base,
-    color: "white", // Valeur sélectionnée en blanc
+    color: "black", // Valeur sélectionnée en blanc
   }),
 };
 
@@ -51,7 +51,7 @@ const customClass: ClassNamesConfig<OptionType, boolean> = {
   },
   menu: () => "rounded-3xl p-1 bg-white dark:bg-neutral-800",
   option: (state) => {
-    return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active text-white" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white px-2`;
+    return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white px-2`;
   },
   multiValue: () => "bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5",
   multiValueLabel: () => "text-gray-800",
