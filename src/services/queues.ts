@@ -114,7 +114,7 @@ export const getAnonymizeQueue = (uuid: string): Promise<AnonQueue[]> => {
         progress: job.Progress,
         state: job.State,
         id: job.Id,
-        results: orthancStudyToStudy(job.Results),
+        results: job.Results ? orthancStudyToStudy(job.Results) : null,
       }));
     })
     .catch(function (error) {

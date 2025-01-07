@@ -27,5 +27,6 @@ export const orthancStudyToStudy = (
     parentPatient: orthancStudy.ParentPatient,
     series: orthancStudy.Series,
     type: orthancStudy.Type,
+    anonymizedFrom : orthancStudy?.AnonymizedFrom,
   };
 };

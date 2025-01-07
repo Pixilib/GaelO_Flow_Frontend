@@ -44,6 +44,7 @@ const customClass: ClassNamesConfig<OptionType, boolean> = {
   option: (state) => {
     return `rounded-xl p-2 ${state.isSelected ? 'bg-primary-active text-white' : 'bg-white dark:bg-neutral-800 text-gray-800 dark:text-white'} hover:bg-primary hover:text-white px-2`;
   },
+  singleValue : () => 'text-black dark:text-white',
   multiValue: () => 'bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5',
   multiValueLabel: () => 'text-gray-800',
   multiValueRemove: () => 'text-red-500 hover:bg-red-200 rounded-full p-0.5',

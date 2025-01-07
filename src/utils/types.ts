@@ -363,13 +363,14 @@ export type Study = {
   parentPatient: string;
   series: string[];
   type: string;
+  anonymizedFrom?: string;
 };
 
 export type AnonPatient = {
-  newPatientName: string,
-  newPatientId: string,
-  originalPatient: Patient
-}
+  newPatientName: string;
+  newPatientId: string;
+  originalPatient: Patient;
+};
 
 export type AnonStudy = {
   newPatientName: string;
@@ -400,29 +401,37 @@ export type SeriesModifyPayload = {
 };
 
 export type Queue = {
-  progress: number
-  state: string
-  id: string
-  results: Record<string, any>
-  userId: number
-}
+  progress: number;
+  state: string;
+  id: string;
+  results: Record<string, any>;
+  userId: number;
+};
+
+export type Tag = {
+  Name: string;
+  Type: string;
+  Value: string | Record<string, Tag>[];
+};
+
+export type Metadata = Record<string, Tag>;
 
 export type AnonQueue = {
-  progress: number
-  state: string
-  id: string
-  results: Study
-  userId: number
-}
+  progress: number;
+  state: string;
+  id: string;
+  results: Study;
+  userId: number;
+};
 
 export type AnonItem = {
-  OrthancStudyID: string,
-  Profile: 'full' | 'default',
-  NewAccessionNumber: string
-  NewPatientID: string
-  NewPatientName: string
-}
+  OrthancStudyID: string;
+  Profile: "full" | "default";
+  NewAccessionNumber: string;
+  NewPatientID: string;
+  NewPatientName: string;
+};
 
 export type AnonymizePayload = {
-  Anonymizes: AnonItem[]
-}
+  Anonymizes: AnonItem[];
+};

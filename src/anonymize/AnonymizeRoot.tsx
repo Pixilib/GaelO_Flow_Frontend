@@ -28,14 +28,13 @@ const AnonymizeRoot = () => {
     const dispatch = useDispatch();
     const anonList = useSelector((state: RootState) => state.anonymize);
     const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
-    const [anonJobId, setAnonJobId] = useState<string | null>(null);
 
     const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
         ({ anonItems }) => createAnonymizeQueue(anonItems),
         [['queue', 'anonymize']],
         {
             onSuccess: (jobId) => {
-                setAnonJobId(jobId);
+                //console.log(jobId)
             },
         }
     );
@@ -63,7 +62,6 @@ const AnonymizeRoot = () => {
     };
 
     const onRemovePatient = (patientId: string) => {
-        console.log(patientId)
         studies
             .filter((study) => study.originalStudy.parentPatient === patientId)
             .forEach((study) => {
@@ -71,7 +69,7 @@ const AnonymizeRoot = () => {
             });
     };
 
-    const onChangeProfile = (option: { value: string }) => {
+    const onChangeProfile = (option: { value: 'Default'|'Full' }) => {
         dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }));
     };
 
