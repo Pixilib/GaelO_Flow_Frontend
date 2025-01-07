@@ -1,14 +1,13 @@
 import { Export } from "../../icons";
-import Button from "../../ui/Button";
 import Card, { CardHeader, CardBody, CardFooter } from "../../ui/Card";
 import { Colors } from "../../utils/enums";
 
-const CardExport = () => {
+const CardDelete = () => {
     return (
-        <Card className="flex-1 overflow-hidden rounded-lg shadow-lg md:max-w-md">
-              <CardHeader centerTitle color={Colors.secondary} className="flex items-center">
+        <Card className="flex-1 bg-white overflow-hidden rounded-lg shadow-lg md:max-w-md dark:bg-neutral-500">
+              <CardHeader centerTitle color={Colors.danger} className="flex items-center">
                 <Export className="mr-3 text-xl text-white " /> 
-                <span className="text-lg font-bold text-white">Anonymisation</span>
+                <span className="text-lg font-bold text-white">Delete</span>
             </CardHeader>
             
             <CardBody
@@ -23,4 +22,4 @@ const CardExport = () => {
     );
 };
 
-export default CardExport;
+export default CardDelete;
