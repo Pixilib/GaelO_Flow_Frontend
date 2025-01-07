@@ -45,7 +45,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       const dropdownMenu = dropdownRef.current.querySelector('.hs-dropdown-menu');
       if (dropdownMenu) {
-        dropdownMenu.classList.add('hidden');
+        //dropdownMenu.classList.add('hidden');
       }
     }
   };
