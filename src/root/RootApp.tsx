@@ -15,6 +15,7 @@ import DatasetRoot from "../datasets/DatasetRoot";
 import DeleteRoot from "../delete/DeleteRoot";
 import AnonymizeRoot from "../anonymize/AnonymizeRoot";
 import ExportRoot from "../export/ExportRoot";
+import AutoRetrieveRoot from "../auto-retrieve/AutoRetrieveRoot";
 
 const titlePath: { [key: string]: string } = {
   "/administration/general": "General",
@@ -71,6 +72,7 @@ const RootApp = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />
+            <Route path="/auto-retrieve/*" element={<AutoRetrieveRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />
             <Route path="/orthanc-content" element={<ContentRoot />} />
             <Route path="/datasets" element={<DatasetRoot />} />
