@@ -2,6 +2,7 @@ import QueryRoot from "./query/QueryRoot";
 import { Tab, Tabs } from "../ui";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import ResultsRoot from "./results/ResultsRoot";
+import TaskRoot from "./task/TaskRoot";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
@@ -27,11 +28,17 @@ const AutoRetrieveRoot = () => {
           active={location.pathname.endsWith("/auto-retrieve/results")}
           onClick={() => handleTabClick("/auto-retrieve/results")}
         />
+        <Tab
+          title="Robot"
+          active={location.pathname.endsWith("/auto-retrieve/task")}
+          onClick={() => handleTabClick("/auto-retrieve/task")}
+        />
       </Tabs>
       <div>
         <Routes>
           <Route path="/" element={<QueryRoot />} />
           <Route path="/results" element={<ResultsRoot />} />
+          <Route path="/task" element={<TaskRoot />} />
         </Routes>
       </div>
     </div>

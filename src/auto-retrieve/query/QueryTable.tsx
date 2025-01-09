@@ -1,36 +1,53 @@
 import moment from "moment";
-import { Table } from "../../ui";
+import { Button, Table } from "../../ui";
 import { QueryStudy } from "../types";
+import { Colors } from "../../utils";
+import { Trash } from "../../icons";
 
 type QueryTableProps = {
   queries: QueryStudy[];
+  onCellEdit: (rowIndex: string | number, columnId: any, value: any) => void;
+  onRemoveRow: (rowId) => void;
 };
 
-const QueryTable = ({ queries }: QueryTableProps) => {
+const QueryTable = ({ queries, onCellEdit, onRemoveRow }: QueryTableProps) => {
   const columns = [
     {
       id: "id",
       accessorKey: "id",
     },
     {
+      id: "patientName",
       accessorKey: "patientName",
       header: "Patient Name",
+      isEditable: true,
     },
     {
+      id: "patientID",
       accessorKey: "patientID",
       header: "Patient ID",
+      isEditable: true,
     },
     {
+      id: "studyDescription",
+      accessorKey: "studyDescription",
+      header: "Study Description",
+      isEditable: true,
+    },
+    {
+      id: "accessionNumber",
       accessorKey: "accessionNumber",
       header: "Accession Number",
+      isEditable: true,
     },
     {
-      id: "DateFrom",
+      id: "dateFrom",
       accessorFn: (row) => {
-        if (row.DateFrom == "" || row.DateFrom == null) return null;
+        if (row.dateFrom == "" || row.dateFrom == null) return null;
         return moment(row.DateFrom, "YYYYMMDD", true)?.toDate();
       },
       header: "Date From",
+      isEditable: true,
       //isEditable: true,
       //editionProperties: {
       //    type: 'CALENDAR'
@@ -39,20 +56,20 @@ const QueryTable = ({ queries }: QueryTableProps) => {
       //filterFn: isWithinDateRange
     },
     {
-      id: "DateTo",
+      id: "dateTo",
       accessorFn: (row) => {
-        if (row.DateTo == "" || row.DateTo == null) return null;
+        if (row.dateTo == "" || row.dateTo == null) return null;
         return moment(row.DateFrom, "YYYYMMDD", true)?.toDate();
       },
       header: "Date To",
+      isEditable: true,
     },
+
     {
-      accessorKey: "studyDescription",
-      header: "Study Description",
-    },
-    {
+      id: "modalitiesInStudy",
       accessorKey: "modalitiesInStudy",
       header: "Modalities",
+      isEditable: true,
       /*
             cell: ({ row, getValue }) => {
                 return <SelectModalities
@@ -63,8 +80,10 @@ const QueryTable = ({ queries }: QueryTableProps) => {
                 */
     },
     {
+      id: "aet",
       accessorKey: "aet",
       header: "AET",
+      isEditable: true,
       /*
                     cell: ({ row, getValue }) => {
             return <SelectModalities
@@ -74,9 +93,25 @@ const QueryTable = ({ queries }: QueryTableProps) => {
         }
             */
     },
+    {
+      accessorKey: "delete",
+      header: "Remove",
+      cell: ({row}) => {
+        return (
+          <Button onClick={() => onRemoveRow(row.original.id)} className="w-full" color={Colors.danger}>
+            <Trash />
+          </Button>
+        );
+      },
+    },
   ];
   return (
-    <Table columns={columns} columnVisibility={{ id: false }} data={queries} />
+    <Table
+      onCellEdit={onCellEdit}
+      columns={columns}
+      columnVisibility={{ id: false }}
+      data={queries}
+    />
   );
 };
 
