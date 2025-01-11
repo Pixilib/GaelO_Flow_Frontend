@@ -74,7 +74,7 @@ const QueryRoot = () => {
     <div className="flex flex-col gap-3 p-3">
       <div className="flex gap-3 w-full justify-between">
         <div className="flex gap-3">
-          <Button color={Colors.warning} onClick={addEmptyQuery}>
+          <Button color={Colors.primary} onClick={addEmptyQuery}>
             <Add />
           </Button>
           <QueryCsvDrop onImportCsv={handleImportCsv} />
