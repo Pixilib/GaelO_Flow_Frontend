@@ -25,8 +25,8 @@ const AutoRetrieveRoot = () => {
         />
         <Tab
           title="Results"
-          active={location.pathname.endsWith("/auto-retrieve/results")}
-          onClick={() => handleTabClick("/auto-retrieve/results")}
+          active={location.pathname.includes("/auto-retrieve/results")}
+          onClick={() => handleTabClick("/auto-retrieve/results/studies")}
         />
         <Tab
           title="Robot"
@@ -37,7 +37,7 @@ const AutoRetrieveRoot = () => {
       <div>
         <Routes>
           <Route path="/" element={<QueryRoot />} />
-          <Route path="/results" element={<ResultsRoot />} />
+          <Route path="/results/*" element={<ResultsRoot />} />
           <Route path="/task" element={<TaskRoot />} />
         </Routes>
       </div>

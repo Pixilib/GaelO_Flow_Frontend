@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Papa from "papaparse";
 import QueryTable from "./QueryTable";
-import { Colors } from "../../utils";
+import { Colors, dicomDateQueryStringFromDateFromDateTo, QueryPayload } from "../../utils";
 import { Button } from "../../ui";
 import { Add, Download, Empty } from "../../icons";
 import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
 import QueryCsvDrop from "./QueryCsvDrop";
+import { queryModality } from "../../services";
 
 const QueryRoot = () => {
   const [queries, setQueries] = useState<QueryStudy[]>([]);
@@ -67,6 +68,23 @@ const QueryRoot = () => {
   };
 
   const onStartQueries = () => {
+    for (const queryRow of queries) {
+
+      
+      const query: QueryPayload = {
+        Level: 'Study',
+        Query: {
+          PatientName: queryRow.patientName,
+          PatientID: queryRow.patientID,
+          StudyDescription: queryRow.studyDescription,
+          AccessionNumber: queryRow.accessionNumber,
+          StudyDate: dicomDateQueryStringFromDateFromDateTo(queryRow.dateFrom, queryRow.dateTo),
+          Modality: queryRow.modalitiesInStudy
+        }
+      }
+      queryModality(queryRow.aet, query)
+    }
+
     //TODO
   }
 

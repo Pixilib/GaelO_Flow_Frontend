@@ -196,7 +196,7 @@ type QueryStudy = {
   StudyDate?: string;
   Modality?: string;
   StudyDescription?: string;
-  AccessionNb?: string;
+  AccessionNumber?: string;
   StudyInstanceUID?: string;
 };
 

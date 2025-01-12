@@ -1,7 +1,10 @@
 import moment from "moment";
-import { Button, Table } from "../../ui";
+import { Table } from "../../ui";
 
-const ResultStudiesTable = () => {
+type ResultStudiesTableProps = {
+    resultStudies: any;
+}
+const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
     const columns = [
         {
             id: "id",
@@ -63,10 +66,10 @@ const ResultStudiesTable = () => {
 
     return (
         <Table
-        columns={columns}
-        columnVisibility={{ id: false, studyInstanceUID: false }}
-        data={resultStudies}
-      />
+            columns={columns}
+            columnVisibility={{ id: false, studyInstanceUID: false }}
+            data={resultStudies}
+        />
     )
 }
 
