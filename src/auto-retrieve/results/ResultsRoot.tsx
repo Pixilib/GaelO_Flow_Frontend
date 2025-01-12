@@ -4,13 +4,16 @@ import ResultStudiesTable from "./ResultStudIesTable";
 import ResultSeriesTable from "./ResultSeriesTable";
 import { QueryResultSeries, QueryResultStudy } from "../../utils/types";
 import { Colors } from "../../utils";
+import { Empty } from "../../icons";
 
 type ResultsRootProps = {
     studyResults: QueryResultStudy[]
     seriesResults: QueryResultSeries[]
     onStartSeriesQueries: () => void
+    onClearStudyResults: () => void
+    onClearSeriesResults: () => void
 }
-const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries }: ResultsRootProps) => {
+const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClearStudyResults, onClearSeriesResults }: ResultsRootProps) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -39,6 +42,7 @@ const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries }: Resu
                         <div className="flex justify-center p-3 gap-3">
                             <Button color={Colors.success} onClick={() => { }}>Start Robot Study</Button>
                             <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query Series</Button>
+                            <Button color={Colors.warning} onClick={onClearStudyResults}><Empty /></Button>
                         </div>
                     </>
                 } />
@@ -47,6 +51,7 @@ const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries }: Resu
                         <ResultSeriesTable resultSeries={seriesResults} />
                         <div className="flex justify-center p-3 gap-3">
                             <Button color={Colors.success} onClick={() => { }}>Start Robot Series</Button>
+                            <Button color={Colors.warning} onClick={onClearSeriesResults}><Empty /></Button>
                         </div>
                     </>
                 } />

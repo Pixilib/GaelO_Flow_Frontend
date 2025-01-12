@@ -65,6 +65,14 @@ const AutoRetrieveRoot = () => {
     }
   }
 
+  const handleClearStudyResults = () => {
+    setStudiesResults([])
+  }
+
+  const handleClearSeriesResults = () => {
+    setSeriesResults([])
+  }
+
   return (
     <div
       className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl space-y-3"
@@ -90,7 +98,7 @@ const AutoRetrieveRoot = () => {
       <div>
         <Routes>
           <Route path="/" element={<QueryRoot onStartStudyQueries = {handleStartStudyQueries} queries={queries} setQueries={setQueries} onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
-          <Route path="/results/*" element={<ResultsRoot studyResults={studiesResults} seriesResults={seriesResults} onStartSeriesQueries={handleStartSeriesQueries} />} />
+          <Route path="/results/*" element={<ResultsRoot studyResults={studiesResults} seriesResults={seriesResults} onStartSeriesQueries={handleStartSeriesQueries} onClearStudyResults={handleClearStudyResults} onClearSeriesResults={handleClearSeriesResults} />} />
           <Route path="/task" element={<TaskRoot />} />
         </Routes>
       </div>

@@ -90,7 +90,7 @@ const QueryRoot = ({ queries, setQueries, onStartStudyQueries }: QueryRootProps)
           >
             <Download /> csv
           </Button>
-          <Button color={Colors.danger} onClick={onEmptyQueryList}>
+          <Button color={Colors.warning} onClick={onEmptyQueryList}>
             <Empty />
           </Button>
         </div>
