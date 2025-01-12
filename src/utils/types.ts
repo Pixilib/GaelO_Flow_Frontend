@@ -226,7 +226,7 @@ export type ExtendedQueryPayload = {
   aet: string;
 };
 
-export type QueryResponse = {
+export type QueryResult = {
   answerId: string;
   answerNumber: number;
   level: Level;

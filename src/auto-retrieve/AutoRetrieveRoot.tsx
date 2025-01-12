@@ -3,14 +3,27 @@ import { Tab, Tabs } from "../ui";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import ResultsRoot from "./results/ResultsRoot";
 import TaskRoot from "./task/TaskRoot";
+import { QueryResult } from "../utils/types";
+import { useState } from "react";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [studiesResults, setStudiesResults] = useState<QueryResult[]>([]);
+  const [seriesResults, setSeriesResults] = useState<QueryResult[]>([]);
+
   const handleTabClick = (tab: string) => {
     navigate(tab);
   };
+
+  const studyResultsHandler = (answers: QueryResult[]) => {
+    setStudiesResults(studyResults=>[...studyResults, ...answers]);
+  };
+
+  const seriesResultsHandler = (answers: QueryResult[]) => {
+    setSeriesResults(seriesResults=>[...seriesResults, ...answers]);
+  }
 
   return (
     <div
@@ -36,8 +49,8 @@ const AutoRetrieveRoot = () => {
       </Tabs>
       <div>
         <Routes>
-          <Route path="/" element={<QueryRoot />} />
-          <Route path="/results/*" element={<ResultsRoot />} />
+          <Route path="/" element={<QueryRoot onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
+          <Route path="/results/*" element={<ResultsRoot studiesResults={studiesResults} seriesResults={seriesResults}/>} />
           <Route path="/task" element={<TaskRoot />} />
         </Routes>
       </div>

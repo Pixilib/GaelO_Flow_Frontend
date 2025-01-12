@@ -8,8 +8,14 @@ import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
 import QueryCsvDrop from "./QueryCsvDrop";
 import { queryModality } from "../../services";
+import { QueryResult } from "../../utils/types";
 
-const QueryRoot = () => {
+type QueryRootProps = {
+  onStudyResults: (answer: QueryResult[]) => void;
+  onSeriesResults: (answer: QueryResult[]) => void;
+};
+
+const QueryRoot = ({ onStudyResults, onSeriesResults }: QueryRootProps) => {
   const [queries, setQueries] = useState<QueryStudy[]>([]);
 
   const addEmptyQuery = () => {
@@ -67,10 +73,8 @@ const QueryRoot = () => {
     setQueries([]);
   };
 
-  const onStartQueries = () => {
+  const onStartQueries = async () => {
     for (const queryRow of queries) {
-
-      
       const query: QueryPayload = {
         Level: 'Study',
         Query: {
@@ -82,10 +86,9 @@ const QueryRoot = () => {
           Modality: queryRow.modalitiesInStudy
         }
       }
-      queryModality(queryRow.aet, query)
+      const answer = await queryModality(queryRow.aet, query)
+      onStudyResults(answer)
     }
-
-    //TODO
   }
 
   return (

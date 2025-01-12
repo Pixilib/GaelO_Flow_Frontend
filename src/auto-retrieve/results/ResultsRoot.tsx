@@ -2,8 +2,13 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Tab, Tabs } from "../../ui";
 import ResultStudiesTable from "./ResultStudIesTable";
 import ResultSeriesTable from "./ResultSeriesTable";
+import { QueryResult } from "../../utils/types";
 
-const ResultsRoot = () => {
+type ResultsRootProps = {
+    studyResults: QueryResult[]
+    seriesResults: QueryResult[]
+}
+const ResultsRoot = ({ studyResults, seriesResults }: ResultsRootProps) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -26,8 +31,8 @@ const ResultsRoot = () => {
                 />
             </Tabs>
             <Routes>
-                <Route path="studies" element={<ResultStudiesTable resultStudies={[]} />} />
-                <Route path="series" element={<ResultSeriesTable resultSeries={[]} />} />
+                <Route path="studies" element={<ResultStudiesTable resultStudies={studyResults} />} />
+                <Route path="series" element={<ResultSeriesTable resultSeries={seriesResults} />} />
             </Routes>
         </div>
     )

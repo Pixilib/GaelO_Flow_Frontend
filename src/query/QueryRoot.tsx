@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormCard } from "../ui";
 import { getModalities, queryModality } from "../services";
 import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors, useCustomToast } from "../utils";
-import { QueryResponse, QueryPayload, ExtendedQueryPayload } from '../utils/types';
+import { QueryResult, QueryPayload, ExtendedQueryPayload } from '../utils/types';
 
 import SearchForm from "./SearchForm";
 import ResultsTable from "./ResultsTable";
@@ -16,7 +16,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
 
   const { toastError } = useCustomToast();
 
-  const [studies, setStudies] = useState<QueryResponse[]>([]);
+  const [studies, setStudies] = useState<QueryResult[]>([]);
   const [series, setSeries] = useState<any[]>([]);
 
   const { data: aets } = useCustomQuery<ModalityExtended[], Option[]>(
@@ -30,7 +30,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     }
   );
 
-  const { mutateAsync: mutateQueryStudies } = useCustomMutation<QueryResponse[], ExtendedQueryPayload>(
+  const { mutateAsync: mutateQueryStudies } = useCustomMutation<QueryResult[], ExtendedQueryPayload>(
     ({ queryPayload, aet }) => queryModality(aet, queryPayload),
     [],
     {
@@ -44,7 +44,7 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     }
   );
 
-  const { mutateAsync: mutateQuerySeries } = useCustomMutation<QueryResponse[], ExtendedQueryPayload>(
+  const { mutateAsync: mutateQuerySeries } = useCustomMutation<QueryResult[], ExtendedQueryPayload>(
     ({ queryPayload, aet }) => queryModality(aet, queryPayload),
     [],
     {

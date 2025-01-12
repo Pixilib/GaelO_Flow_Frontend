@@ -8,7 +8,11 @@ const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
     const columns = [
         {
             id: "id",
-            accessorKey: "id",
+            accessorKey: "answerId",
+        },
+        {
+            id: "answerNumber",
+            accessorKey: "answerNumber",
         },
         {
             id: "patientName",
@@ -67,7 +71,7 @@ const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
     return (
         <Table
             columns={columns}
-            columnVisibility={{ id: false, studyInstanceUID: false }}
+            columnVisibility={{ id: false, answerNumber:false, studyInstanceUID: false }}
             data={resultStudies}
         />
     )

@@ -1,15 +1,15 @@
 import axios from "axios";
-import { QueryResponse, QueryPayload, RetrieveResponse } from "../utils/types";
+import { QueryResult, QueryPayload, RetrieveResponse } from "../utils/types";
 
 export const queryModality = (
   modality: string,
   payload: QueryPayload
-): Promise<QueryResponse[]> => {
+): Promise<QueryResult[]> => {
   return axios
     .post(`/api/modalities/${modality}/parsed-query`, payload)
-    .then((response: any):QueryResponse[] => {
+    .then((response: any):QueryResult[] => {
       return response.data.map(
-        (data: any): QueryResponse => ({
+        (data: any): QueryResult => ({
           answerId: data.AnswerId,
           answerNumber: data.AnswerNumber,
           level: data.Level,
