@@ -16,6 +16,7 @@ import DeleteRoot from "../delete/DeleteRoot";
 import AnonymizeRoot from "../anonymize/AnonymizeRoot";
 import ExportRoot from "../export/ExportRoot";
 import AutoRetrieveRoot from "../auto-retrieve/AutoRetrieveRoot";
+import HelpRoot from "../help/HelpRoot";
 
 const titlePath: { [key: string]: string } = {
   "/administration/general": "General",
@@ -82,6 +83,7 @@ const RootApp = () => {
             <Route path="/anonymize" element={<AnonymizeRoot />} />
             <Route path="/export" element={<ExportRoot />} />
             <Route path="/delete" element={<DeleteRoot />} />
+            <Route path="/help" element={<HelpRoot />} />
           </Routes>
         </div>
       </div>
