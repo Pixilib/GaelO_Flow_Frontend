@@ -1,22 +1,22 @@
-import { useState } from "react";
 import Papa from "papaparse";
 import QueryTable from "./QueryTable";
-import { Colors, dicomDateQueryStringFromDateFromDateTo, QueryPayload } from "../../utils";
+import { Colors } from "../../utils";
 import { Button } from "../../ui";
 import { Add, Download, Empty } from "../../icons";
 import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
 import QueryCsvDrop from "./QueryCsvDrop";
-import { queryModality } from "../../services";
-import { QueryResult } from "../../utils/types";
+import { QueryResultStudy, QueryResultSeries } from "../../utils/types";
 
 type QueryRootProps = {
-  onStudyResults: (answer: QueryResult[]) => void;
-  onSeriesResults: (answer: QueryResult[]) => void;
+  queries: QueryStudy[];
+  setQueries: (queries) => void;
+  onStudyResults: (answer: QueryResultStudy[]) => void;
+  onSeriesResults: (answer: QueryResultSeries[]) => void;
+  onStartStudyQueries: () => void;
 };
 
-const QueryRoot = ({ onStudyResults, onSeriesResults }: QueryRootProps) => {
-  const [queries, setQueries] = useState<QueryStudy[]>([]);
+const QueryRoot = ({ queries, setQueries, onStartStudyQueries }: QueryRootProps) => {
 
   const addEmptyQuery = () => {
     setQueries((queries) => {
@@ -73,24 +73,6 @@ const QueryRoot = ({ onStudyResults, onSeriesResults }: QueryRootProps) => {
     setQueries([]);
   };
 
-  const onStartQueries = async () => {
-    for (const queryRow of queries) {
-      const query: QueryPayload = {
-        Level: 'Study',
-        Query: {
-          PatientName: queryRow.patientName,
-          PatientID: queryRow.patientID,
-          StudyDescription: queryRow.studyDescription,
-          AccessionNumber: queryRow.accessionNumber,
-          StudyDate: dicomDateQueryStringFromDateFromDateTo(queryRow.dateFrom, queryRow.dateTo),
-          Modality: queryRow.modalitiesInStudy
-        }
-      }
-      const answer = await queryModality(queryRow.aet, query)
-      onStudyResults(answer)
-    }
-  }
-
   return (
     <div className="flex flex-col gap-3 p-3">
       <div className="flex gap-3 w-full justify-between">
@@ -121,7 +103,7 @@ const QueryRoot = ({ onStudyResults, onSeriesResults }: QueryRootProps) => {
         />
       </div>
       <div className="flex justify-center m-3">
-        <Button color={Colors.primary} onClick={onStartQueries}>Start Queries</Button>
+        <Button color={Colors.primary} onClick={onStartStudyQueries}>Start Queries</Button>
       </div>
     </div>
   );

@@ -20,8 +20,8 @@ const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
             header: "Patient Name",
         },
         {
-            id: "patientID",
-            accessorKey: "patientID",
+            id: "patientId",
+            accessorKey: "patientId",
             header: "Patient ID",
         },
         {
@@ -43,6 +43,11 @@ const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
             accessorFn: (row) => {
                 return moment(row.studyDate, "YYYYMMDD", true)?.toDate();
             },
+            cell: ({row}) => {
+                return (
+                    moment((row.studyDate as Date)).format("YYYY-MM-DD")
+                );
+              },
             header: "Study Date",
         },
         {
@@ -56,13 +61,13 @@ const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
             header: "Number of Series",
         },
         {
-            id: "numberOfSeriesRelatedInstances",
-            accessorKey: "numberOfSeriesRelatedInstances",
+            id: "numberOfStudyRelatedInstances",
+            accessorKey: "numberOfStudyRelatedInstances",
             header: "Number of Instances",
         },
         {
-            id: "aet",
-            accessorKey: "aet",
+            id: "originAET",
+            accessorKey: "originAET",
             header: "AET",
         },
 

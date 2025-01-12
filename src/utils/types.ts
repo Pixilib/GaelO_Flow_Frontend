@@ -226,7 +226,21 @@ export type ExtendedQueryPayload = {
   aet: string;
 };
 
-export type QueryResult = {
+export type QueryResultSeries = QueryResult & {
+  modality: string;
+  seriesNumber: string;
+  seriesDescription: string;
+  numberOfSeriesRelatedInstances: string;
+};
+
+export type QueryResultStudy = QueryResult & {
+  seriesInstanceUID: string;
+  numberOfStudyRelatedInstances: string;
+  numberOfStudyRelatedSeries: string;
+  modalitiesInStudy: string;
+};
+
+type QueryResult = {
   answerId: string;
   answerNumber: number;
   level: Level;
@@ -236,13 +250,8 @@ export type QueryResult = {
   accessionNumber: string;
   studyDescription: string;
   studyDate: string;
-  requestedProcedureDescription: string;
-  modality: string;
-  seriesDescription: string;
-  seriesNumber: string;
-  numberOfSeriesRelatedInstances: string;
   studyInstanceUID: string;
-  seriesInstanceUID: string;
+  requestedProcedureDescription: string;
 };
 
 export type RetrieveResponse = {

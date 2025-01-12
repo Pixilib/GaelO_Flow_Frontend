@@ -20,8 +20,8 @@ const ResultSeriesTable = ({ resultSeries }: ResultSeriesTableProps) => {
             header: "Patient Name",
         },
         {
-            id: "patientID",
-            accessorKey: "patientID",
+            id: "patientId",
+            accessorKey: "patientId",
             header: "Patient ID",
         },
         {
@@ -38,6 +38,11 @@ const ResultSeriesTable = ({ resultSeries }: ResultSeriesTableProps) => {
             id: "studyDate",
             accessorFn: (row) => {
                 return moment(row.studyDate, "YYYYMMDD", true)?.toDate();
+            },
+            cell: ({ row }) => {
+                return (
+                    moment((row.studyDate as Date)).format("YYYY-MM-DD")
+                );
             },
             header: "Study Date",
         },
@@ -65,8 +70,8 @@ const ResultSeriesTable = ({ resultSeries }: ResultSeriesTableProps) => {
             header: "Number of Instances",
         },
         {
-            id: "aet",
-            accessorKey: "aet",
+            id: "originAET",
+            accessorKey: "originAET",
             header: "AET",
         }
     ]
@@ -74,7 +79,7 @@ const ResultSeriesTable = ({ resultSeries }: ResultSeriesTableProps) => {
     return (
         <Table
             columns={columns}
-            columnVisibility={{ id: false, answerNumber:false, studyInstanceUID: false, seriesInstanceUID: false }}
+            columnVisibility={{ id: false, answerNumber: false, studyInstanceUID: false, seriesInstanceUID: false }}
             data={resultSeries}
         />
     )

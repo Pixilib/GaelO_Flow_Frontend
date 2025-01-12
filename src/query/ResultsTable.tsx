@@ -1,12 +1,12 @@
 import { Table } from "../ui";
 import { ColumnDef } from "@tanstack/react-table";
-import { QueryResult } from "../utils/types";
+import { QueryResultStudy } from "../utils/types";
 import { Colors } from "../utils";
 import RetrieveButton from './RetrieveButton';
 import { useMemo, useState } from "react";
 
 type ResultsTableProps = {
-    results: QueryResult[] | null;
+    results: QueryResultStudy[] | null;
     onRowClick: (studyInstanceUID: string, originAET: string) => void;
 };
 
@@ -14,7 +14,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
     const rows = useMemo(() => results, [results]);
     
-    const columns: ColumnDef<QueryResult>[] = useMemo(() => [
+    const columns: ColumnDef<QueryResultStudy>[] = useMemo(() => [
         {
             accessorKey: "patientName",
             header: "Patient Name",
@@ -50,7 +50,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
         },
     ], []);
 
-    const handleRowClick = (row: QueryResult) => {
+    const handleRowClick = (row: QueryResultStudy) => {
         onRowClick(row.studyInstanceUID, row.originAET);
         setSelectedRows(prev => ({
             ...prev,
@@ -58,7 +58,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
         }));
     };
 
-    const getRowClasses = (row: QueryResult) => {
+    const getRowClasses = (row: QueryResultStudy) => {
         if (selectedRows[row.studyInstanceUID]) {
             return 'bg-primary hover:cursor-pointer';
         }
