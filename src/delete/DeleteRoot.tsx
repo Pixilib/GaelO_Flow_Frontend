@@ -13,7 +13,6 @@ import { Trash, Empty } from "../icons";
 const DeleteRoot = () => {
     const dispatch = useDispatch();
     const deleteList = useSelector((state: RootState) => state.delete.studies);
-    const [queueUuid, setQueueUuid] = useState<string | null>(null);
 
     const handleClearList = () => {
         dispatch(flushDeleteList());
@@ -25,7 +24,6 @@ const DeleteRoot = () => {
         {
             onSuccess: (uuid) => {
                 console.log("Queue created with UUID:", uuid);
-                setQueueUuid(uuid);
             },
         }
     );
@@ -55,29 +53,25 @@ const DeleteRoot = () => {
                     </div>
                 </div>
             </CardHeader>
-            <CardBody 
-            color={Colors.almond}
-            className="dark:bg-neutral-500">
+            <CardBody
+                color={Colors.almond}
+                className="dark:bg-neutral-500">
                 <DeleteStudyTable
                     studies={Object.values(deleteList)} />
             </CardBody>
-            <CardFooter 
-            color={Colors.light}
-            className="dark:bg-slate-950">
-                <div className="flex items-center justify-center gap-3">
-                    <div>
-                        <Button
-                            onClick={handleDeleteList}
-                            color={Colors.danger}
-                            className="flex items-center justify-center"
-                        >
-                            <Trash />
-                            <span className="ml-2">Delete List</span>
-                        </Button>
-                    </div>
-                    <div>
-                        <DeleteQueues />
-                    </div>
+            <CardFooter
+                color={Colors.light}
+                className="dark:bg-slate-950">
+                <div className="flex flex-col items-center justify-center gap-3 m-3">
+                    <Button
+                        onClick={handleDeleteList}
+                        color={Colors.danger}
+                        className="flex items-center justify-center"
+                    >
+                        <Trash />
+                        <span className="ml-2">Delete List</span>
+                    </Button>
+                    <DeleteQueues />
                 </div>
             </CardFooter>
 

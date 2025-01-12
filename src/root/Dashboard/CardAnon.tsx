@@ -46,7 +46,7 @@ const CardAnon = () => {
     if (!data || data.length === 0) return 0;
     const totalJobs = data.length;
     const completedJobs = data.filter(
-      (job) => job.state === "completed" || job.state === "in progress"
+      (job) => job.state === "completed" || job.state === "failed"
     ).length;
     return totalJobs === 0 ? 0 : (completedJobs / totalJobs) * 100;
   }, [data]);
@@ -59,7 +59,7 @@ const CardAnon = () => {
         className="flex items-center"
       >
         <Anon className="mr-3 text-xl text-white" />
-        <span className="text-lg font-bold text-white">Anonymisation</span>
+        <span className="text-lg font-bold text-white">Anonymization</span>
       </CardHeader>
       <CardBody
         className="flex items-center justify-center p-4 dark:bg-neutral-500"
