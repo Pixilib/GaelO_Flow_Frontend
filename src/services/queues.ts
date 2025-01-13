@@ -201,7 +201,6 @@ export const getQueryQueue = (uuid: string) : Promise<Queue[]> => {
   return axios
     .get(`/api/queues/query/${uuid}`)
     .then((response) => {
-      console.log(response.data);
       const data: any = Object.values(response.data);
       return data.map((job) => ({
         userId: job.UserId,

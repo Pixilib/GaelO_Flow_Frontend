@@ -414,7 +414,7 @@ export type Queue = {
   progress: number;
   state: string;
   id: string;
-  results: Record<string, any>;
+  results: Record<string, any> |null;
   userId: number;
 };
 

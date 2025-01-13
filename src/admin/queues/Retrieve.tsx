@@ -21,6 +21,7 @@ import {
 } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Send } from "../../icons";
+import RetrieveQueues from "./RetrieveQueues";
 
 type RetrieveProps = {
   data: Options;
@@ -167,7 +168,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
         </CardBody>
       </Card>
       <div className="mt-6 overflow-x-auto">
-        <Table data={[]} columns={[]} headerColor={Colors.almond} />
+        <RetrieveQueues/>
       </div>
     </form>
   );

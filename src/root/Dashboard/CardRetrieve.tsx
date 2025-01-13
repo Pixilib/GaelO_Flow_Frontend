@@ -16,15 +16,15 @@ const CardRetrieve = () => {
     (state: RootState) => state.user.currentUserId
 );
 
-const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
+const { data: existingRetrieveQueues } = useCustomQuery<string[]>(
     ["queue", "query", currentUserId?.toString() || ""],
     () => getExistingQueriesQueues(currentUserId)
 );
 
-const firstQueue = existingAnonymizeQueues?.[0];
+const firstQueue = existingRetrieveQueues?.[0];
 
 const { data } = useCustomQuery<Queue[]>(
-    ["queue", "delete", firstQueue],
+    ["queue", "retrieve", firstQueue],
     () => getQueryQueue(firstQueue),
     {
         refetchInterval: 2000,
@@ -34,7 +34,7 @@ const { data } = useCustomQuery<Queue[]>(
 
 const { mutate: mutateDeleteQueue } = useCustomMutation(
     () => deleteQueryQueue(firstQueue),
-    [["queue", "delete"]]
+    [["queue", "retrieve"]]
 );
 
 const globalProgress = useMemo(() => {
