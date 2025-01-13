@@ -24,7 +24,7 @@ const { data: existingRetrieveQueues } = useCustomQuery<string[]>(
 const firstQueue = existingRetrieveQueues?.[0];
 
 const { data } = useCustomQuery<Queue[]>(
-    ["queue", "retrieve", firstQueue],
+    ["queue", "query", firstQueue],
     () => getQueryQueue(firstQueue),
     {
         refetchInterval: 2000,
@@ -34,7 +34,7 @@ const { data } = useCustomQuery<Queue[]>(
 
 const { mutate: mutateDeleteQueue } = useCustomMutation(
     () => deleteQueryQueue(firstQueue),
-    [["queue", "retrieve"]]
+    [["queue", "query"]]
 );
 
 const globalProgress = useMemo(() => {
