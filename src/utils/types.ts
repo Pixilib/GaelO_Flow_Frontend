@@ -231,6 +231,7 @@ export type QueryResultSeries = QueryResult & {
   seriesNumber: string;
   seriesDescription: string;
   numberOfSeriesRelatedInstances: string;
+  seriesInstanceUID: string;
 };
 
 export type QueryResultStudy = QueryResult & {
@@ -443,4 +444,25 @@ export type AnonItem = {
 
 export type AnonymizePayload = {
   Anonymizes: AnonItem[];
+};
+
+export type QueryQueueStudyItem = {
+  patientName: string;
+  patientId: string;
+  studyDate: string;
+  modality: string;
+  studyDescription: string;
+  accessionNumber: string;
+  studyInstanceUID: string;
+  aet: string;
+};
+
+export type QueryQueueSeriesItem = {
+  studyInstanceUID: string;
+  modality: string;
+  protocolName: string;
+  seriesDescription: string;
+  seriesNumber: string;
+  seriesInstanceUID: string;
+  aet: string;
 };

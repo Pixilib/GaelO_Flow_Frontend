@@ -1,5 +1,12 @@
 import axios from "axios";
-import { AnonItem, AnonQueue, AnonymizePayload, Queue } from "../utils/types";
+import {
+  AnonItem,
+  AnonQueue,
+  AnonymizePayload,
+  QueryQueueSeriesItem,
+  QueryQueueStudyItem,
+  Queue,
+} from "../utils/types";
 import { orthancStudyToStudy } from "./utils";
 
 export const createDeleteQueue = (seriesId: string[]): Promise<string> => {
@@ -128,6 +135,93 @@ export const getAnonymizeQueue = (uuid: string): Promise<AnonQueue[]> => {
 export const deleteAnonymizeQueue = (uuid: string): Promise<void> => {
   return axios
     .delete(`/api/queues/anonymize/${uuid}`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const createQueryQueue = (
+  studies: QueryQueueStudyItem[],
+  series: QueryQueueSeriesItem[]
+): Promise<string> => {
+  const payload = {
+    Studies: studies.map((study) => ({
+      PatientName: study.patientName,
+      PatientID: study.patientId,
+      StudyDate: study.studyDate,
+      Modality: study.modality,
+      StudyDescription: study.studyDescription,
+      AccessionNumber: study.accessionNumber,
+      StudyInstanceUID: study.studyInstanceUID,
+      Aet: study.aet,
+    })),
+    Series: series.map((series) => ({
+      StudyInstanceUID: series.studyInstanceUID,
+      Modality: series.modality,
+      ProtocolName: series.protocolName,
+      SeriesDescription: series.seriesDescription,
+      SeriesNumber: series.seriesNumber,
+      SeriesInstanceUID: series.seriesInstanceUID,
+      Aet: series.aet,
+    })),
+  };
+  return axios
+    .post(`/api/queues/query`, payload)
+    .then((response) => response.data.Uuid)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const getExistingQueriesQueues = (
+  userId: number | undefined
+): Promise<string[]> => {
+  const url = userId
+    ? `/api/queues/query?userId=${userId}`
+    : "/api/queues/query";
+  return axios
+    .get(url)
+    .then((response) => response.data)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const getQueryQueue = (uuid: string) : Promise<Queue[]> => {
+  return axios
+    .get(`/api/queues/query/${uuid}`)
+    .then((response) => {
+      console.log(response.data);
+      const data: any = Object.values(response.data);
+      return data.map((job) => ({
+        userId: job.UserId,
+        progress: job.Progress,
+        state: job.State,
+        id: job.Id,
+        results: job.Results,
+      }));
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const deleteQueryQueue = (uuid: string): Promise<void> => {
+  return axios
+    .delete(`/api/queues/query/${uuid}`)
     .then(() => undefined)
     .catch(function (error) {
       if (error.response) {

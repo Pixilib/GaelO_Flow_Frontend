@@ -12,8 +12,10 @@ type ResultsRootProps = {
     onStartSeriesQueries: () => void
     onClearStudyResults: () => void
     onClearSeriesResults: () => void
+    onCreateRobotStudy: () => void
+    onCreateRobotSeries: () => void
 }
-const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClearStudyResults, onClearSeriesResults }: ResultsRootProps) => {
+const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClearStudyResults, onClearSeriesResults, onCreateRobotStudy, onCreateRobotSeries }: ResultsRootProps) => {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClea
                     <>
                         <ResultStudiesTable resultStudies={studyResults} />
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.success} onClick={() => { }}>Start Robot Study</Button>
+                            <Button color={Colors.success} onClick={onCreateRobotStudy}>Start Robot Study</Button>
                             <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query Series</Button>
                             <Button color={Colors.warning} onClick={onClearStudyResults}><Empty /></Button>
                         </div>
@@ -50,7 +52,7 @@ const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClea
                     <>
                         <ResultSeriesTable resultSeries={seriesResults} />
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.success} onClick={() => { }}>Start Robot Series</Button>
+                            <Button color={Colors.success} onClick={onCreateRobotSeries}>Start Robot Series</Button>
                             <Button color={Colors.warning} onClick={onClearSeriesResults}><Empty /></Button>
                         </div>
                     </>

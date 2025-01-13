@@ -3,11 +3,12 @@ import { Tab, Tabs } from "../ui";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import ResultsRoot from "./results/ResultsRoot";
 import TaskRoot from "./task/TaskRoot";
-import { QueryPayload, QueryResultSeries, QueryResultStudy } from "../utils/types";
+import { QueryPayload, QueryQueueSeriesItem, QueryQueueStudyItem, QueryResultSeries, QueryResultStudy } from "../utils/types";
 import { useState } from "react";
-import { dicomDateQueryStringFromDateFromDateTo } from "../utils";
+import { dicomDateQueryStringFromDateFromDateTo, useCustomMutation } from "../utils";
 import { queryModality } from "../services";
 import { QueryStudy } from "./types";
+import { createQueryQueue } from "../services/queues";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
@@ -21,7 +22,43 @@ const AutoRetrieveRoot = () => {
     navigate(tab);
   };
 
-  const handleQuerySeries = () => {
+  const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
+    ({ studies, series }) => createQueryQueue(studies, series),
+    [['queue', 'query']],
+    {
+      onSuccess: (jobId) => {
+        console.log(jobId)
+      },
+    }
+  );
+
+  const handleCreateStudyRobot = () => {
+    const studies: QueryQueueStudyItem[] = studiesResults.map(study => ({
+      patientName: '',
+      patientId: '',
+      studyDate: '',
+      modality: '',
+      studyDescription: '',
+      accessionNumber: '',
+      studyInstanceUID: study.studyInstanceUID,
+      aet: study.originAET,
+    }))
+
+    mutateCreateAnonymizeQueue({ studies, series: [] })
+  };
+
+  const handleCreateSeriesRobot = () => {
+    const series: QueryQueueSeriesItem[] = seriesResults.map(series => ({
+      studyInstanceUID: series.studyInstanceUID,
+      modality: '',
+      seriesDescription: '',
+      seriesNumber: '',
+      seriesInstanceUID: series.seriesInstanceUID,
+      aet: series.originAET,
+      protocolName: ''
+    }))
+
+    mutateCreateAnonymizeQueue({ studies: [], series })
   };
 
   const studyResultsHandler = (answers: QueryResultStudy[]) => {
@@ -60,7 +97,7 @@ const AutoRetrieveRoot = () => {
           StudyInstanceUID: studyResult.studyInstanceUID,
         }
       }
-      const answer = await (queryModality(studyResult.originAET, query) as Promise<QueryResultSeries[]>)     
+      const answer = await (queryModality(studyResult.originAET, query) as Promise<QueryResultSeries[]>)
       seriesResultsHandler(answer)
     }
   }
@@ -97,8 +134,16 @@ const AutoRetrieveRoot = () => {
       </Tabs>
       <div>
         <Routes>
-          <Route path="/" element={<QueryRoot onStartStudyQueries = {handleStartStudyQueries} queries={queries} setQueries={setQueries} onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
-          <Route path="/results/*" element={<ResultsRoot studyResults={studiesResults} seriesResults={seriesResults} onStartSeriesQueries={handleStartSeriesQueries} onClearStudyResults={handleClearStudyResults} onClearSeriesResults={handleClearSeriesResults} />} />
+          <Route path="/" element={<QueryRoot onStartStudyQueries={handleStartStudyQueries} queries={queries} setQueries={setQueries} onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
+          <Route path="/results/*" element={<ResultsRoot
+            studyResults={studiesResults}
+            seriesResults={seriesResults}
+            onStartSeriesQueries={handleStartSeriesQueries}
+            onClearStudyResults={handleClearStudyResults}
+            onClearSeriesResults={handleClearSeriesResults}
+            onCreateRobotStudy={handleCreateStudyRobot}
+            onCreateRobotSeries={handleCreateSeriesRobot}
+          />} />
           <Route path="/task" element={<TaskRoot />} />
         </Routes>
       </div>
