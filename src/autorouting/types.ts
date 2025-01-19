@@ -7,6 +7,22 @@ export enum AutoroutingEventType {
     STABLE_STUDY = 'StableStudy',
     STABLE_PATIENT = 'StablePatient',
   }
+
+  // MUST BE CHANGED !!!!!!!!!
+  export enum AutoRoutingRuleFormType {
+    OPTION1 = 'Option1',
+    OPTION2 = 'Option2',
+    OPTION3 = 'Option3',
+    OPTION4 = 'Option4',
+  }
+
+   // MUST BE CHANGED !!!!!!!!!
+   export enum AutoRoutingDestinationFormType {
+    OPTION1 = 'Option1',
+    OPTION2 = 'Option2',
+    OPTION3 = 'Option3',
+    OPTION4 = 'Option4',
+  }
   
   export enum RuleCondition {
     AND = 'AND',

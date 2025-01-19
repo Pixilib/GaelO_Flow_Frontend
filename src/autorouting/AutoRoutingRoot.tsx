@@ -48,16 +48,32 @@ const AutoRoutingRoot = () => {
     setCondition(option.value);
   };
 
-  const handleAddClick = () => {
-    /*
-    const selectedLabels = eventType.map((option) => option.label).join(", ");
-    alert(
-      `Name: ${name}, Event Type: ${selectedLabels}, Activated: ${isActivated}, Condition: ${condition}, Rule: ${rule}, Destination: ${destination}`
-    );
-    */
-  };
+  // const handleAddClick = () => {
+  //   /*
+  //   const selectedLabels = eventType.map((option) => option.label).join(", ");
+  //   alert(
+  //     `Name: ${name}, Event Type: ${selectedLabels}, Activated: ${isActivated}, Condition: ${condition}, Rule: ${rule}, Destination: ${destination}`
+  //   );
+  //   */
+  // };
 
   console.log(eventType, condition)
+
+  const [showForm, setShowForm] = useState(false);
+  const [showForm2, setShowForm2] = useState(false);
+
+
+  const handleAddClick = () => {
+    setShowForm((prev) => !prev);
+  };
+
+  const handleAddClick2 = () => {
+    setShowForm2((prev) => !prev);
+  };
+
+  const sendForm = () => {
+    alert("Sending form (not true)");
+  };
 
   return (
     <div>
@@ -88,9 +104,42 @@ const AutoRoutingRoot = () => {
         value={condition}
         options={conditionsOptions}
       />
-      <Button
+
+
+<Label value="Rules" htmlFor="Rules" />
+<Button
         color={Colors.primary}
         onClick={handleAddClick}
+      >
+        +
+      </Button>
+      {showForm && (
+        <div style={{ marginTop: "10px" }}>
+          <input type="text" placeholder="Input 1" />
+          <input type="text" placeholder="Input 2" style={{ marginLeft: "10px" }} />
+        </div>
+      )}
+
+
+
+<Label value="Destinations" htmlFor="Rules" />
+<Button
+        color={Colors.primary}
+        onClick={handleAddClick2}
+      >
+        +
+      </Button>
+      {showForm2 && (
+        <div style={{ marginTop: "10px" }}>
+          <input type="text" placeholder="Input 1" />
+          <input type="text" placeholder="Input 2" style={{ marginLeft: "10px" }} />
+        </div>
+      )}
+
+
+      <Button
+        color={Colors.primary}
+        onClick={sendForm}
       >
         Add
       </Button>
