@@ -3,19 +3,20 @@ import { Input, SelectInput, Label, Button } from "../ui";
 import {
   AutoroutingEventType,
   AutoRoutingRule,
-  Destination,
-  RuleCondition,
+  AutoRoutingDestinationType,
+  AutoRoutingCondition,
 } from "./types";
 import { Colors } from "../utils";
 
 const AutoRoutingRoot = () => {
+  
   const [name, setName] = useState<string>("");
   const [eventType, setEventType] = useState<AutoroutingEventType | null>(null);
   const [isActivated, setIsActivated] = useState(false);
-  const [condition, setCondition] = useState<RuleCondition>(RuleCondition.AND);
+  const [condition, setCondition] = useState<AutoRoutingCondition>(AutoRoutingCondition.AND);
   
   const [rules, setRules] = useState<AutoRoutingRule[]>([]);
-  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [destinations, setDestinations] = useState<AutoRoutingDestinationType[]>([]);
 
   const conditionsOptions = [
     { label: "And", value: RuleCondition.AND },
