@@ -112,7 +112,7 @@ export const SignInForm = () => {
 
           <div className="mt-3 text-xs text-right">
             <span
-              className="inline-block text-white cursor-pointer hover:text-indigo-800 hover:underline dark:text-white dark:hover:text-indigo-300"
+              className="inline-block cursor-pointer hover:text-indigo-800 hover:underline dark:text-white dark:hover:text-indigo-300"
 
               onClick={() => navigate("/lost-password")}
             >

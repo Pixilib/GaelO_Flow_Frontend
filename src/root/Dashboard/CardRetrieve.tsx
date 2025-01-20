@@ -14,37 +14,37 @@ const CardRetrieve = () => {
 
   const currentUserId = useSelector(
     (state: RootState) => state.user.currentUserId
-);
+  );
 
-const { data: existingRetrieveQueues } = useCustomQuery<string[]>(
+  const { data: existingRetrieveQueues } = useCustomQuery<string[]>(
     ["queue", "query", currentUserId?.toString() || ""],
     () => getExistingQueriesQueues(currentUserId)
-);
+  );
 
-const firstQueue = existingRetrieveQueues?.[0];
+  const firstQueue = existingRetrieveQueues?.[0];
 
-const { data } = useCustomQuery<Queue[]>(
+  const { data } = useCustomQuery<Queue[]>(
     ["queue", "query", firstQueue],
     () => getQueryQueue(firstQueue),
     {
-        refetchInterval: 2000,
-        enabled: firstQueue != null,
+      refetchInterval: 2000,
+      enabled: firstQueue != null,
     }
-);
+  );
 
-const { mutate: mutateDeleteQueue } = useCustomMutation(
+  const { mutate: mutateDeleteQueue } = useCustomMutation(
     () => deleteQueryQueue(firstQueue),
     [["queue", "query"]]
-);
+  );
 
-const globalProgress = useMemo(() => {
+  const globalProgress = useMemo(() => {
     if (!data || data.length === 0) return 0;
     const totalJobs = data.length;
     const completedJobs = data.filter(
-        (job) => job.state === "completed" || job.state === "failed"
+      (job) => job.state === "completed" || job.state === "failed"
     ).length;
     return totalJobs === 0 ? 0 : (completedJobs / totalJobs) * 100;
-}, [data]);
+  }, [data]);
 
 
   return (
@@ -61,26 +61,26 @@ const globalProgress = useMemo(() => {
         className="dark:bg-neutral-500"
         color={Colors.white}
       >
-                    <CardBody
-                className="flex flex-col items-center justify-center p-6 dark:bg-neutral-500 bg-gray-50"
-                color={Colors.light}
-            >
-                {firstQueue ? (
-                    <ProgressQueueCircle
-                        onDelete={() => mutateDeleteQueue({})}
-                        queueData={{
-                            progress: globalProgress,
-                            state: "",
-                            id: "",
-                            results: undefined,
-                            userId: currentUserId || 0,
-                        }}
-                        colors={{ background: "text-gray-300", progress: Colors.primary }}
-                    />
-                ) : (
-                    <Validate className='text-success h-10 w-10' />
-                )}
-            </CardBody>
+        <CardBody
+          className="flex flex-col items-center justify-center p-6 dark:bg-neutral-500 bg-gray-50"
+          color={Colors.light}
+        >
+          {firstQueue ? (
+            <ProgressQueueCircle
+              onDelete={() => mutateDeleteQueue({})}
+              queueData={{
+                progress: globalProgress,
+                state: "",
+                id: "",
+                results: undefined,
+                userId: currentUserId || 0,
+              }}
+              colors={{ background: "text-gray-300", progress: Colors.primary }}
+            />
+          ) : (
+            <Validate className='text-success h-10 w-10' />
+          )}
+        </CardBody>
       </CardBody>
       <CardFooter
         className="flex justify-center dark:bg-neutral-500"

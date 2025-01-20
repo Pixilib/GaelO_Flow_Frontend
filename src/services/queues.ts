@@ -218,9 +218,10 @@ export const getQueryQueue = (uuid: string) : Promise<Queue[]> => {
     });
 };
 
-export const deleteQueryQueue = (uuid: string): Promise<void> => {
+export const deleteQueryQueue = (uuid?: string): Promise<void> => {
+  const api = uuid ? `/api/queues/query/${uuid}` : "/api/queues/query";
   return axios
-    .delete(`/api/queues/query/${uuid}`)
+    .delete(api)
     .then(() => undefined)
     .catch(function (error) {
       if (error.response) {

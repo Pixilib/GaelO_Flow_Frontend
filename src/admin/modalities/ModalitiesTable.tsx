@@ -30,6 +30,10 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
     {
       accessorKey: "host",
       header: "Host",
+    }, 
+    {
+      accessorKey: "port",
+      header: "Port",
     },
     {
       accessorKey: "manufacturer",
@@ -58,7 +62,8 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
   ];
 
   const getRowClasses = () => {
-    return "hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer";  };
+    return "hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer";
+  };
 
   return (
     <Table
