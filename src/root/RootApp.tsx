@@ -40,6 +40,7 @@ const titlePath: { [key: string]: string } = {
   "/auto-retrieve": "Auto retrieve",
   "/auto-retrieve/results/studies": "Auto retrieve",
   "/auto-retrieve/results/series": "Auto retrieve",
+  "/auto-retrieve/basket": "Auto retrieve",
   "/auto-retrieve/task": "Auto retrieve",
   "/auto-routing": "Auto routing",
   "/datasets": "Datasets",

@@ -15,7 +15,6 @@ const BasketRoot = () => {
         [['queue', 'query']]
     );
 
-
     const handleCreateRobot = () => {
 
         const studies: QueryQueueStudyItem[] = studyResults.map(study => ({
@@ -44,7 +43,6 @@ const BasketRoot = () => {
 
     return (
         <Button color={Colors.success} onClick={(handleCreateRobot)}>Start Robot</Button>
-
     )
 }
 
