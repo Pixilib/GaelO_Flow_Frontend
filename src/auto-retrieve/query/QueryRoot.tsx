@@ -7,47 +7,38 @@ import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
 import QueryCsvDrop from "./QueryCsvDrop";
 import { QueryResultStudy, QueryResultSeries } from "../../utils/types";
+import { addQuery, clearQueries, editQuery, removeQuery } from "../../reducers/AutoRetrieveSlice";
+import { store } from "../../store";
 
 type QueryRootProps = {
   queries: QueryStudy[];
-  setQueries: (queries) => void;
   onStudyResults: (answer: QueryResultStudy[]) => void;
   onSeriesResults: (answer: QueryResultSeries[]) => void;
   onStartStudyQueries: () => void;
 };
 
-const QueryRoot = ({ queries, setQueries, onStartStudyQueries }: QueryRootProps) => {
+const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
 
   const addEmptyQuery = () => {
-    setQueries((queries) => {
-      queries.push({
-        id: Math.random(),
-        patientName: "",
-        patientID: "",
-        dateFrom: "",
-        dateTo: "",
-        modalitiesInStudy: "",
-        studyDescription: "",
-        accessionNumber: "",
-        aet: "",
-      });
-      return [...queries];
-    });
+    store.dispatch(addQuery({
+      id: Math.random(),
+      patientName: "",
+      patientID: "",
+      dateFrom: "",
+      dateTo: "",
+      modalitiesInStudy: "",
+      studyDescription: "",
+      accessionNumber: "",
+      aet: "",
+    }));
   };
 
   const onCellEdit = (rowIndex, columnId, value) => {
-    setQueries((queries) => {
-      queries.forEach((query) => {
-        if (query.id === rowIndex) {
-          query[columnId] = value ?? "";
-        }
-      });
-      return [...queries];
-    });
+    store.dispatch(editQuery({ id: rowIndex, key: columnId, value }));
   };
 
   const onRemoveQuery = (id) => {
-    setQueries((queries) => queries.filter((query) => query.id !== id));
+    store.dispatch(removeQuery({ id }));
   };
 
   const onDownloadCSV = () => {
@@ -66,11 +57,13 @@ const QueryRoot = ({ queries, setQueries, onStartStudyQueries }: QueryRootProps)
   };
 
   const handleImportCsv = (importedQueries: QueryStudy[]) => {
-    setQueries((queries) => [...queries, ...importedQueries]);
+    importedQueries.forEach((query) => {
+      store.dispatch(addQuery(query));
+    });
   };
 
   const onEmptyQueryList = () => {
-    setQueries([]);
+    store.dispatch(clearQueries());
   };
 
   return (

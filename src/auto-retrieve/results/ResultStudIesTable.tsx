@@ -4,6 +4,7 @@ import { Table } from "../../ui";
 type ResultStudiesTableProps = {
     resultStudies: any;
 }
+
 const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
     const columns = [
         {

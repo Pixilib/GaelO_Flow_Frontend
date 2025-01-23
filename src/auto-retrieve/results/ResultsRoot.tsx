@@ -1,23 +1,32 @@
+import { useSelector } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Button, Tab, Tabs } from "../../ui";
 import ResultStudiesTable from "./ResultStudIesTable";
 import ResultSeriesTable from "./ResultSeriesTable";
-import { QueryResultSeries, QueryResultStudy } from "../../utils/types";
 import { Colors } from "../../utils";
 import { Empty } from "../../icons";
+import { RootState, store } from "../../store";
+import { clearSeriesResults, clearStudyResults } from "../../reducers/AutoRetrieveSlice";
 
 type ResultsRootProps = {
-    studyResults: QueryResultStudy[]
-    seriesResults: QueryResultSeries[]
     onStartSeriesQueries: () => void
-    onClearStudyResults: () => void
-    onClearSeriesResults: () => void
-    onCreateRobotStudy: () => void
-    onCreateRobotSeries: () => void
 }
-const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClearStudyResults, onClearSeriesResults, onCreateRobotStudy, onCreateRobotSeries }: ResultsRootProps) => {
+
+const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
+
+    const studyResults = useSelector((state: RootState) => state.autoRetrieve.studyResults);
+    const seriesResults = useSelector((state: RootState) => state.autoRetrieve.seriesResults);
+
     const location = useLocation();
     const navigate = useNavigate();
+
+    const onClearStudyResults = () => {
+        store.dispatch(clearStudyResults());
+    }
+
+    const onClearSeriesResults = () => {
+        store.dispatch(clearSeriesResults());
+    }
 
     const handleTabClick = (tab: string) => {
         navigate(tab);
@@ -42,7 +51,6 @@ const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClea
                     <>
                         <ResultStudiesTable resultStudies={studyResults} />
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.success} onClick={onCreateRobotStudy}>Start Robot Study</Button>
                             <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query Series</Button>
                             <Button color={Colors.warning} onClick={onClearStudyResults}><Empty /></Button>
                         </div>
@@ -52,7 +60,6 @@ const ResultsRoot = ({ studyResults, seriesResults, onStartSeriesQueries, onClea
                     <>
                         <ResultSeriesTable resultSeries={seriesResults} />
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.success} onClick={onCreateRobotSeries}>Start Robot Series</Button>
                             <Button color={Colors.warning} onClick={onClearSeriesResults}><Empty /></Button>
                         </div>
                     </>

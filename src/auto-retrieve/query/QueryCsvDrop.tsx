@@ -5,6 +5,7 @@ import { QueryStudy } from "../types";
 type QueryCsvDropProps = {
   onImportCsv: (records: QueryStudy[]) => void;
 };
+
 const QueryCsvDrop = ({ onImportCsv }: QueryCsvDropProps) => {
     
   const { getRootProps, getInputProps, open } = useDropzone({

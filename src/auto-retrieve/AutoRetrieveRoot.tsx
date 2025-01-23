@@ -1,72 +1,39 @@
-import QueryRoot from "./query/QueryRoot";
-import { Tab, Tabs } from "../ui";
+import { useSelector } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+
+import QueryRoot from "./query/QueryRoot";
 import ResultsRoot from "./results/ResultsRoot";
 import TaskRoot from "./task/TaskRoot";
-import { QueryPayload, QueryQueueSeriesItem, QueryQueueStudyItem, QueryResultSeries, QueryResultStudy } from "../utils/types";
-import { useState } from "react";
-import { dicomDateQueryStringFromDateFromDateTo, useCustomMutation } from "../utils";
+import BasketRoot from "./basket/BasketRoot";
+import { addSeriesResult, addStudyResult, clearSeriesResults } from "../reducers/AutoRetrieveSlice";
+
+import { Tab, Tabs } from "../ui";
+import { QueryPayload, QueryResultSeries, QueryResultStudy } from "../utils/types";
+import { dicomDateQueryStringFromDateFromDateTo } from "../utils";
 import { queryModality } from "../services";
-import { QueryStudy } from "./types";
-import { createQueryQueue } from "../services/queues";
+import { RootState, store } from "../store";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [queries, setQueries] = useState<QueryStudy[]>([]);
-  const [studiesResults, setStudiesResults] = useState<QueryResultStudy[]>([]);
-  const [seriesResults, setSeriesResults] = useState<QueryResultSeries[]>([]);
+  const queries = useSelector((state: RootState) => state.autoRetrieve.queries);
+  const studiesResults = useSelector((state: RootState) => state.autoRetrieve.studyResults);
 
   const handleTabClick = (tab: string) => {
     navigate(tab);
   };
 
-  const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
-    ({ studies, series }) => createQueryQueue(studies, series),
-    [['queue', 'query']],
-    {
-      onSuccess: (jobId) => {
-        console.log(jobId)
-      },
-    }
-  );
-
-  const handleCreateStudyRobot = () => {
-    const studies: QueryQueueStudyItem[] = studiesResults.map(study => ({
-      patientName: '',
-      patientId: '',
-      studyDate: '',
-      modality: '',
-      studyDescription: '',
-      accessionNumber: '',
-      studyInstanceUID: study.studyInstanceUID,
-      aet: study.originAET,
-    }))
-
-    mutateCreateAnonymizeQueue({ studies, series: [] })
-  };
-
-  const handleCreateSeriesRobot = () => {
-    const series: QueryQueueSeriesItem[] = seriesResults.map(series => ({
-      studyInstanceUID: series.studyInstanceUID,
-      modality: '',
-      seriesDescription: '',
-      seriesNumber: '',
-      seriesInstanceUID: series.seriesInstanceUID,
-      aet: series.originAET,
-      protocolName: ''
-    }))
-
-    mutateCreateAnonymizeQueue({ studies: [], series })
-  };
-
   const studyResultsHandler = (answers: QueryResultStudy[]) => {
-    setStudiesResults(studyResults => [...studyResults, ...answers]);
+    answers.forEach((study) => {
+      store.dispatch(addStudyResult(study));
+    })
   };
 
   const seriesResultsHandler = (answers: QueryResultSeries[]) => {
-    setSeriesResults(seriesResults => [...seriesResults, ...answers]);
+    answers.forEach((series) => {
+      store.dispatch(addSeriesResult(series));
+    })
   }
 
   const handleStartStudyQueries = async () => {
@@ -88,7 +55,7 @@ const AutoRetrieveRoot = () => {
   }
 
   const handleStartSeriesQueries = async () => {
-    setSeriesResults([])
+    clearSeriesResults()
     //Repopulate seriesResults
     for (const studyResult of studiesResults) {
       const query: QueryPayload = {
@@ -100,14 +67,6 @@ const AutoRetrieveRoot = () => {
       const answer = await (queryModality(studyResult.originAET, query) as Promise<QueryResultSeries[]>)
       seriesResultsHandler(answer)
     }
-  }
-
-  const handleClearStudyResults = () => {
-    setStudiesResults([])
-  }
-
-  const handleClearSeriesResults = () => {
-    setSeriesResults([])
   }
 
   return (
@@ -127,6 +86,11 @@ const AutoRetrieveRoot = () => {
           onClick={() => handleTabClick("/auto-retrieve/results/studies")}
         />
         <Tab
+          title="Basket"
+          active={location.pathname.includes("/auto-retrieve/basket")}
+          onClick={() => handleTabClick("/auto-retrieve/basket")}
+        />
+        <Tab
           title="Robot"
           active={location.pathname.endsWith("/auto-retrieve/task")}
           onClick={() => handleTabClick("/auto-retrieve/task")}
@@ -134,16 +98,11 @@ const AutoRetrieveRoot = () => {
       </Tabs>
       <div>
         <Routes>
-          <Route path="/" element={<QueryRoot onStartStudyQueries={handleStartStudyQueries} queries={queries} setQueries={setQueries} onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
+          <Route path="/" element={<QueryRoot onStartStudyQueries={handleStartStudyQueries} queries={queries} onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
           <Route path="/results/*" element={<ResultsRoot
-            studyResults={studiesResults}
-            seriesResults={seriesResults}
             onStartSeriesQueries={handleStartSeriesQueries}
-            onClearStudyResults={handleClearStudyResults}
-            onClearSeriesResults={handleClearSeriesResults}
-            onCreateRobotStudy={handleCreateStudyRobot}
-            onCreateRobotSeries={handleCreateSeriesRobot}
           />} />
+          <Route path="/basket" element={<BasketRoot />} />
           <Route path="/task" element={<TaskRoot />} />
         </Routes>
       </div>
