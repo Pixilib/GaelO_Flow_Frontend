@@ -31,12 +31,7 @@ const AnonymizeRoot = () => {
 
     const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
         ({ anonItems }) => createAnonymizeQueue(anonItems),
-        [['queue', 'anonymize']],
-        {
-            onSuccess: (jobId) => {
-                //console.log(jobId)
-            },
-        }
+        [['queue', 'anonymize']]
     );
 
     const patients = useMemo(() => Object.values(anonList.patients), [anonList]);
@@ -91,7 +86,7 @@ const AnonymizeRoot = () => {
             color={Colors.primary}>
                 <div className="flex flex-col items-center w-full sm:flex-row">
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
-                        Anonymize resources
+                        Anonymize Resources
                     </div>
                     <div className="flex justify-end w-full p-3 sm:w-1/5">
                         <DropdownButton

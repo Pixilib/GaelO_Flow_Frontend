@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import UserSlice from "./reducers/UserSlice";
 import DeleteSlice from "./reducers/DeleteSlice";
 import AnonymizeSlice from "./reducers/AnonymizeSlice";
+import AutoRetrieveSlice from "./reducers/AutoRetrieveSlice";
 import ExportSlice from "./reducers/ExportSlice";
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
     user: UserSlice,
     delete : DeleteSlice,
     anonymize : AnonymizeSlice,
-    export : ExportSlice
+    export : ExportSlice,
+    autoRetrieve : AutoRetrieveSlice
   },
   devTools: true,
 });

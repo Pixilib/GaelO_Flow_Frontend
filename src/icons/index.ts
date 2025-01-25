@@ -48,6 +48,7 @@ import SubmitUser from './SubmitUser'
 import Sun from './Sun'
 import Trash from './Trash'
 import User from './User'
+import Validate from './Validate'
 import Wifi from './Wifi'
 import ZoomQuestion from './ZoomQuestion'
 
@@ -102,6 +103,7 @@ export {
     Sun,
     Trash,
     User,
+    Validate,
     Wifi,
     ZoomQuestion
 }

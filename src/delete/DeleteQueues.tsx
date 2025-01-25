@@ -5,13 +5,9 @@ import { RootState } from "../store";
 import { Spinner } from "../ui";
 import ProgressQueueBar from "../queue/ProgressQueueBar";
 import { Queue } from "../utils/types";
-import ProgressQueueCircle from "../queue/ProgressQueueCircle";
+import { useMemo } from "react";
 
-type DeleteQueueProps = {
-    circle?: boolean
-}
-
-const DeleteQueues = ({ circle = false }: DeleteQueueProps) => {
+const DeleteQueues = () => {
     const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
 
     const { data: existingDeleteQueues } = useCustomQuery<string[]>(
@@ -35,26 +31,27 @@ const DeleteQueues = ({ circle = false }: DeleteQueueProps) => {
         [['queue', 'delete']]
     );
 
+    const globalProgress = useMemo(() => {
+        if (!data || data.length === 0) return 0;
+        const totalJobs = data.length;
+        const completedJobs = data.filter(
+            (job) => job.state === "completed" || job.state === "failed"
+        ).length;
+        return totalJobs === 0 ? 0 : (completedJobs / totalJobs) * 100;
+    }, [data]);
+
     if (!firstQueue) return null;
     if (isPending) return <Spinner />;
 
     return (
-        <div className="w-full space-y-4">
-            {existingDeleteQueues?.map((uuid) => (
-                <div
-                    key={uuid}
-                    className="p-4 bg-white border border-gray-100 shadow-inner rounded-xl"
+        <>
+            {firstQueue && (
+                <div className="w-full"
                 >
-                    {
-                        circle ?
-                            <ProgressQueueCircle queueData={data[0]} onDelete={() => mutateDeleteQueue({})} />
-                            :
-                            <ProgressQueueBar progress={data[0].progress} onDelete={() => mutateDeleteQueue({})} />
-                    }
-
+                    <ProgressQueueBar progress={globalProgress} onDelete={() => mutateDeleteQueue({})} />
                 </div>
-            ))}
-        </div>
+            )}
+        </>
     );
 };
 

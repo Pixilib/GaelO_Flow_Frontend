@@ -3,9 +3,10 @@ import { useMemo } from "react";
 import { Table } from "../ui";
 import { Colors } from "../utils";
 import RetrieveButton from './RetrieveButton';
+import { QueryResultSeries } from "../utils/types";
 
 type SeriesTableProps = {
-    series: any[] | null;
+    series: QueryResultSeries[];
 };
 
 const SeriesTable = ({ series }: SeriesTableProps) => {
