@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import Papa from "papaparse";
 import QueryTable from "./QueryTable";
 import { Colors } from "../../utils";
@@ -7,17 +8,24 @@ import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
 import QueryCsvDrop from "./QueryCsvDrop";
 import { QueryResultStudy, QueryResultSeries } from "../../utils/types";
-import { addQuery, clearQueries, editQuery, removeQuery } from "../../reducers/AutoRetrieveSlice";
+import { addQuery, editQuery, removeQuery, updateQueriesSelection } from "../../reducers/AutoRetrieveSlice";
 import { store } from "../../store";
 
 type QueryRootProps = {
-  queries: QueryStudy[];
+  queries: (QueryStudy & { selected: boolean })[];
   onStudyResults: (answer: QueryResultStudy[]) => void;
   onSeriesResults: (answer: QueryResultSeries[]) => void;
   onStartStudyQueries: () => void;
 };
 
 const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
+
+  const selectedRow: Record<number, boolean> = useMemo(() => {
+    return queries.reduce((acc, query, index) => {
+      acc[query.id] = query.selected;
+      return acc;
+    }, {});
+  }, [queries]);
 
   const addEmptyQuery = () => {
     store.dispatch(addQuery({
@@ -35,10 +43,6 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
 
   const onCellEdit = (rowIndex, columnId, value) => {
     store.dispatch(editQuery({ id: rowIndex, key: columnId, value }));
-  };
-
-  const onRemoveQuery = (id) => {
-    store.dispatch(removeQuery({ id }));
   };
 
   const onDownloadCSV = () => {
@@ -62,9 +66,17 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
     });
   };
 
-  const onEmptyQueryList = () => {
-    store.dispatch(clearQueries());
+  const onRemoveQueryList = () => {
+    for (const [index, selected] of Object.entries(selectedRow)) {
+      if (selected) {
+        store.dispatch(removeQuery({ id: Number(index) }));
+      }
+    }
   };
+
+  const handleRowSelectionChange = (selectedState: Record<number, boolean>) => {
+    store.dispatch(updateQueriesSelection(selectedState));
+  }
 
   return (
     <div className="flex flex-col gap-3 p-3">
@@ -83,20 +95,21 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
           >
             <Download /> csv
           </Button>
-          <Button color={Colors.warning} onClick={onEmptyQueryList}>
-            <Empty />
-          </Button>
         </div>
       </div>
       <div>
         <QueryTable
           queries={queries}
           onCellEdit={onCellEdit}
-          onRemoveRow={onRemoveQuery}
+          onRowSelectionChange={handleRowSelectionChange}
+          selectedRow={selectedRow}
         />
       </div>
-      <div className="flex justify-center m-3">
+      <div className="flex justify-center m-3 gap-3">
         <Button color={Colors.primary} onClick={onStartStudyQueries}>Start Queries</Button>
+        <Button color={Colors.warning} onClick={onRemoveQueryList}>
+          <Empty />
+        </Button>
       </div>
     </div>
   );

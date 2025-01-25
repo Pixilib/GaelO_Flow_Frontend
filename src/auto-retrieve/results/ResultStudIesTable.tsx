@@ -3,9 +3,11 @@ import { Table } from "../../ui";
 
 type ResultStudiesTableProps = {
     resultStudies: any;
+    onRowSelectionChange: (selectedState: Record<string, boolean>) => void;
+    selectedRow: Record<string, boolean>;
 }
 
-const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
+const ResultStudiesTable = ({ resultStudies, onRowSelectionChange, selectedRow }: ResultStudiesTableProps) => {
     const columns = [
         {
             id: "id",
@@ -44,11 +46,11 @@ const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
             accessorFn: (row) => {
                 return moment(row.studyDate, "YYYYMMDD", true)?.toDate();
             },
-            cell: ({row}) => {
+            cell: ({ row }) => {
                 return (
                     moment((row.studyDate as Date)).format("YYYY-MM-DD")
                 );
-              },
+            },
             header: "Study Date",
         },
         {
@@ -76,9 +78,15 @@ const ResultStudiesTable = ({ resultStudies }: ResultStudiesTableProps) => {
 
     return (
         <Table
+            id="studyInstanceUID"
+            enableRowSelection
+            enableColumnFilters
+            enableSorting
             columns={columns}
-            columnVisibility={{ id: false, answerNumber:false, studyInstanceUID: false }}
+            columnVisibility={{ id: false, answerNumber: false, studyInstanceUID: false }}
             data={resultStudies}
+            onRowSelectionChange={onRowSelectionChange}
+            selectedRow={selectedRow}
         />
     )
 }

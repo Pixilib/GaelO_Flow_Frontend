@@ -1,16 +1,15 @@
 import moment from "moment";
-import { Button, Table } from "../../ui";
+import { Table } from "../../ui";
 import { QueryStudy } from "../types";
-import { Colors } from "../../utils";
-import { Trash } from "../../icons";
 
 type QueryTableProps = {
   queries: QueryStudy[];
   onCellEdit: (rowIndex: string | number, columnId: any, value: any) => void;
-  onRemoveRow: (rowId) => void;
+  onRowSelectionChange: (selectedState: Record<number, boolean>) => void;
+  selectedRow: Record<number, boolean>;
 };
 
-const QueryTable = ({ queries, onCellEdit, onRemoveRow }: QueryTableProps) => {
+const QueryTable = ({ queries, onCellEdit, onRowSelectionChange, selectedRow }: QueryTableProps) => {
   const columns = [
     {
       id: "id",
@@ -93,24 +92,19 @@ const QueryTable = ({ queries, onCellEdit, onRemoveRow }: QueryTableProps) => {
         }
             */
     },
-    {
-      accessorKey: "delete",
-      header: "Remove",
-      cell: ({row}) => {
-        return (
-          <Button onClick={() => onRemoveRow(row.original.id)} className="w-full" color={Colors.danger}>
-            <Trash />
-          </Button>
-        );
-      },
-    },
   ];
+
   return (
     <Table
+      enableRowSelection
+      enableColumnFilters
+      enableSorting
       onCellEdit={onCellEdit}
       columns={columns}
       columnVisibility={{ id: false }}
       data={queries}
+      onRowSelectionChange={onRowSelectionChange}
+      selectedRow={selectedRow}
     />
   );
 };

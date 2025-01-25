@@ -3,11 +3,13 @@ import { Table } from "../../ui";
 
 type ResultSeriesTableProps = {
     resultSeries: any;
+    onRowSelectionChange: (selectedState: Record<string, boolean>) => void;
+    selectedRow: Record<string, boolean>;
 }
-const ResultSeriesTable = ({ resultSeries }: ResultSeriesTableProps) => {
+const ResultSeriesTable = ({ resultSeries, onRowSelectionChange, selectedRow }: ResultSeriesTableProps) => {
     const columns = [
         {
-            id: "id",
+            id: "answerId",
             accessorKey: "answerId",
         },
         {
@@ -78,9 +80,15 @@ const ResultSeriesTable = ({ resultSeries }: ResultSeriesTableProps) => {
 
     return (
         <Table
+            id="seriesInstanceUID"
+            enableRowSelection
+            enableColumnFilters
+            enableSorting
             columns={columns}
-            columnVisibility={{ id: false, answerNumber: false, studyInstanceUID: false, seriesInstanceUID: false }}
+            columnVisibility={{ answerId: false, answerNumber: false, studyInstanceUID: false, seriesInstanceUID: false }}
             data={resultSeries}
+            onRowSelectionChange={onRowSelectionChange}
+            selectedRow={selectedRow}
         />
     )
 }

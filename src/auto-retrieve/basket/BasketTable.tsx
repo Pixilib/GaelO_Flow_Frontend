@@ -89,7 +89,11 @@ const BasketTable = ({ queryResults }: BasketTableProps) => {
     ]
 
     return (
-        <Table columns={columns}
+        <Table
+            enableRowSelection
+            enableColumnFilters
+            enableSorting
+            columns={columns}
             columnVisibility={{ id: false, answerNumber: false, studyInstanceUID: false, seriesInstanceUID: false }}
             data={queryResults}
         />
