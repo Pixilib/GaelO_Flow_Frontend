@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import Input from '../Input'
+import SelectInput from '../SelectInput'
 
 const EditableCell = ({
     getValue,
@@ -15,6 +16,8 @@ const EditableCell = ({
                 min = undefined,
                 max = undefined,
                 placeholder = undefined,
+                options,
+                isClearable = true,
                 disabled = undefined,
             } = {},
             isEditable = false
@@ -41,6 +44,23 @@ const EditableCell = ({
     useEffect(() => {
         setValue(initialValue)
     }, [initialValue])
+
+    if (type == 'SELECT') {
+        return (
+            <div style={style} >
+                <SelectInput
+                    isClearable={isClearable}
+                    menuPosition='fixed'
+                    placeholder='Select...'
+                    value={value}
+                    options={options}
+                    onChange={(option) => {
+                        table.options.meta?.updateData(rowId, columnId, option?.value)
+                    }}
+                />
+            </div>
+        )
+    }
 
     return (
         <Input

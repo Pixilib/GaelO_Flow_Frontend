@@ -1,15 +1,16 @@
 import { useMemo } from "react";
 import Papa from "papaparse";
 import QueryTable from "./QueryTable";
-import { Colors } from "../../utils";
-import { Button } from "../../ui";
+import { Colors, useCustomQuery } from "../../utils";
+import { Button, Spinner } from "../../ui";
 import { Add, Download, Empty } from "../../icons";
 import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
 import QueryCsvDrop from "./QueryCsvDrop";
-import { QueryResultStudy, QueryResultSeries } from "../../utils/types";
+import { QueryResultStudy, QueryResultSeries, ModalityExtended, Option } from "../../utils/types";
 import { addQuery, editQuery, removeQuery, updateQueriesSelection } from "../../reducers/AutoRetrieveSlice";
 import { store } from "../../store";
+import { getModalities } from "../../services";
 
 type QueryRootProps = {
   queries: (QueryStudy & { selected: boolean })[];
@@ -19,6 +20,17 @@ type QueryRootProps = {
 };
 
 const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
+
+  const { data: aetOptions, isPending } = useCustomQuery<ModalityExtended[], Option[]>(
+    ['modalities'],
+    () => getModalities(),
+    {
+      select: (response) => response.map((modality) => ({
+        value: modality.name,
+        label: modality.aet,
+      })),
+    }
+  );
 
   const selectedRow: Record<number, boolean> = useMemo(() => {
     return queries.reduce((acc, query, index) => {
@@ -78,6 +90,8 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
     store.dispatch(updateQueriesSelection(selectedState));
   }
 
+  if(isPending) return <Spinner />
+  
   return (
     <div className="flex flex-col gap-3 p-3">
       <div className="flex gap-3 w-full justify-between">
@@ -99,6 +113,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
       </div>
       <div>
         <QueryTable
+          aets = {aetOptions}
           queries={queries}
           onCellEdit={onCellEdit}
           onRowSelectionChange={handleRowSelectionChange}

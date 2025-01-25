@@ -1,15 +1,17 @@
 import moment from "moment";
 import { Table } from "../../ui";
 import { QueryStudy } from "../types";
+import { Option } from "../../utils";
 
 type QueryTableProps = {
+  aets: Option[];
   queries: QueryStudy[];
   onCellEdit: (rowIndex: string | number, columnId: any, value: any) => void;
   onRowSelectionChange: (selectedState: Record<number, boolean>) => void;
   selectedRow: Record<number, boolean>;
 };
 
-const QueryTable = ({ queries, onCellEdit, onRowSelectionChange, selectedRow }: QueryTableProps) => {
+const QueryTable = ({ aets, queries, onCellEdit, onRowSelectionChange, selectedRow }: QueryTableProps) => {
   const columns = [
     {
       id: "id",
@@ -83,14 +85,13 @@ const QueryTable = ({ queries, onCellEdit, onRowSelectionChange, selectedRow }: 
       accessorKey: "aet",
       header: "AET",
       isEditable: true,
-      /*
-                    cell: ({ row, getValue }) => {
-            return <SelectModalities
-                previousModalities={getValue()}
-                onChange={(value) => cellEditHandler(row.original.key, 'ModalitiesInStudy', value)}
-            />
-        }
-            */
+      editionProperties: {
+        type: 'SELECT',
+        options: aets
+      },
+      style: {
+        minWidth: '200px'
+      }
     },
   ];
 
