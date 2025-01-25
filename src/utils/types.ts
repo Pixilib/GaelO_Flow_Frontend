@@ -196,7 +196,7 @@ type QueryStudy = {
   StudyDate?: string;
   Modality?: string;
   StudyDescription?: string;
-  AccessionNb?: string;
+  AccessionNumber?: string;
   StudyInstanceUID?: string;
 };
 
@@ -226,7 +226,22 @@ export type ExtendedQueryPayload = {
   aet: string;
 };
 
-export type QueryResponse = {
+export type QueryResultSeries = QueryResult & {
+  modality: string;
+  seriesNumber: string;
+  seriesDescription: string;
+  numberOfSeriesRelatedInstances: string;
+  seriesInstanceUID: string;
+};
+
+export type QueryResultStudy = QueryResult & {
+  seriesInstanceUID: string;
+  numberOfStudyRelatedInstances: string;
+  numberOfStudyRelatedSeries: string;
+  modalitiesInStudy: string;
+};
+
+type QueryResult = {
   answerId: string;
   answerNumber: number;
   level: Level;
@@ -236,13 +251,8 @@ export type QueryResponse = {
   accessionNumber: string;
   studyDescription: string;
   studyDate: string;
-  requestedProcedureDescription: string;
-  modality: string;
-  seriesDescription: string;
-  seriesNumber: string;
-  numberOfSeriesRelatedInstances: string;
   studyInstanceUID: string;
-  seriesInstanceUID: string;
+  requestedProcedureDescription: string;
 };
 
 export type RetrieveResponse = {
@@ -404,7 +414,7 @@ export type Queue = {
   progress: number;
   state: string;
   id: string;
-  results: Record<string, any>;
+  results: Record<string, any> |null;
   userId: number;
 };
 
@@ -434,4 +444,25 @@ export type AnonItem = {
 
 export type AnonymizePayload = {
   Anonymizes: AnonItem[];
+};
+
+export type QueryQueueStudyItem = {
+  patientName: string;
+  patientId: string;
+  studyDate: string;
+  modality: string;
+  studyDescription: string;
+  accessionNumber: string;
+  studyInstanceUID: string;
+  aet: string;
+};
+
+export type QueryQueueSeriesItem = {
+  studyInstanceUID: string;
+  modality: string;
+  protocolName: string;
+  seriesDescription: string;
+  seriesNumber: string;
+  seriesInstanceUID: string;
+  aet: string;
 };

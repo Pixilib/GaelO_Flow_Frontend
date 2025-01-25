@@ -46,23 +46,23 @@ const CardAnon = () => {
     if (!data || data.length === 0) return 0;
     const totalJobs = data.length;
     const completedJobs = data.filter(
-      (job) => job.state === "completed" || job.state === "in progress"
+      (job) => job.state === "completed" || job.state === "failed"
     ).length;
     return totalJobs === 0 ? 0 : (completedJobs / totalJobs) * 100;
   }, [data]);
 
   return (
-    <Card className="flex-1 md:max-w-md">
+    <Card className="flex-1 bg-white overflow-hidden rounded-lg shadow-lg md:max-w-md dark:bg-neutral-500">
       <CardHeader
         centerTitle
         color={Colors.blueCustom}
         className="flex items-center"
       >
         <Anon className="mr-3 text-xl text-white" />
-        <span className="text-lg font-bold text-white">Anonymisation</span>
+        <span className="text-lg font-bold text-white">Anonymization</span>
       </CardHeader>
       <CardBody
-        className="flex items-center justify-center p-4 dark:bg-neutral-500"
+        className="flex flex-col items-center justify-center p-6 dark:bg-neutral-500 bg-gray-50"
         color={Colors.white}
       >
         {firstQueue ? (
@@ -78,7 +78,7 @@ const CardAnon = () => {
             colors={{ background: "text-gray-300", progress: Colors.primary }}
           />
         ) : (
-          <Validate className='text-success h-10 w-10'/>
+          <Validate className="text-success h-10 w-10" />
         )}
       </CardBody>
       <CardFooter

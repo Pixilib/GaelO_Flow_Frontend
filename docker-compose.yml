@@ -67,6 +67,8 @@ services:
             ORTHANC__DICOM_WEB__SSL: "true"
             ORTHANC__DICOM_WEB__STUDIES_METADATA: "MainDicomTags"
             ORTHANC__DICOM_WEB__SERIES_METADATA: "Full"
+            VERBOSE_ENABLED: "true"
+            #TRACE_ENABLED: "true"
             
 
 volumes:

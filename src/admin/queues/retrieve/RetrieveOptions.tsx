@@ -1,32 +1,31 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useCustomToast } from "../../utils/toastify";
-import { useCustomMutation } from "../../utils/reactQuery";
-import { updateAutoQueryOptions } from "../../services/options";
-import { AutoQueryOptionsPayload, Options } from "../../utils/types";
+import { useCustomToast } from "../../../utils/toastify";
+import { useCustomMutation } from "../../../utils/reactQuery";
+import { updateAutoQueryOptions } from "../../../services/options";
+import { AutoQueryOptionsPayload, Options } from "../../../utils/types";
 import {
   formatTime,
   formatTimeReadable,
   parseTimeString,
   timeDiff,
-} from "../../utils/moment";
+} from "../../../utils/moment";
 import {
   Card,
   CardHeader,
   CardBody,
   Badge,
   Button,
-  Table,
   Input,
   Label,
-} from "../../ui";
-import { Colors } from "../../utils/enums";
-import { Send } from "../../icons";
+} from "../../../ui";
+import { Colors } from "../../../utils/enums";
+import { Send } from "../../../icons";
 
-type RetrieveProps = {
+type RetrieveOptionProps = {
   data: Options;
 };
 
-const Retrieve = ({ data }: RetrieveProps) => {
+const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
   const { toastSuccess, toastError } = useCustomToast();
 
   const [startTime, setStartTime] = useState<string | null>(null);
@@ -60,7 +59,7 @@ const Retrieve = ({ data }: RetrieveProps) => {
       onError: (error: any) => {
         toastError(
           "An error occurred during updating options." +
-            (error?.data?.message ?? "")
+          (error?.data?.message ?? "")
         );
       },
     }
@@ -98,11 +97,11 @@ const Retrieve = ({ data }: RetrieveProps) => {
       className="w-full rounded-br-xl rounded-bl-xl"
     >
       <Card bordered>
-        <CardHeader centerTitle 
-        title="Retrieve Schedule Time : " color={Colors.success} />
-        <CardBody 
-        color={Colors.light} roundedBottomLeft roundedBottomRight
-        className="dark:bg-neutral-800 dark:text-white">
+        <CardHeader centerTitle
+          title="Retrieve Schedule Time : " color={Colors.success} />
+        <CardBody
+          color={Colors.light} roundedBottomLeft roundedBottomRight
+          className="dark:bg-neutral-800 dark:text-white">
           <div className="flex flex-col items-center justify-between gap-4 mt-1 sm:flex-row sm:gap-12">
             <Input
               type="time"
@@ -137,9 +136,9 @@ const Retrieve = ({ data }: RetrieveProps) => {
               }
             />
             <div className="flex flex-col w-full text-center sm:w-auto">
-              <label 
-                    htmlFor="time-delta" 
-                    className="justify-center text-sm font-bold">
+              <label
+                htmlFor="time-delta"
+                className="justify-center text-sm font-bold">
                 Total Time
               </label>
               <Badge
@@ -166,11 +165,8 @@ const Retrieve = ({ data }: RetrieveProps) => {
           </div>
         </CardBody>
       </Card>
-      <div className="mt-6 overflow-x-auto">
-        <Table data={[]} columns={[]} headerColor={Colors.almond} />
-      </div>
     </form>
   );
 };
 
-export default Retrieve;
+export default RetrieveOptions;

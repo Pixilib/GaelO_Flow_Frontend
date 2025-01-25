@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import moment from "moment";
-import { Option, QueryPayload, useCustomToast } from "../utils";
+import { dicomDateQueryStringFromDateFromDateTo, Option, QueryPayload, useCustomToast } from "../utils";
 import { FormButton, Input, Label, SelectInput } from "../ui";
 import SelectModalities from "./SelectModalities";
 import { Search } from "../icons";
@@ -71,27 +71,15 @@ const SearchForm: React.FC<SearchFormProps> = ({
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-
-    let dateString = '';
-    const dicomDateFrom = dateFrom.split('-').join('');
-    const dicomDateTo = dateTo.split('-').join('');
-    if (dicomDateFrom !== '' && dicomDateTo !== '') {
-      dateString = dicomDateFrom + '-' + dicomDateTo;
-    } else if (dicomDateFrom === '' && dicomDateTo !== '') {
-      dateString = '-' + dicomDateTo;
-    } else if (dicomDateFrom !== '' && dicomDateTo === '') {
-      dateString = dicomDateFrom + '-';
-    }
-
     let queryPayload: QueryPayload = {
       Level: 'Study',
       Query: {
         PatientName: patientName,
         PatientID: patientId,
-        StudyDate: dateString,
+        StudyDate: dicomDateQueryStringFromDateFromDateTo(dateFrom, dateTo),
         Modality: modalities.join('\\'),
         StudyDescription: studyDescription,
-        AccessionNb: accessionNumber,
+        AccessionNumber: accessionNumber,
       }
     };
 
@@ -221,7 +209,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
         <div className={`${withAets && aets.length > 0 ? "w-1/2 mt-5" : "w-full"} flex justify-center items-center`}>
           <FormButton
             text="Search"
-            isPrimary={true}
             type="submit"
             className=" lg:mt-10"
           />
