@@ -6,7 +6,7 @@ import ResultSeriesTable from "./ResultSeriesTable";
 import { Colors } from "../../utils";
 import { Empty } from "../../icons";
 import { RootState, store } from "../../store";
-import { clearSeriesResults, clearStudyResults } from "../../reducers/AutoRetrieveSlice";
+import { addStudyOrSeriesToBasket, clearSeriesResults, clearStudyResults } from "../../reducers/AutoRetrieveSlice";
 
 type ResultsRootProps = {
     onStartSeriesQueries: () => void
@@ -32,6 +32,19 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
         navigate(tab);
     };
 
+    const onAddToBasketSeries = () => {
+        seriesResults.forEach((study) => {
+            store.dispatch(addStudyOrSeriesToBasket(study));
+        });
+    }
+
+
+    const onAddToBasketStudies = () => {
+        studyResults.forEach((series) => {
+            store.dispatch(addStudyOrSeriesToBasket(series))
+        });
+    }
+
     return (
         <div>
             <Tabs className="bg-primary rounded-t-xl">
@@ -51,7 +64,8 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                     <>
                         <ResultStudiesTable resultStudies={studyResults} />
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query Series</Button>
+                            <Button color={Colors.primary} onClick={onAddToBasketStudies}>Add to basket</Button>
+                            <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query series</Button>
                             <Button color={Colors.warning} onClick={onClearStudyResults}><Empty /></Button>
                         </div>
                     </>
@@ -60,6 +74,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                     <>
                         <ResultSeriesTable resultSeries={seriesResults} />
                         <div className="flex justify-center p-3 gap-3">
+                            <Button color={Colors.primary} onClick={onAddToBasketSeries}>Add to basket</Button>
                             <Button color={Colors.warning} onClick={onClearSeriesResults}><Empty /></Button>
                         </div>
                     </>
