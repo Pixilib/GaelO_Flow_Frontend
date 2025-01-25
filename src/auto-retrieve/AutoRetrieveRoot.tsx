@@ -7,11 +7,12 @@ import TaskRoot from "./task/TaskRoot";
 import BasketRoot from "./basket/BasketRoot";
 import { addSeriesResult, addStudyResult, clearSeriesResults } from "../reducers/AutoRetrieveSlice";
 
-import { Tab, Tabs } from "../ui";
+import { Label, ProgressBar, Tab, Tabs } from "../ui";
 import { QueryPayload, QueryResultSeries, QueryResultStudy } from "../utils/types";
 import { dicomDateQueryStringFromDateFromDateTo } from "../utils";
 import { queryModality } from "../services";
 import { RootState, store } from "../store";
+import { useState } from "react";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
@@ -19,6 +20,9 @@ const AutoRetrieveRoot = () => {
 
   const queries = useSelector((state: RootState) => state.autoRetrieve.queries);
   const studiesResults = useSelector((state: RootState) => state.autoRetrieve.studyResults);
+
+  const [progressQueriesStudies, setProgressQueriesStudies] = useState(0);
+  const [progressQueriesSeries, setProgressQueriesSeries] = useState(0);
 
   const handleTabClick = (tab: string) => {
     navigate(tab);
@@ -37,7 +41,9 @@ const AutoRetrieveRoot = () => {
   }
 
   const handleStartStudyQueries = async () => {
-    for (const queryRow of queries) {
+    setProgressQueriesStudies(0)
+    const queriesReady = queries.filter((query) => query.aet)
+    for (const queryRow of queriesReady) {
       const query: QueryPayload = {
         Level: 'Study',
         Query: {
@@ -51,12 +57,14 @@ const AutoRetrieveRoot = () => {
       }
       const answer = await (queryModality(queryRow.aet, query) as Promise<QueryResultStudy[]>)
       studyResultsHandler(answer)
+      setProgressQueriesStudies((progress) => progress + (100 / queriesReady.length))
     }
+    setProgressQueriesStudies(0)
   }
 
   const handleStartSeriesQueries = async () => {
     clearSeriesResults()
-    //Repopulate seriesResults
+    setProgressQueriesSeries(0)
     for (const studyResult of studiesResults) {
       const query: QueryPayload = {
         Level: 'Series',
@@ -66,7 +74,9 @@ const AutoRetrieveRoot = () => {
       }
       const answer = await (queryModality(studyResult.originAET, query) as Promise<QueryResultSeries[]>)
       seriesResultsHandler(answer)
+      setProgressQueriesSeries((progress) => Math.round(progress + (100 / studiesResults.length)))
     }
+    setProgressQueriesSeries(0)
   }
 
   return (
@@ -105,6 +115,10 @@ const AutoRetrieveRoot = () => {
           <Route path="/basket" element={<BasketRoot />} />
           <Route path="/task" element={<TaskRoot />} />
         </Routes>
+      </div>
+      <div className="flex flex-col gap-3">
+        {progressQueriesStudies ? <ProgressBar progress={progressQueriesStudies} /> : null}
+        {progressQueriesSeries ? <ProgressBar progress={progressQueriesSeries} /> : null}
       </div>
     </div>
   );
