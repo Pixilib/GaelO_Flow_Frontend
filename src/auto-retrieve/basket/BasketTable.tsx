@@ -4,11 +4,19 @@ import { QueryResultSeries, QueryResultStudy } from "../../utils/types";
 
 type BasketTableProps = {
     queryResults: Array<QueryResultStudy | QueryResultSeries>
+    onRowSelectionChange: (selectedState: Record<string, boolean>) => void;
+    selectedRow: Record<string, boolean>;
 }
-const BasketTable = ({ queryResults }: BasketTableProps) => {
+const BasketTable = ({ queryResults, onRowSelectionChange, selectedRow }: BasketTableProps) => {
     const columns = [
         {
             id: "id",
+            accessorFn: (row) => {
+                return row.answerId+'/'+row.answerNumber;
+            }
+        },
+        {
+            id: "answerId",
             accessorKey: "answerId",
         },
         {
@@ -94,8 +102,10 @@ const BasketTable = ({ queryResults }: BasketTableProps) => {
             enableColumnFilters
             enableSorting
             columns={columns}
-            columnVisibility={{ id: false, answerNumber: false, studyInstanceUID: false, seriesInstanceUID: false }}
+            columnVisibility={{ id : false, answerId: false, answerNumber: false, studyInstanceUID: false, seriesInstanceUID: false }}
             data={queryResults}
+            onRowSelectionChange={onRowSelectionChange}
+            selectedRow={selectedRow}
         />
     )
 }

@@ -31,12 +31,7 @@ const AnonymizeRoot = () => {
 
     const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
         ({ anonItems }) => createAnonymizeQueue(anonItems),
-        [['queue', 'anonymize']],
-        {
-            onSuccess: (jobId) => {
-                //console.log(jobId)
-            },
-        }
+        [['queue', 'anonymize']]
     );
 
     const patients = useMemo(() => Object.values(anonList.patients), [anonList]);

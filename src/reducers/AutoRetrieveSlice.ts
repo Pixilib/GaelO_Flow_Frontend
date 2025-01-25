@@ -7,8 +7,8 @@ export type AutoRetrieveState = {
   studyResults: (QueryResultStudy & { selected: boolean })[];
   seriesResults: (QueryResultSeries & { selected: boolean })[];
   basket: Array<
-    | (QueryResultSeries & { selected: boolean })
-    | (QueryResultStudy & { selected: boolean })
+    | (QueryResultSeries & { id: string; selected: boolean })
+    | (QueryResultStudy & { id: string; selected: boolean })
   >;
 };
 
@@ -19,10 +19,14 @@ const initialState: AutoRetrieveState = {
   basket: [],
 };
 
-type ChangeSelectionPayload = Record<number|string, boolean>
+type ChangeSelectionPayload = Record<number | string, boolean>;
 
 type RemoveQueryPayload = {
   id: number;
+};
+
+type RemoveBasketPayload = {
+  id: string;
 };
 
 type RemoveResultPayload = {
@@ -41,15 +45,17 @@ const autoRetrieveSlice = createSlice({
   reducers: {
     addQuery: (state, action: PayloadAction<QueryStudy>) => {
       const study = action.payload;
-      state.queries.push({...study, selected: false});
+      state.queries.push({ ...study, selected: false });
     },
-    updateQueriesSelection: (state, action: PayloadAction<ChangeSelectionPayload>) => { 
+    updateQueriesSelection: (
+      state,
+      action: PayloadAction<ChangeSelectionPayload>
+    ) => {
       state.queries.forEach((query) => {
         query.selected = action.payload?.[query.id] ?? false;
       });
     },
     removeQuery: (state, action: PayloadAction<RemoveQueryPayload>) => {
-      console.log(action.payload);
       state.queries = state.queries.filter(
         (query) => query.id !== action.payload.id
       );
@@ -80,30 +86,44 @@ const autoRetrieveSlice = createSlice({
           return;
         }
       }
-      state.basket.push({...action.payload, selected: false});
+      state.basket.push({
+        ...action.payload,
+        id: action.payload.answerId + "/" + action.payload.answerNumber,
+        selected: false,
+      });
     },
     removeStudyOrSeriesFromBasket: (
       state,
-      action: PayloadAction<RemoveResultPayload>
+      action: PayloadAction<RemoveBasketPayload>
     ) => {
       state.basket = state.basket.filter((ressource) => {
-        if (ressource.seriesInstanceUID) {
-          return ressource.seriesInstanceUID !== action.payload.instanceUID;
-        } else {
-          return ressource.studyInstanceUID !== action.payload.instanceUID;
-        }
+        return ressource.id !== action.payload.id;
+      });
+    },
+    updateBasketSelection: (
+      state,
+      action: PayloadAction<ChangeSelectionPayload>
+    ) => {
+      state.basket.forEach((query) => {
+        query.selected = action.payload?.[query.id] ?? false;
       });
     },
     addStudyResult: (state, action: PayloadAction<QueryResultStudy>) => {
       const resultStudy = action.payload;
-      state.studyResults.push({...resultStudy, selected: false});
+      state.studyResults.push({ ...resultStudy, selected: false });
     },
-    updateStudyResultSelection: (state, action: PayloadAction<ChangeSelectionPayload>) => { 
+    updateStudyResultSelection: (
+      state,
+      action: PayloadAction<ChangeSelectionPayload>
+    ) => {
       state.studyResults.forEach((query) => {
         query.selected = action.payload?.[query.studyInstanceUID] ?? false;
       });
     },
-    updateSeriesResultSelection: (state, action: PayloadAction<ChangeSelectionPayload>) => { 
+    updateSeriesResultSelection: (
+      state,
+      action: PayloadAction<ChangeSelectionPayload>
+    ) => {
       state.seriesResults.forEach((query) => {
         query.selected = action.payload?.[query.seriesInstanceUID] ?? false;
       });
@@ -113,14 +133,17 @@ const autoRetrieveSlice = createSlice({
         return study.studyInstanceUID !== action.payload.instanceUID;
       });
     },
-    removeSeriesResults: (state, action: PayloadAction<RemoveResultPayload>) => {
+    removeSeriesResults: (
+      state,
+      action: PayloadAction<RemoveResultPayload>
+    ) => {
       state.seriesResults = state.seriesResults.filter((study) => {
         return study.seriesInstanceUID !== action.payload.instanceUID;
       });
     },
     addSeriesResult: (state, action: PayloadAction<QueryResultSeries>) => {
       const resultSeries = action.payload;
-      state.seriesResults.push({...resultSeries, selected: false});
+      state.seriesResults.push({ ...resultSeries, selected: false });
     },
     clearQueries: (state) => {
       state.queries = [];
@@ -141,6 +164,7 @@ export const {
   removeQuery,
   addStudyResult,
   updateStudyResultSelection,
+  updateBasketSelection,
   addSeriesResult,
   updateSeriesResultSelection,
   addStudyOrSeriesToBasket,
@@ -152,7 +176,7 @@ export const {
   clearSeriesResults,
   clearBasket,
   removeStudyResults,
-  removeSeriesResults
+  removeSeriesResults,
 } = autoRetrieveSlice.actions;
 
 export default autoRetrieveSlice.reducer;
