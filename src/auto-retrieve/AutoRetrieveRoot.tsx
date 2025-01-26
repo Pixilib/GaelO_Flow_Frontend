@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
@@ -7,12 +8,11 @@ import TaskRoot from "./task/TaskRoot";
 import BasketRoot from "./basket/BasketRoot";
 import { addSeriesResult, addStudyResult, clearSeriesResults } from "../reducers/AutoRetrieveSlice";
 
-import { Label, ProgressBar, Tab, Tabs } from "../ui";
+import { ProgressBar, Tab, Tabs } from "../ui";
 import { QueryPayload, QueryResultSeries, QueryResultStudy } from "../utils/types";
 import { dicomDateQueryStringFromDateFromDateTo } from "../utils";
 import { queryModality } from "../services";
 import { RootState, store } from "../store";
-import { useState } from "react";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
