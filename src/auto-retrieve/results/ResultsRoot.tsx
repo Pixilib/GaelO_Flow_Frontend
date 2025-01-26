@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Papa from "papaparse";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Button, Tab, Tabs } from "../../ui";
-import ResultStudiesTable from "./ResultStudIesTable";
+import ResultStudiesTable from "./ResultStudiesTable";
 import ResultSeriesTable from "./ResultSeriesTable";
 import { Colors } from "../../utils";
 import { Download, Empty } from "../../icons";

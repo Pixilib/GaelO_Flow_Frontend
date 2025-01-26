@@ -30,6 +30,8 @@ const ResultSeriesTable = ({ resultSeries, onRowSelectionChange, selectedRow }: 
             id: "studyDescription",
             accessorKey: "studyDescription",
             header: "Study Description",
+            filterType: 'MULTISELECT',
+            filterFn : 'arrIncludesSome',
         },
         {
             id: "accessionNumber",
@@ -52,11 +54,15 @@ const ResultSeriesTable = ({ resultSeries, onRowSelectionChange, selectedRow }: 
             id: "modality",
             accessorKey: "modality",
             header: "Modality",
+            filterType: 'MULTISELECT',
+            filterFn : 'arrIncludesSome',
         },
         {
             id: "seriesDescription",
             accessorKey: "seriesDescription",
             header: "Series Description",
+            filterType: 'MULTISELECT',
+            filterFn : 'arrIncludesSome',
         },
         {
             id: "studyInstanceUID",
@@ -75,6 +81,8 @@ const ResultSeriesTable = ({ resultSeries, onRowSelectionChange, selectedRow }: 
             id: "originAET",
             accessorKey: "originAET",
             header: "AET",
+            filterType: 'MULTISELECT',
+            filterFn : 'arrIncludesSome',
         }
     ]
 

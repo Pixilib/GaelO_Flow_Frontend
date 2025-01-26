@@ -9,6 +9,9 @@ import {
     ColumnFiltersState,
     getFilteredRowModel,
     getPaginationRowModel,
+    getFacetedRowModel,
+    getFacetedMinMaxValues,
+    getFacetedUniqueValues,
 } from '@tanstack/react-table';
 import { Colors } from "../../utils/enums";
 import FilterTable from './FilterTable';
@@ -59,11 +62,11 @@ function Table<T>({
     enableRowSelection = false,
     selectedRow = {},
     columnVisibility = {},
-    onRowSelectionChange = () => {},
+    onRowSelectionChange = () => { },
     onRowClick,
     getRowStyles,
     getRowClasses = () => 'bg-indigo-50 dark:bg-slate-950 text-black dark:text-white',
-    onCellEdit = () => {},
+    onCellEdit = () => { },
     getRowId = (originalRow, index) => originalRow?.[id] ?? index,
 }: TableProps<T>) {
     const [sorting, setSorting] = useState<SortingState>([]);
@@ -123,6 +126,9 @@ function Table<T>({
         getFilteredRowModel: getFilteredRowModel(),
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        getFacetedRowModel: getFacetedRowModel(),
+        getFacetedMinMaxValues: getFacetedMinMaxValues(),
+        getFacetedUniqueValues: getFacetedUniqueValues(),
         enableRowSelection,
         enableColumnFilters,
         enableSorting,
@@ -140,7 +146,7 @@ function Table<T>({
     const headerText = headerTextSize === "xxs" ? "text-[0.491rem]" : `text-${headerTextSize}`;
 
     const firstColumnClass = `sticky left-0 ${headerClass[headerColor]} border-b border-gray-300 dark:border-gray-700 text-center`;
-    const lastColumnClass = "sticky right-0 bg-white dark:bg-gray-800 text-black dark:text-white"; 
+    const lastColumnClass = "sticky right-0 bg-white dark:bg-gray-800 text-black dark:text-white";
 
     const getColumnClasses = (index: number, length: number) => {
         if (pinFirstColumn && index === 0) return firstColumnClass;
@@ -158,24 +164,26 @@ function Table<T>({
                                 <th
                                     key={header.id}
                                     colSpan={header.column.getCanFilter() ? 1 : undefined}
-                                    className={`h-2 px-2 pt-5 pb-3 py-2 font-bold tracking-wider uppercase cursor-pointer md:px-4 lg:px-6 ${getColumnClasses(index, headerGroup.headers.length)}`}
-                                    onClick={header.column.getToggleSortingHandler()}
+                                    className={`p-4 font-bold tracking-wider uppercase cursor-pointer  ${getColumnClasses(index, headerGroup.headers.length)}`}
                                 >
-                                    <div className={`flex items-center ${headerText}`}>
-                                        <div className="text-left">
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
+                                    <div className='flex flex-col'>
+                                        <div className={`flex justify-between items-center w-full ${headerText}`} onClick={header.column.getToggleSortingHandler()}>
+                                            <div className="text-left">
+                                                {flexRender(header.column.columnDef.header, header.getContext())}
+                                            </div>
+                                            {enableSorting && header.column.getCanSort() && (
+                                                <span className="ml-1 text-lg cursor-pointer">
+                                                    {header.column.getIsSorted() === 'desc' ? <SortZa /> : <SortAz />}
+                                                </span>
+                                            )}
                                         </div>
-                                        {enableSorting && header.column.getCanSort() && (
-                                            <span className="ml-1 text-lg cursor-pointer">
-                                                {header.column.getIsSorted() === 'desc' ? <SortZa /> : <SortAz />}
-                                            </span>
+                                        {header.column.getCanFilter() && (
+                                            <div className="mt-2 text-left w-full">
+                                                <FilterTable columnDef={header.column.columnDef} column={header.column} table={table} />
+                                            </div>
                                         )}
                                     </div>
-                                    {header.column.getCanFilter() && (
-                                        <div className="mt-2 text-left">
-                                            <FilterTable column={header.column} table={table} />
-                                        </div>
-                                    )}
+
                                 </th>
                             ))}
                         </tr>

@@ -2,6 +2,7 @@ import moment from "moment";
 import { Table } from "../../ui";
 import { QueryStudy } from "../types";
 import { Option } from "../../utils";
+import { filterFns } from "@tanstack/react-table";
 
 type QueryTableProps = {
   aets: Option[];
