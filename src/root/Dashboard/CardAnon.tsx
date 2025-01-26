@@ -10,7 +10,6 @@ import {
 import { useCustomMutation, useCustomQuery } from "../../utils";
 import { useMemo } from "react";
 import ProgressQueueCircle from "../../queue/ProgressQueueCircle";
-import { Spinner } from "../../ui";
 import { AnonQueue } from "../../utils/types";
 import { RootState } from "../../store";
 import Anon from "../../icons/Anon"; // Import the Anon icon
@@ -52,7 +51,7 @@ const CardAnon = () => {
   }, [data]);
 
   return (
-    <Card className="flex-1 bg-white overflow-hidden rounded-lg shadow-lg md:max-w-md dark:bg-neutral-500">
+    <Card className="w-full bg-white overflow-hidden rounded-lg shadow-lg md:max-w-md dark:bg-neutral-500">
       <CardHeader
         centerTitle
         color={Colors.blueCustom}
@@ -62,7 +61,7 @@ const CardAnon = () => {
         <span className="text-lg font-bold text-white">Anonymization</span>
       </CardHeader>
       <CardBody
-        className="flex flex-col items-center justify-center p-6 dark:bg-neutral-500 bg-gray-50"
+        className="flex flex-col items-center justify-center dark:bg-neutral-500 bg-gray-50"
         color={Colors.white}
       >
         {firstQueue ? (
@@ -81,10 +80,6 @@ const CardAnon = () => {
           <Validate className="text-success h-10 w-10" />
         )}
       </CardBody>
-      <CardFooter
-        className="flex justify-center dark:bg-neutral-500"
-        color={Colors.white}
-      ></CardFooter>
     </Card>
   );
 };

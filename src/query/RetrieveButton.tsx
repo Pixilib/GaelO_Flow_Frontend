@@ -45,7 +45,7 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
           color={Colors.warning}
           onClick={handleClick}
           size="2.5em"
-          className={`transition-transform transform cursor-pointer hover:text-warning-500 hover:scale-110 `}
+          className={`h-7 w-7 transition-transform transform cursor-pointer hover:text-warning-500 hover:scale-110 `}
         />
       }
 

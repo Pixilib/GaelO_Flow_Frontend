@@ -2,6 +2,7 @@ import moment from "moment";
 import { Table } from "../../ui";
 import { QueryStudy } from "../types";
 import { Option } from "../../utils";
+import { filterFns } from "@tanstack/react-table";
 
 type QueryTableProps = {
   aets: Option[];
@@ -22,63 +23,63 @@ const QueryTable = ({ aets, queries, onCellEdit, onRowSelectionChange, selectedR
       accessorKey: "patientName",
       header: "Patient Name",
       isEditable: true,
+      style: {
+        minWidth: '150px'
+      }
     },
     {
       id: "patientID",
       accessorKey: "patientID",
       header: "Patient ID",
       isEditable: true,
+      style: {
+        minWidth: '150px'
+      }
     },
     {
       id: "studyDescription",
       accessorKey: "studyDescription",
       header: "Study Description",
       isEditable: true,
+      style: {
+        minWidth: '150px'
+      }
     },
     {
       id: "accessionNumber",
       accessorKey: "accessionNumber",
       header: "Accession Number",
       isEditable: true,
+      style: {
+        minWidth: '100px'
+      }
     },
     {
       id: "dateFrom",
-      accessorFn: (row) => {
-        if (row.dateFrom == "" || row.dateFrom == null) return null;
-        return moment(row.DateFrom, "YYYYMMDD", true)?.toDate();
-      },
+      accessorKey: "dateFrom",
       header: "Date From",
       isEditable: true,
-      //isEditable: true,
-      //editionProperties: {
-      //    type: 'CALENDAR'
-      //},
-      //filterType: filter.DATE_FILTER,
-      //filterFn: isWithinDateRange
+      style: {
+        minWidth: '100px'
+      }
     },
     {
       id: "dateTo",
-      accessorFn: (row) => {
-        if (row.dateTo == "" || row.dateTo == null) return null;
-        return moment(row.DateFrom, "YYYYMMDD", true)?.toDate();
-      },
+      accessorKey: "dateTo",
       header: "Date To",
       isEditable: true,
+      style: {
+        minWidth: '100px'
+      }
     },
-
     {
       id: "modalitiesInStudy",
       accessorKey: "modalitiesInStudy",
       header: "Modalities",
       isEditable: true,
-      /*
-            cell: ({ row, getValue }) => {
-                return <SelectModalities
-                    previousModalities={getValue()}
-                    onChange={(value) => cellEditHandler(row.original.key, 'ModalitiesInStudy', value)}
-                />
-            }
-                */
+      style: {
+        minWidth: '100px'
+      }
     },
     {
       id: "aet",
@@ -90,7 +91,7 @@ const QueryTable = ({ aets, queries, onCellEdit, onRowSelectionChange, selectedR
         options: aets
       },
       style: {
-        minWidth: '200px'
+        minWidth: '150px'
       }
     },
   ];

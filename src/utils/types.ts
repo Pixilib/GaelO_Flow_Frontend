@@ -230,14 +230,14 @@ export type QueryResultSeries = QueryResult & {
   modality: string;
   seriesNumber: string;
   seriesDescription: string;
-  numberOfSeriesRelatedInstances: string;
+  numberOfSeriesRelatedInstances: number;
   seriesInstanceUID: string;
 };
 
 export type QueryResultStudy = QueryResult & {
   seriesInstanceUID: string;
-  numberOfStudyRelatedInstances: string;
-  numberOfStudyRelatedSeries: string;
+  numberOfStudyRelatedInstances: number;
+  numberOfStudyRelatedSeries: number;
   modalitiesInStudy: string;
 };
 
