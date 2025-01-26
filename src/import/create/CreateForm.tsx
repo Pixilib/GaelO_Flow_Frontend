@@ -38,7 +38,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
         <div className="flex-1">
           <Input
             label={<Label value="Tag" className="text-sm font-medium" />}
-            placeholder="Entrer le tag"
+            placeholder="tag"
             value={tag}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setTag(event.target.value)}
             className="w-full"
@@ -46,8 +46,8 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
         </div>
         <div className="flex-1">
           <Input
-            label={<Label value="Valeur" className="text-sm font-medium" />}
-            placeholder="Entrer la valeur"
+            label={<Label value="Value" className="text-sm font-medium" />}
+            placeholder="value"
             value={value}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
             className="w-full"
