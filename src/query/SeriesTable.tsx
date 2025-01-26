@@ -10,8 +10,7 @@ type SeriesTableProps = {
 };
 
 const SeriesTable = ({ series }: SeriesTableProps) => {
-    const rows = useMemo(() => series, [series]);
-    const columns = useMemo(() => [
+    const columns = [
         {
             accessorKey: "seriesDescription",
             header: "Series Description",
@@ -41,16 +40,15 @@ const SeriesTable = ({ series }: SeriesTableProps) => {
                 )
             }
         }
-    ], []);
+    ];
+
     return (
         <Table
             columns={columns}
-            data={rows ?? []}
+            data={series ?? []}
             headerTextSize="xs"
             headerColor={Colors.light} 
             className="text-xs bg-gray-100"
-
-            
         />
     );
 

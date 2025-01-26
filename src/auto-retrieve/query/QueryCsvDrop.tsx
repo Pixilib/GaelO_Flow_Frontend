@@ -7,9 +7,14 @@ type QueryCsvDropProps = {
 };
 
 const QueryCsvDrop = ({ onImportCsv }: QueryCsvDropProps) => {
-    
+
   const { getRootProps, getInputProps, open } = useDropzone({
     multiple: false,
+    accept: {
+      'text/csv': ['.csv'],
+      'text/plain': ['.csv'],
+      'application/vnd.ms-excel': ['.csv']
+    },
     onDrop: async (acceptedFiles) => {
       const csvString = await acceptedFiles[0].text();
       const records = Papa.parse(csvString, {

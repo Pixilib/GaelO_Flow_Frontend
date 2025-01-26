@@ -31,7 +31,7 @@ const Dashboard = () => {
         <span className="ml-4 text-4xl text-primary">👋🏻</span>
       </h2>
 
-      <div className="flex flex-col gap-4 md:flex-row md:gap-6">
+      <div className="flex justify-around md:flex-row md:gap-6 w-full">
         <CardRetrieve />
         <CardAnon />
         <CardDelete />

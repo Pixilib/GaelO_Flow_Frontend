@@ -12,9 +12,8 @@ type ResultsTableProps = {
 
 const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
-    const rows = useMemo(() => results, [results]);
     
-    const columns: ColumnDef<QueryResultStudy>[] = useMemo(() => [
+    const columns: ColumnDef<QueryResultStudy>[] =  [
         {
             accessorKey: "patientName",
             header: "Patient Name",
@@ -48,19 +47,18 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
                 );
             }
         },
-    ], []);
+    ];
 
     const handleRowClick = (row: QueryResultStudy) => {
         onRowClick(row.studyInstanceUID, row.originAET);
         setSelectedRows(prev => ({
-            ...prev,
             [row.studyInstanceUID]: !prev[row.studyInstanceUID] // Toggle selection
         }));
     };
 
     const getRowClasses = (row: QueryResultStudy) => {
         if (selectedRows[row.studyInstanceUID]) {
-            return 'bg-primary hover:cursor-pointer';
+            return 'bg-primary text-white hover:cursor-pointer';
         }
         return 'hover:bg-indigo-100 hover:cursor-pointer';
     };
@@ -68,7 +66,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
     return (
         <Table
             columns={columns}
-            data={rows ?? []}
+            data={results ?? []}
             enableColumnFilters={true}
             onRowClick={handleRowClick}
             getRowClasses={getRowClasses}

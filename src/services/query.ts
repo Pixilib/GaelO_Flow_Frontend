@@ -29,9 +29,9 @@ export const queryModality = (
           modalitiesInStudy: data.ModalitiesInStudy,
           seriesDescription: data.SeriesDescription,
           seriesNumber: data.SeriesNumber,
-          numberOfStudyRelatedInstances : data.NumberOfStudyRelatedInstances,
-          numberOfStudyRelatedSeries : data.NumberOfStudyRelatedSeries,
-          numberOfSeriesRelatedInstances: data.NumberOfSeriesRelatedInstances,
+          numberOfStudyRelatedInstances : data.NumberOfStudyRelatedInstances ? Number(data.NumberOfStudyRelatedInstances) : 0,
+          numberOfStudyRelatedSeries : data.NumberOfStudyRelatedSeries ? Number(data.NumberOfStudyRelatedSeries) : 0,
+          numberOfSeriesRelatedInstances: data.NumberOfSeriesRelatedInstances ? Number(data.NumberOfSeriesRelatedInstances) : 0,
           studyInstanceUID: data.StudyInstanceUID,
           seriesInstanceUID: data.SeriesInstanceUID,
         })

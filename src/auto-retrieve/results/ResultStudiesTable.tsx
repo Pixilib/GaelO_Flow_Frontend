@@ -31,6 +31,8 @@ const ResultStudiesTable = ({ resultStudies, onRowSelectionChange, selectedRow }
             id: "studyDescription",
             accessorKey: "studyDescription",
             header: "Study Description",
+            filterType: 'MULTISELECT',
+            filterFn : 'arrIncludesSome',
         },
         {
             id: "accessionNumber",
@@ -72,6 +74,8 @@ const ResultStudiesTable = ({ resultStudies, onRowSelectionChange, selectedRow }
             id: "originAET",
             accessorKey: "originAET",
             header: "AET",
+            filterType: 'MULTISELECT',
+            filterFn : 'arrIncludesSome',
         },
 
     ]

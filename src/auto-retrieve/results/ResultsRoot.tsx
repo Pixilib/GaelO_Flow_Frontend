@@ -1,13 +1,15 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
+import Papa from "papaparse";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Button, Tab, Tabs } from "../../ui";
-import ResultStudiesTable from "./ResultStudIesTable";
+import ResultStudiesTable from "./ResultStudiesTable";
 import ResultSeriesTable from "./ResultSeriesTable";
 import { Colors } from "../../utils";
-import { Empty } from "../../icons";
+import { Download, Empty } from "../../icons";
 import { RootState, store } from "../../store";
 import { addStudyOrSeriesToBasket, removeSeriesResults, removeStudyResults, updateSeriesResultSelection, updateStudyResultSelection } from "../../reducers/AutoRetrieveSlice";
+import { exportCsv } from "../../utils/export";
 
 type ResultsRootProps = {
     onStartSeriesQueries: () => void
@@ -71,6 +73,44 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
         store.dispatch(updateStudyResultSelection(selectedState));
     };
 
+    const onDownloadCSVStudy = () => {
+        const payload = studyResults.map((query) => ({
+            patientName: query.patientName,
+            patientID: query.patientId,
+            studyDescription: query.studyDescription,
+            accessionNumber: query.accessionNumber,
+            dateFrom: query.studyDate,
+            dateTo: query.studyDate,
+            modalitiesInStudy: query.modalitiesInStudy,
+            studyInstanceUID: query.studyInstanceUID,
+            numberOfStudyRelatedSeries : query.numberOfStudyRelatedSeries,
+            numberOfStudyRelatedInstances : query.numberOfStudyRelatedInstances,
+            aet: query.originAET,
+        }));
+        const csvString = Papa.unparse(payload);
+        exportCsv(csvString, ".csv", "auto-queries.csv");
+    }
+
+    const onDownloadCSVSeries = () => {
+        const payload = seriesResults.map((query) => ({
+            patientName: query.patientName,
+            patientID: query.patientId,
+            studyDescription: query.studyDescription,
+            seriesDescription: query.seriesDescription,
+            accessionNumber: query.accessionNumber,
+            dateFrom: query.studyDate,
+            dateTo: query.studyDate,
+            modality: query.modality,
+            studyInstanceUID: query.studyInstanceUID,
+            seriesInstanceUID: query.seriesInstanceUID,
+            seriesNumber: query.seriesNumber,
+            numberOfSeriesRelatedInstances : query.numberOfSeriesRelatedInstances,
+            aet: query.originAET,
+        }));
+        const csvString = Papa.unparse(payload);
+        exportCsv(csvString, ".csv", "auto-queries.csv");
+    }
+
     return (
         <div>
             <Tabs className="bg-primary rounded-t-xl">
@@ -96,6 +136,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                         <div className="flex justify-center p-3 gap-3">
                             <Button color={Colors.primary} onClick={onAddToBasketStudies}>Add to basket</Button>
                             <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query series</Button>
+                            <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVStudy}><Download />CSV</Button>
                             <Button color={Colors.warning} onClick={onRemoveStudiesResults}><Empty /></Button>
                         </div>
                     </>
@@ -108,6 +149,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                             resultSeries={seriesResults} />
                         <div className="flex justify-center p-3 gap-3">
                             <Button color={Colors.primary} onClick={onAddToBasketSeries}>Add to basket</Button>
+                            <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVSeries}><Download />CSV</Button>
                             <Button color={Colors.warning} onClick={onRemoveSeriesResults}><Empty /></Button>
                         </div>
                     </>
