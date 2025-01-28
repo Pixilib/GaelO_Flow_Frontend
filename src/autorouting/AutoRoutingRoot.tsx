@@ -2,36 +2,27 @@ import { useState, ChangeEvent } from "react";
 import { Input, SelectInput, Label, Button } from "../ui";
 import {
   AutoroutingEventType,
+  AutoRoutingCondition,
+  AutoRoutingRuleCondition,
+  AutoRoutingRuleValueRepresentation,
+  AutoRoutingRuleDicomTag,
   AutoRoutingRule,
   AutoRoutingDestinationType,
-  AutoRoutingCondition,
 } from "./types";
 import { Colors } from "../utils";
 
 const AutoRoutingRoot = () => {
-  
   const [name, setName] = useState<string>("");
   const [eventType, setEventType] = useState<AutoroutingEventType | null>(null);
   const [isActivated, setIsActivated] = useState(false);
-  const [condition, setCondition] = useState<AutoRoutingCondition>(AutoRoutingCondition.AND);
-  
+  const [condition, setCondition] = useState<AutoRoutingCondition>(
+    AutoRoutingCondition.AND
+  );
+
   const [rules, setRules] = useState<AutoRoutingRule[]>([]);
-  const [destinations, setDestinations] = useState<AutoRoutingDestinationType[]>([]);
-
-  const conditionsOptions = [
-    { label: "And", value: RuleCondition.AND },
-    { label: "Or", value: RuleCondition.OR },
-  ];
-
-  const eventTypeOptions = [
-    { label: "New Instance", value: AutoroutingEventType.NEW_INSTANCE },
-    { label: "New Series", value: AutoroutingEventType.NEW_SERIES },
-    { label: "New Study", value: AutoroutingEventType.NEW_STUDY },
-    { label: "New Patient", value: AutoroutingEventType.NEW_PATIENT },
-    { label: "Stable Series", value: AutoroutingEventType.STABLE_SERIES },
-    { label: "Stable Study", value: AutoroutingEventType.STABLE_STUDY },
-    { label: "Stable Patient", value: AutoroutingEventType.STABLE_PATIENT },
-  ];
+  const [destinations, setDestinations] = useState<
+    { Destination: AutoRoutingDestinationType; Name: string }[]
+  >([]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -49,31 +40,65 @@ const AutoRoutingRoot = () => {
     setCondition(option.value);
   };
 
-  // const handleAddClick = () => {
-  //   /*
-  //   const selectedLabels = eventType.map((option) => option.label).join(", ");
-  //   alert(
-  //     `Name: ${name}, Event Type: ${selectedLabels}, Activated: ${isActivated}, Condition: ${condition}, Rule: ${rule}, Destination: ${destination}`
-  //   );
-  //   */
-  // };
-
-  console.log(eventType, condition)
-
-  const [showForm, setShowForm] = useState(false);
-  const [showForm2, setShowForm2] = useState(false);
-
-
-  const handleAddClick = () => {
-    setShowForm((prev) => !prev);
+  // Gestion des rules
+  const addRule = () => {
+    setRules((prev) => [
+      ...prev,
+      {
+        DicomTag: AutoRoutingRuleDicomTag.PATIENT_NAME,
+        ValueRepresentation: AutoRoutingRuleValueRepresentation.STRING,
+        Value: "",
+        Condition: AutoRoutingRuleCondition.EQUALS,
+      },
+    ]);
   };
 
-  const handleAddClick2 = () => {
-    setShowForm2((prev) => !prev);
+  const updateRule = (index: number, key: keyof AutoRoutingRule, value: any) => {
+    setRules((prev) =>
+      prev.map((rule, i) =>
+        i === index ? { ...rule, [key]: value } : rule
+      )
+    );
+  };
+
+  const removeRule = (index: number) => {
+    setRules((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  // Gestion des destinations
+  const addDestination = () => {
+    setDestinations((prev) => [
+      ...prev,
+      { Destination: AutoRoutingDestinationType.AET, Name: "" },
+    ]);
+  };
+
+  const updateDestination = (
+    index: number,
+    key: keyof { Destination: AutoRoutingDestinationType; Name: string },
+    value: any
+  ) => {
+    setDestinations((prev) =>
+      prev.map((destination, i) =>
+        i === index ? { ...destination, [key]: value } : destination
+      )
+    );
+  };
+
+  const removeDestination = (index: number) => {
+    setDestinations((prev) => prev.filter((_, i) => i !== index));
   };
 
   const sendForm = () => {
-    alert("Sending form (not true)");
+    console.log({
+      name,
+      eventType,
+      isActivated,
+      condition,
+      rules,
+      destinations,
+    });
+    alert("Form submitted! Check the console for details.");
   };
 
   return (
@@ -88,60 +113,107 @@ const AutoRoutingRoot = () => {
       <SelectInput
         value={eventType}
         onChange={handleEventTypeChange}
-        options={eventTypeOptions}
+        options={Object.values(AutoroutingEventType).map((value) => ({
+          label: value,
+          value,
+        }))}
       />
       <Label value="Activated :" htmlFor="activatedSwitch" />
-      <Input
-        type="checkbox"
-        checked={isActivated}
-        onChange={handleSwitchChange}
-      />
-      <Label
-        value="Condition :"
-        htmlFor="conditionSelect"
-      />
+      <Input type="checkbox" checked={isActivated} onChange={handleSwitchChange} />
+      <Label value="Condition :" htmlFor="conditionSelect" />
       <SelectInput
         onChange={handleConditionChange}
         value={condition}
-        options={conditionsOptions}
+        options={Object.values(AutoRoutingCondition).map((value) => ({
+          label: value,
+          value,
+        }))}
       />
 
-
-<Label value="Rules" htmlFor="Rules" />
-<Button
-        color={Colors.primary}
-        onClick={handleAddClick}
-      >
+      {/* Gestion des rules */}
+      <Label value="Rules" htmlFor="Rules" />
+      <Button color={Colors.primary} onClick={addRule}>
         +
       </Button>
-      {showForm && (
-        <div style={{ marginTop: "10px" }}>
-          <input type="text" placeholder="Input 1" />
-          <input type="text" placeholder="Input 2" style={{ marginLeft: "10px" }} />
+      {rules.map((rule, index) => (
+        <div key={index} style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+          <SelectInput
+            value={rule.DicomTag}
+            onChange={(e) => updateRule(index, "DicomTag", e.value)}
+            options={Object.values(AutoRoutingRuleDicomTag).map((value) => ({
+              label: value,
+              value,
+            }))}
+          />
+          <SelectInput
+            value={rule.ValueRepresentation}
+            onChange={(e) =>
+              updateRule(index, "ValueRepresentation", e.value)
+            }
+            options={Object.values(AutoRoutingRuleValueRepresentation).map(
+              (value) => ({
+                label: value,
+                value,
+              })
+            )}
+          />
+          <SelectInput
+            value={rule.Condition}
+            onChange={(e) => updateRule(index, "Condition", e.value)}
+            options={Object.values(AutoRoutingRuleCondition).map((value) => ({
+              label: value,
+              value,
+            }))}
+          />
+          <Input
+            placeholder="Value"
+            value={rule.Value.toString()}
+            onChange={(e) => updateRule(index, "Value", e.target.value)}
+          />
+          <Button
+            color={Colors.danger}
+            onClick={() => removeRule(index)}
+            style={{ marginLeft: "10px" }}
+          >
+            -
+          </Button>
         </div>
-      )}
+      ))}
 
-
-
-<Label value="Destinations" htmlFor="Rules" />
-<Button
-        color={Colors.primary}
-        onClick={handleAddClick2}
-      >
+      {/* Gestion des destinations */}
+      <Label value="Destinations" htmlFor="Destinations" />
+      <Button color={Colors.primary} onClick={addDestination}>
         +
       </Button>
-      {showForm2 && (
-        <div style={{ marginTop: "10px" }}>
-          <input type="text" placeholder="Input 1" />
-          <input type="text" placeholder="Input 2" style={{ marginLeft: "10px" }} />
+      {destinations.map((destination, index) => (
+        <div
+          key={index}
+          style={{ marginTop: "10px", display: "flex", gap: "10px" }}
+        >
+          <SelectInput
+            value={destination.Destination}
+            onChange={(e) => updateDestination(index, "Destination", e.value)}
+            options={Object.values(AutoRoutingDestinationType).map((value) => ({
+              label: value,
+              value,
+            }))}
+          />
+          <Input
+            placeholder="Name"
+            value={destination.Name}
+            onChange={(e) => updateDestination(index, "Name", e.target.value)}
+          />
+          <Button
+            color={Colors.danger}
+            onClick={() => removeDestination(index)}
+            style={{ marginLeft: "10px" }}
+          >
+            -
+          </Button>
         </div>
-      )}
+      ))}
 
-
-      <Button
-        color={Colors.primary}
-        onClick={sendForm}
-      >
+      <Button color={Colors.primary} onClick={sendForm}>
         Add
       </Button>
     </div>

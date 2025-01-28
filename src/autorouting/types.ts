@@ -98,7 +98,7 @@ export type AutoRoutingRule = {
 export type Router = {
   RuleCondition: AutoRoutingCondition;
   Rules: AutoRoutingRule[];
-  Destinations: AutoRoutingDestinationType[];
+  Detinations : { Destination  : AutoRoutingDestinationType; Name : string}[]
 }
 
 export type AutoRouter = {
