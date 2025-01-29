@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Eye } from '../../icons';
-import Study from '../../model/Study';
 
 import OhifViewerLink from '../../content/OhifViewerLink';
 import StoneViewerLink from '../../content/StoneViewerLink';
 import DropdownButton from '../../ui/menu/DropdownButton';
+import Study from '../../model/Study';
 
 type DatasetStudyActionsProps = {
     study: Study,

@@ -19,11 +19,10 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
     selectedStudyId,
 }) => {
 
-    const data = useMemo(() => {
-        return studies.map(study => study.toJSON())
-    }, [studies]);
-
-    const columns: ColumnDef<any>[] = useMemo(() => [
+    const columns: ColumnDef<Study>[] = useMemo(() => [
+        {
+            id : 'id'
+        },
         {
             accessorKey: "accessionNumber",
             header: "Accession Number",
@@ -45,10 +44,10 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
         },
     ], [onActionClick]);
 
-    const getRowClasses = (row: any) => {
-        const isSelected = row.original.id === selectedStudyId;
+    const getRowClasses = (study: Study) => {
+        const isSelected = study.id === selectedStudyId;
         return isSelected
-            ? 'bg-primary hover:cursor-pointer'
+            ? 'bg-primary hover:cursor-pointer text-white font-bold'
             : 'hover:bg-indigo-100 hover:cursor-pointer';
     };
 
@@ -56,7 +55,7 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
     return (
         <Table
             columns={columns}
-            data={data}
+            data={studies}
             enableColumnFilters={true}
             headerColor={Colors.white}
             onRowClick={(row) => onRowClick(row.id)}
