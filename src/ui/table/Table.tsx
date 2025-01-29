@@ -154,6 +154,13 @@ function Table<T>({
         return '';
     };
 
+    const getSortedIcon = (column) : React.ReactNode => {
+        const direction  = column.getIsSorted()
+        if(!direction) return <SortAz className={"opacity-30"} /> 
+        if(direction === 'desc') return <SortZa />
+        if(direction === 'asc') return <SortAz />
+    }
+
     return (
         <div className={`overflow-x-auto  rounded-xl shadow-lg custom-scrollbar ${className} dark:border-gray-700`}>
             <table className="min-w-full border-gray-custom dark:border-gray-600">
@@ -173,7 +180,7 @@ function Table<T>({
                                             </div>
                                             {enableSorting && header.column.getCanSort() && (
                                                 <span className="ml-1 text-lg cursor-pointer">
-                                                    {header.column.getIsSorted() === 'desc' ? <SortZa /> : <SortAz />}
+                                                    {getSortedIcon(header.column)}
                                                 </span>
                                             )}
                                         </div>
