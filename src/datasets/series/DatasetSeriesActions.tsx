@@ -23,12 +23,14 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onA
     const options: DropdownOption[] = [
         {
             label: "View Metadata",
+            color: 'green',
             action: () => {
                 onActionClick("metadata", series.id);
             },
         },
         {
             label: "Download nii.gz",
+            color: 'green',
             action: () => {
                 const id = toastSuccess("Download started", 60)
                 exportSeriesToNifti(series.id, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))

@@ -16,13 +16,11 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
 
     const options = [
         {
-            label: "View in OHIF",
             icon: <Eye />,
             color: 'green',
             component: <OhifViewerLink studyInstanceUID={study.studyInstanceUID} />
         },
         {
-            label: "View in Stone",
             icon: <Eye />,
             color: 'green',
             component: <StoneViewerLink studyInstanceUID={study.studyInstanceUID} />
