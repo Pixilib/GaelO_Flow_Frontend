@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { HSDropdown } from 'preline/preline';
 
 type DropdownOption = {
-  label: string;
+  label?: string;
   component?: React.ReactNode;
   icon?: React.ReactNode;
   color?: string;
@@ -96,7 +96,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
             style={{ color: option.color }}
           >
             {option.icon && <span>{option.icon}</span>}
-            {option.label}
+            {option?.label}
             {option.component && <span>{option.component}</span>}
           </button>
         ))}

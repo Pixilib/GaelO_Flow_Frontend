@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Eye } from '../../icons';
+import { Download, Eye } from '../../icons';
 
 import OhifViewerLink from '../../content/OhifViewerLink';
 import StoneViewerLink from '../../content/StoneViewerLink';
 import DropdownButton from '../../ui/menu/DropdownButton';
 import Study from '../../model/Study';
+import { useCustomToast } from '../../utils';
+import { exportRessource } from '../../services/export';
 
 type DatasetStudyActionsProps = {
     study: Study,
@@ -14,7 +16,19 @@ type DatasetStudyActionsProps = {
 
 const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps) => {
 
+        const { toastSuccess, updateExistingToast } = useCustomToast();
+
     const options = [
+        {
+            icon: <Download />,
+            label: "Download DICOM",
+            color: 'orange',
+            action : () => {
+                const id = toastSuccess("Download started", 30)
+                exportRessource("studies", study.id, (mb) => {
+                    updateExistingToast(id, "Downloaded " + mb + " mb", 10)})
+            }
+        },
         {
             icon: <Eye />,
             color: 'green',
@@ -31,19 +45,11 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
         e.stopPropagation();
     };
 
-    const handleDropdownAction = (actionLabel: string) => {
-        onActionClick(actionLabel, study.id);
-    };
-
-    const dropdownOptions = options.map(option => ({
-        ...option,
-        action: () => handleDropdownAction(option.label),
-    }));
 
     return (
         <div onClick={handleClick}>
             <DropdownButton
-                options={dropdownOptions}
+                options={options}
                 buttonText="Actions"
             />
         </div>
