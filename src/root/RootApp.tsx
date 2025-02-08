@@ -16,6 +16,8 @@ import DeleteRoot from "../delete/DeleteRoot";
 import AnonymizeRoot from "../anonymize/AnonymizeRoot";
 import ExportRoot from "../export/ExportRoot";
 import AutoRoutingRoot from "../autorouting/AutoRoutingRoot";
+import AutoRetrieveRoot from "../auto-retrieve/AutoRetrieveRoot";
+import HelpRoot from "../help/HelpRoot";
 
 const titlePath: { [key: string]: string } = {
   "/administration/general": "General",
@@ -36,8 +38,12 @@ const titlePath: { [key: string]: string } = {
   "/query": "Query",
   "/users": "Users",
   "/dataset": "DataSet",
-  "/auto-retrieve": "Auto Retrieve",
-  "/autorouting": "Auto Routing",
+  "/auto-retrieve": "Auto retrieve",
+  "/auto-retrieve/results/studies": "Auto retrieve",
+  "/auto-retrieve/results/series": "Auto retrieve",
+  "/auto-retrieve/basket": "Auto retrieve",
+  "/auto-retrieve/task": "Auto retrieve",
+  "/auto-routing": "Auto routing",
   "/datasets": "Datasets",
   "/": "Home",
 };
@@ -72,13 +78,15 @@ const RootApp = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/administration/*" element={<AdminRoot />} />
             <Route path="/query" element={<QueryRoot />} />
+            <Route path="/auto-retrieve/*" element={<AutoRetrieveRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />
             <Route path="/orthanc-content" element={<ContentRoot />} />
             <Route path="/datasets" element={<DatasetRoot />} />
             <Route path="/anonymize" element={<AnonymizeRoot />} />
             <Route path="/export" element={<ExportRoot />} />
             <Route path="/delete" element={<DeleteRoot />} />
-            <Route path="/autorouting" element={<AutoRoutingRoot />} />
+            <Route path="/auto-routing" element={<AutoRoutingRoot />} />
+            <Route path="/help" element={<HelpRoot />} />
           </Routes>
         </div>
       </div>

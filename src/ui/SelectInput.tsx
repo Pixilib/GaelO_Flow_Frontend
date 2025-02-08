@@ -1,11 +1,11 @@
-import Select, { ActionMeta, StylesConfig } from "react-select";
+import Select, { ActionMeta } from 'react-select';
 
-interface OptionType {
+type OptionType =  {
   value: string;
   label: string;
 }
 
-interface SelectInputProps {
+type SelectInputProps = {
   isMulti?: boolean;
   name?: string;
   value: string | string[] | null;
@@ -26,36 +26,19 @@ interface SelectInputProps {
   }) => JSX.Element;
 }
 
-// Styles personnalisés pour React-Select
-const customStyles: StylesConfig<OptionType, boolean> = {
-  placeholder: (base) => ({
-    ...base,
-    color: "black", // Placeholder en blanc
-  }),
-  input: (base) => ({
-    ...base,
-    color: "black", // Texte saisi en blanc
-  }),
-  singleValue: (base) => ({
-    ...base,
-    color: "black", // Valeur sélectionnée en blanc
-  }),
-};
-
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
-    const borderRadius = state.selectProps.rounded
-      ? "rounded-3xl"
-      : "rounded-xl";
-    return `border border-gray-300 min-h-[40px] bg-gray-50 dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
+    const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
+    return `border border-gray-300 min-h-[40px] bg-gray-50 text-black dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
   },
   menu: () => "rounded-3xl p-1 bg-white dark:bg-neutral-800",
   option: (state) => {
     return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white px-2`;
   },
-  multiValue: () => "bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5",
-  multiValueLabel: () => "text-gray-800",
-  multiValueRemove: () => "text-red-500 hover:bg-red-200 rounded-full p-0.5",
+  singleValue : () => 'text-black dark:text-white',
+  multiValue: () => 'bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5',
+  multiValueLabel: () => 'text-gray-800',
+  multiValueRemove: () => 'text-red-500 hover:bg-red-200 rounded-full p-0.5',
 };
 
 const SelectInput = ({
@@ -84,7 +67,6 @@ const SelectInput = ({
       options={options}
       onChange={onChange}
       placeholder={placeholder}
-      styles={customStyles}
       classNames={customClass}
       isClearable={isClearable}
       menuPosition={menuPosition}

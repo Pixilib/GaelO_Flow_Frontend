@@ -28,16 +28,10 @@ const AnonymizeRoot = () => {
     const dispatch = useDispatch();
     const anonList = useSelector((state: RootState) => state.anonymize);
     const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
-    const [anonJobId, setAnonJobId] = useState<string | null>(null);
 
     const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
         ({ anonItems }) => createAnonymizeQueue(anonItems),
-        [['queue', 'anonymize']],
-        {
-            onSuccess: (jobId) => {
-                setAnonJobId(jobId);
-            },
-        }
+        [['queue', 'anonymize']]
     );
 
     const patients = useMemo(() => Object.values(anonList.patients), [anonList]);
@@ -63,7 +57,6 @@ const AnonymizeRoot = () => {
     };
 
     const onRemovePatient = (patientId: string) => {
-        console.log(patientId)
         studies
             .filter((study) => study.originalStudy.parentPatient === patientId)
             .forEach((study) => {
@@ -71,7 +64,7 @@ const AnonymizeRoot = () => {
             });
     };
 
-    const onChangeProfile = (option: { value: string }) => {
+    const onChangeProfile = (option: { value: 'Default'|'Full' }) => {
         dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }));
     };
 
@@ -93,7 +86,7 @@ const AnonymizeRoot = () => {
             color={Colors.primary}>
                 <div className="flex flex-col items-center w-full sm:flex-row">
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
-                        Anonymize resources
+                        Anonymize Resources
                     </div>
                     <div className="flex justify-end w-full p-3 sm:w-1/5">
                         <DropdownButton

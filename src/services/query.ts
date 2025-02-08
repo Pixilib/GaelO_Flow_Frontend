@@ -1,15 +1,20 @@
 import axios from "axios";
-import { QueryResponse, QueryPayload, RetrieveResponse } from "../utils/types";
+import {
+  QueryPayload,
+  RetrieveResponse,
+  QueryResultStudy,
+  QueryResultSeries,
+} from "../utils/types";
 
 export const queryModality = (
   modality: string,
   payload: QueryPayload
-): Promise<QueryResponse[]> => {
+): Promise<QueryResultStudy[] | QueryResultSeries[]> => {
   return axios
     .post(`/api/modalities/${modality}/parsed-query`, payload)
-    .then((response: any):QueryResponse[] => {
+    .then((response: any): QueryResultStudy[] | QueryResultSeries[] => {
       return response.data.map(
-        (data: any): QueryResponse => ({
+        (data: any): QueryResultStudy | QueryResultSeries => ({
           answerId: data.AnswerId,
           answerNumber: data.AnswerNumber,
           level: data.Level,
@@ -21,9 +26,12 @@ export const queryModality = (
           studyDate: data.StudyDate,
           requestedProcedureDescription: data.RequestedProcedureDescription,
           modality: data.Modality,
+          modalitiesInStudy: data.ModalitiesInStudy,
           seriesDescription: data.SeriesDescription,
           seriesNumber: data.SeriesNumber,
-          numberOfSeriesRelatedInstances: data.NumberOfSeriesRelatedInstances,
+          numberOfStudyRelatedInstances : data.NumberOfStudyRelatedInstances ? Number(data.NumberOfStudyRelatedInstances) : 0,
+          numberOfStudyRelatedSeries : data.NumberOfStudyRelatedSeries ? Number(data.NumberOfStudyRelatedSeries) : 0,
+          numberOfSeriesRelatedInstances: data.NumberOfSeriesRelatedInstances ? Number(data.NumberOfSeriesRelatedInstances) : 0,
           studyInstanceUID: data.StudyInstanceUID,
           seriesInstanceUID: data.SeriesInstanceUID,
         })

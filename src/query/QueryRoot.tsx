@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { FormCard } from "../ui";
 import { getModalities, queryModality } from "../services";
-import { useCustomQuery, Option, ModalityExtended, useCustomMutation, Colors, useCustomToast } from "../utils";
-import { QueryResponse, QueryPayload, ExtendedQueryPayload } from '../utils/types';
+import { useCustomQuery, Option, ModalityExtended, useCustomMutation, useCustomToast } from "../utils";
+import { QueryPayload, ExtendedQueryPayload, QueryResultStudy, QueryResultSeries } from '../utils/types';
 
 import SearchForm from "./SearchForm";
 import ResultsTable from "./ResultsTable";
@@ -16,8 +16,8 @@ const QueryRoot = ({ className }: QueryFormProps) => {
 
   const { toastError } = useCustomToast();
 
-  const [studies, setStudies] = useState<QueryResponse[]>([]);
-  const [series, setSeries] = useState<any[]>([]);
+  const [studies, setStudies] = useState<QueryResultStudy[]>([]);
+  const [series, setSeries] = useState<QueryResultSeries[]>([]);
 
   const { data: aets } = useCustomQuery<ModalityExtended[], Option[]>(
     ['modalities'],
@@ -30,8 +30,8 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     }
   );
 
-  const { mutateAsync: mutateQueryStudies } = useCustomMutation<QueryResponse[], ExtendedQueryPayload>(
-    ({ queryPayload, aet }) => queryModality(aet, queryPayload),
+  const { mutateAsync: mutateQueryStudies } = useCustomMutation<QueryResultStudy[], ExtendedQueryPayload>(
+      ({ queryPayload, aet }) => queryModality(aet, queryPayload) as Promise<QueryResultStudy[]>,
     [],
     {
       onSuccess: (data) => {
@@ -44,8 +44,8 @@ const QueryRoot = ({ className }: QueryFormProps) => {
     }
   );
 
-  const { mutateAsync: mutateQuerySeries } = useCustomMutation<QueryResponse[], ExtendedQueryPayload>(
-    ({ queryPayload, aet }) => queryModality(aet, queryPayload),
+  const { mutateAsync: mutateQuerySeries } = useCustomMutation<QueryResultSeries[], ExtendedQueryPayload>(
+      ({ queryPayload, aet }) => queryModality(aet, queryPayload) as Promise<QueryResultSeries[]>,
     [],
     {
       onSuccess: (data) => {

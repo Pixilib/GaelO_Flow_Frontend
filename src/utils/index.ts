@@ -11,6 +11,7 @@ import {
     useCustomMutation
     , useCustomQuery
 } from "./reactQuery";
+import { dicomDateQueryStringFromDateFromDateTo } from "./query";
 import { getQueryParams } from "./queryParams";
 import type {
     AutoQueryOptionsPayload,
@@ -32,6 +33,7 @@ import { useCustomToast } from "./toastify";
 export {
     AutoQueryOptionsPayload,
     Colors,
+    dicomDateQueryStringFromDateFromDateTo,
     formatTime,
     formatTimeReadable,
     getQueryParams,

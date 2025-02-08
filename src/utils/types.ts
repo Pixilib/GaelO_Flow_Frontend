@@ -196,7 +196,7 @@ type QueryStudy = {
   StudyDate?: string;
   Modality?: string;
   StudyDescription?: string;
-  AccessionNb?: string;
+  AccessionNumber?: string;
   StudyInstanceUID?: string;
 };
 
@@ -226,7 +226,22 @@ export type ExtendedQueryPayload = {
   aet: string;
 };
 
-export type QueryResponse = {
+export type QueryResultSeries = QueryResult & {
+  modality: string;
+  seriesNumber: string;
+  seriesDescription: string;
+  numberOfSeriesRelatedInstances: number;
+  seriesInstanceUID: string;
+};
+
+export type QueryResultStudy = QueryResult & {
+  seriesInstanceUID: string;
+  numberOfStudyRelatedInstances: number;
+  numberOfStudyRelatedSeries: number;
+  modalitiesInStudy: string;
+};
+
+type QueryResult = {
   answerId: string;
   answerNumber: number;
   level: Level;
@@ -236,13 +251,8 @@ export type QueryResponse = {
   accessionNumber: string;
   studyDescription: string;
   studyDate: string;
-  requestedProcedureDescription: string;
-  modality: string;
-  seriesDescription: string;
-  seriesNumber: string;
-  numberOfSeriesRelatedInstances: string;
   studyInstanceUID: string;
-  seriesInstanceUID: string;
+  requestedProcedureDescription: string;
 };
 
 export type RetrieveResponse = {
@@ -363,13 +373,14 @@ export type Study = {
   parentPatient: string;
   series: string[];
   type: string;
+  anonymizedFrom?: string;
 };
 
 export type AnonPatient = {
-  newPatientName: string,
-  newPatientId: string,
-  originalPatient: Patient
-}
+  newPatientName: string;
+  newPatientId: string;
+  originalPatient: Patient;
+};
 
 export type AnonStudy = {
   newPatientName: string;
@@ -400,37 +411,58 @@ export type SeriesModifyPayload = {
 };
 
 export type Queue = {
-  progress: number
-  state: string
-  id: string
-  results: Record<string, any>
-  userId: number
-}
+  progress: number;
+  state: string;
+  id: string;
+  results: Record<string, any> |null;
+  userId: number;
+};
 
 export type Tag = {
-  Name :string;
-  Type :string;
-  Value : string| Record<string, Tag>[]
-}
+  Name: string;
+  Type: string;
+  Value: string | Record<string, Tag>[];
+};
 
 export type Metadata = Record<string, Tag>;
 
 export type AnonQueue = {
-  progress: number
-  state: string
-  id: string
-  results: Study
-  userId: number
-}
+  progress: number;
+  state: string;
+  id: string;
+  results: Study;
+  userId: number;
+};
 
 export type AnonItem = {
-  OrthancStudyID: string,
-  Profile: 'full' | 'default',
-  NewAccessionNumber: string
-  NewPatientID: string
-  NewPatientName: string
-}
+  OrthancStudyID: string;
+  Profile: "full" | "default";
+  NewAccessionNumber: string;
+  NewPatientID: string;
+  NewPatientName: string;
+};
 
 export type AnonymizePayload = {
-  Anonymizes: AnonItem[]
-}
+  Anonymizes: AnonItem[];
+};
+
+export type QueryQueueStudyItem = {
+  patientName: string;
+  patientId: string;
+  studyDate: string;
+  modality: string;
+  studyDescription: string;
+  accessionNumber: string;
+  studyInstanceUID: string;
+  aet: string;
+};
+
+export type QueryQueueSeriesItem = {
+  studyInstanceUID: string;
+  modality: string;
+  protocolName: string;
+  seriesDescription: string;
+  seriesNumber: string;
+  seriesInstanceUID: string;
+  aet: string;
+};

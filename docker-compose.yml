@@ -43,7 +43,7 @@ services:
         restart: unless-stopped
 
     orthanc-flow:
-        image: osimis/orthanc:23.9.0
+        image: orthancteam/orthanc:24.12.0
         container_name: orthanc-flow
         restart: unless-stopped
         ports: ["8042:8042"]
@@ -67,6 +67,8 @@ services:
             ORTHANC__DICOM_WEB__SSL: "true"
             ORTHANC__DICOM_WEB__STUDIES_METADATA: "MainDicomTags"
             ORTHANC__DICOM_WEB__SERIES_METADATA: "Full"
+            VERBOSE_ENABLED: "true"
+            #TRACE_ENABLED: "true"
             
 
 volumes:
