@@ -38,28 +38,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       >
         <div className="flex items-center gap-6 place-content-center">
           {children}
-
-          {typeof dropDown === 'boolean' && dropDown && (
-            <div className="absolute w-64 p-4 bg-white rounded-md shadow-md top-full text-dark">
-              <ul className="space-y-2">
-                <li>
-                  <input type="checkbox" id="option1" />
-                  <label htmlFor="option1">Option 1</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="option2" />
-                  <label htmlFor="option2">Option 2</label>
-                </li>
-                <li>
-                  <input type="checkbox" id="option3" />
-                  <label htmlFor="option3">Option 3</label>
-                </li>
-              </ul>
-            </div>
-          )}
-
-          {typeof dropDown !== 'boolean' && dropDown}
-
+          {dropDown}
           {chevronPosition && (
             <ToogleChevron
               isOpen={isOpenUse ? isOpen : isOpenState}

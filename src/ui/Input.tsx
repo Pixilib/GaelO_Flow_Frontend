@@ -68,8 +68,7 @@ const Input = ({
     <div className="w-full">
       {label &&
         typeof label === "string" ? (
-        <label
-          className="mb-2 text-sm font-medium text-dark dark:text-white">{label}</label>
+        <Label value={label} />
       ) : label}
 
       <div

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import Banner from '../ui/menu/Banner';
-import ToggleSwitch from '../ui/menu/ToggleSwitch';
+import ToggleDarkMode from './ToggleDarkMode';
 import BannerItems from '../ui/menu/BannerItems';
 import DeleteList from './ToolList';
 import { Gear, Language, Notification, User } from '../icons';
@@ -98,12 +98,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
               </div>
             }
           >
-            <ToggleSwitch
-              isToggled={true}
-              onToggle={(isChecked) => {
-                console.log('Toggle state:', isChecked);
-              }}
-            />
+            <ToggleDarkMode/>
             <div className="relative flex items-center gap-5">
               <div className="flex items-center gap-1 cursor-pointer" onClick={handleDropdown}>
                 <Language className="w-5 h-5 mx-1" fill="currentColor" />

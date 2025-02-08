@@ -10,6 +10,7 @@ import {
   AutoRoutingDestinationType,
 } from "./types";
 import { Colors } from "../utils";
+import { Trash } from "../icons";
 
 const AutoRoutingRoot = () => {
   const [name, setName] = useState("");
@@ -59,22 +60,28 @@ const AutoRoutingRoot = () => {
   };
 
   return (
-    <div>
-      <Input label="Name :" placeholder="Name" value={name} onChange={handleInputChange} />
-      <Label value="Event Type :" />
-      <SelectInput
-        value={eventType}
-        onChange={handleEventTypeChange}
-        options={Object.values(AutoroutingEventType).map((value) => ({ label: value, value }))}
-      />
-      <Label value="Activated :" />
-      <Input type="checkbox" checked={isActivated} onChange={handleSwitchChange} />
-      <Label value="Condition :" />
+    <div className="flex flex-col gap-3" >
+      <Input label="Name" placeholder="Name" value={name} onChange={handleInputChange} />
+      <div className="flex gap-3">
+        <Label value="Event Type" />
+        <SelectInput
+          value={eventType}
+          onChange={handleEventTypeChange}
+          options={Object.values(AutoroutingEventType).map((value) => ({ label: value, value }))}
+        />
+      </div>
+
+      <div className="flex gap-3">
+        <Input label="Activated" type="checkbox" checked={isActivated} onChange={handleSwitchChange} />
+      </div>
+      <div className="flex gap-3">
+      <Label value="Condition" />
       <SelectInput
         onChange={handleConditionChange}
         value={condition}
         options={Object.values(AutoRoutingCondition).map((value) => ({ label: value, value }))}
       />
+      </div>
 
       <Label value="Rules" />
       <Button color={Colors.primary} onClick={addRule}>+</Button>
@@ -96,7 +103,7 @@ const AutoRoutingRoot = () => {
             options={Object.values(AutoRoutingRuleCondition).map((value) => ({ label: value, value }))}
           />
           <Input placeholder="Value" value={rule.Value} onChange={(e) => updateRule(index, "Value", e.target.value)} />
-          <Button color={Colors.danger} onClick={() => removeRule(index)}>-</Button>
+          <Button color={Colors.danger} onClick={() => removeRule(index)}><Trash/></Button>
         </div>
       ))}
 
@@ -110,7 +117,7 @@ const AutoRoutingRoot = () => {
             options={Object.values(AutoRoutingDestinationType).map((value) => ({ label: value, value }))}
           />
           <Input placeholder="Name" value={destination.Name} onChange={(e) => updateDestination(index, "Name", e.target.value)} />
-          <Button color={Colors.danger} onClick={() => removeDestination(index)}>-</Button>
+          <Button color={Colors.danger} onClick={() => removeDestination(index)}><Trash/></Button>
         </div>
       ))}
 

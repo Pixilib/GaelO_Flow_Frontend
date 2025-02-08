@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "../../icons";
+import { Moon, Sun } from "../icons";
 
 
-const ToggleSwitch = ()  => {
+const ToggleDarkMode = ()  => {
   const [checked, setChecked] = useState<boolean>(localStorage.getItem('theme') === 'dark');
 
   const handleClick = () => {
@@ -48,4 +48,4 @@ const ToggleSwitch = ()  => {
   );
 };
 
-export default ToggleSwitch;
+export default ToggleDarkMode;
