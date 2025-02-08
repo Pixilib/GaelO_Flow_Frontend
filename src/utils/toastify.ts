@@ -2,7 +2,7 @@ import useToasts from "../services/useToasts";
 export const useCustomToast = () => {
   const { pushToast, updateToast } = useToasts();
 
-  const toastSuccess = (message: string, duration = 1.3) => {
+  const toastSuccess = (message: string, duration = 3) => {
     return pushToast({
       content: message,
       type: "success",
@@ -12,7 +12,7 @@ export const useCustomToast = () => {
     });
   };
 
-  const toastWarning = (message: string, duration = 1.3) => {
+  const toastWarning = (message: string, duration = 3) => {
     return pushToast({
       content: message,
       type: "warning",
@@ -22,7 +22,7 @@ export const useCustomToast = () => {
     });
   };
 
-  const toastError = (message: string, duration = 1.3) => {
+  const toastError = (message: string, duration = 3) => {
     return pushToast({
       content: message,
       type: "danger",
@@ -32,7 +32,7 @@ export const useCustomToast = () => {
     });
   };
 
-  const toastInfo = (message: string, duration = 1.3) => {
+  const toastInfo = (message: string, duration = 3) => {
     return pushToast({
       content: message,
       type: "info",
@@ -42,7 +42,7 @@ export const useCustomToast = () => {
     });
   };
 
-  const updateExistingToast = (id: number, message: string, duration = 1.3) => {
+  const updateExistingToast = (id: number, message: string, duration = 3) => {
     updateToast(id, { content: message, duration });
   };
 

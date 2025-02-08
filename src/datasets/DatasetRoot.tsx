@@ -98,7 +98,7 @@ const DatasetRoot = () => {
                             studies={studies}
                             onRowClick={handleStudyRowClick}
                             onActionClick={handleStudyActionClick}
-                            selectedStudyId={null}
+                            selectedStudyId={currentStudyId}
                         />
                     </div>
                     <div className="2xl:col-span-5">

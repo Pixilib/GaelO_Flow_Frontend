@@ -48,7 +48,7 @@ const AnonQueues = ({ showResults, circle }: AnonQueuesProps) => {
   const globalProgress = useMemo(() => {
     if (!queuedData || queuedData.length === 0) return 0;
     const completedJobs = queuedData.filter((job) => job.state === "completed");
-    return (completedJobs.length / queuedData.length) * 100;
+    return Math.round((completedJobs.length / queuedData.length) * 100);
   }, [queuedData]);
 
   useEffect(() => {

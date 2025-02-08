@@ -4,7 +4,7 @@ import { Series, useCustomToast } from '../../utils';
 import { exportSeriesToNifti } from '../../services/export';
 import { DropdownButton } from '../../ui';
 
-interface DropdownOption {
+type DropdownOption = {
     label: string;
     icon?: React.ReactNode;
     color?: string;
@@ -12,23 +12,25 @@ interface DropdownOption {
 }
 
 type DataSetSeriesActionsProps = {
-    series: Series & { id: string };
+    series: Series;
+    onActionClick: (action: string, studyId: string) => void;
 };
 
-const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series }) => {
+const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onActionClick }) => {
 
     const { toastSuccess, updateExistingToast } = useCustomToast();
-
 
     const options: DropdownOption[] = [
         {
             label: "View Metadata",
+            color: 'green',
             action: () => {
-                console.log("View Metadata", series.id);
+                onActionClick("metadata", series.id);
             },
         },
         {
             label: "Download nii.gz",
+            color: 'green',
             action: () => {
                 const id = toastSuccess("Download started", 60)
                 exportSeriesToNifti(series.id, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))

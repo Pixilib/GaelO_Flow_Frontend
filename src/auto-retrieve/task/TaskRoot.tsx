@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useCustomQuery } from "../../utils";
 import { getExistingQueriesQueues, getQueryQueue } from "../../services/queues";
-import { Queue } from "../../utils/types";
+import { QueryQueue, Queue } from "../../utils/types";
 import TaskTable from "./TaskTable";
 
 const TaskRoot = () => {
@@ -18,7 +18,7 @@ const TaskRoot = () => {
 
     const firstQueue = existingRetrieveQueues?.[0];
 
-    const { data } = useCustomQuery<Queue[]>(
+    const { data } = useCustomQuery<QueryQueue[]>(
         ["queue", "retrieve", firstQueue],
         () => getQueryQueue(firstQueue),
         {

@@ -36,7 +36,6 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
               popover={<LabelsRoles key={row.original.name} labelName={row.original.name} />}
               placement="top"
               backgroundColor="bg-white"
-              width="200px"
             >
               <Button color={Colors.secondary} className="flex items-center gap-1.5">
                 <Admin size="1.3rem" />

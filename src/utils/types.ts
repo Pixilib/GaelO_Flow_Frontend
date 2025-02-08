@@ -414,8 +414,12 @@ export type Queue = {
   progress: number;
   state: string;
   id: string;
-  results: Record<string, any> |null;
+  results: Record<string, any> | null;
   userId: number;
+};
+
+export type QueryQueue = Queue & {
+  query: Record<string, any> | null;
 };
 
 export type Tag = {
