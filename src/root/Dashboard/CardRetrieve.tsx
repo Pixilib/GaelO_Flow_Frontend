@@ -4,7 +4,7 @@ import Card, { CardHeader, CardBody } from "../../ui/Card";
 import { Colors } from "../../utils/enums";
 import { RootState } from "../../store";
 import { useCustomMutation, useCustomQuery } from "../../utils";
-import { Queue } from "../../utils/types";
+import { QueryQueue, Queue } from "../../utils/types";
 import { useMemo } from "react";
 import ProgressQueueCircle from "../../queue/ProgressQueueCircle";
 import { Validate } from "../../icons";
@@ -23,7 +23,7 @@ const CardRetrieve = () => {
 
   const firstQueue = existingRetrieveQueues?.[0];
 
-  const { data } = useCustomQuery<Queue[]>(
+  const { data } = useCustomQuery<QueryQueue[]>(
     ["queue", "query", firstQueue],
     () => getQueryQueue(firstQueue),
     {

@@ -7,8 +7,6 @@ type PopoverProps = {
   placement?: 'top' | 'right' | 'bottom' | 'left' | 'bottom-left' | 'bottom-right';
   className?: string;
   backgroundColor?: string;
-  disableAutoPlacement?: boolean;
-  width?: string;
 };
 
 const Popover: React.FC<PopoverProps> = ({
@@ -18,8 +16,6 @@ const Popover: React.FC<PopoverProps> = ({
   placement = 'bottom',
   className = '',
   backgroundColor = 'bg-secondary',
-  disableAutoPlacement = false,
-  width = '200px',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -78,7 +74,6 @@ const Popover: React.FC<PopoverProps> = ({
         <div
           ref={popoverRef}
           className={`absolute ${getPlacementClasses(placement)} z-50 rounded-lg p-4 text-gray-600 shadow-md dark:text-gray-400 ${className} ${backgroundColor}`}
-          style={{ width }}
         >
           {popover}
         </div>

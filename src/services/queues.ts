@@ -3,6 +3,7 @@ import {
   AnonItem,
   AnonQueue,
   AnonymizePayload,
+  QueryQueue,
   QueryQueueSeriesItem,
   QueryQueueStudyItem,
   Queue,
@@ -197,7 +198,7 @@ export const getExistingQueriesQueues = (
     });
 };
 
-export const getQueryQueue = (uuid: string) : Promise<Queue[]> => {
+export const getQueryQueue = (uuid: string) : Promise<QueryQueue[]> => {
   return axios
     .get(`/api/queues/query/${uuid}`)
     .then((response) => {
@@ -208,6 +209,7 @@ export const getQueryQueue = (uuid: string) : Promise<Queue[]> => {
         state: job.State,
         id: job.Id,
         results: job.Results,
+        query : job.Query,
       }));
     })
     .catch(function (error) {

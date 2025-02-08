@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Info } from "../../icons";
-import { Button, Dropdown, Popover, Table } from "../../ui";
+import { Button, Table } from "../../ui";
 import { Colors } from "../../utils";
 import { Queue } from "../../utils/types";
 
@@ -15,6 +16,21 @@ const TaskTable = ({ data }: TaskTableProps) => {
             accessorKey: "id",
         },
         {
+            id: "query",
+            accessorKey: "query",
+            cell: ({ row }) => {
+                const [open, setOpen] = useState(false)
+                return (
+                    <div >
+                        <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
+                        {open && <pre className="break-all text-xs">
+                            {JSON.stringify(row.original.query, null, 2)}
+                        </pre>}
+                    </div>
+                )
+            }
+        },
+        {
             id: "state",
             accessorKey: "state",
         },
@@ -26,21 +42,24 @@ const TaskTable = ({ data }: TaskTableProps) => {
             id: "results",
             accessorKey: "results",
             cell: ({ row }) => {
-                return (<Popover withOnClick popover={
-                    <pre className="break-all">
-                        {JSON.stringify({
-                            patientMainDicomTags: row.original.results?.PatientMainDicomTags,
-                            mainDicomTags: row.original.results?.MainDicomTags,
-                        })}
-                    </pre>
-                }>
-                    <Button color={Colors.primary}><Info /></Button>
-                </Popover>)
+                const [open, setOpen] = useState(false)
+                return (
+
+                    <div >
+                        <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
+                        {open && <pre className="break-all text-xs">
+                            {JSON.stringify({
+                                patientMainDicomTags: row.original.results?.PatientMainDicomTags,
+                                mainDicomTags: row.original.results?.MainDicomTags,
+                            }, null, 2)}
+                        </pre>}
+                    </div>)
             },
         },
+
     ]
     return (
-        <Table columnVisibility={{ id: false}} columns={columns} data={data} />
+        <Table columnVisibility={{ id: false }} columns={columns} data={data} />
     )
 };
 
