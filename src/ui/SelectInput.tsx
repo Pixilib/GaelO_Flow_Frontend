@@ -1,33 +1,39 @@
 import Select, { ActionMeta } from 'react-select';
 
-interface OptionType {
+type OptionType =  {
   value: string;
   label: string;
 }
 
-interface SelectInputProps {
+type SelectInputProps = {
   isMulti?: boolean;
+  name?: string;
   value: string | string[] | null;
   options: OptionType[];
-  onChange: (selectedOption: OptionType | OptionType[] | null, meta: ActionMeta<OptionType>) => void;
+  onChange: (
+    selectedOption: OptionType | OptionType[] | null,
+    meta: ActionMeta<OptionType>
+  ) => void;
   placeholder?: string;
   rounded?: boolean;
   isClearable?: boolean;
   closeMenuOnSelect?: boolean;
   menuPosition?: "fixed" | undefined;
   formatOptionLabel?: (option: OptionType) => JSX.Element;
-  formatGroupLabel?: (group: { label: string; options: OptionType[] }) => JSX.Element;
+  formatGroupLabel?: (group: {
+    label: string;
+    options: OptionType[];
+  }) => JSX.Element;
 }
-
 
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
     const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
     return `border border-gray-300 min-h-[40px] bg-gray-50 text-black dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
   },
-  menu: () => 'rounded-3xl p-1 bg-white dark:bg-neutral-800',
+  menu: () => "rounded-3xl p-1 bg-white dark:bg-neutral-800",
   option: (state) => {
-    return `rounded-xl p-2 ${state.isSelected ? 'bg-primary-active text-white' : 'bg-white dark:bg-neutral-800 text-gray-800 dark:text-white'} hover:bg-primary hover:text-white px-2`;
+    return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white px-2`;
   },
   singleValue : () => 'text-black dark:text-white',
   multiValue: () => 'bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5',
@@ -37,23 +43,27 @@ const customClass: ClassNamesConfig<OptionType, boolean> = {
 
 const SelectInput = ({
   value,
+  name,
   isMulti = false,
   options,
   onChange,
-  placeholder = 'Select...',
+  placeholder = "Select...",
   rounded = true,
   isClearable = false,
   closeMenuOnSelect = true,
   menuPosition = undefined,
   formatOptionLabel,
-  formatGroupLabel
+  formatGroupLabel,
 }: SelectInputProps) => {
-  const selectedValue = isMulti 
-    ? (value as string[]).map(val => options.find(option => option.value === val)).filter(Boolean)
-    : options.find(option => option.value === value) || null;
+  const selectedValue = isMulti
+    ? (value as string[])
+        .map((val) => options.find((option) => option.value === val))
+        .filter(Boolean)
+    : options.find((option) => option.value === value) || null;
 
   return (
     <Select
+      name={name}
       options={options}
       onChange={onChange}
       placeholder={placeholder}
@@ -64,7 +74,7 @@ const SelectInput = ({
       formatGroupLabel={formatGroupLabel}
       isMulti={isMulti}
       value={selectedValue}
-      className={`w-full ${rounded ? 'rounded-3xl' : ''} focus:outline-none focus:ring-2 focus:ring-gray-300`}
+      className={`w-full ${rounded ? "rounded-3xl" : ""} focus:outline-none focus:ring-2 focus:ring-gray-300`}
       closeMenuOnSelect={closeMenuOnSelect}
     />
   );

@@ -15,6 +15,7 @@ import DatasetRoot from "../datasets/DatasetRoot";
 import DeleteRoot from "../delete/DeleteRoot";
 import AnonymizeRoot from "../anonymize/AnonymizeRoot";
 import ExportRoot from "../export/ExportRoot";
+import AutoRoutingRoot from "../autorouting/AutoRoutingRoot";
 import AutoRetrieveRoot from "../auto-retrieve/AutoRetrieveRoot";
 import HelpRoot from "../help/HelpRoot";
 
@@ -84,6 +85,7 @@ const RootApp = () => {
             <Route path="/anonymize" element={<AnonymizeRoot />} />
             <Route path="/export" element={<ExportRoot />} />
             <Route path="/delete" element={<DeleteRoot />} />
+            <Route path="/auto-routing" element={<AutoRoutingRoot />} />
             <Route path="/help" element={<HelpRoot />} />
           </Routes>
         </div>
