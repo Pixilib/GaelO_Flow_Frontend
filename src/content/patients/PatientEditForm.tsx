@@ -5,7 +5,7 @@ import { PatientMainDicomTags, PatientModifyPayload } from "../../utils/types";
 import CheckBox from "../../ui/Checkbox";
 import { Colors } from "../../utils";
 import InputWithDelete from "../../ui/InputWithDelete";
-import ProgressJobs from "../../query/ProgressJobs";
+import ProgressJob from "../../query/ProgressJob";
 
 type PatientEditFormProps = {
     jobId: string | null;
@@ -127,7 +127,7 @@ const PatientEditForm = ({ patient, jobId, onSubmit, onJobCompleted }: PatientEd
                 {jobId &&
                     (
                         <div className="flex flex-col items-center justify-center">
-                            <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                            <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
                         </div>
                     )
                 }

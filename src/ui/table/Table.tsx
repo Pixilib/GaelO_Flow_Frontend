@@ -145,7 +145,7 @@ function Table<T>({
 
     const headerText = headerTextSize === "xxs" ? "text-[0.491rem]" : `text-${headerTextSize}`;
 
-    const firstColumnClass = `sticky left-0 ${headerClass[headerColor]} border-b border-gray-300 dark:border-gray-700 text-center`;
+    const firstColumnClass = `sticky left-0 ${headerClass[headerColor]} border-b border-gray-300 dark:border-gray-700  text-center`;
     const lastColumnClass = "sticky right-0 bg-white dark:bg-gray-800 text-black dark:text-white";
 
     const getColumnClasses = (index: number, length: number) => {
@@ -162,7 +162,7 @@ function Table<T>({
     }
 
     return (
-        <div className={`overflow-x-auto  rounded-xl shadow-lg custom-scrollbar ${className} dark:border-gray-700`}>
+        <div className={`overflow-x-auto rounded-xl shadow-lg custom-scrollbar ${className} dark:border-gray-700 dark:bg-black dark:text-white`}>
             <table className="min-w-full border-gray-custom dark:border-gray-600">
                 <thead className={`bg-${headerColor} dark:bg-neutral-800 text-black dark:text-white border-b border-gray-300 dark:border-gray-700 ${headerclassName}`}>
                     {table.getHeaderGroups().map((headerGroup) => (

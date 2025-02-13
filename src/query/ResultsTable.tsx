@@ -60,7 +60,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
         if (selectedRows[row.studyInstanceUID]) {
             return 'bg-primary text-white hover:cursor-pointer';
         }
-        return 'hover:bg-indigo-100 hover:cursor-pointer';
+        return 'hover:bg-indigo-100 dark:hover:bg-indigo-900 hover:cursor-pointer';
     };
 
     return (

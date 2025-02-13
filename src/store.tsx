@@ -5,6 +5,7 @@ import DeleteSlice from "./reducers/DeleteSlice";
 import AnonymizeSlice from "./reducers/AnonymizeSlice";
 import AutoRetrieveSlice from "./reducers/AutoRetrieveSlice";
 import ExportSlice from "./reducers/ExportSlice";
+import JobSlice from './reducers/JobSlice'
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ const store = configureStore({
     delete : DeleteSlice,
     anonymize : AnonymizeSlice,
     export : ExportSlice,
-    autoRetrieve : AutoRetrieveSlice
+    autoRetrieve : AutoRetrieveSlice,
+    job : JobSlice,
   },
   devTools: true,
 });

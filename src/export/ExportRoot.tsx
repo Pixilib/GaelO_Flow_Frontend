@@ -10,7 +10,7 @@ import { getModalities, getPeers } from "../services";
 import { exportResourcesId } from "../services/export";
 import { flushExportList } from "../reducers/ExportSlice";
 import { storeToModality } from "../services/modalities";
-import ProgressJobs from "../query/ProgressJobs";
+import ProgressJob from "../query/ProgressJob";
 import { sendResourcesToPeer } from "../services/peers";
 import { GaeloIcon } from "../assets";
 import { exportCsv } from "../utils/export";
@@ -190,12 +190,12 @@ const ExportRoot = () => {
                         options={downloadOptions} />
                     <DropdownButton
                         buttonText="Send To Modality" options={modalitiesOptions} />
-                    {storeJobId && <ProgressJobs
+                    {storeJobId && <ProgressJob
                         size={50} jobId={storeJobId} />}
                     <DropdownButton
                         buttonText="Send To Peer"
                         options={peersOptions} />
-                    {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}
+                    {sendPeerJobId && <ProgressJob size={50} jobId={sendPeerJobId} />}
                     <Button
                         color={Colors.blueCustom}
                         className="text-white bg-cyan-700" disabled>

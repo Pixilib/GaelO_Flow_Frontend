@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { Series, SeriesModifyPayload, SeriesMainDicomTags } from '../../utils/types';
 import { InputWithDelete, CheckBox, Button } from "../../ui";
 
-import ProgressJobs from "../../query/ProgressJobs";
+import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
 
 type SeriesEditFormProps = {
@@ -138,7 +138,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                 {
                     jobId && (
                         <div className="flex flex-col items-center justify-center">
-                            <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                            <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
                         </div>
                     )
                 }
