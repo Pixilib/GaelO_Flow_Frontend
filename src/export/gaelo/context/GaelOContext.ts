@@ -4,7 +4,8 @@ const GaelOContext = createContext({
     userId: null,
     token: null,
     studyName: null,
-    role : null
+    role : null,
+    study : null
 })
 
 export default GaelOContext

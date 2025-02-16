@@ -1,17 +1,27 @@
 import { useState } from "react";
 import { Button, Input } from "../../ui";
-import { Colors, useCustomMutation } from "../../utils";
+import { Colors, Study, useCustomMutation, useCustomQuery } from "../../utils";
 import { login } from './../../services/gaelo'
 import GaelOContextProvider from "./context/GaelOContextProvider";
 import GaelOStudyRoleSelector from "./GaelOStudyRoleSelector";
+import { getStudy } from "../../services/orthanc";
+import GaelOVisitSelector from "./GaelOVisitSelector";
 
-const GaelORoot = () => {
+type GaelORootProps = {
+    studyOrthancId: string
+}
+const GaelORoot = ({ studyOrthancId }: GaelORootProps) => {
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [token, setToken] = useState<string | null>(null)
     const [userId, setUserId] = useState<number | null>(null)
     const [studyName, setStudyName] = useState<string | null>(null)
+
+    const { data: study } = useCustomQuery<Study>(
+        ['study', studyOrthancId],
+        () => getStudy(studyOrthancId)
+    )
 
     const { mutate: loginMutation } = useCustomMutation(
         ({ email, password }) => login(email, password),
@@ -38,11 +48,15 @@ const GaelORoot = () => {
         <GaelOContextProvider
             studyName={studyName}
             userId={userId}
-            role='investigator'
+            role='Investigator'
             token={token}
+            study={study}
         >
             {token ?
-                <GaelOStudyRoleSelector onStudychange={handleStudyChange} />
+                <div className="min-h-80">
+                    <GaelOStudyRoleSelector onStudychange={handleStudyChange} />
+                    <GaelOVisitSelector />
+                </div>
                 :
                 <div>
                     <form className="flex flex-col gap-3" onSubmit={handleLogin}>

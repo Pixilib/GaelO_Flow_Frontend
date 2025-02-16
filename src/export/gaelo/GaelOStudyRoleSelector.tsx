@@ -28,7 +28,7 @@ const GaelOStudyRoleSelector = ({ onStudychange }: GaelOStudyRoleSelector) => {
         {
             enabled: studyName !== null,
             select: (roles) => {
-                return roles.includes('investigator')
+                return roles.includes('Investigator')
             }
         }
     )
@@ -40,8 +40,8 @@ const GaelOStudyRoleSelector = ({ onStudychange }: GaelOStudyRoleSelector) => {
     if (isPending) return <Spinner />
 
     return (
-        <div className="min-h-80">
-            <SelectInput onChange={(option) => { setStudyName(option.value) }} value={studiesOptions.find(option => studyName === option.value)?.value ?? null} options={studiesOptions} />
+        <div>
+            <SelectInput onChange={(option) => setStudyName(option.value)} value={studiesOptions.find(option => studyName === option.value)?.value ?? null} options={studiesOptions} />
         </div>
     )
 

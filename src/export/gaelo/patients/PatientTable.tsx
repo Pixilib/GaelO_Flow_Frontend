@@ -5,41 +5,40 @@ import { Colors } from "../../../utils";
 
 type PatientTableProps = {
     patients: any[];
-    onRowClick?: (patientId: string) => void;
+    selectedPatientId: string,
+    onRowClick: (patientId: string) => void;
 };
 
 const PatientTable: React.FC<PatientTableProps> = ({
     patients,
+    selectedPatientId,
     onRowClick
 }) => {
     const columns: ColumnDef<any>[] = [
         {
-            id: "lastname",
-            accessorKey: "lastname",
-            header: "Lastname",
+            id: "id",
+            accessorKey: "id",
         },
         {
-            id: "firstname",
-            accessorKey: "firstname",
-            header: "Firstname",
+            id: "code",
+            accessorKey: "code",
+            header: "Code",
         },
         {
-            id: "gender",
-            accessorKey: "gender",
-            header: "gender",
+            id: "centerName",
+            accessorKey: "center.name",
+            header: "Center Name",
         },
     ];
 
-    /**
+
     const getRowClasses = (row: any) => {
-        if (selectedPai?.[row.id]) {
-            return 'bg-primary hover:cursor-pointer';
+        if (selectedPatientId === row.id) {
+            return 'bg-primary hover:cursor-pointer text-white';
         } else {
             return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';
         }
     };
-     */
-
 
     return (
         <Table
@@ -48,9 +47,12 @@ const PatientTable: React.FC<PatientTableProps> = ({
             headerColor={Colors.light}
             headerTextSize="xs"
             className="bg-gray-100 dark:bg-slate-950 dark:text-white"
-            //getRowClasses={getRowClasses}
-            onRowClick={(row) => onRowClick && onRowClick(row.id)}
+            getRowClasses={getRowClasses}
+            onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}
+            enableColumnFilters={true}
+            columnVisibility={{ id: false }}
+            pageSize={5}
         />
     );
 };

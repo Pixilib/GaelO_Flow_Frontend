@@ -149,7 +149,7 @@ const ExportRoot = () => {
                 </Modal.Header>
                 
                 <Modal.Body>
-                    <GaelORoot />
+                    <GaelORoot studyOrthancId={currentStudyId} />
                 </Modal.Body>
             </Modal>
             <CardHeader
