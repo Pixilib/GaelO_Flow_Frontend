@@ -1,45 +1,89 @@
-import { useContext, useMemo, useState } from "react"
-import { getVisitsTree } from "../../services/gaelo"
-import { useCustomQuery } from "../../utils"
-import GaelOContext from "./context/GaelOContext"
-import { Spinner } from "../../ui"
-import PatientTable from "./patients/PatientTable"
+import { useContext, useMemo, useState } from "react";
+import { getGaelOPatientLink, getVisitsTree } from "../../services/gaelo";
+import { Colors, useCustomQuery, useCustomToast } from "../../utils";
+import GaelOContext from "./context/GaelOContext";
+import { Button, Label, Spinner } from "../../ui";
+import PatientTable from "./patients/PatientTable";
+import GaelOVisitSummary from "./GaelOVisitSummary";
+import { GaeloIcon } from "../../assets";
+import { exportResourcesId } from "../../services/export";
 
-const GaelOVisitSelector = () => {
+type GaelOVisitSelectorProps = {
+  studyOrthancId: string;
+};
 
-    const { studyName, token, userId, role } = useContext(GaelOContext)
+const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
+  const { studyName, token, role, userId } = useContext(GaelOContext);
+  const { updateExistingToast, toastSuccess } = useCustomToast();
 
-    const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null)
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
+    null
+  );
 
-    const { data: visitTree, isPending } = useCustomQuery(
-        ['gaelo', 'study', studyName, role],
-        () => getVisitsTree(token, studyName, role)
-    )
+  const { data: visitTree, isPending } = useCustomQuery(
+    ["gaelo", "study", studyName, role],
+    () => getVisitsTree(token, studyName, role)
+  );
 
-    const patients = useMemo(() => {
-        if (!visitTree) return []
-        return Object.values(visitTree.patients)
-    }, [visitTree])
+  const patients = useMemo(() => {
+    if (!visitTree) return [];
+    return Object.values(visitTree.patients);
+  }, [visitTree]);
 
-    const handlePatientClick = (patientId: string) => {
-        setSelectedPatientId(patientId)
-    }
+  const handlePatientClick = (patientId: string) => {
+    setSelectedPatientId(patientId);
+  };
 
-    const visitsOfPatient = useMemo(() => {
-        if (!visitTree) return []
-        const visitsOfPatient = Object.values(visitTree.visits).filter((visit: any) => visit.patientId === selectedPatientId)
-        console.log(visitsOfPatient)
-    }, [selectedPatientId])
+  const visitsOfPatient = useMemo(() => {
+    if (!visitTree) return [];
+    const visitsOfPatient = Object.values(visitTree.visits).filter(
+      (visit: any) => visit.patientId === selectedPatientId
+    );
+    return visitsOfPatient;
+  }, [selectedPatientId]);
 
-    if (isPending) return <Spinner />
+  const handleOpenGaelO = () => {
+    const id = toastSuccess("Download started");
+    exportResourcesId(
+      [studyOrthancId],
+      (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"),
+      undefined,
+      true,
+      undefined
+    );
+    window.open(
+      getGaelOPatientLink(studyName, role, selectedPatientId, token, userId),
+      "_blank"
+    );
+  };
 
-    return (
-        <div className="flex flex-col gap-3">
-            <div>Patients : </div>
-            <PatientTable patients={patients} selectedPatientId={selectedPatientId} onRowClick={handlePatientClick} />
-            <div>Visits : </div>
-        </div>
-    )
-}
+  if (isPending) return <Spinner />;
 
-export default GaelOVisitSelector
+  return (
+    <div className="flex flex-col gap-3">
+      <Label className="font-bold" value="Patients :" />
+      <PatientTable
+        patients={patients}
+        selectedPatientId={selectedPatientId}
+        onRowClick={handlePatientClick}
+      />
+      <Label className="font-bold" value="Visits :" />
+      {
+        <GaelOVisitSummary
+          patientId={selectedPatientId}
+          existingVisits={visitsOfPatient ?? []}
+        />
+      }
+      <Button
+        onClick={handleOpenGaelO}
+        className="flex align-center gap-1"
+        color={Colors.success}
+      >
+        {" "}
+        Open <GaeloIcon />{" "}
+      </Button>
+    </div>
+  );
+};
+
+export default GaelOVisitSelector;

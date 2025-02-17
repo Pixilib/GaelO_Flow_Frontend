@@ -184,6 +184,7 @@ const ExportRoot = () => {
                     <div className="flex-1 min-w-0">
                         <ExportStudyTable
                             onClickStudy={handleClickStudy}
+                            currentStudyId={currentStudyId}
                             studies={Object.values(exportStudyList)}
                         />
                     </div>

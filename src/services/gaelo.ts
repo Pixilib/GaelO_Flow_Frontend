@@ -95,3 +95,43 @@ export const getPatient = (token, studyName, patientId, role) => {
       throw error;
     });
 };
+
+export const getCreatableVisits = (token: string, patientId: string) => {
+  let header = getHeader(token);
+  return axiosInstance
+    .get(url + "/api/patients/" + patientId + "/creatable-visits", {
+      headers: header,
+    })
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const getGaelOPatientLink = (
+  studyName,
+  role,
+  patientId,
+  token,
+  userId
+) => {
+  console.log(url);
+  return new URL(
+    url +
+      "/study/" +
+      studyName +
+      "/role/" +
+      role +
+      "/patient/" +
+      patientId +
+      "?token=" +
+      token +
+      "&userId=" +
+      userId
+  );
+};

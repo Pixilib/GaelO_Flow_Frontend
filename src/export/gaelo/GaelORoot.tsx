@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input } from "../../ui";
+import { Button, Input, Label } from "../../ui";
 import { Colors, Study, useCustomMutation, useCustomQuery } from "../../utils";
 import { login } from './../../services/gaelo'
 import GaelOContextProvider from "./context/GaelOContextProvider";
@@ -53,9 +53,10 @@ const GaelORoot = ({ studyOrthancId }: GaelORootProps) => {
             study={study}
         >
             {token ?
-                <div className="min-h-80">
+                <div className="min-h-80 flex flex-col gap-3">
+                    <Label className="font-bold" value="Study :" />
                     <GaelOStudyRoleSelector onStudychange={handleStudyChange} />
-                    <GaelOVisitSelector />
+                    <GaelOVisitSelector studyOrthancId={studyOrthancId} />
                 </div>
                 :
                 <div>
