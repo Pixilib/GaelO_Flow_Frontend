@@ -4,13 +4,13 @@ import { OrthancJob } from "../utils/types";
 import { getJobById } from "../services/jobs";
 import { ProgressCircle } from "../ui";
 
-type ProgressJobsProps = {
+type ProgressJobProps = {
     jobId: string;
     size?: number;
     onJobCompleted?: (jobStatus: string) => void;
 }
 
-const ProgressJobs: React.FC<ProgressJobsProps> = React.memo(({ jobId, size = 84, onJobCompleted  }) => {
+const ProgressJob: React.FC<ProgressJobProps> = ({ jobId, size = 84, onJobCompleted  }) => {
     const { data: jobData, isLoading, error } = useCustomQuery<OrthancJob>(
         ["job", jobId],
         () => getJobById(jobId),
@@ -47,6 +47,6 @@ const ProgressJobs: React.FC<ProgressJobsProps> = React.memo(({ jobId, size = 84
             size={size}
         />
     );
-});
+};
 
-export default ProgressJobs;
+export default ProgressJob;

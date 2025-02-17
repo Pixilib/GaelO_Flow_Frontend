@@ -1,8 +1,10 @@
 import { Colors, useCustomMutation } from '../utils';
 import { MouseEvent, useState } from 'react';
-import ProgressJobs from './ProgressJobs';
+import ProgressJob from './ProgressJob';
 import { makeRetrieve } from '../services';
 import { Download } from '../icons';
+import { useDispatch } from 'react-redux';
+import { addJob } from '../reducers/JobSlice';
 
 
 /**
@@ -19,6 +21,8 @@ type RetrieveButtonProps = {
 };
 const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
 
+  const dispatch = useDispatch();
+
   const [jobId, setJobId] = useState<string | null>(null);
 
   const { mutateAsync: retrieveMutation } = useCustomMutation<any, any>(
@@ -27,11 +31,13 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
     {
       onSuccess: (data) => {
         setJobId(data.id);
+        dispatch(addJob({jobId : data.id}))
       }
     }
   );
 
   const handleClick = (event: MouseEvent<SVGAElement>) => {
+    
     event.stopPropagation()
     if (jobId) return
     retrieveMutation({})
@@ -39,7 +45,7 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
   return (
     <div className="flex justify-center">
       {jobId ?
-        <ProgressJobs jobId={jobId} />
+        <ProgressJob jobId={jobId} />
         :
         <Download
           color={Colors.warning}

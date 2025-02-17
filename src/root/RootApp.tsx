@@ -5,7 +5,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../reducers/UserSlice";
 
 import SideBar from "./SideBar";
-import Dashboard from "./Dashboard/Dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import AdminRoot from "../admin/AdminRoot";
 import Header from "./Header";
 import QueryRoot from "../query/QueryRoot";

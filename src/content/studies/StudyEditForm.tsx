@@ -4,7 +4,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { StudyModifyPayload, StudyMainDicomTags, Study, PatientMainDicomTags } from '../../utils/types';
 import { Button, CheckBox, Input, InputWithDelete } from "../../ui";
 
-import ProgressJobs from "../../query/ProgressJobs";
+import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
 
 type StudyEditFormProps = {
@@ -166,7 +166,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
             {jobId &&
                 (
                     <div className="flex flex-col items-center justify-center">
-                        <ProgressJobs jobId={jobId} onJobCompleted={onJobCompleted} />
+                        <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
                     </div>
                 )
             }

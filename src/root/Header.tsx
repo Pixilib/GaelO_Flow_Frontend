@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import Banner from '../ui/menu/Banner';
-import ToggleSwitch from '../ui/menu/ToggleSwitch';
+import ToggleDarkMode from './ToggleDarkMode';
 import BannerItems from '../ui/menu/BannerItems';
-import DeleteList from './ToolList';
-import { Gear, Language, Notification, User } from '../icons';
-import { Dropdown, ToogleChevron } from '../ui';
+import ToolList from './ToolList';
+import { Language, Notification, User } from '../icons';
+import { Dropdown, Popover, ToogleChevron } from '../ui';
+import Jobs from './notifications/Jobs';
+import { RootState } from '../store';
+import { useSelector } from 'react-redux';
 
 type Item = {
   title: string;
@@ -22,8 +25,9 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { i18n } = useTranslation();
+
+  const jobIds = useSelector((state: RootState) => state.job.jobIds);
 
   const [openItem, setOpenItem] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -59,8 +63,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     setOpenItem(null);
   };
 
-  const Items: Item[] = [
-    
+  const languageItems: Item[] = [
     {
       title: 'English',
       code: 'en',
@@ -80,43 +83,53 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       className="sticky top-0 z-50 bg-white"
     >
       <div className="flex justify-end gap-4">
-        <DeleteList />
-        <div className="relative">
-          <Dropdown
-            ref={dropdownRef}
-            className="flex flex-col"
-            isOpen={openItem === 'Dropdown'}
-            dropDown={
-              <div className={`absolute -mt-2 top-full w-80 bg-white shadow-lg rounded-lg transition-all duration-200 ${openItem === 'Dropdown' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                <BannerItems
-                  elements={Items}
-                  onSelect={(item) => handleItemClick(item)}
-                  isOpen={openItem === 'Dropdown'}
-                  setOpenItem={setOpenItem}
-                  className="w-80"
-                />
-              </div>
+        <ToolList />
+        <Dropdown
+          ref={dropdownRef}
+          className="flex flex-col"
+          isOpen={openItem === 'Dropdown'}
+          dropDown={
+            <div className={`absolute -mt-2 top-full w-80 shadow-lg rounded-lg transition-all duration-200 ${openItem === 'Dropdown' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+              <BannerItems
+                elements={languageItems}
+                onSelect={(item) => handleItemClick(item)}
+                isOpen={openItem === 'Dropdown'}
+                setOpenItem={setOpenItem}
+                className="w-80"
+              />
+            </div>
+          }
+        >
+          <div className="flex items-center gap-1 cursor-pointer" onClick={handleDropdown}>
+            <Language className="w-5 h-5 mx-1" fill="currentColor" />
+            <span className="text-sm">
+              {languageItems.find((item) => item.code === i18n.language)?.title}
+            </span>
+            <ToogleChevron isOpen={openItem === 'Dropdown'} />
+            <ToggleDarkMode />
+          </div>
+        </Dropdown>
+
+        <div className="flex items-center bg-primary rounded-xl text-white p-3 gap-3">
+          <Popover
+            className='!p-1 !bg-light dark:!bg-black'
+            withOnClick
+            popover={
+              <Jobs />
             }
           >
-            <ToggleSwitch
-              isToggled={true}
-              onToggle={(isChecked) => {
-                console.log('Toggle state:', isChecked);
-              }}
-            />
-            <div className="relative flex items-center gap-5">
-              <div className="flex items-center gap-1 cursor-pointer" onClick={handleDropdown}>
-                <Language className="w-5 h-5 mx-1" fill="currentColor" />
-                <span className="text-sm">
-                  {Items.find((item) => item.code === i18n.language)?.title}
-                </span>
-                <ToogleChevron isOpen={openItem === 'Dropdown'} />
-              </div>
+            <span className='relative'>
               <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
-              <Gear className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
-              <User className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
-            </div>
-          </Dropdown>
+              {jobIds.length > 0 ?
+                (<span className='absolute -bottom-4 -right-2 bg-danger pr-1 pl-1 rounded-xl text-xs'>
+                  {jobIds.length}
+                </span>)
+                :
+                null
+              }
+            </span>
+          </Popover>
+          <User className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
         </div>
       </div>
     </Banner>

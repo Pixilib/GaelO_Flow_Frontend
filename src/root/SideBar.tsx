@@ -84,8 +84,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             <MenuItem
               title="Auto routing"
               icon={<Directions className="w-6 h-6" />}
-              isActive={location.pathname === "/autorouting"}
-              onClick={() => handleItemClick("/autorouting")}
+              isActive={location.pathname === "/auto-routing"}
+              onClick={() => handleItemClick("/auto-routing")}
             />
             <MenuItem
               title="Datasets"

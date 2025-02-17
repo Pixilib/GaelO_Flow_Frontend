@@ -8,7 +8,7 @@ import MenuItem from "./MenuItem";
 import MenuItemsCollapse from "./MenuItemsCollapse";
 import SideBarItems from "./SideBarItems";
 import Tabs, { Tab } from "./Tabs";
-import ToggleSwitch from "./ToggleSwitch";
+import ToggleSwitch from "../../root/ToggleDarkMode";
 import Toggle from "./Toogle";
 import ToogleChevron from "./ToogleChevron";
 

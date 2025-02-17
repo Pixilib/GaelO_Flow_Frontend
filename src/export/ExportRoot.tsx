@@ -4,19 +4,20 @@ import Papa from "papaparse";
 import { RootState } from "../store";
 import ExportStudyTable from "./ExportStudyTable";
 import ExportSeriesTable from "./ExportSeriesTable";
-import { Button, Card, CardHeader, CardBody, CardFooter, DropdownButton } from "../ui";
+import { Button, Card, CardHeader, CardBody, CardFooter, DropdownButton, Modal } from "../ui";
 import { Colors, Study, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import { getModalities, getPeers } from "../services";
 import { exportResourcesId } from "../services/export";
 import { flushExportList } from "../reducers/ExportSlice";
 import { storeToModality } from "../services/modalities";
-import ProgressJobs from "../query/ProgressJobs";
+import ProgressJob from "../query/ProgressJob";
 import { sendResourcesToPeer } from "../services/peers";
 import { GaeloIcon } from "../assets";
 import { exportCsv } from "../utils/export";
 import SelectTransferSyntax from "./SelectTransferSyntax";
 import { Download } from "../icons";
 import Empty from "../icons/Empty";
+import GaelORoot from "./gaelo/GaelORoot";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
@@ -28,6 +29,7 @@ const ExportRoot = () => {
     const [storeJobId, setStoreJobId] = useState(null);
     const [sendPeerJobId, setsendPeerJobId] = useState(null);
     const [transferSyntax, setTrasferSyntax] = useState('None');
+    const [openGaelOModal, setOpenGaelOModal] = useState(false)
 
     const series = useMemo(() => {
         if (!currentStudyId) return [];
@@ -141,6 +143,15 @@ const ExportRoot = () => {
 
     return (
         <Card>
+            <Modal show={openGaelOModal} size='lg'>
+                <Modal.Header className="bg-primary rounded-t-xl" onClose={() => setOpenGaelOModal(false)} >
+                    <span className="text-white font-bold">Send to GaelO</span>
+                </Modal.Header>
+                
+                <Modal.Body>
+                    <GaelORoot studyOrthancId={currentStudyId} />
+                </Modal.Body>
+            </Modal>
             <CardHeader
                 color={Colors.primary}>
                 <div className="flex items-center w-full">
@@ -173,6 +184,7 @@ const ExportRoot = () => {
                     <div className="flex-1 min-w-0">
                         <ExportStudyTable
                             onClickStudy={handleClickStudy}
+                            currentStudyId={currentStudyId}
                             studies={Object.values(exportStudyList)}
                         />
                     </div>
@@ -190,15 +202,16 @@ const ExportRoot = () => {
                         options={downloadOptions} />
                     <DropdownButton
                         buttonText="Send To Modality" options={modalitiesOptions} />
-                    {storeJobId && <ProgressJobs
+                    {storeJobId && <ProgressJob
                         size={50} jobId={storeJobId} />}
                     <DropdownButton
                         buttonText="Send To Peer"
                         options={peersOptions} />
-                    {sendPeerJobId && <ProgressJobs size={50} jobId={sendPeerJobId} />}
+                    {sendPeerJobId && <ProgressJob size={50} jobId={sendPeerJobId} />}
                     <Button
                         color={Colors.blueCustom}
-                        className="text-white bg-cyan-700" disabled>
+                        onClick={() => setOpenGaelOModal(true)}
+                        className="text-white bg-cyan-700" >
                         Send to <GaeloIcon className="ml-1" />
                     </Button>
                 </div>
