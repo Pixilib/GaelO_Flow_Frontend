@@ -22,13 +22,13 @@ const GaelOVisitSummary = ({
   return (
     <>
       <div className="flex gap-3">
-        <span>Created : </span>
+        <span className="text-sm">Created : </span>
         {existingVisits.map((visit) => {
           return <Badge variant="success">{visit?.visitType?.name}</Badge>;
         })}
       </div>
       <div className="flex gap-3">
-        <span>Creatable : </span>
+        <span className="text-sm">Creatable : </span>
         {creatableVisits?.map((visitType) => {
           return <Badge variant="default">{visitType.name}</Badge>;
         })}

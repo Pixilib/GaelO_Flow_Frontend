@@ -7,6 +7,7 @@ import PatientTable from "./patients/PatientTable";
 import GaelOVisitSummary from "./GaelOVisitSummary";
 import { GaeloIcon } from "../../assets";
 import { exportResourcesId } from "../../services/export";
+import { PatientDicomComparison } from "./dicoms/PatientDicomComparison";
 
 type GaelOVisitSelectorProps = {
   studyOrthancId: string;
@@ -72,12 +73,21 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
         selectedPatientId={selectedPatientId}
         onRowClick={handlePatientClick}
       />
-      <Label className="font-bold" value="Visits :" />
+
       {
-        <GaelOVisitSummary
-          patientId={selectedPatientId}
-          existingVisits={visitsOfPatient ?? []}
-        />
+        <>
+          <Label className="font-bold" value="Dicom compliance :" />
+          <PatientDicomComparison
+            studyOrthancId={studyOrthancId}
+            patientId={selectedPatientId}
+          />
+          <Label className="font-bold" value="Visits :" />
+          <GaelOVisitSummary
+            patientId={selectedPatientId}
+            existingVisits={visitsOfPatient ?? []}
+          />
+        </>
+
       }
       <Button
         onClick={handleOpenGaelO}
@@ -85,7 +95,7 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
         disabled={selectedPatientId == null}
         color={Colors.success}
       >
-        Open <GaeloIcon />
+        Download Dicoms & Open <GaeloIcon />
       </Button>
     </div>
   );
