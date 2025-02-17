@@ -1,9 +1,11 @@
 import { useContext, useMemo } from "react"
+
+import { Badge, Spinner } from "../../../ui"
+import { Study, useCustomQuery } from "../../../utils"
+
+import GaelOContext from "../context/GaelOContext"
 import { getPatient } from "../../../services/gaelo"
 import { getStudy } from "../../../services/orthanc"
-import { Study, useCustomQuery } from "../../../utils"
-import GaelOContext from "../context/GaelOContext"
-import { Badge, Spinner } from "../../../ui"
 
 type PatientDicomComparisonProps = {
     studyOrthancId: string
@@ -11,7 +13,7 @@ type PatientDicomComparisonProps = {
 }
 export const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomComparisonProps) => {
 
-    const { studyName, token, role, userId } = useContext(GaelOContext);
+    const { studyName, token, role } = useContext(GaelOContext);
 
     const { data: study, isPending: isPendingStudy } = useCustomQuery<Study>(
         ['studies', studyOrthancId],

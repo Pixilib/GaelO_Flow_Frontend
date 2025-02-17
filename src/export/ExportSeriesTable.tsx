@@ -1,8 +1,9 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { Button, Table } from "../ui";
-import { Colors, Series } from "../utils";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
+import { ColumnDef } from "@tanstack/react-table";
+
+import { Button, Table } from "../ui";
+import { Colors, Series } from "../utils";
 import { removeSeriesFromExportList } from "../reducers/ExportSlice";
 import { Trash } from "../icons";
 

@@ -1,13 +1,15 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import { getGaelOPatientLink, getVisitsTree } from "../../services/gaelo";
-import { Colors, useCustomQuery, useCustomToast } from "../../utils";
-import GaelOContext from "./context/GaelOContext";
 import { Button, Label, Spinner } from "../../ui";
-import PatientTable from "./patients/PatientTable";
-import GaelOVisitSummary from "./GaelOVisitSummary";
+
+import { Colors, useCustomQuery, useCustomToast } from "../../utils";
 import { GaeloIcon } from "../../assets";
 import { exportResourcesId } from "../../services/export";
+import { getGaelOPatientLink, getVisitsTree } from "../../services/gaelo";
+
+import GaelOContext from "./context/GaelOContext";
 import { PatientDicomComparison } from "./dicoms/PatientDicomComparison";
+import PatientTable from "./patients/PatientTable";
+import GaelOVisitSummary from "./GaelOVisitSummary";
 
 type GaelOVisitSelectorProps = {
   studyOrthancId: string;

@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { getCreatableVisits } from "../../services/gaelo";
 import { Badge } from "../../ui";
-import { useCustomMutation, useCustomQuery } from "../../utils";
+import { useCustomQuery } from "../../utils";
 import GaelOContext from "./context/GaelOContext";
 
 type GaelOVisitSummaryProps = {

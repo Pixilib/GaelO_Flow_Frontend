@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react"
 import GaelOContext from "./context/GaelOContext"
 import { useCustomQuery } from "../../utils"
-import { getRoles, getStudiesFromUser } from "../../services/gaelo"
 import { SelectInput, Spinner } from "../../ui"
+
+import { getRoles, getStudiesFromUser } from "../../services/gaelo"
 
 type GaelOStudyRoleSelector = {
     onStudychange: (studyName: string) => void

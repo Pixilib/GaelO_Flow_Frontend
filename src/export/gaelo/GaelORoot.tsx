@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Button, Input, Label } from "../../ui";
 import { Colors, Study, useCustomMutation, useCustomQuery } from "../../utils";
-import { login } from './../../services/gaelo'
+
 import GaelOContextProvider from "./context/GaelOContextProvider";
 import GaelOStudyRoleSelector from "./GaelOStudyRoleSelector";
-import { getStudy } from "../../services/orthanc";
 import GaelOVisitSelector from "./GaelOVisitSelector";
+
+import { getStudy } from "../../services/orthanc";
+import { login } from './../../services/gaelo'
 
 type GaelORootProps = {
     studyOrthancId: string
