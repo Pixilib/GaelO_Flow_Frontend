@@ -55,7 +55,8 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
       (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"),
       undefined,
       true,
-      undefined
+      undefined,
+      'GaelO-' + studyName + '-' + selectedPatientId + '.zip'
     );
     window.open(
       getGaelOPatientLink(studyName, role, selectedPatientId, token, userId),

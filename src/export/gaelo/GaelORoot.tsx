@@ -17,6 +17,7 @@ const GaelORoot = ({ studyOrthancId }: GaelORootProps) => {
     const [token, setToken] = useState<string | null>(null)
     const [userId, setUserId] = useState<number | null>(null)
     const [studyName, setStudyName] = useState<string | null>(null)
+    const [loginError, setLoginError] = useState<string | null>(null)
 
     const { data: study } = useCustomQuery<Study>(
         ['study', studyOrthancId],
@@ -31,6 +32,9 @@ const GaelORoot = ({ studyOrthancId }: GaelORootProps) => {
                 console.log(data)
                 setToken(data.access_token)
                 setUserId(data.id)
+            },
+            onError: () => {
+                setLoginError('Login Failure')
             }
         }
     )
@@ -59,12 +63,20 @@ const GaelORoot = ({ studyOrthancId }: GaelORootProps) => {
                     <GaelOVisitSelector studyOrthancId={studyOrthancId} />
                 </div>
                 :
-                <div>
-                    <form className="flex flex-col gap-3" onSubmit={handleLogin}>
-                        <Input name="gaeloEmail" required autoComplete="email" label={"Email"} value={email} onChange={(event) => setEmail(event.target.value)} />
-                        <Input name="gaeloPassword" required autoComplete="current-password" label={"Password"} value={password} type="password" onChange={(event) => setPassword(event.target.value)} />
+                <div className="flex flex-col gap-3">
+                    <form autoComplete="on" className="flex flex-col gap-3" onSubmit={handleLogin}>
+                        <Input id="gaeloEmail" name="gaeloEmail" required autoComplete="email" label={"Email"} value={email} onChange={(event) => setEmail(event.target.value)} />
+                        <Input id="gaeloPassword" name="gaeloPassword" required autoComplete="current-password" label={"Password"} value={password} type="password" onChange={(event) => setPassword(event.target.value)} />
+                        {
+                            loginError && (
+                                <div className="bg-warning rounded-xl text-white p-3">
+                                    Login Error
+                                </div>
+                            )
+                        }
                         <Button color={Colors.primary} type="submit">Login</Button>
                     </form>
+
                 </div>
             }
         </GaelOContextProvider>

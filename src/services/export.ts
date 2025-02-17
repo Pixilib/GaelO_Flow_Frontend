@@ -59,7 +59,8 @@ export const exportResourcesId = (
   onProgress = (_mb: number) => {},
   abortController = new AbortController(),
   hierarchical = true,
-  transferSyntax: string | undefined = undefined
+  transferSyntax: string | undefined = undefined,
+  filename = undefined
 ): Promise<any> => {
   const body = {
     Resources: ids,
@@ -84,11 +85,11 @@ export const exportResourcesId = (
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
-      let filename = getContentDispositionFilename(answer.headers);
+      let downloadFilename = filename ?? getContentDispositionFilename(answer.headers);
       exportFileThroughFilesystemAPI(
         readableStream,
         contentType,
-        filename,
+        downloadFilename,
         onProgress
       );
       return true;
