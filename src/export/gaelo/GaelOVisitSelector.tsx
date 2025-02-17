@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { getGaelOPatientLink, getVisitsTree } from "../../services/gaelo";
 import { Colors, useCustomQuery, useCustomToast } from "../../utils";
 import GaelOContext from "./context/GaelOContext";
@@ -19,6 +19,11 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
     null
   );
+
+  useEffect(() => {
+    //Reset selected patient id on change study
+    setSelectedPatientId(null);
+  }, [studyName]);
 
   const { data: visitTree, isPending } = useCustomQuery(
     ["gaelo", "study", studyName, role],
@@ -77,10 +82,10 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
       <Button
         onClick={handleOpenGaelO}
         className="flex align-center gap-1"
+        disabled={selectedPatientId == null}
         color={Colors.success}
       >
-        {" "}
-        Open <GaeloIcon />{" "}
+        Open <GaeloIcon />
       </Button>
     </div>
   );
