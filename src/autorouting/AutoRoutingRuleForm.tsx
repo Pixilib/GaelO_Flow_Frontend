@@ -1,7 +1,3 @@
-// AutoRoutingRuleForm
-// Author: Julien VIGNAU-ESPINE
-// Date: 13-01-2024
-
 import { useState, ChangeEvent } from "react";
 import { Input, SelectInput, Label, Button } from "../ui";
 import {
@@ -10,43 +6,43 @@ import {
     Destination,
     RuleCondition,
     AutoRoutingRuleFormType,
+    AutoRoutingRuleValueRepresentation,
+    AutoRoutingRuleDicomTag,
+    AutoRoutingRuleCondition,
 } from "./types";
 import { Colors } from "../utils";
 
-/*
-
-"DicomTag": Input: "PatientName", 
-"ValueRepresentation": Select: "String" "number",
-"Value": input string
-"Condition": select: "EQUALS"
-
-*/
-
 const AutoRoutingRuleForm = () => {
-
     const [PatientName, setPatientName] = useState<string>("");
-
     const [Value, setValue] = useState<string>("");
+    const [ValueRepresentation, setValueRepresentation] = useState<AutoRoutingRuleValueRepresentation>(AutoRoutingRuleValueRepresentation.STRING);
+    const [Condition, setCondition] = useState<AutoRoutingRuleCondition>(AutoRoutingRuleCondition.EQUALS);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPatientName(event.target.value);
-      };
+    };
 
     const handleInputChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value);
-      };
+    };
 
-    //   const handleValeRepresentationChange = (option) => {
-    //     setCondition(option.value);
-    //   };
+    const handleValueRepresentationChange = (option) => {
+        setValueRepresentation(option.value);
+    };
 
-      // MUST BE CHANGED !!!!!!
-      const eventValueRepresentationOptions = [
-        { label: "Option 1", value: AutoRoutingRuleFormType.OPTION1 },
-        { label: "Option 2", value: AutoRoutingRuleFormType.OPTION2 },
-        { label: "Option 3", value: AutoRoutingRuleFormType.OPTION3 },
-        { label: "Option 4", value: AutoRoutingRuleFormType.OPTION4 },
-      ];
+    const handleConditionChange = (option) => {
+        setCondition(option.value);
+    };
+
+    const valueRepresentationOptions = [
+        { label: "String", value: AutoRoutingRuleValueRepresentation.STRING },
+        { label: "Number", value: AutoRoutingRuleValueRepresentation.NUMBER },
+    ];
+
+    const conditionOptions = [
+        { label: "Equals", value: AutoRoutingRuleCondition.EQUALS },
+        { label: "Not Equals", value: AutoRoutingRuleCondition.NOT_EQUALS },
+    ];
 
     return (
         <div>
@@ -57,13 +53,25 @@ const AutoRoutingRuleForm = () => {
                 onChange={handleInputChange}
             />
 
-            {/* Here goes value representation select */}
-            
+            <Label value="Value Representation" />
+            <SelectInput
+                value={ValueRepresentation}
+                onChange={handleValueRepresentationChange}
+                options={valueRepresentationOptions}
+            />
+
             <Input
                 label="Value :"
                 placeholder="Value"
                 value={Value}
                 onChange={handleInputChangeValue}
+            />
+
+            <Label value="Condition" />
+            <SelectInput
+                value={Condition}
+                onChange={handleConditionChange}
+                options={conditionOptions}
             />
         </div>
     );

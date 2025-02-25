@@ -54,13 +54,38 @@ const AutoRoutingRoot = () => {
     setDestinations(destinations.filter((_, i) => i !== index));
   };
 
-  const sendForm = () => {
-    console.log({ name, eventType, isActivated, condition, rules, destinations });
-    alert("Form submitted! Check the console for details.");
+  const sendForm = async () => {
+    const payload = {
+      name,
+      eventType,
+      isActivated,
+      condition,
+      rules,
+      destinations,
+    };
+
+    try {
+      const response = await fetch("https://api.example.com/autorouting", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("Form submitted successfully!");
+      } else {
+        alert("Failed to submit form.");
+      }
+    } catch (error) {
+      alert("An error occurred while submitting the form.");
+    }
   };
 
   return (
-    <div className="flex flex-col gap-3" >
+    <div className="flex flex-col gap-3">
       <Input label="Name" placeholder="Name" value={name} onChange={handleInputChange} />
       <div className="flex gap-3">
         <Label value="Event Type" />
@@ -75,12 +100,12 @@ const AutoRoutingRoot = () => {
         <Input label="Activated" type="checkbox" checked={isActivated} onChange={handleSwitchChange} />
       </div>
       <div className="flex gap-3">
-      <Label value="Condition" />
-      <SelectInput
-        onChange={handleConditionChange}
-        value={condition}
-        options={Object.values(AutoRoutingCondition).map((value) => ({ label: value, value }))}
-      />
+        <Label value="Condition" />
+        <SelectInput
+          onChange={handleConditionChange}
+          value={condition}
+          options={Object.values(AutoRoutingCondition).map((value) => ({ label: value, value }))}
+        />
       </div>
 
       <Label value="Rules" />
@@ -103,7 +128,7 @@ const AutoRoutingRoot = () => {
             options={Object.values(AutoRoutingRuleCondition).map((value) => ({ label: value, value }))}
           />
           <Input placeholder="Value" value={rule.Value} onChange={(e) => updateRule(index, "Value", e.target.value)} />
-          <Button color={Colors.danger} onClick={() => removeRule(index)}><Trash/></Button>
+          <Button color={Colors.danger} onClick={() => removeRule(index)}><Trash /></Button>
         </div>
       ))}
 
@@ -117,7 +142,7 @@ const AutoRoutingRoot = () => {
             options={Object.values(AutoRoutingDestinationType).map((value) => ({ label: value, value }))}
           />
           <Input placeholder="Name" value={destination.Name} onChange={(e) => updateDestination(index, "Name", e.target.value)} />
-          <Button color={Colors.danger} onClick={() => removeDestination(index)}><Trash/></Button>
+          <Button color={Colors.danger} onClick={() => removeDestination(index)}><Trash /></Button>
         </div>
       ))}
 

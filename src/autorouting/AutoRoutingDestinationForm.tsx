@@ -28,6 +28,29 @@ const AutoRoutingRuleForm = () => {
         setRules(rules.filter((_, i) => i !== index));
     };
 
+    const saveRules = async () => {
+        const payload = { rules };
+
+        try {
+            const response = await fetch("https://api.example.com/rules", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert("Rules saved successfully!");
+            } else {
+                alert("Failed to save rules.");
+            }
+        } catch (error) {
+            alert("An error occurred while saving the rules.");
+        }
+    };
+
     return (
         <div>
             <Label value="Rules" />
@@ -47,6 +70,7 @@ const AutoRoutingRuleForm = () => {
                     <Button color={Colors.danger} onClick={() => removeRule(index)}>-</Button>
                 </div>
             ))}
+            <Button color={Colors.primary} onClick={saveRules}>Save Rules</Button>
         </div>
     );
 };
