@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RuleCondition } from "./types";
+import { RuleCondition } from "../types";
 
 type AutoRoutingRulesTableProps = {
     rules: RuleCondition[];

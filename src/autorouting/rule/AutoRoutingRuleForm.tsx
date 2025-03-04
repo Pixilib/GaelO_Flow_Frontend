@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { Input, SelectInput, Label, Button } from "../ui";
+import { Input, SelectInput, Label, Button } from "../../ui";
 import {
     AutoroutingEventType,
     AutoRoutingRule,
@@ -9,8 +9,8 @@ import {
     AutoRoutingRuleValueRepresentation,
     AutoRoutingRuleDicomTag,
     AutoRoutingRuleCondition,
-} from "./types";
-import { Colors } from "../utils";
+} from "../types";
+import { Colors } from "../../utils";
 
 const AutoRoutingRuleForm = () => {
     const [PatientName, setPatientName] = useState<string>("");

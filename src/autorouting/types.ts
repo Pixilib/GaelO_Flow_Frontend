@@ -95,10 +95,15 @@ export type AutoRoutingRule = {
   Condition: AutoRoutingRuleCondition;
 };
 
+export type DestinationRule = {
+  Destination: AutoRoutingDestinationType;
+  Name: string
+}
+
 export type Router = {
   RuleCondition: AutoRoutingCondition;
   Rules: AutoRoutingRule[];
-  Detinations : { Destination  : AutoRoutingDestinationType; Name : string}[]
+  Detinations: DestinationRule[]
 }
 
 export type AutoRouter = {

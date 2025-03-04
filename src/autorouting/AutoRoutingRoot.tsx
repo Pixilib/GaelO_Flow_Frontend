@@ -8,9 +8,13 @@ import {
   AutoRoutingRuleDicomTag,
   AutoRoutingRule,
   AutoRoutingDestinationType,
+  DestinationRule,
 } from "./types";
 import { Colors } from "../utils";
 import { Trash } from "../icons";
+import Destination from "./destination/Destination";
+
+type DestinationWithId = DestinationRule & { id: number }
 
 const AutoRoutingRoot = () => {
   // State hooks for managing form data
@@ -19,14 +23,35 @@ const AutoRoutingRoot = () => {
   const [isActivated, setIsActivated] = useState(false);
   const [condition, setCondition] = useState(AutoRoutingCondition.AND);
   const [rules, setRules] = useState([]);
-  const [destinations, setDestinations] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    // Simulate fetching initial data or settings
-    console.log("Component mounted or updated");
-  }, []);
+  const [destinations, setDestinations] = useState<DestinationWithId[]>([]);
+
+  const addDestination = () => {
+    setDestinations((destinations: DestinationWithId[]) => {
+      return [
+        ...destinations,
+        {
+          id: Math.random(),
+          Destination: AutoRoutingDestinationType.AET,
+          Name: "",
+        }]
+    });
+  };
+
+  const updateDestination = (id: number, destination: DestinationRule) => {
+    const newDestinations = destinations.map((currentDestination) => {
+      return (id === currentDestination.id ? { ...destination, id: id } : currentDestination)
+    }
+    )
+    setDestinations(newDestinations);
+  };
+
+  const removeDestination = (id: number) => {
+    const newDestinations = destinations.filter((destination) => destination.id !== id)
+    setDestinations(newDestinations);
+  };
 
   // Handler for input changes
   const handleInputChange = (event) => {
@@ -76,24 +101,6 @@ const AutoRoutingRoot = () => {
     clearError();
   };
 
-  // Function to add a new destination with default values
-  const addDestination = () => {
-    const newDestination = { Destination: AutoRoutingDestinationType.AET, Name: "" };
-    setDestinations([...destinations, newDestination]);
-    clearError();
-  };
-
-  // Function to update an existing destination
-  const updateDestination = (index, key, value) => {
-    setDestinations(destinations.map((dest, i) => (i === index ? { ...dest, [key]: value } : dest)));
-    clearError();
-  };
-
-  // Function to remove a destination
-  const removeDestination = (index) => {
-    setDestinations(destinations.filter((_, i) => i !== index));
-    clearError();
-  };
 
   // Function to clear error messages
   const clearError = () => {
@@ -197,18 +204,9 @@ const AutoRoutingRoot = () => {
 
       <Label value="Destinations" />
       <Button color={Colors.primary} onClick={addDestination} disabled={isLoading}>Add Destination</Button>
-      {destinations.map((destination, index) => (
-        <div key={index} style={{ marginTop: 10, display: "flex", gap: 10 }}>
-          <SelectInput
-            value={destination.Destination}
-            onChange={(e) => updateDestination(index, "Destination", e.value)}
-            options={Object.values(AutoRoutingDestinationType).map((value) => ({ label: value, value }))}
-            disabled={isLoading}
-          />
-          <Input placeholder="Name" value={destination.Name} onChange={(e) => updateDestination(index, "Name", e.target.value)} disabled={isLoading} />
-          <Button color={Colors.danger} onClick={() => removeDestination(index)} disabled={isLoading}><Trash /></Button>
-        </div>
-      ))}
+      {destinations.map((destination: DestinationWithId) => {
+        return <Destination id={destination.id} destination={destination} onChange={(newDestination) => updateDestination(destination.id, newDestination)} onDelete={() => removeDestination(destination.id)} />
+      })}
 
       <Button color={Colors.primary} onClick={sendForm} disabled={isLoading}>
         {isLoading ? "Submitting..." : "Submit"}
