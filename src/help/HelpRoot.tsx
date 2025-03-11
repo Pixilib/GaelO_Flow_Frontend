@@ -2,7 +2,7 @@ const HelpRoot = () => {
     return (
         <div className="flex flex-col items-center justify-center gap-3 m-3">
             <span>
-                GaelO-Flow is a tradmark of Pixilib SAS
+                GaelO-Flow is a trademark of Pixilib SAS
             </span>
             <span>
                 Maintainer : Salim Kanoun (Pixilib)
