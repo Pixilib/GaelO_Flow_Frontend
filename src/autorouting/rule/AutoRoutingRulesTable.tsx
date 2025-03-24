@@ -1,47 +1,58 @@
-import { useEffect, useState } from "react";
-import { RuleCondition } from "../types";
+import { Input, SelectInput, Button } from "../../ui";
+import { Colors } from "../../utils";
+import {
+    AutoRoutingRuleValueRepresentation,
+    AutoRoutingRuleCondition,
+    AutoRoutingRuleFormType
+} from "../types";
 
-type AutoRoutingRulesTableProps = {
-    rules: RuleCondition[];
+type AutoRoutingRuleFormProps = {
+    rule: AutoRoutingRuleFormType;
+    onChange: (rule: AutoRoutingRuleFormType) => void;
+    onDelete: () => void;
 };
 
-const AutoRoutingRulesTable = ({ rules: initialRules }: AutoRoutingRulesTableProps) => {
-    const [rules, setRules] = useState<RuleCondition[]>(initialRules);
+const valueRepresentationOptions = [
+    { label: "String", value: AutoRoutingRuleValueRepresentation.STRING },
+    { label: "Number", value: AutoRoutingRuleValueRepresentation.NUMBER },
+];
 
-    useEffect(() => {
-        const fetchRules = async () => {
-            try {
-                const response = await fetch("https://api.example.com/rules");
-                if (response.ok) {
-                    const data = await response.json();
-                    setRules(data.rules);
-                } else {
-                    console.error("Failed to fetch rules.");
-                }
-            } catch (error) {
-                console.error("An error occurred while fetching the rules.", error);
-            }
-        };
+const conditionOptions = [
+    { label: "Equals", value: AutoRoutingRuleCondition.EQUALS },
+    { label: "Not Equals", value: AutoRoutingRuleCondition.NOT_EQUALS },
+];
 
-        fetchRules();
-    }, []);
+const AutoRoutingRuleForm = ({ rule, onChange, onDelete }: AutoRoutingRuleFormProps) => {
+    const handleOnChange = (key: keyof AutoRoutingRuleFormType, value: any) => {
+        const updatedRule = { ...rule, [key]: value };
+        onChange(updatedRule);
+    };
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>Condition</th>
-                </tr>
-            </thead>
-            <tbody>
-                {rules.map((rule, index) => (
-                    <tr key={index}>
-                        <td>{rule}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <div style={{ marginTop: 10, display: "flex", gap: 10 }}>
+            <Input
+                placeholder="PatientName"
+                value={rule.PatientName}
+                onChange={(event) => handleOnChange("PatientName", event.target.value)}
+            />
+            <SelectInput
+                options={valueRepresentationOptions}
+                value={rule.ValueRepresentation}
+                onChange={(option: any) => handleOnChange("ValueRepresentation", option.value)}
+            />
+            <Input
+                placeholder="Value"
+                value={rule.Value}
+                onChange={(event) => handleOnChange("Value", event.target.value)}
+            />
+            <SelectInput
+                options={conditionOptions}
+                value={rule.Condition}
+                onChange={(option: any) => handleOnChange("Condition", option.value)}
+            />
+            <Button color={Colors.danger} onClick={onDelete}>-</Button>
+        </div>
     );
 };
 
-export default AutoRoutingRulesTable;
+export default AutoRoutingRuleForm;
