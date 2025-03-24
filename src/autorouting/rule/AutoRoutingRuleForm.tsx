@@ -1,22 +1,16 @@
 import { useState, ChangeEvent } from "react";
-import { Input, SelectInput, Label, Button } from "../../ui";
+import { Input, SelectInput, Label } from "../../ui";
 import {
-    AutoroutingEventType,
-    AutoRoutingRule,
-    Destination,
-    RuleCondition,
-    AutoRoutingRuleFormType,
     AutoRoutingRuleValueRepresentation,
-    AutoRoutingRuleDicomTag,
     AutoRoutingRuleCondition,
 } from "../types";
-import { Colors } from "../../utils";
 
 const AutoRoutingRuleForm = () => {
-    const [PatientName, setPatientName] = useState<string>("");
-    const [Value, setValue] = useState<string>("");
-    const [ValueRepresentation, setValueRepresentation] = useState<AutoRoutingRuleValueRepresentation>(AutoRoutingRuleValueRepresentation.STRING);
-    const [Condition, setCondition] = useState<AutoRoutingRuleCondition>(AutoRoutingRuleCondition.EQUALS);
+
+    const [patientName, setPatientName] = useState<string>("");
+    const [value, setValue] = useState<string>("");
+    const [valueRepresentation, setValueRepresentation] = useState<AutoRoutingRuleValueRepresentation>(AutoRoutingRuleValueRepresentation.STRING);
+    const [condition, setCondition] = useState<AutoRoutingRuleCondition>(AutoRoutingRuleCondition.EQUALS);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPatientName(event.target.value);
@@ -41,7 +35,7 @@ const AutoRoutingRuleForm = () => {
 
     const conditionOptions = [
         { label: "Equals", value: AutoRoutingRuleCondition.EQUALS },
-        { label: "Not Equals", value: AutoRoutingRuleCondition.NOT_EQUALS },
+        { label: "Different", value: AutoRoutingRuleCondition.DIFFERENT },
     ];
 
     return (
@@ -49,27 +43,24 @@ const AutoRoutingRuleForm = () => {
             <Input
                 label="PatientName :"
                 placeholder="PatientName"
-                value={PatientName}
+                value={patientName}
                 onChange={handleInputChange}
             />
-
             <Label value="Value Representation" />
             <SelectInput
-                value={ValueRepresentation}
+                value={valueRepresentation}
                 onChange={handleValueRepresentationChange}
                 options={valueRepresentationOptions}
             />
-
             <Input
                 label="Value :"
                 placeholder="Value"
-                value={Value}
+                value={value}
                 onChange={handleInputChangeValue}
             />
-
             <Label value="Condition" />
             <SelectInput
-                value={Condition}
+                value={condition}
                 onChange={handleConditionChange}
                 options={conditionOptions}
             />

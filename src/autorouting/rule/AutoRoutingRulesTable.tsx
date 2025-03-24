@@ -3,12 +3,12 @@ import { Colors } from "../../utils";
 import {
     AutoRoutingRuleValueRepresentation,
     AutoRoutingRuleCondition,
-    AutoRoutingRuleFormType
+    AutoRoutingRule
 } from "../types";
 
 type AutoRoutingRuleFormProps = {
-    rule: AutoRoutingRuleFormType;
-    onChange: (rule: AutoRoutingRuleFormType) => void;
+    rule: AutoRoutingRule;
+    onChange: (rule: AutoRoutingRule) => void;
     onDelete: () => void;
 };
 
@@ -19,11 +19,11 @@ const valueRepresentationOptions = [
 
 const conditionOptions = [
     { label: "Equals", value: AutoRoutingRuleCondition.EQUALS },
-    { label: "Not Equals", value: AutoRoutingRuleCondition.NOT_EQUALS },
+    { label: "Different", value: AutoRoutingRuleCondition.DIFFERENT },
 ];
 
 const AutoRoutingRuleForm = ({ rule, onChange, onDelete }: AutoRoutingRuleFormProps) => {
-    const handleOnChange = (key: keyof AutoRoutingRuleFormType, value: any) => {
+    const handleOnChange = (key: keyof AutoRoutingRule, value: any) => {
         const updatedRule = { ...rule, [key]: value };
         onChange(updatedRule);
     };

@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState } from "react";
 import { Input, SelectInput, Label, Button } from "../ui";
 import {
   AutoroutingEventType,
@@ -6,12 +6,10 @@ import {
   AutoRoutingRuleCondition,
   AutoRoutingRuleValueRepresentation,
   AutoRoutingRuleDicomTag,
-  AutoRoutingRule,
   AutoRoutingDestinationType,
   DestinationRule,
 } from "./types";
 import { Colors } from "../utils";
-import { Trash } from "../icons";
 import Destination from "./destination/Destination";
 
 type DestinationWithId = DestinationRule & { id: number }
@@ -25,7 +23,6 @@ const AutoRoutingRoot = () => {
   const [rules, setRules] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
   const [destinations, setDestinations] = useState<DestinationWithId[]>([]);
 
   const addDestination = () => {
@@ -89,17 +86,7 @@ const AutoRoutingRoot = () => {
     clearError();
   };
 
-  // Function to update an existing rule
-  const updateRule = (index, key, value) => {
-    setRules(rules.map((rule, i) => (i === index ? { ...rule, [key]: value } : rule)));
-    clearError();
-  };
 
-  // Function to remove a rule
-  const removeRule = (index) => {
-    setRules(rules.filter((_, i) => i !== index));
-    clearError();
-  };
 
 
   // Function to clear error messages
@@ -178,28 +165,7 @@ const AutoRoutingRoot = () => {
       <Label value="Rules" />
       <Button color={Colors.primary} onClick={addRule} disabled={isLoading}>Add Rule</Button>
       {rules.map((rule, index) => (
-        <div key={index} style={{ marginTop: 10, display: "flex", gap: 10 }}>
-          <SelectInput
-            value={rule.DicomTag}
-            onChange={(e) => updateRule(index, "DicomTag", e.value)}
-            options={Object.values(AutoRoutingRuleDicomTag).map((value) => ({ label: value, value }))}
-            disabled={isLoading}
-          />
-          <SelectInput
-            value={rule.ValueRepresentation}
-            onChange={(e) => updateRule(index, "ValueRepresentation", e.value)}
-            options={Object.values(AutoRoutingRuleValueRepresentation).map((value) => ({ label: value, value }))}
-            disabled={isLoading}
-          />
-          <SelectInput
-            value={rule.Condition}
-            onChange={(e) => updateRule(index, "Condition", e.value)}
-            options={Object.values(AutoRoutingRuleCondition).map((value) => ({ label: value, value }))}
-            disabled={isLoading}
-          />
-          <Input placeholder="Value" value={rule.Value} onChange={(e) => updateRule(index, "Value", e.target.value)} disabled={isLoading} />
-          <Button color={Colors.danger} onClick={() => removeRule(index)} disabled={isLoading}><Trash /></Button>
-        </div>
+
       ))}
 
       <Label value="Destinations" />
