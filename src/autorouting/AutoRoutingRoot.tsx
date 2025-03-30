@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Input, SelectInput, Label, Button } from "../ui";
 import {
   AutoroutingEventType,
@@ -11,16 +11,23 @@ import {
 } from "./types";
 import { Colors } from "../utils";
 import Destination from "./destination/Destination";
+import Rule from './rule/Rule';
 
-type DestinationWithId = DestinationRule & { id: number }
+type DestinationWithId = DestinationRule & { id: number };
+type RuleType = {
+    id: number;
+    dicomTag: string;
+    valueRepresentation: string;
+    value: string;
+    condition: string;
+};
 
 const AutoRoutingRoot = () => {
-  // State hooks for managing form data
   const [name, setName] = useState("");
   const [eventType, setEventType] = useState(null);
   const [isActivated, setIsActivated] = useState(false);
   const [condition, setCondition] = useState(AutoRoutingCondition.AND);
-  const [rules, setRules] = useState([]);
+  const [rules, setRules] = useState<RuleType[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [destinations, setDestinations] = useState<DestinationWithId[]>([]);
@@ -40,61 +47,59 @@ const AutoRoutingRoot = () => {
   const updateDestination = (id: number, destination: DestinationRule) => {
     const newDestinations = destinations.map((currentDestination) => {
       return (id === currentDestination.id ? { ...destination, id: id } : currentDestination)
-    }
-    )
+    });
     setDestinations(newDestinations);
   };
 
   const removeDestination = (id: number) => {
-    const newDestinations = destinations.filter((destination) => destination.id !== id)
+    const newDestinations = destinations.filter((destination) => destination.id !== id);
     setDestinations(newDestinations);
   };
 
-  // Handler for input changes
   const handleInputChange = (event) => {
     setName(event.target.value);
     clearError();
   };
 
-  // Handler for event type changes
   const handleEventTypeChange = (selectedOptions) => {
     setEventType(selectedOptions.value);
     clearError();
   };
 
-  // Handler for activation switch changes
   const handleSwitchChange = () => {
     setIsActivated(!isActivated);
     clearError();
   };
 
-  // Handler for condition changes
   const handleConditionChange = (option) => {
     setCondition(option.value);
     clearError();
   };
 
-  // Function to add a new rule with default values
   const addRule = () => {
-    const newRule = {
-      DicomTag: AutoRoutingRuleDicomTag.PATIENT_NAME,
-      ValueRepresentation: AutoRoutingRuleValueRepresentation.STRING,
-      Value: "",
-      Condition: AutoRoutingRuleCondition.EQUALS,
+    const newRule: RuleType = {
+        id: Date.now(),
+        dicomTag: '',
+        valueRepresentation: 'string',
+        value: '',
+        condition: 'EQUALS'
     };
     setRules([...rules, newRule]);
     clearError();
   };
 
+  const updateRule = (updatedRule: RuleType) => {
+    setRules(rules.map(rule => rule.id === updatedRule.id ? updatedRule : rule));
+  };
 
+  const removeRule = (id: number) => {
+    setRules(rules.filter(rule => rule.id !== id));
+  };
 
-
-  // Function to clear error messages
   const clearError = () => {
     setError("");
   };
 
-  // Function to send the form data to the server
   const sendForm = async () => {
     if (!name || !eventType || rules.length === 0 || destinations.length === 0) {
       setError("Please fill in all required fields.");
@@ -112,7 +117,7 @@ const AutoRoutingRoot = () => {
 
     setIsLoading(true);
     try {
-      const response = await fetch("https://api.example.com/autorouting", {
+      const response = await fetch("", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -164,15 +169,26 @@ const AutoRoutingRoot = () => {
 
       <Label value="Rules" />
       <Button color={Colors.primary} onClick={addRule} disabled={isLoading}>Add Rule</Button>
-      {rules.map((rule, index) => (
-
+      {rules.map((rule: RuleType) => (
+        <Rule
+            key={rule.id}
+            rule={rule}
+            onDelete={() => removeRule(rule.id)}
+            onChange={updateRule}
+        />
       ))}
 
       <Label value="Destinations" />
       <Button color={Colors.primary} onClick={addDestination} disabled={isLoading}>Add Destination</Button>
-      {destinations.map((destination: DestinationWithId) => {
-        return <Destination id={destination.id} destination={destination} onChange={(newDestination) => updateDestination(destination.id, newDestination)} onDelete={() => removeDestination(destination.id)} />
-      })}
+      {destinations.map((destination: DestinationWithId) => (
+        <Destination
+            key={destination.id}
+            id={destination.id}
+            destination={destination}
+            onChange={(newDestination) => updateDestination(destination.id, newDestination)}
+            onDelete={() => removeDestination(destination.id)}
+        />
+      ))}
 
       <Button color={Colors.primary} onClick={sendForm} disabled={isLoading}>
         {isLoading ? "Submitting..." : "Submit"}
