@@ -11,51 +11,28 @@
   --radius-20: 20px;
   --radius-40: 40px;
   --radius-70: 70px;
-  
-  --color-almond: #F7E9D8,
-  --color-almond-hover: #F6D1A7,
-  --color-primary: #4746b8,
-  --color-primary-active: #333182,
-  --color-primary-light: #8C8BD3,
-  --color-secondary: #EB9124,
-  --color-secondary-hover: #BD6800,
-  --color-danger: #DB1F22,
-  --color-danger-hover: #8A1315,
-  --color-success-light: #CBDCD4,
-  --color-success: #037F6E,
-  --color-success-hover: #2E7058,
-  --color-disabled: #b2b2b2,
-  --color-warning: #DDAD00,
-  --color-warning-hover: #A88400,
-  --color-dark: #484544,
-  --color-blue-custom: #2F77BA,
-  --color-blue-custom-hover: #245D92,
-  --color-gray-custom: #D4CFCF,
-  --color-light: #FFFFFF,
-  --color-light-gray: #EFEFEF,
-  
-  /* --spacing-5: 5%,
-  --spacing-10: 10%,
-  --spacing-11: 11%,
-  --spacing-12: 12%,
-  --spacing-15: 15%,
-  --spacing-20: 20%,
-  --spacing-25: 25%,
-  --spacing-30: 30%,
-  --spacing-35: 35%,
-  --spacing-40: 40%,
-  --spacing-45: 45%,
-  --spacing-50: 50%,
-  --spacing-55: 55%,
-  --spacing-60: 60%,
-  --spacing-64: 64%,
-  --spacing-65: 65%,
-  --spacing-69: 69%,
-  --spacing-70: 70%,
-  --spacing-75: 75%,
-  --spacing-80: 80%,
-  --spacing-85: 85%,
-  --spacing-90: 90%, */
+
+  --color-almond: #F7E9D8;
+  --color-almond-hover: #F6D1A7;
+  --color-primary: #4746b8;
+  --color-primary-active: #333182;
+  --color-primary-light: #8C8BD3;
+  --color-secondary: #EB9124;
+  --color-secondary-hover: #BD6800;
+  --color-danger: #DB1F22;
+  --color-danger-hover: #8A1315;
+  --color-success-light: #CBDCD4;
+  --color-success: #037F6E;
+  --color-success-hover: #2E7058;
+  --color-disabled: #b2b2b2;
+  --color-warning: #DDAD00;
+  --color-warning-hover: #A88400;
+  --color-dark: #484544;
+  --color-blue-custom: #2F77BA;
+  --color-blue-custom-hover: #245D92;
+  --color-gray-custom: #D4CFCF;
+  --color-light: #FFFFFF;
+  --color-light-gray: #EFEFEF;
 }
 
 @layer utilities {
