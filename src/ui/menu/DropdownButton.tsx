@@ -62,7 +62,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
       <button
         id="hs-dropdown-custom-trigger"
         type="button"
-        className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 align-middle transition-all bg-white rounded-md shadow-sm hover:text-white hs-dropdown-togglefocus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-primary dark:bg-slate-700 dark:border-gray-700 dark:hover:bg-secondary hover:bg-secondary dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+        className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-gray-700 align-middle transition-all bg-white rounded-md shadow-xs hover:text-white hs-dropdown-togglefocus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-primary dark:bg-slate-700 dark:border-gray-700 dark:hover:bg-secondary hover:bg-secondary dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
       >
         {buttonText}
         <svg
@@ -92,7 +92,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
           <button
             key={index}
             onClick={() => handleOptionClick(option)}
-            className="flex items-center gap-x-3.5 py-2 w-full px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-gray-300 dark:focus:bg-slate-700"
+            className="flex items-center gap-x-3.5 py-2 w-full px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-gray-300 dark:focus:bg-slate-700"
             style={{ color: option.color }}
           >
             {option.icon && <span>{option.icon}</span>}

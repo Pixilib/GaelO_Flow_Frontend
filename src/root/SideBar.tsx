@@ -38,7 +38,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   return (
     <nav
       data-gaelo-flow="sidebar"
-      className="flex-shrink-0 w-64 h-screen border-transparent rounded-tr-40"
+      className="shrink-0 w-64 h-screen border-transparent rounded-tr-40"
     >
       <main className="flex flex-col h-full rounded-tr-40 bg-primary dark:bg-slate-950">
         {/* Logo */}

@@ -18,7 +18,7 @@ const Modal = ({ show, size = "lg", children, ...props }: ModalProps) => {
     <div
       data-gaelo-flow='modal'
       className={
-        "fixed left-0 top-0 z-[1400] w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-500 bg-opacity-50 dark:text-white " +
+        "fixed left-0 top-0 z-[1400] w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-500 bg-black/50 dark:text-white " +
         (show ? "open" : "hidden")
       }
       {...props}
@@ -30,7 +30,7 @@ const Modal = ({ show, size = "lg", children, ...props }: ModalProps) => {
             SizeClasses[size]
           }
         >
-          <div className="relative flex w-full flex-col bg-white shadow-sm rounded-2xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+          <div className="relative flex w-full flex-col bg-white shadow-xs rounded-2xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
             {children}
           </div>
 
@@ -66,7 +66,7 @@ const Header = ({
         <button
           type="button"
           onClick={onClose}
-          className="inline-flex items-center justify-center w-8 h-8 text-gray-500 transition-all rounded-md hs-dropdown-toggle hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+          className="inline-flex items-center justify-center w-8 h-8 text-gray-500 transition-all rounded-md hs-dropdown-toggle hover:text-gray-400 focus:outline-hidden focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
         >
           <span className="sr-only">Close</span>
           <svg
