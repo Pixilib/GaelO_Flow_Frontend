@@ -1,12 +1,14 @@
 @import "tailwindcss";
+@import "./../node_modules/preline/variants.css";
+@source "./../node_modules/preline/dist";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@source "preline/dist";
 @plugin '@tailwindcss/forms';
 @plugin 'tailwind-scrollbar';
+
 
 @custom-variant dark (&:where(.dark, .dark *));
 

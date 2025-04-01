@@ -5,6 +5,7 @@ import RootApp from "./root/RootApp";
 import { IStaticMethods } from "preline/preline";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+
 declare global {
   interface Window {
     HSStaticMethods: IStaticMethods;
