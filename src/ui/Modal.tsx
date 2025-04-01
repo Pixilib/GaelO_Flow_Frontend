@@ -18,7 +18,7 @@ const Modal = ({ show, size = "lg", children, ...props }: ModalProps) => {
     <div
       data-gaelo-flow='modal'
       className={
-        "fixed left-0 top-0 z-[1400] w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-500 bg-black/50 dark:text-white " +
+        "fixed left-0 top-0 z-[1400] w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-500 bg-black/5050 dark:text-white " +
         (show ? "open" : "hidden")
       }
       {...props}

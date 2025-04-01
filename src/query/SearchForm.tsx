@@ -101,7 +101,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
         <div className="flex flex-col gap-2">
           <Label value="Patient Name *" className="text-sm font-medium" align="left" />
           <Input
-            className="pl-2"
             placeholder="Search by patient name"
             value={patientName}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setPatientName(event.target.value)}
@@ -111,7 +110,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
         <div className="flex flex-col gap-2">
           <Label value="Patient Id *" className="text-sm font-medium" align="left" />
           <Input
-            className="pl-2"
             placeholder="Search by patient id"
             value={patientId}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setPatientId(event.target.value)}
@@ -121,7 +119,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
         <div className="flex flex-col gap-2">
           <Label value="Accession" className="text-sm font-medium" align="left" />
           <Input
-            className="pl-2"
             type="text"
             placeholder="Search by accession"
             value={accessionNumber}
@@ -134,7 +131,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
         <div className="flex flex-col gap-2">
           <Label value="Study Description" className="text-sm font-medium" align="left" />
           <Input
-            className="pl-2"
             placeholder="Search by study description"
             value={studyDescription}
             onChange={(event: ChangeEvent<HTMLInputElement>) => setStudyDescription(event.target.value)}
@@ -182,7 +178,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           label={<Label value="Data From" className="text-sm font-medium" align="left" />}
           value={dateFrom ?? undefined}
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleDataFromChange(event.target.value)}
-          className="disabled:text-slate-500 pl-2"
+          className="disabled:text-slate-500"
           disabled={isDateDisabled}
         />
 
@@ -191,7 +187,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           label={<Label value="Data To" className="text-sm font-medium" align="left" />}
           value={dateTo ?? undefined}
           onChange={(event: ChangeEvent<HTMLInputElement>) => handleDataToChange(event.target.value)}
-          className="disabled:text-slate-500 pl-2"
+          className="disabled:text-slate-500"
           disabled={isDateDisabled}
         />
       </div>

@@ -39,6 +39,19 @@
   --color-gray-custom: #D4CFCF;
   --color-light: #FFFFFF;
   --color-light-gray: #EFEFEF;
+
+  --shadow-custom: 5px 17px 15px rgba(58, 51, 51, 0.20);
+
+  --animate-typing: typing 3s steps(30) 1s 1 normal both;
+
+  @keyframes typing {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
 }
 
 @layer utilities {

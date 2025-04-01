@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       {...props}
-      className={`flex items-center justify-center ${colorClass} ${borderClasses} focus:shadow-outline rounded-full p-3 font-semibold text-white shadow-lg focus:outline-hidden disabled:bg-black/70 ${className}`}
+      className={`flex items-center justify-center ${colorClass} ${borderClasses} focus:shadow-outline rounded-full p-3 font-semibold text-white shadow-lg focus:outline-hidden disabled:${colorClass}/70 ${className}`}
     >
       {children}
     </button>
