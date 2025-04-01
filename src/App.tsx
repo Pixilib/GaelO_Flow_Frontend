@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "./store";
 import WelcomeRoot from "./welcome/WelcomeRoot";
 import RootApp from "./root/RootApp";
-import "preline/preline";
 import { IStaticMethods } from "preline/preline";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";

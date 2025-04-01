@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@source "preline/dist";
 @plugin '@tailwindcss/forms';
 @plugin 'tailwind-scrollbar';
 
@@ -36,7 +37,6 @@
   --color-gray-custom: #D4CFCF;
   --color-light: #FFFFFF;
   --color-light-gray: #EFEFEF;
-
 }
 
 @layer utilities {

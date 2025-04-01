@@ -13,7 +13,7 @@ import "./index.css";
 import ConfirmContextProvider from "./services/ConfirmContextProvider.tsx";
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
-import '@floating-ui/react'
+import '@floating-ui/react';
 
 const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {
   const cache = React.useMemo(
