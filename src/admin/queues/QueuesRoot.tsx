@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { Tabs, Tab, Card, CardBody } from "../../ui";
 import Anonymize from "./Anonymize";
 import Delete from "./Delete";
@@ -16,17 +16,17 @@ const QueuesRoot = () => {
         <Tab
           title="Retrieve"
           active={path.endsWith("retrieve")}
-          onClick={() => navigate("retrieve")}
+          onClick={() => navigate("/administration/queues/retrieve")}
         />
         <Tab
           title="Anonymize"
           active={path.endsWith("anonymize")}
-          onClick={() => navigate("anonymize")}
+          onClick={() => navigate("/administration/queues/anonymize")}
         />
         <Tab
           title="Delete"
           active={path.endsWith("delete")}
-          onClick={() => navigate("delete")}
+          onClick={() => navigate("/administration/queues/delete")}
         />
       </Tabs>
       <CardBody

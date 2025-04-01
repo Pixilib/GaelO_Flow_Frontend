@@ -116,7 +116,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleTimeStart(event)
               }
-              className={"focus:shadow-2xl w-full sm:w-auto"}
+              className={"focus:shadow-2xl w-full sm:w-auto pl-2"}
             />
             <Input
               type="time"
@@ -132,7 +132,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
                 handleTimeStop(event)
               }
               className={
-                "bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl w-full sm:w-auto"
+                "bg-gray-100 text-gray-400 focus:text-primary focus:shadow-2xl w-full sm:w-auto pl-2"
               }
             />
             <div className="flex flex-col w-full text-center sm:w-auto">

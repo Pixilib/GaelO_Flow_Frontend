@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@plugin '@tailwindcss/forms';
+@plugin 'tailwind-scrollbar';
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -33,6 +36,7 @@
   --color-gray-custom: #D4CFCF;
   --color-light: #FFFFFF;
   --color-light-gray: #EFEFEF;
+
 }
 
 @layer utilities {
@@ -58,3 +62,4 @@
     @apply !ring-transparent;
   }
 }
+

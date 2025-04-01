@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router";
 import MenuItem from "../ui/menu/MenuItem";
 import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
@@ -26,7 +26,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   };
 
   const adminItems = [
-    { title: "General", path: "/administration/general", isActive: location.pathname === "/administration/general" },
+    { title: "General", path: "/administration/general/redis", isActive: location.pathname.includes("/administration/general") },
     { title: "Modalities", path: "/administration/modalities", isActive: location.pathname === "/administration/modalities" },
     { title: "Peers", path: "/administration/peers", isActive: location.pathname === "/administration/peers" },
     { title: "Queues", path: "/administration/queues/retrieve", isActive: location.pathname === "/administration/queues" },

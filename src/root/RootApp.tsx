@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 
 import { logout } from "../reducers/UserSlice";
 
@@ -20,7 +20,7 @@ import AutoRetrieveRoot from "../auto-retrieve/AutoRetrieveRoot";
 import HelpRoot from "../help/HelpRoot";
 
 const titlePath: { [key: string]: string } = {
-  "/administration/general": "General",
+  "/administration/general/redis": "General",
   "/administration/modalities": "Modalities",
   "/administration/jobs": "Jobs",
   "/administration/labels": "Labels",
@@ -76,7 +76,9 @@ const RootApp = () => {
         <div className="mx-6 my-6">
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/administration/*" element={<AdminRoot />} />
+            <Route path="/administration">
+              <Route path="*" element={<AdminRoot />} />
+            </Route>
             <Route path="/query" element={<QueryRoot />} />
             <Route path="/auto-retrieve/*" element={<AutoRetrieveRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />

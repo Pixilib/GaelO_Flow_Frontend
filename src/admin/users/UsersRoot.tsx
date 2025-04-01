@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { Tabs, Tab, Card, CardBody } from "../../ui";
 import { Colors } from "../../utils";
 import Roles from "./roles/Roles";
@@ -11,7 +11,7 @@ const UsersRoot = () => {
     const path = location.pathname;
 
     const handleTabClick = (tab: string) => {
-        navigate(tab);
+        navigate('/administration/users/' + tab);
     };
 
     const isUsersPath = path.endsWith("users");

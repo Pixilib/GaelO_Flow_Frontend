@@ -8,7 +8,6 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
-    "storybook-addon-react-router-v6",
     "@storybook/addon-actions",
     "@chromatic-com/storybook"
   ],
@@ -18,7 +17,9 @@ const config: StorybookConfig = {
     options: {},
   },
 
-  docs: {},
+  docs: {
+    autodocs: true
+  },
 
   typescript: {
     reactDocgen: "react-docgen-typescript"

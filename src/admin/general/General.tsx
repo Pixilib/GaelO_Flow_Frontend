@@ -1,4 +1,4 @@
-import { Route, Routes, To, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, To, useLocation, useNavigate } from "react-router";
 import { Tabs, Tab } from "../../ui";
 import RedisCard from "./RedisCard";
 import OrthancSettingsCard from "./OrthancCard";
@@ -28,8 +28,8 @@ const General = () => {
       <Tabs className="bg-primary rounded-t-xl">
         <Tab
           title="Redis"
-          active={location.pathname === "/administration/general"}
-          onClick={() => handleTabClick("/administration/general")}
+          active={location.pathname === "/administration/general/redis"}
+          onClick={() => handleTabClick("/administration/general/redis")}
         />
         <Tab
           title="Orthanc"
@@ -40,7 +40,7 @@ const General = () => {
       <div className="mt-4 mb-4">
         <Routes>
           <Route
-            path="/"
+            path="/redis"
             element={
               <RedisCard
                 redisData={{
