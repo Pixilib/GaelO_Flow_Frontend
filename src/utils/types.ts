@@ -391,7 +391,7 @@ export type AnonStudy = {
 };
 
 export type StudyModifyPayload = {
-  replace: Partial<StudyMainDicomTags & PatientMainDicomTags>;
+  replace: Partial<StudyMainDicomTags & PatientMainDicomTags> & { raw : {[key :string] : string|number}};
   remove: string[];
   removePrivateTags: boolean;
   force: boolean;
