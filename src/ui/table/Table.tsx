@@ -200,7 +200,7 @@ function Table<T>({
                     {table.getRowModel().rows.map((row) => (
                         <tr
                             key={row.id}
-                            className={`border-b dark:border-neutral-800 ${getRowClasses(row.original)}`}
+                            className={`border-b border-gray-custom dark:border-neutral-800 ${getRowClasses(row.original)}`}
                             style={getRowStyles?.(row.original)}
                             onClick={() => onRowClick?.(row.original)}
                         >

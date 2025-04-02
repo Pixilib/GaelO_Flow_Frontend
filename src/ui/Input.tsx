@@ -61,7 +61,7 @@ const Input = ({
     disabled:opacity-60`;
 
   // Génération de la classe CSS pour contrôler les arrondis
-  const borderClasses = bordered ? " border-1 border-gray " : "border-none";
+  const borderClasses = bordered ? " border-1 border-gray-custom " : "border-none";
   const roundedRightClass = roundedRight ? "rounded-xl" : "rounded-none";
 
   return (

@@ -74,7 +74,7 @@ const SelectInput = ({
       formatGroupLabel={formatGroupLabel}
       isMulti={isMulti}
       value={selectedValue}
-      className={`w-full ${rounded ? "rounded-3xl" : ""} focus:outline-none focus:ring-2 focus:ring-gray-300`}
+      className={`w-full ${rounded ? "rounded-3xl" : ""} focus:outline-hidden focus:ring-2 focus:ring-gray-300`}
       closeMenuOnSelect={closeMenuOnSelect}
     />
   );

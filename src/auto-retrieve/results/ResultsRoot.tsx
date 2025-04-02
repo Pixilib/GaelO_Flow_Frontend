@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import Papa from "papaparse";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { Button, Tab, Tabs } from "../../ui";
 import ResultStudiesTable from "./ResultStudiesTable";
 import ResultSeriesTable from "./ResultSeriesTable";
@@ -50,7 +50,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
     }
 
     const handleTabClick = (tab: string) => {
-        navigate(tab);
+        navigate('/auto-retrieve/results/' +tab);
     };
 
     const onAddToBasketSeries = () => {

@@ -49,7 +49,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
             ${className}
             peer
             border-2
-            focus:outline-none
+            focus:outline-hidden
             focus:ring-2
             focus:ring-offset-2
             invalid:border-red-500 

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import General from "./general/General";
 import JobRoot from "./jobs/JobRoot";
 import QueuesRoot from "./queues/QueuesRoot";
@@ -11,11 +11,17 @@ const AdminRoot = () => {
     return (
         <div className="size-full" data-gaelo-flow="admin-root">
             <Routes>
-                <Route path="/general/*" element={<General />} />
                 <Route path="/jobs" element={<JobRoot />} />
                 <Route path="/modalities" element={<ModalitiesRoot />} />
-                <Route path="/queues/*" element={<QueuesRoot />} />
-                <Route path="/users/*" element={<UsersRoot />} />
+                <Route path="/queues">
+                    <Route path="*" element={<QueuesRoot />} />
+                </Route>
+                <Route path="/users">
+                    <Route path="*" element={<UsersRoot />} />
+                </Route>
+                <Route path="/general">
+                    <Route path="*" element={<General/>} />
+                </Route>
                 <Route path="/peers" element={<PeersRoot />} />
                 <Route path="/labels" element={<LabelRoot />} />
             </Routes>

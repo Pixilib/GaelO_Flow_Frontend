@@ -43,7 +43,7 @@ const JobRoot = () => {
       />
       <CardBody
         color={Colors.almond} roundedTopLeft roundedTopRight
-        className="rounded dark:bg-neutral-500 rounded-br-2xl rounded-bl-2xl">
+        className="rounded-sm dark:bg-neutral-500 rounded-br-2xl rounded-bl-2xl">
         <div className="w-full ">
           <JobTable data={jobData as any} onJobAction={handleJobAction} />
         </div>

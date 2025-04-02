@@ -1,7 +1,8 @@
+import React from 'react';
 import {Meta, StoryObj } from "@storybook/react";
 import Header from "../src/root/Header";
 import { action } from '@storybook/addon-actions';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router';
 
 const meta: Meta<typeof Header> = {
     title: 'GAELO FLOW Components/Header',

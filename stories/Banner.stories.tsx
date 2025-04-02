@@ -1,5 +1,6 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router';
 import type BannerProps from "../src/ui/menu/Banner";
 import Banner  from "../src/ui/menu/Banner";
 
