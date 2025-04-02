@@ -4,13 +4,14 @@ import Button from "../Button";
 import Input from "../Input";
 import { useState } from "react";
 
+
 const KeyValueTable = () => {
     const [fields, setFields] = useState([]);
 
     const handleButtonClick = () => {
-        setFields(prevFields => [...prevFields, { id: Date.now(), key: "", value: "" }]);
+        setFields(prevFields => [...prevFields, { id: crypto.randomUUID(), key: "", value: "" }]);
     };
-    
+
     const handleDeleteField = (id: number) => {
         setFields(prevFields => prevFields.filter(field => field.id !== id));
     }
@@ -20,11 +21,11 @@ const KeyValueTable = () => {
             <div className="flex flex-col gap-5 justify-center items-center overflow-auto">
                 {fields.map((field)=> (
                     <div key={field.id} className="flex w-full gap-10 items-center"> 
-                        <Input 
+                        <Input
                             placeholder="key"
                         />
                         <p> = </p>
-                        <Input 
+                        <Input
                             placeholder="value"
                         />
                         <Trash onClick={() => handleDeleteField(field.id)} size={"3rem"} className="fill-danger" />
