@@ -1,6 +1,58 @@
+@import "tailwindcss" important;
+@import "./../node_modules/preline/variants.css";
+@source "./../node_modules/preline/dist";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@plugin '@tailwindcss/forms';
+@plugin 'tailwind-scrollbar';
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --radius-18: 18px;
+  --radius-20: 20px;
+  --radius-40: 40px;
+  --radius-70: 70px;
+
+  --color-almond: #F7E9D8;
+  --color-almond-hover: #F6D1A7;
+  --color-primary: #4746b8;
+  --color-primary-active: #333182;
+  --color-primary-light: #8C8BD3;
+  --color-secondary: #EB9124;
+  --color-secondary-hover: #BD6800;
+  --color-danger: #DB1F22;
+  --color-danger-hover: #8A1315;
+  --color-success-light: #CBDCD4;
+  --color-success: #037F6E;
+  --color-success-hover: #2E7058;
+  --color-disabled: #b2b2b2;
+  --color-warning: #DDAD00;
+  --color-warning-hover: #A88400;
+  --color-dark: #484544;
+  --color-blue-custom: #2F77BA;
+  --color-blue-custom-hover: #245D92;
+  --color-gray-custom: #D4CFCF;
+  --color-light: #FFFFFF;
+  --color-light-gray: #EFEFEF;
+
+  --shadow-custom: 5px 17px 15px rgba(58, 51, 51, 0.20);
+
+  --animate-typing: typing 3s steps(30) 1s 1 normal both;
+
+  @keyframes typing {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+}
 
 @layer utilities {
   .custom-scrollbar {
@@ -25,3 +77,4 @@
     @apply !ring-transparent;
   }
 }
+

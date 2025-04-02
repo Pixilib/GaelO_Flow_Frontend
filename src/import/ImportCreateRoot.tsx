@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { Tabs, Tab } from "../ui";
 
 import CreateRoot from "./create/CreateRoot";
@@ -9,7 +9,7 @@ const ImportCreateRoot = () => {
     const navigate = useNavigate();
 
     const handleTabClick = (tab: string) => {
-        navigate(tab);
+        navigate('/import/' +tab);
     };
 
     return (

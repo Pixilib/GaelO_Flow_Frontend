@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "../store"
 
 import ToolItem from "./ToolItem"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router"
 import { Anon, Export, Trash } from "../icons"
 
 const ToolList = () => {

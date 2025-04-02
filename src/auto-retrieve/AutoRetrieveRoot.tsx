@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 
 import QueryRoot from "./query/QueryRoot";
 import ResultsRoot from "./results/ResultsRoot";
@@ -109,9 +109,11 @@ const AutoRetrieveRoot = () => {
       <div>
         <Routes>
           <Route path="/" element={<QueryRoot onStartStudyQueries={handleStartStudyQueries} queries={queries} onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
-          <Route path="/results/*" element={<ResultsRoot
-            onStartSeriesQueries={handleStartSeriesQueries}
-          />} />
+          <Route path="/results">
+            <Route path="*" element={<ResultsRoot
+              onStartSeriesQueries={handleStartSeriesQueries}
+            />} />
+          </Route>
           <Route path="/basket" element={<BasketRoot />} />
           <Route path="/task" element={<TaskRoot />} />
         </Routes>

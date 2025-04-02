@@ -73,7 +73,7 @@ export const WithCloseButton = () => {
 
   return (
     <>
-      <button onClick={handleButtonClick} className="p-3 text-white rounded bg-success">Toggle Form Card</button>
+      <button onClick={handleButtonClick} className="p-3 text-white rounded-sm bg-success">Toggle Form Card</button>
       {showFormCard && (
         <FormCard
           title="Form Card with Close Button"

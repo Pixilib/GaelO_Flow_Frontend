@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { SignUpForm } from "./SignUpForm";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import ChangePasswordForm from "./ChangePasswordForm";
@@ -38,7 +38,7 @@ const Welcome = () => {
   const classLink = "text-gray-600 hover:underline hover:text-indigo-800 cursor-pointer";
 
   return (
-    <main className="flex w-screen h-screen bg-gradient-to-r from-primary to-secondary dark:from-blue-900 dark:to-orange-800 bg-opacity-5">
+    <main className="flex w-screen h-screen bg-gradient-to-r from-primary to-secondary dark:from-blue-900 dark:to-orange-800">
       <div className="relative flex items-center justify-center w-1/2 h-full">
         <img
           src="/gaelo-flow-white2.svg"

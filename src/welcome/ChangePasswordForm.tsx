@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 import { changePassword } from "../services/auth";
 import { useCustomMutation } from "../utils/reactQuery";

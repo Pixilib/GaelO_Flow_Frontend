@@ -55,7 +55,7 @@ export const CardStory: Story = {
         <CardBody>
           Lorem ipsum
         </CardBody>
-        <CardFooter className="flex-shrink-0">
+        <CardFooter className="shrink-0">
           <div className="flex items-center space-x-10">
             <Button color={Colors.success}><ChevronRight /></Button>
             <Button color={Colors.orange}><ChevronRight /></Button>
