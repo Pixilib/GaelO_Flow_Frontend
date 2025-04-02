@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" important;
 @import "./../node_modules/preline/variants.css";
 @source "./../node_modules/preline/dist";
 

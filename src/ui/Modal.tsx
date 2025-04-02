@@ -18,7 +18,7 @@ const Modal = ({ show, size = "lg", children, ...props }: ModalProps) => {
     <div
       data-gaelo-flow='modal'
       className={
-        "fixed left-0 top-0 z-[1400] w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-500 bg-black/5050 dark:text-white " +
+        "fixed left-0 top-0 z-[1400] w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-500/50 dark:text-white " +
         (show ? "open" : "hidden")
       }
       {...props}
@@ -56,7 +56,7 @@ const Header = ({
   return (
     <div
       data-gaelo-flow='modal-header'
-      className={"flex justify-between w-full py-3 px-4 border-b dark:border-gray-700 " + className}
+      className={"flex justify-between w-full py-3 px-4 border-b border-gray-custom dark:border-gray-700" + className}
       {...props}
     >
       <div>
@@ -109,7 +109,7 @@ interface FooterProps {
 }
 const Footer = ({ children, className = "", ...props }: FooterProps) => {
   return (
-    <div data-gaelo-flow='modal-footer' className={"relative w-full gap-x-2 py-3 px-4 border-t dark:border-gray-700 " + className} {...props}>
+    <div data-gaelo-flow='modal-footer' className={"relative w-full gap-x-2 py-3 px-4 border-t border-gray-custom dark:border-gray-700 " + className} {...props}>
       {children}
     </div>
   );
