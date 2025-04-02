@@ -3,6 +3,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { StudyModifyPayload, StudyMainDicomTags, Study, PatientMainDicomTags } from '../../utils/types';
 import { Button, CheckBox, Input, InputWithDelete } from "../../ui";
+import KeyValueTable from "../../ui/table/KeyValueTable"
 
 import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
@@ -140,6 +141,9 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                     fieldsToRemove={fieldsToRemove}
                 />
             </div>
+            <div className="">
+                <KeyValueTable />
+            </div>
             <div className="flex justify-around">
                 <CheckBox
                     label="Remove private tags"
@@ -161,7 +165,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                 />
             </div>
             <div className="flex justify-center">
-                <Button type="submit" color={Colors.secondary}>Modify</Button>
+                <Button type="submit" color={Colors.primary}>Modify</Button>
             </div>
             {jobId &&
                 (
