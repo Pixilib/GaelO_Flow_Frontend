@@ -7,6 +7,7 @@ import KeyValueTable from "../../ui/table/KeyValueTable"
 
 import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
+import SelectTranscode from "../SelectTranscode";
 
 type StudyEditFormProps = {
     data: Study;
@@ -31,6 +32,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
     const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
+    const [transferSyntax, setTrasferSyntax] = useState('None');
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -43,6 +45,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
         const replace: Partial<StudyMainDicomTags & PatientMainDicomTags> & { raw: { [key: string]: string | number } } = {
             raw: {}
         };
+        let transcode = 'None';
 
         if (patientId !== data?.patientMainDicomTags?.patientId) replace.patientId = patientId;
         if (patientName !== data?.patientMainDicomTags?.patientName) replace.patientName = patientName;
@@ -56,9 +59,10 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
         if (studyDescription !== data?.mainDicomTags?.studyDescription) replace.studyDescription = studyDescription;
         if (studyId !== data?.mainDicomTags?.studyId) replace.studyId = studyId;
         if (studyTime !== data?.mainDicomTags?.studyTime) replace.studyTime = studyTime;
+        if (transferSyntax !== 'None')  transcode = transferSyntax;
 
-        replace.raw = Object.fromEntries(keyVal.map(({ key, val }) => [key, val]));
-
+        replace.raw = { ...replace.raw, ...Object.fromEntries(keyVal.map(({ key, val }) => [key, val])) };
+        
         const payload: StudyModifyPayload = {
             replace,
             remove: fieldsToRemove,
@@ -67,11 +71,12 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
             keepSource,
             force: true,
             synchronous: false,
+            transcode,
         };
 
+        console.log("payload", payload);
         onSubmit({ id: data.id, payload });
     };
-
 
     return (
         <form onSubmit={handleSubmit} className="mt-5 space-y-8">
@@ -102,20 +107,16 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                 />
             </div>
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+                <SelectTranscode
+                    transfetSyntax={transferSyntax}
+                    setTrasferSyntax={setTrasferSyntax}
+                />
                 <InputWithDelete
                     label="Accession Number"
                     value={accessionNumber}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setAccessionNumber(e.target.value)}
                     onRemove={handleFieldRemoval}
                     fieldName="accessionNumber"
-                    fieldsToRemove={fieldsToRemove}
-                />
-                <InputWithDelete
-                    label="Study Date"
-                    value={studyDate}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyDate(e.target.value)}
-                    onRemove={handleFieldRemoval}
-                    fieldName="studyDate"
                     fieldsToRemove={fieldsToRemove}
                 />
             </div>
@@ -144,6 +145,14 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyTime(e.target.value)}
                     onRemove={handleFieldRemoval}
                     fieldName="studyTime"
+                    fieldsToRemove={fieldsToRemove}
+                />
+                <InputWithDelete
+                    label="Study Date"
+                    value={studyDate}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setStudyDate(e.target.value)}
+                    onRemove={handleFieldRemoval}
+                    fieldName="studyDate"
                     fieldsToRemove={fieldsToRemove}
                 />
             </div>

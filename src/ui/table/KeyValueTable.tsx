@@ -31,7 +31,6 @@ const KeyValueTable = ({keyVal, setKeyVal, buttonText, keyPlaceHolder, valuePlac
 
     const handleRemoveKeyVal = (id: string) => {
         setKeyVal(prevState => prevState.filter(kv => kv.id !== id));
-
     };
 
     return (

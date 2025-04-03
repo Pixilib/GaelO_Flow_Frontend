@@ -21,7 +21,7 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
     const [jobId, setJobId] = useState<string | null>(null);
 
     const { mutateAsync: mutateStudy } = useCustomMutation<any, { id: string, payload: StudyModifyPayload }>(
-        ({ id, payload }) => modifyStudy(id, payload),
+        ({ id, payload }) => modifyStudy(id, payload, payload.transcode),
         [['studies'], ['jobs']],
         {
             onSuccess: (data) => {

@@ -398,6 +398,7 @@ export type StudyModifyPayload = {
   keep: string[];
   synchronous: boolean;
   keepSource: boolean;
+  transcode: string;
 };
 
 export type SeriesModifyPayload = {
