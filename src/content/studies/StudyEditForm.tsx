@@ -71,7 +71,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
             keepSource,
             force: true,
             synchronous: false,
-            transcode,
+            ...(transcode && transcode !== 'None') ? { transcode } : {},
         };
 
         console.log("payload", payload);

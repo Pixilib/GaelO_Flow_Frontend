@@ -402,13 +402,14 @@ export type StudyModifyPayload = {
 };
 
 export type SeriesModifyPayload = {
-  replace: Partial<SeriesMainDicomTags>;
+  replace: Partial<SeriesMainDicomTags> & { raw : {[key :string] : string|number}};
   remove: string[];
   removePrivateTags: boolean;
   keepSource: boolean;
   force: boolean;
   synchronous: boolean;
   keep: string[];
+  transcode: string;
 };
 
 export type Queue = {

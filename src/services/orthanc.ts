@@ -340,7 +340,8 @@ export const modifyStudy = (
 
 export const modifySeries = (
   seriesId: string,
-  series: SeriesModifyPayload
+  series: SeriesModifyPayload,
+  transcode : string|undefined
 ): Promise<OrthancResponse> => {
   const seriesPayloadUpdate = {
     Replace: {
@@ -355,6 +356,7 @@ export const modifySeries = (
       StationName: series.replace.stationName,
       SeriesDate: series.replace.seriesDate,
       SeriesTime: series.replace.seriesTime,
+      ...series.replace.raw
     },
     Remove: series.remove.map(
       (field) => field.charAt(0).toUpperCase() + field.slice(1)
@@ -364,6 +366,7 @@ export const modifySeries = (
     Synchronous: false,
     KeepSource: series.keepSource,
     Keep: series.keep,
+    Transcode : transcode
   };
   return axios
     .post(`/api/series/${seriesId}/modify`, seriesPayloadUpdate)
