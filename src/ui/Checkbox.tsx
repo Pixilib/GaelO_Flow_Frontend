@@ -17,6 +17,18 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 }) => {
     const id = useId();
 
+    const inputClassNames= `w-4
+        h-4
+        border-gray-300
+        rounded-xs
+        text-secondary
+        focus:ring-secondary
+        dark:focus:ring-orange-600
+        dark:ring-offset-gray-800
+        focus:ring-2 
+        ${checked ? 'bg-secondary' : 'bg-gray-100'}
+        dark:${checked ? 'bg-secondary' : 'bg-gray-700'} peer`;
+
     return (
         <div className={`flex items-center ${bordered ? 'border' : ''} rounded`}>
             <input
@@ -24,7 +36,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
                 type="checkbox"
                 checked={checked}
                 onChange={onChange}
-                className="w-4 h-4 bg-gray-100 border-gray-300 rounded-xs text-secondary focus:ring-secondary dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                className={inputClassNames}
                 {...props}
             />
             {label && (

@@ -83,7 +83,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
       </button>
       <div
         onClick={(e) => handleDropdownClick(e, 'dropdown-id')}
-        className="hs-dropdown-menu hs-dropdown z-dropdown transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
+        className="hs-dropdown-menu !z-[999] transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-slate-800 dark:border dark:border-gray-700"
         aria-labelledby="hs-dropdown-custom-trigger"
         id="dropdown-id"
       >
@@ -92,7 +92,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
           <button
             key={index}
             onClick={() => handleOptionClick(option)}
-            className="flex items-center gap-x-3.5 py-2 w-full px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-gray-300 dark:focus:bg-slate-700"
+            className="flex items-center gap-x-3.5 py-2 w-full px-3 rounded-lg text-sm hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:hover:bg-slate-700 dark:hover:text-gray-300 dark:focus:bg-slate-700"
             style={{ color: option.color }}
           >
             {option.icon && <span>{option.icon}</span>}

@@ -4,6 +4,8 @@ import { InputWithDelete, CheckBox, Button } from "../../ui";
 
 import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
+import SelectTranscode from "../SelectTranscode";
+import KeyValueTable from "../../ui/table/KeyValueTable";
 
 type SeriesEditFormProps = {
     data: Series;
@@ -22,6 +24,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
+    const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
+    const [transferSyntax, setTrasferSyntax] = useState("None");
 
     useEffect(() => {
         if (keepUIDs) setKeepSource(true)
@@ -36,7 +40,10 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        const replace: Partial<SeriesMainDicomTags> = {};
+        const replace: Partial<SeriesMainDicomTags> & { raw: { [key: string]: string | number } } = {
+            raw: {}
+        };
+        let transcode = 'None';
 
         if (manufacturer !== data.mainDicomTags.manufacturer) replace.manufacturer = manufacturer;
         if (modality !== data.mainDicomTags.modality) replace.modality = modality;
@@ -44,6 +51,9 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         if (seriesNumber !== data.mainDicomTags.seriesNumber?.toString()) replace.seriesNumber = seriesNumber;
         if (seriesDate !== data.mainDicomTags.seriesDate) replace.seriesDate = seriesDate;
         if (seriesTime !== data.mainDicomTags.seriesTime) replace.seriesTime = seriesTime;
+        if (transferSyntax !== 'None')  transcode = transferSyntax;
+
+        replace.raw = { ...replace.raw, ...Object.fromEntries(keyVal.map(({ key, val }) => [key, val])) };
 
         const payload: SeriesModifyPayload = {
             replace,
@@ -53,6 +63,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             force: true,
             synchronous: false,
             keep: keepUIDs ? ['SeriesInstanceUID', 'SOPInstanceUID'] : [],
+            ...(transcode && transcode !== 'None') ? { transcode } : {},
         };
 
         onSubmit({ id: data.id, payload });
@@ -111,6 +122,21 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                     onRemove={handleFieldRemoval}
                     fieldName="seriesTime"
                     fieldsToRemove={fieldsToRemove}
+                />
+            </div>
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+                <SelectTranscode
+                    transfetSyntax={transferSyntax}
+                    setTrasferSyntax={setTrasferSyntax}
+                />
+            </div>
+            <div>
+                <KeyValueTable 
+                    keyVal={keyVal}
+                    setKeyVal={setKeyVal}
+                    buttonText="Add a field"
+                    keyPlaceHolder="key"
+                    valuePlaceHolder="value"
                 />
             </div>
             <div className="flex justify-around">
