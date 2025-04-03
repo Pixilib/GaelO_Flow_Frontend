@@ -1,6 +1,6 @@
 
 
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { StudyModifyPayload, StudyMainDicomTags, Study, PatientMainDicomTags } from '../../utils/types';
 import { Button, CheckBox, Input, InputWithDelete } from "../../ui";
 import KeyValueTable from "../../ui/table/KeyValueTable"
@@ -30,15 +30,19 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
+    const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
             checked ? [...prev, field] : prev.filter((item) => item !== field)
         );
     };
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
-        const replace: Partial<StudyMainDicomTags & PatientMainDicomTags> = {};
+        const replace: Partial<StudyMainDicomTags & PatientMainDicomTags> & { raw: { [key: string]: string | number } } = {
+            raw: {}
+        };
 
         if (patientId !== data?.patientMainDicomTags?.patientId) replace.patientId = patientId;
         if (patientName !== data?.patientMainDicomTags?.patientName) replace.patientName = patientName;
@@ -52,6 +56,8 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
         if (studyDescription !== data?.mainDicomTags?.studyDescription) replace.studyDescription = studyDescription;
         if (studyId !== data?.mainDicomTags?.studyId) replace.studyId = studyId;
         if (studyTime !== data?.mainDicomTags?.studyTime) replace.studyTime = studyTime;
+
+        replace.raw = Object.fromEntries(keyVal.map(({ key, val }) => [key, val]));
 
         const payload: StudyModifyPayload = {
             replace,
@@ -142,7 +148,13 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                 />
             </div>
             <div className="">
-                <KeyValueTable />
+                <KeyValueTable 
+                    keyVal={keyVal}
+                    setKeyVal={setKeyVal}
+                    buttonText="Add a field"
+                    keyPlaceHolder="key"
+                    valuePlaceHolder="value"
+                />
             </div>
             <div className="flex justify-around">
                 <CheckBox
