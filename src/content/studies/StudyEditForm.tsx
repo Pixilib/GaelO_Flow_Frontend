@@ -188,13 +188,11 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
             <div className="flex justify-center">
                 <Button type="submit" color={Colors.primary}>Modify</Button>
             </div>
-            {jobId &&
-                (
-                    <div className="flex flex-col items-center justify-center">
-                        <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
-                    </div>
-                )
-            }
+            {jobId && (
+                <div className="flex flex-col items-center justify-center">
+                    <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
+                </div>
+            )}
         </form>
     );
 };

@@ -28,8 +28,13 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
     const [keepUIDs, setKeepUIDs] = useState(false)
     const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
     const [transferSyntax, setTrasferSyntax] = useState("None");
-    const [pixelMask, setPixelMask] = useState<[dimension: string, { x: number, y: number, z: number }, { x: number, y: number, z: number }] [] | null>(null);
-    const [invalidCoordinates, setInvalidCoordinates] = useState(false);
+    const [pixelMask, setPixelMask] = useState<[
+        dimension: string, // "2D" or "3D"
+        maskType: string, // "MeanFilter" or "Fill"
+        maskTypeValue: number, // value for the mask
+        { x: number, y: number, z: number }, // start coordinates
+        { x: number, y: number, z: number }, // end coordinates
+    ] [] | null>(null);
 
     useEffect(() => {
         if (keepUIDs) setKeepSource(true)
@@ -48,6 +53,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             raw: {}
         };
         let transcode = 'None';
+
+        console.log(pixelMask);
 
         if (manufacturer !== data.mainDicomTags.manufacturer) replace.manufacturer = manufacturer;
         if (modality !== data.mainDicomTags.modality) replace.modality = modality;
@@ -170,16 +177,13 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                 />
             </div>
             <div className="flex justify-center">
-                <Button type="submit" color={Colors.secondary}>Modify</Button>
-                {
-                    jobId && (
-                        <div className="flex flex-col items-center justify-center">
-                            <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
-                        </div>
-                    )
-                }
+                <Button type="submit" color={Colors.primary}>Modify</Button>
             </div>
-
+            {jobId && (
+                <div className="flex flex-col items-center justify-center">
+                    <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
+                </div>
+            )}
         </form>
     );
 };

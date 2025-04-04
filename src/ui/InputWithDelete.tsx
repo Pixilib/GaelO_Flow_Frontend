@@ -27,26 +27,26 @@ const InputWithDelete: React.FC<InputWithDeleteProps> = ({
     const isMarkedForRemoval = fieldsToRemove.includes(fieldName);
 
     return (
-        <fieldset className={`flex items-center gap-3 ${isMarkedForRemoval ? 'opacity-50' : ''}`}>
-            <Input
-                label={
-                    <Label
-                        value={label}
-                        className={`text-sm font-medium ${isMarkedForRemoval ? 'line-through' : ''}`}
-                    />
-                }
-                value={value || ""}
-                onChange={onChange}
-                readOnly={readOnly || isMarkedForRemoval}
-                required={required}
-                placeholder={placeholder}
-                disabled={isMarkedForRemoval}
-                className={`
+        <fieldset className={`flex flex-col ${isMarkedForRemoval ? 'opacity-50' : ''}`}>
+            <Label
+                value={label}
+                className={`text-sm font-medium ${isMarkedForRemoval ? 'line-through' : ''}`}
+            />
+            <div className="flex items-center gap-3 w-full">
+                <Input
+                    value={value || ""}
+                    onChange={onChange}
+                    readOnly={readOnly || isMarkedForRemoval}
+                    required={required}
+                    placeholder={placeholder}
+                    disabled={isMarkedForRemoval}
+                    className={`
                         w-full 
                         ${isMarkedForRemoval ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : ''}
                     `}
-            />
-            <Trash size={"1.3rem"} className="fill-danger cursor-pointer" onClick={() => onRemove(fieldName, !isMarkedForRemoval)} />
+                />
+                <Trash size={"1.3rem"} className="fill-danger cursor-pointer" onClick={() => onRemove(fieldName, !isMarkedForRemoval)} />
+            </div>
         </fieldset>
     );
 };
