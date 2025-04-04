@@ -46,7 +46,7 @@ const InputWithDelete: React.FC<InputWithDeleteProps> = ({
                         ${isMarkedForRemoval ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : ''}
                     `}
             />
-            <Trash size={"1.3rem"} className="fill-danger" onClick={() => onRemove(fieldName, !isMarkedForRemoval)} />
+            <Trash size={"1.3rem"} className="fill-danger cursor-pointer" onClick={() => onRemove(fieldName, !isMarkedForRemoval)} />
         </fieldset>
     );
 };

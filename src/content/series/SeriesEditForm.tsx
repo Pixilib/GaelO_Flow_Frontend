@@ -6,6 +6,8 @@ import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
 import SelectTranscode from "../SelectTranscode";
 import KeyValueTable from "../../ui/table/KeyValueTable";
+import { Dimensions } from "../../utils/enums";
+import PixelMask from "./PixelMask";
 
 type SeriesEditFormProps = {
     data: Series;
@@ -26,6 +28,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
     const [keepUIDs, setKeepUIDs] = useState(false)
     const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
     const [transferSyntax, setTrasferSyntax] = useState("None");
+    const [pixelMask, setPixelMask] = useState<[dimension: string, { x: number, y: number, z: number }, { x: number, y: number, z: number }] [] | null>(null);
+    const [invalidCoordinates, setInvalidCoordinates] = useState(false);
 
     useEffect(() => {
         if (keepUIDs) setKeepSource(true)
@@ -128,6 +132,12 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                 <SelectTranscode
                     transfetSyntax={transferSyntax}
                     setTrasferSyntax={setTrasferSyntax}
+                />
+            </div>
+            <div>
+                <PixelMask
+                    pixelMask={pixelMask}
+                    setPixelMask={setPixelMask}
                 />
             </div>
             <div>

@@ -34,8 +34,8 @@ const KeyValueTable = ({keyVal, setKeyVal, buttonText, keyPlaceHolder, valuePlac
     };
 
     return (
-        <div className="p-2 overflow-auto max-h-40 rounded-xl bg-light-gray">
-            <div className="flex flex-col gap-5 justify-center items-center overflow-auto">
+        <div className="p-2 overflow-auto max-h-50 rounded-xl bg-light-gray">
+            <div className="flex flex-col gap-5 justify-center items-center">
                 {keyVal.map((kv)=> (
                     <div key={kv.id} className="flex w-full gap-10 items-center"> 
                         <Input
@@ -49,7 +49,9 @@ const KeyValueTable = ({keyVal, setKeyVal, buttonText, keyPlaceHolder, valuePlac
                             placeholder={valuePlaceHolder}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => handleValueChange(kv.id, e.target.value)}
                         />
-                        <Trash onClick={() => handleRemoveKeyVal(kv.id)} size={"3rem"} className="fill-danger" />
+                        <div className="w-10">
+                        <Trash onClick={() => handleRemoveKeyVal(kv.id)} size={"1.3rem"} className="fill-danger cursor-pointer" />
+                        </div>
                     </div>
                 ))}
                 <Button type="button" color={Colors.secondary} onClick={addKeyValue}>{buttonText}</Button>
