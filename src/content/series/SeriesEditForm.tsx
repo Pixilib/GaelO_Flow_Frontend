@@ -6,7 +6,6 @@ import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
 import SelectTranscode from "../SelectTranscode";
 import KeyValueTable from "../../ui/table/KeyValueTable";
-import { Dimensions } from "../../utils/enums";
 import PixelMask from "./PixelMask";
 
 type SeriesEditFormProps = {
