@@ -23,7 +23,7 @@ const EditSeries: React.FC<EditSeriesProps> = ({ series, onEditSeries, onClose, 
 
 
     const { mutateAsync: mutateSeries } = useCustomMutation<any, { id: string, payload: SeriesModifyPayload }>(
-        ({ id, payload }) => modifySeries(id, payload),
+        ({ id, payload }) => modifySeries(id, payload, payload.transcode),
         [['series'], ['jobs']],
         {
             onSuccess: (data) => {

@@ -391,23 +391,25 @@ export type AnonStudy = {
 };
 
 export type StudyModifyPayload = {
-  replace: Partial<StudyMainDicomTags & PatientMainDicomTags>;
+  replace: Partial<StudyMainDicomTags & PatientMainDicomTags> & { raw : {[key :string] : string|number}};
   remove: string[];
   removePrivateTags: boolean;
   force: boolean;
   keep: string[];
   synchronous: boolean;
   keepSource: boolean;
+  transcode: string;
 };
 
 export type SeriesModifyPayload = {
-  replace: Partial<SeriesMainDicomTags>;
+  replace: Partial<SeriesMainDicomTags> & { raw : {[key :string] : string|number}};
   remove: string[];
   removePrivateTags: boolean;
   keepSource: boolean;
   force: boolean;
   synchronous: boolean;
   keep: string[];
+  transcode: string;
 };
 
 export type Queue = {
