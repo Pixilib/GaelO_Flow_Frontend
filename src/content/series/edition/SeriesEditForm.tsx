@@ -1,12 +1,13 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Series, SeriesModifyPayload, SeriesMainDicomTags } from '../../utils/types';
-import { InputWithDelete, CheckBox, Button } from "../../ui";
+import { Series, SeriesModifyPayload, SeriesMainDicomTags } from '../../../utils/types';
+import { InputWithDelete, CheckBox, Button } from "../../../ui";
 
-import ProgressJob from "../../query/ProgressJob";
-import { Colors } from "../../utils";
-import SelectTranscode from "../SelectTranscode";
-import KeyValueTable from "../../ui/table/KeyValueTable";
+import ProgressJob from "../../../query/ProgressJob";
+import { Colors } from "../../../utils";
+import SelectTranscode from "../../SelectTranscode";
 import PixelMask from "./PixelMask";
+import { customTags } from "./CustomTags";
+import EditCustomTagsTable from "./EditCustomTagsTable";
 
 type SeriesEditFormProps = {
     data: Series;
@@ -25,8 +26,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
-    const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
-    const [transferSyntax, setTrasferSyntax] = useState("None");
+    const [customsTags, setCustomTags] = useState<customTags>({});
+    const [transferSyntax, setTrasferSyntax] = useState(null);
     const [pixelMask, setPixelMask] = useState<[
         dimension: string, // "2D" or "3D"
         maskType: string, // "MeanFilter" or "Fill"
@@ -45,15 +46,17 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         );
     };
 
+    const handleChangeCustomTags = (customTags: customTags) => {
+        setCustomTags(customTags);
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<SeriesMainDicomTags> & { raw: { [key: string]: string | number } } = {
             raw: {}
         };
-        let transcode = 'None';
 
-        console.log(pixelMask);
+        let transcode = undefined;
 
         if (manufacturer !== data.mainDicomTags.manufacturer) replace.manufacturer = manufacturer;
         if (modality !== data.mainDicomTags.modality) replace.modality = modality;
@@ -61,9 +64,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         if (seriesNumber !== data.mainDicomTags.seriesNumber?.toString()) replace.seriesNumber = seriesNumber;
         if (seriesDate !== data.mainDicomTags.seriesDate) replace.seriesDate = seriesDate;
         if (seriesTime !== data.mainDicomTags.seriesTime) replace.seriesTime = seriesTime;
-        if (transferSyntax !== 'None')  transcode = transferSyntax;
-
-        replace.raw = { ...replace.raw, ...Object.fromEntries(keyVal.map(({ key, val }) => [key, val])) };
+        if (transferSyntax) transcode = transferSyntax;
+        replace.raw = { ...customsTags };
 
         const payload: SeriesModifyPayload = {
             replace,
@@ -73,7 +75,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             force: true,
             synchronous: false,
             keep: keepUIDs ? ['SeriesInstanceUID', 'SOPInstanceUID'] : [],
-            ...(transcode && transcode !== 'None') ? { transcode } : {},
+            transcode : transcode
         };
 
         onSubmit({ id: data.id, payload });
@@ -147,12 +149,9 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                 />
             </div>
             <div>
-                <KeyValueTable 
-                    keyVal={keyVal}
-                    setKeyVal={setKeyVal}
-                    buttonText="Add a field"
-                    keyPlaceHolder="key"
-                    valuePlaceHolder="value"
+                <EditCustomTagsTable 
+                    customTags={customsTags}
+                    onChange={handleChangeCustomTags}
                 />
             </div>
             <div className="flex justify-around">
@@ -176,7 +175,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                 />
             </div>
             <div className="flex justify-center">
-                <Button type="submit" color={Colors.primary}>Modify</Button>
+                <Button type="submit" color={Colors.secondary}>Modify</Button>
             </div>
             {jobId && (
                 <div className="flex flex-col items-center justify-center">

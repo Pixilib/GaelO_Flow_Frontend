@@ -8,7 +8,7 @@ type SelectTranscodeProps = {
 
 const SelectTranscode = ({transfetSyntax, setTrasferSyntax}: SelectTranscodeProps) => {
     const TRANSCODING_OPTIONS = [
-        { value: 'None', label: 'None (use Original TS)' },
+        { value: null, label: 'None (use Original TS)' },
         { value: '1.2.840.10008.1.2', label: 'Implicit VR Endian' },
         { value: '1.2.840.10008.1.2.1', label: 'Explicit VR Little Endian' },
         { value: '1.2.840.10008.1.2.1.99', label: 'Deflated Explicit VR Little Endian' },

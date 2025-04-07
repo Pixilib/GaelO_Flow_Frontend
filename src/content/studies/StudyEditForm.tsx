@@ -3,7 +3,8 @@
 import React, { ChangeEvent, useState } from "react";
 import { StudyModifyPayload, StudyMainDicomTags, Study, PatientMainDicomTags } from '../../utils/types';
 import { Button, CheckBox, Input, InputWithDelete } from "../../ui";
-import KeyValueTable from "../../ui/table/KeyValueTable"
+import EditCustomTagsTable from "../series/edition/EditCustomTagsTable"
+import { customTags } from "../series/edition/CustomTags";
 
 import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
@@ -31,8 +32,8 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
-    const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
-    const [transferSyntax, setTrasferSyntax] = useState('None');
+    const [transferSyntax, setTrasferSyntax] = useState(null);
+    const [customsTags, setCustomTags] = useState<customTags>({});
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -40,12 +41,16 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
         );
     };
 
+    const handleChangeCustomTags = (customTags: customTags) => {
+        setCustomTags(customTags);
+    };
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<StudyMainDicomTags & PatientMainDicomTags> & { raw: { [key: string]: string | number } } = {
             raw: {}
         };
-        let transcode = 'None';
+        let transcode = undefined;
 
         if (patientId !== data?.patientMainDicomTags?.patientId) replace.patientId = patientId;
         if (patientName !== data?.patientMainDicomTags?.patientName) replace.patientName = patientName;
@@ -59,10 +64,9 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
         if (studyDescription !== data?.mainDicomTags?.studyDescription) replace.studyDescription = studyDescription;
         if (studyId !== data?.mainDicomTags?.studyId) replace.studyId = studyId;
         if (studyTime !== data?.mainDicomTags?.studyTime) replace.studyTime = studyTime;
-        if (transferSyntax !== 'None')  transcode = transferSyntax;
+        if (transferSyntax) transcode = transferSyntax;
+        replace.raw = { ...customsTags };
 
-        replace.raw = { ...replace.raw, ...Object.fromEntries(keyVal.map(({ key, val }) => [key, val])) };
-        
         const payload: StudyModifyPayload = {
             replace,
             remove: fieldsToRemove,
@@ -157,12 +161,9 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                 />
             </div>
             <div className="">
-                <KeyValueTable 
-                    keyVal={keyVal}
-                    setKeyVal={setKeyVal}
-                    buttonText="Add a field"
-                    keyPlaceHolder="key"
-                    valuePlaceHolder="value"
+                <EditCustomTagsTable
+                    customTags={customsTags}
+                    onChange={handleChangeCustomTags} 
                 />
             </div>
             <div className="flex justify-around">

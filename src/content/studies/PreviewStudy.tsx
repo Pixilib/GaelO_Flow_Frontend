@@ -10,7 +10,7 @@ import { useCustomQuery } from "../../utils";
 import { Accordion, Modal, Spinner } from "../../ui";
 import { Series } from "../../utils/types";
 import { AccordionHeader } from "../../ui/Accordion";
-import PreviewSeries from "../series/PreviewSeries";
+import PreviewSeries from "../series/preview/PreviewSeries";
 
 type PreviewStudyProps = {
     studyId: string;

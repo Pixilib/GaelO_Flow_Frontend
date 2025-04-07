@@ -7,12 +7,12 @@ import { useCustomQuery, useCustomMutation } from '../../utils/reactQuery';
 import { getSeriesOfStudy, deleteSeries } from '../../services/orthanc';
 import { Series } from '../../utils/types';
 import SeriesTable from './SeriesTable';
-import EditSeries from './EditSeries';
-import PreviewSeries from './PreviewSeries';
+import EditSeries from './edition/EditSeries';
+import PreviewSeries from './preview/PreviewSeries';
 import { useConfirm } from '../../services/ConfirmContextProvider';
 import { useCustomToast } from '../../utils/toastify';
 import { Modal, Spinner } from '../../ui';
-import Tags from './TagsTree';
+import TagsTree from './metadata/TagsTree';
 import { exportRessource, exportSeriesToNifti } from '../../services/export';
 
 interface SeriesRootProps {
@@ -152,7 +152,7 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
             <Modal.Title>Preview Metadata</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Tags seriesId={previewMetadata.id} />
+            <TagsTree seriesId={previewMetadata.id} />
           </Modal.Body>
         </Modal>
       )}

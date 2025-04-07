@@ -4,11 +4,11 @@
  */
 
 import React, { useState } from "react";
-import { modifySeries } from "../../services/orthanc";
-import { useCustomMutation, useCustomToast, Series } from "../../utils";
+import { modifySeries } from "../../../services/orthanc";
+import { useCustomMutation, useCustomToast, Series } from "../../../utils";
 import SeriesEditForm from './SeriesEditForm';
-import { Modal } from "../../ui";
-import { SeriesModifyPayload } from "../../utils/types";
+import { Modal } from "../../../ui";
+import { SeriesModifyPayload } from "../../../utils/types";
 
 type EditSeriesProps = {
     series: Series;
