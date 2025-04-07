@@ -8,6 +8,7 @@ import SelectTranscode from "../../SelectTranscode";
 import PixelMask from "./PixelMask";
 import { customTags } from "./CustomTags";
 import EditCustomTagsTable from "./EditCustomTagsTable";
+import { PixelMaskType } from "./PixelMaskType";
 
 type SeriesEditFormProps = {
     data: Series;
@@ -28,13 +29,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
     const [keepUIDs, setKeepUIDs] = useState(false)
     const [customsTags, setCustomTags] = useState<customTags>({});
     const [transferSyntax, setTrasferSyntax] = useState(null);
-    const [pixelMask, setPixelMask] = useState<[
-        dimension: string, // "2D" or "3D"
-        maskType: string, // "MeanFilter" or "Fill"
-        maskTypeValue: number, // value for the mask
-        { x: number, y: number, z: number }, // start coordinates
-        { x: number, y: number, z: number }, // end coordinates
-    ] [] | null>(null);
+    const [pixelMask, setPixelMask] = useState<PixelMaskType[] | null>(null);
 
     useEffect(() => {
         if (keepUIDs) setKeepSource(true)
@@ -44,6 +39,10 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         setFieldsToRemove((prev) =>
             checked ? [...prev, field] : prev.filter((item) => item !== field)
         );
+    };
+
+    const handlePixelMaskChange = (pixelMask: PixelMaskType[] | null) => {
+        setPixelMask(pixelMask);
     };
 
     const handleChangeCustomTags = (customTags: customTags) => {
@@ -77,6 +76,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             keep: keepUIDs ? ['SeriesInstanceUID', 'SOPInstanceUID'] : [],
             transcode : transcode
         };
+
+        console.log(pixelMask);
 
         onSubmit({ id: data.id, payload });
     }
@@ -145,7 +146,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             <div>
                 <PixelMask
                     pixelMask={pixelMask}
-                    setPixelMask={setPixelMask}
+                    onChange={handlePixelMaskChange}
                 />
             </div>
             <div>

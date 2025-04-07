@@ -3,43 +3,55 @@ import { Colors } from "../../../utils";
 import { Check } from "../../../icons";
 import { useState } from "react";
 import PixelMaskEditForm from "./PixelMaskEditForm";
-import ChevronDown from "../../../assets/chevron-down.svg?react";
+import ChevronDown from "../../../assets/chevron-right.svg?react";
+import { PixelMaskType } from "./PixelMaskType";
 
 type PixelMaskProps = {
-    pixelMask: [
-        dimension: string, // "2D" or "3D"
-        maskType: string, // "MeanFilter" or "Fill"
-        maskTypeValue: number, // value for the mask
-        { x: number, y: number, z: number }, // start coordinates
-        { x: number, y: number, z: number }
-    ][] | null; // end coordinates
-
-    setPixelMask: React.Dispatch<React.SetStateAction<[
-        dimension: string,
-        maskType: string,
-        maskTypeValue: number,
-        { x: number, y: number, z: number },
-        { x: number, y: number, z: number }
-    ][] | null>>;
+    pixelMask: PixelMaskType[] | null;
+    onChange: (pixelMask: PixelMaskType[] | null) => void;
 }
 
-const PixelMask = ({ pixelMask, setPixelMask }: PixelMaskProps) => {
+const PixelMask = ({ pixelMask, onChange }: PixelMaskProps) => {
     const [editingPixelMask, setEditingPixelMask] = useState<boolean>(false);
     const [index, setIndex] = useState<number>(0);
 
-    const handleSavePixelMask = () => {
-        setEditingPixelMask(false);
+    const handleChangeValueOfAnIteration = (PixelMask: PixelMaskType) => {
+        const newPixelMask = [...pixelMask];
+        newPixelMask[index] = PixelMask;
+        onChange(newPixelMask);
     }
 
     const addPixelMask = () => {
+        const newPixelMaskEntry: PixelMaskType = {
+            dimension: null,
+            maskType: null,
+            maskTypeValue: null,
+            start: { x: null, y: null, z: null },
+            end: { x: null, y: null, z: null }
+        };
+    
         if (!pixelMask) {
-            setPixelMask([[null, null, null, { x: null, y: null, z: null }, { x: null, y: null, z: null }]]);
+            onChange([newPixelMaskEntry]);
             setIndex(0);
         } else {
-            setPixelMask((prevState) => [...prevState, [null, null, null, { x: null, y: null, z: null }, { x: null, y: null, z: null }]]);
+            const newPixelMask = [...pixelMask, newPixelMaskEntry];
+            onChange(newPixelMask);
             setIndex(pixelMask.length);
         }
         setEditingPixelMask(true);
+    };
+
+    const handleChevronClick = (index: number) => {
+        setEditingPixelMask(true);
+        setIndex(index);
+    }
+
+    const handleRemoveItteration = () => {
+        const newPixelMask = [...pixelMask];
+        newPixelMask.splice(index, 1);
+        onChange(newPixelMask);
+        setEditingPixelMask(false);
+        setIndex(pixelMask.length);
     }
 
     return (
@@ -47,14 +59,13 @@ const PixelMask = ({ pixelMask, setPixelMask }: PixelMaskProps) => {
             {editingPixelMask ? (
                 <>
                     <PixelMaskEditForm
-                        index={index}
-                        pixelMask={pixelMask}
-                        setPixelMask={setPixelMask}
-                        key={index}
+                        pixelMask={pixelMask[index]}
+                        onChange={handleChangeValueOfAnIteration}
+                        onRemove={handleRemoveItteration}
                     />
                     {editingPixelMask && (
                         <div className="flex justify-center">
-                            <Button type="button" color={Colors.blueCustom} onClick={() => handleSavePixelMask()}>
+                            <Button type="button" color={Colors.blueCustom} onClick={() => setEditingPixelMask(false)}>
                                 <Check size="20px" />
                             </Button>
                         </div>
@@ -62,17 +73,17 @@ const PixelMask = ({ pixelMask, setPixelMask }: PixelMaskProps) => {
                 </>
             ) : (
                 <>
-                    {pixelMask && pixelMask.map((mask, index) => (
-                        <div key={index} className="flex justify-between items-center border border-gray-custom rounded-xl p-2 hover:bg-gray-300 cursor-pointer">
+                    {pixelMask && pixelMask.map((mask, ind) => (
+                        <div key={ind} className="flex justify-between items-center border border-gray-custom rounded-xl p-2 hover:bg-gray-300 cursor-pointer">
                             <div className="flex w-full gap-5 items-center">
-                                <p className="text-sm text-dark"><span className="font-bold">Dimension :</span> {pixelMask && pixelMask[index][0]}</p>
-                                <p className="text-sm text-dark"><span className="font-bold">Mask Type :</span> {pixelMask && pixelMask[index][1]}</p>
-                                <p className="text-sm text-dark"><span className="font-bold">Mask Value :</span> {pixelMask && pixelMask[index][2]}</p>
-                                <p className="text-sm text-dark"><span className="font-bold">Start coordinates :</span> {"x=" + pixelMask[index][3].x},  {"y=" + pixelMask[index][3].y} {pixelMask[index][3].z ? ", z=" + pixelMask[index][3].z : ""} </p>
-                                <p className="text-sm text-dark"><span className="font-bold">End coordinates :</span> {"x=" + pixelMask[index][4].x}, {"y=" + pixelMask[index][4].y} {pixelMask[index][4].z ? ", z=" + pixelMask[index][4].z : ""} </p>
+                                <p className="text-sm text-dark"><span className="font-bold">Dimension :</span> {pixelMask && pixelMask[ind].dimension}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Mask Type :</span> {pixelMask && pixelMask[ind].maskType}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Mask Value :</span> {pixelMask && pixelMask[ind].maskTypeValue}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Start coordinates :</span> {"x=" + pixelMask[ind].start.x},  {"y=" + pixelMask[ind].start.y} {pixelMask[ind].start.z ? ", z=" + pixelMask[ind].start.z : ""} </p>
+                                <p className="text-sm text-dark"><span className="font-bold">End coordinates :</span> {"x=" + pixelMask[ind].end.x}, {"y=" + pixelMask[ind].end.y} {pixelMask[ind].end.z ? ", z=" + pixelMask[ind].end.z : ""} </p>
                             </div>
                             <div>
-                                <ChevronDown className="fill-dark" />
+                                <ChevronDown className="fill-dark" onClick={() => handleChevronClick(ind)} />
                             </div>
                         </div>
                     ))}

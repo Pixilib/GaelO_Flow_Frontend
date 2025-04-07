@@ -1,25 +1,12 @@
 import React, { ChangeEvent } from "react";
 import { Input, SelectInput } from "../../../ui";
 import { Trash } from "../../../icons";
-
-type PixelMask = [
-    dimension: string | null,
-    maskType: string | null,
-    maskTypeValue: number | null,
-    { x: number | null; y: number | null; z: number | null },
-    { x: number | null; y: number | null; z: number | null }
-];
+import { PixelMaskType } from "./PixelMaskType";
 
 type PixelMaskEditProps = {
-    index: number;
-    pixelMask: PixelMask[] | null;
-    setPixelMask: React.Dispatch<React.SetStateAction<[
-        dimension: string | null,
-        maskType: string | null,
-        maskTypeValue: number | null,
-        { x: number | null; y: number | null; z: number | null },
-        { x: number | null; y: number | null; z: number | null }
-    ][] | null>>;
+    pixelMask: PixelMaskType | null;
+    onChange: (pixelMask: PixelMaskType | null) => void;
+    onRemove: () => void;
 }
 
 const dimensions = [
@@ -33,60 +20,48 @@ const maskTypes = [
 ]
 
 const enum StartOrEnd {
-    start = 3, // start coordinates at index 3 of the pixelMask array
-    end = 4, // end coordinates at index 4 of the pixelMask array
+    start = "start",
+    end = "end"
 }
 
-const PixelMaskEditForm = ({index, pixelMask, setPixelMask}: PixelMaskEditProps) => {
+const PixelMaskEditForm = ({pixelMask, onChange, onRemove}: PixelMaskEditProps) => {
 
-    const handleSelectDimension = (dimension: string, index: number) => {
-        setPixelMask((prevState) => {
-            const newState = [...prevState];
-            newState[index][0] = dimension;
-            return newState;
-        });
+    const handleSelectDimension = (dimension: string) => {
+        const newPixelMask = pixelMask;
+        newPixelMask.dimension = dimension;
+        onChange(newPixelMask);
     }
 
-    const handleSelectMaskType = (maskType: string, index: number) => {
-        setPixelMask((prevState) => {
-            const newState = [...prevState];
-            newState[index][1] = maskType;
-            return newState;
-        });
+    const handleSelectMaskType = (maskType: string) => {
+        const newPixelMask = pixelMask;
+        newPixelMask.maskType = maskType;
+        onChange(newPixelMask);
     }
 
-    const handleMaskTypeValue = (maskTypeValue: number, index: number) => {
-        setPixelMask((prevState) => {
-            const newState = [...prevState];
-            newState[index][2] = maskTypeValue;
-            return newState;
-        });
+    const handleMaskTypeValue = (maskTypeValue: number) => {
+        const newPixelMask = pixelMask;
+        newPixelMask.maskTypeValue = maskTypeValue;
+        onChange(newPixelMask);
     }
 
-    const handleRemoveMask = (index: number) => {
-        setPixelMask((prevState) => prevState.filter((_, i) => i !== index));
-    }
-
-    const handleChange = (value: number, index: number, startEnd: StartOrEnd, cooLetter: string) => {
-        setPixelMask((prevState) => {
-            const newState = [...prevState];
-            if (cooLetter === "x")
-                newState[index][startEnd][cooLetter] = value;
-            if (cooLetter === "y")
-                newState[index][startEnd][cooLetter] = value;
-            if (cooLetter === "z")
-                newState[index][startEnd][cooLetter] = value;
-            return newState;
-        });
+    const handleChange = (value: number, startEnd: StartOrEnd, cooLetter: string) => {
+        const newPixelMask = pixelMask;
+        if (cooLetter === "x")
+            newPixelMask[startEnd].x = value;
+        if (cooLetter === "y")
+            newPixelMask[startEnd].y = value;
+        if (cooLetter === "z")
+            newPixelMask[startEnd].z = value;
+        onChange(newPixelMask);
     }
 
     return (
-        <div key={index} className="flex flex-col border border-gray-custom rounded-xl pl-2 pr-2 pb-4">
+        <div className="flex flex-col border border-gray-custom rounded-xl pl-2 pr-2 pb-4">
             <div className="flex w-full gap-5 items-center">
                 <SelectInput
-                    value={pixelMask[index][0]}
+                    value={pixelMask?.dimension || null}
                     onChange={(option) => {
-                        handleSelectDimension(option ? option.value : null, index);
+                        handleSelectDimension(option ? option.value : null);
                     }}
                     placeholder="Select dimension"
                     options={dimensions}
@@ -96,61 +71,68 @@ const PixelMaskEditForm = ({index, pixelMask, setPixelMask}: PixelMaskEditProps)
                         <Input
                             placeholder="Origin X"
                             type="number"
-                            disabled={!pixelMask[index][0] && true}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), index, StartOrEnd.start, "x")}
+                            value={pixelMask?.start?.x || ""}
+                            disabled={!pixelMask.dimension && true}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), StartOrEnd.start, "x")}
                         />
                         <Input
                             placeholder="Origin Y"
                             type="number"
-                            disabled={!pixelMask[index][0] && true}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), index, StartOrEnd.start, "y")}
+                            value={pixelMask?.start?.y || ""}
+                            disabled={!pixelMask.dimension && true}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), StartOrEnd.start, "y")}
                         />
                         <Input
                             placeholder="Origin Z"
                             type="number"
-                            disabled={!pixelMask[index][0] || pixelMask[index][0] !== "3D" && true}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), index, StartOrEnd.start, "z")}
+                            value={pixelMask?.start?.z || ""}
+                            disabled={!pixelMask.dimension || pixelMask.dimension !== "3D" && true}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), StartOrEnd.start, "z")}
                         />
                     </div>
                     <div className="flex gap-5">
                         <Input
                             placeholder="End X"
                             type="number"
-                            disabled={!pixelMask[index][0] && true}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), index, StartOrEnd.end, "x")}
+                            value={pixelMask?.end?.x || ""}
+                            disabled={!pixelMask.dimension && true}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), StartOrEnd.end, "x")}
                         />
                         <Input
                             placeholder="End Y"
                             type="number"
-                            disabled={!pixelMask[index][0] && true}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), index, StartOrEnd.end, "y")}
+                            value={pixelMask?.end?.y || ""}
+                            disabled={!pixelMask.dimension && true}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), StartOrEnd.end, "y")}
                         />
                         <Input
                             placeholder="End Z"
                             type="number"
-                            disabled={!pixelMask[index][0] || pixelMask[index][0] !== "3D" && true}
-                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), index, StartOrEnd.end, "z")}
+                            value={pixelMask?.end?.z || ""}
+                            disabled={!pixelMask.dimension || pixelMask.dimension !== "3D" && true}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(parseInt(e.target.value), StartOrEnd.end, "z")}
                         />
                     </div>
                 </div>
                 <div className="w-20">
-                    <Trash onClick={() => handleRemoveMask(index)} size={"1.3rem"} className="fill-danger cursor-pointer" />
+                    <Trash onClick={() => onRemove} size={"1.3rem"} className="fill-danger cursor-pointer" />
                 </div>
             </div>
             <div className="flex gap-5 items-center">
                 <SelectInput
-                    value={pixelMask[index][1]}
+                    value={pixelMask?.maskType || null}
                     onChange={(option) => {
-                        handleSelectMaskType(option ? option.value : null, index);
+                        handleSelectMaskType(option ? option.value : null);
                     }}
                     placeholder={"Select Mask Type"}
                     options={maskTypes}
                 />
                 <Input
-                    placeholder={pixelMask[index][1] === "MeanFilter" ? "Filter Width" : "Fill Value"}
+                    placeholder={pixelMask.maskType === "MeanFilter" ? "Filter Width" : "Fill Value"}
                     type="number"
-                    disabled={!pixelMask[index][1] && true}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleMaskTypeValue(parseInt(e.target.value), index)}
+                    value={pixelMask?.maskTypeValue || ""}
+                    disabled={!pixelMask.maskType && true}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleMaskTypeValue(parseInt(e.target.value))}
                 />
             </div>
         </div>
