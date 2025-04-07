@@ -15,7 +15,6 @@ import { Modal, Spinner } from '../../ui';
 import Tags from './TagsTree';
 import { exportRessource, exportSeriesToNifti } from '../../services/export';
 
-
 interface SeriesRootProps {
   studyId: string;
 }
