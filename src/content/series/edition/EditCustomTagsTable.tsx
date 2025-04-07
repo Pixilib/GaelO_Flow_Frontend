@@ -3,7 +3,7 @@ import { Colors } from "../../../utils";
 import Button from "../../../ui/Button";
 import Input from "../../../ui/Input";
 import { ChangeEvent } from "react";
-import { customTags } from "./CustomTags";
+import { customTags } from "./types";
 
 type EditCustomTagTableProps = {
     customTags: customTags;

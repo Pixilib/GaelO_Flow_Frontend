@@ -4,7 +4,7 @@ import { Check } from "../../../icons";
 import { useState } from "react";
 import PixelMaskEditForm from "./PixelMaskEditForm";
 import ChevronDown from "../../../assets/chevron-right.svg?react";
-import { PixelMaskType } from "./PixelMaskType";
+import { PixelMaskType } from "./types";
 
 type PixelMaskProps = {
     pixelMask: PixelMaskType[] | null;
@@ -29,7 +29,7 @@ const PixelMask = ({ pixelMask, onChange }: PixelMaskProps) => {
             start: { x: null, y: null, z: null },
             end: { x: null, y: null, z: null }
         };
-    
+
         if (!pixelMask) {
             onChange([newPixelMaskEntry]);
             setIndex(0);
@@ -63,37 +63,35 @@ const PixelMask = ({ pixelMask, onChange }: PixelMaskProps) => {
                         onChange={handleChangeValueOfAnIteration}
                         onRemove={handleRemoveItteration}
                     />
-                    {editingPixelMask && (
-                        <div className="flex justify-center">
-                            <Button type="button" color={Colors.blueCustom} onClick={() => setEditingPixelMask(false)}>
-                                <Check size="20px" />
-                            </Button>
-                        </div>
-                    )}
+                    <div className="flex justify-center">
+                        <Button type="button" color={Colors.blueCustom} onClick={() => setEditingPixelMask(false)}>
+                            <Check size="20px" />
+                        </Button>
+                    </div>
                 </>
             ) : (
                 <>
-                    {pixelMask && pixelMask.map((mask, ind) => (
-                        <div key={ind} className="flex justify-between items-center border border-gray-custom rounded-xl p-2 hover:bg-gray-300 cursor-pointer">
+                    {pixelMask?.map((mask, index) => (
+                        <div key={index} className="flex justify-between items-center border border-gray-custom rounded-xl p-2 hover:bg-gray-300 cursor-pointer">
                             <div className="flex w-full gap-5 items-center">
-                                <p className="text-sm text-dark"><span className="font-bold">Dimension :</span> {pixelMask && pixelMask[ind].dimension}</p>
-                                <p className="text-sm text-dark"><span className="font-bold">Mask Type :</span> {pixelMask && pixelMask[ind].maskType}</p>
-                                <p className="text-sm text-dark"><span className="font-bold">Mask Value :</span> {pixelMask && pixelMask[ind].maskTypeValue}</p>
-                                <p className="text-sm text-dark"><span className="font-bold">Start coordinates :</span> {"x=" + pixelMask[ind].start.x},  {"y=" + pixelMask[ind].start.y} {pixelMask[ind].start.z ? ", z=" + pixelMask[ind].start.z : ""} </p>
-                                <p className="text-sm text-dark"><span className="font-bold">End coordinates :</span> {"x=" + pixelMask[ind].end.x}, {"y=" + pixelMask[ind].end.y} {pixelMask[ind].end.z ? ", z=" + pixelMask[ind].end.z : ""} </p>
+                                <p className="text-sm text-dark"><span className="font-bold">Dimension :</span> {mask.dimension}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Mask Type :</span> {mask.maskType}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Mask Value :</span> {mask.maskTypeValue}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Start coordinates :</span> {"x=" + mask.start.x},  {"y=" + mask.start.y} {mask.start.z ? ", z=" + mask.start.z : ""} </p>
+                                <p className="text-sm text-dark"><span className="font-bold">End coordinates :</span> {"x=" + mask.end.x}, {"y=" + mask.end.y} {mask.end.z ? ", z=" + mask.end.z : ""} </p>
                             </div>
                             <div>
-                                <ChevronDown className="fill-dark" onClick={() => handleChevronClick(ind)} />
+                                <ChevronDown className="fill-dark" onClick={() => handleChevronClick(index)} />
                             </div>
                         </div>
                     ))}
                 </>
             )}
-            <div className="flex justify-center">
-                {!editingPixelMask &&
+            {!editingPixelMask &&
+                <div className="flex justify-center">
                     <Button type="button" color={Colors.blueCustom} onClick={() => addPixelMask()}>Add Pixel Mask</Button>
-                }
-            </div>
+                </div>
+            }
         </div>
     );
 };

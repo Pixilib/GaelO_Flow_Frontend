@@ -6,9 +6,8 @@ import ProgressJob from "../../../query/ProgressJob";
 import { Colors } from "../../../utils";
 import SelectTranscode from "../../SelectTranscode";
 import PixelMask from "./PixelMask";
-import { customTags } from "./CustomTags";
 import EditCustomTagsTable from "./EditCustomTagsTable";
-import { PixelMaskType } from "./PixelMaskType";
+import { customTags, PixelMaskType } from "./types";
 
 type SeriesEditFormProps = {
     data: Series;

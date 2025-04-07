@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { Input, SelectInput } from "../../../ui";
 import { Trash } from "../../../icons";
-import { PixelMaskType } from "./PixelMaskType";
+import { PixelMaskType } from "./types";
 
 type PixelMaskEditProps = {
     pixelMask: PixelMaskType | null;
@@ -9,12 +9,12 @@ type PixelMaskEditProps = {
     onRemove: () => void;
 }
 
-const dimensions = [
+const dimensionsOptions = [
     { value: "2D", label: "2D" },
     { value: "3D", label: "3D" },
 ]
 
-const maskTypes = [
+const maskTypesOptions = [
     { value: "MeanFilter", label: "MeanFilter" },
     { value: "Fill", label: "Fill" },
 ]
@@ -23,6 +23,8 @@ const enum StartOrEnd {
     start = "start",
     end = "end"
 }
+
+type Axis = 'x' | 'y' | 'z';
 
 const PixelMaskEditForm = ({pixelMask, onChange, onRemove}: PixelMaskEditProps) => {
 
@@ -44,14 +46,9 @@ const PixelMaskEditForm = ({pixelMask, onChange, onRemove}: PixelMaskEditProps) 
         onChange(newPixelMask);
     }
 
-    const handleChange = (value: number, startEnd: StartOrEnd, cooLetter: string) => {
+    const handleChange = (value: number, startEnd: StartOrEnd, axis :Axis ) => {
         const newPixelMask = pixelMask;
-        if (cooLetter === "x")
-            newPixelMask[startEnd].x = value;
-        if (cooLetter === "y")
-            newPixelMask[startEnd].y = value;
-        if (cooLetter === "z")
-            newPixelMask[startEnd].z = value;
+        newPixelMask[startEnd][axis] = value;
         onChange(newPixelMask);
     }
 
@@ -64,7 +61,7 @@ const PixelMaskEditForm = ({pixelMask, onChange, onRemove}: PixelMaskEditProps) 
                         handleSelectDimension(option ? option.value : null);
                     }}
                     placeholder="Select dimension"
-                    options={dimensions}
+                    options={dimensionsOptions}
                 />
                 <div className="flex flex-col gap-5 w-1000 rounded-xl p-5">
                     <div className="flex gap-5">
@@ -122,15 +119,15 @@ const PixelMaskEditForm = ({pixelMask, onChange, onRemove}: PixelMaskEditProps) 
                 <SelectInput
                     value={pixelMask?.maskType || null}
                     onChange={(option) => {
-                        handleSelectMaskType(option ? option.value : null);
+                        handleSelectMaskType(option?.value ?? null);
                     }}
                     placeholder={"Select Mask Type"}
-                    options={maskTypes}
+                    options={maskTypesOptions}
                 />
                 <Input
                     placeholder={pixelMask.maskType === "MeanFilter" ? "Filter Width" : "Fill Value"}
                     type="number"
-                    value={pixelMask?.maskTypeValue || ""}
+                    value={pixelMask?.maskTypeValue ?? ""}
                     disabled={!pixelMask.maskType && true}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => handleMaskTypeValue(parseInt(e.target.value))}
                 />

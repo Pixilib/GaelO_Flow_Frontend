@@ -14,3 +14,7 @@ type PixelMaskType = {
 
 export type { PixelMaskType };
 export type { Coordinates };
+
+export type customTags = {
+    [key: string]: string | number
+}
