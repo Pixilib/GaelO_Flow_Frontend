@@ -3,6 +3,7 @@ import { Colors } from "../../../utils";
 import { Check } from "../../../icons";
 import { useState } from "react";
 import PixelMaskEditForm from "./PixelMaskEditForm";
+import ChevronDown from "../../../assets/chevron-down.svg?react";
 
 type PixelMaskProps = {
     pixelMask: [
@@ -62,12 +63,17 @@ const PixelMask = ({ pixelMask, setPixelMask }: PixelMaskProps) => {
             ) : (
                 <>
                     {pixelMask && pixelMask.map((mask, index) => (
-                        <div key={index} className="flex w-full gap-5 items-center border border-gray-custom rounded-xl p-2 hover:bg-gray-300 cursor-pointer">
-                            <p className="text-sm text-dark"><span className="font-bold">Dimension :</span> {pixelMask && pixelMask[index][0]}</p>
-                            <p className="text-sm text-dark"><span className="font-bold">Mask Type :</span> {pixelMask && pixelMask[index][1]}</p>
-                            <p className="text-sm text-dark"><span className="font-bold">Mask Value :</span> {pixelMask && pixelMask[index][2]}</p>
-                            <p className="text-sm text-dark"><span className="font-bold">Start coordinates :</span> {"x=" + pixelMask[index][3].x},  {"y=" + pixelMask[index][3].y} {pixelMask[index][3].z ? ", z=" + pixelMask[index][3].z : ""} </p>
-                            <p className="text-sm text-dark"><span className="font-bold">End coordinates :</span> {"x=" + pixelMask[index][4].x}, {"y=" + pixelMask[index][4].y} {pixelMask[index][4].z ? ", z=" + pixelMask[index][4].z : ""} </p>
+                        <div key={index} className="flex justify-between items-center border border-gray-custom rounded-xl p-2 hover:bg-gray-300 cursor-pointer">
+                            <div className="flex w-full gap-5 items-center">
+                                <p className="text-sm text-dark"><span className="font-bold">Dimension :</span> {pixelMask && pixelMask[index][0]}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Mask Type :</span> {pixelMask && pixelMask[index][1]}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Mask Value :</span> {pixelMask && pixelMask[index][2]}</p>
+                                <p className="text-sm text-dark"><span className="font-bold">Start coordinates :</span> {"x=" + pixelMask[index][3].x},  {"y=" + pixelMask[index][3].y} {pixelMask[index][3].z ? ", z=" + pixelMask[index][3].z : ""} </p>
+                                <p className="text-sm text-dark"><span className="font-bold">End coordinates :</span> {"x=" + pixelMask[index][4].x}, {"y=" + pixelMask[index][4].y} {pixelMask[index][4].z ? ", z=" + pixelMask[index][4].z : ""} </p>
+                            </div>
+                            <div>
+                                <ChevronDown className="fill-dark" />
+                            </div>
                         </div>
                     ))}
                 </>
