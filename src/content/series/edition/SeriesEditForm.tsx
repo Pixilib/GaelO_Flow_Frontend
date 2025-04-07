@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Series, SeriesModifyPayload, SeriesMainDicomTags } from '../../../utils/types';
+import { Series, SeriesModifyPayload, RegionPixelData2D, RegionPixelData3D, SeriesMainDicomTags } from '../../../utils/types';
 import { InputWithDelete, CheckBox, Button } from "../../../ui";
 
 import ProgressJob from "../../../query/ProgressJob";
@@ -54,6 +54,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             raw: {}
         };
 
+        const maskPixelData: (RegionPixelData2D | RegionPixelData3D)[] = [];
+
         let transcode = undefined;
 
         if (manufacturer !== data.mainDicomTags.manufacturer) replace.manufacturer = manufacturer;
@@ -65,6 +67,28 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         if (transferSyntax) transcode = transferSyntax;
         replace.raw = { ...customsTags };
 
+        if (pixelMask) {
+            pixelMask.forEach((mask) => {
+                if (mask.dimension == "2D") {
+                    maskPixelData.push({
+                        maskType: mask.maskType,
+                        fillValue: mask.maskTypeValue,
+                        regionType: mask.dimension,
+                        origin: [mask.start.x, mask.start.y],
+                        end: [mask.end.x, mask.end.y],
+                    } as RegionPixelData2D);
+                } else if (mask.dimension == "3D") {
+                    maskPixelData.push({
+                        maskType: mask.maskType,
+                        filterWidth: mask.maskTypeValue,
+                        regionType: mask.dimension,
+                        origin: [mask.start.x, mask.start.y, mask.start.z],
+                        end: [mask.end.x, mask.end.y, mask.end.z],
+                    } as RegionPixelData3D);
+                }
+            });
+        }
+
         const payload: SeriesModifyPayload = {
             replace,
             remove: fieldsToRemove,
@@ -73,7 +97,8 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             force: true,
             synchronous: false,
             keep: keepUIDs ? ['SeriesInstanceUID', 'SOPInstanceUID'] : [],
-            transcode : transcode
+            transcode: transcode,
+            maskPixelData
         };
 
         console.log(pixelMask);

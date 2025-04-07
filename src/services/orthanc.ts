@@ -366,7 +366,28 @@ export const modifySeries = (
     Synchronous: false,
     KeepSource: series.keepSource,
     Keep: series.keep,
-    Transcode : transcode
+    Transcode : transcode,
+    MaskPixelData: {
+      Region: series.maskPixelData.map((mask) => {
+        if (mask.regionType == "2D") {
+          return {
+            MaskType: mask.maskType,
+            FillValue: mask.fillValue,
+            RegionType: mask.regionType,
+            Origin: [mask.origin[0], mask.origin[1]],
+            End: [mask.end[0], mask.end[1]],
+          };
+        } else if (mask.regionType == "3D") {
+          return {
+            MaskType: mask.maskType,
+            FilterWidth: mask.filterWidth,
+            RegionType: mask.regionType,
+            Origin: [mask.origin[0], mask.origin[1], mask.origin[2]],
+            End: [mask.end[0], mask.end[1], mask.end[2]],
+          };
+        }
+      }),
+    }
   };
   return axios
     .post(`/api/series/${seriesId}/modify`, seriesPayloadUpdate)

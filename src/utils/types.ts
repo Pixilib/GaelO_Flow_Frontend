@@ -390,8 +390,24 @@ export type AnonStudy = {
   originalStudy: Study;
 };
 
+export type RegionPixelData2D = {
+  maskType: string,
+  fillValue: number,
+  regionType: string,
+  origin: [number, number],
+  end: [number, number],
+}
+
+export type RegionPixelData3D = {
+  maskType: string,
+  filterWidth: number,
+  regionType: string,
+  origin: [number, number, number],
+  end: [number, number, number],
+}
+
 export type StudyModifyPayload = {
-  replace: Partial<StudyMainDicomTags & PatientMainDicomTags> & { raw : {[key :string] : string|number}};
+  replace: Partial<StudyMainDicomTags & PatientMainDicomTags> & { raw: { [key: string]: string | number } };
   remove: string[];
   removePrivateTags: boolean;
   force: boolean;
@@ -402,7 +418,7 @@ export type StudyModifyPayload = {
 };
 
 export type SeriesModifyPayload = {
-  replace: Partial<SeriesMainDicomTags> & { raw : {[key :string] : string|number}};
+  replace: Partial<SeriesMainDicomTags> & { raw: { [key: string]: string | number } };
   remove: string[];
   removePrivateTags: boolean;
   keepSource: boolean;
@@ -410,6 +426,7 @@ export type SeriesModifyPayload = {
   synchronous: boolean;
   keep: string[];
   transcode: string;
+  maskPixelData: (RegionPixelData2D | RegionPixelData3D)[];
 };
 
 export type Queue = {
