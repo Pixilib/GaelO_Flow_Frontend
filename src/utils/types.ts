@@ -390,20 +390,13 @@ export type AnonStudy = {
   originalStudy: Study;
 };
 
-export type RegionPixelData2D = {
+export type RegionPixelData = {
   maskType: string,
-  fillValue: number,
+  fillValue?: number,
+  filterWidth?: number,
   regionType: string,
-  origin: [number, number],
-  end: [number, number],
-}
-
-export type RegionPixelData3D = {
-  maskType: string,
-  filterWidth: number,
-  regionType: string,
-  origin: [number, number, number],
-  end: [number, number, number],
+  origin: [number, number, number | undefined],
+  end: [number, number, number | undefined],
 }
 
 export type StudyModifyPayload = {
@@ -426,7 +419,7 @@ export type SeriesModifyPayload = {
   synchronous: boolean;
   keep: string[];
   transcode: string;
-  maskPixelData: (RegionPixelData2D | RegionPixelData3D)[];
+  maskPixelData: RegionPixelData[];
 };
 
 export type Queue = {

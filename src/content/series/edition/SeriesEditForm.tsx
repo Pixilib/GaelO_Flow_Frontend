@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Series, SeriesModifyPayload, RegionPixelData2D, RegionPixelData3D, SeriesMainDicomTags } from '../../../utils/types';
+import { Series, SeriesModifyPayload, SeriesMainDicomTags, RegionPixelData } from '../../../utils/types';
 import { InputWithDelete, CheckBox, Button } from "../../../ui";
 
 import ProgressJob from "../../../query/ProgressJob";
@@ -8,6 +8,7 @@ import SelectTranscode from "../../SelectTranscode";
 import PixelMask from "./PixelMask";
 import EditCustomTagsTable from "./EditCustomTagsTable";
 import { customTags, PixelMaskType } from "./types";
+
 
 type SeriesEditFormProps = {
     data: Series;
@@ -48,13 +49,17 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         setCustomTags(customTags);
     };
 
+    function normalizeCoordinate(coord: { x: number, y: number, z?: number }): [number, number, number | undefined] {
+        return [coord.x, coord.y, coord?.z ?? undefined];
+    }
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<SeriesMainDicomTags> & { raw: { [key: string]: string | number } } = {
             raw: {}
         };
 
-        const maskPixelData: (RegionPixelData2D | RegionPixelData3D)[] = [];
+        const maskPixelData: (RegionPixelData)[] = [];
 
         let transcode = undefined;
 
@@ -69,23 +74,14 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
 
         if (pixelMask) {
             pixelMask.forEach((mask) => {
-                if (mask.dimension == "2D") {
-                    maskPixelData.push({
-                        maskType: mask.maskType,
-                        fillValue: mask.maskTypeValue,
-                        regionType: mask.dimension,
-                        origin: [mask.start.x, mask.start.y],
-                        end: [mask.end.x, mask.end.y],
-                    } as RegionPixelData2D);
-                } else if (mask.dimension == "3D") {
-                    maskPixelData.push({
-                        maskType: mask.maskType,
-                        filterWidth: mask.maskTypeValue,
-                        regionType: mask.dimension,
-                        origin: [mask.start.x, mask.start.y, mask.start.z],
-                        end: [mask.end.x, mask.end.y, mask.end.z],
-                    } as RegionPixelData3D);
-                }
+                maskPixelData.push({
+                    maskType: mask.maskType,
+                    fillValue: mask.maskType === "Fill" ? mask.maskTypeValue : undefined,
+                    filterWidth: mask.maskType === "MeanFilter" ? mask.maskTypeValue : undefined,
+                    regionType: mask.dimension,
+                    origin: normalizeCoordinate(mask.start),
+                    end: normalizeCoordinate(mask.end),
+                })
             });
         }
 
@@ -174,7 +170,7 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                 />
             </div>
             <div>
-                <EditCustomTagsTable 
+                <EditCustomTagsTable
                     customTags={customsTags}
                     onChange={handleChangeCustomTags}
                 />

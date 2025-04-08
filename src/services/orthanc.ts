@@ -368,24 +368,15 @@ export const modifySeries = (
     Keep: series.keep,
     Transcode : transcode,
     MaskPixelData: {
-      Region: series.maskPixelData.map((mask) => {
-        if (mask.regionType == "2D") {
-          return {
-            MaskType: mask.maskType,
-            FillValue: mask.fillValue,
-            RegionType: mask.regionType,
-            Origin: [mask.origin[0], mask.origin[1]],
-            End: [mask.end[0], mask.end[1]],
-          };
-        } else if (mask.regionType == "3D") {
-          return {
-            MaskType: mask.maskType,
-            FilterWidth: mask.filterWidth,
-            RegionType: mask.regionType,
-            Origin: [mask.origin[0], mask.origin[1], mask.origin[2]],
-            End: [mask.end[0], mask.end[1], mask.end[2]],
-          };
-        }
+      Regions: series.maskPixelData.map((mask) => {
+        return {
+          MaskType: mask.maskType,
+          RegionType: mask.regionType,
+          FilterWidth: mask.filterWidth,
+          FillValue: mask.fillValue,
+          Origin: mask.origin.filter((coord) => coord !== undefined),
+          End: mask.end.filter((coord) => coord !== undefined),
+        };
       }),
     }
   };
