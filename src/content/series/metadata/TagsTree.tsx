@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
-import { Badge, Input, Spinner } from "../../ui";
-import { instanceHeader, instanceTags } from "../../services/instances";
-import { getInstancesOfSeries } from "../../services/orthanc";
-import { Metadata, Tag as TagType } from "../../utils/types";
-import { useCustomQuery } from "../../utils";
-import TagSequence from "./metadata/TagSequence";
-import TagItem from "./metadata/TagItem";
+import { Badge, Input, Spinner } from "../../../ui";
+import { instanceHeader, instanceTags } from "../../../services/instances";
+import { getInstancesOfSeries } from "../../../services/orthanc";
+import { Metadata, Tag as TagType } from "../../../utils/types";
+import { useCustomQuery } from "../../../utils";
+import TagSequence from "./TagSequence";
+import TagItem from "./TagItem";
 
 type TagsProps = {
   seriesId: string;

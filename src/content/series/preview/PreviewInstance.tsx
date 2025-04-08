@@ -1,5 +1,5 @@
-import { previewInstance } from "../../services/instances"
-import { useCustomQuery } from "../../utils"
+import { previewInstance } from "../../../services/instances"
+import { useCustomQuery } from "../../../utils"
 
 type PreviewInstanceProps = {
     instanceUID: string

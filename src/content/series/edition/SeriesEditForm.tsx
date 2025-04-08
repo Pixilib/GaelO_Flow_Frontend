@@ -1,11 +1,14 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Series, SeriesModifyPayload, SeriesMainDicomTags } from '../../utils/types';
-import { InputWithDelete, CheckBox, Button } from "../../ui";
+import { Series, SeriesModifyPayload, SeriesMainDicomTags, RegionPixelData } from '../../../utils/types';
+import { InputWithDelete, CheckBox, Button } from "../../../ui";
 
-import ProgressJob from "../../query/ProgressJob";
-import { Colors } from "../../utils";
-import SelectTranscode from "../SelectTranscode";
-import KeyValueTable from "../../ui/table/KeyValueTable";
+import ProgressJob from "../../../query/ProgressJob";
+import { Colors } from "../../../utils";
+import SelectTranscode from "../../SelectTranscode";
+import PixelMask from "./PixelMask";
+import EditCustomTagsTable from "./EditCustomTagsTable";
+import { customTags, PixelMaskType } from "./types";
+
 
 type SeriesEditFormProps = {
     data: Series;
@@ -24,8 +27,9 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
     const [keepSource, setKeepSource] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
-    const [keyVal, setKeyVal] = useState<{id: string, key: string, val: string | number}[]>([]);
-    const [transferSyntax, setTrasferSyntax] = useState("None");
+    const [customsTags, setCustomTags] = useState<customTags>({});
+    const [transferSyntax, setTrasferSyntax] = useState(null);
+    const [pixelMask, setPixelMask] = useState<PixelMaskType[] | null>(null);
 
     useEffect(() => {
         if (keepUIDs) setKeepSource(true)
@@ -37,13 +41,27 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         );
     };
 
+    const handlePixelMaskChange = (pixelMask: PixelMaskType[] | null) => {
+        setPixelMask(pixelMask);
+    };
+
+    const handleChangeCustomTags = (customTags: customTags) => {
+        setCustomTags(customTags);
+    };
+
+    function normalizeCoordinate(coord: { x: number, y: number, z?: number }): [number, number, number | undefined] {
+        return [coord.x, coord.y, coord?.z ?? undefined];
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         const replace: Partial<SeriesMainDicomTags> & { raw: { [key: string]: string | number } } = {
             raw: {}
         };
-        let transcode = 'None';
+
+        const maskPixelData: (RegionPixelData)[] = [];
+
+        let transcode = undefined;
 
         if (manufacturer !== data.mainDicomTags.manufacturer) replace.manufacturer = manufacturer;
         if (modality !== data.mainDicomTags.modality) replace.modality = modality;
@@ -51,9 +69,21 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
         if (seriesNumber !== data.mainDicomTags.seriesNumber?.toString()) replace.seriesNumber = seriesNumber;
         if (seriesDate !== data.mainDicomTags.seriesDate) replace.seriesDate = seriesDate;
         if (seriesTime !== data.mainDicomTags.seriesTime) replace.seriesTime = seriesTime;
-        if (transferSyntax !== 'None')  transcode = transferSyntax;
+        if (transferSyntax) transcode = transferSyntax;
+        replace.raw = { ...customsTags };
 
-        replace.raw = { ...replace.raw, ...Object.fromEntries(keyVal.map(({ key, val }) => [key, val])) };
+        if (pixelMask) {
+            pixelMask.forEach((mask) => {
+                maskPixelData.push({
+                    maskType: mask.maskType,
+                    fillValue: mask.maskType === "Fill" ? mask.maskTypeValue : undefined,
+                    filterWidth: mask.maskType === "MeanFilter" ? mask.maskTypeValue : undefined,
+                    regionType: mask.dimension,
+                    origin: normalizeCoordinate(mask.start),
+                    end: normalizeCoordinate(mask.end),
+                })
+            });
+        }
 
         const payload: SeriesModifyPayload = {
             replace,
@@ -63,8 +93,11 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             force: true,
             synchronous: false,
             keep: keepUIDs ? ['SeriesInstanceUID', 'SOPInstanceUID'] : [],
-            ...(transcode && transcode !== 'None') ? { transcode } : {},
+            transcode: transcode,
+            maskPixelData
         };
+
+        console.log(pixelMask);
 
         onSubmit({ id: data.id, payload });
     }
@@ -131,12 +164,15 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
                 />
             </div>
             <div>
-                <KeyValueTable 
-                    keyVal={keyVal}
-                    setKeyVal={setKeyVal}
-                    buttonText="Add a field"
-                    keyPlaceHolder="key"
-                    valuePlaceHolder="value"
+                <PixelMask
+                    pixelMask={pixelMask}
+                    onChange={handlePixelMaskChange}
+                />
+            </div>
+            <div>
+                <EditCustomTagsTable
+                    customTags={customsTags}
+                    onChange={handleChangeCustomTags}
                 />
             </div>
             <div className="flex justify-around">
@@ -161,15 +197,12 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             </div>
             <div className="flex justify-center">
                 <Button type="submit" color={Colors.secondary}>Modify</Button>
-                {
-                    jobId && (
-                        <div className="flex flex-col items-center justify-center">
-                            <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
-                        </div>
-                    )
-                }
             </div>
-
+            {jobId && (
+                <div className="flex flex-col items-center justify-center">
+                    <ProgressJob jobId={jobId} onJobCompleted={onJobCompleted} />
+                </div>
+            )}
         </form>
     );
 };

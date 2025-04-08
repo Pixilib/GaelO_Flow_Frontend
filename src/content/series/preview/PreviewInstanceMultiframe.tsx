@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react"
-import { previewFrame, previewInstance } from "../../services/instances"
-import { useCustomQuery } from "../../utils"
+import { previewFrame, previewInstance } from "../../../services/instances"
+import { useCustomQuery } from "../../../utils"
 
 type PreviewInstanceMultiframeProps = {
     instanceUID: string
