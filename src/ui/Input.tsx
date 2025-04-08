@@ -16,6 +16,7 @@ type InputProps = {
   min?: number;
   max?: number;
   step?: number;
+  disabled?: boolean;
   [key: string]: any;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -33,7 +34,7 @@ const Input = ({
   bordered = true,
   roundedLeft = true,
   roundedRight = true,
-
+  disabled = false,
   ...props
 }: InputProps) => {
   const InputClassName =
@@ -52,13 +53,11 @@ const Input = ({
     dark:border-white
     dark:placeholder-gray-200 
     dark:text-gray-200 
-    dark:focus:ring-indogp-300 
+    dark:focus:ring-indigo-300 
     dark:focus:border-blue-500
     hover:disabled:cursor-not-allowed
-    disabled:bg-gray-200 
-    disabled:text-gray-400 
-    disabled:border-gray-300
-    disabled:opacity-60`;
+    ${disabled ? "bg-gray-300 text-gray-400" : ""}
+    `;
 
   // Génération de la classe CSS pour contrôler les arrondis
   const borderClasses = bordered ? " border-1 border-gray-custom " : "border-none";
@@ -81,13 +80,14 @@ const Input = ({
           </div>
         )}
         <input
-          className="w-full bg-transparent border-none min-h-10"
+          className={`w-full bg-transparent border-none min-h-10 ${disabled ? "cursor-not-allowed opacity-60" : ""}`}
           type={type}
           min={min}
           max={max}
           step={step}
           autoComplete={autoComplete}
           placeholder={placeholder}
+          disabled={disabled}
           {...props}
         />
         {svgRight && (

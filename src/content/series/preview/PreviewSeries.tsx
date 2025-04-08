@@ -4,14 +4,14 @@
  */
 
 import React, { ChangeEvent, useMemo, useState } from "react";
-import { getInstancesOfSeries } from "../../services/orthanc";
-import { Colors, useCustomQuery } from "../../utils";
+import { getInstancesOfSeries } from "../../../services/orthanc";
+import { Colors, useCustomQuery } from "../../../utils";
 
-import { Button, Input, Spinner } from "../../ui";
+import { Button, Input, Spinner } from "../../../ui";
 import PreviewInstance from "./PreviewInstance";
-import { Instances } from "../../utils/types";
+import { Instances } from "../../../utils/types";
 import PreviewInstanceMultiframe from "./PreviewInstanceMultiframe";
-import { Next, Previous } from "../../icons";
+import { Next, Previous } from "../../../icons";
 
 type PreviewSeriesProps = {
   seriesId: string;

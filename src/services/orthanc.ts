@@ -366,7 +366,19 @@ export const modifySeries = (
     Synchronous: false,
     KeepSource: series.keepSource,
     Keep: series.keep,
-    Transcode : transcode
+    Transcode : transcode,
+    MaskPixelData: {
+      Regions: series.maskPixelData.map((mask) => {
+        return {
+          MaskType: mask.maskType,
+          RegionType: mask.regionType,
+          FilterWidth: mask.filterWidth,
+          FillValue: mask.fillValue,
+          Origin: mask.origin.filter((coord) => coord !== undefined),
+          End: mask.end.filter((coord) => coord !== undefined),
+        };
+      }),
+    }
   };
   return axios
     .post(`/api/series/${seriesId}/modify`, seriesPayloadUpdate)

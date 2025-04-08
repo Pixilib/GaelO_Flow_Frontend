@@ -43,7 +43,7 @@ services:
         restart: unless-stopped
 
     orthanc-flow:
-        image: orthancteam/orthanc:24.12.0
+        image: orthancteam/orthanc-pre-release:pixel-anon-unstable
         container_name: orthanc-flow
         restart: unless-stopped
         ports: ["8042:8042"]

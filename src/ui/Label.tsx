@@ -11,7 +11,6 @@ type LabelProps = {
     [key: string]: any;
 };
 
-
 const Label = ({value, align="left", classParent, className, ...props }:LabelProps) => {
     return (
         <div className={`mb-2 text-sm font-medium text-dark dark:text-white text-${align} ${classParent}`} >
