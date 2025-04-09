@@ -6,9 +6,11 @@ import { Queue } from "../../utils/types";
 
 type TaskTableProps = {
     data: Queue[];
+    selectedRows?: Record<string, boolean>;
+    onRowSelectionChange?: (rowSelection: Record<string, boolean>) => void;
 }
 
-const TaskTable = ({ data }: TaskTableProps) => {
+const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps) => {
 
     const columns = [
         {
@@ -44,7 +46,6 @@ const TaskTable = ({ data }: TaskTableProps) => {
             cell: ({ row }) => {
                 const [open, setOpen] = useState(false)
                 return (
-
                     <div >
                         <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
                         {open && <pre className="break-all text-xs">
@@ -59,7 +60,14 @@ const TaskTable = ({ data }: TaskTableProps) => {
 
     ]
     return (
-        <Table columnVisibility={{ id: false }} columns={columns} data={data} />
+        <Table
+            columnVisibility={{ id: false }}
+            columns={columns}
+            data={data}
+            enableRowSelection={true}
+            onRowSelectionChange={onRowSelectionChange}
+            selectedRow={selectedRows}
+        />
     )
 };
 

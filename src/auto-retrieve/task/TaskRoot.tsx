@@ -1,11 +1,22 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { useCustomQuery } from "../../utils";
+import { Colors, useCustomQuery } from "../../utils";
 import { getExistingQueriesQueues, getQueryQueue } from "../../services/queues";
-import { QueryQueue, Queue } from "../../utils/types";
+import { QueryQueue } from "../../utils/types";
 import TaskTable from "./TaskTable";
+import { useState } from "react";
+import { Button } from "../../ui";
+import { Anon, Export } from "../../icons";
+import {
+    addStudyIdToDeleteList,
+    addSeriesOfStudyIdToExportList,
+    addStudyIdToAnonymizeList,
+    addSeriesToExportListFromSeriesId,
+} from "../../utils/actionsUtils";
 
 const TaskRoot = () => {
+
+    const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
 
     const currentUserId = useSelector(
         (state: RootState) => state.user.currentUserId
@@ -26,10 +37,97 @@ const TaskRoot = () => {
             enabled: firstQueue != null,
         }
     );
-    
+
+    const handleSendAnonymizeList = () => {
+        Object.entries(selectedRows)
+        .filter(([_, value]) => value)
+        .forEach(([key]) => {
+            data.forEach(async (item) => {
+                if (!item.results)
+                    return;
+                if (item.id === key) {
+                    if (item.results.Type === "Study")
+                        await addStudyIdToAnonymizeList(item.results.ID);
+                    if (item.results.Type === "Series")
+                        await addStudyIdToAnonymizeList(item.results.ParentStudy);
+                }
+            });
+        });
+    };
+
+    const handleSendExportList = async () => {
+        Object.entries(selectedRows)
+        .filter(([_, value]) => value)
+        .forEach(([key]) => {
+            data.forEach(async (item) => {
+                if (!item.results)
+                    return;
+                if (item.id === key) {
+                    if (item.results.Type === "Study")
+                        await addSeriesOfStudyIdToExportList(item.results.ID);
+                    if (item.results.Type === "Series")
+                        await addSeriesToExportListFromSeriesId(item.results.ID);
+                }
+            });
+        });
+    };
+
+    const handleSendDeleteList = async () => {
+        Object.entries(selectedRows)
+        .filter(([_, value]) => value)
+        .forEach(([key]) => {
+            data.forEach(async (item) => {
+                if (!item.results)
+                    return;
+                if (item.id === key) {
+                    if (item.results.Type === "Study")
+                        await addStudyIdToDeleteList(item.results.ID);
+                    if (item.results.Type === "Series")
+                        await addStudyIdToDeleteList(item.results.ParentStudy);
+                }
+            });
+        });
+    };
+
+    const onRowSelectionChange = (rowSelection: Record<string, boolean>) => {
+        setSelectedRows(rowSelection);
+    }
+
     return (
         <>
-            <TaskTable  data={data || []} />
+            <div className="flex flex-wrap gap-2 pl-3 pr-3 pb-3">
+                <Button
+                    color={Colors.blueCustom}
+                    className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                    onClick={handleSendAnonymizeList}
+                >
+                    <Anon className="text-xl" />
+                    <span className="ml-2">Send to Anonymize</span>
+                </Button>
+
+                <Button
+                    color={Colors.secondary}
+                    className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                    onClick={handleSendExportList}
+                >
+                    <Export className="text-xl" />
+                    <span className="ml-2">Send to Export</span>
+                </Button>
+
+                <Button
+                    color={Colors.danger}
+                    className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                    onClick={handleSendDeleteList}
+                >
+                    <Export className="text-xl" />
+                    <span className="ml-2">Send to Delete</span>
+                </Button>
+            </div>
+            <TaskTable
+                data={data || []}
+                selectedRows={selectedRows}
+                onRowSelectionChange={onRowSelectionChange}
+            />
         </>
     )
 }
