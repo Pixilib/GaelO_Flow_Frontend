@@ -3,7 +3,6 @@ import { Info } from "../../icons";
 import { Button, Table } from "../../ui";
 import { Colors } from "../../utils";
 import { Queue } from "../../utils/types";
-import { o } from "node_modules/react-router/dist/development/fog-of-war-BjgPfDmv.d.mts";
 
 type TaskTableProps = {
     data: Queue[];
@@ -24,7 +23,7 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
             cell: ({ row }) => {
                 const [open, setOpen] = useState(false)
                 return (
-                    <div >
+                    <div>
                         <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
                         {open && <pre className="break-all text-xs">
                             {JSON.stringify(row.original.query, null, 2)}
@@ -52,12 +51,22 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
                 }, [row.original.results])
 
                 return (
-                    <div >
-                        <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
-                        {open && <pre className="break-all text-xs">
-                            {JSON.stringify(tags, null, 2)}
-                        </pre>}
-                    </div>)
+                    <div className={`flex flex-row items-center gap-10 overflow-hidden`}>
+                        <div>
+                            <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
+                        </div>
+                        {open &&
+                            <div className="border border-gray-500 rounded-md p-1">
+                                {tags && Object.entries(tags).map(([key, value], index) => (
+                                    <div key={key} className={`flex flex-row items-center justify-between gap-30 ${index % 2 === 0 ? "bg-gray-300 dark:bg-indigo-400" : ""}`}>
+                                        <p className="font-bold">{key} :</p>
+                                        <p className="text-xs">{value}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        }
+                    </div>
+                )
             },
         },
 
