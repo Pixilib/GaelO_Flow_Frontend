@@ -5,9 +5,12 @@ import { RootState } from "../store";
 import { Spinner } from "../ui";
 import ProgressQueueBar from "../queue/ProgressQueueBar";
 import { Queue } from "../utils/types";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
-const DeleteQueues = () => {
+type DeleteQueueProps = {
+    onFinish : () => void;
+}
+const DeleteQueues = ({onFinish} : DeleteQueueProps) => {
     const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
 
     const { data: existingDeleteQueues } = useCustomQuery<string[]>(
@@ -39,6 +42,12 @@ const DeleteQueues = () => {
         ).length;
         return totalJobs === 0 ? 0 : (completedJobs / totalJobs) * 100;
     }, [data]);
+
+    useEffect(() => {
+        if (globalProgress === 100) {
+            onFinish();
+        }
+    }, [globalProgress])
 
     if (!firstQueue) return null;
     if (isPending) return <Spinner />;

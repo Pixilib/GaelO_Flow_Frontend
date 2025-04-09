@@ -18,6 +18,10 @@ const DeleteRoot = () => {
         dispatch(flushDeleteList());
     };
 
+    const handleDeleteFinished = () => {
+        handleClearList()
+    };
+
     const { mutate: mutateDelete } = useCustomMutation(
         ({ seriesIds }) => createDeleteQueue(seriesIds),
         [[]],
@@ -69,9 +73,9 @@ const DeleteRoot = () => {
                         className="flex items-center justify-center"
                     >
                         <Trash />
-                        <span className="ml-2">Delete List</span>
+                        <span className="ml-2">Execute Deletion</span>
                     </Button>
-                    <DeleteQueues />
+                    <DeleteQueues onFinish={handleDeleteFinished} />
                 </div>
             </CardFooter>
 

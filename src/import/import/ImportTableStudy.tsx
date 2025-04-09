@@ -7,10 +7,12 @@ interface ImportTableStudyProps {
     data: Study[];
     onStudyClick: (studyInstanceUID: string) => void;
     selectedStudyInstanceUID: string | null;
+    onRowSelectionChange?: (selectedRow: Record<string, boolean>) => void;
+    selectedRow?: Record<string, boolean>;
 }
 
-const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID }) => {
-    
+const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyClick, selectedStudyInstanceUID, onRowSelectionChange, selectedRow }) => {
+
     const columns = useMemo(() => {
         return [
             {
@@ -61,6 +63,9 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
             enableSorting
             getRowClasses={getRowClasses}
             onRowClick={handleRowClick}
+            enableRowSelection={true}
+            onRowSelectionChange={onRowSelectionChange}
+            selectedRow={selectedRow}
         />
     );
 };
