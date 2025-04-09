@@ -1,11 +1,17 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { BannerAlert } from "../../ui";
+import { BannerAlert, Button } from "../../ui";
 import Model from "../../model/Model";
 import { Colors } from "../../utils";
 import ImportDrop from "./ImportDrop";
 import ImportTableStudy from "./ImportTableStudy"; // Import de ImportTableStudy
 import ImportTableSeries from "./ImportTableSeries"; // Import de ImportTableSeries
 import ImportErrorModal from "./ImportErrorModal";
+import { Anon, Export } from "../../icons";
+import {
+  addStudyIdToDeleteList,
+  addSeriesOfStudyIdToExportList,
+  addStudyIdToAnonymizeList,
+} from "../../utils/actionsUtils";
 
 interface ImportError {
   filename: string;
@@ -21,6 +27,7 @@ const ImportRoot: React.FC = () => {
   const [seriesData, setSeriesData] = useState<any[]>([]);
   const [errors, setErrors] = useState<ImportError[]>([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<Record<string, boolean>>({});
 
   const refreshStudyData = () => {
     const studies = refModel.current.getStudies();
@@ -55,6 +62,37 @@ const ImportRoot: React.FC = () => {
     setShowErrorModal(false);
   }, []);
 
+  const onRowSelectionChange = useCallback(
+    (selectedRow: Record<string, boolean>) => {
+      setSelectedRow(selectedRow);
+    },
+    []
+  );
+
+  const handleSendAnonymizeList = () => {
+    Object.entries(selectedRow)
+      .filter(([_, value]) => value)
+      .forEach(async ([key]) => {
+        await addStudyIdToAnonymizeList(key);
+      });
+  };
+
+  const handleSendExportList = async () => {
+    Object.entries(selectedRow)
+      .filter(([_, value]) => value)
+      .forEach(async ([key]) => {
+        await addSeriesOfStudyIdToExportList(key);
+      });
+  };
+
+  const handleSendDeleteList = async () => {
+    Object.entries(selectedRow)
+      .filter(([_, value]) => value)
+      .forEach(async ([key]) => {
+        await addStudyIdToDeleteList(key);
+      });
+  };
+
   useEffect(() => {
     if (currentStudyInstanceUID) {
       updateSeriesData(currentStudyInstanceUID);
@@ -83,20 +121,51 @@ const ImportRoot: React.FC = () => {
       )}
 
       {studiesData.length > 0 && (
-        <div className="flex gap-4">
-          <div className="flex-1 mb-4 overflow-x-auto shadow-lg rounded-xl">
-            <ImportTableStudy
-              data={studiesData}
-              selectedStudyInstanceUID={currentStudyInstanceUID}
-              onStudyClick={handleStudyClick}
-            />
-          </div>
+        <div>
+          <div className="flex flex-wrap gap-2 mb-4">
+            <Button
+              color={Colors.blueCustom}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendAnonymizeList}
+            >
+              <Anon className="text-xl" />
+              <span className="ml-2">Send to Anonymize</span>
+            </Button>
 
-          {currentStudyInstanceUID && seriesData.length > 0 && (
-            <div className="flex-1 overflow-x-auto shadow-lg rounded-xl mb">
-              <ImportTableSeries data={seriesData} />
+            <Button
+              color={Colors.secondary}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendExportList}
+            >
+              <Export className="text-xl" />
+              <span className="ml-2">Send to Export</span>
+            </Button>
+
+            <Button
+              color={Colors.danger}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendDeleteList}
+            >
+              <Export className="text-xl" />
+              <span className="ml-2">Send to Delete</span>
+            </Button>
+          </div>
+          <div className="flex gap-4">
+            <div className="flex-1 mb-4 overflow-x-auto shadow-lg rounded-xl">
+              <ImportTableStudy
+                data={studiesData}
+                selectedStudyInstanceUID={currentStudyInstanceUID}
+                onStudyClick={handleStudyClick}
+                selectedRow={selectedRow}
+                onRowSelectionChange={onRowSelectionChange}
+              />
             </div>
-          )}
+            {currentStudyInstanceUID && seriesData.length > 0 && (
+              <div className="flex-1 overflow-x-auto shadow-lg rounded-xl mb">
+                <ImportTableSeries data={seriesData} />
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

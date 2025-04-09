@@ -1,5 +1,5 @@
 import { store } from '../store'
-import { getPatient, getSeriesOfStudy, getStudy } from "../services/orthanc"
+import { getPatient, getSeries, getSeriesOfStudy, getStudy } from "../services/orthanc"
 import { addStudyToDeleteList } from '../reducers/DeleteSlice'
 import { addStudyToAnonymizeList } from '../reducers/AnonymizeSlice'
 import { addSeriesToExportList } from '../reducers/ExportSlice'
@@ -37,6 +37,12 @@ export const addSeriesOfStudyIdToExportList = async (studyId: string) => {
     series.forEach(series =>
         store.dispatch(addSeriesToExportList({ series: series, study: study }))
     )
+}
+
+export const addSeriesToExportListFromSeriesId = async (seriesId: string) => {
+    const series = await getSeries(seriesId)
+    const study = await getStudy(series.parentStudy)
+    store.dispatch(addSeriesToExportList({ series: series, study: study }))
 }
 
 export { addSeriesToExportList }
