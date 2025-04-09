@@ -38,55 +38,42 @@ const TaskRoot = () => {
         }
     );
 
-    const handleSendAnonymizeList = () => {
-        Object.entries(selectedRows)
-        .filter(([_, value]) => value)
-        .forEach(([key]) => {
-            data.forEach(async (item) => {
-                if (!item.results)
-                    return;
-                if (item.id === key) {
-                    if (item.results.Type === "Study")
-                        await addStudyIdToAnonymizeList(item.results.ID);
-                    if (item.results.Type === "Series")
-                        await addStudyIdToAnonymizeList(item.results.ParentStudy);
-                }
-            });
-        });
+    const getSelectedData = () => {
+        const selectedIds = Object.keys(selectedRows)
+        return data.filter(item => selectedIds.includes(item.id))
+    }
+
+    const handleSendAnonymizeList = async () => {
+        const selectedData = getSelectedData();
+        for (const item of selectedData) {
+            if (!item.results) continue;
+            if (item.results.Type === "Study")
+                await addStudyIdToAnonymizeList(item.results.ID);
+            if (item.results.Type === "Series")
+                await addStudyIdToAnonymizeList(item.results.ParentStudy);
+        }
     };
 
     const handleSendExportList = async () => {
-        Object.entries(selectedRows)
-        .filter(([_, value]) => value)
-        .forEach(([key]) => {
-            data.forEach(async (item) => {
-                if (!item.results)
-                    return;
-                if (item.id === key) {
-                    if (item.results.Type === "Study")
-                        await addSeriesOfStudyIdToExportList(item.results.ID);
-                    if (item.results.Type === "Series")
-                        await addSeriesToExportListFromSeriesId(item.results.ID);
-                }
-            });
-        });
+        const selectedData = getSelectedData();
+        for (const item of selectedData) {
+            if (!item.results) continue;
+            if (item.results.Type === "Study")
+                await addSeriesOfStudyIdToExportList(item.results.ID);
+            if (item.results.Type === "Series")
+                await addSeriesToExportListFromSeriesId(item.results.ID);
+        }
     };
 
     const handleSendDeleteList = async () => {
-        Object.entries(selectedRows)
-        .filter(([_, value]) => value)
-        .forEach(([key]) => {
-            data.forEach(async (item) => {
-                if (!item.results)
-                    return;
-                if (item.id === key) {
-                    if (item.results.Type === "Study")
-                        await addStudyIdToDeleteList(item.results.ID);
-                    if (item.results.Type === "Series")
-                        await addStudyIdToDeleteList(item.results.ParentStudy);
-                }
-            });
-        });
+        const selectedData = getSelectedData();
+        for (const item of selectedData) {
+            if (!item.results) continue;
+            if (item.results.Type === "Study")
+                await addStudyIdToDeleteList(item.results.ID);
+            if (item.results.Type === "Series")
+                await addStudyIdToDeleteList(item.results.ParentStudy);
+        }
     };
 
     const onRowSelectionChange = (rowSelection: Record<string, boolean>) => {

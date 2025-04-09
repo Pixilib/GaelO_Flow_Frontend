@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Info } from "../../icons";
 import { Button, Table } from "../../ui";
 import { Colors } from "../../utils";
 import { Queue } from "../../utils/types";
+import { o } from "node_modules/react-router/dist/development/fog-of-war-BjgPfDmv.d.mts";
 
 type TaskTableProps = {
     data: Queue[];
@@ -45,14 +46,16 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
             accessorKey: "results",
             cell: ({ row }) => {
                 const [open, setOpen] = useState(false)
+
+                const tags = useMemo(() => {
+                    return {...row.original.results?.MainDicomTags, ...row.original.results?.PatientMainDicomTags}
+                }, [row.original.results])
+
                 return (
                     <div >
                         <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
                         {open && <pre className="break-all text-xs">
-                            {JSON.stringify({
-                                patientMainDicomTags: row.original.results?.PatientMainDicomTags,
-                                mainDicomTags: row.original.results?.MainDicomTags,
-                            }, null, 2)}
+                            {JSON.stringify(tags, null, 2)}
                         </pre>}
                     </div>)
             },
