@@ -48,6 +48,7 @@
     0% {
       width: 0%;
     }
+
     100% {
       width: 100%;
     }
@@ -59,16 +60,28 @@
     scrollbar-width: thin;
     scrollbar-color: #ffffff #edf2f7;
   }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: #edf2f7;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: #ffffff;
     border-radius: 9999px;
     border: 2px solid #edf2f7;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
@@ -77,4 +90,3 @@
     @apply !ring-transparent;
   }
 }
-

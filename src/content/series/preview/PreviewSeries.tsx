@@ -72,7 +72,6 @@ const PreviewSeries: React.FC<PreviewSeriesProps> = ({ seriesId }) => {
   return (
     <>
       <div
-        className={"flex w-full h-full"}
         style={{
           display: "grid",
           gridTemplateColumns: `repeat(${columns}, 1fr)`,
@@ -104,7 +103,7 @@ const PreviewSeries: React.FC<PreviewSeriesProps> = ({ seriesId }) => {
           setImageIndex(Number(event.target.value))
         }
       />
-      <div className={"flex w-full justify-center"}>
+      <div className={"flex w-full justify-center h-scree"}>
         <div className="flex gap-3">
           <Button color={Colors.primary} onClick={onPagePrevious}>
             <Previous />

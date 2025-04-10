@@ -47,7 +47,7 @@ const Welcome = () => {
         />
         <div className="w-full max-w-2xl mx-auto">{getImage}</div>
       </div>
-      <div className="flex items-center justify-center w-1/2 bg-white shadow-xl dark:bg-stone-900">
+      <div className="flex flex-col items-center gap-7 justify-center w-1/2 bg-white shadow-xl dark:bg-stone-900">
         <div className="w-full max-w-md p-4">
           <Routes>
             <Route path="/*" element={<SignInForm />} />
@@ -57,46 +57,43 @@ const Welcome = () => {
             <Route path="/sign-up" element={<SignUpForm />} />
           </Routes>
 
-          <hr className="w-full my-8 mt-20 border-primary dark:border-white" />
-
-          <div className="flex justify-between mx-auto text-center text-balance">
-            {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
-              <span
-                onClick={() => navigate("/sign-up")}
-                className={`${classLink} dark:text-white dark:hover:text-indigo-300`}
-              >
-                Don’t have an account?
+        </div>
+        <div className="flex justify-between items-end gap-5 text-center text-balance">
+          {location.pathname !== "/sign-up" && location.pathname !== "/legal-mention" && (
+            <span
+              onClick={() => navigate("/sign-up")}
+              className={`${classLink} dark:text-white dark:hover:text-indigo-300`}
+            >
+              Don’t have an account?
+            </span>
+          )}
+          {location.pathname === "/legal-mention" ? (
+            <div
+              onClick={() => navigate("/")}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <ArrowBack />
+              <span className="text-gray-600 dark:text-white dark:hover:text-indigo-300">
+                Back
               </span>
-            )}
+            </div>
+          ) : (
+            <span
+              onClick={() => navigate("/")}
+              className={`${classLink} dark:text-white dark:hover:text-indigo-300`}
+            >
+              Already have an account?
+            </span>
+          )}
 
-            {location.pathname === "/legal-mention" ? (
-              <div
-                onClick={() => navigate("/")}
-                className="flex items-center gap-2 cursor-pointer"
-              >
-                <ArrowBack />
-                <span className="text-gray-600 dark:text-white dark:hover:text-indigo-300">
-                  Back
-                </span>
-              </div>
-            ) : (
-              <span
-                onClick={() => navigate("/")}
-                className={`${classLink} dark:text-white dark:hover:text-indigo-300`}
-              >
-                Already have an account?
-              </span>
-            )}
-
-            {location.pathname !== "/legal-mention" && (
-              <span
-                onClick={() => navigate("/legal-mention")}
-                className={`${classLink} inline-block dark:text-white dark:hover:text-indigo-300`}
-              >
-                Legal Mention
-              </span>
-            )}
-          </div>
+          {location.pathname !== "/legal-mention" && (
+            <span
+              onClick={() => navigate("/legal-mention")}
+              className={`${classLink} inline-block dark:text-white dark:hover:text-indigo-300`}
+            >
+              Legal Mention
+            </span>
+          )}
         </div>
       </div>
     </main>

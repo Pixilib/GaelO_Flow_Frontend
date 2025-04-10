@@ -40,6 +40,7 @@ const StudyRoot = ({
   const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
 
   const studies = useMemo(() => {
+    onStudySelected(null)
     return patient.getStudies().map((study) => study.toJSON());
   }, [patient]);
 

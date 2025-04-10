@@ -24,7 +24,7 @@ export const timeDiff = (timeStart: string, timeEnd: string): string => {
  * @returns {string} - The formatted time example 12:30
  */
 export const formatTime = (hours: number, minutes: number): string => {
-    const timeString = moment({ hours, minutes }).format('hh:mm');
+    const timeString = moment({ hours, minutes }).format('HH:mm');
     return timeString;
 }
 

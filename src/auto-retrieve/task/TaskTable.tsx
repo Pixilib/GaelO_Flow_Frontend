@@ -4,6 +4,7 @@ import { Badge, Button, Table } from "../../ui";
 import { Colors } from "../../utils";
 import { Queue } from "../../utils/types";
 import { size } from "@floating-ui/dom";
+import { Key } from "src/assets";
 
 type TaskTableProps = {
     data: Queue[];
@@ -23,12 +24,33 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
             accessorKey: "query",
             cell: ({ row }) => {
                 const [open, setOpen] = useState(false)
+                if( row.original.query === undefined ) return <div> Pending </div>
                 return (
-                    <div>
-                        <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
-                        {open && <pre className="break-all text-xs">
-                            {JSON.stringify(row.original.query, null, 2)}
-                        </pre>}
+                            <div className="flex flex-col max-h-24 overflow-auto no-scrollbar">
+                                {Object.entries(row.original.query).filter(([key, value]) => ['PatientID', 'PatientName', 'StudyDescription', 'StudyDate', 'SeriesDescription'].includes(key)).map(([key, value], index) =>
+                                    <span key={key} className="text-xs break-all">{key} : {value}</span>
+                                )}
+                            </div>
+                )
+            }
+        },
+        {
+            id: "details",
+            accessorKey: "details",
+            cell: ({ row }) => {
+                const [open, setOpen] = useState(false)
+                return (
+                    <div className={`flex flex-row items-center gap-10 overflow-hidden `}>
+                        <div>
+                            <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
+                        </div>
+                        {open &&
+                            <div className=" flex flex-col max-h-24 w-full overflow-auto gap-3 border border-gray-500 rounded-md p-1">
+                                {Object.entries(row.original.query).filter(([key, value]) => !['AnswerId', 'AnswerNumber'].includes(key)).map(([key, value], index) =>
+                                    <Badge key={key} className="font-bold break-all">{key} : {value}</Badge>
+                                )}
+                            </div>
+                        }
                     </div>
                 )
             }
@@ -40,34 +62,7 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
         {
             id: "progress",
             accessorKey: "progress",
-        },
-        {
-            id: "results",
-            accessorKey: "results",
-            cell: ({ row }) => {
-                const [open, setOpen] = useState(false)
-
-                const tags = useMemo(() => {
-                    return {...row.original.results?.MainDicomTags, ...row.original.results?.PatientMainDicomTags}
-                }, [row.original.results])
-
-                return (
-                    <div className={`flex flex-row items-center gap-10 overflow-hidden `}>
-                        <div>
-                            <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
-                        </div>
-                        {open &&
-                            <div className=" flex flex-col max-h-24 w-full overflow-auto gap-3 border border-gray-500 rounded-md p-1">
-                                {tags && Object.entries(tags).map(([key, value], index) => (
-                                    <Badge key={key} className="font-bold break-all">{key} : {value}</Badge>
-                                ))}
-                            </div>
-                        }
-                    </div>
-                )
-            },
-            size: 200,
-        },
+        }
 
     ]
     return (
