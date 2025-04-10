@@ -48,6 +48,7 @@
     0% {
       width: 0%;
     }
+
     100% {
       width: 100%;
     }
@@ -59,12 +60,15 @@
     scrollbar-width: thin;
     scrollbar-color: #ffffff #edf2f7;
   }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: #edf2f7;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background-color: #ffffff;
     border-radius: 9999px;
@@ -73,12 +77,12 @@
 
   .no-scrollbar::-webkit-scrollbar {
     display: none;
-}
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 @layer components {
