@@ -100,7 +100,7 @@ function Table<T>({
                 onClick={(e) => e.stopPropagation()}
             />
         ),
-    };
+        size : 30    };
 
     const tableColumns = enableRowSelection ? [selectionColumn, ...columns] : columns;
 
@@ -171,6 +171,7 @@ function Table<T>({
                                 <th
                                     key={header.id}
                                     colSpan={header.column.getCanFilter() ? 1 : undefined}
+                                    style={{ width: `${header.getSize()}px` }}
                                     className={`p-4 font-bold tracking-wider uppercase cursor-pointer  ${getColumnClasses(index, headerGroup.headers.length)}`}
                                 >
                                     <div className='flex flex-col'>
