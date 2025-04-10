@@ -1,8 +1,9 @@
 import { useMemo, useState } from "react";
 import { Info } from "../../icons";
-import { Button, Table } from "../../ui";
+import { Badge, Button, Table } from "../../ui";
 import { Colors } from "../../utils";
 import { Queue } from "../../utils/types";
+import { size } from "@floating-ui/dom";
 
 type TaskTableProps = {
     data: Queue[];
@@ -51,23 +52,21 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
                 }, [row.original.results])
 
                 return (
-                    <div className={`flex flex-row items-center gap-10 overflow-hidden`}>
+                    <div className={`flex flex-row items-center gap-10 overflow-hidden `}>
                         <div>
                             <Button onClick={() => setOpen(open => !open)} color={Colors.primary}><Info /></Button>
                         </div>
                         {open &&
-                            <div className="border border-gray-500 rounded-md p-1">
+                            <div className=" flex flex-col max-h-24 w-full overflow-auto gap-3 border border-gray-500 rounded-md p-1">
                                 {tags && Object.entries(tags).map(([key, value], index) => (
-                                    <div key={key} className={`flex flex-row items-center justify-between gap-30 ${index % 2 === 0 ? "bg-gray-300 dark:bg-indigo-400" : ""}`}>
-                                        <p className="font-bold">{key} :</p>
-                                        <p className="text-xs">{value}</p>
-                                    </div>
+                                    <Badge key={key} className="font-bold break-all">{key} : {value}</Badge>
                                 ))}
                             </div>
                         }
                     </div>
                 )
             },
+            size: 200,
         },
 
     ]
