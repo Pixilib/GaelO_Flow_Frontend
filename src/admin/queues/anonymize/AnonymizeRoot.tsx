@@ -3,21 +3,19 @@ import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../..
 import { getOptions } from "../../../services";
 import { Button, Spinner } from "../../../ui";
 
-import RetrieveOptions from "./RetrieveOptions";
-import RetrieveQueues from "./RetrieveQueues";
+import AnonymizeQueues from "./AnonymizeQueues";
 import { Options } from "../../../utils/types";
-import { Trash, Pause, Play } from "../../../icons";
-import { deleteQueryQueue, pauseQueryQueue, resumeQueryQueue } from "../../../services/queues";
-import { data } from "react-router";
+import { Pause, Play, Trash } from "../../../icons";
+import { deleteAnonymizeQueue, pauseAnonymizeQueue, resumeAnonymizeQueue } from "../../../services/queues";
 import { useState } from "react";
 
-const RetrieveRoot = () => {
+const AnonymizeRoot = () => {
     const { data: options, isPending: isLoadingOptions } = useCustomQuery<Options>(["options"], () => getOptions());
     const { toastSuccess, toastError } = useCustomToast();
 
     const { mutate: mutateDeleteQueue } = useCustomMutation(
-        () => deleteQueryQueue(),
-        [["queue", "query"]],
+        () => deleteAnonymizeQueue(),
+        [["queue", "anonymize"]],
         {
             onError: (e: any) => {
                 toastError(e?.data?.message);
@@ -30,8 +28,8 @@ const RetrieveRoot = () => {
     );
 
     const { mutate: mutatePauseQueue } = useCustomMutation(
-        () => pauseQueryQueue(),
-        [["queue", "query", "pause"]],
+        () => pauseAnonymizeQueue(),
+        [["queue", "anonymize", "pause"]],
         {
             onError: (e: any) => {
                 toastError(e?.data?.message);
@@ -43,9 +41,10 @@ const RetrieveRoot = () => {
         }
     );
 
+
     const { mutate: mutateResumeQueue } = useCustomMutation(
-        () => resumeQueryQueue(),
-        [["queue", "query", "resume"]],
+        () => resumeAnonymizeQueue(),
+        [["queue", "anonymize", "resume"]],
         {
             onError: (e: any) => {
                 toastError(e?.data?.message);
@@ -61,8 +60,7 @@ const RetrieveRoot = () => {
 
     return (
         <div className="flex flex-col gap-3">
-            <RetrieveOptions data={options} />
-            <RetrieveQueues />
+            <AnonymizeQueues />
             <div className="flex justify-end gap-5">
                 <Button onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
                 <Button onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
@@ -71,5 +69,4 @@ const RetrieveRoot = () => {
         </div>
     )
 }
-
-export default RetrieveRoot;
+export default AnonymizeRoot;
