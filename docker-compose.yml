@@ -1,5 +1,4 @@
 services:
-    
     gaelo-flow:
       container_name: gaelo-flow
       image: ghcr.io/pixilib/gaelo-flow-backend
@@ -25,7 +24,6 @@ services:
         MAIL_PASSWORD: ""
         MAIL_FROM: ""
         MAIL_ENCRYPTION: ""
-
 
     redis:
         image: redis:alpine
@@ -69,7 +67,6 @@ services:
             ORTHANC__DICOM_WEB__SERIES_METADATA: "Full"
             VERBOSE_ENABLED: "true"
             #TRACE_ENABLED: "true"
-            
 
 volumes:
         orthanc-flow:
