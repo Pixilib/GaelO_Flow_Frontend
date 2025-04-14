@@ -1,9 +1,9 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router";
 import { Tabs, Tab, Card, CardBody } from "../../ui";
-import Anonymize from "./Anonymize";
-import Delete from "./Delete";
 import { Colors } from "../../utils";
 import RetrieveRoot from "./retrieve/RetrieveRoot";
+import AnonymizeRoot from "./anonymize/AnonymizeRoot";
+import DeleteRoot from "./delete/DeleteRoot";
 
 const QueuesRoot = () => {
   const navigate = useNavigate();
@@ -39,8 +39,8 @@ const QueuesRoot = () => {
       >
         <Routes>
           <Route path="retrieve" element={<RetrieveRoot />} />
-          <Route path="anonymize" element={<Anonymize />} />
-          <Route path="delete" element={<Delete />} />
+          <Route path="anonymize" element={<AnonymizeRoot />} />
+          <Route path="delete" element={<DeleteRoot />} />
         </Routes>
       </CardBody>
     </Card>
