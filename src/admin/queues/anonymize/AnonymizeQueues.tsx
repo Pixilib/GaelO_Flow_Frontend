@@ -1,22 +1,22 @@
-import { startTransition, useMemo } from "react";
+import { useMemo } from "react";
 import { useQueries } from "@tanstack/react-query";
-import { getExistingQueriesQueues, getQueryQueue } from "../../../services/queues";
+import { getExistingAnonymizeQueues, getAnonymizeQueue } from "../../../services/queues";
 import { useCustomQuery } from "../../../utils";
-import RetrieveQueueTable from "./RetrieveQueueTable";
+import AnonymizeQueueTable from "./AnonymizeQueueTable";
 import { Badge } from "../../../ui";
 
-const RetrieveQueues = () => {
+const AnonymizeQueues = () => {
 
-  const { data: existingRetrieveQueues } = useCustomQuery<string[]>(
+  const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
     ["queue", "query"],
-    () => getExistingQueriesQueues(undefined)
+    () => getExistingAnonymizeQueues(undefined)
   );
 
-  const currentRetrieveJobs = useQueries({
-    queries: existingRetrieveQueues?.map((id) => {
+  const currentAnonymizeJobs = useQueries({
+    queries: existingAnonymizeQueues?.map((id) => {
       return {
         queryKey: ["queue", "query", id],
-        queryFn: () => getQueryQueue(id),
+        queryFn: () => getAnonymizeQueue(id),
         refetchInterval: 5000,
         select: (data: object) => ({ jobs: data, id: id }),
       };
@@ -30,14 +30,15 @@ const RetrieveQueues = () => {
   });
 
   const queueRows = useMemo(() => {
-    return currentRetrieveJobs.data.filter(queue => queue).map((queue) => {
-      if (!queue) return;
+    return currentAnonymizeJobs.data.filter(queue => queue).map((queue) => {
+      if (!queue) return; 
       const jobs = Object.values(queue.jobs);
       const states = jobs.map((job) => job.state);
       const counts = {};
 
-      for (const state of states)
+      for (const state of states) {
         counts[state] = counts[state] ? counts[state] + 1 : 1;
+      }
 
       const progressHtml = (
         <div className="flex gap-2">
@@ -57,11 +58,12 @@ const RetrieveQueues = () => {
       })
     }
     );
-  }, [currentRetrieveJobs]);
+  }, [currentAnonymizeJobs]);
+
 
   return (
-    <RetrieveQueueTable queues={queueRows} />
+    <AnonymizeQueueTable queues={queueRows} />
   );
 };
 
-export default RetrieveQueues;
+export default AnonymizeQueues;

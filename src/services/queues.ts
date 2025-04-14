@@ -46,9 +46,10 @@ export const getDeleteQueue = (uuid: string): Promise<Queue[]> => {
     });
 };
 
-export const deleteDeleteQueue = (uuid: string): Promise<void> => {
+export const deleteDeleteQueue = (uuid?: string): Promise<void> => {
+  const api = uuid ? `/api/queues/delete/${uuid}` : "/api/queues/delete";
   return axios
-    .delete(`/api/queues/delete/${uuid}`)
+    .delete(api)
     .then(() => undefined)
     .catch(function (error) {
       if (error.response) {
@@ -57,6 +58,30 @@ export const deleteDeleteQueue = (uuid: string): Promise<void> => {
       throw error;
     });
 };
+
+export const pauseDeleteQueue = (): Promise<void> => {
+  return axios
+    .post(`/api/queues/delete/pause`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+
+export const resumeDeleteQueue = (): Promise<void> => {
+  return axios
+    .post(`/api/queues/delete/resume`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
 
 export const getExistingDeleteQueues = (
   userId: number | undefined
@@ -97,7 +122,7 @@ export const getExistingAnonymizeQueues = (
 ): Promise<string[]> => {
   const url = userId
     ? `/api/queues/anonymize?userId=${userId}`
-    : "/api/queues/anon";
+    : "/api/queues/anonymize";
   return axios
     .get(url)
     .then((response) => {
@@ -133,9 +158,10 @@ export const getAnonymizeQueue = (uuid: string): Promise<AnonQueue[]> => {
     });
 };
 
-export const deleteAnonymizeQueue = (uuid: string): Promise<void> => {
+export const deleteAnonymizeQueue = (uuid?: string): Promise<void> => {
+  const api = uuid ? `/api/queues/anonymize/${uuid}` : "/api/queues/anonymize";
   return axios
-    .delete(`/api/queues/anonymize/${uuid}`)
+    .delete(api)
     .then(() => undefined)
     .catch(function (error) {
       if (error.response) {
@@ -144,6 +170,30 @@ export const deleteAnonymizeQueue = (uuid: string): Promise<void> => {
       throw error;
     });
 };
+
+export const pauseAnonymizeQueue = (): Promise<void> => {
+  return axios
+    .post(`/api/queues/anonymize/pause`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+
+export const resumeAnonymizeQueue = (): Promise<void> => {
+  return axios
+    .post(`/api/queues/anonymize/resume`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
 
 export const createQueryQueue = (
   studies: QueryQueueStudyItem[],
@@ -232,3 +282,27 @@ export const deleteQueryQueue = (uuid?: string): Promise<void> => {
       throw error;
     });
 };
+
+export const pauseQueryQueue = (): Promise<void> => {
+  return axios
+    .post(`/api/queues/query/pause`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+
+export const resumeQueryQueue = (): Promise<void> => {
+  return axios
+    .post(`/api/queues/query/resume`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}

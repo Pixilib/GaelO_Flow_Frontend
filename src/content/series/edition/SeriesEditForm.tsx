@@ -97,8 +97,6 @@ const SeriesEditForm = ({ data, onSubmit, jobId, onJobCompleted }: SeriesEditFor
             maskPixelData
         };
 
-        console.log(pixelMask);
-
         onSubmit({ id: data.id, payload });
     }
     return (
