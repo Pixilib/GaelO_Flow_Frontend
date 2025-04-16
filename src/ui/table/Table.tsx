@@ -156,7 +156,7 @@ function Table<T>({
 
     const getSortedIcon = (column) : React.ReactNode => {
         const direction  = column.getIsSorted()
-        if(!direction) return <SortAz className={"opacity-30"} /> 
+        if(!direction) return <SortAz className={"opacity-30"} />
         if(direction === 'desc') return <SortZa />
         if(direction === 'asc') return <SortAz />
     }

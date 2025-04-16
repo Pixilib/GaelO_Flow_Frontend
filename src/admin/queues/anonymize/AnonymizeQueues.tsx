@@ -60,7 +60,6 @@ const AnonymizeQueues = () => {
     );
   }, [currentAnonymizeJobs]);
 
-
   return (
     <AnonymizeQueueTable queues={queueRows} />
   );

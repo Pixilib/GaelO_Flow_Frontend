@@ -140,6 +140,9 @@ export type ProcessingJob = {
   state: string;
   id: string;
   results: Record<string, any>;
+  userId: number;
+  jobType: string;
+  payload: object[];
 };
 
 export type Peer = {
