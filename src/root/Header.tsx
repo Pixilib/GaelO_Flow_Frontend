@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   const navigate = useNavigate();
   const { i18n } = useTranslation();
 
-  const jobIds = useSelector((state: RootState) => state.job.jobIds);
+  const jobs = useSelector((state: RootState) => state.job.jobs);
 
   const [openItem, setOpenItem] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -112,24 +112,25 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 
         <div className="flex items-center bg-primary rounded-xl text-white p-3 gap-3">
           <Popover
-            className='!p-1 !bg-light dark:!bg-black'
+            className='border border-gray-custom max-h-150 overflow-auto translate-y-3 -translate-x-60'
             withOnClick
+            backgroundColor='bg-white'
             popover={
               <Jobs />
             }
           >
             <span className='relative'>
-              <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
-              {jobIds.length > 0 ?
+              <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
+              {jobs.length > 0 ?
                 (<span className='absolute -bottom-4 -right-2 bg-danger pr-1 pl-1 rounded-xl text-xs'>
-                  {jobIds.length}
+                  {jobs.length}
                 </span>)
                 :
                 null
               }
             </span>
           </Popover>
-          <User className="w-5 h-5 transition-transform duration-100 hover:scale-110" fill="currentColor" />
+          <User className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
         </div>
       </div>
     </Banner>

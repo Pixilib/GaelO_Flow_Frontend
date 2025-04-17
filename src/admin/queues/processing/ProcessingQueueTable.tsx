@@ -95,7 +95,7 @@ const ProcessingQueueTable = ({ jobs = [] }: ProcessingQueueTableProps) => {
             header: 'User ID',
         },
         {
-            accessorKey: "jobType",
+            accessorKey: "type",
             header: 'Job Type',
         },
     ]

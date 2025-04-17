@@ -308,7 +308,7 @@ export const getProcessingJobs = (): Promise<ProcessingJob[]> => {
         state: job.State,
         id: job.Id,
         userId: job.UserId,
-        jobType: job.JobType,
+        type: job.JobType,
         payload: job.Payload,
       }));
     })
