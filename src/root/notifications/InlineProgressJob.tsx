@@ -47,7 +47,7 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, onJobCompl
     const handleRemoveJob = () => {
         dispatch(removeJob({jobId :jobId}))
     }
-    
+
     return (
         <Badge className={'flex flex-col '+ getTextColor(jobData.state)}>
             <span className='flex justify-end'><Close onClick={handleRemoveJob}/></span>
