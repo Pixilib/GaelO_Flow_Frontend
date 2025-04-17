@@ -15,7 +15,7 @@ const ProcessingQueues = () => {
           progress: job.progress,
           state: job.state,
           userId: job.userId,
-          jobType: job.jobType,
+          type: job.type,
           payload: job.payload,
         }));
       },

@@ -31,13 +31,12 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
     {
       onSuccess: (data) => {
         setJobId(data.id);
-        dispatch(addJob({jobId : data.id}))
+        dispatch(addJob({jobId : data.id, jobType : "orthanc"}))
       }
     }
   );
 
   const handleClick = (event: MouseEvent<SVGAElement>) => {
-    
     event.stopPropagation()
     if (jobId) return
     retrieveMutation({})

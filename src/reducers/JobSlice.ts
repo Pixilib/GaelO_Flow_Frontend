@@ -1,15 +1,18 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export type JobState = {
-  jobIds: string[];
+  jobs: {jobId: string, jobType: JobType}[];
 };
+
+export type JobType = "processing" | "orthanc";
 
 interface AddRemoveJobPayload {
   jobId: string;
+  jobType?: JobType;
 }
 
 const initialState: JobState = {
-  jobIds: [],
+  jobs: [],
 };
 
 const jobSlice = createSlice({
@@ -17,11 +20,11 @@ const jobSlice = createSlice({
   initialState,
   reducers: {
     addJob(state, action: PayloadAction<AddRemoveJobPayload>) {
-      state.jobIds.push(action.payload.jobId);
+      state.jobs.push({ jobId: action.payload.jobId, jobType: action.payload.jobType });
     },
-    removeJob(state, action: PayloadAction<AddRemoveJobPayload>) {
-      state.jobIds = state.jobIds.filter(
-        (jobId) => jobId !== action.payload.jobId
+    removeJob(state, action: PayloadAction<string>) {
+      state.jobs = state.jobs.filter(
+        (job) => job.jobId !== action.payload
       );
     },
   },

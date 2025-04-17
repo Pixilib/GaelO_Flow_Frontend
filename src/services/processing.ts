@@ -16,17 +16,20 @@ export const createProcessingJob = (
     .catch(handleAxiosError);
 };
 
-export const getProcessingJob = (jobId: string): Promise<ProcessingJob[]> => {
+export const getProcessingJob = (jobId: string): Promise<ProcessingJob> => {
   return axios
     .get(`/api/processing/` + jobId)
     .then((response) => {
       const data = response.data;
-      return data.map((jobdata) => ({
-        progress: jobdata.Progress,
-        state: jobdata.State,
-        id: jobdata.Id,
-        results: jobdata.Results,
-      }));
+      return ({
+        progress: data.Progress,
+        state: data.State,
+        id: data.Id,
+        results: data.Results,
+        userId: data.UserId,
+        type: data.JobType,
+        payload: data.Payload,
+      });
     })
     .catch(handleAxiosError);
 };

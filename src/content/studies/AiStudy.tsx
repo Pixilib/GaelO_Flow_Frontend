@@ -10,6 +10,8 @@ import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../..
 import { Button, Modal, ProgressCircle, Spinner } from "../../ui";
 import { ProcessingJob, Series } from "../../utils/types";
 import { createProcessingJob, getProcessingJob } from "../../services/processing";
+import { useDispatch } from "react-redux";
+import { addJob } from "../../reducers/JobSlice";
 
 type AIStudyProps = {
     studyId: string;
@@ -19,7 +21,7 @@ type AIStudyProps = {
 
 const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
     const { toastSuccess, toastError } = useCustomToast()
-
+    const dispatch = useDispatch()
     const [selectedSeries, setSelectedSeries] = useState([]);
     const [jobId, setJobId] = useState<string | null>(null);
 
@@ -33,7 +35,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
         }
     )
 
-    const { data: jobData } = useCustomQuery<ProcessingJob[]>(
+    const { data: jobData } = useCustomQuery<ProcessingJob>(
         ['processing', jobId ?? ''],
         () => getProcessingJob(jobId),
         {
@@ -49,6 +51,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
             onSuccess: (jobId) => {
                 toastSuccess("Job Created")
                 setJobId(jobId)
+                dispatch(addJob({ jobId, jobType: 'processing' }))
             }
         }
     )
@@ -102,7 +105,7 @@ const AiStudy: React.FC<AIStudyProps> = ({ studyId, onClose, show }) => {
             <Modal.Footer>
                 <div className={"flex justify-center"}>
                     <Button color={Colors.success} onClick={handleExecute}>Execute TMTV Model</Button>
-                    {jobData && jobData.map(job => <ProgressCircle progress={job.progress} text={job.state} />)}
+                    {jobData && <ProgressCircle progress={jobData.progress} text={jobData.state} />}
                 </div>
             </Modal.Footer>
         </Modal>

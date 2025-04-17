@@ -87,6 +87,7 @@ type StateJob =
   | "Paused"
   | "Retry";
 
+
 export type OrthancJob = {
   id: string;
   type: string;
@@ -141,7 +142,7 @@ export type ProcessingJob = {
   id: string;
   results: Record<string, any>;
   userId: number;
-  jobType: string;
+  type: string;
   payload: object[];
 };
 
