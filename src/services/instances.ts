@@ -23,6 +23,28 @@ export const sendDicom = (payload: Uint8Array): Promise<OrthancImportDicom> => {
     });
 };
 
+export const sendZipDicom = (payload: Uint8Array): Promise<OrthancImportDicom[]> => {
+  return axios
+    .post(`/api/instances`, payload, {
+      headers: { "Content-Type": "application/zip" },
+    })
+    .then((response: any) => {
+      const data = response.data;
+      return data.map((instance: any) => ({
+        id: instance.ID,
+        parentPatient: instance.ParentPatient,
+        parentSeries: instance.ParentSeries,
+        parentStudy: instance.ParentStudy,
+      }));
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
 export const createDicom = (
   content: string[],
   tags: object = {},

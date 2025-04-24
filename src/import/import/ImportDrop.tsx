@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 
 import { ProgressBar } from '../../ui';
 
-import { sendDicom } from '../../services/instances';
+import { sendDicom, sendZipDicom } from '../../services/instances';
 import Model from '../../model/Model';
 import { useCustomMutation } from '../../utils';
 import { OrthancImportDicom } from '../../utils/types';
@@ -25,9 +25,12 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
         return numberOfLoadedFiles > 0 && numberOfLoadedFiles === numberOfProcessedFiles;
     }, [numberOfLoadedFiles, numberOfProcessedFiles]);
 
-    const { mutateAsync: sendDicomMutate } = useCustomMutation<OrthancImportDicom>(({ data }) =>
-        sendDicom(data)
-    );
+    const { mutateAsync: sendDicomMutate } = useCustomMutation<OrthancImportDicom | OrthancImportDicom[]>(({ data, isZip }) => {
+        if (isZip)
+            return sendZipDicom(data);
+        else
+            return sendDicom(data);
+    });
 
     const promiseFileReader = (file: File) => {
         return new Promise<FileReader>((resolve) => {
@@ -46,19 +49,32 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
             setIsUploading(true);
 
             for (const file of acceptedFiles) {
+                const isZip = file.type === 'application/zip';
 
                 await promiseFileReader(file).then(async (reader: FileReader) => {
                     if (!reader.result) return;
 
                     try {
                         const stringBuffer = new Uint8Array(reader.result as ArrayBuffer);
-                        const orthancAnswer = await sendDicomMutate({ data: stringBuffer });
-                        await model.addInstance(
-                            orthancAnswer.id,
-                            orthancAnswer.parentSeries,
-                            orthancAnswer.parentStudy,
-                            orthancAnswer.parentPatient
-                        );
+                        const orthancAnswer = await sendDicomMutate({ data: stringBuffer, isZip });
+                        if (isZip) {
+                            const orthancAnswers = orthancAnswer as OrthancImportDicom[];
+                            for (const answer of orthancAnswers) {
+                                await model.addInstance(
+                                    answer.id,
+                                    answer.parentSeries,
+                                    answer.parentStudy,
+                                    answer.parentPatient
+                                );
+                            }
+                        } else {
+                            await model.addInstance(
+                                orthancAnswer.id,
+                                orthancAnswer.parentSeries,
+                                orthancAnswer.parentStudy,
+                                orthancAnswer.parentPatient
+                            );
+                        }
                         onFilesUploaded();
                     } catch (e: any) {
                         onError(file.name, e.status === 400 ? "Not a DICOM file" : e.statusText);
@@ -66,9 +82,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                 });
                 setNumberOfProcessedFiles((nbFiles) => nbFiles + 1);
             }
-
             setIsUploading(false);
-
         },
     });
 
