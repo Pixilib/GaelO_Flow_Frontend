@@ -26,13 +26,10 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
     }, [numberOfLoadedFiles, numberOfProcessedFiles]);
 
     const { mutateAsync: sendDicomMutate } = useCustomMutation<OrthancImportDicom | OrthancImportDicom[]>(({ data, isZip }) => {
-        if (isZip) {
-            console.log('Sending ZIP DICOM');
+        if (isZip)
             return sendZipDicom(data);
-        } else {
-            console.log('Sending DICOM');
+        else
             return sendDicom(data);
-        }
     });
 
     const promiseFileReader = (file: File) => {
@@ -52,14 +49,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
             setIsUploading(true);
 
             for (const file of acceptedFiles) {
-                const isZip = file.type === 'application/zip' || file.name.toLowerCase().endsWith('.zip');
-                const isDicom = file.name.toLowerCase().endsWith('.dcm');
-
-                if (!isZip && !isDicom) {
-                    onError(file.name, "File is neither a DICOM nor a ZIP file");
-                    setNumberOfProcessedFiles((nbFiles) => nbFiles + 1);
-                    continue;
-                }
+                const isZip = file.type === 'application/zip';
 
                 await promiseFileReader(file).then(async (reader: FileReader) => {
                     if (!reader.result) return;
