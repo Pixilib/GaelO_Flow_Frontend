@@ -100,7 +100,7 @@ const ImportRoot: React.FC = () => {
   }, [currentStudyInstanceUID]);
 
   return (
-    <div className="mx-4 mb-4 space-y-3"> {/* Ajout de mb-4 pour l'espace en bas */}
+    <div className="mx-4 mb-4 space-y-3">
       <ImportDrop
         model={refModel.current}
         onError={handleImportError}
