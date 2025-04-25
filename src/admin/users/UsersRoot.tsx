@@ -37,11 +37,11 @@ const UsersRoot = () => {
                     onClick={() => handleTabClick("oauth2")}
                 />
             </Tabs>
-            <CardBody noPadding 
-                color={Colors.almond} 
-                roundedTopLeft={false} 
-                roundedTopRight={false} 
-                roundedBottomLeft={false} 
+            <CardBody noPadding
+                color={Colors.almond}
+                roundedTopLeft={false}
+                roundedTopRight={false}
+                roundedBottomLeft={false}
                 roundedBottomRight={false}
                 className="rounded-br-2xl rounded-bl-2xl dark:bg-neutral-500">
                 <Routes>
