@@ -124,7 +124,7 @@ const ImportRoot: React.FC = () => {
   }
 
   return (
-    <div className="mx-4 mb-4 mt-4 space-y-3">
+    <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col items-center">
       <SelectInput
         value={selectedOptions}
         onChange={handleSelectChange}
@@ -135,6 +135,7 @@ const ImportRoot: React.FC = () => {
         model={refModel.current}
         onError={handleImportError}
         onFilesUploaded={() => refreshStudyData()}
+        selectedLabel={selectedOptions}
       />
 
       {errors.length > 0 && (
