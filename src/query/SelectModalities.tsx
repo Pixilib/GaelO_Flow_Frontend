@@ -7,56 +7,55 @@ type SelectModalitiesProps = {
     onChange: (modalities: string[]) => void;
     closeMenuOnSelect?: boolean;
 }
+
+const modalitiesRadiology = [
+    { value: 'CT', label: 'CT', explanation: 'Computed Tomography' },
+    { value: 'DX', label: 'DX', explanation: 'Digital Radiography' },
+    { value: 'CR', label: 'CR', explanation: 'Computed Radiography' },
+    { value: 'MR', label: 'MR', explanation: 'Magnetic Resonance' },
+    { value: 'US', label: 'US', explanation: 'Ultrasound' },
+    { value: 'MG', label: 'MG', explanation: 'Mammography' },
+    { value: 'XA', label: 'XA', explanation: 'X-Ray Angiography' }
+]
+
+const modalitiesNuclearMedicine = [
+    { value: 'PT', label: 'PT', explanation: 'Positron emission tomography' },
+    { value: 'NM', label: 'NM', explanation: 'Nuclear Medicine' }
+]
+
+const modalitiesRadiotherapy = [
+    { value: 'RTDOSE', label: 'RTDOSE', explanation: 'Radiotherapy Dose' },
+    { value: 'RTIMAGE', label: 'RTIMAGE', explanation: 'Radiotherapy Image' },
+    { value: 'RTPLAN', label: 'RTPLAN', explanation: 'Radiotherapy Plan' },
+    { value: 'RTRECORD', label: 'RTRECORD', explanation: 'RT Treatment Record' },
+    { value: 'RTSTRUCT', label: 'RTSTRUCT', explanation: 'Radiotherapy Structure Set' },
+    { value: 'SEG', label: 'SEG', explanation: 'Segmentation' },
+]
+
+const allModalities = [...modalitiesRadiology, ...modalitiesNuclearMedicine, ...modalitiesRadiotherapy]
+
+const groupedOptions = [
+    {
+        label: 'Radiology',
+        options: modalitiesRadiology,
+    },
+    {
+        label: 'NuclearMedicine',
+        options: modalitiesNuclearMedicine,
+    },
+    {
+        label: 'Radiotherapy',
+        options: modalitiesRadiotherapy,
+    },
+]
+
 const SelectModalities = ({ modalities, onChange, closeMenuOnSelect = true }: SelectModalitiesProps) => {
 
-    const [selectedModalities, setSelectedModalities] = useState<Option[]>([])
+    const [selectedModalities, setSelectedModalities] = useState<string[]>([])
 
     useEffect(() => {
-        const previousModalityArray = modalities.map((modality) => {
-            return { value: modality, label: modality }
-        })
-        setSelectedModalities(previousModalityArray)
-
+        setSelectedModalities(modalities)
     }, [JSON.stringify(modalities)])
-
-    const modalitiesRadiology = [
-        { value: 'CT', label: 'CT', explanation: 'Computed Tomography' },
-        { value: 'DX', label: 'DX', explanation: 'Digital Radiography' },
-        { value: 'CR', label: 'CR', explanation: 'Computed Radiography' },
-        { value: 'MR', label: 'MR', explanation: 'Magnetic Resonance' },
-        { value: 'US', label: 'US', explanation: 'Ultrasound' },
-        { value: 'MG', label: 'MG', explanation: 'Mammography' },
-        { value: 'XA', label: 'XA', explanation: 'X-Ray Angiography' }
-    ]
-
-    const modalitiesNuclearMedicine = [
-        { value: 'PT', label: 'PT', explanation: 'Positron emission tomography' },
-        { value: 'NM', label: 'NM', explanation: 'Nuclear Medicine' }
-    ]
-
-    const modalitiesRadiotherapy = [
-        { value: 'RTDOSE', label: 'RTDOSE', explanation: 'Radiotherapy Dose' },
-        { value: 'RTIMAGE', label: 'RTIMAGE', explanation: 'Radiotherapy Image' },
-        { value: 'RTPLAN', label: 'RTPLAN', explanation: 'Radiotherapy Plan' },
-        { value: 'RTRECORD', label: 'RTRECORD', explanation: 'RT Treatment Record' },
-        { value: 'RTSTRUCT', label: 'RTSTRUCT', explanation: 'Radiotherapy Structure Set' },
-        { value: 'SEG', label: 'SEG', explanation: 'Segmentation' },
-    ]
-
-    const groupedOptions = [
-        {
-            label: 'Radiology',
-            options: modalitiesRadiology,
-        },
-        {
-            label: 'NuclearMedicine',
-            options: modalitiesNuclearMedicine,
-        },
-        {
-            label: 'Radiotherapy',
-            options: modalitiesRadiotherapy,
-        },
-    ]
 
     const formatOptionLabel = ({ label, explanation }: any): JSX.Element => (
         <div className='flex'>
@@ -74,11 +73,9 @@ const SelectModalities = ({ modalities, onChange, closeMenuOnSelect = true }: Se
         </div>
     );
 
-    const changeListener = (selectedOption, meta) => {
-        if(meta.action === "select-option") {
-        }
-
-        
+    const changeListener = (selectedOptions, meta) => {
+        const selectedValues = selectedOptions?.map((option) => option.value)
+        onChange(selectedValues)       
     }
 
     return (
@@ -87,7 +84,7 @@ const SelectModalities = ({ modalities, onChange, closeMenuOnSelect = true }: Se
             menuPosition="fixed"
             options={groupedOptions}
             formatOptionLabel={formatOptionLabel}
-            value={selectedModalities.map(option => option.value)}
+            value={selectedModalities}
             onChange={changeListener}
             formatGroupLabel={formatGroupLabel}
             closeMenuOnSelect={closeMenuOnSelect}

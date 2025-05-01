@@ -1,15 +1,12 @@
-import Select, { ActionMeta } from 'react-select';
+import Select, { ActionMeta, GroupBase } from "react-select";
 
-type OptionType =  {
-  value: string;
-  label: string;
-}
+type OptionType = { value: string; label: string; [key: string]: string };
 
 type SelectInputProps = {
   isMulti?: boolean;
   name?: string;
   value: string | string[] | null;
-  options: OptionType[];
+  options: OptionType[] | any;
   onChange: (
     selectedOption: OptionType | OptionType[] | null,
     meta: ActionMeta<OptionType>
@@ -24,21 +21,23 @@ type SelectInputProps = {
     label: string;
     options: OptionType[];
   }) => JSX.Element;
-}
+};
 
 const customClass: ClassNamesConfig<OptionType, boolean> = {
   control: (state) => {
-    const borderRadius = state.selectProps.rounded ? 'rounded-3xl' : 'rounded-xl';
+    const borderRadius = state.selectProps.rounded
+      ? "rounded-3xl"
+      : "rounded-xl";
     return `border border-gray-300 min-h-[40px] bg-gray-50 text-black dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
   },
   menu: () => "rounded-3xl p-1 bg-white dark:bg-neutral-800",
   option: (state) => {
     return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white px-2`;
   },
-  singleValue : () => 'text-black dark:text-white',
-  multiValue: () => 'bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5',
-  multiValueLabel: () => 'text-gray-800',
-  multiValueRemove: () => 'text-red-500 hover:bg-red-200 rounded-full p-0.5',
+  singleValue: () => "text-black dark:text-white",
+  multiValue: () => "bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5",
+  multiValueLabel: () => "text-gray-800",
+  multiValueRemove: () => "text-red-500 hover:bg-red-200 rounded-full p-0.5",
 };
 
 const SelectInput = ({
@@ -56,8 +55,17 @@ const SelectInput = ({
   formatGroupLabel,
 }: SelectInputProps) => {
   const selectedValue = isMulti
-    ? (value as string[])
-        .map((val) => options.find((option) => option.value === val))
+    ? (value as string[]) 
+        .map((val) => {
+              const allOptions = options
+                .map((option) => {
+                  //groupped options case
+                  if(option.options) return option.options;
+                  else return option
+                })
+                .flat()
+                return allOptions.find((option) => option.value === val)
+        })
         .filter(Boolean)
     : options.find((option) => option.value === value) || null;
 
