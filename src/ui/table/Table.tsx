@@ -217,7 +217,7 @@ function Table<T>({
                     ))}
                 </tbody>
             </table>
-            <Footer table={table} pageSize={pageSize} handlePageSizeChange={handlePageSizeChange} />
+            <Footer table={table} onPageSizeChange={handlePageSizeChange} />
         </div>
     );
 }
