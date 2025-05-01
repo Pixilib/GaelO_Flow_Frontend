@@ -137,6 +137,7 @@ function Table<T>({
             getRowClasses,
             updateData: onCellEdit,
         },
+        autoResetPageIndex :false
     });
 
     const headerClass = {
