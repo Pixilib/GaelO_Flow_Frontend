@@ -37,7 +37,6 @@ const AccordionPatient = ({
   onSelectedStudyChange,
 }: AccordionPatientProps) => {
   const { toastSuccess, updateExistingToast } = useCustomToast();
-  const [selectedPatient, setSelectedPatient] = useState(false);
   const [currentActiveStudyId, setCurrentStudyId] = useState<string | null>(
     null
   );
@@ -47,9 +46,19 @@ const AccordionPatient = ({
     return selectedStudies[patient.id];
   }, [selectedStudies]);
 
-  useEffect(() => {
-    onPatientSelectionChange(selectedPatient, patient);
-  }, [selectedPatient]);
+  const isSelectedPatient = useMemo(()=>{
+    const studiesOfPatient = selectedStudies[patient.id]
+    if(!studiesOfPatient) return false
+    for(const [_id, selected] of Object.entries(studiesOfPatient)){
+      if(!selected) return false
+    }
+    return true
+
+  }, [JSON.stringify(selectedStudies)])
+
+  const handleSelectionPatientChange = (event) => {
+    onPatientSelectionChange(event.target.checked, patient);
+  }
 
   const handleStudySelected = (studyId: string) => {
     setCurrentStudyId(studyId);
@@ -89,8 +98,8 @@ const AccordionPatient = ({
           <CheckBox
             bordered={false}
             onClick={(event) => event.stopPropagation()}
-            onChange={(event) => setSelectedPatient(event.target.checked)}
-            checked={selectedPatient}
+            onChange={handleSelectionPatientChange}
+            checked={isSelectedPatient}
           />
           <div className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
             <span className="text-sm font-medium text-gray-600 group-hover:text-white dark:text-white">
