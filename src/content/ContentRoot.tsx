@@ -156,6 +156,14 @@ const ContentRoot: React.FC = () => {
     const studies = model.getStudies();
     //TODO detection de la selection
     const newSelectedState = {};
+    //If there are any selected study, set state to empty an terminate the handler (deselection)
+    for(const[_id, studies] of Object.entries(selectedStudies)){
+      const selectedStudies = Object.values(studies).filter(selectedStudy => selectedStudy)
+      if(selectedStudies.length > 0) {
+        setSelectedStudies(newSelectedState);
+        return
+      }
+    }
     studies.forEach((study) => {
       if (!newSelectedState[study.patientId]) {
         newSelectedState[study.patientId] = {};

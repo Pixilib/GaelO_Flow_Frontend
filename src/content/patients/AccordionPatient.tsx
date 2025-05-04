@@ -44,17 +44,12 @@ const AccordionPatient = ({
 
   const selectedStudyIdsForPatient = useMemo(() => {
     return selectedStudies[patient.id];
-  }, [selectedStudies]);
+  }, [JSON.stringify(selectedStudies)]);
 
   const isSelectedPatient = useMemo(()=>{
-    const studiesOfPatient = selectedStudies[patient.id]
-    if(!studiesOfPatient) return false
-    for(const [_id, selected] of Object.entries(studiesOfPatient)){
-      if(!selected) return false
-    }
-    return true
-
-  }, [JSON.stringify(selectedStudies)])
+    if(!selectedStudyIdsForPatient) return false
+    return Object.entries(selectedStudyIdsForPatient).every(([_id, selected]) => selected === true )
+  }, [JSON.stringify(selectedStudyIdsForPatient)])
 
   const handleSelectionPatientChange = (event) => {
     onPatientSelectionChange(event.target.checked, patient);
