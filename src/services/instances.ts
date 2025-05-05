@@ -5,7 +5,7 @@ export const sendDicom = (payload: Uint8Array, labels: string[], isZip: boolean)
   const queryParams = labels.map((label) => `${encodeURIComponent(label)}`).join(",");
 
   return axios
-    .post(labels === undefined ? `/api/instances` : `/api/tools/upload-and-label?label=${queryParams}`,
+    .post(labels.length === 0 ? `/api/instances` : `/api/tools/upload-and-label?label=${queryParams}`,
       payload, {
         headers: { "Content-Type": isZip ? "application/zip" : "application/dicom" },
       }
