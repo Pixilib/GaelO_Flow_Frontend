@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getLabels, findTools, useConfirm, deletePatient } from "../services";
 import {
   QueryPayload,
@@ -9,7 +9,7 @@ import {
 } from "../utils";
 import Model from "../model/Model";
 import Patient from "../model/Patient";
-import { FormCard, Button } from "../ui";
+import { FormCard, Button, Input, CheckBox } from "../ui";
 import SearchForm from "../query/SearchForm";
 import AccordionPatient from "./patients/AccordionPatient";
 import EditPatient from "./patients/EditPatient";
@@ -33,6 +33,7 @@ const ContentRoot: React.FC = () => {
   const [model, setModel] = useState<Model | null>(null);
   const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
   const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
+  const [selectAll, setSelectAll] = useState<boolean>(false)
 
   const patients = useMemo(() => model?.getPatients() || [], [model]);
 
@@ -151,30 +152,23 @@ const ContentRoot: React.FC = () => {
     }
   };
 
-  const handleSelectAll = () => {
+  useEffect(()=>{
     if (!model) return;
     const studies = model.getStudies();
-    //TODO detection de la selection
     const newSelectedState = {};
-    //If there are any selected study, set state to empty an terminate the handler (deselection)
-    for(const[_id, studies] of Object.entries(selectedStudies)){
-      const selectedStudies = Object.values(studies).filter(selectedStudy => selectedStudy)
-      if(selectedStudies.length > 0) {
-        setSelectedStudies(newSelectedState);
-        return
-      }
+    if(selectAll){
+      studies.forEach((study) => {
+        if (!newSelectedState[study.patientId]) {
+          newSelectedState[study.patientId] = {};
+        }
+        newSelectedState[study.patientId] = {
+          ...newSelectedState[study.patientId],
+          [study.id]: true,
+        };
+      });
     }
-    studies.forEach((study) => {
-      if (!newSelectedState[study.patientId]) {
-        newSelectedState[study.patientId] = {};
-      }
-      newSelectedState[study.patientId] = {
-        ...newSelectedState[study.patientId],
-        [study.id]: true,
-      };
-    });
     setSelectedStudies(newSelectedState);
-  };
+  }, [selectAll])
 
   return (
     <div className="flex flex-col gap-3">
@@ -211,13 +205,12 @@ const ContentRoot: React.FC = () => {
         <div className="w-full mb-3 border-t border-gray-200" />
 
         <div className="flex flex-wrap gap-2 mb-4">
-          <Button
-            color={Colors.secondary}
-            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-            onClick={handleSelectAll}
-          >
-            Select / Unselect All
-          </Button>
+          <CheckBox
+            bordered={false}
+            type="checkbox"
+            checked={selectAll}
+            onChange={(event) => setSelectAll(event.target.checked)}
+          />
           <Button
             color={Colors.blueCustom}
             className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
