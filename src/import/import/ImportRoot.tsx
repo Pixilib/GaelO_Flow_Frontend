@@ -1,10 +1,10 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
-import { BannerAlert, Button } from "../../ui";
+import React, { useState, useRef, useCallback, useEffect, useMemo } from "react";
+import { BannerAlert, Button, SelectInput } from "../../ui";
 import Model from "../../model/Model";
-import { Colors } from "../../utils";
+import { Colors, useCustomQuery } from "../../utils";
 import ImportDrop from "./ImportDrop";
-import ImportTableStudy from "./ImportTableStudy"; // Import de ImportTableStudy
-import ImportTableSeries from "./ImportTableSeries"; // Import de ImportTableSeries
+import ImportTableStudy from "./ImportTableStudy";
+import ImportTableSeries from "./ImportTableSeries";
 import ImportErrorModal from "./ImportErrorModal";
 import { Anon, Export } from "../../icons";
 import {
@@ -12,6 +12,10 @@ import {
   addSeriesOfStudyIdToExportList,
   addStudyIdToAnonymizeList,
 } from "../../utils/actionsUtils";
+import { getLabelsByRoleName } from "../../services";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import SelectRoleLabels from "../../datasets/SelectRoleLabels";
 
 interface ImportError {
   filename: string;
@@ -28,6 +32,7 @@ const ImportRoot: React.FC = () => {
   const [errors, setErrors] = useState<ImportError[]>([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Record<string, boolean>>({});
+  const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
 
   const refreshStudyData = () => {
     const studies = refModel.current.getStudies();
@@ -99,14 +104,22 @@ const ImportRoot: React.FC = () => {
     }
   }, [currentStudyInstanceUID]);
 
+  useEffect(() => {
+
+  }, []);
+
   return (
-    <div className="mx-4 mb-4 space-y-3">
+    <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col items-center">
+      <SelectRoleLabels
+        values={selectedLabels}
+        onChange={setSelectedLabels}
+      />
       <ImportDrop
         model={refModel.current}
         onError={handleImportError}
         onFilesUploaded={() => refreshStudyData()}
+        selectedLabel={selectedLabels}
       />
-
       {errors.length > 0 && (
         <BannerAlert
           color={Colors.danger}

@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone';
 
 import { ProgressBar } from '../../ui';
 
-import { sendDicom, sendZipDicom } from '../../services/instances';
+import { sendDicom } from '../../services/instances';
 import Model from '../../model/Model';
 import { useCustomMutation } from '../../utils';
 import { OrthancImportDicom } from '../../utils/types';
@@ -14,9 +14,10 @@ type ImportDropProps = {
     model: Model;
     onError: (filename: string, errorMessage: string) => void;
     onFilesUploaded: () => void;
+    selectedLabel?: string[] | undefined;
 };
 
-const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded }) => {
+const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded, selectedLabel }) => {
     const [isUploading, setIsUploading] = useState(false);
     const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
     const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
@@ -26,10 +27,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
     }, [numberOfLoadedFiles, numberOfProcessedFiles]);
 
     const { mutateAsync: sendDicomMutate } = useCustomMutation<OrthancImportDicom | OrthancImportDicom[]>(({ data, isZip }) => {
-        if (isZip)
-            return sendZipDicom(data);
-        else
-            return sendDicom(data);
+        return sendDicom(data, selectedLabel, isZip);
     });
 
     const promiseFileReader = (file: File) => {
