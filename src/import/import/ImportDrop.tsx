@@ -14,7 +14,7 @@ type ImportDropProps = {
     model: Model;
     onError: (filename: string, errorMessage: string) => void;
     onFilesUploaded: () => void;
-    selectedLabel?: string | undefined;
+    selectedLabel?: string[] | undefined;
 };
 
 const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded, selectedLabel }) => {

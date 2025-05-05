@@ -1,9 +1,11 @@
 import axios from "./axios";
 import { OrthancImportDicom, Tags } from "../utils/types";
 
-export const sendDicom = (payload: Uint8Array, label: string, isZip: boolean): Promise<OrthancImportDicom | OrthancImportDicom[]> => {
+export const sendDicom = (payload: Uint8Array, labels: string[], isZip: boolean): Promise<OrthancImportDicom | OrthancImportDicom[]> => {
+  const queryParams = labels.map((label) => `${encodeURIComponent(label)}`).join(",");
+
   return axios
-    .post(label === undefined ? `/api/instances` : `/api/tools/upload-and-label?label=${encodeURIComponent(label)}`,
+    .post(labels === undefined ? `/api/instances` : `/api/tools/upload-and-label?label=${queryParams}`,
       payload, {
         headers: { "Content-Type": isZip ? "application/zip" : "application/dicom" },
       }

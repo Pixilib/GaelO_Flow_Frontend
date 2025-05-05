@@ -12,8 +12,10 @@ import {
   addSeriesOfStudyIdToExportList,
   addStudyIdToAnonymizeList,
 } from "../../utils/actionsUtils";
-import { Label } from "../../utils/types";
-import { getLabels } from "../../services";
+import { getLabelsByRoleName } from "../../services";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import SelectRoleLabels from "../../datasets/SelectRoleLabels";
 
 interface ImportError {
   filename: string;
@@ -30,16 +32,7 @@ const ImportRoot: React.FC = () => {
   const [errors, setErrors] = useState<ImportError[]>([]);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Record<string, boolean>>({});
-  const [selectedOptions, setSelectedOptions] = useState<string>();
-
-  const { data: labels, isPending } = useCustomQuery<Label[]>(["label"], () => getLabels(), {});
-
-  const selectOptions = useMemo(() => {
-    return labels?.map((label) => ({
-      label: label.name,
-      value: label.name,
-    })) || [];
-  }, [labels]);
+  const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
 
   const refreshStudyData = () => {
     const studies = refModel.current.getStudies();
@@ -115,29 +108,18 @@ const ImportRoot: React.FC = () => {
 
   }, []);
 
-  const handleSelectChange = (selectedOption: any) => {
-    setSelectedOptions(selectedOption.value);
-  };
-
-  if (isPending) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col items-center">
-      <SelectInput
-        value={selectedOptions}
-        onChange={handleSelectChange}
-        placeholder="Add a label"
-        options={selectOptions}
+      <SelectRoleLabels
+        values={selectedLabels}
+        onChange={setSelectedLabels}
       />
       <ImportDrop
         model={refModel.current}
         onError={handleImportError}
         onFilesUploaded={() => refreshStudyData()}
-        selectedLabel={selectedOptions}
+        selectedLabel={selectedLabels}
       />
-
       {errors.length > 0 && (
         <BannerAlert
           color={Colors.danger}
