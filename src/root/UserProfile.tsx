@@ -12,13 +12,13 @@ const UserProfile = () => {
       () => getUserById(userState?.currentUserId)
     );
 
-    const styleInfo='flex flex-row justify-between';
+    const styleInfo='flex flex-row justify-between dark:text-white';
 
     if (isPending) return <div className="spinner" />;
 
     return (
     <div className="flex flex-col gap-2 w-80">
-      <div className="flex flex-row items-center gap-2 pl-1">
+      <div className="flex flex-row items-center gap-2 pl-1 dark:text-white">
         <UserIcon></UserIcon>
         <p className="font-bold">Profil Overview</p>
       </div>

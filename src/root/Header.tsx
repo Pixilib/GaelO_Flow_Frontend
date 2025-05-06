@@ -132,9 +132,9 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             </span>
           </Popover>
           <Popover
-            className='border border-gray-custom translate-y-3 -translate-x-83'
+            className='border border-gray-custom dark:border-gray-600 translate-y-3 -translate-x-83'
             withOnClick
-            backgroundColor='bg-white'
+            backgroundColor='bg-white dark:bg-gray-800'
             popover={
               <UserProfile />
             }
