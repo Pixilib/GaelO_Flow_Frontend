@@ -3,7 +3,6 @@ import moment from "moment";
 import { dicomDateQueryStringFromDateFromDateTo, Option, QueryPayload, useCustomToast } from "../utils";
 import { FormButton, Input, Label, SelectInput } from "../ui";
 import SelectModalities from "./SelectModalities";
-import { Search } from "../icons";
 
 type SearchFormProps = {
   aets?: Option[];
@@ -77,11 +76,18 @@ const SearchForm: React.FC<SearchFormProps> = ({
         PatientName: patientName,
         PatientID: patientId,
         StudyDate: dicomDateQueryStringFromDateFromDateTo(dateFrom, dateTo),
-        Modality: modalities.join('\\'),
+        ModalitiesInStudy : '',
         StudyDescription: studyDescription,
         AccessionNumber: accessionNumber,
       }
     };
+
+    //Modality key not the same for Find Orthanc or Find Dicom Query
+    if(withAets){
+      queryPayload.Query.Modality =  modalities.join('\\')
+    }else{
+      queryPayload.Query.ModalitiesInStudy =  modalities.join('\\')
+    }
 
     if (withAets && aets.length > 0) {
       const aet = aetsInput?.value;

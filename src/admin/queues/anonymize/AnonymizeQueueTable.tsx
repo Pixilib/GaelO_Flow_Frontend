@@ -1,5 +1,5 @@
 import { Trash } from "../../../icons"
-import { deleteQueryQueue } from "../../../services/queues"
+import { deleteAnonymizeQueue } from "../../../services/queues"
 import { Button, Table } from "../../../ui"
 import { Colors, useCustomMutation } from "../../../utils"
 
@@ -9,8 +9,8 @@ type AnonymizeQueueTableProps = {
 const AnonymizeQueueTable = ({ queues = [] }: AnonymizeQueueTableProps) => {
 
     const { mutate: mutateDeleteQueue } = useCustomMutation(
-        ({ queueId }) => deleteQueryQueue(queueId),
-        [["queue", "query"]]
+        ({ queueId }) => deleteAnonymizeQueue(queueId),
+        [["queue", "anonymize"]]
     );
 
     const handleDelete = (queueId: string) => {

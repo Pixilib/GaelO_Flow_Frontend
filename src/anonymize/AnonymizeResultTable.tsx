@@ -17,11 +17,11 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
   const columns: ColumnDef<Study>[] = [
     {
       accessorKey: "patientMainDicomTags.patientName",
-      header: "Accession Number",
+      header: "Patient Name",
     },
     {
       accessorKey: "patientMainDicomTags.patientId",
-      header: "Accession Number",
+      header: "Patient ID",
     },
     {
       accessorKey: "mainDicomTags.studyDate",

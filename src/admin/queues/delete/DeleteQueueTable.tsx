@@ -1,5 +1,5 @@
 import { Trash } from "../../../icons"
-import { deleteQueryQueue } from "../../../services/queues"
+import { deleteDeleteQueue } from "../../../services/queues"
 import { Button, Table } from "../../../ui"
 import { Colors, useCustomMutation } from "../../../utils"
 
@@ -9,10 +9,9 @@ type DeleteQueueTableProps = {
 const DeleteQueueTable = ({ queues = [] }: DeleteQueueTableProps) => {
 
     const { mutate: mutateDeleteQueue } = useCustomMutation(
-        ({ queueId }) => deleteQueryQueue(queueId),
-        [["queue", "query"]]
+        ({ queueId }) => deleteDeleteQueue(queueId),
+        [["queue", "delete"]]
     );
-
 
     const handleDelete = (queueId: string) => {
         mutateDeleteQueue({ queueId })

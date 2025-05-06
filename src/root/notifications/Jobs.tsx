@@ -2,20 +2,23 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import InlineProgressJob from "./InlineProgressJob";
 
-const Jobs = ()=> {
-    const jobIds = useSelector((state: RootState) => state.job.jobIds);
+const Jobs = () => {
+    const jobState = useSelector((state: RootState) => state.job);
 
     return (
-        <div>
+        <div className="flex flex-col gap-2 w-60">
             {
-                jobIds.map(id => {
-                    return (
-                        <InlineProgressJob key={id} jobId={id}/>
-                    )
-                })
+                jobState.jobs.length === 0 ?
+                (
+                    <span>Empty list</span>
+                ) : (
+                    jobState.jobs.map((job) => (
+                        <InlineProgressJob key={job.jobId} jobId={job.jobId} jobType={job.jobType} />
+                    ))
+                )
             }
         </div>
-    )
-}
+    );
+};
 
-export default Jobs
+export default Jobs;

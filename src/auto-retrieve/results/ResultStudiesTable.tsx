@@ -48,9 +48,9 @@ const ResultStudiesTable = ({ resultStudies, onRowSelectionChange, selectedRow }
             accessorFn: (row) => {
                 return moment(row.studyDate, "YYYYMMDD", true)?.toDate();
             },
-            cell: ({ row }) => {
+            cell: ({ getValue }) => {
                 return (
-                    moment((row.studyDate as Date)).format("YYYY-MM-DD")
+                    moment(getValue() as Date).format("YYYY-MM-DD")
                 );
             },
             header: "Study Date",

@@ -46,6 +46,7 @@ class Model {
         if (patient && !patient.isStudyExists(studyData.id)) {
             const study = new Study(studyData.id)
             study.fillData(studyData)
+            study.setPatient(new Patient(studyData.parentPatient))
             patient.addStudy(study)
         }
     }

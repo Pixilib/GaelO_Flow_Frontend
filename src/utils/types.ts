@@ -87,6 +87,7 @@ type StateJob =
   | "Paused"
   | "Retry";
 
+
 export type OrthancJob = {
   id: string;
   type: string;
@@ -140,6 +141,9 @@ export type ProcessingJob = {
   state: string;
   id: string;
   results: Record<string, any>;
+  userId: number;
+  type: string;
+  payload: object[];
 };
 
 export type Peer = {
@@ -194,7 +198,7 @@ type QueryStudy = {
   PatientName?: string;
   PatientID?: string;
   StudyDate?: string;
-  Modality?: string;
+  ModalitiesInStudy?: string;
   StudyDescription?: string;
   AccessionNumber?: string;
   StudyInstanceUID?: string;

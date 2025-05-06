@@ -3,6 +3,7 @@ import {
   AnonItem,
   AnonQueue,
   AnonymizePayload,
+  ProcessingJob,
   QueryQueue,
   QueryQueueSeriesItem,
   QueryQueueStudyItem,
@@ -248,7 +249,78 @@ export const getExistingQueriesQueues = (
     });
 };
 
-export const getQueryQueue = (uuid: string) : Promise<QueryQueue[]> => {
+export const pauseProcessingJobs = (): Promise<void> => {
+  return axios
+    .post(`/api/processing/pause`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    }
+    );
+}
+
+export const resumeProcessingJobs = (): Promise<void> => {
+  return axios
+    .post(`/api/processing/resume`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}
+
+export const deleteProcessingjob = (uuid?: string): Promise<void> => {
+  return axios
+    .delete(`/api/processing/${uuid}`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const deleteProcessingJobs = (): Promise<void> => {
+  return axios
+    .delete(`/api/processing`)
+    .then(() => undefined)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const getProcessingJobs = (): Promise<ProcessingJob[]> => {
+  return axios
+    .get(`/api/processing`)
+    .then((response) => {
+      const data: any = Object.values(response.data);
+      return data.map((job) => ({
+        progress: job.Progress,
+        state: job.State,
+        id: job.Id,
+        userId: job.UserId,
+        type: job.JobType,
+        payload: job.Payload,
+      }));
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const getQueryQueue = (uuid: string): Promise<QueryQueue[]> => {
   return axios
     .get(`/api/queues/query/${uuid}`)
     .then((response) => {
@@ -259,7 +331,7 @@ export const getQueryQueue = (uuid: string) : Promise<QueryQueue[]> => {
         state: job.State,
         id: job.Id,
         results: job.Results,
-        query : job.Query,
+        query: job.Query,
       }));
     })
     .catch(function (error) {
