@@ -3,7 +3,7 @@ import EditStudy from "../../content/studies/EditStudy";
 import PreviewStudy from "../../content/studies/PreviewStudy";
 import AiStudy from "../../content/studies/AiStudy";
 import DatasetTableStudy from "./DatasetTableStudy";
-import { Study } from "../../utils";
+import Study from "../../model/Study";
 
 type StudyRootProps = {
   studies: Study[];
@@ -22,7 +22,7 @@ const DatasetStudyRoot = ({
 
 
   const onActionClick = () => {
-    
+
   }
 
   return (

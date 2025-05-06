@@ -3,7 +3,7 @@ import { Series, useCustomToast } from '../../utils';
 
 import { exportSeriesToNifti } from '../../services/export';
 import { DropdownButton } from '../../ui';
-import { Edit, Eye } from '../../icons';
+import { Download, Edit, Eye } from '../../icons';
 
 type DropdownOption = {
     label: string;
@@ -41,13 +41,7 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onA
             action: () => onActionClick('preview', series.id)
         },
         {
-            label: "View Metadata",
-            color: 'green',
-            action: () => {
-                onActionClick("metadata", series.id);
-            },
-        },
-        {
+            icon: <Download />,
             label: "Download nii.gz",
             color: 'green',
             action: () => {
