@@ -6,16 +6,16 @@ import TagsTree from "../../content/series/metadata/TagsTree";
 import PreviewSeries from "../../content/series/preview/PreviewSeries";
 import EditSeries from "../../content/series/edition/EditSeries";
 import { useConfirm } from "../../services";
-import { exportRessource, exportSeriesToNifti } from "src/services/export";
+import { exportRessource, exportSeriesToNifti } from "../../services/export";
 
 type DatasetSeriesRootProps = {
   series: Series[];
 };
 
 const DatasetSeriesRoot = ({ series }: DatasetSeriesRootProps) => {
-  const [editingSeries, setEditingSeries] = useState<string | null>(null);
-  const [previewSeries, setPreviewSeries] = useState<string | null>(null);
-  const [previewMetadata, setPreviewMetadata] = useState<string | null>(null);
+  const [editingSeriesId, setEditingSeriesId] = useState<string | null>(null);
+  const [previewSeriesId, setPreviewSeriesId] = useState<string | null>(null);
+  const [previewMetadataSeriesId, setPreviewMetadataSeriesId] = useState<string | null>(null);
 
     const { confirm } = useConfirm();
     const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
@@ -33,13 +33,13 @@ const DatasetSeriesRoot = ({ series }: DatasetSeriesRootProps) => {
   const handleSeriesAction = (action: string, seriesId :string) => {
     switch (action) {
       case "edit":
-        setEditingSeries(seriesId);
+        setEditingSeriesId(seriesId);
         break;
       case "preview":
-        setPreviewSeries(seriesId);
+        setPreviewSeriesId(seriesId);
         break;
       case "metadata":
-        setPreviewMetadata(seriesId);
+        setPreviewMetadataSeriesId(seriesId);
         break;
       case "download":
         handleDownloadSeries(seriesId);
@@ -54,32 +54,32 @@ const DatasetSeriesRoot = ({ series }: DatasetSeriesRootProps) => {
 
   return (
     <>
-      {editingSeries && (
+      {editingSeriesId && (
         <EditSeries
-          series={editingSeries}
+          seriesId={editingSeriesId}
           onSeriesEdited={() => {}}
-          onClose={() => setEditingSeries(null)}
-          show={!!editingSeries}
+          onClose={() => setEditingSeriesId(null)}
+          show={!!editingSeriesId}
         />
       )}
-      {previewSeries && (
-        <Modal show={!!previewSeries} size="xl">
-          <Modal.Header onClose={() => setPreviewSeries(null)}>
+      {previewSeriesId && (
+        <Modal show={!!previewSeriesId} size="xl">
+          <Modal.Header onClose={() => setPreviewSeriesId(null)}>
             <Modal.Title>Preview Series</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <PreviewSeries seriesId={previewSeries.id} />
+            <PreviewSeries seriesId={previewSeriesId} />
           </Modal.Body>
         </Modal>
       )}
 
-      {previewMetadata && (
-        <Modal show={!!previewMetadata} size="xl">
-          <Modal.Header onClose={() => setPreviewMetadata(null)}>
+      {previewMetadataSeriesId && (
+        <Modal show={!!previewMetadataSeriesId} size="xl">
+          <Modal.Header onClose={() => setPreviewMetadataSeriesId(null)}>
             <Modal.Title>Preview Metadata</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <TagsTree seriesId={previewMetadata.id} />
+            <TagsTree seriesId={previewMetadataSeriesId} />
           </Modal.Body>
         </Modal>
       )}

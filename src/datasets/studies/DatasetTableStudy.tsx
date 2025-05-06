@@ -1,9 +1,8 @@
 import React, { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Colors } from "../../utils";
+import { Colors, Study } from "../../utils";
 import { Table } from "../../ui";
 import StudyActions from "./DatasetStudyActions";
-import Study from "../../model/Study";
 
 type StudyTableProps = {
     studies: Study[];

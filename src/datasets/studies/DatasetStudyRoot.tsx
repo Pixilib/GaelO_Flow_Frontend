@@ -3,6 +3,7 @@ import EditStudy from "../../content/studies/EditStudy";
 import PreviewStudy from "../../content/studies/PreviewStudy";
 import AiStudy from "../../content/studies/AiStudy";
 import DatasetTableStudy from "./DatasetTableStudy";
+import { Study } from "../../utils";
 
 type StudyRootProps = {
   studies: Study[];
@@ -15,18 +16,23 @@ const DatasetStudyRoot = ({
   onRowClick,
   selectedStudyId,
 }: StudyRootProps) => {
-  const [editingStudy, setEditingStudy] = useState<string | null>(null);
+  const [editingStudyId, setEditingStudyId] = useState<string | null>(null);
   const [aiStudyId, setAIStudyId] = useState<string | null>(null);
   const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
 
+
+  const onActionClick = () => {
+    
+  }
+
   return (
     <>
-      {editingStudy && (
+      {editingStudyId && (
         <EditStudy
-          studyId={editingStudy}
-          onStudyUpdated={handleStudyEdit}
-          onClose={() => setEditingStudy(null)}
-          show={!!editingStudy}
+          studyId={editingStudyId}
+          onStudyUpdated={() => {}}
+          onClose={() => setEditingStudyId(null)}
+          show={!!editingStudyId}
         />
       )}
       {previewStudyId && (

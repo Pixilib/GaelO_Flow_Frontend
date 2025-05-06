@@ -5,8 +5,7 @@ import { Brain, Download, Edit, Eye } from '../../icons';
 import OhifViewerLink from '../../content/OhifViewerLink';
 import StoneViewerLink from '../../content/StoneViewerLink';
 import DropdownButton from '../../ui/menu/DropdownButton';
-import Study from '../../model/Study';
-import { useCustomToast } from '../../utils';
+import { Study, useCustomToast } from '../../utils';
 import { exportRessource } from '../../services/export';
 
 type DatasetStudyActionsProps = {
@@ -32,12 +31,12 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
         {
             icon: <Eye />,
             color: 'green',
-            component: <OhifViewerLink studyInstanceUID={study.studyInstanceUID} />
+            component: <OhifViewerLink studyInstanceUID={study.mainDicomTags.studyInstanceUID} />
         },
         {
             icon: <Eye />,
             color: 'green',
-            component: <StoneViewerLink studyInstanceUID={study.studyInstanceUID} />
+            component: <StoneViewerLink studyInstanceUID={study.mainDicomTags.studyInstanceUID} />
         },
         {
             label: 'Modify',
