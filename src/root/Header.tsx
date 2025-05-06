@@ -11,6 +11,7 @@ import { Dropdown, Popover, ToogleChevron } from '../ui';
 import Jobs from './notifications/Jobs';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
+import UserProfile from './UserProfile';
 
 type Item = {
   title: string;
@@ -130,7 +131,16 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
               }
             </span>
           </Popover>
-          <User className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
+          <Popover
+            className='border border-gray-custom max-h-150 overflow-auto translate-y-3 -translate-x-60'
+            withOnClick
+            backgroundColor='bg-white'
+            popover={
+              <UserProfile />
+            }
+          >
+            <User className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
+          </Popover>
         </div>
       </div>
     </Banner>
