@@ -132,7 +132,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             </span>
           </Popover>
           <Popover
-            className='border border-gray-custom max-h-150 overflow-auto translate-y-3 -translate-x-60'
+            className='border border-gray-custom translate-y-3 -translate-x-83'
             withOnClick
             backgroundColor='bg-white'
             popover={
