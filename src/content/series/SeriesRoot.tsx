@@ -68,11 +68,11 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     exportSeriesToNifti(seriesId, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
   }
 
-  const handleDeleteSeries = async (seriesId: string) => {
+  const handleDeleteSeries = async (seriesId: string, seriesDescription :string) => {
     const confirmContent = (
-      <div className="italic">
+      <div className="text-xl flex gap-2 items-center">
         Are you sure you want to delete this Series:
-        <span className="text-xl not-italic font-bold text-primary">{seriesId} ?</span>
+        <span className="font-bold text-primary">{seriesDescription} ?</span>
       </div>
     );
     if (await confirm({ content: confirmContent })) {
@@ -87,7 +87,7 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
         handleEditSeries(series.id);
         break;
       case 'delete':
-        handleDeleteSeries(series.id);
+        handleDeleteSeries(series.id, series.mainDicomTags?.seriesDescription ?? '');
         break;
       case 'preview':
         handlePreviewSeries(series.id);
