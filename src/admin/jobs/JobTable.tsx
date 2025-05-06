@@ -65,7 +65,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
             withOnClick={true}
             backgroundColor="bg-white "
           >
-            <Info size="1.5em"  className="hover:scale-110 " />
+            <Info size="1.5em" className="hover:scale-110 text-primary" />
           </Popover>
         );
       },

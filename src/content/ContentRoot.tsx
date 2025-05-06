@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { getLabels, findTools, useConfirm, deletePatient } from "../services";
+import { getLabels, findTools, useConfirm, deletePatient, getLabelsByRoleName } from "../services";
 import {
   QueryPayload,
   useCustomMutation,
@@ -22,14 +22,23 @@ import {
 import { Colors } from "../utils";
 import { Anon, Export } from "../icons";
 import Labels from "./Labels";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 const ContentRoot: React.FC = () => {
   const { confirm } = useConfirm();
   const { toastSuccess, toastError } = useCustomToast();
 
+  const roleName = useSelector(
+    (state: RootState) => state.user.role?.name || ""
+  );
+
   const [selectedStudies, setSelectedStudies] = useState<{
     [patientId: string]: { [studyId: string]: boolean };
   }>({});
+
+
+
   const [model, setModel] = useState<Model | null>(null);
   const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
   const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
@@ -81,12 +90,9 @@ const ContentRoot: React.FC = () => {
     }
   );
 
-  const { data: labelsData } = useCustomQuery<Label[], string[]>(
-    ["labels"],
-    () => getLabels(),
-    {
-      select: (labels) => labels.map((label) => label.name),
-    }
+  const { data: labelsData } = useCustomQuery<string[], string[]>(
+    ["roles", roleName, "labels"],
+    () => getLabelsByRoleName(roleName)
   );
 
   const { mutateAsync: mutateToolsFind, isPending } = useCustomMutation<

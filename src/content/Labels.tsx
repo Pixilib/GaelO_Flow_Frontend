@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Button } from "../ui";
 import { Add, Cancel, Label } from "../icons";
 import ToggleChevron from "../ui/menu/ToogleChevron";
@@ -66,7 +66,7 @@ const Labels = ({ selectedStudyIds }: LabelProps) => {
                                 onClick={handleAddLabels}
                             />
                             <Cancel
-                                className="cursor-pointer"
+                                className="cursor-pointer text-danger"
                                 onClick={handleRemoveLabels}
                             />
                         </div>

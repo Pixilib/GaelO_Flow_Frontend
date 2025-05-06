@@ -4,7 +4,6 @@ const Info = (props) => {
     return (
         <BsInfoCircle 
             {...props} 
-            className="text-white dark:text-white"
         />
     );
 }
