@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { Colors, useCustomQuery } from "../../utils";
-import { getExistingQueriesQueues, getQueryQueue } from "../../services/queues";
+import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../../utils";
+import { deleteQueryQueue, getExistingQueriesQueues, getQueryQueue, pauseQueryQueue, resumeQueryQueue } from "../../services/queues";
 import { QueryQueue } from "../../utils/types";
 import TaskTable from "./TaskTable";
 import { useState } from "react";
 import { Button } from "../../ui";
-import { Anon, Export } from "../../icons";
+import { Anon, Export, Pause, Play, Trash } from "../../icons";
 import {
     addStudyIdToDeleteList,
     addSeriesOfStudyIdToExportList,
@@ -15,6 +15,7 @@ import {
 } from "../../utils/actionsUtils";
 
 const TaskRoot = () => {
+    const { toastSuccess, toastError } = useCustomToast();
 
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
 
@@ -76,13 +77,55 @@ const TaskRoot = () => {
         }
     };
 
+    const { mutate: mutateDeleteQueue } = useCustomMutation(
+        () => deleteQueryQueue(),
+        [["queue", "query"]],
+        {
+            onError: (e: any) => {
+                toastError(e?.data?.message);
+            },
+
+            onSuccess: () => {
+                toastSuccess("Delete Queue with success");
+            }
+        }
+    );
+
+    const { mutate: mutatePauseQueue } = useCustomMutation(
+        () => pauseQueryQueue(),
+        [["queue", "query", "pause"]],
+        {
+            onError: (e: any) => {
+                toastError(e?.data?.message);
+            },
+
+            onSuccess: () => {
+                toastSuccess("Pause Queue with success");
+            }
+        }
+    );
+
+    const { mutate: mutateResumeQueue } = useCustomMutation(
+        () => resumeQueryQueue(),
+        [["queue", "query", "resume"]],
+        {
+            onError: (e: any) => {
+                toastError(e?.data?.message);
+            },
+
+            onSuccess: () => {
+                toastSuccess("Resume Queue with success");
+            }
+        }
+    );
+
     const onRowSelectionChange = (rowSelection: Record<string, boolean>) => {
         setSelectedRows(rowSelection);
     }
 
     return (
-        <>
-            <div className="flex flex-wrap gap-2 pl-3 pr-3 pb-3">
+        <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap gap-2 pl-3 pr-3">
                 <Button
                     color={Colors.blueCustom}
                     className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
@@ -115,7 +158,12 @@ const TaskRoot = () => {
                 selectedRows={selectedRows}
                 onRowSelectionChange={onRowSelectionChange}
             />
-        </>
+            <div className="flex justify-end gap-5 pr-3">
+                <Button onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
+                <Button onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
+                <Button onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
+            </div>
+        </div>
     )
 }
 

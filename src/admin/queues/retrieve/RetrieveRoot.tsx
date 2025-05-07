@@ -8,8 +8,6 @@ import RetrieveQueues from "./RetrieveQueues";
 import { Options } from "../../../utils/types";
 import { Trash, Pause, Play } from "../../../icons";
 import { deleteQueryQueue, pauseQueryQueue, resumeQueryQueue } from "../../../services/queues";
-import { data } from "react-router";
-import { useState } from "react";
 
 const RetrieveRoot = () => {
     const { data: options, isPending: isLoadingOptions } = useCustomQuery<Options>(["options"], () => getOptions());
