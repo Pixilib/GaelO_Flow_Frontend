@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "../../ui";
+import { Modal, Spinner } from "../../ui";
 import { useCustomMutation, useCustomQuery } from "../../utils";
 import { addLabelForStudy, getLabelsOfStudy, removeLabelForStudy } from "../../services/orthanc";
 import SelectLabels from "../SelectLabels";
@@ -11,7 +11,7 @@ type LabelModalProps = {
 
 const LabelModal: React.FC<LabelModalProps> = ({ studyId, onClose, show }) => {
 
-    const { data: existingLabelsOptions } = useCustomQuery<string[]>(
+    const { data: existingLabelsOptions, isPending } = useCustomQuery<string[]>(
         ['study', studyId, 'labels'],
         () => getLabelsOfStudy(studyId),
     )
@@ -30,21 +30,23 @@ const LabelModal: React.FC<LabelModalProps> = ({ studyId, onClose, show }) => {
         const labelsToAdd = labels.filter((label) => !existingLabelsOptions.some((existingLabel) => existingLabel === label))
         const labelsToRemove = existingLabelsOptions.filter((existingLabel) => !labels.some((label) => existingLabel === label))
 
-        for(const label of labelsToAdd) {
+        for (const label of labelsToAdd) {
             mutateAddLabel({ label })
         }
-        for(const label of labelsToRemove) {
+        for (const label of labelsToRemove) {
             mutateDeleteLabel({ label })
         }
     }
+
+    if(isPending) return <Spinner />
+
     return (
         <Modal show={show} size='lg'>
             <Modal.Header onClose={onClose}>Assign Labels</Modal.Header>
             <Modal.Body>
                 <SelectLabels
-                values={existingLabelsOptions} 
-                onChange={handleLabelChanges} />
-                <p>{studyId}</p>
+                    values={existingLabelsOptions}
+                    onChange={handleLabelChanges} />
             </Modal.Body>
         </Modal>
     );
