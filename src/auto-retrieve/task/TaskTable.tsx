@@ -1,10 +1,8 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Info } from "../../icons";
 import { Badge, Button, Table } from "../../ui";
 import { Colors } from "../../utils";
 import { Queue } from "../../utils/types";
-import { size } from "@floating-ui/dom";
-import { Key } from "src/assets";
 
 type TaskTableProps = {
     data: Queue[];
@@ -13,6 +11,13 @@ type TaskTableProps = {
 }
 
 const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps) => {
+    const stateBadgeVariants: Record<string, { variant: string; label: string }> = {
+        completed: { variant: "success", label: "Completed" },
+        failed: { variant: "danger", label: "Failed" },
+        paused: { variant: "warning", label: "Paused" },
+        wait: { variant: "warning", label: "Waiting" },
+        active: { variant: "default", label: "Active" },
+    };
 
     const columns = [
         {
@@ -23,14 +28,13 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
             id: "query",
             accessorKey: "query",
             cell: ({ row }) => {
-                const [open, setOpen] = useState(false)
-                if( row.original.query === undefined ) return <div> Pending </div>
+                if (row.original.query === undefined) return <div> Pending </div>
                 return (
-                            <div className="flex flex-col max-h-24 overflow-auto no-scrollbar">
-                                {Object.entries(row.original.query).filter(([key, value]) => ['PatientID', 'PatientName', 'StudyDescription', 'StudyDate', 'SeriesDescription'].includes(key)).map(([key, value], index) =>
-                                    <span key={key} className="text-xs break-all">{key} : {value}</span>
-                                )}
-                            </div>
+                    <div className="flex flex-col max-h-24 overflow-auto no-scrollbar">
+                        {Object.entries(row.original.query).filter(([key, value]) => ['PatientID', 'PatientName', 'StudyDescription', 'StudyDate', 'SeriesDescription'].includes(key)).map(([key, value], index) =>
+                            <span key={key} className="text-xs break-all">{key} : {value}</span>
+                        )}
+                    </div>
                 )
             }
         },
@@ -58,6 +62,19 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
         {
             id: "state",
             accessorKey: "state",
+            cell: ({ row }) => {
+                return (
+                    <>
+                        {stateBadgeVariants[row.original.state] ? (
+                            <Badge variant={stateBadgeVariants[row.original.state].variant}>
+                                {stateBadgeVariants[row.original.state].label}
+                            </Badge>
+                        ) : (
+                            <Badge>{row.original.state}</Badge>
+                        )}
+                    </>
+                );
+            }
         },
         {
             id: "progress",

@@ -42,8 +42,8 @@ const RetrieveQueues = () => {
       const progressHtml = (
         <div className="flex gap-2">
           <Badge variant="success">Complete : {counts?.completed ? counts.completed : "0"}</Badge>
-          <Badge variant="warning">Active : {counts?.active ? counts.active : "0"}</Badge>
-          <Badge>Waiting : {counts?.wait ? counts.wait : "0"}</Badge>
+          <Badge>Active : {counts?.active ? counts.active : "0"}</Badge>
+          <Badge variant="warning">Waiting : {counts?.wait ? counts.wait : "0"}</Badge>
           {counts?.paused && <Badge variant="warning">Paused : {counts?.paused}</Badge>}
           {counts?.failed && <Badge variant="danger">Failed : {counts?.failed ? counts.failed : "0"}</Badge>}
         </div>
