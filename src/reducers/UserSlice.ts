@@ -7,12 +7,14 @@ export interface UserState {
     tokenCreationDate: string | null;
     currentUserId: number | null;
     role: Role | null;
+    canExitPage: boolean;
 }
 
 interface LoginPayload {
     token: string;
     userId: number;
     role: Role;
+    canExitPage: boolean;
 }
 
 const initialState: UserState = {
@@ -20,7 +22,8 @@ const initialState: UserState = {
     isLogged: false,
     tokenCreationDate: null,
     currentUserId: null,
-    role: null
+    role: null,
+    canExitPage: true,
 }
 
 const userSlice = createSlice({
@@ -33,6 +36,7 @@ const userSlice = createSlice({
             state.tokenCreationDate = new Date().toISOString();
             state.currentUserId = action.payload.userId;
             state.role = action.payload.role;
+            state.canExitPage = true;
         },
         logout(state) {
             state.token = null;
@@ -41,7 +45,10 @@ const userSlice = createSlice({
             state.currentUserId = null;
             state.role = null;
         },
-        }
+        setCanExitPage(state, action: PayloadAction<boolean>) {
+            state.canExitPage = action.payload;
+        },
+    }
 })
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setCanExitPage } = userSlice.actions;
 export default userSlice.reducer;
