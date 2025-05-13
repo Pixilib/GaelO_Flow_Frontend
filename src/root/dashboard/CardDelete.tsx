@@ -46,7 +46,7 @@ const CardDelete = () => {
     }, [data]);
 
     return (
-        <Card className="w-full bg-white overflow-hidden rounded-lg shadow-lg md:max-w-md dark:bg-neutral-500">
+        <Card className="w-full bg-white overflow-hidden rounded-lg rounded-tl-2xl rounded-tr-2xl shadow-lg md:max-w-md dark:bg-neutral-500">
             <CardHeader centerTitle color={Colors.danger} className="flex items-center">
                 <Export className="mr-3 text-xl text-white " />
                 <span className="text-lg font-bold text-white">Delete</span>
