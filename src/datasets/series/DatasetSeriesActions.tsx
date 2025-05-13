@@ -3,6 +3,7 @@ import { Series, useCustomToast } from '../../utils';
 
 import { exportSeriesToNifti } from '../../services/export';
 import { DropdownButton } from '../../ui';
+import { Download, Edit, Eye } from '../../icons';
 
 type DropdownOption = {
     label: string;
@@ -13,7 +14,7 @@ type DropdownOption = {
 
 type DataSetSeriesActionsProps = {
     series: Series;
-    onActionClick: (action: string, studyId: string) => void;
+    onActionClick: (action: string, seriesId: string) => void;
 };
 
 const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onActionClick }) => {
@@ -22,13 +23,25 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onA
 
     const options: DropdownOption[] = [
         {
-            label: "View Metadata",
-            color: 'green',
-            action: () => {
-                onActionClick("metadata", series.id);
-            },
+            label: 'Modify',
+            icon: <Edit />,
+            color: 'orange',
+            action: () => onActionClick('edit', series.id)
         },
         {
+            label: 'Metadata',
+            icon: <Eye />,
+            color: 'green',
+            action: () => onActionClick('metadata', series.id)
+        },
+        {
+            label: 'Preview Series',
+            icon: <Eye />,
+            color: 'green',
+            action: () => onActionClick('preview', series.id)
+        },
+        {
+            icon: <Download />,
             label: "Download nii.gz",
             color: 'green',
             action: () => {

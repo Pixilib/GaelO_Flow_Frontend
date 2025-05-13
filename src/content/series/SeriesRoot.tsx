@@ -15,14 +15,14 @@ import { Modal, Spinner } from '../../ui';
 import TagsTree from './metadata/TagsTree';
 import { exportRessource, exportSeriesToNifti } from '../../services/export';
 
-interface SeriesRootProps {
+type SeriesRootProps = {
   studyId: string;
 }
 
 const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
-  const [editingSeries, setEditingSeries] = useState<Series | null>(null);
-  const [previewSeries, setPreviewSeries] = useState<Series | null>(null);
-  const [previewMetadata, setPreviewMetadata] = useState<Series | null>(null);
+  const [editingSeriesId, setEditingSeriesId] = useState<string | null>(null);
+  const [previewSeriesId, setPreviewSeriesId] = useState<string | null>(null);
+  const [previewMetadataSeriesId, setPreviewMetadataSeriesId] = useState<string | null>(null);
 
   const { confirm } = useConfirm();
   const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
@@ -50,33 +50,29 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
     }
   );
 
-  const handleEditSeries = (series: Series) => {
-    setEditingSeries(series);
+  const handleEditSeries = (seriesId :string) => {
+    setEditingSeriesId(seriesId);
   };
 
-  const handlePreviewSeries = (series: Series) => {
-    setPreviewSeries(series);
+  const handlePreviewSeries = (seriesId :string) => {
+    setPreviewSeriesId(seriesId);
   }
 
-  const handleDownloadSeries = (series: Series) => {
+  const handleDownloadSeries = (seriesId :string) => {
     const id = toastSuccess("Download started")
-    exportRessource("series", series.id, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
+    exportRessource("series", seriesId, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"))
   }
 
-  const handleDownloadSeriesNifti = (series: Series) => {
+  const handleDownloadSeriesNifti = (seriesId :string) => {
     const id = toastSuccess("Download started", 60)
-    exportSeriesToNifti(series.id, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
+    exportSeriesToNifti(seriesId, true, (mb) => updateExistingToast(id, "Downloaded " + mb + " mb", 5))
   }
 
-  const handleMetadataPreview = (series: Series) => {
-    setPreviewMetadata(series)
-  }
-
-  const handleDeleteSeries = async (seriesId: string) => {
+  const handleDeleteSeries = async (seriesId: string, seriesDescription :string) => {
     const confirmContent = (
-      <div className="italic">
+      <div className="text-xl flex gap-2 items-center">
         Are you sure you want to delete this Series:
-        <span className="text-xl not-italic font-bold text-primary">{seriesId} ?</span>
+        <span className="font-bold text-primary">{seriesDescription} ?</span>
       </div>
     );
     if (await confirm({ content: confirmContent })) {
@@ -88,22 +84,22 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
   const handleSeriesAction = (action: string, series: Series) => {
     switch (action) {
       case 'edit':
-        handleEditSeries(series);
+        handleEditSeries(series.id);
         break;
       case 'delete':
-        handleDeleteSeries(series.id);
+        handleDeleteSeries(series.id, series.mainDicomTags?.seriesDescription ?? '');
         break;
       case 'preview':
-        handlePreviewSeries(series);
+        handlePreviewSeries(series.id);
         break;
       case 'metadata':
-        setPreviewMetadata(series);
+        setPreviewMetadataSeriesId(series.id);
         break;
       case 'download':
-        handleDownloadSeries(series);
+        handleDownloadSeries(series.id);
         break;
       case 'download-nifti':
-        handleDownloadSeriesNifti(series);
+        handleDownloadSeriesNifti(series.id);
         break;
       default:
         console.warn(`Unhandled action: ${action}`);
@@ -127,32 +123,32 @@ const SeriesRoot: React.FC<SeriesRootProps> = ({ studyId }) => {
       ) : (
         <p>No series found for this study.</p>
       )}
-      {editingSeries && (
+      {editingSeriesId && (
         <EditSeries
-          series={editingSeries}
-          onEditSeries={handleSeriesUpdate}
-          onClose={() => setEditingSeries(null)}
-          show={!!editingSeries}
+          seriesId={editingSeriesId}
+          onSeriesEdited={handleSeriesUpdate}
+          onClose={() => setEditingSeriesId(null)}
+          show={!!editingSeriesId}
         />
       )}
-      {previewSeries && (
-        <Modal show={!!previewSeries} size='xl'>
-          <Modal.Header onClose={() => setPreviewSeries(null)} >
+      {previewSeriesId && (
+        <Modal show={!!previewSeriesId} size='xl'>
+          <Modal.Header onClose={() => setPreviewSeriesId(null)} >
             <Modal.Title>Preview Series</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <PreviewSeries seriesId={previewSeries.id} />
+            <PreviewSeries seriesId={previewSeriesId} />
           </Modal.Body>
         </Modal>
       )}
 
-      {previewMetadata && (
-        <Modal show={!!previewMetadata} size='xl'>
-          <Modal.Header onClose={() => setPreviewMetadata(null)} >
+      {previewMetadataSeriesId && (
+        <Modal show={!!previewMetadataSeriesId} size='xl'>
+          <Modal.Header onClose={() => setPreviewMetadataSeriesId(null)} >
             <Modal.Title>Preview Metadata</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <TagsTree seriesId={previewMetadata.id} />
+            <TagsTree seriesId={previewMetadataSeriesId} />
           </Modal.Body>
         </Modal>
       )}

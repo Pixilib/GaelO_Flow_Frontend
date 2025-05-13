@@ -2,13 +2,13 @@ import Card, { CardHeader, CardFooter, CardBody } from "../ui/Card";
 import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import { Button } from "../ui";
 import SelectRoleLabels from "./SelectRoleLabels";
-import DatasetTableStudy from "./studies/DatasetTableStudy";
-import DatasetSeriesTable from "./series/DatasetSeriesTable";
 import { findTools } from "../services";
 import Model from "../model/Model";
 import { useEffect, useState } from "react";
 import { FindPayload, Series } from "../utils/types";
 import { getSeriesOfStudy } from "../services/orthanc";
+import DatasetStudyRoot from "./studies/DatasetStudyRoot";
+import DatasetSeriesRoot from "./series/DatasetSeriesRoot";
 
 const DatasetRoot = () => {
     const [model, setModel] = useState<Model | null>(null);
@@ -67,14 +67,6 @@ const DatasetRoot = () => {
         setCurrentStudyId(studyId);
     };
 
-    const handleStudyActionClick = (action: any, studyId: any) => {
-        console.log(`Study action "${action}" clicked for study ID: ${studyId}`);
-    };
-
-    const handleSeriesActionClick = (action: any, series: any) => {
-        console.log(`Series action "${action}" clicked for series:`, series);
-    };
-
     const handleButtonClick = () => {
         console.log("Button clicked");
     };
@@ -94,19 +86,17 @@ const DatasetRoot = () => {
                 <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
                     <div className="2xl:col-span-7">
                         <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">Studies</span>
-                        <DatasetTableStudy
+                        <DatasetStudyRoot
                             studies={studies}
                             onRowClick={handleStudyRowClick}
-                            onActionClick={handleStudyActionClick}
                             selectedStudyId={currentStudyId}
                         />
                     </div>
                     <div className="2xl:col-span-5">
                         <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">Series</span>
                         {series && (
-                            <DatasetSeriesTable
+                            <DatasetSeriesRoot
                                 series={series}
-                                onActionClick={handleSeriesActionClick}
                             />
                         )}
                     </div>

@@ -2,6 +2,8 @@ import { getLabels, getLabelsByRoleName } from "../services";
 import { useCustomQuery } from "../utils";
 import { SelectInput, Spinner } from "../ui";
 import { Label, Option } from "../utils/types";
+import { useSelector } from "react-redux";
+import { RootState } from "src/store";
 
 type SelectLabelsProps = {
   values: string[];
@@ -10,14 +12,18 @@ type SelectLabelsProps = {
 
 const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
 
-  const { data: labelsOptions, isPending } = useCustomQuery<Label[], Option[]>(
-    ["labels"],
-    () => getLabels(),
+  const roleName = useSelector(
+    (state: RootState) => state.user.role?.name || ""
+  );
+
+  const { data: labelsOptions, isPending } = useCustomQuery<string[], Option[]>(
+    ["roles", roleName, "labels"],
+    () => getLabelsByRoleName(roleName),
     {
-      select: (labels : Label[]) => {
+      select: (labels : string[]) => {
         const formattedOptions = labels.map((label) => ({
-          value: label.name,
-          label : label.name,
+          value: label,
+          label : label,
         }));
         return formattedOptions;
       }
@@ -29,6 +35,8 @@ const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
   }
 
   if (isPending) return <Spinner />;
+
+  console.log(labelsOptions);
 
   return (
     <SelectInput

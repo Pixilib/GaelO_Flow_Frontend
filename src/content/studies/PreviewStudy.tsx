@@ -42,7 +42,7 @@ const PreviewStudy: React.FC<PreviewStudyProps> = ({ studyId, onClose, show }) =
                     {
                         series?.map((series: Series) => {
                             return (
-                                <Accordion variant="secondary" header={<AccordionHeader variant="primary">{(series.mainDicomTags?.seriesDescription?.length ?? 0) > 0 ? series.mainDicomTags?.seriesDescription : "N/A"}</AccordionHeader>}>
+                                <Accordion key={series.id} variant="secondary" header={<AccordionHeader variant="primary">{(series.mainDicomTags?.seriesDescription?.length ?? 0) > 0 ? series.mainDicomTags?.seriesDescription : "N/A"}</AccordionHeader>}>
                                     <PreviewSeries seriesId={series.id} />
                                 </Accordion>
                             )

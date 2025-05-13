@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Colors } from "../../utils";
 import { Table } from "../../ui";
-import StudyActions from "./DatasetStudyActions";
+import DatasetStudyActions from "./DatasetStudyActions";
 import Study from "../../model/Study";
 
 type StudyTableProps = {
@@ -39,7 +39,7 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
             header: "Actions",
             cell: ({ row }) => {
                 const study = row.original;
-                return <StudyActions study={study} onActionClick={onActionClick} />;
+                return <DatasetStudyActions study={study} onActionClick={onActionClick} />;
             },
         },
     ], [onActionClick]);

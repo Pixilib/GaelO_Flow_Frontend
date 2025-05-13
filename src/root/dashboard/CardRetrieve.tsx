@@ -48,11 +48,11 @@ const CardRetrieve = () => {
 
 
   return (
-    <Card className="w-full bg-white overflow-hidden rounded-lg shadow-lg md:max-w-md dark:bg-neutral-500">
+    <Card className="w-full bg-white overflow-hidden rounded-lg rounded-tl-2xl rounded-tr-2xl shadow-lg md:max-w-md dark:bg-neutral-500">
       <CardHeader
         centerTitle
         color={Colors.primary}
-        className="flex items-center "
+        className="flex items-center"
       >
         <AutoRetrieve className="mr-3 text-xl text-white" />
         <span className="text-lg font-bold text-white">Retrieve</span>

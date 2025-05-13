@@ -70,7 +70,7 @@ const Users = ({ className = "" }: UsersProps) => {
       {userToEdit ? (
         <EditUserForm
           title={"Edit User"}
-          className="bg-gray-200"
+          className="bg-gray-200 "
           onClose={() => {
             setUserToEdit(null);
           }}

@@ -20,7 +20,7 @@ const UserProfile = () => {
     <div className="flex flex-col gap-2 w-80">
       <div className="flex flex-row items-center gap-2 pl-1 dark:text-white">
         <UserIcon></UserIcon>
-        <p className="font-bold">Profil Overview</p>
+        <p className="font-bold">Profile Overview</p>
       </div>
       <div className="border-b border-b-gray-600"/>
       <div>

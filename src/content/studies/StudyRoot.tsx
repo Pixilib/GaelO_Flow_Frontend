@@ -63,11 +63,12 @@ const StudyRoot = ({
   };
 
   const handleDeleteStudy = async (studyId: string) => {
+    const studyDescription = studies.find((study) => study.id === studyId)?.studyDescription;
     const confirmContent = (
-      <div className="italic">
+      <div className="flex gap-2 text-xl">
         Are you sure you want to delete this study:
-        <span className="text-xl not-italic font-bold text-primary">
-          {studyId}?
+        <span className="font-bold text-primary">
+          {studyDescription}?
         </span>
       </div>
     );

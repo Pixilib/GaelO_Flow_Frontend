@@ -1,7 +1,7 @@
-import React, { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { BannerAlert, Button, SelectInput } from "../../ui";
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import { BannerAlert, Button } from "../../ui";
 import Model from "../../model/Model";
-import { Colors, useCustomQuery } from "../../utils";
+import { Colors } from "../../utils";
 import ImportDrop from "./ImportDrop";
 import ImportTableStudy from "./ImportTableStudy";
 import ImportTableSeries from "./ImportTableSeries";
@@ -12,9 +12,6 @@ import {
   addSeriesOfStudyIdToExportList,
   addStudyIdToAnonymizeList,
 } from "../../utils/actionsUtils";
-import { getLabelsByRoleName } from "../../services";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import SelectRoleLabels from "../../datasets/SelectRoleLabels";
 
 interface ImportError {
@@ -104,10 +101,6 @@ const ImportRoot: React.FC = () => {
     }
   }, [currentStudyInstanceUID]);
 
-  useEffect(() => {
-
-  }, []);
-
   return (
     <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col items-center">
       <SelectRoleLabels
@@ -134,8 +127,8 @@ const ImportRoot: React.FC = () => {
       )}
 
       {studiesData.length > 0 && (
-        <div>
-          <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-col gap-3 w-full">
+          <div className="flex gap-2">
             <Button
               color={Colors.blueCustom}
               className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
@@ -163,7 +156,7 @@ const ImportRoot: React.FC = () => {
               <span className="ml-2">Send to Delete</span>
             </Button>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <div className="flex-1 mb-4 overflow-x-auto shadow-lg rounded-xl">
               <ImportTableStudy
                 data={studiesData}

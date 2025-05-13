@@ -30,16 +30,17 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
         id: "roles",
 
         cell: ({ row }: any) => (
-          <div className="flex  gap-2.5">
+          <div className="flex gap-2.5">
             <Popover
               withOnClick={true}
               popover={<LabelsRoles key={row.original.name} labelName={row.original.name} />}
-              placement="top"
+              placement="right"
               backgroundColor="bg-white"
+              className="max-h-30 overflow-y-auto overflow-x-hidden"
             >
               <Button color={Colors.secondary} className="flex items-center gap-1.5">
                 <Admin size="1.3rem" />
-                <ToggleChevron isOpen={false} /> 
+                <ToggleChevron isOpen={false} />
               </Button>
             </Popover>
           </div>

@@ -8,7 +8,7 @@ const Cancel = ({className, ...props } : CancelProps) => {
 
     return (
         <FaTimes
-            className={`transition-transform duration-200 hover:text-danger-hover text-danger hover:transform hover:scale-125 ${className}`}
+            className={`transition-transform duration-200 hover:transform hover:scale-125 ${className}`}
             {...props}
 
         />
