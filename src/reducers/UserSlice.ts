@@ -1,20 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Role } from 'src/utils';
+import { Role } from '../utils';
 
-export interface UserState {
+export type UserState = {
     token: string | null;
     isLogged: boolean;
     tokenCreationDate: string | null;
     currentUserId: number | null;
     role: Role | null;
     canExitPage: boolean;
+    message : string;
 }
 
-interface LoginPayload {
+type LoginPayload = {
     token: string;
     userId: number;
     role: Role;
-    canExitPage: boolean;
 }
 
 const initialState: UserState = {
@@ -24,6 +24,12 @@ const initialState: UserState = {
     currentUserId: null,
     role: null,
     canExitPage: true,
+    message : ""
+}
+
+type ChangeCanExitPagePayload = {
+    canExitPage: boolean;
+    message :string;
 }
 
 const userSlice = createSlice({
@@ -36,7 +42,6 @@ const userSlice = createSlice({
             state.tokenCreationDate = new Date().toISOString();
             state.currentUserId = action.payload.userId;
             state.role = action.payload.role;
-            state.canExitPage = true;
         },
         logout(state) {
             state.token = null;
@@ -45,8 +50,9 @@ const userSlice = createSlice({
             state.currentUserId = null;
             state.role = null;
         },
-        setCanExitPage(state, action: PayloadAction<boolean>) {
-            state.canExitPage = action.payload;
+        setCanExitPage(state, action: PayloadAction<ChangeCanExitPagePayload>) {
+            state.canExitPage = action.payload.canExitPage;
+            state.message = action.payload.message;
         },
     }
 })

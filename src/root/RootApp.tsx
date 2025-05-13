@@ -1,8 +1,8 @@
-import { useMemo, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Routes, useLocation, useNavigate } from "react-router";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes, useLocation, useNavigate, unstable_usePrompt as usePrompt } from "react-router";
 
-import { logout } from "../reducers/UserSlice";
+import { logout, setCanExitPage } from "../reducers/UserSlice";
 
 import SideBar from "./SideBar";
 import Dashboard from "./dashboard/Dashboard";
@@ -18,6 +18,7 @@ import ExportRoot from "../export/ExportRoot";
 import AutoRoutingRoot from "../autorouting/AutoRoutingRoot";
 import AutoRetrieveRoot from "../auto-retrieve/AutoRetrieveRoot";
 import HelpRoot from "../help/HelpRoot";
+import { RootState } from "../store";
 
 const titlePath: { [key: string]: string } = {
   "/administration/general/redis": "General",
@@ -52,6 +53,25 @@ const RootApp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const canExitPage = useSelector((state: RootState) => state.user.canExitPage)
+  const exitMessage = useSelector((state: RootState) => state.user.message)
+
+  useEffect(() => {
+    if (!canExitPage)
+      dispatch(setCanExitPage({ canExitPage: true, message: "" }))
+  }, [location.pathname]);
+
+  useEffect(() => {
+    console.log(exitMessage);
+  }, [exitMessage])
+
+  usePrompt(
+    {
+      when: !canExitPage,
+      message : exitMessage,
+    }
+  )
 
   const [openItem, setOpenItem] = useState<string | null>(null);
 

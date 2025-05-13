@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { ProgressBar } from '../../ui';
@@ -8,6 +8,8 @@ import Model from '../../model/Model';
 import { useCustomMutation } from '../../utils';
 import { OrthancImportDicom } from '../../utils/types';
 import { Check, Cloud } from '../../icons';
+import { useDispatch } from 'react-redux';
+import { setCanExitPage } from '../../reducers/UserSlice';
 
 
 type ImportDropProps = {
@@ -18,6 +20,7 @@ type ImportDropProps = {
 };
 
 const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded, selectedLabel }) => {
+    const dispatch = useDispatch();
     const [isUploading, setIsUploading] = useState(false);
     const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
     const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
@@ -40,9 +43,14 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
         });
     };
 
+    useEffect(() => {
+        dispatch(setCanExitPage({ canExitPage: !isUploading, message: "File import are processing, changing page will interupt import." }))
+    }, [isUploading])
+
     const { getRootProps, getInputProps, open } = useDropzone({
         multiple: true,
         onDrop: async (acceptedFiles) => {
+
             setNumberOfLoadedFiles((loadedFiles) => loadedFiles + acceptedFiles.length);
             setIsUploading(true);
 

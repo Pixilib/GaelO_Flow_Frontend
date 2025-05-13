@@ -49,8 +49,7 @@ export const SignInForm = () => {
             cdBurner: decodedToken.role.CdBurner,
             autoRouting: decodedToken.role.AutoRouting,
             readAll: decodedToken.role.ReadAll,
-          },
-          canExitPage: true,
+          }
         })
       );
     },
