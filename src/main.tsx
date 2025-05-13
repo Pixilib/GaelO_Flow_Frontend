@@ -41,7 +41,6 @@ let router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
     <Provider store={store}>
       <ErrorBoundary FallbackComponent={<>Error</>}>
         <QueryClientProvider client={queryClient}>
@@ -55,5 +54,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <ToastContainer />
       </ErrorBoundary>
     </Provider>
-  </React.StrictMode>
 );

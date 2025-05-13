@@ -57,15 +57,6 @@ const RootApp = () => {
   const canExitPage = useSelector((state: RootState) => state.user.canExitPage)
   const exitMessage = useSelector((state: RootState) => state.user.message)
 
-  useEffect(() => {
-    if (!canExitPage)
-      dispatch(setCanExitPage({ canExitPage: true, message: "" }))
-  }, [location.pathname]);
-
-  useEffect(() => {
-    console.log(exitMessage);
-  }, [exitMessage])
-
   usePrompt(
     {
       when: !canExitPage,

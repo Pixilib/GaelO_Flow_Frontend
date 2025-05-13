@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import { ProgressBar } from '../../ui';
@@ -24,6 +24,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
     const [isUploading, setIsUploading] = useState(false);
     const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
     const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
+    const mounted = useRef(false);
 
     const uploadComplete = useMemo(() => {
         return numberOfLoadedFiles > 0 && numberOfLoadedFiles === numberOfProcessedFiles;
@@ -47,6 +48,15 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
         dispatch(setCanExitPage({ canExitPage: !isUploading, message: "File import are processing, changing page will interupt import." }))
     }, [isUploading])
 
+    useEffect(() => {
+        mounted.current = true;
+        return () => {
+            mounted.current = false;
+            dispatch(setCanExitPage({ canExitPage: true, message: "" }))
+        }
+    }, [])
+
+
     const { getRootProps, getInputProps, open } = useDropzone({
         multiple: true,
         onDrop: async (acceptedFiles) => {
@@ -55,6 +65,11 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
             setIsUploading(true);
 
             for (const file of acceptedFiles) {
+
+                if (!mounted.current) {
+                    return
+                }
+
                 const isZip = file.type === 'application/zip';
 
                 await promiseFileReader(file).then(async (reader: FileReader) => {

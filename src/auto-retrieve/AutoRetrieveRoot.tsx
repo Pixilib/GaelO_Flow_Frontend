@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
 
 import QueryRoot from "./query/QueryRoot";
@@ -13,16 +13,32 @@ import { QueryPayload, QueryResultSeries, QueryResultStudy } from "../utils/type
 import { dicomDateQueryStringFromDateFromDateTo } from "../utils";
 import { queryModality } from "../services";
 import { RootState, store } from "../store";
+import { setCanExitPage } from "../reducers/UserSlice";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const mounted = useRef(false);
   const queries = useSelector((state: RootState) => state.autoRetrieve.queries);
   const studiesResults = useSelector((state: RootState) => state.autoRetrieve.studyResults);
 
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      dispatch(setCanExitPage({ canExitPage: true, message: "" }))
+    }
+  }, [])
+
   const [progressQueriesStudies, setProgressQueriesStudies] = useState(0);
   const [progressQueriesSeries, setProgressQueriesSeries] = useState(0);
+  const [isQuerying, setIsQuerying] = useState(false);
+
+  useEffect(() => {
+    dispatch(setCanExitPage({ canExitPage: !isQuerying, message: "Queries are processing, changing page will interupt them." }))
+  }, [isQuerying])
 
   const handleTabClick = (tab: string) => {
     navigate(tab);
@@ -41,6 +57,7 @@ const AutoRetrieveRoot = () => {
   }
 
   const handleStartStudyQueries = async () => {
+    setIsQuerying(true)
     setProgressQueriesStudies(0)
     const queriesReady = queries.filter((query) => query.aet)
     for (const queryRow of queriesReady) {
@@ -60,9 +77,11 @@ const AutoRetrieveRoot = () => {
       setProgressQueriesStudies((progress) => progress + (100 / queriesReady.length))
     }
     setProgressQueriesStudies(0)
+    setIsQuerying(false)
   }
 
   const handleStartSeriesQueries = async () => {
+    setIsQuerying(true)
     clearSeriesResults()
     setProgressQueriesSeries(0)
     for (const studyResult of studiesResults) {
@@ -77,6 +96,7 @@ const AutoRetrieveRoot = () => {
       setProgressQueriesSeries((progress) => Math.round(progress + (100 / studiesResults.length)))
     }
     setProgressQueriesSeries(0)
+    setIsQuerying(false)
   }
 
   return (
