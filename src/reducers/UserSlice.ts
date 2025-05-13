@@ -1,15 +1,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Role } from 'src/utils';
+import { Role } from '../utils';
 
-export interface UserState {
+export type UserState = {
     token: string | null;
     isLogged: boolean;
     tokenCreationDate: string | null;
     currentUserId: number | null;
     role: Role | null;
+    canExitPage: boolean;
+    message : string;
 }
 
-interface LoginPayload {
+type LoginPayload = {
     token: string;
     userId: number;
     role: Role;
@@ -20,7 +22,14 @@ const initialState: UserState = {
     isLogged: false,
     tokenCreationDate: null,
     currentUserId: null,
-    role: null
+    role: null,
+    canExitPage: true,
+    message : ""
+}
+
+type ChangeCanExitPagePayload = {
+    canExitPage: boolean;
+    message :string;
 }
 
 const userSlice = createSlice({
@@ -41,7 +50,11 @@ const userSlice = createSlice({
             state.currentUserId = null;
             state.role = null;
         },
-        }
+        setCanExitPage(state, action: PayloadAction<ChangeCanExitPagePayload>) {
+            state.canExitPage = action.payload.canExitPage;
+            state.message = action.payload.message;
+        },
+    }
 })
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setCanExitPage } = userSlice.actions;
 export default userSlice.reducer;

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
 
-import { login } from "../reducers/UserSlice";
+import { login, setCanExitPage } from "../reducers/UserSlice";
 import { useCustomMutation } from "../utils/reactQuery";
 import { signIn } from "../services/auth";
 import { useCustomToast } from "../utils/toastify";
@@ -49,7 +49,7 @@ export const SignInForm = () => {
             cdBurner: decodedToken.role.CdBurner,
             autoRouting: decodedToken.role.AutoRouting,
             readAll: decodedToken.role.ReadAll,
-          },
+          }
         })
       );
     },

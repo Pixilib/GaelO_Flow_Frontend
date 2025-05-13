@@ -64,7 +64,7 @@ const CardHeader = ({ title, centerTitle, className = "", children, color }: Car
 
   return (
     <div data-gaelo-flow="Card-header" className={`${headerClass} w-full min-h-12 text-white ${shadowClass} rounded-t-2xl flex items-center ${centerTitle ? 'justify-center' : ''} ${className}`}>
-      {title && <div className="text-lg font-bold">{title}</div>}
+      {title && <div className="text-lg font-bold m-3">{title}</div>}
       {children}
     </div>
   );

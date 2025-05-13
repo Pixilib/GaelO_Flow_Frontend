@@ -101,10 +101,6 @@ const ImportRoot: React.FC = () => {
     }
   }, [currentStudyInstanceUID]);
 
-  useEffect(() => {
-
-  }, []);
-
   return (
     <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col items-center">
       <SelectRoleLabels
