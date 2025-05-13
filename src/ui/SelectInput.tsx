@@ -28,11 +28,11 @@ const customClass: ClassNamesConfig<OptionType, boolean> = {
     const borderRadius = state.selectProps.rounded
       ? "rounded-3xl"
       : "rounded-xl";
-    return `border border-gray-300 min-h-[40px] bg-gray-50 text-black dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active px-2`;
+    return `border border-gray-300 bg-gray-50 text-black dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active`;
   },
   menu: () => "rounded-3xl p-1 bg-white dark:bg-neutral-800",
   option: (state) => {
-    return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white px-2`;
+    return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white`;
   },
   singleValue: () => "text-black dark:text-white",
   multiValue: () => "bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5",
@@ -55,7 +55,7 @@ const SelectInput = ({
   formatGroupLabel,
 }: SelectInputProps) => {
   const selectedValue = isMulti
-    ? (value as string[]) 
+    ? (value as string[])
         .map((val) => {
               const allOptions = options
                 .map((option) => {

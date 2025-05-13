@@ -79,7 +79,7 @@ const CardBody = ({
   roundedTopRight,
   roundedBottomLeft,
   roundedBottomRight,
-  noPadding, 
+  noPadding,
 }: CardBodyProps & { noPadding?: boolean }) => {
   const bodyClass = getColorClass(color);
 
