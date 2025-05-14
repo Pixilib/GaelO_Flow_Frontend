@@ -34,7 +34,7 @@ const LabelRoot: React.FC = () => {
         toastSuccess("Label deleted successfully");
       },
       onError: (error: any) =>
-        toastError(`Error while deleting label: ${error?.message}`),
+        toastError(`${error?.message}`),
     }
   );
 
