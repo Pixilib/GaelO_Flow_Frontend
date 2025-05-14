@@ -3,8 +3,7 @@ import { ToggleEye } from '../ui';
 import Input from './Input';
 import Label from './Label';
 
-// Regex pour valider les mots de passe
-const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}$/;
+const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_.+])[A-Za-z\d!@#$%^&*()\-_.+]{12,}$/;
 
 type InputPasswordProps = {
   className?: string;
@@ -52,9 +51,9 @@ const InputPassword: React.FC<InputPasswordProps> = ({
             focus:outline-hidden
             focus:ring-2
             focus:ring-offset-2
-            invalid:border-red-500 
-            valid:border-green-500 
-            focus:invalid:ring-red-500 
+            invalid:border-red-500
+            valid:border-green-500
+            focus:invalid:ring-red-500
             focus:valid:ring-green-500
           `}
           pattern={PASSWORD_REGEX.source}
