@@ -3,8 +3,7 @@ import { ToggleEye } from '../ui';
 import Input from './Input';
 import Label from './Label';
 
-// Regex pour valider les mots de passe
-const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}$/;
+const PASSWORD_REGEX = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*.])[A-Za-z\d!@#$%^&*.]{12,}$/;
 
 type InputPasswordProps = {
   className?: string;
