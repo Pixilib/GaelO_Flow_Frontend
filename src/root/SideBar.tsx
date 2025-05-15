@@ -43,7 +43,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
       <main className="flex flex-col h-full rounded-tr-40 bg-primary dark:bg-slate-950">
         {/* Logo */}
         <div className="flex justify-center py-4 ">
-          <LogoSideBar className="h-16" />
+          <LogoSideBar />
         </div>
 
         {/* Contenu de la barre latérale avec défilement toujours visible */}
