@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { AutoQueryOptionsPayload, Options } from "src/utils/types";
+import { AnonymizeOptionPayload, AutoQueryOptionsPayload, Options } from "src/utils/types";
 
 export const getOptions = (): Promise<Options> => {
   return axios
@@ -30,8 +30,26 @@ export const getOptions = (): Promise<Options> => {
         orthancPassword: data.OrthancPassword,
         redisAddress: data.RedisAddress,
         redisPort: data.RedisPort,
+        keepLabel: data.AnonymizeKeepLabels,
       };
     })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const updateAnonymizeOptions = (
+  anonymizeOptions: AnonymizeOptionPayload
+): Promise<void> => {
+  const payload = {
+    AnonymizeKeepLabels: anonymizeOptions.anonymizeKeepLabels,
+  };
+  return axios
+    .patch("/api/options", payload)
+    .then((response) => response.data)
     .catch(function (error) {
       if (error.response) {
         throw error.response;

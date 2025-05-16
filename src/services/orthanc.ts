@@ -297,7 +297,8 @@ export const modifyPatient = (
 export const modifyStudy = (
   studyId: string,
   study: StudyModifyPayload,
-  transcode : string|undefined
+  transcode : string|undefined,
+  keepLabels : boolean = false
 ): Promise<OrthancResponse> => {
   const studyPayloadUpdate = {
     Replace: {
@@ -319,7 +320,8 @@ export const modifyStudy = (
     Force: true,
     Synchronous: false,
     KeepSource: study.keepSource,
-    Transcode : transcode
+    Transcode : transcode,
+    KeepLabels: keepLabels,
   };
   return axios
     .post(`/api/studies/${studyId}/modify`, studyPayloadUpdate)

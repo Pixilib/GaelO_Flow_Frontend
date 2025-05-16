@@ -6,6 +6,10 @@ export type AutoQueryOptionsPayload = {
   autoQueryMinuteStop: number;
 };
 
+export type AnonymizeOptionPayload = {
+  anonymizeKeepLabels: boolean;
+};
+
 // ? we can use this type to validate the payload who check if object contains properties of OptionsResponse
 //! For now we don't need to use this type
 type AtLeastOne<T> = {
@@ -69,6 +73,7 @@ export type Options = {
   orthancPassword: string;
   redisAddress: string;
   redisPort: string;
+  keepLabel: boolean;
 };
 
 //Job
@@ -412,6 +417,7 @@ export type StudyModifyPayload = {
   synchronous: boolean;
   keepSource: boolean;
   transcode: string;
+  keepLabel: boolean;
 };
 
 export type SeriesModifyPayload = {

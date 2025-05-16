@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 import { Role } from "../../../utils/types";
 import { Colors } from "../../../utils";
 
-import { Button, Input,Toggle } from "../../../ui";
+import { Button, Input, Toggle } from "../../../ui";
 import { SubmitUser } from "../../../icons";
 
 type RoleFormProps = {
@@ -16,12 +16,12 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
     const [name, setName] = useState<string>(initialData?.name || "");
     const [importRole, setImportRole] = useState<boolean>(initialData?.import || false);
     const [anonymize, setAnonymize] = useState<boolean>(initialData?.anonymize || false);
-    const [exportRole, setExportRole] = useState<boolean>(initialData?.export || false);
+    const [exportRole, setExportRole] = useState<boolean>(initialData?.export || false);
     const [query, setQuery] = useState<boolean>(initialData?.query || false);
     const [autoQuery, setAutoQuery] = useState<boolean>(initialData?.autoQuery || false);
     const [deleteRole, setDeleteRole] = useState<boolean>(initialData?.delete || false);
     const [admin, setAdmin] = useState<boolean>(initialData?.admin || false);
-    const [modify, setModify] = useState<boolean>(initialData?.modify || false);
+    const [modify, setModify] = useState<boolean>(initialData?.modify || false);
     const [cdBurner, setCdBurner] = useState<boolean>(initialData?.cdBurner || false);
     const [autoRouting, setAutoRouting] = useState<boolean>(initialData?.autoRouting || false);
     const [readAll, setReadAll] = useState<boolean>(initialData?.readAll || false);
@@ -43,14 +43,14 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
             readAll: readAll
         };
         onSubmit(payload);
-        if(initialData) return;
+        if (initialData) return;
         setName("");
     };
 
     return (
-        <form onSubmit={handleSubmit} 
-        className="grid gap-y-4 lg:gap-y-6 "
-        data-gaelo-flow="role-form"
+        <form onSubmit={handleSubmit}
+            className="grid gap-y-4 lg:gap-y-6 "
+            data-gaelo-flow="role-form"
         >
             <div className="flex flex-col max-w-lg gap-2">
                 <Input
@@ -149,9 +149,9 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
             </div>
             <div className="flex justify-center">
-                <Button color={Colors.success} 
-                className="h-12 gap-3 justify-self-center w-36 md:justify-center" 
-                type="submit">
+                <Button color={Colors.success}
+                    className="h-12 gap-3 justify-self-center w-36 md:justify-center"
+                    type="submit">
                     <SubmitUser size='1.3rem' />
                     <div>{buttonText}</div>
                 </Button>
