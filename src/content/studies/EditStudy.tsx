@@ -28,16 +28,16 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
                 setJobId(data.id);
             },
             onError: (error) => {
-                toastError("Failed to update study: " + error );
+                toastError("Failed to update study: " + error);
             },
         }
     );
 
     const { data: editingStudyDetails, isPending } = useCustomQuery<Study>(
         ['studies', studyId],
-        () => getStudy(studyId) ,
+        () => getStudy(studyId),
         {
-            onError: (error:any) => {
+            onError: (error: any) => {
                 toastError("Failed to load study details: " + error);
             },
         }
@@ -57,7 +57,7 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
         }
     };
 
-    if (isPending) return <Spinner/>
+    if (isPending) return <Spinner />
 
     return (
         <Modal
@@ -66,8 +66,8 @@ const EditStudy: React.FC<EditStudyProps> = ({ studyId, onStudyUpdated, onClose,
         >
             <Modal.Header onClose={onClose}> Edit Study</Modal.Header>
             <Modal.Body>
-            {editingStudyDetails && (
-                    <StudyEditForm 
+                {editingStudyDetails && (
+                    <StudyEditForm
                         data={editingStudyDetails}
                         onSubmit={handleSubmit}
                         jobId={jobId ?? undefined}
