@@ -91,7 +91,7 @@ const AnonymizeRoot = () => {
                 <Toggle
                     onChange={handleKeepLabelChange}
                     checked={keepLabel}
-                    label="Auto Anonymize"
+                    label="Keep Labels"
                     labelPosition="right"
                 />
                 <div className="flex justify-end gap-5">
