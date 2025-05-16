@@ -32,9 +32,15 @@ const Dashboard = () => {
       </h2>
 
       <div className="flex justify-around md:flex-row md:gap-6 w-full">
-        <CardRetrieve />
-        <CardAnon />
-        <CardDelete />
+        {userData?.role?.autoQuery && (
+          <CardRetrieve />
+        )}
+        {userData?.role?.anonymize && (
+          <CardAnon />
+        )}
+        {userData?.role?.delete && (
+          <CardDelete />
+        )}
       </div>
     </div>
   );
