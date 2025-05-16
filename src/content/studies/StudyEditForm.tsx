@@ -4,7 +4,7 @@ import React, { ChangeEvent, useState } from "react";
 import { StudyModifyPayload, StudyMainDicomTags, Study, PatientMainDicomTags } from '../../utils/types';
 import { Button, CheckBox, Input, InputWithDelete } from "../../ui";
 import EditCustomTagsTable from "../series/edition/EditCustomTagsTable"
-import { customTags } from "../series/edition/CustomTags";
+import { customTags } from "../series/edition/types";
 
 import ProgressJob from "../../query/ProgressJob";
 import { Colors } from "../../utils";
@@ -30,6 +30,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
     const [studyId, setStudyId] = useState<string | null>(data?.mainDicomTags?.studyId ?? null);
     const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
     const [keepSource, setKeepSource] = useState<boolean>(false);
+    const [keepLabel, setKeepLabel] = useState<boolean>(false);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
     const [transferSyntax, setTrasferSyntax] = useState(null);
@@ -73,10 +74,11 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
             removePrivateTags,
             keep: keepUIDs ? ['StudyInstanceUID', 'SeriesInstanceUID', 'SOPInstanceUID'] : [],
             keepSource,
+            keepLabel,
             force: true,
             synchronous: false,
             ...(transcode && transcode !== 'None') ? { transcode } : {},
-        };
+        } as StudyModifyPayload;
 
         onSubmit({ id: data.id, payload });
     };
@@ -182,6 +184,12 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                     label="Keep UIDs"
                     checked={keepUIDs}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepUIDs(e.target.checked)}
+                    bordered={false}
+                />
+                <CheckBox
+                    label="Keep labels"
+                    checked={keepLabel}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepLabel(e.target.checked)}
                     bordered={false}
                 />
             </div>
