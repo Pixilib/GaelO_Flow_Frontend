@@ -18,9 +18,11 @@ const TaskRoot = () => {
 
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
 
-    const currentUserId = useSelector(
-        (state: RootState) => state.user.currentUserId
+    const state = useSelector(
+        (state: RootState) => state
     );
+
+    const currentUserId = state.user.currentUserId;
 
     const { data: existingRetrieveQueues } = useCustomQuery<string[]>(
         ["queue", "query", currentUserId?.toString() || ""],
@@ -83,32 +85,36 @@ const TaskRoot = () => {
     return (
         <>
             <div className="flex flex-wrap gap-2 pl-3 pr-3 pb-3">
-                <Button
-                    color={Colors.blueCustom}
-                    className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-                    onClick={handleSendAnonymizeList}
-                >
-                    <Anon className="text-xl" />
-                    <span className="ml-2">Send to Anonymize</span>
-                </Button>
-
-                <Button
-                    color={Colors.secondary}
-                    className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-                    onClick={handleSendExportList}
-                >
-                    <Export className="text-xl" />
-                    <span className="ml-2">Send to Export</span>
-                </Button>
-
-                <Button
-                    color={Colors.danger}
-                    className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-                    onClick={handleSendDeleteList}
-                >
-                    <Export className="text-xl" />
-                    <span className="ml-2">Send to Delete</span>
-                </Button>
+                {state.user.role.anonymize &&
+                    <Button
+                        color={Colors.blueCustom}
+                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                        onClick={handleSendAnonymizeList}
+                    >
+                        <Anon className="text-xl" />
+                        <span className="ml-2">Send to Anonymize</span>
+                    </Button>
+                }
+                {state.user.role.export &&
+                    <Button
+                        color={Colors.secondary}
+                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                        onClick={handleSendExportList}
+                    >
+                        <Export className="text-xl" />
+                        <span className="ml-2">Send to Export</span>
+                    </Button>
+                }
+                {state.user.role.delete &&
+                    <Button
+                        color={Colors.danger}
+                        className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                        onClick={handleSendDeleteList}
+                    >
+                        <Export className="text-xl" />
+                        <span className="ml-2">Send to Delete</span>
+                    </Button>
+                }
             </div>
             <TaskTable
                 data={data || []}
