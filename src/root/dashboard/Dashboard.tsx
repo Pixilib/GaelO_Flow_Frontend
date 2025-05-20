@@ -9,11 +9,11 @@ import { useCustomQuery, User } from "../../utils";
 import { getUserById } from "../../services";
 
 const Dashboard = () => {
-  const userState = useSelector((state: RootState) => state.user) as UserState;
+  const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
 
   const { data: userData, isPending } = useCustomQuery<User>(
-    ["users", userState?.currentUserId.toString()],
-    () => getUserById(userState?.currentUserId)
+    ["users", currentUserId.toString()],
+    () => getUserById(currentUserId)
   );
 
   if (isPending) return <Spinner />;
@@ -32,9 +32,15 @@ const Dashboard = () => {
       </h2>
 
       <div className="flex justify-around md:flex-row md:gap-6 w-full">
-        <CardRetrieve />
-        <CardAnon />
-        <CardDelete />
+        {userData?.role?.autoQuery && (
+          <CardRetrieve />
+        )}
+        {userData?.role?.anonymize && (
+          <CardAnon />
+        )}
+        {userData?.role?.delete && (
+          <CardDelete />
+        )}
       </div>
     </div>
   );

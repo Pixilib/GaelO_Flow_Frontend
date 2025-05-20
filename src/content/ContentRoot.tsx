@@ -30,8 +30,10 @@ const ContentRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
   const roleName = useSelector(
-    (state: RootState) => state.user.role?.name || ""
+    (state: RootState) => state.user?.role?.name || ""
   );
+
+  const role = useSelector((state: RootState) => state.user.role);
 
   const [selectedStudies, setSelectedStudies] = useState<{
     [patientId: string]: { [studyId: string]: boolean };
@@ -158,11 +160,11 @@ const ContentRoot: React.FC = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!model) return;
     const studies = model.getStudies();
     const newSelectedState = {};
-    if(selectAll){
+    if (selectAll) {
       studies.forEach((study) => {
         if (!newSelectedState[study.patientId]) {
           newSelectedState[study.patientId] = {};
@@ -217,33 +219,36 @@ const ContentRoot: React.FC = () => {
             checked={selectAll}
             onChange={(event) => setSelectAll(event.target.checked)}
           />
-          <Button
-            color={Colors.blueCustom}
-            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-            onClick={handleSendAnonymizeList}
-          >
-            <Anon className="text-xl" />
-            <span className="ml-2">Send to Anonymize</span>
-          </Button>
-
-          <Button
-            color={Colors.secondary}
-            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-            onClick={handleSendExportList}
-          >
-            <Export className="text-xl" />
-            <span className="ml-2">Send to Export</span>
-          </Button>
-
-          <Button
-            color={Colors.danger}
-            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-            onClick={handleSendDeleteList}
-          >
-            <Export className="text-xl" />
-            <span className="ml-2">Send to Delete</span>
-          </Button>
-
+          {role.anonymize &&
+            <Button
+              color={Colors.blueCustom}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendAnonymizeList}
+            >
+              <Anon className="text-xl" />
+              <span className="ml-2">Send to Anonymize</span>
+            </Button>
+          }
+          {role.export &&
+            <Button
+              color={Colors.secondary}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendExportList}
+            >
+              <Export className="text-xl" />
+              <span className="ml-2">Send to Export</span>
+            </Button>
+          }
+          {role.delete &&
+            <Button
+              color={Colors.danger}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendDeleteList}
+            >
+              <Export className="text-xl" />
+              <span className="ml-2">Send to Delete</span>
+            </Button>
+          }
           <Labels selectedStudyIds={selectedStudiesIds} />
         </div>
       </div>
@@ -251,17 +256,17 @@ const ContentRoot: React.FC = () => {
       <div className="flex flex-col w-full gap-4">
         {patients.length > 0
           ? patients.map((patient) => (
-              <AccordionPatient
-                key={patient.id}
-                patient={patient}
-                onPatientSelectionChange={handlePatientSelectionChange}
-                onDeletePatient={handleDeletePatient}
-                onEditPatient={setEditingPatient}
-                onStudyUpdated={refreshFind}
-                selectedStudies={selectedStudies}
-                onSelectedStudyChange={handleStudySelectedChange}
-              />
-            ))
+            <AccordionPatient
+              key={patient.id}
+              patient={patient}
+              onPatientSelectionChange={handlePatientSelectionChange}
+              onDeletePatient={handleDeletePatient}
+              onEditPatient={setEditingPatient}
+              onStudyUpdated={refreshFind}
+              selectedStudies={selectedStudies}
+              onSelectedStudyChange={handleStudySelectedChange}
+            />
+          ))
           : null}
       </div>
     </div>
