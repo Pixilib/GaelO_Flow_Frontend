@@ -1,13 +1,12 @@
 import TagTable from "../../import/create/TagTable";
 import CreateForm from "../../import/create/CreateForm";
-import { Button, Modal, Spinner } from "../../ui";
-import { useEffect, useState } from "react";
-import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../../utils";
-import { Study } from "../../utils/types";
-import { getStudy } from "../../services/orthanc";
+import { Button, Modal } from "../../ui";
+import { useState } from "react";
+import { Colors, useCustomMutation, useCustomToast } from "../../utils";
 import { createDicom } from "../../services/instances";
 import CreateDrop from "../../import/create/CreateDrop";
-import { current } from "@reduxjs/toolkit";
+import CurrentDicomsTags from "./CurrentDicomsTagsTable";
+import { Tag } from "./DicomTagType";
 
 type CreateSerieProps = {
     studyId: string;
@@ -15,20 +14,14 @@ type CreateSerieProps = {
     onClose: () => void;
 }
 
-type Tag = {
-    name: string;
-    value: string;
-    isDeletable: boolean;
-}
-
 const CreateSerie = ({ studyId, show, onClose }: CreateSerieProps) => {
-    const [ags, setNewTags] = useState<Tag[]>([]);
-    const [tagsToDisplay, setTagsToDisplay] = useState<Tag[]>([]);
+    const [newTags, setNewTags] = useState<Tag[]>([]);
+    const [ currentTagsOpened, setCurrentTagsOpened ] = useState(false)
     const { toastSuccess, toastError } = useCustomToast();
     const [files, setFiles] = useState<File[]>([])
 
     const { mutate } = useCustomMutation(
-        ({ content, tags, parent }) => createDicom(content, tags, true, parent),
+        ({ content, tags, parent }) => createDicom(content, tags, false, parent),
         [[]],
         {
             onSuccess: () => {
@@ -43,32 +36,11 @@ const CreateSerie = ({ studyId, show, onClose }: CreateSerieProps) => {
 
     const handleAddTag = (tag: { name: string; value: string, isDeletable: boolean }) => {
         setNewTags((prevTags) => [...prevTags, tag]);
-        setTagsToDisplay((prevTags) => [...prevTags, tag]);
     };
 
     const handleDeleteTag = (name: string) => {
         setNewTags((prevTags) => prevTags.filter((tag) => tag.name !== name));
-        setTagsToDisplay((prevTags) => prevTags.filter((tag) => tag.name !== name));
     };
-
-    const { data: editingStudyDetails, isPending } = useCustomQuery<Study>(
-        ['studies', studyId],
-        () => getStudy(studyId),
-        {
-            onError: (error: any) => {
-                toastError("Failed to load study details: " + error);
-            },
-        }
-    );
-
-    useEffect(() => {
-        if (!editingStudyDetails) return;
-
-        const tagsArray = Object.entries(editingStudyDetails?.mainDicomTags).map(
-            ([key, value]) => ({ name: key, value: value, isDeletable: false })
-        );
-        setTagsToDisplay((prevTags) => [...prevTags, ...tagsArray]);
-    }, [editingStudyDetails]);
 
     const handleCreateSerie = async () => {
         const content: string[] = []
@@ -91,8 +63,6 @@ const CreateSerie = ({ studyId, show, onClose }: CreateSerieProps) => {
         })
     }
 
-    if (isPending) return <Spinner />;
-
     return (
         <Modal show={show} size='xl'>
             <Modal.Header onClose={onClose} >
@@ -100,20 +70,25 @@ const CreateSerie = ({ studyId, show, onClose }: CreateSerieProps) => {
             </Modal.Header>
             <Modal.Body>
                 <div className="flex flex-col gap-4">
+                    <CreateDrop
+                        files={files}
+                        onDrop={setFiles}
+                    />
                     <div>
-                        <CreateDrop
-                            files={files}
-                            onDrop={setFiles}
-                        />
                         <CreateForm
                             title="Define DICOM Tags"
                             onAddTag={handleAddTag}
                         />
                         <TagTable
-                            data={tagsToDisplay}
+                            data={newTags}
                             onDeleteTag={handleDeleteTag}
                         />
                     </div>
+                    <CurrentDicomsTags
+                        studyId={studyId}
+                        isOpen={currentTagsOpened}
+                        toggleOpen={() => setCurrentTagsOpened(!currentTagsOpened)}
+                    />
                     <Button
                         onClick={handleCreateSerie}
                         className="w-60 self-center"

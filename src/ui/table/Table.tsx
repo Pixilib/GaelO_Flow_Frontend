@@ -29,6 +29,7 @@ interface TableProps<TData> {
     enableSorting?: boolean;
     enableColumnFilters?: boolean;
     headerColor?: Colors;
+    footerColor?: Colors;
     headerTextSize?: TextSize;
     className?: string;
     pageSize?: number;
@@ -53,6 +54,7 @@ function Table<T>({
     enableSorting = false,
     enableColumnFilters = false,
     headerColor = Colors.white,
+    footerColor = Colors.white,
     headerclassName = '',
     className,
     pageSize = 10,
@@ -218,7 +220,7 @@ function Table<T>({
                     ))}
                 </tbody>
             </table>
-            <Footer table={table} onPageSizeChange={handlePageSizeChange} />
+            <Footer color={footerColor} table={table} onPageSizeChange={handlePageSizeChange} />
         </div>
     );
 }
