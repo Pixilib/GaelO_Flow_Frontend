@@ -1,13 +1,12 @@
 // StudyActions.tsx
 import React, { useState } from 'react';
-import { Brain, Download, Edit, Eye, Label, Trash } from '../../icons';
+import { Add, Brain, Download, Edit, Eye, Label, Trash } from '../../icons';
 import { StudyMainDicomTags } from "../../utils/types";
 import OhifViewerLink from '../OhifViewerLink';
 import StoneViewerLink from '../StoneViewerLink';
 
 import LabelModal from './LabelModal';
 import { DropdownButton } from '../../ui';
-
 
 type StudyActionsProps = {
     study: StudyMainDicomTags & { id: string };
@@ -50,6 +49,12 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             action: () => onActionClick('ai', study.id)
         },
         {
+            label: 'Create Serie',
+            icon: <Add />,
+            color: 'green',
+            action: () => onActionClick('createSerie', study.id)
+        },
+        {
             label: 'Preview Study',
             icon: <Eye />,
             color: 'green',
@@ -79,11 +84,11 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
                 options={options}
                 buttonText="Actions"
             />
-                        {isLabelsModalOpen && (
-                <LabelModal 
-                    studyId={study.id} 
+            {isLabelsModalOpen && (
+                <LabelModal
+                    studyId={study.id}
                     show={isLabelsModalOpen}
-                    onClose={() => setLabelsModalOpen(false)} 
+                    onClose={() => setLabelsModalOpen(false)}
                 />
             )}
         </div>

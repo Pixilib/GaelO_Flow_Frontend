@@ -7,7 +7,7 @@ import { Add } from '../../icons';
 interface TagFormProps {
   title: string;
   className?: string;
-  onAddTag: (tag: { name: string; value: string }) => void;
+  onAddTag: (tag: { name: string, value: string, isDeletable: boolean }) => void;
 }
 
 const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
@@ -17,7 +17,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
 
   const handleAddTag = () => {
     if (tag && value) {
-      onAddTag({ name: tag, value: value });
+      onAddTag({ name: tag, value: value, isDeletable: true });
       setTag('');
       setValue('');
     }

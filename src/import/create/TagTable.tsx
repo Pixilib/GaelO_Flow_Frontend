@@ -4,13 +4,13 @@ import { ColumnDef } from '@tanstack/react-table';
 import DeleteButton from '../../ui/DeleteButton';
 import { Colors } from '../../utils';
 type TagTableProps = {
-    data: { name: string, value: string }[];
+    data: { name: string, value: string, isDeletable: boolean}[];
     onDeleteTag: (tagName: string) => void;
 };
 
 const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
 
-    const columns: ColumnDef<{ name: string, value: string }>[] = [
+    const columns: ColumnDef<{ name: string, value: string, isDeletable: boolean }>[] = [
         {
             accessorKey: 'name',
             header: 'Tag Name',
@@ -26,9 +26,9 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
                 <div className='flex justify-center w-full'>
                     <DeleteButton
                         onClick={() => onDeleteTag(row.original.name)}
+                        disabled={!row.original.isDeletable}
                     />
                 </div>
-
             )
         }
     ];
@@ -41,8 +41,6 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
                 data={data}
                 className="bg-gray-100"
                 enableSorting
-            
-            
             />
         </div>
     );
