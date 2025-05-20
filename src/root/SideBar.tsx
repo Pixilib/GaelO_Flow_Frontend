@@ -22,11 +22,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const userState = useSelector((state: RootState) => state.user) as UserState;
-  const { data: userData, isPending } = useCustomQuery<User>(
-    ["users", userState?.currentUserId.toString()],
-    () => getUserById(userState?.currentUserId)
-  );
+  const role = useSelector((state: RootState) => state.user.role);
 
   const handleItemClick = (item: Item | string) => {
     const itemPath = typeof item === "string" ? item : item.path;
@@ -47,8 +43,6 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     { title: "Labels", path: "/administration/labels", isActive: location.pathname === "/administration/labels" },
   ];
 
-  if (isPending) return <Spinner />;
-
   return (
     <nav
       data-gaelo-flow="sidebar"
@@ -63,7 +57,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
         {/* Contenu de la barre latérale avec défilement toujours visible */}
         <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 dark:scrollbar-white scrollbar-track-transparent">
           <div className="flex flex-col gap-3">
-            {userData?.role?.admin && (
+            {role.admin && (
               <MenuItemsCollapse
                 icon={<Admin className="w-6 h-6" />}
                 title="Administration"
@@ -73,7 +67,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
                 onNavigate={handleItemClick}
               />
             )}
-            {userData?.role?.readAll && (
+            {role.readAll && (
               <MenuItem
                 title="Orthanc Content"
                 icon={<ImageSearch className="w-6 h-6" />}
@@ -81,7 +75,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
                 onClick={() => handleItemClick("/orthanc-content")}
               />
             )}
-            {userData?.role?.import && (
+            {role.import && (
               <MenuItem
                 title="Import"
                 icon={<Import className="w-6 h-6" />}
@@ -89,7 +83,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
                 onClick={() => handleItemClick("/import/upload")}
               />
             )}
-            {userData?.role?.query && (
+            {role.query && (
               <MenuItem
                 title="Query"
                 icon={<ZoomQuestion className="w-6 h-6" />}
@@ -97,7 +91,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
                 onClick={() => handleItemClick("/query")}
               />
             )}
-            {userData?.role?.autoQuery && (
+            {role.autoQuery && (
               <MenuItem
                 title="Auto retrieve"
                 icon={<RestorePage className="w-6 h-6" />}
@@ -105,7 +99,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
                 onClick={() => handleItemClick("/auto-retrieve")}
               />
             )}
-            {userData?.role?.autoRouting && (
+            {role.autoRouting && (
               <MenuItem
                 title="Auto routing"
                 icon={<Directions className="w-6 h-6" />}

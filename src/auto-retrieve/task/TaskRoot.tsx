@@ -18,11 +18,13 @@ const TaskRoot = () => {
 
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
 
-    const state = useSelector(
-        (state: RootState) => state
+    const currentUserId = useSelector(
+        (state: RootState) => state.user.currentUserId
     );
 
-    const currentUserId = state.user.currentUserId;
+    const role = useSelector(
+        (state: RootState) => state.user.role
+    );
 
     const { data: existingRetrieveQueues } = useCustomQuery<string[]>(
         ["queue", "query", currentUserId?.toString() || ""],
@@ -85,7 +87,7 @@ const TaskRoot = () => {
     return (
         <>
             <div className="flex flex-wrap gap-2 pl-3 pr-3 pb-3">
-                {state.user.role.anonymize &&
+                {role.anonymize &&
                     <Button
                         color={Colors.blueCustom}
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
@@ -95,7 +97,7 @@ const TaskRoot = () => {
                         <span className="ml-2">Send to Anonymize</span>
                     </Button>
                 }
-                {state.user.role.export &&
+                {role.export &&
                     <Button
                         color={Colors.secondary}
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
@@ -105,7 +107,7 @@ const TaskRoot = () => {
                         <span className="ml-2">Send to Export</span>
                     </Button>
                 }
-                {state.user.role.delete &&
+                {role.delete &&
                     <Button
                         color={Colors.danger}
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"

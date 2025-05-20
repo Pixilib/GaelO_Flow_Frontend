@@ -9,11 +9,11 @@ import { useCustomQuery, User } from "../../utils";
 import { getUserById } from "../../services";
 
 const Dashboard = () => {
-  const userState = useSelector((state: RootState) => state.user) as UserState;
+  const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
 
   const { data: userData, isPending } = useCustomQuery<User>(
-    ["users", userState?.currentUserId.toString()],
-    () => getUserById(userState?.currentUserId)
+    ["users", currentUserId.toString()],
+    () => getUserById(currentUserId)
   );
 
   if (isPending) return <Spinner />;

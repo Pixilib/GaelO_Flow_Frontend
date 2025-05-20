@@ -29,10 +29,11 @@ const ContentRoot: React.FC = () => {
   const { confirm } = useConfirm();
   const { toastSuccess, toastError } = useCustomToast();
 
-  const state = useSelector(
-    (state: RootState) => state
+  const roleName = useSelector(
+    (state: RootState) => state.user?.role?.name || ""
   );
-  const roleName = state.user?.role?.name || "";
+
+  const role = useSelector((state: RootState) => state.user.role);
 
   const [selectedStudies, setSelectedStudies] = useState<{
     [patientId: string]: { [studyId: string]: boolean };
@@ -218,7 +219,7 @@ const ContentRoot: React.FC = () => {
             checked={selectAll}
             onChange={(event) => setSelectAll(event.target.checked)}
           />
-          {state.user.role.anonymize &&
+          {role.anonymize &&
             <Button
               color={Colors.blueCustom}
               className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
@@ -228,7 +229,7 @@ const ContentRoot: React.FC = () => {
               <span className="ml-2">Send to Anonymize</span>
             </Button>
           }
-          {state.user.role.export &&
+          {role.export &&
             <Button
               color={Colors.secondary}
               className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
@@ -238,7 +239,7 @@ const ContentRoot: React.FC = () => {
               <span className="ml-2">Send to Export</span>
             </Button>
           }
-          {state.user.role.delete &&
+          {role.delete &&
             <Button
               color={Colors.danger}
               className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
