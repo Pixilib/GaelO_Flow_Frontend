@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../ui";
 import { Add, Cancel, Label } from "../icons";
-import ToggleChevron from "../ui/menu/ToogleChevron";
+import ToggleChevron from "../ui/menu/ToggleChevron";
 import { Colors, useCustomMutation } from "../utils";
 import { addLabelForStudy, removeLabelForStudy } from "../services/orthanc";
 import SelectRoleLabels from "./SelectLabels";

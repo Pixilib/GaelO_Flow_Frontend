@@ -12,7 +12,7 @@ import SeriesRoot from "../series/SeriesRoot";
 import { AccordionHeader } from "../../ui/Accordion";
 import { exportRessource } from "../../services/export";
 import { useCustomToast } from "../../utils";
-import ToggleChevron from "../../ui/menu/ToogleChevron";
+import ToggleChevron from "../../ui/menu/ToggleChevron";
 
 type AccordionPatientProps = {
   patient: Patient;

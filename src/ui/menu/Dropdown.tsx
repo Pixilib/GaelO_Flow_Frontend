@@ -1,5 +1,5 @@
 import React, { useState, forwardRef } from "react";
-import ToogleChevron from './ToogleChevron';
+import ToggleChevron from './ToggleChevron';
 
 type DropdownProps = {
   chevronPosition?: "left" | "right";
@@ -40,7 +40,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
           {children}
           {dropDown}
           {chevronPosition && (
-            <ToogleChevron
+            <ToggleChevron
               isOpen={isOpenUse ? isOpen : isOpenState}
               className={`${chevronPosition === "left" ? "order-first" : "order-last"} flex items-center`}
               onClick={dropDownOpen}

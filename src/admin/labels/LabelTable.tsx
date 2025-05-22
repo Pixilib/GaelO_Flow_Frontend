@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import ToggleChevron from "../../ui/menu/ToogleChevron";
+import ToggleChevron from "../../ui/menu/ToggleChevron";
 import { Table, Button, Label, Popover } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label as LabelType } from "../../utils/types";

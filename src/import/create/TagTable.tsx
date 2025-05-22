@@ -28,7 +28,6 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
                         onClick={() => onDeleteTag(row.original.name)}
                     />
                 </div>
-
             )
         }
     ];
@@ -41,8 +40,6 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
                 data={data}
                 className="bg-gray-100"
                 enableSorting
-            
-            
             />
         </div>
     );

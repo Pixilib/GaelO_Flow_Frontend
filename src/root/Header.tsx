@@ -7,7 +7,7 @@ import ToggleDarkMode from './ToggleDarkMode';
 import BannerItems from '../ui/menu/BannerItems';
 import ToolList from './ToolList';
 import { Language, Notification, User } from '../icons';
-import { Dropdown, Popover, ToogleChevron } from '../ui';
+import { Dropdown, Popover, ToggleChevron } from '../ui';
 import Jobs from './notifications/Jobs';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             <span className="text-sm">
               {languageItems.find((item) => item.code === i18n.language)?.title}
             </span>
-            <ToogleChevron isOpen={openItem === 'Dropdown'} />
+            <ToggleChevron isOpen={openItem === 'Dropdown'} />
             <ToggleDarkMode />
           </div>
         </Dropdown>

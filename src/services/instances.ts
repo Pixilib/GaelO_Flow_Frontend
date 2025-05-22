@@ -39,11 +39,13 @@ export const sendDicom = (payload: Uint8Array, labels: string[], isZip: boolean)
 export const createDicom = (
   content: string[],
   tags: object = {},
+  force: boolean = false,
   parentOrthancId?: string
 ) => {
   let payload = {
     Content: content,
     Tags: tags,
+    Force: force,
     Parent: parentOrthancId,
   };
 

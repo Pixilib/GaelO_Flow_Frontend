@@ -1,12 +1,14 @@
 import { Table } from "@tanstack/react-table";
 import { Next, Previous, SkipNext, SkipPrevious } from "../../icons";
+import { Colors } from "../../utils";
 
 type FooterProps = {
   table: Table<any>;
+  color?: Colors;
   onPageSizeChange: (pageSize: number) => void;
 };
 
-const Footer = ({ table, onPageSizeChange }: FooterProps) => {
+const Footer = ({ table, color = Colors.white, onPageSizeChange }: FooterProps) => {
   const {
     getState,
     setPageIndex,
@@ -22,7 +24,7 @@ const Footer = ({ table, onPageSizeChange }: FooterProps) => {
 
   // Styles Tailwind avec gestion du mode sombre par défaut
   const btnClassFooter = "border-none bg-transparent p-2 focus:outline-hidden text-dark dark:text-white";
-  const containerClass = "flex items-center justify-end w-full py-0.5 text-sm rounded-b-xl bg-white dark:bg-neutral-800 text-dark dark:text-white";
+  const containerClass = `flex items-center justify-end w-full py-0.5 text-sm rounded-b-xl bg-${color} dark:bg-neutral-800 text-dark dark:text-white`;
   const inputClass = "w-12 p-1 mr-4 text-center border rounded-sm text-primary dark:text-white bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-primary";
 
   const handlePageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {

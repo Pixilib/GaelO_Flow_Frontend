@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Item } from "./Items";
 import SideBarItems from "./SideBarItems";
 
-import ToogleChevron from "./ToogleChevron";
+import ToggleChevron from "./ToggleChevron";
 
 type MenuItemCollapseProps = {
   icon?: ReactNode;
@@ -42,7 +42,7 @@ const handleClick = () => {
           <span className="-ml-0.5 mr-5">{icon}</span>
           <span>{title}</span>
         </div>
-        <ToogleChevron  className={"ml-7 flex shrink-0 items-center"} isOpen={isOpen} />
+        <ToggleChevron  className={"ml-7 flex shrink-0 items-center"} isOpen={isOpen} />
       </div>
         </div>
       {isOpen && <SideBarItems elements={elements} onNavigate={onNavigate} />}
