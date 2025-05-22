@@ -20,24 +20,7 @@ export const createAutoRoutingItem = (
     payload: AutoRoutingPayload
 ): Promise<void> => {
     return axios
-        .post("/api/autorouting", {
-            Name: payload.name,
-            EventType: payload.eventType,
-            Activated: payload.activated,
-            Router: {
-                RuleCondition: payload.router.ruleCondition,
-                Rules: payload.router.rules.map((rule) => ({
-                    DicomTag: rule.dicomTag,
-                    ValueRepresentation: rule.valueRepresentation,
-                    Value: rule.value,
-                    Condition: rule.condition,
-                })),
-                Destinations: payload.router.destinations.map((destination) => ({
-                    Destination: destination.destination,
-                    Name: destination.name,
-                })),
-            }
-        })
+        .post("/api/autorouting", payload)
         .then((response) => {
             console.log(response.data);
             return response.data;

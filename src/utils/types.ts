@@ -494,34 +494,34 @@ export type QueryQueueSeriesItem = {
 };
 
 export type Rule = {
-  dicomTag: string;
-  valueRepresentation: string;
-  value: string;
-  condition: string;
+  DicomTag: string;
+  ValueRepresentation: string;
+  Value: string;
+  Condition: string;
 }
 
 export type Destination = {
-  destination: string;
-  name: string;
+  Destination: string;
+  Name: string;
 }
 
 export type Router = {
-  ruleCondition: string;
-  rules: Rule[];
-  destinations: Destination[];
+  RuleCondition: string;
+  Rules: Rule[];
+  Destinations: Destination[];
 }
 
 export type AutoRoutingItems = {
-  id: number;
-  name: string;
-  eventType: string;
-  activated: boolean;
-  router: Router;
+  Id: number;
+  Name: string;
+  EventType: string;
+  Activated: boolean;
+  Router: Router;
 }
 
 export type AutoRoutingPayload = {
-  name: string;
-  eventType: string;
-  activated: boolean;
-  router: Router;
+  Name: string;
+  EventType: string;
+  Activated: boolean;
+  Router: Router;
 }

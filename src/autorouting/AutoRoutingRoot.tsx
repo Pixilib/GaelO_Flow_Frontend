@@ -10,7 +10,7 @@ const AutoRoutingRoot = () => {
 
   const { mutate: mutateCreateAutoRoutingItem } = useCustomMutation<void>(
     ({ payload }) => createAutoRoutingItem(payload),
-    [],
+    [["autorouting"]],
     {
       onSuccess: () => {
         toastSuccess("AutoRouting item created");
@@ -33,23 +33,23 @@ const AutoRoutingRoot = () => {
 
   const handleCreateAutoRoutingItem = () => {
     const payload: AutoRoutingPayload = {
-      name: "New AutoRouting Item",
-      eventType: "NewInstance",
-      activated: true,
-      router: {
-        ruleCondition: "AND",
-        rules: [
+      Name: "New AutoRouting Item",
+      EventType: "NewInstance",
+      Activated: true,
+      Router: {
+        RuleCondition: "AND",
+        Rules: [
           {
-            dicomTag: "PatientName",
-            valueRepresentation: "string",
-            value: "John Doe",
-            condition: "EQUALS",
+            DicomTag: "PatientName",
+            ValueRepresentation: "string",
+            Value: "John Doe",
+            Condition: "EQUALS",
           },
         ],
-        destinations: [
+        Destinations: [
           {
-            destination: "AET",
-            name: "ORTHANC",
+            Destination: "AET",
+            Name: "ORTHANC",
           },
         ],
       },
