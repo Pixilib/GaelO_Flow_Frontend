@@ -2,13 +2,21 @@ import { Colors, useCustomQuery } from "../../utils";
 import { Button, Table, Toggle } from "../../ui";
 import { getAutoRoutingItems } from "../../services/autorouting";
 import { AutoRoutingItems } from "../../utils/types";
-import { Check, Cloud } from "../../icons";
+import { Check, Cloud, Trash } from "../../icons";
+import SeeRulesModal from "./SeeRulesModal";
+import { useState } from "react";
+import SeeDestinationModal from "./SeeDestinationModal";
 
 type AutoRoutingTableProps = {
     data: AutoRoutingItems[];
+    onDelete: (id: number) => void;
 }
 
-const AutoRoutingTable = ({ data }: AutoRoutingTableProps) => {
+const AutoRoutingTable = ({ data, onDelete }: AutoRoutingTableProps) => {
+    const [ itemIdToShow, setItemIdToShow ] = useState<number | null>(null);
+    const [ showRulesModal, setShowRulesModal ] = useState(false);
+    const [ showDestinationsModal, setShowDestinationsModal ] = useState(false);
+
     const columns = [
         {
             header: "Activated",
@@ -39,7 +47,10 @@ const AutoRoutingTable = ({ data }: AutoRoutingTableProps) => {
                 return (
                     <Button
                         className="h-13 w-32 text-sm"
-                        onClick={() => { }}
+                        onClick={() => {
+                            setItemIdToShow(row.original.Id);
+                            setShowRulesModal(true)
+                        }}
                         color={Colors.primary}
                         children={<p>See Rules</p>}
                     />
@@ -52,9 +63,30 @@ const AutoRoutingTable = ({ data }: AutoRoutingTableProps) => {
                 return (
                     <Button
                         className="h-13 w-32 text-sm"
-                        onClick={() => { }}
+                        onClick={() => {
+                            setItemIdToShow(row.original.Id);
+                            setShowDestinationsModal(true)
+                        }}
                         color={Colors.primary}
                         children={<p>See Destinations</p>}
+                    />
+                );
+            }
+        },
+        {
+            header: "Delete",
+            cell({ row }: { row: any }) {
+                return (
+                    <Button
+                        onClick={() => onDelete(row.original.Id)}
+                        color={Colors.danger}
+                        children={
+                            <Trash
+                                size="1.3rem"
+                                className="transition duration-70 hover:scale-110"
+                                color={Colors.light}
+                            />
+                        }
                     />
                 );
             }
@@ -62,13 +94,32 @@ const AutoRoutingTable = ({ data }: AutoRoutingTableProps) => {
     ]
 
     return (
-        <Table
-            headerColor={Colors.light}
-            columns={columns}
-            data={data}
-            className="bg-gray-100"
-            enableSorting
-        />
+        <>
+            <Table
+                headerColor={Colors.light}
+                columns={columns}
+                data={data}
+                className="bg-gray-100"
+                enableSorting
+            />
+            <SeeRulesModal
+                show={showRulesModal}
+                onClose={() => {
+                    setShowRulesModal(false)
+                    setItemIdToShow(null);
+                }}
+                data={data?.find(item => item.Id === itemIdToShow)?.Router?.Rules}
+            />
+            <SeeDestinationModal
+                show={showDestinationsModal}
+                onClose={() => {
+                    setShowDestinationsModal(false)
+                    setItemIdToShow(null);
+                }
+                }
+                data={data?.find(item => item.Id === itemIdToShow)?.Router?.Destinations}
+            />
+        </>
     );
 }
 

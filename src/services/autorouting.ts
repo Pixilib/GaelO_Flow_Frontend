@@ -32,3 +32,20 @@ export const createAutoRoutingItem = (
             throw error;
         });
 }
+
+export const deleteAutoRoutingItem = (
+    id: number
+): Promise<void> => {
+    return axios
+        .delete(`/api/autorouting/${id}`)
+        .then((response) => {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch((error) => {
+            if (error.response) {
+                throw error.response;
+            }
+            throw error;
+        });
+}

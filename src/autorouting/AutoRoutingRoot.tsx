@@ -1,6 +1,6 @@
 import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import AutoRoutingTable from "./table/AutoRoutingTable";
-import { createAutoRoutingItem, getAutoRoutingItems } from "../services/autorouting";
+import { createAutoRoutingItem, deleteAutoRoutingItem, getAutoRoutingItems } from "../services/autorouting";
 import { AutoRoutingItems, AutoRoutingPayload } from "../utils/types";
 import { Button } from "../ui";
 import { Add } from "../icons";
@@ -17,6 +17,19 @@ const AutoRoutingRoot = () => {
       },
       onError: () => {
         toastError("Unable to create AutoRouting item");
+      },
+    }
+  );
+
+  const { mutate: mutateDeleteAutoRoutingItem } = useCustomMutation<void>(
+    ({ id }: { id: number }) => deleteAutoRoutingItem(id),
+    [["autorouting"]],
+    {
+      onSuccess: () => {
+        toastSuccess("AutoRouting item deleted");
+      },
+      onError: () => {
+        toastError("Unable to delete AutoRouting item");
       },
     }
   );
@@ -58,6 +71,10 @@ const AutoRoutingRoot = () => {
     mutateCreateAutoRoutingItem({ payload });
   };
 
+  const handleDeleteAutoRoutingItem = (id: number) => {
+    mutateDeleteAutoRoutingItem({ id });
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -74,6 +91,7 @@ const AutoRoutingRoot = () => {
       </div>
       <AutoRoutingTable
         data={autoRoutingItems}
+        onDelete={handleDeleteAutoRoutingItem}
       />
     </div>
   );
