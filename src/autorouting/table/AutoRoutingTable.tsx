@@ -10,9 +10,10 @@ import SeeDestinationModal from "./SeeDestinationModal";
 type AutoRoutingTableProps = {
     data: AutoRoutingItems[];
     onDelete: (id: number) => void;
+    toggleActivated: (id: number, activate: boolean) => void;
 }
 
-const AutoRoutingTable = ({ data, onDelete }: AutoRoutingTableProps) => {
+const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableProps) => {
     const [ itemIdToShow, setItemIdToShow ] = useState<number | null>(null);
     const [ showRulesModal, setShowRulesModal ] = useState(false);
     const [ showDestinationsModal, setShowDestinationsModal ] = useState(false);
@@ -23,7 +24,7 @@ const AutoRoutingTable = ({ data, onDelete }: AutoRoutingTableProps) => {
             cell({ row }: { row: any }) {
                 return (
                     <Toggle
-                        onChange={() => { }}
+                        onChange={() => toggleActivated(row.original.Id, !row.original.Activated)}
                         checked={row.original.Activated}
                     />
                 )

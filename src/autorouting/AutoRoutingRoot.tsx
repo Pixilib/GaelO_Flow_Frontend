@@ -1,6 +1,6 @@
 import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../utils";
 import AutoRoutingTable from "./table/AutoRoutingTable";
-import { createAutoRoutingItem, deleteAutoRoutingItem, getAutoRoutingItems } from "../services/autorouting";
+import { createAutoRoutingItem, deleteAutoRoutingItem, getAutoRoutingItems, toggleActivatedAutoRoutingItem } from "../services/autorouting";
 import { AutoRoutingItems, AutoRoutingPayload } from "../utils/types";
 import { Button } from "../ui";
 import { Add } from "../icons";
@@ -19,6 +19,11 @@ const AutoRoutingRoot = () => {
         toastError("Unable to create AutoRouting item");
       },
     }
+  );
+
+  const { mutate: mutateToggleAutoRoutingItem } = useCustomMutation<void>(
+    ({ id, value }) => toggleActivatedAutoRoutingItem(id, value),
+    [["autorouting"]],
   );
 
   const { mutate: mutateDeleteAutoRoutingItem } = useCustomMutation<void>(
@@ -75,6 +80,10 @@ const AutoRoutingRoot = () => {
     mutateDeleteAutoRoutingItem({ id });
   };
 
+  const handleToggleActivate = (id: number, activate: boolean) => {
+    mutateToggleAutoRoutingItem({ id: id, value: activate });
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -92,6 +101,7 @@ const AutoRoutingRoot = () => {
       <AutoRoutingTable
         data={autoRoutingItems}
         onDelete={handleDeleteAutoRoutingItem}
+        toggleActivated={handleToggleActivate}
       />
     </div>
   );

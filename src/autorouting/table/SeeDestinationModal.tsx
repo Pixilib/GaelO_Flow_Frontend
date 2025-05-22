@@ -1,5 +1,5 @@
 import { Destination } from "../../utils/types";
-import { Modal } from "../../ui";
+import { Modal, Table } from "../../ui";
 
 type SeeDestinationModalProps = {
     show: boolean;
@@ -8,6 +8,17 @@ type SeeDestinationModalProps = {
 }
 
 const SeeDestinationModal = ({ show, onClose, data }: SeeDestinationModalProps) => {
+    const columns = [
+        {
+            header: "Name",
+            accessorKey: "Name",
+        },
+        {
+            header: "Destination",
+            accessorKey: "Destination",
+        },
+    ];
+
     return (
         <Modal
             show={show}
@@ -17,13 +28,14 @@ const SeeDestinationModal = ({ show, onClose, data }: SeeDestinationModalProps) 
             <Modal.Header onClose={onClose}>
                 <Modal.Title>Destinations</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <div className="p-4 bg-gray-200 rounded-lg">
-                    <pre className="text-sm break-all whitespace-pre-wrap">
-                        {JSON.stringify(data)}
-                    </pre>
-                </div>
+            <Modal.Body className="bg-light-gray">
+                <Table
+                    columns={columns}
+                    data={data}
+                    enableSorting={false}
+                />
             </Modal.Body>
+            <Modal.Footer />
         </Modal>
     );
 }

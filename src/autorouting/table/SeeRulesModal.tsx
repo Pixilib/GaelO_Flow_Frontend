@@ -1,5 +1,6 @@
 import { Rule } from "../../utils/types";
-import { Modal } from "../../ui";
+import { Modal, Table } from "../../ui";
+import { Colors } from "../../utils";
 
 type SeeRulesModalProps = {
     show: boolean;
@@ -8,6 +9,22 @@ type SeeRulesModalProps = {
 }
 
 const SeeRulesModal = ({ show, onClose, data }: SeeRulesModalProps) => {
+
+    const columns = [
+        {
+            header: "DicomTag",
+            accessorKey: "DicomTag",
+        },
+        {
+            header: "Condition",
+            accessorKey: "Condition",
+        },
+        {
+            header: "Value",
+            accessorKey: "Value",
+        }
+    ];
+
     return (
         <Modal
             show={show}
@@ -17,13 +34,14 @@ const SeeRulesModal = ({ show, onClose, data }: SeeRulesModalProps) => {
             <Modal.Header onClose={onClose}>
                 <Modal.Title>Rules</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <div className="p-4 bg-gray-200 rounded-lg">
-                    <pre className="text-sm break-all whitespace-pre-wrap">
-                        {JSON.stringify(data)}
-                    </pre>
-                </div>
+            <Modal.Body className="bg-light-gray">
+                <Table
+                    columns={columns}
+                    data={data}
+                    enableSorting={false}
+                />
             </Modal.Body>
+            <Modal.Footer />
         </Modal>
     );
 }

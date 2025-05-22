@@ -49,3 +49,21 @@ export const deleteAutoRoutingItem = (
             throw error;
         });
 }
+
+export const toggleActivatedAutoRoutingItem = (
+    id: number,
+    value: boolean
+): Promise<void> => {
+    return axios
+        .put(`/api/autorouting/${id}/${value ? "enable" : "disable"}`)
+        .then((response) => {
+            console.log(response.data);
+            return response.data;
+        })
+        .catch((error) => {
+            if (error.response) {
+                throw error.response;
+            }
+            throw error;
+        });
+}
