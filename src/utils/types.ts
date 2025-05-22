@@ -492,3 +492,36 @@ export type QueryQueueSeriesItem = {
   seriesInstanceUID: string;
   aet: string;
 };
+
+export type Rule = {
+  dicomTag: string;
+  valueRepresentation: string;
+  value: string;
+  condition: string;
+}
+
+export type Destination = {
+  destination: string;
+  name: string;
+}
+
+export type Router = {
+  ruleCondition: string;
+  rules: Rule[];
+  destinations: Destination[];
+}
+
+export type AutoRoutingItems = {
+  id: number;
+  name: string;
+  eventType: string;
+  activated: boolean;
+  router: Router;
+}
+
+export type AutoRoutingPayload = {
+  name: string;
+  eventType: string;
+  activated: boolean;
+  router: Router;
+}
