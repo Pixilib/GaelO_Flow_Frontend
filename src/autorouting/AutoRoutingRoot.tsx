@@ -4,9 +4,12 @@ import { createAutoRoutingItem, deleteAutoRoutingItem, getAutoRoutingItems, togg
 import { AutoRoutingItems, AutoRoutingPayload } from "../utils/types";
 import { Button } from "../ui";
 import { Add } from "../icons";
+import CreateRootModal from "./createAutoRouting/CreateRootModal";
+import { useState } from "react";
 
 const AutoRoutingRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const { mutate: mutateCreateAutoRoutingItem } = useCustomMutation<void>(
     ({ payload }) => createAutoRoutingItem(payload),
@@ -84,12 +87,16 @@ const AutoRoutingRoot = () => {
     mutateToggleAutoRoutingItem({ id: id, value: activate });
   }
 
+  const onSubmit = (payload: AutoRoutingPayload) => {
+    mutateCreateAutoRoutingItem({ payload });
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div>
         <Button
           color={Colors.success}
-          onClick={handleCreateAutoRoutingItem}
+          onClick={() => setShowCreateModal(true)}
           children={
             <div className="flex items-center gap-2">
               <Add />
@@ -102,6 +109,11 @@ const AutoRoutingRoot = () => {
         data={autoRoutingItems}
         onDelete={handleDeleteAutoRoutingItem}
         toggleActivated={handleToggleActivate}
+      />
+      <CreateRootModal
+        show={showCreateModal}
+        onClose={() => setShowCreateModal(false)}
+        onSubmit={onSubmit}
       />
     </div>
   );

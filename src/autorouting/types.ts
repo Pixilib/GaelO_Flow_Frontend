@@ -1,12 +1,12 @@
-export enum AutoroutingEventType {
-  NEW_INSTANCE = "NewInstance",
-  NEW_SERIES = "NewSeries",
-  NEW_STUDY = "NewStudy",
-  NEW_PATIENT = "NewPatient",
-  STABLE_SERIES = "StableSeries",
-  STABLE_STUDY = "StableStudy",
-  STABLE_PATIENT = "StablePatient",
-}
+export const eventOptions = [
+  { value: 'NewInstance', label: 'New Instance' },
+  { value: 'NewSeries', label: 'New Series' },
+  { value: 'NewStudy', label: 'New Study' },
+  { value: 'NewPatient', label: 'New Patient' },
+  { value: 'StableSeries', label: 'Stable Series' },
+  { value: 'StableStudy', label: 'Stable Study' },
+  { value: 'StablePatient', label: 'Stable Patient' },
+];
 
 export enum AutoRoutingCondition {
   AND = "AND",
