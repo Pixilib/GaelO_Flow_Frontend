@@ -1,10 +1,10 @@
-import TagTable from "../../import/create/TagTable";
-import CreateForm from "../../import/create/CreateForm";
-import { Button, Modal } from "../../ui";
+import TagTable from "../../../import/create/TagTable";
+import CreateForm from "../../../import/create/CreateForm";
+import { Button, Modal } from "../../../ui";
 import { useState } from "react";
-import { Colors, useCustomMutation, useCustomToast } from "../../utils";
-import { createDicom } from "../../services/instances";
-import CreateDrop from "../../import/create/CreateDrop";
+import { Colors, useCustomMutation, useCustomToast } from "../../../utils";
+import { createDicom } from "../../../services/instances";
+import CreateDrop from "../../../import/create/CreateDrop";
 import CurrentDicomsTags from "./CurrentDicomsTagsTable";
 import { Tag } from "./DicomTagType";
 
@@ -34,7 +34,7 @@ const CreateSerie = ({ studyId, show, onClose }: CreateSerieProps) => {
         }
     )
 
-    const handleAddTag = (tag: { name: string; value: string, isDeletable: boolean }) => {
+    const handleAddTag = (tag: { name: string; value: string }) => {
         setNewTags((prevTags) => [...prevTags, tag]);
     };
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Tag } from "./DicomTagType";
 import ImmutableTagTable from "./ImmutableTagTable";
-import { getStudy } from "../../services/orthanc";
-import { Colors, Study, useCustomQuery, useCustomToast } from "../../utils";
-import { Button, Spinner, ToggleChevron } from "../../ui";
+import { getStudy } from "../../../services/orthanc";
+import { Colors, Study, useCustomQuery, useCustomToast } from "../../../utils";
+import { Button, Spinner, ToggleChevron } from "../../../ui";
 
 type CurrentDicomsTagsProps = {
     studyId: string;
@@ -29,7 +29,7 @@ const CurrentDicomsTags = ({ studyId, isOpen, toggleOpen }: CurrentDicomsTagsPro
         if (!editingStudyDetails) return;
 
         const tagsArray = Object.entries(editingStudyDetails?.mainDicomTags).map(
-            ([key, value]) => ({ name: key, value: value, isDeletable: false })
+            ([key, value]) => ({ name: key, value: value })
         );
         setCurrentTage((prevTags) => [...prevTags, ...tagsArray]);
     }, [editingStudyDetails]);

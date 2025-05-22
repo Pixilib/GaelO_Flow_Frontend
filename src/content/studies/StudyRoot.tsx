@@ -12,7 +12,7 @@ import StudyTable from "./StudyTable";
 import EditStudy from "./EditStudy";
 import PreviewStudy from "./PreviewStudy";
 import AiStudy from "./AiStudy";
-import CreateSerie from "./CreateSerie";
+import CreateSerie from "./create-serie/CreateSerie";
 
 type StudyRootProps = {
   patient: Patient;

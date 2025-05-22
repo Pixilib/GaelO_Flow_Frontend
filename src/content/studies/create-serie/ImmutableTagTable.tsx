@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table } from '../../ui';
+import { Table } from '../../../ui';
 import { ColumnDef } from '@tanstack/react-table';
-import { Colors } from '../../utils';
+import { Colors } from '../../../utils';
 import { Tag } from './DicomTagType';
 
 type ImmutableTagTableProps = {
