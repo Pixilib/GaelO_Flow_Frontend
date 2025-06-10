@@ -91,7 +91,7 @@ export const autoRoutingRuleDicomTagOptions = [
   { value: AutoRoutingRuleDicomTag.PATIENT_NAME, label: "Patient Name" },
   { value: AutoRoutingRuleDicomTag.PATIENT_ID, label: "Patient ID" },
   { value: AutoRoutingRuleDicomTag.PATIENT_BIRTHDATE, label: "Patient Birthdate" },
-  { value: AutoRoutingRuleDicomTag.PATIENT_SEX, label: "Patiend Sex" },
+  { value: AutoRoutingRuleDicomTag.PATIENT_SEX, label: "Patient Sex" },
   { value: AutoRoutingRuleDicomTag.OTHER_PATIENT_IDS, label: "Other Patient IDs" },
 
   { value: AutoRoutingRuleDicomTag.STUDY_DATE, label: "Study Date" },
