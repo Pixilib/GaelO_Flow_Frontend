@@ -28,7 +28,7 @@ const SeeDestinationModal = ({ show, onClose, data }: SeeDestinationModalProps) 
             <Modal.Header onClose={onClose}>
                 <Modal.Title>Destinations</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="bg-light-gray">
+            <Modal.Body className="bg-light-gray dark:bg-inherit">
                 <Table
                     columns={columns}
                     data={data}

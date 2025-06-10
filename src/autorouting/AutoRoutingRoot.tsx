@@ -52,33 +52,6 @@ const AutoRoutingRoot = () => {
     }
   );
 
-  const handleCreateAutoRoutingItem = () => {
-    const payload: AutoRoutingPayload = {
-      Name: "New AutoRouting Item",
-      EventType: "NewInstance",
-      Activated: true,
-      Router: {
-        RuleCondition: "AND",
-        Rules: [
-          {
-            DicomTag: "PatientName",
-            ValueRepresentation: "string",
-            Value: "John Doe",
-            Condition: "EQUALS",
-          },
-        ],
-        Destinations: [
-          {
-            Destination: "AET",
-            Name: "ORTHANC",
-          },
-        ],
-      },
-    }
-
-    mutateCreateAutoRoutingItem({ payload });
-  };
-
   const handleDeleteAutoRoutingItem = (id: number) => {
     mutateDeleteAutoRoutingItem({ id });
   };

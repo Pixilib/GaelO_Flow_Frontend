@@ -34,7 +34,7 @@ const SeeRulesModal = ({ show, onClose, data }: SeeRulesModalProps) => {
             <Modal.Header onClose={onClose}>
                 <Modal.Title>Rules</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="bg-light-gray">
+            <Modal.Body className="bg-light-gray dark:bg-inherit">
                 <Table
                     columns={columns}
                     data={data}

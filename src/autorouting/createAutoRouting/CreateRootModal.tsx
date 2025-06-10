@@ -1,4 +1,4 @@
-import { AutoRoutingPayload } from "../../utils/types";
+import { AutoRoutingPayload, Destination, Rule } from "../../utils/types";
 import { Button, Modal } from "../../ui";
 import { Colors } from "../../utils";
 import CreateAutoRoutingForm from "./CreateAutoRoutingForm";
@@ -12,7 +12,9 @@ type CreateRootModalProps = {
 }
 
 const CreateRootModal = ({ show, onClose, onSubmit }: CreateRootModalProps) => {
-    const [AutoRoutingPayload, setAutoRoutingPayload] = useState<AutoRoutingPayload>(
+    const [rules, setRules] = useState<{ rule: Rule, id: string }[]>([]);
+    const [destinations, setDestinations] = useState<{ destination: Destination, id: string }[]>([]);
+    const [autoRoutingPayload, setAutoRoutingPayload] = useState<AutoRoutingPayload>(
         {
             Name: "",
             EventType: eventOptions[0].value,
@@ -21,6 +23,27 @@ const CreateRootModal = ({ show, onClose, onSubmit }: CreateRootModalProps) => {
 
     const handlePayloadChange = (payload: AutoRoutingPayload) => {
         setAutoRoutingPayload(payload);
+    }
+
+    const handleSubmit = () => {
+        const newPayload = {
+            ...autoRoutingPayload,
+            Router: {
+                ...autoRoutingPayload.Router,
+                Rules: rules.map(r => r.rule),
+                Destinations: destinations.map(d => d.destination),
+            }
+        };
+        setAutoRoutingPayload(newPayload);
+        onSubmit(newPayload);
+    }
+
+    const handleRulesChange = (newRules: { rule: Rule, id: string }[]) => {
+        setRules(newRules);
+    }
+
+    const handleDestinationChange = (newDestinations: { destination: Destination, id: string }[]) => {
+        setDestinations(newDestinations);
     }
 
     return (
@@ -34,15 +57,20 @@ const CreateRootModal = ({ show, onClose, onSubmit }: CreateRootModalProps) => {
             </Modal.Header>
             <Modal.Body>
                 <CreateAutoRoutingForm
-                    payload={AutoRoutingPayload}
+                    payload={autoRoutingPayload}
                     onPayloadChange={handlePayloadChange}
+                    rules={rules}
+                    onRulesChange={handleRulesChange}
+                    destinations={destinations}
+                    onDestinationsChange={handleDestinationChange}
+
                 />
             </Modal.Body>
             <Modal.Footer>
                 <div className="flex justify-center items-center">
                     <Button
                         color={Colors.primary}
-                        onClick={() => console.log(AutoRoutingPayload)}
+                        onClick={handleSubmit}
                         children={<p>Submit</p>}
                     />
                 </div>
