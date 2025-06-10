@@ -62,7 +62,6 @@ const useCustomMutation = <T, V = undefined|any> (
             }
             invalidateAllQueries(invalidatedQueryKeys);
         },
-        
     });
 };
 

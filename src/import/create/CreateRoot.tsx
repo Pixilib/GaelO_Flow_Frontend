@@ -66,7 +66,7 @@ const CreateRoot: React.FC = () => {
             </div>
 
             <div className="flex flex-col justify-center p-3 border-t-2 shadow-inner bg-light dark:bg-neutral-950 border-slate-200 dark:border-neutral-700">
-            <CreateForm
+                <CreateForm
                     title="Define DICOM Tags"
                     onAddTag={handleAddTag}
                 />
@@ -74,7 +74,7 @@ const CreateRoot: React.FC = () => {
                     data={tags}
                     onDeleteTag={handleTagDelete}
                 />
-                
+
             </div>
             <div className="flex justify-center p-3 bg-white dark:bg-neutral-950 rounded-b-xl">
                 <Button

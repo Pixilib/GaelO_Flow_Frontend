@@ -28,7 +28,7 @@ import ToastContext from "./toast/ToastContext";
 import SelectInput from "./SelectInput";
 import InputWithDelete from "./InputWithDelete";    
 import Spinner from "./Spinner";
-import { Banner, BannerItems, Dropdown, DropdownButton, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToogleChevron, Tabs, Tab } from "./menu";
+import { Banner, BannerItems, Dropdown, DropdownButton, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToggleChevron, Tabs, Tab } from "./menu";
 import ConfirmModal from './ConfirmModal';
 import Modal from './Modal';
 import BannerAlert from "./BannerAlert";
@@ -82,5 +82,5 @@ export {
     ToggleEye,
     Toggle,
     ToggleSwitch,
-    ToogleChevron
+    ToggleChevron
 };

@@ -1,5 +1,4 @@
-import ChevronUp from "../../assets/chevron-up.svg?react";
-import ChevronDown from "../../assets/chevron-down.svg?react";
+import { ChevronRight, ChevronDown } from "../../assets";
 
 type ToggleChevronProps = {
   isOpen: boolean;
@@ -14,7 +13,7 @@ const ToggleChevron = ({ isOpen, className, onClick = () => {} }: ToggleChevronP
       className={`transition-colors ${className} ${isOpen ? 'text-primary' : 'text-gray-600'} group-hover:text-white`}
       onClick={onClick}
     >
-      {isOpen ? <ChevronUp /> : <ChevronDown />}
+      {isOpen ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
     </span>
   );
 };

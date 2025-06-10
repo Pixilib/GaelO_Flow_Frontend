@@ -12,6 +12,7 @@ import StudyTable from "./StudyTable";
 import EditStudy from "./EditStudy";
 import PreviewStudy from "./PreviewStudy";
 import AiStudy from "./AiStudy";
+import CreateSerie from "./create-serie/CreateSerie";
 
 type StudyRootProps = {
   patient: Patient;
@@ -35,6 +36,7 @@ const StudyRoot = ({
   const [editingStudy, setEditingStudy] = useState<string | null>(null);
   const [aiStudyId, setAIStudyId] = useState<string | null>(null);
   const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
+  const [creatingSerieId, setCreatingSerieId] = useState<string | null>(null);
 
   const { confirm } = useConfirm();
   const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
@@ -92,6 +94,11 @@ const StudyRoot = ({
     );
   };
 
+  const handleCreateStudy = (studyId: string) => {
+    setCreatingSerieId(studyId);
+  };
+
+
   const handleStudyAction = (action: string, studyId: string) => {
     switch (action) {
       case "edit":
@@ -105,6 +112,9 @@ const StudyRoot = ({
         break;
       case "ai":
         handleAIStudy(studyId);
+        break;
+      case "createSerie":
+        handleCreateStudy(studyId);
         break;
       case "download":
         handleDownloadStudy(studyId);
@@ -150,6 +160,13 @@ const StudyRoot = ({
             studyId={aiStudyId}
             onClose={() => setAIStudyId(null)}
             show={!!aiStudyId}
+          />
+        )}
+        {creatingSerieId && (
+          <CreateSerie
+            studyId={creatingSerieId}
+            onClose={() => setCreatingSerieId(null)}
+            show={!!creatingSerieId}
           />
         )}
       </div>
