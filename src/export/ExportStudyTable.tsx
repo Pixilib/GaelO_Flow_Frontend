@@ -11,12 +11,16 @@ type ExportStudyTableProps = {
   studies: Study[];
   currentStudyId: string;
   onClickStudy: (study: Study) => void;
+  onRowSelectionChange: (selectedState: Record<number, boolean>) => void;
+  selectedRow: Record<number, boolean>;
 };
 
 const ExportStudyTable = ({
   studies,
   currentStudyId,
   onClickStudy,
+  onRowSelectionChange,
+  selectedRow,
 }: ExportStudyTableProps) => {
   const dispatch = useDispatch();
 
@@ -80,6 +84,9 @@ const ExportStudyTable = ({
 
   return (
     <Table
+      enableRowSelection
+      selectedRow={selectedRow}
+      onRowSelectionChange={onRowSelectionChange}
       onRowClick={onClickStudy}
       columnVisibility={{ id: false }}
       data={studies}
