@@ -21,7 +21,7 @@ export const exportFileThroughFilesystemAPI = async (
   mimeType: string,
   suggestedName: string | null,
   onProgress?: (mb: number) => void
-) => {
+) : Promise<FileSystemWritableFileStream> => {
   if (!readableStream) return;
   let acceptedTypes = [];
 
@@ -52,6 +52,7 @@ export const exportFileThroughFilesystemAPI = async (
   });
 
   await readableStream.pipeThrough(progress).pipeTo(writableStream);
+  return writableStream;
 };
 
 export const exportResourcesId = (
@@ -81,12 +82,12 @@ export const exportResourcesId = (
     body: JSON.stringify(body),
     signal: abortController.signal,
   })
-    .then((answer) => {
+    .then(async (answer) => {
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
       let downloadFilename = filename ?? getContentDispositionFilename(answer.headers);
-      exportFileThroughFilesystemAPI(
+      await exportFileThroughFilesystemAPI(
         readableStream,
         contentType,
         downloadFilename,
@@ -121,18 +122,18 @@ export const exportRessource = (
     body: JSON.stringify(body),
     signal: abortController.signal,
   })
-    .then((answer) => {
+    .then(async (answer) => {
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
       let filename = getContentDispositionFilename(answer.headers);
-      exportFileThroughFilesystemAPI(
+      const stream = await exportFileThroughFilesystemAPI(
         readableStream,
         contentType,
         filename,
         onProgress
       );
-      return true;
+      return stream;
     })
     .catch((error) => {
       throw error;
@@ -157,11 +158,11 @@ export const exportSeriesToNifti = (
       signal: abortController.signal,
     }
   )
-    .then((answer) => {
+    .then(async (answer) => {
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
-      exportFileThroughFilesystemAPI(
+      await exportFileThroughFilesystemAPI(
         readableStream,
         contentType,
         seriesId + '.nii.gz',

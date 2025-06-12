@@ -8,6 +8,7 @@ import GaelOVisitSelector from "./GaelOVisitSelector";
 
 import { getStudy } from "../../services/orthanc";
 import { login } from './../../services/gaelo'
+import { data } from "react-router";
 
 type GaelORootProps = {
     studyOrthancId: string
@@ -60,9 +61,9 @@ const GaelORoot = ({ studyOrthancId }: GaelORootProps) => {
         >
             {token ?
                 <div className="min-h-80 flex flex-col gap-3">
-                    <Label className="font-bold" value="Study :" />
+                    <h1 className="font-bold text-dark text-l" >Study :</h1>
                     <GaelOStudyRoleSelector onStudychange={handleStudyChange} />
-                    <GaelOVisitSelector studyOrthancId={studyOrthancId} />
+                    <GaelOVisitSelector studyOrthancId={studyOrthancId} studyMainDicomTag={study.mainDicomTags} />
                 </div>
                 :
                 <div className="flex flex-col gap-3">

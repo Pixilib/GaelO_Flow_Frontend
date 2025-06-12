@@ -10,12 +10,14 @@ import GaelOContext from "./context/GaelOContext";
 import { PatientDicomComparison } from "./dicoms/PatientDicomComparison";
 import PatientTable from "./patients/PatientTable";
 import GaelOVisitSummary from "./GaelOVisitSummary";
+import { StudyMainDicomTags } from "../../utils/types";
 
 type GaelOVisitSelectorProps = {
   studyOrthancId: string;
+  studyMainDicomTag: StudyMainDicomTags
 };
 
-const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
+const GaelOVisitSelector = ({ studyOrthancId, studyMainDicomTag }: GaelOVisitSelectorProps) => {
   const { studyName, token, role, userId } = useContext(GaelOContext);
   const { updateExistingToast, toastSuccess } = useCustomToast();
 
@@ -48,7 +50,7 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
       (visit: any) => visit.patientId === selectedPatientId
     );
     return visitsOfPatient;
-  }, [selectedPatientId]);
+  }, [selectedPatientId, visitTree]);
 
   const handleOpenGaelO = () => {
     const id = toastSuccess("Download started");
@@ -70,7 +72,7 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <Label className="font-bold" value="Patients :" />
+      <h1 className="font-bold text-dark text-l" >Patients :</h1>
       <PatientTable
         patients={patients}
         selectedPatientId={selectedPatientId}
@@ -79,27 +81,28 @@ const GaelOVisitSelector = ({ studyOrthancId }: GaelOVisitSelectorProps) => {
 
       {
         <>
-          <Label className="font-bold" value="Dicom compliance :" />
+          <h1 className="font-bold text-dark text-l" >Dicom compliance :</h1>
           <PatientDicomComparison
             studyOrthancId={studyOrthancId}
             patientId={selectedPatientId}
           />
-          <Label className="font-bold" value="Visits :" />
+          <h1 className="font-bold text-dark text-l" >Visits :</h1>
           <GaelOVisitSummary
             patientId={selectedPatientId}
             existingVisits={visitsOfPatient ?? []}
+            studyMainDicomTag={studyMainDicomTag}
           />
         </>
 
       }
-      <Button
+      {/* <Button
         onClick={handleOpenGaelO}
         className="flex align-center gap-1"
         disabled={selectedPatientId == null}
         color={Colors.success}
       >
         Download Dicoms & Open <GaeloIcon />
-      </Button>
+      </Button> */}
     </div>
   );
 };

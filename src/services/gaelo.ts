@@ -135,3 +135,42 @@ export const getGaelOPatientLink = (
       userId
   );
 };
+
+export const createVisit = (
+  token: string,
+  studyName: string,
+  role: string,
+  visitTypeId: number,
+  patientId: string,
+  statusDone: string,
+  visitDate: string | null,
+  reasonForNotDone?: string | null
+) => {
+  const header = getHeader(token);
+  const payload = {
+    patientId: patientId,
+    visitDate: visitDate,
+    statusDone: statusDone,
+    reasonForNotDone: reasonForNotDone,
+  };
+
+  return axiosInstance
+    .post(
+      url +
+        "/api/visit-types/" +
+        visitTypeId +
+        "/visits?role=" +
+        role +
+        "&studyName=" +
+        studyName,
+      payload,
+      { headers: header }
+    )
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
