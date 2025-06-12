@@ -6,7 +6,7 @@ import { QueryQueue } from "../../utils/types";
 import TaskTable from "./TaskTable";
 import { useState } from "react";
 import { Button } from "../../ui";
-import { Anon, Export } from "../../icons";
+import { Anon, Export, Trash } from "../../icons";
 import {
     addStudyIdToDeleteList,
     addSeriesOfStudyIdToExportList,
@@ -113,7 +113,7 @@ const TaskRoot = () => {
                         className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
                         onClick={handleSendDeleteList}
                     >
-                        <Export className="text-xl" />
+                        <Trash className="text-xl" />
                         <span className="ml-2">Send to Delete</span>
                     </Button>
                 }

@@ -6,7 +6,7 @@ import ImportDrop from "./ImportDrop";
 import ImportTableStudy from "./ImportTableStudy";
 import ImportTableSeries from "./ImportTableSeries";
 import ImportErrorModal from "./ImportErrorModal";
-import { Anon, Export } from "../../icons";
+import { Anon, Export, Trash } from "../../icons";
 import {
   addStudyIdToDeleteList,
   addSeriesOfStudyIdToExportList,
@@ -152,7 +152,7 @@ const ImportRoot: React.FC = () => {
               className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
               onClick={handleSendDeleteList}
             >
-              <Export className="text-xl" />
+              <Trash className="text-xl" />
               <span className="ml-2">Send to Delete</span>
             </Button>
           </div>

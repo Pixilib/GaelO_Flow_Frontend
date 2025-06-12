@@ -20,7 +20,7 @@ import {
   addStudyIdToAnonymizeList,
 } from "../utils/actionsUtils";
 import { Colors } from "../utils";
-import { Anon, Export } from "../icons";
+import { Anon, Export, Trash } from "../icons";
 import Labels from "./Labels";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
@@ -245,7 +245,7 @@ const ContentRoot: React.FC = () => {
               className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
               onClick={handleSendDeleteList}
             >
-              <Export className="text-xl" />
+              <Trash className="text-xl" />
               <span className="ml-2">Send to Delete</span>
             </Button>
           }
