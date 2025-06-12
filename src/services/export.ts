@@ -185,7 +185,7 @@ export const exportRessourceToLocalFilesystem = (
   onProgress = (_mb: number) => { },
   abortController = new AbortController(),
   transferSyntax: string | undefined = undefined
-): Promise<any> => {
+): Promise<File> => {
   const body = {
     Asynchronous: false,
     Transcode: transferSyntax,
@@ -205,7 +205,7 @@ export const exportRessourceToLocalFilesystem = (
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
-      const stream = await exportFileThroughFilesystemAPI(
+      const stream = await exportFileThroughOPFSApi(
         readableStream,
         contentType,
         studyId,

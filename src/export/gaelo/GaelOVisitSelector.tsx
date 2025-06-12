@@ -88,6 +88,7 @@ const GaelOVisitSelector = ({ studyOrthancId, studyMainDicomTag }: GaelOVisitSel
           />
           <h1 className="font-bold text-dark text-l" >Visits :</h1>
           <GaelOVisitSummary
+            studyOrthancId={studyOrthancId}
             patientId={selectedPatientId}
             existingVisits={visitsOfPatient ?? []}
             studyMainDicomTag={studyMainDicomTag}

@@ -5,27 +5,31 @@ import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../..
 import GaelOContext from "./context/GaelOContext";
 import { StudyMainDicomTags } from "../../utils/types";
 import { GaeloIcon } from "../../assets";
+import Tus from "@uppy/tus";
+import { exportRessourceToLocalFilesystem } from "../../services/export";
 
 type GaelOVisitSummaryProps = {
   patientId: string;
   existingVisits: any[];
   studyMainDicomTag: StudyMainDicomTags;
+  studyOrthancId: string;
 };
 const GaelOVisitSummary = ({
   patientId,
   existingVisits,
   studyMainDicomTag,
+  studyOrthancId,
 }: GaelOVisitSummaryProps) => {
   const { token, studyName, role } = useContext(GaelOContext);
   const [visit, setVisit] = useState<string | null>(null);
   const [visitType, setVisitType] = useState<string | null>(null);
 
+  const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
+
   const { data: creatableVisits, isPending } = useCustomQuery(
     ["gaelo", "patients", patientId, "creatable-visits"],
     () => getCreatableVisits(token, patientId),
   );
-
-  const { toastSuccess, toastError } = useCustomToast();
 
   function formatDate(yyyymmdd) {
     const year = yyyymmdd.slice(0, 4);
@@ -61,6 +65,13 @@ const GaelOVisitSummary = ({
     }
   );
 
+  const handleExport = async () => {
+    const id = toastSuccess("Download started", 30)
+    await exportRessourceToLocalFilesystem("studies", studyOrthancId, (mb) => {
+      updateExistingToast(id, "Downloaded " + mb + " mb", 10)
+    })
+  }
+
   if (isPending) return <Spinner />;
 
   return (
@@ -90,6 +101,7 @@ const GaelOVisitSummary = ({
       {visit &&
         <Button
           color={Colors.success}
+          onClick={handleExport}
           children={
             <div className="flex flex-row items-center gap-1">
               <p>Send DICOM to</p>
