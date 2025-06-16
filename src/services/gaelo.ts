@@ -174,3 +174,56 @@ export const createVisit = (
       throw error;
     });
 };
+
+export const validateDicomUpload = (
+  token: string,
+  visitId: string,
+  originalOrthancId: string,
+  tusUploadIds: string[],
+  numberOfUploadedInstances: number
+): Promise<any> => {
+  const header = getHeader(token);
+  const payload = {
+    originalOrthancId: originalOrthancId,
+    uploadedFileTusId: tusUploadIds,
+    numberOfInstances: numberOfUploadedInstances,
+  };
+
+  return axiosInstance
+    .post(
+      url + `/api/visits/${visitId}/validate-dicom`,
+      payload,
+      { headers: header }
+    )
+    .then((response) => response.data)
+    .catch((error) => {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};
+
+export const getVisit = (token, studyName, patientId, role) => {
+  let header = getHeader(token);
+  return axiosInstance
+    .get(
+      url +
+        "/api/patients/" +
+        patientId +
+        "/visits?role=" +
+        role +
+        "&studyName=" +
+        studyName,
+      { headers: header }
+    )
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+};

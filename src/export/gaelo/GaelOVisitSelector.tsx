@@ -1,10 +1,8 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import { Button, Label, Spinner } from "../../ui";
+import { Spinner } from "../../ui";
 
-import { Colors, useCustomQuery, useCustomToast } from "../../utils";
-import { GaeloIcon } from "../../assets";
-import { exportResourcesId } from "../../services/export";
-import { getGaelOPatientLink, getVisitsTree } from "../../services/gaelo";
+import { useCustomQuery, useCustomToast } from "../../utils";
+import { getVisitsTree } from "../../services/gaelo";
 
 import GaelOContext from "./context/GaelOContext";
 import { PatientDicomComparison } from "./dicoms/PatientDicomComparison";
@@ -52,58 +50,41 @@ const GaelOVisitSelector = ({ studyOrthancId, studyMainDicomTag }: GaelOVisitSel
     return visitsOfPatient;
   }, [selectedPatientId, visitTree]);
 
-  const handleOpenGaelO = () => {
-    const id = toastSuccess("Download started");
-    exportResourcesId(
-      [studyOrthancId],
-      (mb) => updateExistingToast(id, "Downloaded " + mb + " mb"),
-      undefined,
-      true,
-      undefined,
-      'GaelO-' + studyName + '-' + selectedPatientId + '.zip'
-    );
-    window.open(
-      getGaelOPatientLink(studyName, role, selectedPatientId, token, userId),
-      "_blank"
-    );
-  };
-
   if (isPending) return <Spinner />;
 
   return (
     <div className="flex flex-col gap-3">
-      <h1 className="font-bold text-dark text-l" >Patients :</h1>
-      <PatientTable
-        patients={patients}
-        selectedPatientId={selectedPatientId}
-        onRowClick={handlePatientClick}
-      />
-
-      {
-        <>
-          <h1 className="font-bold text-dark text-l" >Dicom compliance :</h1>
-          <PatientDicomComparison
-            studyOrthancId={studyOrthancId}
-            patientId={selectedPatientId}
-          />
-          <h1 className="font-bold text-dark text-l" >Visits :</h1>
-          <GaelOVisitSummary
-            studyOrthancId={studyOrthancId}
-            patientId={selectedPatientId}
-            existingVisits={visitsOfPatient ?? []}
-            studyMainDicomTag={studyMainDicomTag}
-          />
-        </>
-
+      {studyName ? (
+        <PatientTable
+          patients={patients}
+          selectedPatientId={selectedPatientId}
+          onRowClick={handlePatientClick}
+        />
+      ) : (
+        <div className="w-full">
+          <p className="text-dark">Please select a study first.</p>
+        </div>
+      )}
+      {studyName &&
+        <div className="flex items-center w-full">
+          <div className="w-full">
+            <h1 className="font-bold text-dark text-l" >Visits :</h1>
+            {selectedPatientId ? (
+              <GaelOVisitSummary
+                studyOrthancId={studyOrthancId}
+                patientId={selectedPatientId}
+                existingVisits={visitsOfPatient ?? []}
+                studyMainDicomTag={studyMainDicomTag}
+              />
+            ) : (
+              <div>
+                <p className="text-dark">Please select a patient first.</p>
+              </div>
+            )
+            }
+          </div>
+        </div>
       }
-      {/* <Button
-        onClick={handleOpenGaelO}
-        className="flex align-center gap-1"
-        disabled={selectedPatientId == null}
-        color={Colors.success}
-      >
-        Download Dicoms & Open <GaeloIcon />
-      </Button> */}
     </div>
   );
 };

@@ -46,7 +46,7 @@ const PatientTable: React.FC<PatientTableProps> = ({
             data={patients}
             headerColor={Colors.light}
             headerTextSize="xs"
-            className="bg-gray-100 dark:bg-slate-950 dark:text-white"
+            className="bg-gray-100 dark:bg-slate-950 dark:text-white w-full"
             getRowClasses={getRowClasses}
             onRowClick={(row) => onRowClick(row.id)}
             enableSorting={true}

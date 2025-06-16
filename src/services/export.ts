@@ -1,6 +1,7 @@
 import { getToken } from "./axios";
 import { showSaveFilePicker } from "native-file-system-adapter";
 import mime from "mime-types";
+import { sha1 } from "../utils/export";
 
 const getContentType = (headers: any) => {
   const contentType = headers.get("Content-Type");
@@ -179,19 +180,22 @@ export const exportRessource = (
     });
 };
 
-export const exportRessourceToLocalFilesystem = (
-  level: "studies" | "patients" | "series",
-  studyId: string,
+export const exportRessourceIdsToLocalFilesystem = async (
+  ids: string[],
   onProgress = (_mb: number) => { },
   abortController = new AbortController(),
-  transferSyntax: string | undefined = undefined
+  transferSyntax: string | undefined = undefined,
 ): Promise<File> => {
   const body = {
+    Resources: ids,
     Asynchronous: false,
     Transcode: transferSyntax,
   };
 
-  return fetch("/api/" + level + "/" + studyId + "/archive", {
+  const hash = await sha1(ids.join(","))
+  console.log(hash)
+
+  return fetch("/api/tools/create-archive", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + getToken(),
@@ -205,13 +209,13 @@ export const exportRessourceToLocalFilesystem = (
       if (!answer.ok) throw answer;
       const readableStream = answer.body;
       let contentType = getContentType(answer.headers);
-      const stream = await exportFileThroughOPFSApi(
+      const file = await exportFileThroughOPFSApi(
         readableStream,
         contentType,
-        studyId,
+        hash,
         onProgress
       );
-      return stream;
+      return file;
     })
     .catch((error) => {
       throw error;
