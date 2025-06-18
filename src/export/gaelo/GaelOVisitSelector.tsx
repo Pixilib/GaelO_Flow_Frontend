@@ -1,31 +1,27 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { Spinner } from "../../ui";
-
-import { useCustomQuery, useCustomToast } from "../../utils";
+import { useCustomQuery } from "../../utils";
 import { getVisitsTree } from "../../services/gaelo";
-
 import GaelOContext from "./context/GaelOContext";
-import { PatientDicomComparison } from "./dicoms/PatientDicomComparison";
 import PatientTable from "./patients/PatientTable";
 import GaelOVisitSummary from "./GaelOVisitSummary";
 import { StudyMainDicomTags } from "../../utils/types";
 
 type GaelOVisitSelectorProps = {
-  studyOrthancId: string;
   studyMainDicomTag: StudyMainDicomTags
+  onVisitIdChange: (visitId: string) => void;
 };
 
-const GaelOVisitSelector = ({ studyOrthancId, studyMainDicomTag }: GaelOVisitSelectorProps) => {
-  const { studyName, token, role, userId } = useContext(GaelOContext);
-  const { updateExistingToast, toastSuccess } = useCustomToast();
+const GaelOVisitSelector = ({
+  studyMainDicomTag,
+  onVisitIdChange,
+}: GaelOVisitSelectorProps) => {
 
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(
-    null
-  );
+  const { studyName, token, role } = useContext(GaelOContext);
+  const [currentPatientId, setCurrentPatientId] = useState<string | null>(null);
 
   useEffect(() => {
-    //Reset selected patient id on change study
-    setSelectedPatientId(null);
+    setCurrentPatientId(null);
   }, [studyName]);
 
   const { data: visitTree, isPending } = useCustomQuery(
@@ -39,16 +35,20 @@ const GaelOVisitSelector = ({ studyOrthancId, studyMainDicomTag }: GaelOVisitSel
   }, [visitTree]);
 
   const handlePatientClick = (patientId: string) => {
-    setSelectedPatientId(patientId);
+    setCurrentPatientId(patientId);
   };
 
   const visitsOfPatient = useMemo(() => {
     if (!visitTree) return [];
     const visitsOfPatient = Object.values(visitTree.visits).filter(
-      (visit: any) => visit.patientId === selectedPatientId
+      (visit: any) => visit.patientId === currentPatientId
     );
     return visitsOfPatient;
-  }, [selectedPatientId, visitTree]);
+  }, [currentPatientId, visitTree]);
+
+  useEffect(() => {
+    onVisitIdChange(null);
+  }, [currentPatientId]);
 
   if (isPending) return <Spinner />;
 
@@ -57,28 +57,28 @@ const GaelOVisitSelector = ({ studyOrthancId, studyMainDicomTag }: GaelOVisitSel
       {studyName ? (
         <PatientTable
           patients={patients}
-          selectedPatientId={selectedPatientId}
+          patientId={currentPatientId}
           onRowClick={handlePatientClick}
         />
       ) : (
         <div className="w-full">
-          <p className="text-dark">Please select a study first.</p>
+          <p className="text-dark dark:text-white">Please select a study first.</p>
         </div>
       )}
       {studyName &&
         <div className="flex items-center w-full">
           <div className="w-full">
-            <h1 className="font-bold text-dark text-l" >Visits :</h1>
-            {selectedPatientId ? (
+            <h1 className="font-bold text-dark text-l dark:text-white" >Visits :</h1>
+            {currentPatientId ? (
               <GaelOVisitSummary
-                studyOrthancId={studyOrthancId}
-                patientId={selectedPatientId}
+                patientId={currentPatientId}
                 existingVisits={visitsOfPatient ?? []}
                 studyMainDicomTag={studyMainDicomTag}
+                onVisitIdChange={onVisitIdChange}
               />
             ) : (
               <div>
-                <p className="text-dark">Please select a patient first.</p>
+                <p className="text-dark dark:text-white">Please select a patient first.</p>
               </div>
             )
             }

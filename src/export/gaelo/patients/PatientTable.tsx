@@ -5,13 +5,13 @@ import { Colors } from "../../../utils";
 
 type PatientTableProps = {
     patients: any[];
-    selectedPatientId: string,
+    patientId: string,
     onRowClick: (patientId: string) => void;
 };
 
 const PatientTable: React.FC<PatientTableProps> = ({
     patients,
-    selectedPatientId,
+    patientId,
     onRowClick
 }) => {
     const columns: ColumnDef<any>[] = [
@@ -33,7 +33,7 @@ const PatientTable: React.FC<PatientTableProps> = ({
 
 
     const getRowClasses = (row: any) => {
-        if (selectedPatientId === row.id) {
+        if (patientId === row.id) {
             return 'bg-primary hover:cursor-pointer text-white';
         } else {
             return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';

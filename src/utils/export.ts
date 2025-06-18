@@ -17,3 +17,12 @@ export async function sha1(str) {
     .map(v => v.toString(16).padStart(2, '0'))
     .join('');
 }
+
+export const formatDate = (yyyymmdd: string) => {
+  const year = yyyymmdd.slice(0, 4);
+  const month = yyyymmdd.slice(4, 6);
+  const day = yyyymmdd.slice(6, 8);
+
+  const date = new Date(`${year}-${month}-${day}`);
+  return date.toISOString().slice(0, 10);
+}

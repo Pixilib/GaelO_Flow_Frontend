@@ -6,12 +6,14 @@ import { Study, useCustomQuery } from "../../../utils"
 import GaelOContext from "../context/GaelOContext"
 import { getPatient } from "../../../services/gaelo"
 import { getStudy } from "../../../services/orthanc"
+import { formatDate } from "../../../utils/export"
 
 type PatientDicomComparisonProps = {
     studyOrthancId: string
     patientId: string
 }
-export const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomComparisonProps) => {
+
+const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomComparisonProps) => {
 
     const { studyName, token, role } = useContext(GaelOContext);
 
@@ -77,10 +79,12 @@ export const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDic
             <Badge variant={'default'}>
                 Date Of Birth :<br />
                 <span>
-                    {"GaelO: " + dobCheck.gaelo + " Dicom: " + dobCheck.dicom}
+                    {"GaelO: " + dobCheck.gaelo + " Dicom: " + formatDate(dobCheck.dicom)}
                 </span>
             </Badge>
         </div>
     )
 
 }
+
+export default PatientDicomComparison

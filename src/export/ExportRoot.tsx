@@ -25,7 +25,6 @@ const ExportRoot = () => {
     const dispatch = useDispatch();
     const exportSeriesList = useSelector((state: RootState) => state.export.series);
     const exportStudyList = useSelector((state: RootState) => state.export.studies);
-
     const [currentStudyId, setCurrentStudyId] = useState(null);
     const [storeJobId, setStoreJobId] = useState(null);
     const [sendPeerJobId, setsendPeerJobId] = useState(null);

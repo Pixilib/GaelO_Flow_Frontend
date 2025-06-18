@@ -136,6 +136,16 @@ export const getGaelOPatientLink = (
   );
 };
 
+export const getGaelOInvestigatorFormLink = (
+  studyName,
+  role,
+  visitId,
+) => {
+  return new URL(
+    url + "/study/" + studyName + "/role/" + role + "/visit/" + visitId
+  );
+};
+
 export const createVisit = (
   token: string,
   studyName: string,
@@ -204,14 +214,14 @@ export const validateDicomUpload = (
     });
 };
 
-export const getVisit = (token, studyName, patientId, role) => {
+export const getVisit = (token, studyName, visitId, role) => {
   let header = getHeader(token);
   return axiosInstance
     .get(
       url +
-        "/api/patients/" +
-        patientId +
-        "/visits?role=" +
+        "/api/visits/" +
+        visitId +
+        "?role=" +
         role +
         "&studyName=" +
         studyName,
