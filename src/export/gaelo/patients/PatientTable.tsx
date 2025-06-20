@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button, Table } from "../../../ui";
 import { Colors } from "../../../utils";
 import { GaeloIcon } from "../../../assets";
+import { getGaelOPatientLink } from "../../../services/gaelo";
+import GaelOContext from "../context/GaelOContext";
 
 type PatientTableProps = {
     patients: any[];
@@ -15,6 +17,8 @@ const PatientTable: React.FC<PatientTableProps> = ({
     patientId,
     onRowClick
 }) => {
+    const { studyName, role, token, userId } = useContext(GaelOContext);
+
     const columns: ColumnDef<any>[] = [
         {
             id: "id",
@@ -37,7 +41,7 @@ const PatientTable: React.FC<PatientTableProps> = ({
                     <Button
                         className="h-10 w-45 text-sm"
                         color={Colors.warning}
-                        onClick={() => onRowClick(row.original.id)}
+                        onClick={() => handleOpenPatientInGaelO(row.original.id)}
                         children={
                             <div className="flex items-center gap-1">
                                 <p>Open patient in </p>
@@ -51,6 +55,9 @@ const PatientTable: React.FC<PatientTableProps> = ({
         },
     ];
 
+    const handleOpenPatientInGaelO = (patientId: string) => {
+        window.open(getGaelOPatientLink(studyName, role, patientId, token, userId));
+    }
 
     const getRowClasses = (row: any) => {
         if (patientId === row.id) {
