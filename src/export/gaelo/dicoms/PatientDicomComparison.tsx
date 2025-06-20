@@ -6,6 +6,7 @@ import { Study, useCustomQuery } from "../../../utils"
 import GaelOContext from "../context/GaelOContext"
 import { getPatient } from "../../../services/gaelo"
 import { getStudy } from "../../../services/orthanc"
+import { GaeloIcon } from "../../../assets"
 import { formatDate } from "../../../utils/export"
 
 type PatientDicomComparisonProps = {
@@ -29,7 +30,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
 
     const firstnameCheck = useMemo(() => {
         const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[1]?.[0]?.toUpperCase() ?? "N/A"
-        const initalGaelO = patient?.firstname?.toUpperCase() ?? "N/A"
+        const initalGaelO = patient?.firstname?.toUpperCase() === "" ? "N/A" : patient?.firstname?.toUpperCase()
         return {
             gaelo: initalGaelO,
             dicom: initialDicom,
@@ -39,7 +40,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
 
     const lastnameCheck = useMemo(() => {
         const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[0]?.[0]?.toUpperCase() ?? "N/A"
-        const initalGaelO = patient?.lastname?.toUpperCase() ?? "N/A"
+        const initalGaelO = patient?.lastname?.toUpperCase() === "" ? "N/A" : patient?.lastname?.toUpperCase()
         return {
             gaelo: initalGaelO,
             dicom: initialDicom,
@@ -48,11 +49,16 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
     }, [study, patient])
 
     const dobCheck = useMemo(() => {
-        const dicomDob = study?.patientMainDicomTags.patientBirthDate ?? "ND-ND-ND"
-        const gaeloBirthDay = patient?.birthDay ?? 'ND'
-        const gaeloBirthMonth = patient?.birthMonth ?? 'ND'
-        const gaeloBirthYear = patient?.birthYear ?? 'ND'
-        const gaelODob = [gaeloBirthYear, gaeloBirthMonth, gaeloBirthDay].join('-')
+        let dicomDob = study?.patientMainDicomTags.patientBirthDate ?? "ND-ND-ND"
+        if (dicomDob !== "ND-ND-ND")
+            dicomDob = formatDate(dicomDob)
+        const formatWithLeadingZero = (value: string | number | undefined): string =>
+            value != null ? value.toString().padStart(2, '0') : 'ND';
+        const gaeloBirthDay = patient?.birthDay != null ? formatWithLeadingZero(patient.birthDay) : 'ND';
+        const gaeloBirthMonth = patient?.birthMonth != null ? formatWithLeadingZero(patient.birthMonth) : 'ND';
+        const gaeloBirthYear = patient?.birthYear ?? 'ND';
+
+        const gaelODob = [gaeloBirthYear, gaeloBirthMonth, gaeloBirthDay].join('-');
         return {
             gaelo: gaelODob,
             dicom: dicomDob,
@@ -63,22 +69,29 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
     if (isPendingStudy || isPendingPatient) return <Spinner />
 
     return (
-        <div className="flex justify-around">
-            <Badge variant={'default'} className="flex flex-col min-w-[150px]">
-                <span className="font-bold">Firstname</span>
-                <span>GaelO: {firstnameCheck.gaelo ?? "N/A"}</span>
-                <span>Dicom: {firstnameCheck.dicom}</span>
-            </Badge>
-            <Badge variant={'default'} className="flex flex-col min-w-[150px]">
-                <span className="font-bold">Lastname</span>
-                <span>GaelO: {lastnameCheck?.gaelo ?? "N/A"}</span>
-                <span>Dicom: {lastnameCheck.dicom}</span>
-            </Badge>
-            <Badge variant={'default'} className="flex flex-col min-w-[150px]">
-                <span className="font-bold">Date Of Birth</span>
-                <span>GaelO: {dobCheck.gaelo}</span>
-                <span>Dicom: {formatDate(dobCheck.dicom)}</span>
-            </Badge>
+        <div className="flex flex-col">
+            <div className="flex flex-row font-bold bg-green-100 items-center p-1 pl-3 pr-3 border-t border-green-300">
+                <p className="w-full">Tag</p>
+                <p className="w-full">DICOM</p>
+                <div className="w-full">
+                    <GaeloIcon />
+                </div>
+            </div>
+            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b border-t ${firstnameCheck.pass ? 'bg-green-100 border-green-300' : 'bg-red-100 border-red-300'}`}>
+                <p className="w-full">Firstname</p>
+                <p className="w-full">{firstnameCheck.dicom}</p>
+                <p className="w-full">{firstnameCheck.gaelo}</p>
+            </div>
+            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${lastnameCheck.pass ? 'bg-green-100 border-green-300' : 'bg-red-100 border-red-300'}`}>
+                <p className="w-full">Lastname</p>
+                <p className="w-full">{lastnameCheck.dicom}</p>
+                <p className="w-full">{lastnameCheck.gaelo}</p>
+            </div>
+            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${dobCheck.pass ? 'bg-green-100 border-green-300' : 'bg-red-100 border-red-300'}`}>
+                <p className="w-full">Date Of Birth</p>
+                <p className="w-full">{dobCheck.dicom}</p>
+                <p className="w-full">{dobCheck.gaelo}</p>
+            </div>
         </div>
     )
 
