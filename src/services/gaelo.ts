@@ -136,13 +136,15 @@ export const getGaelOPatientLink = (
   );
 };
 
-export const getGaelOInvestigatorFormLink = (
+export const getGaelOVisitLink = (
   studyName,
   role,
   visitId,
+  token,
+  userId,
 ) => {
   return new URL(
-    url + "/study/" + studyName + "/role/" + role + "/visit/" + visitId
+    url + "/study/" + studyName + "/role/" + role + "/visit/" + visitId + "?token=" + token + "&userId=" + userId
   );
 };
 

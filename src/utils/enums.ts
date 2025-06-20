@@ -1,5 +1,6 @@
 export enum Colors {
     almond = 'almond',
+    darkAlmond = 'dark-almond',
     blueCustom = 'blueCustom',
     danger = 'danger',
     dark = 'dark',

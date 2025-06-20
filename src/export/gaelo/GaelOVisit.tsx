@@ -1,12 +1,11 @@
 
 import { getVisit } from "../../services/gaelo";
 import { Colors, useCustomQuery } from "../../utils";
-import GaeloVisitDetails from "./GaelOVisitDetails";
-import GaelOVisitUploadDicom from "./GaelOVisitUploadDicom";
 import GaelOContext from "./context/GaelOContext";
 import { useContext } from "react";
-import PatientDicomComparison from "./dicoms/PatientDicomComparison";
-import GaelORedirectReview from "./GaelORedirectReview";
+import { Card } from "../../ui";
+import GaelOVisitCardHeader from "./GaelOVisitCardHeader";
+import GaelOVisitCardBody from "./GaelOVisitCardBody";
 
 type GaelOVisitProps = {
     studyOrthancId: string;
@@ -22,6 +21,7 @@ const GaelOVisit = ({
     studyOrthancId,
     visitId,
 }: GaelOVisitProps) => {
+
     const { token, studyName } = useContext(GaelOContext);
 
     const { data: visit, refetch } = useCustomQuery(
@@ -46,26 +46,17 @@ const GaelOVisit = ({
     };
 
     return (
-        <div className="flex w-full flex-col gap-3">
-            {visit != null &&
-                <PatientDicomComparison
-                    studyOrthancId={studyOrthancId}
-                    patientId={visit?.patientId}
-                />
-            }
-            <GaeloVisitDetails
+        <Card>
+            <GaelOVisitCardHeader
                 visit={visit}
             />
-            <GaelORedirectReview
+            <GaelOVisitCardBody
                 visit={visit}
-            />
-            <GaelOVisitUploadDicom
                 studyOrthancId={studyOrthancId}
                 visitId={visitId}
                 onActualiseVisit={onActualiseVisit}
-                visitDetails={visit}
             />
-        </div>
+        </Card>
     )
 }
 

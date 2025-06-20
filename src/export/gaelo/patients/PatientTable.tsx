@@ -1,7 +1,8 @@
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Table } from "../../../ui";
+import { Button, Table } from "../../../ui";
 import { Colors } from "../../../utils";
+import { GaeloIcon } from "../../../assets";
 
 type PatientTableProps = {
     patients: any[];
@@ -28,6 +29,25 @@ const PatientTable: React.FC<PatientTableProps> = ({
             id: "centerName",
             accessorKey: "center.name",
             header: "Center Name",
+        },
+        {
+            id: "open",
+            cell: ({ row }) => (
+                <div className="flex items-center justify-center">
+                    <Button
+                        className="h-10 w-45 text-sm"
+                        color={Colors.warning}
+                        onClick={() => onRowClick(row.original.id)}
+                        children={
+                            <div className="flex items-center gap-1">
+                                <p>Open patient in </p>
+                                <div className="mb-0.5"><GaeloIcon /></div>
+                            </div>
+                        }
+                    />
+                </div>
+
+            )
         },
     ];
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { createVisit, getCreatableVisits } from "../../services/gaelo";
-import { Button, Spinner } from "../../ui";
+import { Button, Card, CardBody, CardHeader, Spinner } from "../../ui";
 import { Colors, useCustomMutation, useCustomQuery } from "../../utils";
 import GaelOContext from "./context/GaelOContext";
 import { StudyMainDicomTags } from "../../utils/types";
@@ -51,9 +51,12 @@ const GaelOVisitSummary = ({
   if (isPending) return <Spinner />;
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="rounded-xl shadow-md">
-        <div className="flex gap-3 items-center bg-gray-200 h-15 p-2 rounded-t-lg dark:bg-gray-600">
+    <Card >
+      <CardHeader color={Colors.primary} className="flex items-center justify-between text-white">
+        <div className="font-bold ml-3" >Visits :</div>
+      </CardHeader>
+      <CardBody>
+        <div className="flex gap-3 items-center h-15 rounded-t-lg dark:bg-gray-600">
           <p className="text-sm text-gray-700 underline font-bold w-25 dark:text-white">Created : </p>
           {existingVisits.map((visit) => {
             return (
@@ -68,7 +71,7 @@ const GaelOVisitSummary = ({
             );
           })}
         </div>
-        <div className="flex gap-3 items-center bg-gray-300 h-15 p-2 rounded-b-lg dark:bg-gray-700">
+        <div className="flex gap-3 items-center h-15 rounded-b-lg dark:bg-gray-700">
           <p className="text-sm text-gray-700 underline font-bold w-25 dark:text-white">Creatable : </p>
           {creatableVisits?.map((visitType) => {
             return (
@@ -83,8 +86,9 @@ const GaelOVisitSummary = ({
             );
           })}
         </div>
-      </div>
-    </div>
+      </CardBody>
+
+    </Card>
   );
 };
 

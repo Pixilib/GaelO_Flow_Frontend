@@ -68,7 +68,6 @@ const GaelOVisitSelector = ({
       {studyName &&
         <div className="flex items-center w-full">
           <div className="w-full">
-            <h1 className="font-bold text-dark text-l dark:text-white" >Visits :</h1>
             {currentPatientId ? (
               <GaelOVisitSummary
                 patientId={currentPatientId}

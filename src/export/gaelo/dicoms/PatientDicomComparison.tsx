@@ -28,7 +28,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
     )
 
     const firstnameCheck = useMemo(() => {
-        const initialDicom = study?.patientMainDicomTags.patientName?.[0]?.toUpperCase() ?? "N/A"
+        const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[1]?.[0]?.toUpperCase() ?? "N/A"
         const initalGaelO = patient?.firstname?.toUpperCase() ?? "N/A"
         return {
             gaelo: initalGaelO,
@@ -38,7 +38,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
     }, [study, patient])
 
     const lastnameCheck = useMemo(() => {
-        const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[1]?.[0]?.toUpperCase() ?? "N/A"
+        const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[0]?.[0]?.toUpperCase() ?? "N/A"
         const initalGaelO = patient?.lastname?.toUpperCase() ?? "N/A"
         return {
             gaelo: initalGaelO,
@@ -63,24 +63,21 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
     if (isPendingStudy || isPendingPatient) return <Spinner />
 
     return (
-        <div className="flex gap-3">
-            <Badge variant={'default'}>
-                Firstname :<br />
-                <span>
-                    {"GaelO: " + firstnameCheck.gaelo + " Dicom: " + firstnameCheck.dicom}
-                </span>
+        <div className="flex justify-around">
+            <Badge variant={'default'} className="flex flex-col min-w-[150px]">
+                <span className="font-bold">Firstname</span>
+                <span>GaelO: {firstnameCheck.gaelo ?? "N/A"}</span>
+                <span>Dicom: {firstnameCheck.dicom}</span>
             </Badge>
-            <Badge variant={'default'}>
-                Lastname :<br />
-                <span>
-                    {"GaelO: " + lastnameCheck.gaelo + " Dicom: " + lastnameCheck.dicom}
-                </span>
+            <Badge variant={'default'} className="flex flex-col min-w-[150px]">
+                <span className="font-bold">Lastname</span>
+                <span>GaelO: {lastnameCheck?.gaelo ?? "N/A"}</span>
+                <span>Dicom: {lastnameCheck.dicom}</span>
             </Badge>
-            <Badge variant={'default'}>
-                Date Of Birth :<br />
-                <span>
-                    {"GaelO: " + dobCheck.gaelo + " Dicom: " + formatDate(dobCheck.dicom)}
-                </span>
+            <Badge variant={'default'} className="flex flex-col min-w-[150px]">
+                <span className="font-bold">Date Of Birth</span>
+                <span>GaelO: {dobCheck.gaelo}</span>
+                <span>Dicom: {formatDate(dobCheck.dicom)}</span>
             </Badge>
         </div>
     )

@@ -132,7 +132,7 @@ const GaelOVisitUploadDicom = ({
                     children={
                         <div className="flex flex-row items-center gap-1">
                             <p>Send DICOM to</p>
-                            <GaeloIcon />
+                            <span className="mb-0.5"><GaeloIcon /></span>
                             <p>({visitDetails?.visitType?.name})</p>
                         </div>
                     }
