@@ -1,9 +1,9 @@
 
-import { getVisit } from "../../services/gaelo";
-import { Colors, useCustomQuery } from "../../utils";
-import GaelOContext from "./context/GaelOContext";
+import { getVisit } from "../../../services/gaelo";
+import { Colors, useCustomQuery } from "../../../utils";
+import GaelOContext from "../context/GaelOContext";
 import { useContext } from "react";
-import { Card } from "../../ui";
+import { Card } from "../../../ui";
 import GaelOVisitCardHeader from "./GaelOVisitCardHeader";
 import GaelOVisitCardBody from "./GaelOVisitCardBody";
 

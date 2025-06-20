@@ -77,12 +77,12 @@ export const getPatient = (token, studyName, patientId, role) => {
   return axiosInstance
     .get(
       url +
-        "/api/patients/" +
-        patientId +
-        "?role=" +
-        role +
-        "&studyName=" +
-        studyName,
+      "/api/patients/" +
+      patientId +
+      "?role=" +
+      role +
+      "&studyName=" +
+      studyName,
       { headers: header }
     )
     .then(function (response) {
@@ -123,16 +123,16 @@ export const getGaelOPatientLink = (
   console.log(url);
   return new URL(
     url +
-      "/study/" +
-      studyName +
-      "/role/" +
-      role +
-      "/patient/" +
-      patientId +
-      "?token=" +
-      token +
-      "&userId=" +
-      userId
+    "/study/" +
+    studyName +
+    "/role/" +
+    role +
+    "/patient/" +
+    patientId +
+    "?token=" +
+    token +
+    "&userId=" +
+    userId
   );
 };
 
@@ -156,25 +156,26 @@ export const createVisit = (
   patientId: string,
   statusDone: string,
   visitDate: string | null,
-  reasonForNotDone?: string | null
+  reasonForNotDone: string | null
 ) => {
   const header = getHeader(token);
-  const payload = {
-    patientId: patientId,
-    visitDate: visitDate,
-    statusDone: statusDone,
-    reasonForNotDone: reasonForNotDone,
+  const payload: any = {
+    patientId,
+    statusDone,
+    reasonForNotDone,
   };
+  if (visitDate) payload.visitDate = visitDate;
+  if (reasonForNotDone) payload.reasonForNotDone = reasonForNotDone;
 
   return axiosInstance
     .post(
       url +
-        "/api/visit-types/" +
-        visitTypeId +
-        "/visits?role=" +
-        role +
-        "&studyName=" +
-        studyName,
+      "/api/visit-types/" +
+      visitTypeId +
+      "/visits?role=" +
+      role +
+      "&studyName=" +
+      studyName,
       payload,
       { headers: header }
     )
@@ -221,12 +222,12 @@ export const getVisit = (token, studyName, visitId, role) => {
   return axiosInstance
     .get(
       url +
-        "/api/visits/" +
-        visitId +
-        "?role=" +
-        role +
-        "&studyName=" +
-        studyName,
+      "/api/visits/" +
+      visitId +
+      "?role=" +
+      role +
+      "&studyName=" +
+      studyName,
       { headers: header }
     )
     .then(function (response) {

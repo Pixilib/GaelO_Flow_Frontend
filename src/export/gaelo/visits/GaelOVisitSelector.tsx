@@ -1,11 +1,11 @@
 import { useContext, useEffect, useMemo, useState } from "react";
-import { Spinner } from "../../ui";
-import { useCustomQuery } from "../../utils";
-import { getVisitsTree } from "../../services/gaelo";
-import GaelOContext from "./context/GaelOContext";
-import PatientTable from "./patients/PatientTable";
+import { Spinner } from "../../../ui";
+import { useCustomQuery } from "../../../utils";
+import { getVisitsTree } from "../../../services/gaelo";
+import GaelOContext from "../context/GaelOContext";
+import PatientTable from "../patients/PatientTable";
 import GaelOVisitSummary from "./GaelOVisitSummary";
-import { StudyMainDicomTags } from "../../utils/types";
+import { StudyMainDicomTags } from "../../../utils/types";
 
 type GaelOVisitSelectorProps = {
   studyMainDicomTag: StudyMainDicomTags
@@ -70,6 +70,7 @@ const GaelOVisitSelector = ({
           <div className="w-full">
             {currentPatientId ? (
               <GaelOVisitSummary
+                key={currentPatientId}
                 patientId={currentPatientId}
                 existingVisits={visitsOfPatient ?? []}
                 studyMainDicomTag={studyMainDicomTag}

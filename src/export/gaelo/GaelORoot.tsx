@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Study, useCustomQuery } from "../../utils";
 import GaelOContextProvider from "./context/GaelOContextProvider";
 import GaelOStudyRoleSelector from "./GaelOStudyRoleSelector";
-import GaelOVisitSelector from "./GaelOVisitSelector";
+import GaelOVisitSelector from "./visits/GaelOVisitSelector";
 import { getStudy } from "../../services/orthanc";
 import GaelOLogin from "./GaelOLogin";
-import GaelOVisit from "./GaelOVisit";
+import GaelOVisit from "./visits/GaelOVisit";
 
 type GaelORootProps = {
     studyOrthancId: string

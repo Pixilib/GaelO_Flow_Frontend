@@ -95,7 +95,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
                 <p className="w-full">Force</p>
             </div>
             <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b border-t ${firstnameCheck.pass ? styleValidate : forceFirstname ? styleValidate : styleUnValidated}`}>
-                <p className="w-full">Firstname</p>
+                <p className="w-full font-semibold">Firstname</p>
                 <p className="w-full">{firstnameCheck.dicom}</p>
                 <p className="w-full">{firstnameCheck.gaelo}</p>
                 <div className="w-full">
@@ -112,7 +112,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
                 </div>
             </div>
             <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${lastnameCheck.pass ? styleValidate : forceLastname ? styleValidate : styleUnValidated}`}>
-                <p className="w-full">Lastname</p>
+                <p className="w-full font-semibold">Lastname</p>
                 <p className="w-full">{lastnameCheck.dicom}</p>
                 <p className="w-full">{lastnameCheck.gaelo}</p>
                 <div className="w-full">
@@ -129,7 +129,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
                 </div>
             </div>
             <div className={`flex flex-row items-center rounded-b-lg p-1 pl-3 pr-3 border-b ${dobCheck.pass ? styleValidate : forceDob ? styleValidate : styleUnValidated}`}>
-                <p className="w-full">Date Of Birth</p>
+                <p className="w-full font-semibold">Date Of Birth</p>
                 <p className="w-full">{dobCheck.dicom}</p>
                 <p className="w-full">{dobCheck.gaelo}</p>
                 <div className="w-full">

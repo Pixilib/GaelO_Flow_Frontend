@@ -1,9 +1,9 @@
-import { GaeloIcon } from "../../assets";
-import { Button, CardHeader } from "../../ui";
-import { Colors } from "../../utils";
-import { getGaelOVisitLink } from "../../services/gaelo";
+import { GaeloIcon } from "../../../assets";
+import { Button, CardHeader } from "../../../ui";
+import { Colors } from "../../../utils";
+import { getGaelOVisitLink } from "../../../services/gaelo";
 import { useContext } from "react";
-import GaelOContext from "./context/GaelOContext";
+import GaelOContext from "../context/GaelOContext";
 
 const GaelOVisitCardHeader = ({ visit, studyOrthancId }: { visit: any; studyOrthancId?: string }) => {
     const { role, userId, token, studyName } = useContext(GaelOContext);
