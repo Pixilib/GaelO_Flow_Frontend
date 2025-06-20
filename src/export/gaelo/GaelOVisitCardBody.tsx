@@ -2,6 +2,7 @@ import { CardBody } from "../../ui";
 import PatientDicomComparison from "./dicoms/PatientDicomComparison";
 import GaelOVisitUploadDicom from "./GaelOVisitUploadDicom";
 import GaeloVisitDetails from "./GaelOVisitDetails";
+import { useState } from "react";
 
 type GaelOVisitCardBodyProps = {
     visit: any;
@@ -11,7 +12,11 @@ type GaelOVisitCardBodyProps = {
 }
 
 const GaelOVisitCardBody = ({ visit, studyOrthancId, visitId, onActualiseVisit }: GaelOVisitCardBodyProps) => {
+    const [authorizedToSend, setAuthorizedToSend] = useState(false);
 
+    const handleAuthorizedToSendChange = (value: boolean) => {
+        setAuthorizedToSend(value);
+    };
 
     return (
         <CardBody
@@ -24,6 +29,7 @@ const GaelOVisitCardBody = ({ visit, studyOrthancId, visitId, onActualiseVisit }
                         <PatientDicomComparison
                             studyOrthancId={studyOrthancId}
                             patientId={visit?.patientId}
+                            onAuthorizedToSendChange={handleAuthorizedToSendChange}
                         />
                     }
                     <GaelOVisitUploadDicom
@@ -31,6 +37,7 @@ const GaelOVisitCardBody = ({ visit, studyOrthancId, visitId, onActualiseVisit }
                         visitId={visitId}
                         onActualiseVisit={onActualiseVisit}
                         visitDetails={visit}
+                        authorizedToSend={authorizedToSend}
                     />
                 </div>
             }

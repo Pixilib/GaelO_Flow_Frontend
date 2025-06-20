@@ -15,6 +15,7 @@ type GaelOVisitUploadDicomProps = {
     visitId: string;
     onActualiseVisit: () => void;
     visitDetails: any;
+    authorizedToSend: boolean;
 }
 
 const GaelOVisitUploadDicom = ({
@@ -22,6 +23,7 @@ const GaelOVisitUploadDicom = ({
     visitId,
     onActualiseVisit,
     visitDetails,
+    authorizedToSend,
 }: GaelOVisitUploadDicomProps) => {
     const [message, setMessage] = useState<UploadMessage | null>(null);
     const [progress, setProgress] = useState<number>(0);
@@ -129,6 +131,7 @@ const GaelOVisitUploadDicom = ({
                 <Button
                     color={Colors.success}
                     onClick={handleExport}
+                    disabled={!authorizedToSend}
                     children={
                         <div className="flex flex-row items-center gap-1">
                             <p>Send DICOM to</p>

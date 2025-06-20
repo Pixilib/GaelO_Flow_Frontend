@@ -25,7 +25,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         focus:ring-secondary
         dark:focus:ring-orange-600
         dark:ring-offset-gray-800
-        focus:ring-2 
+        focus:ring-2
+        cursor-pointer
         ${checked ? 'bg-secondary' : 'bg-gray-100'}
         dark:${checked ? 'bg-secondary' : 'bg-gray-700'} peer`;
 

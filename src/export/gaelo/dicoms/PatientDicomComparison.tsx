@@ -1,7 +1,7 @@
-import { useContext, useMemo } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 
-import { Badge, Spinner } from "../../../ui"
-import { Study, useCustomQuery } from "../../../utils"
+import { Button, Spinner } from "../../../ui"
+import { Colors, Study, useCustomQuery } from "../../../utils"
 
 import GaelOContext from "../context/GaelOContext"
 import { getPatient } from "../../../services/gaelo"
@@ -12,9 +12,13 @@ import { formatDate } from "../../../utils/export"
 type PatientDicomComparisonProps = {
     studyOrthancId: string
     patientId: string
+    onAuthorizedToSendChange: (value: boolean) => void
 }
 
-const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomComparisonProps) => {
+const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendChange }: PatientDicomComparisonProps) => {
+    const [forceFirstname, setForceFirstname] = useState(false)
+    const [forceLastname, setForceLastname] = useState(false)
+    const [forceDob, setForceDob] = useState(false)
 
     const { studyName, token, role } = useContext(GaelOContext);
 
@@ -27,6 +31,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
         ['gaelo', 'patient', patientId],
         () => getPatient(token, studyName, patientId, role)
     )
+
 
     const firstnameCheck = useMemo(() => {
         const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[1]?.[0]?.toUpperCase() ?? "N/A"
@@ -66,31 +71,79 @@ const PatientDicomComparison = ({ studyOrthancId, patientId }: PatientDicomCompa
         }
     }, [study, patient])
 
+    useEffect(() => {
+        onAuthorizedToSendChange(
+            (firstnameCheck.pass || forceFirstname) &&
+            (lastnameCheck.pass || forceLastname) &&
+            (dobCheck.pass || forceDob)
+        )
+    }, [dobCheck, firstnameCheck, lastnameCheck, forceDob, forceFirstname, forceLastname])
+
+    const styleValidate = 'bg-green-100 border-green-300 dark:bg-green-200/30 dark:border-green-300/30';
+    const styleUnValidated = 'bg-red-100 border-red-300 dark:bg-red-200/30 dark:border-red-300/30';
+
     if (isPendingStudy || isPendingPatient) return <Spinner />
 
     return (
-        <div className="flex flex-col">
-            <div className="flex flex-row font-bold bg-green-100 items-center p-1 pl-3 pr-3 border-t border-green-300">
+        <div className="flex flex-col dark:text-white">
+            <div className={"flex flex-row font-bold bg-green-100 rounded-t-lg items-center p-1 pl-3 pr-3 border-t " + styleValidate}>
                 <p className="w-full">Tag</p>
                 <p className="w-full">DICOM</p>
                 <div className="w-full">
                     <GaeloIcon />
                 </div>
+                <p className="w-full">Force</p>
             </div>
-            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b border-t ${firstnameCheck.pass ? 'bg-green-100 border-green-300' : 'bg-red-100 border-red-300'}`}>
+            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b border-t ${firstnameCheck.pass ? styleValidate : forceFirstname ? styleValidate : styleUnValidated}`}>
                 <p className="w-full">Firstname</p>
                 <p className="w-full">{firstnameCheck.dicom}</p>
                 <p className="w-full">{firstnameCheck.gaelo}</p>
+                <div className="w-full">
+                    {!firstnameCheck.pass &&
+                        <Button
+                            className="h-7"
+                            color={forceFirstname ? Colors.danger : Colors.success}
+                            onClick={() => setForceFirstname(!forceFirstname)}
+                            children={
+                                <p className="text-sm">{forceFirstname ? "Consider" : "Ignore"}</p>
+                            }
+                        />
+                    }
+                </div>
             </div>
-            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${lastnameCheck.pass ? 'bg-green-100 border-green-300' : 'bg-red-100 border-red-300'}`}>
+            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${lastnameCheck.pass ? styleValidate : forceLastname ? styleValidate : styleUnValidated}`}>
                 <p className="w-full">Lastname</p>
                 <p className="w-full">{lastnameCheck.dicom}</p>
                 <p className="w-full">{lastnameCheck.gaelo}</p>
+                <div className="w-full">
+                    {!lastnameCheck.pass &&
+                        <Button
+                            className="h-7"
+                            color={forceLastname ? Colors.danger : Colors.success}
+                            onClick={() => setForceLastname(!forceLastname)}
+                            children={
+                                <p className="text-sm">{forceLastname ? "Consider" : "Ignore"}</p>
+                            }
+                        />
+                    }
+                </div>
             </div>
-            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${dobCheck.pass ? 'bg-green-100 border-green-300' : 'bg-red-100 border-red-300'}`}>
+            <div className={`flex flex-row items-center rounded-b-lg p-1 pl-3 pr-3 border-b ${dobCheck.pass ? styleValidate : forceDob ? styleValidate : styleUnValidated}`}>
                 <p className="w-full">Date Of Birth</p>
                 <p className="w-full">{dobCheck.dicom}</p>
                 <p className="w-full">{dobCheck.gaelo}</p>
+                <div className="w-full">
+                    {!dobCheck.pass &&
+                        <Button
+                            className="h-7"
+                            color={forceDob ? Colors.danger : Colors.success}
+                            onClick={() => setForceDob(!forceDob)}
+                            children={
+                                <p className="text-sm">{forceDob ? "Consider" : "Ignore"}</p>
+                            }
+                        />
+                    }
+                </div>
             </div>
         </div>
     )
