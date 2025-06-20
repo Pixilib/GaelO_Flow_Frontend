@@ -1,26 +1,24 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { createVisit, getCreatableVisits } from "../../../services/gaelo";
-import { Button, Card, CardBody, CardHeader, CheckBox, Input, Label, SelectInput, Spinner } from "../../../ui";
+import { Button, Card, CardBody, CardHeader, Spinner } from "../../../ui";
 import { Colors, useCustomMutation, useCustomQuery } from "../../../utils";
 import GaelOContext from "../context/GaelOContext";
 import { StudyMainDicomTags } from "../../../utils/types";
-import { formatDate } from "../../../utils/export";
-import CreateForm from "src/import/create/CreateForm";
-import GaelOVisitCreateForm, { CreateVisitForm } from "./GaelOVisitCreateForm";
+import GaelOVisitCreateForm, { CreateVisitForm } from "../visits/GaelOVisitCreateForm";
 
-type GaelOVisitSummaryProps = {
+type GaelOPatientVisitsProps = {
   patientId: string;
   existingVisits: any[];
   studyMainDicomTag: StudyMainDicomTags;
   onVisitIdChange: (visitId: string) => void;
 };
 
-const GaelOVisitSummary = ({
+const GaelOPatientVisits = ({
   patientId,
   existingVisits,
   studyMainDicomTag,
   onVisitIdChange
-}: GaelOVisitSummaryProps) => {
+}: GaelOPatientVisitsProps) => {
   const { token, studyName, role, } = useContext(GaelOContext);
   const [createFormVisit, setCreateFormVisit] = useState<Record<string, any> | null>(null);
 
@@ -38,17 +36,7 @@ const GaelOVisitSummary = ({
       patientId,
       form.status,
       form.date ? form.date : null,
-      (
-        form.reasonForNotDone !== null
-        &&
-        form.reasonForNotDone === "Other"
-      )
-        ? form.otherReasonForNotDone :
-        (
-          form.reasonForNotDone
-          ?
-          form.reasonForNotDone : null
-        )
+      form?.reasonForNotDone === "Other" ? form.otherReasonForNotDone : form.reasonForNotDone
     ),
     [
       ["gaelo", "study", studyName, role],
@@ -129,4 +117,4 @@ const GaelOVisitSummary = ({
   );
 };
 
-export default GaelOVisitSummary;
+export default GaelOPatientVisits;

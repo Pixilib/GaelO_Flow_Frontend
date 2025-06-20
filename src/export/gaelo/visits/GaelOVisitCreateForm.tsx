@@ -1,8 +1,6 @@
-import { Colors, useCustomMutation } from "../../../utils";
+import { Colors } from "../../../utils";
 import { Button, Card, CardBody, CardHeader, Input, Label, SelectInput } from "../../../ui";
-import { forwardRef, useContext, useEffect, useImperativeHandle, useState } from "react";
-import GaelOContext from "../context/GaelOContext";
-import { createVisit } from "../../../services/gaelo";
+import { useEffect, useState } from "react";
 import { formatDate } from "../../../utils/export";
 import { StudyMainDicomTags } from "../../../utils/types";
 
@@ -11,8 +9,8 @@ export type CreateVisitForm = {
   visitId: number;
   status: string;
   date: string;
-  reasonForNotDone: string;
-  otherReasonForNotDone: string;
+  reasonForNotDone: string | null;
+  otherReasonForNotDone: string | null;
 }
 
 type GaelOVisitCreateFormProps = {
@@ -21,6 +19,18 @@ type GaelOVisitCreateFormProps = {
   onCreateVisit: (data: CreateVisitForm) => void;
 }
 
+const listStatus = [
+  { value: "Done", label: "Done" },
+  { value: "Not Done", label: "Not Done" }
+]
+
+const listReasonForNotDone = [
+  { value: "Not Performed", label: "Not Performed" },
+  { value: "Image Lost", label: "Image Lost" },
+  { value: "Patient Withdrawn", label: "Patient Withdrawn" },
+  { value: "Other", label: "Other" }
+]
+
 const GaelOVisitCreateForm = ({
   visitType,
   studyMainDicomTag,
@@ -28,18 +38,6 @@ const GaelOVisitCreateForm = ({
 }: GaelOVisitCreateFormProps) => {
 
   const [createVisitForm, setCreateVisitForm] = useState<CreateVisitForm>(null);
-
-  const listStatus = [
-    { value: "Done", label: "Done" },
-    { value: "Not Done", label: "Not Done" }
-  ]
-
-  const listReasonForNotDone = [
-    { value: "Not Performed", label: "Not Performed" },
-    { value: "Image Lost", label: "Image Lost" },
-    { value: "Patient Withdrawn", label: "Patient Withdrawn" },
-    { value: "Other", label: "Other" }
-  ]
 
   useEffect(() => {
     setCreateVisitForm({

@@ -55,6 +55,7 @@ const GaelORoot = ({ studyOrthancId }: GaelORootProps) => {
                     />
                     {visitId &&
                         <GaelOVisit
+                            key={visitId}
                             studyOrthancId={studyOrthancId}
                             visitId={visitId}
                         />

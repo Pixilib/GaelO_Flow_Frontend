@@ -5,7 +5,7 @@ import { getGaelOVisitLink } from "../../../services/gaelo";
 import { useContext } from "react";
 import GaelOContext from "../context/GaelOContext";
 
-const GaelOVisitCardHeader = ({ visit, studyOrthancId }: { visit: any; studyOrthancId?: string }) => {
+const GaelOVisitCardHeader = ({ visit }: { visit: any; }) => {
     const { role, userId, token, studyName } = useContext(GaelOContext);
 
     return (

@@ -15,12 +15,15 @@ type PatientDicomComparisonProps = {
     onAuthorizedToSendChange: (value: boolean) => void
 }
 
+const styleValidate = 'bg-green-100 border-green-300 dark:bg-green-200/30 dark:border-green-300/30';
+const styleUnValidated = 'bg-red-100 border-red-300 dark:bg-red-200/30 dark:border-red-300/30';
+
 const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendChange }: PatientDicomComparisonProps) => {
+    const { studyName, token, role } = useContext(GaelOContext);
+
     const [forceFirstname, setForceFirstname] = useState(false)
     const [forceLastname, setForceLastname] = useState(false)
     const [forceDob, setForceDob] = useState(false)
-
-    const { studyName, token, role } = useContext(GaelOContext);
 
     const { data: study, isPending: isPendingStudy } = useCustomQuery<Study>(
         ['studies', studyOrthancId],
@@ -31,7 +34,6 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
         ['gaelo', 'patient', patientId],
         () => getPatient(token, studyName, patientId, role)
     )
-
 
     const firstnameCheck = useMemo(() => {
         const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[1]?.[0]?.toUpperCase() ?? "N/A"
@@ -79,9 +81,6 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
         )
     }, [dobCheck, firstnameCheck, lastnameCheck, forceDob, forceFirstname, forceLastname])
 
-    const styleValidate = 'bg-green-100 border-green-300 dark:bg-green-200/30 dark:border-green-300/30';
-    const styleUnValidated = 'bg-red-100 border-red-300 dark:bg-red-200/30 dark:border-red-300/30';
-
     if (isPendingStudy || isPendingPatient) return <Spinner />
 
     return (
@@ -94,7 +93,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
                 </div>
                 <p className="w-full">Force</p>
             </div>
-            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b border-t ${firstnameCheck.pass ? styleValidate : forceFirstname ? styleValidate : styleUnValidated}`}>
+            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b border-t ${(firstnameCheck.pass || forceFirstname) ? styleValidate : styleUnValidated}`}>
                 <p className="w-full font-semibold">Firstname</p>
                 <p className="w-full">{firstnameCheck.dicom}</p>
                 <p className="w-full">{firstnameCheck.gaelo}</p>
@@ -111,7 +110,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
                     }
                 </div>
             </div>
-            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${lastnameCheck.pass ? styleValidate : forceLastname ? styleValidate : styleUnValidated}`}>
+            <div className={`flex flex-row items-center p-1 pl-3 pr-3 border-b ${(lastnameCheck.pass || forceLastname) ? styleValidate : styleUnValidated}`}>
                 <p className="w-full font-semibold">Lastname</p>
                 <p className="w-full">{lastnameCheck.dicom}</p>
                 <p className="w-full">{lastnameCheck.gaelo}</p>
@@ -128,7 +127,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
                     }
                 </div>
             </div>
-            <div className={`flex flex-row items-center rounded-b-lg p-1 pl-3 pr-3 border-b ${dobCheck.pass ? styleValidate : forceDob ? styleValidate : styleUnValidated}`}>
+            <div className={`flex flex-row items-center rounded-b-lg p-1 pl-3 pr-3 border-b ${(dobCheck.pass || forceDob) ? styleValidate : styleUnValidated}`}>
                 <p className="w-full font-semibold">Date Of Birth</p>
                 <p className="w-full">{dobCheck.dicom}</p>
                 <p className="w-full">{dobCheck.gaelo}</p>

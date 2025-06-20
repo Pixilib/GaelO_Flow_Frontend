@@ -1,6 +1,6 @@
 
 import { getVisit } from "../../../services/gaelo";
-import { Colors, useCustomQuery } from "../../../utils";
+import { useCustomQuery } from "../../../utils";
 import GaelOContext from "../context/GaelOContext";
 import { useContext } from "react";
 import { Card } from "../../../ui";
@@ -10,11 +10,6 @@ import GaelOVisitCardBody from "./GaelOVisitCardBody";
 type GaelOVisitProps = {
     studyOrthancId: string;
     visitId: string;
-}
-
-export type UploadMessage = {
-    message: string;
-    color: Colors;
 }
 
 const GaelOVisit = ({

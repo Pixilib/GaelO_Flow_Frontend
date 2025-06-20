@@ -3,7 +3,6 @@ import { Colors, useCustomMutation } from "../../../utils";
 import { useContext, useEffect, useState } from "react";
 import GaelOContext from "../context/GaelOContext";
 import { Button, ProgressBar, Spinner } from "../../../ui";
-import { UploadMessage } from "./GaelOVisit";
 import { getStudyStatistics } from "../../../services/orthanc";
 import Uppy from "@uppy/core";
 import Tus from "@uppy/tus";
@@ -18,6 +17,11 @@ type GaelOVisitUploadDicomProps = {
     authorizedToSend: boolean;
 }
 
+type UploadMessage = {
+    message: string;
+    color: Colors;
+}
+
 const GaelOVisitUploadDicom = ({
     studyOrthancId,
     visitId,
@@ -25,6 +29,7 @@ const GaelOVisitUploadDicom = ({
     visitDetails,
     authorizedToSend,
 }: GaelOVisitUploadDicomProps) => {
+
     const [message, setMessage] = useState<UploadMessage | null>(null);
     const [progress, setProgress] = useState<number>(0);
     const [showSpinner, setShowSpinner] = useState<boolean>(false);

@@ -4,7 +4,7 @@ import { useCustomQuery } from "../../../utils";
 import { getVisitsTree } from "../../../services/gaelo";
 import GaelOContext from "../context/GaelOContext";
 import PatientTable from "../patients/PatientTable";
-import GaelOVisitSummary from "./GaelOVisitSummary";
+import GaelOPatientVisits from "../patients/GaelOPatientVisits";
 import { StudyMainDicomTags } from "../../../utils/types";
 
 type GaelOVisitSelectorProps = {
@@ -61,28 +61,26 @@ const GaelOVisitSelector = ({
           onRowClick={handlePatientClick}
         />
       ) : (
-        <div className="w-full">
-          <p className="text-dark dark:text-white">Please select a study first.</p>
+        <div className="w-full text-dark dark:text-white">
+          Please select a study first.
         </div>
       )}
       {studyName &&
         <div className="flex items-center w-full">
-          <div className="w-full">
-            {currentPatientId ? (
-              <GaelOVisitSummary
-                key={currentPatientId}
-                patientId={currentPatientId}
-                existingVisits={visitsOfPatient ?? []}
-                studyMainDicomTag={studyMainDicomTag}
-                onVisitIdChange={onVisitIdChange}
-              />
-            ) : (
-              <div>
-                <p className="text-dark dark:text-white">Please select a patient first.</p>
-              </div>
-            )
-            }
-          </div>
+          {currentPatientId ? (
+            <GaelOPatientVisits
+              key={currentPatientId}
+              patientId={currentPatientId}
+              existingVisits={visitsOfPatient ?? []}
+              studyMainDicomTag={studyMainDicomTag}
+              onVisitIdChange={onVisitIdChange}
+            />
+          ) : (
+            <div>
+              <p className="text-dark dark:text-white">Please select a patient first.</p>
+            </div>
+          )
+          }
         </div>
       }
     </div>
