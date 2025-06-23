@@ -1,5 +1,5 @@
 import { CardBody } from "../../../ui";
-import PatientDicomComparison from "../dicoms/PatientDicomComparison";
+import PatientDicomComparison from "../comparaison/PatientDicomComparison";
 import GaelOVisitUploadDicom from "./GaelOVisitUploadDicom";
 import GaeloVisitDetails from "./GaelOVisitDetails";
 import { useState } from "react";
@@ -32,6 +32,7 @@ const GaelOVisitCardBody = ({ visit, studyOrthancId, visitId, onActualiseVisit }
                                     studyOrthancId={studyOrthancId}
                                     patientId={visit?.patientId}
                                     onAuthorizedToSendChange={handleAuthorizedToSendChange}
+                                    visit={visit}
                                 />
                             }
                             <GaelOVisitUploadDicom

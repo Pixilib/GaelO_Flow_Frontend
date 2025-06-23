@@ -67,8 +67,8 @@ const GaelOPatientVisits = ({
   if (isPending) return <Spinner />;
 
   return (
-    <>
-      <Card >
+    <div className="flex w-full flex-col gap-3">
+      <Card className="w-full">
         <CardHeader color={Colors.primary} className="flex items-center justify-between text-white">
           <div className="font-bold ml-3" >Visits :</div>
         </CardHeader>
@@ -113,7 +113,7 @@ const GaelOPatientVisits = ({
           onCreateVisit={handleCreateVisit}
         />
       }
-    </>
+    </div>
   );
 };
 
