@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Colors, OrthancJob, useCustomQuery } from '../../utils';
 import { getJobById } from '../../services/jobs';
 import { Button, ToggleChevron } from '../../ui';
@@ -7,6 +7,8 @@ import { useDispatch } from 'react-redux';
 import { JobType, removeJob } from '../../reducers/JobSlice';
 import { ProcessingJob } from '../../utils/types';
 import { getProcessingJob } from '../../services/processing';
+import { calculateOrthancStudyID } from '../../utils/calculateOrthandId';
+import { addSeriesOfStudyIdToExportList, addStudyIdToAnonymizeList, addStudyIdToDeleteList } from '../../utils/actionsUtils';
 
 type ProgressInlineJobProps = {
     jobId: string;
@@ -19,13 +21,15 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
     const dispatch = useDispatch()
 
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    const [orthancId, setOrthancId] = useState<string | null>(null);
 
     const { data: jobData, isLoading, error } = useCustomQuery<OrthancJob | ProcessingJob>(
         ["job", jobId],
         () => (jobType === "orthanc" ? getJobById(jobId) : getProcessingJob(jobId)),
         {
             refetchInterval: (query) => {
-                if (query.state.data?.state === 'Success' || query.state.data?.state === 'Failure') {
+                const data = query.state.data;
+                if (data?.state === 'Success' || data?.state === 'Failure') {
                     onJobCompleted && onJobCompleted(query.state.data?.state);
                     return false;
                 }
@@ -34,17 +38,20 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
         }
     );
 
+    useEffect(() => {
+        (async () => {
+            const patientId = jobData?.content?.Query?.[0]?.["0010,0020"];
+            const studyInstanceUID = jobData?.content?.Query?.[0]?.["0020,000d"];
+            const id = await calculateOrthancStudyID(patientId, studyInstanceUID);
+            setOrthancId(id);
+        })();
+    }, [jobData]);
+
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: </div>;
     if (!jobData) return <div>No job data available</div>;
     const getTextColor = (state: string) => {
         switch (state) {
-            case "waiting": return "bg-warning/20";
-            case "completed": return "bg-green-200/90 dark:bg-green-200/40";
-            case "failed": return "bg-red-200/90 dark:bg-red-200/40";
-            case "paused": return "bg-blue-200/90 dark:bg-blue-200/40";
-            case "active": return "bg-warning/20";
-
             case "Pending": return "bg-warning/20";
             case "Running": return "bg-warning/20";
             case "Success": return "bg-green-200/90 dark:bg-green-200/40";
@@ -58,20 +65,19 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
         dispatch(removeJob(jobId))
     }
 
-    const handleAnonymizeClick = () => {}
+    const handleAnonymizeClick = async () => {
+        await addStudyIdToAnonymizeList(orthancId);
+    }
 
-    const handleExportClick = () => {}
+    const handleExportClick = async () => {
+        await addSeriesOfStudyIdToExportList(orthancId)
+    }
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = async () => {
+        await addStudyIdToDeleteList(orthancId);
     }
 
     return (
-        // <Badge className={'flex flex-col ' + getTextColor(jobData.state)}>
-        //     <span className='flex justify-end cursor-pointer'><Close onClick={handleRemoveJob} /></span>
-        //     <span><span className='font-bold underline'>Job state :</span> {jobData.state}</span>
-        //     <span><span className='font-bold underline'>Job type :</span> {jobType} - {jobData.type}</span>
-        //     <span><span className='font-bold underline'>Progress :</span> {jobData.progress} %</span>
-        // </Badge>
         <button
             className={`flex flex-col gap-2 cursor-pointer border border-gray-400 p-2 rounded-lg text-gray-600 dark:text-white ${getTextColor(jobData.state)} hover:border-blue-300`}
             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
@@ -98,21 +104,22 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
                     <div className='w-full flex justify-around'>
                         <Button
                             color={Colors.blueCustom}
-                            children={<Anon className='w-10 h-10'/>}
-                            className='rounded-xl w-10 h-10'
-                            onClick={e => {e.stopPropagation(); handleAnonymizeClick()}}
+                            children={<Anon className='' />}
+                            className='rounded-xl w-10 h-5'
+                            onClick={e => { e.stopPropagation(); handleAnonymizeClick() }}
+                            disabled={jobData.state !== "Success"}
                         />
                         <Button
                             color={Colors.warning}
                             children={<Export />}
-                            className='rounded-xl w-10 h-10'
-                            onClick={e => {e.stopPropagation(); handleExportClick()}}
+                            className='rounded-xl w-10 h-5'
+                            onClick={e => { e.stopPropagation(); handleExportClick() }}
                         />
                         <Button
                             color={Colors.danger}
                             children={<Trash />}
-                            className='rounded-xl w-10 h-10'
-                            onClick={e => {e.stopPropagation(); handleDeleteClick()}}
+                            className='rounded-xl w-10 h-5'
+                            onClick={e => { e.stopPropagation(); handleDeleteClick() }}
                         />
                     </div>
                 </>
