@@ -112,17 +112,17 @@ const GaelOVisitUploadDicom = ({
         setProgress(0);
         mutateGetStudyStatistics(undefined);
         const file = await exportRessourceIdsToLocalFilesystem([studyOrthancId], (mb) => {
-            setMessage({ message: `Downloading ${mb} MB`, color: Colors.success });
+            setMessage({ message: `Step 1/3 : Downloading ${mb} MB`, color: Colors.success });
         })
-        setMessage({ message: "Sending DICOM to GaelO...", color: Colors.success });
+        setMessage({ message: "Step 2/3 : Sending DICOM to GaelO...", color: Colors.success });
         const gaeloId = await sendToGaelo(file);
-        setMessage({ message: "Validating DICOM upload...", color: Colors.warning });
+        setMessage({ message: "Step 3/3 : Validating DICOM upload...", color: Colors.warning });
+        setShowSpinner(true);
         mutateValidateDicomUpload({ gaeloId });
         setTimeout(() => {
             setProgress(100);
             onActualiseVisit();
         }, 500);
-        setShowSpinner(true);
     }
 
     useEffect(() => {

@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
-import { createVisit, getCreatableVisits } from "../../../services/gaelo";
+import { createVisit, getCreatableVisits, getGaelOPatientLink } from "../../../services/gaelo";
 import { Button, Card, CardBody, CardHeader, Spinner } from "../../../ui";
 import { Colors, useCustomMutation, useCustomQuery } from "../../../utils";
 import GaelOContext from "../context/GaelOContext";
 import { StudyMainDicomTags } from "../../../utils/types";
 import GaelOVisitCreateForm, { CreateVisitForm } from "../visits/GaelOVisitCreateForm";
+import { GaeloIcon } from "../../../assets";
 
 type GaelOPatientVisitsProps = {
   patientId: string;
@@ -19,7 +20,7 @@ const GaelOPatientVisits = ({
   studyMainDicomTag,
   onVisitIdChange
 }: GaelOPatientVisitsProps) => {
-  const { token, studyName, role, } = useContext(GaelOContext);
+  const { token, studyName, role, userId } = useContext(GaelOContext);
   const [createFormVisit, setCreateFormVisit] = useState<Record<string, any> | null>(null);
 
   const { data: creatableVisits, isPending } = useCustomQuery(
@@ -64,16 +65,32 @@ const GaelOPatientVisits = ({
     onVisitIdChange(null);
   }
 
+  const handleOpenPatientInGaelO = () => {
+    window.open(getGaelOPatientLink(studyName, role, patientId, token, userId));
+  }
+
   if (isPending) return <Spinner />;
 
   return (
-    <div className="flex w-full flex-col gap-3">
-      <Card className="w-full">
-        <CardHeader color={Colors.primary} className="flex items-center justify-between text-white">
-          <div className="font-bold ml-3" >Visits :</div>
+    <div className="flex w-full h-full flex-col gap-3">
+      <Card>
+        <CardHeader color={Colors.primary} className="flex items-center justify-between text-white pl-3 pr-3">
+          <div className="font-bold" >Patient : {patientId}</div>
+          <Button
+            className="h-10"
+            color={Colors.warning}
+            children={
+              <div className="text-sm flex flex-row gap-0.5 items-center">
+                <p>Open patient in</p>
+                <span className="mb-0.5"><GaeloIcon className="h-3.5" /></span>
+              </div>
+            }
+            onClick={handleOpenPatientInGaelO}
+          />
         </CardHeader>
         <CardBody>
-          <div className="flex gap-3 items-center h-15 rounded-t-lg dark:bg-gray-600">
+          <p className="font-bold text-lg">Visits</p>
+          <div className="flex gap-3 items-center h-15 rounded-t-lg dark:bg-gray-600 pl-3">
             <p className="text-sm text-gray-700 underline font-bold w-25 dark:text-white">Created : </p>
             {existingVisits.map((visit) => {
               return (
@@ -88,7 +105,7 @@ const GaelOPatientVisits = ({
               );
             })}
           </div>
-          <div className="flex gap-3 items-center h-15 rounded-b-lg dark:bg-gray-700">
+          <div className="flex gap-3 items-center h-15 rounded-b-lg dark:bg-gray-700 pl-3">
             <p className="text-sm text-gray-700 underline font-bold w-25 dark:text-white">Creatable : </p>
             {creatableVisits?.map((visitType) => {
               return (

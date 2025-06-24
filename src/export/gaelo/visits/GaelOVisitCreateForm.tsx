@@ -72,7 +72,7 @@ const GaelOVisitCreateForm = ({
                   onChange={(event: any) => {
                     setCreateVisitForm({
                       ...createVisitForm,
-                      date: event.value === "Done" ? createVisitForm?.date : null,
+                      date: event.value === "Done" ? formatDate(studyMainDicomTag?.studyDate) : null,
                       status: event.value
                     });
                   }}
@@ -92,6 +92,7 @@ const GaelOVisitCreateForm = ({
                             date: event.target.value
                           });
                         }}
+                        type="date"
                       />
                     </>
                   ) : (

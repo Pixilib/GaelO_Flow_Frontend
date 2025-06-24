@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button, Table } from "../../../ui";
+import { Button, Table, ToggleChevron } from "../../../ui";
 import { Colors } from "../../../utils";
 import { GaeloIcon } from "../../../assets";
 import { getGaelOPatientLink } from "../../../services/gaelo";
@@ -17,70 +17,51 @@ const PatientTable: React.FC<PatientTableProps> = ({
     patientId,
     onRowClick
 }) => {
-    const { studyName, role, token, userId } = useContext(GaelOContext);
+    const [search, setSearch] = useState("");
 
-    const columns: ColumnDef<any>[] = [
-        {
-            id: "id",
-            accessorKey: "id",
-        },
-        {
-            id: "code",
-            accessorKey: "code",
-            header: "Code",
-        },
-        {
-            id: "centerName",
-            accessorKey: "center.name",
-            header: "Center Name",
-        },
-        {
-            id: "open",
-            cell: ({ row }) => (
-                <div className="flex items-center justify-center">
-                    <Button
-                        className="h-10 w-45 text-sm"
-                        color={Colors.warning}
-                        onClick={() => handleOpenPatientInGaelO(row.original.id)}
-                        children={
-                            <div className="flex items-center gap-1">
-                                <p>Open patient in </p>
-                                <div className="mb-0.5"><GaeloIcon /></div>
-                            </div>
-                        }
-                    />
-                </div>
-
-            )
-        },
-    ];
-
-    const handleOpenPatientInGaelO = (patientId: string) => {
-        window.open(getGaelOPatientLink(studyName, role, patientId, token, userId));
+    const handleRowClick = (id: string) => {
+        if (patientId === id)
+            onRowClick(null);
+        else
+            onRowClick(id);
     }
 
-    const getRowClasses = (row: any) => {
-        if (patientId === row.id) {
-            return 'bg-primary hover:cursor-pointer text-white';
-        } else {
-            return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';
-        }
-    };
+    const handleSearchPatients = (search: string) => {
+        setSearch(search);
+    }
 
     return (
-        <Table
-            columns={columns}
-            data={patients}
-            headerColor={Colors.light}
-            headerTextSize="xs"
-            className="bg-gray-100 dark:bg-slate-950 dark:text-white w-full"
-            getRowClasses={getRowClasses}
-            onRowClick={(row) => onRowClick(row.id)}
-            enableSorting={true}
-            enableColumnFilters={true}
-            columnVisibility={{ id: false }}
-            pageSize={5}
-        />
+        <div className="flex flex-col w-110 gap-2">
+            <input
+                placeholder="Search patients..."
+                className="w-96/100 h-7 px-3 border border-gray-300 rounded-xl"
+                type="text"
+                onChange={(e) => handleSearchPatients(e.target.value)}
+            />
+            <div className="flex flex-col h-75 overflow-y-auto text-gray-800">
+                {patients
+                    .filter(
+                        (patient) =>
+                            (patient.code + " " + patient.center.name)
+                                .toLowerCase()
+                                .includes(search.toLowerCase())
+                    )
+                    .map((patient) => (< div className="flex flex-col justify-center" >
+                        <div className={`flex flex-col h-12`}>
+                            <button
+                                className="flex flex-row items-center text-base cursor-pointer hover:bg-gray-200 w-full h-12 justify-between pr-2"
+                                onClick={() => handleRowClick(patient.id)}
+                            >
+                                <p className={patientId === patient.id ? "font-bold" : ""}>{patient.code}</p>
+                                <p className={patientId === patient.id ? "font-bold" : ""}>{patient.center.name}</p>
+                            </button>
+                        </div>
+                        <div className="border-b border-gray-300" />
+                    </div>
+                    ))
+                }
+            </div>
+        </div >
     );
 };
 

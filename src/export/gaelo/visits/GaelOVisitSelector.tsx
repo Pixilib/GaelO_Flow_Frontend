@@ -53,7 +53,7 @@ const GaelOVisitSelector = ({
   if (isPending) return <Spinner />;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-row gap-3">
       {studyName ? (
         <PatientTable
           patients={patients}
@@ -66,7 +66,7 @@ const GaelOVisitSelector = ({
         </div>
       )}
       {studyName &&
-        <div className="flex items-center w-full">
+        <div className="flex w-full">
           {currentPatientId ? (
             <GaelOPatientVisits
               key={currentPatientId}
