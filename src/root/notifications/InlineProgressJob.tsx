@@ -7,8 +7,8 @@ import { useDispatch } from 'react-redux';
 import { JobType, removeJob } from '../../reducers/JobSlice';
 import { ProcessingJob } from '../../utils/types';
 import { getProcessingJob } from '../../services/processing';
-import { calculateOrthancStudyID } from '../../utils/calculateOrthandId';
-import { addSeriesOfStudyIdToExportList, addStudyIdToAnonymizeList, addStudyIdToDeleteList } from '../../utils/actionsUtils';
+import { calculateOrthancSeriesID, calculateOrthancStudyID } from '../../utils/calculateOrthandId';
+import { addSeriesOfStudyIdToExportList, addSeriesToExportListFromSeriesId, addStudyIdToAnonymizeList, addStudyIdToDeleteList } from '../../utils/actionsUtils';
 
 type ProgressInlineJobProps = {
     jobId: string;
@@ -40,10 +40,18 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
 
     useEffect(() => {
         (async () => {
-            const patientId = jobData?.content?.Query?.[0]?.["0010,0020"];
-            const studyInstanceUID = jobData?.content?.Query?.[0]?.["0020,000d"];
-            const id = await calculateOrthancStudyID(patientId, studyInstanceUID);
-            setOrthancId(id);
+            if (jobData?.content?.Query?.[0]?.["0008,0052"] === "STUDY") {
+                const patientId = jobData?.content?.Query?.[0]?.["0010,0020"];
+                const studyInstanceUID = jobData?.content?.Query?.[0]?.["0020,000d"];
+                const id = await calculateOrthancStudyID(patientId, studyInstanceUID);
+                setOrthancId(id);
+            } else if (jobData?.content?.Query?.[0]?.["0008,0052"] === "SERIES") {
+                const patientId = jobData?.content?.Query?.[0]?.["0010,0020"];
+                const studyInstanceUID = jobData?.content?.Query?.[0]?.["0020,000d"];
+                const seriesInstanceUID = jobData?.content?.Query?.[0]?.["0020,000e"];
+                const id = await calculateOrthancSeriesID(patientId, studyInstanceUID, seriesInstanceUID);
+                setOrthancId(id);
+            }
         })();
     }, [jobData]);
 
@@ -70,7 +78,10 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
     }
 
     const handleExportClick = async () => {
-        await addSeriesOfStudyIdToExportList(orthancId)
+        if (jobData?.content?.Query?.[0]?.["0008,0052"] === "SERIES")
+            await addSeriesToExportListFromSeriesId(orthancId);
+        else if (jobData?.content?.Query?.[0]?.["0008,0052"] === "STUDY")
+            await addSeriesOfStudyIdToExportList(orthancId);
     }
 
     const handleDeleteClick = async () => {
