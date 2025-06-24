@@ -40,17 +40,17 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
     const getTextColor = (state: string) => {
         switch (state) {
             case "waiting": return "bg-warning/20";
-            case "completed": return "bg-green-200/90";
-            case "failed": return "bg-red-200/90";
-            case "paused": return "bg-blue-200/90";
-            case "active": return "bg-warning/90";
+            case "completed": return "bg-green-200/90 dark:bg-green-200/40";
+            case "failed": return "bg-red-200/90 dark:bg-red-200/40";
+            case "paused": return "bg-blue-200/90 dark:bg-blue-200/40";
+            case "active": return "bg-warning/20";
 
             case "Pending": return "bg-warning/20";
             case "Running": return "bg-warning/20";
-            case "Success": return "bg-green-200/90";
-            case "Failure": return "bg-red-200/90";
-            case "Paused": return "bg-blue-200/90";
-            case "Retry": return "bg-red-200/90";
+            case "Success": return "bg-green-200/90 dark:bg-green-200/40";
+            case "Failure": return "bg-red-200/90 dark:bg-red-200/40";
+            case "Paused": return "bg-blue-200/90 dark:bg-blue-200/40";
+            case "Retry": return "bg-red-200/90 dark:bg-red-200/40";
         }
     };
 
@@ -73,7 +73,7 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
         //     <span><span className='font-bold underline'>Progress :</span> {jobData.progress} %</span>
         // </Badge>
         <button
-            className={`flex flex-col gap-2 cursor-pointer border border-gray-400 p-2 rounded-lg text-gray-600 ${getTextColor(jobData.state)} hover:border-blue-300`}
+            className={`flex flex-col gap-2 cursor-pointer border border-gray-400 p-2 rounded-lg text-gray-600 dark:text-white ${getTextColor(jobData.state)} hover:border-blue-300`}
             onClick={() => setIsDetailsOpen(!isDetailsOpen)}
         >
             <div className='flex flex-col items-start w-full'>
