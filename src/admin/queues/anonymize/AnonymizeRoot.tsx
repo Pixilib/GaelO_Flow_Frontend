@@ -20,8 +20,6 @@ const AnonymizeRoot = () => {
             setKeepLabel(options.keepLabel);
     }, [options]);
 
-    console.log("options", options);
-
     const {mutate: mutateUpdateAnonymizeOptions} = useCustomMutation(
         (anonymizeOptions: AnonymizeOptionPayload) => updateAnonymizeOptions(anonymizeOptions),
         [["options"]],

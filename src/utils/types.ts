@@ -129,8 +129,8 @@ export type User = {
   firstname: string;
   lastname: string;
   email: string;
-  roleName: Role["name"];
-  role: Role;
+  roleName: Role["name"]|null;
+  role?: Role|null;
 };
 
 export type UserPayload = Omit<User, "id" | "role"> & { password: string };
@@ -492,3 +492,36 @@ export type QueryQueueSeriesItem = {
   seriesInstanceUID: string;
   aet: string;
 };
+
+export type Rule = {
+  DicomTag: string;
+  ValueRepresentation: string;
+  Value: string;
+  Condition: string;
+}
+
+export type Destination = {
+  Destination: string;
+  Name: string;
+}
+
+export type Router = {
+  RuleCondition: string;
+  Rules: Rule[];
+  Destinations: Destination[];
+}
+
+export type AutoRoutingItems = {
+  Id: number;
+  Name: string;
+  EventType: string;
+  Activated: boolean;
+  Router: Router;
+}
+
+export type AutoRoutingPayload = {
+  Name: string;
+  EventType: string;
+  Activated: boolean;
+  Router: Router;
+}

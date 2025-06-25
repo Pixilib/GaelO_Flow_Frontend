@@ -64,7 +64,7 @@ const AnonymizeRoot = () => {
             });
     };
 
-    const onChangeProfile = (option: { value: 'Default'|'Full' }) => {
+    const onChangeProfile = (option: { value: 'Default' | 'Full' }) => {
         dispatch(updateAnonymizationProfile({ anonymizationProfile: option.value }));
     };
 
@@ -82,8 +82,8 @@ const AnonymizeRoot = () => {
 
     return (
         <>
-            <CardHeader 
-            color={Colors.primary}>
+            <CardHeader
+                color={Colors.primary}>
                 <div className="flex flex-col items-center w-full sm:flex-row">
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
                         Anonymize Resources
@@ -113,9 +113,9 @@ const AnonymizeRoot = () => {
                     </div>
                 </div>
             </CardHeader>
-            <CardBody 
-            color={Colors.almond}
-            className="dark:bg-neutral-500">
+            <CardBody
+                color={Colors.almond}
+                className="dark:bg-neutral-500">
                 <div className="flex flex-col w-full gap-4">
                     <div className="flex-1 overflow-auto break-words">
                         <PatientTable

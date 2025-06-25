@@ -1,38 +1,38 @@
-export enum AutoroutingEventType {
-  NEW_INSTANCE = "NewInstance",
-  NEW_SERIES = "NewSeries",
-  NEW_STUDY = "NewStudy",
-  NEW_PATIENT = "NewPatient",
-  STABLE_SERIES = "StableSeries",
-  STABLE_STUDY = "StableStudy",
-  STABLE_PATIENT = "StablePatient",
-}
+export const eventOptions = [
+  { value: 'NewInstance', label: 'New Instance' },
+  { value: 'NewSeries', label: 'New Series' },
+  { value: 'NewStudy', label: 'New Study' },
+  { value: 'NewPatient', label: 'New Patient' },
+  { value: 'StableSeries', label: 'Stable Series' },
+  { value: 'StableStudy', label: 'Stable Study' },
+  { value: 'StablePatient', label: 'Stable Patient' },
+];
 
-export enum AutoRoutingCondition {
-  AND = "AND",
-  OR = "OR",
-}
+export const autoRoutingConditionOptions = [
+  { value: 'AND', label: 'AND' },
+  { value: 'OR', label: 'OR' },
+];
 
-export enum AutoRoutingRuleCondition {
-  EQUALS = "EQUALS",
-  DIFFERENT = "DIFFERENT",
-  IN = "IN", // in array
-  NOT_IN = "NOT_IN", // not in array
-  LESS_THAN = "LESS_THAN",
-  GREATER_THAN = "GREATER_THAN",
-}
+export const autoRoutingRuleConditionOptions = [
+  { value: "EQUALS", label: "EQUALS"},
+  { value: "DIFFERENT", label: "DIFFERENT"},
+  { value: "IN", label: "IN"}, // in array
+  { value: "NOT_IN", label: "NOT IN"}, // not in array
+  { value: "LESS_THAN", label: "LESS THAN"},
+  { value: "GREATER_THAN", label: "GREATER THAN"},
+]
 
-export enum AutoRoutingRuleValueRepresentation {
-  STRING = "string",
-  NUMBER = "number",
-  DATE = "date",
-}
+export const autoRoutingRuleValueRepresentation = [
+  {value: "string", label: "STRING"},
+  {value: "number", label: "NUMBER"},
+  {value: "date", label: "DATE"},
+]
 
-export enum AutoRoutingDestinationType {
-  AET = "AET",
-  TMTVJOB = "TMTVJob",
-  PEER = "Peer",
-}
+export const autoRoutingDestinationTypeOptions = [
+  { value: "AET", label: "AET" },
+  { value: "TMTVJob", label: "TMTVJob" },
+  { value: "Peer", label: "PEER" },
+]
 
 export enum AutoRoutingRuleDicomTag {
   PATIENT_NAME = "PatientName",
@@ -87,28 +87,55 @@ export enum AutoRoutingRuleDicomTag {
   IMAGE_COMMENTS = "ImageComments",
 }
 
+export const autoRoutingRuleDicomTagOptions = [
+  { value: AutoRoutingRuleDicomTag.PATIENT_NAME, label: "Patient Name" },
+  { value: AutoRoutingRuleDicomTag.PATIENT_ID, label: "Patient ID" },
+  { value: AutoRoutingRuleDicomTag.PATIENT_BIRTHDATE, label: "Patient Birthdate" },
+  { value: AutoRoutingRuleDicomTag.PATIENT_SEX, label: "Patient Sex" },
+  { value: AutoRoutingRuleDicomTag.OTHER_PATIENT_IDS, label: "Other Patient IDs" },
 
-export type AutoRoutingRule = {
-  DicomTag: AutoRoutingRuleDicomTag;
-  ValueRepresentation: AutoRoutingRuleValueRepresentation;
-  Value: string | number;
-  Condition: AutoRoutingRuleCondition;
-};
+  { value: AutoRoutingRuleDicomTag.STUDY_DATE, label: "Study Date" },
+  { value: AutoRoutingRuleDicomTag.STUDY_TIME, label: "Study Time" },
+  { value: AutoRoutingRuleDicomTag.STUDY_ID, label: "Study ID" },
+  { value: AutoRoutingRuleDicomTag.STUDY_DESCRIPTION, label: "Study Description" },
+  { value: AutoRoutingRuleDicomTag.ACCESSION_NUMBER, label: "Accession Number" },
+  { value: AutoRoutingRuleDicomTag.STUDY_INSTANCE_UID, label: "Study Instance UID" },
+  { value: AutoRoutingRuleDicomTag.REQUESTED_PROCEDURE_DESCRIPTION, label: "Requested Procedure Description" },
+  { value: AutoRoutingRuleDicomTag.INSTITUTION_NAME, label: "Institution Name" },
+  { value: AutoRoutingRuleDicomTag.REQUESTING_PHYSICIAN, label: "Requesting Physician" },
+  { value: AutoRoutingRuleDicomTag.REFERRING_PHYSICIAN_NAME, label: "Referring Physician Name" },
 
-export type DestinationRule = {
-  Destination: AutoRoutingDestinationType;
-  Name: string
-}
+  { value: AutoRoutingRuleDicomTag.SERIES_DATE, label: "Series Date" },
+  { value: AutoRoutingRuleDicomTag.SERIES_TIME, label: "Series Time" },
+  { value: AutoRoutingRuleDicomTag.MODALITY, label: "Modality" },
+  { value: AutoRoutingRuleDicomTag.MANUFACTURER, label: "Manufacturer" },
+  { value: AutoRoutingRuleDicomTag.STATION_NAME, label: "Station Name" },
+  { value: AutoRoutingRuleDicomTag.SERIES_DESCRIPTION, label: "Series Description" },
+  { value: AutoRoutingRuleDicomTag.BODY_PART_EXAMINED, label: "Body Part Examined" },
+  { value: AutoRoutingRuleDicomTag.SEQUENCE_NAME, label: "Sequence Name" },
+  { value: AutoRoutingRuleDicomTag.PROTOCOL_NAME, label: "Protocol Name" },
+  { value: AutoRoutingRuleDicomTag.SERIES_NUMBER, label: "Series Number" },
+  { value: AutoRoutingRuleDicomTag.CARDIAC_NUMBER_OF_IMAGES, label: "Cardiac Number Of Images" },
+  { value: AutoRoutingRuleDicomTag.IMAGES_IN_ACQUISITION, label: "Images In Acquisition" },
+  { value: AutoRoutingRuleDicomTag.NUMBER_OF_TEMPORAL_POSITIONS, label: "Number Of Temporal Positions" },
+  { value: AutoRoutingRuleDicomTag.NUMBER_OF_SLICES, label: "Number Of Slices" },
+  { value: AutoRoutingRuleDicomTag.NUMBER_OF_TIME_SLICES, label: "Number Of Time Slices" },
+  { value: AutoRoutingRuleDicomTag.SERIES_INSTANCE_UID, label: "Series Instance UID" },
+  { value: AutoRoutingRuleDicomTag.IMAGE_ORIENTATION_PATIENT, label: "Image Orientation Patient" },
+  { value: AutoRoutingRuleDicomTag.SERIES_TYPE, label: "Series Type" },
+  { value: AutoRoutingRuleDicomTag.OPERATORS_NAME, label: "Operators Name" },
+  { value: AutoRoutingRuleDicomTag.PERFORMED_PROCEDURE_STEP_DESCRIPTION, label: "Performed Procedure Step Description" },
+  { value: AutoRoutingRuleDicomTag.ACQUISITION_DEVICE_PROCESSING_DESCRIPTION, label: "Acquisition Device Processing Description" },
+  { value: AutoRoutingRuleDicomTag.CONTRAST_BOLUS_AGENT, label: "Contrast Bolus Agent" },
 
-export type Router = {
-  RuleCondition: AutoRoutingCondition;
-  Rules: AutoRoutingRule[];
-  Detinations: DestinationRule[]
-}
-
-export type AutoRouter = {
-  Name: string;
-  EventType: AutoroutingEventType;
-  IsActivated: boolean;
-  Router: Router;
-}
+  { value: AutoRoutingRuleDicomTag.INSTANCE_CREATION_DATE, label: "Instance Creation Date" },
+  { value: AutoRoutingRuleDicomTag.INSTANCE_CREATION_TIME, label: "Instance Creation Time" },
+  { value: AutoRoutingRuleDicomTag.ACQUISITION_NUMBER, label: "Acquisition Number" },
+  { value: AutoRoutingRuleDicomTag.IMAGE_INDEX, label: "Image Index" },
+  { value: AutoRoutingRuleDicomTag.INSTANCE_NUMBER, label: "Instance Number" },
+  { value: AutoRoutingRuleDicomTag.NUMBER_OF_FRAMES, label: "Number Of Frames" },
+  { value: AutoRoutingRuleDicomTag.TEMPORAL_POSITION_IDENTIFIER, label: "Temporal Position Identifier" },
+  { value: AutoRoutingRuleDicomTag.SOP_INSTANCE_UID, label: "SOP Instance UID" },
+  { value: AutoRoutingRuleDicomTag.IMAGE_POSITION_PATIENT, label: "Image Position Patient" },
+  { value: AutoRoutingRuleDicomTag.IMAGE_COMMENTS, label: "Image Comments" },
+]

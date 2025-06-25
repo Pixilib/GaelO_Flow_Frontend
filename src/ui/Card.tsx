@@ -43,7 +43,8 @@ const colorClasses: Record<Colors, string> = {
   blueCustom: "bg-blue-custom dark:bg-blue-600",
   light: "bg-light",
   white: "bg-white",
-  [Colors.lightGray]: ''
+  [Colors.darkAlmond]: "bg-dark-almond",
+  [Colors.lightGray]: '',
 };
 
 const getColorClass = (color?: Colors) => color ? colorClasses[color] ?? "" : "";

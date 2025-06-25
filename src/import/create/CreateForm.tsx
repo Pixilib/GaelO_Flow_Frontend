@@ -7,7 +7,7 @@ import { Add } from '../../icons';
 interface TagFormProps {
   title: string;
   className?: string;
-  onAddTag: (tag: { name: string; value: string }) => void;
+  onAddTag: (tag: { name: string, value: string }) => void;
 }
 
 const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {

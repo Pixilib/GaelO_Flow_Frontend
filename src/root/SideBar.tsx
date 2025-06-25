@@ -5,6 +5,12 @@ import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import { Item } from "../ui/menu/Items";
 import { Admin, Directions, Help, Home, ImageAdd, ImageSearch, Import, Logout, RestorePage, ZoomQuestion } from "../icons";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { UserState } from "../reducers/UserSlice";
+import { useCustomQuery, User } from "../utils";
+import { getUserById } from "../services";
+import { Spinner } from "../ui";
 
 type SideBarProps = {
   onLogout: () => void;
@@ -15,6 +21,8 @@ type SideBarProps = {
 const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const role = useSelector((state: RootState) => state.user.role);
 
   const handleItemClick = (item: Item | string) => {
     const itemPath = typeof item === "string" ? item : item.path;
@@ -49,44 +57,56 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
         {/* Contenu de la barre latérale avec défilement toujours visible */}
         <div className="flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 dark:scrollbar-white scrollbar-track-transparent">
           <div className="flex flex-col gap-3">
-            <MenuItemsCollapse
-              icon={<Admin className="w-6 h-6" />}
-              title="Administration"
-              elements={adminItems}
-              isOpen={openItem === "Administration"}
-              dropDownOpen={() => handleDropdown("Administration")}
-              onNavigate={handleItemClick}
-            />
-            <MenuItem
-              title="Orthanc Content"
-              icon={<ImageSearch className="w-6 h-6" />}
-              isActive={location.pathname === "/orthanc-content"}
-              onClick={() => handleItemClick("/orthanc-content")}
-            />
-            <MenuItem
-              title="Import"
-              icon={<Import className="w-6 h-6" />}
-              isActive={location.pathname.includes("/import/")}
-              onClick={() => handleItemClick("/import/upload")}
-            />
-            <MenuItem
-              title="Query"
-              icon={<ZoomQuestion className="w-6 h-6" />}
-              isActive={location.pathname === "/query"}
-              onClick={() => handleItemClick("/query")}
-            />
-            <MenuItem
-              title="Auto retrieve"
-              icon={<RestorePage className="w-6 h-6" />}
-              isActive={location.pathname === "/auto-retrieve"}
-              onClick={() => handleItemClick("/auto-retrieve")}
-            />
-            <MenuItem
-              title="Auto routing"
-              icon={<Directions className="w-6 h-6" />}
-              isActive={location.pathname === "/auto-routing"}
-              onClick={() => handleItemClick("/auto-routing")}
-            />
+            {role.admin && (
+              <MenuItemsCollapse
+                icon={<Admin className="w-6 h-6" />}
+                title="Administration"
+                elements={adminItems}
+                isOpen={openItem === "Administration"}
+                dropDownOpen={() => handleDropdown("Administration")}
+                onNavigate={handleItemClick}
+              />
+            )}
+            {role.readAll && (
+              <MenuItem
+                title="Orthanc Content"
+                icon={<ImageSearch className="w-6 h-6" />}
+                isActive={location.pathname === "/orthanc-content"}
+                onClick={() => handleItemClick("/orthanc-content")}
+              />
+            )}
+            {role.import && (
+              <MenuItem
+                title="Import"
+                icon={<Import className="w-6 h-6" />}
+                isActive={location.pathname.includes("/import/")}
+                onClick={() => handleItemClick("/import/upload")}
+              />
+            )}
+            {role.query && (
+              <MenuItem
+                title="Query"
+                icon={<ZoomQuestion className="w-6 h-6" />}
+                isActive={location.pathname === "/query"}
+                onClick={() => handleItemClick("/query")}
+              />
+            )}
+            {role.autoQuery && (
+              <MenuItem
+                title="Auto retrieve"
+                icon={<RestorePage className="w-6 h-6" />}
+                isActive={location.pathname === "/auto-retrieve"}
+                onClick={() => handleItemClick("/auto-retrieve")}
+              />
+            )}
+            {role.autoRouting && (
+              <MenuItem
+                title="Auto routing"
+                icon={<Directions className="w-6 h-6" />}
+                isActive={location.pathname === "/auto-routing"}
+                onClick={() => handleItemClick("/auto-routing")}
+              />
+            )}
             <MenuItem
               title="Datasets"
               icon={<ImageAdd className="w-6 h-6" />}

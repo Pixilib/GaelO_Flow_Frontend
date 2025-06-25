@@ -15,21 +15,22 @@ import { sendResourcesToPeer } from "../services/peers";
 import { GaeloIcon } from "../assets";
 import { exportCsv } from "../utils/export";
 import SelectTransferSyntax from "./SelectTransferSyntax";
-import { Download } from "../icons";
+import { Anon, Download, Export } from "../icons";
 import Empty from "../icons/Empty";
 import GaelORoot from "./gaelo/GaelORoot";
+import { addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
     const dispatch = useDispatch();
     const exportSeriesList = useSelector((state: RootState) => state.export.series);
     const exportStudyList = useSelector((state: RootState) => state.export.studies);
-
     const [currentStudyId, setCurrentStudyId] = useState(null);
     const [storeJobId, setStoreJobId] = useState(null);
     const [sendPeerJobId, setsendPeerJobId] = useState(null);
     const [transferSyntax, setTrasferSyntax] = useState('None');
     const [openGaelOModal, setOpenGaelOModal] = useState(false)
+    const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
 
     const series = useMemo(() => {
         if (!currentStudyId) return [];
@@ -38,6 +39,10 @@ const ExportRoot = () => {
 
     const { data: modalities } = useCustomQuery(["modalities"], () => getModalities());
     const { data: peers } = useCustomQuery(["peers"], () => getPeers());
+
+    const role = useSelector(
+        (state: RootState) => state.user.role
+    );
 
     const { mutate: storeMutate } = useCustomMutation(
         ({ modalityName, resources }) => storeToModality(modalityName, resources),
@@ -141,13 +146,25 @@ const ExportRoot = () => {
         })) ?? [];
     }, [peers]);
 
+    const handleSendAnonymizeList = () => {
+        Object.entries(selectedRows).forEach(async ([key, isSelected]) => {
+            await addStudyIdToAnonymizeList(key);
+        })
+    };
+
+    const handleSendDeleteList = () => {
+        Object.entries(selectedRows).forEach(async ([key, isSelected]) => {
+            await addStudyIdToDeleteList(key);
+        })
+    };
+
     return (
         <Card>
-            <Modal show={openGaelOModal} size='lg'>
+            <Modal show={openGaelOModal} size='xl'>
                 <Modal.Header className="bg-primary rounded-t-xl" onClose={() => setOpenGaelOModal(false)} >
                     <span className="text-white font-bold">Send to GaelO</span>
                 </Modal.Header>
-                
+
                 <Modal.Body>
                     <GaelORoot studyOrthancId={currentStudyId} />
                 </Modal.Body>
@@ -180,16 +197,42 @@ const ExportRoot = () => {
             <CardBody
                 color={Colors.almond}
                 className="overflow-x-auto dark:bg-neutral-500">
-                <div className="flex flex-col md:flex-row md:space-x-4">
-                    <div className="flex-1 min-w-0">
-                        <ExportStudyTable
-                            onClickStudy={handleClickStudy}
-                            currentStudyId={currentStudyId}
-                            studies={Object.values(exportStudyList)}
-                        />
+                <div className="flex flex-col gap-3">
+                    <div className="flex flex-row gap-3">
+                        {role.anonymize &&
+                            <Button
+                                color={Colors.blueCustom}
+                                className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                                onClick={handleSendAnonymizeList}
+                            >
+                                <Anon className="text-xl" />
+                                <span className="ml-2">Send to Anonymize</span>
+                            </Button>
+                        }
+                        {role.delete &&
+                            <Button
+                                color={Colors.danger}
+                                className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+                                onClick={handleSendDeleteList}
+                            >
+                                <Export className="text-xl" />
+                                <span className="ml-2">Send to Delete</span>
+                            </Button>
+                        }
                     </div>
-                    <div className="flex-1 min-w-0">
-                        <ExportSeriesTable series={series} />
+                    <div className="flex flex-col md:flex-row md:space-x-4">
+                        <div className="flex-1 min-w-0">
+                            <ExportStudyTable
+                                onClickStudy={handleClickStudy}
+                                currentStudyId={currentStudyId}
+                                studies={Object.values(exportStudyList)}
+                                selectedRow={selectedRows}
+                                onRowSelectionChange={setSelectedRows}
+                            />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <ExportSeriesTable series={series} />
+                        </div>
                     </div>
                 </div>
             </CardBody>
@@ -211,9 +254,15 @@ const ExportRoot = () => {
                     <Button
                         color={Colors.blueCustom}
                         onClick={() => setOpenGaelOModal(true)}
-                        className="text-white bg-cyan-700" >
-                        Send to <GaeloIcon className="ml-1" />
-                    </Button>
+                        className="text-white bg-cyan-700"
+                        disabled={currentStudyId ? null : true}
+                        children={
+                            <div className="flex items-center">
+                                <p>Send to </p>
+                                <GaeloIcon className="ml-1" />
+                            </div>
+                        }
+                    />
                 </div>
             </CardFooter>
         </Card>

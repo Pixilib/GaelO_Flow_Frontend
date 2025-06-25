@@ -91,7 +91,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
   }
 
   if(isPending) return <Spinner />
-  
+
   return (
     <div className="flex flex-col gap-3 p-3">
       <div className="flex gap-3 w-full justify-between">

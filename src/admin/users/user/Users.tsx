@@ -23,9 +23,7 @@ const Users = ({ className = "" }: UsersProps) => {
   const [isCreatingUser, setIsCreatingUser] = useState(false);
 
   const { data: users, isPending: isLoadingUsers } =
-    useCustomQuery<User[]>(["users"], () => getUsers(), {
-      enabled: true,
-    });
+    useCustomQuery<User[]>(["users"], () => getUsers());
 
   const deleteMutation = useCustomMutation<void, number>(
     (userId: number) => deleteUser(userId),

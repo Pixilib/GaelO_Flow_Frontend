@@ -10,6 +10,6 @@ import SideBarItems from "./SideBarItems";
 import Tabs, { Tab } from "./Tabs";
 import ToggleSwitch from "../../root/ToggleDarkMode";
 import Toggle from "./Toogle";
-import ToogleChevron from "./ToogleChevron";
+import ToggleChevron from "./ToggleChevron";
 
-export { Banner, BannerItems, Dropdown, DropdownButton, Items, MenuItem, MenuItemsCollapse, SideBarItems, Tabs, Tab, ToogleChevron, ToggleSwitch, Toggle};
+export { Banner, BannerItems, Dropdown, DropdownButton, Items, MenuItem, MenuItemsCollapse, SideBarItems, Tabs, Tab, ToggleChevron, ToggleSwitch, Toggle};
