@@ -112,6 +112,21 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
             {isDetailsOpen && (
                 <>
                     <div className='border-b border-gray-700 w-full' />
+                    <div className='flex flex-col w-full text-xs'>
+                        <div className='flex flex-row justify-between items-center'>
+                            <p className='font-bold'>Level</p>
+                            <p className='font-semibold'>{jobData?.content?.Query?.[0]?.["0008,0052"]}</p>
+                        </div>
+                        <div className='flex flex-row justify-between items-center'>
+                            <p className='font-bold'>PatientID</p>
+                            <p className='font-semibold'>{jobData?.content?.Query?.[0]?.["0010,0020"] === "" ? "N/A" : jobData?.content?.Query?.[0]?.["0010,0020"]}</p>
+                        </div>
+                        <div className='flex flex-row justify-between items-center'>
+                            <p className='font-bold'>From</p>
+                            <p className='font-semibold'>{jobData?.content?.RemoteAet}</p>
+                        </div>
+                    </div>
+                    <div className='border-b border-gray-700 w-full' />
                     <div className='w-full flex justify-around'>
                         <Button
                             color={Colors.blueCustom}
