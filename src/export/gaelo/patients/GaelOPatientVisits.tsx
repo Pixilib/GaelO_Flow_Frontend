@@ -2,10 +2,10 @@ import { useContext, useState } from "react";
 import { createVisit, getCreatableVisits, getGaelOPatientLink } from "../../../services/gaelo";
 import { Button, Card, CardBody, CardHeader, Spinner } from "../../../ui";
 import { Colors, useCustomMutation, useCustomQuery } from "../../../utils";
-import GaelOContext from "../context/GaelOContext";
 import { StudyMainDicomTags } from "../../../utils/types";
-import GaelOVisitCreateForm, { CreateVisitForm } from "../visits/GaelOVisitCreateForm";
 import { GaeloIcon } from "../../../assets";
+import GaelOVisitCreateForm, { CreateVisitForm } from "../visits/GaelOVisitCreateForm";
+import GaelOContext from "../context/GaelOContext";
 
 type GaelOPatientVisitsProps = {
   patientId: string;

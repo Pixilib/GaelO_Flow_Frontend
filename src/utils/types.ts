@@ -129,8 +129,8 @@ export type User = {
   firstname: string;
   lastname: string;
   email: string;
-  roleName: Role["name"];
-  role: Role;
+  roleName: Role["name"]|null;
+  role?: Role|null;
 };
 
 export type UserPayload = Omit<User, "id" | "role"> & { password: string };

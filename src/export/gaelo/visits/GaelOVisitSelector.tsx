@@ -2,10 +2,10 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { Spinner } from "../../../ui";
 import { useCustomQuery } from "../../../utils";
 import { getVisitsTree } from "../../../services/gaelo";
-import GaelOContext from "../context/GaelOContext";
-import PatientTable from "../patients/PatientTable";
-import GaelOPatientVisits from "../patients/GaelOPatientVisits";
 import { StudyMainDicomTags } from "../../../utils/types";
+import GaelOContext from "../context/GaelOContext";
+import PatientList from "../patients/PatientList";
+import GaelOPatientVisits from "../patients/GaelOPatientVisits";
 
 type GaelOVisitSelectorProps = {
   studyMainDicomTag: StudyMainDicomTags
@@ -55,7 +55,7 @@ const GaelOVisitSelector = ({
   return (
     <div className="flex flex-row gap-3">
       {studyName ? (
-        <PatientTable
+        <PatientList
           patients={patients}
           patientId={currentPatientId}
           onRowClick={handlePatientClick}

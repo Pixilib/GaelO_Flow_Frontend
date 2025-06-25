@@ -1,13 +1,13 @@
-import { validateDicomUpload } from "../../../services/gaelo";
-import { Colors, useCustomMutation } from "../../../utils";
 import { useContext, useEffect, useState } from "react";
-import GaelOContext from "../context/GaelOContext";
-import { Button, ProgressBar, Spinner } from "../../../ui";
-import { getStudyStatistics } from "../../../services/orthanc";
 import Uppy from "@uppy/core";
 import Tus from "@uppy/tus";
+import { validateDicomUpload } from "../../../services/gaelo";
+import { Colors, useCustomMutation } from "../../../utils";
+import { Button, ProgressBar, Spinner } from "../../../ui";
+import { getStudyStatistics } from "../../../services/orthanc";
 import { exportRessourceIdsToLocalFilesystem } from "../../../services/export";
 import { GaeloIcon } from "../../../assets";
+import GaelOContext from "../context/GaelOContext";
 
 type GaelOVisitUploadDicomProps = {
     studyOrthancId: string;
