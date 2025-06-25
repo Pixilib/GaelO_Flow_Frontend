@@ -18,14 +18,13 @@ import SelectTransferSyntax from "./SelectTransferSyntax";
 import { Anon, Download, Export } from "../icons";
 import Empty from "../icons/Empty";
 import GaelORoot from "./gaelo/GaelORoot";
-import { addSeriesOfStudyIdToExportList, addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
+import { addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
     const dispatch = useDispatch();
     const exportSeriesList = useSelector((state: RootState) => state.export.series);
     const exportStudyList = useSelector((state: RootState) => state.export.studies);
-
     const [currentStudyId, setCurrentStudyId] = useState(null);
     const [storeJobId, setStoreJobId] = useState(null);
     const [sendPeerJobId, setsendPeerJobId] = useState(null);
@@ -161,7 +160,7 @@ const ExportRoot = () => {
 
     return (
         <Card>
-            <Modal show={openGaelOModal} size='lg'>
+            <Modal show={openGaelOModal} size='xl'>
                 <Modal.Header className="bg-primary rounded-t-xl" onClose={() => setOpenGaelOModal(false)} >
                     <span className="text-white font-bold">Send to GaelO</span>
                 </Modal.Header>
@@ -255,9 +254,15 @@ const ExportRoot = () => {
                     <Button
                         color={Colors.blueCustom}
                         onClick={() => setOpenGaelOModal(true)}
-                        className="text-white bg-cyan-700" >
-                        Send to <GaeloIcon className="ml-1" />
-                    </Button>
+                        className="text-white bg-cyan-700"
+                        disabled={currentStudyId ? null : true}
+                        children={
+                            <div className="flex items-center">
+                                <p>Send to </p>
+                                <GaeloIcon className="ml-1" />
+                            </div>
+                        }
+                    />
                 </div>
             </CardFooter>
         </Card>

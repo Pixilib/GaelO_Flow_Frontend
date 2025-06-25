@@ -6,10 +6,9 @@ type SpinnerProps = {
 const Spinner = ({className = ""} : SpinnerProps) => {
     return (
       <div className={"flex items-center justify-center"+ className}>
-        <div className="bg-white border-b-2 rounded-full size-16 animate-spin border-primary"></div>
+        <div className="border-b-2 rounded-full size-16 animate-spin border-primary"></div>
       </div>
     );
   };
-  
+
   export default Spinner;
-  

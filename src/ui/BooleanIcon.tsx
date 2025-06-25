@@ -6,9 +6,9 @@ type BooleanIconProps = {
 }
 
 const BooleanIcon: React.FC<BooleanIconProps> = ({ value, size}) => {
-    return value ? 
+    return value ?
         <Check color={"green"}  size={size} className="mx-auto"/>:
-        <Cross color={"red"}  size={size} className="mx-auto"/>;       
+        <Cross color={"red"}  size={size} className="mx-auto"/>;
 }
 
 export default BooleanIcon;

@@ -37,7 +37,7 @@ import UserBanner from "./user-banner.svg?react";
 import User from "./user.svg?react";
 import VisibilityOff from "./visibility-off.svg?react";
 import Visibility from "./visibility.svg?react";
-import GaeloIcon from "./gaelo-logo-white.svg?react";
+import GaeloIcon from "./gaelo-logo.svg?react";
 
 export {
     Administrator,

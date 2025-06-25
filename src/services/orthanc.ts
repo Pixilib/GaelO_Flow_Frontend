@@ -134,6 +134,21 @@ export const getStudy = (studyId: string): Promise<Study> => {
     });
 };
 
+export const getStudyStatistics = (studyId: string): Promise<any> => {
+  return axios
+    .get("/api/studies/" + studyId + "/statistics")
+    .then((response) => {
+      const data = response.data;
+      return data;
+    })
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    }); 
+}
+
 export const getLabelsOfStudy = (studyId: string): Promise<string[]> => {
   return axios
     .get("/api/studies/" + studyId + "/labels")
