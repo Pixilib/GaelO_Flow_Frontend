@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create();
 
-const url = window?.location?.hostname?.includes("localhost") ? "https://v2-test.gaelo.fr" : "https://platform.gaelo.fr";
+export const gaelOUrl = window?.location?.hostname?.includes("localhost") ? "https://v2-test.gaelo.fr" : "https://platform.gaelo.fr";
 
 const getHeader = (token) => {
   return {
@@ -16,7 +16,7 @@ export const login = (email, password) => {
     password: password,
   };
   return axiosInstance
-    .post(url + "/api/login", payload)
+    .post(gaelOUrl + "/api/login", payload)
     .then((answer) => answer.data)
     .catch((error) => {
       throw error;
@@ -26,7 +26,7 @@ export const login = (email, password) => {
 export const getStudiesFromUser = (token, userId) => {
   let header = getHeader(token);
   return axiosInstance
-    .get(url + "/api/users/" + userId + "/studies", { headers: header })
+    .get(gaelOUrl + "/api/users/" + userId + "/studies", { headers: header })
     .then(function (response) {
       return response.data;
     })
@@ -41,7 +41,7 @@ export const getStudiesFromUser = (token, userId) => {
 export const getRoles = (token, userId, studyName) => {
   let header = getHeader(token);
   return axiosInstance
-    .get(url + "/api/users/" + userId + "/roles?studyName=" + studyName, {
+    .get(gaelOUrl + "/api/users/" + userId + "/roles?studyName=" + studyName, {
       headers: header,
     })
     .then(function (response) {
@@ -58,7 +58,7 @@ export const getRoles = (token, userId, studyName) => {
 export const getVisitsTree = (token, studyName, role) => {
   let header = getHeader(token);
   return axiosInstance
-    .get(url + "/api/studies/" + studyName + "/visits-tree?role=" + role, {
+    .get(gaelOUrl + "/api/studies/" + studyName + "/visits-tree?role=" + role, {
       headers: header,
     })
     .then(function (response) {
@@ -76,7 +76,7 @@ export const getPatient = (token, studyName, patientId, role) => {
   let header = getHeader(token);
   return axiosInstance
     .get(
-      url +
+      gaelOUrl +
       "/api/patients/" +
       patientId +
       "?role=" +
@@ -99,7 +99,7 @@ export const getPatient = (token, studyName, patientId, role) => {
 export const getCreatableVisits = (token: string, patientId: string) => {
   let header = getHeader(token);
   return axiosInstance
-    .get(url + "/api/patients/" + patientId + "/creatable-visits", {
+    .get(gaelOUrl + "/api/patients/" + patientId + "/creatable-visits", {
       headers: header,
     })
     .then(function (response) {
@@ -120,9 +120,8 @@ export const getGaelOPatientLink = (
   token,
   userId
 ) => {
-  console.log(url);
   return new URL(
-    url +
+    gaelOUrl +
     "/study/" +
     studyName +
     "/role/" +
@@ -144,7 +143,7 @@ export const getGaelOVisitLink = (
   userId,
 ) => {
   return new URL(
-    url + "/study/" + studyName + "/role/" + role + "/visit/" + visitId + "?token=" + token + "&userId=" + userId
+    gaelOUrl + "/study/" + studyName + "/role/" + role + "/visit/" + visitId + "?token=" + token + "&userId=" + userId
   );
 };
 
@@ -169,7 +168,7 @@ export const createVisit = (
 
   return axiosInstance
     .post(
-      url +
+      gaelOUrl +
       "/api/visit-types/" +
       visitTypeId +
       "/visits?role=" +
@@ -204,7 +203,7 @@ export const validateDicomUpload = (
 
   return axiosInstance
     .post(
-      url + `/api/visits/${visitId}/validate-dicom`,
+      gaelOUrl + `/api/visits/${visitId}/validate-dicom`,
       payload,
       { headers: header }
     )
@@ -221,7 +220,7 @@ export const getVisit = (token, studyName, visitId, role) => {
   let header = getHeader(token);
   return axiosInstance
     .get(
-      url +
+      gaelOUrl +
       "/api/visits/" +
       visitId +
       "?role=" +

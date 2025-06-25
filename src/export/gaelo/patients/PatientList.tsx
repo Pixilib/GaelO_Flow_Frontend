@@ -45,15 +45,15 @@ const PatientList: React.FC<PatientListProps> = ({
             />
             <div className="flex flex-col h-75 overflow-y-auto text-gray-800">
                 {filteredPatients.map((patient) => (
-                    <div className="flex flex-col justify-center" key={patient.id}>
+                    <div className="flex flex-col justify-center " key={patient.id}>
                         <div className={`flex flex-col h-12`}>
-                            <button
-                                className="flex flex-row items-center text-base cursor-pointer hover:bg-gray-200 w-full h-12 justify-between pr-2"
+                            <div 
+                                className={"flex flex-row pl-3 pr-3 items-center text-base cursor-pointer w-full h-12 justify-between " + (patientId === patient.id ? "font-bold bg-primary text-white" : "")}
                                 onClick={() => handleRowClick(patient.id)}
                             >
-                                <p className={patientId === patient.id ? "font-bold" : ""}>{patient.code}</p>
-                                <p className={patientId === patient.id ? "font-bold" : ""}>{patient.center.name}</p>
-                            </button>
+                                <p>{patient.code}</p>
+                                <p>{patient.center.name}</p>
+                            </div>
                         </div>
                         <div className="border-b border-gray-300" />
                     </div>

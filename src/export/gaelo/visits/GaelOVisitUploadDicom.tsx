@@ -1,20 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Uppy from "@uppy/core";
 import Tus from "@uppy/tus";
-import { validateDicomUpload } from "../../../services/gaelo";
-import { Colors, useCustomMutation } from "../../../utils";
-import { Button, ProgressBar, Spinner } from "../../../ui";
+import { gaelOUrl, validateDicomUpload } from "../../../services/gaelo";
+import { Colors, useCustomMutation, useCustomQuery } from "../../../utils";
+import { Button, ProgressBar } from "../../../ui";
 import { getStudyStatistics } from "../../../services/orthanc";
 import { exportRessourceIdsToLocalFilesystem } from "../../../services/export";
 import { GaeloIcon } from "../../../assets";
 import GaelOContext from "../context/GaelOContext";
+import PatientDicomComparison from "../comparaison/PatientDicomComparison";
 
 type GaelOVisitUploadDicomProps = {
     studyOrthancId: string;
     visitId: string;
     onActualiseVisit: () => void;
     visitDetails: any;
-    authorizedToSend: boolean;
 }
 
 type UploadMessage = {
@@ -27,16 +27,24 @@ const GaelOVisitUploadDicom = ({
     visitId,
     onActualiseVisit,
     visitDetails,
-    authorizedToSend,
 }: GaelOVisitUploadDicomProps) => {
 
+    const [authorizedToSend, setAuthorizedToSend] = useState(false);
     const [message, setMessage] = useState<UploadMessage | null>(null);
     const [progress, setProgress] = useState<number>(0);
-    const [showSpinner, setShowSpinner] = useState<boolean>(false);
-    const [buttonClicked, setButtonClicked] = useState<boolean>(false);
-    const [studyNumberOfInstances, setStudyNumberOfInstances] = useState<number>(0);
+    const [exportStarted, setExportStarted] = useState<boolean>(false);
 
     const { token } = useContext(GaelOContext);
+
+    const { data: numberOfInstances } = useCustomQuery(
+        ["studies", studyOrthancId, "statistics"],
+        () => getStudyStatistics(studyOrthancId),
+        {
+            select: (data) => {
+                return data.CountInstances;
+            }
+        }
+    );
 
     const { mutate: mutateValidateDicomUpload } = useCustomMutation(
         ({ gaeloId }) => validateDicomUpload(
@@ -44,32 +52,14 @@ const GaelOVisitUploadDicom = ({
             visitId,
             studyOrthancId,
             [gaeloId],
-            studyNumberOfInstances,
+            numberOfInstances,
         ),
         [
             ["visits", "validate-dicom"],
         ],
         {
-            onSuccess: () => {
-                setShowSpinner(false);
-                setMessage({ message: "Status finished you can now close this tab", color: Colors.success });
-                if (visitDetails?.stateInvestigatorForm === "Not Done")
-                    setMessage(null);
-            },
             onError: (error) => {
-                setShowSpinner(false);
                 setMessage({ message: "Failed to validate DICOM upload", color: Colors.danger });
-            },
-        }
-    );
-
-    const { mutate: mutateGetStudyStatistics } = useCustomMutation(
-        () => getStudyStatistics(studyOrthancId),
-        [["studies", studyOrthancId, "statistics"]],
-        {
-            onSuccess: (data) => {
-                setStudyNumberOfInstances(data.CountInstances);
-                console.log("Study statistics:", data);
             },
         }
     );
@@ -77,7 +67,7 @@ const GaelOVisitUploadDicom = ({
     const sendToGaelo = async (file: File): Promise<string> => {
         const uppy = new Uppy()
             .use(Tus, {
-                endpoint: `https://v2-test.gaelo.fr/api/tus`,
+                endpoint: gaelOUrl + `/api/tus`,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
@@ -107,17 +97,23 @@ const GaelOVisitUploadDicom = ({
         });
     };
 
+    const handleAuthorizedToSendChange = (value: boolean) => {
+        setAuthorizedToSend(value);
+    };
+
     const handleExport = async () => {
-        setButtonClicked(true);
+        setExportStarted(true);
         setProgress(0);
-        mutateGetStudyStatistics(undefined);
         const file = await exportRessourceIdsToLocalFilesystem([studyOrthancId], (mb) => {
-            setMessage({ message: `Step 1/3 : Downloading ${mb} MB`, color: Colors.success });
+            setMessage({ message: `Step 1/3 : Downloading ${mb} MB`, color: Colors.warning });
         })
-        setMessage({ message: "Step 2/3 : Sending DICOM to GaelO...", color: Colors.success });
+        setMessage({ message: "Step 2/3 : Sending DICOM to GaelO...", color: Colors.warning });
         const gaeloId = await sendToGaelo(file);
-        setMessage({ message: "Step 3/3 : Validating DICOM upload...", color: Colors.warning });
-        setShowSpinner(true);
+        if (visitDetails?.stateInvestigatorForm === "Not Done") {
+            setMessage({ message: "Step 3/3 : Validating DICOM upload, don't forget to the fill investigator form in GaelO", color: Colors.warning });
+        } else {
+            setMessage({ message: "Step 3/3 : Validating DICOM upload...", color: Colors.warning });
+        }
         mutateValidateDicomUpload({ gaeloId });
         setTimeout(() => {
             setProgress(100);
@@ -125,14 +121,17 @@ const GaelOVisitUploadDicom = ({
         }, 500);
     }
 
-    useEffect(() => {
-        setButtonClicked(false);
-        setMessage(null);
-    }, [visitId]);
-
     return (
-        <div className="flex flex-col w-full">
-            {visitDetails?.uploadStatus === "Not Done" && !buttonClicked &&
+        <div className="flex flex-col w-full gap-3">
+            {visitDetails?.uploadStatus === "Not Done" && !exportStarted &&
+                <PatientDicomComparison
+                    studyOrthancId={studyOrthancId}
+                    patientId={visitDetails?.patientId}
+                    onAuthorizedToSendChange={handleAuthorizedToSendChange}
+                    visit={visitDetails}
+                />
+            }
+            {!exportStarted &&
                 <Button
                     color={Colors.success}
                     onClick={handleExport}
@@ -146,19 +145,15 @@ const GaelOVisitUploadDicom = ({
                     }
                 />
             }
+            {message != null && (
+                <div>
+                    <p className={`font-bold bg-${message.color} text-white rounded p-3`}>{message.message}</p>
+                </div>
+            )}
             {progress < 100 && progress > 0 && (
                 <ProgressBar progress={progress} />
             )}
-            {showSpinner && (
-                <div>
-                    <Spinner />
-                </div>
-            )}
-            {message != null && (
-                <div>
-                    <p className={`text-${message.color}`}>{message.message}</p>
-                </div>
-            )}
+
         </div>
     );
 }

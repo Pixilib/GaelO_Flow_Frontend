@@ -40,7 +40,7 @@ const ImportTableStudy: React.FC<ImportTableStudyProps> = ({ data = [], onStudyC
 
     const getRowClasses = (row: Study) => {
         if (row.studyInstanceUID === selectedStudyInstanceUID) {
-            return 'bg-primary hover:cursor-pointer';
+            return 'bg-primary text-white font-bold hover:cursor-pointer';
         } else {
             return 'hover:bg-indigo-100 hover:cursor-pointer dark:hover:bg-indigo-700';
         }
