@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create();
 
-const url = "https://v2-test.gaelo.fr";
+const url = window?.location?.hostname?.includes("localhost") ? "https://v2-test.gaelo.fr" : "https://platform.gaelo.fr";
 
 const getHeader = (token) => {
   return {
