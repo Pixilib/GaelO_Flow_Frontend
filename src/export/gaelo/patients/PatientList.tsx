@@ -1,18 +1,12 @@
-import React, { useContext, useState } from "react";
-import { ColumnDef } from "@tanstack/react-table";
-import { Button, Table, ToggleChevron } from "../../../ui";
-import { Colors } from "../../../utils";
-import { GaeloIcon } from "../../../assets";
-import { getGaelOPatientLink } from "../../../services/gaelo";
-import GaelOContext from "../context/GaelOContext";
+import React, { useState } from "react";
 
-type PatientTableProps = {
+type PatientListProps = {
     patients: any[];
     patientId: string,
     onRowClick: (patientId: string) => void;
 };
 
-const PatientTable: React.FC<PatientTableProps> = ({
+const PatientList: React.FC<PatientListProps> = ({
     patients,
     patientId,
     onRowClick
@@ -65,4 +59,4 @@ const PatientTable: React.FC<PatientTableProps> = ({
     );
 };
 
-export default PatientTable;
+export default PatientList;

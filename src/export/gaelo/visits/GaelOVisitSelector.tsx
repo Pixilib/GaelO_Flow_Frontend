@@ -3,7 +3,7 @@ import { Spinner } from "../../../ui";
 import { useCustomQuery } from "../../../utils";
 import { getVisitsTree } from "../../../services/gaelo";
 import GaelOContext from "../context/GaelOContext";
-import PatientTable from "../patients/PatientTable";
+import PatientList from "../patients/PatientList";
 import GaelOPatientVisits from "../patients/GaelOPatientVisits";
 import { StudyMainDicomTags } from "../../../utils/types";
 
@@ -55,7 +55,7 @@ const GaelOVisitSelector = ({
   return (
     <div className="flex flex-row gap-3">
       {studyName ? (
-        <PatientTable
+        <PatientList
           patients={patients}
           patientId={currentPatientId}
           onRowClick={handlePatientClick}
