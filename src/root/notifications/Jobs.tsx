@@ -10,7 +10,7 @@ const Jobs = () => {
             {
                 jobState.jobs.length === 0 ?
                 (
-                    <span>Empty list</span>
+                    <span className="dark:text-white">Empty list</span>
                 ) : (
                     jobState.jobs.map((job) => (
                         <InlineProgressJob key={job.jobId} jobId={job.jobId} jobType={job.jobType} />
