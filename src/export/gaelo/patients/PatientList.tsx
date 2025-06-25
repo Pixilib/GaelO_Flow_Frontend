@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 type PatientListProps = {
     patients: any[];
@@ -24,6 +24,17 @@ const PatientList: React.FC<PatientListProps> = ({
         setSearch(search);
     }
 
+    const filteredPatients = useMemo(
+        () =>
+            patients.filter(
+                (patient) =>
+                    (patient.code + " " + patient.center.name)
+                        .toLowerCase()
+                        .includes(search.toLowerCase())
+            ),
+        [patients, search]
+    );
+
     return (
         <div className="flex flex-col w-110 gap-2">
             <input
@@ -33,14 +44,8 @@ const PatientList: React.FC<PatientListProps> = ({
                 onChange={(e) => handleSearchPatients(e.target.value)}
             />
             <div className="flex flex-col h-75 overflow-y-auto text-gray-800">
-                {patients
-                    .filter(
-                        (patient) =>
-                            (patient.code + " " + patient.center.name)
-                                .toLowerCase()
-                                .includes(search.toLowerCase())
-                    )
-                    .map((patient) => (< div className="flex flex-col justify-center" >
+                {filteredPatients.map((patient) => (
+                    <div className="flex flex-col justify-center" key={patient.id}>
                         <div className={`flex flex-col h-12`}>
                             <button
                                 className="flex flex-row items-center text-base cursor-pointer hover:bg-gray-200 w-full h-12 justify-between pr-2"
@@ -52,10 +57,9 @@ const PatientList: React.FC<PatientListProps> = ({
                         </div>
                         <div className="border-b border-gray-300" />
                     </div>
-                    ))
-                }
+                ))}
             </div>
-        </div >
+        </div>
     );
 };
 
