@@ -115,7 +115,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           <Popover
             className='border border-gray-custom max-h-150 overflow-auto translate-y-3 -translate-x-60'
             withOnClick
-            backgroundColor='bg-white'
+            backgroundColor='bg-white dark:bg-gray-800'
             popover={
               <Jobs />
             }
