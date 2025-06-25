@@ -12,12 +12,6 @@ type GaelOVisitCardBodyProps = {
 }
 
 const GaelOVisitCardBody = ({ visit, studyOrthancId, visitId, onActualiseVisit }: GaelOVisitCardBodyProps) => {
-    const [authorizedToSend, setAuthorizedToSend] = useState(false);
-
-    const handleAuthorizedToSendChange = (value: boolean) => {
-        setAuthorizedToSend(value);
-    };
-
     return (
         <CardBody
             children={
@@ -27,21 +21,17 @@ const GaelOVisitCardBody = ({ visit, studyOrthancId, visitId, onActualiseVisit }
                     />
                     {visit?.statusDone === "Done" &&
                         <>
-                            {visit != null &&
-                                <PatientDicomComparison
-                                    studyOrthancId={studyOrthancId}
-                                    patientId={visit?.patientId}
-                                    onAuthorizedToSendChange={handleAuthorizedToSendChange}
-                                    visit={visit}
-                                />
+                            {visit != null && ["Not Done", "Processing"].includes(visit.uploadStatus) &&
+                                <>
+                                    <GaelOVisitUploadDicom
+                                        key={visitId}
+                                        studyOrthancId={studyOrthancId}
+                                        visitId={visitId}
+                                        onActualiseVisit={onActualiseVisit}
+                                        visitDetails={visit}
+                                    />
+                                </>
                             }
-                            <GaelOVisitUploadDicom
-                                studyOrthancId={studyOrthancId}
-                                visitId={visitId}
-                                onActualiseVisit={onActualiseVisit}
-                                visitDetails={visit}
-                                authorizedToSend={authorizedToSend}
-                            />
                         </>
                     }
                 </div>
