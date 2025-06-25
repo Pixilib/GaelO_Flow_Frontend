@@ -1,8 +1,8 @@
+import { useState } from "react";
 import { CardBody } from "../../../ui";
 import PatientDicomComparison from "../comparaison/PatientDicomComparison";
 import GaelOVisitUploadDicom from "./GaelOVisitUploadDicom";
 import GaeloVisitDetails from "./GaelOVisitDetails";
-import { useState } from "react";
 
 type GaelOVisitCardBodyProps = {
     visit: any;
