@@ -40,14 +40,12 @@ const InlineProgressJob: React.FC<ProgressInlineJobProps> = ({ jobId, jobType, o
 
     useEffect(() => {
         (async () => {
+            const patientId = jobData?.content?.Query?.[0]?.["0010,0020"];
+            const studyInstanceUID = jobData?.content?.Query?.[0]?.["0020,000d"];
             if (jobData?.content?.Query?.[0]?.["0008,0052"] === "STUDY") {
-                const patientId = jobData?.content?.Query?.[0]?.["0010,0020"];
-                const studyInstanceUID = jobData?.content?.Query?.[0]?.["0020,000d"];
                 const id = await calculateOrthancStudyID(patientId, studyInstanceUID);
                 setOrthancId(id);
             } else if (jobData?.content?.Query?.[0]?.["0008,0052"] === "SERIES") {
-                const patientId = jobData?.content?.Query?.[0]?.["0010,0020"];
-                const studyInstanceUID = jobData?.content?.Query?.[0]?.["0020,000d"];
                 const seriesInstanceUID = jobData?.content?.Query?.[0]?.["0020,000e"];
                 const id = await calculateOrthancSeriesID(patientId, studyInstanceUID, seriesInstanceUID);
                 setOrthancId(id);
