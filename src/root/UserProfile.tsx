@@ -31,19 +31,19 @@ const UserProfile = () => {
       <div>
         <div className={styleInfo}>
           <p className="font-semibold">First Name</p>
-          <p>{userData?.firstname ?? "Unknow"}</p>
+          <p>{userData?.firstname}</p>
         </div>
         <div className={styleInfo}>
           <p className="font-semibold">Last Name</p>
-          <p>{userData?.lastname ?? "Unknow"}</p>
+          <p>{userData?.lastname}</p>
         </div>
         <div className={styleInfo}>
           <p className="font-semibold">Email</p>
-          <p>{userData?.email ?? "Unknow"}</p>
+          <p>{userData?.email}</p>
         </div>
         <div className={styleInfo}>
           <p className="font-semibold">Role</p>
-          <p>{userData?.role?.name ?? "You don't have role"}</p>
+          <p>{userData?.role?.name}</p>
         </div>
       </div>
     </div>
