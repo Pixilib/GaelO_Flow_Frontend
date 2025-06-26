@@ -46,21 +46,21 @@ export const getUserById = (userId: number): Promise<User> => {
         firstname: data.Firstname,
         lastname: data.Lastname,
         email: data.Email,
-        roleName: data.Role["name"],
-        role: {
-          name: data.Role.Name,
-          import: data.Role.Import,
-          anonymize: data.Role.Anonymize,
-          export: data.Role.Export,
-          query: data.Role.Query,
-          autoQuery: data.Role.AutoQuery,
-          delete: data.Role.Delete,
-          admin: data.Role.Admin,
-          modify: data.Role.Modify,
-          cdBurner: data.Role.CdBurner,
-          autoRouting: data.Role.AutoRouting,
-          readAll: data.Role.ReadAll,
-        },
+        roleName: data?.Role?.Name ?? null,
+        role: data?.Role ? {
+          name: data?.Role.Name,
+          import: data?.Role.Import,
+          anonymize: data?.Role.Anonymize,
+          export: data?.Role.Export,
+          query: data?.Role.Query,
+          autoQuery: data?.Role.AutoQuery,
+          delete: data?.Role.Delete,
+          admin: data?.Role.Admin,
+          modify: data?.Role.Modify,
+          cdBurner: data?.Role.CdBurner,
+          autoRouting: data?.Role.AutoRouting,
+          readAll: data?.Role.ReadAll,
+        } : null,
       };
     })
     .catch(function (error) {
@@ -77,7 +77,7 @@ export const postUsers = (data: UserPayload): Promise<number> => {
     Lastname: data.lastname,
     Email: data.email,
     RoleName: data.roleName,
-    Password : data.password
+    Password: data.password
   };
   return axios
     .post("/api/users", payload)
@@ -101,7 +101,7 @@ export const updateUser = (
     Firstname: userUpdatePayload.firstname,
     Lastname: userUpdatePayload.lastname,
     RoleName: userUpdatePayload.roleName,
-    Password : userUpdatePayload.password
+    Password: userUpdatePayload.password
   };
   return axios
     .put(`/api/users/${userId}`, payload)
