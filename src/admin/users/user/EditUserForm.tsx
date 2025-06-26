@@ -32,7 +32,6 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
 
     useEffect(() => {
         if (user) {
-            // Pre-fill form when editing
             setFirstName(user.firstname);
             setLastName(user.lastname);
             setEmail(user.email);
@@ -60,15 +59,11 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
 
     const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!selectedRole) {
-            toastError("Please select a role");
-            return;
-        }
         const payload: UserUpdatePayload = {
             firstname: firstName,
             lastname: lastName,
             email: email,
-            roleName: selectedRole.value
+            roleName: selectedRole?.value ?? null
         };
         userUpdateMutation.mutate(payload);
     }
@@ -130,6 +125,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                             <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Roles *</span>
                             <SelectInput
                                 options={rolesOptions ?? []}
+                                isClearable
                                 placeholder="Select a Role"
                                 onChange={(option) => {
                                     setSelectedRole(option);
