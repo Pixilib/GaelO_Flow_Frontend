@@ -63,15 +63,11 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!selectedRole) {
-      toastError('Please select a role');
-      return;
-    }
     const payload: UserPayload = {
       firstname: firstName,
       lastname: lastName,
       email: email,
-      roleName: selectedRole.value,
+      roleName: selectedRole?.value ?? null,
       password: password,
     };
     userMutation.mutate(payload);
@@ -143,6 +139,7 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
           <SelectInput
             options={rolesOptions ?? []}
             placeholder="Select a Rôle"
+            isClearable
             onChange={(option) => setSelectedRole({ value: option.value, label: option.value })}
             value={selectedRole?.value ?? null}
           />

@@ -4,15 +4,20 @@ import { getUserById } from "../services";
 import { useCustomQuery, User } from "../utils";
 import { UserState } from '../reducers/UserSlice';
 import { User as UserIcon } from "../icons";
+import { useEffect } from "react";
 
 const UserProfile = () => {
     const userState = useSelector((state: RootState) => state.user) as UserState;
     const { data: userData, isPending } = useCustomQuery<User>(
       ["users", userState?.currentUserId.toString()],
-      () => getUserById(userState?.currentUserId)
+      () => getUserById(userState?.currentUserId),
     );
 
     const styleInfo='flex flex-row justify-between dark:text-white';
+
+    useEffect (() => {
+      console.log("User data:", userData);
+    }, [userData]);
 
     if (isPending) return <div className="spinner" />;
 
@@ -26,19 +31,19 @@ const UserProfile = () => {
       <div>
         <div className={styleInfo}>
           <p className="font-semibold">First Name</p>
-          <p>{userData.firstname}</p>
+          <p>{userData?.firstname ?? "Unknow"}</p>
         </div>
         <div className={styleInfo}>
           <p className="font-semibold">Last Name</p>
-          <p>{userData.lastname}</p>
+          <p>{userData?.lastname ?? "Unknow"}</p>
         </div>
         <div className={styleInfo}>
           <p className="font-semibold">Email</p>
-          <p>{userData.email}</p>
+          <p>{userData?.email ?? "Unknow"}</p>
         </div>
         <div className={styleInfo}>
           <p className="font-semibold">Role</p>
-          <p>{userData.role.name}</p>
+          <p>{userData?.role?.name ?? "You don't have role"}</p>
         </div>
       </div>
     </div>
