@@ -10,9 +10,10 @@ import { exportRessource, exportSeriesToNifti } from "../../services/export";
 
 type DatasetSeriesRootProps = {
   series: Series[];
+  onSeriesEdited : () => {}
 };
 
-const DatasetSeriesRoot = ({ series }: DatasetSeriesRootProps) => {
+const DatasetSeriesRoot = ({ series, onSeriesEdited }: DatasetSeriesRootProps) => {
   const [editingSeriesId, setEditingSeriesId] = useState<string | null>(null);
   const [previewSeriesId, setPreviewSeriesId] = useState<string | null>(null);
   const [previewMetadataSeriesId, setPreviewMetadataSeriesId] = useState<string | null>(null);
@@ -57,7 +58,7 @@ const DatasetSeriesRoot = ({ series }: DatasetSeriesRootProps) => {
       {editingSeriesId && (
         <EditSeries
           seriesId={editingSeriesId}
-          onSeriesEdited={() => {}}
+          onSeriesEdited={onSeriesEdited}
           onClose={() => setEditingSeriesId(null)}
           show={!!editingSeriesId}
         />

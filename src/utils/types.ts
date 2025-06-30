@@ -73,7 +73,7 @@ export type Options = {
   orthancPassword: string;
   redisAddress: string;
   redisPort: string;
-  keepLabel: boolean;
+  keepLabels: boolean;
 };
 
 //Job
@@ -417,7 +417,7 @@ export type StudyModifyPayload = {
   synchronous: boolean;
   keepSource: boolean;
   transcode: string;
-  keepLabel: boolean;
+  keepLabels: boolean;
 };
 
 export type SeriesModifyPayload = {

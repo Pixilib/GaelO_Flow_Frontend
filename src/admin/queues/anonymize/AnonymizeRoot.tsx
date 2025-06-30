@@ -13,11 +13,11 @@ import { updateAnonymizeOptions } from "../../../services/options";
 const AnonymizeRoot = () => {
     const { data: options, isPending: isLoadingOptions } = useCustomQuery<Options>(["options"], () => getOptions());
     const { toastSuccess, toastError } = useCustomToast();
-    const [keepLabel, setKeepLabel] = useState<boolean>();
+    const [keepLabels, setKeepLabels] = useState<boolean>();
 
     useMemo(() => {
         if (options)
-            setKeepLabel(options.keepLabel);
+            setKeepLabels(options.keepLabels);
     }, [options]);
 
     const {mutate: mutateUpdateAnonymizeOptions} = useCustomMutation(
@@ -28,7 +28,7 @@ const AnonymizeRoot = () => {
                 toastError(e?.data?.message);
             },
             onSuccess: () => {
-                setKeepLabel(!keepLabel);
+                setKeepLabels(!keepLabels);
             }
         },
     );
@@ -77,7 +77,7 @@ const AnonymizeRoot = () => {
     );
 
     const handleKeepLabelChange = () => {
-        mutateUpdateAnonymizeOptions({ anonymizeKeepLabels: !keepLabel });
+        mutateUpdateAnonymizeOptions({ anonymizeKeepLabels: !keepLabels });
     }
 
     if (isLoadingOptions) return <Spinner />;
@@ -88,7 +88,7 @@ const AnonymizeRoot = () => {
             <div className="flex justify-between items-center">
                 <Toggle
                     onChange={handleKeepLabelChange}
-                    checked={keepLabel}
+                    checked={keepLabels}
                     label="Keep Labels"
                     labelPosition="right"
                 />
