@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import InlineProgressJob from "./InlineProgressJob";
+import InlineQueryProgressJob from "./InlineQueryProgressJob";
 
 const Jobs = () => {
     const jobState = useSelector((state: RootState) => state.job);
@@ -13,7 +13,7 @@ const Jobs = () => {
                     <span className="dark:text-white">Empty list</span>
                 ) : (
                     jobState.jobs.map((job) => (
-                        <InlineProgressJob key={job.jobId} jobId={job.jobId} jobType={job.jobType} />
+                        <InlineQueryProgressJob key={job.jobId} jobId={job.jobId} jobType={job.jobType} />
                     ))
                 )
             }
