@@ -335,7 +335,7 @@ export const modifyStudy = (
     Synchronous: false,
     KeepSource: study.keepSource,
     Transcode : transcode,
-    KeepLabels: study.keepLabel,
+    KeepLabels: study.keepLabels,
   };
   return axios
     .post(`/api/studies/${studyId}/modify`, studyPayloadUpdate)

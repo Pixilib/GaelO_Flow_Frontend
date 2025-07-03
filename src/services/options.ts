@@ -30,7 +30,7 @@ export const getOptions = (): Promise<Options> => {
         orthancPassword: data.OrthancPassword,
         redisAddress: data.RedisAddress,
         redisPort: data.RedisPort,
-        keepLabel: data.AnonymizeKeepLabels,
+        keepLabels: data.AnonymizeKeepLabels,
       };
     })
     .catch(function (error) {

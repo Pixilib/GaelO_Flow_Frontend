@@ -15,9 +15,10 @@ type StudyEditFormProps = {
     onSubmit: (params: { id: string; payload: StudyModifyPayload }) => void;
     jobId?: string;
     onJobCompleted?: (jobState: string) => void;
+    defaultKeepLabels :boolean
 };
 
-const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormProps) => {
+const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted,defaultKeepLabels }: StudyEditFormProps) => {
     const [patientName, setPatientName] = useState<string | null>(data?.patientMainDicomTags?.patientName ?? null);
     const [patientId, setPatientId] = useState<string | null>(data?.patientMainDicomTags?.patientId ?? null);
     const [patientBirthDate, setPatientBirthDate] = useState<string | null>(data?.patientMainDicomTags?.patientBirthDate ?? null);
@@ -30,7 +31,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
     const [studyId, setStudyId] = useState<string | null>(data?.mainDicomTags?.studyId ?? null);
     const [removePrivateTags, setRemovePrivateTags] = useState<boolean>(false);
     const [keepSource, setKeepSource] = useState<boolean>(false);
-    const [keepLabel, setKeepLabel] = useState<boolean>(false);
+    const [keepLabels, setKeepLabels] = useState<boolean>(defaultKeepLabels);
     const [fieldsToRemove, setFieldsToRemove] = useState<string[]>([]);
     const [keepUIDs, setKeepUIDs] = useState(false)
     const [transferSyntax, setTrasferSyntax] = useState(null);
@@ -74,7 +75,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
             removePrivateTags,
             keep: keepUIDs ? ['StudyInstanceUID', 'SeriesInstanceUID', 'SOPInstanceUID'] : [],
             keepSource,
-            keepLabel,
+            keepLabels,
             force: true,
             synchronous: false,
             ...(transcode && transcode !== 'None') ? { transcode } : {},
@@ -188,8 +189,8 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted }: StudyEditFormP
                 />
                 <CheckBox
                     label="Keep labels"
-                    checked={keepLabel}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepLabel(e.target.checked)}
+                    checked={keepLabels}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setKeepLabels(e.target.checked)}
                     bordered={false}
                 />
             </div>

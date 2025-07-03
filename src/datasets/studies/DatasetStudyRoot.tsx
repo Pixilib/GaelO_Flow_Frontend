@@ -4,10 +4,13 @@ import PreviewStudy from "../../content/studies/PreviewStudy";
 import AiStudy from "../../content/studies/AiStudy";
 import DatasetTableStudy from "./DatasetTableStudy";
 import Study from "../../model/Study";
+import { useCustomToast } from "../../utils";
+import { exportRessource } from "../../services/export";
 
 type StudyRootProps = {
   studies: Study[];
   onRowClick: (studyId: string) => void;
+  onStudyUpdated : () => void;
   selectedStudyId: string | null;
 };
 
@@ -15,14 +18,38 @@ const DatasetStudyRoot = ({
   studies,
   onRowClick,
   selectedStudyId,
+  onStudyUpdated
 }: StudyRootProps) => {
+
+  const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
   const [editingStudyId, setEditingStudyId] = useState<string | null>(null);
   const [aiStudyId, setAIStudyId] = useState<string | null>(null);
   const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
 
+  const handleDownloadStudy = (studyId: string) => {
+    const id = toastSuccess("Download started, follow progression in console");
+    exportRessource("studies", studyId, (mb) =>
+      updateExistingToast(id, `Downloaded ${mb} mb`)
+    );
+  };
 
-  const onActionClick = () => {
-
+  const onActionClick = (action: string, studyId: string) => {
+    switch (action) {
+      case "edit":
+        setEditingStudyId(studyId);
+        break;
+      case "preview":
+        setPreviewStudyId(studyId);
+        break;
+      case "ai":
+        setAIStudyId(studyId);
+        break;
+      case "download":
+        handleDownloadStudy(studyId);
+        break;
+      default:
+        break;
+    }
   }
 
   return (
@@ -30,9 +57,10 @@ const DatasetStudyRoot = ({
       {editingStudyId && (
         <EditStudy
           studyId={editingStudyId}
-          onStudyUpdated={() => {}}
+          onStudyUpdated={onStudyUpdated}
           onClose={() => setEditingStudyId(null)}
           show={!!editingStudyId}
+          defaultKeepLabels
         />
       )}
       {previewStudyId && (
