@@ -1,6 +1,6 @@
 // stories/InputWithDelete.stories.tsx
 import { useState, ChangeEvent } from 'react';
-import { Meta, StoryObj, StoryFn } from '@storybook/react';
+import { Meta, StoryObj, StoryFn } from '@storybook/react-vite';
 import InputWithDelete from '../src/ui/InputWithDelete';
 
 const meta: Meta<typeof InputWithDelete> = {

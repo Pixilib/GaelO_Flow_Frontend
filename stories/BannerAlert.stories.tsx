@@ -1,5 +1,5 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Meta, Story } from '@storybook/react-vite';
 import BannerAlert, { BannerProps } from '../src/ui/BannerAlert';
 import { Colors } from '../src/utils/enums';
 

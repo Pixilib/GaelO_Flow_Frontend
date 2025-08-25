@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import Card, { CardHeader, CardBody, CardFooter } from "../src/ui/Card";
 import ChevronRight from '../src/assets/chevron-right.svg?react';
 import { Colors } from "../src/utils/enums";

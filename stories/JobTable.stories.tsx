@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import JobTable from '../src/admin/jobs/JobTable';
 
 const meta: Meta<typeof JobTable> = {
