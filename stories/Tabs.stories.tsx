@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { action } from 'storybook/actions';
 import { Tabs, Tab } from '../src/ui'; // Assuming these are correctly imported as you mentioned
 
 const Users = () => <div className="h-26" style={{ height: '300px' }}>Content of Local Users</div>;

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react-vite";
 import Button from "../src/ui/Button";
 import ChevronRight from "../src/assets/chevron-right.svg?react";
 import { Colors } from "../src/utils/enums"; 

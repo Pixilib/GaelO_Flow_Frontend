@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import SearchForm from '../src/query/SearchForm';
 import { QueryPayload } from '../src/utils';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const meta = {
     title: 'GAELO FLOW COMPONENTS/SearchForm',

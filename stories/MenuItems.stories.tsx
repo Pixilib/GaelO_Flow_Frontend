@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Administrator from '../src/assets/administrator.svg?react';
 import MenuItemsCollapse from '../src/ui/menu/MenuItemsCollapse';
 

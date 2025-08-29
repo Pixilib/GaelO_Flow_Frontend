@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { Series, SeriesPayload } from '../src/utils/types';
 import SeriesEditForm from '../src/content/series/SeriesEditForm';

@@ -1,7 +1,7 @@
 // AccordionPatient.stories.tsx
 
-import { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { Meta, StoryObj } from '@storybook/react-vite';
+import { action } from 'storybook/actions';
 import AccordionPatient from '../src/content/patients/AccordionPatient';
 import Patient from '../src/model/Patient';
 import Study from '../src/model/Study';

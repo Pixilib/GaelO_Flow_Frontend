@@ -5,20 +5,14 @@ const config: StorybookConfig = {
 
   addons: [
     "@storybook/addon-links",
-    "@storybook/addon-essentials",
     "@storybook/addon-onboarding",
-    "@storybook/addon-interactions",
-    "@storybook/addon-actions",
-    "@chromatic-com/storybook"
+    "@chromatic-com/storybook",
+    "@storybook/addon-docs"
   ],
 
   framework: {
     name: "@storybook/react-vite",
     options: {},
-  },
-
-  docs: {
-    autodocs: true
   },
 
   typescript: {
