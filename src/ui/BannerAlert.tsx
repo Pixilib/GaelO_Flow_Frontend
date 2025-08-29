@@ -44,7 +44,7 @@ const BannerAlert: React.FC<BannerProps> = ({
   return (
     <div
       {...props}
-      className={`flex items-center p-4 mb-4 border-t-4 rounded-lg shadow-sm ${colorClass} ${className}`}
+      className={`flex gap-3 items-center w-full p-4 mb-4 border-t-4 rounded-lg shadow-sm ${colorClass} ${className}`}
       role="alert"
     >
       <Info className="shrink-0 w-5 h-5" />
@@ -54,7 +54,7 @@ const BannerAlert: React.FC<BannerProps> = ({
       {onClickButton && (
         <Button
           className="px-4 py-2 ml-auto font-bold text-white focus:outline-hidden focus:shadow-outline"
-          onClick={onClickButton} color={Colors.danger}       >
+          onClick={onClickButton} color={Colors.warning}       >
           {buttonLabel}
         </Button>
       )}

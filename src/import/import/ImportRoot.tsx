@@ -102,7 +102,7 @@ const ImportRoot: React.FC = () => {
   }, [currentStudyInstanceUID]);
 
   return (
-    <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col items-center">
+    <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col gap-3 items-center">
       <SelectRoleLabels
         values={selectedLabels}
         onChange={setSelectedLabels}
@@ -115,10 +115,10 @@ const ImportRoot: React.FC = () => {
       />
       {errors.length > 0 && (
         <BannerAlert
-          color={Colors.danger}
-          message={`Error Importing ${errors.length} file(s)`}
+          color={Colors.warning}
+          message={`Failed to import ${errors.length} file(s)`}
           onClickButton={handleShowModal}
-          buttonLabel="See Errors"
+          buttonLabel="See failures"
         />
       )}
 
