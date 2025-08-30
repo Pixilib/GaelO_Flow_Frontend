@@ -1,4 +1,4 @@
-import Card, { CardHeader, CardFooter, CardBody } from "../ui/Card";
+import Card, { CardHeader, CardBody } from "../ui/Card";
 import {
   Colors,
   useCustomMutation,
@@ -14,6 +14,7 @@ import { FindPayload, Series } from "../utils/types";
 import { getSeriesOfStudy } from "../services/orthanc";
 import DatasetStudyRoot from "./studies/DatasetStudyRoot";
 import DatasetSeriesRoot from "./series/DatasetSeriesRoot";
+import { Anon, Export, Trash } from "../icons";
 
 const DatasetRoot = () => {
   const [model, setModel] = useState<Model | null>(null);
@@ -84,10 +85,6 @@ const DatasetRoot = () => {
     setCurrentStudyId(studyId);
   };
 
-  const handleButtonClick = () => {
-    console.log("Button clicked");
-  };
-
   const handleStudyUpdated = () => {
     doFind();
   };
@@ -96,11 +93,21 @@ const DatasetRoot = () => {
     refetch()
   }
 
+  const handleSendAnonymizeList = () => {
+    console.log("Send to Anonymize clicked");
+  }
+  const handleSendExportList = () => {
+    console.log("Send to Export clicked");
+  }
+  const handleSendDeleteList = () => {
+    console.log("Send to Delete clicked");
+  }
+
   return (
     <Card>
       <CardHeader centerTitle color={Colors.primary} title="Dataset" />
-      <CardBody className="bg-almond dark:bg-neutral-500">
-        <div className="space-y-2">
+      <CardBody className="bg-almond dark:bg-neutral-500 flex flex-col gap-4">
+        <div>
           <span className="text-base font-semibold text-gray-700 dark:text-white">
             Labels
           </span>
@@ -109,7 +116,35 @@ const DatasetRoot = () => {
             onChange={(labels) => setSelectedLabels(labels)}
           />
         </div>
-        <div className="grid grid-cols-1 gap-4 mt-4 2xl:grid-cols-12">
+        <div className="flex gap-2">
+          <Button
+            color={Colors.blueCustom}
+            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+            onClick={handleSendAnonymizeList}
+          >
+            <Anon className="text-xl" />
+            <span className="ml-2">Send to Anonymize</span>
+          </Button>
+
+          <Button
+            color={Colors.secondary}
+            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+            onClick={handleSendExportList}
+          >
+            <Export className="text-xl" />
+            <span className="ml-2">Send to Export</span>
+          </Button>
+
+          <Button
+            color={Colors.danger}
+            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+            onClick={handleSendDeleteList}
+          >
+            <Trash className="text-xl" />
+            <span className="ml-2">Send to Delete</span>
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 gap-4 2xl:grid-cols-12">
           <div className="2xl:col-span-7">
             <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">
               Studies
@@ -125,15 +160,10 @@ const DatasetRoot = () => {
             <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">
               Series
             </span>
-            {series && <DatasetSeriesRoot onSeriesEdited = {handleOnSeriesEdited} series={series} />}
+            {series && <DatasetSeriesRoot onSeriesEdited={handleOnSeriesEdited} series={series} />}
           </div>
         </div>
       </CardBody>
-      <CardFooter className="flex justify-center border-t-2 border-indigo-100 shadow-inner dark:border-slate-600 bg-light dark:bg-slate-950">
-        <Button color={Colors.secondary} onClick={handleButtonClick}>
-          To Export
-        </Button>
-      </CardFooter>
     </Card>
   );
 };

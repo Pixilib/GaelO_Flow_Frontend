@@ -10,7 +10,7 @@ import { exportRessource, exportSeriesToNifti } from "../../services/export";
 
 type DatasetSeriesRootProps = {
   series: Series[];
-  onSeriesEdited : () => {}
+  onSeriesEdited : () => void;
 };
 
 const DatasetSeriesRoot = ({ series, onSeriesEdited }: DatasetSeriesRootProps) => {
