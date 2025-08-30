@@ -5,6 +5,7 @@ type ProgressCircleProps = {
   children?: React.ReactNode;
   className?: string;
   progressColor?: string;
+  [props: string]: any;
 };
 
 const ProgressCircle = ({
@@ -14,13 +15,14 @@ const ProgressCircle = ({
   children,
   className = '',
   progressColor = 'text-orange-600',
+  ...props
 }: ProgressCircleProps) => {
   const radius = 15;
   const circumference = 2 * Math.PI * radius;
   const progressValue = (progress / 100) * circumference;
 
   return (
-    <div className={`relative flex items-center justify-center ${className}`} style={{ width: size, height: size }}>
+    <div className={`relative flex items-center justify-center ${className}`} style={{ width: size, height: size }} {...props}>
       <svg
         className="rotate-[135deg] w-full h-full"
         viewBox="0 0 36 36"
