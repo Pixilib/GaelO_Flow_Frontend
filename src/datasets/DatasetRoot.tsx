@@ -15,11 +15,15 @@ import { getSeriesOfStudy } from "../services/orthanc";
 import DatasetStudyRoot from "./studies/DatasetStudyRoot";
 import DatasetSeriesRoot from "./series/DatasetSeriesRoot";
 import { Anon, Export, Trash } from "../icons";
+import { addSeriesOfStudyIdToExportList, addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
 
 const DatasetRoot = () => {
   const [model, setModel] = useState<Model | null>(null);
+
   const [currentStudyId, setCurrentStudyId] = useState<string | null>(null);
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
+  const [selectedRow, setSelectedRow] = useState<Record<string, boolean>>({});
+
   const { toastError } = useCustomToast();
   const studies =
     model
@@ -93,14 +97,30 @@ const DatasetRoot = () => {
     refetch()
   }
 
+  const onRowSelectionChange = (selectedRow: Record<string, boolean>) => {
+    setSelectedRow(selectedRow);
+  }
+
   const handleSendAnonymizeList = () => {
-    console.log("Send to Anonymize clicked");
+    Object.entries(selectedRow)
+      .filter(([_, value]) => value)
+      .forEach(async ([key]) => {
+        await addStudyIdToAnonymizeList(key);
+      });
   }
   const handleSendExportList = () => {
-    console.log("Send to Export clicked");
+    Object.entries(selectedRow)
+      .filter(([_, value]) => value)
+      .forEach(async ([key]) => {
+        await addSeriesOfStudyIdToExportList(key);
+      });
   }
   const handleSendDeleteList = () => {
-    console.log("Send to Delete clicked");
+    Object.entries(selectedRow)
+      .filter(([_, value]) => value)
+      .forEach(async ([key]) => {
+        await addStudyIdToDeleteList(key);
+      });
   }
 
   return (
@@ -154,6 +174,8 @@ const DatasetRoot = () => {
               onRowClick={handleStudyRowClick}
               selectedStudyId={currentStudyId}
               onStudyUpdated={handleStudyUpdated}
+              onRowSelectionChange={onRowSelectionChange}
+              selectedRow={selectedRow}
             />
           </div>
           <div className="2xl:col-span-5">

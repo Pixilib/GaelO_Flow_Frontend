@@ -10,6 +10,8 @@ type StudyTableProps = {
   onRowClick: (studyId: string) => void;
   onActionClick: (action: string, studyId: string) => void;
   selectedStudyId: string | null;
+  onRowSelectionChange?: (selectedRow: Record<string, boolean>) => void;
+  selectedRow?: Record<string, boolean>;
 };
 
 const DatasetTableStudy: React.FC<StudyTableProps> = ({
@@ -17,6 +19,8 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
   onRowClick,
   onActionClick,
   selectedStudyId,
+  onRowSelectionChange,
+  selectedRow
 }) => {
   const columns: ColumnDef<Study>[] = useMemo(
     () => [
@@ -75,6 +79,8 @@ const DatasetTableStudy: React.FC<StudyTableProps> = ({
       headerTextSize="xs"
       className="text-xs bg-gray-100"
       getRowClasses={getRowClasses}
+      onRowSelectionChange={onRowSelectionChange}
+      selectedRow={selectedRow}
     />
   );
 };
