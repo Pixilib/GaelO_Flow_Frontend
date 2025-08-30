@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useDropzone } from "react-dropzone";
 import { useCustomToast } from "../../utils";
 import { Check, Cloud } from "../../icons";
@@ -29,12 +29,9 @@ const CreateDrop: React.FC<CreateDropProps> = ({ files, onDrop }) => {
         }
     });
 
-    const handleDragOver = useCallback(
-        (event: React.DragEvent<HTMLDivElement>) => {
-            event.preventDefault();
-        },
-        []
-    );
+    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+    }
 
     return (
         <div

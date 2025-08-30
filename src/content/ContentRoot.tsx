@@ -39,8 +39,6 @@ const ContentRoot: React.FC = () => {
     [patientId: string]: { [studyId: string]: boolean };
   }>({});
 
-
-
   const [model, setModel] = useState<Model | null>(null);
   const [queryPayload, setQueryPayload] = useState<QueryPayload | null>(null);
   const [editingPatient, setEditingPatient] = useState<Patient | null>(null);

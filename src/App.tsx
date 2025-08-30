@@ -17,17 +17,31 @@ function App() {
   const location = useLocation();
   const [isDark, setDark] = useState(localStorage.getItem('theme') === 'dark')
 
+  async function loadPreline() {
+    return import('preline/dist/index.js');
+  }
+
+  useEffect(() => {
+    const initPreline = async () => {
+      await loadPreline();
+
+      if (
+        window.HSStaticMethods &&
+        typeof window.HSStaticMethods.autoInit === 'function'
+      ) {
+        window.HSStaticMethods.autoInit();
+      }
+    };
+
+    initPreline();
+  }, [location.pathname]);
+
   useEffect(() => {
     window.onstorage = () => {
       const isDark = localStorage.getItem('theme') === 'dark';
       setDark(isDark);
     };
   }, []);
-
-  useEffect(() => {
-    window.HSStaticMethods.autoInit();
-  }, [location.pathname]);
-
 
   return (
     <div className={`w-screen h-screen ${isDark ? 'dark' : ''}`}>

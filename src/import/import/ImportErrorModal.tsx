@@ -1,12 +1,12 @@
 import React from 'react';
 import { Modal, Table } from '../../ui';
 
-interface ImportError {
+type ImportError = {
     filename: string;
     errorMessage: string;
 }
 
-interface ImportErrorModalProps {
+type ImportErrorModalProps = {
     errors: ImportError[];
     onClose: () => void;
 }

@@ -1,21 +1,23 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, CheckBox, Input } from "../ui";
+import { Button, CheckBox, Input, Label } from "../ui";
 import { Colors } from "../utils";
-import { updateAnonymizePatientValue } from "../reducers/AnonymizeSlice";
+import { updateAnonymizePatientValue, updateAnonymizeStudyValue } from "../reducers/AnonymizeSlice";
 import { RootState } from "../store";
 
 const AutoFillInput = () => {
     const dispatch = useDispatch();
 
     const [autoIncrement, setAutoIncrement] = useState(false);
-    const [autoFillValue, setAutoFillValue] = useState('');
+    const [autoFillPatientValue, setAutoFillPatientValue] = useState<string>('');
+    const [autoFillStudyDescriptionValue, setAutoFillDescriptionValue] = useState<string>('');
 
     const anonPatientList = useSelector((state: RootState) => state.anonymize.patients);
+    const anonStudyList = useSelector((state: RootState) => state.anonymize.studies);
 
-    const handleAutoFill = () => {
+    const handleAutoFillPatient = () => {
         Object.values(anonPatientList).forEach((patient, i) => {
-            const currentValue = autoIncrement ?  autoFillValue + (i + 1) : autoFillValue;
+            const currentValue = autoIncrement ? autoFillPatientValue + (i + 1) : autoFillPatientValue;
             dispatch(
                 updateAnonymizePatientValue({
                     patientId: patient.originalPatient.id,
@@ -26,26 +28,61 @@ const AutoFillInput = () => {
         });
     };
 
+    const handleAutoFillStudyDescription = () => {
+        Object.keys(anonStudyList).forEach((studyId, i) => {
+            dispatch(
+                updateAnonymizeStudyValue({
+                    studyId: studyId,
+                    newStudyDescription: autoFillStudyDescriptionValue,
+                })
+            );
+        });
+    }
+
     return (
-        <div className="flex flex-col items-center">
-            <Input
-                type="text"
-                placeholder="Enter value"
-                className="w-full p-2 border"
-                value={autoFillValue}
-                onChange={(e) => setAutoFillValue(e.target.value)}
-            />
-            <div className="flex items-center w-full mt-2">
-                <CheckBox checked={autoIncrement} onChange={(event) => setAutoIncrement(event.target.checked)} bordered={false} className="mr-2" />
-                <span className="text-black">Auto Increment</span>
+        <div className="flex flex-col gap-3 items-center w-full" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-3 shadow p-3 justify-around w-96">
+                <Label value="Patient Name/ID" className="font-semibold"></Label>
+                <span>
+                    <Input
+                        type="text"
+                        placeholder="Enter value"
+                        className="w-full p-2"
+                        value={autoFillPatientValue}
+                        onChange={(e) => { console.log(e.target.value); setAutoFillPatientValue(e.target.value) }}
+                    />
+                    <div className="flex items-center w-full mt-2">
+                        <CheckBox checked={autoIncrement} onChange={(event) => setAutoIncrement(event.target.checked)} bordered={false} className="mr-2" />
+                        <span className="">Auto Increment</span>
+                    </div>
+                </span>
+                <Button
+                    onClick={handleAutoFillPatient}
+                    color={Colors.secondary}
+                    className="mx-auto rounded-lg hover:bg-secondary"
+                >
+                    <span>Auto Fill</span>
+                </Button>
             </div>
-            <Button
-                onClick={handleAutoFill}
-                color={Colors.secondary}
-                className="mx-auto rounded-lg hover:bg-secondary group"
-            >
-                <span className="ml-2">Auto Fill</span>
-            </Button>
+            <div className="w-full flex items-center gap-3 shadow p-3 justify-around">
+                <Label value="Study Description" className="font-semibold"></Label>
+                <span>
+                    <Input
+                        type="text"
+                        placeholder="Enter value"
+                        className="w-full p-2"
+                        value={autoFillStudyDescriptionValue}
+                        onChange={(e) => { console.log(e.target.value); setAutoFillDescriptionValue(e.target.value) }}
+                    />
+                </span>
+                <Button
+                    onClick={handleAutoFillStudyDescription}
+                    color={Colors.secondary}
+                    className="mx-auto rounded-lg hover:bg-secondary"
+                >
+                    <span>Auto Fill</span>
+                </Button>
+            </div>
         </div>
     );
 };

@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import FormCard from '../src/ui/FormCard';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { useState } from 'react';
 
 const meta = {

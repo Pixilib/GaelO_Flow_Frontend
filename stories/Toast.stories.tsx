@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import  { useState } from 'react';
 import ToastContainer, { ToastItem } from '../src/ui/toast/ToastContainer';
 import ToastContext from '../src/ui/toast/ToastContext';

@@ -8,9 +8,10 @@ type ProgressJobProps = {
     jobId: string;
     size?: number;
     onJobCompleted?: (jobStatus: string) => void;
+    [props: string]: any;
 }
 
-const ProgressJob: React.FC<ProgressJobProps> = ({ jobId, size = 84, onJobCompleted  }) => {
+const ProgressJob: React.FC<ProgressJobProps> = ({ jobId, size = 84, onJobCompleted, ...props }) => {
     const { data: jobData, isLoading, error } = useCustomQuery<OrthancJob>(
         ["job", jobId],
         () => getJobById(jobId),
@@ -45,6 +46,7 @@ const ProgressJob: React.FC<ProgressJobProps> = ({ jobId, size = 84, onJobComple
             text={jobData?.state ?? ""}
             className={`${getTextColor(jobData?.state ?? "")} text-[11px]`}
             size={size}
+            {...props}
         />
     );
 };

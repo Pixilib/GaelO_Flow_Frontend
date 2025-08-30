@@ -1,7 +1,7 @@
 import React from 'react';
-import {Meta, StoryObj } from "@storybook/react";
+import {Meta, StoryObj } from "@storybook/react-vite";
 import Header from "../src/root/Header";
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { BrowserRouter as Router } from 'react-router';
 
 const meta: Meta<typeof Header> = {

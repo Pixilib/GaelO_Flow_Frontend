@@ -74,28 +74,28 @@ function ToastContainer({ className }: ToastContainerProps) {
         data-gaelo-flow="toast-container"
         className={`z-[1300] ${className}`}
       >
-        <div className="fixed bottom-2 right-2">
+        <div className="space-y-2 fixed bottom-2 right-2">
           {toasts
             .filter((toast) => toast.position === "bottom-right")
             .map((toast) => (
               <ToastComponent key={toast.id} onClose={() => onClickToast(toast.id)} {...toast} />
             ))}
         </div>
-        <div className="fixed bottom-2 left-2">
+        <div className="space-y-2 fixed bottom-2 left-2">
           {toasts
             .filter((toast) => toast.position === "bottom-left")
             .map((toast) => (
               <ToastComponent key={toast.id} onClose={() =>  onClickToast(toast.id)} {...toast} />
             ))}
         </div>
-        <div className="fixed left-2 top-2">
+        <div className="space-y-2 fixed left-2 top-2">
           {toasts
             .filter((toast) => toast.position === "top-left")
             .map((toast) => (
               <ToastComponent key={toast.id} onClose={() =>  onClickToast(toast.id)} {...toast} />
             ))}
         </div>
-        <div className="fixed right-2 top-2">
+        <div className="space-y-2 fixed right-2 top-2">
           {toasts
             .filter((toast) => toast.position === "top-right")
             .map((toast) => (

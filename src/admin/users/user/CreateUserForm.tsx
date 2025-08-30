@@ -138,7 +138,8 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
           <span className="mt-1 mb-2 text-sm font-bold lg:mt-3"> Roles *</span>
           <SelectInput
             options={rolesOptions ?? []}
-            placeholder="Select a Rôle"
+            placeholder="Select a Role"
+            menuPosition='fixed'
             isClearable
             onChange={(option) => setSelectedRole({ value: option.value, label: option.value })}
             value={selectedRole?.value ?? null}

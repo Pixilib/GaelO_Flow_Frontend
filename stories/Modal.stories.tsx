@@ -1,7 +1,7 @@
 // Modal.stories.tsx
 
-import type { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { action } from 'storybook/actions';
 import { Colors } from '../src/utils';
 import { Button, Modal } from '../src/ui';
 import { useState } from 'react';

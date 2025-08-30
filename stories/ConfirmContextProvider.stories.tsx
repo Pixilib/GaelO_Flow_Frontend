@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { action } from 'storybook/actions';
 import ConfirmContextProvider, { useConfirm } from '../src/services/ConfirmContextProvider';
 import { Button } from '../src/ui';
 import { Colors } from '../src/utils';

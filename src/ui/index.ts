@@ -28,11 +28,12 @@ import ToastContext from "./toast/ToastContext";
 import SelectInput from "./SelectInput";
 import InputWithDelete from "./InputWithDelete";    
 import Spinner from "./Spinner";
-import { Banner, BannerItems, Dropdown, DropdownButton, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToggleChevron, Tabs, Tab } from "./menu";
+import { Banner, BannerItems, Dropdown as DropdownMenu, DropdownButton, Items, MenuItem, MenuItemsCollapse, SideBarItems, Toggle, ToggleSwitch, ToggleChevron, Tabs, Tab } from "./menu";
 import ConfirmModal from './ConfirmModal';
 import Modal from './Modal';
 import BannerAlert from "./BannerAlert";
 import ProgressBar from "./ProgressBar";
+import Dropdown from "./Dropdown";
 
 export {
     Accordion,
@@ -52,6 +53,7 @@ export {
     CloseButton,
     DownloadButton,
     Dropdown,
+    DropdownMenu,
     DropdownButton,
     EditButton,
     DeleteButton,

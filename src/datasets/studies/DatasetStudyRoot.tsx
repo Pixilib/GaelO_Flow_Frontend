@@ -10,18 +10,22 @@ import { exportRessource } from "../../services/export";
 type StudyRootProps = {
   studies: Study[];
   onRowClick: (studyId: string) => void;
-  onStudyUpdated : () => void;
+  onStudyUpdated: () => void;
   selectedStudyId: string | null;
+  onRowSelectionChange?: (selectedRow: Record<string, boolean>) => void;
+  selectedRow?: Record<string, boolean>;
 };
 
 const DatasetStudyRoot = ({
   studies,
   onRowClick,
   selectedStudyId,
-  onStudyUpdated
+  onStudyUpdated,
+  onRowSelectionChange,
+  selectedRow
 }: StudyRootProps) => {
 
-  const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
+  const { toastSuccess, updateExistingToast } = useCustomToast();
   const [editingStudyId, setEditingStudyId] = useState<string | null>(null);
   const [aiStudyId, setAIStudyId] = useState<string | null>(null);
   const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
@@ -82,6 +86,8 @@ const DatasetStudyRoot = ({
         onRowClick={onRowClick}
         onActionClick={onActionClick}
         selectedStudyId={selectedStudyId}
+        onRowSelectionChange={onRowSelectionChange}
+        selectedRow={selectedRow}
       />
     </>
   );

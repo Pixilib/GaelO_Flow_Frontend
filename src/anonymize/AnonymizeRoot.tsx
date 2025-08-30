@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { DropdownButton, CardHeader, CardBody, CardFooter, Button, SelectInput } from "../ui";
+import { CardHeader, CardBody, CardFooter, Button, SelectInput, Dropdown } from "../ui";
 import { Colors, useCustomMutation } from "../utils";
 import PatientTable from "./PatientTable";
 import StudyTable from "./StudyTable";
@@ -12,7 +12,7 @@ import {
     updateAnonymizePatientValue,
     updateAnonymizeStudyValue,
 } from "../reducers/AnonymizeSlice";
-import { Anon, Empty } from "../icons";
+import { Anon, ChevronDown, Empty } from "../icons";
 import AutoFill from "../icons/AutofIll";
 import { AnonItem } from "../utils/types";
 import { createAnonymizeQueue } from "../services/queues";
@@ -88,20 +88,20 @@ const AnonymizeRoot = () => {
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
                         Anonymize Resources
                     </div>
-                    <div className="flex justify-end w-full p-3 sm:w-1/5">
-                        <DropdownButton
-                            options={[]}
-                            buttonText={
-                                <div className="flex items-center justify-center">
-                                    <AutoFill className="text-2xl text-primary group-hover:text-white dark:text-white" />
-                                    <span className="ml-2 dark:text-white">Auto Fill</span>
-                                </div>
+                    <div className="flex justify-end gap-3 w-full p-3 sm:w-1/5">
+                        <Dropdown
+                            withOnClick
+                            popover={
+                                <AutoFillInput />
                             }
                             className="mr-4"
                         >
-                            <AutoFillInput />
-                        </DropdownButton>
-
+                            <Button className="rounded-lg dark:bg-slate-700" color={Colors.light} >
+                                <AutoFill className="text-2xl text-primary group-hover:text-white dark:text-white" />
+                                <span className="ml-2 font-semibold text-sm text-gray-700 dark:text-white">Auto Fill</span>
+                                <ChevronDown className="ml-3 text-gray-700 dark:text-white" />
+                            </Button>
+                        </Dropdown>
                         <Button
                             onClick={() => dispatch(flushAnonymizeList())}
                             color={Colors.light}

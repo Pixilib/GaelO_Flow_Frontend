@@ -44,7 +44,7 @@ const RetrieveButton = ({ answerId, answerNumber }: RetrieveButtonProps) => {
   return (
     <div className="flex justify-center">
       {jobId ?
-        <ProgressJob jobId={jobId} />
+        <ProgressJob jobId={jobId} onClick = {(event)=> {event.stopPropagation()}} />
         :
         <Download
           color={Colors.warning}

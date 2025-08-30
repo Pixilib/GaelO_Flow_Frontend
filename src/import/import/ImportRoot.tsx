@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BannerAlert, Button } from "../../ui";
 import Model from "../../model/Model";
 import { Colors } from "../../utils";
@@ -36,11 +36,11 @@ const ImportRoot: React.FC = () => {
     setStudiesData(studies);
   };
 
-  const handleStudyClick = useCallback((studyInstanceUID: string) => {
+  const handleStudyClick = (studyInstanceUID: string) => {
     refreshStudyData();
     setCurrentStudyInstanceUID(studyInstanceUID);
     updateSeriesData(studyInstanceUID);
-  }, []);
+  };
 
   const updateSeriesData = (studyInstanceUID: string) => {
     const study = refModel.current.getStudy(studyInstanceUID);
@@ -49,27 +49,21 @@ const ImportRoot: React.FC = () => {
     }
   };
 
-  const handleImportError = useCallback(
-    (filename: string, errorMessage: string) => {
-      setErrors((prevErrors) => [...prevErrors, { filename, errorMessage }]);
-    },
-    []
-  );
+  const handleImportError = (filename: string, errorMessage: string) => {
+    setErrors((prevErrors) => [...prevErrors, { filename, errorMessage }]);
+  }
 
-  const handleShowModal = useCallback(() => {
+  const handleShowModal = () => {
     setShowErrorModal(true);
-  }, []);
+  }
 
-  const handleCloseModal = useCallback(() => {
+  const handleCloseModal = () => {
     setShowErrorModal(false);
-  }, []);
+  }
 
-  const onRowSelectionChange = useCallback(
-    (selectedRow: Record<string, boolean>) => {
-      setSelectedRow(selectedRow);
-    },
-    []
-  );
+  const onRowSelectionChange = (selectedRow: Record<string, boolean>) => {
+    setSelectedRow(selectedRow);
+  }
 
   const handleSendAnonymizeList = () => {
     Object.entries(selectedRow)
@@ -102,7 +96,7 @@ const ImportRoot: React.FC = () => {
   }, [currentStudyInstanceUID]);
 
   return (
-    <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col items-center">
+    <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col gap-3 items-center">
       <SelectRoleLabels
         values={selectedLabels}
         onChange={setSelectedLabels}
@@ -115,10 +109,10 @@ const ImportRoot: React.FC = () => {
       />
       {errors.length > 0 && (
         <BannerAlert
-          color={Colors.danger}
-          message={`Error Importing ${errors.length} file(s)`}
+          color={Colors.warning}
+          message={`Failed to import ${errors.length} file(s)`}
           onClickButton={handleShowModal}
-          buttonLabel="See Errors"
+          buttonLabel="See failures"
         />
       )}
 
