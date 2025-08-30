@@ -1,5 +1,5 @@
 # Nginx
-FROM nginx:1.23.3
+FROM nginx:1.29.1
 
 ENV NGINX_SERVER_NAME='nginx'
 ENV NGINX_PORT='80'
