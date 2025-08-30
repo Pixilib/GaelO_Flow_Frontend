@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { HSDropdown } from 'preline/preline';
 
 type DropdownOption = {
   label?: string;
@@ -19,12 +18,6 @@ type DropdownButtonProps = {
 const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "Action", children, className }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (dropdownRef.current) {
-      HSDropdown.autoInit();
-    }
-  }, []);
 
   const handleOptionClick = (option: DropdownOption) => {
     option.action && option.action();

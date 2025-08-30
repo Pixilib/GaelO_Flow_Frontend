@@ -99,9 +99,9 @@ const AnonymizeRoot = () => {
                             }
                             className="mr-4"
                         >
+
                             <AutoFillInput />
                         </DropdownButton>
-
                         <Button
                             onClick={() => dispatch(flushAnonymizeList())}
                             color={Colors.light}
