@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, CheckBox, Input, Label } from "../ui";
 import { Colors } from "../utils";
-import { updateAnonymizePatientValue } from "../reducers/AnonymizeSlice";
+import { updateAnonymizePatientValue, updateAnonymizeStudyValue } from "../reducers/AnonymizeSlice";
 import { RootState } from "../store";
 
 const AutoFillInput = () => {
@@ -13,6 +13,7 @@ const AutoFillInput = () => {
     const [autoFillStudyDescriptionValue, setAutoFillDescriptionValue] = useState<string>('');
 
     const anonPatientList = useSelector((state: RootState) => state.anonymize.patients);
+    const anonStudyList = useSelector((state: RootState) => state.anonymize.studies);
 
     const handleAutoFillPatient = () => {
         Object.values(anonPatientList).forEach((patient, i) => {
@@ -28,8 +29,16 @@ const AutoFillInput = () => {
     };
 
     const handleAutoFillStudyDescription = () => {
-
+        Object.keys(anonStudyList).forEach((studyId, i) => {
+            dispatch(
+                updateAnonymizeStudyValue({
+                    studyId: studyId,
+                    newStudyDescription: autoFillStudyDescriptionValue,
+                })
+            );
+        });
     }
+
     return (
         <div className="flex flex-col gap-3 items-center w-full" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 shadow p-3 justify-around w-96">
@@ -74,7 +83,6 @@ const AutoFillInput = () => {
                     <span>Auto Fill</span>
                 </Button>
             </div>
-
         </div>
     );
 };

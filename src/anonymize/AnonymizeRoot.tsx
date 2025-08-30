@@ -92,7 +92,6 @@ const AnonymizeRoot = () => {
                         <Dropdown
                             withOnClick
                             popover={
-
                                 <AutoFillInput />
                             }
                             className="mr-4"
