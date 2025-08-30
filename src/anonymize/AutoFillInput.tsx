@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, CheckBox, Input, Label } from "../ui";
 import { Colors } from "../utils";
@@ -31,9 +31,9 @@ const AutoFillInput = () => {
 
     }
     return (
-        <div className="flex flex-col gap-3 items-center w-full">
-            <div className="w-full flex items-center gap-3 shadow p-3 justify-around">
-                <Label value="Patient Name/ID" className="text-black mb-2"></Label>
+        <div className="flex flex-col gap-3 items-center w-full" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center gap-3 shadow p-3 justify-around w-96">
+                <Label value="Patient Name/ID" className="font-semibold"></Label>
                 <span>
                     <Input
                         type="text"
@@ -44,7 +44,7 @@ const AutoFillInput = () => {
                     />
                     <div className="flex items-center w-full mt-2">
                         <CheckBox checked={autoIncrement} onChange={(event) => setAutoIncrement(event.target.checked)} bordered={false} className="mr-2" />
-                        <span className="text-black">Auto Increment</span>
+                        <span className="">Auto Increment</span>
                     </div>
                 </span>
                 <Button
@@ -52,11 +52,11 @@ const AutoFillInput = () => {
                     color={Colors.secondary}
                     className="mx-auto rounded-lg hover:bg-secondary"
                 >
-                    <span className="ml-2">Auto Fill</span>
+                    <span>Auto Fill</span>
                 </Button>
             </div>
             <div className="w-full flex items-center gap-3 shadow p-3 justify-around">
-                <Label value="Study Description" className="text-black mb-2"></Label>
+                <Label value="Study Description" className="font-semibold"></Label>
                 <span>
                     <Input
                         type="text"
@@ -71,7 +71,7 @@ const AutoFillInput = () => {
                     color={Colors.secondary}
                     className="mx-auto rounded-lg hover:bg-secondary"
                 >
-                    <span className="ml-2">Auto Fill</span>
+                    <span>Auto Fill</span>
                 </Button>
             </div>
 

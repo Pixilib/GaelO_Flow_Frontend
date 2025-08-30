@@ -4,6 +4,7 @@ import Anon from './Anon'
 import ArrowLeft from './ArrowLeft'
 import Brain from './Brain'
 import Cancel from './Cancel'
+import ChevronDown from './ChevronDown'
 import Check from './Check'
 import Close from './Close'
 import Cloud from './Cloud'
@@ -59,6 +60,7 @@ export {
     ArrowLeft,
     Brain,
     Cancel,
+    ChevronDown,
     Check,
     Close,
     Cloud,

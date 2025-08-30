@@ -7,7 +7,7 @@ import ToggleDarkMode from './ToggleDarkMode';
 import BannerItems from '../ui/menu/BannerItems';
 import ToolList from './ToolList';
 import { Language, Notification, User } from '../icons';
-import { Dropdown, Popover, ToggleChevron } from '../ui';
+import { DropdownMenu, Popover, ToggleChevron } from '../ui';
 import Jobs from './notifications/Jobs';
 import { RootState } from '../store';
 import { useSelector } from 'react-redux';
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
     >
       <div className="flex justify-end gap-4">
         <ToolList />
-        <Dropdown
+        <DropdownMenu
           ref={dropdownRef}
           className="flex flex-col"
           isOpen={openItem === 'Dropdown'}
@@ -109,7 +109,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             <ToggleChevron isOpen={openItem === 'Dropdown'} />
             <ToggleDarkMode />
           </div>
-        </Dropdown>
+        </DropdownMenu>
 
         <div className="flex items-center bg-primary rounded-xl text-white p-3 gap-3">
           <Popover
