@@ -6,7 +6,7 @@ import { Button, Spinner } from "../../ui";
 import { Add, Download, Empty } from "../../icons";
 import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
-import QueryCsvDrop from "./QueryCsvDrop";
+import CsvDrop from "./CsvDrop";
 import { QueryResultStudy, QueryResultSeries, ModalityExtended, Option } from "../../utils/types";
 import { addQuery, editQuery, removeQuery, updateQueriesSelection } from "../../reducers/AutoRetrieveSlice";
 import { store } from "../../store";
@@ -99,7 +99,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
           <Button color={Colors.primary} onClick={addEmptyQuery}>
             <Add />
           </Button>
-          <QueryCsvDrop onImportCsv={handleImportCsv} />
+          <CsvDrop onImportCsv={handleImportCsv} />
         </div>
         <div className="flex gap-3">
           <Button

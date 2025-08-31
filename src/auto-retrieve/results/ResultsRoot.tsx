@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import Papa from "papaparse";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
-import { Button, Tab, Tabs } from "../../ui";
+import { Button, Modal, Tab, Tabs } from "../../ui";
 import ResultStudiesTable from "./ResultStudiesTable";
 import ResultSeriesTable from "./ResultSeriesTable";
 import { Colors } from "../../utils";
@@ -10,6 +10,7 @@ import { Download, Empty } from "../../icons";
 import { RootState, store } from "../../store";
 import { addStudyOrSeriesToBasket, removeSeriesResults, removeStudyResults, updateSeriesResultSelection, updateStudyResultSelection } from "../../reducers/AutoRetrieveSlice";
 import { exportCsv } from "../../utils/export";
+import LoadSeriesCSV from "./LoadSeriesCSV";
 
 type ResultsRootProps = {
     onStartSeriesQueries: () => void
@@ -22,6 +23,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
 
     const studyResults = useSelector((state: RootState) => state.autoRetrieve.studyResults);
     const seriesResults = useSelector((state: RootState) => state.autoRetrieve.seriesResults);
+    const [openLoadSeriesCSV, setOpenLoadSeriesCSV] = useState(false);
 
     const studiesSelectedRow: Record<number, boolean> = useMemo(() => {
         return studyResults.reduce((acc, query, index) => {
@@ -50,7 +52,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
     }
 
     const handleTabClick = (tab: string) => {
-        navigate('/auto-retrieve/results/' +tab);
+        navigate('/auto-retrieve/results/' + tab);
     };
 
     const onAddToBasketSeries = () => {
@@ -83,8 +85,8 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
             dateTo: query.studyDate,
             modalitiesInStudy: query.modalitiesInStudy,
             studyInstanceUID: query.studyInstanceUID,
-            numberOfStudyRelatedSeries : query.numberOfStudyRelatedSeries,
-            numberOfStudyRelatedInstances : query.numberOfStudyRelatedInstances,
+            numberOfStudyRelatedSeries: query.numberOfStudyRelatedSeries,
+            numberOfStudyRelatedInstances: query.numberOfStudyRelatedInstances,
             aet: query.originAET,
         }));
         const csvString = Papa.unparse(payload);
@@ -104,11 +106,15 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
             studyInstanceUID: query.studyInstanceUID,
             seriesInstanceUID: query.seriesInstanceUID,
             seriesNumber: query.seriesNumber,
-            numberOfSeriesRelatedInstances : query.numberOfSeriesRelatedInstances,
+            numberOfSeriesRelatedInstances: query.numberOfSeriesRelatedInstances,
             aet: query.originAET,
         }));
         const csvString = Papa.unparse(payload);
         exportCsv(csvString, ".csv", "auto-queries.csv");
+    }
+
+    const onClickLoadSeriesCSV = () => {
+        setOpenLoadSeriesCSV((openLoadSeriesCSV) => !openLoadSeriesCSV);
     }
 
     return (
@@ -143,15 +149,29 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                 } />
                 <Route path="series" element={
                     <>
+                        <Modal show={openLoadSeriesCSV} size="xl">
+                            <Modal.Header onClose={onClickLoadSeriesCSV}>
+                                <Modal.Title>Load Series from CSV</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <LoadSeriesCSV />
+                            </Modal.Body>
+                        </Modal>
                         <ResultSeriesTable
                             onRowSelectionChange={handleSeriesSelectionChange}
                             selectedRow={seriesSelectedRow}
                             resultSeries={seriesResults} />
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.primary} onClick={onAddToBasketSeries}>Add to basket</Button>
-                            <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVSeries}><Download />CSV</Button>
-                            <Button color={Colors.warning} onClick={onRemoveSeriesResults}><Empty /></Button>
+                            <div className="grow flex justify-center gap-3">
+                                <Button color={Colors.primary} onClick={onAddToBasketSeries}>Add to basket</Button>
+                                <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVSeries}><Download />CSV</Button>
+                                <Button color={Colors.warning} onClick={onRemoveSeriesResults}><Empty /></Button>
+                            </div>
+                            <div className="flex justify-end">
+                                <Button color={Colors.secondary} onClick={onClickLoadSeriesCSV}>Load CSV</Button>
+                            </div>
                         </div>
+
                     </>
                 } />
             </Routes>
