@@ -55,7 +55,7 @@ jobs:
 
       - name: 'set version'
         if: github.ref_type == 'tag'
-        run: yarn version --new-version ${{ github.ref_name }}
+        run: yarn version ${{ github.ref_name }}
 
       - run : yarn build
 
