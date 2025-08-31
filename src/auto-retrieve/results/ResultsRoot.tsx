@@ -78,7 +78,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
     const onDownloadCSVStudy = () => {
         const payload = studyResults.map((query) => ({
             patientName: query.patientName,
-            patientID: query.patientId,
+            patientId: query.patientId,
             studyDescription: query.studyDescription,
             accessionNumber: query.accessionNumber,
             dateFrom: query.studyDate,
@@ -96,7 +96,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
     const onDownloadCSVSeries = () => {
         const payload = seriesResults.map((query) => ({
             patientName: query.patientName,
-            patientID: query.patientId,
+            patientId: query.patientId,
             studyDescription: query.studyDescription,
             seriesDescription: query.seriesDescription,
             accessionNumber: query.accessionNumber,
@@ -168,7 +168,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                                 <Button color={Colors.warning} onClick={onRemoveSeriesResults}><Empty /></Button>
                             </div>
                             <div className="flex justify-end">
-                                <Button color={Colors.secondary} onClick={onClickLoadSeriesCSV}>Load CSV</Button>
+                                <Button color={Colors.secondary} onClick={onClickLoadSeriesCSV}>Load From CSV</Button>
                             </div>
                         </div>
 

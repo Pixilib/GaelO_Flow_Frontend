@@ -36,8 +36,6 @@ const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
 
   if (isPending) return <Spinner />;
 
-  console.log(labelsOptions);
-
   return (
     <SelectInput
       isMulti

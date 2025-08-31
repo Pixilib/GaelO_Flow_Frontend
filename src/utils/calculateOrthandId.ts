@@ -10,8 +10,8 @@ export const cryptofn = async (str: string): Promise<string> => {
     return hexCodes.join("");
 };
 
-export const calculateOrthancSeriesID = async (patientID, studyInstanceUID, seriesInstanceUID): Promise<string> => {
-    const stringToHash = patientID + "|" + studyInstanceUID + "|" + seriesInstanceUID;
+export const calculateOrthancSeriesID = async (patientId, studyInstanceUID, seriesInstanceUID): Promise<string> => {
+    const stringToHash = patientId + "|" + studyInstanceUID + "|" + seriesInstanceUID;
     const hash = await cryptofn(stringToHash);
     return (`${hash.substring(0, 8)}-${hash.substring(8, 16)}-${hash.substring(16, 24)}-${hash.substring(24, 32)}-${hash.substring(32, 40)}`);
 };

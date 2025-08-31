@@ -1,6 +1,6 @@
 export type QueryStudy = {
     id : number,
-    patientID : string,
+    patientId : string,
     patientName : string,
     dateFrom: string,
     dateTo : string,
@@ -8,4 +8,21 @@ export type QueryStudy = {
     studyDescription: string,
     accessionNumber: string,
     aet :string
+}
+
+export type QueryResultSeries = {
+    id : number,
+    patientId : string,
+    patientName : string,
+    dateFrom: string,
+    dateTo : string,
+    modality: string,
+    studyDescription: string,
+    seriesDescription: string,
+    accessionNumber: string,
+    originAET :string
+    studyInstanceUID: string,
+    seriesInstanceUID: string,
+    seriesNumber: string,
+    numberOfSeriesRelatedInstances: number,
 }

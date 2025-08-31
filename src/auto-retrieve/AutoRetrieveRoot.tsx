@@ -65,7 +65,7 @@ const AutoRetrieveRoot = () => {
         Level: 'Study',
         Query: {
           PatientName: queryRow.patientName,
-          PatientID: queryRow.patientID,
+          PatientID: queryRow.patientId,
           StudyDescription: queryRow.studyDescription,
           AccessionNumber: queryRow.accessionNumber,
           StudyDate: dicomDateQueryStringFromDateFromDateTo(queryRow.dateFrom, queryRow.dateTo),

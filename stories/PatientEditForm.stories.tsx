@@ -30,7 +30,6 @@ type Story = StoryObj<typeof meta>;
 const handleSubmit = (params: { id:string , payload: PatientPayload}) => {
   const { id, payload } = params;
   action('submit-form')({ id, payload });
-  console.log('Données du patient soumises:', { id, payload });
 };
 
 const handleCancel = () => {
