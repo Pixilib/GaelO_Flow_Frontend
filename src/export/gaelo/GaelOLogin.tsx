@@ -22,7 +22,6 @@ const GaelOLogin = ({
         [['gaelo', 'login']],
         {
             onSuccess: (data) => {
-                console.log(data)
                 handleTokenChange(data.access_token)
                 handleUserIdChange(data.id)
             },

@@ -47,9 +47,7 @@ const AccordionPatient = ({
   }, [JSON.stringify(selectedStudies)]);
 
   const isSelectedPatient = useMemo(()=>{
-    if(!selectedStudyIdsForPatient || Object.keys(selectedStudyIdsForPatient).length === 0 ) return false
-
-    console.log(selectedStudyIdsForPatient)
+    if(!selectedStudyIdsForPatient || Object.keys(selectedStudyIdsForPatient).length === 0 ) return false;
     return Object.entries(selectedStudyIdsForPatient).every(([_id, selected]) => selected === true )
   }, [JSON.stringify(selectedStudyIdsForPatient)])
 

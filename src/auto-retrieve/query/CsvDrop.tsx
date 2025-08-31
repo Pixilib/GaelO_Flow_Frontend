@@ -3,7 +3,7 @@ import Papa from "papaparse";
 import { QueryStudy } from "../types";
 
 type QueryCsvDropProps = {
-  onImportCsv: (records: QueryStudy[]) => void;
+  onImportCsv: (records: Record<string, any>[]) => void;
 };
 
 const QueryCsvDrop = ({ onImportCsv }: QueryCsvDropProps) => {
@@ -21,19 +21,7 @@ const QueryCsvDrop = ({ onImportCsv }: QueryCsvDropProps) => {
         header: true,
         skipEmptyLines: true,
       }).data;
-
-      const queries = records.map((record: any) => ({
-        id: Math.random(),
-        patientName: record.patientName,
-        patientID: record.patientID,
-        studyDescription: record.studyDescription,
-        accessionNumber: record.accessionNumber,
-        dateFrom: record.dateFrom,
-        dateTo: record.dateTo,
-        modalitiesInStudy: record.modalitiesInStudy,
-        aet: record.aet,
-      }));
-      onImportCsv(queries);
+      onImportCsv(records);
     },
   });
 

@@ -44,12 +44,7 @@ const AutoRoutingRoot = () => {
 
   const { data: autoRoutingItems } = useCustomQuery<AutoRoutingItems[]>(
     ["autorouting"],
-    () => getAutoRoutingItems(),
-    {
-      onSuccess: (data) => {
-        console.log("AutoRouting Items: ", data);
-      }
-    }
+    () => getAutoRoutingItems()
   );
 
   const handleDeleteAutoRoutingItem = (id: number) => {

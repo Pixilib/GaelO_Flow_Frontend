@@ -6,7 +6,7 @@ import { Button, Spinner } from "../../ui";
 import { Add, Download, Empty } from "../../icons";
 import { QueryStudy } from "../types";
 import { exportCsv } from "../../utils/export";
-import QueryCsvDrop from "./QueryCsvDrop";
+import CsvDrop from "./CsvDrop";
 import { QueryResultStudy, QueryResultSeries, ModalityExtended, Option } from "../../utils/types";
 import { addQuery, editQuery, removeQuery, updateQueriesSelection } from "../../reducers/AutoRetrieveSlice";
 import { store } from "../../store";
@@ -43,7 +43,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
     store.dispatch(addQuery({
       id: Math.random(),
       patientName: "",
-      patientID: "",
+      patientId: "",
       dateFrom: "",
       dateTo: "",
       modalitiesInStudy: "",
@@ -60,7 +60,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
   const onDownloadCSV = () => {
     const payload = queries.map((query) => ({
       patientName: query.patientName,
-      patientID: query.patientID,
+      patientId: query.patientId,
       studyDescription: query.studyDescription,
       accessionNumber: query.accessionNumber,
       dateFrom: query.dateFrom,
@@ -72,7 +72,18 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
     exportCsv(csvString, ".csv", "auto-queries.csv");
   };
 
-  const handleImportCsv = (importedQueries: QueryStudy[]) => {
+  const handleImportCsv = (records: Record<string, any>[]) => {
+    const importedQueries: QueryStudy[] = records.map((record: any) => ({
+      id: Math.random(),
+      patientName: record.patientName,
+      patientId: record.patientId,
+      studyDescription: record.studyDescription,
+      accessionNumber: record.accessionNumber,
+      dateFrom: record.dateFrom,
+      dateTo: record.dateTo,
+      modalitiesInStudy: record.modalitiesInStudy,
+      aet: record.aet,
+    }));
     importedQueries.forEach((query) => {
       store.dispatch(addQuery(query));
     });
@@ -90,7 +101,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
     store.dispatch(updateQueriesSelection(selectedState));
   }
 
-  if(isPending) return <Spinner />
+  if (isPending) return <Spinner />
 
   return (
     <div className="flex flex-col gap-3 p-3">
@@ -99,7 +110,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
           <Button color={Colors.primary} onClick={addEmptyQuery}>
             <Add />
           </Button>
-          <QueryCsvDrop onImportCsv={handleImportCsv} />
+          <CsvDrop onImportCsv={handleImportCsv} />
         </div>
         <div className="flex gap-3">
           <Button
@@ -113,7 +124,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
       </div>
       <div>
         <QueryTable
-          aets = {aetOptions}
+          aets={aetOptions}
           queries={queries}
           onCellEdit={onCellEdit}
           onRowSelectionChange={handleRowSelectionChange}

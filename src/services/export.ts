@@ -193,7 +193,6 @@ export const exportRessourceIdsToLocalFilesystem = async (
   };
 
   const hash = await sha1(ids.join(","))
-  console.log(hash)
 
   return fetch("/api/tools/create-archive", {
     method: "POST",

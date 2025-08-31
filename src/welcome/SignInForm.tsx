@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { jwtDecode } from "jwt-decode";
 
-import { login, setCanExitPage } from "../reducers/UserSlice";
+import { login } from "../reducers/UserSlice";
 import { useCustomMutation } from "../utils/reactQuery";
 import { signIn } from "../services/auth";
 import { useCustomToast } from "../utils/toastify";
@@ -13,7 +13,7 @@ import { SignInResponse } from "../utils/types";
 import PasswordLock from "../icons/PasswordLock";
 
 import { Button, Input, ToggleEye } from "../ui";
-import { ChevronRight, User } from "./../assets";
+import { ChevronRight } from "./../assets";
 import UserId from "../icons/UserId";
 
 export const SignInForm = () => {
@@ -73,10 +73,10 @@ export const SignInForm = () => {
           <h1 className="mb-4 text-4xl font-semibold text-center text-dark dark:text-white">
             {t("titleSignInForm")}
           </h1>
-          <p className="mb-10 text-lg text-center text-dark dark:text-white">
+          <p className="mb-22 text-lg text-center text-dark dark:text-white">
             Please Log in to your Account
           </p>
-          <div className="w-2/3 mt-10 text-dark">
+          <div className="flex flex-col gap-5 text-dark">
             <Input
               label="Email:"
               svgLeft={<UserId />}
@@ -91,7 +91,7 @@ export const SignInForm = () => {
               required
             />
 
-            <div className="w-full mt-12 text-dark">
+            <div className="w-full  text-dark">
               <Input
                 label="Password:"
                 svgLeft={<PasswordLock />}

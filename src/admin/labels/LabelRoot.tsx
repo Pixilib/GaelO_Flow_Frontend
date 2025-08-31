@@ -22,7 +22,7 @@ const LabelRoot: React.FC = () => {
         toastSuccess("Label added successfully");
       },
       onError: (error: any) =>
-        toastError(`Error while creating label: ${error?.message}`),
+        toastError(`Error while creating label should contain only alphanumeric characters`),
     }
   );
 
@@ -34,7 +34,7 @@ const LabelRoot: React.FC = () => {
         toastSuccess("Label deleted successfully");
       },
       onError: (error: any) =>
-        toastError(`${error?.message}`),
+        toastError(`Error deleting Label ${error?.message}`),
     }
   );
 

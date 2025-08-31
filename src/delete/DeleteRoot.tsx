@@ -24,12 +24,7 @@ const DeleteRoot = () => {
 
     const { mutate: mutateDelete } = useCustomMutation(
         ({ seriesIds }) => createDeleteQueue(seriesIds),
-        [[]],
-        {
-            onSuccess: (uuid) => {
-                console.log("Queue created with UUID:", uuid);
-            },
-        }
+        [[]]
     );
 
     const handleDeleteList = () => {

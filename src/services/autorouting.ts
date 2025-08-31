@@ -5,7 +5,6 @@ export const getAutoRoutingItems = (): Promise<AutoRoutingItems[]> => {
     return axios
         .get("/api/autorouting")
         .then((response) => {
-            console.log(response.data);
             return response.data;
         })
         .catch((error) => {
@@ -22,7 +21,6 @@ export const createAutoRoutingItem = (
     return axios
         .post("/api/autorouting", payload)
         .then((response) => {
-            console.log(response.data);
             return response.data;
         })
         .catch((error) => {
@@ -39,7 +37,6 @@ export const deleteAutoRoutingItem = (
     return axios
         .delete(`/api/autorouting/${id}`)
         .then((response) => {
-            console.log(response.data);
             return response.data;
         })
         .catch((error) => {
@@ -57,7 +54,6 @@ export const toggleActivatedAutoRoutingItem = (
     return axios
         .put(`/api/autorouting/${id}/${value ? "enable" : "disable"}`)
         .then((response) => {
-            console.log(response.data);
             return response.data;
         })
         .catch((error) => {

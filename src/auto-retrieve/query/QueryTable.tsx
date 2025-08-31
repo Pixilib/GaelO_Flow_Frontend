@@ -28,8 +28,8 @@ const QueryTable = ({ aets, queries, onCellEdit, onRowSelectionChange, selectedR
       }
     },
     {
-      id: "patientID",
-      accessorKey: "patientID",
+      id: "patientId",
+      accessorKey: "patientId",
       header: "Patient ID",
       isEditable: true,
       style: {
