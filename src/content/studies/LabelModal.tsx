@@ -27,8 +27,8 @@ const LabelModal: React.FC<LabelModalProps> = ({ studyId, onClose, show }) => {
     )
 
     const handleLabelChanges = (labels: string[]) => {
-        const labelsToAdd = labels.filter((label) => !existingLabelsOptions.some((existingLabel) => existingLabel === label))
-        const labelsToRemove = existingLabelsOptions.filter((existingLabel) => !labels.some((label) => existingLabel === label))
+        const labelsToAdd = labels.filter((label) => !existingLabelsOptions?.some((existingLabel) => existingLabel === label))
+        const labelsToRemove = existingLabelsOptions?.filter((existingLabel) => !labels.some((label) => existingLabel === label))
 
         for (const label of labelsToAdd) {
             mutateAddLabel({ label })
@@ -45,7 +45,7 @@ const LabelModal: React.FC<LabelModalProps> = ({ studyId, onClose, show }) => {
             <Modal.Header onClose={onClose}>Assign Labels</Modal.Header>
             <Modal.Body>
                 <SelectLabels
-                    values={existingLabelsOptions}
+                    values={existingLabelsOptions ?? []}
                     onChange={handleLabelChanges} />
             </Modal.Body>
         </Modal>
