@@ -5,5 +5,10 @@
       "OrthancContent": "Orthanc Content",
       "Query": "Query",
       "Import": "Import",
-      "titleSignInForm":"Welcome Back !"
+      "titleSignInForm":"Welcome Back !",
+      "dashboard" : {
+        "hello" : "Hello",
+        "anonymization" : "Anonymization",
+        "delete" : "Delete"
+      }
   }

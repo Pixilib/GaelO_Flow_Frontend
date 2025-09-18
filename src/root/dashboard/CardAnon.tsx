@@ -14,11 +14,13 @@ import { AnonQueue } from "../../utils/types";
 import { RootState } from "../../store";
 import Anon from "../../icons/Anon"; // Import the Anon icon
 import { Validate } from "../../icons";
+import { useTranslation } from "react-i18next";
 
 const CardAnon = () => {
   const currentUserId = useSelector(
     (state: RootState) => state.user.currentUserId
   );
+  const {t} = useTranslation()
 
   const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
     ["queue", "anonymize", currentUserId?.toString() || ""],
@@ -58,7 +60,7 @@ const CardAnon = () => {
         className="flex items-center"
       >
         <Anon className="mr-3 text-xl text-white" />
-        <span className="text-lg font-bold text-white">Anonymization</span>
+        <span className="text-lg font-bold text-white">{t("dashboard.anonymization")}</span>
       </CardHeader>
       <CardBody
         className="flex flex-col items-center justify-center dark:bg-neutral-500 bg-gray-50"

@@ -1,9 +1,14 @@
 {
-      "Home": "Accueil",
-      "Help": "Aide",
-      "Log out": "Déconnexion",
-      "OrthancContent": "Contenu Orthanc",
-      "Query": "Requête",
-      "Import": "Importer",
-      "titleSignInForm":"Bienvenue !"
-  }
+    "Home": "Accueil",
+    "Help": "Aide",
+    "Log out": "Déconnexion",
+    "OrthancContent": "Contenu Orthanc",
+    "Query": "Requête",
+    "Import": "Importer",
+    "titleSignInForm": "Bienvenue !",
+    "dashboard": {
+        "hello": "Bonjour",
+        "anonymization": "Anonymisation",
+        "delete": "Supression"
+    }
+}
