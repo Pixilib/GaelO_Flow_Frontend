@@ -28,15 +28,15 @@ const customClass: ClassNamesConfig<OptionType, boolean> = {
     const borderRadius = state.selectProps.rounded
       ? "rounded-3xl"
       : "rounded-xl";
-    return `border border-gray-300 bg-gray-50 text-black dark:bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active`;
+    return `border border-gray-300 bg-gray-50 text-black dark:!bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active`;
   },
-  menu: () => "rounded-3xl p-1 bg-white dark:bg-neutral-800",
+  menu: () => "rounded-3xl p-1 bg-white dark:!bg-neutral-800",
   option: (state) => {
-    return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:bg-neutral-800 text-gray-800 dark:text-white"} hover:bg-primary hover:text-white`;
+    return `rounded-xl p-2 ${state.isSelected ? "bg-primary-active" : "bg-white dark:!bg-neutral-800 text-gray-800 dark:!text-white"} hover:bg-primary hover:text-white hover:dark:!bg-neutral-600 `;
   },
-  singleValue: () => "text-black dark:text-white",
-  multiValue: () => "bg-gray-200 dark:bg-neutral-800 rounded-3xl px-2 py-0.5",
-  multiValueLabel: () => "text-gray-800",
+  singleValue: () => "text-black dark:!text-white",
+  multiValue: () => "bg-gray-200 dark:!bg-neutral-600 dark:!text-white rounded-3xl px-2 py-0.5",
+  multiValueLabel: () => "text-gray-800 dark:!text-white",
   multiValueRemove: () => "text-red-500 hover:bg-red-200 rounded-full p-0.5",
 };
 
