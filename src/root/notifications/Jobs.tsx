@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import InlineQueryProgressJob from "./InlineQueryProgressJob";
+import { useTranslation } from "react-i18next";
 
 const Jobs = () => {
     const jobState = useSelector((state: RootState) => state.job);
+    const {t} = useTranslation()
 
     return (
         <div className="flex flex-col gap-2 w-60">
             {
                 jobState.jobs.length === 0 ?
                 (
-                    <span className="dark:text-white">Empty list</span>
+                    <span className="dark:text-white">{t("notification.Empty list")}</span>
                 ) : (
                     jobState.jobs.map((job) => (
                         <InlineQueryProgressJob key={job.jobId} jobId={job.jobId} jobType={job.jobType} />

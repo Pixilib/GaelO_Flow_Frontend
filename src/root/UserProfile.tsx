@@ -5,6 +5,8 @@ import { useCustomQuery, User } from "../utils";
 import { UserState } from '../reducers/UserSlice';
 import { User as UserIcon } from "../icons";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
 
 const UserProfile = () => {
   const userState = useSelector((state: RootState) => state.user) as UserState;
@@ -14,6 +16,7 @@ const UserProfile = () => {
   );
 
   const styleInfo = 'flex flex-row justify-between dark:text-white';
+  const {t} = useTranslation()
 
   if (isPending) return <div className="spinner" />;
 
@@ -21,24 +24,24 @@ const UserProfile = () => {
     <div className="flex flex-col gap-2 w-80">
       <div className="flex flex-row items-center gap-2 pl-1 dark:text-white">
         <UserIcon></UserIcon>
-        <p className="font-bold">Profile Overview</p>
+        <p className="font-bold">{t("user.Profile Overview")}</p>
       </div>
       <div className="border-b border-b-gray-600" />
       <div>
         <div className={styleInfo}>
-          <p className="font-semibold">First Name</p>
+          <p className="font-semibold">{t("user.First Name")}</p>
           <p>{userData?.firstname}</p>
         </div>
         <div className={styleInfo}>
-          <p className="font-semibold">Last Name</p>
+          <p className="font-semibold">{t("user.Last Name")}</p>
           <p>{userData?.lastname}</p>
         </div>
         <div className={styleInfo}>
-          <p className="font-semibold">Email</p>
+          <p className="font-semibold">{t("user.Email")}</p>
           <p>{userData?.email}</p>
         </div>
         <div className={styleInfo}>
-          <p className="font-semibold">Role</p>
+          <p className="font-semibold">{t("user.Role")}</p>
           <p>{userData?.role?.name}</p>
         </div>
       </div>

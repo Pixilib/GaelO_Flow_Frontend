@@ -10,5 +10,20 @@
         "hello" : "Hello",
         "anonymization" : "Anonymization",
         "delete" : "Delete"
+      },
+      "notification" : {
+        "Click to see details" : "Click to see details",
+        "Progress" : "Progress",
+        "Level" : "Level",
+        "Empty list" : "Empty list",
+        "PatientID" : "PatientID",
+        "From" : "From"
+      },
+      "user" : {
+        "Profile Overview" : "Profile Overview",
+        "First Name" : "First Name",
+        "Last Name" : "Last Name",
+        "Email" : "Email",
+        "Role" : "Role"
       }
   }
