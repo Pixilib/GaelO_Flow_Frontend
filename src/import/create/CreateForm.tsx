@@ -3,6 +3,7 @@ import { useCustomToast } from '../../utils';
 import { FormCard, Input, Label, Button } from '../../ui';
 import { Colors } from "../../utils/enums";
 import { Add } from '../../icons';
+import { useTranslation } from "react-i18next";
 
 interface TagFormProps {
   title: string;
@@ -14,6 +15,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
   const { toastSuccess } = useCustomToast();
   const [tag, setTag] = useState('');
   const [value, setValue] = useState('');
+  const {t} = useTranslation()
 
   const handleAddTag = () => {
     if (tag && value) {
@@ -60,7 +62,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
             className="flex items-center h-10 px-4 space-x-2"
           >
             <Add />
-            Add Tag
+            {t("import.Add tag")}
           </Button>
         </div>
       </div>

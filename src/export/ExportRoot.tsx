@@ -19,6 +19,7 @@ import { Anon, Download, Export } from "../icons";
 import Empty from "../icons/Empty";
 import GaelORoot from "./gaelo/GaelORoot";
 import { addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
+import { useTranslation } from "react-i18next";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
@@ -31,7 +32,8 @@ const ExportRoot = () => {
     const [transferSyntax, setTrasferSyntax] = useState('None');
     const [openGaelOModal, setOpenGaelOModal] = useState(false)
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
-
+    const {t} = useTranslation()
+    
     const series = useMemo(() => {
         if (!currentStudyId) return [];
         return Object.values(exportSeriesList).filter((series) => series.parentStudy === currentStudyId);
@@ -206,7 +208,7 @@ const ExportRoot = () => {
                                 onClick={handleSendAnonymizeList}
                             >
                                 <Anon className="text-xl" />
-                                <span className="ml-2">Send to Anonymize</span>
+                                <span className="ml-2">{t("button.Send to Anonymize")}</span>
                             </Button>
                         }
                         {role.delete &&
@@ -216,7 +218,7 @@ const ExportRoot = () => {
                                 onClick={handleSendDeleteList}
                             >
                                 <Export className="text-xl" />
-                                <span className="ml-2">Send to Delete</span>
+                                <span className="ml-2">{t("button.Send to Delete")}</span>
                             </Button>
                         }
                     </div>

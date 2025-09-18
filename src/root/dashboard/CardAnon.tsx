@@ -60,7 +60,7 @@ const CardAnon = () => {
         className="flex items-center"
       >
         <Anon className="mr-3 text-xl text-white" />
-        <span className="text-lg font-bold text-white">{t("dashboard.anonymization")}</span>
+        <span className="text-lg font-bold text-white">{t("root.dashboard.anonymization")}</span>
       </CardHeader>
       <CardBody
         className="flex flex-col items-center justify-center dark:bg-neutral-500 bg-gray-50"

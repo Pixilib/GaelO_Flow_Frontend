@@ -24,10 +24,12 @@ import { Anon, Export, Trash } from "../icons";
 import Labels from "./Labels";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { useTranslation } from "react-i18next";
 
 const ContentRoot: React.FC = () => {
   const { confirm } = useConfirm();
   const { toastSuccess, toastError } = useCustomToast();
+  const {t} = useTranslation()
 
   const roleName = useSelector(
     (state: RootState) => state.user?.role?.name || ""
@@ -224,7 +226,7 @@ const ContentRoot: React.FC = () => {
               onClick={handleSendAnonymizeList}
             >
               <Anon className="text-xl" />
-              <span className="ml-2">Send to Anonymize</span>
+              <span className="ml-2">{t("button.Send to Anonymize")}</span>
             </Button>
           }
           {role.export &&
@@ -234,7 +236,7 @@ const ContentRoot: React.FC = () => {
               onClick={handleSendExportList}
             >
               <Export className="text-xl" />
-              <span className="ml-2">Send to Export</span>
+              <span className="ml-2">{t("button.Send to Export")}</span>
             </Button>
           }
           {role.delete &&
@@ -244,7 +246,7 @@ const ContentRoot: React.FC = () => {
               onClick={handleSendDeleteList}
             >
               <Trash className="text-xl" />
-              <span className="ml-2">Send to Delete</span>
+              <span className="ml-2">{t("button.Send to Delete")}</span>
             </Button>
           }
           <Labels selectedStudyIds={selectedStudiesIds} />

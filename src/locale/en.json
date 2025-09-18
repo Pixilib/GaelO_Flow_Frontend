@@ -8,32 +8,49 @@
       "titleSignInForm":"Welcome Back !",
       "Select Labels" : "Select Labels ...",
       "root" : {
-
-      },
-      "dashboard" : {
-        "hello" : "Hello",
-        "anonymization" : "Anonymization",
-        "delete" : "Delete"
-      },
-      "notification" : {
-        "Click to see details" : "Click to see details",
-        "Progress" : "Progress",
-        "Level" : "Level",
-        "Empty list" : "Empty list",
-        "PatientID" : "PatientID",
-        "From" : "From"
-      },
-      "user" : {
-        "Profile Overview" : "Profile Overview",
-        "First Name" : "First Name",
-        "Last Name" : "Last Name",
-        "Email" : "Email",
-        "Role" : "Role"
+        "dashboard" : {
+          "hello" : "Hello",
+          "anonymization" : "Anonymization",
+          "delete" : "Delete"
+        },
+        "notification" : {
+          "Click to see details" : "Click to see details",
+          "Progress" : "Progress",
+          "Level" : "Level",
+          "Empty list" : "Empty list",
+          "PatientID" : "PatientID",
+          "From" : "From"
+        },
+        "user" : {
+          "Profile Overview" : "Profile Overview",
+          "First Name" : "First Name",
+          "Last Name" : "Last Name",
+          "Email" : "Email",
+          "Role" : "Role"
+        }
       },
       "import" : {
         "Create Dicoms" : "Create Dicoms",
         "Import Dicoms" : "Import Dicoms",
         "Drop the Dicom" : "Drop the Dicom folder or ZIP, or click to select files",
-        "Drag and drop" : "Drag and drop image files here"
+        "Drag and drop" : "Drag and drop image files here",
+        "Add tag" : "Add tag",
+        "Tag name" :"Tag name",
+        "Value" : "Value"
+      },
+      "ui" : {
+        "table" : {
+          "Rows per page" : "Rows per page:"
+        }
+      },
+      "button" : {
+        "Send to Anonymize" : "Send to Anonymize",
+        "Send to Export" : "Send to Export",
+        "Send to Delete" : "Send to Delete"
+      },
+      "contents" : {
+        "View in OHIF" : "View in OHIF",
+        "View in Stone" : "View in Stone"
+
       }
   }

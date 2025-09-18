@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { Anon, Export, Trash } from "../icons";
 import { addSeriesOfStudyIdToExportList, addStudyIdToDeleteList } from "../utils/actionsUtils";
+import { useTranslation } from "react-i18next";
+
 
 type AnonymizeResultTableProps = {
   studies: Study[];
@@ -38,6 +40,7 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
   ];
 
   const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
+  const {t} = useTranslation()
 
   const role = useSelector((state: RootState) => state.user.role);
 
@@ -100,7 +103,7 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
                 onClick={handleSendExportList}
               >
                 <Export className="text-xl" />
-                <span className="ml-2">Send to Export</span>
+                <span className="ml-2">{t("button.Send to Export")}</span>
               </Button>
             }
             {role.delete &&
@@ -110,7 +113,7 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
                 onClick={handleSendDeleteList}
               >
                 <Trash className="text-xl" />
-                <span className="ml-2">Send to Delete</span>
+                <span className="ml-2">{t("button.Send to Delete")}</span>
               </Button>
             }
           </div>

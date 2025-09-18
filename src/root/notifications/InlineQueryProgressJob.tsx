@@ -131,9 +131,9 @@ const {t} = useTranslation()
             <Close className="w-3.5 h-3.5" />
           </button>
         </div>
-        <p className="text-xs font-semibold">{t("notification.Progress")} {jobData.progress}%</p>
+        <p className="text-xs font-semibold">{t("root.notification.Progress")} {jobData.progress}%</p>
         <div className="flex flex-row items-center justify-between w-full ">
-          <p className="text-xs font-semibold">{t("notification.Click to see details")}</p>
+          <p className="text-xs font-semibold">{t("root.notification.Click to see details")}</p>
           <ToggleChevron isOpen={isDetailsOpen} className="w-3.5 h-3.5 mr-1" />
         </div>
       </div>
@@ -142,13 +142,13 @@ const {t} = useTranslation()
           <div className="border-b border-gray-700 w-full" />
           <div className="flex flex-col w-full text-xs">
             <div className="flex flex-row justify-between items-center">
-              <p className="font-bold">{t("notification.Level")}</p>
+              <p className="font-bold">{t("root.notification.Level")}</p>
               <p className="font-semibold">
                 {jobData?.content?.Query?.[0]?.["0008,0052"]}
               </p>
             </div>
             <div className="flex flex-row justify-between items-center">
-              <p className="font-bold">{t("notification.PatientID")}</p>
+              <p className="font-bold">{t("root.notification.PatientID")}</p>
               <p className="font-semibold">
                 {jobData?.content?.Query?.[0]?.["0010,0020"] === ""
                   ? "N/A"
@@ -156,7 +156,7 @@ const {t} = useTranslation()
               </p>
             </div>
             <div className="flex flex-row justify-between items-center">
-              <p className="font-bold">{t("notification.From")}</p>
+              <p className="font-bold">{t("root.notification.From")}</p>
               <p className="font-semibold">{jobData?.content?.RemoteAet}</p>
             </div>
           </div>

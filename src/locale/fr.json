@@ -7,30 +7,50 @@
     "Import": "Importer",
     "titleSignInForm": "Bienvenue !",
     "Select Labels" : "Sélectionner les Labels ...",
-    "dashboard": {
-        "hello": "Bonjour",
-        "anonymization": "Anonymisation",
-        "delete": "Supression"
-    },
-    "notification" : {
-        "Click to see details" : "Clicker pour voir les details",
-        "Progress" : "Progrès",
-        "Level" : "Level",
-        "Empty list" : "Liste vide",
-        "PatientID": "PatientID",
-        "From" : "From"
-    },
-    "user" : {
-        "Profile Overview" : "Aperçu du profil",
-        "First Name" : "Prénom",
-        "Last Name" : "Nom",
-        "Email" : "Email",
-        "Role" : "Role"
+    "root" : {
+        "dashboard": {
+            "hello": "Bonjour",
+            "anonymization": "Anonymisation",
+            "delete": "Supression"
+        },
+        "notification" : {
+            "Click to see details" : "Clicker pour voir les details",
+            "Progress" : "Progrès",
+            "Level" : "Level",
+            "Empty list" : "Liste vide",
+            "PatientID": "PatientID",
+            "From" : "From"
+        },
+        "user" : {
+            "Profile Overview" : "Aperçu du profil",
+            "First Name" : "Prénom",
+            "Last Name" : "Nom",
+            "Email" : "Email",
+            "Role" : "Role"
+        }
     },
     "import" : {
         "Create Dicoms" : "Créer Dicoms",
         "Import Dicoms" : "Importer Dicoms",
         "Drop the Dicom" : "Déposez le dossier Dicom ou le fichier ZIP, ou cliquez pour sélectionner les fichiers",
-        "Drag and drop" : "Glissez et déposez les fichiers image ici"
+        "Drag and drop" : "Glissez et déposez les fichiers image ici",
+        "Add tag" : "Ajout du tag",
+        "Tag name" :"Nom du tag",
+        "Value" : "Valeur"
+    },
+    "ui" : {
+        "table" : {
+          "Rows per page" : "Lignes par page:"
+        }
+    },
+    "button" : {
+        "Send to Anonymize" : "Envoyé à l'Anonymisation",
+        "Send to Export" : "Envoyer pour Exporter",
+        "Send to Delete" : "Envoyer pour Suprimmer"
+    },
+    "contents" : {
+        "View in OHIF" : "Voir dans OHIF",
+        "View in Stone" : "Voir dans Stone"
+
     }
 }
