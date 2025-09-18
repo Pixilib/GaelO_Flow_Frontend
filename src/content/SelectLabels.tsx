@@ -4,6 +4,7 @@ import { SelectInput, Spinner } from "../ui";
 import { Label, Option } from "../utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "src/store";
+import { useTranslation } from "react-i18next";
 
 type SelectLabelsProps = {
   values: string[];
@@ -11,6 +12,8 @@ type SelectLabelsProps = {
 }
 
 const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
+
+  const {t} = useTranslation()
 
   const roleName = useSelector(
     (state: RootState) => state.user.role?.name || ""
@@ -43,7 +46,7 @@ const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
       options={labelsOptions}
       onChange={handleChange}
       closeMenuOnSelect={true}
-      placeholder='Select labels ...'
+      placeholder={t("Select Labels")}
       value={values}
     />
   );

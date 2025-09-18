@@ -2,6 +2,7 @@ import React from "react";
 import { useDropzone } from "react-dropzone";
 import { useCustomToast } from "../../utils";
 import { Check, Cloud } from "../../icons";
+import { useTranslation } from "react-i18next";
 
 interface CreateDropProps {
     files: File[],
@@ -11,6 +12,7 @@ interface CreateDropProps {
 const CreateDrop: React.FC<CreateDropProps> = ({ files, onDrop }) => {
 
     const { toastError } = useCustomToast()
+    const {t} = useTranslation()
 
     const { getRootProps, open } = useDropzone({
         multiple: true,
@@ -48,7 +50,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ files, onDrop }) => {
                     size={40}
                     className={`text-primary dark:text-white`} />
             )}
-            <p className="text-primary dark:text-white">{files.length > 0 ? files.length + ' files loaded' : 'Drag and drop image files here'}</p>
+            <p className="text-primary dark:text-white">{files.length > 0 ? files.length + ' files loaded' : t("import.Drag and drop")} </p>
             <input type="file" style={{ display: 'none' }} />
         </div>
     );

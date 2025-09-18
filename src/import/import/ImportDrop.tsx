@@ -10,6 +10,7 @@ import { OrthancImportDicom } from '../../utils/types';
 import { Check, Cloud } from '../../icons';
 import { useDispatch } from 'react-redux';
 import { setCanExitPage } from '../../reducers/UserSlice';
+import { useTranslation } from "react-i18next";
 
 
 type ImportDropProps = {
@@ -25,7 +26,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
     const [numberOfLoadedFiles, setNumberOfLoadedFiles] = useState(0);
     const [numberOfProcessedFiles, setNumberOfProcessedFiles] = useState(0);
     const mounted = useRef(false);
-
+    const {t} = useTranslation()
     const uploadComplete = useMemo(() => {
         return numberOfLoadedFiles > 0 && numberOfLoadedFiles === numberOfProcessedFiles;
     }, [numberOfLoadedFiles, numberOfProcessedFiles]);
@@ -123,7 +124,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                         size={40}
                         className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary dark:text-white'}`} />
                 )}
-                <p className="text-primary dark:text-white">Drop the Dicom folder or ZIP, or click to select files</p>
+                <p className="text-primary dark:text-white">{t("import.Drop the Dicom")}</p>
                 <input directory="" webkitdirectory="" {...getInputProps()} />
                 {numberOfLoadedFiles > 0 &&
                     <ProgressBar

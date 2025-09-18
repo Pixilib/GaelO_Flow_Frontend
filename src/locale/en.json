@@ -6,6 +6,10 @@
       "Query": "Query",
       "Import": "Import",
       "titleSignInForm":"Welcome Back !",
+      "Select Labels" : "Select Labels ...",
+      "root" : {
+
+      },
       "dashboard" : {
         "hello" : "Hello",
         "anonymization" : "Anonymization",
@@ -25,5 +29,11 @@
         "Last Name" : "Last Name",
         "Email" : "Email",
         "Role" : "Role"
+      },
+      "import" : {
+        "Create Dicoms" : "Create Dicoms",
+        "Import Dicoms" : "Import Dicoms",
+        "Drop the Dicom" : "Drop the Dicom folder or ZIP, or click to select files",
+        "Drag and drop" : "Drag and drop image files here"
       }
   }
