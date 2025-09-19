@@ -3,8 +3,7 @@ import { Info } from "../../icons";
 import { Badge, Button, Table } from "../../ui";
 import { Colors } from "../../utils";
 import { Queue } from "../../utils/types";
-import { size } from "@floating-ui/dom";
-import { Key } from "src/assets";
+import { useTranslation } from "react-i18next";
 
 type TaskTableProps = {
     data: Queue[];
@@ -13,6 +12,7 @@ type TaskTableProps = {
 }
 
 const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps) => {
+    const {t} = useTranslation()
 
     const columns = [
         {
@@ -58,10 +58,12 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
         {
             id: "state",
             accessorKey: "state",
+            header: () => <>{t("auto-retrieve.task.State")}</>, 
         },
         {
             id: "progress",
             accessorKey: "progress",
+            header: () => <>{t("auto-retrieve.task.Progress")}</>,
         }
 
     ]

@@ -4,14 +4,14 @@ import { Colors } from "../../utils";
 import CreateAutoRoutingForm from "./CreateAutoRoutingForm";
 import { useState } from "react";
 import { eventOptions } from "../types";
+import { useTranslation } from "react-i18next";
 
 type CreateRootModalProps = {
-    show: boolean;
     onClose: () => void;
     onSubmit: (payload: AutoRoutingPayload) => void;
 }
 
-const CreateRootModal = ({ show, onClose, onSubmit }: CreateRootModalProps) => {
+const CreateRootModal = ({ onClose, onSubmit }: CreateRootModalProps) => {
     const [rules, setRules] = useState<{ rule: Rule, id: string }[]>([]);
     const [destinations, setDestinations] = useState<{ destination: Destination, id: string }[]>([]);
     const [autoRoutingPayload, setAutoRoutingPayload] = useState<AutoRoutingPayload>(
@@ -20,7 +20,7 @@ const CreateRootModal = ({ show, onClose, onSubmit }: CreateRootModalProps) => {
             EventType: eventOptions[0].value,
             Activated: true,
         } as AutoRoutingPayload);
-
+    const { t } = useTranslation()
     const handlePayloadChange = (payload: AutoRoutingPayload) => {
         setAutoRoutingPayload(payload);
     }
@@ -47,13 +47,9 @@ const CreateRootModal = ({ show, onClose, onSubmit }: CreateRootModalProps) => {
     }
 
     return (
-        <Modal
-            show={show}
-            onClose={onClose}
-            size="xl"
-        >
+        <>
             <Modal.Header onClose={onClose}>
-                <Modal.Title>Create Auto-Rooting</Modal.Title>
+                <Modal.Title>{t("autorouting.createAutoRooting.Create Auto-Rooting")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <CreateAutoRoutingForm
@@ -71,11 +67,11 @@ const CreateRootModal = ({ show, onClose, onSubmit }: CreateRootModalProps) => {
                     <Button
                         color={Colors.primary}
                         onClick={handleSubmit}
-                        children={<p>Submit</p>}
+                        children={<p>{t("autorouting.createAutoRooting.Submit")}</p>}
                     />
                 </div>
             </Modal.Footer>
-        </Modal>
+        </>
     );
 }
 

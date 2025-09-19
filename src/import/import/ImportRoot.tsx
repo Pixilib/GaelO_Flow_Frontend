@@ -131,7 +131,7 @@ const ImportRoot: React.FC = () => {
               onClick={handleSendAnonymizeList}
             >
               <Anon className="text-xl" />
-              <span className="ml-2">{t("button.Send to Anonymize")}</span>
+              <span className="ml-2">{t("buttons.Send to Anonymize")}</span>
             </Button>
 
             <Button
@@ -140,7 +140,7 @@ const ImportRoot: React.FC = () => {
               onClick={handleSendExportList}
             >
               <Export className="text-xl" />
-              <span className="ml-2">{t("button.Send to Export")}</span>
+              <span className="ml-2">{t("buttons.Send to Export")}</span>
             </Button>
 
             <Button
@@ -149,7 +149,7 @@ const ImportRoot: React.FC = () => {
               onClick={handleSendDeleteList}
             >
               <Trash className="text-xl" />
-              <span className="ml-2">{t("button.Send to Delete")}</span>
+              <span className="ml-2">{t("buttons.Send to Delete")}</span>
             </Button>
           </div>
           <div className="flex gap-3">

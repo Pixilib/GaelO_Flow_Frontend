@@ -218,7 +218,7 @@ const ExportRoot = () => {
                                 onClick={handleSendDeleteList}
                             >
                                 <Export className="text-xl" />
-                                <span className="ml-2">{t("button.Send to Delete")}</span>
+                                <span className="ml-2">{t("buttons.Send to Delete")}</span>
                             </Button>
                         }
                     </div>

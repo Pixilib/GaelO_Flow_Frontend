@@ -3,6 +3,7 @@ import { Column, ColumnDef } from "@tanstack/react-table";
 import SelectInput from "../SelectInput";
 import { Option } from "../../utils";
 import CheckBox from "../Checkbox";
+import { useTranslation } from "react-i18next";
 
 type FilterTableProps = {
   column: Column<any, any>;
@@ -12,6 +13,7 @@ type FilterTableProps = {
 
 const FilterTable = ({ column, table, columnDef }: FilterTableProps) => {
   const [inverted, setInverted] = useState(false);
+  const {t} = useTranslation()
 
   const firstValue = table
     .getPreFilteredRowModel()
@@ -113,7 +115,7 @@ const FilterTable = ({ column, table, columnDef }: FilterTableProps) => {
             label: value,
           }))}
           value={columnFilterValue ? columnFilterValue : null}
-          placeholder="Filter..."
+          placeholder={t("ui.table.Search...")}
           onChange={(option) => column.setFilterValue(option?.value)}
         />
       </div>
@@ -144,7 +146,7 @@ const FilterTable = ({ column, table, columnDef }: FilterTableProps) => {
             label: value,
           }))}
           value={selectedValues}
-          placeholder="Filter..."
+          placeholder={t("ui.table.Search...")}
           onChange={(options: Option[]) => {
             setSelectedValues(options.map((option) => option.value));
           }}
@@ -166,7 +168,7 @@ const FilterTable = ({ column, table, columnDef }: FilterTableProps) => {
       value={(columnFilterValue ?? "") as string}
       onClick={stopPropagation}
       onChange={(e) => column.setFilterValue(e.target.value)}
-      placeholder="Search..."
+      placeholder={t("ui.table.Search...")}
       className="w-full h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 dark:bg-stone-800 rounded-2xl placeholder:text-gray-400"
     />
   );

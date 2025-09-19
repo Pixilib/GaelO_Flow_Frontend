@@ -40,17 +40,68 @@
     },
     "ui" : {
         "table" : {
-          "Rows per page" : "Lignes par page:"
+          "Rows per page" : "Lignes par page:",
+          "Search..." : "Rechercher...",
+          "Select..." : "Sélectionner..."
         }
     },
-    "button" : {
-        "Send to Anonymize" : "Envoyé à l'Anonymisation",
-        "Send to Export" : "Envoyer pour Exporter",
-        "Send to Delete" : "Envoyer pour Suprimmer"
+    "buttons" : {
+        "Send to Anonymize" : "Envoyer vers l'anonymisation",
+        "Send to Export" : "Envoyer vers export",
+        "Send to Delete" : "Envoyer vers supression"
     },
     "contents" : {
         "View in OHIF" : "Voir dans OHIF",
-        "View in Stone" : "Voir dans Stone"
-
-    }
+        "View in Stone" : "Voir dans Stone",
+        "Modify" : "Modifier",
+        "AI" : "IA",
+        "Preview Study" : "Aperçu study",
+        "Download DICOM" : "Télécharger DICOM",
+        "Metadata" : "Métadonnées",
+        "Preview Series" : "Aperçu de la série",
+        "Download nii.gz" : "Télécharger nii.gz",
+        "Assign Labels" : "Attribuer Labels"
+    },
+    "autorouting" : {
+        "Create new rule" : "Créer une nouvelle règle",
+        "createAutoRooting" : {
+          "Create Auto-Rooting" : "Créer un auto routeur",
+          "Submit" : "soumettre",
+          "Add Rule" : "Ajouter une règle",
+          "Add Destination" : "Ajouter une destination",
+          "Rules" : "règles",
+          "Destinations" : "Destinations",
+          "Event Type *" : "Type d'événement *",
+          "Name *" : "Nom *",
+          "Name" : "Nom",
+          "Activated *" : "Activé *",
+          "Select Condition" : "Sélectionner une condition",
+          "Select Destination" : "Sélectionner une destination",
+          "Value" : "Valeur",
+          "Value Representation" : "Représentation de la valeur",
+          "See Rules" : "Voir les règles",
+          "See Destinations" : "Voir les destinations",
+          "Activated" : "Activé",
+          "Event Type" : "Type d'événement",
+          "Rule Condition" : "Condition",
+          "Delete" : "Supprimer"
+        }
+    },
+    "auto-retrieve" : {
+        "query" : {
+          "Drop CSV" : "Déposer CSV",
+          "Results" : "Résultats",
+          "Basket" : "Panier"
+        },
+        "results" : {
+          "Add to basket" : "Ajouter au panier"
+        },
+        "basket" : {
+            "Start Robot" : "Lancer le robot"
+        },
+        "task" : {
+            "State" : "État",
+            "Progress" : "Progrès"
+        }
+    } 
 }

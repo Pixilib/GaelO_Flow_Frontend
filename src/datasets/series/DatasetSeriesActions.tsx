@@ -4,6 +4,7 @@ import { Series, useCustomToast } from '../../utils';
 import { exportSeriesToNifti } from '../../services/export';
 import { DropdownButton } from '../../ui';
 import { Download, Edit, Eye } from '../../icons';
+import { useTranslation } from "react-i18next";
 
 type DropdownOption = {
     label: string;
@@ -20,29 +21,30 @@ type DataSetSeriesActionsProps = {
 const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onActionClick }) => {
 
     const { toastSuccess, updateExistingToast } = useCustomToast();
+    const {t} = useTranslation()
 
     const options: DropdownOption[] = [
         {
-            label: 'Modify',
+            label:t("contents.Modify"),
             icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', series.id)
         },
         {
-            label: 'Metadata',
+            label: t("contents.Metadata"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('metadata', series.id)
         },
         {
-            label: 'Preview Series',
+            label: t("contents.Preview Series"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', series.id)
         },
         {
             icon: <Download />,
-            label: "Download nii.gz",
+            label: t("contents.Download nii.gz"),
             color: 'green',
             action: () => {
                 const id = toastSuccess("Download started", 60)

@@ -8,6 +8,7 @@ import DropdownButton from '../../ui/menu/DropdownButton';
 import { useCustomToast } from '../../utils';
 import { exportRessource } from '../../services/export';
 import Study from '../../model/Study';
+import { useTranslation } from "react-i18next";
 
 type DatasetStudyActionsProps = {
     study: Study,
@@ -17,6 +18,7 @@ type DatasetStudyActionsProps = {
 const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps) => {
 
     const { toastSuccess, updateExistingToast } = useCustomToast();
+    const {t} = useTranslation()
 
     const options = [
         {
@@ -30,26 +32,26 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
             component: <StoneViewerLink studyInstanceUID={study.studyInstanceUID} />
         },
         {
-            label: 'Modify',
+            label: t("contents.Modify"),
             icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', study.id)
         },
         {
-            label: 'AI',
+            label: t("contents.AI"),
             icon: <Brain />,
             color: 'green',
             action: () => onActionClick('ai', study.id)
         },
         {
-            label: 'Preview Study',
+            label: t("contents.Preview Study"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', study.id)
         },
         {
             icon: <Download />,
-            label: "Download DICOM",
+            label: t("contents.Download DICOM"),
             color: 'green',
             action: () => {
                 const id = toastSuccess("Download started", 30)

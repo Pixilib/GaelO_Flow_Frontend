@@ -3,6 +3,7 @@ import { Button, Input, SelectInput } from "../../ui";
 import { autoRoutingRuleConditionOptions, autoRoutingRuleDicomTagOptions, autoRoutingRuleValueRepresentation } from "../types";
 import { Colors } from "../../utils";
 import { Trash } from "../../icons";
+import { useTranslation } from "react-i18next";
 
 type AddRuleFormProps = {
     rule: Rule;
@@ -12,12 +13,15 @@ type AddRuleFormProps = {
 }
 
 const AddRuleForm = ({ rule, id, onChange, onDelete }: AddRuleFormProps) => {
+    const {t} = useTranslation()
+
     return (
         <div>
             <div className="flex gap-5 flex-row">
                 <SelectInput
                     placeholder="Dicom Tag"
                     options={autoRoutingRuleDicomTagOptions}
+
                     value={rule?.DicomTag || ""}
                     onChange={(e: any) => onChange(id, {
                         ...rule,
@@ -34,7 +38,7 @@ const AddRuleForm = ({ rule, id, onChange, onDelete }: AddRuleFormProps) => {
                     })}
                 />
                 <Input
-                    placeholder="Value"
+                    placeholder={t("autorouting.createAutoRooting.Value")}
                     value={rule?.Value || ""}
                     onChange={(e) => onChange(id, {
                         ...rule,
@@ -42,7 +46,7 @@ const AddRuleForm = ({ rule, id, onChange, onDelete }: AddRuleFormProps) => {
                     })}
                 />
                 <SelectInput
-                    placeholder="Value Representation"
+                    placeholder={t("autorouting.createAutoRooting.Value Representation")}
                     value={rule?.ValueRepresentation || ""}
                     options={autoRoutingRuleValueRepresentation}
                     onChange={(e: any) => onChange(id, {
