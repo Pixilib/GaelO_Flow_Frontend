@@ -1,43 +1,43 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Administrator from '../src/assets/administrator.svg?react';
+import { Administrator } from '../src/assets';
 import MenuItemsCollapse from '../src/ui/menu/MenuItemsCollapse';
 
 
 const meta: Meta<typeof MenuItemsCollapse> = {
-    title: 'GAELO FLOW UI/MenuItem',
-    component: MenuItemsCollapse,
-    tags: ["autodocs"],
-    args: {
-        title: 'Menu',
-        isOpen: true,
-        className: 'bg-primary text-white',
-        elements: [
-                {
-                  title: "Lost Password",
-                  path: "/lost-password",
-                  isActive: location.pathname === 'api/lost-password' 
-                },
-                {
-                  title: "sign-up",
-                  path: "/signup",
-                  isActive: location.pathname === '/signup'
-                },
-                {
-                  title: "sign-in",
-                  path: "/signin",
-                  isActive: location.pathname === '/signin'
-                },
-              ],
-        icon: <Administrator />,
+  title: 'GAELO FLOW UI/MenuItem',
+  component: MenuItemsCollapse,
+  tags: ["autodocs"],
+  args: {
+    title: 'Menu',
+    isOpen: true,
+    className: 'bg-primary text-white',
+    elements: [
+      {
+        title: "Lost Password",
+        path: "/lost-password",
+        isActive: location.pathname === 'api/lost-password'
+      },
+      {
+        title: "sign-up",
+        path: "/signup",
+        isActive: location.pathname === '/signup'
+      },
+      {
+        title: "sign-in",
+        path: "/signin",
+        isActive: location.pathname === '/signin'
+      },
+    ],
+    icon: <Administrator />,
+  },
+  argTypes: {
+    title: {
+      control: { type: 'text' },
     },
-    argTypes: {
-        title: {
-            control: { type: 'text' },
-        },
-        isOpen: {
-            control: { type: 'boolean' },
-        },
+    isOpen: {
+      control: { type: 'boolean' },
     },
+  },
 };
 export default meta;
 type Story = StoryObj<typeof MenuItemsCollapse>;
@@ -45,8 +45,8 @@ type Story = StoryObj<typeof MenuItemsCollapse>;
 export const MenuItems: Story = {};
 
 export const MenuItemsWithProps: Story = {
-    decorators: [],
-    name: 'MenuItems',
-    parameters: {},
+  decorators: [],
+  name: 'MenuItems',
+  parameters: {},
 };
 

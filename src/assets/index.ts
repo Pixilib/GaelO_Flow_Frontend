@@ -17,7 +17,7 @@ import Key from "./key.svg?react";
 import Language from "./language.svg?react";
 import Letter from "./mail.svg?react";
 import Line from "./line.svg?react";
-import LogoGaeloFlowWhite3 from "./logoGaeloFlow-white3.svg?react";
+import LogoGaeloFlowWhite from "./gaelo-flow-logo-white.svg?react";
 import Logout from "./logout.svg?react";
 import MyDicom from "./my-dicom.svg?react";
 import Notification from "./notification.svg?react";
@@ -60,7 +60,7 @@ export {
     Language,
     Letter,
     Line,
-    LogoGaeloFlowWhite3,
+    LogoGaeloFlowWhite,
     Logout,
     MyDicom,
     Notification,

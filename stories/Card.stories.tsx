@@ -1,10 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react-vite";
 import Card, { CardHeader, CardBody, CardFooter } from "../src/ui/Card";
-import ChevronRight from '../src/assets/chevron-right.svg?react';
+import {ChevronRight, DotMenuMore} from '../src/assets';
 import { Colors } from "../src/utils/enums";
 import Button from "../src/ui/Button";
-
-import DotMenuRightMore from "../src/assets/dot-menu-more.svg?react";
 
 export default {
   title: "Gaelo Flow UI/Card",
@@ -48,7 +46,7 @@ export const CardStory: Story = {
         <CardHeader title="Card Setting Title" centerTitle={true} rightIcon={<ChevronRight />} >
           <>
             <button className={`icon-button mr-4`}>
-              <span className="icon-right">{<DotMenuRightMore />}</span>
+              <span className="icon-right">{<DotMenuMore />}</span>
             </button>
           </>
         </CardHeader>
