@@ -189,7 +189,7 @@ const ContentRoot: React.FC = () => {
       />
       <FormCard
         className="bg-white dark:bg-neutral-500"
-        title="Search"
+        title={t("query.search")}
         collapsible
       >
         <SearchForm
@@ -202,7 +202,7 @@ const ContentRoot: React.FC = () => {
       <div className="flex flex-col w-full p-4 bg-white shadow-md dark:bg-neutral-800 rounded-3xl">
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-primary dark:text-white">
-            Results
+            {t("query.results")}
           </div>
           <div className="text-lg text-gray-600 dark:text-white">
             {patients.length} {patients.length === 1 ? "patient" : "patients"}{" "}
@@ -226,7 +226,7 @@ const ContentRoot: React.FC = () => {
               onClick={handleSendAnonymizeList}
             >
               <Anon className="text-xl" />
-              <span className="ml-2">{t("buttons.Send to Anonymize")}</span>
+              <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
             </Button>
           }
           {role.export &&
@@ -236,7 +236,7 @@ const ContentRoot: React.FC = () => {
               onClick={handleSendExportList}
             >
               <Export className="text-xl" />
-              <span className="ml-2">{t("buttons.Send to Export")}</span>
+              <span className="ml-2">{t("buttons.send-to-export")}</span>
             </Button>
           }
           {role.delete &&
@@ -246,7 +246,7 @@ const ContentRoot: React.FC = () => {
               onClick={handleSendDeleteList}
             >
               <Trash className="text-xl" />
-              <span className="ml-2">{t("buttons.Send to Delete")}</span>
+              <span className="ml-2">{t("buttons.send-to-delete")}</span>
             </Button>
           }
           <Labels selectedStudyIds={selectedStudiesIds} />

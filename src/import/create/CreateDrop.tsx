@@ -50,7 +50,7 @@ const CreateDrop: React.FC<CreateDropProps> = ({ files, onDrop }) => {
                     size={40}
                     className={`text-primary dark:text-white`} />
             )}
-            <p className="text-primary dark:text-white">{files.length > 0 ? files.length + ' files loaded' : t("import.Drag and drop")} </p>
+            <p className="text-primary dark:text-white">{files.length > 0 ? files.length + ' files loaded' : t("import.drag-and-drop")} </p>
             <input type="file" style={{ display: 'none' }} />
         </div>
     );

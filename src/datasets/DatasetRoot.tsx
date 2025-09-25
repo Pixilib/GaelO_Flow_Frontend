@@ -146,7 +146,7 @@ const DatasetRoot = () => {
             onClick={handleSendAnonymizeList}
           >
             <Anon className="text-xl" />
-            <span className="ml-2">{t("buttons.Send to Anonymize")}</span>
+            <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
           </Button>
 
           <Button
@@ -155,7 +155,7 @@ const DatasetRoot = () => {
             onClick={handleSendExportList}
           >
             <Export className="text-xl" />
-            <span className="ml-2">{t("buttons.Send to Export")}</span>
+            <span className="ml-2">{t("buttons.send-to-export")}</span>
           </Button>
 
           <Button
@@ -164,7 +164,7 @@ const DatasetRoot = () => {
             onClick={handleSendDeleteList}
           >
             <Trash className="text-xl" />
-            <span className="ml-2">{t("buttons.Send to Delete")}</span>
+            <span className="ml-2">{t("buttons.send-to-delete")}</span>
           </Button>
         </div>
         <div className="grid grid-cols-1 gap-4 2xl:grid-cols-12">

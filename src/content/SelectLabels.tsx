@@ -46,7 +46,7 @@ const SelectLabels = ({ onChange, values }: SelectLabelsProps) => {
       options={labelsOptions}
       onChange={handleChange}
       closeMenuOnSelect={true}
-      placeholder={t("Select Labels")}
+      placeholder={t("select-labels")}
       value={values}
     />
   );

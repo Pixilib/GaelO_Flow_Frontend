@@ -8,7 +8,7 @@ const OhifViewerLink = ({ studyInstanceUID }: OhifViewerLinkProps) => {
     const token = store?.getState()?.user.token
     const {t} = useTranslation()
     return (
-        <a href={'/viewer-ohif/gaelo?StudyInstanceUIDs=' + studyInstanceUID + '&token=' + token} target='_blank'>{t("contents.View in OHIF")}</a>
+        <a href={'/viewer-ohif/gaelo?StudyInstanceUIDs=' + studyInstanceUID + '&token=' + token} target='_blank'>{t("contents.view-in-ohif")}</a>
     )
 
 }

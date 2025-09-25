@@ -18,12 +18,12 @@ const AddDestinationForm = ({ value, id, onChange, onDelete }: AddDestinationFor
     return (
         <div className="flex gap-5 flex-row">
             <Input
-                placeholder={t("autorouting.createAutoRooting.Name")}
-                onChange={(e) => onChange(id, { ...value, Name: e.target.value })}
+                placeholder={t("autorouting.createAutoRooting.name")}
+                onChange={(e) => onChange(id, { ...value, Name:e.target.value })}
                 value={value?.Name}
             />
             <SelectInput
-                placeholder={t("autorouting.createAutoRooting.Select Destination")}
+                placeholder={t("autorouting.createAutoRooting.select-destination")}
                 options={autoRoutingDestinationTypeOptions}
 
                 value={value?.Destination}

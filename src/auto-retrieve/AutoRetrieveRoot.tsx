@@ -113,12 +113,12 @@ const AutoRetrieveRoot = () => {
           onClick={() => handleTabClick("/auto-retrieve")}
         />
         <Tab
-          title={t("auto-retrieve.query.Results")}
+          title={t("auto-retrieve.query.results")}
           active={location.pathname.includes("/auto-retrieve/results")}
           onClick={() => handleTabClick("/auto-retrieve/results/studies")}
         />
         <Tab
-          title={t("auto-retrieve.query.Basket")}
+          title={t("auto-retrieve.query.basket")}
           active={location.pathname.includes("/auto-retrieve/basket")}
           onClick={() => handleTabClick("/auto-retrieve/basket")}
         />

@@ -62,7 +62,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
             className="flex items-center h-10 px-4 space-x-2"
           >
             <Add />
-            {t("import.Add tag")}
+            {t("import.add-tag")}
           </Button>
         </div>
       </div>

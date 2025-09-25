@@ -115,7 +115,7 @@ const FilterTable = ({ column, table, columnDef }: FilterTableProps) => {
             label: value,
           }))}
           value={columnFilterValue ? columnFilterValue : null}
-          placeholder={t("ui.table.Search...")}
+          placeholder={t("ui.table.search")}
           onChange={(option) => column.setFilterValue(option?.value)}
         />
       </div>
@@ -146,7 +146,7 @@ const FilterTable = ({ column, table, columnDef }: FilterTableProps) => {
             label: value,
           }))}
           value={selectedValues}
-          placeholder={t("ui.table.Search...")}
+          placeholder={t("ui.table.search")}
           onChange={(options: Option[]) => {
             setSelectedValues(options.map((option) => option.value));
           }}
@@ -168,7 +168,7 @@ const FilterTable = ({ column, table, columnDef }: FilterTableProps) => {
       value={(columnFilterValue ?? "") as string}
       onClick={stopPropagation}
       onChange={(e) => column.setFilterValue(e.target.value)}
-      placeholder={t("ui.table.Search...")}
+      placeholder={t("ui.table.search")}
       className="w-full h-5 pl-1 text-xs font-medium text-gray-600 border border-gray-300 dark:bg-stone-800 rounded-2xl placeholder:text-gray-400"
     />
   );

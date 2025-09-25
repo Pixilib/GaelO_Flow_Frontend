@@ -71,7 +71,7 @@ const AutoRoutingRoot = () => {
           children={
             <div className="flex items-center gap-2">
               <Add />
-              <p>{t("autorouting.Create new rule")}</p>
+              <p>{t("autorouting.create-new-rule")}</p>
             </div>
           }
         />

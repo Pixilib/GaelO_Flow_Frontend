@@ -72,7 +72,7 @@ const BasketRoot = () => {
                 selectedRow={basketSelectedRow}
             />
             <div className="flex justify-center gap-3 m-3">
-                <Button color={Colors.success} onClick={handleCreateRobot}>{t("auto-retrieve.basket.Start Robot")}</Button>
+                <Button color={Colors.success} onClick={handleCreateRobot}>{t("auto-retrieve.basket.start-robot")}</Button>
                 <Button color={Colors.warning} onClick={handleRemoveBasket}><Empty /></Button>
             </div>
         </div>

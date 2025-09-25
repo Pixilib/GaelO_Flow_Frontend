@@ -1,12 +1,12 @@
 {
-      "Home": "Home",
-      "Help": "Help",
-      "Log out": "Log out",
-      "OrthancContent": "Orthanc Content",
+      "home": "Home",
+      "help": "Help",
+      "log-out": "Log out",
+      "orthanc-content": "Orthanc Content",
       "Query": "Query",
       "Import": "Import",
-      "titleSignInForm":"Welcome Back !",
-      "Select Labels" : "Select Labels ...",
+      "title-sign-in-form":"Welcome Back !",
+      "select-labels" : "Select Labels ...",
       "root" : {
         "dashboard" : {
           "hello" : "Hello",
@@ -14,94 +14,98 @@
           "delete" : "Delete"
         },
         "notification" : {
-          "Click to see details" : "Click to see details",
-          "Progress" : "Progress",
-          "Level" : "Level",
-          "Empty list" : "Empty list",
-          "PatientID" : "PatientID",
-          "From" : "From"
+          "click-to-see-details" : "Click to see details",
+          "progress" : "Progress",
+          "level" : "Level",
+          "empty-list" : "Empty list",
+          "patientID" : "PatientID",
+          "from" : "From"
         },
         "user" : {
-          "Profile Overview" : "Profile Overview",
-          "First Name" : "First Name",
-          "Last Name" : "Last Name",
-          "Email" : "Email",
-          "Role" : "Role"
+          "profile-overview" : "Profile Overview",
+          "first-name" : "First Name",
+          "last-name" : "Last Name",
+          "email" : "Email",
+          "role" : "Role"
         }
       },
       "import" : {
-        "Create Dicoms" : "Create Dicoms",
-        "Import Dicoms" : "Import Dicoms",
-        "Drop the Dicom" : "Drop the Dicom folder or ZIP, or click to select files",
-        "Drag and drop" : "Drag and drop image files here",
-        "Add tag" : "Add tag",
-        "Tag name" :"Tag name",
-        "Value" : "Value"
+        "create-dicoms" : "Create Dicoms",
+        "import-dicoms" : "Import Dicoms",
+        "drop-the-dicom" : "Drop the Dicom folder or ZIP, or click to select files",
+        "drag-and-drop" : "Drag and drop image files here",
+        "add-tag" : "Add tag",
+        "tag-name" :"Tag name",
+        "value" : "Value"
       },
       "ui" : {
         "table" : {
-          "Rows per page" : "Rows per page:",
-          "Search..." : "Search...",
-          "Select..." : "Select..."
+          "rows-per-page" : "Rows per page:",
+          "search" : "Search...",
+          "select" : "Select..."
         }
       },
       "buttons" : {
-        "Send to Anonymize" : "Send to Anonymize",
-        "Send to Export" : "Send to Export",
-        "Send to Delete" : "Send to Delete"
+        "send-to-anonymize" : "Send to Anonymize",
+        "send-to-export" : "Send to Export",
+        "send-to-delete" : "Send to Delete"
       },
       "contents" : {
-        "View in OHIF" : "View in OHIF",
-        "View in Stone" : "View in Stone",
-        "Modify" : "Modify",
-        "AI" : "AI",
-        "Preview Study" : "Preview Study",
-        "Download DICOM" : "Download DICOM",
-        "Metadata" : "Metadata",
-        "Preview Series" : "Preview Serie",
-        "Download nii.gz" : "Download nii.gz",
-        "Assign Labels" : "Assign Labels"
+        "view-in-ohif" : "View in OHIF",
+        "view-in-stone" : "View in Stone",
+        "modify" : "Modify",
+        "ai" : "AI",
+        "preview-study" : "Preview Study",
+        "download-dicom" : "Download DICOM",
+        "metadata" : "Metadata",
+        "preview-series" : "Preview Serie",
+        "download-nii.gz" : "Download nii.gz",
+        "assign-labels" : "Assign Labels"
       },
       "autorouting" : {
-        "Create new rule" : "Create new rule",
+        "create-new-rule" : "Create new rule",
         "createAutoRooting" : {
-          "Create Auto-Rooting" : "Create Auto-Rooting",
-          "Submit" : "Submit",
-          "Add Rule" : "Add rule",
-          "Add Destination" : "Add Destination",
-          "Rules" : "Rules",
-          "Destinations" : "Destinations",
-          "Event Type *" : "Event Type *",
-          "Name *" : "Name *",
-          "Name" : "Name",
-          "Activated *" : "Activated *",
-          "Select Condition" : "Select Condition",
-          "Select Destination" : "Select Destination",
-          "Value" : "Value",
-          "Value Representation" : "Value Representation",
-          "See Rules" : "See Rules",
-          "See Destinations" : "See Destinations",
-          "Activated" : "Activated",
-          "Event Type" : "Event Type",
-          "Rule Condition" : "Rule Condition",
-          "Delete" : "Delete"
+          "create-auto-rooting" : "Create Auto-Rooting",
+          "submit" : "Submit",
+          "add-rule" : "Add rule",
+          "add-destination" : "Add Destination",
+          "rules" : "Rules",
+          "destinations" : "Destinations",
+          "event-type*" : "Event Type *",
+          "name*" : "Name *",
+          "name" : "Name",
+          "activated*" : "Activated *",
+          "select-condition" : "Select Condition",
+          "select-destination" : "Select Destination",
+          "value" : "Value",
+          "value-representation" : "Value Representation",
+          "see-rules" : "See Rules",
+          "see-destinations" : "See Destinations",
+          "activated" : "Activated",
+          "event-type" : "Event Type",
+          "rule-condition" : "Rule Condition",
+          "delete" : "Delete"
         }
       },
       "auto-retrieve" : {
         "query" : {
-          "Drop CSV" : "Drop CSV",
-          "Results" : "Results",
-          "Basket" : "Basket"
+          "drop-csv" : "Drop CSV",
+          "results" : "Results",
+          "basket" : "Basket"
         },
         "results" : {
-          "Add to basket" : "Add to basket"
+          "add-to-basket" : "Add to basket"
         },
         "basket" : {
-            "Start Robot" : "Start Robot"
+            "start-robot" : "Start Robot"
         },
         "task" : {
-            "State" : "State",
-            "Progress" : "Progress"
+            "state" : "State",
+            "progress" : "Progress"
         }
-      }
+      },
+      "query" : {
+        "search" : "Search",
+        "results" : "Results"
+    }
   }

@@ -142,7 +142,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                             selectedRow={studiesSelectedRow}
                         />
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.primary} onClick={onAddToBasketStudies}>{t("auto-retrieve.results.Add to basket")}</Button>
+                            <Button color={Colors.primary} onClick={onAddToBasketStudies}>{t("auto-retrieve.results.add-to-basket")}</Button>
                             <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query series</Button>
                             <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVStudy}><Download />CSV</Button>
                             <Button color={Colors.warning} onClick={onRemoveStudiesResults}><Empty /></Button>
@@ -165,7 +165,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                             resultSeries={seriesResults} />
                         <div className="flex justify-center p-3 gap-3">
                             <div className="grow flex justify-center gap-3">
-                                <Button color={Colors.primary} onClick={onAddToBasketSeries}>{t("auto-retrieve.results.Add to basket")}</Button>
+                                <Button color={Colors.primary} onClick={onAddToBasketSeries}>{t("auto-retrieve.results.add-to-basket")}</Button>
                                 <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVSeries}><Download />CSV</Button>
                                 <Button color={Colors.warning} onClick={onRemoveSeriesResults}><Empty /></Button>
                             </div>

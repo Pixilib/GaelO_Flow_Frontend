@@ -79,7 +79,7 @@ const Footer = ({ table, color = Colors.white, onPageSizeChange }: FooterProps) 
           </button>
           <div className="flex items-center ml-4">
             <label htmlFor="pageSize" className="mr-2 italic">
-              {t("ui.table.Rows per page")}
+              {t("ui.table.rows-per-page")}
             </label>
             <input
               id="pageSize"

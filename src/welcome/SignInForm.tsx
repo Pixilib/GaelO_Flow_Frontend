@@ -71,7 +71,7 @@ export const SignInForm = () => {
       <div className="relative px-10 bg-white shadow-lg dark:text-white dark:opacity-70 dark:bg-neutral-700 py-14 rounded-3xl">
         <form onSubmit={handleSubmit} className="relative z-10 flex flex-col items-center w-full">
           <h1 className="mb-4 text-4xl font-semibold text-center text-dark dark:text-white">
-            {t("titleSignInForm")}
+            {t("title-sign-in-form")}
           </h1>
           <p className="mb-22 text-lg text-center text-dark dark:text-white">
             Please Log in to your Account

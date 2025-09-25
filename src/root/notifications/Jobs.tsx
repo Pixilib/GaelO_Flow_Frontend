@@ -12,7 +12,7 @@ const Jobs = () => {
             {
                 jobState.jobs.length === 0 ?
                 (
-                    <span className="dark:text-white">{t("root.notification.Empty list")}</span>
+                    <span className="dark:text-white">{t("root.notification.empty-list")}</span>
                 ) : (
                     jobState.jobs.map((job) => (
                         <InlineQueryProgressJob key={job.jobId} jobId={job.jobId} jobType={job.jobType} />

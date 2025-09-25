@@ -1,12 +1,12 @@
 {
-    "Home": "Accueil",
-    "Help": "Aide",
-    "Log out": "Déconnexion",
-    "OrthancContent": "Contenu Orthanc",
+    "home": "Accueil",
+    "help": "Aide",
+    "log-out": "Déconnexion",
+    "orthanc-content": "Contenu Orthanc",
     "Query": "Requête",
     "Import": "Importer",
-    "titleSignInForm": "Bienvenue !",
-    "Select Labels" : "Sélectionner les Labels ...",
+    "title-sign-in-form": "Bienvenue !",
+    "select-labels" : "Sélectionner les Labels ...",
     "root" : {
         "dashboard": {
             "hello": "Bonjour",
@@ -14,84 +14,84 @@
             "delete": "Supression"
         },
         "notification" : {
-            "Click to see details" : "Clicker pour voir les details",
-            "Progress" : "Progrès",
-            "Level" : "Level",
-            "Empty list" : "Liste vide",
-            "PatientID": "PatientID",
-            "From" : "From"
+            "click-to-see-details" : "Clicker pour voir les details",
+            "progress" : "Progrès",
+            "level" : "Level",
+            "empty-list" : "Liste vide",
+            "patientID": "PatientID",
+            "from" : "From"
         },
         "user" : {
-            "Profile Overview" : "Aperçu du profil",
-            "First Name" : "Prénom",
-            "Last Name" : "Nom",
-            "Email" : "Email",
-            "Role" : "Role"
+            "profile-overview" : "Aperçu du profil",
+            "first-name" : "Prénom",
+            "last-name" : "Nom",
+            "email" : "Email",
+            "role" : "Role"
         }
     },
     "import" : {
-        "Create Dicoms" : "Créer Dicoms",
-        "Import Dicoms" : "Importer Dicoms",
-        "Drop the Dicom" : "Déposez le dossier Dicom ou le fichier ZIP, ou cliquez pour sélectionner les fichiers",
-        "Drag and drop" : "Glissez et déposez les fichiers image ici",
-        "Add tag" : "Ajout du tag",
-        "Tag name" :"Nom du tag",
-        "Value" : "Valeur"
+        "create-dicoms" : "Créer Dicoms",
+        "import-dicoms" : "Importer Dicoms",
+        "drop-the-dicom" : "Déposez le dossier Dicom ou le fichier ZIP, ou cliquez pour sélectionner les fichiers",
+        "drag-and-drop" : "Glissez et déposez les fichiers image ici",
+        "add-tag" : "Ajout du tag",
+        "tag-name" :"Nom du tag",
+        "value" : "Valeur"
     },
     "ui" : {
         "table" : {
-          "Rows per page" : "Lignes par page:",
-          "Search..." : "Rechercher...",
-          "Select..." : "Sélectionner..."
+          "rows-per-page" : "Lignes par page:",
+          "search" : "Rechercher...",
+          "select" : "Sélectionner..."
         }
     },
     "buttons" : {
-        "Send to Anonymize" : "Envoyer vers l'anonymisation",
-        "Send to Export" : "Envoyer vers export",
-        "Send to Delete" : "Envoyer vers supression"
+        "send-to-anonymize" : "Envoyer vers l'anonymisation",
+        "send-to-export" : "Envoyer vers export",
+        "send-to-delete" : "Envoyer vers supression"
     },
     "contents" : {
-        "View in OHIF" : "Voir dans OHIF",
-        "View in Stone" : "Voir dans Stone",
-        "Modify" : "Modifier",
-        "AI" : "IA",
-        "Preview Study" : "Aperçu study",
-        "Download DICOM" : "Télécharger DICOM",
-        "Metadata" : "Métadonnées",
-        "Preview Series" : "Aperçu de la série",
-        "Download nii.gz" : "Télécharger nii.gz",
-        "Assign Labels" : "Attribuer Labels"
+        "view-in-ohif" : "Voir dans OHIF",
+        "view-in-stone" : "Voir dans Stone",
+        "modify" : "Modifier",
+        "ai" : "IA",
+        "preview-study" : "Aperçu study",
+        "download-dicom" : "Télécharger DICOM",
+        "metadata" : "Métadonnées",
+        "preview-series" : "Aperçu de la série",
+        "download-nii.gz" : "Télécharger nii.gz",
+        "assign-labels" : "Attribuer les labels"
     },
     "autorouting" : {
-        "Create new rule" : "Créer une nouvelle règle",
+        "create-new-rule" : "Créer une nouvelle règle",
         "createAutoRooting" : {
-          "Create Auto-Rooting" : "Créer un auto routeur",
-          "Submit" : "soumettre",
-          "Add Rule" : "Ajouter une règle",
-          "Add Destination" : "Ajouter une destination",
-          "Rules" : "règles",
-          "Destinations" : "Destinations",
-          "Event Type *" : "Type d'événement *",
-          "Name *" : "Nom *",
-          "Name" : "Nom",
-          "Activated *" : "Activé *",
-          "Select Condition" : "Sélectionner une condition",
-          "Select Destination" : "Sélectionner une destination",
-          "Value" : "Valeur",
-          "Value Representation" : "Représentation de la valeur",
-          "See Rules" : "Voir les règles",
-          "See Destinations" : "Voir les destinations",
-          "Activated" : "Activé",
-          "Event Type" : "Type d'événement",
-          "Rule Condition" : "Condition",
-          "Delete" : "Supprimer"
+          "create-auto-rooting" : "Créer un auto routeur",
+          "submit" : "soumettre",
+          "add-rule" : "Ajouter une règle",
+          "add-destination" : "Ajouter une destination",
+          "rules" : "règles",
+          "destinations" : "Destinations",
+          "event-type*" : "Type d'événement *",
+          "name*" : "Nom *",
+          "name" : "Nom",
+          "activated*" : "Activé *",
+          "select-condition" : "Sélectionner une condition",
+          "select-destination" : "Sélectionner une destination",
+          "value" : "Valeur",
+          "value-representation" : "Représentation de la valeur",
+          "see-rules" : "Voir les règles",
+          "see-destinations" : "Voir les destinations",
+          "activated" : "Activé",
+          "event-type" : "Type d'événement",
+          "rule-condition" : "Condition",
+          "delete" : "Supprimer"
         }
     },
     "auto-retrieve" : {
         "query" : {
-          "Drop CSV" : "Déposer CSV",
-          "Results" : "Résultats",
-          "Basket" : "Panier"
+          "drop-csv" : "Déposer CSV",
+          "results" : "Résultats",
+          "basket" : "Panier"
         },
         "results" : {
           "Add to basket" : "Ajouter au panier"
@@ -100,8 +100,13 @@
             "Start Robot" : "Lancer le robot"
         },
         "task" : {
-            "State" : "État",
-            "Progress" : "Progrès"
+            "state" : "État",
+            "progress" : "Progrès"
         }
-    } 
+    },
+    "query" : {
+        "search" : "Recherche",
+        "results" : "Résultat"
+    }
+
 }

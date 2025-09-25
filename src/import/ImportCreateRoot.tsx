@@ -18,12 +18,12 @@ const ImportCreateRoot = () => {
         <div className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl" data-gaelo-flow="import-create-root">
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
-                    title={t("import.Import Dicoms")}
+                    title={t("import.import-dicoms")}
                     active={location.pathname.endsWith('/upload')}
                     onClick={() => handleTabClick("upload")}
                 />
                 <Tab
-                    title={t("import.Create Dicoms")}
+                    title={t("import.create-dicoms")}
                     active={location.pathname.endsWith('/create')}
                     onClick={() => handleTabClick("create")}
                 />

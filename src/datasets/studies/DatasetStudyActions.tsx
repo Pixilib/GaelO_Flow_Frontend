@@ -32,26 +32,26 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
             component: <StoneViewerLink studyInstanceUID={study.studyInstanceUID} />
         },
         {
-            label: t("contents.Modify"),
+            label: t("contents.modify"),
             icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', study.id)
         },
         {
-            label: t("contents.AI"),
+            label: t("contents.ai"),
             icon: <Brain />,
             color: 'green',
             action: () => onActionClick('ai', study.id)
         },
         {
-            label: t("contents.Preview Study"),
+            label: t("contents.preview-study"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', study.id)
         },
         {
             icon: <Download />,
-            label: t("contents.Download DICOM"),
+            label: t("contents.download-dicom"),
             color: 'green',
             action: () => {
                 const id = toastSuccess("Download started", 30)

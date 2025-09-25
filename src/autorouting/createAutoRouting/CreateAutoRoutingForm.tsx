@@ -49,15 +49,15 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
         <div className="flex flex-col gap-4">
             <div className="flex gap-5 flex-row">
                 <div className="w-full">
-                    <Label value={t("autorouting.createAutoRooting.Name *")}/>
+                    <Label value={t("autorouting.createAutoRooting.name*")}/>
                     <Input
-                        placeholder={t("autorouting.createAutoRooting.Name")}
+                        placeholder={t("autorouting.createAutoRooting.name")}
                         onChange={(e) => onPayloadChange({ ...payload, Name: e.target.value })}
                         value={payload?.Name}
                     />
                 </div>
                 <div className="w-full">
-                    <Label value={t("autorouting.createAutoRooting.Event Type *")} />
+                    <Label value={t("autorouting.createAutoRooting.event-type*")} />
                     <SelectInput
                         placeholder="Select option"
                         options={eventOptions}
@@ -66,7 +66,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                     />
                 </div>
                 <div className="w-50">
-                    <Label value={t("autorouting.createAutoRooting.Activated *")} />
+                    <Label value={t("autorouting.createAutoRooting.activated*")} />
                     <Toggle
                         checked={payload?.Activated}
                         onChange={() => onPayloadChange({ ...payload, Activated: !payload.Activated })}
@@ -80,7 +80,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                         <h1 className="font-bold">{t("autorouting.createAutoRooting.Rules")}</h1>
                         <div className="w-80">
                             <SelectInput
-                                placeholder={t("autorouting.createAutoRooting.Select Condition")}
+                                placeholder={t("autorouting.createAutoRooting.select-condition")}
                                 options={autoRoutingConditionOptions}
                                 value={payload?.Router?.RuleCondition || ""}
                                 onChange={(e: any) => onPayloadChange({ ...payload, Router: { ...payload.Router, RuleCondition: e.value } })}
@@ -104,7 +104,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             children={
                                 <div className="flex items-center gap-2 text-sm">
                                     <Add />
-                                    <p>{t("autorouting.createAutoRooting.Add Rule")}</p>
+                                    <p>{t("autorouting.createAutoRooting.add-rule")}</p>
                                 </div>
                             }
                         />
@@ -134,7 +134,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             children={
                                 <div className="flex items-center gap-2 text-sm">
                                     <Add />
-                                    <p>{t("autorouting.createAutoRooting.Add Destination")}</p>
+                                    <p>{t("autorouting.createAutoRooting.add-destination")}</p>
                                 </div>
                             }
                         />

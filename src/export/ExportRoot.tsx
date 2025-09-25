@@ -208,7 +208,7 @@ const ExportRoot = () => {
                                 onClick={handleSendAnonymizeList}
                             >
                                 <Anon className="text-xl" />
-                                <span className="ml-2">{t("button.Send to Anonymize")}</span>
+                                <span className="ml-2">{t("button.send-to-anonymize")}</span>
                             </Button>
                         }
                         {role.delete &&
@@ -218,7 +218,7 @@ const ExportRoot = () => {
                                 onClick={handleSendDeleteList}
                             >
                                 <Export className="text-xl" />
-                                <span className="ml-2">{t("buttons.Send to Delete")}</span>
+                                <span className="ml-2">{t("buttons.send-to-delete")}</span>
                             </Button>
                         }
                     </div>

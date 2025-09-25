@@ -7,10 +7,7 @@ import { Item } from "../ui/menu/Items";
 import { Admin, Directions, Help, Home, ImageAdd, ImageSearch, Import, Logout, RestorePage, ZoomQuestion } from "../icons";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { UserState } from "../reducers/UserSlice";
-import { useCustomQuery, User } from "../utils";
-import { getUserById } from "../services";
-import { Spinner } from "../ui";
+import { useTranslation } from "react-i18next";
 
 type SideBarProps = {
   onLogout: () => void;
@@ -23,6 +20,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   const location = useLocation();
 
   const role = useSelector((state: RootState) => state.user.role);
+  const {t} = useTranslation()
 
   const handleItemClick = (item: Item | string) => {
     const itemPath = typeof item === "string" ? item : item.path;
@@ -69,7 +67,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             )}
             {role.readAll && (
               <MenuItem
-                title="Orthanc Content"
+                title={t("orthanc-content")}
                 icon={<ImageSearch className="w-6 h-6" />}
                 isActive={location.pathname === "/orthanc-content"}
                 onClick={() => handleItemClick("/orthanc-content")}
@@ -77,7 +75,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             )}
             {role.import && (
               <MenuItem
-                title="Import"
+                title={t("Import")}
                 icon={<Import className="w-6 h-6" />}
                 isActive={location.pathname.includes("/import/")}
                 onClick={() => handleItemClick("/import/upload")}
@@ -85,7 +83,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             )}
             {role.query && (
               <MenuItem
-                title="Query"
+                title={t("Query")}
                 icon={<ZoomQuestion className="w-6 h-6" />}
                 isActive={location.pathname === "/query"}
                 onClick={() => handleItemClick("/query")}
@@ -119,20 +117,20 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
         {/* Section bas de la barre latérale */}
         <div className="flex flex-col gap-2 border-t border-white">
           <MenuItem
-            title="Home"
+            title={t("home")}
             icon={<Home className="w-6 h-6" />}
             isActive={location.pathname === "/"}
             onClick={() => handleItemClick("/")}
             className="mt-3"
           />
           <MenuItem
-            title="Help"
+            title={t("help")}
             icon={<Help className="w-6 h-6" />}
             isActive={location.pathname === "/help"}
             onClick={() => handleItemClick("/help")}
           />
           <MenuItem
-            title="Log out"
+            title={t("log-out")}
             icon={<Logout className="w-6 h-6" />}
             isActive={location.pathname === "/logout"}
             onClick={onLogout}

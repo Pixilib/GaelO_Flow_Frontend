@@ -38,7 +38,7 @@ const AddRuleForm = ({ rule, id, onChange, onDelete }: AddRuleFormProps) => {
                     })}
                 />
                 <Input
-                    placeholder={t("autorouting.createAutoRooting.Value")}
+                    placeholder={t("autorouting.createAutoRooting.value")}
                     value={rule?.Value || ""}
                     onChange={(e) => onChange(id, {
                         ...rule,
@@ -46,7 +46,7 @@ const AddRuleForm = ({ rule, id, onChange, onDelete }: AddRuleFormProps) => {
                     })}
                 />
                 <SelectInput
-                    placeholder={t("autorouting.createAutoRooting.Value Representation")}
+                    placeholder={t("autorouting.createAutoRooting.value-representation")}
                     value={rule?.ValueRepresentation || ""}
                     options={autoRoutingRuleValueRepresentation}
                     onChange={(e: any) => onChange(id, {

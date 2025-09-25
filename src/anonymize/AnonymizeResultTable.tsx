@@ -103,7 +103,7 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
                 onClick={handleSendExportList}
               >
                 <Export className="text-xl" />
-                <span className="ml-2">{t("buttons.Send to Export")}</span>
+                <span className="ml-2">{t("buttons.send-to-export")}</span>
               </Button>
             }
             {role.delete &&
@@ -113,7 +113,7 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
                 onClick={handleSendDeleteList}
               >
                 <Trash className="text-xl" />
-                <span className="ml-2">{t("buttons.Send to Delete")}</span>
+                <span className="ml-2">{t("buttons.send-to-delete")}</span>
               </Button>
             }
           </div>

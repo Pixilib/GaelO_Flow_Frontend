@@ -124,7 +124,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                         size={40}
                         className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary dark:text-white'}`} />
                 )}
-                <p className="text-primary dark:text-white">{t("import.Drop the Dicom")}</p>
+                <p className="text-primary dark:text-white">{t("import.drop-the-dicom")}</p>
                 <input directory="" webkitdirectory="" {...getInputProps()} />
                 {numberOfLoadedFiles > 0 &&
                     <ProgressBar

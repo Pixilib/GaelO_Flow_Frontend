@@ -50,7 +50,7 @@ const Labels = ({ selectedStudyIds }: LabelProps) => {
                 onClick={() => setIsLabelDropdownOpen(!isLabelDropdownOpen)}
             >
                 <Label className="text-xl" />
-                <span className="ml-2">{t("contents.Assign Labels")}</span>
+                <span className="ml-2">{t("contents.assign-labels")}</span>
                 <ToggleChevron
                     isOpen={isLabelDropdownOpen}
                     className="ml-2" />

@@ -83,7 +83,7 @@ const CreateRoot: React.FC = () => {
                     color={tags.length > 0 ? Colors.primary : Colors.almond}
                     onClick={handleCreateDicoms}
                 >
-                    {t("import.Create Dicoms")},
+                    {t("import.create-dicoms")},
                 </Button>
             </div>
         </>

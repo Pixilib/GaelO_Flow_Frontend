@@ -49,7 +49,7 @@ const CreateRootModal = ({ onClose, onSubmit }: CreateRootModalProps) => {
     return (
         <>
             <Modal.Header onClose={onClose}>
-                <Modal.Title>{t("autorouting.createAutoRooting.Create Auto-Rooting")}</Modal.Title>
+                <Modal.Title>{t("autorouting.createAutoRooting.create-auto-rooting")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <CreateAutoRoutingForm
@@ -67,7 +67,7 @@ const CreateRootModal = ({ onClose, onSubmit }: CreateRootModalProps) => {
                     <Button
                         color={Colors.primary}
                         onClick={handleSubmit}
-                        children={<p>{t("autorouting.createAutoRooting.Submit")}</p>}
+                        children={<p>{t("autorouting.createAutoRooting.submit")}</p>}
                     />
                 </div>
             </Modal.Footer>

@@ -21,7 +21,7 @@ const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableP
 
     const columns = [
         {
-            header: t("autorouting.createAutoRooting.Activated"),
+            header: t("autorouting.createAutoRooting.activated"),
             cell({ row }: { row: any }) {
                 return (
                     <Toggle
@@ -32,19 +32,19 @@ const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableP
             }
         },
         {
-            header: t("autorouting.createAutoRooting.Name"),
+            header: t("autorouting.createAutoRooting.name"),
             accessorKey: "Name",
         },
         {
-            header: t("autorouting.createAutoRooting.Event Type"),
+            header: t("autorouting.createAutoRooting.event-type"),
             accessorKey: "EventType",
         },
         {
-            header: t("autorouting.createAutoRooting.Rule Condition"),
+            header: t("autorouting.createAutoRooting.rule-condition"),
             accessorKey: "Router.RuleCondition",
         },
         {
-            header: t("autorouting.createAutoRooting.Rules"),
+            header: t("autorouting.createAutoRooting.rules"),
             cell({ row }: { row: any }) {
                 return (
                     <Button
@@ -54,13 +54,13 @@ const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableP
                             setShowRulesModal(true)
                         }}
                         color={Colors.primary}
-                        children={<p>{t("autorouting.createAutoRooting.See Rules")}</p>}
+                        children={<p>{t("autorouting.createAutoRooting.see-rules")}</p>}
                     />
                 );
             }
         },
         {
-            header: t("autorouting.createAutoRooting.Destinations"),
+            header: t("autorouting.createAutoRooting.destinations"),
             cell({ row }: { row: any }) {
                 return (
                     <Button
@@ -70,13 +70,13 @@ const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableP
                             setShowDestinationsModal(true)
                         }}
                         color={Colors.primary}
-                        children={<p>{t("autorouting.createAutoRooting.See Destinations")}</p>}
+                        children={<p>{t("autorouting.createAutoRooting.see-destinations")}</p>}
                     />
                 );
             }
         },
         {
-            header: t("autorouting.createAutoRooting.Delete"),
+            header: t("autorouting.createAutoRooting.delete"),
             cell({ row }: { row: any }) {
                 return (
                     <Button

@@ -15,11 +15,11 @@ const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
     const columns: ColumnDef<{ name: string, value: string }>[] = [
         {
             accessorKey: 'name',
-            header: () => <>{t("import.Tag name")}</>,
+            header: () => <>{t("import.tag-name")}</>,
         },          
         {
             accessorKey: 'value',
-            header: () => <>{t("import.Value")}</>,
+            header: () => <>{t("import.value")}</>,
         },
         {
             id: 'delete',

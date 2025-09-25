@@ -53,7 +53,7 @@ const EditableCell = ({
                 <SelectInput
                     isClearable={isClearable}
                     menuPosition='fixed'
-                    placeholder={t("ui.table.Select...")}
+                    placeholder={t("ui.table.select")}
                     value={value}
                     options={options}
                     onChange={(option) => {

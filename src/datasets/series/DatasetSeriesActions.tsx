@@ -25,26 +25,26 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onA
 
     const options: DropdownOption[] = [
         {
-            label:t("contents.Modify"),
+            label:t("contents.modify"),
             icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', series.id)
         },
         {
-            label: t("contents.Metadata"),
+            label: t("contents.metadata"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('metadata', series.id)
         },
         {
-            label: t("contents.Preview Series"),
+            label: t("contents.preview-series"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', series.id)
         },
         {
             icon: <Download />,
-            label: t("contents.Download nii.gz"),
+            label: t("contents.download-nii.gz"),
             color: 'green',
             action: () => {
                 const id = toastSuccess("Download started", 60)
