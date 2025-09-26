@@ -3,6 +3,7 @@ import moment from "moment";
 import { dicomDateQueryStringFromDateFromDateTo, Option, QueryPayload, useCustomToast } from "../utils";
 import { FormButton, Input, Label, SelectInput } from "../ui";
 import SelectModalities from "./SelectModalities";
+import { useTranslation } from "react-i18next";
 
 type SearchFormProps = {
   aets?: Option[];
@@ -29,6 +30,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
   const [dateFrom, setDateFrom] = useState<string>("");
   const [dateTo, setDateTo] = useState<string>("");
   const [labels, setLabels] = useState<string[]>([]);
+  const {t} = useTranslation()
 
   const dataPresetOptions: Option[] = [
     { value: 0.01, label: "Today" },
@@ -214,7 +216,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
       <div className="flex justify-center col-span-2 lg:w-1/2 lg:mx-auto lg:gap-11">
         <div className={`${withAets && aets.length > 0 ? "w-1/2 mt-5" : "w-full"} flex justify-center items-center`}>
           <FormButton
-            text="Search"
+            text={t("query.search")}
             type="submit"
             className=" lg:mt-10"
           />

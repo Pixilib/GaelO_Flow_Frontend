@@ -1,6 +1,5 @@
 import { Rule } from "../../utils/types";
 import { Modal, Table } from "../../ui";
-import { Colors } from "../../utils";
 
 type SeeRulesModalProps = {
     show: boolean;

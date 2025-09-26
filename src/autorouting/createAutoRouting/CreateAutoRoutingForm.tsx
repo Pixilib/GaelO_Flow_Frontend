@@ -5,7 +5,7 @@ import AddRuleForm from "./AddRuleForm";
 import { Colors } from "../../utils";
 import { Add } from "../../icons";
 import AddDestinationForm from "./AddDestinationForm";
-import { Router } from "react-router";
+import { useTranslation } from "react-i18next";
 
 type CreateAutoRoutingFormProps = {
     payload: AutoRoutingPayload
@@ -43,20 +43,21 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
     const handleModifyDestination = (id: string, destination: Destination) => {
         onDestinationsChange(destinations.map(d => d.id === id ? { destination, id } : d));
     }
+    const {t} = useTranslation()
 
     return (
         <div className="flex flex-col gap-4">
             <div className="flex gap-5 flex-row">
                 <div className="w-full">
-                    <Label value="Name *" />
+                    <Label value={t("autorouting.createAutoRooting.name*")}/>
                     <Input
-                        placeholder="Name"
+                        placeholder={t("autorouting.createAutoRooting.name")}
                         onChange={(e) => onPayloadChange({ ...payload, Name: e.target.value })}
                         value={payload?.Name}
                     />
                 </div>
                 <div className="w-full">
-                    <Label value="Event Type *" />
+                    <Label value={t("autorouting.createAutoRooting.event-type*")} />
                     <SelectInput
                         placeholder="Select option"
                         options={eventOptions}
@@ -65,7 +66,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                     />
                 </div>
                 <div className="w-50">
-                    <Label value="Activated *" />
+                    <Label value={t("autorouting.createAutoRooting.activated*")} />
                     <Toggle
                         checked={payload?.Activated}
                         onChange={() => onPayloadChange({ ...payload, Activated: !payload.Activated })}
@@ -76,10 +77,10 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
             <div>
                 <div className="flex flex-col gap-5">
                     <div className="flex items-center gap-10">
-                        <h1 className="font-bold">Rules</h1>
+                        <h1 className="font-bold">{t("autorouting.createAutoRooting.rules")}</h1>
                         <div className="w-80">
                             <SelectInput
-                                placeholder="Select Condition"
+                                placeholder={t("autorouting.createAutoRooting.select-condition")}
                                 options={autoRoutingConditionOptions}
                                 value={payload?.Router?.RuleCondition || ""}
                                 onChange={(e: any) => onPayloadChange({ ...payload, Router: { ...payload.Router, RuleCondition: e.value } })}
@@ -103,7 +104,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             children={
                                 <div className="flex items-center gap-2 text-sm">
                                     <Add />
-                                    <p>Add Rule</p>
+                                    <p>{t("autorouting.createAutoRooting.add-rule")}</p>
                                 </div>
                             }
                         />
@@ -113,7 +114,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
             <div className="border-b border-gray-custom" />
             <div>
                 <div className="flex flex-col gap-2">
-                    <h1 className="font-bold">Destinations</h1>
+                    <h1 className="font-bold">{t("autorouting.createAutoRooting.destinations")}</h1>
                     <div>
                         <div className="flex flex-col gap-2">
                             {destinations.map((destination, i) => (
@@ -133,7 +134,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             children={
                                 <div className="flex items-center gap-2 text-sm">
                                     <Add />
-                                    <p>Add Destination</p>
+                                    <p>{t("autorouting.createAutoRooting.add-destination")}</p>
                                 </div>
                             }
                         />
@@ -145,3 +146,4 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
 }
 
 export default CreateAutoRoutingForm;
+

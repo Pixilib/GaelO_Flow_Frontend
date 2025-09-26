@@ -1,13 +1,13 @@
 import { useDropzone } from "react-dropzone";
 import Papa from "papaparse";
-import { QueryStudy } from "../types";
+import { useTranslation } from "react-i18next";
 
 type QueryCsvDropProps = {
   onImportCsv: (records: Record<string, any>[]) => void;
 };
 
 const QueryCsvDrop = ({ onImportCsv }: QueryCsvDropProps) => {
-
+  const {t} = useTranslation()
   const { getRootProps, getInputProps, open } = useDropzone({
     multiple: false,
     accept: {
@@ -31,7 +31,7 @@ const QueryCsvDrop = ({ onImportCsv }: QueryCsvDropProps) => {
         {...getRootProps({ onClick: open })}
         className={`relative flex flex-col space-y-3 items-center justify-center w-full max-w-full p-4 text-center bg-indigo-100 dark:bg-neutral-800 border-4 border-dashed border-primary dark:border-white rounded-lg`}
       >
-        <p className="text-primary dark:text-white">Drop CSV</p>
+        <p className="text-primary dark:text-white">{t("auto-retrieve.query.drop-csv")}</p>
         <input {...getInputProps()} />
       </div>
     </>

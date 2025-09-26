@@ -3,21 +3,23 @@ import { Input, Table } from '../../ui';
 import { ColumnDef } from '@tanstack/react-table';
 import DeleteButton from '../../ui/DeleteButton';
 import { Colors } from '../../utils';
+import { useTranslation } from 'react-i18next';
 type TagTableProps = {
     data: { name: string, value: string }[];
     onDeleteTag: (tagName: string) => void;
 };
 
 const TagTable: React.FC<TagTableProps> = ({ data, onDeleteTag }) => {
+    const { t } = useTranslation()
 
     const columns: ColumnDef<{ name: string, value: string }>[] = [
         {
             accessorKey: 'name',
-            header: 'Tag Name',
-        },
+            header: () => <>{t("import.tag-name")}</>,
+        },          
         {
             accessorKey: 'value',
-            header: 'Value',
+            header: () => <>{t("import.value")}</>,
         },
         {
             id: 'delete',

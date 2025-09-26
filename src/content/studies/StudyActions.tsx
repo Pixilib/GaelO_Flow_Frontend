@@ -7,6 +7,7 @@ import StoneViewerLink from '../StoneViewerLink';
 
 import LabelModal from './LabelModal';
 import { DropdownButton } from '../../ui';
+import { useTranslation } from "react-i18next";
 
 type StudyActionsProps = {
     study: StudyMainDicomTags & { id: string };
@@ -14,6 +15,7 @@ type StudyActionsProps = {
 };
 
 const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => {
+    const {t} = useTranslation()
 
     const [isLabelsModalOpen, setLabelsModalOpen] = useState(false);
 
@@ -37,37 +39,37 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             action: () => setLabelsModalOpen(true)
         },
         {
-            label: 'Modify',
+            label: t("contents.modify"),
             icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', study.id)
         },
         {
-            label: 'AI',
+            label: t("contents.ai"),
             icon: <Brain />,
             color: 'green',
             action: () => onActionClick('ai', study.id)
         },
         {
-            label: 'Create Serie',
+            label: t("contents.create-serie"),
             icon: <Add />,
             color: 'green',
             action: () => onActionClick('createSerie', study.id)
         },
         {
-            label: 'Preview Study',
+            label: t("contents.preview-study"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', study.id)
         },
         {
-            label: 'Download',
+            label: t("contents.download"),
             icon: <Download />,
             color: 'green',
             action: () => onActionClick('download', study.id)
         },
         {
-            label: 'Delete',
+            label: t("contents.delete"),
             icon: <Trash />,
             color: 'red',
             action: () => onActionClick('delete', study.id)

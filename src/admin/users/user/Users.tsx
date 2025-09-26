@@ -11,6 +11,7 @@ import UsersTable from "./UsersTable";
 import CreateUserForm from "./CreateUserForm";
 import EditUserForm from "./EditUserForm";
 import { More } from "../../../icons";
+import { useTranslation } from "react-i18next";
 
 type UsersProps = {
   className?: string;
@@ -21,6 +22,7 @@ const Users = ({ className = "" }: UsersProps) => {
   const { confirm } = useConfirm();
   const [userToEdit, setUserToEdit] = useState<User | null>(null);
   const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const {t} = useTranslation()
 
   const { data: users, isPending: isLoadingUsers } =
     useCustomQuery<User[]>(["users"], () => getUsers());
@@ -85,7 +87,7 @@ const Users = ({ className = "" }: UsersProps) => {
               className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"
             >
               <More size={18} />
-              Create User
+              {t("admin.user.create-user")}
             </Button>
           ) : (
             <CreateUserForm onClose={() => setIsCreatingUser(null)} />

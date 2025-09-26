@@ -8,12 +8,14 @@ import { deleteDeleteQueue, getDeleteQueue, getExistingDeleteQueues } from "../.
 import { Queue } from "../../utils/types";
 import { useMemo } from "react";
 import ProgressQueueCircle from "../../queue/ProgressQueueCircle";
+import { useTranslation } from "react-i18next";
 
 const CardDelete = () => {
 
     const currentUserId = useSelector(
         (state: RootState) => state.user.currentUserId
     );
+    const { t } = useTranslation();
 
     const { data: existingAnonymizeQueues } = useCustomQuery<string[]>(
         ["queue", "delete", currentUserId?.toString() || ""],
@@ -49,7 +51,7 @@ const CardDelete = () => {
         <Card className="w-full bg-white overflow-hidden rounded-lg rounded-tl-2xl rounded-tr-2xl shadow-lg md:max-w-md dark:bg-neutral-500">
             <CardHeader centerTitle color={Colors.danger} className="flex items-center">
                 <Export className="mr-3 text-xl text-white " />
-                <span className="text-lg font-bold text-white">Delete</span>
+                <span className="text-lg font-bold text-white">{t("root.dashboard.delete")}</span>
             </CardHeader>
             <CardBody
                 className="flex items-center justify-center dark:bg-neutral-500 bg-gray-50"

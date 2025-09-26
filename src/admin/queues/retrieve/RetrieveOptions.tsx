@@ -20,6 +20,7 @@ import {
 } from "../../../ui";
 import { Colors } from "../../../utils/enums";
 import { Send } from "../../../icons";
+import { useTranslation } from "react-i18next";
 
 type RetrieveOptionProps = {
   data: Options;
@@ -30,6 +31,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
 
   const [startTime, setStartTime] = useState<string | null>(null);
   const [stopTime, setStopTime] = useState<string | null>(null);
+  const {t} = useTranslation()
 
   const timeDelta = useMemo(() => {
     if (!startTime || !stopTime) return null;
@@ -98,7 +100,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
     >
       <Card bordered>
         <CardHeader centerTitle
-          title="Retrieve Schedule Time : " color={Colors.success} />
+          title={t("admin.queues.retrieve-schedule-time")} color={Colors.success} />
         <CardBody
           color={Colors.light} roundedBottomLeft roundedBottomRight
           className="dark:bg-neutral-800 dark:text-white">
@@ -107,7 +109,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
               type="time"
               label={
                 <Label
-                  value={"Start Time"}
+                  value={t("admin.queues.start-time")}
                   className="text-sm font-medium text-center"
                   align="center"
                 />
@@ -122,7 +124,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
               type="time"
               label={
                 <Label
-                  value={"Stop Time"}
+                  value={t("admin.queues.stop-time")}
                   className="text-sm font-medium text-center"
                   align="center"
                 />
@@ -139,7 +141,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
               <label
                 htmlFor="time-delta"
                 className="justify-center text-sm font-bold">
-                Total Time
+                {t("admin.queues.total-time")}
               </label>
               <Badge
                 value={timeDelta ?? ""}
@@ -160,7 +162,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
               <span>
                 <Send />
               </span>
-              <span>Send</span>
+              <span>{t("admin.queues.send")}</span>
             </Button>
           </div>
         </CardBody>

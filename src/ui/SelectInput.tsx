@@ -28,7 +28,7 @@ const customClass: ClassNamesConfig<OptionType, boolean> = {
     const borderRadius = state.selectProps.rounded
       ? "rounded-3xl"
       : "rounded-xl";
-    return `border border-gray-300 bg-gray-50 text-black dark:!bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active`;
+    return `border border-gray-300 bg-gray-50 text-black dark:!bg-neutral-800 ${borderRadius} focus:border-active hover:border-primary-active text-sm`;
   },
   menu: () => "rounded-3xl p-1 bg-white dark:!bg-neutral-800",
   option: (state) => {

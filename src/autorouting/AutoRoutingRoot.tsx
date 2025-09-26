@@ -2,14 +2,16 @@ import { Colors, useCustomMutation, useCustomQuery, useCustomToast } from "../ut
 import AutoRoutingTable from "./table/AutoRoutingTable";
 import { createAutoRoutingItem, deleteAutoRoutingItem, getAutoRoutingItems, toggleActivatedAutoRoutingItem } from "../services/autorouting";
 import { AutoRoutingItems, AutoRoutingPayload } from "../utils/types";
-import { Button } from "../ui";
+import { Button, Modal } from "../ui";
 import { Add } from "../icons";
 import CreateRootModal from "./createAutoRouting/CreateRootModal";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const AutoRoutingRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const { t } = useTranslation()
 
   const { mutate: mutateCreateAutoRoutingItem } = useCustomMutation<void>(
     ({ payload }) => createAutoRoutingItem(payload),
@@ -57,6 +59,7 @@ const AutoRoutingRoot = () => {
 
   const onSubmit = (payload: AutoRoutingPayload) => {
     mutateCreateAutoRoutingItem({ payload });
+    setShowCreateModal(false)
   }
 
   return (
@@ -68,7 +71,7 @@ const AutoRoutingRoot = () => {
           children={
             <div className="flex items-center gap-2">
               <Add />
-              <p>Create new rule</p>
+              <p>{t("autorouting.create-new-rule")}</p>
             </div>
           }
         />
@@ -78,11 +81,17 @@ const AutoRoutingRoot = () => {
         onDelete={handleDeleteAutoRoutingItem}
         toggleActivated={handleToggleActivate}
       />
-      <CreateRootModal
+      <Modal
         show={showCreateModal}
         onClose={() => setShowCreateModal(false)}
-        onSubmit={onSubmit}
-      />
+        size="xl"
+      >
+        <CreateRootModal
+          onClose={() => setShowCreateModal(false)}
+          onSubmit={onSubmit}
+        />
+      </Modal>
+
     </div>
   );
 };
