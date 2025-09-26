@@ -2,8 +2,8 @@
     "home": "Accueil",
     "help": "Aide",
     "log-out": "Déconnexion",
-    "orthanc-content": "Contenu Orthanc",
-    "Query": "Requête",
+    "content": "Recherche d'images",
+    "Query": "Query",
     "Import": "Importer",
     "title-sign-in-form": "Bienvenue !",
     "select-labels" : "Sélectionner les Labels ...",
@@ -15,7 +15,7 @@
         },
         "notification" : {
             "click-to-see-details" : "Clicker pour voir les details",
-            "progress" : "Progrès",
+            "progress" : "Progression",
             "level" : "Level",
             "empty-list" : "Liste vide",
             "patientID": "PatientID",
@@ -32,11 +32,12 @@
     "import" : {
         "create-dicoms" : "Créer Dicoms",
         "import-dicoms" : "Importer Dicoms",
-        "drop-the-dicom" : "Déposez le dossier Dicom ou le fichier ZIP, ou cliquez pour sélectionner les fichiers",
+        "dicom-drop" : "Déposez le dossier Dicom ou le fichier ZIP, ou cliquez pour sélectionner les fichiers",
         "drag-and-drop" : "Glissez et déposez les fichiers image ici",
         "add-tag" : "Ajout du tag",
         "tag-name" :"Nom du tag",
-        "value" : "Valeur"
+        "value" : "Valeur",
+        "define-dicoms-tags" : "Spécifier les champs DICOMS"
     },
     "ui" : {
         "table" : {
@@ -55,12 +56,16 @@
         "view-in-stone" : "Voir dans Stone",
         "modify" : "Modifier",
         "ai" : "IA",
-        "preview-study" : "Aperçu study",
+        "preview-study" : "Prévisualisation study",
         "download-dicom" : "Télécharger DICOM",
         "metadata" : "Métadonnées",
-        "preview-series" : "Aperçu de la série",
+        "preview-series" : "Prévisualisation Serie",
         "download-nii.gz" : "Télécharger nii.gz",
-        "assign-labels" : "Attribuer les labels"
+        "assign-labels" : "Attribuer les labels",
+        "download" : "Télécharger",
+        "download-nifti" : "Télécharger Nifti",
+        "delete" : "Supprimer",
+        "create-serie" : "Créer Serie"
     },
     "autorouting" : {
         "create-new-rule" : "Créer une nouvelle règle",
@@ -69,7 +74,7 @@
           "submit" : "soumettre",
           "add-rule" : "Ajouter une règle",
           "add-destination" : "Ajouter une destination",
-          "rules" : "règles",
+          "rules" : "Règles",
           "destinations" : "Destinations",
           "event-type*" : "Type d'événement *",
           "name*" : "Nom *",
@@ -94,19 +99,55 @@
           "basket" : "Panier"
         },
         "results" : {
-          "Add to basket" : "Ajouter au panier"
+          "add-to-basket" : "Ajouter au panier"
         },
         "basket" : {
-            "Start Robot" : "Lancer le robot"
+            "start-robot" : "Lancer le robot"
         },
         "task" : {
             "state" : "État",
-            "progress" : "Progrès"
+            "progress" : "Progression"
         }
     },
     "query" : {
         "search" : "Recherche",
         "results" : "Résultat"
+    },
+    "admin" : {
+        "queues" : {
+            "retrieve-schedule-time" : "Horaires de retrieve",
+            "start-time" : "Heure de début",
+            "stop-time" : "heure de fin",
+            "total-time" : "Durée totale",
+            "send" : "Envoyer",
+            "user-id" : "Utilisateur ID",
+            "progress" : "Progression",
+            "number-of-items" : "Nombre d'éléments",
+            "delete" : "Supression",
+            "state" : "État",
+            "job-type" : "Type de job",
+            "anonymize" : "Anonymisation"
+        },
+        "modalities" : {
+            "manage-modalities" : "Gestion des modalities",
+            "new-modality" : "Nouvelle modality",
+            "create-new-modality" : "Créer une nouvelle modality"
+          },
+          "peers" : {
+            "manage-peers" : "Gestion des Peers",
+            "new-peer" : "Nouveau Peer",
+            "create-new-peer" : "Créer un nouveau serveur peer"
+          },
+          "jobs" : {
+            "manage-jobs" : "Gestion des tâches"
+          },
+          "labels" : {
+            "manage-labels" : "Gestion des labels",
+            "add-new-label" : "Ajout d'un nouveau label"
+          },
+          "user" : {
+            "create-user" : "Créer un utilisateur",
+            "user" : "Utilisateurs"
+          }
     }
-
 }

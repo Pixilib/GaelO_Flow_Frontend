@@ -77,7 +77,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
             <div>
                 <div className="flex flex-col gap-5">
                     <div className="flex items-center gap-10">
-                        <h1 className="font-bold">{t("autorouting.createAutoRooting.Rules")}</h1>
+                        <h1 className="font-bold">{t("autorouting.createAutoRooting.rules")}</h1>
                         <div className="w-80">
                             <SelectInput
                                 placeholder={t("autorouting.createAutoRooting.select-condition")}
@@ -114,7 +114,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
             <div className="border-b border-gray-custom" />
             <div>
                 <div className="flex flex-col gap-2">
-                    <h1 className="font-bold">{t("autorouting.createAutoRooting.Destinations")}</h1>
+                    <h1 className="font-bold">{t("autorouting.createAutoRooting.destinations")}</h1>
                     <div>
                         <div className="flex flex-col gap-2">
                             {destinations.map((destination, i) => (

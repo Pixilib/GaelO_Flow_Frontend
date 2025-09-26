@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { Button, Input } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label } from "../../icons";
+import { useTranslation } from "react-i18next";
 
 type LabelInputFormProps = {
   onCreateLabel: (label: string) => void;
@@ -10,6 +11,7 @@ type LabelInputFormProps = {
 
 const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   const [label, setLabel] = useState<string | null>(null);
+  const {t} = useTranslation()
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLabel(event?.target?.value);
@@ -29,7 +31,7 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
         type="text"
         value={label ?? ""}
         onChange={handleInputChange}
-        placeholder="Add new label"
+        placeholder={t("admin.labels.add-new-label")}
         bordered
         className="w-full border border-gray-300 rounded-r-none shadow-md rounded-l-xl focus:outline-hidden focus:ring-2 focus:ring-gray-300"
       />

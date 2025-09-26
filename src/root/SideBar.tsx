@@ -67,10 +67,10 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             )}
             {role.readAll && (
               <MenuItem
-                title={t("orthanc-content")}
+                title={t("content")}
                 icon={<ImageSearch className="w-6 h-6" />}
-                isActive={location.pathname === "/orthanc-content"}
-                onClick={() => handleItemClick("/orthanc-content")}
+                isActive={location.pathname === "/content"}
+                onClick={() => handleItemClick("/content")}
               />
             )}
             {role.import && (

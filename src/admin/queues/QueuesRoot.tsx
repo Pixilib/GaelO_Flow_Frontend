@@ -5,11 +5,13 @@ import RetrieveRoot from "./retrieve/RetrieveRoot";
 import AnonymizeRoot from "./anonymize/AnonymizeRoot";
 import DeleteRoot from "./delete/DeleteRoot";
 import ProcessingRoot from "./processing/ProcessingRoot";
+import { useTranslation } from "react-i18next";
 
 const QueuesRoot = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname;
+  const {t} = useTranslation()
 
   return (
     <Card >
@@ -20,12 +22,12 @@ const QueuesRoot = () => {
           onClick={() => navigate("/administration/queues/retrieve")}
         />
         <Tab
-          title="Anonymize"
+          title={t("admin.queues.anonymize")}
           active={path.endsWith("anonymize")}
           onClick={() => navigate("/administration/queues/anonymize")}
         />
         <Tab
-          title="Delete"
+          title={t("admin.queues.delete")}
           active={path.endsWith("delete")}
           onClick={() => navigate("/administration/queues/delete")}
         />

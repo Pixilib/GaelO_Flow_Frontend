@@ -69,7 +69,7 @@ const CreateRoot: React.FC = () => {
 
             <div className="flex flex-col justify-center p-3 border-t-2 shadow-inner bg-light dark:bg-neutral-950 border-slate-200 dark:border-neutral-700">
                 <CreateForm
-                    title="Define DICOM Tags"
+                    title={t("import.define-dicoms-tags")}
                     onAddTag={handleAddTag}
                 />
                 <TagTable

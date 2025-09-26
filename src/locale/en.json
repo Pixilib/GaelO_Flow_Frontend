@@ -2,7 +2,7 @@
       "home": "Home",
       "help": "Help",
       "log-out": "Log out",
-      "orthanc-content": "Orthanc Content",
+      "content": "Browse Images",
       "Query": "Query",
       "Import": "Import",
       "title-sign-in-form":"Welcome Back !",
@@ -32,11 +32,12 @@
       "import" : {
         "create-dicoms" : "Create Dicoms",
         "import-dicoms" : "Import Dicoms",
-        "drop-the-dicom" : "Drop the Dicom folder or ZIP, or click to select files",
+        "dicom-drop" : "Drop the Dicom folder or ZIP, or click to select files",
         "drag-and-drop" : "Drag and drop image files here",
         "add-tag" : "Add tag",
         "tag-name" :"Tag name",
-        "value" : "Value"
+        "value" : "Value",
+        "define-dicoms-tags" : "Define DICOM Tags"
       },
       "ui" : {
         "table" : {
@@ -58,9 +59,14 @@
         "preview-study" : "Preview Study",
         "download-dicom" : "Download DICOM",
         "metadata" : "Metadata",
-        "preview-series" : "Preview Serie",
+        "preview-series" : "Preview serie",
         "download-nii.gz" : "Download nii.gz",
-        "assign-labels" : "Assign Labels"
+        "assign-labels" : "Assign Labels",
+        "download" : "Download",
+        "download-nifti" : "Download Nifti",
+        "delete" : "Delete",
+        "create-serie" : "Create serie"
+
       },
       "autorouting" : {
         "create-new-rule" : "Create new rule",
@@ -107,5 +113,42 @@
       "query" : {
         "search" : "Search",
         "results" : "Results"
-    }
+      },
+      "admin" : {
+        "queues" : {
+            "retrieve-schedule-time" : "Retrieve Schedule Time",
+            "start-time" : "Start Time",
+            "stop-time" : "Stop Time",
+            "total-time" : "Total Time",
+            "send" : "Send",
+            "user-id" : "User ID",
+            "progress" : "Progress",
+            "number-of-items" : "Number of items",
+            "delete" : "Delete",
+            "state" : "State",
+            "job-type" : "Job Type",
+            "anonymize" : "Anonymize"
+          },
+          "modalities" : {
+            "manage-modalities" : "Manage Modalities",
+            "new-modality" : "New modality",
+            "create-new-modality" : "Create New Modality"
+          },
+          "peers" : {
+            "manage-peers" : "Manage Peers",
+            "new-peer" : "New Peer",
+            "create-new-peer" : "Create New Peer"
+          },
+          "jobs" : {
+            "manage-jobs" : "Manage jobs"
+          },
+          "labels" : {
+            "manage-labels" : "Manage Labels",
+            "add-new-label" : "Add new label"
+          },
+          "user" : {
+            "create-user" : "Create User",
+            "user" : "Users"
+          }
+      }
   }

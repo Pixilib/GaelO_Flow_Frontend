@@ -58,12 +58,12 @@ const TaskTable = ({ data, selectedRows, onRowSelectionChange }: TaskTableProps)
         {
             id: "state",
             accessorKey: "state",
-            header: () => <>{t("auto-retrieve.task.state")}</>, 
+            header: t("auto-retrieve.task.state"), 
         },
         {
             id: "progress",
             accessorKey: "progress",
-            header: () => <>{t("auto-retrieve.task.progress")}</>,
+            header: t("auto-retrieve.task.progress"),
         }
 
     ]

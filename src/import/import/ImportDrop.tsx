@@ -60,6 +60,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
 
     const { getRootProps, getInputProps, open } = useDropzone({
         multiple: true,
+        
         onDrop: async (acceptedFiles) => {
 
             setNumberOfLoadedFiles((loadedFiles) => loadedFiles + acceptedFiles.length);
@@ -124,7 +125,7 @@ const ImportDrop: React.FC<ImportDropProps> = ({ model, onError, onFilesUploaded
                         size={40}
                         className={`${isUploading ? 'text-gray-400 animate-spin' : 'text-primary dark:text-white'}`} />
                 )}
-                <p className="text-primary dark:text-white">{t("import.drop-the-dicom")}</p>
+                <p className="text-primary dark:text-white">{t("import.dicom-drop")}</p>
                 <input directory="" webkitdirectory="" {...getInputProps()} />
                 {numberOfLoadedFiles > 0 &&
                     <ProgressBar
