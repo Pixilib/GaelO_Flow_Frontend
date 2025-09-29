@@ -102,6 +102,7 @@ const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableP
                 data={data}
                 className="bg-gray-100"
                 enableSorting
+                initialSorting = {[{ id: "Name", desc: false }]}
             />
             <SeeRulesModal
                 show={showRulesModal}

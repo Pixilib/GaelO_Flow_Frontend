@@ -4,13 +4,9 @@ import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
 import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import { Item } from "../ui/menu/Items";
-import { Admin, Directions, Help, Home, ImageAdd, ImageSearch, Import, Logout, RestorePage, ZoomQuestion } from "../icons";
+import { Admin, Cd, Directions, Help, Home, ImageAdd, ImageSearch, Import, Logout, RestorePage, ZoomQuestion } from "../icons";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { UserState } from "../reducers/UserSlice";
-import { useCustomQuery, User } from "../utils";
-import { getUserById } from "../services";
-import { Spinner } from "../ui";
 
 type SideBarProps = {
   onLogout: () => void;
@@ -19,6 +15,7 @@ type SideBarProps = {
 };
 
 const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -97,6 +94,14 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
                 icon={<RestorePage className="w-6 h-6" />}
                 isActive={location.pathname === "/auto-retrieve"}
                 onClick={() => handleItemClick("/auto-retrieve")}
+              />
+            )}
+            {role.cdBurner && (
+              <MenuItem
+                title="CD Burner"
+                icon={<Cd className="w-6 h-6" />}
+                isActive={location.pathname === "/cd-burner"}
+                onClick={() => handleItemClick("/cd-burner")}
               />
             )}
             {role.autoRouting && (

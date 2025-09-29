@@ -27,7 +27,7 @@ type OptionsRequest = {
   BurnerStarted: boolean;
   BurnerLabelPath: string;
   BurnerMonitoringLevel: string;
-  BurnerManifacturer: string;
+  BurnerManufacturer: string;
   BurnerMonitoredPath: string;
   BurnerDeleteStudyAfterSent: boolean;
   BurnerSupportType: string;
@@ -58,7 +58,7 @@ export type Options = {
   burnerStarted: boolean;
   burnerLabelPath: string;
   burnerMonitoringLevel: string;
-  burnerManifacturer: string;
+  burnerManufacturer: string;
   burnerMonitoredPath: string;
   burnerDeleteStudyAfterSent: boolean;
   burnerSupportType: string;

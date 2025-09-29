@@ -15,7 +15,7 @@ export const getOptions = (): Promise<Options> => {
         burnerStarted: data.BurnerStarted,
         burnerLabelPath: data.BurnerLabelPath,
         burnerMonitoringLevel: data.BurnerMonitoringLevel,
-        burnerManifacturer: data.BurnerManifacturer,
+        burnerManufacturer: data.BurnerManufacturer,
         burnerMonitoredPath: data.BurnerMonitoredPath,
         burnerDeleteStudyAfterSent: data.BurnerDeleteStudyAfterSent,
         burnerSupportType: data.BurnerSupportType,
