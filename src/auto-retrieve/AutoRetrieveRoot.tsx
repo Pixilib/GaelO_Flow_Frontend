@@ -14,6 +14,7 @@ import { dicomDateQueryStringFromDateFromDateTo } from "../utils";
 import { queryModality } from "../services";
 import { RootState, store } from "../store";
 import { setCanExitPage } from "../reducers/UserSlice";
+import { useTranslation } from "react-i18next";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
@@ -23,6 +24,7 @@ const AutoRetrieveRoot = () => {
   const mounted = useRef(false);
   const queries = useSelector((state: RootState) => state.autoRetrieve.queries);
   const studiesResults = useSelector((state: RootState) => state.autoRetrieve.studyResults);
+  const {t} = useTranslation()
 
   useEffect(() => {
     mounted.current = true;
@@ -111,12 +113,12 @@ const AutoRetrieveRoot = () => {
           onClick={() => handleTabClick("/auto-retrieve")}
         />
         <Tab
-          title="Results"
+          title={t("auto-retrieve.query.results")}
           active={location.pathname.includes("/auto-retrieve/results")}
           onClick={() => handleTabClick("/auto-retrieve/results/studies")}
         />
         <Tab
-          title="Basket"
+          title={t("auto-retrieve.query.basket")}
           active={location.pathname.includes("/auto-retrieve/basket")}
           onClick={() => handleTabClick("/auto-retrieve/basket")}
         />

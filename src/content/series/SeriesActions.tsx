@@ -2,6 +2,7 @@ import React from 'react';
 import { Series } from "../../utils/types";
 import { Download, Edit, Eye, Trash } from '../../icons';
 import { DropdownButton } from '../../ui';
+import { useTranslation } from "react-i18next";
 
 type SeriesActionsProps = {
     series: Series;
@@ -10,41 +11,42 @@ type SeriesActionsProps = {
 
 const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) => {
 
+    const {t} = useTranslation()
 
     const options = [
         
         {
-            label: 'Modify',
+            label: t("contents.modify"),
             icon: <Edit />,
             color: 'orange',
             action: () => onActionClick('edit', series)
         },
         {
-            label: 'Metadata',
+            label: t("contents.metadata"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('metadata', series)
         },
         {
-            label: 'Preview Series',
+            label: t("contents.preview-series"),
             icon: <Eye />,
             color: 'green',
             action: () => onActionClick('preview', series)
         },
         {
-            label: 'Download',
+            label: t("contents.download"),
             icon: <Download />,
             color: 'green',
             action: () => onActionClick('download', series)
         },
         {
-            label: 'Download Nifti',
+            label: t("contents.download-nifti"),
             icon: <Download />,
             color: 'green',
             action: () => onActionClick('download-nifti', series)
         },
         {
-            label: 'Delete',
+            label: t("contents.delete"),
             icon: <Trash />,
             color: 'red',
             action: () => onActionClick('delete', series)

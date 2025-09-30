@@ -3,10 +3,12 @@ import { Tabs, Tab } from "../ui";
 
 import CreateRoot from "./create/CreateRoot";
 import ImportRoot from "./import/ImportRoot";
+import { useTranslation } from "react-i18next";
 
 const ImportCreateRoot = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const {t} = useTranslation()
 
     const handleTabClick = (tab: string) => {
         navigate('/import/' +tab);
@@ -16,12 +18,12 @@ const ImportCreateRoot = () => {
         <div className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl" data-gaelo-flow="import-create-root">
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
-                    title="Import Dicom"
+                    title={t("import.import-dicoms")}
                     active={location.pathname.endsWith('/upload')}
                     onClick={() => handleTabClick("upload")}
                 />
                 <Tab
-                    title="Create Dicom"
+                    title={t("import.create-dicoms")}
                     active={location.pathname.endsWith('/create')}
                     onClick={() => handleTabClick("create")}
                 />

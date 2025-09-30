@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 import Input from '../Input'
 import SelectInput from '../SelectInput'
+import { useTranslation } from "react-i18next";
 
 const EditableCell = ({
     getValue,
@@ -30,6 +31,7 @@ const EditableCell = ({
     let initialValue = getValue()
 
     const [value, setValue] = useState(initialValue)
+    const {t} = useTranslation()
 
     const onChange = (e : ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value // Treat empty string as null value
@@ -51,7 +53,7 @@ const EditableCell = ({
                 <SelectInput
                     isClearable={isClearable}
                     menuPosition='fixed'
-                    placeholder='Select...'
+                    placeholder={t("ui.table.select")}
                     value={value}
                     options={options}
                     onChange={(option) => {

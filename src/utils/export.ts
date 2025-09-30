@@ -19,6 +19,7 @@ export async function sha1(str) {
 }
 
 export const formatDate = (yyyymmdd: string) => {
+  if(!yyyymmdd || yyyymmdd.length != 8) return null
   const year = yyyymmdd.slice(0, 4);
   const month = yyyymmdd.slice(4, 6);
   const day = yyyymmdd.slice(6, 8);

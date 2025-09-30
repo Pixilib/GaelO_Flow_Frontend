@@ -18,6 +18,7 @@ import {
 import { getErrorMessage } from '../../../utils/error';
 import InputPassword from '../../../ui/InputPassword';
 import { SubmitUser } from '../../../icons';
+import { useTranslation } from "react-i18next";
 
 type UserFormProps = {
   onClose : () => void;
@@ -31,6 +32,7 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [selectedRole, setSelectedRole] = useState<{ value: string; label: string } | null>(null);
+  const {t} = useTranslation()
 
   const { data: rolesOptions } = useCustomQuery<Role[], Option[]>(
     ['roles'],
@@ -76,7 +78,7 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
   return (
     <FormCard
       className={`${className} bg-light-gray dark:bg-neutral-500 `}
-      title={"Create user"}
+      title={t("admin.user.create-user")}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
@@ -148,7 +150,7 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
       </div>
       <div className="grid grid-cols-1 col-span-3 ">
         <FormButton
-          text=" Create user"
+          text={t("admin.user.create-user")}
           className='w-40'
           icon={<SubmitUser size="1.3rem" />}
         />

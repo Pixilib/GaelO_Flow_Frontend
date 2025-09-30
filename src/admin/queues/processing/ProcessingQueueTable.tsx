@@ -3,6 +3,7 @@ import { Info } from "../../../icons"
 import { deleteProcessingjob } from "../../../services/queues"
 import { Badge, Button, Table } from "../../../ui"
 import { Colors, useCustomMutation } from "../../../utils"
+import { useTranslation } from "react-i18next";
 
 type ProcessingQueueTableProps = {
     jobs?: any[]
@@ -17,6 +18,7 @@ const ProcessingQueueTable = ({ jobs = [] }: ProcessingQueueTableProps) => {
     const handleProcessing = (queueId: string) => {
         mutateProcessingQueue({ queueId })
     }
+    const {t} = useTranslation()
 
     const badgeVariant = (state: string) => {
         switch (state) {
@@ -52,7 +54,7 @@ const ProcessingQueueTable = ({ jobs = [] }: ProcessingQueueTableProps) => {
         },
         {
             accessorKey: "progress",
-            header: "Progress",
+            header: t("admin.queues.progress"),
             cell: ({ row }) => {
                 return (<p className="font-bold">{row.original.progress + "%"}</p>);
             }
@@ -81,7 +83,7 @@ const ProcessingQueueTable = ({ jobs = [] }: ProcessingQueueTableProps) => {
         },
         {
             accessorKey: "state",
-            header: 'State',
+            header: t("admin.queues.state"),
             cell: ({ row }) => {
                 return (
                     <Badge variant={badgeVariant(row.original.state)}>
@@ -92,11 +94,11 @@ const ProcessingQueueTable = ({ jobs = [] }: ProcessingQueueTableProps) => {
         },
         {
             accessorKey: "userId",
-            header: 'User ID',
+            header: t("admin.queues.user-id"),
         },
         {
             accessorKey: "type",
-            header: 'Job Type',
+           header: t("admin.queues.job-type"),
         },
     ]
 

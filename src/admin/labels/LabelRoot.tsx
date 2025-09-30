@@ -7,9 +7,11 @@ import { getLabels, addLabel, removeLabel, getRoles } from "../../services";
 import { Label, Role } from "../../utils/types";
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
+import { useTranslation } from "react-i18next";
 
 const LabelRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
+  const {t} = useTranslation()
 
   const { data: labelsData } = useCustomQuery<Label[]>(["labels"], () => getLabels());
   useCustomQuery<Role[]>(["roles"], () => getRoles());
@@ -48,7 +50,7 @@ const LabelRoot: React.FC = () => {
 
   return (
     <Card>
-      <CardHeader centerTitle color={Colors.primary} title={"Manage Labels"} />
+      <CardHeader centerTitle color={Colors.primary} title={t("admin.labels.manage-labels")} />
       <CardBody
         color={Colors.almond}
         className="dark:bg-neutral-500 rounded-br-2xl rounded-bl-2xl">

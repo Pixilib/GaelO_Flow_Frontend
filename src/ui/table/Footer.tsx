@@ -1,6 +1,7 @@
 import { Table } from "@tanstack/react-table";
 import { Next, Previous, SkipNext, SkipPrevious } from "../../icons";
 import { Colors } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 type FooterProps = {
   table: Table<any>;
@@ -31,6 +32,7 @@ const Footer = ({ table, color = Colors.white, onPageSizeChange }: FooterProps) 
     const newPageSize = Number(event.target.value);
     onPageSizeChange(newPageSize);
   };
+  const {t} = useTranslation()
 
   return (
     <div className={containerClass}>
@@ -77,7 +79,7 @@ const Footer = ({ table, color = Colors.white, onPageSizeChange }: FooterProps) 
           </button>
           <div className="flex items-center ml-4">
             <label htmlFor="pageSize" className="mr-2 italic">
-              Rows per page:
+              {t("ui.table.rows-per-page")}
             </label>
             <input
               id="pageSize"

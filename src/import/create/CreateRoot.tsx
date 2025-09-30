@@ -6,11 +6,13 @@ import CreateDrop from './CreateDrop';
 import TagTable from './TagTable';
 import { Colors, useCustomMutation, useCustomToast } from '../../utils';
 import { createDicom } from '../../services/instances';
+import { useTranslation } from "react-i18next";
 
 const CreateRoot: React.FC = () => {
     const { toastError, toastSuccess } = useCustomToast()
     const [tags, setTags] = useState<{ name: string, value: string }[]>([]);
     const [files, setFiles] = useState<File[]>([])
+    const {t} = useTranslation()
 
     const { mutate } = useCustomMutation(
         ({ content, tags }) => createDicom(content, tags),
@@ -67,7 +69,7 @@ const CreateRoot: React.FC = () => {
 
             <div className="flex flex-col justify-center p-3 border-t-2 shadow-inner bg-light dark:bg-neutral-950 border-slate-200 dark:border-neutral-700">
                 <CreateForm
-                    title="Define DICOM Tags"
+                    title={t("import.define-dicoms-tags")}
                     onAddTag={handleAddTag}
                 />
                 <TagTable
@@ -81,7 +83,7 @@ const CreateRoot: React.FC = () => {
                     color={tags.length > 0 ? Colors.primary : Colors.almond}
                     onClick={handleCreateDicoms}
                 >
-                    Create Dicoms
+                    {t("import.create-dicoms")},
                 </Button>
             </div>
         </>

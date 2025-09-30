@@ -43,7 +43,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
     )
 
     const firstnameCheck = useMemo(() => {
-        const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[1]?.[0]?.toUpperCase() ?? "N/A"
+        const initialDicom = study?.patientMainDicomTags?.patientName?.split('^')?.[1]?.[0]?.toUpperCase() ?? "N/A"
         const initalGaelO = patient?.firstname?.toUpperCase() === "" ? "N/A" : patient?.firstname?.toUpperCase()
         return {
             gaelo: initalGaelO,
@@ -53,7 +53,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
     }, [study, patient])
 
     const lastnameCheck = useMemo(() => {
-        const initialDicom = study?.patientMainDicomTags.patientName?.split('^')?.[0]?.[0]?.toUpperCase() ?? "N/A"
+        const initialDicom = study?.patientMainDicomTags?.patientName?.split('^')?.[0]?.[0]?.toUpperCase() ?? "N/A"
         const initalGaelO = patient?.lastname?.toUpperCase() === "" ? "N/A" : patient?.lastname?.toUpperCase()
         return {
             gaelo: initalGaelO,
@@ -63,7 +63,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
     }, [study, patient])
 
     const dobCheck = useMemo(() => {
-        let dicomDob = study?.patientMainDicomTags.patientBirthDate ?? "ND-ND-ND"
+        let dicomDob = study?.patientMainDicomTags?.patientBirthDate ?? "ND-ND-ND"
         if (dicomDob !== "ND-ND-ND")
             dicomDob = formatDate(dicomDob)
         const formatWithLeadingZero = (value: string | number | undefined): string =>
@@ -81,7 +81,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
     }, [study, patient])
 
     const sexCheck = useMemo(() => {
-        let dicomSex = study?.patientMainDicomTags.patientSex ?? "N/A";
+        let dicomSex = study?.patientMainDicomTags?.patientSex ?? "N/A";
         let gaeloSex = patient?.gender ?? "N/A";
 
         return {
@@ -142,7 +142,7 @@ const PatientDicomComparison = ({ studyOrthancId, patientId, onAuthorizedToSendC
 
     return (
         <div className="flex flex-col dark:text-white">
-            <div className={"flex flex-row font-bold bg-green-100 rounded-t-lg items-center p-1 pl-3 pr-3 border-t bg-green-100 border-green-300 dark:bg-green-200/30 dark:border-green-300/30"}>
+            <div className={"flex flex-row font-bold rounded-t-lg items-center p-1 pl-3 pr-3 border-t bg-green-100 border-green-300 dark:bg-green-200/30 dark:border-green-300/30"}>
                 <p className="w-full">Tag</p>
                 <p className="w-full">DICOM</p>
                 <div className="w-full">

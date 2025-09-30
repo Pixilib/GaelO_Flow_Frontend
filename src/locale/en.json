@@ -1,9 +1,154 @@
 {
-      "Home": "Home",
-      "Help": "Help",
-      "Log out": "Log out",
-      "OrthancContent": "Orthanc Content",
+      "home": "Home",
+      "help": "Help",
+      "log-out": "Log out",
+      "content": "Browse Images",
       "Query": "Query",
       "Import": "Import",
-      "titleSignInForm":"Welcome Back !"
+      "title-sign-in-form":"Welcome Back !",
+      "select-labels" : "Select Labels ...",
+      "root" : {
+        "dashboard" : {
+          "hello" : "Hello",
+          "anonymization" : "Anonymization",
+          "delete" : "Delete"
+        },
+        "notification" : {
+          "click-to-see-details" : "Click to see details",
+          "progress" : "Progress",
+          "level" : "Level",
+          "empty-list" : "Empty list",
+          "patientID" : "PatientID",
+          "from" : "From"
+        },
+        "user" : {
+          "profile-overview" : "Profile Overview",
+          "first-name" : "First Name",
+          "last-name" : "Last Name",
+          "email" : "Email",
+          "role" : "Role"
+        }
+      },
+      "import" : {
+        "create-dicoms" : "Create Dicoms",
+        "import-dicoms" : "Import Dicoms",
+        "dicom-drop" : "Drop the Dicom folder or ZIP, or click to select files",
+        "drag-and-drop" : "Drag and drop image files here",
+        "add-tag" : "Add tag",
+        "tag-name" :"Tag name",
+        "value" : "Value",
+        "define-dicoms-tags" : "Define DICOM Tags"
+      },
+      "ui" : {
+        "table" : {
+          "rows-per-page" : "Rows per page:",
+          "search" : "Search...",
+          "select" : "Select..."
+        }
+      },
+      "buttons" : {
+        "send-to-anonymize" : "Send to Anonymize",
+        "send-to-export" : "Send to Export",
+        "send-to-delete" : "Send to Delete"
+      },
+      "contents" : {
+        "view-in-ohif" : "View in OHIF",
+        "view-in-stone" : "View in Stone",
+        "modify" : "Modify",
+        "ai" : "AI",
+        "preview-study" : "Preview Study",
+        "download-dicom" : "Download DICOM",
+        "metadata" : "Metadata",
+        "preview-series" : "Preview serie",
+        "download-nii.gz" : "Download nii.gz",
+        "assign-labels" : "Assign Labels",
+        "download" : "Download",
+        "download-nifti" : "Download Nifti",
+        "delete" : "Delete",
+        "create-serie" : "Create serie"
+
+      },
+      "autorouting" : {
+        "create-new-rule" : "Create new rule",
+        "createAutoRooting" : {
+          "create-auto-rooting" : "Create Auto-Rooting",
+          "submit" : "Submit",
+          "add-rule" : "Add rule",
+          "add-destination" : "Add Destination",
+          "rules" : "Rules",
+          "destinations" : "Destinations",
+          "event-type*" : "Event Type *",
+          "name*" : "Name *",
+          "name" : "Name",
+          "activated*" : "Activated *",
+          "select-condition" : "Select Condition",
+          "select-destination" : "Select Destination",
+          "value" : "Value",
+          "value-representation" : "Value Representation",
+          "see-rules" : "See Rules",
+          "see-destinations" : "See Destinations",
+          "activated" : "Activated",
+          "event-type" : "Event Type",
+          "rule-condition" : "Rule Condition",
+          "delete" : "Delete"
+        }
+      },
+      "auto-retrieve" : {
+        "query" : {
+          "drop-csv" : "Drop CSV",
+          "results" : "Results",
+          "basket" : "Basket"
+        },
+        "results" : {
+          "add-to-basket" : "Add to basket"
+        },
+        "basket" : {
+            "start-robot" : "Start Robot"
+        },
+        "task" : {
+            "state" : "State",
+            "progress" : "Progress"
+        }
+      },
+      "query" : {
+        "search" : "Search",
+        "results" : "Results"
+      },
+      "admin" : {
+        "queues" : {
+            "retrieve-schedule-time" : "Retrieve Schedule Time",
+            "start-time" : "Start Time",
+            "stop-time" : "Stop Time",
+            "total-time" : "Total Time",
+            "send" : "Send",
+            "user-id" : "User ID",
+            "progress" : "Progress",
+            "number-of-items" : "Number of items",
+            "delete" : "Delete",
+            "state" : "State",
+            "job-type" : "Job Type",
+            "anonymize" : "Anonymize"
+          },
+          "modalities" : {
+            "manage-modalities" : "Manage Modalities",
+            "new-modality" : "New modality",
+            "create-new-modality" : "Create New Modality"
+          },
+          "peers" : {
+            "manage-peers" : "Manage Peers",
+            "new-peer" : "New Peer",
+            "create-new-peer" : "Create New Peer"
+          },
+          "jobs" : {
+            "manage-jobs" : "Manage jobs"
+          },
+          "labels" : {
+            "manage-labels" : "Manage Labels",
+            "add-new-label" : "Add new label"
+          },
+          "user" : {
+            "create-user" : "Create User",
+            "user" : "Users"
+          }
+      }
   }

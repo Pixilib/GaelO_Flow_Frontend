@@ -2,7 +2,6 @@ import { useNavigate, useLocation } from "react-router";
 import MenuItem from "../ui/menu/MenuItem";
 import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
-import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import { Item } from "../ui/menu/Items";
 import { Admin, Directions, Help, Home, ImageAdd, ImageSearch, Import, Logout, RestorePage, ZoomQuestion } from "../icons";
 import { useSelector } from "react-redux";
@@ -11,6 +10,8 @@ import { UserState } from "../reducers/UserSlice";
 import { useCustomQuery, User } from "../utils";
 import { getUserById } from "../services";
 import { Spinner } from "../ui";
+import { LogoGaeloFlowWhite } from "../assets";
+import { useTranslation } from "react-i18next";
 
 type SideBarProps = {
   onLogout: () => void;
@@ -23,6 +24,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
   const location = useLocation();
 
   const role = useSelector((state: RootState) => state.user.role);
+  const {t} = useTranslation()
 
   const handleItemClick = (item: Item | string) => {
     const itemPath = typeof item === "string" ? item : item.path;
@@ -50,8 +52,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     >
       <main className="flex flex-col h-full rounded-tr-40 bg-primary dark:bg-slate-950">
         {/* Logo */}
-        <div className="flex justify-center py-4 ">
-          <LogoSideBar />
+        <div className="flex justify-center py-4 h-25 ">
+          <LogoGaeloFlowWhite />
         </div>
 
         {/* Contenu de la barre latérale avec défilement toujours visible */}
@@ -69,15 +71,15 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             )}
             {role.readAll && (
               <MenuItem
-                title="Orthanc Content"
+                title={t("content")}
                 icon={<ImageSearch className="w-6 h-6" />}
-                isActive={location.pathname === "/orthanc-content"}
-                onClick={() => handleItemClick("/orthanc-content")}
+                isActive={location.pathname === "/content"}
+                onClick={() => handleItemClick("/content")}
               />
             )}
             {role.import && (
               <MenuItem
-                title="Import"
+                title={t("Import")}
                 icon={<Import className="w-6 h-6" />}
                 isActive={location.pathname.includes("/import/")}
                 onClick={() => handleItemClick("/import/upload")}
@@ -85,7 +87,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
             )}
             {role.query && (
               <MenuItem
-                title="Query"
+                title={t("Query")}
                 icon={<ZoomQuestion className="w-6 h-6" />}
                 isActive={location.pathname === "/query"}
                 onClick={() => handleItemClick("/query")}
@@ -119,20 +121,20 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
         {/* Section bas de la barre latérale */}
         <div className="flex flex-col gap-2 border-t border-white">
           <MenuItem
-            title="Home"
+            title={t("home")}
             icon={<Home className="w-6 h-6" />}
             isActive={location.pathname === "/"}
             onClick={() => handleItemClick("/")}
             className="mt-3"
           />
           <MenuItem
-            title="Help"
+            title={t("help")}
             icon={<Help className="w-6 h-6" />}
             isActive={location.pathname === "/help"}
             onClick={() => handleItemClick("/help")}
           />
           <MenuItem
-            title="Log out"
+            title={t("log-out")}
             icon={<Logout className="w-6 h-6" />}
             isActive={location.pathname === "/logout"}
             onClick={onLogout}

@@ -4,6 +4,7 @@ import { FormCard, Button, Input } from '../../ui';
 import { Check } from '../../icons';
 import { Colors } from '../../utils/enums';
 import { Peer } from '../../utils/types';
+import { useTranslation } from "react-i18next";
 
 interface NewPeerCardProps {
     onClose: () => void;
@@ -15,6 +16,7 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
     const [url, setUrl] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const {t} = useTranslation()
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -24,7 +26,7 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
     return (
         <FormCard
             className="w-full bg-light-gray dark:bg-neutral-500"
-            title="Create New Peer"
+            title={t("admin.peers.create-new-peer")}
             onClose={onClose}
             onSubmit={handleSubmit}
         >

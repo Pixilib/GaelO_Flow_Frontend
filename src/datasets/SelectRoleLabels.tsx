@@ -3,6 +3,7 @@ import { RootState } from "../store";
 import { getLabelsByRoleName } from "../services";
 import { useCustomQuery } from "../utils";
 import { SelectInput, Spinner } from "../ui";
+import { useTranslation } from "react-i18next";
 
 type SelectRoleLabelsProps = {
   values: string[];
@@ -10,6 +11,8 @@ type SelectRoleLabelsProps = {
 }
 
 const SelectRoleLabels = ({ onChange, values }: SelectRoleLabelsProps) => {
+
+  const {t} = useTranslation()
 
   const roleName = useSelector(
     (state: RootState) => state.user.role?.name || ""
@@ -43,7 +46,7 @@ const SelectRoleLabels = ({ onChange, values }: SelectRoleLabelsProps) => {
       options={labelsOptions}
       onChange={handleChange}
       closeMenuOnSelect={true}
-      placeholder='Select labels ...'
+      placeholder={t("select-labels")}
       value={values}
     />
   );
