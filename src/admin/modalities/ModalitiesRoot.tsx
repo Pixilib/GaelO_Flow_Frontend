@@ -22,11 +22,13 @@ import {
   echoModality,
 } from "../../services/modalities";
 import { More } from "../../icons";
+import { useTranslation } from "react-i18next";
 
 const ModalitiesRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
 
   const [showNewAetCard, setShowNewAetCard] = useState(false);
+  const {t} = useTranslation()
 
   const { data: aets, isLoading } = useCustomQuery<
     ModalityExtended[],
@@ -81,7 +83,7 @@ const ModalitiesRoot: React.FC = () => {
       <CardHeader
         centerTitle
         color={Colors.primary}
-        title={"Manage Modalities"}
+        title={t("admin.modalities.manage-modalities")}
       />
       <CardBody color={Colors.almond} className="space-x-2 dark:bg-neutral-500">
         <div className="w-full mt-2 mb-2">
@@ -99,7 +101,7 @@ const ModalitiesRoot: React.FC = () => {
         {!showNewAetCard && (
           <Button color={Colors.success} onClick={handleNewAetClick} className="w-full mb-4 sm:w-auto sm:mb-0">
             <More className="mr-3" size={24} />
-            New modality
+            {t("admin.modalities.new-modality")}
           </Button>
         )}
 

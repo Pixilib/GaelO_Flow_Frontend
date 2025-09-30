@@ -5,6 +5,8 @@ import ToggleChevron from "../ui/menu/ToggleChevron";
 import { Colors, useCustomMutation } from "../utils";
 import { addLabelForStudy, removeLabelForStudy } from "../services/orthanc";
 import SelectRoleLabels from "./SelectLabels";
+import { useTranslation } from "react-i18next";
+
 
 type LabelProps = {
     selectedStudyIds: string[];
@@ -13,6 +15,7 @@ const Labels = ({ selectedStudyIds }: LabelProps) => {
 
     const [isLabelDropdownOpen, setIsLabelDropdownOpen] = useState(false);
     const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
+    const {t} = useTranslation()
 
     const { mutateAsync: addMutate } = useCustomMutation(
         ({ studyId, label }) => addLabelForStudy(studyId, label)
@@ -47,7 +50,7 @@ const Labels = ({ selectedStudyIds }: LabelProps) => {
                 onClick={() => setIsLabelDropdownOpen(!isLabelDropdownOpen)}
             >
                 <Label className="text-xl" />
-                <span className="ml-2">Assign Labels</span>
+                <span className="ml-2">{t("contents.assign-labels")}</span>
                 <ToggleChevron
                     isOpen={isLabelDropdownOpen}
                     className="ml-2" />

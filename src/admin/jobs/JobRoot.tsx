@@ -6,9 +6,11 @@ import { useCustomToast } from "../../utils/toastify";
 
 import { JobPayload, JobsAction, OrthancJob } from "../../utils/types";
 import JobTable from "./JobTable";
+import { useTranslation } from "react-i18next";
 
 const JobRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
+  const {t} = useTranslation()
 
   const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<
     OrthancJob[]
@@ -39,7 +41,7 @@ const JobRoot = () => {
       <CardHeader
         centerTitle
         color={Colors.primary}
-        title={"Manage Jobs"}
+        title={t("admin.jobs.manage-jobs")}
       />
       <CardBody
         color={Colors.almond} roundedTopLeft roundedTopRight

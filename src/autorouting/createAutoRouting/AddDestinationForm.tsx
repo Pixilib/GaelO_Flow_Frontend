@@ -3,6 +3,7 @@ import { Button, Input, SelectInput } from "../../ui";
 import { autoRoutingDestinationTypeOptions } from "../types";
 import { Colors } from "../../utils";
 import { Trash } from "../../icons";
+import { useTranslation } from "react-i18next";
 
 type AddDestinationFormProps = {
     value: Destination;
@@ -12,16 +13,19 @@ type AddDestinationFormProps = {
 }
 
 const AddDestinationForm = ({ value, id, onChange, onDelete }: AddDestinationFormProps) => {
+    const {t} = useTranslation()
+
     return (
         <div className="flex gap-5 flex-row">
             <Input
-                placeholder="Name"
-                onChange={(e) => onChange(id, { ...value, Name: e.target.value })}
+                placeholder={t("autorouting.createAutoRooting.name")}
+                onChange={(e) => onChange(id, { ...value, Name:e.target.value })}
                 value={value?.Name}
             />
             <SelectInput
-                placeholder="Select Destination"
+                placeholder={t("autorouting.createAutoRooting.select-destination")}
                 options={autoRoutingDestinationTypeOptions}
+
                 value={value?.Destination}
                 onChange={(e: any) => onChange(id, { ...value, Destination: e.value })}
             />

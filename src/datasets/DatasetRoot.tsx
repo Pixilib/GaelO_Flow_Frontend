@@ -16,6 +16,7 @@ import DatasetStudyRoot from "./studies/DatasetStudyRoot";
 import DatasetSeriesRoot from "./series/DatasetSeriesRoot";
 import { Anon, Export, Trash } from "../icons";
 import { addSeriesOfStudyIdToExportList, addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
+import { useTranslation } from "react-i18next";
 
 const DatasetRoot = () => {
   const [model, setModel] = useState<Model | null>(null);
@@ -23,6 +24,8 @@ const DatasetRoot = () => {
   const [currentStudyId, setCurrentStudyId] = useState<string | null>(null);
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   const [selectedRow, setSelectedRow] = useState<Record<string, boolean>>({});
+  const {t} = useTranslation()
+
 
   const { toastError } = useCustomToast();
   const studies =
@@ -143,7 +146,7 @@ const DatasetRoot = () => {
             onClick={handleSendAnonymizeList}
           >
             <Anon className="text-xl" />
-            <span className="ml-2">Send to Anonymize</span>
+            <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
           </Button>
 
           <Button
@@ -152,7 +155,7 @@ const DatasetRoot = () => {
             onClick={handleSendExportList}
           >
             <Export className="text-xl" />
-            <span className="ml-2">Send to Export</span>
+            <span className="ml-2">{t("buttons.send-to-export")}</span>
           </Button>
 
           <Button
@@ -161,7 +164,7 @@ const DatasetRoot = () => {
             onClick={handleSendDeleteList}
           >
             <Trash className="text-xl" />
-            <span className="ml-2">Send to Delete</span>
+            <span className="ml-2">{t("buttons.send-to-delete")}</span>
           </Button>
         </div>
         <div className="grid grid-cols-1 gap-4 2xl:grid-cols-12">

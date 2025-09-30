@@ -4,11 +4,13 @@ import { Colors } from "../../utils";
 import Roles from "./roles/Roles";
 import Users from "./user/Users";
 import Oauth2 from "./oauth/Oauth";
+import { useTranslation } from "react-i18next";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const path = location.pathname;
+    const {t} = useTranslation()
 
     const handleTabClick = (tab: string) => {
         navigate('/administration/users/' + tab);
@@ -22,7 +24,7 @@ const UsersRoot = () => {
         <Card className="bg-white shadow-md rounded-2xl" data-gaelo-flow="users-root">
             <Tabs className=" bg-light-gray rounded-t-2xl">
                 <Tab
-                    title="Users"
+                    title={t("admin.user.user")}
                     active={isUsersPath}
                     onClick={() => handleTabClick("users")}
                 />

@@ -1,9 +1,153 @@
 {
-      "Home": "Accueil",
-      "Help": "Aide",
-      "Log out": "Déconnexion",
-      "OrthancContent": "Contenu Orthanc",
-      "Query": "Requête",
-      "Import": "Importer",
-      "titleSignInForm":"Bienvenue !"
-  }
+    "home": "Accueil",
+    "help": "Aide",
+    "log-out": "Déconnexion",
+    "content": "Recherche d'images",
+    "Query": "Query",
+    "Import": "Importer",
+    "title-sign-in-form": "Bienvenue !",
+    "select-labels" : "Sélectionner les Labels ...",
+    "root" : {
+        "dashboard": {
+            "hello": "Bonjour",
+            "anonymization": "Anonymisation",
+            "delete": "Supression"
+        },
+        "notification" : {
+            "click-to-see-details" : "Clicker pour voir les details",
+            "progress" : "Progression",
+            "level" : "Level",
+            "empty-list" : "Liste vide",
+            "patientID": "PatientID",
+            "from" : "From"
+        },
+        "user" : {
+            "profile-overview" : "Aperçu du profil",
+            "first-name" : "Prénom",
+            "last-name" : "Nom",
+            "email" : "Email",
+            "role" : "Role"
+        }
+    },
+    "import" : {
+        "create-dicoms" : "Créer Dicoms",
+        "import-dicoms" : "Importer Dicoms",
+        "dicom-drop" : "Déposez le dossier Dicom ou le fichier ZIP, ou cliquez pour sélectionner les fichiers",
+        "drag-and-drop" : "Glissez et déposez les fichiers image ici",
+        "add-tag" : "Ajout du tag",
+        "tag-name" :"Nom du tag",
+        "value" : "Valeur",
+        "define-dicoms-tags" : "Spécifier les champs DICOMS"
+    },
+    "ui" : {
+        "table" : {
+          "rows-per-page" : "Lignes par page:",
+          "search" : "Rechercher...",
+          "select" : "Sélectionner..."
+        }
+    },
+    "buttons" : {
+        "send-to-anonymize" : "Envoyer vers l'anonymisation",
+        "send-to-export" : "Envoyer vers export",
+        "send-to-delete" : "Envoyer vers supression"
+    },
+    "contents" : {
+        "view-in-ohif" : "Voir dans OHIF",
+        "view-in-stone" : "Voir dans Stone",
+        "modify" : "Modifier",
+        "ai" : "IA",
+        "preview-study" : "Prévisualisation study",
+        "download-dicom" : "Télécharger DICOM",
+        "metadata" : "Métadonnées",
+        "preview-series" : "Prévisualisation Serie",
+        "download-nii.gz" : "Télécharger nii.gz",
+        "assign-labels" : "Attribuer les labels",
+        "download" : "Télécharger",
+        "download-nifti" : "Télécharger Nifti",
+        "delete" : "Supprimer",
+        "create-serie" : "Créer Serie"
+    },
+    "autorouting" : {
+        "create-new-rule" : "Créer une nouvelle règle",
+        "createAutoRooting" : {
+          "create-auto-rooting" : "Créer un auto routeur",
+          "submit" : "soumettre",
+          "add-rule" : "Ajouter une règle",
+          "add-destination" : "Ajouter une destination",
+          "rules" : "Règles",
+          "destinations" : "Destinations",
+          "event-type*" : "Type d'événement *",
+          "name*" : "Nom *",
+          "name" : "Nom",
+          "activated*" : "Activé *",
+          "select-condition" : "Sélectionner une condition",
+          "select-destination" : "Sélectionner une destination",
+          "value" : "Valeur",
+          "value-representation" : "Représentation de la valeur",
+          "see-rules" : "Voir les règles",
+          "see-destinations" : "Voir les destinations",
+          "activated" : "Activé",
+          "event-type" : "Type d'événement",
+          "rule-condition" : "Condition",
+          "delete" : "Supprimer"
+        }
+    },
+    "auto-retrieve" : {
+        "query" : {
+          "drop-csv" : "Déposer CSV",
+          "results" : "Résultats",
+          "basket" : "Panier"
+        },
+        "results" : {
+          "add-to-basket" : "Ajouter au panier"
+        },
+        "basket" : {
+            "start-robot" : "Lancer le robot"
+        },
+        "task" : {
+            "state" : "État",
+            "progress" : "Progression"
+        }
+    },
+    "query" : {
+        "search" : "Recherche",
+        "results" : "Résultat"
+    },
+    "admin" : {
+        "queues" : {
+            "retrieve-schedule-time" : "Horaires de retrieve",
+            "start-time" : "Heure de début",
+            "stop-time" : "heure de fin",
+            "total-time" : "Durée totale",
+            "send" : "Envoyer",
+            "user-id" : "Utilisateur ID",
+            "progress" : "Progression",
+            "number-of-items" : "Nombre d'éléments",
+            "delete" : "Supression",
+            "state" : "État",
+            "job-type" : "Type de job",
+            "anonymize" : "Anonymisation"
+        },
+        "modalities" : {
+            "manage-modalities" : "Gestion des modalities",
+            "new-modality" : "Nouvelle modality",
+            "create-new-modality" : "Créer une nouvelle modality"
+          },
+          "peers" : {
+            "manage-peers" : "Gestion des Peers",
+            "new-peer" : "Nouveau Peer",
+            "create-new-peer" : "Créer un nouveau serveur peer"
+          },
+          "jobs" : {
+            "manage-jobs" : "Gestion des tâches"
+          },
+          "labels" : {
+            "manage-labels" : "Gestion des labels",
+            "add-new-label" : "Ajout d'un nouveau label"
+          },
+          "user" : {
+            "create-user" : "Créer un utilisateur",
+            "user" : "Utilisateurs"
+          }
+    }
+}

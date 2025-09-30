@@ -8,10 +8,12 @@ import BasketTable from "./BasketTable";
 import { Empty } from "../../icons";
 import { removeStudyOrSeriesFromBasket, updateBasketSelection } from "../../reducers/AutoRetrieveSlice";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 const BasketRoot = () => {
 
     const basket = useSelector((state: RootState) => state.autoRetrieve.basket);
+    const {t} = useTranslation()
 
     const basketSelectedRow: Record<number, boolean> = useMemo(() => {
         return basket.reduce((acc, query, index) => {
@@ -70,7 +72,7 @@ const BasketRoot = () => {
                 selectedRow={basketSelectedRow}
             />
             <div className="flex justify-center gap-3 m-3">
-                <Button color={Colors.success} onClick={handleCreateRobot}>Start Robot</Button>
+                <Button color={Colors.success} onClick={handleCreateRobot}>{t("auto-retrieve.basket.start-robot")}</Button>
                 <Button color={Colors.warning} onClick={handleRemoveBasket}><Empty /></Button>
             </div>
         </div>
