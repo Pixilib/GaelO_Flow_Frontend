@@ -6,6 +6,7 @@ import { StudyMainDicomTags } from "../../../utils/types";
 import { GaeloIcon } from "../../../assets";
 import GaelOVisitCreateForm, { CreateVisitForm } from "../visits/GaelOVisitCreateForm";
 import GaelOContext from "../context/GaelOContext";
+import useToasts from "../../../services/useToasts";
 
 type GaelOPatientVisitsProps = {
   patientId: string;
@@ -21,6 +22,7 @@ const GaelOPatientVisits = ({
   onVisitIdChange
 }: GaelOPatientVisitsProps) => {
   const { token, studyName, role, userId } = useContext(GaelOContext);
+  const { pushToast } = useToasts()
   const [createFormVisit, setCreateFormVisit] = useState<Record<string, any> | null>(null);
 
   const { data: creatableVisits, isPending } = useCustomQuery(
@@ -52,6 +54,11 @@ const GaelOPatientVisits = ({
   );
 
   const handleCreateVisit = (form: CreateVisitForm) => {
+    //Check Visit Date is defined for Done visits
+    if (form.status === "Done" && form.date === null) {
+      pushToast({ type: "danger", content: "Missing Date for Visit Done" })
+      return
+    }
     createVisitMutation(form);
   }
 

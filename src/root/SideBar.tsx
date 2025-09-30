@@ -2,11 +2,15 @@ import { useNavigate, useLocation } from "react-router";
 import MenuItem from "../ui/menu/MenuItem";
 import MenuItemsCollapse from "../ui/menu/MenuItemsCollapse";
 
-import LogoSideBar from "../assets/logoGaeloFlow-white3.svg?react";
 import { Item } from "../ui/menu/Items";
 import { Admin, Directions, Help, Home, ImageAdd, ImageSearch, Import, Logout, RestorePage, ZoomQuestion } from "../icons";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { UserState } from "../reducers/UserSlice";
+import { useCustomQuery, User } from "../utils";
+import { getUserById } from "../services";
+import { Spinner } from "../ui";
+import { LogoGaeloFlowWhite } from "../assets";
 import { useTranslation } from "react-i18next";
 
 type SideBarProps = {
@@ -48,8 +52,8 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     >
       <main className="flex flex-col h-full rounded-tr-40 bg-primary dark:bg-slate-950">
         {/* Logo */}
-        <div className="flex justify-center py-4 ">
-          <LogoSideBar />
+        <div className="flex justify-center py-4 h-25 ">
+          <LogoGaeloFlowWhite />
         </div>
 
         {/* Contenu de la barre latérale avec défilement toujours visible */}

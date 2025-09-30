@@ -41,7 +41,7 @@ const Welcome = () => {
     <main className="flex w-screen h-screen bg-gradient-to-r from-primary to-secondary dark:from-blue-900 dark:to-orange-800">
       <div className="relative flex items-center justify-center w-1/2 h-full">
         <img
-          src="/gaelo-flow-white2.svg"
+          src="/gaelo-flow-logo-white.svg"
           className="absolute w-20 h-auto max-w-full left-7 top-7"
           alt="Logo"
         />
