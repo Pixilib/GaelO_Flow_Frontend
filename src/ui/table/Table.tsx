@@ -45,6 +45,7 @@ interface TableProps<TData> {
     onCellEdit?: (rowIndex: string | number, columnId: any, value: any) => void;
     getRowId?: (originalRow: TData, index: number) => string;
     headerclassName?: string;
+    initialSorting?: SortingState;
 }
 
 function Table<T>({
@@ -62,6 +63,7 @@ function Table<T>({
     pinFirstColumn = false,
     pinLastColumn = false,
     enableRowSelection = false,
+    initialSorting = [],
     selectedRow = {},
     columnVisibility = {},
     onRowSelectionChange = () => { },
@@ -82,6 +84,10 @@ function Table<T>({
     useEffect(() => {
         onRowSelectionChange(rowSelection);
     }, [JSON.stringify(rowSelection)]);
+
+    useEffect(() => {
+        setSorting(initialSorting);
+    },[])
 
     const handlePageSizeChange = (newPageSize: number) => {
         setPagination((prev) => ({ ...prev, pageSize: newPageSize }));
