@@ -19,6 +19,7 @@ import AutoRoutingRoot from "../autorouting/AutoRoutingRoot";
 import AutoRetrieveRoot from "../auto-retrieve/AutoRetrieveRoot";
 import HelpRoot from "../help/HelpRoot";
 import { RootState } from "../store";
+import CdBurnerRoot from "../cd-burner/CdBurnerRoot";
 
 const titlePath: { [key: string]: string } = {
   "/administration/general/redis": "General",
@@ -46,6 +47,7 @@ const titlePath: { [key: string]: string } = {
   "/auto-retrieve/task": "Auto retrieve",
   "/auto-routing": "Auto routing",
   "/datasets": "Datasets",
+  "/cd-burner": "CD Burner",
   "/": "Home",
 };
 
@@ -98,6 +100,7 @@ const RootApp = () => {
             <Route path="/anonymize" element={<AnonymizeRoot />} />
             <Route path="/export" element={<ExportRoot />} />
             <Route path="/delete" element={<DeleteRoot />} />
+            <Route path="/cd-burner" element={<CdBurnerRoot />} />
             <Route path="/auto-routing" element={<AutoRoutingRoot />} />
             <Route path="/help" element={<HelpRoot />} />
           </Routes>

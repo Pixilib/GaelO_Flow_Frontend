@@ -32,6 +32,7 @@ export const autoRoutingDestinationTypeOptions = [
   { value: "AET", label: "AET" },
   { value: "TMTVJob", label: "TMTVJob" },
   { value: "Peer", label: "PEER" },
+  { value: "CdBurner", label: "CD Burner" },
 ]
 
 export enum AutoRoutingRuleDicomTag {

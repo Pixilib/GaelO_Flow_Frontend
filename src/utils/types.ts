@@ -27,14 +27,13 @@ type OptionsRequest = {
   BurnerStarted: boolean;
   BurnerLabelPath: string;
   BurnerMonitoringLevel: string;
-  BurnerManifacturer: string;
+  BurnerManufacturer: string;
   BurnerMonitoredPath: string;
   BurnerDeleteStudyAfterSent: boolean;
   BurnerSupportType: string;
   BurnerViewerPath: string;
   BurnerTransferSyntax: string;
   BurnerDateFormat: string;
-  BurnerTranscoding: string;
   AutorouterStarted: boolean;
   OrthancAddress: string;
   OrthancPort: string;
@@ -58,14 +57,13 @@ export type Options = {
   burnerStarted: boolean;
   burnerLabelPath: string;
   burnerMonitoringLevel: string;
-  burnerManifacturer: string;
+  burnerManufacturer: string;
   burnerMonitoredPath: string;
   burnerDeleteStudyAfterSent: boolean;
   burnerSupportType: string;
   burnerViewerPath: string;
   burnerTransferSyntax: string;
   burnerDateFormat: string;
-  burnerTranscoding: string;
   autorouterStarted: boolean;
   orthancAddress: string;
   orthancPort: string;
@@ -524,4 +522,21 @@ export type AutoRoutingPayload = {
   EventType: string;
   Activated: boolean;
   Router: Router;
+}
+
+export type CdBurnerItem = {
+  jobID: string;
+  jobStatus: string;
+  timestamp?: string;
+  patientName?: string;
+  patientID?: string;
+  patientDOB?: string;
+  studyDate?: string;
+  studyDescription?: string;
+  manufacturer?: string;
+  files: {
+      taskPath?: string;
+      datPath?: string;
+      folderPath?: string;
+  }
 }
