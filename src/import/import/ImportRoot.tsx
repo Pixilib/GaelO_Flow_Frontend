@@ -13,6 +13,7 @@ import {
   addStudyIdToAnonymizeList,
 } from "../../utils/actionsUtils";
 import SelectRoleLabels from "../../datasets/SelectRoleLabels";
+import { useTranslation } from "react-i18next";
 
 interface ImportError {
   filename: string;
@@ -30,6 +31,7 @@ const ImportRoot: React.FC = () => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState<Record<string, boolean>>({});
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
+  const {t} = useTranslation()
 
   const refreshStudyData = () => {
     const studies = refModel.current.getStudies();
@@ -129,7 +131,7 @@ const ImportRoot: React.FC = () => {
               onClick={handleSendAnonymizeList}
             >
               <Anon className="text-xl" />
-              <span className="ml-2">Send to Anonymize</span>
+              <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
             </Button>
 
             <Button
@@ -138,7 +140,7 @@ const ImportRoot: React.FC = () => {
               onClick={handleSendExportList}
             >
               <Export className="text-xl" />
-              <span className="ml-2">Send to Export</span>
+              <span className="ml-2">{t("buttons.Ssend-to-export")}</span>
             </Button>
 
             <Button
@@ -147,7 +149,7 @@ const ImportRoot: React.FC = () => {
               onClick={handleSendDeleteList}
             >
               <Trash className="text-xl" />
-              <span className="ml-2">Send to Delete</span>
+              <span className="ml-2">{t("buttons.send-to-delete")}</span>
             </Button>
           </div>
           <div className="flex gap-3">

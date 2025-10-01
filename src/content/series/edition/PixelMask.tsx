@@ -3,8 +3,8 @@ import { Colors } from "../../../utils";
 import { Check } from "../../../icons";
 import { useState } from "react";
 import PixelMaskEditForm from "./PixelMaskEditForm";
-import ChevronDown from "../../../assets/chevron-right.svg?react";
 import { PixelMaskType } from "./types";
+import { ChevronRight } from "../../../assets";
 
 type PixelMaskProps = {
     pixelMask: PixelMaskType[] | null;
@@ -81,7 +81,7 @@ const PixelMask = ({ pixelMask, onChange }: PixelMaskProps) => {
                                 <p className="text-sm text-dark"><span className="font-bold">End coordinates :</span> {"x=" + mask.end.x}, {"y=" + mask.end.y} {mask.end.z ? ", z=" + mask.end.z : ""} </p>
                             </div>
                             <div>
-                                <ChevronDown className="fill-dark" onClick={() => handleChevronClick(index)} />
+                                <ChevronRight className="fill-dark" onClick={() => handleChevronClick(index)} />
                             </div>
                         </div>
                     ))}

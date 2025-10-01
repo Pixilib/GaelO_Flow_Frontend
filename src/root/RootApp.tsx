@@ -95,7 +95,7 @@ const RootApp = () => {
             <Route path="/query" element={<QueryRoot />} />
             <Route path="/auto-retrieve/*" element={<AutoRetrieveRoot />} />
             <Route path="/import/*" element={<ImportCreateRoot />} />
-            <Route path="/orthanc-content" element={<ContentRoot />} />
+            <Route path="/content" element={<ContentRoot />} />
             <Route path="/datasets" element={<DatasetRoot />} />
             <Route path="/anonymize" element={<AnonymizeRoot />} />
             <Route path="/export" element={<ExportRoot />} />

@@ -8,15 +8,19 @@ import { useState } from "react";
 import { Button } from "../../ui";
 import { Anon, Export, Trash } from "../../icons";
 import {
+    
     addStudyIdToDeleteList,
     addSeriesOfStudyIdToExportList,
     addStudyIdToAnonymizeList,
     addSeriesToExportListFromSeriesId,
 } from "../../utils/actionsUtils";
+import { useTranslation } from "react-i18next";
 
 const TaskRoot = () => {
 
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
+    const {t} = useTranslation()
+
 
     const currentUserId = useSelector(
         (state: RootState) => state.user.currentUserId
@@ -94,7 +98,7 @@ const TaskRoot = () => {
                         onClick={handleSendAnonymizeList}
                     >
                         <Anon className="text-xl" />
-                        <span className="ml-2">Send to Anonymize</span>
+                        <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
                     </Button>
                 }
                 {role.export &&
@@ -104,7 +108,7 @@ const TaskRoot = () => {
                         onClick={handleSendExportList}
                     >
                         <Export className="text-xl" />
-                        <span className="ml-2">Send to Export</span>
+                        <span className="ml-2">{t("buttons.send-to-export")}</span>
                     </Button>
                 }
                 {role.delete &&
@@ -114,7 +118,7 @@ const TaskRoot = () => {
                         onClick={handleSendDeleteList}
                     >
                         <Trash className="text-xl" />
-                        <span className="ml-2">Send to Delete</span>
+                        <span className="ml-2">{t("buttons.send-to-delete")}</span>
                     </Button>
                 }
             </div>

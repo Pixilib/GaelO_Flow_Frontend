@@ -6,7 +6,7 @@ import { Colors } from "../../utils/enums";
 
 import { useCustomToast } from "../../utils/toastify";
 import { Modality, Option } from "../../utils/types";
-
+import { useTranslation } from "react-i18next";
 interface NewModalityCardProps {
   onClose: () => void;
   onCreateAet: (aet: Modality) => void;
@@ -22,6 +22,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
   const [host, setHost] = useState("");
   const [port, setPort] = useState<number | "">("");
   const [manufacturer, setManufacturer] = useState<Option | null>(null);
+  const {t} = useTranslation()
 
   const options = [
     { value: "Generic", label: "Generic" },
@@ -84,7 +85,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
   return (
     <FormCard
     className="w-full bg-light-gray dark:bg-neutral-500"
-    title="Create New Modality"
+    title={t("admin.modalities.create-new-modality")}
     onClose={onClose}
     onSubmit={handleSubmit}
   >
