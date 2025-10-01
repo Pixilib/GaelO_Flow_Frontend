@@ -22,7 +22,6 @@ export const getOptions = (): Promise<Options> => {
         burnerViewerPath: data.BurnerViewerPath,
         burnerTransferSyntax: data.BurnerTransferSyntax,
         burnerDateFormat: data.BurnerDateFormat,
-        burnerTranscoding: data.BurnerTranscoding,
         autorouterStarted: data.AutorouterStarted,
         orthancAddress: data.OrthancAddress,
         orthancPort: data.OrthancPort,

@@ -47,6 +47,7 @@ const titlePath: { [key: string]: string } = {
   "/auto-retrieve/task": "Auto retrieve",
   "/auto-routing": "Auto routing",
   "/datasets": "Datasets",
+  "/cd-burner": "CD Burner",
   "/": "Home",
 };
 
