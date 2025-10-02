@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useLocation, useNavigate, unstable_usePrompt as usePrompt } from "react-router";
 
-import { logout, setCanExitPage } from "../reducers/UserSlice";
+import { logout } from "../reducers/UserSlice";
 
 import SideBar from "./SideBar";
 import Dashboard from "./dashboard/Dashboard";
@@ -48,6 +48,7 @@ const titlePath: { [key: string]: string } = {
   "/auto-routing": "Auto routing",
   "/datasets": "Datasets",
   "/cd-burner": "CD Burner",
+  "/about": "About",
   "/": "Home",
 };
 
@@ -62,7 +63,7 @@ const RootApp = () => {
   usePrompt(
     {
       when: !canExitPage,
-      message : exitMessage,
+      message: exitMessage,
     }
   )
 
@@ -102,7 +103,7 @@ const RootApp = () => {
             <Route path="/delete" element={<DeleteRoot />} />
             <Route path="/cd-burner" element={<CdBurnerRoot />} />
             <Route path="/auto-routing" element={<AutoRoutingRoot />} />
-            <Route path="/help" element={<HelpRoot />} />
+            <Route path="/about" element={<HelpRoot />} />
           </Routes>
         </div>
       </div>

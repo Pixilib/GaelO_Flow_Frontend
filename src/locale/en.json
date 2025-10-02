@@ -5,8 +5,10 @@
       "content": "Browse Images",
       "Query": "Query",
       "Import": "Import",
+      "cd-burner" : "CD Burner",
       "title-sign-in-form":"Welcome Back !",
       "select-labels" : "Select Labels ...",
+      "about" : "About",
       "root" : {
         "dashboard" : {
           "hello" : "Hello",
@@ -150,5 +152,25 @@
             "create-user" : "Create User",
             "user" : "Users"
           }
+      },
+      "anonymize" : {
+        "anonymize-resources" : "Anonymize Resources"
+      },
+      "export" : {
+        "export-resources" : "Export Resources"
+      },
+      "delete" : {
+        "delete-resources" : "Delete Resources"
+      },
+      "tour" : {
+        "sidebar" : "Main navigation menu",
+        "menu" : "Available features",
+        "anonymize" : "Batch anonymization",
+        "export" : "Batch export",
+        "delete" : "Batch delete",
+        "language": "Switch interface language",
+        "darkmode" : "Toggle light/dark theme",
+        "notifications": "Notifications",
+        "profile": "Your account"
       }
   }

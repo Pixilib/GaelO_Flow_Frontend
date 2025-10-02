@@ -18,6 +18,7 @@ import { AnonItem } from "../utils/types";
 import { createAnonymizeQueue } from "../services/queues";
 import AnonQueues from "./AnonQueues";
 import AutoFillInput from "./AutoFillInput";
+import { useTranslation } from "react-i18next";
 
 const profileOptions = [
     { value: "Default", label: "Default" },
@@ -28,6 +29,7 @@ const AnonymizeRoot = () => {
     const dispatch = useDispatch();
     const anonList = useSelector((state: RootState) => state.anonymize);
     const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
+    const {t} = useTranslation()
 
     const { mutate: mutateCreateAnonymizeQueue } = useCustomMutation(
         ({ anonItems }) => createAnonymizeQueue(anonItems),
@@ -86,7 +88,7 @@ const AnonymizeRoot = () => {
                 color={Colors.primary}>
                 <div className="flex flex-col items-center w-full sm:flex-row">
                     <div className="w-full mb-2 text-lg font-bold text-center sm:w-4/5 sm:mb-0">
-                        Anonymize Resources
+                        {t("anonymize.anonymize-resources")}
                     </div>
                     <div className="flex justify-end gap-3 w-full p-3 sm:w-1/5">
                         <Dropdown

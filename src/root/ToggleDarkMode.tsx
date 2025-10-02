@@ -26,6 +26,7 @@ const ToggleDarkMode = ()  => {
       />
       {/* switch design */}
       <div
+        data-gaelo-flow="header-darkmode"
         className={`relative flex items-center h-7 w-14 rounded-full transition-colors d ${
           checked ? "dark:bg-neutral-700" : "bg-primary-light"
         }`}

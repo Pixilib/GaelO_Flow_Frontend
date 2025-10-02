@@ -19,7 +19,7 @@ const Banner = ({
     <div
       data-gaelo-flow="banner"
       className={`p-3 w-full flex flex-col items-center sm:flex-row sm:justify-between rounded-br-2xl border-transparent shadow-lg bg-white dark:bg-neutral-800  ${className}`}
-    >
+   >
       <div className="flex items-center justify-between w-full sm:w-auto">
         {onLeftIconClick && (
           <span

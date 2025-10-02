@@ -174,7 +174,7 @@ const ExportRoot = () => {
             <CardHeader
                 color={Colors.primary}>
                 <div className="flex items-center w-full">
-                    <div className="w-4/5 text-lg font-bold text-center">Export Resources</div>
+                    <div className="w-4/5 text-lg font-bold text-center">{t("export.export-resources")}</div>
                     <div className="flex justify-end w-1/5 gap-3 p-3">
                         <Button
                             color={Colors.light}
@@ -208,7 +208,7 @@ const ExportRoot = () => {
                                 onClick={handleSendAnonymizeList}
                             >
                                 <Anon className="text-xl" />
-                                <span className="ml-2">{t("button.send-to-anonymize")}</span>
+                                <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
                             </Button>
                         }
                         {role.delete &&
