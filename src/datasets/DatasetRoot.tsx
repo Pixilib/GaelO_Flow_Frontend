@@ -17,6 +17,7 @@ import DatasetSeriesRoot from "./series/DatasetSeriesRoot";
 import { Anon, Export, Trash } from "../icons";
 import { addSeriesOfStudyIdToExportList, addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
 import { useTranslation } from "react-i18next";
+import DatasetsTour from "../tour/tours/DatasetsTour";
 
 const DatasetRoot = () => {
   const [model, setModel] = useState<Model | null>(null);
@@ -24,7 +25,7 @@ const DatasetRoot = () => {
   const [currentStudyId, setCurrentStudyId] = useState<string | null>(null);
   const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
   const [selectedRow, setSelectedRow] = useState<Record<string, boolean>>({});
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
 
   const { toastError } = useCustomToast();
@@ -127,69 +128,75 @@ const DatasetRoot = () => {
   }
 
   return (
-    <Card>
-      <CardHeader centerTitle color={Colors.primary} title="Dataset" />
-      <CardBody className="bg-almond dark:bg-neutral-500 flex flex-col gap-4">
-        <div>
-          <span className="text-base font-semibold text-gray-700 dark:text-white">
-            Labels
-          </span>
-          <SelectRoleLabels
-            values={selectedLabels}
-            onChange={(labels) => setSelectedLabels(labels)}
-          />
-        </div>
-        <div className="flex gap-2">
-          <Button
-            color={Colors.blueCustom}
-            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-            onClick={handleSendAnonymizeList}
-          >
-            <Anon className="text-xl" />
-            <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
-          </Button>
+    <>
+      <div className="w-full flex justify-end m-1">
+        <DatasetsTour />
+      </div>
+      <Card>
 
-          <Button
-            color={Colors.secondary}
-            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-            onClick={handleSendExportList}
-          >
-            <Export className="text-xl" />
-            <span className="ml-2">{t("buttons.send-to-export")}</span>
-          </Button>
-
-          <Button
-            color={Colors.danger}
-            className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
-            onClick={handleSendDeleteList}
-          >
-            <Trash className="text-xl" />
-            <span className="ml-2">{t("buttons.send-to-delete")}</span>
-          </Button>
-        </div>
-        <div className="grid grid-cols-1 gap-4 2xl:grid-cols-12">
-          <div className="2xl:col-span-7">
-            <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">
-              Studies
+        <CardHeader centerTitle color={Colors.primary} title="Dataset" />
+        <CardBody className="bg-almond dark:bg-neutral-500 flex flex-col gap-4">
+          <div data-gaelo-flow="dataset-labels">
+            <span className="text-base font-semibold text-gray-700 dark:text-white">
+              Labels
             </span>
-            <DatasetStudyRoot
-              studies={studies}
-              onRowClick={handleStudyRowClick}
-              selectedStudyId={currentStudyId}
-              onStudyUpdated={handleStudyUpdated}
-              onRowSelectionChange={onRowSelectionChange}
-              selectedRow={selectedRow}
+            <SelectRoleLabels
+              values={selectedLabels}
+              onChange={(labels) => setSelectedLabels(labels)}
             />
           </div>
-          <div className="2xl:col-span-5">
-            <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">
-              Series
-            </span>
-            {series && <DatasetSeriesRoot onSeriesEdited={handleOnSeriesEdited} series={series} />}
+          <div data-gaelo-flow="dataset-buttons" className="flex gap-2">
+            <Button
+              color={Colors.blueCustom}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendAnonymizeList}
+            >
+              <Anon className="text-xl" />
+              <span className="ml-2">{t("buttons.send-to-anonymize")}</span>
+            </Button>
+
+            <Button
+              color={Colors.secondary}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendExportList}
+            >
+              <Export className="text-xl" />
+              <span className="ml-2">{t("buttons.send-to-export")}</span>
+            </Button>
+
+            <Button
+              color={Colors.danger}
+              className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
+              onClick={handleSendDeleteList}
+            >
+              <Trash className="text-xl" />
+              <span className="ml-2">{t("buttons.send-to-delete")}</span>
+            </Button>
           </div>
-        </div>
-      </CardBody>
-    </Card>
+          <div className="grid grid-cols-1 gap-4 2xl:grid-cols-12">
+            <div data-gaelo-flow="dataset-studies" className="2xl:col-span-7">
+              <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">
+                Studies
+              </span>
+              <DatasetStudyRoot
+                studies={studies}
+                onRowClick={handleStudyRowClick}
+                selectedStudyId={currentStudyId}
+                onStudyUpdated={handleStudyUpdated}
+                onRowSelectionChange={onRowSelectionChange}
+                selectedRow={selectedRow}
+              />
+            </div>
+            <div data-gaelo-flow="dataset-series" className="2xl:col-span-5">
+              <span className="mx-4 mt-2 mb-4 text-base font-semibold text-gray-700 dark:text-white">
+                Series
+              </span>
+              {series && <DatasetSeriesRoot onSeriesEdited={handleOnSeriesEdited} series={series} />}
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+    </>
   );
 };
 

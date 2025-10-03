@@ -4,12 +4,16 @@ import ReactTour from '../ReactTour'
 import { Badge } from '../../ui'
 import { useTranslation } from 'react-i18next'
 
-const HelpPatientInvestigator = () => {
+const CDBurnerTour = () => {
     const { t } = useTranslation()
     const steps = [
         {
-            selector: '[data-gaelo-flow="job-status-panel"]',
-            content: t('tour.home.home-page'),
+            selector: '[data-gaelo-flow="cd-burner-datatable"]',
+            content: t('tour.cd-burner.datatable'),
+        },
+        {
+            selector: '[data-gaelo-flow="cd-burner-speaker"]',
+            content: t('tour.cd-burner.speaker'),
         },
     ]
 
@@ -26,4 +30,4 @@ const HelpPatientInvestigator = () => {
     )
 }
 
-export default HelpPatientInvestigator
+export default CDBurnerTour

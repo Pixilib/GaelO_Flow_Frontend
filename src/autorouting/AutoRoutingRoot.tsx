@@ -7,6 +7,7 @@ import { Add } from "../icons";
 import CreateRootModal from "./createAutoRouting/CreateRootModal";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import AutoroutingTour from "../tour/tours/AutoroutingTour";
 
 const AutoRoutingRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -63,9 +64,14 @@ const AutoRoutingRoot = () => {
   }
 
   return (
+    <>
+    <div className="w-full flex justify-end m-1">
+      <AutoroutingTour />
+    </div>
     <div className="flex flex-col gap-4">
       <div>
         <Button
+          data-gaelo-flow="routing-buttons"
           color={Colors.success}
           onClick={() => setShowCreateModal(true)}
           children={
@@ -75,8 +81,9 @@ const AutoRoutingRoot = () => {
             </div>
           }
         />
-      </div>
+      </div >
       <AutoRoutingTable
+        data-gaelo-flow="routing-datatable"
         data={autoRoutingItems}
         onDelete={handleDeleteAutoRoutingItem}
         toggleActivated={handleToggleActivate}
@@ -93,6 +100,7 @@ const AutoRoutingRoot = () => {
       </Modal>
 
     </div>
+    </>
   );
 };
 

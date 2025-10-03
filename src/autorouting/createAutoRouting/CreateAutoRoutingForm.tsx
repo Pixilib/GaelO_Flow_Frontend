@@ -48,7 +48,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
     return (
         <div className="flex flex-col gap-4">
             <div className="flex gap-5 flex-row">
-                <div className="w-full">
+                <div data-gaelo-flow="modal-name" className="w-full">
                     <Label value={t("autorouting.createAutoRooting.name*")}/>
                     <Input
                         placeholder={t("autorouting.createAutoRooting.name")}
@@ -56,7 +56,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                         value={payload?.Name}
                     />
                 </div>
-                <div className="w-full">
+                <div data-gaelo-flow="modal-eventype" className="w-full">
                     <Label value={t("autorouting.createAutoRooting.event-type*")} />
                     <SelectInput
                         placeholder="Select option"
@@ -76,7 +76,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
             <div className="border-b border-gray-custom" />
             <div>
                 <div className="flex flex-col gap-5">
-                    <div className="flex items-center gap-10">
+                    <div data-gaelo-flow="modal-rules" className="flex items-center gap-10">
                         <h1 className="font-bold">{t("autorouting.createAutoRooting.rules")}</h1>
                         <div className="w-80">
                             <SelectInput
@@ -87,7 +87,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2">
+                    <div data-gaelo-flow="modal-ruleFields" className="flex flex-col gap-2">
                         {rules.map((rule, i) => (
                             <AddRuleForm
                                 rule={rule.rule}
@@ -102,7 +102,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             color={Colors.primary}
                             onClick={handleAddRule}
                             children={
-                                <div className="flex items-center gap-2 text-sm">
+                                <div data-gaelo-flow="modal-addRule" className="flex items-center gap-2 text-sm">
                                     <Add />
                                     <p>{t("autorouting.createAutoRooting.add-rule")}</p>
                                 </div>
@@ -116,7 +116,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                 <div className="flex flex-col gap-2">
                     <h1 className="font-bold">{t("autorouting.createAutoRooting.destinations")}</h1>
                     <div>
-                        <div className="flex flex-col gap-2">
+                        <div data-gaelo-flow="modal-destinationFields" className="flex flex-col gap-2">
                             {destinations.map((destination, i) => (
                                 <AddDestinationForm
                                     value={destination.destination}
@@ -132,7 +132,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             color={Colors.primary}
                             onClick={handleAddDestination}
                             children={
-                                <div className="flex items-center gap-2 text-sm">
+                                <div data-gaelo-flow="modal-addDestination" className="flex items-center gap-2 text-sm">
                                     <Add />
                                     <p>{t("autorouting.createAutoRooting.add-destination")}</p>
                                 </div>

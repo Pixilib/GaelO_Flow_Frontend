@@ -10,47 +10,47 @@ const MainTour = () => {
     const allSteps = [
     {
         selector: '[data-gaelo-flow="sidebar"]',
-        content: t('tour.sidebar'),
+        content: t('tour.main.sidebar'),
         position: 'bottom'
     },
     {
         selector: '[data-gaelo-flow="menu-content"]',
-        content: t('tour.menu'),
+        content: t('tour.main.menu'),
         position: 'top'
     },
     {
         selector: '[data-gaelo-flow="tool-anonymize"]',
-        content: t('tour.anonymize'),
+        content: t('tour.main.anonymize'),
         position: 'bottom'
     },
     {
         selector: '[data-gaelo-flow="tool-export"]',
-        content: t('tour.export'),
+        content: t('tour.main.export'),
         position: 'bottom'
     },
     {
         selector: '[data-gaelo-flow="tool-delete"]',
-        content: t('tour.delete'),
+        content: t('tour.main.delete'),
         position: 'bottom'
     },
     {
         selector: '[data-gaelo-flow="header-language"]',
-        content: t('tour.language'),
+        content: t('tour.main.language'),
         position: 'bottom'
     },
     {
         selector: '[data-gaelo-flow="header-darkmode"]',
-        content: t('tour.darkmode'),
+        content: t('tour.main.darkmode'),
         position: 'bottom'
     },
     {
         selector: '[data-gaelo-flow="header-notifications"]',
-        content: t('tour.notifications'),
+        content: t('tour.main.notifications'),
         position: 'bottom'
     },
     {
         selector: '[data-gaelo-flow="header-profile"]',
-        content: t('tour.profile'),
+        content: t('tour.main.profile'),
         position: 'bottom'
     }
     ]

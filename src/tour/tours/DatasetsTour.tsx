@@ -8,13 +8,29 @@ const DatasetsTour = () => {
     const { t } = useTranslation()
     const steps = [
         {
-            selector: '',
-            content: '',
+            selector: '[data-gaelo-flow="dataset-labels"]',
+            content: t('tour.dataset.label'),
         },
         {
-            selector: '',
-            content: '',
+            selector: '[data-gaelo-flow="dataset-buttons"]',
+            content: t('tour.dataset.buttons'),
         },
+        {
+            selector: '[data-gaelo-flow="dataset-studies"]',
+            content: t('tour.dataset.studies'),
+        },
+        {
+            selector: '[data-gaelo-flow="study-actions"]',
+            content: t('tour.dataset.study-actions'),
+        },
+        {
+            selector: '[data-gaelo-flow="dataset-series"]',
+            content: t('tour.dataset.series'),
+        },
+        {
+            selector: '[data-gaelo-flow="series-actions"]',
+            content: t('tour.dataset.series-actions'),
+        }
     ]
 
     return (

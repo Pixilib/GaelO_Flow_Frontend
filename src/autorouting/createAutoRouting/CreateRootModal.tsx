@@ -5,6 +5,7 @@ import CreateAutoRoutingForm from "./CreateAutoRoutingForm";
 import { useState } from "react";
 import { eventOptions } from "../types";
 import { useTranslation } from "react-i18next";
+import ModalRoutingTour from "../../tour/tours/ModalRoutingTour";
 
 type CreateRootModalProps = {
     onClose: () => void;
@@ -48,8 +49,11 @@ const CreateRootModal = ({ onClose, onSubmit }: CreateRootModalProps) => {
 
     return (
         <>
+        <div className="w-full flex justify-end p-1">
+            <ModalRoutingTour />
+        </div>
             <Modal.Header onClose={onClose}>
-                <Modal.Title>{t("autorouting.createAutoRooting.create-auto-rooting")}</Modal.Title>
+                <Modal.Title>{t("autorouting.createAutoRooting.create-auto-routing")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <CreateAutoRoutingForm

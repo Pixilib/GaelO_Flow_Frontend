@@ -16,7 +16,7 @@ type DropdownButtonProps = {
   className?: string;
 };
 
-const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "Action", children, className }) => {
+const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "Action", children, className, ...props }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [activeDropdownId, setActiveDropdownId] = useState<string | null>(null);
 
@@ -58,7 +58,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({ options, buttonText = "
   }, []);
 
   return (
-    <div ref={dropdownRef} className={`relative inline-flex hs-dropdown [--placement:bottom-left] ${className}`}>
+    <div ref={dropdownRef} {...props} className={`relative inline-flex hs-dropdown [--placement:bottom-left] ${className}`}>
       <button
         id="hs-dropdown-custom-trigger"
         type="button"

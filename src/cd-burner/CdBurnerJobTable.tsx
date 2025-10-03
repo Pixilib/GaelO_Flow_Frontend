@@ -3,7 +3,7 @@ import { cancelCdBurnerJob } from "../services/cd-burner";
 import { Button, Table } from "../ui";
 import { Trash } from "../icons";
 
-const CdBurnerJobTable = ({ data }) => {
+const CdBurnerJobTable = ({ data, ...props }) => {
 
     const columns = [
         {
@@ -42,12 +42,16 @@ const CdBurnerJobTable = ({ data }) => {
     ];
 
     return (
+        <>
+        <div {...props}> 
         <Table
             columns={columns}
             data={data}
             enableSorting
             initialSorting={[{ id: "timestamp", desc: true, }]}
         />
+        </div>
+        </>
     );
 };
 

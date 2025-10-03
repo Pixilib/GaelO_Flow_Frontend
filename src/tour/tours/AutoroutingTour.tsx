@@ -4,12 +4,16 @@ import ReactTour from '../ReactTour'
 import { Badge } from '../../ui'
 import { useTranslation } from 'react-i18next'
 
-const HelpPatientInvestigator = () => {
+const AutoroutingTour = () => {
     const { t } = useTranslation()
     const steps = [
         {
-            selector: '[data-gaelo-flow="job-status-panel"]',
-            content: t('tour.home.home-page'),
+            selector: '[data-gaelo-flow="routing-datatable"]',
+            content: t('tour.routing.datatable'),
+        },
+        {
+            selector: '[data-gaelo-flow="routing-buttons"]',
+            content: t('tour.routing.buttons'),
         },
     ]
 
@@ -26,4 +30,4 @@ const HelpPatientInvestigator = () => {
     )
 }
 
-export default HelpPatientInvestigator
+export default AutoroutingTour

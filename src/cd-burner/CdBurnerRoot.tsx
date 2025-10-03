@@ -9,6 +9,7 @@ import SoundEnabled from "../icons/SoundEnabled";
 import SoundDisabled from "../icons/SoundDisabled";
 import audioError from './sounds/error.wav';
 import audioSuccess from './sounds/success.wav';
+import CDBurnerTour from "../tour/tours/CDBurnerTour";
 
 const CdBurnerRoot = () => {
 
@@ -58,12 +59,17 @@ const CdBurnerRoot = () => {
 
 
     return (
+        <>
+        <div className="w-full flex justify-end m-1">
+        <CDBurnerTour />
+      </div>
         <Card>
             <CardHeader color={Colors.primary}>
                 <div className="flex w-full">
                     <div className="flex w-4/5 justify-center text-lg font-bold m-3">CD Burner</div>
                     <div className="flex justify-end w-1/5">
                         <Button
+                            data-gaelo-flow="cd-burner-speaker"
                             color={playSound ? Colors.success  : Colors.danger}
                             onClick={clickSoundHandler}
                             title={playSound ? "Disable sound" : "Enable sound"}
@@ -76,10 +82,11 @@ const CdBurnerRoot = () => {
                 </div>
             </CardHeader>
             <CardBody>
-                <CdBurnerJobTable data={burnerJobs} />
+                <CdBurnerJobTable data-gaelo-flow="cd-burner-datatable" data={burnerJobs} />
             </CardBody>
 
         </Card>
+    </>
     );
 };
 
