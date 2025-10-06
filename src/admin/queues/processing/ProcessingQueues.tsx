@@ -2,7 +2,7 @@ import { Spinner } from "../../../ui";
 import { getProcessingJobs } from "../../../services/queues";
 import { useCustomQuery } from "../../../utils";
 import ProcessingQueueTable from "./ProcessingQueueTable";
-import { ProcessingJob } from "src/utils/types";
+import { ProcessingJob } from "../../../utils/types";
 
 const ProcessingQueues = () => {
   const { data: jobRows, isPending } = useCustomQuery<object[]>(

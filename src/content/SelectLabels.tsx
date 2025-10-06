@@ -3,7 +3,7 @@ import { useCustomQuery } from "../utils";
 import { SelectInput, Spinner } from "../ui";
 import { Label, Option } from "../utils/types";
 import { useSelector } from "react-redux";
-import { RootState } from "src/store";
+import { RootState } from "../store";
 import { useTranslation } from "react-i18next";
 
 type SelectLabelsProps = {

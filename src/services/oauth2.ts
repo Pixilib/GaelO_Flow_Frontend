@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Oauth2Config } from "src/utils/types";
+import { Oauth2Config } from "../utils/types";
 
 export const getOauth2Config = (): Promise<Oauth2Config[]> => {
   return axios

@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { AnonymizeOptionPayload, AutoQueryOptionsPayload, Options } from "src/utils/types";
+import { AnonymizeOptionPayload, AutoQueryOptionsPayload, Options } from "../utils/types";
 
 export const getOptions = (): Promise<Options> => {
   return axios
