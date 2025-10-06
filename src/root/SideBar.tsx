@@ -41,6 +41,7 @@ const SideBar = ({ onLogout, openItem, setOpenItem }: SideBarProps) => {
     { title: "Jobs", path: "/administration/jobs", isActive: location.pathname === "/administration/jobs" },
     { title: "Users", path: "/administration/users/users", isActive: location.pathname === "/administration/users/crud" },
     { title: "Labels", path: "/administration/labels", isActive: location.pathname === "/administration/labels" },
+    { title: "CD Burner", path: "/administration/cd-burner", isActive: location.pathname === "/administration/cd-burner" },
   ];
 
   return (
