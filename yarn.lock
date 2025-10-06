@@ -1001,6 +1001,53 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@reactour/mask@npm:*":
+  version: 1.2.0
+  resolution: "@reactour/mask@npm:1.2.0"
+  dependencies:
+    "@reactour/utils": "npm:*"
+  peerDependencies:
+    react: 16.x || 17.x || 18.x || 19.x
+  checksum: 10c0/58c7641a62fc963093319365d1dac645e330c75d1f301bdb728f115f7e2007cb3b3801ec518de6bfa6e9f326d2b6cd821aab3eeec22080fb353312b1a4f3ef1f
+  languageName: node
+  linkType: hard
+
+"@reactour/popover@npm:*":
+  version: 1.3.0
+  resolution: "@reactour/popover@npm:1.3.0"
+  dependencies:
+    "@reactour/utils": "npm:*"
+  peerDependencies:
+    react: 16.x || 17.x || 18.x || 19.x
+  checksum: 10c0/c1d9a7b11839ec2f8498b5d2c9a276b78e76c8cc39bc113d806c6347ddd2afec58325d52fb5497ab57c825dab8fdf18a4f64b8511125edadb2f29d5c0d73bc19
+  languageName: node
+  linkType: hard
+
+"@reactour/tour@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "@reactour/tour@npm:3.8.0"
+  dependencies:
+    "@reactour/mask": "npm:*"
+    "@reactour/popover": "npm:*"
+    "@reactour/utils": "npm:*"
+  peerDependencies:
+    react: 16.x || 17.x || 18.x || 19.x
+  checksum: 10c0/5bbba7c3d2730bda084a5df5a886db3ba9452a058032d133779ab35ac06ee299d4d6eb98ce127032143ba550c1a2410a0308ac45f6cc31c33c0102a1b2d576b3
+  languageName: node
+  linkType: hard
+
+"@reactour/utils@npm:*":
+  version: 0.6.0
+  resolution: "@reactour/utils@npm:0.6.0"
+  dependencies:
+    "@rooks/use-mutation-observer": "npm:^4.11.2"
+    resize-observer-polyfill: "npm:^1.5.1"
+  peerDependencies:
+    react: 16.x || 17.x || 18.x || 19.x
+  checksum: 10c0/9684c75bef19749235a378c10b1ddc9ec0c3d7eec91b1a2f9affc68b96c091c4ae735206cb999801f923549247b77226c3a3555bceceb384e12415c675152209
+  languageName: node
+  linkType: hard
+
 "@reduxjs/toolkit@npm:^2.9.0":
   version: 2.9.0
   resolution: "@reduxjs/toolkit@npm:2.9.0"
@@ -1190,6 +1237,15 @@ __metadata:
   version: 4.50.0
   resolution: "@rollup/rollup-win32-x64-msvc@npm:4.50.0"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@rooks/use-mutation-observer@npm:^4.11.2":
+  version: 4.11.2
+  resolution: "@rooks/use-mutation-observer@npm:4.11.2"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 10c0/3ce88237a03b0f223ae0bba3934fe0c90d4b94dc1a7132902d631d7ff01e3007b28293d654bd83654b2eb7ec898ec1bcbbf042db2b19831070bb9acb4209bc11
   languageName: node
   linkType: hard
 
@@ -4025,6 +4081,7 @@ __metadata:
     "@chromatic-com/storybook": "npm:^4.1.1"
     "@floating-ui/dom": "npm:^1.7.4"
     "@floating-ui/react": "npm:^0.27.16"
+    "@reactour/tour": "npm:^3.8.0"
     "@reduxjs/toolkit": "npm:^2.9.0"
     "@storybook/addon-docs": "npm:^9.1.6"
     "@storybook/addon-links": "npm:^9.1.6"
@@ -6268,6 +6325,13 @@ __metadata:
   version: 5.1.1
   resolution: "reselect@npm:5.1.1"
   checksum: 10c0/219c30da122980f61853db3aebd173524a2accd4b3baec770e3d51941426c87648a125ca08d8c57daa6b8b086f2fdd2703cb035dd6231db98cdbe1176a71f489
+  languageName: node
+  linkType: hard
+
+"resize-observer-polyfill@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "resize-observer-polyfill@npm:1.5.1"
+  checksum: 10c0/5e882475067f0b97dc07e0f37c3e335ac5bc3520d463f777cec7e894bb273eddbfecb857ae668e6fb6881fd6f6bb7148246967172139302da50fa12ea3a15d95
   languageName: node
   linkType: hard
 

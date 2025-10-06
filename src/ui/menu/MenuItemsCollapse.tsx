@@ -23,30 +23,30 @@ const MenuItemsCollapse = ({
   onNavigate
 }: MenuItemCollapseProps) => {
   //? Personnalize css if Menu is Open or not
-  const bgIsOpen = isOpen ? "bg-primary-active rounded-lg p-2.5" : "p-2.5 hover:bg-primary-hover rounded-lg";
+  const bgIsOpen = isOpen ? "bg-primary-active" : "hover:bg-primary-light";
 
-const handleClick = () => {
-  dropDownOpen(); 
-}
+  const handleClick = () => {
+    dropDownOpen();
+  }
 
   return (
     <div
-      className={`flex w-full cursor-context-menu flex-col text-xs text-white ${className}`}
+      className={`flex w-full flex-col text-xs text-white ${className}`}
       data-gaelo-flow="sidebar-item-collapse"
       onClick={handleClick}
       tabIndex={-1}
     >
-      <div className="flex justify-start gap-3 mx-auto"  >
-        <div className={`${bgIsOpen} mx-auto flex`}>
-        <div className="flex items-center mx-3 grow">
-          <span className="-ml-0.5 mr-5">{icon}</span>
-          <span>{title}</span>
+      <div className="flex justify-start gap-3 mx-auto hover:cursor-pointer "  >
+        <div className={`${bgIsOpen} mx-auto flex p-2.5 rounded-lg`}>
+          <div className="flex items-center mx-3 grow">
+            <span className="ml-1">{icon}</span>
+            <span className="ml-5 mr-4">{title}</span>
+          </div>
+          <ToggleChevron className={"ml-6 flex shrink-0 items-center"} isOpen={isOpen} />
         </div>
-        <ToggleChevron  className={"ml-7 flex shrink-0 items-center"} isOpen={isOpen} />
       </div>
-        </div>
       {isOpen && <SideBarItems elements={elements} onNavigate={onNavigate} />}
-    </div>      
+    </div>
   );
 }
 export default MenuItemsCollapse;

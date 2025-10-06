@@ -7,6 +7,7 @@ import CardDelete from "./CardDelete";
 import { useCustomQuery, User } from "../../utils";
 import { getUserById } from "../../services";
 import { useTranslation } from "react-i18next";
+import HomeTour from "../../tour/tours/HomeTour";
 
 const Dashboard = () => {
   const currentUserId = useSelector((state: RootState) => state.user.currentUserId);
@@ -23,6 +24,9 @@ const Dashboard = () => {
 
   return (
     <div className="p-4 md:p-8 bg-background size-full">
+      <div className="flex justify-end">
+        <HomeTour/>
+      </div>
       <h1 className="text-2xl font-medium md:text-4xl animate-typing text-slate-400 dark:text-white">
         {t("root.dashboard.hello")},
       </h1>
@@ -32,7 +36,7 @@ const Dashboard = () => {
         <span className="ml-4 text-4xl text-primary">👋🏻</span>
       </h2>
 
-      <div className="flex justify-around md:flex-row md:gap-6 w-full">
+      <div data-gaelo-flow="job-status-panel" className="flex justify-around md:flex-row md:gap-6 w-full">
         {userData?.role?.autoQuery && (
           <CardRetrieve />
         )}

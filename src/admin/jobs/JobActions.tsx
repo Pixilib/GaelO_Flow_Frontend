@@ -1,4 +1,4 @@
-import { JobsAction } from "src/utils/types";
+import { JobsAction } from "../../utils/types";
 import { Cancel, Pause, Play, Resume } from "../../icons";
 
 type JobActionsProps = {

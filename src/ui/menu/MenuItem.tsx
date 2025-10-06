@@ -3,16 +3,16 @@ import { ReactNode } from "react";
 type MenuItemProps = {
   icon?: ReactNode;
   title: string;
-  isActive: boolean;
-  onClick: () => void;
+  isActive?: boolean;
+  onClick?: () => void;
   className?: string;
 };
 
 const MenuItem = ({
   icon,
   title,
-  isActive,
-  onClick,
+  isActive = false,
+  onClick = () => {},
   className,
 }: MenuItemProps) => {
   //? Personnalize css if item is Active or not

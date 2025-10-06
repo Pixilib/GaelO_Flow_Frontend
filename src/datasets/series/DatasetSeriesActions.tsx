@@ -61,6 +61,7 @@ const DatasetSeriesActions: React.FC<DataSetSeriesActionsProps> = ({ series, onA
     return (
         <div onClick={handleClick}>
             <DropdownButton
+                data-gaelo-flow="series-actions"
                 options={options}
                 buttonText="Actions"
             />

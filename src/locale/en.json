@@ -5,8 +5,10 @@
       "content": "Browse Images",
       "Query": "Query",
       "Import": "Import",
+      "cd-burner" : "CD Burner",
       "title-sign-in-form":"Welcome Back !",
       "select-labels" : "Select Labels ...",
+      "about" : "About",
       "root" : {
         "dashboard" : {
           "hello" : "Hello",
@@ -71,7 +73,7 @@
       "autorouting" : {
         "create-new-rule" : "Create new rule",
         "createAutoRooting" : {
-          "create-auto-rooting" : "Create Auto-Rooting",
+          "create-auto-routing" : "Create Auto-Routing",
           "submit" : "Submit",
           "add-rule" : "Add rule",
           "add-destination" : "Add Destination",
@@ -150,5 +152,55 @@
             "create-user" : "Create User",
             "user" : "Users"
           }
+      },
+      "anonymize" : {
+        "anonymize-resources" : "Anonymize Resources"
+      },
+      "export" : {
+        "export-resources" : "Export Resources"
+      },
+      "delete" : {
+        "delete-resources" : "Delete Resources"
+      },
+      "tour" : {
+        "main" : {
+          "sidebar" : "Main navigation menu",
+          "menu" : "Available features",
+          "anonymize" : "Batch anonymization",
+          "export" : "Batch export",
+          "delete" : "Batch delete",
+          "language": "Switch interface language",
+          "darkmode" : "Toggle light/dark theme",
+          "notifications": "Notifications",
+          "profile": "Your account"
+        },
+        "home" : {
+          "home-page" : "This panel shows the status of your jobs (Retrieve, Anonymize and Delete Jobs)"
+        },
+        "dataset" : {
+          "label" : "Select labels to list associated DICOM studies",
+          "buttons" : "Batch send of DICOM studies to anonymize, export or delete tools",
+          "studies" : "Studies datatable of selected labels",
+          "series" : "Series datatable of selected study",
+          "study-actions": "Action tools for study",
+          "series-actions": "Action tools for series"
+        },
+        "routing" : {
+          "buttons": "Create a new rule",
+          "datatable": "datatable",
+          "modal" : {
+            "name": "Rule name",
+            "even-type": "Event type",
+            "rules": "Rules",
+            "add-rule": "Add a rule",
+            "rule-fields": "Rule fields",
+            "add-destination": "Add a destination", 
+            "destination-fields": "Destination fields"
+          }
+        },
+        "cd-burner" : {
+          "datatable" : "CD burner recent Jobs",
+          "speaker" : "Enable/Disable sounds notification when CD burner success or failure"
+        }
       }
   }

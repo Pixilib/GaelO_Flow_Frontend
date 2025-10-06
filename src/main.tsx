@@ -14,6 +14,7 @@ import ConfirmContextProvider from "./services/ConfirmContextProvider.tsx";
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import '@floating-ui/react';
+import { TourProvider } from "@reactour/tour"
 
 const EmotionCacheProvider = ({ children }: { children: React.ReactNode }) => {
   const cache = React.useMemo(
@@ -41,17 +42,19 @@ let router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <Provider store={store}>
-      <ErrorBoundary FallbackComponent={<>Error</>}>
-        <QueryClientProvider client={queryClient}>
+  <Provider store={store}>
+    <ErrorBoundary FallbackComponent={<>Error</>}>
+      <QueryClientProvider client={queryClient}>
+        <TourProvider steps={[]}>
           <ConfirmContextProvider>
             <EmotionCacheProvider>
               <RouterProvider router={router} />
+              <ToastContainer />
             </EmotionCacheProvider>
           </ConfirmContextProvider>
           <ReactQueryDevtools initialIsOpen={true} />
-        </QueryClientProvider>
-        <ToastContainer />
-      </ErrorBoundary>
-    </Provider>
+        </TourProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
+  </Provider>
 );

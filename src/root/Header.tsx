@@ -84,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       className="sticky top-0 z-50 bg-white"
     >
       <div className="flex justify-end gap-4">
-        <ToolList />
+        <ToolList data-gaelo-flow="header-language"/>
         <DropdownMenu
           ref={dropdownRef}
           className="flex flex-col"
@@ -101,14 +101,16 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             </div>
           }
         >
-          <div className="flex items-center gap-1 cursor-pointer" onClick={handleDropdown}>
+          <div data-gaelo-flow="header-language" className="flex items-center gap-1 cursor-pointer" onClick={handleDropdown}>
             <Language className="w-5 h-5 mx-1" fill="currentColor" />
             <span className="text-sm">
               {languageItems.find((item) => item.code === i18n.language)?.title}
             </span>
             <ToggleChevron isOpen={openItem === 'Dropdown'} />
-            <ToggleDarkMode />
           </div>
+          <div data-gaelo-flow="header-darkmode">
+              <ToggleDarkMode />
+            </div>
         </DropdownMenu>
 
         <div className="flex items-center bg-primary rounded-xl text-white p-3 gap-3">
@@ -121,7 +123,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
             }
           >
             <span className='relative'>
-              <Notification className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
+              <Notification data-gaelo-flow="header-notifications" className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
               {jobs.length > 0 ?
                 (<span className='absolute -bottom-4 -right-2 bg-danger pr-1 pl-1 rounded-xl text-xs'>
                   {jobs.length}
@@ -139,7 +141,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
               <UserProfile />
             }
           >
-            <User className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
+            <User data-gaelo-flow="header-profile" className="w-5 h-5 transition-transform duration-100 hover:scale-110 cursor-pointer" fill="currentColor" />
           </Popover>
         </div>
       </div>

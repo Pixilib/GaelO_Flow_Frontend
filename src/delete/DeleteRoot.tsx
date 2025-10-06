@@ -9,10 +9,12 @@ import { createDeleteQueue } from "../services/queues";
 import DeleteQueues from "./DeleteQueues";
 import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
 import { Trash, Empty } from "../icons";
+import { useTranslation } from "react-i18next";
 
 const DeleteRoot = () => {
     const dispatch = useDispatch();
     const deleteList = useSelector((state: RootState) => state.delete.studies);
+    const {t} = useTranslation()
 
     const handleClearList = () => {
         dispatch(flushDeleteList());
@@ -39,7 +41,7 @@ const DeleteRoot = () => {
             <CardHeader color={Colors.primary}>
                 <div className="flex items-center w-full">
                     <div className="w-4/5 text-lg font-bold text-center">
-                        Delete Resources
+                        {t("delete.delete-resources")}
                     </div>
                     <div className="flex justify-end w-1/5 gap-3 p-3">
                         <Button

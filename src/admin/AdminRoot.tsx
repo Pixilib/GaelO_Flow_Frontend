@@ -6,6 +6,7 @@ import ModalitiesRoot from "./modalities/ModalitiesRoot";
 import UsersRoot from "./users/UsersRoot";
 import PeersRoot from "./peers/PeersRoot";
 import LabelRoot from "./labels/LabelRoot";
+import CdBurnerAdminRoot from "./cd-burner/CdBurnerAdminRoot";
 
 const AdminRoot = () => {
     return (
@@ -24,6 +25,7 @@ const AdminRoot = () => {
                 </Route>
                 <Route path="/peers" element={<PeersRoot />} />
                 <Route path="/labels" element={<LabelRoot />} />
+                <Route path="/cd-burner" element={<CdBurnerAdminRoot />} />
             </Routes>
         </div>
     );

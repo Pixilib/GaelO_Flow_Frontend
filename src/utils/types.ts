@@ -24,11 +24,9 @@ type OptionsRequest = {
   AutoQueryHourStop: number;
   AutoQueryMinuteStop: number;
   OrthancMonitoringRate: number;
-  BurnerStarted: boolean;
   BurnerLabelPath: string;
-  BurnerMonitoringLevel: string;
+  BurnerDataPath: string;
   BurnerManufacturer: string;
-  BurnerMonitoredPath: string;
   BurnerDeleteStudyAfterSent: boolean;
   BurnerSupportType: string;
   BurnerViewerPath: string;
@@ -54,11 +52,9 @@ export type Options = {
   autoQueryHourStop: number;
   autoQueryMinuteStop: number;
   orthancMonitoringRate: number;
-  burnerStarted: boolean;
   burnerLabelPath: string;
-  burnerMonitoringLevel: string;
+  burnerDataPath: string;
   burnerManufacturer: string;
-  burnerMonitoredPath: string;
   burnerDeleteStudyAfterSent: boolean;
   burnerSupportType: string;
   burnerViewerPath: string;

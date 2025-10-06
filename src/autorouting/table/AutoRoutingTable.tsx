@@ -13,7 +13,7 @@ type AutoRoutingTableProps = {
     toggleActivated: (id: number, activate: boolean) => void;
 }
 
-const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableProps) => {
+const AutoRoutingTable = ({ data, onDelete, toggleActivated, ...props }: AutoRoutingTableProps) => {
     const [ itemIdToShow, setItemIdToShow ] = useState<number | null>(null);
     const [ showRulesModal, setShowRulesModal ] = useState(false);
     const [ showDestinationsModal, setShowDestinationsModal ] = useState(false);
@@ -97,6 +97,7 @@ const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableP
 
     return (
         <>
+        <div {...props}> 
             <Table
                 headerColor={Colors.light}
                 columns={columns}
@@ -122,6 +123,7 @@ const AutoRoutingTable = ({ data, onDelete, toggleActivated }: AutoRoutingTableP
                 }
                 data={data?.find(item => item.Id === itemIdToShow)?.Router?.Destinations}
             />
+         </div>
         </>
     );
 }

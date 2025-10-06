@@ -70,6 +70,7 @@ const DatasetStudyActions = ({ study, onActionClick }: DatasetStudyActionsProps)
     return (
         <div onClick={handleClick}>
             <DropdownButton
+                data-gaelo-flow="study-actions"
                 options={options}
                 buttonText="Actions"
             />

@@ -29,21 +29,21 @@ const ToolList = () => {
   return (
     <div className={`flex justify-between gap-3 p-2 grow flex-nowrap bg-primary rounded-2xl dark:bg-indigo-700 ${widthClass}`}>
       {role.anonymize && (
-        <ToolItem count={Object.keys(anonList).length} onClick={() => navigate('/anonymize')}>
+        <ToolItem count={Object.keys(anonList).length} onClick={() => navigate('/anonymize')} data-gaelo-flow="tool-anonymize">
           <Anon
             className="text-blue-900 cursor-pointer dark:text-blue-400 dark:to-blue-500 group-hover:text-white size-6"
           />
         </ToolItem>
       )}
       {role.export && (
-        <ToolItem count={Object.keys(exportList).length} onClick={() => navigate('/export')}>
+        <ToolItem count={Object.keys(exportList).length} onClick={() => navigate('/export')} data-gaelo-flow="tool-export">
           <Export
             className="cursor-pointer text-secondary group-hover:text-white"
           />
         </ToolItem>
       )}
       {role.delete && (
-        <ToolItem count={Object.keys(deleteList).length} onClick={() => navigate('/delete')}>
+        <ToolItem count={Object.keys(deleteList).length} onClick={() => navigate('/delete')} data-gaelo-flow="tool-delete">
           <Trash
             className="text-red-500 cursor-pointer group-hover:text-white"
           />

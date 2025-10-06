@@ -1,5 +1,5 @@
 import axios from "./axios";
-import { AnonymizeOptionPayload, AutoQueryOptionsPayload, Options } from "src/utils/types";
+import { AnonymizeOptionPayload, AutoQueryOptionsPayload, Options } from "../utils/types";
 
 export const getOptions = (): Promise<Options> => {
   return axios
@@ -12,11 +12,9 @@ export const getOptions = (): Promise<Options> => {
         autoQueryHourStop: data.AutoQueryHourStop,
         autoQueryMinuteStop: data.AutoQueryMinuteStop,
         orthancMonitoringRate: data.OrthancMonitoringRate,
-        burnerStarted: data.BurnerStarted,
         burnerLabelPath: data.BurnerLabelPath,
-        burnerMonitoringLevel: data.BurnerMonitoringLevel,
+        burnerDataPath: data.BurnerDataPath,
         burnerManufacturer: data.BurnerManufacturer,
-        burnerMonitoredPath: data.BurnerMonitoredPath,
         burnerDeleteStudyAfterSent: data.BurnerDeleteStudyAfterSent,
         burnerSupportType: data.BurnerSupportType,
         burnerViewerPath: data.BurnerViewerPath,
@@ -76,3 +74,26 @@ export const updateAutoQueryOptions = (
       throw error;
     });
 };
+
+export const updateCdBurnerOptions = (
+  cdBurnerOptions: Partial<Options>
+): Promise<void> => {
+  const payload: any = {
+    BurnerLabelPath: cdBurnerOptions.burnerLabelPath,
+    BurnerManufacturer: cdBurnerOptions.burnerManufacturer,
+    BurnerDeleteStudyAfterSent: cdBurnerOptions.burnerDeleteStudyAfterSent,
+    BurnerSupportType: cdBurnerOptions.burnerSupportType,
+    BurnerViewerPath: cdBurnerOptions.burnerViewerPath,
+    BurnerTransferSyntax: cdBurnerOptions.burnerTransferSyntax,
+    BurnerDateFormat: cdBurnerOptions.burnerDateFormat,
+  };
+  return axios
+    .patch("/api/options", payload)
+    .then((response) => response.data)
+    .catch(function (error) {
+      if (error.response) {
+        throw error.response;
+      }
+      throw error;
+    });
+}

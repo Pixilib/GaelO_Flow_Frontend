@@ -5,8 +5,10 @@
     "content": "Recherche d'images",
     "Query": "Query",
     "Import": "Importer",
+    "cd-burner" : "Graveur de CD",
     "title-sign-in-form": "Bienvenue !",
     "select-labels" : "Sélectionner les Labels ...",
+    "about" : "À propos",
     "root" : {
         "dashboard": {
             "hello": "Bonjour",
@@ -70,7 +72,7 @@
     "autorouting" : {
         "create-new-rule" : "Créer une nouvelle règle",
         "createAutoRooting" : {
-          "create-auto-rooting" : "Créer un auto routeur",
+          "create-auto-routing" : "Créer un auto routeur",
           "submit" : "soumettre",
           "add-rule" : "Ajouter une règle",
           "add-destination" : "Ajouter une destination",
@@ -149,5 +151,55 @@
             "create-user" : "Créer un utilisateur",
             "user" : "Utilisateurs"
           }
-    }
+    },
+    "anonymize" : {
+        "anonymize-resources" : "Anonymisation des ressources"
+    },
+    "export" : {
+      "export-resources" : "Exportation des ressources"
+    },
+    "delete" : {
+        "delete-resources" : "Suppression des ressources"
+    },
+    "tour" : {
+      "main" : {
+        "sidebar" : "Menu de navigation principal",
+        "menu" : "Fonctionnalités disponibles",
+        "anonymize" : "anonymisation par lot ",
+        "export" : "Export par lot",
+        "delete" : "Supression par lot",
+        "language": "Changer la langue de l'interface",
+        "darkmode" : "Alterner thème clair/sombre",
+        "notifications": "Notifications",
+        "profile": "Votre compte"
+      },
+        "home" : {
+          "home-page" : "Ce panneau affiche l'état de vos tâches (Retrieve, anonymisation et suppression des tâches)"
+        },
+        "dataset" : {
+          "label" : "Sélectionnez un label pour filtrer",
+          "buttons" : "Différent boutons : anonymiser, exporter ou supprimer",
+          "studies" : "Tableau de données studies du label selectionné",
+          "series" : "Tableau de données series du label selectionné",
+          "study-actions": "Une fois le label sélectionné, utilisez le boutons action sur l'étude",
+          "series-actions": "Une fois le label sélectionné, utilisez le boutons action sur la séries"
+        },
+        "routing" : {
+          "buttons": "Créer une nouvelle règle",
+          "datatable": "datatable",
+          "modal": {
+          "name": "Nom",
+          "even-type": "Type d'événement",
+          "rules": "Règles",
+          "add-rule": "Ajouter une règle",
+          "rule-fields": "Champs de règle",
+          "add-destination": "Ajouter une destination",
+          "destination-fields": "Champs de destination"
+        }
+        },
+        "cd-burner" : {
+          "datatable" : "Tableau des données graveur CD",
+          "speaker" : "speaker"
+        }
+      }
 }
