@@ -1,6 +1,6 @@
 
 
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { StudyModifyPayload, StudyMainDicomTags, Study, PatientMainDicomTags } from '../../utils/types';
 import { Button, CheckBox, Input, InputWithDelete } from "../../ui";
 import EditCustomTagsTable from "../series/edition/EditCustomTagsTable"
@@ -15,10 +15,10 @@ type StudyEditFormProps = {
     onSubmit: (params: { id: string; payload: StudyModifyPayload }) => void;
     jobId?: string;
     onJobCompleted?: (jobState: string) => void;
-    defaultKeepLabels :boolean
+    defaultKeepLabels: boolean
 };
 
-const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted,defaultKeepLabels }: StudyEditFormProps) => {
+const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted, defaultKeepLabels }: StudyEditFormProps) => {
     const [patientName, setPatientName] = useState<string | null>(data?.patientMainDicomTags?.patientName ?? null);
     const [patientId, setPatientId] = useState<string | null>(data?.patientMainDicomTags?.patientId ?? null);
     const [patientBirthDate, setPatientBirthDate] = useState<string | null>(data?.patientMainDicomTags?.patientBirthDate ?? null);
@@ -36,6 +36,10 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted,defaultKeepLabels
     const [keepUIDs, setKeepUIDs] = useState(false)
     const [transferSyntax, setTrasferSyntax] = useState(null);
     const [customsTags, setCustomTags] = useState<customTags>({});
+
+    useEffect(() => {
+        if (keepUIDs) setKeepSource(true)
+    }, [keepUIDs])
 
     const handleFieldRemoval = (field: string, checked: boolean) => {
         setFieldsToRemove((prev) =>
@@ -165,7 +169,7 @@ const StudyEditForm = ({ data, onSubmit, jobId, onJobCompleted,defaultKeepLabels
             <div className="">
                 <EditCustomTagsTable
                     customTags={customsTags}
-                    onChange={handleChangeCustomTags} 
+                    onChange={handleChangeCustomTags}
                 />
             </div>
             <div className="flex justify-around">
