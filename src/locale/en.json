@@ -66,9 +66,11 @@
         "assign-labels" : "Assign Labels",
         "download" : "Download",
         "download-nifti" : "Download Nifti",
+        "send-to-burner" : "Burn",
         "delete" : "Delete",
-        "create-serie" : "Create serie"
-
+        "create-serie" : "Create serie",
+        "burn-patient-confirmation": "Are you sure you want to burn this patient ?",
+        "burn-study-confirmation": "Are you sure you want to burn this study ?"
       },
       "autorouting" : {
         "create-new-rule" : "Create new rule",

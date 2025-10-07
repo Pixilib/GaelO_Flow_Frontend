@@ -5,6 +5,7 @@ import {
   DeleteButton,
   DownloadButton,
   EditButton,
+  CdButton
 } from "../../ui";
 import Patient from "../../model/Patient";
 import StudyRoot from "../studies/StudyRoot";
@@ -17,6 +18,7 @@ import ToggleChevron from "../../ui/menu/ToggleChevron";
 type AccordionPatientProps = {
   patient: Patient;
   onPatientSelectionChange: (selected: boolean, patient: Patient) => void;
+  onBurnerPatient: (patient: Patient) => void;
   onEditPatient: (patient: Patient) => void;
   onStudyUpdated: (patient: Patient) => void;
   onDeletePatient: (patient: Patient) => void;
@@ -30,6 +32,7 @@ type AccordionPatientProps = {
 const AccordionPatient = ({
   patient,
   onPatientSelectionChange,
+  onBurnerPatient,
   onEditPatient,
   onDeletePatient,
   onStudyUpdated,
@@ -58,6 +61,13 @@ const AccordionPatient = ({
   const handleStudySelected = (studyId: string) => {
     setCurrentStudyId(studyId);
   };
+
+  const handleCdBurnerClick = (
+    event: React.MouseEvent<HTMLButtonElement | SVGElement>
+  ) => {
+    event.stopPropagation();
+    onBurnerPatient(patient);
+  }
 
   const handleEditClick = (
     event: React.MouseEvent<HTMLButtonElement | SVGElement>
@@ -107,6 +117,7 @@ const AccordionPatient = ({
               Nb of Studies: {patient.getStudies().length}
             </span>
             <div className="flex justify-end w-full space-x-7">
+              <CdButton onClick={handleCdBurnerClick} />
               <EditButton
                 onClick={handleEditClick}
                 className="group-hover:fill-white"

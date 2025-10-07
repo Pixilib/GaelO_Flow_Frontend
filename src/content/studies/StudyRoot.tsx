@@ -13,6 +13,8 @@ import EditStudy from "./EditStudy";
 import PreviewStudy from "./PreviewStudy";
 import AiStudy from "./AiStudy";
 import CreateSerie from "./create-serie/CreateSerie";
+import { useTranslation } from "react-i18next";
+import { postCdBurnerJob } from "../../services/cd-burner";
 
 type StudyRootProps = {
   patient: Patient;
@@ -40,6 +42,7 @@ const StudyRoot = ({
 
   const { confirm } = useConfirm();
   const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
+  const { t } = useTranslation()
 
   const studies = useMemo(() => {
     onStudySelected(null)
@@ -98,6 +101,24 @@ const StudyRoot = ({
     setCreatingSerieId(studyId);
   };
 
+  const handleBurnStudy = async (studyId: string) => {
+    const confirmContent = (
+      <div>
+        <span className="text-xl not-italic font-bold">
+          {t("contents.burn-study-confirmation")}
+        </span>
+        <br />
+        <br />
+        {studyId}
+      </div>
+    );
+    if (await confirm({ content: confirmContent })) {
+      postCdBurnerJob(studyId, "Study").then(() => {
+        toastSuccess("CD Burner job created");
+      }).catch((e) => {
+        toastError(`Failed to create CD Burner job: ${e.statusText}`);
+      });    }
+  }
 
   const handleStudyAction = (action: string, studyId: string) => {
     switch (action) {
@@ -118,6 +139,9 @@ const StudyRoot = ({
         break;
       case "download":
         handleDownloadStudy(studyId);
+        break;
+      case "burn":
+        handleBurnStudy(studyId);
         break;
       default:
         break;

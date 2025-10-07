@@ -1,6 +1,6 @@
 // StudyActions.tsx
 import React, { useState } from 'react';
-import { Add, Brain, Download, Edit, Eye, Label, Trash } from '../../icons';
+import { Add, Brain, Cd, Download, Edit, Eye, Label, Trash } from '../../icons';
 import { StudyMainDicomTags } from "../../utils/types";
 import OhifViewerLink from '../OhifViewerLink';
 import StoneViewerLink from '../StoneViewerLink';
@@ -67,6 +67,12 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             icon: <Download />,
             color: 'green',
             action: () => onActionClick('download', study.id)
+        },
+        {
+            label: t("contents.send-to-burner"),
+            icon: <Cd />,
+            color: 'black',
+            action: () => onActionClick('burn', study.id)
         },
         {
             label: t("contents.delete"),
