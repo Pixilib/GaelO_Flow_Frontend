@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
-import { useCustomMutation } from "../../utils/reactQuery";
+import { useCustomMutation, useCustomQuery } from "../../utils/reactQuery";
 import { useCustomToast } from "../../utils/toastify";
 
-import { deleteStudy } from "../../services/orthanc";
+import { deleteStudy, getStudy } from "../../services/orthanc";
 import { exportRessource } from "../../services/export";
 import { useConfirm } from "../../services/ConfirmContextProvider";
 
@@ -15,6 +15,7 @@ import AiStudy from "./AiStudy";
 import CreateSerie from "./create-serie/CreateSerie";
 import { useTranslation } from "react-i18next";
 import { postCdBurnerJob } from "../../services/cd-burner";
+import { StudyMainDicomTags } from "../../utils/types";
 
 type StudyRootProps = {
   patient: Patient;
@@ -39,6 +40,7 @@ const StudyRoot = ({
   const [aiStudyId, setAIStudyId] = useState<string | null>(null);
   const [previewStudyId, setPreviewStudyId] = useState<string | null>(null);
   const [creatingSerieId, setCreatingSerieId] = useState<string | null>(null);
+  const [burningStudy, setBurningStudy] = useState<(StudyMainDicomTags & { id: string }) | null>(null);
 
   const { confirm } = useConfirm();
   const { toastSuccess, toastError, updateExistingToast } = useCustomToast();
@@ -48,6 +50,14 @@ const StudyRoot = ({
     onStudySelected(null)
     return patient.getStudies().map((study) => study.toJSON());
   }, [patient]);
+
+  const { data: studyDataForBurn, isLoading: isLoadingBurnData } = useCustomQuery(
+    ["study", burningStudy?.id],
+    () => getStudy(burningStudy!.id),
+    {
+      enabled: !!burningStudy,
+    }
+  );
 
   const { mutate: mutateDeleteStudy } = useCustomMutation<void, { id: string }>(
     ({ id }) => deleteStudy(id),
@@ -101,47 +111,74 @@ const StudyRoot = ({
     setCreatingSerieId(studyId);
   };
 
-  const handleBurnStudy = async (studyId: string) => {
+  const handleBurnStudy = (study: StudyMainDicomTags & { id: string }) => {
+    setBurningStudy(study);
+  };
+
+  const handleBurnConfirmation = async (study: StudyMainDicomTags & { id: string }, studyData: any) => {
+    const data = [
+      { key: 'Patient Name', value: studyData.patientMainDicomTags?.patientName },
+      { key: 'Study Description', value: study.studyDescription },
+      { key: 'Study Date', value: study.studyDate },
+    ];
+
     const confirmContent = (
       <div>
         <span className="text-xl not-italic font-bold">
           {t("contents.burn-study-confirmation")}
         </span>
-        <br />
-        <br />
-        {studyId}
+        <table className="mt-4">
+          <tbody>
+            {data.map((item) => (
+              <tr key={item.key} className="border-b border-t border-gray-200">
+                <td className="px-4 py-2 font-bold text-gray-700 dark:text-gray-300">{item.key}</td>
+                <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{item.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
+
     if (await confirm({ content: confirmContent })) {
-      postCdBurnerJob(studyId, "Study").then(() => {
+      postCdBurnerJob(study.id, "Study").then(() => {
         toastSuccess("CD Burner job created");
       }).catch((e) => {
         toastError(`Failed to create CD Burner job: ${e.statusText}`);
-      });    }
-  }
+      });
+    }
 
-  const handleStudyAction = (action: string, studyId: string) => {
+    setBurningStudy(null);
+  };
+
+  useEffect(() => {
+    if (burningStudy && studyDataForBurn && !isLoadingBurnData) {
+      handleBurnConfirmation(burningStudy, studyDataForBurn);
+    }
+  }, [burningStudy, studyDataForBurn, isLoadingBurnData]);
+
+  const handleStudyAction = (action: string,  study: StudyMainDicomTags & { id: string }) => {
     switch (action) {
       case "edit":
-        setEditingStudy(studyId);
+        setEditingStudy(study.id);
         break;
       case "delete":
-        handleDeleteStudy(studyId);
+        handleDeleteStudy(study.id);
         break;
       case "preview":
-        handlePreviewStudy(studyId);
+        handlePreviewStudy(study.id);
         break;
       case "ai":
-        handleAIStudy(studyId);
+        handleAIStudy(study.id);
         break;
       case "createSerie":
-        handleCreateStudy(studyId);
+        handleCreateStudy(study.id);
         break;
       case "download":
-        handleDownloadStudy(studyId);
+        handleDownloadStudy(study.id);
         break;
       case "burn":
-        handleBurnStudy(studyId);
+        handleBurnStudy(study);
         break;
       default:
         break;

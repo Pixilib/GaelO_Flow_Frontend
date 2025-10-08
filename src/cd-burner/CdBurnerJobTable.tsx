@@ -44,12 +44,20 @@ const CdBurnerJobTable = ({ data, ...props }) => {
             header: "Cancel",
             enableSorting: false,
             cell: ({ row }) => {
-                const canBeCanceled = !['BURNING_DONE', 'BURNING_ERROR', 'REQUEST_CANCELING'].includes(row.original.jobStatus);
+                const isCancelable = [
+                    'SENT_TO_BURNER',
+                    'RETRIEVING_DICOM',
+                    'UNZIPING',
+                    'UNZIP_DONE',
+                    'BURNING_IN_PROGRESS',
+                    'BURNING_PAUSED',
+                    'REQUEST_RECEIVED',
+                ].includes(row.original.jobStatus);
                 return <Button
-                    color={canBeCanceled ? Colors.danger : Colors.dark}
+                    color={isCancelable ? Colors.danger : Colors.dark}
                     onClick={() => handleDeleteJob(row.original.jobID)}
                     title="Cancel CD Burner Job"
-                    disabled={!canBeCanceled}
+                    disabled={!isCancelable}
                 >
                     <Trash />
                 </Button>

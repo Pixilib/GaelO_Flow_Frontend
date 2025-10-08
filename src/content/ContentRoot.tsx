@@ -9,7 +9,7 @@ import {
 } from "../utils";
 import Model from "../model/Model";
 import Patient from "../model/Patient";
-import { FormCard, Button, Input, CheckBox } from "../ui";
+import { FormCard, Button, CheckBox } from "../ui";
 import SearchForm from "../query/SearchForm";
 import AccordionPatient from "./patients/AccordionPatient";
 import EditPatient from "./patients/EditPatient";
@@ -75,16 +75,25 @@ const ContentRoot: React.FC = () => {
   };
 
   const handleBurnerPatient = async (patient: Patient) => {
+    const data = [
+      { key: 'Patient Name', value: patient.patientName }
+    ]
+
     const confirmContent = (
       <div>
         <span className="text-xl not-italic font-bold">
           {t("contents.burn-patient-confirmation")}
         </span>
-        <br />
-        <br />
-        {`ID: ${patient.patientId}`}
-        <br />
-        {`Name: ${patient.patientName}`}
+        <table className="mt-4">
+          <tbody>
+            {data.map((item) => (
+              <tr key={item.key} className="border-b border-t border-gray-200">
+                <td className="px-4 py-2 font-bold text-gray-700 dark:text-gray-300">{item.key}</td>
+                <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{item.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
     if (await confirm({ content: confirmContent })) {
