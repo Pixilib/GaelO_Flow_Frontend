@@ -12,7 +12,7 @@ type StudyTableProps = {
   selectedRows?: Record<string, boolean>;
   currentActiveStudyId: string | null;
   onRowClick?: (studyId: string) => void;
-  onActionClick: (action: string, studyId: string) => void;
+  onActionClick: (action: string, study: StudyMainDicomTags & { id: string }) => void;
   onRowSelectionChange?: (selectedRow: Record<string, boolean>) => void;
 };
 

@@ -66,8 +66,11 @@
         "assign-labels" : "Attribuer les labels",
         "download" : "Télécharger",
         "download-nifti" : "Télécharger Nifti",
+        "send-to-burner" : "Graver",
         "delete" : "Supprimer",
-        "create-serie" : "Créer Serie"
+        "create-serie" : "Créer Serie",
+        "burn-patient-confirmation": "Êtes-vous sûr de vouloir graver ce patient ?",
+        "burn-study-confirmation": "Êtes-vous sûr de vouloir graver cette étude ?"
     },
     "autorouting" : {
         "create-new-rule" : "Créer une nouvelle règle",

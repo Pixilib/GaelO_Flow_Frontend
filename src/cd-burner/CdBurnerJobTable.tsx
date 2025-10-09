@@ -1,9 +1,18 @@
-import { Colors } from "../utils";
+import { Colors, useCustomToast } from "../utils";
 import { cancelCdBurnerJob } from "../services/cd-burner";
 import { Button, Table } from "../ui";
 import { Trash } from "../icons";
 
 const CdBurnerJobTable = ({ data, ...props }) => {
+    const { toastSuccess, toastError } = useCustomToast();
+
+    const handleDeleteJob = async (jobId: string) => {
+        cancelCdBurnerJob(jobId).then(() => {
+            toastSuccess("CD Burner job canceled");
+        }).catch((e) => {
+            toastError("Failed to cancel CD Burner job, is it already canceled?");
+        });
+    }
 
     const columns = [
         {
@@ -34,23 +43,38 @@ const CdBurnerJobTable = ({ data, ...props }) => {
             accessorKey: "cancelButton",
             header: "Cancel",
             enableSorting: false,
-            cell: ({ row }) => (
-                ['BURNING_DONE', 'BURNING_ERROR'].includes(row.original.jobStatus) ? <div className="h-10" /> :
-                    <Button color={Colors.danger} onClick={() => cancelCdBurnerJob(row.original.jobID)}> <Trash /></Button>
-            ),
+            cell: ({ row }) => {
+                const isCancelable = [
+                    'SENT_TO_BURNER',
+                    'RETRIEVING_DICOM',
+                    'UNZIPING',
+                    'UNZIP_DONE',
+                    'BURNING_IN_PROGRESS',
+                    'BURNING_PAUSED',
+                    'REQUEST_RECEIVED',
+                ].includes(row.original.jobStatus);
+                return <Button
+                    color={isCancelable ? Colors.danger : Colors.dark}
+                    onClick={() => handleDeleteJob(row.original.jobID)}
+                    title="Cancel CD Burner Job"
+                    disabled={!isCancelable}
+                >
+                    <Trash />
+                </Button>
+            }
         },
     ];
 
     return (
         <>
-        <div {...props}> 
-        <Table
-            columns={columns}
-            data={data}
-            enableSorting
-            initialSorting={[{ id: "timestamp", desc: true, }]}
-        />
-        </div>
+            <div {...props}>
+                <Table
+                    columns={columns}
+                    data={data}
+                    enableSorting
+                    initialSorting={[{ id: "timestamp", desc: true, }]}
+                />
+            </div>
         </>
     );
 };
