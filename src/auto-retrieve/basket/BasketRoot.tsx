@@ -9,6 +9,8 @@ import { Empty } from "../../icons";
 import { removeStudyOrSeriesFromBasket, updateBasketSelection } from "../../reducers/AutoRetrieveSlice";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import BasketTour from "../../tour/tours/auto-retrieve/BasketTour";
+
 
 const BasketRoot = () => {
 
@@ -66,14 +68,19 @@ const BasketRoot = () => {
 
     return (
         <div className="flex flex-col">
+             <div className="w-full flex justify-end m-1">
+                <BasketTour />
+            </div >
+            <div data-gaelo-flow="basket-datatable">
             <BasketTable
                 queryResults={basket}
                 onRowSelectionChange={handleRowSelectionChange}
                 selectedRow={basketSelectedRow}
             />
+            </div>
             <div className="flex justify-center gap-3 m-3">
-                <Button color={Colors.success} onClick={handleCreateRobot}>{t("auto-retrieve.basket.start-robot")}</Button>
-                <Button color={Colors.warning} onClick={handleRemoveBasket}><Empty /></Button>
+                <Button data-gaelo-flow="basket-start-robot" color={Colors.success} onClick={handleCreateRobot}>{t("auto-retrieve.basket.start-robot")}</Button>
+                <Button data-gaelo-flow="basket-delete" color={Colors.warning} onClick={handleRemoveBasket}><Empty /></Button>
             </div>
         </div>
 

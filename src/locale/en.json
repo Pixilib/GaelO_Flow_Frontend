@@ -185,7 +185,7 @@
           "studies" : "Studies datatable of selected labels",
           "series" : "Series datatable of selected study",
           "study-actions": "Action tools for study",
-          "series-actions": "Action tools for series"
+          "series-actions": "Action tools for séries"
         },
         "routing" : {
           "buttons": "Create a new rule",
@@ -197,12 +197,60 @@
             "add-rule": "Add a rule",
             "rule-fields": "Rule fields",
             "add-destination": "Add a destination", 
-            "destination-fields": "Destination fields"
+            "destination-fields": "Destination fields",
+            "submit" : "Submit"
           }
         },
         "cd-burner" : {
           "datatable" : "CD burner recent Jobs",
           "speaker" : "Enable/Disable sounds notification when CD burner success or failure"
-        }
+        },
+        "auto-retrieve" : {
+          "query" : {
+            "drop-csv" : "Drop CSV",
+            "plus" : "Add line",
+            "download-csv" : "Download CSV",
+            "datatable" : "Datatable",
+            "start-queries" : "Start queries",
+            "delete" : "Delete new line"
+          },
+          "results" : {
+            "datatable" : "Datatable",
+            "add-to-basket" : "Add to basket",
+            "query-series" : " Query series",
+            "download-csv" : "Download CSV",
+            "delete" : "Delete",
+            "load-from-csv" : "Load from CSV"
+            
+          },
+          "basket" : {
+            "datatable" : "Datatable",
+            "delete" : "Delete",
+            "start-robot" : "Start Robot"
+          },
+          "task" : {
+            "buttons" :"Batch send of DICOM studies to anonymize, export or delete tools",
+            "datatable" : "Datatable"
+          }
+        },
+        "query" : {
+          "form" : "form",
+          "studies" : "Studies datatable of selected labels",
+          "series" : "Series datatable of selected study",
+          "dowload-studies" : "Download for study",
+          "dowload-series" : "Download for study"
+        },
+        "import" : {
+          "select-labels" : "Select Labels",
+          "drop-dicom" : "Drop Dicom",
+          "buttons" : "Batch send of DICOM studies to anonymize, export or delete tools",
+          "studies" : "Studies datatable of selected labels",
+          "series" : "Series datatable of selected study",
+          "drop-image" : "Drop image",
+          "dicom-tags" : "DICOM tags",
+          "add-tag" :"Add tag",
+          "datatable" : "Datatable",
+          "create-dicoms" : "Create Dicoms"
+        } 
       }
   }

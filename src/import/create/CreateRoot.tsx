@@ -7,6 +7,7 @@ import TagTable from './TagTable';
 import { Colors, useCustomMutation, useCustomToast } from '../../utils';
 import { createDicom } from '../../services/instances';
 import { useTranslation } from "react-i18next";
+import CreateTour from "../../tour/tours/Import/CreateTour";
 
 const CreateRoot: React.FC = () => {
     const { toastError, toastSuccess } = useCustomToast()
@@ -63,23 +64,30 @@ const CreateRoot: React.FC = () => {
 
     return (
         <>
-            <div className="w-full p-6 space-y-3 md:flex md:space-x-3 ">
+        <div className="w-full flex justify-end m-1">
+        <CreateTour />
+        </div>
+            <div data-gaelo-flow="import-drop-image" className="w-full p-6 space-y-3 md:flex md:space-x-3 ">
                 <CreateDrop files={files} onDrop={handleFilesUploaded} />
             </div>
 
             <div className="flex flex-col justify-center p-3 border-t-2 shadow-inner bg-light dark:bg-neutral-950 border-slate-200 dark:border-neutral-700">
+                <div data-gaelo-flow="import-dicom-tags">
                 <CreateForm
                     title={t("import.define-dicoms-tags")}
                     onAddTag={handleAddTag}
                 />
+                </div>
+                <div data-gaelo-flow="import-datatable">
                 <TagTable
                     data={tags}
                     onDeleteTag={handleTagDelete}
                 />
-
+                </div>
             </div>
             <div className="flex justify-center p-3 bg-white dark:bg-neutral-950 rounded-b-xl">
                 <Button
+                    data-gaelo-flow="import-create-dicoms"
                     color={tags.length > 0 ? Colors.primary : Colors.almond}
                     onClick={handleCreateDicoms}
                 >

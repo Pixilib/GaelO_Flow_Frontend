@@ -12,11 +12,11 @@ type AddRuleFormProps = {
     onDelete: () => void;
 }
 
-const AddRuleForm = ({ rule, id, onChange, onDelete }: AddRuleFormProps) => {
+const AddRuleForm = ({ rule, id, onChange, onDelete, ...props }: AddRuleFormProps) => {
     const {t} = useTranslation()
 
     return (
-        <div>
+        <div {...props}>
             <div className="flex gap-5 flex-row">
                 <SelectInput
                     placeholder="Dicom Tag"

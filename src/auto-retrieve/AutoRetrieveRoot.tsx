@@ -15,7 +15,6 @@ import { queryModality } from "../services";
 import { RootState, store } from "../store";
 import { setCanExitPage } from "../reducers/UserSlice";
 import { useTranslation } from "react-i18next";
-import QueriesTour from "../tour/tours/QueriesTour";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
@@ -103,10 +102,6 @@ const AutoRetrieveRoot = () => {
   }
 
   return (
-    <>
-    <div className="w-full flex justify-end m-1">
-      <QueriesTour />
-    </div>
     <div
       className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl space-y-3"
       data-gaelo-flow="import-create-root"
@@ -150,7 +145,6 @@ const AutoRetrieveRoot = () => {
         {progressQueriesSeries ? <ProgressBar progress={progressQueriesSeries} /> : null}
       </div>
     </div>
-  </>
   );
 };
 

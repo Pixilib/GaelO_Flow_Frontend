@@ -8,6 +8,7 @@ import SearchForm from "./SearchForm";
 import ResultsTable from "./ResultsTable";
 import SeriesTable from "./SeriesTable";
 import { useTranslation } from "react-i18next";
+import QueryTour from "../tour/tours/QueryTour";
 
 type QueryFormProps = {
   className?: string;
@@ -87,17 +88,23 @@ const QueryRoot = ({ className }: QueryFormProps) => {
   };
 
   return (
+    <>
+    <div className="w-full flex justify-end m-2">
+        <QueryTour />
+        </div>
     <div className={`${className} space-y-6`}>
       <FormCard
-        className="flex flex-col justify-center bg-white dark:bg-neutral-500 gap-y-7"
+        className= "flex flex-col justify-center bg-white dark:bg-neutral-500 gap-y-7"
         title={t("query.search")}
         collapsible={true}
       >
+        <div data-gaelo-flow="query-form">
         <SearchForm
           aets={aets ?? []}
           onSubmit={handleSubmit}
           withAets={true}
         />
+        </div>
       </FormCard>
 
       {/* Section for results and series tables */}
@@ -111,14 +118,15 @@ const QueryRoot = ({ className }: QueryFormProps) => {
       </div>
 
       <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2">
-        <div className="2xl:col-span-1">
+        <div data-gaelo-flow="query-studies" className="2xl:col-span-1">
           <ResultsTable results={studies} onRowClick={handleRowClick} />
         </div>
-        <div className="2xl:col-span-1">
+        <div data-gaelo-flow="query-series" className="2xl:col-span-1">
           <SeriesTable series={series} />
         </div>
       </div>
     </div>
+  </>
   );
 };
 

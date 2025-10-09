@@ -11,6 +11,7 @@ import { QueryResultStudy, QueryResultSeries, ModalityExtended, Option } from ".
 import { addQuery, editQuery, removeQuery, updateQueriesSelection } from "../../reducers/AutoRetrieveSlice";
 import { store } from "../../store";
 import { getModalities } from "../../services";
+import QueriesTour from "../../tour/tours/auto-retrieve/QueriesTour";
 
 type QueryRootProps = {
   queries: (QueryStudy & { selected: boolean })[];
@@ -104,16 +105,23 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
   if (isPending) return <Spinner />
 
   return (
+    <>
+    <div className="w-full flex justify-end m-1">
+      <QueriesTour />
+    </div>
     <div className="flex flex-col gap-3 p-3">
       <div className="flex gap-3 w-full justify-between">
         <div className="flex gap-3">
-          <Button color={Colors.primary} onClick={addEmptyQuery}>
+          <Button data-gaelo-flow="query-addLine" color={Colors.primary} onClick={addEmptyQuery}>
             <Add />
           </Button>
-          <CsvDrop onImportCsv={handleImportCsv} />
+          <div data-gaelo-flow="query-dropCSV">
+            <CsvDrop onImportCsv={handleImportCsv} />
+          </div>
         </div>
         <div className="flex gap-3">
           <Button
+            data-gaelo-flow="query-downloadCSV"
             className="flex gap-3"
             color={Colors.success}
             onClick={onDownloadCSV}
@@ -122,7 +130,7 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
           </Button>
         </div>
       </div>
-      <div>
+      <div data-gaelo-flow="query-datatable">
         <QueryTable
           aets={aetOptions}
           queries={queries}
@@ -132,12 +140,13 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
         />
       </div>
       <div className="flex justify-center m-3 gap-3">
-        <Button color={Colors.primary} onClick={onStartStudyQueries}>Start Queries</Button>
-        <Button color={Colors.warning} onClick={onRemoveQueryList}>
+        <Button data-gaelo-flow="query-start" color={Colors.primary} onClick={onStartStudyQueries}>Start Queries</Button>
+        <Button data-gaelo-flow="query-delete" color={Colors.warning} onClick={onRemoveQueryList}>
           <Empty />
         </Button>
       </div>
     </div>
+  </>
   );
 };
 

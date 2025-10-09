@@ -34,6 +34,10 @@ const ModalRoutingTour = () => {
         {
             selector: '[data-gaelo-flow="modal-destinationFields"]',
             content: t('tour.routing.modal.destination-fields'),
+        },
+        {
+            selector: '[data-gaelo-flow="modal-submit"]',
+            content: t('tour.routing.modal.submit'),
         }
     ]
 

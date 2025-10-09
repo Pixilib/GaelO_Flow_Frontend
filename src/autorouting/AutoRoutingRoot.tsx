@@ -94,6 +94,7 @@ const AutoRoutingRoot = () => {
         size="xl"
       >
         <CreateRootModal
+          data-gaelo-flow="modal-submit"
           onClose={() => setShowCreateModal(false)}
           onSubmit={onSubmit}
         />

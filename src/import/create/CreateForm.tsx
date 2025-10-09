@@ -55,7 +55,7 @@ const CreateForm = ({ title, className, onAddTag }: TagFormProps) => {
             className="w-full"
           />
         </div>
-        <div className="flex justify-end">
+        <div data-gaelo-flow="import-add-tag" className="flex justify-end">
           <Button
             color={Colors.secondary}
             onClick={handleAddTag}

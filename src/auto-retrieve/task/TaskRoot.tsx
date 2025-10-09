@@ -15,6 +15,7 @@ import {
     addSeriesToExportListFromSeriesId,
 } from "../../utils/actionsUtils";
 import { useTranslation } from "react-i18next";
+import RobotTour from "../../tour/tours/auto-retrieve/RobotTour";
 
 const TaskRoot = () => {
 
@@ -90,7 +91,10 @@ const TaskRoot = () => {
 
     return (
         <>
-            <div className="flex flex-wrap gap-2 pl-3 pr-3 pb-3">
+        <div className="w-full flex justify-end m-1">
+        <RobotTour />
+        </div>
+            <div data-gaelo-flow="robot-buttons" className="flex flex-wrap gap-2 pl-3 pr-3 pb-3">
                 {role.anonymize &&
                     <Button
                         color={Colors.blueCustom}
@@ -121,12 +125,14 @@ const TaskRoot = () => {
                         <span className="ml-2">{t("buttons.send-to-delete")}</span>
                     </Button>
                 }
-            </div>
+            </div >
+            <div data-gaelo-flow="robot-datatable">
             <TaskTable
                 data={data || []}
                 selectedRows={selectedRows}
                 onRowSelectionChange={onRowSelectionChange}
             />
+            </div>
         </>
     )
 }

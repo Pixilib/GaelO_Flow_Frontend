@@ -12,6 +12,7 @@ import { addStudyOrSeriesToBasket, removeSeriesResults, removeStudyResults, upda
 import { exportCsv } from "../../utils/export";
 import LoadSeriesCSV from "./LoadSeriesCSV";
 import { useTranslation } from "react-i18next";
+import ResultsTour from "../../tour/tours/auto-retrieve/ResultsTour";
 
 type ResultsRootProps = {
     onStartSeriesQueries: () => void
@@ -121,6 +122,9 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
 
     return (
         <div>
+            <div className="w-full flex justify-end m-1">
+                <ResultsTour />
+            </div>
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
                     title="Studies"
@@ -136,16 +140,18 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
             <Routes>
                 <Route path="studies" element={
                     <>
+                        <div data-gaelo-flow="results-datatable">
                         <ResultStudiesTable
                             resultStudies={studyResults}
                             onRowSelectionChange={handleStudiesSelectionChange}
                             selectedRow={studiesSelectedRow}
                         />
+                        </div>
                         <div className="flex justify-center p-3 gap-3">
-                            <Button color={Colors.primary} onClick={onAddToBasketStudies}>{t("auto-retrieve.results.add-to-basket")}</Button>
-                            <Button color={Colors.primary} onClick={onStartSeriesQueries}>Query series</Button>
-                            <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVStudy}><Download />CSV</Button>
-                            <Button color={Colors.warning} onClick={onRemoveStudiesResults}><Empty /></Button>
+                            <Button data-gaelo-flow="results-add-to-basket" color={Colors.primary} onClick={onAddToBasketStudies}>{t("auto-retrieve.results.add-to-basket")}</Button>
+                            <Button data-gaelo-flow="results-query-series" color={Colors.primary} onClick={onStartSeriesQueries}>Query series</Button>
+                            <Button data-gaelo-flow="results-download-csv" className="flex gap-3" color={Colors.success} onClick={onDownloadCSVStudy}><Download />CSV</Button>
+                            <Button data-gaelo-flow="results-delete" color={Colors.warning} onClick={onRemoveStudiesResults}><Empty /></Button>
                         </div>
                     </>
                 } />
@@ -159,18 +165,20 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                                 <LoadSeriesCSV />
                             </Modal.Body>
                         </Modal>
+                        <div data-gaelo-flow="results-datatable">
                         <ResultSeriesTable
                             onRowSelectionChange={handleSeriesSelectionChange}
                             selectedRow={seriesSelectedRow}
                             resultSeries={seriesResults} />
+                        </div>
                         <div className="flex justify-center p-3 gap-3">
                             <div className="grow flex justify-center gap-3">
-                                <Button color={Colors.primary} onClick={onAddToBasketSeries}>{t("auto-retrieve.results.add-to-basket")}</Button>
-                                <Button className="flex gap-3" color={Colors.success} onClick={onDownloadCSVSeries}><Download />CSV</Button>
-                                <Button color={Colors.warning} onClick={onRemoveSeriesResults}><Empty /></Button>
+                                <Button data-gaelo-flow="results-add-to-basket" color={Colors.primary} onClick={onAddToBasketSeries}>{t("auto-retrieve.results.add-to-basket")}</Button>
+                                <Button data-gaelo-flow="results-download-csv" className="flex gap-3" color={Colors.success} onClick={onDownloadCSVSeries}><Download />CSV</Button>
+                                <Button data-gaelo-flow="results-delete" color={Colors.warning} onClick={onRemoveSeriesResults}><Empty /></Button>
                             </div>
                             <div className="flex justify-end">
-                                <Button color={Colors.secondary} onClick={onClickLoadSeriesCSV}>Load From CSV</Button>
+                                <Button data-gaelo-flow="results-load-from-csv" color={Colors.secondary} onClick={onClickLoadSeriesCSV}>Load From CSV</Button>
                             </div>
                         </div>
 

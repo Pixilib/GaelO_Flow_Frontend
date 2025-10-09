@@ -12,7 +12,7 @@ type CreateRootModalProps = {
     onSubmit: (payload: AutoRoutingPayload) => void;
 }
 
-const CreateRootModal = ({ onClose, onSubmit }: CreateRootModalProps) => {
+const CreateRootModal = ({ onClose, onSubmit, ...props }: CreateRootModalProps) => {
     const [rules, setRules] = useState<{ rule: Rule, id: string }[]>([]);
     const [destinations, setDestinations] = useState<{ destination: Destination, id: string }[]>([]);
     const [autoRoutingPayload, setAutoRoutingPayload] = useState<AutoRoutingPayload>(
@@ -69,6 +69,7 @@ const CreateRootModal = ({ onClose, onSubmit }: CreateRootModalProps) => {
             <Modal.Footer>
                 <div className="flex justify-center items-center">
                     <Button
+                        {...props}
                         color={Colors.primary}
                         onClick={handleSubmit}
                         children={<p>{t("autorouting.createAutoRooting.submit")}</p>}
