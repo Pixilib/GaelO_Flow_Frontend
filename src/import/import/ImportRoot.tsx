@@ -14,8 +14,6 @@ import {
 } from "../../utils/actionsUtils";
 import SelectRoleLabels from "../../datasets/SelectRoleLabels";
 import { useTranslation } from "react-i18next";
-import ImportTour from "../../tour/tours/Import/ImportTour";
-
 
 interface ImportError {
   filename: string;
@@ -100,10 +98,6 @@ const ImportRoot: React.FC = () => {
   }, [currentStudyInstanceUID]);
 
   return (
-    <>
-    <div className="w-full flex justify-end m-1">
-      <ImportTour />
-    </div>
     <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col gap-3 items-center">
       <div data-gaelo-flow="import-select" className="w-full">
         <SelectRoleLabels
@@ -181,7 +175,6 @@ const ImportRoot: React.FC = () => {
         </div>
       )}
     </div>
-  </>
   );
 };
 

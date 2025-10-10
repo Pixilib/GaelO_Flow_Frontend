@@ -251,6 +251,19 @@
           "add-tag" :"Ajouter tag",
           "datatable" : "Datatable",
           "create-dicoms" : "Créer Dicoms"
-        } 
+        },
+        "content" : {
+          "form" : "Form patient info",
+          "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
+          "patient-info" : "Number studies on patient",
+          "studies" : "Tableau de données studies du patient selectionné",
+          "series" : "Tableau de données series de la studies selectionné",
+          "study-actions": "Outils action pour l'étude",
+          "series-actions": "Outils action pour l'étude",
+          "burn-cd" : "Graver un CD",
+          "edit" : "Modifier le patient",
+          "download" : "Télécharger le patient",
+          "delete" : "Supprimer le patient"
+        }
       }
 }

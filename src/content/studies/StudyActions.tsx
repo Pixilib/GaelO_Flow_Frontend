@@ -89,6 +89,7 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
     return (
         <div onClick={handleClick}>
             <DropdownButton
+                data-gaelo-flow="study-actions"
                 options={options}
                 buttonText="Actions"
             />

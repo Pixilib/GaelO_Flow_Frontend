@@ -13,7 +13,6 @@ import { FormCard, Button, CheckBox } from "../ui";
 import SearchForm from "../query/SearchForm";
 import AccordionPatient from "./patients/AccordionPatient";
 import EditPatient from "./patients/EditPatient";
-import { Label } from "../utils/types";
 import {
   addStudyIdToDeleteList,
   addSeriesOfStudyIdToExportList,
@@ -26,6 +25,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useTranslation } from "react-i18next";
 import { postCdBurnerJob } from "../services/cd-burner";
+import  ContentTour from "../tour/tours/ContentTour";
 
 const ContentRoot: React.FC = () => {
   const { confirm } = useConfirm();
@@ -211,6 +211,10 @@ const ContentRoot: React.FC = () => {
   }, [selectAll])
 
   return (
+    <>
+    <div className="w-full flex justify-end m-1">
+      <ContentTour />
+    </div>
     <div className="flex flex-col gap-3">
       <EditPatient
         key={editingPatient?.id ?? undefined}
@@ -219,6 +223,7 @@ const ContentRoot: React.FC = () => {
         onClose={closeEditModal}
         show={!!editingPatient}
       />
+      <div data-gaelo-flow="content-form">
       <FormCard
         className="bg-white dark:bg-neutral-500"
         title={t("query.search")}
@@ -230,7 +235,7 @@ const ContentRoot: React.FC = () => {
           withAets={false}
         />
       </FormCard>
-
+      </div>
       <div className="flex flex-col w-full p-4 bg-white shadow-md dark:bg-neutral-800 rounded-3xl">
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-primary dark:text-white">
@@ -244,7 +249,7 @@ const ContentRoot: React.FC = () => {
 
         <div className="w-full mb-3 border-t border-gray-200" />
 
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div data-gaelo-flow="content-buttons" className="flex flex-wrap gap-2 mb-4">
           <CheckBox
             bordered={false}
             type="checkbox"
@@ -303,6 +308,7 @@ const ContentRoot: React.FC = () => {
           : null}
       </div>
     </div>
+  </>
   );
 };
 

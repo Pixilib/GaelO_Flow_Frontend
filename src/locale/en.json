@@ -185,7 +185,7 @@
           "studies" : "Studies datatable of selected labels",
           "series" : "Series datatable of selected study",
           "study-actions": "Action tools for study",
-          "series-actions": "Action tools for séries"
+          "series-actions": "Action tools for series"
         },
         "routing" : {
           "buttons": "Create a new rule",
@@ -251,6 +251,24 @@
           "add-tag" :"Add tag",
           "datatable" : "Datatable",
           "create-dicoms" : "Create Dicoms"
-        } 
+        },
+        "content" : {
+          "form" : "Form patient info",
+          "buttons" : "Batch send of DICOM studies to anonymize, export or delete tools",
+          "patient-info" : "Number studies on patient",
+          "studies" : "Studies datatable of selected patient",
+          "series" : "Series datatable of selected study",
+          "study-actions": "Action tools for study",
+          "series-actions": "Action tools for series",
+          "burn-cd" : "Burn cd",
+          "edit" : "Edit patient",
+          "download" : "Download patient",
+          "delete" : "Delete patient"
+        },
+        "admin" :{
+          "general" : {
+            "datatable" : "Datatable"
+          }
+        }
       }
   }

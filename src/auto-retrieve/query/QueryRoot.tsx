@@ -11,7 +11,6 @@ import { QueryResultStudy, QueryResultSeries, ModalityExtended, Option } from ".
 import { addQuery, editQuery, removeQuery, updateQueriesSelection } from "../../reducers/AutoRetrieveSlice";
 import { store } from "../../store";
 import { getModalities } from "../../services";
-import QueriesTour from "../../tour/tours/auto-retrieve/QueriesTour";
 
 type QueryRootProps = {
   queries: (QueryStudy & { selected: boolean })[];
@@ -105,10 +104,6 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
   if (isPending) return <Spinner />
 
   return (
-    <>
-    <div className="w-full flex justify-end m-1">
-      <QueriesTour />
-    </div>
     <div className="flex flex-col gap-3 p-3">
       <div className="flex gap-3 w-full justify-between">
         <div className="flex gap-3">
@@ -146,7 +141,6 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
         </Button>
       </div>
     </div>
-  </>
   );
 };
 

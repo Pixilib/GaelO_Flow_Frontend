@@ -7,7 +7,6 @@ import TagTable from './TagTable';
 import { Colors, useCustomMutation, useCustomToast } from '../../utils';
 import { createDicom } from '../../services/instances';
 import { useTranslation } from "react-i18next";
-import CreateTour from "../../tour/tours/Import/CreateTour";
 
 const CreateRoot: React.FC = () => {
     const { toastError, toastSuccess } = useCustomToast()
@@ -64,9 +63,6 @@ const CreateRoot: React.FC = () => {
 
     return (
         <>
-        <div className="w-full flex justify-end m-1">
-        <CreateTour />
-        </div>
             <div data-gaelo-flow="import-drop-image" className="w-full p-6 space-y-3 md:flex md:space-x-3 ">
                 <CreateDrop files={files} onDrop={handleFilesUploaded} />
             </div>

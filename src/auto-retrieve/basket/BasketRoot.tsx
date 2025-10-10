@@ -9,8 +9,6 @@ import { Empty } from "../../icons";
 import { removeStudyOrSeriesFromBasket, updateBasketSelection } from "../../reducers/AutoRetrieveSlice";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import BasketTour from "../../tour/tours/auto-retrieve/BasketTour";
-
 
 const BasketRoot = () => {
 
@@ -68,9 +66,6 @@ const BasketRoot = () => {
 
     return (
         <div className="flex flex-col">
-             <div className="w-full flex justify-end m-1">
-                <BasketTour />
-            </div >
             <div data-gaelo-flow="basket-datatable">
             <BasketTable
                 queryResults={basket}

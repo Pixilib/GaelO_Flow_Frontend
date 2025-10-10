@@ -12,7 +12,6 @@ import { addStudyOrSeriesToBasket, removeSeriesResults, removeStudyResults, upda
 import { exportCsv } from "../../utils/export";
 import LoadSeriesCSV from "./LoadSeriesCSV";
 import { useTranslation } from "react-i18next";
-import ResultsTour from "../../tour/tours/auto-retrieve/ResultsTour";
 
 type ResultsRootProps = {
     onStartSeriesQueries: () => void
@@ -122,9 +121,6 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
 
     return (
         <div>
-            <div className="w-full flex justify-end m-1">
-                <ResultsTour />
-            </div>
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
                     title="Studies"

@@ -15,6 +15,7 @@ import { queryModality } from "../services";
 import { RootState, store } from "../store";
 import { setCanExitPage } from "../reducers/UserSlice";
 import { useTranslation } from "react-i18next";
+import AutoRetrieveTour from "../tour/tours/auto-retrieve/AutoRetrieveTour";
 
 const AutoRetrieveRoot = () => {
   const location = useLocation();
@@ -106,6 +107,9 @@ const AutoRetrieveRoot = () => {
       className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl space-y-3"
       data-gaelo-flow="import-create-root"
     >
+     <div className="w-full flex justify-end m-1">
+          <AutoRetrieveTour />
+      </div>
       <Tabs className="bg-primary rounded-t-xl">
         <Tab
           title="Queries"

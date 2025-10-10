@@ -4,23 +4,14 @@ import ReactTour from '../../ReactTour'
 import { Badge } from '../../../ui'
 import { useTranslation } from 'react-i18next'
 
-const BasketTour = () => {
+const RedisTour = () => {
     const { t } = useTranslation()
     const steps = [
         {
-            selector: '[data-gaelo-flow="basket-datatable"]',
-            content: t('tour.auto-retrieve.basket.datatable'),
+            selector: '[data-gaelo-flow="redis-datatable"]',
+            content: t('tour.admin.general.datatable'),
         },
-        {
-            selector: '[data-gaelo-flow="basket-start-robot"]',
-            content: t('tour.auto-retrieve.basket.start-robot'),
-        },
-        {
-            selector: '[data-gaelo-flow="basket-delete"]',
-            content: t('tour.auto-retrieve.basket.delete'),
-        }
     ]
-
     return (
         <ReactTour steps={steps} >
             <Badge
@@ -34,4 +25,4 @@ const BasketTour = () => {
     )
 }
 
-export default BasketTour
+export default RedisTour

@@ -4,9 +4,30 @@ import ReactTour from '../../ReactTour'
 import { Badge } from '../../../ui'
 import { useTranslation } from 'react-i18next'
 
-const CreateTour = () => {
+const ImportCreateTour = () => {
     const { t } = useTranslation()
     const steps = [
+        {// import onglet
+            selector: '[data-gaelo-flow="import-select"]',
+            content: t('tour.import.select-labels'),
+        },
+        {
+            selector: '[data-gaelo-flow="import-drop-dicom"]',
+            content: t('tour.import.drop-dicom'),
+        },
+        {
+            selector: '[data-gaelo-flow="import-buttons"]',
+            content: t('tour.import.buttons'),
+        },
+        {
+            selector: '[data-gaelo-flow="import-studies"]',
+            content: t('tour.import.studies'),
+        },
+        {
+            selector: '[data-gaelo-flow="import-series"]',
+            content: t('tour.import.series'),
+        },
+        // create onglet
         {
             selector: '[data-gaelo-flow="import-drop-image"]',
             content: t('tour.import.drop-image'),
@@ -42,4 +63,4 @@ const CreateTour = () => {
     )
 }
 
-export default CreateTour
+export default ImportCreateTour
