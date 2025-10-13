@@ -38,7 +38,7 @@ const ResultsTable = ({ results, onRowClick }: ResultsTableProps) => {
             header: "Retrieve",
             cell: ({ row }: { row: any }) => {
                 return (
-                    <div className="flex justify-center">
+                    <div data-gaelo-flow="query-dowload-studies" className="flex justify-center">
                         <RetrieveButton
                             answerId={row.original.answerId}
                             answerNumber={row.original.answerNumber}

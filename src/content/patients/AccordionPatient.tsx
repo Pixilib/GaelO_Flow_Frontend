@@ -5,6 +5,7 @@ import {
   DeleteButton,
   DownloadButton,
   EditButton,
+  CdButton
 } from "../../ui";
 import Patient from "../../model/Patient";
 import StudyRoot from "../studies/StudyRoot";
@@ -17,6 +18,7 @@ import ToggleChevron from "../../ui/menu/ToggleChevron";
 type AccordionPatientProps = {
   patient: Patient;
   onPatientSelectionChange: (selected: boolean, patient: Patient) => void;
+  onBurnerPatient: (patient: Patient) => void;
   onEditPatient: (patient: Patient) => void;
   onStudyUpdated: (patient: Patient) => void;
   onDeletePatient: (patient: Patient) => void;
@@ -30,6 +32,7 @@ type AccordionPatientProps = {
 const AccordionPatient = ({
   patient,
   onPatientSelectionChange,
+  onBurnerPatient,
   onEditPatient,
   onDeletePatient,
   onStudyUpdated,
@@ -58,6 +61,13 @@ const AccordionPatient = ({
   const handleStudySelected = (studyId: string) => {
     setCurrentStudyId(studyId);
   };
+
+  const handleCdBurnerClick = (
+    event: React.MouseEvent<HTMLButtonElement | SVGElement>
+  ) => {
+    event.stopPropagation();
+    onBurnerPatient(patient);
+  }
 
   const handleEditClick = (
     event: React.MouseEvent<HTMLButtonElement | SVGElement>
@@ -96,7 +106,7 @@ const AccordionPatient = ({
             onChange={handleSelectionPatientChange}
             checked={isSelectedPatient}
           />
-          <div className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
+          <div data-gaelo-flow="content-patient-info" className="grid items-center justify-between w-full grid-cols-4 ml-5 lg:gap-x-10 ">
             <span className="text-sm font-medium text-gray-600 group-hover:text-white dark:text-white">
               Patient ID: {patient.patientId}
             </span>
@@ -107,12 +117,21 @@ const AccordionPatient = ({
               Nb of Studies: {patient.getStudies().length}
             </span>
             <div className="flex justify-end w-full space-x-7">
+              <div data-gaelo-flow="content-Burn-cd">
+              <CdButton onClick={handleCdBurnerClick} />
+              </div>
+              <div data-gaelo-flow="content-edit">
               <EditButton
                 onClick={handleEditClick}
                 className="group-hover:fill-white"
               />
+              </div>
+              <div data-gaelo-flow="content-download">
               <DownloadButton onClick={handleDownloadClick} />
+              </div>
+              <div data-gaelo-flow="content-delete">
               <DeleteButton onClick={handleDeleteClick} />
+              </div>
             </div>
           </div>
           <ToggleChevron
@@ -125,7 +144,7 @@ const AccordionPatient = ({
       className="w-full rounded-2xl"
     >
       <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className={`${!currentActiveStudyId ? "lg:col-span-2" : ""}`}>
+        <div data-gaelo-flow="content-study" className={`${!currentActiveStudyId ? "lg:col-span-2" : ""}`}>
           <StudyRoot
             patient={patient}
             onStudyUpdated={() => onStudyUpdated(patient)}
@@ -138,7 +157,7 @@ const AccordionPatient = ({
           />
         </div>
         {currentActiveStudyId && (
-          <div>
+          <div data-gaelo-flow="content-series">
             <SeriesRoot studyId={currentActiveStudyId} />
           </div>
         )}

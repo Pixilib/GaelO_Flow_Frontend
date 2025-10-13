@@ -66,8 +66,11 @@
         "assign-labels" : "Attribuer les labels",
         "download" : "Télécharger",
         "download-nifti" : "Télécharger Nifti",
+        "send-to-burner" : "Graver",
         "delete" : "Supprimer",
-        "create-serie" : "Créer Serie"
+        "create-serie" : "Créer Serie",
+        "burn-patient-confirmation": "Êtes-vous sûr de vouloir graver ce patient ?",
+        "burn-study-confirmation": "Êtes-vous sûr de vouloir graver cette étude ?"
     },
     "autorouting" : {
         "create-new-rule" : "Créer une nouvelle règle",
@@ -178,28 +181,89 @@
         },
         "dataset" : {
           "label" : "Sélectionnez un label pour filtrer",
-          "buttons" : "Différent boutons : anonymiser, exporter ou supprimer",
+          "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
           "studies" : "Tableau de données studies du label selectionné",
           "series" : "Tableau de données series du label selectionné",
-          "study-actions": "Une fois le label sélectionné, utilisez le boutons action sur l'étude",
-          "series-actions": "Une fois le label sélectionné, utilisez le boutons action sur la séries"
+          "study-actions": "Outils action pour l'étude",
+          "series-actions": "Outils action pour l'étude"
         },
         "routing" : {
           "buttons": "Créer une nouvelle règle",
           "datatable": "datatable",
-          "modal": {
-          "name": "Nom",
-          "even-type": "Type d'événement",
-          "rules": "Règles",
-          "add-rule": "Ajouter une règle",
-          "rule-fields": "Champs de règle",
-          "add-destination": "Ajouter une destination",
-          "destination-fields": "Champs de destination"
-        }
+            "modal": {
+            "name": "Nom",
+            "even-type": "Type d'événement",
+            "rules": "Règles",
+            "add-rule": "Ajouter une règle",
+            "rule-fields": "Champs de règle",
+            "add-destination": "Ajouter une destination",
+            "destination-fields": "Champs de destination",
+            "submit" : "Soumettre"
+          }
         },
         "cd-burner" : {
           "datatable" : "Tableau des données graveur CD",
           "speaker" : "speaker"
+        },
+        "auto-retrieve" : {
+          "query" : {
+            "drop-csv" : "Déposer CSV",
+            "plus" : "Ajouter une ligne",
+            "download-csv" : "Télécharger CSV",
+            "datatable" : "Datatable",
+            "start-queries" : "Démmarer queries",
+            "delete" : "Supprimer nouvelle ligne"
+          },
+          "results" : {
+            "datatable" : "Datatable",
+            "add-to-basket" : "Ajouter au panier",
+            "query-series" : " Query series",
+            "download-csv" : "Télécharger CSV",
+            "delete" : "Supprimer",
+            "load-from-csv" : "Charger depuis CSV"
+            
+          },
+          "basket" : {
+            "datatable" : "Datatable",
+            "delete" : "Supprimer",
+            "start-robot" : "Démmarer Robot"
+          },
+          "task" : {
+            "buttons" :"Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
+            "datatable" : "Datatable"
+          }
+        },
+        "query" : {
+          "form" : "form",
+          "studies" : "Tableau de données studies du label selectionné",
+          "series" : "Tableau de données series du label selectionné",
+          "dowload-studies" : "Download tools for study",
+          "dowload-series" : "Download tools for study"
+        },
+        "import" : {
+          "select-labels" : "Sélectionner les Labels",
+          "drop-dicom" : "Déposer Dicom",
+          "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
+          "studies" : "Tableau de données studies du label selectionné",
+          "series" : "Tableau de données series du label selectionné",
+          "drop-image" : "Déposer image",
+          "dicom-tags" : "DICOM tags",
+          "add-tag" :"Ajouter tag",
+          "datatable" : "Datatable",
+          "create-dicoms" : "Créer Dicoms"
+        },
+        "content" : {
+          "form" : "Form patient info",
+          "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
+          "patient-info" : "Number studies on patient",
+          "studies" : "Tableau de données studies du patient selectionné",
+          "series" : "Tableau de données series de la studies selectionné",
+          "study-actions": "Outils action pour l'étude",
+          "series-actions": "Outils action pour l'étude",
+          "burn-cd" : "Graver un CD",
+          "edit" : "Modifier le patient",
+          "download" : "Télécharger le patient",
+          "delete" : "Supprimer le patient"
         }
       }
 }

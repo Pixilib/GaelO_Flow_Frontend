@@ -9,11 +9,10 @@ import {
 } from "../utils";
 import Model from "../model/Model";
 import Patient from "../model/Patient";
-import { FormCard, Button, Input, CheckBox } from "../ui";
+import { FormCard, Button, CheckBox } from "../ui";
 import SearchForm from "../query/SearchForm";
 import AccordionPatient from "./patients/AccordionPatient";
 import EditPatient from "./patients/EditPatient";
-import { Label } from "../utils/types";
 import {
   addStudyIdToDeleteList,
   addSeriesOfStudyIdToExportList,
@@ -25,11 +24,13 @@ import Labels from "./Labels";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useTranslation } from "react-i18next";
+import { postCdBurnerJob } from "../services/cd-burner";
+import  ContentTour from "../tour/tours/ContentTour";
 
 const ContentRoot: React.FC = () => {
   const { confirm } = useConfirm();
   const { toastSuccess, toastError } = useCustomToast();
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const roleName = useSelector(
     (state: RootState) => state.user?.role?.name || ""
@@ -72,6 +73,37 @@ const ContentRoot: React.FC = () => {
       mutateDeletePatient(patient.id);
     }
   };
+
+  const handleBurnerPatient = async (patient: Patient) => {
+    const data = [
+      { key: 'Patient Name', value: patient.patientName }
+    ]
+
+    const confirmContent = (
+      <div>
+        <span className="text-xl not-italic font-bold">
+          {t("contents.burn-patient-confirmation")}
+        </span>
+        <table className="mt-4">
+          <tbody>
+            {data.map((item) => (
+              <tr key={item.key} className="border-b border-t border-gray-200">
+                <td className="px-4 py-2 font-bold text-gray-700 dark:text-gray-300">{item.key}</td>
+                <td className="px-4 py-2 text-gray-600 dark:text-gray-400">{item.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+    if (await confirm({ content: confirmContent })) {
+      postCdBurnerJob(patient.id, "Patient").then(() => {
+        toastSuccess("CD Burner job created");
+      }).catch((e) => {
+        toastError(`Failed to create CD Burner job: ${e.statusText}`);
+      });
+    }
+  }
 
   const closeEditModal = () => setEditingPatient(null);
 
@@ -179,6 +211,10 @@ const ContentRoot: React.FC = () => {
   }, [selectAll])
 
   return (
+    <>
+    <div className="w-full flex justify-end m-1">
+      <ContentTour />
+    </div>
     <div className="flex flex-col gap-3">
       <EditPatient
         key={editingPatient?.id ?? undefined}
@@ -187,6 +223,7 @@ const ContentRoot: React.FC = () => {
         onClose={closeEditModal}
         show={!!editingPatient}
       />
+      <div data-gaelo-flow="content-form">
       <FormCard
         className="bg-white dark:bg-neutral-500"
         title={t("query.search")}
@@ -198,7 +235,7 @@ const ContentRoot: React.FC = () => {
           withAets={false}
         />
       </FormCard>
-
+      </div>
       <div className="flex flex-col w-full p-4 bg-white shadow-md dark:bg-neutral-800 rounded-3xl">
         <div className="flex items-center justify-between mb-4">
           <div className="text-2xl font-bold text-primary dark:text-white">
@@ -212,7 +249,7 @@ const ContentRoot: React.FC = () => {
 
         <div className="w-full mb-3 border-t border-gray-200" />
 
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div data-gaelo-flow="content-buttons" className="flex flex-wrap gap-2 mb-4">
           <CheckBox
             bordered={false}
             type="checkbox"
@@ -260,6 +297,7 @@ const ContentRoot: React.FC = () => {
               key={patient.id}
               patient={patient}
               onPatientSelectionChange={handlePatientSelectionChange}
+              onBurnerPatient={handleBurnerPatient}
               onDeletePatient={handleDeletePatient}
               onEditPatient={setEditingPatient}
               onStudyUpdated={refreshFind}
@@ -270,6 +308,7 @@ const ContentRoot: React.FC = () => {
           : null}
       </div>
     </div>
+  </>
   );
 };
 

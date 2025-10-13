@@ -30,7 +30,7 @@ const RedisCard: React.FC<RedisCardProps> = ({ redisData }) => {
     ];
 
     return (
-        <div className="mx-6 mt-6">
+        <div data-gaelo-flow="redis-datatable" className="mx-6 mt-6">
             <Table
                 columns={columns}
                 data={[redisData]}

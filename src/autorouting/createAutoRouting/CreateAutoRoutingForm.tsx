@@ -87,9 +87,10 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             />
                         </div>
                     </div>
-                    <div data-gaelo-flow="modal-ruleFields" className="flex flex-col gap-2">
+                    <div className="flex flex-col gap-2">
                         {rules.map((rule, i) => (
                             <AddRuleForm
+                                data-gaelo-flow="modal-ruleFields"
                                 rule={rule.rule}
                                 id={rule.id}
                                 onChange={handleModifyRule}
@@ -116,9 +117,10 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                 <div className="flex flex-col gap-2">
                     <h1 className="font-bold">{t("autorouting.createAutoRooting.destinations")}</h1>
                     <div>
-                        <div data-gaelo-flow="modal-destinationFields" className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-2">
                             {destinations.map((destination, i) => (
                                 <AddDestinationForm
+                                    data-gaelo-flow="modal-destinationFields"
                                     value={destination.destination}
                                     id={destination.id}
                                     onChange={handleModifyDestination}

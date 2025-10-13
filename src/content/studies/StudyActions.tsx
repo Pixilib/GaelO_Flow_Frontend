@@ -1,6 +1,6 @@
 // StudyActions.tsx
 import React, { useState } from 'react';
-import { Add, Brain, Download, Edit, Eye, Label, Trash } from '../../icons';
+import { Add, Brain, Cd, Download, Edit, Eye, Label, Trash } from '../../icons';
 import { StudyMainDicomTags } from "../../utils/types";
 import OhifViewerLink from '../OhifViewerLink';
 import StoneViewerLink from '../StoneViewerLink';
@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 
 type StudyActionsProps = {
     study: StudyMainDicomTags & { id: string };
-    onActionClick: (action: string, studyId: string) => void;
+    onActionClick: (action: string, study: StudyMainDicomTags & { id: string }) => void;
 };
 
 const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => {
@@ -42,37 +42,43 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
             label: t("contents.modify"),
             icon: <Edit />,
             color: 'orange',
-            action: () => onActionClick('edit', study.id)
+            action: () => onActionClick('edit', study)
         },
         {
             label: t("contents.ai"),
             icon: <Brain />,
             color: 'green',
-            action: () => onActionClick('ai', study.id)
+            action: () => onActionClick('ai', study)
         },
         {
             label: t("contents.create-serie"),
             icon: <Add />,
             color: 'green',
-            action: () => onActionClick('createSerie', study.id)
+            action: () => onActionClick('createSerie', study)
         },
         {
             label: t("contents.preview-study"),
             icon: <Eye />,
             color: 'green',
-            action: () => onActionClick('preview', study.id)
+            action: () => onActionClick('preview', study)
         },
         {
             label: t("contents.download"),
             icon: <Download />,
             color: 'green',
-            action: () => onActionClick('download', study.id)
+            action: () => onActionClick('download', study)
+        },
+        {
+            label: t("contents.send-to-burner"),
+            icon: <Cd />,
+            color: 'black',
+            action: () => onActionClick('burn', study)
         },
         {
             label: t("contents.delete"),
             icon: <Trash />,
             color: 'red',
-            action: () => onActionClick('delete', study.id)
+            action: () => onActionClick('delete', study)
         },
     ];
 
@@ -83,6 +89,7 @@ const StudyActions: React.FC<StudyActionsProps> = ({ study, onActionClick }) => 
     return (
         <div onClick={handleClick}>
             <DropdownButton
+                data-gaelo-flow="study-actions"
                 options={options}
                 buttonText="Actions"
             />

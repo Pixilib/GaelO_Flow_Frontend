@@ -60,6 +60,7 @@ const SeriesActions: React.FC<SeriesActionsProps> = ({ series, onActionClick }) 
     return (
         <div onClick={handleClick}>
             <DropdownButton
+                data-gaelo-flow="series-actions"
                 options={options}
                 buttonText="Actions"
             />

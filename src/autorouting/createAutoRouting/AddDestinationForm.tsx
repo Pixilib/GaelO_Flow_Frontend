@@ -12,11 +12,11 @@ type AddDestinationFormProps = {
     onDelete: () => void;
 }
 
-const AddDestinationForm = ({ value, id, onChange, onDelete }: AddDestinationFormProps) => {
+const AddDestinationForm = ({ value, id, onChange, onDelete, ...props }: AddDestinationFormProps) => {
     const {t} = useTranslation()
 
     return (
-        <div className="flex gap-5 flex-row">
+        <div {...props} className="flex gap-5 flex-row">
             <Input
                 placeholder={t("autorouting.createAutoRooting.name")}
                 onChange={(e) => onChange(id, { ...value, Name:e.target.value })}

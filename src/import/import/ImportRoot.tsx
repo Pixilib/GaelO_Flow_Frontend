@@ -99,16 +99,20 @@ const ImportRoot: React.FC = () => {
 
   return (
     <div className="mx-4 mb-4 mt-4 space-y-3 flex flex-col gap-3 items-center">
-      <SelectRoleLabels
-        values={selectedLabels}
-        onChange={setSelectedLabels}
-      />
+      <div data-gaelo-flow="import-select" className="w-full">
+        <SelectRoleLabels
+          values={selectedLabels}
+          onChange={setSelectedLabels}
+        />
+      </div>
+      <div data-gaelo-flow="import-drop-dicom" className="w-full">
       <ImportDrop
         model={refModel.current}
         onError={handleImportError}
         onFilesUploaded={() => refreshStudyData()}
         selectedLabel={selectedLabels}
       />
+      </div>
       {errors.length > 0 && (
         <BannerAlert
           color={Colors.warning}
@@ -124,7 +128,7 @@ const ImportRoot: React.FC = () => {
 
       {studiesData.length > 0 && (
         <div className="flex flex-col gap-3 w-full">
-          <div className="flex gap-2">
+          <div data-gaelo-flow="import-buttons" className="flex gap-2">
             <Button
               color={Colors.blueCustom}
               className="flex items-center text-sm transition-transform duration-200 hover:scale-105"
@@ -140,7 +144,7 @@ const ImportRoot: React.FC = () => {
               onClick={handleSendExportList}
             >
               <Export className="text-xl" />
-              <span className="ml-2">{t("buttons.Ssend-to-export")}</span>
+              <span className="ml-2">{t("buttons.send-to-export")}</span>
             </Button>
 
             <Button
@@ -153,7 +157,7 @@ const ImportRoot: React.FC = () => {
             </Button>
           </div>
           <div className="flex gap-3">
-            <div className="flex-1 mb-4 overflow-x-auto shadow-lg rounded-xl">
+            <div data-gaelo-flow="import-studies" className="flex-1 mb-4 overflow-x-auto shadow-lg rounded-xl">
               <ImportTableStudy
                 data={studiesData}
                 selectedStudyInstanceUID={currentStudyInstanceUID}
@@ -163,7 +167,7 @@ const ImportRoot: React.FC = () => {
               />
             </div>
             {currentStudyInstanceUID && seriesData.length > 0 && (
-              <div className="flex-1 overflow-x-auto shadow-lg rounded-xl mb">
+              <div data-gaelo-flow="import-series" className="flex-1 overflow-x-auto shadow-lg rounded-xl mb">
                 <ImportTableSeries data={seriesData} />
               </div>
             )}

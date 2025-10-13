@@ -66,14 +66,16 @@ const BasketRoot = () => {
 
     return (
         <div className="flex flex-col">
+            <div data-gaelo-flow="basket-datatable">
             <BasketTable
                 queryResults={basket}
                 onRowSelectionChange={handleRowSelectionChange}
                 selectedRow={basketSelectedRow}
             />
+            </div>
             <div className="flex justify-center gap-3 m-3">
-                <Button color={Colors.success} onClick={handleCreateRobot}>{t("auto-retrieve.basket.start-robot")}</Button>
-                <Button color={Colors.warning} onClick={handleRemoveBasket}><Empty /></Button>
+                <Button data-gaelo-flow="basket-start-robot" color={Colors.success} onClick={handleCreateRobot}>{t("auto-retrieve.basket.start-robot")}</Button>
+                <Button data-gaelo-flow="basket-delete" color={Colors.warning} onClick={handleRemoveBasket}><Empty /></Button>
             </div>
         </div>
 
