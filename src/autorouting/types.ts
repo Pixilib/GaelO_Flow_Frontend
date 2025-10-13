@@ -14,18 +14,18 @@ export const autoRoutingConditionOptions = [
 ];
 
 export const autoRoutingRuleConditionOptions = [
-  { value: "EQUALS", label: "EQUALS"},
-  { value: "DIFFERENT", label: "DIFFERENT"},
-  { value: "IN", label: "IN"}, // in array
-  { value: "NOT_IN", label: "NOT IN"}, // not in array
-  { value: "LESS_THAN", label: "LESS THAN"},
-  { value: "GREATER_THAN", label: "GREATER THAN"},
+  { value: "EQUALS", label: "EQUALS" },
+  { value: "DIFFERENT", label: "DIFFERENT" },
+  { value: "IN", label: "IN" }, // in array
+  { value: "NOT_IN", label: "NOT IN" }, // not in array
+  { value: "LESS_THAN", label: "LESS THAN" },
+  { value: "GREATER_THAN", label: "GREATER THAN" },
 ]
 
 export const autoRoutingRuleValueRepresentation = [
-  {value: "string", label: "STRING"},
-  {value: "number", label: "NUMBER"},
-  {value: "date", label: "DATE"},
+  { value: "string", label: "STRING" },
+  { value: "number", label: "NUMBER" },
+  { value: "date", label: "DATE" },
 ]
 
 export const autoRoutingDestinationTypeOptions = [
@@ -86,6 +86,11 @@ export enum AutoRoutingRuleDicomTag {
   SOP_INSTANCE_UID = "SOPInstanceUID",
   IMAGE_POSITION_PATIENT = "ImagePositionPatient",
   IMAGE_COMMENTS = "ImageComments",
+
+  CALLED_AET = 'CalledAET',
+  ORIGIN = 'Origin',
+  REMOTE_AET = 'RemoteAET',
+  REMOTE_IP = 'RemoteIP',
 }
 
 export const autoRoutingRuleDicomTagOptions = [
@@ -139,4 +144,9 @@ export const autoRoutingRuleDicomTagOptions = [
   { value: AutoRoutingRuleDicomTag.SOP_INSTANCE_UID, label: "SOP Instance UID" },
   { value: AutoRoutingRuleDicomTag.IMAGE_POSITION_PATIENT, label: "Image Position Patient" },
   { value: AutoRoutingRuleDicomTag.IMAGE_COMMENTS, label: "Image Comments" },
+
+  { value: AutoRoutingRuleDicomTag.CALLED_AET, label: "Called AET" },
+  { value: AutoRoutingRuleDicomTag.ORIGIN, label: "Origin" },
+  { value: AutoRoutingRuleDicomTag.REMOTE_AET, label: "Remote AET" },
+  { value: AutoRoutingRuleDicomTag.REMOTE_IP, label: "Remote IP" },
 ]
