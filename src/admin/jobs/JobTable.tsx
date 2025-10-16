@@ -65,7 +65,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
             withOnClick={true}
             backgroundColor="bg-white "
           >
-            <Info size="1.5em" className="hover:scale-110 text-primary" />
+            <Info data-gaelo-flow="jobs-info" size="1.5em" className="hover:scale-110 text-primary" />
           </Popover>
         );
       },
@@ -74,6 +74,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
   ];
 
   return (
+    <div data-gaelo-flow="jobs-datatable">
     <Table
       data={data}
       columns={columns}
@@ -84,6 +85,7 @@ const JobTable = ({ data = [], onJobAction }: JobTableProps) => {
       enableSorting
       getRowClasses={() => "hover:bg-indigo-100 cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer"}
     />
+    </div>
   );
 };
 

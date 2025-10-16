@@ -45,12 +45,14 @@ const ModalitiesTable: React.FC<ModalitiesTableProps> = ({
       cell: ({ row }) => (
         <div className="flex items-center space-x-2">
           <Button
+            data-gaelo-flow="modalities-action-buttonEcho"
             onClick={() => onEchoAet(row.original.name)}
             color={Colors.secondary}
           >
             <Wifi />
           </Button>
           <Button
+            data-gaelo-flow="modalities-action-buttonDelete"
             onClick={() => onDeleteAet(row.original.name)}
             color={Colors.danger}
           >

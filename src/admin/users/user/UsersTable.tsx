@@ -36,8 +36,12 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
 
         return (
           <div className="flex justify-center gap-2">
-            <EditButton onClick={() => onEdit(user)} />
-            <DeleteButton onClick={() => onDelete(user)} />
+            <div data-gaelo-flow="users-editLine" >
+              <EditButton onClick={() => onEdit(user)} />
+            </div>
+            <div data-gaelo-flow="users-deleteLine">
+              <DeleteButton onClick={() => onDelete(user)} />
+            </div>
           </div>
         );
       },
@@ -45,7 +49,7 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
   ];
 
   return (
-    <div className="pb-6 mx-5 mt-4">
+    <div data-gaelo-flow="users-datatable" className="pb-6 mx-5 mt-4">
       <Table
         data={data}
         columns={columns}

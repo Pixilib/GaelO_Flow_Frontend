@@ -103,7 +103,9 @@ const ProcessingQueueTable = ({ jobs = [] }: ProcessingQueueTableProps) => {
     ]
 
     return (
+        <div data-gaelo-flow="processing-datatable">
         <Table columnVisibility={{ jobId: false }} data={jobs} columns={columns} headerColor={Colors.success} headerclassName="text-white" />
+        </div>
     )
 
 }

@@ -31,15 +31,15 @@ const PeersTable: React.FC<PeersTableProps> = ({ peerData, onDeletePeer, onEchoP
             id: 'actions',
             cell: ({ row }) => (
                 <div className="flex justify-start items-center gap-2.5"> {/* Alignement à gauche */}
-                    <Button onClick={() => onEchoPeer(row.original.name)} color={Colors.secondary}>
+                    <Button data-gaelo-flow="peers-action-buttonEcho" onClick={() => onEchoPeer(row.original.name)} color={Colors.secondary}>
                         <Wifi />
                     </Button>
-                    <Button onClick={() => onDeletePeer(row.original.name)} color={Colors.danger}>
+                    <Button data-gaelo-flow="peers-action-buttonDelete" onClick={() => onDeletePeer(row.original.name)} color={Colors.danger}>
                         <Trash size={18} />
                     </Button>
                 </div>
             )
-        }
+        } 
     ];
 
     return (

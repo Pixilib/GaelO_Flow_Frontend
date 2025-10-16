@@ -6,6 +6,7 @@ import AnonymizeRoot from "./anonymize/AnonymizeRoot";
 import DeleteRoot from "./delete/DeleteRoot";
 import ProcessingRoot from "./processing/ProcessingRoot";
 import { useTranslation } from "react-i18next";
+import QueuesTour from "../../tour/tours/admin/QueuesTour";
 
 const QueuesRoot = () => {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ const QueuesRoot = () => {
 
   return (
     <Card >
+      <div className="w-full flex justify-end m-1">
+          <QueuesTour />
+      </div>
       <Tabs className="rounded- bg-light-gray">
         <Tab
           title="Retrieve"

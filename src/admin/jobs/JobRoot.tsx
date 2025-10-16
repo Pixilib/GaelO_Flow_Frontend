@@ -7,6 +7,7 @@ import { useCustomToast } from "../../utils/toastify";
 import { JobPayload, JobsAction, OrthancJob } from "../../utils/types";
 import JobTable from "./JobTable";
 import { useTranslation } from "react-i18next";
+import JobsTour from "../../tour/tours/admin/JobsTour";
 
 const JobRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -38,6 +39,9 @@ const JobRoot = () => {
   if (isLoadingJobs) return <Spinner />;
   return (
     <Card className="l bg-almond dark:bg-neutral-500">
+      <div className="w-full flex justify-end m-1">
+          <JobsTour />
+      </div>
       <CardHeader
         centerTitle
         color={Colors.primary}

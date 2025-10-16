@@ -5,6 +5,7 @@ import Roles from "./roles/Roles";
 import Users from "./user/Users";
 import Oauth2 from "./oauth/Oauth";
 import { useTranslation } from "react-i18next";
+import UsersTour from "../../tour/tours/admin/UsersTour";
 
 const UsersRoot = () => {
     const navigate = useNavigate();
@@ -22,6 +23,9 @@ const UsersRoot = () => {
 
     return (
         <Card className="bg-white shadow-md rounded-2xl" data-gaelo-flow="users-root">
+            <div className="w-full flex justify-end m-1">
+                <UsersTour />
+            </div>
             <Tabs className=" bg-light-gray rounded-t-2xl">
                 <Tab
                     title={t("admin.user.user")}

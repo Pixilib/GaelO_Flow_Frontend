@@ -82,6 +82,7 @@ const Users = ({ className = "" }: UsersProps) => {
         <div className="flex justify-center">
           {!isCreatingUser ? (
             <Button
+              data-gaelo-flow="users-buttonCreateUser"
               color={Colors.success}
               onClick={() => setIsCreatingUser(true)}
               className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"

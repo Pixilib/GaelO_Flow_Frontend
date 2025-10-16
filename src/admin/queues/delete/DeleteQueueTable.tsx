@@ -49,7 +49,9 @@ const DeleteQueueTable = ({ queues = [] }: DeleteQueueTableProps) => {
     ]
 
     return (
+        <div data-gaelo-flow="delete-datatable">
         <Table columnVisibility={{ id: false }} data={queues} columns={columns} headerColor={Colors.success} headerclassName="text-white" />
+        </div>
     )
 
 }

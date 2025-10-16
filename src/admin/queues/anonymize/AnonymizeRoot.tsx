@@ -86,16 +86,18 @@ const AnonymizeRoot = () => {
         <div className="flex flex-col gap-3">
             <AnonymizeQueues />
             <div className="flex justify-between items-center">
+                <div data-gaelo-flow="anonymize-keepLabels">
                 <Toggle
                     onChange={handleKeepLabelChange}
                     checked={keepLabels}
                     label="Keep Labels"
                     labelPosition="right"
                 />
+                </div>
                 <div className="flex justify-end gap-5">
-                    <Button onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
-                    <Button onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
-                    <Button onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
+                    <Button data-gaelo-flow="anonymize-buttonPlay" onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
+                    <Button data-gaelo-flow="anonymize-buttonPause" onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
+                    <Button data-gaelo-flow="anonymize-buttonDelete" onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
                 </div>
             </div>
         </div>

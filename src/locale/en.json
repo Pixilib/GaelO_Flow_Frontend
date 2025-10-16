@@ -267,7 +267,56 @@
         },
         "admin" :{
           "general" : {
-            "datatable" : "Datatable"
+            "datatable" : "Datatable",
+            "reset" : "Reset",
+            "shutdown" : "Shutdown Orthanc",
+            "info" : "Information Orthanc system",
+            "drop-down-menu" : "Delete down menu"
+          },
+          "modalities" : {
+            "datatable" : "Datatable",
+            "button-echo" : "Button echo",
+            "button-delete" : "Delete the modality",
+            "button-modality" : "Create a new modality",
+            "form-modality" : "Form to create a modality",
+            "submit" : "Submit"
+          },
+          "peers" : {
+            "datatable" : "Datatable",
+            "button-echo" : "Button echo",
+            "button-delete" : "Delete the peer",
+            "button-peers" : "Create a new peer",
+            "form-peers" : "Form to create a peer",
+            "submit" : "Submit"
+          },
+          "queues" : {
+            "start-time" : "Start Time",
+            "stop-time" : "Stop Time",
+            "total-time" :"Total Time",
+            "send" : "Send",
+            "datatable" : "Datatable",
+            "button-play" : "Button play",
+            "button-pause" : "Button pause",
+            "button-delete" : "Button delete",
+            "keep-labels" : "keep labels"
+          },
+          "jobs" : {
+            "datatable" : "Datatable",
+            "button-reset" : "Button reset",
+            "button-play" : "Button play",
+            "button-pause" : "Button pause",
+            "button-cancel" : "Button cancel",
+            "info" :"Information"
+          },
+          "users" : {
+            "datatable" : "Datatable",
+            "edit-line" : "Edit the line",
+            "delete-line" : "Delete the line",
+            "create-user" : "Create User",
+            "form-edit-user" : "Form to edit user",
+            "button-update" : "Button update",
+            "form-user" : "Form to create a user",
+            "button-create-user" : "Button create user"
           }
         }
       }
