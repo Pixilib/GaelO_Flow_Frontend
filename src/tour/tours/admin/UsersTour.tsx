@@ -44,45 +44,53 @@ const UsersTour = () => {
             content: t('tour.admin.users.roles.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="users-editLine"]',
-            content: t('tour.admin.users.role.edit-line'),
+            selector: '[data-gaelo-flow="roles-editLine"]',
+            content: t('tour.admin.users.roles.edit-line'),
         },
         {
-            selector: '[data-gaelo-flow="users-deleteLine"]',
-            content: t('tour.adminusers.role.delete-line'),
+            selector: '[data-gaelo-flow="roles-deleteLine"]',
+            content: t('tour.admin.users.roles.delete-line'),
         },
         {
-            selector: '[data-gaelo-flow="roles-keepLabels"]',
-            content: t('tour.admin.users.roles.keep-labels'),
+            selector: '[data-gaelo-flow="roles-createRole"]',
+            content: t('tour.admin.users.roles.create-role'),
         },
         {
-            selector: '[data-gaelo-flow="anonymize-buttonPlay"]',
-            content: t('tour.admin.queues.button-play'),
+            selector: '[data-gaelo-flow="roles-formEditRole"]',
+            content: t('tour.admin.users.roles.form-edit-role'),
         },
         {
-            selector: '[data-gaelo-flow="anonymize-buttonPause"]',
-            content: t('tour.admin.queues.button-pause'),
+            selector: '[data-gaelo-flow="roles-buttonUpdate"]',
+            content: t('tour.admin.users.roles.button-update'),
         },
         {
-            selector: '[data-gaelo-flow="anonymize-buttonDelete"]',
-            content: t('tour.admin.queues.button-delete'),
+            selector: '[data-gaelo-flow="users-formRole"]',
+            content: t('tour.admin.users.roles.form-role'),
+        },
+        {
+            selector: '[data-gaelo-flow="users-buttonCreateRole"]',
+            content: t('tour.admin.users.roles.button-create-role'),
         },
         {//onglet oauth2
-            selector: '[data-gaelo-flow="delete-datatable"]',
-            content: t('tour.admin.queues.datatable'),
+            selector: '[data-gaelo-flow="oauth2-datatable"]',
+            content: t('tour.admin.users.oauth2.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="delete-buttonPlay"]',
-            content: t('tour.admin.queues.button-play'),
+            selector: '[data-gaelo-flow="oauth2-deleteLine"]',
+            content: t('tour.admin.users.oauth2.delete-line'),
         },
         {
-            selector: '[data-gaelo-flow="delete-buttonPause"]',
-            content: t('tour.admin.queues.button-pause'),
+            selector: '[data-gaelo-flow="oauth2-createProvider"]',
+            content: t('tour.admin.users.oauth2.create-provider'),
         },
         {
-            selector: '[data-gaelo-flow="delete-buttonDelete"]',
-            content: t('tour.admin.queues.button-delete'),
-        }
+            selector: '[data-gaelo-flow="oauth2-formCreateOauth"]',
+            content: t('tour.admin.users.oauth2.form-create-oauth'),
+        },
+        {
+            selector: '[data-gaelo-flow="oauth2-buttonCreate"]',
+            content: t('tour.admin.users.oauth2.button-create'),
+        },
     ]
     return (
         <ReactTour steps={steps} >

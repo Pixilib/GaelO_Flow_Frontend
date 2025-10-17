@@ -25,7 +25,7 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   };
 
   return (
-    <div className="relative flex items-center">
+    <div data-gaelo-flow="labels-addLabels" className="relative flex items-center">
       <Input
         svgLeft={<Label className="text-2xl text-gray-400 dark:text-white" />}
         type="text"

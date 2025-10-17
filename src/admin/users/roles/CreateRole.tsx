@@ -35,6 +35,7 @@ const CreateRole = ({ title, className, onClose }: CreateRoleFormProps) => {
   };
 
   return (
+    <div data-gaelo-flow="users-formRole" className="w-full">
     <FormCard
       title={title}
       onClose={() => onClose()}
@@ -43,7 +44,7 @@ const CreateRole = ({ title, className, onClose }: CreateRoleFormProps) => {
       onSubmit={handleSubmit}
       buttonText="Submit" />
     </FormCard>
-
+    </div>
   );
 };
 

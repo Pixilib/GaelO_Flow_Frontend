@@ -45,7 +45,7 @@ const CdBurnerAdminForm = ({ options }: { options: Options }) => {
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
-    return <div className="relative flex items-center flex-col space-y-4">
+    return <div data-gaelo-flow="burner-form" className="relative flex items-center flex-col space-y-4">
         <FormComponent label="Mounted Data Path">
             <Input
                 disabled
@@ -116,6 +116,7 @@ const CdBurnerAdminForm = ({ options }: { options: Options }) => {
         <hr className="my-4 w-full border-t border-gray-300" />
         <div className="justify-end flex w-full space-x-4">
             <Button
+                data-gaelo-flow="burner-buttonSave"
                 disabled={JSON.stringify(formData) === JSON.stringify(options)}
                 type="button"
                 color={Colors.primary}

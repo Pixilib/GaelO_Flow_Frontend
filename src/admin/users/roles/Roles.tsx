@@ -89,6 +89,7 @@ const Roles = () => {
                 )}
                 {!showCreateRoleForm && (
                     <Button
+                        data-gaelo-flow="roles-createRole"
                         color={Colors.success}
                         onClick={() => setShowCreateRoleForm(true)}
                         className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"

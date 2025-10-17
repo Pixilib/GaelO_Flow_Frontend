@@ -8,6 +8,7 @@ import { Label, Role } from "../../utils/types";
 import LabelInputForm from "./LabelInputForm";
 import LabelTable from "./LabelTable";
 import { useTranslation } from "react-i18next";
+import LabelsTour from "../../tour/tours/admin/LabelsTour";
 
 const LabelRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -50,6 +51,9 @@ const LabelRoot: React.FC = () => {
 
   return (
     <Card>
+      <div className="w-full flex justify-end m-1">
+        <LabelsTour />
+      </div>
       <CardHeader centerTitle color={Colors.primary} title={t("admin.labels.manage-labels")} />
       <CardBody
         color={Colors.almond}

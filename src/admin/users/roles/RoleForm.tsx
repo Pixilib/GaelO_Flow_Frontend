@@ -149,12 +149,14 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
             </div>
             <div className="flex justify-center">
+                <div data-gaelo-flow={buttonText === "Update" ? "roles-buttonUpdate" : "users-buttonCreateRole"}>
                 <Button color={Colors.success}
                     className="h-12 gap-3 justify-self-center w-36 md:justify-center"
                     type="submit">
                     <SubmitUser size='1.3rem' />
                     <div>{buttonText}</div>
                 </Button>
+                </div>
             </div>
         </form>
     );

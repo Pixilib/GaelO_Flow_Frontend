@@ -316,7 +316,34 @@
             "form-edit-user" : "Form to edit user",
             "button-update" : "Button update",
             "form-user" : "Form to create a user",
-            "button-create-user" : "Button create user"
+            "button-create-user" : "Button create user",
+            "roles" : {
+              "datatable" : "Datatable",
+              "edit-line" : "Edit the line",
+              "delete-line" : "Delete the line",
+              "create-role" : "Create Role",
+              "form-edit-role" : "Form to edit role",
+              "button-update" : "Button update",
+              "form-role" : "Form to create a role",
+              "button-create-role" : "Button create role"
+            },
+            "oauth2" : {
+              "datatable" : "Datatable",
+              "delete-line" :"Delete the line",
+              "create-provider" : "Create a provider",
+              "form-create-oauth" : "Form to create a oauth",
+              "button-create" : "Button create oauth"
+            }
+          },
+          "labels" : {
+            "add-labels" : "Add a new label",
+            "datatable" : "Datatable",
+            "roles" : "Choose between user and admin",
+            "delete" : "Delete the line"
+          },
+          "cd-burner" : {
+            "form" : "Form CD burner",
+            "button-save" : "Save form"
           }
         }
       }
