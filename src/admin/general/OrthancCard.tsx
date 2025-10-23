@@ -116,7 +116,7 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
 
     return (
         <>
-            <div data-gaelo-flow="ortanc-datatable" className="mx-6 mt-6 mb-6">
+            <div className="mx-6 mt-6 mb-6">
                 <Table
                     columns={columns}
                     data={[orthancData]}
@@ -127,7 +127,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                 />            </div>
             <CardFooter className="flex justify-center gap-3 py-2 border-t-2 shadow-inner border-slate-200 dark:border-neutral-700 bg-light dark:bg-slate-950">
                 <Button
-                    data-gaelo-flow="ortanc-reset"
                     color={Colors.warning}
                     onClick={reset}
                     className="flex items-center justify-center"
@@ -135,7 +134,6 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <Restart size="20px" title="Restart" />
                 </Button>
                 <Button
-                    data-gaelo-flow="ortanc-shutdown"
                     color={Colors.danger}
                     onClick={handleOrthancShutdown}
                     className="flex items-center justify-center"
@@ -143,14 +141,13 @@ const OrthancSettingsCard = ({ orthancData }: OrthancCardProps) => {
                     <Close size="20px" title="Shutdown" />
                 </Button>
                 <Button
-                    data-gaelo-flow="ortanc-info"
                     color={Colors.primary}
                     onClick={orthancInfoHandler}
                     className="flex items-center justify-center"
                 >
                     <Question size="20px" title="Info" />
                 </Button>
-                <div data-gaelo-flow="ortanc-drop-down-menu" className="w-1/4">
+                <div className="w-1/4">
                     <SelectInput
                         value={currentVerbosityOption}
                         onChange={handleSelectChange}

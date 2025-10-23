@@ -188,17 +188,17 @@
           "series-actions": "Outils action pour l'étude"
         },
         "routing" : {
-          "buttons": "Créer une nouvelle règle",
-          "datatable": "datatable",
+          "buttons": "Créer une nouvelle règle d'autoroutage",
+          "datatable": "Autorouters définis",
             "modal": {
-            "name": "Nom",
-            "even-type": "Type d'événement",
+            "name": "Nom de l'autorouteur",
+            "even-type": "Type d'événement autorouter",
             "rules": "Règles",
             "add-rule": "Ajouter une règle",
             "rule-fields": "Champs de règle",
             "add-destination": "Ajouter une destination",
             "destination-fields": "Champs de destination",
-            "submit" : "Soumettre"
+            "submit" : "Enregistrer et créer le routage automatique"
           }
         },
         "cd-burner" : {
@@ -207,12 +207,12 @@
         },
         "auto-retrieve" : {
           "query" : {
-            "drop-csv" : "Déposer CSV",
-            "plus" : "Ajouter une ligne",
-            "download-csv" : "Télécharger CSV",
-            "datatable" : "Datatable",
-            "start-queries" : "Démmarer queries",
-            "delete" : "Supprimer nouvelle ligne"
+            "drop-csv" : "Importer des requêtes via un fichier CSV",
+            "plus" : "Ajouter une requête",
+            "download-csv" : "Télécharger la liste des requêtes sous forme de fichier CSV",
+            "datatable" : "Requêtes à traiter",
+            "start-queries" : "Commencer la quarrying list",
+            "delete" : "Supprimer les requêtes sélectionnées"
           },
           "results" : {
             "datatable" : "Datatable",
@@ -253,7 +253,7 @@
           "create-dicoms" : "Créer Dicoms"
         },
         "content" : {
-          "form" : "Form patient info",
+          "form" : "Recherche de ressources DICOM",
           "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
           "patient-info" : "Number studies on patient",
           "studies" : "Tableau de données studies du patient selectionné",
@@ -265,16 +265,9 @@
           "download" : "Télécharger le patient",
           "delete" : "Supprimer le patient"
         },
-        "admin" :{
-          "general" : {
-            "datatable" : "Datatable",
-            "reset" : "Redémarrer",
-            "shutdown" : "Arrêt Orthanc",
-            "info" : "Information Orthanc system",
-            "drop-down-menu" : "Menu deroulant"
-          },
+        "admin" : {
           "modalities" : {
-            "datatable" : "Datatable",
+            "datatable" : "Modalités DICOM",
             "button-echo" : "Button echo",
             "button-delete" : "Supprimer la modalité",
             "button-modality" : "Créer une nouvelle modalité",

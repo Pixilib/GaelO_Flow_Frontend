@@ -4,8 +4,6 @@ import RedisCard from "./RedisCard";
 import OrthancSettingsCard from "./OrthancCard";
 import { getOptions } from "../../services/options";
 import { useCustomQuery } from "../../utils/reactQuery";
-import GeneralTour from "../../tour/tours/admin/GeneralTour";
-
 const General = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,9 +21,6 @@ const General = () => {
 
   return (
     <>
-    <div className="w-full flex justify-end m-1">
-          <GeneralTour />
-      </div>
     <div
       className="mx-4 mt-4 mb-4 shadow-md bg-almond 292929 rounded-xl"
       data-gaelo-flow="general-root"
