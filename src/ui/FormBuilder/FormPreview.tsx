@@ -1,23 +1,43 @@
 import Form from '@rjsf/core';
-import { FormSchema } from './types';
+import { FormSchema } from './types'; 
+import validator from '@rjsf/validator-ajv8';
 
 const FormPreview = ({ formSchema }: { formSchema: FormSchema }) => {
 
-    const dataRJSF = {// pour cree un formulaire ak rjsf
+    const dataRJSF: any = {// pour cree un formulaire ak rjsf
         type: 'object',
-        title: formSchema.formName,
+        title: '',
         properties: {}
     };
 
-
     formSchema.fields.forEach(champ => {
-        dataRJSF.properties[champ.name] = { // ajoute tout les champs dans objet properties
-            type: champ.type === 'number' ? 'number' : 'string',
-            title: champ.label
-        };
+    let fieldSchema: any = {
+        title: champ.title
+    };
+    switch(champ.type) {
+        case 'number':
+            fieldSchema.type = 'number';
+            break;
+        case 'date':
+            fieldSchema.type = 'string';
+            fieldSchema.format = 'date';
+            break;
+        case 'textarea':
+            fieldSchema.type = 'string';
+            fieldSchema.format = 'textarea';
+            break;
+        case 'select':
+            fieldSchema.type = 'string';
+            fieldSchema.enum = ['Option 1', 'Option 2'];
+            break;
+        default:
+            fieldSchema.type = 'string';
+    }
+    dataRJSF.properties[champ.title] = fieldSchema;
+    dataRJSF
     });
     return (
-        <Form schema={dataRJSF} />
+        <Form schema={dataRJSF} validator={validator}/>
     );
 }
 

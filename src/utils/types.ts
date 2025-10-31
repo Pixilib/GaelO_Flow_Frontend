@@ -179,9 +179,20 @@ export type ModalityExtended = {
   timeout: number;
   useDicomTls: boolean;
 };
+export interface FormDefinition {
+  formName: string;
+  fields: {
+    type: string;
+    title: string;
+  }[];
+}
 
 export type Label = {
   name: string;
+  forms?: {
+    [formKey: string] : FormDefinition
+  }
+
 };
 
 // Oauth2

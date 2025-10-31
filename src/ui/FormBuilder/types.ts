@@ -2,8 +2,7 @@ export type FieldType = 'text' | 'number' | 'select' | 'date' | 'textarea'
 
 export interface FormField {
     type: FieldType,
-    name: string,
-    label: string,
+    title: string,
     options?: string[],
     placeholder?: string
 
