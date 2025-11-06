@@ -25,7 +25,7 @@ const AutoRetrieveRoot = () => {
   const mounted = useRef(false);
   const queries = useSelector((state: RootState) => state.autoRetrieve.queries);
   const studiesResults = useSelector((state: RootState) => state.autoRetrieve.studyResults);
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   useEffect(() => {
     mounted.current = true;
@@ -107,9 +107,7 @@ const AutoRetrieveRoot = () => {
       className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl space-y-3"
       data-gaelo-flow="import-create-root"
     >
-     <div className="w-full flex justify-end m-1">
-          <AutoRetrieveTour />
-      </div>
+
       <Tabs className="bg-primary rounded-t-xl">
         <Tab
           title="Queries"
@@ -133,6 +131,9 @@ const AutoRetrieveRoot = () => {
         />
       </Tabs>
       <div>
+        <div className="w-full flex justify-end m-1">
+          <AutoRetrieveTour />
+        </div>
         <Routes>
           <Route path="/" element={<QueryRoot onStartStudyQueries={handleStartStudyQueries} queries={queries} onStudyResults={studyResultsHandler} onSeriesResults={seriesResultsHandler} />} />
           <Route path="/results">

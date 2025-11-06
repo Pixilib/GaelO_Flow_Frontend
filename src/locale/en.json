@@ -182,8 +182,8 @@
         "dataset" : {
           "label" : "Select labels to list associated DICOM studies",
           "buttons" : "Batch send of DICOM studies to anonymize, export or delete tools",
-          "studies" : "Studies datatable of selected labels",
-          "series" : "Series datatable of selected study",
+          "studies" : "Studies of selected labels",
+          "series" : "Series of selected study",
           "study-actions": "Action tools for study",
           "series-actions": "Action tools for series"
         },
@@ -192,12 +192,12 @@
           "datatable": "Defined autorouters",
           "modal" : {
             "name": "Autorouter name",
-            "even-type": "Autorouter event type",
-            "rules": "Rules",
-            "add-rule": "Add a rule",
-            "rule-fields": "Rule different fields",
-            "add-destination": "Add a destination", 
-            "destination-fields": "Destination different fields",
+            "even-type": "Autorouter event type for triggering",
+            "rule-condition": "Define if one or all rules needed to be varified",
+            "add-rule": "Add a new rule",
+            "rule-fields": "Matching rule condition",
+            "add-destination": "Add a new destination", 
+            "destination-fields": "Destination of matching DICOMs",
             "submit" : "Save and create the Auto-Routing"
           }
         },

@@ -8,12 +8,12 @@ const AutoroutingTour = () => {
     const { t } = useTranslation()
     const steps = [
         {
-            selector: '[data-gaelo-flow="routing-datatable"]',
-            content: t('tour.routing.datatable'),
-        },
-        {
             selector: '[data-gaelo-flow="routing-buttons"]',
             content: t('tour.routing.buttons'),
+        },
+        {
+            selector: '[data-gaelo-flow="routing-datatable"]',
+            content: t('tour.routing.datatable'),
         },
     ]
 

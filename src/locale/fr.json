@@ -192,12 +192,12 @@
           "datatable": "Autorouters définis",
             "modal": {
             "name": "Nom de l'autorouteur",
-            "even-type": "Type d'événement autorouter",
-            "rules": "Règles",
+            "even-type": "Type d'événement déclanchant l'autorouter",
+            "rule-condition": "Defini si une ou toute les règles doivent être vérifiées",
             "add-rule": "Ajouter une règle",
-            "rule-fields": "Champs de règle",
+            "rule-fields": "Definition d'une règle",
             "add-destination": "Ajouter une destination",
-            "destination-fields": "Champs de destination",
+            "destination-fields": "Destination des DICOMs ayant vérifiés les conditions",
             "submit" : "Enregistrer et créer le routage automatique"
           }
         },

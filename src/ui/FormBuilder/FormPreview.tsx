@@ -34,7 +34,6 @@ const FormPreview = ({ formSchema }: { formSchema: FormSchema }) => {
             fieldSchema.type = 'string';
     }
     dataRJSF.properties[champ.title] = fieldSchema;
-    dataRJSF
     });
     return (
         <Form schema={dataRJSF} validator={validator}/>
