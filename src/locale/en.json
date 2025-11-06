@@ -210,35 +210,36 @@
             "drop-csv" : "Import queries through CSV file",
             "plus" : "Add query",
             "download-csv" : "Download query list as CSV file",
-            "datatable" : "Queries to proceed",
-            "start-queries" : "Start quarrying list",
+            "query-table" : "Queries to proceed",
+            "start-queries" : "Start queries of the list",
             "delete" : "Remove selected queries"
           },
           "results" : {
-            "datatable" : "Datatable",
-            "add-to-basket" : "Add to basket",
-            "query-series" : " Query series",
-            "download-csv" : "Download CSV",
-            "delete" : "Delete",
-            "load-from-csv" : "Load from CSV"
+            "study-table" : "Results of queries at study level",
+            "series-table" : "Results of queries at series level",
+            "add-to-basket" : "Add selected ressouces to retrieve basket",
+            "query-series" : " Query series level",
+            "download-csv" : "Download results as CSV",
+            "delete" : "Delete selected ressources from list",
+            "load-from-csv" : "Inject series ressources from CSV file"
             
           },
           "basket" : {
-            "datatable" : "Datatable",
-            "delete" : "Delete",
-            "start-robot" : "Start Robot"
+            "retrieve-table" : "Ressources to be retrieved by the robot",
+            "delete" : "Remove selected ressources from basket",
+            "start-robot" : "Start the robot"
           },
           "task" : {
-            "buttons" :"Batch send of DICOM studies to anonymize, export or delete tools",
-            "datatable" : "Datatable"
+            "buttons" :"Batch send of DICOM selected ressources to anonymize, export or delete tools",
+            "robot-table" : "Robot items with procceding status"
           }
         },
         "query" : {
-          "form" : "form",
-          "studies" : "Studies datatable of query",
-          "series" : "Series datatable of query",
-          "dowload-studies" : "Download for study",
-          "dowload-series" : "Download for study"
+          "form" : "DICOM query form",
+          "studies" : "Studies results of query",
+          "series" : "Series results of selected study",
+          "dowload-studies" : "Retrieve the study",
+          "dowload-series" : "Retrieve the series"
         },
         "import" : {
           "select-labels" : "Select Labels",

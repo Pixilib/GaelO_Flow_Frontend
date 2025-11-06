@@ -21,7 +21,7 @@ const QueriesTour = () => {
         },
         {
             selector: '[data-gaelo-flow="query-datatable"]',
-            content: t('tour.auto-retrieve.query.datatable'),
+            content: t('tour.auto-retrieve.query.query-table'),
         },
         {
             selector: '[data-gaelo-flow="query-start"]',
@@ -33,8 +33,12 @@ const QueriesTour = () => {
         },
         //result onglet
         {
-            selector: '[data-gaelo-flow="results-datatable"]',
-            content: t('tour.auto-retrieve.results.datatable'),
+            selector: '[data-gaelo-flow="results-datatable-study"]',
+            content: t('tour.auto-retrieve.results.study-table'),
+        },
+        {
+            selector: '[data-gaelo-flow="results-datatable-series"]',
+            content: t('tour.auto-retrieve.results.series-table'),
         },
         {
             selector: '[data-gaelo-flow="results-add-to-basket"]',
@@ -42,7 +46,7 @@ const QueriesTour = () => {
         },
         {
             selector: '[data-gaelo-flow="results-query-series"]',
-            content: t('tour.auto-retrieve.results.query-series'),
+            content: t('tour.auto-retrieve.results.query-series')
         },
         {
             selector: '[data-gaelo-flow="results-download-csv"]',
@@ -59,7 +63,7 @@ const QueriesTour = () => {
         // basket onglet
         {
             selector: '[data-gaelo-flow="basket-datatable"]',
-            content: t('tour.auto-retrieve.basket.datatable'),
+            content: t('tour.auto-retrieve.basket.retrieve-table'),
         },
         {
             selector: '[data-gaelo-flow="basket-start-robot"]',
@@ -76,7 +80,7 @@ const QueriesTour = () => {
         },
         {
             selector: '[data-gaelo-flow="robot-datatable"]',
-            content: t('tour.auto-retrieve.task.datatable'),
+            content: t('tour.auto-retrieve.task.robot-table'),
         }
 
     ]

@@ -136,7 +136,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
             <Routes>
                 <Route path="studies" element={
                     <>
-                        <div data-gaelo-flow="results-datatable">
+                        <div data-gaelo-flow="results-datatable-study">
                         <ResultStudiesTable
                             resultStudies={studyResults}
                             onRowSelectionChange={handleStudiesSelectionChange}
@@ -161,7 +161,7 @@ const ResultsRoot = ({ onStartSeriesQueries }: ResultsRootProps) => {
                                 <LoadSeriesCSV />
                             </Modal.Body>
                         </Modal>
-                        <div data-gaelo-flow="results-datatable">
+                        <div data-gaelo-flow="results-datatable-series">
                         <ResultSeriesTable
                             onRowSelectionChange={handleSeriesSelectionChange}
                             selectedRow={seriesSelectedRow}

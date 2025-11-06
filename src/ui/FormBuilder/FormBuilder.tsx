@@ -11,6 +11,7 @@ export const FormBuilder = () =>
 {
     const [selectedType, setSelectedType] = useState<FieldType>('text');
     const [currentTitle, setCurrentTitle] = useState('')
+    
     const [form, setForm] = useState<FormSchema>({
         formName: "",
         description: "",
