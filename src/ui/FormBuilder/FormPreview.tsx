@@ -18,10 +18,6 @@ const FormPreview = ({ formSchema }: { formSchema: FormSchema }) => {
         case 'number':
             fieldSchema.type = 'number';
             break;
-        case 'date':
-            fieldSchema.type = 'string';
-            fieldSchema.format = 'date';
-            break;
         case 'textarea':
             fieldSchema.type = 'string';
             fieldSchema.format = 'textarea';
@@ -36,7 +32,7 @@ const FormPreview = ({ formSchema }: { formSchema: FormSchema }) => {
     dataRJSF.properties[champ.title] = fieldSchema;
     });
     return (
-        <Form schema={dataRJSF} validator={validator}/>
+        <Form schema={dataRJSF} validator={validator} children={null}/>
     );
 }
 

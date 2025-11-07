@@ -10,11 +10,12 @@ import DeleteQueues from "./DeleteQueues";
 import { Button, Card, CardHeader, CardBody, CardFooter } from "../ui";
 import { Trash, Empty } from "../icons";
 import { useTranslation } from "react-i18next";
+import DeleteTour from "../tour/tours/DeleteTour";
 
 const DeleteRoot = () => {
     const dispatch = useDispatch();
     const deleteList = useSelector((state: RootState) => state.delete.studies);
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const handleClearList = () => {
         dispatch(flushDeleteList());
@@ -38,6 +39,9 @@ const DeleteRoot = () => {
 
     return (
         <Card>
+            <div className="w-full flex justify-end m-1">
+                <DeleteTour />
+            </div>
             <CardHeader color={Colors.primary}>
                 <div className="flex items-center w-full">
                     <div className="w-4/5 text-lg font-bold text-center">
@@ -45,6 +49,7 @@ const DeleteRoot = () => {
                     </div>
                     <div className="flex justify-end w-1/5 gap-3 p-3">
                         <Button
+                            data-gaelo-flow="delete-clear-button"
                             onClick={handleClearList}
                             color={Colors.light}
                             className="rounded-lg hover:bg-secondary dark:bg-slate-700"
@@ -57,14 +62,17 @@ const DeleteRoot = () => {
             <CardBody
                 color={Colors.almond}
                 className="dark:bg-neutral-500">
-                <DeleteStudyTable
-                    studies={Object.values(deleteList)} />
+                <div data-gaelo-flow="delete-study-table">
+                    <DeleteStudyTable
+                        studies={Object.values(deleteList)} />
+                </div>
             </CardBody>
             <CardFooter
                 color={Colors.light}
                 className="dark:bg-slate-950">
                 <div className="flex flex-col items-center justify-center gap-3 m-3">
                     <Button
+                        data-gaelo-flow="delete-delete-button"
                         onClick={handleDeleteList}
                         color={Colors.danger}
                         className="flex items-center justify-center"

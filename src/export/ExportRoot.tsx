@@ -20,6 +20,7 @@ import Empty from "../icons/Empty";
 import GaelORoot from "./gaelo/GaelORoot";
 import { addStudyIdToAnonymizeList, addStudyIdToDeleteList } from "../utils/actionsUtils";
 import { useTranslation } from "react-i18next";
+import ExportTour from "../tour/tours/ExportTour";
 
 const ExportRoot = () => {
     const { toastSuccess, updateExistingToast, toastWarning } = useCustomToast();
@@ -32,8 +33,8 @@ const ExportRoot = () => {
     const [transferSyntax, setTrasferSyntax] = useState('None');
     const [openGaelOModal, setOpenGaelOModal] = useState(false)
     const [selectedRows, setSelectedRows] = useState<Record<string, boolean>>({});
-    const {t} = useTranslation()
-    
+    const { t } = useTranslation()
+
     const series = useMemo(() => {
         if (!currentStudyId) return [];
         return Object.values(exportSeriesList).filter((series) => series.parentStudy === currentStudyId);
@@ -162,6 +163,9 @@ const ExportRoot = () => {
 
     return (
         <Card>
+            <div className="w-full flex justify-end m-1">
+                <ExportTour />
+            </div>
             <Modal show={openGaelOModal} size='xl'>
                 <Modal.Header className="bg-primary rounded-t-xl" onClose={() => setOpenGaelOModal(false)} >
                     <span className="text-white font-bold">Send to GaelO</span>
@@ -177,6 +181,7 @@ const ExportRoot = () => {
                     <div className="w-4/5 text-lg font-bold text-center">{t("export.export-resources")}</div>
                     <div className="flex justify-end w-1/5 gap-3 p-3">
                         <Button
+                            data-gaelo-flow="export-download"
                             color={Colors.light}
                             className="rounded-lg dark:bg-neutral-700 hover:bg-secondary group">
                             <Download
@@ -184,15 +189,18 @@ const ExportRoot = () => {
                                 className="text-xl text-primary dark:text-white group-hover:text-white" />
                         </Button>
                         <Button
+                            data-gaelo-flow="export-delete"
                             onClick={handleClearList}
                             color={Colors.light}
                             className="rounded-lg hover:bg-secondary dark:bg-neutral-700 group">
                             <Empty className="text-xl text-primary dark:text-white group-hover:text-white" />
                         </Button>
-                        <SelectTransferSyntax
-                            value={transferSyntax}
-                            onChange={(value) => setTrasferSyntax(value)}
-                        />
+                        <div className="flex items-center" data-gaelo-flow="export-setting">
+                            <SelectTransferSyntax
+                                value={transferSyntax}
+                                onChange={(value) => setTrasferSyntax(value)}
+                            />
+                        </div>
                     </div>
                 </div>
             </CardHeader>
@@ -200,7 +208,7 @@ const ExportRoot = () => {
                 color={Colors.almond}
                 className="overflow-x-auto dark:bg-neutral-500">
                 <div className="flex flex-col gap-3">
-                    <div className="flex flex-row gap-3">
+                    <div data-gaelo-flow="export-button" className="flex flex-row gap-3">
                         {role.anonymize &&
                             <Button
                                 color={Colors.blueCustom}
@@ -223,7 +231,7 @@ const ExportRoot = () => {
                         }
                     </div>
                     <div className="flex flex-col md:flex-row md:space-x-4">
-                        <div className="flex-1 min-w-0">
+                        <div data-gaelo-flow="export-study-table" className="flex-1 min-w-0">
                             <ExportStudyTable
                                 onClickStudy={handleClickStudy}
                                 currentStudyId={currentStudyId}
@@ -232,7 +240,7 @@ const ExportRoot = () => {
                                 onRowSelectionChange={setSelectedRows}
                             />
                         </div>
-                        <div className="flex-1 min-w-0">
+                        <div data-gaelo-flow="export-series-table" className="flex-1 min-w-0">
                             <ExportSeriesTable series={series} />
                         </div>
                     </div>
@@ -243,17 +251,21 @@ const ExportRoot = () => {
                 className="flex justify-center gap-3 dark:bg-slate-950">
                 <div className="flex flex-col justify-center w-full gap-3 md:flex-row md:w-4/5">
                     <DropdownButton
+                        data-gaelo-flow="export-choose-download"
                         buttonText="Download"
                         options={downloadOptions} />
                     <DropdownButton
+                        data-gaelo-flow="export-send-modality"
                         buttonText="Send To Modality" options={modalitiesOptions} />
                     {storeJobId && <ProgressJob
                         size={50} jobId={storeJobId} />}
                     <DropdownButton
+                        data-gaelo-flow="export-send-peer"
                         buttonText="Send To Peer"
                         options={peersOptions} />
                     {sendPeerJobId && <ProgressJob size={50} jobId={sendPeerJobId} />}
                     <Button
+                        data-gaelo-flow="export-send-gaelo"
                         color={Colors.blueCustom}
                         onClick={() => setOpenGaelOModal(true)}
                         className="text-white bg-cyan-700"

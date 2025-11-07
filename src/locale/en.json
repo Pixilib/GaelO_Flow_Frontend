@@ -242,26 +242,26 @@
           "dowload-series" : "Retrieve the series"
         },
         "import" : {
-          "select-labels" : "Select Labels",
-          "drop-dicom" : "Drop Dicom",
+          "select-labels" : "Select Labels to assign to new studies ressources",
+          "drop-dicom" : "Drop Dicom to upload",
           "buttons" : "Batch send of DICOM studies to anonymize, export or delete tools",
-          "studies" : "Studies datatable of selected labels",
-          "series" : "Series datatable of selected study",
+          "studies" : "Imported studies",
+          "series" : "Imported series",
           "drop-image" : "Drop image",
           "dicom-tags" : "DICOM tags",
           "add-tag" :"Add tag",
-          "datatable" : "Datatable",
-          "create-dicoms" : "Create Dicoms"
+          "tags" : "DICOM tags of new instance",
+          "create-dicoms" : "Create Dicom"
         },
         "content" : {
           "form" : "Search for DICOM ressources",
           "buttons" : "Batch send of DICOM studies to anonymize, export or delete tools",
-          "patient-info" : "Number studies on patient",
-          "studies" : "Studies datatable of selected patient",
-          "series" : "Series datatable of selected study",
+          "patient-info" : "Patient information",
+          "studies" : "Studies of selected patient",
+          "series" : "Series of selected study",
           "study-actions": "Action tools for study",
           "series-actions": "Action tools for series",
-          "burn-cd" : "Burn cd",
+          "burn-cd" : "Burn cd for patient",
           "edit" : "Edit patient",
           "download" : "Download patient",
           "delete" : "Delete patient"
@@ -339,6 +339,34 @@
             "form" : "Form CD burner",
             "button-save" : "Save form"
           }
+        },
+        "anonymize" : {
+          "auto-fill" : "Tools to auto-fill anonymization rules",
+          "delete" : "Clear all items of anonymization list",
+          "patient-table" : "Patients to anonymize",
+          "study-table" : "Studies to anonymize",
+          "anonymize-button" : "Start the anonymization",
+          "profile" : "Anonymization profile",
+          "result-table" : "Anonymized resulting ressources",
+          "send-button" : "Send selected ressources to other modules (export/delete)",
+          "export-CSV" : "Export anonymized ressources to csv file"
+        },
+        "export" : {
+          "export" : "Export list to CSV file",
+          "delete" : "Clear export list",
+          "settings" : "Export settings (transfer syntax)",
+          "send-to" : "Send selected ressources to others modules",
+          "study-table" :"Studies to be exported",
+          "series-table" : "Series to be exported",
+          "download" : "Download ressources in your browser",
+          "send-modality" : "Send ressources to a DICOM modality",
+          "send-peer" : "Send ressources to an Orthanc Peer",
+          "send-gaelo" : "Send active study to GaelO platform"
+        },
+        "delete" : {
+          "clear-button" : "Clear delete list",
+          "study-table" : "Studies to be deleted",
+          "delete-button" : "Start deletion of DICOM ressources"
         }
       }
   }

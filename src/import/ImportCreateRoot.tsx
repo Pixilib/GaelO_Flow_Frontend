@@ -9,17 +9,14 @@ import ImportCreateTour from "../tour/tours/Import/ImportCreateTour";
 const ImportCreateRoot = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const handleTabClick = (tab: string) => {
-        navigate('/import/' +tab);
+        navigate('/import/' + tab);
     };
 
     return (
         <div className="shadow-md bg-almond dark:bg-neutral-500 rounded-xl" data-gaelo-flow="import-create-root">
-            <div className="w-full flex justify-end m-1">
-                <ImportCreateTour />
-            </div>
             <Tabs className="bg-primary rounded-t-xl">
                 <Tab
                     title={t("import.import-dicoms")}
@@ -33,6 +30,9 @@ const ImportCreateRoot = () => {
                 />
             </Tabs>
             <div>
+                <div className="w-full flex justify-end m-1">
+                    <ImportCreateTour />
+                </div>
                 <Routes>
                     <Route path="/upload" element={<ImportRoot />} />
                     <Route path="/create" element={<CreateRoot />} />

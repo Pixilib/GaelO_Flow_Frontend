@@ -242,26 +242,26 @@
           "dowload-series" : "Demarrer le retrieve de la series"
         },
         "import" : {
-          "select-labels" : "Sélectionner les Labels",
-          "drop-dicom" : "Déposer Dicom",
+          "select-labels" : "Sélectionner les Labels à associer aux nouvelles ressources",
+          "drop-dicom" : "Déposer les fichiers DICOMs pour envoyer",
           "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
-          "studies" : "Tableau de données studies du label selectionné",
-          "series" : "Tableau de données series du label selectionné",
+          "studies" : "Tableau de données des studies importées",
+          "series" : "Tableau de données des series importées",
           "drop-image" : "Déposer image",
-          "dicom-tags" : "DICOM tags",
-          "add-tag" :"Ajouter tag",
-          "datatable" : "Datatable",
+          "dicom-tags" : "Definition des métadonnées DICOM",
+          "add-tag" :"Ajouter une métadonnée",
+          "tags" : "Liste des métadonnées à associer à la nouvelle resource DICOM",
           "create-dicoms" : "Créer Dicoms"
         },
         "content" : {
           "form" : "Recherche de ressources DICOM",
           "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
-          "patient-info" : "Number studies on patient",
-          "studies" : "Tableau de données studies du patient selectionné",
-          "series" : "Tableau de données series de la studies selectionné",
-          "study-actions": "Outils action pour l'étude",
-          "series-actions": "Outils action pour l'étude",
-          "burn-cd" : "Graver un CD",
+          "patient-info" : "Informations patient",
+          "studies" : "Studies du patient selectionné",
+          "series" : "Series de la study selectionné",
+          "study-actions": "Outils action pour la study",
+          "series-actions": "Outils action pour la serie",
+          "burn-cd" : "Graver un CD pour le patient",
           "edit" : "Modifier le patient",
           "download" : "Télécharger le patient",
           "delete" : "Supprimer le patient"
@@ -339,6 +339,34 @@
             "form" : "Formulaire CD burner",
             "button-save" : "Sauvgarder le formulaire"
           }
+        },
+        "anonymize" : {
+          "auto-fill" : "Outils pour pré-remplir les règles d'anonymisation",
+          "delete" : "Vider la liste d'anonymisation",
+          "patient-table" : "Patient à anonymiser",
+          "study-table" : "Studies à anonymiser",
+          "anonymize-button" : "Démarrer l'anonymisation",
+          "profile" : "Profile d'anonymisation",
+          "result-table" : "Ressources anonymisées",
+          "send-button" : "Envoyer les ressouces sélectionnées vers les autres modules (export/supression)",
+          "export-CSV" : "Exporter les ressources anonymisées dans un fichier CSV"
+        },
+        "export" : {
+          "export" : "Exporter la liste dans un fichier CSV",
+          "delete" : "Vider la liste d'export",
+          "settings" : "Paramètres de l'export (transfer syntax)",
+          "send-to" : "Envoyer les ressources séléctionnées aux autres modules",
+          "study-table" :"Studies à exporter",
+          "series-table" : "Series à exporter",
+          "download" : "Télécharger les ressources dans votre navigateur",
+          "send-modality" : "Envoyer les ressources à une modalité DICOM",
+          "send-peer" : "Envoyer les ressources à un Orthanc Peer",
+          "send-gaelo" : "Envoyer la study active à la plateforme GaelO"
+        },
+        "delete" : {
+          "clear-button" : "Vider la liste de supression",
+          "study-table" : "Etudes à supprimer",
+          "delete-button" : "Démarrer la supression des ressources"
         }
       }
 }
