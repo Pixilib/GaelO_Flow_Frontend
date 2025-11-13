@@ -44,6 +44,7 @@ const OauthForm = ({ onSubmit, initialData, buttonText }: OauthFormProps) => {
   };
 
   return (
+    <div data-gaelo-flow="oauth2-form-create-oauth">
     <form onSubmit={handleSubmit} className="grid gap-y-4 lg:gap-y-6">
       <div className="grid grid-cols-2 gap-x-4">
         <Input
@@ -79,6 +80,7 @@ const OauthForm = ({ onSubmit, initialData, buttonText }: OauthFormProps) => {
       </div>
       <div className="flex justify-center">
         <Button
+          data-gaelo-flow="oauth2-button-create"
           color={Colors.success}
           className="h-12 gap-3 justify-self-center w-36 md:justify-center"
           type="submit"
@@ -88,6 +90,7 @@ const OauthForm = ({ onSubmit, initialData, buttonText }: OauthFormProps) => {
         </Button>
       </div>
     </form>
+  </div>
   );
 };
 export default OauthForm;

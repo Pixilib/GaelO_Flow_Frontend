@@ -35,13 +35,15 @@ const EditRole = ({ title, className, onClose, role }: EditRoleProps) => {
   };
 
   return (
-    <FormCard title={title} className="bg-light" onClose={() => onClose()}>
+    <div data-gaelo-flow="roles-form-edit-role">
+    <FormCard title={title} onClose={() => onClose()}>
       <RoleForm
         onSubmit={handleSubmit}
         buttonText="Update"
         initialData={role}
       />
     </FormCard>
+    </div>
   );
 };
 export default EditRole;

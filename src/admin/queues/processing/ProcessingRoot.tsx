@@ -55,9 +55,9 @@ const ProcessingRoot = () => {
         <div className="flex flex-col gap-3">
             <ProcessingQueues />
             <div className="flex justify-end gap-5">
-                <Button onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
-                <Button onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
-                <Button onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
+                <Button data-gaelo-flow="processing-button-play" onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
+                <Button data-gaelo-flow="processing-button-pause" onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
+                <Button data-gaelo-flow="processing-button-delete" onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
             </div>
         </div>
     )

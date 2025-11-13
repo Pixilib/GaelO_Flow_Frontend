@@ -49,13 +49,13 @@ const CreateRootModal = ({ onClose, onSubmit, ...props }: CreateRootModalProps) 
 
     return (
         <>
-        <div className="w-full flex justify-end p-1">
-            <ModalRoutingTour />
-        </div>
             <Modal.Header onClose={onClose}>
                 <Modal.Title>{t("autorouting.createAutoRooting.create-auto-routing")}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
+                 <div className="w-full flex justify-end p-1">
+                    <ModalRoutingTour />
+                </div>
                 <CreateAutoRoutingForm
                     payload={autoRoutingPayload}
                     onPayloadChange={handlePayloadChange}

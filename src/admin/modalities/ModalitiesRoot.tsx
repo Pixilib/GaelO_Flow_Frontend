@@ -23,6 +23,7 @@ import {
 } from "../../services/modalities";
 import { More } from "../../icons";
 import { useTranslation } from "react-i18next";
+import ModalitiesTour from "../../tour/tours/admin/ModalitiesTour";
 
 const ModalitiesRoot: React.FC = () => {
   const { toastSuccess, toastError } = useCustomToast();
@@ -80,13 +81,16 @@ const ModalitiesRoot: React.FC = () => {
 
   return (
     <Card>
+      <div className="w-full flex justify-end m-1">
+          <ModalitiesTour />
+      </div>
       <CardHeader
         centerTitle
         color={Colors.primary}
         title={t("admin.modalities.manage-modalities")}
       />
       <CardBody color={Colors.almond} className="space-x-2 dark:bg-neutral-500">
-        <div className="w-full mt-2 mb-2">
+        <div data-gaelo-flow="modalities-datatable" className="w-full mt-2 mb-2">
           <ModalitiesTable
             aetData={aets}
             onDeleteAet={(aetName: string) => deleteModalityMutate(aetName)}
@@ -99,7 +103,7 @@ const ModalitiesRoot: React.FC = () => {
         className="flex flex-col justify-center py-4 border-t-2 shadow-inner sm:flex-row border-slate-200 dark:border-neutral-700 bg-light dark:bg-slate-950"
       >
         {!showNewAetCard && (
-          <Button color={Colors.success} onClick={handleNewAetClick} className="w-full mb-4 sm:w-auto sm:mb-0">
+          <Button data-gaelo-flow="modalities-button-new-modality" color={Colors.success} onClick={handleNewAetClick} className="w-full mb-4 sm:w-auto sm:mb-0">
             <More className="mr-3" size={24} />
             {t("admin.modalities.new-modality")}
           </Button>

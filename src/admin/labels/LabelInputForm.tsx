@@ -3,6 +3,7 @@ import { Button, Input } from "../../ui";
 import { Colors } from "../../utils/enums";
 import { Label } from "../../icons";
 import { useTranslation } from "react-i18next";
+import {FormBuilder} from "../../ui/FormBuilder/FormBuilder"
 
 type LabelInputFormProps = {
   onCreateLabel: (label: string) => void;
@@ -10,6 +11,7 @@ type LabelInputFormProps = {
 };
 
 const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
+  const [showFormBuilder, setShowFormBuilder] = useState(false);
   const [label, setLabel] = useState<string | null>(null);
   const {t} = useTranslation()
 
@@ -25,7 +27,8 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
   };
 
   return (
-    <div className="relative flex items-center">
+    <div>
+    <div data-gaelo-flow="labels-add-labels" className="relative flex items-center">
       <Input
         svgLeft={<Label className="text-2xl text-gray-400 dark:text-white" />}
         type="text"
@@ -43,6 +46,20 @@ const LabelInputForm = function ({ onCreateLabel }: LabelInputFormProps) {
       >
         +
       </Button>
+      <Button
+        type="button"
+        color={Colors.primary}
+        onClick={() => setShowFormBuilder(!showFormBuilder)}
+        className="ml-2 text-white shadow-md rounded-2xl min-w-20"
+      >
+        formulaire
+      </Button>
+    </div>
+     {showFormBuilder && (
+        <div className="mt-4 p-4 border rounded-lg bg-white dark:bg-gray-800">
+          <FormBuilder />
+        </div>
+      )}
     </div>
   );
 };

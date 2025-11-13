@@ -53,11 +53,11 @@ const Oauth = () => {
       <Oauth2Table
         data={oauth2Config || []} onDelete={deleteOauthHandler} />
 
-      <CardFooter
-        className="border-t-2 rounded-b-lg shadow-inner bg-light border-slate-200 dark:border-neutral-700 dark:bg-slate-950">
+      <CardFooter>
         <div className="flex justify-center w-full">
           {!showOauthForm ? (
             <Button
+              data-gaelo-flow="oauth2-create-provider"
               color={Colors.success}
               onClick={() => setShowOauthForm(true)}
               className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"

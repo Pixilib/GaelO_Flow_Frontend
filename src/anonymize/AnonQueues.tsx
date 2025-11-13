@@ -96,7 +96,7 @@ const AnonQueues = ({ showResults, circle }: AnonQueuesProps) => {
             onDelete={mutateDeleteQueue}
           />
         )}
-      </div>
+      </div >
       {showResults && <AnonymizeResultTable studies={anonymizedStudies} />}
     </div>
   );

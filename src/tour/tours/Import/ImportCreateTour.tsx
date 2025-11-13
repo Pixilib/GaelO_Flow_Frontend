@@ -42,7 +42,7 @@ const ImportCreateTour = () => {
         },
         {
             selector: '[data-gaelo-flow="import-datatable"]',
-            content: t('tour.import.datatable'),
+            content: t('tour.import.tags'),
         },
         {
             selector: '[data-gaelo-flow="import-create-dicoms"]',

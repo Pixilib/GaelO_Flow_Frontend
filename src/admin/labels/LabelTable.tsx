@@ -38,7 +38,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
               backgroundColor="bg-white"
               className="max-h-30 overflow-y-auto overflow-x-hidden"
             >
-              <Button color={Colors.secondary} className="flex items-center gap-1.5">
+              <Button data-gaelo-flow="labels-roles" color={Colors.secondary} className="flex items-center gap-1.5">
                 <Admin size="1.3rem" />
                 <ToggleChevron isOpen={false} />
               </Button>
@@ -51,7 +51,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
         id: "delete",
         cell: ({ row }: any) => (
           <div className="flex justify-center w-full">
-            <Button onClick={() => onDeleteLabel(row.original.name)} color={Colors.danger}>
+            <Button data-gaelo-flow="labels-delete" onClick={() => onDeleteLabel(row.original.name)} color={Colors.danger}>
               <Trash size="1.3rem" className="transition duration-70 hover:scale-110" color={Colors.light} />
             </Button>
           </div>
@@ -65,6 +65,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
   }, []);
 
   return (
+    <div data-gaelo-flow="labels-datatable">
     <Table
       columns={columns}
       data={rows}
@@ -76,6 +77,7 @@ const LabelsTable: React.FC<LabelsTableProps> = ({
       getRowClasses={() => "hover:bg-indigo-100 cursor-pointer hover:bg-indigo-100 dark:hover:bg-indigo-700 hover:cursor-pointer"}
 
     />
+  </div>
   );
 };
 export default LabelsTable;

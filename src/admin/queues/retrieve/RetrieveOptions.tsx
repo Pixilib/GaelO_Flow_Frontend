@@ -114,6 +114,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
                   align="center"
                 />
               }
+              data-gaelo-flow="retrieve-start-time"
               value={startTime ?? undefined}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleTimeStart(event)
@@ -129,6 +130,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
                   align="center"
                 />
               }
+              data-gaelo-flow="retrieve-stop-time"
               value={stopTime ?? undefined}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 handleTimeStop(event)
@@ -144,6 +146,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
                 {t("admin.queues.total-time")}
               </label>
               <Badge
+                data-gaelo-flow="retrieve-total-time"
                 value={timeDelta ?? ""}
                 className={`
                   rounded-full bg-[#CDFFCD] 
@@ -155,6 +158,7 @@ const RetrieveOptions = ({ data }: RetrieveOptionProps) => {
           </div>
           <div className="flex justify-center mt-4">
             <Button
+              data-gaelo-flow="retrieve-send"
               color={Colors.success}
               className="w-32 gap-2 px-8 text-center"
               type="submit"

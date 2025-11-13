@@ -83,6 +83,7 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
   };
 
   return (
+    <div data-gaelo-flow="modalities-form-modality" className="w-full">
     <FormCard
     className="w-full bg-light-gray dark:bg-neutral-500"
     title={t("admin.modalities.create-new-modality")}
@@ -133,11 +134,13 @@ const NewModalityCard: React.FC<NewModalityCardProps> = ({
     </div>
     <div className="flex justify-center">
       <Button type="submit" 
+      data-gaelo-flow="modalities-submit"
       color={Colors.success} aria-label="Submit New Modality">
         <Check size="20px" />
       </Button>
     </div>
   </FormCard>
+    </div>
   );
 };
 

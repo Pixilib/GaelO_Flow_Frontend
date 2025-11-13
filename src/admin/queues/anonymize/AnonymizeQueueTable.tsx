@@ -49,7 +49,9 @@ const AnonymizeQueueTable = ({ queues = [] }: AnonymizeQueueTableProps) => {
     ]
 
     return (
+        <div data-gaelo-flow="anonymize-datatable">
         <Table columnVisibility={{ id: false }} data={queues} columns={columns} headerColor={Colors.success} headerclassName="text-white" />
+        </div>
     )
 
 }

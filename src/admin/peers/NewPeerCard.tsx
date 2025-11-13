@@ -24,6 +24,7 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
     };
 
     return (
+        <div data-gaelo-flow="peers-form-peers" className="w-full">
         <FormCard
             className="w-full bg-light-gray dark:bg-neutral-500"
             title={t("admin.peers.create-new-peer")}
@@ -64,11 +65,12 @@ const NewPeerCard: React.FC<NewPeerCardProps> = ({ onClose, onCreatePeer }) => {
                 />
             </div>
             <div className="flex justify-center my-4"> {/* Ajout de margin vertical */}
-                <Button type="submit" color={Colors.success} aria-label="Submit New Peer">
+                <Button data-gaelo-flow="peers-submit" type="submit" color={Colors.success} aria-label="Submit New Peer">
                     <Check size="20px" />
                 </Button>
             </div>
         </FormCard>
+    </div>
     );
 };
 

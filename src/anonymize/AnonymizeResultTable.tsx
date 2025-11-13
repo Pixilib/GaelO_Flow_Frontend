@@ -84,6 +84,7 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
       </CardHeader>
       <CardBody color={Colors.almond}>
         <div className="flex flex-col gap-3">
+          <div data-gaelo-flow="anonymize-result-table">
           <Table
             enableRowSelection
             selectedRow={selectedRows}
@@ -95,7 +96,8 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
             className="text-xs"
             enableSorting={true}
           />
-          <div className="flex flex-row gap-3">
+          </div>
+          <div data-gaelo-flow="anonymize-send-to-other-module" className="flex flex-row gap-3">
             {role.export &&
               <Button
                 color={Colors.secondary}
@@ -120,7 +122,7 @@ const AnonymizeResultTable: React.FC<AnonymizeResultTableProps> = ({
         </div>
       </CardBody>
       <CardFooter color={Colors.white} className="flex justify-center">
-        <Button color={Colors.warning} onClick={handleExportResultsCSV}>
+        <Button data-gaelo-flow="anonymize-export-CSV" color={Colors.warning} onClick={handleExportResultsCSV}>
           Export CSV
         </Button>
       </CardFooter>

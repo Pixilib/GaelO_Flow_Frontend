@@ -20,7 +20,7 @@ const ContentTour = () => {
             content: t('tour.content.patient-info'),
         },
         {
-            selector: '[data-gaelo-flow="content-Burn-cd"]',
+            selector: '[data-gaelo-flow="content-burn-cd"]',
             content: t('tour.content.burn-cd'),
         },
         {

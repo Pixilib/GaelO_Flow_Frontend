@@ -62,9 +62,9 @@ const RetrieveRoot = () => {
             <RetrieveOptions data={options} />
             <RetrieveQueues />
             <div className="flex justify-end gap-5">
-                <Button onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
-                <Button onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
-                <Button onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
+                <Button data-gaelo-flow="retrieve-button-play" onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
+                <Button data-gaelo-flow="retrieve-button-pause" onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
+                <Button data-gaelo-flow="retrieve-button-delete" onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
             </div>
         </div>
     )

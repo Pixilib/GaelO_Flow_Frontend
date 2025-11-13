@@ -153,6 +153,9 @@
           "user" : {
             "create-user" : "Créer un utilisateur",
             "user" : "Utilisateurs"
+          },
+          "cd-burner" : {
+            "cd-burner-conf" : "Configuration du graveur CD"
           }
     },
     "anonymize" : {
@@ -188,17 +191,17 @@
           "series-actions": "Outils action pour l'étude"
         },
         "routing" : {
-          "buttons": "Créer une nouvelle règle",
-          "datatable": "datatable",
+          "buttons": "Créer une nouvelle règle d'autoroutage",
+          "datatable": "Autorouters définis",
             "modal": {
-            "name": "Nom",
-            "even-type": "Type d'événement",
-            "rules": "Règles",
+            "name": "Nom de l'autorouteur",
+            "even-type": "Type d'événement déclanchant l'autorouter",
+            "rule-condition": "Defini si une ou toute les règles doivent être vérifiées",
             "add-rule": "Ajouter une règle",
-            "rule-fields": "Champs de règle",
+            "rule-fields": "Definition d'une règle",
             "add-destination": "Ajouter une destination",
-            "destination-fields": "Champs de destination",
-            "submit" : "Soumettre"
+            "destination-fields": "Destination des DICOMs ayant vérifiés les conditions",
+            "submit" : "Enregistrer et créer le routage automatique"
           }
         },
         "cd-burner" : {
@@ -207,63 +210,166 @@
         },
         "auto-retrieve" : {
           "query" : {
-            "drop-csv" : "Déposer CSV",
-            "plus" : "Ajouter une ligne",
-            "download-csv" : "Télécharger CSV",
-            "datatable" : "Datatable",
-            "start-queries" : "Démmarer queries",
-            "delete" : "Supprimer nouvelle ligne"
+            "drop-csv" : "Importer des requêtes via un fichier CSV",
+            "plus" : "Ajouter une requête",
+            "download-csv" : "Télécharger la liste des requêtes sous forme de fichier CSV",
+            "datatable" : "Requêtes à traiter",
+            "start-queries" : "Commencer le requetage de la liste",
+            "delete" : "Supprimer les requêtes sélectionnées"
           },
           "results" : {
-            "datatable" : "Datatable",
-            "add-to-basket" : "Ajouter au panier",
-            "query-series" : " Query series",
-            "download-csv" : "Télécharger CSV",
-            "delete" : "Supprimer",
-            "load-from-csv" : "Charger depuis CSV"
+            "study-table" : "Resultat des queries au niveau study",
+            "series-table" : "Resultat des queries au niveau series",
+            "add-to-basket" : "Ajouter les ressources selectionnées au panier",
+            "query-series" : "Lancer le query au niveau series",
+            "download-csv" : "Télécharger la liste des résultats au format CSV",
+            "delete" : "Supprimer les ressources séléctionnées de la liste",
+            "load-from-csv" : "Charger des résultats series depuis fichier CSV"
             
           },
           "basket" : {
-            "datatable" : "Datatable",
-            "delete" : "Supprimer",
-            "start-robot" : "Démmarer Robot"
+            "retrieve-table" : "Ressources à retrieve par le robot",
+            "delete" : "Supprimer les ressources séléctionnées",
+            "start-robot" : "Démmarer le robot"
           },
           "task" : {
             "buttons" :"Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
-            "datatable" : "Datatable"
+            "robot-table" : "Items du robot avec leur statut d'execution"
           }
         },
         "query" : {
-          "form" : "form",
-          "studies" : "Tableau de données studies du label selectionné",
-          "series" : "Tableau de données series du label selectionné",
-          "dowload-studies" : "Download tools for study",
-          "dowload-series" : "Download tools for study"
+          "form" : "Formulaire de DICOM query",
+          "studies" : "Resultats au niveau study de la requête",
+          "series" : "Resultats au niveau series de la study selectionnée",
+          "dowload-studies" : "Demarrer le retrieve de la study",
+          "dowload-series" : "Demarrer le retrieve de la series"
         },
         "import" : {
-          "select-labels" : "Sélectionner les Labels",
-          "drop-dicom" : "Déposer Dicom",
+          "select-labels" : "Sélectionner les Labels à associer aux nouvelles ressources",
+          "drop-dicom" : "Déposer les fichiers DICOMs pour envoyer",
           "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
-          "studies" : "Tableau de données studies du label selectionné",
-          "series" : "Tableau de données series du label selectionné",
+          "studies" : "Tableau de données des studies importées",
+          "series" : "Tableau de données des series importées",
           "drop-image" : "Déposer image",
-          "dicom-tags" : "DICOM tags",
-          "add-tag" :"Ajouter tag",
-          "datatable" : "Datatable",
+          "dicom-tags" : "Definition des métadonnées DICOM",
+          "add-tag" :"Ajouter une métadonnée",
+          "tags" : "Liste des métadonnées à associer à la nouvelle resource DICOM",
           "create-dicoms" : "Créer Dicoms"
         },
         "content" : {
-          "form" : "Form patient info",
+          "form" : "Recherche de ressources DICOM",
           "buttons" : "Envoi groupé d'examens DICOM vers des outils d'anonymisation, d'exportation ou de suppression",
-          "patient-info" : "Number studies on patient",
-          "studies" : "Tableau de données studies du patient selectionné",
-          "series" : "Tableau de données series de la studies selectionné",
-          "study-actions": "Outils action pour l'étude",
-          "series-actions": "Outils action pour l'étude",
-          "burn-cd" : "Graver un CD",
+          "patient-info" : "Informations patient",
+          "studies" : "Studies du patient selectionné",
+          "series" : "Series de la study selectionné",
+          "study-actions": "Outils action pour la study",
+          "series-actions": "Outils action pour la serie",
+          "burn-cd" : "Graver un CD pour le patient",
           "edit" : "Modifier le patient",
           "download" : "Télécharger le patient",
           "delete" : "Supprimer le patient"
+        },
+        "admin" : {
+          "modalities" : {
+            "table-modalities" : "Modalités DICOM",
+            "button-echo" : "Faire un echo sur une modalité",
+            "button-delete" : "Supprimer la modalité",
+            "button-modality" : "Créer une nouvelle modalité",
+            "form-modality" : "Formulaire pour créer une modalité",
+            "submit" : "Soumettre"
+          },
+          "peers" : {
+            "table-peers" : "List des Peer Orthanc",
+            "button-echo" : "Faire un echo sur le Peer",
+            "button-delete" : "Supprimer le Peer",
+            "button-peers" : "Créer une nouveau Peer",
+            "form-peers" : "Formulaire pour créer un nouveau Peer",
+            "submit" : "Submit"
+          },
+          "queues" : {
+            "start-time" : "Heure de début",
+            "stop-time" : "heure de fin",
+            "total-time" : "Durée totale",
+            "send" : "Envoyer",
+            "datatable" : "Datatable",
+            "button-play" : "Bouton play",
+            "button-pause" : "Bouton pause",
+            "button-delete" : "Bouton supprimer",
+            "keep-labels" : "conserver les labels"
+          },
+          "jobs" : {
+            "table-jobs" : "Jobs Orthanc",
+            "button-reset" : "Redemarrer le job Orthanc",
+            "button-play" : "Demarrer le job Orthanc",
+            "button-pause" : "Mettre en pause le job Orthanc",
+            "button-cancel" : "Annuler le job Orthanc",
+            "info" :"Informations sur le job"
+          },
+          "users" : {
+            "table-users" : "Liste des utilisateurs",
+            "button-edit" : "Editer un utilisateur",
+            "button-delete" : "Suprimmer un utilisateur",
+            "button-create" : "Créer un utilisateur",
+            "form-edit-user" : "Formulaire d'edition d'un utilisateur",
+            "button-update" : "Valider l'édition d'un utilisateur",
+            "form-create-user" : "Formulaire pour créer un utilisateur",
+            "button-create-user" : "Valider la creation d'un utilisateur",
+            "roles" : {
+              "table-roles" : "Roles existants",
+              "edit-role" : "Editer le role",
+              "delete-role" : "Supprimer le role",
+              "create-role" : "Créer un nouveau role",
+              "form-edit-role" : "Formulaire d'edition du role",
+              "button-update" : "Valider l'édition du role",
+              "form-role" : "Formulaire pour créer un nouveau role",
+              "button-create-role" : "Valider la création du role"
+            },
+            "oauth2" : {
+              "table-oauth" : "Liste des serveurs Oauth",
+              "delete-oauth" :"Supression du serveur Oauth",
+              "create-provider" : "Créer un nouveau serveur Oauth",
+              "form-create-oauth" : "Formulaire pour ajouter un nouveau serveur Oauth",
+              "button-create" : "Valider la création du serveur Oauth"
+            }
+          },
+           "labels" : {
+            "add-labels" : "Ajouter un nouveau label",
+            "table-labels" : "List des labels disponibles",
+            "roles" : "Autoriser un ou plusieurs roles à acceder aux ressources ayant ce label",
+            "delete" : "Suprimmer le label"
+          },
+          "cd-burner" : {
+            "form" : "Options du graveur CD",
+            "button-save" : "Mettre à jour les options"
+          }
+        },
+        "anonymize" : {
+          "auto-fill" : "Outils pour pré-remplir les règles d'anonymisation",
+          "delete" : "Vider la liste d'anonymisation",
+          "patient-table" : "Patient à anonymiser",
+          "study-table" : "Studies à anonymiser",
+          "anonymize-button" : "Démarrer l'anonymisation",
+          "profile" : "Profile d'anonymisation",
+          "result-table" : "Ressources anonymisées",
+          "send-button" : "Envoyer les ressouces sélectionnées vers les autres modules (export/supression)",
+          "export-CSV" : "Exporter les ressources anonymisées dans un fichier CSV"
+        },
+        "export" : {
+          "export" : "Exporter la liste dans un fichier CSV",
+          "delete" : "Vider la liste d'export",
+          "settings" : "Paramètres de l'export (transfer syntax)",
+          "send-to" : "Envoyer les ressources séléctionnées aux autres modules",
+          "study-table" :"Studies à exporter",
+          "series-table" : "Series à exporter",
+          "download" : "Télécharger les ressources dans votre navigateur",
+          "send-modality" : "Envoyer les ressources à une modalité DICOM",
+          "send-peer" : "Envoyer les ressources à un Orthanc Peer",
+          "send-gaelo" : "Envoyer la study active à la plateforme GaelO"
+        },
+        "delete" : {
+          "clear-button" : "Vider la liste de supression",
+          "study-table" : "Etudes à supprimer",
+          "delete-button" : "Démarrer la supression des ressources"
         }
       }
 }
