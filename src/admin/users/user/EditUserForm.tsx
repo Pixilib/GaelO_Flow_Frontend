@@ -69,7 +69,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
     }
 
     return (
-        <div data-gaelo-flow="users-formEditUser" className="w-full" >
+        <div data-gaelo-flow="users-form-edit-user" className="w-full" >
         <Card className={`my-10 ${className}`}>
             <CardHeader title={title} color={Colors.success} >
                 <CloseButton onClose={() => onClose()} />
@@ -136,7 +136,7 @@ const EditUserForm = ({ title, className, userData, onClose }: UserFormProps) =>
                         </label>
                     </div>
                     <div className="grid grid-cols-1 col-span-3 mt-3">
-                        <Button data-gaelo-flow="users-buttonUpdate" color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
+                        <Button data-gaelo-flow="users-button-update" color={Colors.success} className="h-12 gap-3 justify-self-center w-36 md:justify-center" type="submit">
                             <SubmitUser size={'1.3rem'} />
                             <div>Update</div>
                         </Button>

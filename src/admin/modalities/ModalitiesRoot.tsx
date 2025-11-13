@@ -103,7 +103,7 @@ const ModalitiesRoot: React.FC = () => {
         className="flex flex-col justify-center py-4 border-t-2 shadow-inner sm:flex-row border-slate-200 dark:border-neutral-700 bg-light dark:bg-slate-950"
       >
         {!showNewAetCard && (
-          <Button data-gaelo-flow="modalities-button-newModality" color={Colors.success} onClick={handleNewAetClick} className="w-full mb-4 sm:w-auto sm:mb-0">
+          <Button data-gaelo-flow="modalities-button-new-modality" color={Colors.success} onClick={handleNewAetClick} className="w-full mb-4 sm:w-auto sm:mb-0">
             <More className="mr-3" size={24} />
             {t("admin.modalities.new-modality")}
           </Button>

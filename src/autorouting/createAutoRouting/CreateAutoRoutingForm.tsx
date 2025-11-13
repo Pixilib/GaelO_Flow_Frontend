@@ -90,7 +90,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                     <div className="flex flex-col gap-2">
                         {rules.map((rule, i) => (
                             <AddRuleForm
-                                data-gaelo-flow="modal-ruleFields"
+                                data-gaelo-flow="modal-rule-fields"
                                 rule={rule.rule}
                                 id={rule.id}
                                 onChange={handleModifyRule}
@@ -103,7 +103,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             color={Colors.primary}
                             onClick={handleAddRule}
                             children={
-                                <div data-gaelo-flow="modal-addRule" className="flex items-center gap-2 text-sm">
+                                <div data-gaelo-flow="modal-add-rule" className="flex items-center gap-2 text-sm">
                                     <Add />
                                     <p>{t("autorouting.createAutoRooting.add-rule")}</p>
                                 </div>
@@ -120,7 +120,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                         <div className="flex flex-col gap-2">
                             {destinations.map((destination, i) => (
                                 <AddDestinationForm
-                                    data-gaelo-flow="modal-destinationFields"
+                                    data-gaelo-flow="modal-destination-fields"
                                     value={destination.destination}
                                     id={destination.id}
                                     onChange={handleModifyDestination}
@@ -134,7 +134,7 @@ const CreateAutoRoutingForm = ({ payload, onPayloadChange, rules, onRulesChange,
                             color={Colors.primary}
                             onClick={handleAddDestination}
                             children={
-                                <div data-gaelo-flow="modal-addDestination" className="flex items-center gap-2 text-sm">
+                                <div data-gaelo-flow="modal-add-destination" className="flex items-center gap-2 text-sm">
                                     <Add />
                                     <p>{t("autorouting.createAutoRooting.add-destination")}</p>
                                 </div>

@@ -22,28 +22,28 @@ const JobActions = ({ jobId, onJobAction }: JobActionsProps) => {
         className={`${classIcons} bg-primary`}
         onClick={handleClick("resubmit")}
       >
-        <Resume data-gaelo-flow="jobs-buttonReset" color="white" size="1em" />
+        <Resume data-gaelo-flow="jobs-button-reset" color="white" size="1em" />
       </div>
 
       <div
         className={`${classIcons} bg-success`}
         onClick={handleClick("resume")}
       >
-        <Play data-gaelo-flow="jobs-buttonPlay" color="white" size="1em" />
+        <Play data-gaelo-flow="jobs-button-play" color="white" size="1em" />
       </div>
 
       <div
         className={`${classIcons} bg-[#DFB520]`}
         onClick={handleClick("pause")}
       >
-        <Pause data-gaelo-flow="jobs-buttonPause" color="white" size="1em" />
+        <Pause data-gaelo-flow="jobs-button-pause" color="white" size="1em" />
       </div>
 
       <div
         className={`${classIcons} bg-danger`}
         onClick={handleClick("cancel")}
       >
-        <Cancel data-gaelo-flow="jobs-buttonCancel" color="white" size="1em" />
+        <Cancel data-gaelo-flow="jobs-button-cancel" color="white" size="1em" />
       </div>
     </div>
   );

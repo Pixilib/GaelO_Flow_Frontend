@@ -8,15 +8,15 @@ const QueuesTour = () => {
     const { t } = useTranslation()
     const steps = [
         {// onglet retrieve
-            selector: '[data-gaelo-flow="retrieve-startTime"]',
+            selector: '[data-gaelo-flow="retrieve-start-time"]',
             content: t('tour.admin.queues.start-time'),
         },
         {
-            selector: '[data-gaelo-flow="retrieve-stopTime"]',
+            selector: '[data-gaelo-flow="retrieve-stop-time"]',
             content: t('tour.admin.queues.stop-time'),
         },
         {
-            selector: '[data-gaelo-flow="retrieve-totalTime"]',
+            selector: '[data-gaelo-flow="retrieve-total-time"]',
             content: t('tour.admin.queues.total-time'),
         },
         {
@@ -28,15 +28,15 @@ const QueuesTour = () => {
             content: t('tour.admin.queues.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="retrieve-buttonPlay"]',
+            selector: '[data-gaelo-flow="retrieve-button-play"]',
             content: t('tour.admin.queues.button-play'),
         },
         {
-            selector: '[data-gaelo-flow="retrieve-buttonPause"]',
+            selector: '[data-gaelo-flow="retrieve-button-pause"]',
             content: t('tour.admin.queues.button-pause'),
         },
         {
-            selector: '[data-gaelo-flow="retrieve-buttonDelete"]',
+            selector: '[data-gaelo-flow="retrieve-button-delete"]',
             content: t('tour.admin.queues.button-delete'),
         },
         {//onglet anonymize
@@ -44,19 +44,19 @@ const QueuesTour = () => {
             content: t('tour.admin.queues.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="anonymize-keepLabels"]',
+            selector: '[data-gaelo-flow="anonymize-keep-labels"]',
             content: t('tour.admin.queues.keep-labels'),
         },
         {
-            selector: '[data-gaelo-flow="anonymize-buttonPlay"]',
+            selector: '[data-gaelo-flow="anonymize-button-play"]',
             content: t('tour.admin.queues.button-play'),
         },
         {
-            selector: '[data-gaelo-flow="anonymize-buttonPause"]',
+            selector: '[data-gaelo-flow="anonymize-button-pause"]',
             content: t('tour.admin.queues.button-pause'),
         },
         {
-            selector: '[data-gaelo-flow="anonymize-buttonDelete"]',
+            selector: '[data-gaelo-flow="anonymize-button-delete"]',
             content: t('tour.admin.queues.button-delete'),
         },
         {//onglet delete
@@ -64,15 +64,15 @@ const QueuesTour = () => {
             content: t('tour.admin.queues.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="delete-buttonPlay"]',
+            selector: '[data-gaelo-flow="delete-button-play"]',
             content: t('tour.admin.queues.button-play'),
         },
         {
-            selector: '[data-gaelo-flow="delete-buttonPause"]',
+            selector: '[data-gaelo-flow="delete-button-pause"]',
             content: t('tour.admin.queues.button-pause'),
         },
         {
-            selector: '[data-gaelo-flow="delete-buttonDelete"]',
+            selector: '[data-gaelo-flow="delete-button-delete"]',
             content: t('tour.admin.queues.button-delete'),
         },
         {//onglet processing
@@ -80,15 +80,15 @@ const QueuesTour = () => {
             content: t('tour.admin.queues.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="processing-buttonPlay"]',
+            selector: '[data-gaelo-flow="processing-button-play"]',
             content: t('tour.admin.queues.button-play'),
         },
         {
-            selector: '[data-gaelo-flow="processing-buttonPause"]',
+            selector: '[data-gaelo-flow="processing-button-pause"]',
             content: t('tour.admin.queues.button-pause'),
         },
         {
-            selector: '[data-gaelo-flow="processing-buttonDelete"]',
+            selector: '[data-gaelo-flow="processing-button-delete"]',
             content: t('tour.admin.queues.button-delete'),
         }
     ]

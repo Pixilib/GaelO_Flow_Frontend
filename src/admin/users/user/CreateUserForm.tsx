@@ -76,7 +76,7 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
   };
 
   return (
-    <div data-gaelo-flow="users-formUser" className="w-full" >
+    <div data-gaelo-flow="users-form-user" className="w-full" >
     <FormCard
       className={`${className} bg-light-gray dark:bg-neutral-500 `}
       title={t("admin.user.create-user")}
@@ -149,8 +149,9 @@ const CreateUserForm = ({ onClose, className }: UserFormProps) => {
           />
         </label>
       </div>
-      <div data-gaelo-flow="users-buttonCreateUser" className="grid grid-cols-1 col-span-3 ">
+      <div className="grid grid-cols-1 col-span-3 ">
         <FormButton
+          data-gaelo-flow="users-button-create-user"
           text={t("admin.user.create-user")}
           className='w-40'
           icon={<SubmitUser size="1.3rem" />}

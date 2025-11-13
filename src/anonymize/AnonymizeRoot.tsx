@@ -102,7 +102,7 @@ const AnonymizeRoot = () => {
                             }
                             className="mr-4"
                         >
-                            <Button data-gaelo-flow="anonymize-autoFill" className="rounded-lg dark:bg-slate-700" color={Colors.light} >
+                            <Button data-gaelo-flow="anonymize-auto-fill" className="rounded-lg dark:bg-slate-700" color={Colors.light} >
                                 <AutoFill className="text-2xl text-primary group-hover:text-white dark:text-white" />
                                 <span className="ml-2 font-semibold text-sm text-gray-700 dark:text-white">Auto Fill</span>
                                 <ChevronDown className="ml-3 text-gray-700 dark:text-white" />

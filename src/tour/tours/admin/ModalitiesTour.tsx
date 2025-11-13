@@ -9,18 +9,18 @@ const ModalitiesTour = () => {
     const steps = [
         {
             selector: '[data-gaelo-flow="modalities-datatable"]',
-            content: t('tour.admin.modalities.datatable'),
+            content: t('tour.admin.modalities.table-modalities'),
         },
         {
-            selector: '[data-gaelo-flow="modalities-action-buttonEcho"]',
+            selector: '[data-gaelo-flow="modalities-action-button-echo"]',
             content: t('tour.admin.modalities.button-echo'),
         },
         {
-            selector: '[data-gaelo-flow="modalities-action-buttonDelete"]',
+            selector: '[data-gaelo-flow="modalities-action-button-delete"]',
             content: t('tour.admin.modalities.button-delete'),
         },
         {
-            selector: '[data-gaelo-flow="modalities-button-newModality"]',
+            selector: '[data-gaelo-flow="modalities-button-new-modality"]',
             content: t('tour.admin.modalities.button-modality'),
         },
         {

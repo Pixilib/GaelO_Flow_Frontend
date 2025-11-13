@@ -9,34 +9,34 @@ const UsersTour = () => {
     const steps = [
         {// onglet users
             selector: '[data-gaelo-flow="users-datatable"]',
-            content: t('tour.admin.users.datatable'),
+            content: t('tour.admin.users.table-users'),
         },
         {
-            selector: '[data-gaelo-flow="users-editLine"]',
-            content: t('tour.admin.users.edit-line'),
+            selector: '[data-gaelo-flow="users-edit-line"]',
+            content: t('tour.admin.users.button-edit'),
         },
         {
-            selector: '[data-gaelo-flow="users-deleteLine"]',
-            content: t('tour.admin.users.delete-line'),
+            selector: '[data-gaelo-flow="users-delete-line"]',
+            content: t('tour.admin.users.button-delete'),
         },
         {
-            selector: '[data-gaelo-flow="users-createUser"]',
-            content: t('tour.admin.users.create-user'),
+            selector: '[data-gaelo-flow="users-create-user"]',
+            content: t('tour.admin.users.button-create'),
         },
         {
-            selector: '[data-gaelo-flow="users-formEditUser"]',
+            selector: '[data-gaelo-flow="users-form-edit-user"]',
             content: t('tour.admin.users.form-edit-user'),
         },
         {
-            selector: '[data-gaelo-flow="users-buttonUpdate"]',
+            selector: '[data-gaelo-flow="users-button-update"]',
             content: t('tour.admin.users.button-update'),
         },
         {
-            selector: '[data-gaelo-flow="users-formUser"]',
-            content: t('tour.admin.users.form-user'),
+            selector: '[data-gaelo-flow="users-form-user"]',
+            content: t('tour.admin.users.form-create-user'),
         },
         {
-            selector: '[data-gaelo-flow="users-buttonCreateUser"]',
+            selector: '[data-gaelo-flow="users-button-create-user"]',
             content: t('tour.admin.users.button-create-user'),
         },
         {//onglet roles
@@ -44,31 +44,31 @@ const UsersTour = () => {
             content: t('tour.admin.users.roles.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="roles-editLine"]',
+            selector: '[data-gaelo-flow="roles-edit-line"]',
             content: t('tour.admin.users.roles.edit-line'),
         },
         {
-            selector: '[data-gaelo-flow="roles-deleteLine"]',
+            selector: '[data-gaelo-flow="roles-delete-line"]',
             content: t('tour.admin.users.roles.delete-line'),
         },
         {
-            selector: '[data-gaelo-flow="roles-createRole"]',
+            selector: '[data-gaelo-flow="roles-create-role"]',
             content: t('tour.admin.users.roles.create-role'),
         },
         {
-            selector: '[data-gaelo-flow="roles-formEditRole"]',
+            selector: '[data-gaelo-flow="roles-form-edit-role"]',
             content: t('tour.admin.users.roles.form-edit-role'),
         },
         {
-            selector: '[data-gaelo-flow="roles-buttonUpdate"]',
+            selector: '[data-gaelo-flow="roles-button-update"]',
             content: t('tour.admin.users.roles.button-update'),
         },
         {
-            selector: '[data-gaelo-flow="users-formRole"]',
+            selector: '[data-gaelo-flow="users-form-role"]',
             content: t('tour.admin.users.roles.form-role'),
         },
         {
-            selector: '[data-gaelo-flow="users-buttonCreateRole"]',
+            selector: '[data-gaelo-flow="users-button-create-role"]',
             content: t('tour.admin.users.roles.button-create-role'),
         },
         {//onglet oauth2
@@ -76,19 +76,19 @@ const UsersTour = () => {
             content: t('tour.admin.users.oauth2.datatable'),
         },
         {
-            selector: '[data-gaelo-flow="oauth2-deleteLine"]',
+            selector: '[data-gaelo-flow="oauth2-delete-line"]',
             content: t('tour.admin.users.oauth2.delete-line'),
         },
         {
-            selector: '[data-gaelo-flow="oauth2-createProvider"]',
+            selector: '[data-gaelo-flow="oauth2-create-provider"]',
             content: t('tour.admin.users.oauth2.create-provider'),
         },
         {
-            selector: '[data-gaelo-flow="oauth2-formCreateOauth"]',
+            selector: '[data-gaelo-flow="oauth2-form-create-oauth"]',
             content: t('tour.admin.users.oauth2.form-create-oauth'),
         },
         {
-            selector: '[data-gaelo-flow="oauth2-buttonCreate"]',
+            selector: '[data-gaelo-flow="oauth2-button-create"]',
             content: t('tour.admin.users.oauth2.button-create'),
         },
     ]

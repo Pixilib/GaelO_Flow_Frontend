@@ -107,16 +107,16 @@ const QueryRoot = ({ queries, onStartStudyQueries }: QueryRootProps) => {
     <div className="flex flex-col gap-3 p-3">
       <div className="flex gap-3 w-full justify-between">
         <div className="flex gap-3">
-          <Button data-gaelo-flow="query-addLine" color={Colors.primary} onClick={addEmptyQuery}>
+          <Button data-gaelo-flow="query-add-line" color={Colors.primary} onClick={addEmptyQuery}>
             <Add />
           </Button>
-          <div data-gaelo-flow="query-dropCSV">
+          <div data-gaelo-flow="query-drop-CSV">
             <CsvDrop onImportCsv={handleImportCsv} />
           </div>
         </div>
         <div className="flex gap-3">
           <Button
-            data-gaelo-flow="query-downloadCSV"
+            data-gaelo-flow="query-download-CSV"
             className="flex gap-3"
             color={Colors.success}
             onClick={onDownloadCSV}

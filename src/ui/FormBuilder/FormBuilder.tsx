@@ -43,16 +43,22 @@ const FormBuilderCustom = (props: FieldProps) => {
 
     }, [formName, JSON.stringify(fields), selectedType, currentTitle])
 
-    // const tableField = [
-    //     {
-    //         accessorKey : 'title'
-    //         header : 'Nom du champ'
-    //     },
-    //     {
-    //         accessorKey : 'type'
-    //         header : 'Type choisie'
-    //     },
-    // ]
+    const tableColumns = [
+        {
+            accessorKey: 'title',
+            header: 'Nom du champ'
+        },
+        {
+            accessorKey: 'type',
+            header: 'Type choisie'
+        },
+        {
+            id: 'actions',
+            header: 'Actions',
+            cell: ({ row }) => (<Button color={Colors.primary} onClick={() => removeField(row.index)}>x</Button>)
+        }
+    ]
+
     const addField = () => {
         console.log('avant add:', {currentTitle, selectedType});
         if (currentTitle) {
@@ -119,8 +125,14 @@ const FormBuilderCustom = (props: FieldProps) => {
                 </Button>
                 </div>
             </div>
-             {/* <Table
-            /> */}
+             <Table
+                columns={tableColumns}
+                data={fields}
+                className="justify-center bg-gray-100"
+                headerTextSize='xs'
+                headerColor={Colors.white}
+                headerclassName='text-center'
+            />
             <div>
                 <span>Preview : </span>
                 <div className="border shadow-xl rounded-xl p-3">

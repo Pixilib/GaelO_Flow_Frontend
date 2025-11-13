@@ -117,7 +117,7 @@ const AccordionPatient = ({
               Nb of Studies: {patient.getStudies().length}
             </span>
             <div className="flex justify-end w-full space-x-7">
-              <div data-gaelo-flow="content-Burn-cd">
+              <div data-gaelo-flow="content-burn-cd">
               <CdButton onClick={handleCdBurnerClick} />
               </div>
               <div data-gaelo-flow="content-edit">

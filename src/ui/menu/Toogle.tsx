@@ -15,7 +15,7 @@ const Toggle = ({ onChange, label, labelPosition = 'left', checked }: ToggleProp
     const renderLabel = () => {
         if (!label) return null;
         if (typeof label === 'string') {
-            return <span className="text-sm italic font-medium ">{label}</span>;
+            return <span className="text-sm italic font-medium dark:text-white ">{label}</span>;
         } else {
             return label;
         }

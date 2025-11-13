@@ -58,7 +58,7 @@ const Oauth = () => {
         <div className="flex justify-center w-full">
           {!showOauthForm ? (
             <Button
-              data-gaelo-flow="oauth2-createProvider"
+              data-gaelo-flow="oauth2-create-provider"
               color={Colors.success}
               onClick={() => setShowOauthForm(true)}
               className="flex justify-center gap-4 mt-4 mb-4 w-52 hover:successHover"

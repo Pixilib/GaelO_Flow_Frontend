@@ -268,19 +268,19 @@
         },
         "admin" : {
           "modalities" : {
-            "datatable" : "DICOM modalities",
-            "button-echo" : "Button echo",
+            "table-modalities" : "DICOM modalities",
+            "button-echo" : "Echo modality",
             "button-delete" : "Delete the modality",
             "button-modality" : "Create a new modality",
             "form-modality" : "Form to create a modality",
             "submit" : "Submit"
           },
           "peers" : {
-            "datatable" : "Datatable",
-            "button-echo" : "Button echo",
+            "table-peers" : "List of Orthanc Peers",
+            "button-echo" : "Echo a Peer",
             "button-delete" : "Delete the peer",
             "button-peers" : "Create a new peer",
-            "form-peers" : "Form to create a peer",
+            "form-peers" : "Form to add a new peer",
             "submit" : "Submit"
           },
           "queues" : {
@@ -295,22 +295,22 @@
             "keep-labels" : "keep labels"
           },
           "jobs" : {
-            "datatable" : "Datatable",
-            "button-reset" : "Button reset",
-            "button-play" : "Button play",
-            "button-pause" : "Button pause",
-            "button-cancel" : "Button cancel",
-            "info" :"Information"
+            "table-jobs" : "List of Orthanc Jobs",
+            "button-reset" : "Reset the Orthanc Job",
+            "button-play" : "Start the Orthanc Job",
+            "button-pause" : "Pause the Orthanc Job",
+            "button-cancel" : "Cancel the Orthanc Job",
+            "info" :"Informations about the job"
           },
           "users" : {
-            "datatable" : "Datatable",
-            "edit-line" : "Edit the line",
-            "delete-line" : "Delete the line",
-            "create-user" : "Create User",
-            "form-edit-user" : "Form to edit user",
-            "button-update" : "Button update",
-            "form-user" : "Form to create a user",
-            "button-create-user" : "Button create user",
+            "table-users" : "List of users",
+            "button-edit" : "Edit the user",
+            "button-delete" : "Delete the user",
+            "button-create" : "Create User",
+            "form-edit-user" : "Form to edit the user",
+            "button-update" : "Validate user update",
+            "form-create-user" : "Form to create a user",
+            "button-create-user" : "Validate user creation",
             "roles" : {
               "datatable" : "Datatable",
               "edit-line" : "Edit the line",

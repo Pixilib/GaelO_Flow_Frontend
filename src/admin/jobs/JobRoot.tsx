@@ -11,7 +11,7 @@ import JobsTour from "../../tour/tours/admin/JobsTour";
 
 const JobRoot = () => {
   const { toastSuccess, toastError } = useCustomToast();
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   const { data: jobData, isLoading: isLoadingJobs } = useCustomQuery<
     OrthancJob[]
@@ -38,23 +38,26 @@ const JobRoot = () => {
 
   if (isLoadingJobs) return <Spinner />;
   return (
-    <Card className="l bg-almond dark:bg-neutral-500">
+    <>
       <div className="w-full flex justify-end m-1">
-          <JobsTour />
+        <JobsTour />
       </div>
-      <CardHeader
-        centerTitle
-        color={Colors.primary}
-        title={t("admin.jobs.manage-jobs")}
-      />
-      <CardBody
-        color={Colors.almond} roundedTopLeft roundedTopRight
-        className="rounded-sm dark:bg-neutral-500 rounded-br-2xl rounded-bl-2xl">
-        <div className="w-full ">
-          <JobTable data={jobData as any} onJobAction={handleJobAction} />
-        </div>
-      </CardBody>
-    </Card>
+      <Card className="l bg-almond dark:bg-neutral-500">
+
+        <CardHeader
+          centerTitle
+          color={Colors.primary}
+          title={t("admin.jobs.manage-jobs")}
+        />
+        <CardBody
+          color={Colors.almond} roundedTopLeft roundedTopRight
+          className="rounded-sm dark:bg-neutral-500 rounded-br-2xl rounded-bl-2xl">
+          <div className="w-full ">
+            <JobTable data={jobData as any} onJobAction={handleJobAction} />
+          </div>
+        </CardBody>
+      </Card>
+    </>
   );
 };
 

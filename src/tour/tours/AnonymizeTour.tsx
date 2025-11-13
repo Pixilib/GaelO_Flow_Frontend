@@ -8,7 +8,7 @@ const AutoroutingTour = () => {
     const { t } = useTranslation()
     const steps = [
         {
-            selector: '[data-gaelo-flow="anonymize-autoFill"]',
+            selector: '[data-gaelo-flow="anonymize-auto-fill"]',
             content: t('tour.anonymize.auto-fill'),
         },
         {

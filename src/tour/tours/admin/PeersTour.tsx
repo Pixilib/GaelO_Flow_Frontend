@@ -9,18 +9,18 @@ const ModalitiesTour = () => {
     const steps = [
         {
             selector: '[data-gaelo-flow="peers-datatable"]',
-            content: t('tour.admin.peers.datatable'),
+            content: t('tour.admin.peers.table-peers'),
         },
         {
-            selector: '[data-gaelo-flow="peers-action-buttonEcho"]',
+            selector: '[data-gaelo-flow="peers-action-button-echo"]',
             content: t('tour.admin.peers.button-echo'),
         },
         {
-            selector: '[data-gaelo-flow="peers-action-buttonDelete"]',
+            selector: '[data-gaelo-flow="peers-action-button-delete"]',
             content: t('tour.admin.peers.button-delete'),
         },
         {
-            selector: '[data-gaelo-flow="peers-button-newPeers"]',
+            selector: '[data-gaelo-flow="peers-button-new-peers"]',
             content: t('tour.admin.peers.button-peers'),
         },
         {

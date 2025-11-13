@@ -8,7 +8,7 @@ const LabelsTour = () => {
     const { t } = useTranslation()
     const steps = [
         {
-            selector: '[data-gaelo-flow="labels-addLabels"]',
+            selector: '[data-gaelo-flow="labels-add-labels"]',
             content: t('tour.admin.labels.add-labels'),
         },
         {

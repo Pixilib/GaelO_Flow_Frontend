@@ -61,9 +61,9 @@ const DeleteRoot = () => {
         <div className="flex flex-col gap-3">
             <DeleteQueues />
             <div className="flex justify-end gap-5">
-                <Button data-gaelo-flow="delete-buttonPlay" onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
-                <Button data-gaelo-flow="delete-buttonPause" onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
-                <Button data-gaelo-flow="delete-buttonDelete" onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
+                <Button data-gaelo-flow="delete-button-play" onClick={() => mutateResumeQueue({})} color={Colors.success}><Play /></Button>
+                <Button data-gaelo-flow="delete-button-pause" onClick={() => mutatePauseQueue({})} color={Colors.primary}><Pause /></Button>
+                <Button data-gaelo-flow="delete-button-delete" onClick={() => mutateDeleteQueue({})} color={Colors.danger}><Trash /></Button>
             </div>
         </div>
     )

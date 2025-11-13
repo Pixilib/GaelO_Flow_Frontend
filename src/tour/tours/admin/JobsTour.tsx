@@ -9,22 +9,22 @@ const JobsTour = () => {
     const steps = [
         {
             selector: '[data-gaelo-flow="jobs-datatable"]',
-            content: t('tour.admin.jobs.datatable'),
+            content: t('tour.admin.jobs.table-jobs'),
         },
         {
-            selector: '[data-gaelo-flow="jobs-buttonReset"]',
+            selector: '[data-gaelo-flow="jobs-button-reset"]',
             content: t('tour.admin.jobs.button-reset'),
         },
         {
-            selector: '[data-gaelo-flow="jobs-buttonPlay"]',
+            selector: '[data-gaelo-flow="jobs-button-play"]',
             content: t('tour.admin.jobs.button-play'),
         },
         {
-            selector: '[data-gaelo-flow="jobs-buttonPause"]',
+            selector: '[data-gaelo-flow="jobs-button-pause"]',
             content: t('tour.admin.jobs.button-pause'),
         },
         {
-            selector: '[data-gaelo-flow="jobs-buttonCancel"]',
+            selector: '[data-gaelo-flow="jobs-button-cancel"]',
             content: t('tour.admin.jobs.button-cancel'),
         },
         {

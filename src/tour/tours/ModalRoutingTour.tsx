@@ -20,19 +20,19 @@ const ModalRoutingTour = () => {
             content: t('tour.routing.modal.rule-condition'),
         },
         {
-            selector: '[data-gaelo-flow="modal-ruleFields"]',
+            selector: '[data-gaelo-flow="modal-rule-fields"]',
             content: t('tour.routing.modal.rule-fields'),
         },
         {
-            selector: '[data-gaelo-flow="modal-addRule"]',
+            selector: '[data-gaelo-flow="modal-add-rule"]',
             content: t('tour.routing.modal.add-rule'),
         },
         {
-            selector: '[data-gaelo-flow="modal-destinationFields"]',
+            selector: '[data-gaelo-flow="modal-destination-fields"]',
             content: t('tour.routing.modal.destination-fields'),
         },
         {
-            selector: '[data-gaelo-flow="modal-addDestination"]',
+            selector: '[data-gaelo-flow="modal-add-destination"]',
             content: t('tour.routing.modal.add-destination'),
         },
 

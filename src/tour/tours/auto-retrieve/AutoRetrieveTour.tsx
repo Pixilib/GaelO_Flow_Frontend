@@ -8,15 +8,15 @@ const QueriesTour = () => {
     const { t } = useTranslation()
     const steps = [
         {//queries onglet
-            selector: '[data-gaelo-flow="query-addLine"]',
+            selector: '[data-gaelo-flow="query-add-line"]',
             content: t('tour.auto-retrieve.query.plus'),
         },
         {
-            selector: '[data-gaelo-flow="query-dropCSV"]',
+            selector: '[data-gaelo-flow="query-drop-CSV"]',
             content: t('tour.auto-retrieve.query.drop-csv'),
         },
         {
-            selector: '[data-gaelo-flow="query-downloadCSV"]',
+            selector: '[data-gaelo-flow="query-download-CSV"]',
             content: t('tour.auto-retrieve.query.download-csv'),
         },
         {

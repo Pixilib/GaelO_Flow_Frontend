@@ -62,7 +62,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
             </div>
             <div className="grid gap-4 grid-col-1 xl:grid-cols-4">
                 <fieldset className="p-3 border border-gray-300 rounded-md">
-                    <legend className="px-2 mb-2 text-sm font-semibold">Data Access</legend>
+                    <legend className="px-2 mb-2 text-sm font-semibold dark:text-white">Data Access</legend>
                     <div className="grid items-center gap-2 lg:grid-cols-3 justify-items-center">
                         <Toggle
                             label="Export"
@@ -79,7 +79,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                     </div>
                 </fieldset>
                 <fieldset className="p-3 border border-gray-300 rounded-md">
-                    <legend className="px-2 mb-2 text-sm font-semibold">Query</legend>
+                    <legend className="px-2 mb-2 text-sm font-semibold dark:text-white">Query</legend>
                     <div className="grid items-center gap-2 lg:grid-cols-3 justify-items-center">
                         <Toggle
                             label="Auto Query"
@@ -96,7 +96,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                     </div>
                 </fieldset>
                 <fieldset className="p-3 border border-gray-300 rounded-md">
-                    <legend className="px-2 mb-2 text-sm font-semibold">Modifications</legend>
+                    <legend className="px-2 mb-2 text-sm font-semibold dark:text-white">Modifications</legend>
                     <div className="grid items-center grid-cols-1 gap-2 lg:grid-cols-3 justify-items-center">
                         <Toggle
                             label="Anonymize"
@@ -125,7 +125,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                     </div>
                 </fieldset>
                 <fieldset className="p-3 border border-gray-300 rounded-md">
-                    <legend className="px-2 mb-2 text-sm font-semibold">Other</legend>
+                    <legend className="px-2 mb-2 text-sm font-semibold dark:text-white">Other</legend>
                     <div className="grid items-start grid-cols-1 gap-2 align-middle lg:grid-cols-3 gap-y-4 justify-items-center">
                         <Toggle
                             label="CD Burner"
@@ -149,7 +149,7 @@ const RoleForm = ({ onSubmit, initialData, buttonText }: RoleFormProps) => {
                 </fieldset>
             </div>
             <div className="flex justify-center">
-                <div data-gaelo-flow={buttonText === "Update" ? "roles-buttonUpdate" : "users-buttonCreateRole"}>
+                <div data-gaelo-flow={buttonText === "Update" ? "roles-button-update" : "users-button-create-role"}>
                 <Button color={Colors.success}
                     className="h-12 gap-3 justify-self-center w-36 md:justify-center"
                     type="submit">

@@ -97,10 +97,10 @@ const RolesTable = ({ data = [], onEdit, onDelete }: RolesTableProps) => {
         const roleName = row.original.name;
         return (
           <div className="flex justify-center gap-7">
-            <div data-gaelo-flow="roles-editLine">
+            <div data-gaelo-flow="roles-edit-line">
               <EditButton onClick={() => onEdit(roleName)} />
             </div>
-            <div data-gaelo-flow="roles-deleteLine">
+            <div data-gaelo-flow="roles-delete-line">
               <DeleteButton onClick={() => onDelete(roleName)} />
             </div>
           </div>

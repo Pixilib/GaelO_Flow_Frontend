@@ -36,10 +36,10 @@ const UsersTable = ({ data = [], onEdit, onDelete }: UsersProps) => {
 
         return (
           <div className="flex justify-center gap-2">
-            <div data-gaelo-flow="users-editLine" >
+            <div data-gaelo-flow="users-edit-line" >
               <EditButton onClick={() => onEdit(user)} />
             </div>
-            <div data-gaelo-flow="users-deleteLine">
+            <div data-gaelo-flow="users-delete-line">
               <DeleteButton onClick={() => onDelete(user)} />
             </div>
           </div>

@@ -91,7 +91,7 @@ const PeersRoot: React.FC = () => {
       </CardBody>
       <CardFooter className="flex justify-center py-4 border-t-2 shadow-inner border-slate-200 dark:border-neutral-700 dark:bg-slate-950 bg-light">
         {!showNewPeerCard && (
-          <Button data-gaelo-flow="peers-button-newPeers" color={Colors.success} onClick={handleNewPeerClick}>
+          <Button data-gaelo-flow="peers-button-new-peers" color={Colors.success} onClick={handleNewPeerClick}>
             <More className="mr-3" size={24} /> {t("admin.peers.new-peer")}
           </Button>
         )}

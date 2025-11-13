@@ -32,7 +32,7 @@ const OauthTable = ({ data = [], onDelete }: Oauth2TableProps) => {
 
                 return (
                     <div className="flex justify-center gap-7">
-                        <div data-gaelo-flow="oauth2-deleteLine">
+                        <div data-gaelo-flow="oauth2-delete-line">
                         <DeleteButton
                             onClick={() => onDelete(provider)}
                         />

@@ -12,7 +12,7 @@ const CDBurnerAdminTour = () => {
             content: t('tour.admin.cd-burner.form'),
         },
         {
-            selector: '[data-gaelo-flow="burner-buttonSave"]',
+            selector: '[data-gaelo-flow="burner-button-save"]',
             content: t('tour.admin.cd-burner.button-save'),
         }
     ]
