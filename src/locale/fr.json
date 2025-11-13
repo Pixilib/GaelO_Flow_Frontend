@@ -153,6 +153,9 @@
           "user" : {
             "create-user" : "Créer un utilisateur",
             "user" : "Utilisateurs"
+          },
+          "cd-burner" : {
+            "cd-burner-conf" : "Configuration du graveur CD"
           }
     },
     "anonymize" : {
@@ -312,32 +315,32 @@
             "form-create-user" : "Formulaire pour créer un utilisateur",
             "button-create-user" : "Valider la creation d'un utilisateur",
             "roles" : {
-              "datatable" : "Datatable",
-              "edit-line" : "Modifier la ligne", 
-              "delete-line" : "Supprimer la ligne",
-              "create-role" : "Créer un rôle",
-              "form-edit-role" : "Formulaire de modification de rôle",
-              "button-update" : "Bouton mettre à jour",
-              "form-role" : "Formulaire de création de rôle",
-              "button-create-role" : "Bouton créer le rôle"
+              "table-roles" : "Roles existants",
+              "edit-role" : "Editer le role",
+              "delete-role" : "Supprimer le role",
+              "create-role" : "Créer un nouveau role",
+              "form-edit-role" : "Formulaire d'edition du role",
+              "button-update" : "Valider l'édition du role",
+              "form-role" : "Formulaire pour créer un nouveau role",
+              "button-create-role" : "Valider la création du role"
             },
             "oauth2" : {
-              "datatable" : "Datatable",
-              "delete-line" : "Supprimer la ligne",
-              "create-provider" : "Créer un fournisseur",
-              "form-create-oauth" : "Formulaire de création Oauth",
-              "button-create" : "Bouton créer Oauth"
+              "table-oauth" : "Liste des serveurs Oauth",
+              "delete-oauth" :"Supression du serveur Oauth",
+              "create-provider" : "Créer un nouveau serveur Oauth",
+              "form-create-oauth" : "Formulaire pour ajouter un nouveau serveur Oauth",
+              "button-create" : "Valider la création du serveur Oauth"
             }
           },
            "labels" : {
             "add-labels" : "Ajouter un nouveau label",
-            "datatable" : "Datatable",
-            "roles" : "Choisir entre utilisateur et administrateur",
-            "delete" : "Supprimer la ligne"
+            "table-labels" : "List des labels disponibles",
+            "roles" : "Autoriser un ou plusieurs roles à acceder aux ressources ayant ce label",
+            "delete" : "Suprimmer le label"
           },
           "cd-burner" : {
-            "form" : "Formulaire CD burner",
-            "button-save" : "Sauvgarder le formulaire"
+            "form" : "Options du graveur CD",
+            "button-save" : "Mettre à jour les options"
           }
         },
         "anonymize" : {

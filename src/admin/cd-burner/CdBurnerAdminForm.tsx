@@ -114,7 +114,7 @@ const CdBurnerAdminForm = ({ options }: { options: Options }) => {
         </FormComponent>
 
         <hr className="my-4 w-full border-t border-gray-300" />
-        <div className="justify-end flex w-full space-x-4">
+        <div className="justify-center flex w-full space-x-4">
             <Button
                 data-gaelo-flow="burner-button-save"
                 disabled={JSON.stringify(formData) === JSON.stringify(options)}

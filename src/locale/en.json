@@ -153,6 +153,9 @@
           "user" : {
             "create-user" : "Create User",
             "user" : "Users"
+          },
+          "cd-burner" : {
+            "cd-burner-conf" : "CD Burner Configuration"
           }
       },
       "anonymize" : {
@@ -312,32 +315,32 @@
             "form-create-user" : "Form to create a user",
             "button-create-user" : "Validate user creation",
             "roles" : {
-              "datatable" : "Datatable",
-              "edit-line" : "Edit the line",
-              "delete-line" : "Delete the line",
-              "create-role" : "Create Role",
-              "form-edit-role" : "Form to edit role",
-              "button-update" : "Button update",
-              "form-role" : "Form to create a role",
-              "button-create-role" : "Button create role"
+              "table-roles" : "Existing roles",
+              "edit-role" : "Edit the role",
+              "delete-role" : "Delete the role",
+              "create-role" : "Create a new Role",
+              "form-edit-role" : "Form to edit the role",
+              "button-update" : "Validate role update",
+              "form-role" : "Form to create a new role",
+              "button-create-role" : "Validate role creation"
             },
             "oauth2" : {
-              "datatable" : "Datatable",
-              "delete-line" :"Delete the line",
-              "create-provider" : "Create a provider",
-              "form-create-oauth" : "Form to create a oauth",
-              "button-create" : "Button create oauth"
+              "table-oauth" : "List of Oauth providers",
+              "delete-oauth" :"Delete the Oauth provider",
+              "create-provider" : "Create a new Oauth provider",
+              "form-create-oauth" : "Form to create a new oauth provider",
+              "button-create" : "Validate oauth creation"
             }
           },
           "labels" : {
             "add-labels" : "Add a new label",
-            "datatable" : "Datatable",
-            "roles" : "Choose between user and admin",
-            "delete" : "Delete the line"
+            "table-labels" : "List of available labels",
+            "roles" : "Authorize one or several role to access ressources having this label",
+            "delete" : "Delete the label"
           },
           "cd-burner" : {
-            "form" : "Form CD burner",
-            "button-save" : "Save form"
+            "form" : "CD burner options",
+            "button-save" : "Update options"
           }
         },
         "anonymize" : {

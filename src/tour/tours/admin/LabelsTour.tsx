@@ -13,7 +13,7 @@ const LabelsTour = () => {
         },
         {
             selector: '[data-gaelo-flow="labels-datatable"]',
-            content: t('tour.admin.labels.datatable'),
+            content: t('tour.admin.labels.table-labels'),
         },
         {
             selector: '[data-gaelo-flow="labels-roles"]',

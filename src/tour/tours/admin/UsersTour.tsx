@@ -41,15 +41,15 @@ const UsersTour = () => {
         },
         {//onglet roles
             selector: '[data-gaelo-flow="roles-datatable"]',
-            content: t('tour.admin.users.roles.datatable'),
+            content: t('tour.admin.users.roles.table-roles'),
         },
         {
             selector: '[data-gaelo-flow="roles-edit-line"]',
-            content: t('tour.admin.users.roles.edit-line'),
+            content: t('tour.admin.users.roles.edit-role'),
         },
         {
             selector: '[data-gaelo-flow="roles-delete-line"]',
-            content: t('tour.admin.users.roles.delete-line'),
+            content: t('tour.admin.users.roles.delete-role'),
         },
         {
             selector: '[data-gaelo-flow="roles-create-role"]',
@@ -73,11 +73,11 @@ const UsersTour = () => {
         },
         {//onglet oauth2
             selector: '[data-gaelo-flow="oauth2-datatable"]',
-            content: t('tour.admin.users.oauth2.datatable'),
+            content: t('tour.admin.users.oauth2.table-oauth'),
         },
         {
             selector: '[data-gaelo-flow="oauth2-delete-line"]',
-            content: t('tour.admin.users.oauth2.delete-line'),
+            content: t('tour.admin.users.oauth2.delete-oauth'),
         },
         {
             selector: '[data-gaelo-flow="oauth2-create-provider"]',
